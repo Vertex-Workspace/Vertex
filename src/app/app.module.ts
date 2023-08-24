@@ -10,6 +10,7 @@ import { MuralModule } from './pages/mural/mural.module';
 import { InputModule } from './components/reusable-components/input/input.module';
 import { ButtonComponent } from './components/reusable-components/button/button.component';
 import { ButtonModule } from 'primeng/button';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ButtonModule } from 'primeng/button';
     ProjectsModule,
     MuralModule,
     InputModule,
-    ButtonModule
+    ButtonModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
