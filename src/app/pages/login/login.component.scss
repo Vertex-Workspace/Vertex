@@ -1,0 +1,61 @@
+@import '../../../variables';
+
+.bg{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../../assets/Vertex-bg-login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.logo-div {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.bg section:first-child {
+    width: 50%;
+    height: 100%;
+}
+
+.bg section:last-child {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.bg section:last-child div {
+    width: 50%;
+    height: 60%;
+    display: flex;
+    justify-content:right;
+    align-items: center;
+}
+
+.title-vertex{
+    font-size: 3rem;
+    font-family: $titleFont;
+    padding: 30px;
+    color: #092c4c;
+}
+
+.form-title {
+    font-size: 2rem;
+    font-family: $titleFont;
+    font-weight: 700;
+    color: #f3f3f3;
+    word-break: normal;
+}
