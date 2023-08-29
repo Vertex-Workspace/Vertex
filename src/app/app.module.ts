@@ -11,11 +11,11 @@ import { InputModule } from './components/reusable-components/input/input.module
 import { ButtonComponent } from './components/reusable-components/button/button.component';
 import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
+import { PersonalizationService } from './services/personalization.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ButtonComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +28,9 @@ import { AppRoutingModule } from './app-routing.module';
     ButtonModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    PersonalizationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
