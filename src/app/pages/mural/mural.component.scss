@@ -1,0 +1,9 @@
+@import '../../../_variables.scss';
+
+.section{
+    @apply flex rounded-2xl;
+    background-color: $primaryColor;
+}
+
+
+
