@@ -1,1 +1,50 @@
-<p>task works!</p>
+<section class="screen">
+    <div class="container">
+
+        <section class="side">
+            <div class="task-info">
+                <div class="location">
+                    <p>Equipe</p>
+                    <p>Projeto</p>
+                </div>
+
+                <div class="title">
+                    <h2>Nome da tarefa</h2>
+                </div>
+
+                <div class="properties-content">
+                    props content
+                </div>
+            </div>
+
+            <div class="down-buttons">
+                <button>Gerenciar participantes</button>
+                <button>Iniciar chat</button>
+            </div>
+        </section>
+
+        <section class="side">
+
+            <div class="navigation">
+                <button>Descrição</button>
+                <button>Comentários</button>
+                <button>Histórico</button>
+            </div>
+
+            <!-- <app-description
+                *ngIf="true"
+                style="width: 100%; height: 80%;"
+            /> -->
+
+            <!-- <app-log 
+                style="width: 100%; height: 80%;"
+            /> -->
+
+            <app-comments 
+                style="width: 100%; height: 80%;"
+            />
+
+        </section>
+
+    </div>
+</section>

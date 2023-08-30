@@ -1,0 +1,12 @@
+.content {
+    @apply w-full h-full flex flex-col gap-3
+    shadow-[1px_1px_2px_1px_lightgrey] p-3 rounded;
+}
+
+p {
+    @apply font-light;
+}
+
+p:last-child {
+    @apply text-end;
+}

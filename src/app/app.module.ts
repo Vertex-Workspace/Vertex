@@ -11,11 +11,12 @@ import { InputModule } from './components/reusable-components/input/input.module
 import { ButtonComponent } from './components/reusable-components/button/button.component';
 import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
+import { TaskModule } from './components/modals/task/task.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ButtonComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,8 @@ import { AppRoutingModule } from './app-routing.module';
     MuralModule,
     InputModule,
     ButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
