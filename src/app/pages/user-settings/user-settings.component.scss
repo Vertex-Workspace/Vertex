@@ -67,10 +67,12 @@
     focus:outline-none 
     focus:border-sky-500 
     focus:ring-sky-500 
-    block w-full 
+    block 
     rounded-md 
     sm:text-sm 
-    focus:ring-1
+    focus:ring-1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .leftSide {
@@ -91,18 +93,46 @@
     flex-direction: column;
     justify-content: center; 
     align-items: center; 
-    gap: 30px;
+    gap: 15px;
 }
 
 .divGeneralInputs {
     display: flex;
-    gap: 30px;
+    gap: 15px;
 }
 
 .inputs {
     display: flex; 
     flex-direction: column; 
-    gap: 30px;
+    gap: 15px;
+}
+
+// Container geral do input
+.inputContainer {
+    display: flex;
+    align-items: center;
+}
+
+// configurações do quadrado em que o ícone está inserido
+.iconContainer {
+    width: 2.5rem; 
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+// configurações do ícone.
+.icon {
+    font-size: 1.5rem;
+    color:$primaryColor;
+}
+
+.input {
+    padding: 10px; 
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
