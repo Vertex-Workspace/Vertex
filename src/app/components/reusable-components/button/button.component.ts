@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnInit {
   @Input()
   title!: string;
 
@@ -30,15 +30,23 @@ export class ButtonComponent {
 
   validaInput:boolean = false;
 
-  constructor(){
-    console.log(this.icon);
-    if (this.icon !== "") {
-      this.validaInput = true;
-    } else {
+  constructor(){}
+
+  borderDale: string = "";
+
+  ngOnInit(): void {
+    if (this.icon == undefined) {
       this.validaInput = false;
+    } else {
+      this.validaInput = true;
     }
   }
 
+  changeColor():void{
+    let backgroundDefault: string = this.background;
+    this.background = this.textColor;
+    this.textColor = backgroundDefault;
+  }
 
   eventEmitter(): void {
     this.clickEvent.emit();
