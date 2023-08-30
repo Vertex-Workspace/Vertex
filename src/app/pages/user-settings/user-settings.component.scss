@@ -1,1 +1,109 @@
-@import "../../../variables";
+@import '../../../variables.scss';
+@import '../../../styles.scss';
+
+*{
+    margin:0;
+    padding:0;
+    background-color: $secondColor;
+}
+
+
+// Título da página
+.settingsTitle {
+    font-family: $titleFont;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 60px;
+    margin-left: 60px;
+}
+
+.bg {
+    background-color: $secondColor;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    
+}
+
+// Barra lateral com todas as opções de configurações
+.generalOptions {
+    @apply grid gap-4 grid-cols-1 grid-rows-4;
+    width: 40%;
+    height:25%;
+    margin-top: 60px;
+    margin-left: 60px;
+}
+
+// Opção selecionada da barra lateral
+.p {
+    background-color: #D9D9D9;
+    width:90%;
+    height:50%;
+    justify-content: center;
+    font-family: $primaryFont;
+}
+
+// div do nome do usuário
+.userInfo {
+    display: flex;
+    justify-content:center;
+    height:100%;
+    width: 100%;
+}
+
+// paragrafo do nome do usuário
+.userInfop {
+    font-family: $primaryFont;
+    font-size:large
+}
+
+// Input
+.input {
+    @apply
+    mt-1 px-3 py-2 bg-white 
+    border shadow-sm 
+    border-slate-300 
+    placeholder-slate-400 
+    focus:outline-none 
+    focus:border-sky-500 
+    focus:ring-sky-500 
+    block w-full 
+    rounded-md 
+    sm:text-sm 
+    focus:ring-1
+}
+
+.leftSide {
+    height: 100%; 
+    width: 35%;
+}
+
+.rightSide {
+    width: 65%; 
+    height:100%; 
+    display: flex; 
+    align-items: center;
+}
+
+.userSection {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    gap: 30px;
+}
+
+.divGeneralInputs {
+    display: flex;
+    gap: 30px;
+}
+
+.inputs {
+    display: flex; 
+    flex-direction: column; 
+    gap: 30px;
+}
+
+
+
