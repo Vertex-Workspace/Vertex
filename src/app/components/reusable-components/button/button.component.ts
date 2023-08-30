@@ -27,22 +27,24 @@ export class ButtonComponent implements OnInit {
   @Output()
   clickEvent = new EventEmitter();
 
+  checkInput: boolean = false;
+  checkText: boolean = false;
 
-  validaInput:boolean = false;
+  constructor() {}
 
-  constructor(){}
-
-  borderDale: string = "";
+  border: string = '';
 
   ngOnInit(): void {
-    if (this.icon == undefined) {
-      this.validaInput = false;
-    } else {
-      this.validaInput = true;
+    if (this.icon) {
+      this.checkInput = true;
+    }
+
+    if (this.title) {
+      this.checkText = true;
     }
   }
 
-  changeColor():void{
+  changeColor(): void {
     let backgroundDefault: string = this.background;
     this.background = this.textColor;
     this.textColor = backgroundDefault;

@@ -5,17 +5,17 @@
 [style.color]="textColor" 
 [style.width]="width" 
 [style.height]="height"
-[style.border]="'0.1px solid ' + borderDale"
+[style.border]="'2px solid ' + border"
 style="cursor: pointer; transition: 0.3s ease-in;"
 (click)="eventEmitter()"
 (mouseover)="changeColor()"
 (mouseout)="changeColor()"
-[ngClass]="validaInput == true ? 'icon-button' : 'just-button'"
+[ngClass]="checkInput == true && checkText == true ? 'icon-button' : 'just-button'"
 >
-    <div class="default-div" *ngIf="validaInput">
-        <i [class]="icon" class="pi"></i>
+    <div class="default-div" *ngIf="checkInput">
+        <i [class]="icon" class="pi text-xl"></i>
     </div>
-    <div class="default-div">
+    <div class="default-div" *ngIf="checkText">
         <button>
             {{title}}
         </button>
