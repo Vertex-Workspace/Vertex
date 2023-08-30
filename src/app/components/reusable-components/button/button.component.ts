@@ -3,11 +3,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-
-
   @Input()
   title!: string;
 
@@ -23,10 +21,26 @@ export class ButtonComponent {
   @Input()
   textColor!: string;
 
-  @Output()
-  event = new EventEmitter();
+  @Input()
+  icon!: string;
 
-  eventEmitter(): void{
-    this.event.emit();
+  @Output()
+  clickEvent = new EventEmitter();
+
+
+  validaInput:boolean = false;
+
+  constructor(){
+    console.log(this.icon);
+    if (this.icon !== "") {
+      this.validaInput = true;
+    } else {
+      this.validaInput = false;
+    }
+  }
+
+
+  eventEmitter(): void {
+    this.clickEvent.emit();
   }
 }

@@ -1,10 +1,18 @@
-<button 
-    [style.width]="width" 
-    [style.height]="height"
-    [style.backgroundColor]="background"
-    [style.color]="textColor"
-    (click)="eventEmitter()"
+<a 
+[style.backgroundColor]="background" 
+[style.color]="textColor" 
+[style.width]="width" 
+[style.height]="height"
+class="icon-button" 
+(click)="eventEmitter()"
+[ngClass]="validaInput == true ? 'icon-button' : 'just-button'"
 >
-    {{title}}
-</button>
-
+    <div class="default-div" *ngIf="validaInput">
+        <i [class]="icon" class="pi"></i>
+    </div>
+    <div class="default-div">
+        <button>
+            {{title}}
+        </button>
+    </div>
+</a>

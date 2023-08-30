@@ -17,6 +17,6 @@ export class MuralComponent {
   }
 
   teste():void{
-    console.log("teste mural");
+    console.log("teste muasdsral");
   }
 }

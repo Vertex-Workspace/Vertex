@@ -1,5 +1,25 @@
-button{
-    @apply rounded;
+a{
+    cursor: pointer;
+}
+a:hover{
+    background-color: black;
+    color: white;
+}
+
+
+// SUPER CSS CASO O BOTÃO NÃO POSSUA INPUT
+.icon-button{
+    @apply grid justify-center items-center rounded;
+    grid-template-columns: 20% 80%;
+}
+.just-button{
+    @apply flex w-full h-full justify-center items-center rounded;
+}
+
+
+// FORMATO PADRÃO
+.default-div{
+    @apply flex w-full h-full justify-center items-center;
 }
 
 
