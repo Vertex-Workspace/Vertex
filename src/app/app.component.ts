@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PersonalizationService } from './services/personalization.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Vertex';
+  constructor(private personalization : PersonalizationService){
+    personalization.setPersonalization();
+  }
 }

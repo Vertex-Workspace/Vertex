@@ -1,9 +1,8 @@
 @import '../../../_variables.scss';
 
-.section{
-    @apply flex rounded-2xl;
-    background-color: $primaryColor;
+.mural-section{
+    @apply flex w-screen h-screen;
+    background-color: $secondColor;
 }
-
 
 
