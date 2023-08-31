@@ -12,6 +12,7 @@ import { ButtonComponent } from './components/reusable-components/button/button.
 import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
 import { PersonalizationService } from './services/personalization.service';
+import { SidebarModule } from './components/fixed-components/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PersonalizationService } from './services/personalization.service';
     MuralModule,
     InputModule,
     ButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SidebarModule
   ],
   providers: [
     PersonalizationService

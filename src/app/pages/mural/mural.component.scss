@@ -1,15 +1,9 @@
 @import '../../../_variables.scss';
 
-.main-screen{
-    @apply flex w-screen h-screen flex-col
-}
 
-.header-away{
-    @apply flex w-full h-1/6
-}
 
 .mural-section{
-    @apply flex w-full h-5/6;
+    @apply flex w-screen h-full;
     background-color: $secondColor;
 }
 

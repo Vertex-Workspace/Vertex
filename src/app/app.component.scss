@@ -1,7 +1,36 @@
-.teste{
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
+@import '../variables';
+.main-screen{
+    @apply flex w-screen h-screen;
 }
+
+
+.side-bar{
+    @apply flex w-[4%] h-full flex-col items-center;
+    background-color: $primaryColor;
+}
+
+
+.main-div{
+    @apply flex w-[96%] h-full flex-col;
+    background-color: $secondColor;
+}
+
+.header{
+    @apply flex w-full h-[8%] items-center justify-between;
+}
+
+.current-location{
+    @apply flex w-[50%] h-full justify-start items-center pl-10
+}
+
+.main-content{
+    @apply flex w-full h-[92%];
+}
+
+
+.items-header{
+    @apply flex w-[8%] h-full justify-evenly items-center;
+}
+
+
+
