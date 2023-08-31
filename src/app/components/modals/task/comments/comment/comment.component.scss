@@ -1,6 +1,14 @@
 .content {
-    @apply w-full h-full flex flex-col gap-3
-    shadow-[1px_1px_2px_1px_lightgrey] p-3 rounded;
+    @apply w-full h-full flex flex-col gap-1
+     p-3 rounded;
+}
+div:first-child {
+    @apply flex justify-start gap-2;
+}
+
+
+h3 {
+    @apply text-end;
 }
 
 p {
@@ -8,5 +16,9 @@ p {
 }
 
 p:last-child {
-    @apply text-end;
+    @apply text-start;
+}
+
+.date {
+    @apply w-full italic flex justify-end;
 }

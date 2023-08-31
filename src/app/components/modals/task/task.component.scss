@@ -5,7 +5,7 @@
 }
 
 .container {
-    @apply bg-zinc-100 h-[75%] w-[70%] flex rounded;
+    @apply bg-zinc-100 h-[750px] w-[1300px] flex rounded;
 }
 
 .side:first-child {
@@ -13,7 +13,7 @@
 }
 
 .side:last-child {
-    @apply w-[50%] h-full flex flex-col justify-center p-8 rounded;
+    @apply w-[50%] h-full flex flex-col justify-center items-center p-8 rounded
 }
 
 .task-info {
@@ -50,16 +50,23 @@ h2 {
 }
 
 .navigation {
-    @apply w-full flex justify-between divide-x-2 
-            text-zinc-500 mt-20;
+    @apply w-[50%] flex items-center gap-2 mt-20;
 }
 
 .navigation button {
-    @apply py-1 rounded flex justify-center
-    hover:bg-zinc-200 w-[33%];
+    @apply rounded flex justify-center
+    hover:bg-zinc-200 w-[33%] px-2 text-zinc-600;
 }
 
+.commit-button {
+    @apply w-full h-[6%] flex justify-end items-end;
+}
 
+.commit-button button {
+    @apply bg-[#092C4C] w-[30%] h-[100%] rounded text-zinc-200
+    hover:bg-[#144069];
+}
 
-
-
+.left-side {
+    @apply w-full h-[77%];
+}

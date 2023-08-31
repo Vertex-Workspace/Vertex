@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
+  selectedPage: string = 'description';
+
+  changePage(page: string): void {
+    this.selectedPage = page;
+  }
 
 }
