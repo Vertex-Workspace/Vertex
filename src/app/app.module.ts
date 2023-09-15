@@ -8,15 +8,16 @@ import { TeamsModule } from './pages/teams/teams.module';
 import { ProjectsModule } from './pages/projects/projects.module';
 import { MuralModule } from './pages/mural/mural.module';
 import { InputModule } from './components/reusable-components/input/input.module';
-import { ButtonComponent } from './components/reusable-components/button/button.component';
 import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
 import { PersonalizationService } from './services/personalization.service';
 import { SidebarModule } from './components/fixed-components/sidebar/sidebar.module';
+import { HeaderComponent } from './components/fixed-components/header/header.component';
+import { HeaderModule } from './components/fixed-components/header/header.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +29,8 @@ import { SidebarModule } from './components/fixed-components/sidebar/sidebar.mod
     InputModule,
     ButtonModule,
     AppRoutingModule,
-    SidebarModule
+    SidebarModule,
+    HeaderModule
   ],
   providers: [
     PersonalizationService
