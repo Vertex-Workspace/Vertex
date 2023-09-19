@@ -3,7 +3,7 @@
 
 
 .mural-section{
-    @apply flex w-screen h-full;
+    @apply flex w-screen h-full flex-col;
     background-color: $secondColor;
 }
 
@@ -13,5 +13,10 @@
 }
 .create-and-filter{
     @apply flex flex-row
+}
+
+// CARDS
+.card-space{
+    @apply flex w-full justify-end
 }
 
