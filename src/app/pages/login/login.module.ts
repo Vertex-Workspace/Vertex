@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
   exports:[LoginComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
 })
 export class LoginModule { }

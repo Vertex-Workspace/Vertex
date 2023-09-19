@@ -20,11 +20,8 @@
 .footer-items{
     @apply flex h-[30%] flex-col items-end justify-evenly;
 }
-
-li > i{
-    @apply text-2xl;
-    color: $secondColor;
-    cursor: pointer;
+ul > li {
+    @apply flex justify-center items-center;
 }
 
 .logo{
