@@ -15,6 +15,7 @@ import { SidebarModule } from './components/fixed-components/sidebar/sidebar.mod
 import { HeaderComponent } from './components/fixed-components/header/header.component';
 import { HeaderModule } from './components/fixed-components/header/header.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TaskModule } from './components/modals/task/task.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     SidebarModule,
     HeaderModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TaskModule
   ],
   providers: [
     PersonalizationService
