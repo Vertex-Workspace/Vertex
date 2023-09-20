@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { comments } from 'src/data/data';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-comments',
@@ -7,6 +6,5 @@ import { comments } from 'src/data/data';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent {
-  commentsList = comments;
-
+  @Input() task: any;
 }

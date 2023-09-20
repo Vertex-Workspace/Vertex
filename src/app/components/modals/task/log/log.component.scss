@@ -1,8 +1,21 @@
-.content {
-    @apply w-full h-full flex flex-col items-center 
-    mt-10 gap-6 italic font-light text-zinc-800 overflow-auto;
+.base {
+    @apply w-full h-full flex justify-center ml-2;
 }
 
-.content div {
-    @apply flex gap-4 items-center;
+li {
+    @apply flex gap-2 flex-col;
+    p {
+        @apply text-zinc-700 flex items-center;
+    }
+    div:first-child {
+        @apply flex items-center gap-2;
+    }
+}
+
+ul {
+    @apply w-[65%] h-[100%] flex flex-col gap-8 items-start overflow-auto ml-10;
+}
+
+.date {
+    @apply text-sm;
 }

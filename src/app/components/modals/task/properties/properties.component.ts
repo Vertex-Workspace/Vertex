@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-properties',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./properties.component.scss']
 })
 export class PropertiesComponent {
-
+  @Input() task: any;
 }
