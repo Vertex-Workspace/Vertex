@@ -14,6 +14,8 @@ import { SidebarModule } from './components/fixed-components/sidebar/sidebar.mod
 import { HeaderComponent } from './components/fixed-components/header/header.component';
 import { HeaderModule } from './components/fixed-components/header/header.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TaskModule } from './components/modals/task/task.module';
 
 @NgModule({
   declarations: [
@@ -31,11 +33,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     SidebarModule,
     HeaderModule,
+    AnimacaoLoginRegistro,
     BrowserAnimationsModule
+    FontAwesomeModule,
+    TaskModule
   ],
   providers: [
     PersonalizationService,
-    
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-log',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./log.component.scss']
 })
 export class LogComponent {
+  @Input() task: any;
 
+  click(): void {
+    console.log(this.task);
+  }
 }
