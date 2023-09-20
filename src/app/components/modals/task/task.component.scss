@@ -1,0 +1,72 @@
+@import '../../../../variables';
+
+.screen {
+    @apply w-screen h-screen flex items-center justify-center;
+}
+
+.container {
+    @apply bg-zinc-100 h-[750px] w-[1300px] flex rounded;
+}
+
+.side:first-child {
+    @apply w-[50%] h-full flex flex-col justify-between p-8 rounded;
+}
+
+.side:last-child {
+    @apply w-[50%] h-full flex flex-col justify-center items-center p-8 rounded
+}
+
+.task-info {
+    @apply w-[100%] h-[65%] flex flex-col gap-10 rounded;
+}
+
+.location {
+    @apply divide-x-2 flex items-center;
+}
+
+.location p:first-child, p:last-child {
+    @apply px-5 py-3;
+}
+
+.location p:first-child {
+    @apply text-base font-light;
+}
+
+.location p:last-child {
+    @apply text-xl;
+}
+
+h2 {
+    @apply font-normal text-3xl;
+}
+
+.down-buttons {
+    @apply w-[70%] h-[6%] flex gap-2;
+}
+
+.down-buttons button {
+    @apply w-[50%] h-[100%] bg-[#092C4C] text-zinc-200
+    hover:bg-[#144069] rounded;
+}
+
+.navigation {
+    @apply w-[50%] flex items-center gap-2 mt-20;
+}
+
+.navigation button {
+    @apply rounded flex justify-center
+    hover:bg-zinc-200 w-[33%] px-2 text-zinc-600;
+}
+
+.commit-button {
+    @apply w-full h-[6%] flex justify-end items-end;
+}
+
+.commit-button button {
+    @apply bg-[#092C4C] w-[30%] h-[100%] rounded text-zinc-200
+    hover:bg-[#144069];
+}
+
+.left-side {
+    @apply w-full h-[77%];
+}

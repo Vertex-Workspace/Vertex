@@ -1,1 +1,58 @@
-<p>task works!</p>
+<section class="screen">
+    <div class="container">
+
+        <section class="side">
+            <div class="task-info">
+                <div class="location">
+                    <p>Equipe</p>
+                    <p>Projeto</p>
+                </div>
+
+                <div class="title">
+                    <h2>Nome da tarefa</h2>
+                </div>
+
+                <div class="properties-content">
+                    props content
+                </div>
+            </div>
+
+            <div class="down-buttons">
+                <button>Gerenciar participantes</button>
+                <button>Iniciar chat</button>
+            </div>
+        </section>
+
+        <section class="side">
+            <div class="navigation">
+                <button (click)="changePage('description')">Descrição</button>/
+                <button (click)="changePage('comments')">Comentários</button>/
+                <button (click)="changePage('log')">Histórico</button>
+            </div>
+
+            <div class="left-side">
+                
+                <app-description
+                    *ngIf="selectedPage === 'description'"
+                    style="width: 100%; height: 80%;"
+                />
+
+                <app-log
+                    *ngIf="selectedPage === 'log'"
+                    style="width: 55%; height: 80%;"
+                />
+
+                <app-comments 
+                    *ngIf="selectedPage === 'comments'"
+                    style="width: 80%; height: 100%;"
+                />
+
+            </div>
+
+            <div class="commit-button">
+                <button>Confirmar</button>
+            </div>
+        </section>
+
+    </div>
+</section>
