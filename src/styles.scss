@@ -3,6 +3,8 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
+@import './variables';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,4 +15,19 @@
 }
 body {
     font-family: var(--font-family);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+fa-icon{
+    @apply text-2xl;
+    color: $secondColor;
+    cursor: pointer;
+}
+button, a{
+    cursor: pointer;
 }

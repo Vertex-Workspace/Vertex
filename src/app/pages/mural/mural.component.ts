@@ -16,7 +16,8 @@ export class MuralComponent {
     this.secondColor = personalization.getSecondColor();
   }
 
+
   teste():void{
-    console.log("teste mural");
+    console.log("teste muasdsral");
   }
 }

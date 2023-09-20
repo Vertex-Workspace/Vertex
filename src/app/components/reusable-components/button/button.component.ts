@@ -1,13 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent {
-
-
+export class ButtonComponent implements OnInit {
   @Input()
   title!: string;
 
@@ -23,10 +21,36 @@ export class ButtonComponent {
   @Input()
   textColor!: string;
 
-  @Output()
-  event = new EventEmitter();
+  @Input()
+  icon!: string;
 
-  eventEmitter(): void{
-    this.event.emit();
+  @Output()
+  clickEvent = new EventEmitter();
+
+  checkInput: boolean = false;
+  checkText: boolean = false;
+
+  constructor() {}
+
+  border: string = '';
+
+  ngOnInit(): void {
+    if (this.icon) {
+      this.checkInput = true;
+    }
+
+    if (this.title) {
+      this.checkText = true;
+    }
+  }
+
+  changeColor(): void {
+    let backgroundDefault: string = this.background;
+    this.background = this.textColor;
+    this.textColor = backgroundDefault;
+  }
+
+  eventEmitter(): void {
+    this.clickEvent.emit();
   }
 }

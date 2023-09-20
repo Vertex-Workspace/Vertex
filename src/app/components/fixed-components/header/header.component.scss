@@ -1,0 +1,12 @@
+@import '../../../../variables';
+
+.header{
+    @apply flex w-full h-full items-center justify-around;
+}
+
+.current-location{
+    @apply flex w-[50%] h-full justify-start items-center pl-10
+}
+.items-header{
+    @apply flex w-[8%] h-full justify-evenly items-center;
+}
