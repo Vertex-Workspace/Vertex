@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { provideRouter, RouterModule, Routes } from '@angular/router';
-import { RouterModule, Routes } from '@angular/router';
 import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';

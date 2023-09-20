@@ -11,7 +11,6 @@ import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
 import { PersonalizationService } from './services/personalization.service';
 import { SidebarModule } from './components/fixed-components/sidebar/sidebar.module';
-import { HeaderComponent } from './components/fixed-components/header/header.component';
 import { HeaderModule } from './components/fixed-components/header/header.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -33,8 +32,7 @@ import { TaskModule } from './components/modals/task/task.module';
     AppRoutingModule,
     SidebarModule,
     HeaderModule,
-    AnimacaoLoginRegistro,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule
   ],
