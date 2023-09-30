@@ -7,6 +7,5 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent {
-
   faUser = faUser
 }

@@ -4,6 +4,7 @@
     <div class="leftSide">
         <section>
             <p class="settingsTitle">Configurações e Preferências</p>
+               <fa-icon [icon]="faUser"></fa-icon>
         </section>
 
         <!-- Section com a barra lateral de opções gerais -->
@@ -16,11 +17,11 @@
                 <i class="pi pi-users iconInputs" style="background-color: $secondColor"></i>
                 <p>Equipes</p>
             </div>
-            <div class="leftSideOptions">
+            <div class="leftSideOptions" routerLink="aparencia">
                 <i class="pi pi-pencil iconInputs"></i>
                 <p>Aparência do Sistema</p>
             </div>
-            <div class="leftSideOptions">
+            <div class="leftSideOptions" >
                 <i class="pi pi-bell iconInputs"></i>
                 <p>Notificações</p>
             </div>
@@ -36,6 +37,7 @@
                     <i class="pi pi-user iconUser"></i>
                 </div>
                 <p class="userInfop">Kaique Fernandes Lima Homem</p>
+                <router-outlet></router-outlet>
             </div>
     
             <div class="divGeneralInputs">
