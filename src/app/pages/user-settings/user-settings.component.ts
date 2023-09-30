@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-user-settings',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class UserSettingsComponent {
 
+  faUser = faUser
 }
