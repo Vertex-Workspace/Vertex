@@ -1,32 +1,29 @@
 <div class="bg">
 
     <!-- lado esquerda -->
-    <div class="leftSide">
-        <section>
+    <section class="nav space-y-8">
+        <div class="flex items-end">
             <p class="settingsTitle">Configurações e Preferências</p>
-               <fa-icon [icon]="faUser"></fa-icon>
-        </section>
-
-        <!-- Section com a barra lateral de opções gerais -->
-        <section class="generalOptions">
-            <div class="leftSideContainer boxSelected leftSideOptions">
-                <!-- <i class="pi pi-user iconInputs" style="background-color: #D9D9D9;"></i> -->
-                <!-- <p class="bg-gray-300">Perfil</p> -->
-            </div>
-            <div class="leftSideOptions">
-                <i class="pi pi-users iconInputs" style="background-color: $secondColor"></i>
-                <p>Equipes</p>
-            </div>
-            <div class="leftSideOptions" routerLink="aparencia">
-                <i class="pi pi-pencil iconInputs"></i>
-                <p>Aparência do Sistema</p>
-            </div>
-            <div class="leftSideOptions" >
-                <i class="pi pi-bell iconInputs"></i>
+        </div>
+        <ul class="space-y-4">
+            <li class="navOptions flex items-center space-x-4">
+                <fa-icon class="icon" [icon]="faUser"></fa-icon>
+                <p >Perfil</p>
+            </li>
+            <li class="navOptions flex items-center space-x-4">
+                <fa-icon class="icon" [icon]="faUsers"></fa-icon>
+                <p >Equipes</p>
+             </li>
+             <li class="navOptions flex items-center space-x-4">
+                <fa-icon class="icon" [icon]="faPaintBrush"></fa-icon>
+                <p >Aparência do Sistema</p>
+             </li>
+             <li class="navOptions flex items-center space-x-4">
+                <fa-icon class="icon" [icon]="faBell"></fa-icon>
                 <p>Notificações</p>
-            </div>
-        </section>
-    </div>
+            </li>
+        </ul>
+    </section>
     
     
     <div class="rightSide">

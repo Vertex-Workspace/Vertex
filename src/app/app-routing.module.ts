@@ -35,11 +35,11 @@ const routes: Routes = [
       path: 'aparencia',
       component: AppearanceComponent
       },
-      {
-        path: "",
-        pathMatch: "full",
-        redirectTo: "aparencia",
-      },
+      // {
+      //   path: "",
+      //   pathMatch: "full",
+      //   redirectTo: "aparencia",
+      // },
     ]
   },
   {
