@@ -4,6 +4,7 @@ import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { TeamsComponent } from './pages/teams/teams.component';
 
 const routes: Routes = [
   {
@@ -12,14 +13,18 @@ const routes: Routes = [
     data: { animation: 'loginPage' }
   },
   {
-    path: 'mural',
-    component: MuralComponent,
-    data: { animation: 'muralPage' }
-  },
-  {
     path: 'register',
     component: RegisterComponent,
     data: { animation: 'registerPage' }
+  },
+  {
+    path: 'home',
+    component: TeamsComponent,
+  },
+  {
+    path: 'mural',
+    component: MuralComponent,
+    data: { animation: 'muralPage' }
   },
   {
     path: 'task',
@@ -28,11 +33,11 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "login",
+    redirectTo: "home",
   },
   {
     path: "**",
-    redirectTo: "login",
+    redirectTo: "home",
   }
 ]
 

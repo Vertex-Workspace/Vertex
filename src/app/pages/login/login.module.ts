@@ -5,12 +5,13 @@ import { RouterModule } from '@angular/router';
 
 
 
+
 @NgModule({
   declarations: [LoginComponent],
   exports:[LoginComponent],
   imports: [
     CommonModule,
-    RouterModule,
+    RouterModule
   ],
 })
 export class LoginModule { }
