@@ -9,7 +9,8 @@
 
 .bg {
     @apply  
-    min-h-screen 
+    h-screen
+    w-[100%]
     flex;
     background-color: $secondColor
 }
@@ -21,12 +22,13 @@
 .navOptions {
     @apply
     flex justify-start
+    gap-4
+    w-[60%]
+    items-center
 }
 
 .settingsTitle {
     @apply 
-    ml-10 
-    mt-10 
     text-2xl
     font-bold;
     font-family: $titleFont;
@@ -36,35 +38,30 @@
 .nav {
     @apply 
     w-[30%]
+    h-[50%]
     flex
     flex-col
+    justify-center
     items-center
 }
 
+.divIcon {
+    @apply
+    flex w-[30%] 
+    h-full 
+    justify-center 
+    items-center
 
-
-.generalOptions {
-    @apply 
-    mt-10 ml-10 
-    grid gap-4 
-    grid-cols-1;
-    font-family: $primaryFont;
 }
 
-.leftSideContainer {
-    @apply boxSelected p-2;
+.divOptions {
+    @apply
+    flex w-[70%] 
+    h-full 
+    justify-start 
+    items-center
 }
 
-.leftSideOptions {
-    @apply 
-    flex items-center 
-    space-x-2
-    w-64;
-}
-
-.iconInputs {
-    @apply text-xl;
-}
 
 // div do nome do usuário
 .userInfo {

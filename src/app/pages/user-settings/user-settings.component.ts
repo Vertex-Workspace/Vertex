@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faUser, faUsers, faPaintBrush, faBell } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faUsers, faPaintBrush, faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-user-settings',
@@ -11,4 +11,5 @@ export class UserSettingsComponent {
   faUsers = faUsers;
   faPaintBrush = faPaintBrush;
   faBell = faBell;
+  faUserCircle = faUserCircle
 }

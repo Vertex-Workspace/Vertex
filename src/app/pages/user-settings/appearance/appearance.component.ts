@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-appearance',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./appearance.component.scss']
 })
 export class AppearanceComponent {
+  faCircleUser = faCircleUser;
 
 }
