@@ -16,7 +16,7 @@ export class TasksComponent {
     { id: 'mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
 ];
 
-  changePreviewMode(preview: string) {
+  changePreviewMode(preview: string): void {
     this.clicked = preview;
   }
 }
