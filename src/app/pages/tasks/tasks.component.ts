@@ -9,11 +9,11 @@ export class TasksComponent {
 
   clicked: string = 'kanban';
 
-  menuItems = ['kanban', 'lines', 'calendar', 'mural'];
-  iconClasses: { [key: string]: string } = {
-    'kanban': 'pi pi-th-large',
-    'lines': 'pi pi-list',
-    'calendar': 'pi pi-calendar',
-    'mural': 'pi pi-chart-bar'
-  };
+  menuItems = [
+    { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
+    { id: 'lines', iconClass: 'pi pi-list', label: 'Linhas' },
+    { id: 'calendar', iconClass: 'pi pi-calendar', label: 'Calendário' },
+    { id: 'mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
+];
+
 }

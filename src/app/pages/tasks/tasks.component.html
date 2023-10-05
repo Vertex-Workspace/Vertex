@@ -1,37 +1,12 @@
 <section>
     <section class="menu">
         <div>
-            <label [ngClass]="clicked === 'kanban'
-                    ? 'clicked'
-                    : 'default'"
-            >
-                <i class="pi pi-th-large" style="font-size: 1rem"></i>
-                <button>Kanban</button>
-            </label>
-
-            <label [ngClass]="clicked === 'lines'
-                    ? 'clicked'
-                    : 'default'"
-            >
-                <i class="pi pi-list" style="font-size: 1rem"></i>
-                <button>Linhas</button>
-            </label>
-
-            <label [ngClass]="clicked === 'calendar'
-                    ? 'clicked'
-                    : 'default'"
-            >
-                <i class="pi pi-calendar" style="font-size: 1rem"></i>
-                <button>Calendário</button>
-            </label>
-
-            <label [ngClass]="clicked === 'mural    '
-                    ? 'clicked'
-                    : 'default'"
-            >
-                <i class="pi pi-chart-bar" style="font-size: 1rem"></i>
-                <button>Mural</button>
-            </label>
+            <ng-container *ngFor="let item of menuItems">
+                <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
+                    <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
+                    <button>{{ item.label }}</button>
+                </label>
+            </ng-container>
         </div>
         <div>
             <button></button>
