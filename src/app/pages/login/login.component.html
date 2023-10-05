@@ -19,15 +19,29 @@
             <!-- Div Input Endereço de Email -->
             <div class="w-full">
                 <label class="labels">Endereço de E-mail</label>
-                <input class="inputs" name="email" type="email" autocomplete="email" required>
+                <div class="flex justify-center">
+                    <div class="divRegisterIcons">
+                        <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
+                    </div>
+                    <input class="inputs" name="email" type="email" autocomplete="email" required>
+                </div>
             </div>
 
 
             <!-- Div input de Senha -->
             <div>
                 <label class="labels">Senha</label>
-                <div class=" flex justify-center">
-                    <input class="inputs" name="password" type="password" autocomplete="current-password" required>
+                <div class="flex justify-center">
+                    <div class="divRegisterIcons">
+                        <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
+                    </div>
+                    <input class="inputs" name="password" [type]="invisibleEye ? 'password' : 'text'" autocomplete="current-password" required>
+                    <div class="eyesDiv">
+                        <fa-icon *ngIf="!invisibleEye" (click)="passwordToggle()" class="eyeIcon" [icon]="faEye">
+                        </fa-icon>
+                        <fa-icon *ngIf="invisibleEye" (click)="passwordToggle()" class="eyeIcon"
+                            [icon]="faEyeSlash"></fa-icon>
+                    </div>
                 </div>
 
                 <div class="text-sm flex justify-end">

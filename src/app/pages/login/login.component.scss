@@ -19,6 +19,7 @@
     ;
 }
 
+
 #h1NameVertex{
     @apply
     text-3xl
@@ -80,13 +81,46 @@
     @apply block 
     h-10 
     w-full 
-    border-0 
     py-1.5 
+    border-none
     px-3 
     text-black 
-    shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+    shadow-sm  ring-inset ring-gray-300 placeholder:text-gray-400 
     focus:ring-2 focus:ring-inset focus:ring-[#092c4c] sm:text-sm sm:leading-6;
     font-family: "Inter", sans-serif;
+}
+.divRegisterIcons{
+    @apply w-14
+    h-10
+    bg-slate-100
+    flex
+    justify-center
+    items-center
+}
+
+.registerIcons{
+    @apply w-6
+    text-[#092c4c]
+    flex
+    justify-center
+    items-center
+    
+}
+
+.eyesDiv{
+    @apply w-14
+    bg-white
+    flex
+    items-center
+    justify-center
+    
+}
+
+.eyeIcon{
+    @apply w-6
+    text-[#092c4c]
+    flex
+    items-center
 }
 
 #a-forget-password{

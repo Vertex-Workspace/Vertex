@@ -14,9 +14,12 @@
                     <div class="w-full">
 
                         <div class="flex items-center justify-center w-full">
+                            <div class="divRegisterIcons">
+                                <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
+                            </div>
                             <input style="font-family: 'Inter';" id="nome" name="nome" type="text" autocomplete="nome"
                                 required placeholder="Nome"
-                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
 
@@ -24,9 +27,12 @@
                     <div class="w-full">
 
                         <div class=" flex justify-center w-full">
+                            <div class="divRegisterIcons">
+                                <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
+                            </div>
                             <input style="font-family: 'Inter';" id="sobrenome" name="sobrenome" type="text"
                                 autocomplete="sobrenome" required placeholder="Sobrenome"
-                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                 </div>
@@ -34,11 +40,13 @@
                 <div class="flex">
                     <!-- Div Input Email -->
                     <div class="w-full">
-
                         <div class="flex items-center justify-center w-full">
+                            <div class="divRegisterIcons">
+                                <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
+                            </div>
                             <input style="font-family: 'Inter';" id="email" name="email" type="email"
                                 autocomplete="email" required placeholder="E-mail"
-                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                 </div>
@@ -49,24 +57,42 @@
                         <!-- Div input Senha -->
                         <div class="w-full">
                             <div class="flex items-center justify-start w-full">
-                                <input style="font-family: 'Inter';" id="password" name="password" type="password"
+                                <div class="divRegisterIcons">
+                                    <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
+                                </div>
+                                <input style="font-family: 'Inter';" id="password" [type]="invisibleEye1 ? 'password' : 'text'"
                                     autocomplete="password" required placeholder="Senha"
-                                    class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <div class="eyesDiv">
+                                        <fa-icon *ngIf="!invisibleEye1" (click)="passwordToggle1()" class="eyeIcon" [icon]="faEye">
+                                        </fa-icon>
+                                        <fa-icon *ngIf="invisibleEye1" (click)="passwordToggle1()" class="eyeIcon"
+                                            [icon]="faEyeSlash"></fa-icon>
+                                    </div>
                             </div>
                         </div>
 
                         <!-- Div input Confirmar Senha -->
                         <div class="w-full">
                             <div class="flex items-center justify-center w-full">
-                                <input style="font-family: 'Inter';" id="password" name="password" type="password"
+                                <div class="divRegisterIcons">
+                                    <fa-icon class="registerIcons" [icon]="faKey"></fa-icon>
+                                </div>
+                                <input style="font-family: 'Inter';" id="password" [type]="invisibleEye2 ? 'password' : 'text'"
                                     autocomplete="password" required placeholder="Confirme sua Senha"
-                                    class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <div class="eyesDiv">
+                                        <fa-icon *ngIf="!invisibleEye2" (click)="passwordToggle2()" class="eyeIcon" [icon]="faEye">
+                                        </fa-icon>
+                                        <fa-icon *ngIf="invisibleEye2" (click)="passwordToggle2()" class="eyeIcon"
+                                            [icon]="faEyeSlash"></fa-icon>
+                                    </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="flex flex-col justify-center text-[16px] text-white">
-                        <p class="w-96">Requisitos para uma boa senha:</p>
+                        <p class="w-80">Requisitos para uma boa senha:</p>
                         <p>*Mínimo de 8 caracteres</p>
                         <p>*Mínimo de 1 letra maiúscula</p>
                         <p>*Mínimo de 1 letra minúscula</p>
@@ -81,11 +107,11 @@
                 <!-- Div do botão de Enviar -->
                 <div class="flex justify-center">
                     <button type="submit"
-                        class="flex w-44 h-10 items-center justify-center rounded-md bg-indigo-600 text-sm font-semibold leading-6 text-white shadow-sm
-                hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        class="flex w-44 h-10 items-center justify-center rounded-md bg-[#2E5DA6] text-sm font-semibold leading-6 text-white shadow-sm
+                        hover:bg-[#224680] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#224680]">
                         Cadastrar</button>
                 </div>
-                
+
             </form>
             <br>
 
@@ -94,7 +120,7 @@
                 Já possui uma conta?
                 <br>
                 <a [routerLink]="['/login']"
-                    class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Clique
+                    class="font-semibold leading-6 text-[#224680] hover:text-blue-600 transition">Clique
                     aqui</a>
                 para entrar
             </p>
