@@ -28,7 +28,7 @@ const routes: Routes = [
     component: TaskComponent
   },
   {
-    path: 'userProfile',
+    path: 'configuracoes',
     component: UserSettingsComponent,
     children:[
       {
@@ -45,11 +45,11 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "login",
+    redirectTo: "configuracoes",
   },
   {
     path: "**",
-    redirectTo: "login",
+    redirectTo: "configuracoes",
   }
 ]
 
