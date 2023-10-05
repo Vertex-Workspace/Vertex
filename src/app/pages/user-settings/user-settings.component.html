@@ -5,77 +5,43 @@
         <div class="flex items-end">
             <p class="settingsTitle">Configurações e Preferências</p>
         </div>
-        <ul class="space-y-4">
-            <li class="navOptions flex items-center space-x-4">
-                <fa-icon class="icon" [icon]="faUser"></fa-icon>
-                <p >Perfil</p>
+        <ul class="space-y-4 flex flex-col items-center w-full">
+            <li class="navOptions">
+                <div class="divIcon">
+                    <fa-icon class="icon" [icon]="faUser"></fa-icon>
+                </div>
+                <div class="divOptions">
+                    <p> Perfil</p>
+                </div>
             </li>
-            <li class="navOptions flex items-center space-x-4">
-                <fa-icon class="icon" [icon]="faUsers"></fa-icon>
-                <p >Equipes</p>
-             </li>
-             <li class="navOptions flex items-center space-x-4">
-                <fa-icon class="icon" [icon]="faPaintBrush"></fa-icon>
-                <p >Aparência do Sistema</p>
-             </li>
-             <li class="navOptions flex items-center space-x-4">
-                <fa-icon class="icon" [icon]="faBell"></fa-icon>
-                <p>Notificações</p>
+            <li class="navOptions">
+                <div class="divIcon">
+                    <fa-icon class="icon" [icon]="faUsers"></fa-icon>
+                </div>
+                <div class="divOptions">
+                    <p>Equipes</p>
+                </div>
+            </li>
+            <li class="navOptions" routerLink="aparencia">
+                <div class="divIcon">
+                    <fa-icon class="icon" [icon]="faPaintBrush"></fa-icon>
+                </div>
+                <div class="divOptions">
+                    <p>Aparência do Sistema</p>
+                </div>
+            </li>
+            <li class="navOptions">
+                <div class="divIcon">
+                    <fa-icon class="icon" [icon]="faBell"></fa-icon>
+                </div>
+                <div class="divOptions">
+                    <p> Notificações</p>
+                </div>
             </li>
         </ul>
     </section>
-    
-    
-    <div class="rightSide">
-        <!-- Section com as informações do usuário -->
-        <section class="userSection">
-            <div class="userInfo">
-                <div class="iconUserContainer">
-                    <i class="pi pi-user iconUser"></i>
-                </div>
-                <p class="userInfop">Kaique Fernandes Lima Homem</p>
-                <router-outlet></router-outlet>
-            </div>
-    
-            <div class="divGeneralInputs">
-    
-                <!-- Inputs do lado esquerdo -->
-                <div class="w-96">
-                    <!-- Input com o nome do usuário -->
-                    <div class="inputContainer flex items-center">
-                        <div class="iconContainer">
-                            <i class="pi pi-user iconInputs"></i>
-                        </div>
-                        <input type="text" class="input" placeholder="Kaique Fernandes Lima Homem" />
-                    </div>
-    
-                    <!-- Input com o e-mail do usuário -->
-                    <div class="inputContainer flex items-center">
-                        <div class="iconContainer">
-                            <i class="pi pi-user iconInputs"></i>
-                        </div>
-                        <input type="email" class="input" placeholder="Kaique_homem@estudante.sesisenai.org.br" />
-                    </div>
-                </div>
-    
-                <div class="w-40">
-                    <!-- Input com a senha do usuário -->
-                    <div class="inputContainer flex items-center">
-                        <div class="iconContainer">
-                            <i class="pi pi-lock iconInputs"></i>
-                        </div>
-                        <input type="password" class="input" placeholder="**********" />
-                    </div>
-    
-                    <!-- Input com a confirmação de senha do usuário -->
-                    <div class="inputContainer flex items-center">
-                        <div class="iconContainer">
-                            <i class="pi pi-lock iconInputs"></i>
-                        </div>
-                        <input type="password" class="input" placeholder="************" />
-                    </div>
-                </div>
-            </div>
-        </section>
+
+    <div class="w-[70%] h-full">
+        <router-outlet></router-outlet>
     </div>
 </div>

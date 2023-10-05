@@ -9,100 +9,34 @@
 
 .bg {
     @apply  
-    min-h-screen 
-    flex;
-    background-color: $secondColor
+    flex
+    h-screen 
+    w-[100%];
 }
 
+.icon {
+    color: $primaryColor;
 
-.leftSideContainer {
-    @apply boxSelected p-2;
-}
-
-.leftSideOptions {
-    @apply 
-    flex items-center 
-    space-x-2
-    w-64;
-}
-
-.iconInputs {
-    @apply text-xl;
-}
-
-// div do nome do usuário
-.userInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content:space-between;
-    width: 100%;  
 }
 
 .userInfop {
-    @apply text-xl;
+    @apply text-xl
+    flex flex-col justify-center items-center;
     font-family: $titleFont;
 }
 
 .rightSide {
-    @apply w-2/3 
-    flex items-center
-    justify-center flex-col;;
-}
-
-.userSection {
-    @apply ml-8 mt-8
-    mt-[-100px];
-}
-
-.iconUser {
-    font-size: 700%;
-    color:white;
-    background-color: $primaryColor;   
-    border-radius: 100%;
-}
-
-.iconUserContainer {
-    @apply w-40 h-40; 
-    @apply flex items-center
-    justify-center rounded-full;
-    @apply mb-4;
-    background-color: $primaryColor;
-}
-
-.iconContainer {
     @apply 
-    w-10 
-    h-10 
-    flex items-center 
-    justify-center rounded-md;
+    w-[100%]
+    h-[100%]
+    flex items-center
+    justify-center flex-col
+    space-y-8;
 }
 
-.inputContainer {
-    @apply shadow appearance-none 
-    border rounded w-full 
-    flex items-center;
-}
 
 .input {
-    @apply px-3 py-2 bg-white
-     shadow appearance-none 
-     border rounded w-full 
+    @apply bg-white
+     border rounded-r-sm
      placeholder-slate-400 
-     focus:outline-none 
-     focus:border-sky-500 
-     focus:ring-sky-500 
-     block rounded-md sm:text-sm;
-     focus:ring-1;
-}
-
-.divGeneralInputs {
-    @apply flex gap-4
-    ml-8 mt-8;
-}
-
-
-.boxSelected {
-    background-color:#D9D9D9; 
-    border-left: 5px solid black;
 }

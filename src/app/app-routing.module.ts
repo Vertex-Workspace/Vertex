@@ -36,9 +36,9 @@ const routes: Routes = [
       component: AppearanceComponent
       },
       // {
-      //   path: "",
-      //   pathMatch: "full",
-      //   redirectTo: "aparencia",
+      // path: "",
+      // pathMatch: "full",
+      // redirectTo: "aparencia",
       // },
     ]
   },
