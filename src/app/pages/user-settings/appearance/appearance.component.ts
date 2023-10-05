@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faEnvelope, faLock,
+        faEarthAmericas, faKey } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-appearance',
@@ -8,5 +9,9 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppearanceComponent {
   faCircleUser = faCircleUser;
+  faEnvelope = faEnvelope;
+  faLock = faLock;
+  faEarthAmericas = faEarthAmericas;
+  faKey = faKey;
 
 }
