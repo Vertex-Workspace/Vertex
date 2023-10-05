@@ -1,19 +1,46 @@
-<section>
+<section class="screen">
     <section class="menu">
         <div>
+
             <ng-container *ngFor="let item of menuItems">
                 <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
                     <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
                     <button (click)="changePreviewMode(item.id)">{{ item.label }}</button>
                 </label>
             </ng-container>
+
         </div>
+
         <div>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+            <ng-container>
+                <button *ngIf="!searchBarOpen" (click)="clickSearchBar()">
+                    <i class="pi pi-search" style="font-size: 1.7rem;"></i>
+                </button>
+            
+                <div class="search" *ngIf="searchBarOpen">
+                    <input type="text" placeholder="Pesquise por uma tarefa...">
+                    <i class="pi pi-times cursor-pointer" 
+                        style="font-size: 1.4rem;"
+                        (click)="clickSearchBar()"
+                    ></i>
+                </div>
+            </ng-container>
+
+            <ng-container *ngFor="let item of configItems">
+                    <button class="config-buttons" (click)="item.click">
+                        <i class="{{ item.iconClass }}" style="font-size: 1.7rem"></i>
+                    </button>
+            </ng-container>
+
+            <button class="create">
+                <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                Nova tarefa
+            </button>
         </div>
+
+    </section>
+    <section class="filter-settings">
+        filter
     </section>
     <section>
         router

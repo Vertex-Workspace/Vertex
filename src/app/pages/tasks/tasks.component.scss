@@ -1,25 +1,72 @@
 @import '../../../_variables.scss';
 
-section:first-child {
-    @apply h-[75vh] w-[75vw] p-4;
+.screen {
+    @apply h-full w-screen p-4;
 }
 
 .menu {
-    @apply ml-14;
+    @apply ml-14 mt-8 flex justify-between items-center;
 }
 
 .menu div:first-child {
     border-color: $primaryColor;
-    @apply w-1/2 h-[44px] flex gap-1 border-b-[1px];
+    @apply w-[550px] h-[53px] flex gap-1 border-b-[1px];
+
+    label {
+        @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+        items-center justify-center rounded cursor-pointer;
+    }
+
+    label:hover {
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply transition-colors;
+    }
 }
 
-.menu div:first-child::after {
-    @apply w-2/3;
-}
+.menu div:last-child {
+    @apply flex mr-32 gap-2 h-[48px] items-center;
 
-label {
-    color: $secondColor;
-    @apply w-[107px] h-[38px] flex gap-2 p-4 items-center justify-center rounded;
+
+    .search {
+        @apply w-[300px] h-full flex items-center justify-between bg-white p-3
+        rounded shadow-md border-none;
+
+        i {
+            @apply w-[10%];
+        }
+
+        input {
+            @apply w-[90%] h-full outline-none flex items-center pl-2;
+        }
+    }
+
+    button {
+        color: $primaryColor;
+        border-color: $secondColor;
+        @apply h-[53px] w-[53px] flex items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+
+    button:hover {
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply transition-colors;
+    }
+
+    .create {
+        background-color: $primaryColor;
+        border-color: $primaryColor;
+        color: $secondColor;
+        @apply h-full w-[180px] flex items-center justify-center gap-4
+        text-xl p-3 rounded font-light border-2 transition-colors;
+    }
+
+    .create:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
 }
 
 .clicked {
