@@ -1,5 +1,5 @@
-@import '../../../variables.scss';
-@import '../../../styles.scss';
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
 
 * {
     margin: 0;
@@ -14,42 +14,6 @@
     background-color: $secondColor
 }
 
-.icon {
-    color: $primaryColor
-}
-
-.navOptions {
-    @apply
-    flex justify-start
-}
-
-.settingsTitle {
-    @apply 
-    ml-10 
-    mt-10 
-    text-2xl
-    font-bold;
-    font-family: $titleFont;
-    
-}
-
-.nav {
-    @apply 
-    w-[30%]
-    flex
-    flex-col
-    items-center
-}
-
-
-
-.generalOptions {
-    @apply 
-    mt-10 ml-10 
-    grid gap-4 
-    grid-cols-1;
-    font-family: $primaryFont;
-}
 
 .leftSideContainer {
     @apply boxSelected p-2;
