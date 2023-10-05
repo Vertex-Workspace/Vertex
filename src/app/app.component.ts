@@ -14,9 +14,11 @@ import { PersonalizationService } from './services/personalization.service';
 export class AppComponent{
   title = 'Vertex';
 
-  userLogged: boolean = false;
+  userLogged: boolean = true;
 
-  constructor(private personalization : PersonalizationService, private contexts: ChildrenOutletContexts){
+  constructor(
+    private personalization : PersonalizationService, private contexts: ChildrenOutletContexts
+  ){
     personalization.setPersonalization();
   }
 
