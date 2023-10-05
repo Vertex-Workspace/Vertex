@@ -1,0 +1,7 @@
+section{
+    @apply flex w-screen h-full justify-center items-center;
+}
+
+.container-custom{
+    @apply grid w-[90%] h-full grid-cols-2 ;
+}
