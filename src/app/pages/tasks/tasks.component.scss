@@ -19,7 +19,7 @@ section:first-child {
 
 label {
     color: $secondColor;
-    @apply w-[107px] h-[38px] flex gap-2 p-2 items-center justify-center rounded;
+    @apply w-[107px] h-[38px] flex gap-2 p-4 items-center justify-center rounded;
 }
 
 .clicked {
