@@ -1,0 +1,33 @@
+@import '../../../_variables.scss';
+
+section:first-child {
+    @apply h-[75vh] w-[75vw] p-4;
+}
+
+.menu {
+    @apply ml-14;
+}
+
+.menu div:first-child {
+    border-color: $primaryColor;
+    @apply w-1/2 h-[44px] flex gap-1 border-b-[1px];
+}
+
+.menu div:first-child::after {
+    @apply w-2/3;
+}
+
+label {
+    color: $secondColor;
+    @apply w-[107px] h-[38px] flex gap-2 p-2 items-center justify-center rounded;
+}
+
+.clicked {
+    background-color: $primaryColor;
+    color: $secondColor;
+}
+
+.default {
+    background-color: $secondColor;
+    color: $primaryColor;
+}

@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class TasksComponent {
 
+  clicked: string = 'kanban';
+
+  menuItems = ['kanban', 'lines', 'calendar', 'mural'];
+  iconClasses: { [key: string]: string } = {
+    'kanban': 'pi pi-th-large',
+    'lines': 'pi pi-list',
+    'calendar': 'pi pi-calendar',
+    'mural': 'pi pi-chart-bar'
+  };
 }
