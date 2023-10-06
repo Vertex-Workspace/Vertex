@@ -16,7 +16,7 @@ export class TasksComponent {
 
   menuItems = [
     { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
-    { id: 'lines', iconClass: 'pi pi-list', label: 'Linhas' },
+    { id: 'list', iconClass: 'pi pi-list', label: 'Lista' },
     { id: 'calendar', iconClass: 'pi pi-calendar', label: 'Calendário' },
     { id: 'mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
   ];
@@ -25,6 +25,7 @@ export class TasksComponent {
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
   ];
+
 
   clickSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;

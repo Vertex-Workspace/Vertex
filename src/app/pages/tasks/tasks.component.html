@@ -6,7 +6,8 @@
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
                         <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
-                        <button [routerLink]="['/tasks/kanban']" (click)="changePreviewMode(item.id)">{{ item.label }}</button>
+                        <button [routerLink]="['/tasks/', item.id]"
+                                (click)="changePreviewMode(item.id)">{{ item.label }}</button>
                     </label>
                 </ng-container>
             </div>
