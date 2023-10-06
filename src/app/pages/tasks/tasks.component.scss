@@ -1,11 +1,29 @@
 @import '../../../_variables.scss';
 
 .screen {
-    @apply h-full w-screen p-4;
+    @apply h-full w-screen flex justify-center;
+}
+
+.container-custom{
+    @apply flex w-[90%] h-full flex-col;
 }
 
 .menu {
-    @apply ml-14 mt-8 flex justify-between items-center;
+    @apply flex justify-between mt-10 mb-4;
+}
+
+
+.filter-settings {
+    @apply flex gap-3 items-center;
+
+    p {
+        color: $primaryColor;
+        @apply text-lg;
+    }
+
+    select {
+        @apply w-[170px] h-[35px] text-center outline-none;
+    }
 }
 
 .menu div:first-child {
@@ -25,7 +43,7 @@
 }
 
 .menu div:last-child {
-    @apply flex mr-32 gap-2 h-[48px] items-center;
+    @apply flex gap-2 h-[48px] items-center;
 
 
     .search {
@@ -70,11 +88,11 @@
 }
 
 .clicked {
-    background-color: $primaryColor;
     color: $secondColor;
+    background-color: $primaryColor;
 }
 
 .default {
-    background-color: $secondColor;
     color: $primaryColor;
+    background-color: $secondColor;
 }

@@ -5,6 +5,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
+import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
+import { ListComponent } from './pages/tasks/list/list.component';
+import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -24,7 +27,25 @@ const routes: Routes = [
   },
   {
     path: 'tasks',
-    component: TasksComponent
+    component: TasksComponent,
+    children: [
+      {
+        path: 'kanban',
+        component: KanbanComponent
+      },
+      {
+        path: 'list',
+        component: ListComponent
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent
+      },
+      {
+        path: 'mural',
+        component: MuralComponent
+      }
+    ]
   },
   {
     path: "",
