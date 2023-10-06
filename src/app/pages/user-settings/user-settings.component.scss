@@ -1,19 +1,23 @@
 @import '../../../variables.scss';
 @import '../../../styles.scss';
 
+
+//falar com ana sobre isso
 * {
     margin: 0;
     padding: 0;
     background-color: $secondColor;
 }
 
-.bg {
-    @apply  
-    h-screen
-    w-[100%]
-    flex;
-    background-color: $secondColor
+
+.screen{
+    @apply flex w-screen h-full justify-center items-center;
 }
+
+.container-custom{
+    @apply flex w-[90%] h-full ;
+}
+
 
 .icon {
     color: $primaryColor

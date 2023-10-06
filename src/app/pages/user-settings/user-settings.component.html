@@ -1,47 +1,49 @@
-<div class="bg">
+<section class="screen">
+    <div class="container-custom">
 
-    <!-- lado esquerda -->
-    <section class="nav space-y-8">
-        <div class="flex items-end">
-            <p class="settingsTitle">Configurações e Preferências</p>
+        <!-- lado esquerda -->
+        <section class="nav space-y-8">
+            <div class="flex items-end">
+                <p class="settingsTitle">Configurações e Preferências</p>
+            </div>
+            <ul class="space-y-4 flex flex-col items-center w-full">
+                <li class="navOptions">
+                    <div class="divIcon">
+                        <fa-icon class="icon" [icon]="faUser"></fa-icon>
+                    </div>
+                    <div class="divOptions">
+                        <p> Perfil</p>
+                    </div>
+                </li>
+                <li class="navOptions">
+                    <div class="divIcon">
+                        <fa-icon class="icon" [icon]="faUsers"></fa-icon>
+                    </div>
+                    <div class="divOptions">
+                        <p>Equipes</p>
+                    </div>
+                </li>
+                <li class="navOptions" routerLink="aparencia">
+                    <div class="divIcon">
+                        <fa-icon class="icon" [icon]="faPaintBrush"></fa-icon>
+                    </div>
+                    <div class="divOptions">
+                        <p>Aparência do Sistema</p>
+                    </div>
+                </li>
+                <li class="navOptions">
+                    <div class="divIcon">
+                        <fa-icon class="icon" [icon]="faBell"></fa-icon>
+                    </div>
+                    <div class="divOptions">
+                        <p> Notificações</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <div class="w-[70%] h-full">
+            <router-outlet></router-outlet>
         </div>
-        <ul class="space-y-4 flex flex-col items-center w-full">
-            <li class="navOptions">
-                <div class="divIcon">
-                    <fa-icon class="icon" [icon]="faUser"></fa-icon>
-                </div>
-                <div class="divOptions">
-                    <p> Perfil</p>
-                </div>
-            </li>
-            <li class="navOptions">
-                <div class="divIcon">
-                    <fa-icon class="icon" [icon]="faUsers"></fa-icon>
-                </div>
-                <div class="divOptions">
-                    <p>Equipes</p>
-                </div>
-            </li>
-            <li class="navOptions" routerLink="aparencia">
-                <div class="divIcon">
-                    <fa-icon class="icon" [icon]="faPaintBrush"></fa-icon>
-                </div>
-                <div class="divOptions">
-                    <p>Aparência do Sistema</p>
-                </div>
-            </li>
-            <li class="navOptions">
-                <div class="divIcon">
-                    <fa-icon class="icon" [icon]="faBell"></fa-icon>
-                </div>
-                <div class="divOptions">
-                    <p> Notificações</p>
-                </div>
-            </li>
-        </ul>
-    </section>
-
-    <div class="w-[70%] h-full">
-        <router-outlet></router-outlet>
     </div>
-</div>
+</section>
