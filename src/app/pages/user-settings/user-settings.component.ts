@@ -12,4 +12,14 @@ export class UserSettingsComponent {
   faPaintBrush = faPaintBrush;
   faBell = faBell;
   faUserCircle = faUserCircle
+
+  click: string = 'perfil';
+
+  itemsList = [
+    { id: 'perfil', icon: faUser, option: 'Perfil'},
+    { id: 'aparencia', icon: faPaintBrush, option: 'Aparência do Sistema'},
+    { id: 'equipes', icon: faUsers, option: 'Equipes'},
+    { id: 'notificacoes', icon: faBell, option: 'Notificações'}
+  ];
+
 }
