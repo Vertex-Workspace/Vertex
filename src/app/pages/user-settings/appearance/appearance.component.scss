@@ -1,6 +1,8 @@
 @import '../../../../variables.scss';
 @import '../../../../styles.scss';
 
+
+//Falar com ana sobre isso
 * {
     margin: 0;
     padding: 0;
@@ -8,10 +10,7 @@
 }
 
 .bg {
-    @apply  
-    flex
-    h-screen 
-    w-[100%];
+    @apply  flex h-full w-screen;
 }
 
 .icon {
