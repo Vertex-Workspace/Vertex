@@ -2,7 +2,6 @@
 @import '../../../styles.scss';
 
 
-//falar com ana sobre isso
 * {
     margin: 0;
     padding: 0;
@@ -31,22 +30,24 @@
     items-center
 }
 
-.settingsTitle {
+.p {
     @apply 
     text-2xl
     font-bold;
-    font-family: $titleFont;
-    
+    font-family: $titleFont;   
+}
+
+.ul {
+    @apply
+    space-y-4 
+    flex flex-col 
+    w-full;
 }
 
 .nav {
     @apply 
     w-[30%]
     h-[50%]
-    flex
-    flex-col
-    justify-center
-    items-center
 }
 
 .divIcon {
@@ -63,8 +64,6 @@
     @apply
     flex w-[70%] 
     h-full 
-    justify-start 
-    items-center
 }
 
 .click {

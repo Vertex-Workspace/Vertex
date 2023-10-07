@@ -6,6 +6,9 @@ import { MuralComponent } from './pages/mural/mural.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { ProfileComponent } from './pages/user-settings/profile/profile.component';
+import { NotificationsComponent } from './pages/user-settings/notifications/notifications.component';
+import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/teams-settings.component';
 
 const routes: Routes = [
   {
@@ -35,11 +38,24 @@ const routes: Routes = [
       path: 'aparencia',
       component: AppearanceComponent
       },
-      // {
-      // path: "",
-      // pathMatch: "full",
-      // redirectTo: "aparencia",
-      // },
+      {
+      path: 'perfil',
+      component: ProfileComponent
+      },
+      {
+      path: 'equipes',
+      component: TeamsSettingsComponent
+      },
+      {
+      path: 'notificacoes',
+      component: NotificationsComponent
+      },
+      
+      {
+      path: "",
+      pathMatch: "full",
+      redirectTo: "perfil",
+      },
     ]
   },
   {
