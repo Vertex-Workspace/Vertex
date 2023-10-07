@@ -5,15 +5,73 @@ section{
 }
 
 .container-custom{
-    @apply grid w-[90%] h-full grid-cols-2 bg-black;
+    @apply grid w-[90%] h-full grid-cols-2;
 }
 
-.container-div{
-    @apply flex flex-col items-center h-full w-full ;
+.container-grid{
+    @apply flex flex-col h-full w-full pt-10;
 }
 
 //TEAMS
+.nav-tasks-teams{
+    border-color: $primaryColor;
+    @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
 
+    label {
+        @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+        items-center justify-center rounded cursor-pointer;
+    }
+
+    label:hover {
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply transition-colors;
+    }
+}
+
+.functionally-items{
+    @apply flex w-[85%] pt-4 flex-row justify-between;
+    //BUTTONS
+    button {
+        @apply flex w-2/3  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    button:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
+    .create {
+        background-color: $primaryColor;
+        border-color: $primaryColor;
+        color: $secondColor;
+        @apply h-full w-[180px] flex items-center justify-center gap-4
+        text-lg p-3 rounded font-light border-2 transition-colors;
+    }
+    .search {
+        @apply w-3/5 h-full flex items-center justify-between bg-white p-3
+        rounded shadow-md border-none;
+
+        i {
+            @apply w-[10%];
+        }
+
+        input {
+            @apply w-[90%] h-full outline-none flex items-center pl-2;
+        }
+    }
+}
+
+.clicked {
+    color: $secondColor;
+    background-color: $primaryColor;
+}
+.default {
+    color: $primaryColor;
+    background-color: $secondColor;
+}
 
 
 

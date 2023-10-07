@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamsComponent } from './teams.component';
+import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
 
 
 
@@ -8,7 +9,8 @@ import { TeamsComponent } from './teams.component';
   declarations: [TeamsComponent],
   exports:[TeamsComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    CardListModule
   ],
 })
 export class TeamsModule { }

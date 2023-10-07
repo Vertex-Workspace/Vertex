@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent {
+  clicked: string = 'task';
+  menuItems = [
+    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
+    { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
+  ];
 
+  changePreviewMode(preview: string): void {
+    this.clicked = preview;
+  }
 }

@@ -1,19 +1,38 @@
 <section>
     <div class="container-custom">
         <div class="container-grid">
-            <nav class="">
-                <ul>
-                    <li>Tarefa</li>
-                    <li>Equipes</li>
-                </ul>
-            </nav>
+            <div class="nav-tasks-teams">
+                <ng-container *ngFor="let item of menuItems">
+                    <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
+                        <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
+                        <button (click)="changePreviewMode(item.id)">{{ item.label }}</button>
+                    </label>
+                </ng-container>
+
+            </div>
+            <div class="functionally-items">
+                <button class="create">
+                    <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                    Nova tarefa
+                </button>
+                <div class="search">
+                    <input type="text" placeholder="Pesquise por uma tarefa...">
+                    <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                </div>
+            </div>
+
+            <div class="flex w-[85%] h-full">
+                <app-card-list style="width: 100%; height: 100%; padding-top: 3%;"></app-card-list>
+            </div>
+
+
 
         </div>
 
 
 
 
-        
+
         <div class="container-grid">
             <div class="card-workspace">
                 <div>
