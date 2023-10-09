@@ -14,9 +14,14 @@ export class LoginComponent {
   faLock = faLock;
 
   invisibleEye:boolean = true;
-  
+
+  forgotPassword:boolean = false;
 
   passwordToggle():void{
     this.invisibleEye = !this.invisibleEye;
+  }
+
+  toForgotPassword():void{
+    this.forgotPassword = !this.forgotPassword;
   }
 }

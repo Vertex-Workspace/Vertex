@@ -1,4 +1,4 @@
-<div id="bg-login">
+<div [ngClass]="forgotPassword ? 'bg-loginOpacity' : 'bg-login'">
     <!-- Div da esquerda da tela - Responsável pelo h1 do Vertex e da logo -->
     <div id="left-div-login">
         <!-- H1 que contém o nome do aplicativo - Fica localizado no canto superior esquerdo. -->
@@ -9,6 +9,11 @@
             <img id="img-login" src="../../../assets/vertex-logo.png" alt="">
         </div>
     </div>
+
+    <div *ngIf="forgotPassword" class="absolute left-[37%] top-[20%] bg-[#f3f3f3]">
+        <app-forgot-password></app-forgot-password>
+    </div>
+
 
     <!-- Div da direita da tela - Responsável pelos inputs de usuario e senha -->
     <div id="right-div-login">
@@ -35,17 +40,18 @@
                     <div class="divRegisterIcons">
                         <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
                     </div>
-                    <input class="inputs" name="password" [type]="invisibleEye ? 'password' : 'text'" autocomplete="current-password" required>
+                    <input class="inputs" name="password" [type]="invisibleEye ? 'password' : 'text'"
+                        autocomplete="current-password" required>
                     <div class="eyesDiv">
                         <fa-icon *ngIf="!invisibleEye" (click)="passwordToggle()" class="eyeIcon" [icon]="faEye">
                         </fa-icon>
-                        <fa-icon *ngIf="invisibleEye" (click)="passwordToggle()" class="eyeIcon"
-                            [icon]="faEyeSlash"></fa-icon>
+                        <fa-icon *ngIf="invisibleEye" (click)="passwordToggle()" class="eyeIcon" [icon]="faEyeSlash">
+                        </fa-icon>
                     </div>
                 </div>
 
                 <div class="text-sm flex justify-end">
-                    <a href="#" id="a-forget-password">Esqueceu sua senha?</a>
+                    <a id="a-forget-password" (click)="toForgotPassword()">Esqueceu sua senha?</a>
                 </div>
             </div>
 
@@ -65,5 +71,6 @@
 
         </form>
     </div>
+
 
 </div>

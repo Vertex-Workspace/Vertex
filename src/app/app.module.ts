@@ -15,6 +15,7 @@ import { HeaderModule } from './components/fixed-components/header/header.module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from './components/modals/task/task.module';
+import { ForgotPasswordModule } from './components/modals/forgot-password/forgot-password.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TaskModule } from './components/modals/task/task.module';
     SidebarModule,
     HeaderModule,
     BrowserAnimationsModule,
+    ForgotPasswordModule,
     FontAwesomeModule,
     TaskModule
   ],

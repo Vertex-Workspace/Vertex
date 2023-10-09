@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { provideRouter, RouterModule, Routes } from '@angular/router';
+import { ForgotPasswordComponent } from './components/modals/forgot-password/forgot-password.component';
 import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'task',
     component: TaskComponent
+  },
+  {
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent
   },
   {
     path: "",

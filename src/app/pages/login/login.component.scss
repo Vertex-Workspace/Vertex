@@ -1,4 +1,4 @@
-#bg-login {
+.bg-login {
     @apply 
     bg-cover
     bg-center 
@@ -7,6 +7,20 @@
     flex
     ;
 
+    background-image: url(../../../assets/Vertex-bg-login.jpg);
+}
+
+.bg-loginOpacity{
+    
+    @apply 
+    bg-cover
+    bg-center 
+    w-screen 
+    h-screen 
+    flex
+    opacity-[0.9]
+    ;
+    
     background-image: url(../../../assets/Vertex-bg-login.jpg);
 }
 

@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
 import { PasswordModule } from 'primeng/password';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ForgotPasswordModule } from 'src/app/components/modals/forgot-password/forgot-password.module';
 
 
 
@@ -15,7 +16,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     RouterModule,
     PasswordModule,
+    ForgotPasswordModule,
     FontAwesomeModule
   ],
 })
-export class LoginModule { }
+export class LoginModule { 
+
+  
+
+}
