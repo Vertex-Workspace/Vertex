@@ -14,5 +14,12 @@ export class CardListComponent {
     {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
     {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
     {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
+    {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
+    {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
+    {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
+    {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
+    {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
+    {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
+    {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
   ];
 }

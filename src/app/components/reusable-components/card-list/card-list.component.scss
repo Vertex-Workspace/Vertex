@@ -1,11 +1,16 @@
 @import '../../../../variables';
+.list{
+    @apply flex w-full h-[600px] flex-col gap-[16px];
+    overflow-y: scroll;
+}
+
 .card{
-    @apply flex w-full h-[200px] bg-white shadow-lg rounded-lg flex-row;
+    @apply flex w-[98%] min-h-[200px] bg-white shadow-lg rounded-lg flex-row;
     font-family: $primaryFont;
     color: $primaryColor;
 
     .image {
-        @apply flex h-full w-2/6 rounded-l-lg;
+        @apply flex h-full w-2/6 rounded-lg;
         object-fit: cover;
     }
 
@@ -28,6 +33,7 @@
 
         i{
             @apply flex text-xl;
+            color: $primaryColor;
         }
     }
 }

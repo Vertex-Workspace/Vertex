@@ -21,31 +21,68 @@
                 </div>
             </div>
 
-            <div class="flex w-[85%] h-full">
+            <div class="flex w-full h-full">
                 <app-card-list style="width: 100%; height: 100%; padding-top: 3%;"></app-card-list>
             </div>
-
-
-
         </div>
 
 
 
 
 
-        <div class="container-grid">
+        <div class="container-grid right">
             <div class="card-workspace">
                 <div>
                     <p>Meu espaço de trabalho</p>
                 </div>
                 <div>
-                    <a>Kanban</a>
-                    <a>Linhas</a>
-                    <a>Calendário</a>
-                    <a>Mural</a>
+                    <div class="grid-card-workspace">
+                        <div>
+                            <div class="card-workspace-label">
+                                <i class="pi pi-th-large" style="font-size: 1rem"></i>
+                                <p>Kanban</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card-workspace-label">
+                                <i class="pi pi-calendar" style="font-size: 1rem"></i>
+                                <p>Calendário</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="grid-card-workspace">
+                        <div class="div-grid-space-work">
+                            <div class="card-workspace-label">
+                                <i class="pi pi-list" style="font-size: 1rem"></i>
+                                <p>Linhas</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card-workspace-label">
+                                <i class="pi pi-chart-bar" style="font-size: 1rem"></i>
+                                <p>Mural</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div></div>
+
+            <div class="charts">
+                <div class="card-spaces">
+                    <label>Seu Desempenho Pessoal</label>
+                    <div class="card-chart-background">
+                        <div class="card-chart"></div>
+                    </div>
+                </div>
+                <div class="card-spaces">
+                    <label>Tarefas em Cada Equipe</label>
+                    <div class="card-chart-background">
+                        <div class="card-chart"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
