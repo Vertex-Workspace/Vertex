@@ -1,16 +1,24 @@
 <section class="screen">
      <ng-container>
-            <div *ngFor="let item of kanban"
+            <div *ngFor="let category of categories"
                 class="col"
-                [style.backgroundColor]="item.color"
+                [style.backgroundColor]="category.color"
             >
                 <div class="col-items">
-                    <h2>{{ item.name }}</h2>
-                        <app-card></app-card>
-                        <app-card></app-card>
-                        <app-card></app-card>
+                    <h2>{{ category.name }}</h2>
+                        <ng-container 
+                            *ngFor="let task of taskList"    
+                        >
+                            <app-card
+                                *ngIf="task.category === category"
+                                [task]="task"
+                                [left]="isLeft(task)"
+                                [ngClass]="isLeft(task) ? 'card-left' : 'card-right'"
+                            ></app-card>
+                        </ng-container>
                 </div>
             </div>
 
      </ng-container>
+     asfihsdfh
 </section>

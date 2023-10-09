@@ -1,15 +1,38 @@
-<div class="card">
+<div class="card" 
+    [style.borderColor]="task.category.borderColor"
+    [ngClass]="left ? 'border-left' : 'border-right'"
+    draggable="true"
+>
     <div class="top">
         <div class="left">
-            soidjfisjfis
+            <fa-icon
+                [icon]="faCircleUser"
+                class="icon"
+            >
+            </fa-icon>
         </div>
-
+        
         <div class="right">
-
+            <fa-icon
+                [icon]="faClock"
+                class="icon"
+            >
+            </fa-icon>
+            <fa-icon
+                [icon]="faEnvelope"
+                class="icon"
+            >
+            </fa-icon>
+            <fa-icon
+                [icon]="faTrashCan"
+                class="icon"
+            >
+            </fa-icon>
+            
         </div>
     </div>
 
     <div class="main">
-
+        <p>{{task.name}}</p>
     </div>
 </div>

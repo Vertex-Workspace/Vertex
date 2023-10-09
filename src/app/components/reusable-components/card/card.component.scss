@@ -1,3 +1,46 @@
+@import '../../../../variables';
+
 .card {
-    @apply w-[340px] h-[140px] bg-zinc-200;
+    @apply w-[320px] h-[140px] p-2 rounded bg-[#F2F2F2] 
+    shadow-md flex flex-col gap-8 cursor-pointer;
+}
+
+.top {
+    @apply w-full h-1/3 flex justify-between;
+
+    .left {
+        @apply w-1/2 h-full flex items-center;
+
+        .icon {
+            color: $primaryColor;
+            font-size: 2.8rem;
+        }
+    }
+
+    .right {
+        @apply w-1/2 h-full flex items-start justify-end gap-[0.7rem];
+        
+        .icon {
+            color: $primaryColor;
+            font-size: 1.4rem;
+        }
+    }
+
+}
+
+.main {
+    @apply text-xl;
+
+    p {
+        color: $primaryColor;
+        @apply ml-2;
+    }
+}
+
+.border-left {
+    @apply border-l-[12px];
+}
+
+.border-right {
+    @apply border-r-[12px];
 }

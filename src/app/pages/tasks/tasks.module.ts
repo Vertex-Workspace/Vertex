@@ -9,6 +9,7 @@ import { TaskComponent } from 'src/app/components/modals/task/task.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CardComponent } from 'src/app/components/reusable-components/card/card.
   imports: [
     CommonModule,
     RouterModule,
-    BrowserModule
+    BrowserModule,
+    FontAwesomeModule
   ],
 })
 export class TasksModule { }

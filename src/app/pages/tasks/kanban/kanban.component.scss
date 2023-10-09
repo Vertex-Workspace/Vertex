@@ -1,16 +1,46 @@
+@import '../../../../variables';
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #092c4c #f3f3f3;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #092c4c;
+    border-radius: 4px;
+    border: 2px solid transparent;
+  }
+
 .screen {
     @apply w-full h-full flex gap-4;
 }
 
 
 .col {
-    @apply w-[430px] h-[88%] rounded overflow-auto;
+    @apply w-[410px] h-[90%] rounded overflow-auto shadow-md;
 }
 
 .col-items {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-5 pb-4;
 
     h2 {
         @apply text-2xl m-6 text-[#545B63];
     }
+}
+
+.card-left {
+    @apply w-full flex justify-start;
+}
+
+.card-right {
+    @apply w-full flex justify-end;
 }
