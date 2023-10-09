@@ -1,0 +1,16 @@
+.screen {
+    @apply w-full h-full flex gap-4;
+}
+
+
+.col {
+    @apply w-[430px] h-[88%] rounded overflow-auto;
+}
+
+.col-items {
+    @apply flex flex-col gap-4;
+
+    h2 {
+        @apply text-2xl m-6 text-[#545B63];
+    }
+}

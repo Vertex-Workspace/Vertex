@@ -1,1 +1,16 @@
-<p>kanban works!</p>
+<section class="screen">
+     <ng-container>
+            <div *ngFor="let item of kanban"
+                class="col"
+                [style.backgroundColor]="item.color"
+            >
+                <div class="col-items">
+                    <h2>{{ item.name }}</h2>
+                        <app-card></app-card>
+                        <app-card></app-card>
+                        <app-card></app-card>
+                </div>
+            </div>
+
+     </ng-container>
+</section>

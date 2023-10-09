@@ -5,7 +5,6 @@ import { LoginModule } from './pages/login/login.module';
 import { RegisterModule } from './pages/register/register.module';
 import { TeamsModule } from './pages/teams/teams.module';
 import { ProjectsModule } from './pages/projects/projects.module';
-import { MuralModule } from './pages/mural/mural.module';
 import { InputModule } from './components/reusable-components/input/input.module';
 import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,15 +14,18 @@ import { HeaderModule } from './components/fixed-components/header/header.module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from './components/modals/task/task.module';
-import { TasksComponent } from './pages/tasks/tasks.component';
+import { CommonModule } from '@angular/common';
+import { TasksModule } from './pages/tasks/tasks.module';
+import { MuralComponent } from './pages/mural/mural.component';
+import { MuralModule } from './pages/mural/mural.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TasksComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,    
     LoginModule,
     RegisterModule,
     TeamsModule,
@@ -36,7 +38,8 @@ import { TasksComponent } from './pages/tasks/tasks.component';
     HeaderModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    TaskModule
+    TaskModule,
+    TasksModule
   ],
   providers: [
     PersonalizationService,
