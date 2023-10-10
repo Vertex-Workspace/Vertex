@@ -34,10 +34,30 @@ export class ProfileComponent {
   }
 
   toogleOn: boolean = true;
+  buttonEdit: boolean = true;
 
   // Alter the status of toogle
   toogleCharts(): void{
     this.toogleOn = !this.toogleOn;
   }
+
+  changeButton(): void{
+    this.buttonEdit = !this.buttonEdit;
+  }
+
+  itemsList = [
+    { id: 'edit', option: 'Editar'},
+    { id: 'confirm', option: 'Confirmar'},
+  ];
+
+  click: string = 'edit';
+  clickBool : boolean = false;
+
+  clickOption(id: string): void{
+    this.click = id;
+    this.clickBool = !this.clickBool;
+    console.log(this.click)
+  }
+
 
 }

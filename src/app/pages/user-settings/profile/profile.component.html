@@ -4,92 +4,102 @@
         <!-- ícone do usuário com o nome -->
         <div class="userInfop">
             <fa-icon [icon]="faCircleUser" size="8x" class="iconProfile"></fa-icon>
-            <div class="flex space-x-4 items-end">
+            <div class="flex items-end space-y-4 space-x-2">
                 <p class="font-bold">Kaique Fernandes Lima Homem</p>
                 <fa-icon [icon]="faPencil" class="iconProfile"></fa-icon>
             </div>
         </div>
 
-        <div class="divInputs">
-            <div class="divLeftSide">
-                <!-- E-mail -->
-                <div class="divEachInput">
-                    <label class="text-sm">E-mail</label>
-                    <div class="flex justify-start">
-                        <div class="divInputIcon">
-                            <fa-icon [icon]="faEnvelope" class="iconInput"></fa-icon>
+        <div class="flex w-full justify-end">
+            <div class="divInputs">
+                <div class="divLeftSide">
+                    <!-- E-mail -->
+                    <div class="divEachInput">
+                        <label class="text-sm ">E-mail</label>
+                        <div class="flex justify-start">
+                            <div class="divInputIcon">
+                                <fa-icon [icon]="faEnvelope" class="iconInput"></fa-icon>
+                            </div>
+                            <input type="text" class="input w-[70%] h-12 "
+                                placeholder="ana_cb@estudante.sesisenai.org.br" />
                         </div>
-                        <input type="text" class="input w-[70%] h-12 "
-                            placeholder="ana_cb@estudante.sesisenai.org.br" />
                     </div>
-                </div>
 
-                <!-- Password -->
-                <div class="flex flex-row space-x-8">
-                    <div class="flex flex-col space-y-4">
-                        <div class="divEachInput">
-                            <label class="text-sm">Senha</label>
-                            <div class="flex justify-start">
+                    <!-- Password -->
+                    <div class="flex flex-row space-x-8">
+                        <div class="flex flex-col space-y-4">
+                            <div class="divEachInput">
+                                <label class="text-sm">Senha</label>
+                                <div class="flex justify-center">
+                                    <div class="divInputIcon">
+                                        <fa-icon [icon]="faLock" class="iconInput"></fa-icon>
+                                    </div>
+                                    <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha" />
+                                </div>
+                            </div>
+                            <div class="flex justify-center">
                                 <div class="divInputIcon">
-                                    <fa-icon [icon]="faLock" class="iconInput"></fa-icon>
+                                    <fa-icon [icon]="faKey" class="iconInput"></fa-icon>
                                 </div>
                                 <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha" />
                             </div>
                         </div>
-                        <div class="flex justify-start">
-                            <div class="divInputIcon">
-                                <fa-icon [icon]="faKey" class="iconInput"></fa-icon>
+
+                        <div class="flex flex-col justify-end">
+                            <p class="font-bold text-sm">Requisitos para uma boa senha:</p>
+                            <p>*8 caracteres ou mais</p>
+                            <p>*Pelo menos uma letra maiúscula</p>
+                            <p>*Pelo menos um caractere especial (#@!%$)</p>
+                            <p>*As senhas coincidem</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-end space-x-2 space-y-4">
+                        <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
+                        </fa-icon>
+                        <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
+                        </fa-icon>
+                        <p>Mostrar gráficos de desempenho para visitantes</p>
+                    </div>
+                </div>
+
+
+
+                <!-- User location input -->
+                <div class="divRightSide">
+                    <div class="divEachInput">
+                        <div class="flex flex-col justify-start space-y-4">
+                            <label class="text-sm">Localização</label>
+                            <div class="flex justify-end">
+                                <div class="divInputIcon">
+                                    <fa-icon [icon]="faEarthAmericas" class="iconInput"></fa-icon>
+                                </div>
+                                <input type="text" class="input w-[80%] h-12 flex items-end just"
+                                    placeholder="São Paulo" />
+                                <div class="angleDownIcon">
+                                    <fa-icon [icon]="faAngleDown" class="iconProfile" style="background-color:white">
+                                    </fa-icon>
+                                </div>
                             </div>
-                            <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha" />
                         </div>
                     </div>
 
-                    <div class="flex flex-col justify-end">
-                        <p class="font-bold text-sm">Requisitos para uma boa senha:</p>
-                        <p>*8 caracteres ou mais</p>
-                        <p>*Pelo menos uma letra maiúscula</p>
-                        <p>*Pelo menos um caractere especial (#@!%$)</p>
-                        <p>*As senhas coincidem</p>
+                    <!-- User description Box -->
+                    <div class="divEachInput">
+                        <label class="text-sm">Descrição</label>
+                        <div class="flex justify-end">
+                            <!-- 112 px = 2 inputs with 48px plus 16px of space between them -->
+                            <input type="text" class="input w-[100%] h-[112px]" />
+                        </div>
                     </div>
+
+                    <ng-container *ngFor="let item of itemsList">
+                            <button [ngClass]="click === item.id ? 'edit' : 'confirm'" (click)="clickOption(item.id)">
+                                {{item.option}}
+                            </button>
+                    </ng-container>
                 </div>
 
-                <div class="flex items-end space-x-2 space-y-4">
-                    <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
-                    </fa-icon>
-                    <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
-                    </fa-icon>
-                    <p>Mostrar gráficos de desempenho para visitantes</p>
-                </div>
             </div>
-
-
-            <!-- User location input -->
-            <div class="divRightSide">
-                <div class="divEachInput">
-                    <label class="text-sm">Localização</label>
-                    <div class="flex justify-start">
-                        <div class="divInputIcon">
-                            <fa-icon [icon]="faEarthAmericas" class="iconInput"></fa-icon>
-                        </div>
-                        <input type="text" class="input w-[60%] h-12" placeholder="São Paulo" />
-                        <div class="angleDownIcon">
-                            <fa-icon [icon]="faAngleDown" class="iconProfile" style="background-color:white"></fa-icon>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User description Box -->
-                <div class="divEachInput">
-                    <label class="text-sm">Descrição</label>
-                    <div class="flex justify-start">
-                        <!-- 112 px = 2 inputs with 48px plus 16px of space between them -->
-                        <input type="text" class="input w-[80%] h-[112px]" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- <app-button [title]="'Confirmar'" [width]="'200px'" [height]="'50px'"
-            [textColor]="secondColor" [background]="primaryColor" (clickEvent)="teste()" /> -->
-
         </div>
     </div>

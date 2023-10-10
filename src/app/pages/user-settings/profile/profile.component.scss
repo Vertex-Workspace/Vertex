@@ -22,7 +22,7 @@
 
 .userInfop {
     @apply text-xl
-    flex flex-col justify-center items-center space-y-4;
+    flex flex-col justify-center items-center pt-20 pl-[5%];
     font-family: $titleFont;
 }
 
@@ -30,9 +30,7 @@
     @apply 
     w-[100%]
     h-[100%]
-    flex items-center
-    justify-center flex-col
-    space-y-12;
+    flex flex-col space-y-12 items-center;
 }
 
 
@@ -49,19 +47,19 @@ label {
 }
 
 .divInputs {
-    @apply flex w-full h-[50%]
+    @apply flex w-full h-[50%] w-[95%] 
 }
 
 .divLeftSide {
-    @apply w-[60%] h-full space-y-4
+    @apply w-[70%] h-full space-y-4
 }
 
 .divRightSide {
-    @apply w-[40%] h-full space-y-4
+    @apply w-[30%] h-full space-y-4 flex flex-col items-end;
 }
 
 .divEachInput {
-    @apply flex flex-col space-y-4
+    @apply flex flex-col space-y-4 w-full
 }
 
 .divInputIcon {
@@ -72,4 +70,20 @@ label {
 .angleDownIcon {
     @apply flex justify-center items-center w-[10%];
     background-color:white;
+}
+
+.edit {
+    background-color: $primaryColor;
+    border-color: $primaryColor;
+    color: $secondColor;
+    @apply h-full w-[180px] flex items-center justify-center gap-4
+    text-base p-3 rounded font-bold border-2 transition-colors;
+}
+
+.confirm {
+    background-color: grey;
+    border-color: grey;
+    color: $secondColor;
+    @apply h-full w-[180px] flex items-center justify-center gap-4
+    text-base p-3 rounded font-bold border-2 transition-colors;
 }
