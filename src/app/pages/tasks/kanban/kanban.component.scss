@@ -5,7 +5,6 @@
     scrollbar-color: #092c4c #f3f3f3;
   }
 
-  /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
     width: 2px;
   }
@@ -21,21 +20,119 @@
   }
 
 .screen {
-    @apply w-full h-full flex gap-4;
+    @apply w-full h-full flex gap-4 justify-between;
 }
 
+@media (min-width: 1200px) {
 
-.col {
-    @apply w-[410px] h-[90%] rounded overflow-auto shadow-md;
-}
+    
+    .divide {
+        @apply w-full h-full flex gap-4;
+    }
+    
+    .col {
+        @apply w-[430px] h-[90%] rounded overflow-auto shadow-md;
+    }
+    
+    .col-items {
+        @apply flex flex-col gap-5 pb-4;
+        
+        h2 {
+            @apply text-2xl m-6 text-[#545B63];
+        }
+    }
 
-.col-items {
-    @apply flex flex-col gap-5 pb-4;
-
-    h2 {
-        @apply text-2xl m-6 text-[#545B63];
+    .properties {
+        @apply h-full w-1/4 flex flex-col items-end gap-2;
+    
+        div:first-child {
+            @apply flex gap-4 items-center justify-center;
+        }
+    
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+    
+        button {
+            color: $secondColor;
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            border: 1px 1px 1px 1px solid;
+            @apply h-[45px] w-[260px] flex items-center justify-center 
+            border-2 transition-colors rounded p-3;
+    
+            &:hover {
+                background-color: $secondColor;
+                color: $primaryColor;
+            }
+        }
+    
+        select {
+            color: $primaryColor;
+            @apply p-2 w-[130px] text-center rounded;
+    
+            &:focus {
+                @apply outline-none;
+            }
+        }
     }
 }
+
+@media (max-width: 1199px) {
+    .divide {
+        @apply w-full h-full flex gap-4;
+    }
+    
+    .col {
+        @apply w-[350px] h-[90%] rounded overflow-auto shadow-md;
+    }
+    
+    .col-items {
+        @apply flex flex-col gap-5 pb-4;
+        
+        h2 {
+            @apply text-2xl m-6 text-[#545B63];
+        }
+    }
+
+    .properties {
+        @apply h-full w-1/4 flex flex-col items-end gap-2;
+    
+        div:first-child {
+            @apply flex gap-1 mr-2 items-center justify-center;
+        }
+    
+        p {
+            color: $primaryColor;
+            @apply text-sm;
+        }
+    
+        button {
+            color: $secondColor;
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            border: 1px 1px 1px 1px solid;
+            @apply h-[35px] w-[200px] flex items-center justify-center 
+            border-2 transition-colors rounded p-3;
+    
+            &:hover {
+                background-color: $secondColor;
+                color: $primaryColor;
+            }
+        }
+    
+        select {
+            color: $primaryColor;
+            @apply w-[90px] p-1 text-center rounded;
+    
+            &:focus {
+                @apply outline-none;
+            }
+        }
+    }
+}
+
 
 .card-left {
     @apply w-full flex justify-start;

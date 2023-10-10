@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Task } from 'src/app/models/task';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-kanban',
@@ -59,8 +60,46 @@ export class KanbanComponent {
       category: this.categories[2]
     },
     {
+      name: 'Tarefa 8',
+      category: this.categories[2]
+    },
+    {
+      name: 'Tarefa 8',
+      category: this.categories[2]
+    },
+    {
+      name: 'Tarefa 8',
+      category: this.categories[2]
+    },
+    {
       name: 'Tarefa 9',
       category: this.categories[2]
+    }
+  ];
+
+  properties: any[] = [
+    {
+      name: 'Categorias',
+      values: [
+        {
+          name: 'TO-DO',
+          color: '#FFE7E9',
+          borderColor: '#FF9D9D'
+        },
+        {
+          name: 'DOING',
+          color: '#FFF6C5',
+          borderColor: '#FFD600'
+        },
+        {
+          name: 'DONE',
+          color: '#D7FFC9',
+          borderColor: '#65D73C'
+        }
+      ]
+    },
+    {
+      name: 'prop 1',
     }
   ]
 
