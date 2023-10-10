@@ -139,8 +139,21 @@ section{
 
 
 .recently-teams{
-    @apply flex w-2/3 h-[25.5%] justify-between items-center;
+    @apply flex w-2/3 h-[25.5%] justify-between items-center flex-col;
+
+    .recently-teams-team {
+        @apply flex w-[32%] h-[70%] rounded-md flex-col
+    }
+    .recently-team-image{
+        @apply flex w-full h-1/2  items-center rounded-md;
+
+        image{
+            @apply flex w-full h-full rounded-md;
+            object-fit: cover;
+        }
+    }
+    .recently-team-info{
+        @apply flex w-full h-1/2 bg-white rounded-md;
+    }
 }
-.recently-teams > div {
-    @apply flex w-[32%] h-full bg-black rounded-md;
-}
+
