@@ -9,20 +9,21 @@
             <ng-container *ngFor="let item of itemsList">
                 <ul class="ul">
                     <!-- Check if the option is clicked, if it is the bg will be changed-->
-                    <li class="navOptions" [ngClass]="click === item.id ? 'click' : 'default'" [routerLink]="[item.id]">
-                        <div class="divIcon" [ngClass]="click === item.id ? 'click' : 'default'">
+                    <li class="navOptions" [ngClass]="click === item.id ? 'clickBlue click' : 'default'" [routerLink]="[item.id]">
+                        <button class="divIcon" [ngClass]="click === item.id ? 'click' : 'default'">
                             <fa-icon [ngClass]="click === item.id ? 'click' : 'default'" [icon]="item.icon"
                                 class="icon"></fa-icon>
-                        </div>
+                        </button>
                         <!-- Take each option inside the itemsList -->
-                        <div class="divOptions" [ngClass]="click === item.id ? 'click' : 'default'">
+                        <button class="divOptions" [ngClass]="click === item.id ? 'click' : 'default'"
+                            (click)="clickOption(item.id)">
                             <p [ngClass]="click === item.id ? 'click' : 'default'">{{item.option}}</p>
-                        </div>
+                        </button>
                     </li>
                 </ul>
             </ng-container>
         </section>
-        <div class="w-[70%] h-full">
+        <div class="w-[75%] h-full">
             <router-outlet></router-outlet>
         </div>
     </div>

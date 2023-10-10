@@ -8,7 +8,7 @@
 }
 
 .bg {
-    @apply  flex h-full w-screen;
+    @apply  flex h-full w-screen; 
 }
 
 .iconProfile {
@@ -32,7 +32,7 @@
     h-[100%]
     flex items-center
     justify-center flex-col
-    space-y-8;
+    space-y-12;
 }
 
 
@@ -40,6 +40,7 @@
     @apply bg-white
      rounded-r-sm
      placeholder-slate-400 
+     px-3
 }
 
 label {
@@ -52,7 +53,7 @@ label {
 }
 
 .divLeftSide {
-    @apply w-[60%] h-full space-y-4 
+    @apply w-[60%] h-full space-y-4
 }
 
 .divRightSide {
@@ -66,5 +67,9 @@ label {
 .divInputIcon {
     @apply flex w-12 h-12 justify-center items-center rounded-l-sm;
     background-color: #CDD8EA
+}
 
+.angleDownIcon {
+    @apply flex justify-center items-center w-[10%];
+    background-color:white;
 }

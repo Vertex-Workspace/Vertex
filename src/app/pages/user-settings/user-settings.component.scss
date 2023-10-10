@@ -14,7 +14,7 @@
 }
 
 .container-custom{
-    @apply flex w-[90%] h-full ;
+    @apply flex w-[90%] h-full;
 }
 
 
@@ -46,8 +46,9 @@
 
 .nav {
     @apply 
-    w-[30%]
-    h-[50%]
+    w-[25%]
+    h-[90%]
+    border-r-2 border-solid border-[#96A4B0]
 }
 
 .divIcon {
@@ -68,12 +69,15 @@
 
 .click {
     background-color: #D9D9D9;
-
 }
 
 .default {
     background-color: $secondColor;
 
+}
+
+.clickBlue {
+    @apply border-l-8 border-solid border-[#092C4C];
 }
 
 

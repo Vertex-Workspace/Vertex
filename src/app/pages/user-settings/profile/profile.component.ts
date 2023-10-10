@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { faCircleUser, faEnvelope, faLock,
-    faEarthAmericas, faKey, faAngleDown, faToggleOff } from '@fortawesome/free-solid-svg-icons';
+    faEarthAmericas, faKey, faAngleDown, faToggleOff,
+     faPencil, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 
 @Component({
@@ -17,9 +18,12 @@ export class ProfileComponent {
   faKey = faKey;
   faAngleDown = faAngleDown;
   faToggleOff = faToggleOff;
+  faToggleOn = faToggleOn;
+  faPencil = faPencil;
 
   primaryColor: string;
   secondColor: string;
+
   constructor(private personalization : PersonalizationService){
     this.primaryColor = personalization.getPrimaryColor();
     this.secondColor = personalization.getSecondColor();
@@ -27,6 +31,13 @@ export class ProfileComponent {
 
   teste(){
     console.log("teste");
+  }
+
+  toogleOn: boolean = true;
+
+  // Alter the status of toogle
+  toogleCharts(): void{
+    this.toogleOn = !this.toogleOn;
   }
 
 }

@@ -15,6 +15,11 @@ export class UserSettingsComponent {
 
   click: string = 'perfil';
 
+  clickOption(id: string): void{
+    this.click = id;
+    console.log(this.click)
+  }
+
   itemsList = [
     { id: 'perfil', icon: faUser, option: 'Perfil'},
     { id: 'aparencia', icon: faPaintBrush, option: 'Aparência do Sistema'},
