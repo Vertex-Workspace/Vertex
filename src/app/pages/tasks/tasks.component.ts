@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-tasks',
@@ -10,6 +12,7 @@ export class TasksComponent {
   filterSettings: any[] = [];
   orderSettings: any[] = [];
   clicked: string = 'kanban';
+  query: string = '';
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
@@ -41,5 +44,9 @@ export class TasksComponent {
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+  }
+
+  onInputType(): void {
+
   }
 }

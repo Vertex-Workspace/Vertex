@@ -34,7 +34,11 @@
                     class="search" 
                     *ngIf="searchBarOpen"
                 >
-                    <input type="text" placeholder="Pesquise por uma tarefa...">
+                    <input 
+                        type="text" 
+                        placeholder="Pesquise por uma tarefa..."
+                        [(ngModel)]="query"
+                    >
                     <i class="pi pi-times cursor-pointer" style="font-size: 1.4rem;" (click)="clickSearchBar()"></i>
                 </div>
 

@@ -22,9 +22,9 @@
   
   @media (min-width: 1400px) {
       
-      .screen {
-          @apply w-full h-full flex gap-4 justify-between;
-      }
+    .screen {
+        @apply w-full h-full flex gap-4 justify-between;
+    }
     
     .divide {
         @apply w-full h-full flex gap-4;
@@ -85,7 +85,7 @@
     }
 
     .divide {
-        @apply w-full h-full flex gap-2;
+        @apply w-full h-full flex gap-4;
     }
     
     .col {
@@ -93,7 +93,7 @@
     }
     
     .col-items {
-        @apply flex flex-col gap-3 pb-4;
+        @apply flex flex-col gap-4 pb-4;
         
         h2 {
             @apply text-2xl m-6 text-[#545B63];
@@ -145,3 +145,16 @@
 .card-right {
     @apply w-full flex justify-end;
 }
+
+.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .cdk-drag-placeholder {
+    opacity: 50%;
+  }
+

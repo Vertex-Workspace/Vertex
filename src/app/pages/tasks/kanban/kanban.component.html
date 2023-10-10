@@ -1,10 +1,12 @@
 <section class="screen">
     <section class="divide">
-            <ng-container>
+            <ng-container cdkDropListGroup>
                 <div *ngFor="let category of categories"
                     class="col"
                     [style.backgroundColor]="category.color"
-                    cdkDropList                    
+                    cdkDropList
+                    [cdkDropListData]="taskList"
+                    (cdkDropListDropped)="dropCard($event, category)"
                 >
                 <div class="col-items">
                     <h2>{{ category.name }}</h2>
@@ -16,7 +18,9 @@
                         [task]="task"
                         [left]="isLeft(task)"
                         [ngClass]="isLeft(task) ? 'card-left' : 'card-right'"
+                        [cdkDragData]="task"
                         cdkDrag
+                        
                     ></app-card>
                 </ng-container>
             </div>

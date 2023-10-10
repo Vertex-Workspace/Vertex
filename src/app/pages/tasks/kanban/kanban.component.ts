@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragPlaceholder,
+  CdkDropList,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-kanban',
@@ -60,19 +67,19 @@ export class KanbanComponent {
       category: this.categories[2]
     },
     {
-      name: 'Tarefa 8',
-      category: this.categories[2]
-    },
-    {
-      name: 'Tarefa 8',
-      category: this.categories[2]
-    },
-    {
-      name: 'Tarefa 8',
-      category: this.categories[2]
-    },
-    {
       name: 'Tarefa 9',
+      category: this.categories[2]
+    },
+    {
+      name: 'Tarefa 10',
+      category: this.categories[2]
+    },
+    {
+      name: 'Tarefa 11',
+      category: this.categories[2]
+    },
+    {
+      name: 'Tarefa 12',
       category: this.categories[2]
     }
   ];
@@ -101,16 +108,36 @@ export class KanbanComponent {
     {
       name: 'prop 1',
     }
-  ]
+  ];
 
-  isLeft(task: Task): boolean {
-    const newArray = 
-      this.taskList.filter(taskFor => {
-        return taskFor.category === task.category;
-      });
-    
-    return newArray.indexOf(task) % 2 === 0;
+  specificCategoryArray(task: Task): any[] {
+    return this.taskList.filter(taskFor => {
+      return taskFor.category === task.category;
+    });
   }
 
+  isLeft(task: Task): boolean {
+    return this.specificCategoryArray(task).indexOf(task) % 2 === 0;
+  }
 
+  getCategories(): any[] {
+    return this.categories.map(category => category.cdkDropList);
+  }
+
+  dropCard(event: CdkDragDrop<Task[]>, category: any): void {
+    console.log(event);
+  
+    const task = event.item.data;
+    task.category = category;
+    const currentIndexTask = 
+            this.specificCategoryArray(task)[event.currentIndex];
+    const currentIndex = this.taskList.indexOf(currentIndexTask);
+    const previousIndex = this.taskList.indexOf(task);
+    
+    moveItemInArray(
+      this.taskList, 
+      previousIndex, 
+      currentIndex
+    );
+  }
 }

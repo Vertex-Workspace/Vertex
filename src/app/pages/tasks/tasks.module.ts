@@ -11,12 +11,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     TasksComponent,
     KanbanComponent,
+    ListComponent,
     CardComponent
   ],
   exports:[
@@ -27,7 +29,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RouterModule,
     BrowserModule,
     FontAwesomeModule,
-    DragDropModule
+    DragDropModule,
+    FormsModule
   ],
 })
 export class TasksModule { }

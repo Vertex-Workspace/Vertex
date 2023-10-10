@@ -4,7 +4,6 @@ import { faCircleUser,
           faEnvelope, 
           faClockRotateLeft 
         } from '@fortawesome/free-solid-svg-icons';
-
 import { Task } from 'src/app/models/task';
 
 @Component({
