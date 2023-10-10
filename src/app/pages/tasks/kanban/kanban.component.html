@@ -4,7 +4,7 @@
                 <div *ngFor="let category of categories"
                     class="col"
                     [style.backgroundColor]="category.color"
-                    cdkDrop
+                    cdkDropList                    
                 >
                 <div class="col-items">
                     <h2>{{ category.name }}</h2>

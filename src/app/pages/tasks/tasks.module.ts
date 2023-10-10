@@ -7,6 +7,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { TaskComponent } from 'src/app/components/modals/task/task.component';
 import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -25,7 +26,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     RouterModule,
     BrowserModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DragDropModule
   ],
 })
 export class TasksModule { }
