@@ -133,6 +133,14 @@ section{
     
 }
 .card-chart{
-    @apply flex w-full h-full bg-white rounded-md;
+    @apply flex w-full h-full bg-white rounded-md items-center justify-center;
     border-top: 10px solid $primaryColor;
+}
+
+
+.recently-teams{
+    @apply flex w-2/3 h-[25.5%] justify-between items-center;
+}
+.recently-teams > div {
+    @apply flex w-[32%] h-full bg-black rounded-md;
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamsComponent } from './teams.component';
 import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
-
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -10,7 +10,8 @@ import { CardListModule } from 'src/app/components/reusable-components/card-list
   exports:[TeamsComponent],
   imports: [
     CommonModule,
-    CardListModule
+    CardListModule,
+    ChartModule
   ],
 })
 export class TeamsModule { }
