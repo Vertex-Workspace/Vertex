@@ -112,6 +112,15 @@
     items-center
 }
 
+.divRegisterIconsModal{
+    @apply w-14
+    h-10
+    bg-[rgba(46,93,166,24%)]
+    flex
+    justify-center
+    items-center
+}
+
 .registerIcons{
     @apply w-6
     text-[#092c4c]
@@ -173,4 +182,12 @@
     cursor-pointer
     text-[#2E5DA6] 
     hover:text-blue-600;
+}
+
+.divH1Modal{
+    @apply w-full flex flex-col items-center;
+}
+
+#divGeralModal{
+    @apply w-full h-full flex flex-col items-center justify-evenly;
 }
