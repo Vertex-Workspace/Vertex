@@ -141,19 +141,37 @@ section{
 .recently-teams{
     @apply flex w-2/3 h-[25.5%] justify-between items-center flex-col;
 
+    h2{
+        @apply flex w-full h-[10%] text-xl;
+    }
+    .div-recently-teams{
+        @apply flex w-full flex-row h-[80%] justify-between;
+        color: $primaryColor;
+    }
+
     .recently-teams-team {
-        @apply flex w-[32%] h-[70%] rounded-md flex-col
+        @apply flex w-[32%] h-full rounded-md flex-col;
+        cursor: pointer
     }
     .recently-team-image{
         @apply flex w-full h-1/2  items-center rounded-md;
 
-        image{
+        img{
             @apply flex w-full h-full rounded-md;
             object-fit: cover;
         }
     }
     .recently-team-info{
-        @apply flex w-full h-1/2 bg-white rounded-md;
+        @apply flex w-full h-1/2 bg-white rounded-md justify-between p-2 flex-col;
+        color: $primaryColor;
+
+        .recently-team-name{
+            @apply text-xl;
+        }
+
+        p{
+            @apply text-sm;
+        }
     }
 }
 
