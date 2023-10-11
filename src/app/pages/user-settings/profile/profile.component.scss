@@ -26,6 +26,18 @@
     font-family: $titleFont;
 }
 
+.userName {
+    @apply flex items-end space-y-4 space-x-2
+}
+
+.generalDiv {
+    @apply flex w-full justify-end;
+}
+
+.iconInputBlock {
+    @apply flex justify-start
+}
+
 .rightSide {
     @apply 
     w-[100%]
@@ -73,17 +85,19 @@ label {
 }
 
 .edit {
-    background-color: $primaryColor;
-    border-color: $primaryColor;
+    background-color: grey;
     color: $secondColor;
     @apply h-full w-[180px] flex items-center justify-center gap-4
     text-base p-3 rounded font-bold border-2 transition-colors;
 }
 
 .confirm {
-    background-color: grey;
-    border-color: grey;
+    background-color: $primaryColor;
     color: $secondColor;
     @apply h-full w-[180px] flex items-center justify-center gap-4
     text-base p-3 rounded font-bold border-2 transition-colors;
+}
+
+.disabled {
+    display: disabled;
 }

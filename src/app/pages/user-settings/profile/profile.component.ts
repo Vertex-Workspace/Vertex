@@ -35,6 +35,7 @@ export class ProfileComponent {
 
   toogleOn: boolean = true;
   buttonEdit: boolean = true;
+  click: string = 'edit';
 
   // Alter the status of toogle
   toogleCharts(): void{
@@ -50,14 +51,14 @@ export class ProfileComponent {
     { id: 'confirm', option: 'Confirmar'},
   ];
 
-  click: string = 'edit';
-  clickBool : boolean = false;
-
   clickOption(id: string): void{
     this.click = id;
-    this.clickBool = !this.clickBool;
+    this.buttonEdit = !this.buttonEdit;
     console.log(this.click)
   }
 
+  isEditable(): boolean{
+    return !this.buttonEdit;
+  }
 
 }

@@ -1,27 +1,28 @@
 <div class="bg">
     <div class="rightSide">
-        <!-- Section com as informações do usuário -->
-        <!-- ícone do usuário com o nome -->
+        <!-- Section with user's informations -->
+        <!-- Icon with user's name -->
         <div class="userInfop">
             <fa-icon [icon]="faCircleUser" size="8x" class="iconProfile"></fa-icon>
-            <div class="flex items-end space-y-4 space-x-2">
+            <div class="userName">
                 <p class="font-bold">Kaique Fernandes Lima Homem</p>
                 <fa-icon [icon]="faPencil" class="iconProfile"></fa-icon>
             </div>
         </div>
 
-        <div class="flex w-full justify-end">
+        <div class="generalDiv">
             <div class="divInputs">
                 <div class="divLeftSide">
                     <!-- E-mail -->
                     <div class="divEachInput">
-                        <label class="text-sm ">E-mail</label>
-                        <div class="flex justify-start">
+                        <label class="text-sm">E-mail</label>
+                        <div class="iconInputBlock">
                             <div class="divInputIcon">
                                 <fa-icon [icon]="faEnvelope" class="iconInput"></fa-icon>
                             </div>
                             <input type="text" class="input w-[70%] h-12 "
-                                placeholder="ana_cb@estudante.sesisenai.org.br" />
+                                placeholder="ana_cb@estudante.sesisenai.org.br"
+                                [disabled]="!isEditable()" />
                         </div>
                     </div>
 
@@ -30,18 +31,22 @@
                         <div class="flex flex-col space-y-4">
                             <div class="divEachInput">
                                 <label class="text-sm">Senha</label>
-                                <div class="flex justify-center">
+                                <div class="iconInputBlock">
                                     <div class="divInputIcon">
                                         <fa-icon [icon]="faLock" class="iconInput"></fa-icon>
                                     </div>
-                                    <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha" />
+                                    <input type="text" class="input w-[80%] h-12" 
+                                    placeholder="Digite sua senha" 
+                                    [disabled]="!isEditable()" />
                                 </div>
                             </div>
                             <div class="flex justify-center">
                                 <div class="divInputIcon">
                                     <fa-icon [icon]="faKey" class="iconInput"></fa-icon>
                                 </div>
-                                <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha" />
+                                <input type="text" class="input w-[80%] h-12" 
+                                placeholder="Digite sua senha"
+                                [disabled]="!isEditable()"  />
                             </div>
                         </div>
 
@@ -75,7 +80,8 @@
                                     <fa-icon [icon]="faEarthAmericas" class="iconInput"></fa-icon>
                                 </div>
                                 <input type="text" class="input w-[80%] h-12 flex items-end just"
-                                    placeholder="São Paulo" />
+                                    placeholder="São Paulo" 
+                                    [disabled]="!isEditable()" />
                                 <div class="angleDownIcon">
                                     <fa-icon [icon]="faAngleDown" class="iconProfile" style="background-color:white">
                                     </fa-icon>
@@ -89,7 +95,9 @@
                         <label class="text-sm">Descrição</label>
                         <div class="flex justify-end">
                             <!-- 112 px = 2 inputs with 48px plus 16px of space between them -->
-                            <input type="text" class="input w-[100%] h-[112px]" />
+                            <input type="text" 
+                            class="input w-[100%] h-[112px]"
+                            [disabled]="!isEditable()"  />
                         </div>
                     </div>
 
