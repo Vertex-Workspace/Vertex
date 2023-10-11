@@ -180,7 +180,7 @@
     font-semibold 
     leading-6 
     cursor-pointer
-    text-[#2E5DA6] 
+    text-blue-400 
     hover:text-blue-600;
 }
 
@@ -189,5 +189,9 @@
 }
 
 #divGeralModal{
-    @apply w-full h-full flex flex-col items-center justify-evenly;
+    @apply w-full h-full flex flex-col items-center justify-stretch;
+}
+
+.square-code{
+    @apply w-10 h-10 bg-[#D9D9D9] rounded-md text-center;
 }

@@ -16,12 +16,15 @@ export class LoginComponent {
   invisibleEye:boolean = true;
 
   forgotPassword:boolean = false;
-
+  step:number = 1;
+  
   passwordToggle():void{
     this.invisibleEye = !this.invisibleEye;
   }
-
+  
   toForgotPassword():void{
+    // localStorage.setItem("toForgotPassword",JSON.stringify(!this.forgotPassword));
     this.forgotPassword = !this.forgotPassword;
+    this.step=1;
   }
 }

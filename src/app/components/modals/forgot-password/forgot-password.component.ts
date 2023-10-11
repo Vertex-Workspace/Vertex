@@ -1,4 +1,4 @@
-import { Component, Input,Output } from '@angular/core';
+import { Component, EventEmitter, Input,Output } from '@angular/core';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,6 +16,14 @@ export class ForgotPasswordComponent {
   @Input()
   background!: string;
 
+  @Output()
+  forgot = new EventEmitter<Event>();
+
+
+  forgotPassword(){
+    this.forgot.emit();
+    
+  }
   
 
 }
