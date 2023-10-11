@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from './components/modals/task/task.module';
 import { UserSettingsModule } from './pages/user-settings/user-settings.module';
+import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
+import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { UserSettingsModule } from './pages/user-settings/user-settings.module';
     BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule,
-    UserSettingsModule
+    UserSettingsModule,
+    TeamInformationsModule
   ],
   providers: [
     PersonalizationService,

@@ -4,6 +4,7 @@ import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 
@@ -22,6 +23,10 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     data: { animation: 'registerPage' }
+  },
+  {
+    path: 'team-informations',
+    component: TeamInformationsComponent,
   },
   {
     path: 'task',
@@ -45,11 +50,11 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "configuracoes",
+    redirectTo: "team-informations",
   },
   {
     path: "**",
-    redirectTo: "configuracoes",
+    redirectTo: "team-informations",
   }
 ]
 
