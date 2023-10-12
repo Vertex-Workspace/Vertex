@@ -35,7 +35,10 @@ export class ProfileComponent {
 
   toogleOn: boolean = true;
   buttonEdit: boolean = true;
+  buttonConfirm: boolean = false;
+  contentEditable: boolean = false;
   click: string = 'edit';
+  clickName: string = 'changeName';
 
   // Alter the status of toogle
   toogleCharts(): void{
@@ -44,6 +47,7 @@ export class ProfileComponent {
 
   changeButton(): void{
     this.buttonEdit = !this.buttonEdit;
+    this.buttonConfirm = !this.buttonConfirm;
   }
 
   itemsList = [
@@ -54,11 +58,30 @@ export class ProfileComponent {
   clickOption(id: string): void{
     this.click = id;
     this.buttonEdit = !this.buttonEdit;
+    this.buttonConfirm = !this.buttonConfirm;
     console.log(this.click)
+  }
+
+  clickEdit(id: string): void{
+    this.clickName = id;
+    this.contentEditable = !this.contentEditable;
+    console.log(this.contentEditable);
+    console.log(1)
   }
 
   isEditable(): boolean{
     return !this.buttonEdit;
+  }
+
+  showConfirm(): boolean {
+    return this.buttonConfirm;
+  }
+
+  editContent(): boolean{
+    console.log(this.contentEditable);
+    console.log(1)
+    return this.contentEditable;
+
   }
 
 }

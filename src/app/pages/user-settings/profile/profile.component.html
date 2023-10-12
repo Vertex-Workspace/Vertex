@@ -5,8 +5,11 @@
         <div class="userInfop">
             <fa-icon [icon]="faCircleUser" size="8x" class="iconProfile"></fa-icon>
             <div class="userName">
-                <p class="font-bold">Kaique Fernandes Lima Homem</p>
-                <fa-icon [icon]="faPencil" class="iconProfile"></fa-icon>
+                <input 
+                [ngClass]="click === 'edit' ? 'editName' : 'noeditName'"
+                class="font-bold w-[27%] noeditName" 
+                value="Kaique Fernandes Lima Homem"
+                [disabled]="!isEditable()" />
             </div>
         </div>
 
@@ -21,8 +24,7 @@
                                 <fa-icon [icon]="faEnvelope" class="iconInput"></fa-icon>
                             </div>
                             <input type="text" class="input w-[70%] h-12 "
-                                placeholder="ana_cb@estudante.sesisenai.org.br"
-                                [disabled]="!isEditable()" />
+                                placeholder="ana_cb@estudante.sesisenai.org.br" [disabled]="!isEditable()" />
                         </div>
                     </div>
 
@@ -35,18 +37,16 @@
                                     <div class="divInputIcon">
                                         <fa-icon [icon]="faLock" class="iconInput"></fa-icon>
                                     </div>
-                                    <input type="text" class="input w-[80%] h-12" 
-                                    placeholder="Digite sua senha" 
-                                    [disabled]="!isEditable()" />
+                                    <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha"
+                                        [disabled]="!isEditable()" />
                                 </div>
                             </div>
                             <div class="flex justify-center">
                                 <div class="divInputIcon">
                                     <fa-icon [icon]="faKey" class="iconInput"></fa-icon>
                                 </div>
-                                <input type="text" class="input w-[80%] h-12" 
-                                placeholder="Digite sua senha"
-                                [disabled]="!isEditable()"  />
+                                <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha"
+                                    [disabled]="!isEditable()" />
                             </div>
                         </div>
 
@@ -68,46 +68,56 @@
                     </div>
                 </div>
 
-
-
                 <!-- User location input -->
-                <div class="divRightSide">
-                    <div class="divEachInput">
-                        <div class="flex flex-col justify-start space-y-4">
-                            <label class="text-sm">Localização</label>
-                            <div class="flex justify-end">
-                                <div class="divInputIcon">
-                                    <fa-icon [icon]="faEarthAmericas" class="iconInput"></fa-icon>
-                                </div>
-                                <input type="text" class="input w-[80%] h-12 flex items-end just"
-                                    placeholder="São Paulo" 
-                                    [disabled]="!isEditable()" />
-                                <div class="angleDownIcon">
-                                    <fa-icon [icon]="faAngleDown" class="iconProfile" style="background-color:white">
-                                    </fa-icon>
+                    <div class="divRightSide">
+                        <div class="divEachInput">
+                            <div class="flex flex-col justify-star space-y-4">
+                                <label class="text-sm">Localização</label>
+                                <div class="flex justify-end">
+                                    <div class="divInputIcon">
+                                        <fa-icon [icon]="faEarthAmericas" class="iconInput"></fa-icon>
+                                    </div>
+                                    <input type="text" class="input w-[80%] h-12 flex items-end" placeholder="São Paulo"
+                                        [disabled]="!isEditable()" />
+                                    <div class="angleDownIcon">
+                                        <fa-icon [icon]="faAngleDown" class="iconProfile"
+                                            style="background-color:white">
+                                        </fa-icon>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- User description Box -->
-                    <div class="divEachInput">
-                        <label class="text-sm">Descrição</label>
-                        <div class="flex justify-end">
-                            <!-- 112 px = 2 inputs with 48px plus 16px of space between them -->
-                            <input type="text" 
-                            class="input w-[100%] h-[112px]"
-                            [disabled]="!isEditable()"  />
+                        <!-- User description Box -->
+                        <div class="divEachInput">
+                            <label class="text-sm">Descrição</label>
+                            <div class="flex justify-end">
+                                <!-- 112 px = 2 inputs with 48px plus 16px of space between them -->
+                                <input type="text" class="input w-[100%] h-[112px]" [disabled]="!isEditable()" />
+                            </div>
                         </div>
-                    </div>
 
-                    <ng-container *ngFor="let item of itemsList">
-                            <button [ngClass]="click === item.id ? 'edit' : 'confirm'" (click)="clickOption(item.id)">
-                                {{item.option}}
-                            </button>
-                    </ng-container>
-                </div>
-
-            </div>
+                        <div class="divButton">
+                            <div *ngIf="!buttonConfirm">
+                                <button [ngClass]="click === 'confirm' ? 'edit' : 'confirm'"
+                                    (click)="clickOption('edit')">
+                                    Editar
+                                </button>
+                            </div>
+                            <div *ngIf="buttonConfirm">
+                                <button [ngClass]="click === 'edit' ? 'cancel' : 'confirm'"
+                                    (click)="clickOption('edit')">
+                                    Cancelar
+                                </button>
+                            </div>
+                            <div *ngIf="!buttonEdit">
+                                <button [ngClass]="click === 'confirm' ? 'edit' : 'confirm'"
+                                    (click)="clickOption('confirm')">
+                                    Confirmar
+                                </button>
+                            </div>
+                        </div>
+                     </div>
+           </div>
         </div>
     </div>

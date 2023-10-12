@@ -22,12 +22,12 @@
 
 .userInfop {
     @apply text-xl
-    flex flex-col justify-center items-center pt-20 pl-[5%];
+    flex flex-col justify-center items-center pt-20 pl-[5%] w-full space-y-4;
     font-family: $titleFont;
 }
 
 .userName {
-    @apply flex items-end space-y-4 space-x-2
+    @apply flex items-end space-y-4 space-x-2  w-full justify-center
 }
 
 .generalDiv {
@@ -59,7 +59,7 @@ label {
 }
 
 .divInputs {
-    @apply flex w-full h-[50%] w-[95%] 
+    @apply flex w-full h-[50%] w-[95%]
 }
 
 .divLeftSide {
@@ -67,11 +67,11 @@ label {
 }
 
 .divRightSide {
-    @apply w-[30%] h-full space-y-4 flex flex-col items-end;
+    @apply w-[30%] h-full flex flex-col items-end space-y-4;
 }
 
 .divEachInput {
-    @apply flex flex-col space-y-4 w-full
+    @apply flex flex-col w-full space-y-4
 }
 
 .divInputIcon {
@@ -98,6 +98,26 @@ label {
     text-base p-3 rounded font-bold border-2 transition-colors;
 }
 
+.cancel {
+    background-color: #872323;
+    color: $secondColor;
+    @apply h-full w-[180px] flex items-center justify-center gap-4
+    text-base p-3 rounded font-bold border-2 transition-colors;
+}
+
 .disabled {
     display: disabled;
+}
+
+.divButton {
+    @apply flex justify-end items-end space-y-4
+}
+
+.noeditName {
+    outline: 0px solid transparent;
+    @apply px-2
+}
+
+.editName {
+    @apply border-b-2 border-[#96A4B0]
 }
