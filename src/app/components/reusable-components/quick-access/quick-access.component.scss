@@ -47,11 +47,20 @@ section{
     }
 }
 
-
-//CHARTS
-.charts{
-    @apply flex w-2/3 h-[35%] justify-between;
+@media only screen and (min-width: 1600px) and (min-width: 1920px){
+    //CHARTS
+    .charts{
+        @apply flex w-2/3 h-[35%] justify-between;
+    }
 }
+
+@media only screen and (min-width: 1400px) and (max-height: 900px){
+    //CHARTS
+    .charts{
+        @apply flex w-2/3 h-[40%] justify-between;
+    }
+}
+
 .card-spaces{
     @apply flex w-[48%] h-full flex-col;
 
@@ -60,10 +69,7 @@ section{
         color: $primaryColor;
     }
 }
-.card-chart-background{
-    @apply flex w-full h-[80%] pt-5;
-    
-}
+
 .card-chart{
     @apply flex w-full h-full bg-white rounded-md items-center justify-center;
     border-top: 10px solid $primaryColor;

@@ -8,9 +8,6 @@ section{
     @apply grid w-[90%] h-full grid-cols-2;
 }
 
-.container-grid{
-    @apply flex flex-col h-full w-full pt-10;
-}
 
 
 //TEAMS
@@ -73,6 +70,24 @@ section{
 .default {
     color: $primaryColor;
     background-color: $secondColor;
+}
+
+@media only screen and (min-width: 1600px) and (min-width: 1920px){
+    .container-grid{
+        @apply flex flex-col h-full w-full pt-10;
+    }
+    .default-size{
+        @apply flex w-full h-full;
+    }
+}
+
+@media only screen and (min-width: 1400px) and (max-height: 900px){
+    .default-size{
+        @apply flex w-full h-[95%];
+    }
+    .container-grid{
+        @apply flex flex-col h-full w-full pt-10;
+    }
 }
 
 
