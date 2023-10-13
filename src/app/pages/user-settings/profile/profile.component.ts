@@ -50,11 +50,6 @@ export class ProfileComponent {
     this.buttonConfirm = !this.buttonConfirm;
   }
 
-  itemsList = [
-    { id: 'edit', option: 'Editar'},
-    { id: 'confirm', option: 'Confirmar'},
-  ];
-
   clickOption(id: string): void{
     this.click = id;
     this.buttonEdit = !this.buttonEdit;

@@ -22,16 +22,16 @@
 
 .userInfop {
     @apply text-xl
-    flex flex-col justify-center items-center pt-20 pl-[5%] w-full space-y-4;
+    flex flex-col justify-center items-center pt-16 pl-[5%] w-full ;
     font-family: $titleFont;
 }
 
 .userName {
-    @apply flex items-end space-y-4 space-x-2  w-full justify-center
+    @apply flex items-end w-full justify-center
 }
 
 .generalDiv {
-    @apply flex w-full justify-end;
+    @apply flex w-full justify-end py-6;
 }
 
 .iconInputBlock {
@@ -42,7 +42,7 @@
     @apply 
     w-[100%]
     h-[100%]
-    flex flex-col space-y-12 items-center;
+    flex flex-col items-center;
 }
 
 
@@ -63,15 +63,15 @@ label {
 }
 
 .divLeftSide {
-    @apply w-[70%] h-full space-y-4
+    @apply w-[70%] h-full
 }
 
 .divRightSide {
-    @apply w-[30%] h-full flex flex-col items-end space-y-4;
+    @apply w-[30%] h-full flex flex-col items-end;
 }
 
 .divEachInput {
-    @apply flex flex-col w-full space-y-4
+    @apply flex flex-col w-full py-3
 }
 
 .divInputIcon {
@@ -84,40 +84,32 @@ label {
     background-color:white;
 }
 
+
+.edit, .confirm, .cancel {
+    color: $secondColor;
+    @apply h-full w-[180px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+}
+
 .edit {
     background-color: grey;
-    color: $secondColor;
-    @apply h-full w-[180px] flex items-center justify-center gap-4
-    text-base p-3 rounded font-bold border-2 transition-colors;
 }
 
 .confirm {
     background-color: $primaryColor;
-    color: $secondColor;
-    @apply h-full w-[180px] flex items-center justify-center gap-4
-    text-base p-3 rounded font-bold border-2 transition-colors;
 }
 
 .cancel {
     background-color: #872323;
-    color: $secondColor;
-    @apply h-full w-[180px] flex items-center justify-center gap-4
-    text-base p-3 rounded font-bold border-2 transition-colors;
 }
-
-.disabled {
-    display: disabled;
-}
-
 .divButton {
-    @apply flex justify-end items-end space-y-4
+    @apply flex justify-end items-end;
 }
 
 .noeditName {
     outline: 0px solid transparent;
-    @apply px-2
+    @apply px-2;
 }
 
 .editName {
-    @apply border-b-2 border-[#96A4B0]
+    @apply border-b-2 border-[#96A4B0];
 }

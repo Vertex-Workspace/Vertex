@@ -29,8 +29,8 @@
                     </div>
 
                     <!-- Password -->
-                    <div class="flex flex-row space-x-8">
-                        <div class="flex flex-col space-y-4">
+                    <div class="flex flex-row">
+                        <div class="flex flex-col">
                             <div class="divEachInput">
                                 <label class="text-sm">Senha</label>
                                 <div class="iconInputBlock">
@@ -41,7 +41,7 @@
                                         [disabled]="!isEditable()" />
                                 </div>
                             </div>
-                            <div class="flex justify-center">
+                            <div class="flex justify-center py-2">
                                 <div class="divInputIcon">
                                     <fa-icon [icon]="faKey" class="iconInput"></fa-icon>
                                 </div>
@@ -50,7 +50,7 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col justify-end">
+                        <div class="flex flex-col justify-end px-3">
                             <p class="font-bold text-sm">Requisitos para uma boa senha:</p>
                             <p>*8 caracteres ou mais</p>
                             <p>*Pelo menos uma letra maiúscula</p>
@@ -59,19 +59,19 @@
                         </div>
                     </div>
 
-                    <div class="flex items-end space-x-2 space-y-4">
+                    <div class="flex items-end py-3">
                         <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
                         </fa-icon>
                         <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
                         </fa-icon>
-                        <p>Mostrar gráficos de desempenho para visitantes</p>
+                        <p class="px-3">Mostrar gráficos de desempenho para visitantes</p>
                     </div>
                 </div>
 
                 <!-- User location input -->
                     <div class="divRightSide">
                         <div class="divEachInput">
-                            <div class="flex flex-col justify-star space-y-4">
+                            <div class="flex flex-col justify-start">
                                 <label class="text-sm">Localização</label>
                                 <div class="flex justify-end">
                                     <div class="divInputIcon">

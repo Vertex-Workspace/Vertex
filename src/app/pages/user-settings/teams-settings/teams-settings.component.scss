@@ -1,0 +1,62 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: $secondColor;
+}
+
+.bg {
+    @apply flex h-full w-screen flex-col items-center justify-around ;
+}
+
+.rightSide {
+    @apply w-[80%] h-[8%] flex flex-col items-start justify-start border-b-2 border-[#96A4B0];
+}
+
+.teams {
+    @apply flex w-[20%] items-center justify-around;
+}
+
+.box {
+    @apply flex w-[80%] bg-white justify-center items-center shadow-xl;
+}
+
+.search {
+    @apply flex w-[90%] h-[50%] bg-white h-full justify-between items-center;
+}
+
+.divInfo {
+    @apply flex w-[30%] justify-between items-stretch bg-white;
+}
+
+.divItems {
+     @apply flex flex-col bg-white self-center;
+}
+
+p{
+    background-color: white;
+}
+
+.pTeams {
+    background-color: $secondColor;
+}
+
+.leaveTeam {
+    @apply w-[20%] h-[50%] flex flex-col self-end;
+    color: white;
+    background-color: white;
+}
+
+.icon {
+    color: $primaryColor;
+    @apply bg-white
+}
+
+.teamsIcon {
+    color: $primaryColor;
+    background-color: $secondColor;
+}
+
+
