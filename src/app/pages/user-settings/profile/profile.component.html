@@ -7,7 +7,7 @@
             <div class="userName">
                 <input 
                 [ngClass]="click === 'edit' ? 'editName' : 'noeditName'"
-                class="font-bold w-[27%] noeditName" 
+                class="font-bold w-[27%]" 
                 value="Kaique Fernandes Lima Homem"
                 [disabled]="!isEditable()" />
             </div>
@@ -99,7 +99,7 @@
 
                         <div class="divButton">
                             <div *ngIf="!buttonConfirm">
-                                <button [ngClass]="click === 'confirm' ? 'edit' : 'confirm'"
+                                <button class="confirm"
                                     (click)="clickOption('edit')">
                                     Editar
                                 </button>
