@@ -3,5 +3,21 @@ section{
 }
 
 .container-custom{
-    @apply flex w-[90%] h-full  bg-black;
+    @apply flex w-[90%] h-full bg-black;
+}
+
+.left-side{
+    @apply flex w-[50%] h-full bg-red-500;
+}
+
+.right-side{
+    @apply flex flex-col justify-evenly w-[50%] h-full bg-blue-500;
+}
+
+.divProjectDashboardsBar{
+    @apply flex w-[40%] h-[70%] bg-[#fff] border-t-8 rounded-md border-[#092C4C];
+}
+
+.divProjectDashboardsPie{
+    @apply flex justify-center items-center w-[40%] h-[85%] bg-[#fff] border-t-8 rounded-md border-[#092C4C];
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamInformationsComponent } from './team-informations.component';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -8,7 +9,8 @@ import { TeamInformationsComponent } from './team-informations.component';
   declarations: [TeamInformationsComponent],
   exports: [TeamInformationsComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    ChartModule
   ]
 })
 export class TeamInformationsModule { }

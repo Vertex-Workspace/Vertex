@@ -18,6 +18,7 @@ import { TaskModule } from './components/modals/task/task.module';
 import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { TeamInformationsModule } from './pages/team-informations/team-informati
     FontAwesomeModule,
     TaskModule,
     UserSettingsModule,
-    TeamInformationsModule
+    TeamInformationsModule,
+    ChartModule
+
   ],
   providers: [
     PersonalizationService,
