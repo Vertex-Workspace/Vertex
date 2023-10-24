@@ -1,5 +1,7 @@
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -8,6 +10,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./team-informations.component.scss']
 })
 export class TeamInformationsComponent {
+// ICONS
+    faLink = faLink;
+    faCircleUser = faCircleUser;
+
   @Input()
   basicData: any;
   @Input()
