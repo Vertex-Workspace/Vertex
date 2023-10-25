@@ -1,14 +1,16 @@
+@import '../../../_variables.scss';
+
 section{
     @apply flex w-screen h-full justify-center items-center;
 }
 
 .container-custom{
-    @apply flex w-[90%] h-full bg-black;
+    @apply flex w-[90%] h-full;
 }
 
 
 .left-side{
-    @apply flex w-[50%] h-full justify-center bg-red-500;
+    @apply flex flex-col w-[50%] h-full gap-8;
 }
 
 .divHead{
@@ -16,7 +18,7 @@ section{
 }
 
 .iconUser{
-    @apply text-[150px]
+    @apply text-[180px] text-[#092C4C]
 }
 
 .divTextHead{
@@ -24,7 +26,7 @@ section{
 }
 
 .textHead{
-    @apply text-[24px] font-bold
+    @apply text-[24px] font-bold text-[#092C4C]
 }
 
 .divMembers{
@@ -36,11 +38,35 @@ section{
     @apply flex items-center text-[15px] text-[#092C4C];
 }
 
+.data{
+    @apply text-lg
+}
+
+.clicked {
+    color: $secondColor;
+    background-color: $primaryColor;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.default {
+    color: $primaryColor;
+    background-color: $secondColor;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
 // ============================================================================================================================================================================
 
 
 .right-side{
-    @apply flex flex-col justify-evenly w-[50%] h-full bg-blue-500;
+    @apply flex flex-col justify-evenly w-[50%] h-full;
 }
 
 .divProjectDashboardsBar{

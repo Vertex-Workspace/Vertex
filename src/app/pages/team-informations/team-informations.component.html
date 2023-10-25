@@ -13,7 +13,7 @@
                         <h1 class="textHead">
                             Nome Equipe
                         </h1>
-    
+
                         <div class="divMembers">
                             <p class="membersInvite">3 membros</p>
                             <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
@@ -21,8 +21,48 @@
                         </div>
                     </div>
 
-                    <h3 class="data">Data de Criação: 24/10/2023</h3>
+                    <h1 class="data">Data de Criação: 24/10/2022</h1>
                 </div>
+            </div>
+
+            <div class="flex flex-col gap-3 w-[85%]">
+                <div class="flex flex-col gap-4">
+                    <h1 class="textHead">Membros da equipe</h1>
+                    <div class="flex w-full gap-7">
+                        <ng-container *ngFor="let item of menuItems">
+                            <label class="data gap-3" [ngClass]="clicked === item.id ? 'clicked' : 'default'">
+                                <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
+                                <button routerLink="[item.id]" (click)="changePreviewMode(item.id)">
+                                    {{ item.label }}
+                                </button>
+                            </label>
+                        </ng-container>
+                    </div>
+                    <div class="w-[90%] h-[1px] bg-[#092C4C]"></div>
+                </div>
+
+                <div class="w-[100%] flex items-center">
+                    <div class="flex gap-4 w-[88%]">
+                        <h2>Lista de membros</h2>
+                        <p> | </p>
+                        <div class="flex gap-1">
+                            <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
+                            <p>Copiar link de convite</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <fa-icon class="iconLink" [icon]="faSearch"></fa-icon>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="grid grid-cols-2 gap-3 w-[77%] h-[35%]">
+                <ng-container *ngFor="let user of users">
+                    <div class="bg-[#092C4C] w-full h-full">    
+                    </div>
+                </ng-container>
             </div>
         </div>
 
