@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -15,6 +18,9 @@ export class TeamInformationsComponent {
     faLink = faLink;
     faCircleUser = faCircleUser;
     faSearch = faSearch;
+    faEnvelope = faEnvelope;
+    faUserMinus = faUserMinus;
+    faComment = faComment;
 
     // VARIABLES
     clicked!: string;
@@ -29,14 +35,16 @@ export class TeamInformationsComponent {
 
     menuItems = [
         { id: 'participants', iconClass: 'pi pi-users', label: 'Visualizar participantes' },
-        { id: 'parmissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' },
+        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' }
     ];
 
+    
+
     users = [
-        { picture: "", name: "Ana", function: "", socialMedia: [] },
-        { picture: "", name: "Kaique", function: "", socialMedia: [] },
-        { picture: "", name: "Miguel", function: "", socialMedia: [] },
-        { picture: "", name: "Otávio", function: "", socialMedia: [] }
+        { picture: "", name: "Ana Borchardt", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
+        { picture: "", name: "Kaique Fernandes", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
+        { picture: "", name: "Miguel Bertoldi", function: "Back-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
+        { picture: "", name: "Otávio Rocha", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] }
     ];
 
     changePreviewMode(preview: string): void {
@@ -44,6 +52,9 @@ export class TeamInformationsComponent {
     }
 
     ngOnInit() {
+
+        this.clicked = "participants"
+
         console.log(this.users);
         
         const documentStyle = getComputedStyle(document.documentElement);

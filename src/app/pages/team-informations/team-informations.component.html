@@ -28,9 +28,9 @@
             <div class="flex flex-col gap-3 w-[85%]">
                 <div class="flex flex-col gap-4">
                     <h1 class="textHead">Membros da equipe</h1>
-                    <div class="flex w-full gap-7">
+                    <div class="flex w-full gap-7 ">
                         <ng-container *ngFor="let item of menuItems">
-                            <label class="data gap-3" [ngClass]="clicked === item.id ? 'clicked' : 'default'">
+                            <label class="data gap-3 " [ngClass]="clicked === item.id ? 'clicked' : 'default'">
                                 <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
                                 <button routerLink="[item.id]" (click)="changePreviewMode(item.id)">
                                     {{ item.label }}
@@ -58,9 +58,43 @@
             </div>
 
 
-            <div class="grid grid-cols-2 gap-3 w-[77%] h-[35%]">
+            <div *ngIf="clicked == 'participants'" class="grid grid-cols-2 gap-3 w-[77%] h-[35%]">
                 <ng-container *ngFor="let user of users">
-                    <div class="bg-[#092C4C] w-full h-full">    
+                    <div class="bg-[#fff] rounded-md w-full h-full flex justify-around">
+                        <div class="w-[30%] h-full p-4">
+                            <fa-icon class="text-[#092c4c] text-[60px]" [icon]="faCircleUser"></fa-icon>
+                        </div>
+
+                        <div class="w-[70%] h-full flex flex-col  text-right p-3">
+                            <h1 class="text-2xl flex justify-end">{{ user.name }}</h1>
+                            <p class="font-light text-gray-500">{{ user.function }}</p>
+                            <div class="flex gap-3 items-end h-full w-full justify-end">
+                                <ng-container *ngFor="let item of user.socialMedia">
+                                    <fa-icon class="text-[#092c4c] text-[20px]" [icon]="item"></fa-icon>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+
+            <div *ngIf="clicked == 'permissions'" class="grid grid-cols-2 gap-3 w-[77%] h-[35%]">
+                <ng-container *ngFor="let user of users">
+                    <div class="bg-[#fff] rounded-md w-full h-full flex justify-around">
+                        <div class="w-[30%] h-full p-4">
+                            <fa-icon class="text-[#092c4c] text-[60px]" [icon]="faCircleUser"></fa-icon>
+                        </div>
+
+                        <div class="w-[70%] h-full flex flex-col  text-right p-3">
+                            <h1 class="text-2xl flex justify-end">{{ user.name }}</h1>
+                            <p class="font-light text-gray-500">{{ user.function }}</p>
+                            <div class="flex gap-3 items-end h-full w-full justify-end">
+                                <ng-container *ngFor="let item of user.socialMedia">
+                                    <fa-icon class="text-[#092c4c] text-[20px]" [icon]="item"></fa-icon>
+                                </ng-container>
+                            </div>
+                        </div>
                     </div>
                 </ng-container>
             </div>
@@ -80,7 +114,7 @@
             <h1 class="flex justify-center font-bold text-[#092C4C] text-[22px]">Andamento dos projetos</h1>
 
             <div class="flex flex-col w-full h-[60%]">
-                <div class="flex flex-col w-full h-[50%]">
+                <div class="flex flex-col justify-center w-full h-[42%]">
 
                     <div class="flex justify-center gap-4 w-full h-full">
                         <div class="divProjectDashboardsBar">
