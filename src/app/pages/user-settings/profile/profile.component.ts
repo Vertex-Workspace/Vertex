@@ -37,7 +37,7 @@ export class ProfileComponent {
   buttonEdit: boolean = true;
   buttonConfirm: boolean = false;
   contentEditable: boolean = false;
-  click: string = 'edit';
+  click: string = 'initial';
   clickName: string = 'changeName';
 
   // Alter the status of toogle

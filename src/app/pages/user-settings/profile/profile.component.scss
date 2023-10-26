@@ -11,6 +11,10 @@
     @apply  flex h-full w-screen; 
 }
 
+label {
+ @apply py-3 text-sm;
+}
+
 .iconProfile {
     color: $primaryColor;
 }
@@ -27,11 +31,11 @@
 }
 
 .userName {
-    @apply flex items-end w-full justify-center
+    @apply flex items-end w-full justify-center py-3
 }
 
 .generalDiv {
-    @apply flex w-full justify-end py-6;
+    @apply flex w-full justify-end py-4;
 }
 
 .iconInputBlock {
@@ -71,7 +75,7 @@ label {
 }
 
 .divEachInput {
-    @apply flex flex-col w-full py-3
+    @apply flex flex-col w-full py-2
 }
 
 .divInputIcon {
@@ -102,7 +106,7 @@ label {
     background-color: #872323;
 }
 .divButton {
-    @apply flex justify-end items-end;
+    @apply flex justify-end items-end py-20;
 }
 
 .noeditName {
@@ -112,4 +116,5 @@ label {
 
 .editName {
     @apply border-b-2 border-[#96A4B0];
+    outline: 0px solid transparent;
 }

@@ -1,0 +1,22 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: $secondColor;
+}
+
+.bg {
+    @apply flex h-full w-screen flex-col items-center justify-around ;
+}
+
+.rightSide {
+    @apply w-[80%] h-[8%] flex flex-col items-start justify-start border-b-2 border-[#96A4B0];
+}
+
+.notifications
+
+.icon {
+    color: $primaryColor;
+}

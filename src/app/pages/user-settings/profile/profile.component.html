@@ -7,7 +7,7 @@
             <div class="userName">
                 <input 
                 [ngClass]="click === 'edit' ? 'editName' : 'noeditName'"
-                class="font-bold w-[27%]" 
+                class="font-bold w-[27%] text-center" 
                 value="Kaique Fernandes Lima Homem"
                 [disabled]="!isEditable()" />
             </div>
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="flex flex-col justify-end px-3">
-                            <p class="font-bold text-sm">Requisitos para uma boa senha:</p>
+                            <p class="font-bold text-base">Requisitos para uma boa senha:</p>
                             <p>*8 caracteres ou mais</p>
                             <p>*Pelo menos uma letra maiúscula</p>
                             <p>*Pelo menos um caractere especial (#@!%$)</p>
