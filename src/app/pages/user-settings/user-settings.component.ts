@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faUser, faUsers, faPaintBrush, faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faUsers, faPaintBrush, faBell, faUserCircle, faLock } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-user-settings',
@@ -11,7 +11,8 @@ export class UserSettingsComponent {
   faUsers = faUsers;
   faPaintBrush = faPaintBrush;
   faBell = faBell;
-  faUserCircle = faUserCircle
+  faUserCircle = faUserCircle;
+  faLock = faLock;
 
   click: string = 'perfil';
 
@@ -22,6 +23,7 @@ export class UserSettingsComponent {
 
   itemsList = [
     { id: 'perfil', icon: faUser, option: 'Perfil'},
+    { id: 'seguranca', icon: faLock, option: 'Segurança'},
     { id: 'aparencia', icon: faPaintBrush, option: 'Aparência do Sistema'},
     { id: 'equipes', icon: faUsers, option: 'Equipes'},
     { id: 'notificacoes', icon: faBell, option: 'Notificações'}

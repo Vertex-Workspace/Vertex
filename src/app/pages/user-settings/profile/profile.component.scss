@@ -24,16 +24,6 @@ label {
     background-color:#CDD8EA;
 }
 
-.userInfop {
-    @apply text-xl
-    flex flex-col justify-center items-center pt-16 pl-[5%] w-full ;
-    font-family: $titleFont;
-}
-
-.userName {
-    @apply flex items-end w-full justify-center py-3
-}
-
 .generalDiv {
     @apply flex w-full justify-end py-4;
 }
@@ -41,14 +31,6 @@ label {
 .iconInputBlock {
     @apply flex justify-start
 }
-
-.rightSide {
-    @apply 
-    w-[100%]
-    h-[100%]
-    flex flex-col items-center;
-}
-
 
 .input {
     @apply bg-white
@@ -70,9 +52,6 @@ label {
     @apply w-[70%] h-full
 }
 
-.divRightSide {
-    @apply w-[30%] h-full flex flex-col items-end;
-}
 
 .divEachInput {
     @apply flex flex-col w-full py-2

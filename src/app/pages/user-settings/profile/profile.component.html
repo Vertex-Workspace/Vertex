@@ -1,18 +1,4 @@
 <div class="bg">
-    <div class="rightSide">
-        <!-- Section with user's informations -->
-        <!-- Icon with user's name -->
-        <div class="userInfop">
-            <fa-icon [icon]="faCircleUser" size="8x" class="iconProfile"></fa-icon>
-            <div class="userName">
-                <input 
-                [ngClass]="click === 'edit' ? 'editName' : 'noeditName'"
-                class="font-bold w-[27%] text-center" 
-                value="Kaique Fernandes Lima Homem"
-                [disabled]="!isEditable()" />
-            </div>
-        </div>
-
         <div class="generalDiv">
             <div class="divInputs">
                 <div class="divLeftSide">
@@ -28,36 +14,6 @@
                         </div>
                     </div>
 
-                    <!-- Password -->
-                    <div class="flex flex-row">
-                        <div class="flex flex-col">
-                            <div class="divEachInput">
-                                <label class="text-sm">Senha</label>
-                                <div class="iconInputBlock">
-                                    <div class="divInputIcon">
-                                        <fa-icon [icon]="faLock" class="iconInput"></fa-icon>
-                                    </div>
-                                    <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha"
-                                        [disabled]="!isEditable()" />
-                                </div>
-                            </div>
-                            <div class="flex justify-center py-2">
-                                <div class="divInputIcon">
-                                    <fa-icon [icon]="faKey" class="iconInput"></fa-icon>
-                                </div>
-                                <input type="text" class="input w-[80%] h-12" placeholder="Digite sua senha"
-                                    [disabled]="!isEditable()" />
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col justify-end px-3">
-                            <p class="font-bold text-base">Requisitos para uma boa senha:</p>
-                            <p>*8 caracteres ou mais</p>
-                            <p>*Pelo menos uma letra maiúscula</p>
-                            <p>*Pelo menos um caractere especial (#@!%$)</p>
-                            <p>*As senhas coincidem</p>
-                        </div>
-                    </div>
 
                     <div class="flex items-end py-3">
                         <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
@@ -68,36 +24,8 @@
                     </div>
                 </div>
 
-                <!-- User location input -->
-                    <div class="divRightSide">
-                        <div class="divEachInput">
-                            <div class="flex flex-col justify-start">
-                                <label class="text-sm">Localização</label>
-                                <div class="flex justify-end">
-                                    <div class="divInputIcon">
-                                        <fa-icon [icon]="faEarthAmericas" class="iconInput"></fa-icon>
-                                    </div>
-                                    <input type="text" class="input w-[80%] h-12 flex items-end" placeholder="São Paulo"
-                                        [disabled]="!isEditable()" />
-                                    <div class="angleDownIcon">
-                                        <fa-icon [icon]="faAngleDown" class="iconProfile"
-                                            style="background-color:white">
-                                        </fa-icon>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- User description Box -->
-                        <div class="divEachInput">
-                            <label class="text-sm">Descrição</label>
-                            <div class="flex justify-end">
-                                <!-- 112 px = 2 inputs with 48px plus 16px of space between them -->
-                                <input type="text" class="input w-[100%] h-[112px]" [disabled]="!isEditable()" />
-                            </div>
-                        </div>
-
-                        <div class="divButton">
+                        <!-- <div class="divButton">
                             <div *ngIf="!buttonConfirm">
                                 <button class="confirm"
                                     (click)="clickOption('edit')">
@@ -117,7 +45,7 @@
                                 </button>
                             </div>
                         </div>
-                     </div>
+                     </div> -->
            </div>
         </div>
     </div>
