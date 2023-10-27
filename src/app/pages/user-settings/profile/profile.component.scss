@@ -20,23 +20,23 @@ label {
 }
 
 .generalDiv {
-    @apply flex w-full justify-end py-4;
+    @apply flex w-full justify-end py-5;
 }
 
 .iconInputBlock {
     @apply flex justify-start;
 
-    .teste {
-         @apply flex w-12 h-12 justify-center items-center rounded-l-sm;
+    .iconBox {
+         @apply flex w-[6%] h-12 justify-center items-center rounded-l-sm;
          background-color: #CDD8EA;
      }
+}
 
-     input {
-            @apply bg-white
-            rounded-r-sm
-            placeholder-slate-400 
-            px-3 w-[70%] h-12;
-     }
+input {
+    @apply bg-white
+    rounded-r-sm
+    placeholder-slate-400 
+    px-3;
 }
 
 label {
@@ -49,7 +49,11 @@ label {
 }
 
 .divLeftSide {
-    @apply w-[70%] 
+    @apply w-[70%];
+
+    section {
+       @apply flex h-[65%] flex-col border-b-2
+    }
 }
 
 
@@ -58,7 +62,7 @@ label {
 }
 
 .divInputIcon {
-    @apply flex w-12 h-12 justify-center items-center rounded-l-sm;
+    @apply flex w-12 h-[6%] justify-center items-center rounded-l-sm;
     background-color: #CDD8EA
 }
 
@@ -84,8 +88,8 @@ label {
 .edit {
     background-color: $primaryColor;
 }
-.divButton {
-    @apply flex justify-end items-end py-20;
+divButton {
+    @apply flex h-[70%];
 }
 
 .noeditName {
@@ -99,5 +103,29 @@ label {
 }
 
 .rightSide{
-    @apply flex flex-col w-[30%] h-full items-end py-4;
+    @apply flex w-[30%] h-[70%] h-full items-start justify-end;
+
+    section {
+        @apply h-[65%] w-full flex flex-col justify-between items-end border-b-2 py-2
+     }
+}
+
+.email, .name {
+    @apply w-[70%] h-12;
+}
+
+.location {
+    @apply w-[40%] h-12;
+}
+
+.description {
+    @apply w-[76%] h-32;
+}
+
+.charts {
+    @apply h-[30%] w-full;
+
+    div {
+        @apply flex items-end py-3;
+    }
 }

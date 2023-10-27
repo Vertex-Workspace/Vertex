@@ -3,38 +3,42 @@
         <div class="divInputs">
             <div class="divLeftSide">
                 <!-- E-mail -->
-                <div class="divEachInput" *ngFor="let item of itemsList">
-                    <label class="text-sm">{{item.option}}</label>
-                    <div class="iconInputBlock">
-                        <div class="teste">
-                            <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
+                <section>
+                    <div class="divEachInput" *ngFor="let item of itemsList">
+                        <label class="text-sm">{{item.option}}</label>
+                        <div class="iconInputBlock">
+                            <div class="iconBox" *ngIf="item.id != 'description'">
+                                <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
+                            </div>
+                            <input type="text" [placeholder]="item.placeholder" [ngClass]="item.id" />
                         </div>
-                        <input type="text" [placeholder]="item.placeholder" />
                     </div>
-                </div>
+                </section>
 
-                <div class="flex items-end py-3">
-                    <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
-                    </fa-icon>
-                    <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
-                    </fa-icon>
-                    <p class="px-3">Mostrar gráficos de desempenho para visitantes</p>
+                <div class="charts">
+                    <div *ngFor="let toogle of tooglesList">
+                        <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
+                        </fa-icon>
+                        <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
+                        </fa-icon>
+                        <p class="px-3">{{toogle.text}}</p>
+                    </div>
                 </div>
             </div>
 
             <div class="rightSide">
-                <fa-icon class="iconProfile" size="8x" [icon]="faCircleUser"></fa-icon>
-
-
-
-                <div class="divButton">
-                    <div *ngIf="!buttonConfirm">
-                        <button class="confirm justify-end" (click)="clickOption('edit')" 
-                        [ngClass]="click === 'initial' ? 'noEdit' : 'edit'">
-                            Atualizar
-                        </button>
+                <section>
+                    <fa-icon class="iconProfile" size="8x" [icon]="faCircleUser"></fa-icon>
+                    <!-- <fa-icon [icon]="faPenToSquare" style="color:blue"></fa-icon> -->
+                    <div class="divButton">
+                        <div *ngIf="!buttonConfirm">
+                            <button class="confirm justify-end" (click)="clickOption('edit')"
+                                [ngClass]="click === 'initial' ? 'noEdit' : 'edit'">
+                                Atualizar
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { faUser, faEnvelope, faLock,
+import { faUser, faEnvelope,
     faEarthAmericas, faKey, faAngleDown, faToggleOff,
-     faPencil, faToggleOn, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+     faPencil, faToggleOn, faCircleUser,
+    faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 
 @Component({
@@ -13,7 +14,6 @@ export class ProfileComponent {
 
   faUser = faUser;
   faEnvelope = faEnvelope;
-  faLock = faLock;
   faEarthAmericas = faEarthAmericas;
   faKey = faKey;
   faAngleDown = faAngleDown;
@@ -21,6 +21,7 @@ export class ProfileComponent {
   faToggleOn = faToggleOn;
   faPencil = faPencil;
   faCircleUser = faCircleUser;
+  faPenToSquare = faPenToSquare;
 
   primaryColor: string;
   secondColor: string;
@@ -29,6 +30,12 @@ export class ProfileComponent {
     { id: 'email', icon: faEnvelope, placeholder: 'ana_cb@estudante.sesisenai.org.br', option: 'E-mail'},
     { id: 'name', icon: faUser, placeholder :'Ana Clara', option: 'Nome'},
     { id: 'location', icon: faEarthAmericas, placeholder :'São Paulo, Brazil', option: 'Localização'},
+    { id: 'description', icon: faEarthAmericas, option: 'Descrição'}
+  ];
+
+  tooglesList = [
+    {text: "Mostrar gráficos de desempenho para visitantes" },
+    {text: "Deixar meu perfil visível a visitantes"},
   ];
 
   constructor(private personalization : PersonalizationService){
