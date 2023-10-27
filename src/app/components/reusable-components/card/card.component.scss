@@ -1,17 +1,8 @@
 @import '../../../../variables';
 
-@media (min-width: 1400px) {
-    .card {
-        @apply w-[330px] h-[150px] p-2 rounded bg-[#F2F2F2] 
-        shadow-md flex flex-col gap-8 cursor-pointer;
-    }
-}
-
-@media (max-width: 1399px) {
-    .card {
-        @apply w-[260px] h-[120px] p-2 rounded bg-[#F2F2F2] 
-        shadow-md flex flex-col gap-8 cursor-pointer;
-    }
+.card {
+    @apply w-[300px] h-[140px] p-3 rounded bg-[#F2F2F2] 
+    shadow-md flex flex-col gap-8 border-l-[12px] cursor-pointer;
 }
 
 .top {
@@ -31,7 +22,11 @@
         
         .icon {
             color: $primaryColor;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+
+            &:hover {
+                @apply rotate-[20deg];
+            }
         }
     }
 
@@ -46,10 +41,3 @@
     }
 }
 
-.border-left {
-    @apply border-l-[12px];
-}
-
-.border-right {
-    @apply border-r-[12px];
-}

@@ -1,6 +1,6 @@
-<div class="card" 
+<div 
+    class="card" 
     [style.borderColor]="task.category.borderColor"
-    [ngClass]="left ? 'border-left' : 'border-right'"
 >
     <div class="top">
         <div class="left">
@@ -12,22 +12,14 @@
         </div>
         
         <div class="right">
-            <fa-icon
-                [icon]="faClock"
-                class="icon"
-            >
-            </fa-icon>
-            <fa-icon
-                [icon]="faEnvelope"
-                class="icon"
-            >
-            </fa-icon>
-            <fa-icon
-                [icon]="faTrashCan"
-                class="icon"
-            >
-            </fa-icon>
-            
+            <ng-container *ngFor="let item of settings">
+                <fa-icon
+                    [icon]="item.icon"
+                    (click)="item.onclick"
+                    class="icon"
+                >
+                </fa-icon>
+            </ng-container>
         </div>
     </div>
 

@@ -1,160 +1,56 @@
 @import '../../../../variables';
 
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #092c4c #f3f3f3;
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #092c4c #f3f3f3;
+}
 
-  *::-webkit-scrollbar {
-    width: 2px;
-  }
+*::-webkit-scrollbar {
+  width: 2px;
+}
 
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: #092c4c;
-    border-radius: 4px;
-    border: 2px solid transparent;
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: #092c4c;
+  border-radius: 4px;
+  border: 2px solid transparent;
+}
 
-  
-  @media (min-width: 1400px) {
-      
-    .screen {
-        @apply w-full h-full flex gap-4 justify-between;
-    }
-    
-    .divide {
-        @apply w-full h-full flex gap-4;
-    }
-    
-    .col {
-        @apply w-[430px] h-[90%] rounded overflow-auto shadow-md;
-    }
-    
-    .col-items {
-        @apply flex flex-col gap-5 pb-4;
+.screen {
+  @apply w-full h-[85%] mt-16;
+
+  .col-container {
+      @apply flex gap-4 overflow-auto h-full w-full;
+
+      .col {
+        @apply w-[350px] flex flex-col 
+        gap-4 p-4 h-[90%] overflow-auto shadow-md;
         
-        h2 {
-            @apply text-2xl m-6 text-[#545B63];
-        }
-    }
+          h2 {
+            @apply text-2xl text-[#545B63] ml-3;
+            font-family: $titleFont;
+          }
 
-    .properties {
-        @apply h-full w-1/4 flex flex-col items-end gap-2;
-    
-        div:first-child {
-            @apply flex gap-4 items-center justify-center;
-        }
-    
-        p {
-            color: $primaryColor;
-            @apply text-lg;
-        }
-    
-        button {
-            color: $secondColor;
-            background-color: $primaryColor;
-            border-color: $primaryColor;
-            border: 1px 1px 1px 1px solid;
-            @apply h-[45px] w-[260px] flex items-center justify-center 
-            border-2 transition-colors rounded p-3;
-    
-            &:hover {
-                background-color: $secondColor;
-                color: $primaryColor;
-            }
-        }
-    
-        select {
-            color: $primaryColor;
-            @apply p-2 w-[130px] text-center rounded;
-    
-            &:focus {
-                @apply outline-none;
-            }
-        }
-    }
-}
-
-@media (max-width: 1399px) {
-    .screen {
-        @apply w-full h-full flex gap-4 justify-between mt-6;
-    }
-
-    .divide {
-        @apply w-full h-full flex gap-4;
-    }
-    
-    .col {
-        @apply w-[310px] h-[90%] rounded overflow-auto shadow-md;
-    }
-    
-    .col-items {
-        @apply flex flex-col gap-4 pb-4;
+          .col-items {
+            @apply flex flex-col gap-5 items-center;
+          }
         
-        h2 {
-            @apply text-2xl m-6 text-[#545B63];
-        }
-    }
+      }
+  }
 
-    .properties {
-        @apply h-full w-1/4 flex flex-col items-end gap-2;
-    
-        div:first-child {
-            @apply flex gap-1 mr-2 items-center justify-center;
-        }
-    
-        p {
-            color: $primaryColor;
-            @apply text-sm;
-        }
-    
-        button {
-            color: $secondColor;
-            background-color: $primaryColor;
-            border-color: $primaryColor;
-            border: 1px 1px 1px 1px solid;
-            @apply h-[35px] w-[200px] flex items-center justify-center 
-            border-2 transition-colors rounded p-3;
-    
-            &:hover {
-                background-color: $secondColor;
-                color: $primaryColor;
-            }
-        }
-    
-        select {
-            color: $primaryColor;
-            @apply w-[90px] p-1 text-center rounded;
-    
-            &:focus {
-                @apply outline-none;
-            }
-        }
-    }
-}
-
-
-.card-left {
-    @apply w-full flex justify-start;
-}
-
-.card-right {
-    @apply w-full flex justify-end;
 }
 
 .cdk-drop-list-dragging .cdk-drag {
-    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
-  .cdk-drag-animating {
-    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
-  }
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
 
-  .cdk-drag-placeholder {
-    opacity: 50%;
-  }
+.cdk-drag-animating {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
 
+.cdk-drag-placeholder {
+  opacity: 50%;
+}

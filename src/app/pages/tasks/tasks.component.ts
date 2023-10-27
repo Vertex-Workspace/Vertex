@@ -29,7 +29,6 @@ export class TasksComponent {
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
   ];
 
-
   clickSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;
   } 

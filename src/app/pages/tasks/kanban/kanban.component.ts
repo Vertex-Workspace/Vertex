@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import {
-  CdkDrag,
   CdkDragDrop,
-  CdkDragPlaceholder,
-  CdkDropList,
   moveItemInArray,
-  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -15,6 +11,7 @@ import {
   styleUrls: ['./kanban.component.scss']
 })
 export class KanbanComponent {
+
   categories: any[] = [
     {
       name: 'TO-DO',
@@ -84,31 +81,6 @@ export class KanbanComponent {
     }
   ];
 
-  properties: any[] = [
-    {
-      name: 'Categorias',
-      values: [
-        {
-          name: 'TO-DO',
-          color: '#FFE7E9',
-          borderColor: '#FF9D9D'
-        },
-        {
-          name: 'DOING',
-          color: '#FFF6C5',
-          borderColor: '#FFD600'
-        },
-        {
-          name: 'DONE',
-          color: '#D7FFC9',
-          borderColor: '#65D73C'
-        }
-      ]
-    },
-    {
-      name: 'prop 1',
-    }
-  ];
 
   specificCategoryArray(task: Task): any[] {
     return this.taskList.filter(taskFor => {
@@ -116,28 +88,19 @@ export class KanbanComponent {
     });
   }
 
-  isLeft(task: Task): boolean {
-    return this.specificCategoryArray(task).indexOf(task) % 2 === 0;
-  }
-
-  getCategories(): any[] {
-    return this.categories.map(category => category.cdkDropList);
-  }
-
-  dropCard(event: CdkDragDrop<Task[]>, category: any): void {
-    console.log(event);
-  
+  dropCard(event: CdkDragDrop<Task[]>, category: any): void {  
     const task = event.item.data;
     task.category = category;
-    const currentIndexTask = 
+
+    const newIndexTask = 
             this.specificCategoryArray(task)[event.currentIndex];
-    const currentIndex = this.taskList.indexOf(currentIndexTask);
+    const newIndex = this.taskList.indexOf(newIndexTask);
     const previousIndex = this.taskList.indexOf(task);
     
     moveItemInArray(
       this.taskList, 
       previousIndex, 
-      currentIndex
+      newIndex
     );
-  }
+  };
 }

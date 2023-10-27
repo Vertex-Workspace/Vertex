@@ -1,43 +1,30 @@
 <section class="screen">
-    <section class="divide">
-            <ng-container cdkDropListGroup>
-                <div *ngFor="let category of categories"
-                    class="col"
-                    [style.backgroundColor]="category.color"
-                    cdkDropList
-                    [cdkDropListData]="taskList"
-                    (cdkDropListDropped)="dropCard($event, category)"
-                >
+    <ng-container cdkDropListGroup>
+        <div class="col-container">
+            <div 
+                class="col" 
+                *ngFor="let category of categories" 
+                [style.backgroundColor]="category.color"
+                cdkDropList 
+                [cdkDropListData]="taskList" 
+                (cdkDropListDropped)="dropCard($event, category)"
+            >
+
+                <h2>{{ category.name }}</h2>
+
                 <div class="col-items">
-                    <h2>{{ category.name }}</h2>
-                    <ng-container 
-                       *ngFor="let task of taskList"    
-                    >
-                    <app-card
-                        *ngIf="task.category === category"
-                        [task]="task"
-                        [left]="isLeft(task)"
-                        [ngClass]="isLeft(task) ? 'card-left' : 'card-right'"
-                        [cdkDragData]="task"
-                        cdkDrag
-                        
-                    ></app-card>
-                </ng-container>
+
+                    <ng-container *ngFor="let task of taskList">
+                        <app-card 
+                            *ngIf="task.category === category" 
+                            [task]="task" 
+                            [cdkDragData]="task" 
+                            cdkDrag
+                        />
+                    </ng-container>
+
+                </div>
             </div>
         </div>
-    
     </ng-container>
-    </section>
-
-     <section class="properties">
-        <div>
-            <p>Visualizar por: </p>
-            <select>
-                <option *ngFor="let prop of properties">{{prop.name}}</option>
-            </select>
-        </div>
-        <button>
-            Gerenciar propriedades
-        </button>
-     </section>
 </section>

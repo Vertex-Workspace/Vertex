@@ -26,7 +26,6 @@
                 >
                     <i 
                         class="pi pi-search" 
-                        style="font-size: 1.7rem;"
                     ></i>
                 </button>
 
@@ -49,7 +48,6 @@
                     >
                         <i 
                             class="{{ item.iconClass }}" 
-                            style="font-size: 1.7rem"
                         ></i>
                     </button>
                 </ng-container>
@@ -57,7 +55,6 @@
                 <button class="create">
                     <i 
                         class="pi pi-plus-circle" 
-                        style="font-size: 1.7rem;"
                     ></i>
                     Nova tarefa
                 </button>
@@ -65,7 +62,10 @@
             </div>
 
         </section>
-        <section class="filter-settings" *ngIf="filterOpen || orderOpen">
+        <section 
+            class="filter-settings" 
+            *ngIf="filterOpen || orderOpen"
+        >
             <p>Ordenar por </p>
 
             <ng-container>
@@ -74,6 +74,7 @@
                         {{ item.label }}
                     </option>
                 </select>
+                
                 <select *ngIf="orderOpen">
                     <option *ngFor="let item of orderSettings">
                         {{ item.label }}
@@ -83,7 +84,7 @@
 
         </section>
         <section class="router">
-            <router-outlet></router-outlet>
+            <router-outlet />
         </section>
     </div>
 </section>

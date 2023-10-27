@@ -4,17 +4,80 @@
     @apply h-full w-screen flex justify-center;
 }
 
-.container-custom{
+.container-custom {
     @apply flex w-[90%] h-full flex-col;
 }
 
 .menu {
     @apply flex justify-between mt-16 mb-4;
+
+    div:first-child {
+        border-color: $primaryColor;
+        @apply w-[550px] h-[53px] flex gap-1 border-b-[1px];
+
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
+            transition-colors items-center justify-center 
+            rounded cursor-pointer;
+        }
+
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+
+    div:last-child {
+        @apply flex gap-2 h-[48px] items-center;
+
+
+        .search {
+            @apply w-[300px] h-full flex items-center justify-between 
+            bg-white p-3 rounded shadow-md border-none;
+
+            i {
+                @apply w-[10%];
+            }
+
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+
+        button {
+            color: $primaryColor;
+            border-color: $secondColor;
+            @apply h-[53px] w-[53px] flex items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+
+        button:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-full w-[180px] flex items-center justify-center gap-4 text-lg p-3 
+            rounded font-light border-2 transition-colors;
+        }
+
+        .create:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+
+    }
 }
 
 
 .filter-settings {
-    @apply flex gap-3 items-center mb-4;
+    @apply flex gap-3 items-center;
 
     p {
         color: $primaryColor;
@@ -24,67 +87,7 @@
     select {
         @apply w-[170px] h-[35px] text-center outline-none;
     }
-}
 
-.menu div:first-child {
-    border-color: $primaryColor;
-    @apply w-[550px] h-[53px] flex gap-1 border-b-[1px];
-
-    label {
-        @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
-        items-center justify-center rounded cursor-pointer;
-    }
-
-    label:hover {
-        background-color: $primaryColor;
-        color: $secondColor;
-        @apply transition-colors;
-    }
-}
-
-.menu div:last-child {
-    @apply flex gap-2 h-[48px] items-center;
-
-
-    .search {
-        @apply w-[300px] h-full flex items-center justify-between bg-white p-3
-        rounded shadow-md border-none;
-
-        i {
-            @apply w-[10%];
-        }
-
-        input {
-            @apply w-[90%] h-full outline-none flex items-center pl-2;
-        }
-    }
-
-    button {
-        color: $primaryColor;
-        border-color: $secondColor;
-        @apply h-[53px] w-[53px] flex items-center justify-center 
-        border-2 transition-colors rounded p-3;
-    }
-
-    button:hover {
-        background-color: $primaryColor;
-        color: $secondColor;
-        @apply transition-colors;
-    }
-
-    .create {
-        background-color: $primaryColor;
-        border-color: $primaryColor;
-        color: $secondColor;
-        @apply h-full w-[180px] flex items-center justify-center gap-4
-        text-lg p-3 rounded font-light border-2 transition-colors;
-    }
-
-    .create:hover {
-        background-color: $secondColor;
-        color: $primaryColor;
-        @apply transition-colors;
-    }
 }
 
 .clicked {
@@ -98,5 +101,9 @@
 }
 
 .router {
-    @apply w-full h-full overflow-auto;
+    @apply h-full overflow-auto ;
+}
+
+i {
+    font-size: 1.7rem;
 }
