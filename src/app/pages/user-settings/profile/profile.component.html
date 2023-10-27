@@ -1,51 +1,41 @@
 <div class="bg">
-        <div class="generalDiv">
-            <div class="divInputs">
-                <div class="divLeftSide">
-                    <!-- E-mail -->
-                    <div class="divEachInput">
-                        <label class="text-sm">E-mail</label>
-                        <div class="iconInputBlock">
-                            <div class="divInputIcon">
-                                <fa-icon [icon]="faEnvelope" class="iconInput"></fa-icon>
-                            </div>
-                            <input type="text" class="input w-[70%] h-12 "
-                                placeholder="ana_cb@estudante.sesisenai.org.br" [disabled]="!isEditable()" />
+    <div class="generalDiv">
+        <div class="divInputs">
+            <div class="divLeftSide">
+                <!-- E-mail -->
+                <div class="divEachInput" *ngFor="let item of itemsList">
+                    <label class="text-sm">{{item.option}}</label>
+                    <div class="iconInputBlock">
+                        <div class="teste">
+                            <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                         </div>
-                    </div>
-
-
-                    <div class="flex items-end py-3">
-                        <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
-                        </fa-icon>
-                        <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
-                        </fa-icon>
-                        <p class="px-3">Mostrar gráficos de desempenho para visitantes</p>
+                        <input type="text" [placeholder]="item.placeholder" />
                     </div>
                 </div>
 
+                <div class="flex items-end py-3">
+                    <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
+                    </fa-icon>
+                    <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
+                    </fa-icon>
+                    <p class="px-3">Mostrar gráficos de desempenho para visitantes</p>
+                </div>
+            </div>
 
-                        <!-- <div class="divButton">
-                            <div *ngIf="!buttonConfirm">
-                                <button class="confirm"
-                                    (click)="clickOption('edit')">
-                                    Editar
-                                </button>
-                            </div>
-                            <div *ngIf="buttonConfirm">
-                                <button [ngClass]="click === 'edit' ? 'cancel' : 'confirm'"
-                                    (click)="clickOption('edit')">
-                                    Cancelar
-                                </button>
-                            </div>
-                            <div *ngIf="!buttonEdit">
-                                <button [ngClass]="click === 'confirm' ? 'edit' : 'confirm'"
-                                    (click)="clickOption('confirm')">
-                                    Confirmar
-                                </button>
-                            </div>
-                        </div>
-                     </div> -->
-           </div>
+            <div class="rightSide">
+                <fa-icon class="iconProfile" size="8x" [icon]="faCircleUser"></fa-icon>
+
+
+
+                <div class="divButton">
+                    <div *ngIf="!buttonConfirm">
+                        <button class="confirm justify-end" (click)="clickOption('edit')" 
+                        [ngClass]="click === 'initial' ? 'noEdit' : 'edit'">
+                            Atualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>

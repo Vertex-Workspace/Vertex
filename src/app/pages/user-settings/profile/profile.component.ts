@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { faCircleUser, faEnvelope, faLock,
+import { faUser, faEnvelope, faLock,
     faEarthAmericas, faKey, faAngleDown, faToggleOff,
-     faPencil, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+     faPencil, faToggleOn, faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { PersonalizationService } from 'src/app/services/personalization.service
 })
 export class ProfileComponent {
 
-  faCircleUser = faCircleUser;
+  faUser = faUser;
   faEnvelope = faEnvelope;
   faLock = faLock;
   faEarthAmericas = faEarthAmericas;
@@ -20,9 +20,16 @@ export class ProfileComponent {
   faToggleOff = faToggleOff;
   faToggleOn = faToggleOn;
   faPencil = faPencil;
+  faCircleUser = faCircleUser;
 
   primaryColor: string;
   secondColor: string;
+
+  itemsList = [
+    { id: 'email', icon: faEnvelope, placeholder: 'ana_cb@estudante.sesisenai.org.br', option: 'E-mail'},
+    { id: 'name', icon: faUser, placeholder :'Ana Clara', option: 'Nome'},
+    { id: 'location', icon: faEarthAmericas, placeholder :'São Paulo, Brazil', option: 'Localização'},
+  ];
 
   constructor(private personalization : PersonalizationService){
     this.primaryColor = personalization.getPrimaryColor();
@@ -38,7 +45,6 @@ export class ProfileComponent {
   buttonConfirm: boolean = false;
   contentEditable: boolean = false;
   click: string = 'initial';
-  clickName: string = 'changeName';
 
   // Alter the status of toogle
   toogleCharts(): void{
@@ -52,31 +58,6 @@ export class ProfileComponent {
 
   clickOption(id: string): void{
     this.click = id;
-    this.buttonEdit = !this.buttonEdit;
-    this.buttonConfirm = !this.buttonConfirm;
     console.log(this.click)
   }
-
-  clickEdit(id: string): void{
-    this.clickName = id;
-    this.contentEditable = !this.contentEditable;
-    console.log(this.contentEditable);
-    console.log(1)
-  }
-
-  isEditable(): boolean{
-    return !this.buttonEdit;
-  }
-
-  showConfirm(): boolean {
-    return this.buttonConfirm;
-  }
-
-  editContent(): boolean{
-    console.log(this.contentEditable);
-    console.log(1)
-    return this.contentEditable;
-
-  }
-
 }

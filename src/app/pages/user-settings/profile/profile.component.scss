@@ -1,11 +1,6 @@
 @import '../../../../variables.scss';
 @import '../../../../styles.scss';
 
-* {
-    margin: 0;
-    padding: 0;
-    background-color: $secondColor;
-}
 
 .bg {
     @apply  flex h-full w-screen; 
@@ -29,14 +24,19 @@ label {
 }
 
 .iconInputBlock {
-    @apply flex justify-start
-}
+    @apply flex justify-start;
 
-.input {
-    @apply bg-white
-     rounded-r-sm
-     placeholder-slate-400 
-     px-3
+    .teste {
+         @apply flex w-12 h-12 justify-center items-center rounded-l-sm;
+         background-color: #CDD8EA;
+     }
+
+     input {
+            @apply bg-white
+            rounded-r-sm
+            placeholder-slate-400 
+            px-3 w-[70%] h-12;
+     }
 }
 
 label {
@@ -45,11 +45,11 @@ label {
 }
 
 .divInputs {
-    @apply flex w-full h-[50%] w-[95%]
+    @apply flex w-[95%]
 }
 
 .divLeftSide {
-    @apply w-[70%] h-full
+    @apply w-[70%] 
 }
 
 
@@ -77,12 +77,12 @@ label {
     background-color: grey;
 }
 
-.confirm {
-    background-color: $primaryColor;
+.noEdit {
+    background-color: grey;
 }
 
-.cancel {
-    background-color: #872323;
+.edit {
+    background-color: $primaryColor;
 }
 .divButton {
     @apply flex justify-end items-end py-20;
@@ -96,4 +96,8 @@ label {
 .editName {
     @apply border-b-2 border-[#96A4B0];
     outline: 0px solid transparent;
+}
+
+.rightSide{
+    @apply flex flex-col w-[30%] h-full items-end py-4;
 }
