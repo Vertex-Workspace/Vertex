@@ -52,13 +52,12 @@ label {
     @apply w-[70%];
 
     section {
-       @apply flex h-[65%] flex-col border-b-2
+       @apply flex h-[67%] flex-col border-b-2 justify-evenly
     }
 }
 
-
 .divEachInput {
-    @apply flex flex-col w-full py-2
+    @apply flex flex-col w-full py-2 
 }
 
 .divInputIcon {
@@ -88,9 +87,6 @@ label {
 .edit {
     background-color: $primaryColor;
 }
-divButton {
-    @apply flex h-[70%];
-}
 
 .noeditName {
     outline: 0px solid transparent;
@@ -106,7 +102,7 @@ divButton {
     @apply flex w-[30%] h-[70%] h-full items-start justify-end;
 
     section {
-        @apply h-[65%] w-full flex flex-col justify-between items-end border-b-2 py-2
+        @apply h-[67%] w-full flex flex-col justify-between items-end border-b-2 py-2
      }
 }
 
@@ -123,9 +119,13 @@ divButton {
 }
 
 .charts {
-    @apply h-[30%] w-full;
+    @apply h-[33%] w-full py-3 ;
+
+    p {
+        @apply text-sm
+    }
 
     div {
-        @apply flex items-end py-3;
+        @apply flex items-end;
     }
 }

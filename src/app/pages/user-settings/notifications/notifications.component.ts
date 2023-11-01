@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-notifications',
@@ -9,5 +9,14 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 export class NotificationsComponent {
 
   faBell = faBell;
+  faToggleOn = faToggleOn;
+  faToggleOff = faToggleOff;
+
+  toogleOn: boolean = true;
+
+  // Alter the status of toogle
+  toogleCharts(): void{
+    this.toogleOn = !this.toogleOn;
+  }
   
 }

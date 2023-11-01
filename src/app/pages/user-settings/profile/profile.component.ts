@@ -67,4 +67,9 @@ export class ProfileComponent {
     this.click = id;
     console.log(this.click)
   }
+
+  changeInput(): void{
+    this.contentEditable = !this.contentEditable;
+    console.log("ok")
+  }
 }

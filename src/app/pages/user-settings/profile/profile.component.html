@@ -10,12 +10,13 @@
                             <div class="iconBox" *ngIf="item.id != 'description'">
                                 <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                             </div>
-                            <input type="text" [placeholder]="item.placeholder" [ngClass]="item.id" />
+                            <input (change)="changeInput()" type="text" [value]="item.placeholder" [ngClass]="item.id" />
                         </div>
                     </div>
                 </section>
 
                 <div class="charts">
+                    <p>Visibilidade do Perfil</p>
                     <div *ngFor="let toogle of tooglesList">
                         <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
                         </fa-icon>
@@ -30,7 +31,7 @@
                 <section>
                     <fa-icon class="iconProfile" size="8x" [icon]="faCircleUser"></fa-icon>
                     <!-- <fa-icon [icon]="faPenToSquare" style="color:blue"></fa-icon> -->
-                    <div class="divButton">
+                    <div>
                         <div *ngIf="!buttonConfirm">
                             <button class="confirm justify-end" (click)="clickOption('edit')"
                                 [ngClass]="click === 'initial' ? 'noEdit' : 'edit'">

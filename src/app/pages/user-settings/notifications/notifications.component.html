@@ -1,8 +1,24 @@
 <div class="bg">
-    <div class="rightSide">
-        <div class="teams">
-            <p>Notificações</p>
+    <div class="title">
+        <div>
+            <p> Minhas notificações</p>
             <fa-icon [icon]="faBell" class="icon"></fa-icon>
         </div>
+    </div>
+
+    <div class="my-notifications">
+        <p>Notificações de seu Espaço de Trabalho</p>
+        <p>Receber notificações sobre:</p>
+        <div>
+            <fa-icon class="icon" *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff">
+            </fa-icon>
+            <fa-icon class="icon" *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn">
+            </fa-icon>
+            <p class="px-3">Atualizações</p>
+        </div>
+    </div>
+
+    <div class="general-notifications">
+
     </div>
 </div>
