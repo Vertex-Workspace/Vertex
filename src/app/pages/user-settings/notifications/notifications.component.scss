@@ -32,11 +32,16 @@
         @apply text-sm;
     }
 
-    div {
-        @apply flex py-3
+    div:first-child {
+        @apply flex py-1 
+    }
+
+    div:last-child {
+        @apply flex justify-center items-center
     }
 }
 
 .general-notifications {
     @apply flex flex-col h-[55%] w-[85%] items-start justify-start
+
 }

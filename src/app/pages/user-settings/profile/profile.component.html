@@ -10,7 +10,7 @@
                             <div class="iconBox" *ngIf="item.id != 'description'">
                                 <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                             </div>
-                            <input (change)="changeInput()" type="text" [value]="item.placeholder" [ngClass]="item.id" />
+                            <input (change)="onChange()" type="text" [value]="item.placeholder" [ngClass]="item.id" />
                         </div>
                     </div>
                 </section>
@@ -34,7 +34,7 @@
                     <div>
                         <div *ngIf="!buttonConfirm">
                             <button class="confirm justify-end" (click)="clickOption('edit')"
-                                [ngClass]="click === 'initial' ? 'noEdit' : 'edit'">
+                                [ngClass]="contentEditable === true ? 'edit' : 'noEdit'">
                                 Atualizar
                             </button>
                         </div>

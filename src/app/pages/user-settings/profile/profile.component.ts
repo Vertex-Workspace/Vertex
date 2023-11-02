@@ -4,6 +4,7 @@ import { faUser, faEnvelope,
      faPencil, faToggleOn, faCircleUser,
     faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from 'src/app/services/personalization.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -65,11 +66,13 @@ export class ProfileComponent {
 
   clickOption(id: string): void{
     this.click = id;
+    this.contentEditable = !this.contentEditable
     console.log(this.click)
   }
 
-  changeInput(): void{
+    onChange(): void {
+      console.log(this.contentEditable)
     this.contentEditable = !this.contentEditable;
-    console.log("ok")
+  
   }
 }
