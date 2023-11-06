@@ -4,6 +4,7 @@ import { TeamsComponent } from './teams.component';
 import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
 import { ChartModule } from 'primeng/chart';
 import { QuickAccessModule } from 'src/app/components/reusable-components/quick-access/quick-access.module';
+import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { QuickAccessModule } from 'src/app/components/reusable-components/quick-
   imports: [
     CommonModule,
     CardListModule,
-    QuickAccessModule
+    QuickAccessModule,
+    CreateTeamProjectModule
   ],
 })
 export class TeamsModule { }

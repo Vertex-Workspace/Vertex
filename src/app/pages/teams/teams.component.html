@@ -1,7 +1,7 @@
 <section>
     <div class="container-custom">
 
-        <!-- LIST VIEW -->
+    
         <div class="container-grid">
             <div class="nav-tasks-teams">
                 <ng-container *ngFor="let item of menuItems">
@@ -12,7 +12,21 @@
                 </ng-container>
 
             </div>
-            <div class="functionally-items">
+
+            <!-- UTILITY NAV BAR TEAM -->
+            <div class="functionally-items" *ngIf="clicked === 'team' && !isCreating">
+                <button class="create" (click)="createNewTeam()">
+                    <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                    Nova Equipe
+                </button>
+                <div class="search">
+                    <input type="text" placeholder="Pesquisar por uma equipe...">
+                    <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                </div>
+            </div>
+
+            <!-- UTILITY NAV BAR TASK -->
+            <div class="functionally-items" *ngIf="clicked === 'task'">
                 <button class="create">
                     <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                     Nova tarefa
@@ -24,7 +38,8 @@
             </div>
 
             <div class="default-size">
-                <app-card-list style="width: 100%; height: 90%; padding-top: 3%;"></app-card-list>
+                <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" *ngIf="clicked === 'task'"></app-card-list>
+                <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"  *ngIf="clicked === 'team'"></app-create-team-project>
             </div>
         </div>
 

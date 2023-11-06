@@ -15,10 +15,11 @@ import { HeaderModule } from './components/fixed-components/header/header.module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from './components/modals/task/task.module';
+import { CreateTeamProjectComponent } from './components/reusable-components/create-team-project/create-team-project.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

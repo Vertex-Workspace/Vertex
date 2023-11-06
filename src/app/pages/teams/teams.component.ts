@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent{
-  clicked: string = 'task';
+
+  isCreating: boolean = true;
+  clicked: string = 'team';
   menuItems = [
     { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
     { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
@@ -14,5 +16,9 @@ export class TeamsComponent{
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+  }
+
+  createNewTeam():void{
+    this.isCreating = !this.isCreating;
   }
 }

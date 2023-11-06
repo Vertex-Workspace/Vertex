@@ -1,7 +1,6 @@
 @import '../../../../variables';
-@media screen and (min-width: 1600px) and (min-width: 1920px){
     .list{
-        @apply flex w-full h-[500px] flex-col gap-[16px];
+        @apply flex w-full h-[600px] flex-col gap-[16px];
         overflow-y: scroll;
     }
     .card{
@@ -37,45 +36,44 @@
             }
         }
     }
-}
 
-@media screen and (min-width: 1400px) and (max-height: 900px){
-    .list{
-        @apply flex w-full h-[500px] flex-col gap-[16px];
-        overflow-y: scroll;
-    }
-    .card{
-        @apply flex w-[98%] min-h-[150px] bg-white shadow-lg rounded-lg flex-row;
-        font-family: $primaryFont;
-        color: $primaryColor;
+// @media screen and (max-width: 1599px){
+//     .list{
+//         @apply flex w-full h-[500px] flex-col gap-[16px];
+//         overflow-y: scroll;
+//     }
+//     .card{
+//         @apply flex w-[98%] min-h-[150px] bg-white shadow-lg rounded-lg flex-row;
+//         font-family: $primaryFont;
+//         color: $primaryColor;
     
-        .image {
-            @apply flex h-full w-2/6 rounded-lg;
-            object-fit: cover;
-        }
+//         .image {
+//             @apply flex h-full w-2/6 rounded-lg;
+//             object-fit: cover;
+//         }
     
     
-        .informations{
-            @apply flex h-full w-4/6 flex-col pl-4 pr-4;
-        }
+//         .informations{
+//             @apply flex h-full w-4/6 flex-col pl-4 pr-4;
+//         }
     
-        .informations-text{
-            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
-        }
-        .informations-text > div{
-            @apply flex flex-col items-end;
-        }
-        .informations-input{
-            @apply flex w-full h-1/6 flex-row justify-between;
-        }
-        .informations-input > div{
-            @apply flex w-[15%] h-full flex-row justify-between pb-3;
+//         .informations-text{
+//             @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+//         }
+//         .informations-text > div{
+//             @apply flex flex-col items-end;
+//         }
+//         .informations-input{
+//             @apply flex w-full h-1/6 flex-row justify-between;
+//         }
+//         .informations-input > div{
+//             @apply flex w-[15%] h-full flex-row justify-between pb-3;
     
-            i{
-                @apply flex text-lg;
-                color: $primaryColor;
-            }
-        }
-    }
-}
+//             i{
+//                 @apply flex text-lg;
+//                 color: $primaryColor;
+//             }
+//         }
+//     }
+// }
 
