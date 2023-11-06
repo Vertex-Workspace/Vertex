@@ -10,14 +10,14 @@
                             <div class="iconBox" *ngIf="item.id != 'description'">
                                 <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                             </div>
-                            <input (change)="onChange()" type="text" [value]="item.placeholder" [ngClass]="item.id" />
+                            <input (input)="onChange()" type="text" [value]="item.placeholder" [ngClass]="item.id" />
                         </div>
                     </div>
                 </section>
 
                 <div class="charts">
                     <p>Visibilidade do Perfil</p>
-                    <div *ngFor="let toogle of tooglesList">
+                    <div *ngFor="let toogle of tooglesList" class="flex items-center">
                         <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
                         </fa-icon>
                         <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">

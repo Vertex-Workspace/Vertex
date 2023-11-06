@@ -62,6 +62,7 @@ export class ProfileComponent {
   changeButton(): void{
     this.buttonEdit = !this.buttonEdit;
     this.buttonConfirm = !this.buttonConfirm;
+  
   }
 
   clickOption(id: string): void{
@@ -71,8 +72,9 @@ export class ProfileComponent {
   }
 
     onChange(): void {
-      console.log(this.contentEditable)
+    console.log(this.contentEditable)
+    if(this.contentEditable == false){
     this.contentEditable = !this.contentEditable;
-  
+    }
   }
 }
