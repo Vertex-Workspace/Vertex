@@ -1,7 +1,14 @@
 @import '../../../../variables';
 
 section{
-    @apply flex w-full h-full items-end gap-6 flex-col;
+    @apply flex w-full h-full  gap-6 flex-col;
+}
+
+.section-start{
+    @apply items-start;
+}
+.section-end{
+    @apply items-end;
 }
 
 

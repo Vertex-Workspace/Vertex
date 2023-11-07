@@ -3,6 +3,7 @@ import { provideRouter, RouterModule, Routes } from '@angular/router';
 import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TeamsComponent } from './pages/teams/teams.component';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: TeamsComponent,
+  },
+  {
+    path: 'project',
+    component: ProjectsComponent,
   },
   {
     path: 'mural',

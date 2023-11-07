@@ -11,8 +11,8 @@ section{
 }
 
 .div-grid-name-image{
-    @apply grid h-[30%];
-    grid-template-columns: 65% 45%;
+    @apply grid w-full h-[30%];
+    grid-template-columns: 65% 35%;
 }
 
 .input-name{
@@ -23,6 +23,23 @@ section{
     }
     input{
         @apply flex h-52 rounded-md pl-4;
+    }
+}
+
+.input-image{
+    @apply flex flex-col w-full h-[50%] justify-center items-center;
+
+    #user-icon{
+        @apply text-9xl ;
+        color: $primaryColor;
+    }
+
+    #user-icon:hover{
+        opacity: 0.5;
+    }
+
+    label{
+        @apply text-sm pt-4;
     }
 }
 
@@ -54,5 +71,22 @@ section{
         @apply flex items-center justify-center w-32 h-12 rounded-sm;
         background-color: $primaryColor;
         color: white;
+    }
+}
+
+
+
+app-modal-warn{
+    color: $primaryColor;
+    
+    h2{
+        @apply text-2xl pt-2;
+    }
+    .informations-modal{
+        @apply flex pt-12 flex-col text-xl;
+    }
+
+    app-button{
+        @apply pt-12;
     }
 }

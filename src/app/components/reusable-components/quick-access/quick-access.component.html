@@ -1,7 +1,8 @@
-<section>
+<section  [ngClass]="{'section-start': typeString === 'project', 'section-end': typeString === 'home'}">
     <div class="card-workspace">
         <div>
-            <p>Meu espaço de trabalho</p>
+            <p *ngIf="typeString === 'home'">Meu espaço de trabalho</p>
+            <p *ngIf="typeString === 'project'">Espaço de trabalho de </p>
         </div>
         <div>
             <div class="grid-card-workspace">
@@ -56,7 +57,10 @@
         </div>
     </div>
     <div class="recently-teams">
-        <h2>Equipes Recentes</h2>
+        <h2 *ngIf="typeString === 'home'">Equipes Recentes</h2>
+        <h2 *ngIf="typeString === 'project'">Projetos Recentes de ...</h2>
+
+        <!-- CHANGE AFTER LOGIC -->
         <div class="div-recently-teams">
             <div class="recently-teams-team">
                 <div class="recently-team-image"><img src="../../../assets/teste/teste.jpg" alt=""></div>

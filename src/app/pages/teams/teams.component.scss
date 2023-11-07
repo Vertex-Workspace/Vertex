@@ -91,3 +91,19 @@ section{
 }
 
 
+// TASK - FILTER ORDER
+.filter-settings {
+    @apply flex gap-3 items-center;
+
+    p {
+        color: $primaryColor;
+        @apply text-lg;
+    }
+
+    select {
+        @apply w-[170px] h-[35px] text-center outline-none;
+    }
+
+}
+
+
