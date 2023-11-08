@@ -13,7 +13,7 @@
         }
 
         p{
-            @apply text-lg
+            @apply text-lg h-full
         }
 }
 
@@ -41,13 +41,21 @@
     }
 }
 
-.general-notifications {
+section {
     @apply flex flex-col h-[55%] w-[85%] items-start justify-start
+}
 
+.list {
+    @apply flex py-1 w-full
 }
 
 .emails {
     @apply flex justify-center items-center 
-
-
 }
+
+.toggles-text {
+    @apply flex justify-center items-center;
+    color: $primaryColor;
+}
+
+

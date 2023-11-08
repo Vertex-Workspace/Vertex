@@ -9,41 +9,22 @@
     <div class="my-notifications">
         <p>Notificações de seu Espaço de Trabalho</p>
         <p>Receber notificações sobre:</p>
-        <div *ngFor="let toogle of tooglesList">
+        <div *ngFor="let toogle of tooglesList; index as item">
             <div>
-                <fa-icon class="icon" *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff">
-                </fa-icon>
-                <fa-icon class="icon" *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn">
+                <fa-icon class="icon" (click)="toogleCharts(item)" [icon]="toogle.icon">
                 </fa-icon>
                 <p class="px-3">{{toogle.text}}</p>
             </div>
         </div>
     </div>
 
-    <div class="general-notifications">
-        <div *ngFor="let toogle of generalTooglesList" class="flex py-1">
-            <div class="flex justify-center items-center" *ngIf="toogle.text === 'Enviar notificações por e-mail'">
-                <fa-icon class="icon" *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff">
-                </fa-icon>
-                <fa-icon class="icon" *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn">
-                </fa-icon>
-                <p class="px-3 text-sm">{{toogle.text}}</p>
-                <div class="flex justify-center items-center">
-                    <div style="background-color:#D9D9D9" class="h-[40%] w-full">
-                        <p>kaique@gmail.com</p>
-                    </div>
-                    <button style="background-color: #D9D9D9" class="h-[40%] w-full">
-                        Adicionar E-mail
-                    </button>
-                </div>
-            </div>
-            <div class="flex justify-center items-center" *ngIf="toogle.text != 'Enviar notificações por e-mail'">
-                <fa-icon class="icon" *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff">
-                </fa-icon>
-                <fa-icon class="icon" *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn">
+    <section>
+        <div *ngFor="let toogle of generalTooglesList; index as item" class="list">
+            <div class="toggles-text">
+                <fa-icon class="icon" (click)="toogleGeneral(item)" [icon]="toogle.icon">
                 </fa-icon>
                 <p class="px-3 text-sm">{{toogle.text}}</p>
             </div>
         </div>
-    </div>
+    </section>
 </div>

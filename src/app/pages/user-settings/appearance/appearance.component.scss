@@ -20,3 +20,11 @@
 .icon {
     color: $primaryColor;
 }
+
+.themes {
+    @apply w-[85%] h-[60%] flex flex-col justify-between items-start;
+}
+
+.light-mode {
+    @apply flex w-full h-[45%] bg-white items-center pl-3
+}

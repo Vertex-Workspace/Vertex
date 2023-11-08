@@ -17,10 +17,8 @@
 
                 <div class="charts">
                     <p>Visibilidade do Perfil</p>
-                    <div *ngFor="let toogle of tooglesList" class="flex items-center">
-                        <fa-icon *ngIf="!toogleOn" (click)="toogleCharts()" [icon]="faToggleOff" class="iconProfile">
-                        </fa-icon>
-                        <fa-icon *ngIf="toogleOn" (click)="toogleCharts()" [icon]="faToggleOn" class="iconProfile">
+                    <div *ngFor="let toogle of tooglesList; index as item" class="flex items-center">
+                        <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
                         </fa-icon>
                         <p class="px-3">{{toogle.text}}</p>
                     </div>

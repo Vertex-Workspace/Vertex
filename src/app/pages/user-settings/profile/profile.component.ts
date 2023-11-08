@@ -5,6 +5,7 @@ import { faUser, faEnvelope,
     faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { NgModel } from '@angular/forms';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile',
@@ -35,8 +36,8 @@ export class ProfileComponent {
   ];
 
   tooglesList = [
-    {text: "Mostrar gráficos de desempenho para visitantes" },
-    {text: "Deixar meu perfil visível a visitantes"},
+    {text: "Mostrar gráficos de desempenho para visitantes", icon: faToggleOff},
+    {text: "Deixar meu perfil visível a visitantes", icon: faToggleOff}
   ];
 
   constructor(private personalization : PersonalizationService){
@@ -55,8 +56,12 @@ export class ProfileComponent {
   click: string = 'initial';
 
   // Alter the status of toogle
-  toogleCharts(): void{
-    this.toogleOn = !this.toogleOn;
+  toogleCharts(item :number): void{
+    if(this.tooglesList[item].icon == faToggleOff){
+      this.tooglesList[item].icon = faToggleOn;
+    }else {
+      this.tooglesList[item].icon = faToggleOff;
+    }
   }
 
   changeButton(): void{

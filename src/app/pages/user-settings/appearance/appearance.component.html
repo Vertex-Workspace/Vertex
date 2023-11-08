@@ -5,4 +5,22 @@
             <fa-icon [icon]="faPencil" class="icon"></fa-icon>
         </div>
     </div>
+
+    <div class="themes">
+        <p class="flex  flex">Preferência de tema</p>
+        <div class="light-mode" *ngFor="let theme of themesList">
+            <div class="flex h-[200px] w-[200px] bg-blue-100">
+                <fa-icon [icon]="theme.icon" style="color:blue"></fa-icon>
+            </div>
+            <div>
+                <p>Cor de fundo</p>
+                <div class="rounded-full w-[50px] h-[50px] bg-blue-100">
+                </div>
+
+                <p>Cor secundária</p>
+                <div class="rounded-full w-[50px] h-[50px] bg-blue-100">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

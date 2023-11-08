@@ -84,16 +84,6 @@ label {
     background-color: $primaryColor;
 }
 
-.noeditName {
-    outline: 0px solid transparent;
-    @apply px-2;
-}
-
-.editName {
-    @apply border-b-2 border-[#96A4B0];
-    outline: 0px solid transparent;
-}
-
 .rightSide{
     @apply flex w-[30%] h-[70%] h-full items-start justify-end;
 
