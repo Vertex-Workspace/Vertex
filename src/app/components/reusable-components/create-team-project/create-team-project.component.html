@@ -1,0 +1,40 @@
+<section>
+    <div class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</div>
+    <div class="title" *ngIf="typeString === 'project'">Crie um novo Projeto...</div>
+    <div class="div-grid-name-image">
+        <div class="input-name">
+            <label for="" *ngIf="typeString === 'team'">Nome da Equipe</label>
+            <label for="" *ngIf="typeString === 'project'">Nome do Projeto</label>
+            <input type="text" placeholder="Adicione um nome à equipe" *ngIf="typeString === 'team'">
+            <input type="text" placeholder="Adicione um nome ao projeto" *ngIf="typeString === 'project'">
+        </div>
+        <div class="input-image">
+            <fa-icon [icon]="faCircleUser" id="user-icon"></fa-icon>
+            <label for="" *ngIf="typeString === 'team'">Adicione uma foto à equipe</label>
+            <label for="" *ngIf="typeString === 'project'">Adicione uma foto ao projeto</label>
+        </div>
+    </div>
+    <div class="input-description">
+        <label for="" *ngIf="typeString === 'team'">Descrição da Equipe</label>
+        <label for="" *ngIf="typeString === 'project'">Descrição do Projeto</label>
+        <textarea placeholder="Insira uma descrição à equipe..." *ngIf="typeString === 'team'"></textarea>
+        <textarea placeholder="Insira uma descrição ao projeto..." *ngIf="typeString === 'project'"></textarea>
+    </div>
+
+    <div class="div-buttons">
+        <div class="buttons">
+            <button class="cancel-button" (click)="closeScreen()">Cancelar</button>
+            <button class="confirm-button" (click)="confirmCreateTeam()">Confirmar</button>
+        </div>
+    </div>
+</section>
+
+<app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink">
+    <h2>Equipe AKMO criada com sucesso!</h2>
+    <div class="informations-modal">
+        <p>Convide pessoas para AKMO</p>
+        <p>através do link abaixo.</p>
+    </div>
+    <app-button [title]="'Copiar Link de Convite'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
+        [textColor]="secondColor" [background]="primaryColor" (clickEvent)="copyLink()" />
+</app-modal-warn>

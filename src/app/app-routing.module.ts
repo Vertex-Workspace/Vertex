@@ -3,6 +3,7 @@ import { provideRouter, RouterModule, Routes } from '@angular/router';
 import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
@@ -18,15 +19,6 @@ const routes: Routes = [
     path: 'mural',
     component: MuralComponent,
     data: { animation: 'muralPage' }
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: { animation: 'registerPage' }
-  },
-  {
-    path: 'team-informations',
-    component: TeamInformationsComponent,
   },
   {
     path: 'task',
@@ -50,11 +42,11 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "team-informations",
+    redirectTo: "login",
   },
   {
     path: "**",
-    redirectTo: "team-informations",
+    redirectTo: "login",
   }
 ]
 
