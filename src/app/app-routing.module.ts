@@ -6,6 +6,7 @@ import { MuralComponent } from './pages/mural/mural.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
+import { TeamsComponent } from './pages/teams/teams.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 
@@ -15,6 +16,14 @@ const routes: Routes = [
     component: LoginComponent,
     data: { animation: 'loginPage' }
   },
+  {
+    path: "home",
+    component: TeamsComponent
+  },
+  {
+    path: "project",
+    component: ProjectsComponent
+  },  
   {
     path: 'mural',
     component: MuralComponent,
