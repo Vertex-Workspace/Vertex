@@ -43,5 +43,24 @@ export class CreateTeamProjectComponent {
     this.closeScreen();
   }
 
+  inputImage():void{
+    new FileReader().onload
+  }
+
+  readThis(inputValue: any): void {
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
+    var fileType = inputValue.parentElement.id;
+    myReader.onloadend = function (e) {
+        //myReader.result is a String of the uploaded file
+        console.log(myReader.result);
+
+        //fileString = myReader.result would not work, 
+        //because it is not in the scope of the callback
+    }
+
+    myReader.readAsText(file);
+}
+
 
 }
