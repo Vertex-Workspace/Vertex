@@ -15,9 +15,8 @@ import { HeaderModule } from './components/fixed-components/header/header.module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from './components/modals/task/task.module';
-import { UserSettingsModule } from './pages/user-settings/user-settings.module';
-import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
+import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 
 @NgModule({
   declarations: [
