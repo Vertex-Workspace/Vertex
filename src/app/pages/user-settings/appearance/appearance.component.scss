@@ -21,10 +21,60 @@
     color: $primaryColor;
 }
 
+.icon-dark {
+    color: $secondColor;
+}
+
 .themes {
     @apply w-[85%] h-[60%] flex flex-col justify-between items-start;
 }
 
 .light-mode {
-    @apply flex w-full h-[45%] bg-white items-center pl-3
+    @apply flex w-full h-[45%] bg-[#EAEFF8] items-center pl-3;
+}
+
+.colors-circle {
+    @apply rounded-full w-[60px] h-[60px] flex
+}
+
+.colors {
+    @apply flex flex-col w-[70%] h-full justify-evenly;
+
+    p {
+        @apply px-3;
+    }
+
+    div:first-child {
+        @apply flex flex-col place-content-evenly
+    }
+}
+
+.icon-themes {
+    @apply px-3 py-3;
+}
+
+.text-preferences {
+    @apply  w-[85%] h-[30%]
+}
+
+.writing {
+    @apply w-full h-[40%] flex py-3;
+}
+
+.accessibility {
+    @apply flex ;
+}
+
+.bg-light{
+    background: linear-gradient(to right bottom, #C7D5E2 50%, #092C4C 50%);
+}
+
+.bg-dark{
+    background: linear-gradient(to bottom right, #092C4C 50%, #C7D5E2 50%);
+}
+
+select {
+    background-color: $primaryColor;
+    color: $secondColor;
+    @apply text-sm;
 }

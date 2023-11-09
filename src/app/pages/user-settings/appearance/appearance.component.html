@@ -9,18 +9,70 @@
     <div class="themes">
         <p class="flex  flex">Preferência de tema</p>
         <div class="light-mode" *ngFor="let theme of themesList">
-            <div class="flex h-[200px] w-[200px] bg-blue-100">
-                <fa-icon [icon]="theme.icon" style="color:blue"></fa-icon>
+            <div class="flex h-[85%] w-[20%]"
+            [ngClass]="theme.mode === 'Tema Claro' ? 'bg-light' : 'bg-dark'">
+                <fa-icon [icon]="theme.icon" class="icon-themes"
+                [ngClass]="theme.mode === 'Tema Claro' ? 'icon' : 'icon-dark'"
+                ></fa-icon>
+                <p 
+                [ngClass]="theme.mode === 'Tema Claro' ? 'icon' : 'icon-dark'"
+                class="text-sm py-3">{{theme.mode}}</p>
             </div>
-            <div>
-                <p>Cor de fundo</p>
-                <div class="rounded-full w-[50px] h-[50px] bg-blue-100">
+
+            <div class="colors">
+                <div>
+                    <p>Cor de fundo</p>
+                    <div class="flex flex-row justify-evenly">
+                        <ng-container *ngFor="let color of pcolors">
+                            <div [ngStyle]="{'background-color': color.first}" class="colors-circle">
+                                <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" 
+                                class="icon-dark justify-center flex"></fa-icon>
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
 
-                <p>Cor secundária</p>
-                <div class="rounded-full w-[50px] h-[50px] bg-blue-100">
+                <div class="flex flex-col w-full pt-[10%]">
+                    <p>Cor Secundária</p>
+                    <div class="flex flex-row justify-evenly">
+                        <ng-container *ngFor="let color of pcolors">
+                            <div [ngStyle]="{'background-color': 'blue'}" class="colors-circle">
+                                <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" 
+                                class="icon-dark justify-center flex"></fa-icon>
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
+
         </div>
+    </div>
+
+    <div class="text-preferences">
+        <div class="writing">
+            <div class="w-[30%]">
+                <p>Tamanho da letra</p>
+                <p class="text-sm">Defina o tamanho da letra para o sistema</p>
+                <select>
+                    <option *ngFor="let size of fontSizes" [value]="size">{{size}}</option>
+                </select>
+            </div>
+            <div class="w-[30%]">
+                <p>Estilo da letra</p>
+                <p class="text-sm">Defina o estilo da letra</p>
+                <select>
+                    <option *ngFor="let font of fontFamily" [value]="font">{{font}}</option>
+                </select>
+            </div>
+        </div>
+        <p>Acessibilidade</p>
+        <ng-container *ngFor="let toggle of toggles; index as item">
+            <div class="accessibility">
+                <fa-icon class="icon" (click)="toggleChange(item)" [icon]="toggle.icon">
+                </fa-icon>
+                <p class="px-3 text-sm flex items-center justify-center">{{toggle.text}}</p>
+            </div>
+        </ng-container>
+
     </div>
 </div>
