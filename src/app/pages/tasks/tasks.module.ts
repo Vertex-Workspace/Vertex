@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { CalendarModule } from './calendar/calendar.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FontAwesomeModule,
     DragDropModule,
-    FormsModule
+    FormsModule,
+    CalendarModule
   ],
 })
 export class TasksModule { }

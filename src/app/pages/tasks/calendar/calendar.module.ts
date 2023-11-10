@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -8,8 +9,12 @@ import { CalendarComponent } from './calendar.component';
   declarations: [
     CalendarComponent
   ],
+  exports: [
+    CalendarComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserModule
   ]
 })
 export class CalendarModule { }

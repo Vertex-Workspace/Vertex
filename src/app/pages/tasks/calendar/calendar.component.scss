@@ -1,0 +1,36 @@
+@import "../../../../variables";
+
+section{
+    @apply flex w-full h-5/6 flex-col;
+}
+
+.header-calendar{
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    text-align: center;
+    .title {
+        font-size: 24px;
+    }
+}
+
+.calendar {
+    @apply flex w-full h-full;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    .days-of-week{
+        @apply text-xl;
+        border: $borderBottom;
+        border-top: none;
+        
+    }
+    .calendar-day{
+        @apply flex justify-end pt-2 pr-2 h-52;
+        border: $borderBottom;
+        color: $primaryColor;
+    }
+    
+    .day-not-month {
+        color: #aaa;
+    }
+}

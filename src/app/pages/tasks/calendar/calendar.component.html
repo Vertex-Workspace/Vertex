@@ -1,1 +1,23 @@
-<p>calendar works!</p>
+<section>
+    <div class="header-calendar">
+        <div>
+            <button (click)="changeMonth(-1)">{{translateMonth(currentDate.getMonth()-1)}}</button>
+        </div>
+        <div class="title">{{currentDate | date: 'MMMM yyyy'}}</div>
+        <div>
+            <button (click)="changeMonth(+1)">{{translateMonth(currentDate.getMonth()+1)}}</button>
+        </div>
+    </div>
+    <div class="calendar">
+        <ng-container *ngFor="let day of calendarDays; index as index">
+            <div *ngIf="index < 7" class="days-of-week">
+                {{translateDayOfWeek(day.getDay())}}
+            </div>
+        </ng-container>
+        <div *ngFor="let day of calendarDays; index as index"
+            class="calendar-day"
+            [class.day-not-month]="currentDate.getMonth() !== day.getMonth()">
+            {{day | date : 'dd'}}
+        </div>
+    </div>
+</section>
