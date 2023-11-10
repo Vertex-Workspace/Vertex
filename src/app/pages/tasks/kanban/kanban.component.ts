@@ -12,6 +12,8 @@ import {
 })
 export class KanbanComponent {
 
+  selectedCards ?: Task[];
+
   categories: any[] = [
     {
       name: 'TO-DO',
@@ -95,9 +97,9 @@ export class KanbanComponent {
   ];
 
 
-  specificCategoryArray(task: Task): any[] {
-    return this.taskList.filter(taskFor => {
-      return taskFor.category === task.category;
+  specificPropertyArray(property: any): any[] {
+    return this.taskList.filter(task => {
+      return task.category === property;
     });
   }
 
@@ -106,7 +108,7 @@ export class KanbanComponent {
     task.category = category;
 
     const newIndexTask = 
-            this.specificCategoryArray(task)[event.currentIndex];
+            this.specificPropertyArray(task.category)[event.currentIndex];
     const newIndex = this.taskList.indexOf(newIndexTask);
     const previousIndex = this.taskList.indexOf(task);
     
@@ -116,4 +118,12 @@ export class KanbanComponent {
       newIndex
     );
   };
+
+  getHeight(property: any): string {
+    const propertyTasksQtt = 
+            this.specificPropertyArray(property).length;
+
+    return ((propertyTasksQtt * 150) + 80) + "px";
+  }
+
 }

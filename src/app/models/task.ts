@@ -3,5 +3,6 @@ export interface Task {
     category: any, //propriedade
     creator ?: string,
     properties ?: string[],
-    isDragging ?: boolean
+    isDragging ?: boolean,
+    isSelected ?: boolean
 }

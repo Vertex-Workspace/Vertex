@@ -3,20 +3,21 @@
         <div class="col-container" >
             <div 
                 [ngClass]="'col'" 
-                *ngFor="let category of categories" 
-                [style.backgroundColor]="category.color"
+                *ngFor="let property of categories" 
+                [style.backgroundColor]="property.color"
+                [style.height]="getHeight(property)"
                 cdkDropList 
                 [cdkDropListData]="taskList" 
-                (cdkDropListDropped)="dropCard($event, category)"
+                (cdkDropListDropped)="dropCard($event, property)"
             >
 
-                <h2>{{ category.name }}</h2>
+                <h2>{{ property.name }}</h2>
 
                 <div class="col-items">
 
                     <ng-container *ngFor="let task of taskList">
                         <app-card 
-                            *ngIf="task.category === category" 
+                            *ngIf="task.category === property"
                             [task]="task" 
                             [cdkDragData]="task" 
                             cdkDrag

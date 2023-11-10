@@ -7,7 +7,7 @@
       @apply gap-6 max-w-full min-h-[50px] overflow-auto flex;
 
       .col {
-        @apply min-w-[300px] w-[300px] min-h-[50px] flex flex-col
+        @apply min-w-[300px] w-[300px] h-[350px] flex flex-col
         gap-4 p-4 shadow-md;
         
           h2 {
