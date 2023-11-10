@@ -15,7 +15,6 @@
     @apply flex w-[20%] h-full flex-col items-center;
     transition: width 0.32s ease-in-out;
     background-color: $primaryColor;
-    
     position: fixed;
 }
 
@@ -27,8 +26,8 @@
 
 .main-divOpen {
     @apply flex w-[100%] h-full flex-col items-end;
-    background-color: $secondColor;
 }
+
 
 .main-header{
     @apply flex w-full h-[8%] items-center justify-between;

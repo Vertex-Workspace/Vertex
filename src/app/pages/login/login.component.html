@@ -1,4 +1,4 @@
-<div id="bg-login">
+<div [ngClass]="'bg-login'">
     <!-- Div da esquerda da tela - Responsável pelo h1 do Vertex e da logo -->
     <div id="left-div-login">
         <!-- H1 que contém o nome do aplicativo - Fica localizado no canto superior esquerdo. -->
@@ -10,6 +10,8 @@
         </div>
     </div>
 
+
+
     <!-- Div da direita da tela - Responsável pelos inputs de usuario e senha -->
     <div id="right-div-login">
         <h1 id="h1-access-account">Acesse sua Conta</h1>
@@ -19,19 +21,34 @@
             <!-- Div Input Endereço de Email -->
             <div class="w-full">
                 <label class="labels">Endereço de E-mail</label>
-                <input class="inputs" name="email" type="email" autocomplete="email" required>
+                <div class="flex justify-center">
+                    <div class="divRegisterIcons">
+                        <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
+                    </div>
+                    <input class="inputs" name="email" type="email" autocomplete="email" required>
+                </div>
             </div>
 
 
             <!-- Div input de Senha -->
             <div>
                 <label class="labels">Senha</label>
-                <div class=" flex justify-center">
-                    <input class="inputs" name="password" type="password" autocomplete="current-password" required>
+                <div class="flex justify-center">
+                    <div class="divRegisterIcons">
+                        <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
+                    </div>
+                    <input class="inputs" name="password" [type]="invisibleEye ? 'password' : 'text'"
+                        autocomplete="current-password" required>
+                    <div class="eyesDiv">
+                        <fa-icon *ngIf="!invisibleEye" (click)="passwordToggle()" class="eyeIcon" [icon]="faEye">
+                        </fa-icon>
+                        <fa-icon *ngIf="invisibleEye" (click)="passwordToggle()" class="eyeIcon" [icon]="faEyeSlash">
+                        </fa-icon>
+                    </div>
                 </div>
 
                 <div class="text-sm flex justify-end">
-                    <a href="#" id="a-forget-password">Esqueceu sua senha?</a>
+                    <a id="a-forget-password" (click)="toForgotPassword()">Esqueceu sua senha?</a>
                 </div>
             </div>
 
@@ -52,4 +69,118 @@
         </form>
     </div>
 
+
+
+
 </div>
+
+<ng-container *ngIf="forgotPassword && step==1">
+    <app-forgot-password (forgot)="toForgotPassword()">
+
+        <div id="divGeralModal">
+
+            <div class="w-4/5 flex flex-col gap-10 ">
+                <div class="divH1Modal">
+                    <h1 class="text-[30px] text-[#092c4c] font-bold">Esqueceu sua Senha?</h1>
+                </div>
+
+                <p class=" text-[16px] text-[#092c4c] font-bold">Não se preocupe, vamos te ajudar a recuperar sua senha!
+                </p>
+                <div class="w-full">
+                    <div class="flex justify-center">
+                        <div class="divRegisterIconsModal">
+                            <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
+                        </div>
+                        <input class="inputs" name="email" type="email" autocomplete="email" required>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <h3 class="text-[15px] text-[#092c4c]">Insira seu e-mail para redefinir sua senha:</h3>
+                    <!-- Div do botão de Enviar -->
+                    <div class="flex justify-center">
+                        <button id="enter-btn" type="submit" (click)="step=2">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </app-forgot-password>
+</ng-container>
+
+<ng-container *ngIf="forgotPassword && step == 2">
+    <app-forgot-password (forgot)="toForgotPassword()">
+
+        <div id="divGeralModal">
+
+
+            <div class="w-4/5 flex flex-col gap-10 ">
+                <div class="divH1Modal">
+                    <h1 class="text-[30px] text-[#092c4c] font-bold">Confirme que é você</h1>
+                </div>
+                <p class=" text-[16px] text-[#092c4c] font-bold">Enviamos um código para o e-mail ka****@*****.com</p>
+                <div class="w-full flex flex-col gap-5">
+                    <label class="text-[#092c4c]">Digite o código</label>
+                    <div class="flex justify-evenly">
+                        <input class="square-code" maxlength="1">
+                        <input class="square-code" maxlength="1">
+                        <input class="square-code" maxlength="1">
+                        <input class="square-code" maxlength="1">
+                        <input class="square-code" maxlength="1">
+                    </div>
+                    <h3 class="text-[15px] text-[#092c4c] font-bold" (click)="step=3">Reenviar código</h3>
+                </div>
+            </div>
+        </div>
+
+    </app-forgot-password>
+</ng-container>
+
+<ng-container *ngIf="forgotPassword && step == 3">
+    <app-forgot-password (forgot)="toForgotPassword()">
+
+        <div id="divGeralModal">
+
+
+            <div class="w-4/5 flex flex-col gap-5 ">
+                <div class="divH1Modal">
+                    <h1 class="text-[30px] text-[#092c4c] font-bold">Insira sua nova senha</h1>
+                </div>
+
+                <div class="w-full flex flex-col justify-evenly gap-4">
+                    <div class="flex justify-center">
+                        <div class="divRegisterIconsModal">
+                            <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
+
+                        </div>
+                        <input class="inputs" name="email" type="email" autocomplete="email"
+                            placeholder="Insira sua senha" required>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="divRegisterIconsModal">
+                            <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
+
+                        </div>
+                        <input class="inputs" name="email" type="email" autocomplete="email"
+                            placeholder="Confirme sua senha" required>
+                    </div>
+                </div>
+
+
+                <div>
+                    <p class=" text-[16px] text-[#092c4c] font-bold">Requisitos para uma boa senha:</p>
+                    <p class="text-[13px]">*8 caracteres ou mais<br>*Pelo menos uma letra maiúscula<br>*Pelo menos um
+                        caractere especial (#@!%$)<br>*As senhas coincidem </p>
+                </div>
+
+                <!-- Div do botão de Enviar -->
+                <div class="flex justify-center">
+                    <button id="enter-btn" type="submit">Enviar</button>
+                </div>
+
+            </div>
+        </div>
+
+    </app-forgot-password>
+</ng-container>

@@ -16,9 +16,11 @@
 body {
     font-family: var(--font-family);
     background-color: $secondColor;
+    background-color: #F3F3F3;
 }
 
-*{
+* {
+    // overflow-y: hidden;
     margin: 0;
     padding: 0;
     max-width: 100%;
@@ -51,4 +53,17 @@ button, a{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+::-webkit-scrollbar-track {
+    background: #D9D9D9; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $primaryColor;
+    border-radius: 3px;
 }

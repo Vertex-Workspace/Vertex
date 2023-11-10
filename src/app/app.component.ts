@@ -15,7 +15,7 @@ export class AppComponent{
   title = 'Vertex';
 
   userLogged: boolean = true;
-
+  
   isSideBarExpanded:boolean = false;
 
   constructor(
