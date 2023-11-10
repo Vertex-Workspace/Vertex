@@ -13,7 +13,7 @@
         }
         
         p{
-            @apply text-lg
+            @apply text-lg 
         }
 }
 
@@ -26,27 +26,40 @@
 }
 
 .themes {
-    @apply w-[85%] h-[60%] flex flex-col justify-between items-start;
+    @apply w-[85%] h-[60%] flex flex-col justify-between items-start;  
+
+    p:first-child{
+     @apply pt-2;
+    }
 }
 
-.light-mode {
-    @apply flex w-full h-[45%] bg-[#EAEFF8] items-center pl-3;
+.box-modes {
+    @apply flex w-full h-[45%] bg-[#EAEFF8] items-center pl-3 border border-[#373131] rounded;
+
+    .mode {
+        @apply flex h-[85%] w-[20%];
+
+        p{
+            @apply text-sm py-3
+        }
+    }
 }
 
 .colors-circle {
-    @apply rounded-full w-[60px] h-[60px] flex
+    @apply rounded-full w-[60px] h-[60px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
 }
 
 .colors {
-    @apply flex flex-col w-[70%] h-full justify-evenly;
+    @apply flex flex-col w-[70%] h-full justify-evenly pb-2;
 
     p {
-        @apply px-3;
-    }
+        @apply pl-14;
+    };
 
     div:first-child {
-        @apply flex flex-col place-content-evenly
-    }
+        @apply flex h-full flex-col place-content-evenly;
+
+    };
 }
 
 .icon-themes {
@@ -54,11 +67,11 @@
 }
 
 .text-preferences {
-    @apply  w-[85%] h-[30%]
+    @apply  w-[85%] h-[30%];
 }
 
 .writing {
-    @apply w-full h-[40%] flex py-3;
+    @apply w-full h-[40%] flex py-3 ;
 }
 
 .accessibility {
@@ -66,15 +79,19 @@
 }
 
 .bg-light{
-    background: linear-gradient(to right bottom, #C7D5E2 50%, #092C4C 50%);
+    background: linear-gradient(to right bottom, $secondColor 50%, $primaryColor 50%);
 }
 
 .bg-dark{
-    background: linear-gradient(to bottom right, #092C4C 50%, #C7D5E2 50%);
+    background: linear-gradient(to bottom right, $primaryColor 50%, $secondColor 50%);
 }
 
 select {
     background-color: $primaryColor;
     color: $secondColor;
-    @apply text-sm;
+    @apply text-sm rounded-md h-[30%];
+}
+
+.unselected {
+    @apply opacity-25;
 }
