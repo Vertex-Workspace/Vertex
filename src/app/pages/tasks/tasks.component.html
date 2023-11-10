@@ -1,1 +1,92 @@
-<p>tasks works!</p>
+<section class="screen">
+    <div class="container-custom">
+        <section class="menu">
+
+            <div>
+                <ng-container *ngFor="let item of menuItems">
+                    <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
+                        <i 
+                            class="{{ item.iconClass }}" 
+                            style="font-size: 1rem"
+                        ></i>
+                        <button 
+                            [routerLink]="[item.id]"
+                            (click)="changePreviewMode(item.id)"
+                        >
+                                {{ item.label }}
+                        </button>
+                    </label>
+                </ng-container>
+            </div>
+
+            <div class="config-menu">
+                <button 
+                    *ngIf="!searchBarOpen" 
+                    (click)="toggleSearchBar()"
+                >
+                    <i 
+                        class="pi pi-search" 
+                    ></i>
+                </button>
+
+                <div 
+                    class="search" 
+                    *ngIf="searchBarOpen"
+                >
+                    <input 
+                        type="text" 
+                        placeholder="Pesquise por uma tarefa..."
+                        [(ngModel)]="query"
+                    >
+                    <i class="pi pi-times cursor-pointer" 
+                        style="font-size: 1.4rem;" 
+                        (click)="toggleSearchBar()"></i>
+                </div>
+
+                <ng-container *ngFor="let item of configItems">
+                    <button 
+                        class="config-buttons" 
+                        (click)="item.click()"
+                    >
+                        <i 
+                            class="{{ item.iconClass }}" 
+                        ></i>
+                    </button>
+                </ng-container>
+
+                <button class="create">
+                    <i 
+                        class="pi pi-plus-circle" 
+                    ></i>
+                    Nova tarefa
+                </button>
+
+            </div>
+
+        </section>
+        <section 
+            class="filter-settings" 
+            *ngIf="filterOpen || orderOpen"
+        >
+            <p>Ordenar por </p>
+
+            <ng-container>
+                <select *ngIf="filterOpen">
+                    <option *ngFor="let item of filterSettings">
+                        {{ item.label }}
+                    </option>
+                </select>
+                
+                <select *ngIf="orderOpen">
+                    <option *ngFor="let item of orderSettings">
+                        {{ item.label }}
+                    </option>
+                </select>
+            </ng-container>
+
+        </section>
+        <section class="router">
+            <router-outlet />
+        </section>
+    </div>
+</section>

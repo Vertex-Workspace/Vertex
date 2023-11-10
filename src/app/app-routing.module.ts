@@ -9,7 +9,10 @@ import { TeamInformationsComponent } from './pages/team-informations/team-inform
 import { TeamsComponent } from './pages/teams/teams.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
-
+import { TasksComponent } from './pages/tasks/tasks.component';
+import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
+import { ListComponent } from './pages/tasks/list/list.component';
+import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -32,6 +35,33 @@ const routes: Routes = [
   {
     path: 'task',
     component: TaskComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: { animation: 'registerPage' }
+  },
+  {
+    path: 'tasks',
+    component: TasksComponent,
+    children: [
+      {
+        path: 'kanban',
+        component: KanbanComponent
+      },
+      {
+        path: 'list',
+        component: ListComponent
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent
+      },
+      {
+        path: 'mural',
+        component: MuralComponent
+      }
+    ]
   },
   {
     path: 'configuracoes',

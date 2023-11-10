@@ -1,1 +1,30 @@
-<p>kanban works!</p>
+<section class="screen">
+    <ng-container cdkDropListGroup appFixedScrollbar>
+        <div class="col-container" >
+            <div 
+                [ngClass]="'col'" 
+                *ngFor="let category of categories" 
+                [style.backgroundColor]="category.color"
+                cdkDropList 
+                [cdkDropListData]="taskList" 
+                (cdkDropListDropped)="dropCard($event, category)"
+            >
+
+                <h2>{{ category.name }}</h2>
+
+                <div class="col-items">
+
+                    <ng-container *ngFor="let task of taskList">
+                        <app-card 
+                            *ngIf="task.category === category" 
+                            [task]="task" 
+                            [cdkDragData]="task" 
+                            cdkDrag
+                        />
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</section>
