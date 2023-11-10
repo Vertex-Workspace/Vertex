@@ -11,6 +11,7 @@
 
 body {
     font-family: var(--font-family);
+    background-color: #F3F3F3;
 }
 
 *{
@@ -29,7 +30,7 @@ button, a{
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 4px;
   }
 
 ::-webkit-scrollbar-track {

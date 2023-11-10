@@ -25,9 +25,29 @@ export class KanbanComponent {
     },
     {
       name: 'DONE',
-      color: '#D7FFC9',
+      color: '#d7ffc971',
       borderColor: '#65D73C'
-    }
+    },
+    {
+      name: 'OUTRA CATEGORIA',
+      color: '#d7ffc971',
+      borderColor: '#7be05780'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc971',
+      borderColor: '#7be05780'
+    },
+    // {
+    //   name: 'DONE',
+    //   color: '#D7FFC9',
+    //   borderColor: '#7be0575d'
+    // },
+    // {
+    //   name: 'DONE',
+    //   color: '#D7FFC9',
+    //   borderColor: '#7be0575d'
+    // },
   ];
 
   taskList: Task[] = [

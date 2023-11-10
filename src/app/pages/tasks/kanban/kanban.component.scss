@@ -20,14 +20,14 @@
 }
 
 .screen {
-  @apply w-full h-[85%] mt-16;
+  @apply h-[100%] overflow-auto flex pt-12;
 
   .col-container {
-      @apply flex gap-4 overflow-auto h-full w-full;
+      @apply gap-4 max-w-[1400px] h-full overflow-auto flex;
 
       .col {
-        @apply w-[350px] flex flex-col 
-        gap-4 p-4 h-[90%] overflow-auto shadow-md;
+        @apply min-w-[370px] w-[370px] flex flex-col
+        gap-4 p-4 h-[80%] overflow-auto shadow-md;
         
           h2 {
             @apply text-2xl text-[#545B63] ml-3;
@@ -39,6 +39,17 @@
           }
         
       }
+  }
+
+  .properties {
+    
+    @apply w-1/4 justify-center;
+
+    div:first-child {
+      @apply flex;
+      background-color: #7be05780;
+    }
+
   }
 
 }
