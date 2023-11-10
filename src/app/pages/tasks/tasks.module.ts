@@ -19,8 +19,8 @@ import { FormsModule } from '@angular/forms';
     TasksComponent,
     KanbanComponent,
     ListComponent,
-    CardComponent
-  ],
+    CardComponent,
+   ],
   exports:[
     TasksComponent
   ],

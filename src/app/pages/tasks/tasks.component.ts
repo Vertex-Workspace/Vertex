@@ -25,19 +25,20 @@ export class TasksComponent {
   ];
 
   configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
+    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
+    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
+    { id: 'properties', iconClass: 'pi pi-tags', click: () => console.log('func') },
   ];
 
-  clickSearchBar(): void {
+  toggleSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;
   } 
   
-  clickFilter(): void {
+  toggleFilter(): void {
     this.filterOpen = !this.filterOpen;
   }
   
-  clickOrder(): void {
+  toggleOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
 

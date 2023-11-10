@@ -1,8 +1,8 @@
 <section class="screen">
-    <ng-container cdkDropListGroup>
-        <div class="col-container">
+    <ng-container cdkDropListGroup appFixedScrollbar>
+        <div class="col-container" >
             <div 
-                class="col" 
+                [ngClass]="'col'" 
                 *ngFor="let category of categories" 
                 [style.backgroundColor]="category.color"
                 cdkDropList 
@@ -27,15 +27,4 @@
             </div>
         </div>
     </ng-container>
-
-    <div class="properties">
-        <div>
-            <p>Visualizar por: </p>
-            <select>
-                <option>((items))</option>
-            </select>
-        </div>
-
-        <button>Gerenciar propriedades</button>
-    </div>
 </section>

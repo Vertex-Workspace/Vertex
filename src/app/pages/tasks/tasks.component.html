@@ -22,7 +22,7 @@
             <div class="config-menu">
                 <button 
                     *ngIf="!searchBarOpen" 
-                    (click)="clickSearchBar()"
+                    (click)="toggleSearchBar()"
                 >
                     <i 
                         class="pi pi-search" 
@@ -38,7 +38,9 @@
                         placeholder="Pesquise por uma tarefa..."
                         [(ngModel)]="query"
                     >
-                    <i class="pi pi-times cursor-pointer" style="font-size: 1.4rem;" (click)="clickSearchBar()"></i>
+                    <i class="pi pi-times cursor-pointer" 
+                        style="font-size: 1.4rem;" 
+                        (click)="toggleSearchBar()"></i>
                 </div>
 
                 <ng-container *ngFor="let item of configItems">

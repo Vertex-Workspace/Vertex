@@ -21,7 +21,7 @@ import { MuralModule } from './pages/mural/mural.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
