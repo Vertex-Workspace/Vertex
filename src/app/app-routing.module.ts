@@ -59,8 +59,6 @@ const routes: Routes = [
         component: MuralComponent
       }
     ],
-    path: 'task',
-    component: TaskComponent
   },
   {
     path: 'configuracoes',
