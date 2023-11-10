@@ -41,7 +41,7 @@ import { TeamInformationsModule } from './pages/team-informations/team-informati
     BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule,
-    TasksModule
+    TasksModule,
     UserSettingsModule,
     TeamInformationsModule
   ],
