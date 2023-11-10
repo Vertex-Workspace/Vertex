@@ -18,6 +18,8 @@ import { CommonModule } from '@angular/common';
 import { TasksModule } from './pages/tasks/tasks.module';
 import { MuralComponent } from './pages/mural/mural.component';
 import { MuralModule } from './pages/mural/mural.module';
+import { UserSettingsModule } from './pages/user-settings/user-settings.module';
+import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { MuralModule } from './pages/mural/mural.module';
     FontAwesomeModule,
     TaskModule,
     TasksModule
+    UserSettingsModule,
+    TeamInformationsModule
   ],
   providers: [
     PersonalizationService,

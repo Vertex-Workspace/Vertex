@@ -1,0 +1,41 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+
+//Falar com ana sobre isso
+* {
+    margin: 0;
+    padding: 0;
+    background-color: $secondColor;
+}
+
+.bg {
+    @apply  flex h-full w-screen;
+}
+
+.icon {
+    color: $primaryColor;
+
+}
+
+.userInfop {
+    @apply text-xl
+    flex flex-col justify-center items-center;
+    font-family: $titleFont;
+}
+
+.rightSide {
+    @apply 
+    w-[100%]
+    h-[100%]
+    flex items-center
+    justify-center flex-col
+    space-y-8;
+}
+
+
+.input {
+    @apply bg-white
+     rounded-r-sm
+     placeholder-slate-400 
+}

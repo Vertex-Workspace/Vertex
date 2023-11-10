@@ -1,0 +1,92 @@
+@import "../../../../variables";
+
+section{
+    @apply w-full h-full flex flex-col justify-between;
+    color: $primaryColor;
+}
+
+.title{
+    @apply text-2xl flex h-[15%];
+    color: $primaryColor;
+}
+
+.div-grid-name-image{
+    @apply grid w-full h-[30%];
+    grid-template-columns: 65% 35%;
+}
+
+.input-name{
+    @apply flex flex-col w-full h-[50%];
+
+    label{
+        @apply text-xl pb-6;
+    }
+    input{
+        @apply flex h-52 rounded-md pl-4;
+    }
+}
+
+.input-image{
+    @apply flex flex-col w-full h-[50%] justify-center items-center;
+
+    #user-icon{
+        @apply text-9xl ;
+        color: $primaryColor;
+    }
+
+    #user-icon:hover{
+        opacity: 0.5;
+    }
+
+    label{
+        @apply text-sm pt-4;
+    }
+}
+
+.input-description{
+    @apply flex flex-col w-full h-[30%];
+
+    label{
+        @apply text-xl pb-6;
+    }
+    textarea{
+        @apply pl-4 pt-4 rounded-md h-full;
+        resize: none;
+    }
+}
+
+.div-buttons{
+    @apply flex h-[25%] w-full justify-end items-center;
+
+    .buttons{
+        @apply flex w-full h-full justify-end items-center;
+    }
+
+    .cancel-button{
+        @apply flex items-center justify-center w-32 h-12 rounded-sm mr-4;
+        background-color: #872323;
+        color: white;
+    }
+    .confirm-button{
+        @apply flex items-center justify-center w-32 h-12 rounded-sm;
+        background-color: $primaryColor;
+        color: white;
+    }
+}
+
+
+
+app-modal-warn{
+    color: $primaryColor;
+    
+    h2{
+        @apply text-2xl pt-2;
+    }
+    .informations-modal{
+        @apply flex pt-12 flex-col text-xl;
+    }
+
+    app-button{
+        @apply pt-12;
+    }
+}

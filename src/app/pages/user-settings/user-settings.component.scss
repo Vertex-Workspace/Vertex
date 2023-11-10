@@ -1,0 +1,82 @@
+@import '../../../variables.scss';
+@import '../../../styles.scss';
+
+
+//falar com ana sobre isso
+* {
+    margin: 0;
+    padding: 0;
+    background-color: $secondColor;
+}
+
+
+.screen{
+    @apply flex w-screen h-full justify-center items-center;
+}
+
+.container-custom{
+    @apply flex w-[90%] h-full ;
+}
+
+
+.icon {
+    color: $primaryColor
+}
+
+.navOptions {
+    @apply
+    flex justify-start
+    gap-4
+    w-[60%]
+    items-center
+}
+
+.settingsTitle {
+    @apply 
+    text-2xl
+    font-bold;
+    font-family: $titleFont;
+    
+}
+
+.nav {
+    @apply 
+    w-[30%]
+    h-[50%]
+    flex
+    flex-col
+    justify-center
+    items-center
+}
+
+.divIcon {
+    @apply
+    flex w-[30%] 
+    h-full 
+    justify-center 
+    items-center;
+    background-color: $secondColor;
+
+}
+
+.divOptions {
+    @apply
+    flex w-[70%] 
+    h-full 
+    justify-start 
+    items-center
+}
+
+.click {
+    background-color: #D9D9D9;
+
+}
+
+.default {
+    background-color: $secondColor;
+
+}
+
+
+
+

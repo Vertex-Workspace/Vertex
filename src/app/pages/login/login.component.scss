@@ -1,4 +1,4 @@
-#bg-login {
+.bg-login {
     @apply 
     bg-cover
     bg-center 
@@ -10,6 +10,20 @@
     background-image: url(../../../assets/Vertex-bg-login.jpg);
 }
 
+.bg-loginOpacity{
+    
+    @apply 
+    bg-cover
+    bg-center 
+    w-screen 
+    h-screen 
+    flex
+    opacity-60
+    ;
+    
+    background-image: url(../../../assets/Vertex-bg-login.jpg);
+}
+
 #left-div-login{
     @apply
     w-1/2
@@ -18,6 +32,7 @@
     items-center
     ;
 }
+
 
 #h1NameVertex{
     @apply
@@ -80,13 +95,55 @@
     @apply block 
     h-10 
     w-full 
-    border-0 
     py-1.5 
+    border-none
     px-3 
     text-black 
-    shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
+    shadow-sm  ring-inset ring-gray-300 placeholder:text-gray-400 
     focus:ring-2 focus:ring-inset focus:ring-[#092c4c] sm:text-sm sm:leading-6;
     font-family: "Inter", sans-serif;
+}
+.divRegisterIcons{
+    @apply w-14
+    h-10
+    bg-slate-100
+    flex
+    justify-center
+    items-center
+}
+
+.divRegisterIconsModal{
+    @apply w-14
+    h-10
+    bg-[rgba(46,93,166,24%)]
+    flex
+    justify-center
+    items-center
+}
+
+.registerIcons{
+    @apply w-6
+    text-[#092c4c]
+    flex
+    justify-center
+    items-center
+    
+}
+
+.eyesDiv{
+    @apply w-14
+    bg-white
+    flex
+    items-center
+    justify-center
+    
+}
+
+.eyeIcon{
+    @apply w-6
+    text-[#092c4c]
+    flex
+    items-center
 }
 
 #a-forget-password{
@@ -123,6 +180,18 @@
     font-semibold 
     leading-6 
     cursor-pointer
-    text-[#2E5DA6] 
+    text-blue-400 
     hover:text-blue-600;
+}
+
+.divH1Modal{
+    @apply w-full flex flex-col items-center;
+}
+
+#divGeralModal{
+    @apply w-full h-full flex flex-col items-center justify-stretch;
+}
+
+.square-code{
+    @apply w-10 h-10 bg-[#D9D9D9] rounded-md text-center;
 }
