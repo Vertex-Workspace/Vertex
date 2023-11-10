@@ -16,7 +16,9 @@ export class AppComponent{
 
   userLogged: boolean = true;
 
-  constructor(private personalization : PersonalizationService, private contexts: ChildrenOutletContexts){
+  constructor(
+    private personalization : PersonalizationService, private contexts: ChildrenOutletContexts
+  ){
     personalization.setPersonalization();
   }
 

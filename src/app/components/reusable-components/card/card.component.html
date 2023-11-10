@@ -1,1 +1,29 @@
-<p>card works!</p>
+<div 
+    class="card" 
+    [style.borderColor]="task.category.borderColor"
+>
+    <div class="top">
+        <div class="left">
+            <fa-icon
+                [icon]="faCircleUser"
+                class="icon"
+            >
+            </fa-icon>
+        </div>
+        
+        <div class="right">
+            <ng-container *ngFor="let item of settings">
+                <fa-icon
+                    [icon]="item.icon"
+                    (click)="item.onclick"
+                    class="icon"
+                >
+                </fa-icon>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="main">
+        <p>{{task.name}}</p>
+    </div>
+</div>
