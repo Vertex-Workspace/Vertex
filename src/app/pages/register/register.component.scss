@@ -4,3 +4,38 @@
     @apply flex bg-cover bg-no-repeat h-screen w-screen;
     background-image: url("../../../assets/Vertex-bg-Register.jpg");
 }
+
+.divRegisterIcons{
+    @apply w-14
+    h-10
+    bg-slate-100
+    flex
+    justify-center
+    items-center
+}
+
+.registerIcons{
+    @apply w-6
+    text-[#092c4c]
+    flex
+    justify-center
+    items-center
+    
+}
+
+.eyesDiv{
+    @apply w-14
+    bg-white
+    flex
+    items-center
+    justify-center
+    
+}
+
+.eyeIcon{
+    @apply w-6
+    h-10
+    text-[#092c4c]
+    flex
+    items-center
+}
