@@ -58,7 +58,7 @@
             </div>
 
 
-            <div *ngIf="clicked == 'participants'" class="grid grid-cols-2 gap-3 w-[77%] h-[35%]">
+            <div *ngIf="clicked == 'participants'" class="grid grid-cols-2 gap-3 w-[77%] h-[35%] pr-3 overflow-auto">
                 <ng-container *ngFor="let user of users">
                     <div class="bg-[#fff] rounded-md w-full h-full flex justify-around">
                         <div class="w-[30%] h-full p-4">
@@ -79,7 +79,7 @@
             </div>
 
 
-            <div *ngIf="clicked == 'permissions'" class="grid grid-cols-2 gap-3 w-[77%] h-[35%]">
+            <div *ngIf="clicked == 'permissions'" class="flex flex-col gap-3 w-[77%] h-[35%] pr-3 overflow-auto">
                 <ng-container *ngFor="let user of users">
                     <div class="bg-[#fff] rounded-md w-full h-full flex justify-around">
                         <div class="w-[30%] h-full p-4">
@@ -99,6 +99,8 @@
                 </ng-container>
             </div>
         </div>
+
+        <!-- =============================================================================================== -->
 
         <div class="right-side">
             <div class=" h-[28%] flex flex-col items-center justify-evenly">

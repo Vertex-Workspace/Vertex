@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ChildrenOutletContexts, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
@@ -16,13 +16,23 @@ export class AppComponent{
 
   userLogged: boolean = true;
 
-  constructor(private personalization : PersonalizationService, private contexts: ChildrenOutletContexts){
+  isSideBarExpanded:boolean = false;
+
+  constructor(
+    private personalization : PersonalizationService, 
+    private contexts: ChildrenOutletContexts
+  ){
     personalization.setPersonalization();
   }
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
+
+  openSideBar() {
+    this.isSideBarExpanded = !this.isSideBarExpanded;
+  }
+
 
   inputColor: string = '#FFFFFF';
   fontColor: string = '#000000';

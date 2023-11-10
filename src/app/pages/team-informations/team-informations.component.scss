@@ -1,44 +1,42 @@
 @import '../../../_variables.scss';
 
-section{
+section {
     @apply flex w-screen h-full justify-center items-center;
 }
 
-.container-custom{
+.container-custom {
     @apply flex w-[90%] h-full;
 }
 
-
-.left-side{
+.left-side {
     @apply flex flex-col w-[50%] h-full gap-8;
 }
 
-.divHead{
+.divHead {
     @apply flex w-[80%] h-[25%] items-center gap-10
 }
 
-.iconUser{
+.iconUser {
     @apply text-[180px] text-[#092C4C]
 }
 
-.divTextHead{
+.divTextHead {
     @apply flex flex-col w-[80%] gap-2 text-[#092C4C];
 }
 
-.textHead{
+.textHead {
     @apply text-[24px] font-bold text-[#092C4C]
 }
 
-.divMembers{
+.divMembers {
     @apply flex gap-2
-
 }
 
-.iconLink{
+.iconLink {
     @apply flex items-center text-[15px] text-[#092C4C];
 }
 
-.data{
+.data {
     @apply text-lg
 }
 
@@ -65,14 +63,14 @@ section{
 // ============================================================================================================================================================================
 
 
-.right-side{
+.right-side {
     @apply flex flex-col justify-evenly w-[50%] h-full;
 }
 
-.divProjectDashboardsBar{
+.divProjectDashboardsBar {
     @apply flex w-[40%] h-[90%] bg-[#fff] border-t-8 rounded-md border-[#092C4C];
 }
 
-.divProjectDashboardsPie{
+.divProjectDashboardsPie {
     @apply flex justify-center items-center w-[40%] h-[85%] bg-[#fff] border-t-8 rounded-md border-[#092C4C];
 }

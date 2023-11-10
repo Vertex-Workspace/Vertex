@@ -44,7 +44,7 @@ export class TeamInformationsComponent {
         { picture: "", name: "Ana Borchardt", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
         { picture: "", name: "Kaique Fernandes", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
         { picture: "", name: "Miguel Bertoldi", function: "Back-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
-        { picture: "", name: "Otávio Rocha", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] }
+        { picture: "", name: "Otávio Rocha", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] }, 
     ];
 
     changePreviewMode(preview: string): void {

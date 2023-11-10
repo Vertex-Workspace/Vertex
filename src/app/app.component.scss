@@ -4,14 +4,29 @@
 }
 
 
-.side-bar{
+.side-bar {
     @apply flex w-[4%] h-full flex-col items-center;
     background-color: $primaryColor;
+    transition: width 0.32s ease-out;
+    position: fixed;
 }
 
+.side-barOpen {
+    @apply flex w-[20%] h-full flex-col items-center;
+    transition: width 0.32s ease-in-out;
+    background-color: $primaryColor;
+    
+    position: fixed;
+}
 
-.main-div{
-    @apply flex w-[96%] h-full flex-col;
+.main-div {
+    @apply flex w-[100%] h-full flex-col items-end;
+    background-color: $secondColor;
+    transition: width 0.32s ease-in-out;
+}
+
+.main-divOpen {
+    @apply flex w-[100%] h-full flex-col items-end;
     background-color: $secondColor;
 }
 
@@ -19,7 +34,7 @@
     @apply flex w-full h-[8%] items-center justify-between;
 }
 .main-content{
-    @apply flex w-full h-[92%];
+    @apply flex w-full h-[92%] justify-end;
 }
 
 
