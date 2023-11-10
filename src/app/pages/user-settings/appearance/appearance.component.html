@@ -21,7 +21,7 @@
                 <div>
                     <ng-container *ngFor="let type of theme.types;">
                         <p>{{type.title}}</p>
-                        <div class="flex flex-row justify-evenly">
+                        <div class="colors-row">
                             <ng-container *ngFor="let color of type.colors; index as item;">
                                 <button [ngStyle]="{'background-color': color.color}" class="colors-circle"
                                     (click)="selectColor(type, item)" [ngClass]="">
@@ -39,16 +39,16 @@
 
     <div class="text-preferences">
         <div class="writing">
-            <div class="w-[30%]">
+            <div>
                 <p>Tamanho da letra</p>
-                <p class="text-sm">Defina o tamanho da letra para o sistema</p>
+                <p>Defina o tamanho da letra para o sistema</p>
                 <select>
                     <option *ngFor="let size of fontSizes" [value]="size">{{size}}</option>
                 </select>
             </div>
-            <div class="w-[30%]">
+            <div>
                 <p>Estilo da letra</p>
-                <p class="text-sm">Defina o estilo da letra</p>
+                <p>Defina o estilo da letra</p>
                 <select>
                     <option *ngFor="let font of fontFamily" [value]="font">{{font}}</option>
                 </select>
@@ -59,7 +59,7 @@
             <div class="accessibility">
                 <fa-icon class="icon" (click)="toggleChange(item)" [icon]="toggle.icon">
                 </fa-icon>
-                <p class="px-3 text-sm flex items-center justify-center">{{toggle.text}}</p>
+                <p>{{toggle.text}}</p>
             </div>
         </ng-container>
 

@@ -13,7 +13,7 @@
         }
         
         p{
-            @apply text-lg 
+            @apply text-lg;
         }
 }
 
@@ -58,8 +58,12 @@
 
     div:first-child {
         @apply flex h-full flex-col place-content-evenly;
-
     };
+
+    .colors-row {
+        @apply flex flex-row justify-evenly;
+    }
+
 }
 
 .icon-themes {
@@ -68,14 +72,32 @@
 
 .text-preferences {
     @apply  w-[85%] h-[30%];
-}
 
-.writing {
-    @apply w-full h-[40%] flex py-3 ;
+    .writing {
+        @apply w-full h-[40%] flex py-3;
+
+        p:nth-child(2){
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[30%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-md h-[30%];
+        }
+    }
 }
 
 .accessibility {
-    @apply flex ;
+    @apply flex;
+
+    p{
+       @apply px-3 text-sm flex items-center justify-center; 
+    }
 }
 
 .bg-light{
@@ -86,12 +108,10 @@
     background: linear-gradient(to bottom right, $primaryColor 50%, $secondColor 50%);
 }
 
-select {
-    background-color: $primaryColor;
-    color: $secondColor;
-    @apply text-sm rounded-md h-[30%];
-}
-
 .unselected {
     @apply opacity-25;
+}
+
+p{
+    color: $primaryColor;
 }

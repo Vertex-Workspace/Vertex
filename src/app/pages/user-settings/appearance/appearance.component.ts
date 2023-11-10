@@ -95,8 +95,9 @@ export class AppearanceComponent {
   ]
 
   fontFamily = [
-    'Arial', 'Helvetica', 'Times New Roman'
+    'Inter (Padrão)', 'Helvetica', 'Times New Roman'
   ];
+
 
   selectColor(type:any,item: number): void {
 
