@@ -15,40 +15,53 @@ export class KanbanComponent {
   categories: any[] = [
     {
       name: 'TO-DO',
-      color: '#FFE7E9',
-      borderColor: '#FF9D9D'
+      color: '#FFE7E980',
+      borderColor: '#FF9D9Df3'
     },
     {
       name: 'DOING',
-      color: '#FFF6C5',
-      borderColor: '#FFD600'
+      color: '#FFF6C580',
+      borderColor: '#FFD600f3'
     },
     {
       name: 'DONE',
       color: '#d7ffc971',
-      borderColor: '#65D73C'
+      borderColor: '#7be057de'
     },
     {
       name: 'OUTRA CATEGORIA',
       color: '#d7ffc971',
-      borderColor: '#7be05780'
+      borderColor: '#7be057de'
     },
     {
       name: 'ÚLTIMA CATEGORIA',
       color: '#d7ffc971',
-      borderColor: '#7be05780'
+      borderColor: '#7be057de'
     },
-    // {
-    //   name: 'DONE',
-    //   color: '#D7FFC9',
-    //   borderColor: '#7be0575d'
-    // },
-    // {
-    //   name: 'DONE',
-    //   color: '#D7FFC9',
-    //   borderColor: '#7be0575d'
-    // },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc971',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc971',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc971',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc971',
+      borderColor: '#7be057de'
+    }
   ];
+
+  //ADICIONAR "80" NO FINAL DO HEXADECIMAL DA COLOR -> 50% OPACIDADE
+  //ADICIONAR "DE" NO FINAL DO HEXADECIMAL DA BORDA -> 80%+-
 
   taskList: Task[] = [
     {
@@ -77,26 +90,6 @@ export class KanbanComponent {
     },
     {
       name: 'Tarefa 7',
-      category: this.categories[2]
-    },
-    {
-      name: 'Tarefa 8',
-      category: this.categories[2]
-    },
-    {
-      name: 'Tarefa 9',
-      category: this.categories[2]
-    },
-    {
-      name: 'Tarefa 10',
-      category: this.categories[2]
-    },
-    {
-      name: 'Tarefa 11',
-      category: this.categories[2]
-    },
-    {
-      name: 'Tarefa 12',
       category: this.categories[2]
     }
   ];

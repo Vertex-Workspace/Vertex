@@ -20,17 +20,17 @@
 }
 
 .screen {
-  @apply h-[100%] overflow-auto flex pt-12;
+  @apply min-h-full flex pt-12 ;
 
   .col-container {
-      @apply gap-4 max-w-[1400px] h-full overflow-auto flex;
+      @apply gap-6 max-w-[79.5%] min-h-full  overflow-y-auto flex;
 
       .col {
-        @apply min-w-[370px] w-[370px] flex flex-col
-        gap-4 p-4 h-[80%] overflow-auto shadow-md;
+        @apply min-w-[300px] w-[300px] flex flex-col
+        gap-4 p-4 shadow-md;
         
           h2 {
-            @apply text-2xl text-[#545B63] ml-3;
+            @apply text-xl text-[#545B63] ml-3;
             font-family: $titleFont;
           }
 
@@ -43,11 +43,31 @@
 
   .properties {
     
-    @apply w-1/4 justify-center;
+    @apply w-1/4 flex flex-col items-end gap-4;
 
     div:first-child {
-      @apply flex;
-      background-color: #7be05780;
+      @apply w-[230px] flex justify-between items-center;
+
+      p {
+        @apply text-lg;
+      }
+
+      select {
+        @apply h-[35px] w-[100px] outline-none text-center;
+      }
+    }
+
+    button {
+      @apply w-[230px] h-[45px] rounded-sm transition-colors;;
+      background-color: $primaryColor;
+      color: $secondColor;
+      border: 1px solid $primaryColor;
+
+      &:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+      }
     }
 
   }

@@ -101,7 +101,7 @@
 }
 
 .router {
-    @apply h-full overflow-auto;
+    @apply min-h-full;
 }
 
 i {
