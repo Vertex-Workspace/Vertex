@@ -79,9 +79,21 @@
 .filter-settings {
     @apply flex gap-3 items-center;
 
+    div:first-child {
+        @apply w-[230px] flex justify-between items-center;
+  
+        p {
+          @apply text-lg;
+        }
+  
+        select {
+          @apply h-[35px] w-[100px] outline-none text-center;
+        }
+      }
+
     p {
         color: $primaryColor;
-        @apply text-lg;
+        @apply text-lg ml-4;
     }
 
     select {

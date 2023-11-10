@@ -17,47 +17,47 @@ export class KanbanComponent {
   categories: any[] = [
     {
       name: 'TO-DO',
-      color: '#FFE7E980',
+      color: '#FFE7E94D',
       borderColor: '#FF9D9Df3'
     },
     {
       name: 'DOING',
-      color: '#FFF6C580',
+      color: '#FFF6C54D',
       borderColor: '#FFD600f3'
     },
     {
       name: 'DONE',
-      color: '#d7ffc971',
+      color: '#d7ffc94D',
       borderColor: '#7be057de'
     },
     {
       name: 'OUTRA CATEGORIA',
-      color: '#d7ffc971',
+      color: '#d7ffc94D',
       borderColor: '#7be057de'
     },
     {
       name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc971',
+      color: '#d7ffc94D',
       borderColor: '#7be057de'
     },
     {
       name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc971',
+      color: '#d7ffc94D',
       borderColor: '#7be057de'
     },
     {
       name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc971',
+      color: '#d7ffc94D',
       borderColor: '#7be057de'
     },
     {
       name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc971',
+      color: '#d7ffc94D',
       borderColor: '#7be057de'
     },
     {
       name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc971',
+      color: '#d7ffc94D',
       borderColor: '#7be057de'
     }
   ];
@@ -123,7 +123,8 @@ export class KanbanComponent {
     const propertyTasksQtt = 
             this.specificPropertyArray(property).length;
 
-    return ((propertyTasksQtt * 150) + 80) + "px";
+    return ((propertyTasksQtt * 150) + 110) + "px";
   }
+
 
 }

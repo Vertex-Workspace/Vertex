@@ -1,7 +1,6 @@
 <section class="screen">
     <div class="container-custom">
         <section class="menu">
-
             <div>
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
@@ -24,9 +23,7 @@
                     *ngIf="!searchBarOpen" 
                     (click)="toggleSearchBar()"
                 >
-                    <i 
-                        class="pi pi-search" 
-                    ></i>
+                    <i class="pi pi-search" ></i>
                 </button>
 
                 <div 
@@ -48,29 +45,30 @@
                         class="config-buttons" 
                         (click)="item.click()"
                     >
-                        <i 
-                            class="{{ item.iconClass }}" 
-                        ></i>
+                        <i class="{{ item.iconClass }}"></i>
                     </button>
                 </ng-container>
 
                 <button class="create">
-                    <i 
-                        class="pi pi-plus-circle" 
-                    ></i>
+                    <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
-
             </div>
-
         </section>
+
         <section 
             class="filter-settings" 
-            *ngIf="filterOpen || orderOpen"
         >
-            <p>Ordenar por </p>
+            <div>
+                <p>Visualizar por: </p>
+                <select>
+                    <option>((items))</option>
+                </select>
+            </div>
 
-            <ng-container>
+
+            <ng-container *ngIf="filterOpen || orderOpen">
+                <p>Ordenar por </p>
                 <select *ngIf="filterOpen">
                     <option *ngFor="let item of filterSettings">
                         {{ item.label }}
@@ -83,10 +81,11 @@
                     </option>
                 </select>
             </ng-container>
-
         </section>
+
         <section class="router">
             <router-outlet />
         </section>
+
     </div>
 </section>
