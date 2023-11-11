@@ -13,6 +13,8 @@ import { TeamInformationsComponent } from './pages/team-informations/team-inform
 import { TeamsComponent } from './pages/teams/teams.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { ChatComponent } from './pages/chat/chat.component';
+
 
 const routes: Routes = [
   {
@@ -36,6 +38,10 @@ const routes: Routes = [
     path: 'mural',
     component: MuralComponent,
     data: { animation: 'muralPage' }
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
   },
   {
     path: 'register',

@@ -80,22 +80,43 @@
 
 
             <div *ngIf="clicked == 'permissions'" class="flex flex-col gap-3 w-[77%] h-[35%] pr-3 overflow-auto">
-                <ng-container *ngFor="let user of users">
-                    <div class="bg-[#fff] rounded-md w-full h-full flex justify-around">
-                        <div class="w-[30%] h-full p-4">
-                            <fa-icon class="text-[#092c4c] text-[60px]" [icon]="faCircleUser"></fa-icon>
-                        </div>
+                <ng-container *ngFor="let user of users; let id = index">
+                    <div class="extense-card">
+                        <div class="w-full h-full flex justify-evenly">
+                            <div class="w-[15%] h-full flex items-start p-4">
+                                <fa-icon class="text-[#092c4c] text-[60px]" [icon]="faCircleUser"></fa-icon>
+                            </div>
 
-                        <div class="w-[70%] h-full flex flex-col  text-right p-3">
-                            <h1 class="text-2xl flex justify-end">{{ user.name }}</h1>
-                            <p class="font-light text-gray-500">{{ user.function }}</p>
-                            <div class="flex gap-3 items-end h-full w-full justify-end">
-                                <ng-container *ngFor="let item of user.socialMedia">
-                                    <fa-icon class="text-[#092c4c] text-[20px]" [icon]="item"></fa-icon>
-                                </ng-container>
+                            <div class="w-[70%] h-full flex flex-col justify-start items-start text-right p-3">
+                                <h1 class="text-2xl flex justify-end">{{ user.name }}</h1>
+                                <p class="font-light text-gray-500">{{ user.function }}</p>
+                            </div>
+
+                            <div class="h-full flex items-center">
+                                <fa-icon (click)="swapPermissionExpanded(id)"
+                                    class="text-[#092c4c] text-[20px] cursor-pointer" [icon]="faChevronDown"></fa-icon>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="user.open" class="extense-cardExpanded">
+                            <div class="w-[33.7%] flex justify-end gap-2">
+                                <input type="checkbox" id="editionCheck">
+                                <label for="editionCheck">Edição</label>
+                            </div>
+
+                            <div class="w-[40%] flex justify-end gap-2">
+                                <input type="checkbox" id="visualizeCheck">
+                                <label for="visualizeCheck">Visualização</label>
+                            </div>
+
+                            <div class="w-[34.7%] flex justify-end gap-2">
+                                <input type="checkbox" id="createCheck">
+                                <label for="createCheck">Criação</label>
                             </div>
                         </div>
                     </div>
+
+
                 </ng-container>
             </div>
         </div>

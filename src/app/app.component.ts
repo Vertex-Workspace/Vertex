@@ -18,6 +18,9 @@ export class AppComponent{
   
   isSideBarExpanded:boolean = false;
 
+  rota:String = window.location.href;
+  rotaChat:String = "http://localhost:4200/chat";
+
   constructor(
     private personalization : PersonalizationService, 
     private contexts: ChildrenOutletContexts

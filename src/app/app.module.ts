@@ -21,6 +21,7 @@ import { MuralModule } from './pages/mural/mural.module';
 import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { ChartModule } from 'primeng/chart';
+import { ChatModule } from './pages/chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ChartModule } from 'primeng/chart';
     TasksModule,
     UserSettingsModule,
     TeamInformationsModule,
-    ChartModule
+    ChartModule,
+    ChatModule
 
   ],
   providers: [

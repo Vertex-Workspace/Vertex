@@ -55,7 +55,7 @@ export const slideInAnimation =
     ]),
 
     //Animação dos components, muda opacidade
-    transition('loginPage => muralPage', [
+    transition('* => *', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({

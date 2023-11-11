@@ -1,0 +1,48 @@
+@import '../../../_variables.scss';
+
+#bg {
+    @apply w-screen h-full flex justify-center items-center;
+}
+
+.container-custom {
+    @apply flex w-[90%] h-full;
+}
+
+.main-div {
+    @apply flex flex-col w-full h-full;
+}
+
+header {
+    @apply flex w-full h-[15%] items-end gap-10;
+    background-color: $primaryColor;
+}
+
+.search-div {
+    @apply flex w-[100%] h-[40%] items-center gap-2;
+    background-color: $secondColor;
+}
+
+#search {
+    @apply flex w-[88%] h-full rounded-sm items-center justify-center;
+    background-color: $secondColor;
+}
+
+.searchIcon{
+    @apply w-[7%] text-[1.5rem] text-white flex items-center;
+    color: $primaryColor;
+}
+
+.leftChatPerson{
+    @apply flex items-center gap-2;
+    
+}
+
+.userName{
+    @apply text-[1.5rem] text-white;
+}
+
+.section-left-chat{
+    @apply flex flex-col pl-5 w-[20%] h-[85%] gap-2 shadow-md;
+    
+    background-color: #fff;
+}
