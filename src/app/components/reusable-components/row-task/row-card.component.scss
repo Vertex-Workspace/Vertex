@@ -1,0 +1,13 @@
+.card {
+    @apply min-h-[55px] w-full flex;
+
+    .name {
+        @apply w-[40%] p-4 flex items-center;
+        border-right: 1px solid #03030340;
+    }
+
+    .prop {
+        @apply w-[20%] p-4 flex items-center;
+        border-right: 1px solid #03030340;
+    }
+}

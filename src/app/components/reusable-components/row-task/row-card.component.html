@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="name">
+        {{task.name}}
+    </div>
+    <div class="prop" 
+        *ngFor="let prop of task.properties"
+    >
+        <p *ngIf="hasValue(prop)">
+            {{task.category.name}}
+        </p>
+        <p *ngIf="!hasValue(prop)">
+            -
+        </p>
+    </div>
+
+</div>
