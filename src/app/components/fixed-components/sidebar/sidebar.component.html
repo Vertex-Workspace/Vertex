@@ -3,16 +3,74 @@
         <ul  class="top-logo">
             <li class="div-logo"><img class="logo" src="../assets/white-logo.svg" /></li>
         </ul>
-        <ul class="center-items">
+        <ul *ngIf="!isSideBarExpanded" class="center-items">
             <li><fa-icon [icon]="faMagnifyingGlass"></fa-icon></li>
             <li><fa-icon [icon]="faMessage"></fa-icon></li>
             <li><fa-icon [icon]="faClipboardList"></fa-icon></li>
         </ul>
+        <ul *ngIf="isSideBarExpanded" class="center-items2">
+            <div class="w-[100%] h-full flex flex-col items-center justify-evenly">
+                <li class="liOpen">
+                    <div>
+                        <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+                    </div>
+                    <div>
+                        <p class="pOpen">Pesquisar</p>
+                    </div>
+                </li>
+                <li class="liOpen">
+                    <div>
+                        <fa-icon [icon]="faMessage"></fa-icon>
+                    </div>
+                    <div>
+                        <p class="pOpen">Conversas</p>
+                    </div>
+                </li>
+                <li class="liOpen">
+                    <div>
+                        <fa-icon [icon]="faClipboardList"></fa-icon>
+                    </div>
+                    <div>
+                        <p class="pOpen">Meu espaço de trabalho</p>
+                    </div>
+                </li>
+            </div>
+            
+        </ul>
     </div>
-    <ul class="footer-items">
+    <ul *ngIf="!isSideBarExpanded" class="footer-items">
         <li><fa-icon [icon]="faUser"></fa-icon></li>
         <li><fa-icon [icon]="faGear"></fa-icon></li>
         <li><fa-icon [icon]="faSignOut"></fa-icon></li>
+    </ul>
+
+    <ul *ngIf="isSideBarExpanded" class="footer-items2">
+        <div class="w-[100%] h-full flex flex-col items-center justify-evenly">
+            <li class="liOpen">
+                <div class="w-[13.5%]">
+                    <fa-icon [icon]="faUser"></fa-icon>
+                </div>
+                <div>
+                    <p class="pOpen">Perfil</p>
+                </div>
+            </li>
+            <li class="liOpen">
+                <div class="w-[14%]">
+                    <fa-icon [icon]="faGear"></fa-icon>
+                </div>
+                <div>
+                    <p class="pOpen">Configurações</p>
+                </div>
+            </li>
+            <li class="liOpen">
+                <div class="w-[12.8%]">
+                    <fa-icon [icon]="faSignOut"></fa-icon>
+                </div>
+                <div>
+                    <p class="pOpen">Sair</p>
+                </div>
+            </li>
+        </div>
     </ul>
 </section>
 

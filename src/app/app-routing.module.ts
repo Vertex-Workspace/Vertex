@@ -13,11 +13,17 @@ import { TasksComponent } from './pages/tasks/tasks.component';
 import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
 import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
+
+
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
     data: { animation: 'loginPage' }
+  },
+  {
+    path:"team-informations",
+    component: TeamInformationsComponent
   },
   {
     path: "home",
@@ -61,7 +67,7 @@ const routes: Routes = [
         path: 'mural',
         component: MuralComponent
       }
-    ]
+    ],
   },
   {
     path: 'configuracoes',

@@ -20,6 +20,8 @@ import { CommonModule } from '@angular/common';
 import { TasksModule } from './pages/tasks/tasks.module';
 import { MuralComponent } from './pages/mural/mural.component';
 import { MuralModule } from './pages/mural/mural.module';
+import { ChartModule } from 'primeng/chart';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,10 @@ import { MuralModule } from './pages/mural/mural.module';
     TaskModule,
     UserSettingsModule,
     TeamInformationsModule,
-    TasksModule
+    TasksModule,
+    UserSettingsModule,
+    TeamInformationsModule,
+    ChartModule
   ],
   providers: [
     PersonalizationService,

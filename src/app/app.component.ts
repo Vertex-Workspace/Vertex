@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ChildrenOutletContexts, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
@@ -15,9 +15,12 @@ export class AppComponent{
   title = 'Vertex';
 
   userLogged: boolean = true;
+  
+  isSideBarExpanded:boolean = false;
 
   constructor(
-    private personalization : PersonalizationService, private contexts: ChildrenOutletContexts
+    private personalization : PersonalizationService, 
+    private contexts: ChildrenOutletContexts
   ){
     personalization.setPersonalization();
   }
@@ -25,6 +28,11 @@ export class AppComponent{
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
+
+  openSideBar() {
+    this.isSideBarExpanded = !this.isSideBarExpanded;
+  }
+
 
   inputColor: string = '#FFFFFF';
   fontColor: string = '#000000';

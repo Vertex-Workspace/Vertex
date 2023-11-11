@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
 
 
 
@@ -14,7 +17,10 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   imports: [
     CommonModule,
-    BrowserModule
+    BrowserModule,
+    FontAwesomeModule,
+    DragDropModule,
+    ModalWarnModule
   ]
 })
 export class CalendarModule { }
