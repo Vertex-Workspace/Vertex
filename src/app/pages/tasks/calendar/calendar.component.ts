@@ -1,10 +1,11 @@
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent {
 
@@ -20,11 +21,11 @@ export class CalendarComponent {
     { "name": "teste", date: new Date() },
     { "name": "teste", date: new Date() },
     { "name": "teste", date: new Date() },
+    { "name": "teste2", date: new Date(2023, 10, 4) },
+    { "name": "teste4", date: new Date(2023, 10, 4) },
+    { "name": "teste5", date: new Date(2023, 10, 4) },
     { "name": "teste", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 4) },
+    { "name": "teste7", date: new Date(2023, 10, 4) },
     { "name": "teste", date: new Date(2023, 10, 4) },
     { "name": "teste", date: new Date(2023, 10, 4) },
     { "name": "teste", date: new Date(2023, 10, 25) },
@@ -38,7 +39,6 @@ export class CalendarComponent {
     { "name": "teste", date: new Date(2023, 10, 13) },
     { "name": "teste", date: new Date(2023, 10, 13) },
   ];
-
 
   modalTasks: boolean = false;
   modalDate?: Date;
@@ -125,16 +125,59 @@ export class CalendarComponent {
   }
 
   today(day: Date): boolean {
-    return this.currentDate.getDate() == day.getDate() &&
-      this.currentDate.getMonth() == day.getMonth()
-      && this.currentDate.getFullYear() == day.getFullYear();
+    let date : Date = new Date();
+    return date.getDate() == day.getDate() &&
+    date.getMonth() == day.getMonth()
+      && date.getFullYear() == day.getFullYear();
+  }
+
+  groupCalendarDays(): Date[][] {
+    const weeks: Date[][] = [];
+    let currentWeek: Date[] = [];
+
+    this.calendarDays.forEach((day, index) => {
+      currentWeek.push(day);
+
+      if (currentWeek.length === 7 || index === this.calendarDays.length - 1) {
+        weeks.push([...currentWeek]);
+        currentWeek = [];
+      }
+    });
+
+    return weeks;
   }
 
 
   //it will be a request of user option
-  toggle: boolean = false;
+  toggle: boolean = true;
   toggleCharts(): void {
     this.toggle = !this.toggle;
   }
 
+
+
+  // specificPropertyArray(property: any): any[] {
+  //   return this.tasks.filter(task => {
+  //     return task.category === property;
+  //   });
+  // }
+
+
+  // //DRAG AND DROP
+  // dropCard(event: CdkDragDrop<any[]>, date: Date): void { 
+  //   console.log(event); 
+  //   //lógica
+  //   const task = event.item.data;
+
+  //   const newIndexTask = 
+  //           this.specificPropertyArray(task.category)[event.currentIndex];
+  //   const newIndex = this.tasks.indexOf(newIndexTask);
+  //   const previousIndex = this.tasks.indexOf(task);
+    
+  //   moveItemInArray(
+  //     this.tasks, 
+  //     previousIndex, 
+  //     newIndex
+  //   );
+  // };
 }
