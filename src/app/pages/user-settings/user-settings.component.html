@@ -1,15 +1,15 @@
 <section class="screen">
     <div class="container-custom">
         <!-- Left side -->
-        <section class=" nav space-y-8">
-            <div class>
-                <p class="p">Configurações e Preferências</p>
+        <section>
+            <div>
+                <p class="title">Configurações e Preferências</p>
             </div>
             <!-- Take each item of the itemsList -->
             <ng-container *ngFor="let item of itemsList">
-                <ul class="ul">
+                <ul>
                     <!-- Check if the option is clicked, if it is the bg will be changed-->
-                    <li class="navOptions" [ngClass]="click === item.id ? 'clickBlue click' : 'default'" [routerLink]="[item.id]">
+                    <li [ngClass]="click === item.id ? 'clickBlue click' : 'default'" [routerLink]="[item.id]">
                         <button class="divIcon" [ngClass]="click === item.id ? 'click' : 'default'">
                             <fa-icon [ngClass]="click === item.id ? 'click' : 'default'" [icon]="item.icon"
                                 class="icon"></fa-icon>
@@ -23,7 +23,7 @@
                 </ul>
             </ng-container>
         </section>
-        <div class="w-[75%] h-full flex justify-end">
+        <div class="router-outlet">
             <router-outlet></router-outlet>
         </div>
     </div>

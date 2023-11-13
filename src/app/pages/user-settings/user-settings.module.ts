@@ -4,11 +4,11 @@ import { UserSettingsComponent } from './user-settings.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppearanceComponent } from './appearance/appearance.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { ProfileComponent } from './profile/profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { TeamsSettingsComponent } from './teams-settings/teams-settings.component';
 import { ButtonModule } from 'primeng/button';
 import { ProfileModule } from './profile/profile.module';
+import { TeamsSettingsModule } from './teams-settings/teams-settings.module';
+import { SecurityComponent } from './security/security.component';
 
 
 
@@ -16,8 +16,8 @@ import { ProfileModule } from './profile/profile.module';
   declarations: [
     UserSettingsComponent,
     AppearanceComponent,
-    TeamsSettingsComponent,
     NotificationsComponent,
+    SecurityComponent
   ],
   exports: [
     UserSettingsComponent
@@ -27,7 +27,8 @@ import { ProfileModule } from './profile/profile.module';
     FontAwesomeModule,
     AppRoutingModule,
     ButtonModule,
-    ProfileModule
+    ProfileModule,
+    TeamsSettingsModule
   ]
 })
 export class UserSettingsModule { }

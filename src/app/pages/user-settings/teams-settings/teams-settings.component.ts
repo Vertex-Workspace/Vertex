@@ -15,9 +15,4 @@ export class TeamsSettingsComponent {
   faDoorOpen = faDoorOpen;
   faPaperclip = faPaperclip;
 
-  itemsList = [
-    {option: 'AKMO', teamLeader: 'Ana Borchardt', creationDate : '06/06/2023'},
-    {option: 'AKMO', teamLeader: 'Ana Borchardt', creationDate : '06/06/2023'},
-  ];
-
 }

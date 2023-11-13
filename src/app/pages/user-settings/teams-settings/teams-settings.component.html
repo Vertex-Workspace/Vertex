@@ -5,32 +5,12 @@
             <fa-icon [icon]="faUsers" class="icon"></fa-icon>
         </div>
     </div>
+
+    <section>
+        <span class="p-input-icon-right">
+            <input type="search" placeholder="Busque pela sua equipe aqui..." />
+            <i class="pi pi-search search"></i>
+        </span>
+        <app-card-list style="width: 85%; height: 90%; padding-top: 3%;"></app-card-list>
+    </section>
 </div>
-
-    <!-- <div class="box h-[12%]">
-        <div class="search">
-            <p>Busque pela sua equipe aqui...</p>
-            <fa-icon [icon]="faSearch" class="icon"></fa-icon>
-        </div>
-    </div>
-
-    <ng-container *ngFor="let item of itemsList">
-        <div class="box h-[25%]">
-            <div class="search">
-                <div class="divInfo">
-                    <fa-icon size="4x" [icon]="faCircleUser" class="icon"></fa-icon>
-                    <div class="divItems">
-                        <p>{{item.option}}</p>
-                        <p>{{item.teamLeader}}</p>
-                        <p>{{item.creationDate}}</p>
-                    </div>
-                </div>
-                <div class="leaveTeam">
-                    <fa-icon style="color: white; background-color: #872323;" [icon]="faDoorOpen"></fa-icon>
-                    <p style="background-color: #872323;">Sair da equipe</p>
-                </div>
-            </div>
-        </div>
-    </ng-container>
-
-    <div> -->

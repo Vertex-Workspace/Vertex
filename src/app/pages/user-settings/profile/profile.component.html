@@ -1,23 +1,30 @@
 <div class="bg">
+    <div class="title">
+        <div>
+            <p>Perfil</p>
+            <fa-icon [icon]="faUser" class="iconProfile size"></fa-icon>
+        </div>
+    </div>
     <div class="generalDiv">
         <div class="divInputs">
             <div class="divLeftSide">
                 <!-- E-mail -->
                 <section>
                     <div class="divEachInput" *ngFor="let item of itemsList">
-                        <label class="text-sm">{{item.option}}</label>
+                        <label>{{item.option}}</label>
                         <div class="iconInputBlock">
                             <div class="iconBox" *ngIf="item.id != 'description'">
                                 <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                             </div>
-                            <input (input)="onChange()" type="text" [value]="item.placeholder" [ngClass]="item.id" />
+                            <textarea (input)="onChange()" type="text" [value]="item.placeholder" [ngClass]="item.id">
+                            </textarea>
                         </div>
                     </div>
                 </section>
 
                 <div class="charts">
                     <p>Visibilidade do Perfil</p>
-                    <div *ngFor="let toogle of tooglesList; index as item" class="flex items-center">
+                    <div *ngFor="let toogle of tooglesList; index as item">
                         <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
                         </fa-icon>
                         <p class="px-3">{{toogle.text}}</p>
@@ -27,11 +34,11 @@
 
             <div class="rightSide">
                 <section>
-                    <fa-icon class="iconProfile" size="8x" [icon]="faCircleUser"></fa-icon>
-                    <!-- <fa-icon [icon]="faPenToSquare" style="color:blue"></fa-icon> -->
+                    <fa-icon class="hover" size="8x" [icon]="faCircleUser" title="Adicione uma foto de perfil"></fa-icon>
                     <div>
                         <div *ngIf="!buttonConfirm">
                             <button class="confirm justify-end" (click)="clickOption('edit')"
+                            [disabled]="contentEditable === true ? false : true"
                                 [ngClass]="contentEditable === true ? 'edit' : 'noEdit'">
                                 Atualizar
                             </button>

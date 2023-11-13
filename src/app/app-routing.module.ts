@@ -12,6 +12,7 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
 import { ProfileComponent } from './pages/user-settings/profile/profile.component';
 import { NotificationsComponent } from './pages/user-settings/notifications/notifications.component';
 import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/teams-settings.component';
+import { SecurityComponent } from './pages/user-settings/security/security.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
       path: 'notificacoes',
       component: NotificationsComponent
+      },
+      {
+      path: 'seguranca',
+      component: SecurityComponent
       },
       
       {

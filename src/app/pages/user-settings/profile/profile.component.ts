@@ -32,7 +32,7 @@ export class ProfileComponent {
     { id: 'email', icon: faEnvelope, placeholder: 'ana_cb@estudante.sesisenai.org.br', option: 'E-mail'},
     { id: 'name', icon: faUser, placeholder :'Ana Clara', option: 'Nome'},
     { id: 'location', icon: faEarthAmericas, placeholder :'São Paulo, Brazil', option: 'Localização'},
-    { id: 'description', icon: faEarthAmericas, option: 'Descrição'}
+    { id: 'description', icon: faEarthAmericas, placeholder: '"Lorem ipsum dolor sit amet, consectetur adipiscing elitaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', option: 'Descrição'}
   ];
 
   tooglesList = [
@@ -62,12 +62,6 @@ export class ProfileComponent {
     }else {
       this.tooglesList[item].icon = faToggleOff;
     }
-  }
-
-  changeButton(): void{
-    this.buttonEdit = !this.buttonEdit;
-    this.buttonConfirm = !this.buttonConfirm;
-  
   }
 
   clickOption(id: string): void{
