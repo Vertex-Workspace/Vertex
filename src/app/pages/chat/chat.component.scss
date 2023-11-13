@@ -1,7 +1,16 @@
 @import '../../../_variables.scss';
 
-#bg {
-    @apply w-screen h-full flex justify-center items-center;
+section {
+    @apply w-screen h-full flex flex-col justify-center pl-5;
+    background-color: $primaryColor;
+}
+
+input{
+    padding: 10px;
+}
+
+input:focus {
+    outline: none;
 }
 
 .container-custom {
@@ -23,26 +32,66 @@ header {
 }
 
 #search {
-    @apply flex w-[88%] h-full rounded-sm items-center justify-center;
+    @apply flex w-[89%] h-full rounded-lg items-center justify-center;
     background-color: $secondColor;
 }
 
-.searchIcon{
+.searchIcon {
     @apply w-[7%] text-[1.5rem] text-white flex items-center;
     color: $primaryColor;
 }
 
-.leftChatPerson{
+.leftChatPerson {
     @apply flex items-center gap-2;
-    
+
 }
 
-.userName{
+.userName {
     @apply text-[1.5rem] text-white;
 }
 
-.section-left-chat{
-    @apply flex flex-col pl-5 w-[20%] h-[85%] gap-2 shadow-md;
-    
+.section-left-chat {
+    @apply flex flex-col w-[22.3%] h-[100%] gap-2 shadow-md rounded-sm;
+
+    background-color: $secondColor;
+}
+
+.header-section-left {
+    @apply flex w-full h-[10%] items-center justify-evenly;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.main-section-left {
+    @apply flex flex-col w-full h-[80%] justify-start gap-2;
+}
+
+.section-icons {
+    @apply flex justify-between items-center;
+    color: $primaryColor  !important;
+}
+
+.chat-icons {
+    @apply flex justify-between items-center;
+    color: $primaryColor  !important;
+    font-size: 70px
+}
+
+.section-right-chat {
+    @apply flex flex-col items-center justify-center w-[80%] h-[100%] gap-2 shadow-md rounded-sm;
+    background-color: $secondColor;
+}
+
+.div-input-chat{
+    @apply w-[100%] h-[40%] flex;
     background-color: #fff;
+}
+
+.square-chat{
+    @apply w-[7.5%] h-[40%] flex items-center justify-center;
+    background-color: $primaryColor;
+
+    .section-icons{
+        @apply flex justify-between items-center;
+        color: #fff !important;
+    }
 }

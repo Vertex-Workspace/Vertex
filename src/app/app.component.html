@@ -9,7 +9,7 @@
                 <app-header style="width: 100%; height: 100%;" />
             </header>
 
-            <main class="main-content" [@routeAnimations]="getRouteAnimationData()">
+            <main [ngClass]="rota==rotaChat ? 'main-contentChat' : 'main-content'" [@routeAnimations]="getRouteAnimationData()">
                 <router-outlet></router-outlet>
             </main>
         </div>

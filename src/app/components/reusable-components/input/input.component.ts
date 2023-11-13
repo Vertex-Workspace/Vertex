@@ -14,6 +14,9 @@ export class InputComponent {
   height!: string;
 
   @Input()
+  padding!: string;
+
+  @Input()
   backgroundColor!: string;
 
   @Input()
