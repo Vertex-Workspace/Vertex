@@ -1,6 +1,7 @@
 import {CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { Task } from 'src/app/models/task';
 
 @Component({
   selector: 'app-calendar',
@@ -155,32 +156,5 @@ export class CalendarComponent {
   toggleCharts(): void {
     this.toggle = !this.toggle;
   }
-
-
-
-  specificPropertyArray(property: any): any[] {
-    return this.tasks.filter(task => {
-      return task.category === property;
-    });
-  }
-
-
-  //DRAG AND DROP
-  dropCard(event: CdkDragDrop<any[]>, date: Date): void { 
-    console.log("funcionou"); 
-    //lógica
-    // const task = event.item.data;
-
-    // const newIndexTask = 
-    //         this.specificPropertyArray(task.category)[event.currentIndex];
-    // const newIndex = this.tasks.indexOf(newIndexTask);
-    // const previousIndex = this.tasks.indexOf(task);
-    
-    // moveItemInArray(
-    //   this.tasks, 
-    //   previousIndex, 
-    //   newIndex
-    // );
-  };
 
 }

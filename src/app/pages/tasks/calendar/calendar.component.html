@@ -21,7 +21,7 @@
             </button>
         </div>
     </div>
-    <div class="calendar">
+    <div class="calendar" >
         <div class="calendar-rows">
             <ng-container *ngFor="let day of calendarDays; index as index">
                 <div *ngIf="index < 7" class="days-of-week">
@@ -32,11 +32,11 @@
 
         <div class="calendar-rows" 
         *ngFor="let week of groupCalendarDays()">
-
             <div 
             *ngFor="let day of week; index as index" 
             class="calendar-day"
-            [class.day-not-month]="currentDate.getMonth() !== day.getMonth()">
+            [class.day-not-month]="currentDate.getMonth() !== day.getMonth()"
+            >
 
                 <div class="day-informations">
                     <div [class.today]="today(day)">
@@ -53,8 +53,8 @@
 
 
                 <div class="tasks-list-in-calendar" *ngIf="toggle">
-                    <div *ngFor="let task of getTasksByDate(day)" cdkDrag>
-                        <div class="card-list-task-calendar" >
+                    <div *ngFor="let task of getTasksByDate(day)" >
+                        <div class="card-list-task-calendar">
                             <h2>{{task.name}}</h2>
                         </div>
                     </div>

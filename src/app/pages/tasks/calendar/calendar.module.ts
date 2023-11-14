@@ -19,7 +19,6 @@ import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn
     CommonModule,
     BrowserModule,
     FontAwesomeModule,
-    DragDropModule,
     ModalWarnModule,
   ]
 })
