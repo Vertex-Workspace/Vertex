@@ -8,14 +8,18 @@
 
 
     <div class="w-[85%]">
-        <div *ngFor="let item of passwords">
+        <div *ngFor="let item of passwords; index as oi">
             <section>
                 <label>Confirme sua senha antiga</label>
                 <div class="iconInputBlock">
                     <div class="iconBox">
                         <fa-icon [icon]="item.icon" class="icon"></fa-icon>
                     </div>
-                    <input (input)="onChange()" type="password" />
+                    <div class="h-full w-full p-input-icon-right">
+                        <input (input)="onChange(oi)" [type]="statusEye ? 'text' : 'password'" />
+                        <i (click)="passwordEye()" class="pi pi-eye icon" *ngIf="!statusEye"></i>
+                        <i (click)="passwordEye()" class="pi pi-eye-slash icon" *ngIf="statusEye"></i>
+                    </div>
                 </div>
                 <div *ngIf="item.type === 'oldPassword'" class="forgot-password">
                     <p>Esqueci minha senha</p>
@@ -33,7 +37,7 @@
             </div>
 
             <div>
-                <button  (click)="clickOption('edit')" 
+                <button (click)="clickOption('edit')" 
                 [disabled]="contentEditable === true ? false : true"
                 [ngClass]="contentEditable === true ? 'edit' : 'noEdit'">
                     Redefinir

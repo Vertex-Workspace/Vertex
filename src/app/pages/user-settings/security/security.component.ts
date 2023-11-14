@@ -9,14 +9,14 @@ import { faLock, faEye, faKey } from '@fortawesome/free-solid-svg-icons'
 export class SecurityComponent {
     faLock = faLock;
     faKey = faKey;
-    faEye = faEye;
     contentEditable: boolean = false;
     click: string = 'initial';
+    statusEye: boolean = false;
 
     passwords = [
-        {type: 'oldPassword', icon: faKey, label:'Confirme sua senha antiga'},
-        {type: 'newPassword', icon: faLock, label:'Digite uma nova senha'},
-        {type: 'confirmPassword', icon: faLock, label:'Confirme sua nova senha'},
+        {type: 'oldPassword', icon: faKey, label:'Confirme sua senha antiga', status:false},
+        {type: 'newPassword', icon: faLock, label:'Digite uma nova senha', status:false},
+        {type: 'confirmPassword', icon: faLock, label:'Confirme sua nova senha', status:false},
     ]
 
     clickOption(id: string): void{
@@ -25,11 +25,20 @@ export class SecurityComponent {
       console.log(this.click)
     }
   
-      onChange(): void {
-      console.log(this.contentEditable)
-      if(this.contentEditable == false){
-      this.contentEditable = !this.contentEditable;
+      onChange(item : number): void {
+      this.passwords[item].status = true;
+      console.log(this.passwords[item].status)
+      if((this.passwords[0].status == true) &&
+      (this.passwords[1].status == true) &&
+      (this.passwords[2].status == true)){
+      this.contentEditable = true;
       }
+      console.log(this.contentEditable)
+    }
+
+    passwordEye(): void {
+      this.statusEye = !this.statusEye;
+      console.log(1)
     }
 
 }

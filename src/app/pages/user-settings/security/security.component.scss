@@ -27,20 +27,20 @@
 }
 
 input {
-    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full;
+    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[46px];
 }
 
 .iconInputBlock {
-    @apply flex py-3 w-full;
+    @apply flex py-3 w-full h-full;
 
     .iconBox {
-         @apply flex w-[11%] h-12 justify-center items-center rounded-l-sm;
+         @apply flex w-[46px] h-[46px] justify-center items-center rounded-l-sm;
          background-color: #CDD8EA;
      }
 }
 
 section {
-    @apply h-full w-[45%] pt-6 flex flex-col ;
+    @apply h-full w-[45%] pt-6 flex flex-col;
 
     .forgot-password{
         @apply flex justify-end;
@@ -73,7 +73,6 @@ section {
     }
 
     button {
-        background-color: $primaryColor;
         color: $secondColor;
         @apply h-[32px] w-[110px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
     }
