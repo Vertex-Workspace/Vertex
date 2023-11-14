@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { ForeignKeyService, GridModule } from '@syncfusion/ej2-angular-grids';
 
 
 @NgModule({
@@ -30,7 +31,11 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FontAwesomeModule,
     DragDropModule,
-    FormsModule
+    FormsModule,
+    GridModule
   ],
+  providers: [
+    ForeignKeyService,
+  ]
 })
 export class TasksModule { }

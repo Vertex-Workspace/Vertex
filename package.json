@@ -23,6 +23,7 @@
     "@fortawesome/angular-fontawesome": "^0.12.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@syncfusion/ej2-angular-grids": "^23.1.44",
     "chart.js": "^4.4.0",
     "primeicons": "^6.0.1",
     "primeng": "^15.2.0",

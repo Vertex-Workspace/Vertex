@@ -1,3 +1,25 @@
 <section>
+    <ejs-grid 
+        [dataSource]="taskList"
+        [pageSettings]='pageSettings'
+        [allowPaging]="true"
+        allowResizing='true'
+    >
     
+    <e-columns>
+
+        <e-column 
+            *ngFor="let column of taskList[0].properties" 
+            [headerText]="column.header"
+            [field]="column.value" 
+            ></e-column>  
+
+        <e-column 
+            [field]="'name'" 
+            [headerText]="'aaaa'"
+        ></e-column> 
+
+    </e-columns>
+
+    </ejs-grid>
 </section>
