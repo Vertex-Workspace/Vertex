@@ -1,7 +1,7 @@
 @import "../../../../variables";
 
 section {
-    @apply flex w-full h-5/6 flex-col;
+    @apply flex w-full h-full flex-col;
     color: $primaryColor;
 }
 
@@ -53,7 +53,6 @@ section {
         @apply flex p-2 flex-col;
         min-height: 150px;
         border: $borderBottom;
-        position: relative;
 
         .day-informations {
             @apply flex h-[20%] w-full justify-end;
@@ -80,9 +79,11 @@ section {
             @apply flex flex-col gap-2 pt-2;
             color: $primaryColor;
         
+        
 
             .card-list-task-calendar{
                 @apply flex w-full h-20 bg-white rounded-sm p-3;
+
             }
         }
 
@@ -123,14 +124,14 @@ section {
 
 
 
-// .cdk-drop-list-dragging .cdk-drag {
-//     transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
-//   }
-  
-//   .cdk-drag-animating {
-//     transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
-//   }
-  
-//   .cdk-drag-placeholder {
-//     opacity: 50%;
-//   }
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-placeholder {
+  opacity: 50%;
+}

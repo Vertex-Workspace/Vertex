@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 
@@ -55,7 +55,9 @@ export class CalendarComponent {
     if (date != undefined) {
       let tasks: any[] = [];
       this.tasks.forEach((task) => {
-        if (task.date.getDate() == date.getDate()) {
+        if (task.date.getDate() == date.getDate() 
+        && task.date.getMonth() == date.getMonth()
+        && task.date.getFullYear() == date.getFullYear()) {
           tasks.push(task);
         }
       });
@@ -156,28 +158,29 @@ export class CalendarComponent {
 
 
 
-  // specificPropertyArray(property: any): any[] {
-  //   return this.tasks.filter(task => {
-  //     return task.category === property;
-  //   });
-  // }
+  specificPropertyArray(property: any): any[] {
+    return this.tasks.filter(task => {
+      return task.category === property;
+    });
+  }
 
 
-  // //DRAG AND DROP
-  // dropCard(event: CdkDragDrop<any[]>, date: Date): void { 
-  //   console.log(event); 
-  //   //lógica
-  //   const task = event.item.data;
+  //DRAG AND DROP
+  dropCard(event: CdkDragDrop<any[]>, date: Date): void { 
+    console.log("funcionou"); 
+    //lógica
+    // const task = event.item.data;
 
-  //   const newIndexTask = 
-  //           this.specificPropertyArray(task.category)[event.currentIndex];
-  //   const newIndex = this.tasks.indexOf(newIndexTask);
-  //   const previousIndex = this.tasks.indexOf(task);
+    // const newIndexTask = 
+    //         this.specificPropertyArray(task.category)[event.currentIndex];
+    // const newIndex = this.tasks.indexOf(newIndexTask);
+    // const previousIndex = this.tasks.indexOf(task);
     
-  //   moveItemInArray(
-  //     this.tasks, 
-  //     previousIndex, 
-  //     newIndex
-  //   );
-  // };
+    // moveItemInArray(
+    //   this.tasks, 
+    //   previousIndex, 
+    //   newIndex
+    // );
+  };
+
 }

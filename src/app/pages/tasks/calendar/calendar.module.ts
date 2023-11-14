@@ -21,7 +21,6 @@ import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn
     FontAwesomeModule,
     DragDropModule,
     ModalWarnModule,
-    CdkDrag
   ]
 })
 export class CalendarModule { }
