@@ -40,5 +40,17 @@
     @apply flex w-full h-[100%] justify-end;
 }
 
+.chat-circle{
+    @apply cursor-pointer absolute right-10 bottom-10 w-[70px] h-[70px] rounded-full flex 
+    justify-center items-center;
+    background-color: $primaryColor;
+}
+
+.miniChat{
+    @apply cursor-pointer absolute right-0 bottom-0 w-[350px] h-[400px] rounded-sm flex 
+    justify-center items-center;
+    background-color: $primaryColor;
+}
+
 
 

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { ChildrenOutletContexts, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,11 @@ import { PersonalizationService } from './services/personalization.service';
 })
 export class AppComponent{
   title = 'Vertex';
+  faMessage = faMessage;
 
   userLogged: boolean = true;
+
+  miniChatOpen: boolean = false;
   
   isSideBarExpanded:boolean = false;
 
@@ -50,5 +54,9 @@ export class AppComponent{
     
     const fontSize = this.fontSize + "px";
     document.documentElement.style.setProperty('--font-size', fontSize);
+  }
+
+  openMiniChat(){
+    this.miniChatOpen = !this.miniChatOpen;
   }
 }

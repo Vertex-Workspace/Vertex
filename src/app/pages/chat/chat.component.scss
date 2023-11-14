@@ -1,7 +1,7 @@
 @import '../../../_variables.scss';
 
 section {
-    @apply w-screen h-full flex flex-col justify-center pl-5;
+    @apply w-screen h-full flex flex-col justify-center pl-1;
     background-color: $primaryColor;
 }
 
