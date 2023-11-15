@@ -73,7 +73,7 @@ label {
     @apply w-[70%];
 
     section {
-       @apply flex h-[90%] flex-col border-b-2 justify-evenly
+       @apply flex h-[85%] flex-col border-b-2 justify-evenly;
     }
 }
 
@@ -110,10 +110,10 @@ label {
 }
 
 .rightSide{
-    @apply flex w-[25%] h-full;
+    @apply flex w-[25%];
 
     section {
-        @apply h-[90%] w-full flex flex-col justify-between items-end border-b-2 py-2;
+        @apply h-[85%] w-full flex flex-col justify-between items-end border-b-2 py-3 pb-4;
      }
 }
 
@@ -132,13 +132,20 @@ label {
 .charts {
     @apply h-[20%] w-full pt-4;
 
-    p {
+    p:first-child {
+        @apply text-sm;
+    }
+    p:last-child {
         @apply text-sm pt-2;
     }
 
     div {
-        @apply flex items-end flex items-center;
+        @apply flex items-start;
     }
+}
+
+form {
+    @apply h-full w-full;
 }
 
 

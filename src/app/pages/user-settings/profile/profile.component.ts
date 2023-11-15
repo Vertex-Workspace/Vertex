@@ -37,7 +37,8 @@ export class ProfileComponent {
 
   tooglesList = [
     {text: "Mostrar gráficos de desempenho para visitantes", icon: faToggleOff},
-    {text: "Deixar meu perfil visível a visitantes", icon: faToggleOff}
+    {text: "Deixar meu perfil visível a visitantes", icon: faToggleOff},
+    {text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff}
   ];
 
   constructor(private personalization : PersonalizationService){
@@ -75,5 +76,9 @@ export class ProfileComponent {
     if(this.contentEditable == false){
     this.contentEditable = !this.contentEditable;
     }
+  }
+
+  form(): void {
+
   }
 }

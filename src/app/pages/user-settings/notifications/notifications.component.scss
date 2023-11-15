@@ -60,6 +60,10 @@ section {
 .toggles-text {
     @apply flex justify-center items-center;
     color: $primaryColor;
+
+    p{
+        @apply px-3 text-sm;
+    }
 }
 
 

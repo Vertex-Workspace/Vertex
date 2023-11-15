@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { faLock, faEye, faKey } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
@@ -12,11 +12,12 @@ export class SecurityComponent {
     contentEditable: boolean = false;
     click: string = 'initial';
     statusEye: boolean = false;
+    validPassword: boolean = true;
 
     passwords = [
-        {type: 'oldPassword', icon: faKey, label:'Confirme sua senha antiga', status:false},
-        {type: 'newPassword', icon: faLock, label:'Digite uma nova senha', status:false},
-        {type: 'confirmPassword', icon: faLock, label:'Confirme sua nova senha', status:false},
+        {value: '', icon: faKey, label:'Confirme sua senha antiga', status:false},
+        {value: '', icon: faLock, label:'Digite uma nova senha', status:false},
+        {value: '', icon: faLock, label:'Confirme sua nova senha', status:false},
     ]
 
     clickOption(id: string): void{
@@ -40,5 +41,17 @@ export class SecurityComponent {
       this.statusEye = !this.statusEye;
       console.log(1)
     }
+
+    
+  passwordValidation(): void {
+    console.log(1);
+    if(this.passwords[1].value != this.passwords[2].value){
+      this.validPassword = false;
+    }
+  }
+
+  closeModal(){
+    this.validPassword = true;
+  }
 
 }

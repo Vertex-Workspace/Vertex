@@ -8,21 +8,21 @@
 
 
     <div class="w-[85%]">
-        <div *ngFor="let item of passwords; index as oi">
+        <div *ngFor="let item of passwords; index as i">
             <section>
-                <label>Confirme sua senha antiga</label>
+                <label>{{item.label}}</label>
                 <div class="iconInputBlock">
                     <div class="iconBox">
                         <fa-icon [icon]="item.icon" class="icon"></fa-icon>
                     </div>
-                    <div class="h-full w-full p-input-icon-right">
-                        <input (input)="onChange(oi)" [type]="statusEye ? 'text' : 'password'" />
-                        <i (click)="passwordEye()" class="pi pi-eye icon" *ngIf="!statusEye"></i>
-                        <i (click)="passwordEye()" class="pi pi-eye-slash icon" *ngIf="statusEye"></i>
-                    </div>
-                </div>
-                <div *ngIf="item.type === 'oldPassword'" class="forgot-password">
-                    <p>Esqueci minha senha</p>
+                    <form (ngSubmit)="passwordValidation()">
+                        <div class="h-full w-full p-input-icon-right">
+                            <input (input)="onChange(i)" [type]="statusEye ? 'text' : 'password'"
+                                [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" />
+                            <i (click)="passwordEye()" class="pi pi-eye icon" *ngIf="!statusEye"></i>
+                            <i (click)="passwordEye()" class="pi pi-eye-slash icon" *ngIf="statusEye"></i>
+                        </div>
+                    </form>
                 </div>
             </section>
         </div>
@@ -37,9 +37,9 @@
             </div>
 
             <div>
-                <button (click)="clickOption('edit')" 
-                [disabled]="contentEditable === true ? false : true"
-                [ngClass]="contentEditable === true ? 'edit' : 'noEdit'">
+                <button type="submit" (click)="clickOption('edit')" (click)="passwordValidation()"
+                    [disabled]="contentEditable === true ? false : true"
+                    [ngClass]="contentEditable === true ? 'edit' : 'noEdit'">
                     Redefinir
                 </button>
             </div>
@@ -47,3 +47,9 @@
     </div>
 
 </div>
+
+<app-modal-warn *ngIf="!validPassword" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
+    <div class="modal">
+        <h2>As senhas não coincidem</h2>
+    </div>
+</app-modal-warn>

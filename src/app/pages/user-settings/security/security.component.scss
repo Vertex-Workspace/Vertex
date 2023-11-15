@@ -86,7 +86,14 @@ section {
     background-color: $primaryColor;
 }
 
+form {
+    @apply h-full w-full
+}
 
+h2 {
+    @apply text-xl font-bold;
+}
 
-
-
+.modal {
+    @apply flex items-center justify-center w-full h-full pb-16;
+}

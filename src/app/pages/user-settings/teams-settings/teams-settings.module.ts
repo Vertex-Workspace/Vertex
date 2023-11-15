@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamsSettingsComponent } from './teams-settings.component';
-import { CardListComponent } from 'src/app/components/reusable-components/card-list/card-list.component';
 import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
