@@ -9,7 +9,8 @@
                 <app-header style="width: 100%; height: 100%;" />
             </header>
 
-            <main [ngClass]="rota==rotaChat ? 'main-contentChat' : 'main-content'" [@routeAnimations]="getRouteAnimationData()">
+            <main [ngClass]="rota==rotaChat ? 'main-contentChat' : 'main-content'"
+                [@routeAnimations]="getRouteAnimationData()">
                 <router-outlet></router-outlet>
             </main>
         </div>
@@ -18,9 +19,34 @@
     <div *ngIf="rota!=rotaChat" (click)="openMiniChat()" class="chat-circle">
         <fa-icon [icon]="faMessage"></fa-icon>
     </div>
- 
+
     <div *ngIf="rota!=rotaChat && miniChatOpen" class="miniChat">
-a
+        <div class="miniChat-header">
+            <div class="miniChat-header-title">
+                <fa-icon [icon]="faUser"></fa-icon>
+                <h2>Nome User</h2>
+            </div>
+            <div class="miniChat-header-close">
+                <fa-icon (click)="expandChat()" [icon]="faExpand"></fa-icon>
+                <fa-icon (click)="openMiniChat()" [icon]="faTimes"></fa-icon>
+            </div>
+        </div>
+
+        <div class="miniChat-main">
+            <div class="miniChat-main-input">
+                <div class="flex border-2 w-[80%] h-full border-gray-300 rounded-md">
+                    <input class="pl-[10px] w-[84%] h-[100%]" type="text" placeholder="Digite sua mensagem" />
+                    <div class="flex gap-2 w-[16%]">
+                        <fa-icon class="section-icons" [icon]="faPaperclip"></fa-icon>
+                        <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
+                    </div>
+                </div>
+                <div class="square-chat">
+                    <fa-icon class="text-base pr-1" [icon]="faPaperPlane"></fa-icon>
+                </div>
+
+            </div>
+        </div>
     </div>
 </section>
 

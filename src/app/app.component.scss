@@ -3,7 +3,6 @@
     @apply flex w-screen h-screen ;
 }
 
-
 .side-bar {
     @apply flex w-[4%] h-full flex-col items-center;
     background-color: $primaryColor;
@@ -47,8 +46,41 @@
 }
 
 .miniChat{
-    @apply cursor-pointer absolute right-0 bottom-0 w-[350px] h-[400px] rounded-sm flex 
-    justify-center items-center;
+    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col
+    justify-between items-start shadow-lg;
+    background-color: #fff;
+}
+
+.miniChat-header{
+    @apply flex w-full h-[12%] items-start justify-around;
+    background-color: $primaryColor;
+}
+
+.miniChat-header-title{
+    @apply flex w-[70%] h-full items-center justify-start gap-5;
+    color: #fff;
+}
+
+.miniChat-header-close{
+    @apply flex w-[15%] h-full items-center justify-end gap-5;
+    color: #fff;
+}
+
+.miniChat-main{
+    @apply flex w-full h-[88%] items-end pb-5 justify-center;
+}
+
+.miniChat-main-input{
+    @apply flex w-full h-[10%] items-center justify-evenly ;
+}
+
+.section-icons {
+    @apply flex justify-between items-center text-lg;
+    color: $primaryColor  !important;
+}
+
+.square-chat{
+    @apply w-[10%] h-[100%] rounded-lg flex items-center justify-center;
     background-color: $primaryColor;
 }
 

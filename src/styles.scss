@@ -35,6 +35,10 @@ button, a{
     cursor: pointer;
 }
 
+input:focus {
+    outline: none;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;

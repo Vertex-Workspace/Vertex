@@ -1,8 +1,13 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { ChildrenOutletContexts, RouterLink, RouterOutlet } from '@angular/router';
+import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
-import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faMessage, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +20,12 @@ import { faMessage } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent{
   title = 'Vertex';
   faMessage = faMessage;
+  faTimes = faTimes;
+  faUser = faUser;
+  faExpand = faExpand;
+  faPaperPlane = faPaperPlane;
+  faPaperclip = faPaperclip;
+  faMicrophoneLines = faMicrophoneLines;
 
   userLogged: boolean = true;
 
@@ -24,10 +35,12 @@ export class AppComponent{
 
   rota:String = window.location.href;
   rotaChat:String = "http://localhost:4200/chat";
+  rotaAtual:string = window.location.href;
 
   constructor(
     private personalization : PersonalizationService, 
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private router:Router
   ){
     personalization.setPersonalization();
   }
@@ -54,6 +67,12 @@ export class AppComponent{
     
     const fontSize = this.fontSize + "px";
     document.documentElement.style.setProperty('--font-size', fontSize);
+  }
+
+  expandChat(){
+    window.localStorage.setItem('rota', this.rotaAtual);
+    this.rota = "http://localhost:4200/chat"
+    this.router.navigate(['/chat']);
   }
 
   openMiniChat(){

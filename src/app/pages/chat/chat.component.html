@@ -3,16 +3,15 @@
     <!-- Código aqui -->
 
     <header>
-        <div class=" w-[22.7%] h-full flex items-end pb-5">
-            <div class="search-div">
-                <input id="search" type="text">
-                <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>
-            </div>
+        <!--     -->
+
+        <div class="conversations-div">
+            <h1 class="conversations">ERTEX</h1>
         </div>
 
-        <div class="w-[80%] flex justify-between items-center text-white">
+        <div class="header-right">
 
-            <div class="flex gap-5 items-center pb-5">
+            <div class="header-right-informations">
                 <div class="leftChatPerson">
                     <fa-icon class="text-7xl" [icon]="faCircleUser"></fa-icon>
                 </div>
@@ -33,13 +32,21 @@
             </div>
 
             <!-- icon minimizar chat -->
-            <fa-icon class="pr-5" [icon]="faMinimize"></fa-icon>
+            <fa-icon (click)="minimizeChat()" class="pr-5" [icon]="faMinimize"></fa-icon>
         </div>
     </header>
 
 
-    <div class="w-full h-[85%] gap-[5px] flex overflow-auto">
+    <div class="w-full h-[87%] gap-[5px] flex ">
         <div class="section-left-chat">
+
+            <div class=" w-[100%] h-[8%] p-3 flex items-center justify-center ">
+                <div class="search-div">
+                    <input id="search" type="text">
+                    <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>
+                </div>
+            </div>
+
             <div class="header-section-left">
                 <div class="flex justify-between items-center gap-2 cursor-pointer">
                     <fa-icon class="section-icons" [icon]="faGlobe"></fa-icon>
@@ -60,7 +67,7 @@
             <div class="main-section-left">
                 <ng-container *ngFor="let user of users">
 
-                    <div class="flex justify-between items-center w-full pl-4 h-[15%] shadow-md gap-2 cursor-pointer">
+                    <div class="card-chat">
                         <div class="flex gap-6 items-center w-[70%]">
                             <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
                             <div class="flex flex-col">
@@ -81,6 +88,13 @@
 
                 </ng-container>
             </div>
+
+            <div class="starred-div">
+                <button class="starred-btn">
+                    <p>Favoritas</p>
+                    <fa-icon class="text-[#fff] text-sm" [icon]="faStar"></fa-icon>
+                </button>
+            </div>
         </div>
 
         <div class="section-right-chat">
@@ -97,7 +111,7 @@
                     </div>
                 </div>
                 <div class="square-chat">
-                    <fa-icon class="section-icons " [icon]="faChevronRight"></fa-icon>
+                    <fa-icon class="text-lg pr-1" [icon]="faPaperPlane"></fa-icon>
                 </div>
             </div>
         </div>
