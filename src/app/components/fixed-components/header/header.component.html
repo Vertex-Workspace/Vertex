@@ -4,8 +4,13 @@
             Projeto AKMO
         </div>
         <div class="items-header">
-            <i class="pi pi-bell"></i>
+            <i class="pi pi-bell cursor-pointer" (click)="openNotifications()"></i>
             <i class="pi pi-question"></i>
         </div>
     </section>
 </header>
+
+
+<app-notification *ngIf="notifications">
+
+</app-notification>

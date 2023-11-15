@@ -8,6 +8,9 @@ import { NotificationComponent } from './notification.component';
   declarations: [
     NotificationComponent
   ],
+  exports: [
+    NotificationComponent
+  ],
   imports: [
     CommonModule
   ]

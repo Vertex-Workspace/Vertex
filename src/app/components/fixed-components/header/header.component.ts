@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  notifications:boolean = false;
+
+  openNotifications():void{
+    this.notifications = !this.notifications;
+  }
 }
