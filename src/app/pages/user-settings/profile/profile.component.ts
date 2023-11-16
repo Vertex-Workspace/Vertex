@@ -36,8 +36,7 @@ export class ProfileComponent {
   ];
 
   tooglesList = [
-    {text: "Mostrar gráficos de desempenho para visitantes", icon: faToggleOff},
-    {text: "Deixar meu perfil visível a visitantes", icon: faToggleOff},
+    {text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff},
     {text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff}
   ];
 
@@ -55,6 +54,7 @@ export class ProfileComponent {
   buttonConfirm: boolean = false;
   contentEditable: boolean = false;
   click: string = 'initial';
+  validInput: boolean = true;
 
   // Alter the status of toogle
   toogleCharts(item :number): void{
@@ -69,6 +69,7 @@ export class ProfileComponent {
     this.click = id;
     this.contentEditable = !this.contentEditable
     console.log(this.click)
+    console.log(this.itemsList[0].placeholder)
   }
 
     onChange(): void {
@@ -78,7 +79,14 @@ export class ProfileComponent {
     }
   }
 
-  form(): void {
+  passwordValidation(): void {
+    if((this.itemsList[0].placeholder === '') ||
+      (this.itemsList[1].placeholder === '')){
+        this.validInput = false;
+    }
+  }
 
+  closeModal():void {
+    this.validInput = true;
   }
 }

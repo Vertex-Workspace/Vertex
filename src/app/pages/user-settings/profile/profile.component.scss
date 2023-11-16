@@ -31,7 +31,7 @@ label {
 
 .hover {
     color: $primaryColor;
-    @apply hover:opacity-50;
+    @apply hover:opacity-50 pt-4;
 }
 
 .iconInput {
@@ -133,19 +133,28 @@ label {
     @apply h-[20%] w-full pt-4;
 
     p:first-child {
-        @apply text-sm;
+        @apply text-[16px];
     }
     p:last-child {
         @apply text-sm pt-2;
     }
 
     div {
-        @apply flex items-start;
+        @apply flex items-start pt-2;
     }
 }
 
 form {
-    @apply h-full w-full;
+    @apply h-full w-full flex flex-col justify-evenly;
 }
+
+h2 {
+    @apply text-xl font-bold;
+}
+
+.modal {
+    @apply flex items-center justify-center w-full h-full pb-16;
+}
+
 
 

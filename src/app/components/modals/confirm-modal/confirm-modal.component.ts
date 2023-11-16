@@ -7,6 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ConfirmModalComponent {
 
+  secondModal: boolean = false;
+
     @Output()
     close = new EventEmitter<Event>();
   
@@ -15,6 +17,10 @@ export class ConfirmModalComponent {
   
     @Input()
     width?: String;
+
+    @Input()
+    title?: String;
+
   
     closeModal(){
       this.close.emit();
@@ -23,9 +29,17 @@ export class ConfirmModalComponent {
     deleteTeamConfirm(answer : string): void {
         if(answer == 'yes'){
             console.log('deletado');
+            this.secondModal = true
+            console.log(this.secondModal)
         }
         else{
             console.log('cancelado');
+            this.closeModal()
         }
+    }
+
+    deletedTeam(): void {
+      this.secondModal = false;
+      this.closeModal()
     }
 }

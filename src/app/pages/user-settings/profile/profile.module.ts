@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { ProfileComponent } from './profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
 
 
 
@@ -16,7 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     ButtonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalWarnModule
   ]
 })
 export class ProfileModule { }

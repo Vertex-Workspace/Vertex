@@ -9,19 +9,20 @@
         <div class="divInputs">
             <div class="divLeftSide">
                 <!-- E-mail -->
-                <section >
-                    <form>
-                    <div class="divEachInput" *ngFor="let item of itemsList">
-                        <label>{{item.option}}</label>
-                        <div class="iconInputBlock">
-                            <div class="iconBox" *ngIf="item.id != 'description'">
-                                <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
-                            </div>
-                            <textarea (input)="onChange()" type="text" [value]="item.placeholder" [ngClass]="item.id">
+                <section>
+                    <form (ngSubmit)="passwordValidation()">
+                        <div class="divEachInput" *ngFor="let item of itemsList">
+                            <label>{{item.option}}</label>
+                            <div class="iconInputBlock">
+                                <div class="iconBox" *ngIf="item.id != 'description'">
+                                    <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
+                                </div>
+                                <textarea (input)="onChange()" type="text" [ngClass]="item.id" [value]="item.placeholder"
+                                    #textBox (change)="item.placeholder = textBox.value">
                             </textarea>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </section>
 
                 <div class="charts">
@@ -36,14 +37,16 @@
 
             <div class="rightSide">
                 <section>
-                    <fa-icon class="hover" size="8x" [icon]="faCircleUser" title="Adicione uma foto de perfil"></fa-icon>
+                    <fa-icon class="hover" size="8x" [icon]="faCircleUser" title="Adicione uma foto de perfil">
+                    </fa-icon>
                     <div>
                         <div *ngIf="!buttonConfirm">
-                            <button class="confirm justify-end" (click)="clickOption('edit')"
-                            [disabled]="contentEditable === true ? false : true"
-                                [ngClass]="contentEditable === true ? 'edit' : 'noEdit'">
-                                Atualizar
-                            </button>
+                                <button class="confirm justify-end" (click)="clickOption('edit')"
+                                    [disabled]="contentEditable === true ? false : true"
+                                    [ngClass]="contentEditable === true ? 'edit' : 'noEdit'" type="submit"
+                                    (click)="passwordValidation()">
+                                    Atualizar
+                                </button>
                         </div>
                     </div>
                 </section>
@@ -51,3 +54,9 @@
         </div>
     </div>
 </div>
+
+<app-modal-warn *ngIf="!validInput" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
+    <div class="modal">
+        <h2>Não pode haver campos vazios</h2>
+    </div>
+</app-modal-warn>

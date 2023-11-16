@@ -43,11 +43,3 @@ button {
 .no-button {
     background-color: #BDBDBD;
 }
-
-h2 {
-    @apply text-xl font-bold;
-}
-
-.deleted {
-    @apply flex items-center justify-center w-full h-full pb-16;
-}

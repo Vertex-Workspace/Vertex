@@ -24,7 +24,8 @@
     </ng-container>
 </div>
 
-<app-confirm-modal *ngIf="delete" [width]="'500px'" [height]="'300px'" (close)="deleteTeam()"></app-confirm-modal>
+<app-confirm-modal *ngIf="delete" [width]="'500px'" [height]="'300px'" [title]="'a equipe'" (close)="deleteTeam()">
+</app-confirm-modal>
 
 
 
