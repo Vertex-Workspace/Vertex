@@ -1,0 +1,77 @@
+@import "../../../../variables";
+
+section{
+    @apply absolute flex w-full h-full justify-end max-w-[96%];
+}
+
+.modal{
+    @apply w-[25%] flex h-full rounded-sm flex-col shadow-xl;
+    background-color: $secondColor;
+    
+    .header{
+        @apply flex flex-col w-full h-[15%] p-4;
+        background-color: $primaryColor;
+        color: $secondColor;
+
+        fa-icon{
+            @apply text-xl;
+            color: $secondColor;
+        }
+
+        div{
+            @apply flex w-full h-1/2 flex-row justify-between items-center;
+
+            h2{
+                @apply text-2xl;
+            }
+            p{
+                @apply text-sm;
+            }
+        }
+    }
+
+    .notifications{
+        @apply flex flex-col w-full h-[80%] overflow-y-auto;
+
+        .notification{
+            @apply flex w-full border-b-2 items-center p-4 justify-between;
+            min-height: 80px;
+
+            :first-child{
+                @apply flex flex-row items-center justify-between;
+
+                .isNew{
+                    @apply flex h-2 w-2 rounded-full;
+                    background-color: $primaryColor;
+                }
+
+                .iconUser > fa-icon{
+                    @apply flex text-5xl rounded-full pl-5;
+                    color: $primaryColor;
+                }
+
+                .description{
+                    @apply flex flex-col pl-4;
+                }
+            }
+            
+            .barOpenClose > fa-icon{
+                @apply flex text-2xl;
+                color: $primaryColor;
+            }
+            .rotate{
+                transform: rotate(90deg);
+            }
+        }
+        .openedNotification{
+            @apply flex w-full;
+            min-height: 80px;
+            background-color: $primaryColor;
+        }
+    }
+    .tool-bar{
+        @apply flex flex-col w-full h-[5%];
+        background-color: $primaryColor;
+        color: $secondColor;
+    }
+}

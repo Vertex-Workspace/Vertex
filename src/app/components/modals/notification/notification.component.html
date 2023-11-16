@@ -1,7 +1,49 @@
+<section>
+    <div class="modal">
+        <div class="header">
+            <div>
+                <h2>Notificações</h2>
+                <fa-icon [icon]="faClose"></fa-icon>
+            </div>
+            <div>
+                <p>Caixa de Entrada</p>
+            </div>
+        </div>
+        <div class="notifications">
+            <ng-container *ngFor="let notification of notifications;">
+                <div class="notification">
+                    <div>
+                        <div *ngIf="notification.new" class="isNew"></div>
+                        <div *ngIf="!notification.new" class="isNew opacity-60"></div>
+                        <div class="iconUser">
+                            <fa-icon [icon]="notification.icon"></fa-icon>
+                        </div>
+                        <div class="description">
+                            <p>{{notification.author}} {{notification.action}} {{notification.project}}</p>
+                            <p>
+                                {{notification.date.getDate()+1}} /
+                                {{notification.date.getMonth()+1}} /
+                                {{notification.date.getFullYear()}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="barOpenClose">
+                        <fa-icon [icon]="faBars" *ngIf="!notification.moreInformations" (click)="notificationDetails(notification)"></fa-icon>
+                        <fa-icon [icon]="faBars" *ngIf="notification.moreInformations" (click)="notificationDetails(notification)" class="rotate"></fa-icon>
+                    </div>
+                </div>
+                <div *ngIf="notification.moreInformations" class="openedNotification">
+                    <div>
+                        <input type="checkbox" name="" id="">
+                        <i class="pi pi-external"></i>
+                        <i class="pi pi-trash"></i>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="tool-bar">
 
-
-<section class="absolute flex w-screen h-screen justify-end max-w-[96%]">
-    <div class="w-[20%] flex h-3/5 bg-black rounded-sm">
+        </div>
 
     </div>
 </section>

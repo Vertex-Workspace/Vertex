@@ -21,6 +21,7 @@ import { TasksModule } from './pages/tasks/tasks.module';
 import { MuralComponent } from './pages/mural/mural.component';
 import { MuralModule } from './pages/mural/mural.module';
 import { ChartModule } from 'primeng/chart';
+import { NotificationModule } from './components/modals/notification/notification.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ChartModule } from 'primeng/chart';
     TasksModule,
     UserSettingsModule,
     TeamInformationsModule,
-    ChartModule
+    ChartModule,
+    NotificationModule
   ],
   providers: [
     PersonalizationService,

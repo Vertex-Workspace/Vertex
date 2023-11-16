@@ -15,7 +15,7 @@ export class AppComponent{
   title = 'Vertex';
 
   userLogged: boolean = true;
-  
+  notification:boolean = true;
   isSideBarExpanded:boolean = false;
 
   constructor(
@@ -47,5 +47,10 @@ export class AppComponent{
     
     const fontSize = this.fontSize + "px";
     document.documentElement.style.setProperty('--font-size', fontSize);
+  }
+
+
+  openNotifications():void{
+    this.notification = !this.notification;
   }
 }
