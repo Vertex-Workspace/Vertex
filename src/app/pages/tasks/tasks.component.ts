@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,15 +8,27 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
-  clicked: string = 'kanban';
+  clicked !: string;
   query: string = '';
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
+
+  constructor(
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.clicked = this.getClicked();
+  }
+
+  getClicked(): string {
+    return this.router.url.split('/')[2];
+  }
 
   menuItems = [
     { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },

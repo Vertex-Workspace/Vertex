@@ -2,7 +2,8 @@ export interface Task {
     name: string,
     category: any, //propriedade
     creator ?: string,
-    properties ?: string[],
+    properties ?: any[],
     isDragging ?: boolean,
-    isSelected ?: boolean
+    isSelected ?: boolean,
+    status ?: string
 }
