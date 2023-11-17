@@ -9,6 +9,7 @@ section{
 
 .modal{
     @apply w-[25%] flex h-full rounded-sm flex-col shadow-xl;
+    z-index: 999;
     background-color: $secondColor;
     
     .header{
