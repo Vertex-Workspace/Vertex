@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faBars, faCircleUser, faClose, faGear, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faCircleUser, faClose, faEnvelope, faGear, faGraduationCap, faGripLinesVertical, faHandHoldingDroplet, faSquare, faSquareFull, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-notification',
@@ -8,14 +8,17 @@ import { faBars, faCircleUser, faClose, faGear, faUser } from '@fortawesome/free
 })
 export class NotificationComponent {
   faClose = faClose;
-  
-  faBars = faBars;
-
+  faArrowUpRightFromSquare = faArrowUpRightFromSquare;
+  faEnvelope = faEnvelope;
+  faTrash = faTrash;
+  faGear = faGear;
+  faSquare = faSquare;
 
   notifications:any[] =[
     {
       new: true,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -26,6 +29,7 @@ export class NotificationComponent {
     {
       new: true,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -36,6 +40,7 @@ export class NotificationComponent {
     {
       new: true,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -46,6 +51,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -56,6 +62,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -66,6 +73,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -76,6 +84,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -86,6 +95,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -96,6 +106,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -106,6 +117,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -116,6 +128,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -126,6 +139,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -136,6 +150,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -146,6 +161,7 @@ export class NotificationComponent {
     {
       new: false,
       icon: faCircleUser,
+      isSelected: false,
       author: "Kaique",
       action: "atribuiu você ao",
       team: "AKMO",
@@ -155,7 +171,29 @@ export class NotificationComponent {
     },
   ]
 
+  searchBarOpen: boolean = false;
+  query: string = "";
+  toggleSearchBar(): void {
+    this.searchBarOpen = !this.searchBarOpen;
+  } 
+  
+
+  checkbox:boolean = false;
+  changeSelectedState(notification: any):void{
+    notification.isSelected = !notification.isSelected;
+  }
+
+  changeSelectedStateAll():void{
+    this.checkbox = !this.checkbox;
+    this.notifications.forEach((notification) => {
+      notification.isSelected = this.checkbox;
+    });
+  }
   notificationDetails(notification:any):void{
-    notification.moreInformations = !notification.moreInformations;
+    //Logic
+  }
+
+  hasChecked():boolean{
+    return this.notifications.some( (notification) => notification.isSelected);
   }
 }
