@@ -1,9 +1,10 @@
 <section>
+    <div (click)="closeNotification()" class="clickOut"></div>
     <div class="modal">
         <div class="header">
             <div class="header-title">
                 <h2>Notificações</h2>
-                <fa-icon [icon]="faClose"></fa-icon>
+                <fa-icon [icon]="faClose" (click)="closeNotification()"></fa-icon>
             </div>
             <ul>
                 <li class="tool-icons" *ngIf="!searchBarOpen">

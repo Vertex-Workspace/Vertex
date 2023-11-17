@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { faArrowUpRightFromSquare, faCircleUser, faClose, faEnvelope, faGear, faGraduationCap, faGripLinesVertical, faHandHoldingDroplet, faSquare, faSquareFull, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -7,6 +7,7 @@ import { faArrowUpRightFromSquare, faCircleUser, faClose, faEnvelope, faGear, fa
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent {
+  //ICONS
   faClose = faClose;
   faArrowUpRightFromSquare = faArrowUpRightFromSquare;
   faEnvelope = faEnvelope;
@@ -14,6 +15,11 @@ export class NotificationComponent {
   faGear = faGear;
   faSquare = faSquare;
 
+
+  @Output()
+  close = new EventEmitter();
+
+  //TEMPORARY LIST TEMPLATE
   notifications:any[] =[
     {
       new: true,
@@ -177,23 +183,27 @@ export class NotificationComponent {
     this.searchBarOpen = !this.searchBarOpen;
   } 
   
-
   checkbox:boolean = false;
   changeSelectedState(notification: any):void{
     notification.isSelected = !notification.isSelected;
   }
-
   changeSelectedStateAll():void{
     this.checkbox = !this.checkbox;
     this.notifications.forEach((notification) => {
       notification.isSelected = this.checkbox;
     });
   }
+
+
   notificationDetails(notification:any):void{
     //Logic
   }
 
   hasChecked():boolean{
     return this.notifications.some( (notification) => notification.isSelected);
+  }
+
+  closeNotification(): void{
+    this.close.emit();
   }
 }

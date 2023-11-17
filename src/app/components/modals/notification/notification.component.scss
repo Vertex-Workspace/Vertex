@@ -3,6 +3,9 @@
 section{
     @apply absolute flex w-full h-full justify-end max-w-[96%];
 }
+.clickOut{
+    @apply flex w-[75%] h-full;
+}
 
 .modal{
     @apply w-[25%] flex h-full rounded-sm flex-col shadow-xl;

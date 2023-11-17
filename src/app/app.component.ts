@@ -15,7 +15,7 @@ export class AppComponent{
   title = 'Vertex';
 
   userLogged: boolean = true;
-  notification:boolean = true;
+  notification:boolean = false;
   isSideBarExpanded:boolean = false;
 
   constructor(
@@ -50,7 +50,7 @@ export class AppComponent{
   }
 
 
-  openNotifications():void{
+  switchNotifications():void{
     this.notification = !this.notification;
   }
 }
