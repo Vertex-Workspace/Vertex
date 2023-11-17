@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { faMessage, faMagnifyingGlass, faClipboardList, 
   faUser, faGear, faSignOut, faBellSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,5 +15,8 @@ export class SidebarComponent {
   faUser = faUser;
   faGear = faGear;
   faSignOut = faSignOut;
+
+  @Input()
+  isSideBarExpanded!: boolean;
 
 }

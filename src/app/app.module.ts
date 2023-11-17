@@ -5,7 +5,6 @@ import { LoginModule } from './pages/login/login.module';
 import { RegisterModule } from './pages/register/register.module';
 import { TeamsModule } from './pages/teams/teams.module';
 import { ProjectsModule } from './pages/projects/projects.module';
-import { MuralModule } from './pages/mural/mural.module';
 import { InputModule } from './components/reusable-components/input/input.module';
 import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,13 +16,19 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from './components/modals/task/task.module';
 import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
+import { CommonModule } from '@angular/common';
+import { TasksModule } from './pages/tasks/tasks.module';
+import { MuralComponent } from './pages/mural/mural.component';
+import { MuralModule } from './pages/mural/mural.module';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,    
     LoginModule,
     RegisterModule,
     TeamsModule,
@@ -38,7 +43,11 @@ import { TeamInformationsModule } from './pages/team-informations/team-informati
     FontAwesomeModule,
     TaskModule,
     UserSettingsModule,
-    TeamInformationsModule
+    TeamInformationsModule,
+    TasksModule,
+    UserSettingsModule,
+    TeamInformationsModule,
+    ChartModule
   ],
   providers: [
     PersonalizationService,

@@ -13,12 +13,20 @@ import { ProfileComponent } from './pages/user-settings/profile/profile.componen
 import { NotificationsComponent } from './pages/user-settings/notifications/notifications.component';
 import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/teams-settings.component';
 import { SecurityComponent } from './pages/user-settings/security/security.component';
+import { TasksComponent } from './pages/tasks/tasks.component';
+import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
+import { ListComponent } from './pages/tasks/list/list.component';
+import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
     data: { animation: 'loginPage' }
+  },
+  {
+    path:"team-informations",
+    component: TeamInformationsComponent
   },
   {
     path: "home",
@@ -36,6 +44,33 @@ const routes: Routes = [
   {
     path: 'task',
     component: TaskComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: { animation: 'registerPage' }
+  },
+  {
+    path: 'tasks',
+    component: TasksComponent,
+    children: [
+      {
+        path: 'kanban',
+        component: KanbanComponent
+      },
+      {
+        path: 'list',
+        component: ListComponent
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent
+      },
+      {
+        path: 'mural',
+        component: MuralComponent
+      }
+    ],
   },
   {
     path: 'configuracoes',

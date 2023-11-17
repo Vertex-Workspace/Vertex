@@ -1,1 +1,31 @@
-<p>kanban works!</p>
+<section class="screen">
+    <ng-container cdkDropListGroup>
+        <div class="col-container" >
+            <div 
+                [ngClass]="'col'" 
+                *ngFor="let property of categories" 
+                [style.backgroundColor]="property.color"
+                [style.height]="getHeight(property)"
+                cdkDropList 
+                [cdkDropListData]="taskList" 
+                (cdkDropListDropped)="dropCard($event, property)"
+            >
+
+                <h2>{{ property.name }}</h2>
+
+                <div class="col-items">
+
+                    <ng-container *ngFor="let task of taskList">
+                        <app-card 
+                            *ngIf="task.category === property"
+                            [task]="task" 
+                            [cdkDragData]="task" 
+                            cdkDrag
+                        />
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</section>
