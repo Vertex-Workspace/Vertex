@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Task } from 'src/app/models/task';
 import { 
   taskList, 
   cols
 } from '../data-test';
-import { PageSettingsModel } from '@syncfusion/ej2-angular-grids';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
@@ -11,13 +15,18 @@ import { PageSettingsModel } from '@syncfusion/ej2-angular-grids';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  protected pageSettings?: PageSettingsModel;
   protected taskList = taskList;
   protected cols = cols;
 
   ngOnInit(): void {
-    this.pageSettings = { pageSize: 6 };
   }
 
+  dropCard(event: CdkDragDrop<Task[]>): void {
+    moveItemInArray(
+      this.taskList, 
+      event.previousIndex, 
+      event.currentIndex
+    );
+  }
 
 }

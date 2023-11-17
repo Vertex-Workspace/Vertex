@@ -58,14 +58,15 @@ export const categories: any[] = [
       properties: [
         {
           name: 'status',
-          value: 'to-do',
-          header: 'Status'
+          value: 'to-do',  
+          header: 'Status',
+          bgColor: '#FF9D9D',
         },
         {
           name: 'term',
           value: 'asdasdasdas',
           header: 'Prazo'
-        }
+        },
       ],
       // status: 'aaaaaa'
     },
@@ -76,7 +77,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -92,7 +94,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -108,7 +111,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -124,7 +128,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -140,7 +145,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -156,7 +162,13 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D',
+        },
+        {
+          name: 'creator',
+          value: 'Marcos',
+          header: 'Responsável'
         },
         {
           name: 'term',
@@ -172,7 +184,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -188,7 +201,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -204,7 +218,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
@@ -220,7 +235,8 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D',
         },
         {
           name: 'term',
@@ -236,351 +252,55 @@ export const categories: any[] = [
         {
           name: 'status',
           value: 'to-do',
-          header: 'Status'
+          header: 'Status',
+          bgColor: '#FF9D9D'
         },
         {
           name: 'term',
-          value: 'asdasdasdas',
+          value: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
           header: 'Prazo'
         }
       ],
     },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-  ];
+ ];
 
   export const cols = [
     {
+      field: "name",
+      headerText: "Nome",
+      width: '40%',
+      icon: "pi pi-user",
+    },
+    {
       field: "status",
       headerText: "Status",
-      icon: "pi pi-tag"
+      width: '15%',
+      icon: "pi pi-tag",
     },
     {
       field: "creator",
       headerText: "Responsável",
-      icon: "pi pi-user"
+      width: '15%',
+      icon: "pi pi-user",
     },
     {
       field: "term",
       headerText: "Prazo",
-      icon: "pi pi-clock"
-    }
+      width: '15%',
+      icon: "pi pi-clock",
+    },
+    {
+      field: "term",
+      headerText: "Prazo",
+      width: '15%',
+      icon: "pi pi-clock",
+    },
+    {
+      field: "term",
+      headerText: "Prazo",
+      width: '15%',
+      icon: "pi pi-clock",
+    },
   ];
+
+  

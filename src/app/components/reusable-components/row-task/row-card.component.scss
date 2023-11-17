@@ -1,13 +1,36 @@
+@import '../../../../variables';
+
 .card {
-    @apply min-h-[55px] w-full flex;
+    @apply min-w-full flex shadow-sm cursor-pointer;
+    background-color: $secondColor;
 
     .name {
-        @apply w-[40%] p-4 flex items-center;
-        border-right: 1px solid #03030340;
+        @apply min-w-[40%] h-[55px] flex items-center justify-between pl-4 overflow-hidden;
+        border: 1px solid #0303031A;
     }
 
-    .prop {
-        @apply w-[20%] p-4 flex items-center;
-        border-right: 1px solid #03030340;
+    .properties {
+        @apply h-[55px] flex items-center justify-start pl-4;
+        border: 1px solid #0303031A;
+        background-color: $secondColor;
+
+        p {
+            @apply p-[0.15rem] rounded-sm overflow-hidden;
+        }
+
+        
+    }
+
+    .icons {
+        @apply flex gap-3 pr-3;
+
+        .icon {
+            color: $primaryColor;
+            font-size: 1.1rem;
+
+            &:hover {
+                @apply rotate-[20deg];
+            }
+        }
     }
 }

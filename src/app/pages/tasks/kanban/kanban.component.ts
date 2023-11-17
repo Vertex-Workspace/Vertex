@@ -4,6 +4,7 @@ import {
   CdkDragDrop,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
+import { categories, taskList } from '../data-test';
 
 @Component({
   selector: 'app-kanban',
@@ -14,88 +15,8 @@ export class KanbanComponent {
 
   selectedCards ?: Task[];
 
-  categories: any[] = [
-    {
-      name: 'TO-DO',
-      color: '#FFE7E94D',
-      borderColor: '#FF9D9Df3'
-    },
-    {
-      name: 'DOING',
-      color: '#FFF6C54D',
-      borderColor: '#FFD600f3'
-    },
-    {
-      name: 'DONE',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'OUTRA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    }
-  ];
-
-  //ADICIONAR "80" NO FINAL DO HEXADECIMAL DA COLOR -> 50% OPACIDADE
-  //ADICIONAR "DE" NO FINAL DO HEXADECIMAL DA BORDA -> 80%+-
-
-  taskList: Task[] = [
-    {
-      name: 'Tarefa 1',
-      category: this.categories[0]
-    },
-    {
-      name: 'Tarefa 2',
-      category: this.categories[0]
-    },
-    {
-      name: 'Tarefa 3',
-      category: this.categories[0]
-    },
-    {
-      name: 'Tarefa 4',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 5',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 6',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 7',
-      category: this.categories[2]
-    }
-  ];
-
+  categories = categories;
+  taskList = taskList;
 
   specificPropertyArray(property: any): any[] {
     return this.taskList.filter(task => {

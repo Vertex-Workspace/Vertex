@@ -12,8 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { ForeignKeyService, GridModule } from '@syncfusion/ej2-angular-grids';
-
+import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +20,7 @@ import { ForeignKeyService, GridModule } from '@syncfusion/ej2-angular-grids';
     KanbanComponent,
     ListComponent,
     CardComponent,
+    RowCardComponent
    ],
   exports:[
     TasksComponent
@@ -31,11 +31,7 @@ import { ForeignKeyService, GridModule } from '@syncfusion/ej2-angular-grids';
     BrowserModule,
     FontAwesomeModule,
     DragDropModule,
-    FormsModule,
-    GridModule
+    FormsModule
   ],
-  providers: [
-    ForeignKeyService,
-  ]
 })
 export class TasksModule { }

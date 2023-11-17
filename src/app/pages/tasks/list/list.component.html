@@ -1,25 +1,30 @@
 <section>
-    <ejs-grid 
-        [dataSource]="taskList"
-        [pageSettings]='pageSettings'
-        [allowPaging]="true"
-        allowResizing='true'
-    >
-    
-    <e-columns>
+    <div class="table">
+        <div class="thead">
+            <label 
+                *ngFor="let col of cols"
+                [style.min-width]="col.width"
+            >              
+                <h3>
+                    {{col.headerText}}
+                </h3>
+              </label>
+        </div>
 
-        <e-column 
-            *ngFor="let column of taskList[0].properties" 
-            [headerText]="column.header"
-            [field]="column.value" 
-            ></e-column>  
-
-        <e-column 
-            [field]="'name'" 
-            [headerText]="'aaaa'"
-        ></e-column> 
-
-    </e-columns>
-
-    </ejs-grid>
+        <div class="tbody" 
+            cdkDropList 
+            (cdkDropListDropped)="dropCard($event)"
+        >
+            <div class="trow" *ngFor="let task of taskList">
+                <app-row-card
+                    [task]="task"
+                    [cdkDragData]="task"
+                    cdkDrag
+                    cdkDragLockAxis="y"
+                    cdkDragBoundary=".table"
+                ></app-row-card>
+            </div>
+        </div>       
+    </div>
 </section>
+

@@ -1,16 +1,30 @@
 <div class="card">
     <div class="name">
-        {{task.name}}
-    </div>
-    <div class="prop" 
-        *ngFor="let prop of task.properties"
-    >
-        <p *ngIf="hasValue(prop)">
-            {{task.category.name}}
+        <p>
+            {{task.name}}
         </p>
-        <p *ngIf="!hasValue(prop)">
-            -
-        </p>
+        <div class="icons">
+            <ng-container *ngFor="let item of icons">
+                <fa-icon
+                    [icon]="item.icon"
+                    (click)="item.onclick"
+                    class="icon"
+                ></fa-icon>
+            </ng-container>
+        </div>
     </div>
 
+    <ng-container 
+        *ngFor="let col of cols"
+    >
+        <div *ngIf="col.field !== 'name'" 
+            class="properties"
+            [style.min-width]="col.width"
+        >
+            
+            <p [style.backgroundColor]="getPropertyColor(col)">
+                {{ getPropertyValue(col) }}
+            </p>
+        </div>
+    </ng-container>
 </div>
