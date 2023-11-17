@@ -4,7 +4,7 @@
   @apply min-h-[50px] flex pt-12;
 
   .col-container {
-      @apply gap-6 max-w-full min-h-[50px] overflow-auto flex;
+      @apply gap-6 max-w-full min-h-[50px] overflow-auto flex overflow-y-hidden;
 
       .col {
         @apply min-w-[300px] w-[300px] flex flex-col

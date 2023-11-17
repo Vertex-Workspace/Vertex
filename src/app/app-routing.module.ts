@@ -5,20 +5,28 @@ import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/mural/mural.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { TasksComponent } from './pages/tasks/tasks.component';
-import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
-import { ListComponent } from './pages/tasks/list/list.component';
-import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
 import { TeamsComponent } from './pages/teams/teams.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { ProfileComponent } from './pages/user-settings/profile/profile.component';
+import { NotificationsComponent } from './pages/user-settings/notifications/notifications.component';
+import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/teams-settings.component';
+import { SecurityComponent } from './pages/user-settings/security/security.component';
+import { TasksComponent } from './pages/tasks/tasks.component';
+import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
+import { ListComponent } from './pages/tasks/list/list.component';
+import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
     data: { animation: 'loginPage' }
+  },
+  {
+    path:"team-informations",
+    component: TeamInformationsComponent
   },
   {
     path: "home",
@@ -32,6 +40,10 @@ const routes: Routes = [
     path: 'mural',
     component: MuralComponent,
     data: { animation: 'muralPage' }
+  },
+  {
+    path: 'task',
+    component: TaskComponent
   },
   {
     path: 'register',
@@ -68,11 +80,28 @@ const routes: Routes = [
       path: 'aparencia',
       component: AppearanceComponent
       },
-      // {
-      // path: "",
-      // pathMatch: "full",
-      // redirectTo: "aparencia",
-      // },
+      {
+      path: 'perfil',
+      component: ProfileComponent
+      },
+      {
+      path: 'equipes',
+      component: TeamsSettingsComponent
+      },
+      {
+      path: 'notificacoes',
+      component: NotificationsComponent
+      },
+      {
+      path: 'seguranca',
+      component: SecurityComponent
+      },
+      
+      {
+      path: "",
+      pathMatch: "full",
+      redirectTo: "perfil",
+      },
     ]
   },
   {

@@ -37,6 +37,22 @@
         }
     }
 
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+
+        div{
+            @apply flex flex-row;
+        }
+    }
+
+    h2 {
+        @apply text-xl font-bold flex;
+    }
+
+    h3 {
+        @apply text-lg font-bold flex px-3 pt-16;
+    }
+
 // @media screen and (max-width: 1599px){
 //     .list{
 //         @apply flex w-full h-[500px] flex-col gap-[16px];

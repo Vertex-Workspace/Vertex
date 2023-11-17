@@ -1,0 +1,45 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+.bg {
+    @apply flex h-full w-screen flex-col items-center justify-start ;
+}
+
+.title {
+    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
+
+        div {
+            @apply flex w-[15%] items-center justify-start gap-7;
+        }
+
+        p{
+            @apply text-xl font-medium
+        }
+}
+
+.icon {
+    color:$primaryColor !important;
+    @apply text-[18px];
+}
+
+.search {
+    font-size: 1.5rem;
+    // color: 'var(--primaryColor)';
+    color:$primaryColor !important;
+    @apply pr-10;
+}
+
+input {
+    @apply w-full h-full pl-10 rounded-md flex justify-center items-start;
+};
+
+section {
+    @apply h-full w-[100%] flex flex-col pt-10 items-center;
+}
+
+
+span {
+    @apply h-[10%] w-[85%] bg-white rounded-md flex flex-col items-center justify-center shadow-lg;
+    color:$primaryColor;
+}
+

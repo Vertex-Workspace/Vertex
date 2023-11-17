@@ -13,6 +13,7 @@ import { CardComponent } from 'src/app/components/reusable-components/card/card.
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
+import { CalendarModule } from './calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RowCardComponent } from 'src/app/components/reusable-components/row-tas
     BrowserModule,
     FontAwesomeModule,
     DragDropModule,
-    FormsModule
+    FormsModule,
+    CalendarModule
   ],
 })
 export class TasksModule { }

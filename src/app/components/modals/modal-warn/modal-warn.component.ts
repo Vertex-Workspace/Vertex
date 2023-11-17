@@ -10,6 +10,11 @@ export class ModalWarnComponent {
   @Output()
   close = new EventEmitter<Event>();
 
+  @Input()
+  height?: String;
+
+  @Input()
+  width?: String;
 
   closeModal(){
     this.close.emit();

@@ -1,29 +1,29 @@
 <section class="screen">
     <div class="container-custom">
-    <!-- Left side -->
-    <section class="nav space-y-8">
-        <div class="flex items-end">
-            <p class="settingsTitle">Configurações e Preferências</p>
-        </div>
-        <!-- Take each item of the itemsList -->
-        <ng-container *ngFor="let item of itemsList">
-            <ul class="space-y-4 flex flex-col items-center w-full">
-                <!-- Check if the option is clicked, if it is the bg will be changed-->
-                <li class="navOptions" [ngClass]="click === item.id ? 'click' : 'default'"
-                    [routerLink]="[item.id]">
-                        <div class="divIcon" [ngClass]="click === item.id ? 'click' : 'default'">
-                            <fa-icon [ngClass]="click === item.id ? 'click' : 'default'"
-                            [icon]="item.icon" class="icon"></fa-icon>
-                        </div>
+        <!-- Left side -->
+        <section>
+            <div>
+                <p class="title">Configurações e Preferências</p>
+            </div>
+            <!-- Take each item of the itemsList -->
+            <ng-container *ngFor="let item of itemsList">
+                <ul>
+                    <!-- Check if the option is clicked, if it is the bg will be changed-->
+                    <li [ngClass]="click === item.id ? 'clickBlue click' : 'default'" [routerLink]="[item.id]">
+                        <button class="divIcon" [ngClass]="click === item.id ? 'click' : 'default'">
+                            <fa-icon [ngClass]="click === item.id ? 'click' : 'default'" [icon]="item.icon"
+                                class="icon"></fa-icon>
+                        </button>
                         <!-- Take each option inside the itemsList -->
-                        <div class="divOptions" [ngClass]="click === item.id ? 'click' : 'default'">
+                        <button class="divOptions" [ngClass]="click === item.id ? 'click' : 'default'"
+                            (click)="clickOption(item.id)">
                             <p [ngClass]="click === item.id ? 'click' : 'default'">{{item.option}}</p>
-                        </div>
-                </li>
-            </ul>
-        </ng-container>
-    </section>
-        <div class="w-[70%] h-full">
+                        </button>
+                    </li>
+                </ul>
+            </ng-container>
+        </section>
+        <div class="router-outlet">
             <router-outlet></router-outlet>
         </div>
     </div>

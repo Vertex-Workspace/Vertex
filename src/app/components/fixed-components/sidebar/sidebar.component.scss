@@ -5,7 +5,7 @@
 }
 
 .start-mid-items{
-    @apply flex h-[60%] flex-col items-center;
+    @apply flex w-full h-[60%] flex-col items-center;
 }
 
 .top-logo{
@@ -16,20 +16,51 @@
     @apply flex h-[75%] flex-col justify-evenly;
 }
 
+.center-items2{
+    @apply flex w-full h-[75%] flex-col items-start;
+}
 
 .footer-items{
     @apply flex h-[30%] flex-col items-end justify-evenly;
 }
+
+.footer-items2{
+    @apply flex h-[35%] w-full flex-col items-start ;
+}
 ul > li {
-    @apply flex justify-center items-center;
+    @apply h-[10%] flex justify-center items-center;
 }
 
 .logo{
     display: flex;
-    width: 75%;
+    width: 70px;
     height: auto;
     cursor: pointer;
 }
 .div-logo{
     @apply flex justify-center;
 }
+
+.liOpen{
+    @apply w-full h-[80px] flex gap-5 items-center justify-start pl-10;
+    transition: all 0.3s ease-in-out; 
+    color: $secondColor;
+}
+
+.liOpen:hover{
+    @apply w-[95%] scale-[1.05] pl-8 rounded-l-sm bg-[#f3f3f3] text-black;
+    transition: all 0.3s ease-in-out; 
+    cursor: pointer;
+    color: $primaryColor !important;
+
+    fa-icon{
+        @apply text-[1.2rem] ;
+        color: $primaryColor;
+    }
+}
+
+.pOpen{
+    @apply text-[1.2rem] ;
+
+}
+
