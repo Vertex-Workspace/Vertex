@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
-import { faChevronRight,faPaperPlane,
-  faMicrophoneLines,faPaperclip,
-  faCheckDouble,faUsers,faUser,faGlobe,
-  faMinimize,faStar,faCircleUser,faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  faChevronRight, faPaperPlane,
+  faMicrophoneLines, faPaperclip,
+  faCheckDouble, faUsers, faUser, faGlobe,
+  faMinimize, faStar, faCircleUser, faSearch,
+  faTimes
+} from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { getLocaleDateFormat } from '@angular/common';
+
 
 @Component({
   selector: 'app-chat',
@@ -23,11 +28,22 @@ export class ChatComponent {
   faMicrophoneLines = faMicrophoneLines;
   faChevronRight = faChevronRight;
   faPaperPlane = faPaperPlane;
+  faTimes = faTimes;
 
-  rota:String = window.location.href;
-  rotaChat:String = "http://localhost:4200/chat";
+  rota: String = window.location.href;
+  rotaChat: String = "http://localhost:4200/chat";
 
-  constructor(private router:Router){}
+  messageUser: any = "";
+  @Output()
+  chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  conversationOpen: boolean = false;
+
+  cardChat:number=0;
+
+  side: boolean = true;
+
+  constructor(private router: Router) { }
 
 
   users = [
@@ -45,7 +61,8 @@ export class ChatComponent {
           content: 'How are you?',
           time: '12:10'
         }
-      ]
+      ],
+      conversationOpen: false
     },
     {
       name: 'John Doe',
@@ -61,182 +78,50 @@ export class ChatComponent {
           content: 'How are you?',
           time: '12:10'
         }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
-    },{
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ]
+      ],
+      conversationOpen: false
     },
   ]
 
-  minimizeChat(){
-    let rotaAntiga = window.localStorage.getItem('rota');
-    console.log(rotaAntiga);
-    
-    this.rota = rotaAntiga!;
-    this.router.navigate([this.rota]);
+  openConversation(i: number) {
+    this.users[this.cardChat].conversationOpen = false;
+    this.users[i].conversationOpen = true;
+    this.cardChat = i;
   }
 
-  // userMessages = [
-  //   {
-  //     content: 'Boa tarde! Criei uma tarefa nova!',
-  //     time: '12:10'
-  //   },
-  //   {
-  //     content: 'Ela está dentro do projeto Vertex. Coloquei como prazo, 13 de setembro de 2023.',
-  //     time: '12:11'
-  //   },
-  //   {
-  //     content: 'Ok. Já estarei mudando isso.',
-  //     time: '06:59'
-  //   },
-  // ]
+  minimizeChat(value: boolean) {
+    this.chatExpanded.emit(value);
+  }
+
+  messages = [
+    {
+      id: 1,
+      content: 'Hello',
+      time: '12:10'
+    }
+  ]
+
+  submit() {
+
+    if (this.messageUser != "") {
+      let hora = new Date().getHours() + ":" + new Date().getMinutes();
+      if (new Date().getMinutes() < 10) {
+        hora = new Date().getHours() + ":0" + new Date().getMinutes();
+      }
+
+      this.messageUser = {
+        id: this.messages.length + 1,
+        content: this.messageUser,
+        time: hora
+      }
+
+      console.log(this.messageUser.id);
+
+      this.messages.push(this.messageUser)
+      this.side = !this.side;
+      this.messageUser = '';
+    }
+  }
 
   // answers = [
   //   {

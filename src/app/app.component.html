@@ -20,33 +20,12 @@
         <fa-icon [icon]="faMessage"></fa-icon>
     </div>
 
-    <div *ngIf="rota!=rotaChat && miniChatOpen" class="miniChat">
-        <div class="miniChat-header">
-            <div class="miniChat-header-title">
-                <fa-icon [icon]="faUser"></fa-icon>
-                <h2>Nome User</h2>
-            </div>
-            <div class="miniChat-header-close">
-                <fa-icon (click)="expandChat()" [icon]="faExpand"></fa-icon>
-                <fa-icon (click)="openMiniChat()" [icon]="faTimes"></fa-icon>
-            </div>
-        </div>
+    <div *ngIf="rota!=rotaChat && miniChatOpen">
+        <app-minichat (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat>
+    </div>
 
-        <div class="miniChat-main">
-            <div class="miniChat-main-input">
-                <div class="flex border-2 w-[80%] h-full border-gray-300 rounded-md">
-                    <input class="pl-[10px] w-[84%] h-[100%]" type="text" placeholder="Digite sua mensagem" />
-                    <div class="flex gap-2 w-[16%]">
-                        <fa-icon class="section-icons" [icon]="faPaperclip"></fa-icon>
-                        <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
-                    </div>
-                </div>
-                <div class="square-chat">
-                    <fa-icon class="text-base pr-1" [icon]="faPaperPlane"></fa-icon>
-                </div>
-
-            </div>
-        </div>
+    <div class="w-[96%] absolute h-full right-0 top-0" *ngIf="chatExpanded">
+        <app-chat (chatExpanded)="minimizeChat()"></app-chat>
     </div>
 </section>
 

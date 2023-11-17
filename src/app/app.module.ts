@@ -22,6 +22,7 @@ import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { ChartModule } from 'primeng/chart';
 import { ChatModule } from './pages/chat/chat.module';
+import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ChatModule } from './pages/chat/chat.module';
     UserSettingsModule,
     TeamInformationsModule,
     ChartModule,
-    ChatModule
+    ChatModule,
+    MinichatModule
 
   ],
   providers: [

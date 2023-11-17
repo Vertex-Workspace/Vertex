@@ -6,69 +6,49 @@
         <!--     -->
 
         <div class="conversations-div">
-            <h1 class="conversations">ERTEX</h1>
+            <h1 class="conversations">Conversas</h1>
         </div>
 
         <div class="header-right">
 
             <div class="header-right-informations">
                 <div class="leftChatPerson">
-                    <fa-icon class="text-7xl" [icon]="faCircleUser"></fa-icon>
+                    <fa-icon class="section-icons-7xl" [icon]="faCircleUser"></fa-icon>
                 </div>
 
                 <div class="rightChatPerson">
-                    <div class="flex gap-5 items-center">
+                    <div class="divNamesPerson">
                         <p class="userName">Nome user</p>
 
-                        <fa-icon [icon]="faStar"></fa-icon>
+                        <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
                     </div>
 
-                    <div class="flex gap-5 items-center">
+                    <div class="divNamesPerson">
                         <p>Nome equipe</p>
                         |
                         <p>Objetivo equipe</p>
                     </div>
                 </div>
             </div>
-
             <!-- icon minimizar chat -->
-            <fa-icon (click)="minimizeChat()" class="pr-5" [icon]="faMinimize"></fa-icon>
+            <fa-icon (click)="minimizeChat(false)" class="section-icons pr-8" [icon]="faTimes"></fa-icon>
         </div>
     </header>
 
 
-    <div class="w-full h-[87%] gap-[5px] flex ">
+    <main>
         <div class="section-left-chat">
-
-            <div class=" w-[100%] h-[8%] p-3 flex items-center justify-center ">
+            <div class="header-section-left">
                 <div class="search-div">
                     <input id="search" type="text">
                     <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>
                 </div>
             </div>
 
-            <div class="header-section-left">
-                <div class="flex justify-between items-center gap-2 cursor-pointer">
-                    <fa-icon class="section-icons" [icon]="faGlobe"></fa-icon>
-                    <p>Todos</p>
-                </div>
-
-                <div class="flex justify-between items-center gap-2 cursor-pointer">
-                    <fa-icon class="section-icons" [icon]="faUser"></fa-icon>
-                    <p>Individual</p>
-                </div>
-
-                <div class="flex justify-between items-center gap-2 cursor-pointer">
-                    <fa-icon class="section-icons" [icon]="faUsers"></fa-icon>
-                    <p>Grupos</p>
-                </div>
-            </div>
-
             <div class="main-section-left">
-                <ng-container *ngFor="let user of users">
-
-                    <div class="card-chat">
-                        <div class="flex gap-6 items-center w-[70%]">
+                <ng-container *ngFor="let user of users,let i = index">
+                    <div (click)="openConversation(i)" [ngClass]="user.conversationOpen ? 'card-chatOpen' : 'card-chat'">
+                        <div class="user-card-message">
                             <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
                             <div class="flex flex-col">
                                 <p>{{user.name}}</p>
@@ -77,9 +57,9 @@
                         </div>
 
                         <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
-                        <div class="flex items-center justify-center w-[20%]">
+                        <div class="div-time-message">
 
-                            <div class="flex flex-col gap-2 items-center ">
+                            <div class="div-time">
                                 <p>{{user.messages[0].time}}</p>
                                 <fa-icon class="section-icons" [icon]="faCheckDouble"></fa-icon>
                             </div>
@@ -89,33 +69,52 @@
                 </ng-container>
             </div>
 
-            <div class="starred-div">
-                <button class="starred-btn">
-                    <p>Favoritas</p>
-                    <fa-icon class="text-[#fff] text-sm" [icon]="faStar"></fa-icon>
-                </button>
+            <div class="footer-section-left">
+                <div class="text-group-individual">
+                    <fa-icon class="section-icons" [icon]="faGlobe"></fa-icon>
+                    <p>Todos</p>
+                </div>
+
+                <div class="text-group-individual">
+                    <fa-icon class="section-icons" [icon]="faUser"></fa-icon>
+                    <p>Individual</p>
+                </div>
+
+                <div class="text-group-individual">
+                    <fa-icon class="section-icons" [icon]="faUsers"></fa-icon>
+                    <p>Grupos</p>
+                </div>
             </div>
         </div>
 
         <div class="section-right-chat">
-            <div class="pr-[6%] pl-[6%] w-[100%] h-[80%] overflow-auto">
-                
+            <div class="center-div">
+                <div class="h-[10%] min-h-[10%]" *ngFor="let message of messages">
+                    <div [ngClass]="message.id % 2==0 ? 'left' : 'right'">
+                        <div [ngClass]="message.id % 2==0 ? 'answer' : 'messageUser'">
+                            <p class="pChat">{{message.content}}</p>
+                        </div>
+                        <div>
+                            <p class="pChat">{{message.time}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="w-[65%] h-[20%] flex items-center gap-3">
+            <div class="high-input-div">
                 <div class="div-input-chat">
-                    <input class="pl-[15px] w-[90%] h-[100%]" placeHolder="Digite aqui...">
+                    <input class="pl-[15px] w-[90%] h-[100%]" [(ngModel)]="messageUser" placeHolder="Digite aqui...">
                     <div class="flex gap-4">
                         <fa-icon class="section-icons" [icon]="faPaperclip"></fa-icon>
                         <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
                     </div>
                 </div>
-                <div class="square-chat">
+                <button (click)="submit()" class="square-chat">
                     <fa-icon class="text-lg pr-1" [icon]="faPaperPlane"></fa-icon>
-                </div>
+                </button>
             </div>
         </div>
-    </div>
+    </main>
 
 
 </section>

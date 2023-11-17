@@ -18,6 +18,7 @@ import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons
   ]
 })
 export class AppComponent{
+[x: string]: any;
   title = 'Vertex';
   faMessage = faMessage;
   faTimes = faTimes;
@@ -30,6 +31,8 @@ export class AppComponent{
   userLogged: boolean = true;
 
   miniChatOpen: boolean = false;
+
+  chatExpanded: boolean = false;
   
   isSideBarExpanded:boolean = false;
 
@@ -69,10 +72,12 @@ export class AppComponent{
     document.documentElement.style.setProperty('--font-size', fontSize);
   }
 
-  expandChat(){
-    window.localStorage.setItem('rota', this.rotaAtual);
-    this.rota = "http://localhost:4200/chat"
-    this.router.navigate(['/chat']);
+  expandChat():boolean{
+    return this.chatExpanded = !this.chatExpanded;
+  }
+
+  minimizeChat():boolean{
+    return this.chatExpanded = !this.chatExpanded;
   }
 
   openMiniChat(){
