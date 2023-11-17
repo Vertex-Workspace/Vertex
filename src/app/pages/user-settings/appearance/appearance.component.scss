@@ -2,40 +2,121 @@
 @import '../../../../styles.scss';
 
 
-//Falar com ana sobre isso
-* {
-    margin: 0;
-    padding: 0;
-    background-color: $secondColor;
+.bg {
+    @apply flex h-full w-screen flex-col items-center justify-start ;
 }
 
-.bg {
-    @apply  flex h-full w-screen;
+.title {
+    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
+
+        div {
+            @apply flex w-[25%] items-center justify-start gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium;
+        }
 }
 
 .icon {
     color: $primaryColor;
+}
+
+.size {
+    @apply text-[18px];
+}
+
+.icon-dark {
+    color: $secondColor;
+}
+
+.themes {
+    @apply w-[85%] h-[60%] flex flex-col justify-between items-start;  
+
+    p:first-child{
+     @apply pt-2;
+    }
+}
+
+.box-modes {
+    @apply flex w-full h-[45%] bg-[#EAEFF8] items-center pl-3 border border-[#373131] rounded;
+
+    .mode {
+        @apply flex h-[85%] w-[20%];
+
+        p{
+            @apply text-sm py-3
+        }
+    }
+}
+
+.colors-circle {
+    @apply rounded-full w-[60px] h-[60px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+}
+
+.colors {
+    @apply flex flex-col w-[70%] h-full justify-evenly pb-2;
+
+    p {
+        @apply pl-14;
+    };
+
+    div:first-child {
+        @apply flex h-full flex-col place-content-evenly;
+    };
+
+    .colors-row {
+        @apply flex flex-row justify-evenly;
+    }
 
 }
 
-.userInfop {
-    @apply text-xl
-    flex flex-col justify-center items-center;
-    font-family: $titleFont;
+.icon-themes {
+    @apply px-3 py-3;
 }
 
-.rightSide {
-    @apply 
-    w-[100%]
-    h-[100%]
-    flex items-center
-    justify-center flex-col
-    space-y-8;
+.text-preferences {
+    @apply  w-[85%] h-[30%];
+
+    .writing {
+        @apply w-full h-[40%] flex py-3;
+
+        p:nth-child(2){
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[30%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-md h-[30%];
+        }
+    }
 }
 
+.accessibility {
+    @apply flex;
 
-.input {
-    @apply bg-white
-     rounded-r-sm
-     placeholder-slate-400 
+    p{
+       @apply px-3 text-sm flex items-center justify-center; 
+    }
+}
+
+.bg-light{
+    background: linear-gradient(to right bottom, $secondColor 50%, $primaryColor 50%);
+}
+
+.bg-dark{
+    background: linear-gradient(to bottom right, $primaryColor 50%, $secondColor 50%);
+}
+
+.unselected {
+    @apply opacity-25;
+}
+
+p{
+    color: $primaryColor;
 }

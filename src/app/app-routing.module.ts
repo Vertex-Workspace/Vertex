@@ -9,11 +9,14 @@ import { TeamInformationsComponent } from './pages/team-informations/team-inform
 import { TeamsComponent } from './pages/teams/teams.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { ProfileComponent } from './pages/user-settings/profile/profile.component';
+import { NotificationsComponent } from './pages/user-settings/notifications/notifications.component';
+import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/teams-settings.component';
+import { SecurityComponent } from './pages/user-settings/security/security.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
 import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
-
 
 const routes: Routes = [
   {
@@ -77,11 +80,28 @@ const routes: Routes = [
       path: 'aparencia',
       component: AppearanceComponent
       },
-      // {
-      // path: "",
-      // pathMatch: "full",
-      // redirectTo: "aparencia",
-      // },
+      {
+      path: 'perfil',
+      component: ProfileComponent
+      },
+      {
+      path: 'equipes',
+      component: TeamsSettingsComponent
+      },
+      {
+      path: 'notificacoes',
+      component: NotificationsComponent
+      },
+      {
+      path: 'seguranca',
+      component: SecurityComponent
+      },
+      
+      {
+      path: "",
+      pathMatch: "full",
+      redirectTo: "perfil",
+      },
     ]
   },
   {

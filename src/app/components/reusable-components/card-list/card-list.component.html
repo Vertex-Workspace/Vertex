@@ -16,10 +16,17 @@
                     <span class="text-sm">Visualizar Informações</span>
                     <div>
                         <i class="pi pi-comment"></i>
-                        <i class="pi pi-trash"></i>
+                        <i class="pi pi-trash" (click)="deleteTeam()"></i>
                     </div>
                 </div>
             </div>
         </div>
     </ng-container>
 </div>
+
+<app-confirm-modal *ngIf="delete" [width]="'500px'" [height]="'300px'" [title]="'a equipe'" (close)="deleteTeam()">
+</app-confirm-modal>
+
+
+
+
