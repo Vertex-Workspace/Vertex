@@ -5,7 +5,7 @@
     }
     .card{
         @apply flex w-[98%] min-h-[200px] bg-white shadow-lg rounded-lg flex-row;
-        font-family: $primaryFont;
+        font-family: $fontFamily;
         color: $primaryColor;
     
         .image {
@@ -60,7 +60,7 @@
 //     }
 //     .card{
 //         @apply flex w-[98%] min-h-[150px] bg-white shadow-lg rounded-lg flex-row;
-//         font-family: $primaryFont;
+//         font-family: $fontFamily;
 //         color: $primaryColor;
     
 //         .image {

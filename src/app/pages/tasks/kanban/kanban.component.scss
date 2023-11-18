@@ -11,8 +11,7 @@
         gap-4 p-4 shadow-md;
         
           h2 {
-            @apply text-xl text-[#545B63] ml-3;
-            font-family: $titleFont;
+            @apply text-[#545B63] ml-3;
           }
 
           .col-items {

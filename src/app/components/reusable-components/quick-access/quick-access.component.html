@@ -1,86 +1,58 @@
-<section  [ngClass]="{'section-start': typeString === 'project', 'section-end': typeString === 'home'}">
-    <div class="card-workspace">
-        <div>
-            <p *ngIf="typeString === 'home'">Meu espaço de trabalho</p>
-            <p *ngIf="typeString === 'project'">Espaço de trabalho de </p>
-        </div>
-        <div>
-            <div class="grid-card-workspace">
-                <div>
-                    <div class="card-workspace-label">
-                        <i class="pi pi-th-large" style="font-size: 1rem"></i>
-                        <p>Kanban</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="card-workspace-label">
-                        <i class="pi pi-calendar" style="font-size: 1rem"></i>
-                        <p>Calendário</p>
-                    </div>
+<!-- QUICK ACCESS COMPONENT -->
+<section [ngStyle]="{'align-items': typeString === 'project' ? 'flex-start' : 'flex-end'}">
 
-                </div>
-            </div>
-            <div class="grid-card-workspace">
-                <div class="div-grid-space-work">
-                    <div class="card-workspace-label">
-                        <i class="pi pi-list" style="font-size: 1rem"></i>
-                        <p>Linhas</p>
-                    </div>
-                </div>
+    <!-- CARD WORKSPACE -->
+    <div class="card-workspace">
+        <div class="workspace-title">
+            <h5 *ngIf="typeString === 'home'">Meu espaço de trabalho</h5>
+            <h5 *ngIf="typeString === 'project'">Espaço de trabalho de </h5>
+        </div>
+        <div class="workspace-options">
+            <div class="grid-card-workspace" *ngFor="let section of workSpace">
                 <div>
                     <div class="card-workspace-label">
-                        <i class="pi pi-chart-bar" style="font-size: 1rem"></i>
-                        <p>Mural</p>
+                        <i class="{{section.icon}}"></i>
+                        <p class="large-text">{{section.label}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- CHARTS -->
     <div class="charts">
         <div class="card-spaces">
-            <label>Seu Desempenho Pessoal</label>
-            <div class="card-chart-background">
+            <p class="medium-text">Seu Desempenho Pessoal</p>
+            <div>
                 <div class="card-chart">
                     <p-chart type="pie" [data]="basicData" style="width:70%"></p-chart>
                 </div>
             </div>
         </div>
         <div class="card-spaces">
-            <label>Tarefas em Cada Equipe</label>
-            <div class="card-chart-background">
+            <p class="medium-text">Tarefas em Cada Equipe</p>
+            <div>
                 <div class="card-chart">
                     <p-chart type="pie" [data]="basicData" style="width:70%"></p-chart>
                 </div>
             </div>
-            <a>Visualizar todos os gráficos</a>
+            <a class="regular-text">Visualizar todos os gráficos</a>
         </div>
     </div>
-    <div class="recently-teams">
-        <h2 *ngIf="typeString === 'home'">Equipes Recentes</h2>
-        <h2 *ngIf="typeString === 'project'">Projetos Recentes de ...</h2>
 
-        <!-- CHANGE AFTER LOGIC -->
+    <!-- RECENTLY TEAMS -->
+    <div class="recently-teams">
+        <h6 class="title" *ngIf="typeString === 'home'">Equipes Recentes</h6>
+        <h6 class="title" *ngIf="typeString === 'project'">Projetos Recentes de ...</h6>
+
         <div class="div-recently-teams">
-            <div class="recently-teams-team">
-                <div class="recently-team-image"><img src="../../../assets/teste/teste.jpg" alt=""></div>
-                <div class="recently-team-info">
-                    <h2 class="recently-team-name">AKMO</h2>
-                    <p>11/10/2023</p>
+            <div class="recently-teams-team" *ngFor="let team of recentsTeams">
+                <div class="recently-team-image">
+                    <img src="{{team.image}}" alt="">
                 </div>
-            </div>
-            <div class="recently-teams-team">
-                <div class="recently-team-image"><img src="../../../assets/teste/teste.jpg" alt=""></div>
                 <div class="recently-team-info">
-                    <h2 class="recently-team-name">AKMO</h2>
-                    <p>11/10/2023</p>
-                </div>
-            </div>
-            <div class="recently-teams-team">
-                <div class="recently-team-image"><img src="../../../assets/teste/teste.jpg" alt=""></div>
-                <div class="recently-team-info">
-                    <h2 class="recently-team-name">AKMO</h2>
-                    <p>11/10/2023</p>
+                    <p class="large-text">{{team.name}}</p>
+                    <p class="regular-text">{{team.date}}</p>
                 </div>
             </div>
         </div>

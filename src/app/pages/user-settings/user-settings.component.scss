@@ -26,11 +26,6 @@ li {
     flex justify-start w-[70%] h-full items-center;
 }
 
-.title{
-    @apply text-2xl font-bold;
-    font-family: $titleFont;   
-}
-
 ul {
     @apply 
     flex flex-col w-full h-[8%] pt-6;

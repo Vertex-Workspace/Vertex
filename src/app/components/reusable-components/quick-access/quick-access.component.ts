@@ -30,4 +30,17 @@ export class QuickAccessComponent implements OnInit {
           ]
       };
   }
+
+  workSpace: any[] = [
+    {icon: "pi pi-th-large", label: "Kanban"},
+    {icon: "pi pi-calendar", label: "Calendário"},
+    {icon: "pi pi-list", label: "Linhas"},
+    {icon: "pi pi-chart-bar", label: "Mural"},
+  ]
+
+  recentsTeams: any[] = [
+    { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"},
+    { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"},
+    { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"}
+  ]
 }

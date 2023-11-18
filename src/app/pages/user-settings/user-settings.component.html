@@ -3,20 +3,20 @@
         <!-- Left side -->
         <section>
             <div>
-                <p class="title">Configurações e Preferências</p>
+                <h6>Configurações e Preferências</h6>
             </div>
             <!-- Take each item of the itemsList -->
             <ng-container *ngFor="let item of itemsList">
                 <ul>
                     <!-- Check if the option is clicked, if it is the bg will be changed-->
-                    <li [ngClass]="click === item.id ? 'clickBlue click' : 'default'" [routerLink]="[item.id]">
+                    <li [ngClass]="click === item.id ? 'clickBlue click' : 'default'" [routerLink]="[item.id]" (click)="clickOption(item.id)">
                         <button class="divIcon" [ngClass]="click === item.id ? 'click' : 'default'">
                             <fa-icon [ngClass]="click === item.id ? 'click' : 'default'" [icon]="item.icon"
                                 class="icon"></fa-icon>
                         </button>
                         <!-- Take each option inside the itemsList -->
                         <button class="divOptions" [ngClass]="click === item.id ? 'click' : 'default'"
-                            (click)="clickOption(item.id)">
+>
                             <p [ngClass]="click === item.id ? 'click' : 'default'">{{item.option}}</p>
                         </button>
                     </li>
