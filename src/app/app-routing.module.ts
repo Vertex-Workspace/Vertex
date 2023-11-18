@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { provideRouter, RouterModule, Routes } from '@angular/router';
 import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
-import { MuralComponent } from './pages/mural/mural.component';
+import { MuralComponent } from './pages/tasks/mural/mural.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';

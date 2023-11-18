@@ -18,8 +18,6 @@ import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { CommonModule } from '@angular/common';
 import { TasksModule } from './pages/tasks/tasks.module';
-import { MuralComponent } from './pages/mural/mural.component';
-import { MuralModule } from './pages/mural/mural.module';
 import { ChartModule } from 'primeng/chart';
 import { NotificationModule } from './components/modals/notification/notification.module';
 
@@ -34,7 +32,6 @@ import { NotificationModule } from './components/modals/notification/notificatio
     RegisterModule,
     TeamsModule,
     ProjectsModule,
-    MuralModule,
     InputModule,
     ButtonModule,
     AppRoutingModule,
@@ -49,7 +46,7 @@ import { NotificationModule } from './components/modals/notification/notificatio
     UserSettingsModule,
     TeamInformationsModule,
     ChartModule,
-    NotificationModule
+    NotificationModule,
   ],
   providers: [
     PersonalizationService,

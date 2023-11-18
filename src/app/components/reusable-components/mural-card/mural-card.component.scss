@@ -1,0 +1,55 @@
+@import '../../../../variables';
+
+.card {
+    @apply w-[380px] h-[200px] bg-white shadow-md rounded-sm 
+            p-4 flex cursor-move transition-colors;
+    border: solid lightgrey 1px;
+    color: $primaryColor;
+
+    &:hover {
+        @apply bg-zinc-50 transition-colors;
+
+        .right {
+
+            .icons {
+                @apply bg-zinc-50 transition-colors;
+            }
+
+        }
+    }
+
+    .left {
+        @apply flex flex-col gap-4 h-full w-full;
+
+        .title {
+            @apply text-xl;
+        }
+
+        .text {
+            @apply text-justify h-full w-full;
+
+            p {
+                @apply h-[70%] w-full overflow-hidden;
+            }
+        }
+    }
+
+    .right {
+        @apply w-[19%] h-full flex flex-col items-end justify-between;
+
+        .date {
+            @apply text-sm;
+        }
+
+        .icons {
+            @apply w-full h-1/2 bg-white flex flex-col gap-4 
+                    pl-3 pb-1 items-end justify-end transition-colors;
+
+                    i {
+                        font-size: 1rem;
+                        cursor: pointer;
+                    }
+        }
+
+    }
+}

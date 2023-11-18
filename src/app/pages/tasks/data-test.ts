@@ -73,6 +73,7 @@ export const categories: any[] = [
     {
       name: 'Tarefa 2',
       category: categories[0],
+      description: "Adipisicing elit ea Lorem laborum consectetur ex cillum. Consectetur sit aliqua aute minim laboris dolor ex magna dolore ad irure. Sint occaecat culpa tempor exercitation. Consectetur enim mollit in tempor consequat minim. Exercitation laborum id sunt voluptate adipisicing mollit consequat. Do tempor qui labore laboris ipsum reprehenderit eiusmod.",
       properties: [
         {
           name: 'status',

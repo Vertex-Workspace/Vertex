@@ -14,14 +14,20 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
 import { CalendarModule } from './calendar/calendar.module';
+import { MuralComponent } from './mural/mural.component';
+import { ResizableModule } from 'angular-resizable-element';
+import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
 
 @NgModule({
   declarations: [
     TasksComponent,
     KanbanComponent,
     ListComponent,
+    MuralComponent,
     CardComponent,
-    RowCardComponent
+    RowCardComponent,
+    MuralCardComponent
+  
    ],
   exports:[
     TasksComponent
@@ -33,7 +39,8 @@ import { CalendarModule } from './calendar/calendar.module';
     FontAwesomeModule,
     DragDropModule,
     FormsModule,
-    CalendarModule
+    CalendarModule,
+    ResizableModule
   ],
 })
 export class TasksModule { }
