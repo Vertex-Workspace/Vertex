@@ -7,12 +7,13 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { TaskComponent } from 'src/app/components/modals/task/task.component';
 import { RouterModule } from '@angular/router';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from './calendar/calendar.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PropertiesModule } from 'src/app/components/modals/properties/properties.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CalendarModule } from './calendar/calendar.module';
     FontAwesomeModule,
     DragDropModule,
     FormsModule,
-    CalendarModule
+    CalendarModule,
+    PropertiesModule
   ],
 })
 export class TasksModule { }

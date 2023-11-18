@@ -1,1 +1,52 @@
-<p>properties works!</p>
+<div class="modal-overlay">
+    <div class="modal" [style.height]="height" [style.width]="width">
+
+        <!-- Properties and X button -->
+        <div class="exitModal">
+            <div>
+                <fa-icon [icon]="faArrowLeft" class="icon"></fa-icon>
+                <h2>Propriedades</h2>
+            </div>
+            <div>
+                <fa-icon [icon]="faXmark" class="icon" (click)="closeModal()"></fa-icon>
+            </div>
+        </div>
+
+        <!-- Search and properties -->
+        <div class="ng-contentDiv">
+            <span class="p-input-icon-right">
+                <input type="search" placeholder="Digite o que procura..." />
+                <i class="pi pi-search search"></i>
+            </span>
+
+            <!-- Visible and invisible -->
+            <div class="visible-unvisible">
+                <ng-container *ngFor="let item of propertiesList; index as i">
+                    <p>{{item.status}}</p>
+                    <div class="visible" [ngClass]="item.status === 'visible' ? '' : 'opacity'">
+                        <div>
+                            <div>
+                                <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                                <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                                <fa-icon [icon]="item.icon2" class="icon pl-2"></fa-icon>
+                            </div>
+                            <p>{{item.name}}</p>
+                        </div>
+                        <div>
+                            <fa-icon [icon]="item.icon" class="icon" (click)="changeStatus(i)"></fa-icon>
+                            <fa-icon [icon]="faGear" class="icon" (click)="statusConfig()"></fa-icon>
+                            <fa-icon [icon]="faTrashCan" class="icon"></fa-icon>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="new-property">
+                <fa-icon [icon]="faPlus" class="icon" (click)="openEditModal()"></fa-icon>
+                <p>Adicionar propriedade</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-edit-properties [height]="'600px'" [width]="'450px'" *ngIf="editModal"></app-edit-properties>
+<app-status [height]="'600px'" [width]="'350px'" *ngIf="modalStatus"></app-status>

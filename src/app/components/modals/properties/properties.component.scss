@@ -1,0 +1,88 @@
+@import '../../../../variables';
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+
+}
+
+.exitModal {
+    @apply flex w-full justify-between;
+    color: $primaryColor;
+
+    div:first-child {
+        @apply w-1/2 flex items-center;
+    }
+}
+
+h2 {
+    @apply text-[1.5rem] font-bold cursor-pointer pl-3;
+}
+
+.modal {
+    @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
+    items-end justify-start text-center p-8 border-t-8;
+    border-color: $primaryColor;
+}
+
+.ng-contentDiv{
+    @apply w-full h-full flex flex-col items-center pt-6;
+}
+
+h2 {
+    @apply text-xl font-bold;
+}
+
+.text-align {
+    @apply flex items-center justify-center w-full h-full flex-col pt-16;   
+}
+
+input {
+    @apply w-full h-full pl-10 rounded-md flex justify-center items-start shadow-2xl;
+};
+
+span {
+    @apply w-full h-[50px];
+}
+
+.icon {
+    color: $primaryColor;
+}
+
+.visible-unvisible {
+    @apply w-full h-[85%] pt-10 border-[#092C4C] border-b;
+}
+
+.visible {
+    @apply w-full h-[10%] bg-[#EAEFF8] border-2 flex flex-row justify-between;
+
+    div:first-child {
+        @apply flex w-[70%] pr-3 items-center;
+
+        div{
+            @apply pl-3 w-[29%] flex justify-between;
+        }
+
+    }
+
+    div:last-child {
+        @apply flex w-[30%] justify-between pr-3;
+    }
+}
+
+p{
+    @apply flex justify-start items-start;
+    color:$primaryColor;
+}
+
+.new-property {
+   @apply flex w-full items-center;
+
+   p{
+    @apply pl-3
+   }
+}
+
+.opacity{
+    @apply opacity-25;
+}
+
+

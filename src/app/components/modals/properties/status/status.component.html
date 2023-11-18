@@ -1,0 +1,30 @@
+<div class="modal-overlay">
+    <div class="modal" [style.height]="height" [style.width]="width">
+
+        <!-- Properties and X button -->
+        <div class="exitModal">
+            <div>
+                <fa-icon [icon]="faArrowLeft" class="icon"></fa-icon>
+                <h2>Status</h2>
+            </div>
+        </div>
+
+        <div class="properties">
+            <ng-container *ngFor="let status of statusList">
+                <div class="main-property">
+                    <p>{{status.name}}</p>
+                    <div>
+                        <fa-icon [icon]="faPaintBrush" class="icon"></fa-icon>
+                        <fa-icon [icon]="faTrashCan" class="icon"></fa-icon>
+                    </div>
+                </div>
+                <ng-container *ngFor="let name of status.properties">
+                    <div>
+                        <p>{{name.name}}</p>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

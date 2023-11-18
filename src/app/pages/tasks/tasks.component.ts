@@ -16,6 +16,7 @@ export class TasksComponent {
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
+  propertiesOpen: boolean = false;
 
   menuItems = [
     { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
@@ -27,7 +28,7 @@ export class TasksComponent {
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
-    { id: 'properties', iconClass: 'pi pi-tags', click: () => console.log('func') },
+    { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
   ];
 
   toggleSearchBar(): void {
@@ -48,5 +49,9 @@ export class TasksComponent {
 
   onInputType(): void {
 
+  }
+
+  openPropertiesModal(): void {
+    this.propertiesOpen = true;
   }
 }

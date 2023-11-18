@@ -1,1 +1,48 @@
-<p>edit-properties works!</p>
+<div class="modal-overlay">
+    <div class="modal" [style.height]="height" [style.width]="width">
+
+        <!-- Properties and X button -->
+        <div class="exitModal">
+            <div>
+                <h2>Edite sua propriedade</h2>
+            </div>
+            <div>
+                <fa-icon [icon]="faXmark" class="icon"></fa-icon>
+            </div>
+        </div>
+
+        <div class="task-name">
+            <p>Nome da tarefa</p>
+        </div>
+
+        <section>
+            <p>Tipo de dado</p>
+            <div class="properties-types">
+                <ng-container *ngFor="let type of propertyTypes; index as i">
+                    <div [ngClass]="type.value === true ? '' : 'opacity' "
+                    (click)="selectValue(i)">
+                        <fa-icon [icon]="type.icon" class="icon"></fa-icon>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="properties-answers">
+                <div *ngFor="let check of checkboxList; index as i" class="checkboxes">
+                    <fa-icon [icon]="faSquare" [ngClass]="check.value ? 'checkBox-unselected' : 'checkBox-selected'"
+                        (click)="defineValue(i)"></fa-icon>
+                    <p>{{check.p}}</p>
+                </div>
+                <div class="value-input">
+                    <p *ngIf="openInput">Valor padrão:</p>
+                    <input *ngIf="openInput">
+                </div>
+            </div>
+        </section>
+
+        <div class="delete">
+            <fa-icon [icon]="faTrashCan" class="trash-icon"></fa-icon>
+            <p>Excluir propriedade</p>
+        </div>
+
+    </div>
+</div>

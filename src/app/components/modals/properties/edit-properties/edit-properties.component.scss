@@ -1,0 +1,103 @@
+@import '../../../../../variables';
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+
+}
+
+.exitModal {
+    @apply flex w-full justify-between;
+    color: $primaryColor;
+
+    div:first-child {
+        @apply w-[90%] flex items-center;
+    }
+}
+
+h2 {
+    @apply text-[1.5rem] font-bold cursor-pointer pl-3;
+}
+
+.modal {
+    @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
+    items-end justify-start text-center p-8 border-t-8;
+    border-color: $primaryColor;
+}
+
+.icon {
+    color: $primaryColor;
+    font-size: 3rem;
+}
+
+.checkBox-selected {
+    color: $primaryColor;
+    font-size: 1.5rem;
+    @apply opacity-25;
+}
+
+.checkBox-unselected {
+    color: $primaryColor;
+    font-size: 1.5rem;
+}
+
+
+.task-name{
+    @apply w-full h-[10%] border-b border-[#092C4C] pt-3 flex items-end justify-start;
+
+    p{
+        color:$primaryColor
+    }
+}
+
+.properties-types {
+    @apply pt-3 w-full h-[50%] grid grid-cols-3 justify-center items-center;
+
+    div{
+        @apply w-[80px] h-[80px] bg-[#EAEFF8] flex justify-center items-center;
+    }
+}
+
+.opacity{
+    @apply opacity-25;
+}
+
+.properties-answers {
+    @apply w-full h-[20%] pt-3;
+
+
+    div:last-child{
+        @apply flex flex-row;
+    }
+}
+
+.checkboxes{
+    @apply flex flex-row items-center gap-2;
+}
+
+.value-input{
+    @apply flex flex-row gap-2 ;
+}
+
+input {
+    @apply w-[200px] h-[20px] pt-3 pl-10 rounded-md flex justify-center items-start shadow-2xl;
+};
+
+p{
+    color: $primaryColor;
+}
+
+.delete {
+    @apply w-full h-[10%] border-t border-[#092C4C] flex items-center gap-2;
+}
+
+.trash-icon{
+    font-size:1rem;
+    color:$primaryColor;
+}
+
+section{
+    @apply w-[90%] h-full items-center;
+
+    p:first-child {
+        @apply pr-10 pt-4;
+    }
+}
