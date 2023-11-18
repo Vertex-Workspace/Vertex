@@ -2,57 +2,52 @@
 @import '../../../styles.scss';
 
 
-* {
-    margin: 0;
-    padding: 0;
-    background-color: $secondColor;
-}
-
-
 .screen{
     @apply flex w-screen h-full justify-center items-center;
+
+    .container-custom{
+        @apply flex w-[90%] h-full;
+
+        section {
+            @apply w-[25%] h-[90%] border-r-2 border-solid border-[#96A4B0] flex flex-col;
+
+            ul {
+                @apply 
+                flex flex-col w-full h-[8%] pt-6;
+            
+                li {
+                    @apply
+                    flex justify-start w-[70%] h-full items-center;
+
+                    .divIcon {
+                        @apply flex w-[30%] h-full justify-center items-center;
+                        background-color: $secondColor;
+                    }
+                    
+                    .divOptions {
+                        @apply flex w-[70%] h-full items-center
+                    }
+                }
+            }
+        }
+        .router-outlet {
+            @apply w-[75%] h-full flex justify-end;
+        }
+    }
 }
 
-.container-custom{
-    @apply flex w-[90%] h-full;
-}
+
 
 .icon {
     color: $primaryColor
 }
-
-li {
-    @apply
-    flex justify-start w-[70%] h-full items-center;
-}
-
-ul {
-    @apply 
-    flex flex-col w-full h-[8%] pt-6;
-}
-
-section {
-    @apply w-[25%] h-[90%] border-r-2 border-solid border-[#96A4B0] flex flex-col;
-}
-
-.divIcon {
-    @apply flex w-[30%] h-full justify-center items-center;
-    background-color: $secondColor;
-
-}
-
-.divOptions {
-    @apply flex w-[70%] h-full items-center
-}
-
 .click {
-    background-color: #D9D9D9;
+    background-color: $emphasis;
     @apply rounded-r-sm;
 }
 
 .default {
     background-color: $secondColor;
-
 }
 
 .clickBlue {
@@ -60,9 +55,7 @@ section {
     border-color: $primaryColor;
 }
 
-.router-outlet {
-    @apply w-[75%] h-full flex justify-end;
-}
+
 
 
 
