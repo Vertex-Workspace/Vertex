@@ -12,7 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-
+import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
+import { CalendarModule } from './calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     KanbanComponent,
     ListComponent,
     CardComponent,
+    RowCardComponent
    ],
   exports:[
     TasksComponent
@@ -30,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FontAwesomeModule,
     DragDropModule,
-    FormsModule
+    FormsModule,
+    CalendarModule
   ],
 })
 export class TasksModule { }

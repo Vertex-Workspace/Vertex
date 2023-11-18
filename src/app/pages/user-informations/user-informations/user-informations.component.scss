@@ -1,0 +1,7 @@
+section{
+    @apply flex w-screen h-full justify-center items-center; 
+}
+
+.main-div{
+    @apply flex flex-col w-[90%] h-full;
+}

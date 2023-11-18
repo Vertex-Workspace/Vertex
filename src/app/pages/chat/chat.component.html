@@ -89,7 +89,7 @@
 
         <div class="section-right-chat">
             <div class="center-div">
-                <div class="h-[10%] min-h-[10%]" *ngFor="let message of messages">
+                <div class="h-[20%] min-h-[20%]" *ngFor="let message of messages">
                     <div [ngClass]="message.id % 2==0 ? 'left' : 'right'">
                         <div [ngClass]="message.id % 2==0 ? 'answer' : 'messageUser'">
                             <p class="pChat">{{message.content}}</p>

@@ -1,0 +1,137 @@
+@import "../../../../variables";
+
+section {
+    @apply flex w-full h-full flex-col;
+    color: $primaryColor;
+}
+
+.header-calendar {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    text-align: center;
+
+    .title {
+        @apply flex flex-col text-3xl;
+        div {
+            @apply flex flex-row justify-center pt-2 items-center;
+
+            fa-icon {
+                color: $primaryColor;
+            }
+
+            span {
+                @apply pl-4;
+                font-size: 20px;
+            }
+        }
+    }
+
+    button {
+        @apply flex h-full w-24 justify-between items-center;
+    }
+}
+
+.calendar {
+    @apply flex w-full h-full pt-8;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+
+    text-align: center;
+
+    .days-of-week {
+        @apply text-xl pb-4;
+        border: $borderBottom;
+        border-top: none;
+    }
+
+    .calendar-rows{
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-day {
+        @apply flex p-2 flex-col;
+        min-height: 150px;
+        border: $borderBottom;
+
+        .day-informations {
+            @apply flex h-[20%] w-full justify-end;
+
+            div{
+                @apply w-8 h-7 rounded-full;
+            }
+        }
+
+        .tasks-informations {
+            @apply flex w-full h-[80%] items-center;
+
+            .tasks-link-informations{
+                @apply flex w-full h-1/2 rounded-sm items-center justify-evenly;
+                background-color: $primaryColor;
+                color: $secondColor;
+            }
+            .tasks-link-informations:hover{
+                opacity: 0.8;
+                cursor: pointer;
+            }
+        }
+        .tasks-list-in-calendar{
+            @apply flex flex-col gap-2 pt-2;
+            color: $primaryColor;
+        
+        
+
+            .card-list-task-calendar{
+                @apply flex w-full h-20 bg-white rounded-sm p-3;
+
+            }
+        }
+
+    }
+
+    .day-not-month {
+        color: #aaa;
+    }
+
+    .today {
+        background-color: $primaryColor;
+        color: $secondColor;
+    }
+}
+
+
+
+.model-show-tasks{
+    h2{
+        @apply text-3xl pb-8;
+        color: $primaryColor;
+    }
+    .div-tasks{
+        @apply w-full h-[80%] flex flex-col gap-4;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .card-task{
+            @apply flex w-full flex-row items-center justify-between px-8;
+            min-height: 70px;
+            height: 70px;
+            border-bottom: $borderBottom;
+        }
+
+    }
+
+}
+
+
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-placeholder {
+  opacity: 50%;
+}

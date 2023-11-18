@@ -34,6 +34,8 @@ export class AppComponent{
 
   chatExpanded: boolean = false;
   
+  notification:boolean = false;
+
   isSideBarExpanded:boolean = false;
 
   rota:String = window.location.href;
@@ -83,4 +85,9 @@ export class AppComponent{
   openMiniChat(){
     this.miniChatOpen = !this.miniChatOpen;
   }
+
+  switchNotifications():void{
+    this.notification = !this.notification;
+  }
 }
+

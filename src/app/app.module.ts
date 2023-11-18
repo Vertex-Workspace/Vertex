@@ -14,48 +14,53 @@ import { HeaderModule } from './components/fixed-components/header/header.module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from './components/modals/task/task.module';
+import { UserSettingsModule } from './pages/user-settings/user-settings.module';
+import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { CommonModule } from '@angular/common';
 import { TasksModule } from './pages/tasks/tasks.module';
 import { MuralComponent } from './pages/mural/mural.component';
 import { MuralModule } from './pages/mural/mural.module';
-import { UserSettingsModule } from './pages/user-settings/user-settings.module';
-import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { ChartModule } from 'primeng/chart';
 import { ChatModule } from './pages/chat/chat.module';
 import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
+import { NotificationModule } from './components/modals/notification/notification.module';
+import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    CommonModule,    
-    LoginModule,
-    RegisterModule,
-    TeamsModule,
-    ProjectsModule,
-    MuralModule,
-    InputModule,
-    ButtonModule,
-    AppRoutingModule,
-    SidebarModule,
-    HeaderModule,
-    BrowserAnimationsModule,
-    FontAwesomeModule,
-    TaskModule,
-    TasksModule,
-    UserSettingsModule,
-    TeamInformationsModule,
-    ChartModule,
-    ChatModule,
-    MinichatModule
-
-  ],
-  providers: [
-    PersonalizationService,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        UserInformationsComponent,
+    ],
+    providers: [
+        PersonalizationService,
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        CommonModule,
+        LoginModule,
+        RegisterModule,
+        TeamsModule,
+        ProjectsModule,
+        MuralModule,
+        InputModule,
+        ButtonModule,
+        AppRoutingModule,
+        SidebarModule,
+        HeaderModule,
+        BrowserAnimationsModule,
+        FontAwesomeModule,
+        TaskModule,
+        UserSettingsModule,
+        TeamInformationsModule,
+        TasksModule,
+        UserSettingsModule,
+        TeamInformationsModule,
+        ChartModule,
+        ChatModule,
+        MinichatModule,
+        NotificationModule
+    ]
 })
 export class AppModule { }
 

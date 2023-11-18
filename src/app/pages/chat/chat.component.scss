@@ -181,14 +181,14 @@ main{
 .answer{
     @apply flex rounded-sm items-center flex-wrap justify-center p-3 h-[60px] min-h-[60px] gap-1;
     border: $borderBottom;
-    max-width: 100%;    
+    max-width: 50%;    
 }
 
 .messageUser{
     @apply flex rounded-sm items-center flex-wrap justify-center p-3  h-[60px] min-h-[60px] gap-1;
     background-color: $primaryColor;
     color: $secondColor;
-    max-width: 100%;
+    max-width: 50%;
 }
 
 .pChat {

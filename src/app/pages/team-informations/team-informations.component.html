@@ -25,10 +25,10 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-3 w-[85%]">
-                <div class="flex flex-col gap-4">
+            <div class="high-div-members">
+                <div class="div-members">
                     <h1 class="textHead">Membros da equipe</h1>
-                    <div class="flex w-full gap-7 ">
+                    <div class="members ">
                         <ng-container *ngFor="let item of menuItems">
                             <label class="data gap-3 " [ngClass]="clicked === item.id ? 'clicked' : 'default'">
                                 <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
@@ -38,11 +38,11 @@
                             </label>
                         </ng-container>
                     </div>
-                    <div class="w-[90%] h-[1px] bg-[#092C4C]"></div>
+                    <div class="emptyDiv"></div>
                 </div>
 
-                <div class="w-[100%] flex items-center">
-                    <div class="flex gap-4 w-[88%]">
+                <div class="high-listDiv-members">
+                    <div class="listDiv-members">
                         <h2>Lista de membros</h2>
                         <p> | </p>
                         <div class="flex gap-1">
@@ -58,19 +58,19 @@
             </div>
 
 
-            <div *ngIf="clicked == 'participants'" class="grid grid-cols-2 gap-3 w-[77%] h-[35%] pr-3 overflow-auto">
+            <div *ngIf="clicked == 'participants'" class="grid-participants">
                 <ng-container *ngFor="let user of users">
-                    <div class="bg-[#fff] rounded-md w-full h-full flex justify-around">
-                        <div class="w-[30%] h-full p-4">
-                            <fa-icon class="text-[#092c4c] text-[60px]" [icon]="faCircleUser"></fa-icon>
+                    <div class="card-user-grid">
+                        <div class="div-text-card">
+                            <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon>
                         </div>
 
-                        <div class="w-[70%] h-full flex flex-col  text-right p-3">
+                        <div class="highDiv-card-informations">
                             <h1 class="text-2xl flex justify-end">{{ user.name }}</h1>
                             <p class="font-light text-gray-500">{{ user.function }}</p>
-                            <div class="flex gap-3 items-end h-full w-full justify-end">
+                            <div class="divSocial-media">
                                 <ng-container *ngFor="let item of user.socialMedia">
-                                    <fa-icon class="text-[#092c4c] text-[20px]" [icon]="item"></fa-icon>
+                                    <fa-icon class="social-media" [icon]="item"></fa-icon>
                                 </ng-container>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
             </div>
 
 
-            <div *ngIf="clicked == 'permissions'" class="flex flex-col gap-3 w-[77%] h-[35%] pr-3 overflow-auto">
+            <div *ngIf="clicked == 'permissions'" class="grid-permissions">
                 <ng-container *ngFor="let user of users; let id = index">
                     <div class="extense-card">
                         <div class="w-full h-full flex justify-evenly">
