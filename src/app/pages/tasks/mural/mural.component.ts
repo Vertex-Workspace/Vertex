@@ -15,9 +15,7 @@ export class MuralComponent implements OnInit, AfterViewInit {
   rectangle: any;
 
   ngAfterViewInit() {
-    // Agora, você pode acessar o elemento diretamente usando this.rectangleElement.nativeElement
     this.rectangle = this.rectangleElement!.nativeElement;
-    // Faça o que quiser com o elemento aqui
   }
   
   taskList: Task[] = taskList;
