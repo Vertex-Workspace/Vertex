@@ -43,7 +43,7 @@
 
                 <div class="high-listDiv-members">
                     <div class="listDiv-members">
-                        <h2>Lista de membros</h2>
+                        <h6>Lista de membros</h6>
                         <p> | </p>
                         <div class="flex gap-1">
                             <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
@@ -93,11 +93,11 @@
                             </div>
 
                             <div class="div-swap-permission">
-                                <fa-icon (click)="swapPermissionExpanded(id)"
-                                    class="icon-swap-permission" [icon]="faChevronDown"></fa-icon>
+                                <fa-icon (click)="swapPermissionExpanded(id)" class="icon-swap-permission"
+                                    [icon]="faChevronDown"></fa-icon>
                             </div>
                         </div>
-                        
+
                         <div *ngIf="user.open" class="extense-cardExpanded">
                             <div class="div-checkbox1">
                                 <input type="checkbox" id="editionCheck">
@@ -125,30 +125,36 @@
 
         <div class="right-side">
             <div class="div-description-top-right">
-                <h1 class="h1-description">Descrição da equipe</h1>
-                <h3 class="h3-description">"Lorem ipsum dolor sit amet,
+                <div class="flex w-[82%] items-center h-[30%]">
+                    <h5>Descrição da equipe</h5>
+                </div>
+                <p class="regular-text w-[82%] h-[58%] text-justify overflow-auto">"Lorem ipsum dolor sit amet,
                     consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                     aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum."</h3>
+                    culpa qui officia deserunt mollit anim id est laborum."</p>
             </div>
 
-            <h1 class="h1-description">Andamento dos projetos</h1>
+            <div class="h-[8.5%] w-full items-end justify-center flex">
+                <div class="w-[81%]">
+                    <h5 class="h5-description h-full">Andamento dos projetos</h5>
+                </div>
+            </div>
 
             <div class="div-project-dashboards">
                 <div class="high-div-dashboards-bar">
 
                     <div class="divOf-project-dashboards-bar">
                         <div class="divProjectDashboardsBar">
-                            <p-chart class="dashboard-bar" type="bar"
-                                [data]="basicData" [options]="basicOptions"></p-chart>
+                            <p-chart class="dashboard-bar" type="bar" [data]="basicData" [options]="basicOptions">
+                            </p-chart>
 
                         </div>
 
                         <div class="divProjectDashboardsBar">
-                            <p-chart class="dashboard-bar" type="bar"
-                                [data]="basicData" [options]="basicOptions"></p-chart>
+                            <p-chart class="dashboard-bar" type="bar" [data]="basicData" [options]="basicOptions">
+                            </p-chart>
 
                         </div>
                     </div>
@@ -158,19 +164,16 @@
                 <div class="high-div-dashboards-pie">
                     <div class="divOf-project-dashboards-pie">
                         <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie"
-                                [data]="data" [options]="options"></p-chart>
+                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
 
                         </div>
 
                         <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie"
-                                [data]="data" [options]="options"></p-chart>
+                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
 
                         </div>
                         <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie"
-                                [data]="data" [options]="options"></p-chart>
+                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
 
                         </div>
                     </div>

@@ -87,7 +87,8 @@ section {
 }
 
 .text-function{
-    @apply font-light text-gray-500;
+    @apply font-light;
+    color: $emphasis
 }
 
 .div-permission{
@@ -131,11 +132,11 @@ section {
 // ============================================================================================================================================================================
 
 .right-side {
-    @apply flex flex-col justify-evenly w-[50%] h-full;
+    @apply flex flex-col w-[50%] h-full;
 }
 
 .divProjectDashboardsBar {
-    @apply flex w-[40%] h-[90%] bg-[#fff] rounded-md;
+    @apply flex w-[40%] h-[93%] bg-[#fff] rounded-md;
     border-top:8px solid $primaryColor; 
 }
 
@@ -204,21 +205,21 @@ section {
 }
 
 .div-description-top-right{
-    @apply h-[28%] flex flex-col items-center justify-evenly;
+    @apply h-[32%] flex flex-col items-center justify-end;
 }
 
-.h1-description{
-    @apply flex justify-center font-bold text-[22px];
-    color: $primaryColor;
-}
+// .h1-description{
+//     @apply flex justify-center font-bold text-[22px];
+//     color: $primaryColor;
+// }
 
-.h3-description{
-    @apply text-justify flex justify-center w-[80%];
-    color: $primaryColor;
-}
+// .h3-description{
+//     @apply text-justify flex justify-center w-[80%];
+//     color: $primaryColor;
+// }
 
 .div-project-dashboards{
-    @apply flex flex-col w-full h-[60%];
+    @apply flex flex-col justify-center w-full h-[54.5%];
 }
 
 .high-div-dashboards-bar{

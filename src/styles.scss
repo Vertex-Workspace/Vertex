@@ -54,6 +54,62 @@ input:focus {
     border-radius: 3px;
 }
 
+h1, h2, h3, h4, h5, h6{
+    font-family: $fontFamily;
+    color: $primaryColor;
+}
+
+//TEXTS SIZES - STYLE GUIDE
+h1{
+    font-size: 56px;
+    line-height: 61.1px;
+    
+}
+h2{
+    font-size: 48px;
+    line-height: 52.8px;
+}
+h3{
+    font-size: 40px;
+    line-height: 44px;
+}
+h4{
+    font-size: 32px;
+    line-height: 35.2px;
+}
+h5{
+    font-size: 24px;
+    line-height: 26.4px;
+}
+h6{
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.large-text , .medium-text , .regular-text , .small-text{
+    font-family: $fontFamily;
+    color: $primaryColor;
+}
+
+.large-text{
+    font-size: 20px;
+    line-height: 28px;
+}
+.medium-text{
+    font-size: 18px;
+    line-height: 25.2px;
+}
+.regular-text{
+    font-size: 16px;
+    line-height: 22.4px;
+    font-family: $fontFamily;
+}
+
+.small-text{
+    font-size: 14px;
+    line-height: 19.6px;
+}
+
 input {
     outline: none;
 }

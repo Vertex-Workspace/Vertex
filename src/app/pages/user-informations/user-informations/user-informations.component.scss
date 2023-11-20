@@ -9,15 +9,15 @@ section{
 }
 
 .top-side{
-    @apply flex h-1/3 w-full;
+    @apply flex h-[38%] w-full;
 }
 
 .top-side-left{
-    @apply flex h-full w-1/2 bg-red-700;
+    @apply flex items-center h-full w-1/2;
 }
 
 .top-side-user-img{
-    @apply flex justify-center items-center h-full w-[30%] bg-green-700;
+    @apply flex justify-center items-center h-full w-[30%];
 }
 
 .user-img{
@@ -26,25 +26,53 @@ section{
 }
 
 .top-side-user-informations{
-    @apply flex flex-col justify-center items-center h-[90%] w-[70%] ;
+    @apply flex flex-col justify-start items-center h-[80%] w-[70%] ;
 }
 
 .userName-creationData{
-    @apply flex gap-[56%] justify-center items-center h-full w-full;
+    @apply flex justify-between items-center h-full w-[88%];
 }
 
 .realName-location{
-    @apply flex gap-3 justify-center items-center h-full w-full;
+    @apply flex gap-[35px] justify-center items-center h-full w-full;
 }
 
 .user-description{
     @apply flex justify-center items-center h-full w-full;
 }
 
+.description{
+    @apply text-justify w-[88%];
+}
+
 .top-side-right{
-    @apply flex h-full w-1/2 bg-blue-700;
+    @apply flex flex-col justify-center items-center h-full w-1/2;
+    border-left: $borderBottom;
+}
+
+.top-side-right-text{
+    @apply flex flex-col justify-end items-start h-[25%]  w-[90%];
+}
+
+.top-side-right-projects{
+    @apply flex flex-col justify-start items-start h-[75%] overflow-auto w-[90%];
 }
 
 .under-side{
-    @apply flex h-1/2 w-full bg-white;
+    @apply flex h-[62%] w-full bg-white;
+}
+
+.h1{
+    @apply text-2xl font-bold;
+    color: $primaryColor;
+}
+
+.h1-formated{
+    @apply text-[20px] font-bold;
+    color: $primaryColor;
+}
+
+.card-project{
+    @apply w-[90%] h-[30px];
+    background-color: $card;
 }

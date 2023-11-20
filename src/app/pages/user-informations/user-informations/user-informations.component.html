@@ -10,28 +10,40 @@
 
                 <div class="top-side-user-informations">
                     <div class="userName-creationData">
-                        <h1>KaiqueFLH</h1>
-                        <h2>Creation data</h2>
+                        <p class="regular-text">KaiqueFLH</p>
+                        <p class="regular-text">-20/11/2023-</p>
                     </div>
 
                     <div class="realName-location">
-                        <h1>Kaique Fernandes Lima Homem</h1>
+                        <p class="regular-text">Kaique Fernandes Lima Homem</p>
                         |
-                        <h2>Brasil, Jaraguá do Sul - SC</h2>
+                        <p class="regular-text">Brasil, Jaraguá do Sul - SC</p>
                     </div>
 
                     <div class="user-description">
-                        <h2>
+                        <p class="regular-text description">
                             Kaique Fernandes Lima é um talentoso programador que se destaca no mundo da tecnologia. Com
                             uma paixão inabalável pela programação, ele encontrou seu lugar na renomada empresa WEG,
                             onde contribui de maneira significativa para projetos inovadores e desafiadores.
-                        </h2>
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="top-side-right">
+                <div class="top-side-right-text">
+                    <h5 class="h5-text">
+                        Projetos com maior desempenho
+                    </h5>
+                </div>
 
+                <div class="top-side-right-projects">
+                    <ng-container *ngFor="let project of projects">
+                        <div class="card-project">
+
+                        </div>
+                    </ng-container>
+                </div>
             </div>
         </div>
 
