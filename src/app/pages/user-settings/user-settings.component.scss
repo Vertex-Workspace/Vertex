@@ -21,7 +21,6 @@
 
                     .divIcon {
                         @apply flex w-[30%] h-full justify-center items-center;
-                        background-color: $secondColor;
                     }
                     
                     .divOptions {
@@ -53,6 +52,7 @@
 .clickBlue {
     @apply border-l-8 border-solid rounded-l-md;
     border-color: $primaryColor;
+    background-color: $emphasis;
 }
 
 

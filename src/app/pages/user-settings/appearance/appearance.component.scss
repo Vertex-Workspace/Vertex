@@ -93,6 +93,10 @@
             background-color: $primaryColor;
             color: $secondColor;
             @apply text-sm rounded-md h-[30%];
+
+            option{
+                color: $secondColor;
+            }
         }
     }
 }
@@ -115,8 +119,4 @@
 
 .unselected {
     @apply opacity-25;
-}
-
-p{
-    color: $primaryColor;
 }

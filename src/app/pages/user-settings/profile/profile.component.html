@@ -1,7 +1,7 @@
 <div class="bg">
     <div class="title">
         <div>
-            <p>Perfil</p>
+            <p class="large-text">Perfil</p>
             <fa-icon [icon]="faUser" class="iconProfile size"></fa-icon>
         </div>
     </div>
@@ -12,13 +12,13 @@
                 <section>
                     <form (ngSubmit)="passwordValidation()">
                         <div class="divEachInput" *ngFor="let item of itemsList">
-                            <label>{{item.option}}</label>
+                            <p class="medium-text">{{item.option}}</p>
                             <div class="iconInputBlock">
                                 <div class="iconBox" *ngIf="item.id != 'description'">
                                     <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                                 </div>
                                 <textarea (input)="onChange()" type="text" [ngClass]="item.id" [value]="item.placeholder"
-                                    #textBox (change)="item.placeholder = textBox.value">
+                                    #textBox (change)="item.placeholder = textBox.value" class="regular-text">
                             </textarea>
                             </div>
                         </div>
@@ -26,11 +26,11 @@
                 </section>
 
                 <div class="charts">
-                    <p>Visibilidade do Perfil</p>
+                    <p class="medium-text">Visibilidade do Perfil</p>
                     <div *ngFor="let toogle of tooglesList; index as item">
                         <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
                         </fa-icon>
-                        <p class="px-3">{{toogle.text}}</p>
+                        <p class="small-text px-3">{{toogle.text}}</p>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     </fa-icon>
                     <div>
                         <div *ngIf="!buttonConfirm">
-                                <button class="confirm justify-end" (click)="clickOption('edit')"
+                                <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
                                     [disabled]="contentEditable === true ? false : true"
                                     [ngClass]="contentEditable === true ? 'edit' : 'noEdit'" type="submit"
                                     (click)="passwordValidation()">
@@ -57,6 +57,6 @@
 
 <app-modal-warn *ngIf="!validInput" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
     <div class="modal">
-        <h2>Não pode haver campos vazios</h2>
+        <h5>Não pode haver campos vazios</h5>
     </div>
 </app-modal-warn>

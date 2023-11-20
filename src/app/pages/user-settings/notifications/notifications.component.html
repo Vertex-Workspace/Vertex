@@ -1,19 +1,19 @@
 <div class="bg">
     <div class="title">
         <div>
-            <p>Notificações</p>
+            <p class="large-text">Notificações</p>
             <fa-icon [icon]="faBell" class="icon size"></fa-icon>
         </div>
     </div>
 
     <div class="my-notifications">
-        <p>Notificações de seu Espaço de Trabalho</p>
-        <p>Receber notificações sobre:</p>
+        <p class="regular-text">Notificações de seu Espaço de Trabalho</p>
+        <p class="small-text font-bold">Receber notificações sobre:</p>
         <div *ngFor="let toogle of tooglesList; index as item">
             <div>
                 <fa-icon class="icon" (click)="toogleCharts(item)" [icon]="toogle.icon">
                 </fa-icon>
-                <p>{{toogle.text}}</p>
+                <p class="small-text">{{toogle.text}}</p>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="toggles-text">
                 <fa-icon class="icon" (click)="toogleGeneral(item)" [icon]="toogle.icon">
                 </fa-icon>
-                <p>{{toogle.text}}</p>
+                <p class="small-text">{{toogle.text}}</p>
             </div>
         </div>
     </section>

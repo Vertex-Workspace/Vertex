@@ -39,7 +39,7 @@ section {
 
 
 span {
-    @apply h-[10%] w-[85%] bg-white rounded-md flex flex-col items-center justify-center shadow-lg;
+    @apply h-[10%] w-[85%] bg-white rounded-sm flex flex-col items-center justify-center shadow-lg;
     color:$primaryColor;
 }
 
