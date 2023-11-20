@@ -5,14 +5,14 @@
 
 
 .side-bar {
-    @apply flex w-[4%] h-full flex-col items-center;
+    @apply flex w-[4%] h-full flex-col items-center z-[999];
     background-color: $primaryColor;
     transition: width 0.32s ease-out;
     position: fixed;
 }
 
 .side-barOpen {
-    @apply flex w-[20%] h-full flex-col items-center;
+    @apply flex w-[20%] h-full flex-col items-center z-[999];
     transition: width 0.32s ease-in-out;
     background-color: $primaryColor;
     position: fixed;
@@ -26,6 +26,7 @@
 
 .main-divOpen {
     @apply flex w-[100%] h-full flex-col items-end;
+    background-color: $secondColor;
 }
 
 
