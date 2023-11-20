@@ -26,6 +26,7 @@
 
 .main-divOpen {
     @apply flex w-[100%] h-full flex-col items-end;
+    background-color: $secondColor;
 }
 
 

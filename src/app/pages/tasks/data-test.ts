@@ -68,6 +68,8 @@ export const categories: any[] = [
           header: 'Prazo'
         },
       ],
+      width: '300px',
+      height: '150px'
       // status: 'aaaaaa'
     },
     {
@@ -85,8 +87,10 @@ export const categories: any[] = [
           name: 'term',
           value: 'asdasdasdas',
           header: 'Prazo'
-        }
+        },
       ],
+      width: '300px',
+      height: '150px'
     },
     {
       name: 'Tarefa 3',
@@ -104,6 +108,8 @@ export const categories: any[] = [
           header: 'Prazo'
         }
       ],
+      width: '300px',
+      height: '150px'
     },
     {
       name: 'Tarefa 4',
@@ -121,6 +127,8 @@ export const categories: any[] = [
           header: 'Prazo'
         }
       ],
+      width: '300px',
+      height: '150px'
     },
     {
       name: 'Tarefa 5',
@@ -138,131 +146,133 @@ export const categories: any[] = [
           header: 'Prazo'
         }
       ],
+      width: '300px',
+      height: '150px'
     },
-    {
-      name: 'Tarefa 6',
-      category: categories[1],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D',
-        },
-        {
-          name: 'creator',
-          value: 'Marcos',
-          header: 'Responsável'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D',
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-    },
-    {
-      name: 'Tarefa 7',
-      category: categories[2],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-          header: 'Prazo'
-        }
-      ],
-    },
+    // {
+    //   name: 'Tarefa 6',
+    //   category: categories[1],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    // },
+    // {
+    //   name: 'Tarefa 7',
+    //   category: categories[2],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D',
+    //     },
+    //     {
+    //       name: 'creator',
+    //       value: 'Marcos',
+    //       header: 'Responsável'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    // },
+    // {
+    //   name: 'Tarefa 7',
+    //   category: categories[2],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    // },
+    // {
+    //   name: 'Tarefa 7',
+    //   category: categories[2],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    // },
+    // {
+    //   name: 'Tarefa 7',
+    //   category: categories[2],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    // },
+    // {
+    //   name: 'Tarefa 7',
+    //   category: categories[2],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D',
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    // },
+    // {
+    //   name: 'Tarefa 7',
+    //   category: categories[2],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    // },
  ];
 
   export const cols = [

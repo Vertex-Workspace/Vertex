@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
 import { CalendarModule } from './calendar/calendar.module';
 import { MuralComponent } from './mural/mural.component';
-import { ResizableModule } from 'angular-resizable-element';
 import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
 
 @NgModule({
@@ -40,7 +39,6 @@ import { MuralCardComponent } from 'src/app/components/reusable-components/mural
     DragDropModule,
     FormsModule,
     CalendarModule,
-    ResizableModule
   ],
 })
 export class TasksModule { }

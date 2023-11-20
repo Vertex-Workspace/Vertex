@@ -1,34 +1,48 @@
-<div class="card" cdkDrag cdkDragBoundary=".mural-section">
+<div 
+  #resizeBox 
+  class="container" 
+  [style.width]="task.width"
+  [style.height]="task.height"
+  cdkDrag  
+  cdkDragBoundary=".mural-section"
 
-  <div class="image" *ngIf="hasImage()">
-    <img src="#" alt="Imagem">
-  </div>
-
-  <div class="left">
-    <div class="title">
-      <h3>{{ task.name }}</h3>
-    </div>
+>
+  <span #dragHandleCorner class="dragHandle corner" cdkDrag (cdkDragMoved)="dragMove(dragHandleCorner, $event)"></span>
+  <span #dragHandleRight cdkDragLockAxis="x" class="dragHandle right" cdkDrag (cdkDragMoved)="dragMove(dragHandleRight, $event)"></span>
+  <span #dragHandleBottom cdkDragLockAxis="y" class="dragHandle bottom" cdkDrag (cdkDragMoved)="dragMove(dragHandleBottom, $event)"></span>
+  <span class="full" style="width: 100%;">
     
-    <div class="text">
-      <p>
-        {{ task.description && task.description || "Sem descrição." }}
-      </p>
-    </div>
-  </div>
-
-  <div class="right">
-    <div class="date">
-      12/12/2020
+    <div class="image" *ngIf="hasImage()">
+      <img src="#" alt="Imagem">
     </div>
 
-    <div class="icons">
-      <ng-container *ngFor="let item of configItems">
-        <i 
-          class="{{item.iconClass}}"
-          style="font-size: 1rem"
-        ></i>
-      </ng-container>
+    <div class="left">
+      <div class="title">
+        <h3>{{ task.name }}</h3>
+      </div>
+      
+      <div class="text">
+        <p>
+          {{ task.description && task.description 
+            || "Sem descrição." }}
+        </p>
+      </div>
     </div>
-    
-  </div>
+
+    <div class="right">
+      <div class="date">
+        12/12/2020
+      </div>
+
+      <div class="icons">
+        <ng-container *ngFor="let item of configItems">
+          <i 
+            class="{{item.iconClass}}"
+            style="font-size: 1rem"
+          ></i>
+        </ng-container>
+      </div>
+      
+    </div>
+  </span>
 </div>

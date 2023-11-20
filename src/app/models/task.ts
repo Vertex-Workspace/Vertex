@@ -6,5 +6,7 @@ export interface Task {
     properties ?: any[],
     isDragging ?: boolean,
     isSelected ?: boolean,
-    status ?: string
+    status ?: string,
+    width ?: string,
+    height ?: string
 }

@@ -1,5 +1,9 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ResizeEvent } from 'angular-resizable-element';
+import { AfterViewInit, 
+         Component, 
+         ElementRef, 
+         OnInit, 
+         QueryList, 
+         ViewChildren } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { taskList } from '../data-test';
@@ -11,35 +15,27 @@ import { taskList } from '../data-test';
 })
 export class MuralComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('rectangle', { static: false }) rectangleElement: ElementRef | undefined;
-  rectangle: any;
-
-  ngAfterViewInit() {
-    // Agora, você pode acessar o elemento diretamente usando this.rectangleElement.nativeElement
-    this.rectangle = this.rectangleElement!.nativeElement;
-    // Faça o que quiser com o elemento aqui
-  }
+  @ViewChildren('card', { read: ElementRef })
+  cards !: QueryList<any>;
   
   taskList: Task[] = taskList;
   primaryColor: string;
   secondColor: string;
 
-  ngOnInit(): void {
-  }
-  
-
-
-  constructor(private personalization : PersonalizationService){
+  constructor(
+    private personalization : PersonalizationService
+  ){
     this.primaryColor = personalization.getPrimaryColor();
     this.secondColor = personalization.getSecondColor();
   }
 
-  teste():void{
-    console.log("teste muasdsral");
+  ngOnInit(): void {
   }
 
-  onResizeEnd(event: ResizeEvent): void {
-    this.rectangle.style.width = `${event.rectangle.width}px`;
+  ngAfterViewInit() {
+    this.cards.forEach(c => {
+      console.log(c.nativeElement);
+    })
   }
 
 }
