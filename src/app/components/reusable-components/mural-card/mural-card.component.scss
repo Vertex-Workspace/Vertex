@@ -1,12 +1,12 @@
 @import '../../../../variables';
 
-.container {
+.card {
     @apply relative bg-white overflow-hidden shadow-md 
     rounded-sm flex cursor-move transition-colors min-w-[120px] min-h-[120px];
     position: relative;
   }
   
-  .container span:last-child {
+  .card span:last-child {
     @apply p-2 ;
   
     &:hover {

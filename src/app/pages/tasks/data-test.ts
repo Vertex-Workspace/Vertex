@@ -69,86 +69,88 @@ export const categories: any[] = [
         },
       ],
       width: '300px',
-      height: '150px'
+      height: '150px',
+      top: '300',
+      left: '150'
       // status: 'aaaaaa'
     },
-    {
-      name: 'Tarefa 2',
-      category: categories[0],
-      description: "Adipisicing elit ea Lorem laborum consectetur ex cillum. Consectetur sit aliqua aute minim laboris dolor ex magna dolore ad irure. Sint occaecat culpa tempor exercitation. Consectetur enim mollit in tempor consequat minim. Exercitation laborum id sunt voluptate adipisicing mollit consequat. Do tempor qui labore laboris ipsum reprehenderit eiusmod.",
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        },
-      ],
-      width: '300px',
-      height: '150px'
-    },
-    {
-      name: 'Tarefa 3',
-      category: categories[0],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-      width: '300px',
-      height: '150px'
-    },
-    {
-      name: 'Tarefa 4',
-      category: categories[1],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-      width: '300px',
-      height: '150px'
-    },
-    {
-      name: 'Tarefa 5',
-      category: categories[1],
-      properties: [
-        {
-          name: 'status',
-          value: 'to-do',
-          header: 'Status',
-          bgColor: '#FF9D9D'
-        },
-        {
-          name: 'term',
-          value: 'asdasdasdas',
-          header: 'Prazo'
-        }
-      ],
-      width: '300px',
-      height: '150px'
-    },
+    // {
+    //   name: 'Tarefa 2',
+    //   category: categories[0],
+    //   description: "Adipisicing elit ea Lorem laborum consectetur ex cillum. Consectetur sit aliqua aute minim laboris dolor ex magna dolore ad irure. Sint occaecat culpa tempor exercitation. Consectetur enim mollit in tempor consequat minim. Exercitation laborum id sunt voluptate adipisicing mollit consequat. Do tempor qui labore laboris ipsum reprehenderit eiusmod.",
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     },
+    //   ],
+    //   width: '300px',
+    //   height: '150px'
+    // },
+    // {
+    //   name: 'Tarefa 3',
+    //   category: categories[0],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    //   width: '300px',
+    //   height: '150px'
+    // },
+    // {
+    //   name: 'Tarefa 4',
+    //   category: categories[1],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    //   width: '300px',
+    //   height: '150px'
+    // },
+    // {
+    //   name: 'Tarefa 5',
+    //   category: categories[1],
+    //   properties: [
+    //     {
+    //       name: 'status',
+    //       value: 'to-do',
+    //       header: 'Status',
+    //       bgColor: '#FF9D9D'
+    //     },
+    //     {
+    //       name: 'term',
+    //       value: 'asdasdasdas',
+    //       header: 'Prazo'
+    //     }
+    //   ],
+    //   width: '300px',
+    //   height: '150px'
+    // },
     // {
     //   name: 'Tarefa 6',
     //   category: categories[1],

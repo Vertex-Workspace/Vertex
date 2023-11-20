@@ -8,5 +8,7 @@ export interface Task {
     isSelected ?: boolean,
     status ?: string,
     width ?: string,
-    height ?: string
+    height ?: string,
+    top ?: string,
+    left ?: string
 }
