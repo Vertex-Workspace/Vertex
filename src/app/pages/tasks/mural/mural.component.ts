@@ -17,7 +17,7 @@ export class MuralComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('card', { read: ElementRef })
   cards !: QueryList<any>;
-  
+
   taskList: Task[] = taskList;
   primaryColor: string;
   secondColor: string;
@@ -32,10 +32,11 @@ export class MuralComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-    this.cards.forEach(c => {
-      console.log(c.nativeElement);
-    })
+  ngAfterViewInit(): void {
   }
 
 }
+function ViewChild(arg0: string, arg1: { static: boolean; }) {
+  throw new Error('Function not implemented.');
+}
+
