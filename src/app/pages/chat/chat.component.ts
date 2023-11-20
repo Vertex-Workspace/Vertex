@@ -81,6 +81,177 @@ export class ChatComponent {
       ],
       conversationOpen: false
     },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
+    {
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },
   ]
 
   openConversation(i: number) {

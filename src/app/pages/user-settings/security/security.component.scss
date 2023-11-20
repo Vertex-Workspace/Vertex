@@ -1,0 +1,99 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+.bg {
+    @apply flex h-full w-screen flex-col items-center justify-start;
+}
+
+.title {
+    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
+
+        div {
+            @apply flex w-[20%] items-center justify-start gap-5;
+        }
+
+        p{
+            @apply text-xl font-medium;
+            color: $primaryColor;
+        }
+}
+
+.icon {
+    color:$primaryColor !important;
+}
+
+.size {
+    @apply text-[18px];
+}
+
+input {
+    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[46px];
+}
+
+.iconInputBlock {
+    @apply flex py-3 w-full h-full;
+
+    .iconBox {
+         @apply flex w-[46px] h-[46px] justify-center items-center rounded-l-sm;
+         background-color: #CDD8EA;
+     }
+}
+
+section {
+    @apply h-full w-[45%] pt-6 flex flex-col;
+
+    .forgot-password{
+        @apply flex justify-end;
+    };
+    
+    p {
+        @apply text-sm font-bold;
+        color: $primaryColor;
+    }
+}
+
+.requires{
+    @apply w-[45%] h-[27%] pt-4 flex flex-row;
+    
+    p:first-child{
+        @apply font-bold
+    }
+
+    p {
+        @apply pt-[4px] text-sm;
+        color: $primaryColor;
+    }
+
+    div:first-child {
+        @apply w-[65%]
+    }
+
+    div:last-child {
+        @apply w-[35%] flex items-end justify-end 
+    }
+
+    button {
+        color: $secondColor;
+        @apply h-[32px] w-[110px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
+    }
+}
+
+.noEdit {
+    background-color: grey;
+}
+
+.edit {
+    background-color: $primaryColor;
+}
+
+form {
+    @apply h-full w-full
+}
+
+h2 {
+    @apply text-xl font-bold;
+}
+
+.modal {
+    @apply flex items-center justify-center w-full h-full pb-16;
+}

@@ -60,7 +60,7 @@ export class TeamInformationsComponent {
 
     ngOnInit() {
 
-        this.clicked = "permissions"
+        this.clicked = "participants"
 
         console.log(this.users);
 

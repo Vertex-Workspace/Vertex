@@ -1,1 +1,79 @@
-<p>calendar works!</p>
+<section>
+    <div class="header-calendar">
+        <div>
+            <button (click)="changeMonth(-1)">
+                <i class="pi pi-angle-left"></i>
+                {{translateMonth(currentDate.getMonth()-1)}}
+            </button>
+        </div>
+        <div class="title">
+            {{translateMonth(currentDate.getMonth())}}
+            <div>
+                <fa-icon (click)="toggleCharts()" [icon]="faToggleOn" *ngIf="toggle"></fa-icon>
+                <fa-icon (click)="toggleCharts()" [icon]="faToggleOff" *ngIf="!toggle"></fa-icon>
+                <span>Mostrar Tarefas</span>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <button (click)="changeMonth(+1)">
+                {{translateMonth(currentDate.getMonth()+1)}}
+                <i class="pi pi-angle-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="calendar" >
+        <div class="calendar-rows">
+            <ng-container *ngFor="let day of calendarDays; index as index">
+                <div *ngIf="index < 7" class="days-of-week">
+                    {{translateDayOfWeek(day.getDay())}}
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="calendar-rows" 
+        *ngFor="let week of groupCalendarDays()">
+            <div 
+            *ngFor="let day of week; index as index" 
+            class="calendar-day"
+            [class.day-not-month]="currentDate.getMonth() !== day.getMonth()"
+            >
+
+                <div class="day-informations">
+                    <div [class.today]="today(day)">
+                        {{day | date : 'dd'}}
+                    </div>
+                </div>
+
+                <div class="tasks-informations" *ngIf="getTasksByDate(day).length > 0 && !toggle">
+                    <div class="tasks-link-informations" (click)="openModalTasks(day)">
+                        <span>{{getTasksByDate(day).length}} tarefas atribuídas</span>
+                        <i class="pi pi-external-link"></i>
+                    </div>
+                </div>
+
+
+                <div class="tasks-list-in-calendar" *ngIf="toggle">
+                    <div *ngFor="let task of getTasksByDate(day)" >
+                        <div class="card-list-task-calendar">
+                            <h2>{{task.name}}</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-modal-warn *ngIf="modalTasks" [height]="'650px'" [width]="'600px'" (close)="openModalTasks(null)"
+    class="model-show-tasks">
+    <h2>Tarefas Atribuídas para {{formatDate(modalDate)}}</h2>
+    <div class="div-tasks">
+        <ng-container *ngFor="let task of getTasksByDate(modalDate)">
+            <div class="card-task">
+                <span>{{task.name}}</span>
+                <i class="pi pi-external-link"></i>
+            </div>
+        </ng-container>
+    </div>
+</app-modal-warn>

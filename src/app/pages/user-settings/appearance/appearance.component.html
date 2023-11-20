@@ -1,70 +1,73 @@
 <div class="bg">
-    <div class="rightSide">
-        <!-- Section com as informações do usuário -->
-        <!-- ícone do usuário com o nome -->
-        <div class="userInfop space-y-4">
-            <fa-icon [icon]="faCircleUser" size="8x" class="icon"></fa-icon>
-            <div>
-                <p class="font-bold">Kaique Fernandes Lima Homem</p>
-            </div>
+    <div class="title">
+        <div>
+            <p> Aparência do Sistema</p>
+            <fa-icon [icon]="faPencil" class="icon size"></fa-icon>
         </div>
+    </div>
 
-        <div class="flex w-full h-[50%]">
-            <div class="w-[60%] h-full space-y-4">
+    <div class="themes">
+        <p>Preferência de tema</p>
+        <div class="box-modes" *ngFor="let theme of themesList; index as item;" (click)="selectTheme(item)"
+            [ngClass]="theme.status === 'selected' ? '' : 'unselected'">
+            <ng-container *ngFor="let type of theme.types">
+                <ng-container *ngFor="let color of type.colors">
+                    <div class="mode" *ngIf="color.status === 'selected' && type.title==='Cor de Fundo'" 
+                    [style.background]="'linear-gradient(315deg, ' + theme.secondColor + ' 50%,' + color.color + ' 50%)'">
+                        <fa-icon [icon]="theme.icon" class="icon-themes"
+                            [ngClass]="theme.mode === 'Tema Claro' ? 'icon' : 'icon-dark'"></fa-icon>
+                        <p [ngClass]="theme.mode === 'Tema Claro' ? 'icon' : 'icon-dark'">{{theme.mode}}
+                        </p>
+                    </div>
+                </ng-container>
+            </ng-container>
 
-                <div class="flex flex-col space-y-4">
-                    <label class="text-sm ">E-mail</label>
-                    <div class="flex justify-start">
-                        <div class="flex w-12 h-12 justify-center items-center rounded-l-sm"
-                            style="background-color: #CDD8EA">
-                            <fa-icon [icon]="faEnvelope" class="icon" style="background-color:#CDD8EA"></fa-icon>
+            <div class="colors">
+                <div>
+                    <ng-container *ngFor="let type of theme.types;">
+                        <p>{{type.title}}</p>
+                        <div class="colors-row">
+                            <ng-container *ngFor="let color of type.colors; index as item;">
+                                <button [ngStyle]="{'background-color': color.color}" class="colors-circle"
+                                    (click)="selectColor(theme, type, item)" >
+                                    <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" class="icon"
+                                        [ngStyle]="{'color': type.iconColor}">
+                                    </fa-icon>
+                                </button>
+                            </ng-container>
                         </div>
-                        <input type="text" class="input w-[70%] h-12" placeholder="ana_cb@estudante.sesisenai.org.br" />
-                    </div>
-                </div>
-
-                <div class="flex flex-col space-y-4">
-                    <label class="text-sm ">Senha</label>
-                    <div class="flex justify-start">
-                        <div class="flex w-12 h-12 justify-center items-center rounded-l-sm"
-                            style="background-color: #CDD8EA">
-                            <fa-icon [icon]="faLock" class="icon" style="background-color:#CDD8EA"></fa-icon>
-                        </div>
-                        <input type="text" class="input w-[40%] h-12" placeholder="Digite sua senha" />
-                    </div>
-                </div>
-                <label class="text-sm ">Confirme sua Senha</label>
-                <div class="flex justify-start">
-                    <div class="flex w-12 h-12 justify-center items-center rounded-l-sm"
-                        style="background-color: #CDD8EA">
-                        <fa-icon [icon]="faKey" class="icon" style="background-color:#CDD8EA"></fa-icon>
-                    </div>
-                    <input type="text" class="input w-[40%] h-12" placeholder="Digite sua senha" />
-                </div>
-            </div>
-
-
-            <!-- User location input -->
-            <div class="w-[40%] h-full space-y-4">
-                <div class="flex flex-col space-y-4">
-                    <label class="text-sm">Localização</label>
-                    <div class="flex justify-start">
-                        <div class="flex w-12 h-12 justify-center items-center rounded-l-sm"
-                            style="background-color: #CDD8EA">
-                            <fa-icon [icon]="faEarthAmericas" class="icon" style="background-color:#CDD8EA"></fa-icon>
-                        </div>
-                        <input type="text" class="input w-[70%] h-12" placeholder="São Paulo" />
-                    </div>
-                </div>
-
-                <!-- User description Box -->
-                <div class="flex flex-col space-y-4">
-                    <label class="text-sm">Descrição</label>
-                    <div class="flex justify-start">
-                        <input type="text" class="input w-[70%] h-32" placeholder="São Paulo" />
-                    </div>
+                    </ng-container>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <div class="text-preferences">
+        <div class="writing">
+            <div>
+                <p>Tamanho da letra</p>
+                <p>Defina o tamanho da letra para o sistema</p>
+                <select>
+                    <option *ngFor="let size of fontSizes" [value]="size">{{size}}</option>
+                </select>
+            </div>
+            <div>
+                <p>Estilo da letra</p>
+                <p>Defina o estilo da letra</p>
+                <select>
+                    <option *ngFor="let font of fontFamily" [value]="font">{{font}}</option>
+                </select>
+            </div>
+        </div>
+        <p>Acessibilidade</p>
+        <ng-container *ngFor="let toggle of toggles; index as item">
+            <div class="accessibility">
+                <fa-icon class="icon" (click)="toggleChange(item)" [icon]="toggle.icon">
+                </fa-icon>
+                <p>{{toggle.text}}</p>
+            </div>
+        </ng-container>
+
+    </div>
+</div>
