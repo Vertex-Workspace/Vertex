@@ -1,0 +1,50 @@
+@import '../../../../../variables';
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+
+}
+
+.exitModal {
+    @apply flex w-full justify-between;
+    color: $primaryColor;
+
+    div:first-child {
+        @apply w-[90%] flex items-center;
+    }
+}
+
+h2 {
+    @apply text-[1.5rem] font-bold cursor-pointer pl-3;
+}
+
+.modal {
+    @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
+    items-end justify-start text-center p-8 border-t-8;
+    border-color: $primaryColor;
+}
+
+.icon {
+    color: $primaryColor;
+    font-size: 1.5rem;
+}
+
+ul {
+    @apply w-full h-full pt-4;
+}
+
+li {
+    @apply w-full h-[10%] flex items-center justify-start;
+
+    div{
+        @apply h-[70%] w-[20%];
+    }
+}
+
+p{
+    color:$primaryColor;
+    @apply pl-3;
+}
+
+.emphasis {
+    @apply shadow-2xl bg-white;
+}

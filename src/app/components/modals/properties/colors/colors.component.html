@@ -1,0 +1,9 @@
+<ul>
+    <ng-container *ngFor="let color of colorsList; index as i">
+        <li (click)="selectColor(i)" [ngClass]="color.status === 'selected' ? 'emphasis' : ''">
+            <div [ngStyle]="{'background-color': color.color}">
+            </div>
+            <p>{{color.name}}</p>
+        </li>
+    </ng-container>
+</ul>

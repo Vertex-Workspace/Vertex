@@ -52,7 +52,7 @@ h2 {
     @apply pt-3 w-full h-[50%] grid grid-cols-3 justify-center items-center;
 
     div{
-        @apply w-[80px] h-[80px] bg-[#EAEFF8] flex justify-center items-center;
+        @apply w-[80px] h-[80px] bg-[#EAEFF8] flex justify-center items-center shadow-2xl rounded-md;
     }
 }
 
@@ -74,11 +74,11 @@ h2 {
 }
 
 .value-input{
-    @apply flex flex-row gap-2 ;
+    @apply h-[40%] w-full flex flex-row justify-center items-start;
 }
 
 input {
-    @apply w-[200px] h-[20px] pt-3 pl-10 rounded-md flex justify-center items-start shadow-2xl;
+    @apply w-[200px] h-[30px] pt-3 pl-10 rounded-md shadow-2xl;
 };
 
 p{
@@ -95,7 +95,7 @@ p{
 }
 
 section{
-    @apply w-[90%] h-full items-center;
+    @apply w-full h-full items-center pl-10;
 
     p:first-child {
         @apply pr-10 pt-4;

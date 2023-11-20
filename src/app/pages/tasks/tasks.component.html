@@ -46,7 +46,6 @@
                         (click)="item.click()"
                     >
                         <i class="{{ item.iconClass }}"></i>
-                        <app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (click)="openPropertiesModal()"></app-properties>
                     </button>
                     
                 </ng-container>
@@ -91,3 +90,5 @@
 
     </div>
 </section>
+
+<app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()"></app-properties>

@@ -1,0 +1,55 @@
+<div class="ng-contentDiv" *ngIf="generalModal">
+    <span class="p-input-icon-right">
+        <input type="search" placeholder="Digite o que procura..." />
+        <i class="pi pi-search search"></i>
+    </span>
+
+    <!-- Visible and invisible -->
+    <div class="visible-unvisible">
+        <p class="pl-3">Visíveis</p>
+        <ng-container *ngFor="let item of propertiesList; index as i">
+            <div *ngIf="item.status==='visible'" class="visible "
+                [ngClass]="item.status === 'visible' ? '' : 'opacity'">
+                <div>
+                    <div>
+                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                    </div>
+                    <div (click)="editProperty('add')">
+                        <fa-icon [icon]="item.icon2" class="icon pl-2"></fa-icon>
+                        <p>{{item.name}}</p>
+                    </div>
+                </div>
+                <div>
+                    <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(i)"></fa-icon>
+                    <fa-icon [icon]="faGear" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon"></fa-icon>
+                </div>
+            </div>
+        </ng-container>
+        <p class="pt-3 pl-3">Não visíveis</p>
+        <ng-container *ngFor="let item of propertiesList; index as i">
+            <div *ngIf="item.status==='invisible'" class="visible opacity">
+                <div>
+                    <div>
+                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                    </div>
+                    <div (click)="editProperty('add')">
+                        <fa-icon [icon]="item.icon2" class="icon pl-2"></fa-icon>
+                        <p>{{item.name}}</p>
+                    </div>
+                </div>
+                <div>
+                    <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(i)"></fa-icon>
+                    <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear('gear')"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon"></fa-icon>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="new-property">
+        <fa-icon [icon]="faPlus" class="icon" (click)="clickPlus('plus')"></fa-icon>
+        <p>Adicionar propriedade</p>
+    </div>
+</div>

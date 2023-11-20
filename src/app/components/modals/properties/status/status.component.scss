@@ -19,20 +19,21 @@
     border-color: $primaryColor;
 }
 
-.icon {
+.little-icon {
     color: $primaryColor;
+    font-size:1rem;
 }
 
 p {
     color:$primaryColor;
 }
 
-.main-property {
-    @apply flex flex-row justify-between w-full;
+h2 {
+    @apply text-lg
+}
 
-    div {
-        @apply w-[25%] flex justify-between;
-    }
+.main-property {
+    @apply flex justify-between items-center w-full pt-3;
 
 }
 
@@ -41,5 +42,27 @@ p {
 }
 
 .specific-properties {
-    @apply w-full flex justify-start;
+    @apply w-full flex flex-row items-center justify-start h-[8%] border-b border-[#969397];
+
+    div:first-child {
+        @apply w-[4%] flex justify-between items-center;
+    }
+
+    div:nth-child(2){
+        @apply w-[86%] flex justify-start pl-2 items-center;
+    }
+
+    div:last-child {
+        @apply w-[10%] flex justify-between items-center;
+    }
 }
+
+.bigger-icon {
+    color: $primaryColor;
+    font-size:1.5rem;
+}
+
+.border-div {
+    @apply w-full h-[4%] border-b border-[#969397];
+}
+

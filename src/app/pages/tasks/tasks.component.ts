@@ -52,6 +52,7 @@ export class TasksComponent {
   }
 
   openPropertiesModal(): void {
-    this.propertiesOpen = true;
+    this.propertiesOpen = !this.propertiesOpen;
+    console.log(this.propertiesOpen)
   }
 }

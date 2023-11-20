@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {faArrowLeft, faPaintBrush, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import {faArrowLeft, faPaintBrush, faTrashCan, faEllipsisVertical,
+faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-status',
@@ -11,9 +12,15 @@ export class StatusComponent {
     faArrowLeft = faArrowLeft;
     faPaintBrush = faPaintBrush;
     faTrashCan = faTrashCan;
+    faEllipsisVertical = faEllipsisVertical;
+    faPlus = faPlus;
+    colorModal: boolean = false;
   
   @Output()
   close = new EventEmitter<Event>();
+
+  @Output()
+  pencil = new EventEmitter<String>();
 
   @Input()
   height?: String;
@@ -25,15 +32,21 @@ export class StatusComponent {
     this.close.emit();
   }
 
+  clickPencil(){
+    this.pencil.emit();
+  }
+
   statusList =[
     {
         name: 'Não iniciado',
+        color:'#F7E2E4',
         properties: [
             {name: 'To do'}
         ]
     },
     {
         name:'A fazer',
+        color: '#F5EFD2',
         properties: [
             {name: 'Doing'},
             {name: 'Para análise'},
@@ -41,6 +54,7 @@ export class StatusComponent {
     },
     {
         name:'Concluída',
+        color:'#D9EED2',
         properties: [
             {name: 'Done'},
             {name: 'Arquivados'},
@@ -48,5 +62,7 @@ export class StatusComponent {
     }
   ]
 
-
+  chooseColor(){
+    this.colorModal = true;
+  }
 }

@@ -1,30 +1,25 @@
-<div class="modal-overlay">
-    <div class="modal" [style.height]="height" [style.width]="width">
-
-        <!-- Properties and X button -->
-        <div class="exitModal">
-            <div>
-                <fa-icon [icon]="faArrowLeft" class="icon"></fa-icon>
-                <h2>Status</h2>
-            </div>
+<div class="properties">
+    <ng-container *ngFor="let status of statusList">
+        <div class="main-property">
+            <p>{{status.name}}</p>
+            <fa-icon [icon]="faPlus" class="little-icon"></fa-icon>
         </div>
-
-        <div class="properties">
-            <ng-container *ngFor="let status of statusList">
-                <div class="main-property">
-                    <p>{{status.name}}</p>
-                    <div>
-                        <fa-icon [icon]="faPaintBrush" class="icon"></fa-icon>
-                        <fa-icon [icon]="faTrashCan" class="icon"></fa-icon>
-                    </div>
+        <ng-container *ngFor="let name of status.properties">
+            <div class="specific-properties" [ngStyle]="{'background-color': status.color}">
+                <div>
+                    <fa-icon [icon]="faEllipsisVertical" class="bigger-icon"></fa-icon>
+                    <fa-icon [icon]="faEllipsisVertical" class="bigger-icon"></fa-icon>
                 </div>
-                <ng-container *ngFor="let name of status.properties">
-                    <div>
-                        <p>{{name.name}}</p>
-                    </div>
-                </ng-container>
-            </ng-container>
-
+                <div>
+                    <p>{{name.name}}</p>
+                </div>
+                <div>
+                    <fa-icon (click)="chooseColor()" [icon]="faPaintBrush" (click)="clickPencil()" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon"></fa-icon>
+                </div>
+            </div>
+        </ng-container>
+        <div class="border-div">
         </div>
-    </div>
+    </ng-container>
 </div>

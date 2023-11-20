@@ -1,4 +1,4 @@
-@import '../../../../variables';
+@import '../../../../../variables';
 .modal-overlay {
     @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
 
@@ -9,7 +9,7 @@
     color: $primaryColor;
 
     div:first-child {
-        @apply w-[60%] flex items-center;
+        @apply w-1/2 flex items-center;
     }
 }
 
@@ -68,7 +68,7 @@ span {
     }
 
     div:last-child {
-        @apply flex w-[20%] justify-between pr-3;
+        @apply flex w-[20%] justify-between items-center pr-3;
     }
 }
 
@@ -93,4 +93,3 @@ p{
     color:$primaryColor;
     font-size: 1rem;
 }
-

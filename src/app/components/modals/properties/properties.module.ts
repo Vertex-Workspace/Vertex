@@ -4,6 +4,8 @@ import { PropertiesComponent } from './properties.component';
 import { EditPropertiesComponent } from './edit-properties/edit-properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StatusComponent } from './status/status.component';
+import { ColorsComponent } from './colors/colors.component';
+import { GeneralPropertiesComponent } from './general-properties/general-properties.component';
 
 
 
@@ -11,7 +13,9 @@ import { StatusComponent } from './status/status.component';
   declarations: [
     PropertiesComponent,
     EditPropertiesComponent,
-    StatusComponent
+    StatusComponent,
+    ColorsComponent,
+    GeneralPropertiesComponent
   ],
   exports: [
     PropertiesComponent
