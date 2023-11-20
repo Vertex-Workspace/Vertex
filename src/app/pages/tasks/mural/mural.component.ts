@@ -36,7 +36,3 @@ export class MuralComponent implements OnInit, AfterViewInit {
   }
 
 }
-function ViewChild(arg0: string, arg1: { static: boolean; }) {
-  throw new Error('Function not implemented.');
-}
-
