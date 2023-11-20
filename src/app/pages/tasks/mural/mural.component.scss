@@ -1,5 +1,5 @@
 @import '../../../../_variables.scss';
 
 .mural-section {
-    @apply min-w-full min-h-full gap-4 overflow-auto flex flex-wrap;
+    @apply min-w-full min-h-full gap-4 flex;
 }
