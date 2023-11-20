@@ -1,7 +1,50 @@
+@import '../../../../variables';
+
 section{
     @apply flex w-screen h-full justify-center items-center; 
 }
 
 .main-div{
     @apply flex flex-col w-[90%] h-full;
+}
+
+.top-side{
+    @apply flex h-1/3 w-full;
+}
+
+.top-side-left{
+    @apply flex h-full w-1/2 bg-red-700;
+}
+
+.top-side-user-img{
+    @apply flex justify-center items-center h-full w-[30%] bg-green-700;
+}
+
+.user-img{
+    @apply text-[180px];
+    color: $primaryColor;
+}
+
+.top-side-user-informations{
+    @apply flex flex-col justify-center items-center h-[90%] w-[70%] ;
+}
+
+.userName-creationData{
+    @apply flex gap-[56%] justify-center items-center h-full w-full;
+}
+
+.realName-location{
+    @apply flex gap-3 justify-center items-center h-full w-full;
+}
+
+.user-description{
+    @apply flex justify-center items-center h-full w-full;
+}
+
+.top-side-right{
+    @apply flex h-full w-1/2 bg-blue-700;
+}
+
+.under-side{
+    @apply flex h-1/2 w-full bg-white;
 }
