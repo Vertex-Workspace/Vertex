@@ -108,5 +108,4 @@ export class MuralCardComponent implements OnInit, AfterViewInit {
     this.setAllHandleTransform();
   }
 
-
 }
