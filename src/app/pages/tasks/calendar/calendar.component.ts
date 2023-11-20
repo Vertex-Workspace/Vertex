@@ -1,6 +1,6 @@
-import {CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { Task } from 'src/app/models/task';
 
 @Component({
@@ -12,6 +12,7 @@ export class CalendarComponent {
 
   faToggleOn = faToggleOn;
   faToggleOff = faToggleOff;
+  faCircleUser = faCircleUser;
 
   ngOnInit() {
     this.buildCalendar();
@@ -19,26 +20,51 @@ export class CalendarComponent {
 
   //TASKS
   tasks: any[] = [
-    { "name": "teste", date: new Date() },
-    { "name": "teste", date: new Date() },
-    { "name": "teste", date: new Date() },
-    { "name": "teste2", date: new Date(2023, 10, 4) },
-    { "name": "teste4", date: new Date(2023, 10, 4) },
-    { "name": "teste5", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 4) },
-    { "name": "teste7", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 4) },
-    { "name": "teste", date: new Date(2023, 10, 25) },
-    { "name": "teste", date: new Date(2023, 10, 25) },
-    { "name": "teste", date: new Date(2023, 10, 25) },
-    { "name": "teste", date: new Date(2023, 10, 25) },
-    { "name": "teste", date: new Date(2023, 10, 13) },
-    { "name": "teste", date: new Date(2023, 10, 13) },
-    { "name": "teste", date: new Date(2023, 10, 13) },
-    { "name": "teste", date: new Date(2023, 10, 13) },
-    { "name": "teste", date: new Date(2023, 10, 13) },
-    { "name": "teste", date: new Date(2023, 10, 13) },
+    {
+      "name": "teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE",
+      date: new Date(),
+      category: {
+        name: 'ÚLTIMA CATEGORIA',
+        color: '#d7ffc94D',
+        borderColor: '#FFD600f3'
+      }
+    },
+    {
+      "name": "teste",
+      date: new Date(),
+      category: {
+        name: 'ÚLTIMA CATEGORIA',
+        color: '#d7ffc94D',
+        borderColor: '#FF9D9Df3'
+      }
+    },
+    {
+      "name": "teste",
+      date: new Date(),
+      category: {
+        name: 'ÚLTIMA CATEGORIA',
+        color: '#d7ffc94D',
+        borderColor: '#7be057de'
+      }
+    },
+    {
+      "name": "teste",
+      date: new Date(2023, 10, 4),
+      category: {
+        name: 'ÚLTIMA CATEGORIA',
+        color: '#d7ffc94D',
+        borderColor: '#7be027de'
+      }
+    },
+    {
+      "name": "teste",
+      date: new Date(2023, 10, 4),
+      category: {
+        name: 'ÚLTIMA CATEGORIA',
+        color: '#d7ffc94D',
+        borderColor: '#7be057de'
+      }
+    },
   ];
 
   modalTasks: boolean = false;
@@ -56,9 +82,9 @@ export class CalendarComponent {
     if (date != undefined) {
       let tasks: any[] = [];
       this.tasks.forEach((task) => {
-        if (task.date.getDate() == date.getDate() 
-        && task.date.getMonth() == date.getMonth()
-        && task.date.getFullYear() == date.getFullYear()) {
+        if (task.date.getDate() == date.getDate()
+          && task.date.getMonth() == date.getMonth()
+          && task.date.getFullYear() == date.getFullYear()) {
           tasks.push(task);
         }
       });
@@ -128,9 +154,9 @@ export class CalendarComponent {
   }
 
   today(day: Date): boolean {
-    let date : Date = new Date();
+    let date: Date = new Date();
     return date.getDate() == day.getDate() &&
-    date.getMonth() == day.getMonth()
+      date.getMonth() == day.getMonth()
       && date.getFullYear() == day.getFullYear();
   }
 

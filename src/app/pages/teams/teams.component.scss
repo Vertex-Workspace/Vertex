@@ -18,7 +18,7 @@ section{
 
     label {
         @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
-        items-center justify-center rounded cursor-pointer;
+        items-center justify-center rounded-sm cursor-pointer;
     }
 
     label:hover {
@@ -33,7 +33,7 @@ section{
     //BUTTONS
     button {
         @apply flex w-2/3  items-center justify-center 
-        border-2 transition-colors rounded p-3;
+        border-2 transition-colors rounded-sm p-3;
     }
     
     button:hover {
@@ -46,12 +46,11 @@ section{
         background-color: $primaryColor;
         border-color: $primaryColor;
         color: $secondColor;
-        @apply h-full w-[180px] flex items-center justify-center gap-4
-        text-lg p-3 rounded font-light border-2 transition-colors;
+        @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 rounded-sm font-light border-2 transition-colors;
     }
     .search {
         @apply w-2/5 h-full flex items-center justify-between bg-white p-3
-        rounded shadow-md border-none;
+        rounded-sm shadow-md border-none;
 
         i {
             @apply w-[10%];
@@ -72,33 +71,16 @@ section{
     background-color: $secondColor;
 }
 
-@media only screen and (min-width: 1600px) and (min-width: 1920px){
-    .container-grid{
-        @apply flex flex-col h-full w-full pt-10;
-    }
-    .default-size{
-        @apply flex w-full h-full;
-    }
+.container-grid{
+    @apply flex flex-col h-full w-full pt-10;
 }
-
-@media only screen and (min-width: 1400px) and (max-height: 900px){
-    .default-size{
-        @apply flex w-full h-[95%];
-    }
-    .container-grid{
-        @apply flex flex-col h-full w-full pt-10;
-    }
+.default-size{
+    @apply flex w-full h-full;
 }
-
 
 // TASK - FILTER ORDER
 .filter-settings {
     @apply flex gap-3 items-center;
-
-    p {
-        color: $primaryColor;
-        @apply text-lg;
-    }
 
     select {
         @apply w-[170px] h-[35px] text-center outline-none;

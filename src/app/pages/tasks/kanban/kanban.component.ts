@@ -71,11 +71,11 @@ export class KanbanComponent {
       category: this.categories[0]
     },
     {
-      name: 'Tarefa 2',
+      name: 'Tarefa 2 Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2',
       category: this.categories[0]
     },
     {
-      name: 'Tarefa 3',
+      name: 'REALIZAR PROCESSO BACK-END À PELÉ',
       category: this.categories[0]
     },
     {

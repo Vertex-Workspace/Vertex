@@ -13,14 +13,13 @@ import { CardComponent } from 'src/app/components/reusable-components/card/card.
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from './calendar/calendar.module';
+import { KanbanModule } from './kanban/kanban.module';
 
 
 @NgModule({
   declarations: [
     TasksComponent,
-    KanbanComponent,
     ListComponent,
-    CardComponent,
    ],
   exports:[
     TasksComponent
@@ -32,7 +31,8 @@ import { CalendarModule } from './calendar/calendar.module';
     FontAwesomeModule,
     DragDropModule,
     FormsModule,
-    CalendarModule
+    CalendarModule,
+    KanbanModule
   ],
 })
 export class TasksModule { }

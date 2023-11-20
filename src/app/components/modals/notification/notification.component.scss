@@ -20,8 +20,8 @@ section{
         .header-title{
             @apply flex w-full h-1/2 flex-row justify-between items-center;
 
-            h2{
-                @apply text-2xl;
+            h5{
+                color: $secondColor;
             }
             p{
                 @apply text-sm;

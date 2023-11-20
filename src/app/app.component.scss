@@ -16,6 +16,7 @@
     transition: width 0.32s ease-in-out;
     background-color: $primaryColor;
     position: fixed;
+    z-index: 999;
 }
 
 .main-div {

@@ -3,7 +3,7 @@
         <section class="menu">
             <div>
                 <ng-container *ngFor="let item of menuItems">
-                    <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
+                    <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="regular-text">
                         <i 
                             class="{{ item.iconClass }}" 
                             style="font-size: 1rem"
@@ -18,7 +18,7 @@
                 </ng-container>
             </div>
 
-            <div class="config-menu">
+            <div class="config-menu medium-text">
                 <button 
                     *ngIf="!searchBarOpen" 
                     (click)="toggleSearchBar()"
@@ -27,7 +27,7 @@
                 </button>
 
                 <div 
-                    class="search" 
+                    class="search " 
                     *ngIf="searchBarOpen"
                 >
                     <input 
@@ -57,16 +57,8 @@
         </section>
 
         <section 
-            class="filter-settings" 
+            class="filter-settings regular-text" 
         >
-            <!-- <div>
-                <p>Visualizar por: </p>
-                <select>
-                    <option>((items))</option>
-                </select>
-            </div> -->
-
-
             <ng-container *ngIf="filterOpen || orderOpen">
                 <p>Ordenar por </p>
                 <select *ngIf="filterOpen">

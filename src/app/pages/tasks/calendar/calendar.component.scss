@@ -36,12 +36,12 @@ section {
     display: grid;
     grid-template-rows: repeat(5, 1fr);
 
-    text-align: center;
 
     .days-of-week {
         @apply text-xl pb-4;
         border: $borderBottom;
         border-top: none;
+        text-align: center;
     }
 
     .calendar-rows{
@@ -55,10 +55,16 @@ section {
         border: $borderBottom;
 
         .day-informations {
+            text-align: center;
             @apply flex h-[20%] w-full justify-end;
 
             div{
                 @apply w-8 h-7 rounded-full;
+            }
+
+            .today {
+                background-color: $primaryColor;
+                color: $secondColor;
             }
         }
 
@@ -76,15 +82,8 @@ section {
             }
         }
         .tasks-list-in-calendar{
-            @apply flex flex-col gap-2 pt-2;
+            @apply flex flex-col gap-2 pt-2 items-center;
             color: $primaryColor;
-        
-        
-
-            .card-list-task-calendar{
-                @apply flex w-full h-20 bg-white rounded-sm p-3;
-
-            }
         }
 
     }
@@ -93,18 +92,14 @@ section {
         color: #aaa;
     }
 
-    .today {
-        background-color: $primaryColor;
-        color: $secondColor;
-    }
+
 }
 
 
 
 .model-show-tasks{
-    h2{
-        @apply text-3xl pb-8;
-        color: $primaryColor;
+    p{
+        @apply pb-8;
     }
     .div-tasks{
         @apply w-full h-[80%] flex flex-col gap-4;

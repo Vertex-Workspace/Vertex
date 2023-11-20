@@ -10,8 +10,8 @@
         @apply min-w-[300px] w-[300px] flex flex-col
         gap-4 p-4 shadow-md;
         
-          h2 {
-            @apply text-[#545B63] ml-3;
+        h6 {
+            @apply pl-3;
           }
 
           .col-items {

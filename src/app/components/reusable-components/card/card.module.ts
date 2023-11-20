@@ -9,6 +9,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   declarations: [
     CardComponent
   ],
+  exports:[
+    CardComponent
+  ],
   imports: [
     CommonModule,
     FontAwesomeModule,

@@ -6,10 +6,11 @@ section {
 
 //CARDS
 .card-workspace {
-    @apply flex w-2/3 h-[25%] bg-white flex-col items-center rounded-sm shadow-md;
+    @apply flex w-2/3 h-[25%] flex-col items-center rounded-sm shadow-sm;
+    background-color: $card;
 
     .workspace-title {
-        @apply flex w-full h-[30%] bg-white flex-col items-center justify-center text-xl;
+        @apply flex w-full h-[30%] flex-col items-center justify-center text-xl;
 
         h5 {
             @apply flex h-full items-center;
@@ -18,7 +19,7 @@ section {
     }
 
     .workspace-options {
-        @apply grid w-full h-[70%] bg-white flex-col items-center justify-center grid-cols-2;
+        @apply grid w-full h-[70%] flex-col items-center justify-center grid-cols-2;
 
         .grid-card-workspace {
             @apply flex flex-col w-full h-full items-center justify-evenly;
@@ -32,6 +33,7 @@ section {
 
                 i {
                     @apply flex w-[30%];
+                    color: $primaryColor;
                 }
 
                 p {
@@ -56,9 +58,10 @@ section {
         }
 
         .card-chart {
-            @apply flex w-full h-full bg-white 
-            rounded-md items-center justify-center p-3;
+            @apply flex w-full h-full
+            rounded-sm items-center justify-center p-3;
             border-top: 10px solid $primaryColor;
+            background-color: $card;
         }
     }
 }
@@ -80,22 +83,23 @@ section {
     }
 
     .recently-teams-team {
-        @apply flex w-[32%] h-full rounded-md flex-col;
+        @apply flex w-[32%] h-full rounded-sm flex-col;
         cursor: pointer
     }
 
     .recently-team-image {
-        @apply flex w-full h-1/2 items-center rounded-md;
+        @apply flex w-full h-1/2 items-center rounded-sm;
 
         img {
-            @apply flex w-full h-full rounded-md;
+            @apply flex w-full h-full rounded-sm;
             object-fit: cover;
         }
     }
 
     .recently-team-info {
-        @apply flex w-full h-1/2 bg-white rounded-md justify-between p-2 flex-col;
+        @apply flex w-full h-1/2 rounded-sm justify-between p-2 flex-col;
         color: $primaryColor;
+        background-color: $card;
     }
 }
 //

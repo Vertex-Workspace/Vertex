@@ -1,27 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CalendarComponent } from './calendar.component';
+import { KanbanComponent } from './kanban.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
-import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 import { CardModule } from 'src/app/components/reusable-components/card/card.module';
 
 
 
 @NgModule({
-  declarations: [
-    CalendarComponent
-  ],
-  exports: [
-    CalendarComponent
-  ],
+  declarations: [ KanbanComponent],
+  exports: [ KanbanComponent],
   imports: [
     CommonModule,
     BrowserModule,
     FontAwesomeModule,
-    ModalWarnModule,
+    DragDropModule,
+    FormsModule,
     CardModule
   ]
 })
-export class CalendarModule { }
+export class KanbanModule { }

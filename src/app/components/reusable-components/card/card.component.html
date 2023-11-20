@@ -1,6 +1,8 @@
 <div 
     class="card" 
     [style.borderColor]="task.category.borderColor"
+    [style.width]="width"
+    [style.min-height]="minHeight"
 >
     <div class="top">
         <div class="left">
@@ -23,7 +25,5 @@
         </div>
     </div>
 
-    <div class="main">
-        <p>{{task.name}}</p>
-    </div>
+    <p class="medium-text">{{task.name}}</p>
 </div>

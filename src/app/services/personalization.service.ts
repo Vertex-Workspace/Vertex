@@ -15,7 +15,7 @@ export class PersonalizationService {
 
   setPersonalization(): void {
     const defaultColors: Personalization = {
-      primaryColor: '#FFFFFF',
+      primaryColor: '#719246',
       secondColor: '#F3F3F3',
       tittleFont: "'Manrope', sans-serif",
       textFont: "'Inter', sans-serif",
