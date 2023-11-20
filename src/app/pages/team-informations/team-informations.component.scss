@@ -13,32 +13,28 @@ section {
 }
 
 .divHead {
-    @apply flex w-[80%] h-[25%] items-center gap-10
+    @apply flex w-[80%] h-[25%] items-center gap-10;
+
+    .iconUser {
+        @apply text-[180px];
+        color: $primaryColor;
+    }
+    .divTextHead {
+        @apply flex flex-col w-[80%] gap-4;
+    }
+    .iconLink {
+        @apply flex items-center text-[15px];
+        color: $primaryColor;
+    }
+    .divMembers {
+        @apply flex gap-2;
+    }
 }
 
-.iconUser {
-    @apply text-[180px] text-[#092C4C]
-}
 
-.divTextHead {
-    @apply flex flex-col w-[80%] gap-2 text-[#092C4C];
-}
 
-.textHead {
-    @apply text-[24px] font-bold text-[#092C4C]
-}
 
-.divMembers {
-    @apply flex gap-2
-}
 
-.iconLink {
-    @apply flex items-center text-[15px] text-[#092C4C];
-}
-
-.data {
-    @apply text-lg
-}
 
 .clicked {
     color: $secondColor;
@@ -68,9 +64,13 @@ section {
 }
 
 .divProjectDashboardsBar {
-    @apply flex w-[40%] h-[90%] bg-[#fff] border-t-8 rounded-md border-[#092C4C];
+    @apply flex w-[40%] h-[90%]  border-t-8 rounded-sm;
+    background-color: $card;
+    border-color: $primaryColor;
 }
 
 .divProjectDashboardsPie {
-    @apply flex justify-center items-center w-[40%] h-[85%] bg-[#fff] border-t-8 rounded-md border-[#092C4C];
+    @apply flex justify-center items-center w-[40%] h-[85%] border-t-8 rounded-sm;
+    background-color: $card;
+    border-color: $primaryColor;
 }

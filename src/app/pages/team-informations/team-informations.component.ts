@@ -1,6 +1,6 @@
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +16,7 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 export class TeamInformationsComponent {
     // ICONS
     faLink = faLink;
+    faImage = faImage;
     faCircleUser = faCircleUser;
     faSearch = faSearch;
     faEnvelope = faEnvelope;

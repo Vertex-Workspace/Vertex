@@ -1,27 +1,22 @@
 <section>
     <div class="container-custom">
-        <!-- CODIGO AQUI - COMO QUISER  -->
-
         <div class="left-side">
             <div class="divHead">
                 <div>
-                    <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon>
+                    <fa-icon class="iconUser" [icon]="faImage"></fa-icon>
                 </div>
 
                 <div class="divTextHead">
-                    <div>
-                        <h1 class="textHead">
-                            Nome Equipe
-                        </h1>
-
-                        <div class="divMembers">
-                            <p class="membersInvite">3 membros</p>
-                            <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
-                            <p>Copiar link de convite</p>
-                        </div>
+                    <h5>
+                        Nome Equipe
+                    </h5>
+                    <div class="divMembers regular-text">
+                        <p>3 membros</p>
+                        <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
+                        <p>Copiar link de convite</p>
                     </div>
 
-                    <h1 class="data">Data de Criação: 24/10/2022</h1>
+                    <h6>Data de Criação: 24/10/2022</h6>
                 </div>
             </div>
 
@@ -71,7 +66,7 @@
                             <div class="flex gap-3 items-end h-full w-full justify-end">
                                 <ng-container *ngFor="let item of user.socialMedia">
                                     <fa-icon class="text-[#092c4c] text-[20px]" [icon]="item"></fa-icon>
-                                </ng-container>
+                                    </ng-container>
                             </div>
                         </div>
                     </div>
@@ -83,7 +78,7 @@
                 <ng-container *ngFor="let user of users">
                     <div class="bg-[#fff] rounded-md w-full h-full flex justify-around">
                         <div class="w-[30%] h-full p-4">
-                            <fa-icon class="text-[#092c4c] text-[60px]" [icon]="faCircleUser"></fa-icon>
+                            <fa-icon [icon]="faCircleUser"></fa-icon>
                         </div>
 
                         <div class="w-[70%] h-full flex flex-col  text-right p-3">
@@ -91,7 +86,7 @@
                             <p class="font-light text-gray-500">{{ user.function }}</p>
                             <div class="flex gap-3 items-end h-full w-full justify-end">
                                 <ng-container *ngFor="let item of user.socialMedia">
-                                    <fa-icon class="text-[#092c4c] text-[20px]" [icon]="item"></fa-icon>
+                                    <fa-icon [icon]="item"></fa-icon>
                                 </ng-container>
                             </div>
                         </div>
@@ -104,16 +99,16 @@
 
         <div class="right-side">
             <div class=" h-[28%] flex flex-col items-center justify-evenly">
-                <h1 class="flex justify-center font-bold text-[#092C4C] text-[22px]">Descrição da equipe</h1>
-                <h3 class="text-justify flex justify-center w-[80%] text-[#092C4C]">"Lorem ipsum dolor sit amet,
+                <h5 class="flex justify-center font-bold">Descrição da equipe</h5>
+                <p class="text-justify flex justify-center w-[80%] medium-text">"Lorem ipsum dolor sit amet,
                     consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                     aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum."</h3>
+                    culpa qui officia deserunt mollit anim id est laborum."</p>
             </div>
 
-            <h1 class="flex justify-center font-bold text-[#092C4C] text-[22px]">Andamento dos projetos</h1>
+            <h5 class="flex justify-center font-bold">Andamento dos projetos</h5>
 
             <div class="flex flex-col w-full h-[60%]">
                 <div class="flex flex-col justify-center w-full h-[42%]">
@@ -154,10 +149,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
     </div>
 </section>
