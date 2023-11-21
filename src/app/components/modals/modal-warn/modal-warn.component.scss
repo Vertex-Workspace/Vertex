@@ -10,8 +10,9 @@
 }
 
 .modal {
-    @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
+    @apply absolute w-1/4 h-2/5 rounded-sm flex flex-col 
     items-end justify-start text-center p-8 border-t-8;
+    background-color: $secondColor;
     border-color: $primaryColor;
 }
 

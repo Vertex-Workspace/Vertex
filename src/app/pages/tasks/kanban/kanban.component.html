@@ -2,7 +2,7 @@
     <ng-container cdkDropListGroup>
         <div class="col-container" >
             <div 
-                [ngClass]="'col'" 
+                class="col"
                 *ngFor="let property of categories" 
                 [style.backgroundColor]="property.color"
                 [style.height]="getHeight(property)"
@@ -11,12 +11,14 @@
                 (cdkDropListDropped)="dropCard($event, property)"
             >
 
-                <h2>{{ property.name }}</h2>
+                <h6>{{ property.name }}</h6>
 
                 <div class="col-items">
 
                     <ng-container *ngFor="let task of taskList">
-                        <app-card 
+                        <app-card
+                            [minHeight]="'150px'" 
+                            [width]="'300px'" 
                             *ngIf="task.category === property"
                             [task]="task" 
                             [cdkDragData]="task" 

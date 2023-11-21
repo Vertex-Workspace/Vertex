@@ -62,7 +62,6 @@ export class AppComponent{
   fontSize!: number;
 
   updateColor(): void {
-    console.log(this.inputColor)
     document.documentElement.style.setProperty('--custom-color', this.inputColor);
     document.documentElement.style.setProperty('--font-color', this.fontColor);
     document.documentElement.style.setProperty('--button-color', this.buttonColor);

@@ -20,6 +20,9 @@ export class CardComponent {
   
   @Input() task !: Task;
 
+
+  @Input() width!: string;
+  @Input() minHeight!: string;
   settings = [
     { id: 'clock', icon: this.faClock, onclick: () => this.clock() },
     { id: 'chat', icon: this.faEnvelope, onclick: () => this.openChat() },

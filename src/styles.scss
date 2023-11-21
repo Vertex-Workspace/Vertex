@@ -10,9 +10,7 @@
 @tailwind utilities;
 
 body {
-    font-family: var(--font-family);
     background-color: $secondColor;
-    background-color: #F3F3F3;
 }
 
 * {
@@ -51,6 +49,7 @@ input:focus {
 }
 ::-webkit-scrollbar-thumb {
     background-color: $primaryColor;
+    border-radius: 3px;
 }
 h1, h2, h3, h4, h5, h6{
     font-family: $fontFamily;

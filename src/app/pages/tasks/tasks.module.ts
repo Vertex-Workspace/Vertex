@@ -12,21 +12,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
 import { CalendarModule } from './calendar/calendar.module';
-import { MuralComponent } from './mural/mural.component';
+import { KanbanModule } from './kanban/kanban.module';
 import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
+import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
+import { MuralComponent } from './mural/mural.component';
+
 
 @NgModule({
   declarations: [
     TasksComponent,
-    KanbanComponent,
     ListComponent,
-    MuralComponent,
-    CardComponent,
+    MuralCardComponent,
     RowCardComponent,
-    MuralCardComponent
-  
+    MuralComponent
    ],
   exports:[
     TasksComponent
@@ -39,6 +38,7 @@ import { MuralCardComponent } from 'src/app/components/reusable-components/mural
     DragDropModule,
     FormsModule,
     CalendarModule,
+    KanbanModule
   ],
 })
 export class TasksModule { }

@@ -1,8 +1,9 @@
 @import '../../../../variables';
 
 .card {
-    @apply w-[300px] h-[135px] p-3 rounded bg-[#F2F2F2] 
+    @apply p-3 rounded-sm
     shadow-md flex flex-col gap-8 border-l-[12px] cursor-pointer;
+    background-color: $card;
 }
 
 .top {
@@ -25,19 +26,14 @@
             font-size: 1.2rem;
 
             &:hover {
-                @apply rotate-[20deg];
+                @apply scale-105;
             }
         }
     }
 
 }
 
-.main {
-    @apply text-xl;
-
-    p {
-        color: $primaryColor;
-        @apply ml-2;
-    }
+p {
+    @apply ml-2 overflow-hidden max-h-[24px];
 }
 

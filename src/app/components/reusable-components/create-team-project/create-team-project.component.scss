@@ -6,8 +6,7 @@ section{
 }
 
 .title{
-    @apply text-2xl flex h-[15%];
-    color: $primaryColor;
+    @apply flex h-[15%];
 }
 
 .div-grid-name-image{
@@ -18,7 +17,7 @@ section{
 .input-name{
     @apply flex flex-col w-full h-[50%];
 
-    label{
+    p{
         @apply text-xl pb-6;
     }
     input{
@@ -29,25 +28,25 @@ section{
 .input-image{
     @apply flex flex-col w-full h-[50%] justify-center items-center;
 
-    #user-icon{
-        @apply text-9xl ;
+    #image-icon{
+        @apply text-9xl;
         color: $primaryColor;
     }
 
-    #user-icon:hover{
+    #image-icon:hover{
         opacity: 0.5;
     }
 
-    label{
-        @apply text-sm pt-4;
+    p{
+        @apply pt-4;
     }
 }
 
 .input-description{
     @apply flex flex-col w-full h-[30%];
 
-    label{
-        @apply text-xl pb-6;
+    p{
+        @apply pb-6;
     }
     textarea{
         @apply pl-4 pt-4 rounded-md h-full;
@@ -64,7 +63,7 @@ section{
 
     .cancel-button{
         @apply flex items-center justify-center w-32 h-12 rounded-sm mr-4;
-        background-color: #872323;
+        background-color: $error;
         color: white;
     }
     .confirm-button{
@@ -79,11 +78,12 @@ section{
 app-modal-warn{
     color: $primaryColor;
     
-    h2{
-        @apply text-2xl pt-2;
+    h5{
+        @apply pt-2;
     }
+
     .informations-modal{
-        @apply flex pt-12 flex-col text-xl;
+        @apply flex pt-12 flex-col;
     }
 
     app-button{

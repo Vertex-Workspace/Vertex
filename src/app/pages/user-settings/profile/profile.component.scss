@@ -12,18 +12,12 @@
             @apply flex w-[25%] items-center justify-start gap-7;
         }
         
-        p{
-            @apply text-xl font-medium;
-        }
 }
 
 .size {
     @apply text-[18px];
 }
 
-label {
- @apply py-3 text-sm;
-}
 
 .iconProfile {
     color: $primaryColor;
@@ -60,11 +54,6 @@ textarea {
     resize: none;
 }
 
-label {
-    @apply text-xl;
-    color: $primaryColor;
-}
-
 .divInputs {
     @apply flex w-[95%]
 }
@@ -74,6 +63,10 @@ label {
 
     section {
        @apply flex h-[85%] flex-col border-b-2 justify-evenly;
+    }
+
+    p {
+        @apply py-3;
     }
 }
 
@@ -130,17 +123,10 @@ label {
 }
 
 .charts {
-    @apply h-[20%] w-full pt-4;
-
-    p:first-child {
-        @apply text-[16px];
-    }
-    p:last-child {
-        @apply text-sm pt-2;
-    }
+    @apply h-[20%] w-full pt-4 items-center;
 
     div {
-        @apply flex items-start pt-2;
+        @apply flex items-center pt-2;
     }
 }
 

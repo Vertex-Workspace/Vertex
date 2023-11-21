@@ -8,7 +8,7 @@
         </div>
          <!-- RIGHT SIDE TASKS/TEAMS -->
          <div class="container-grid">
-            <div class="nav-tasks-teams">
+            <div class="nav-tasks-teams regular-text">
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'">
                         <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
@@ -19,7 +19,7 @@
             </div>
 
             <!-- UTILITY NAV BAR PROJECT -->
-            <div class="functionally-items" *ngIf="clicked === 'project' && !isCreating">
+            <div class="functionally-items regular-text" *ngIf="clicked === 'project' && !isCreating">
                 <button class="create" (click)="switchCreateView()">
                     <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                     Novo Projeto
@@ -31,7 +31,7 @@
             </div>
 
             <!-- UTILITY NAV BAR TASK -->
-            <div class="functionally-items" *ngIf="clicked === 'task'">
+            <div class="functionally-items regular-text" *ngIf="clicked === 'task'">
                 <div class="search">
                     <input type="text" placeholder="Pesquise por uma tarefa...">
                     <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
@@ -45,7 +45,7 @@
 
             <!-- SETTING OF ORDER AND FILTER -->
             <section 
-            class="filter-settings" 
+            class="filter-settings regular-text" 
             *ngIf="filterOpen || orderOpen"
             >
             <p *ngIf="orderOpen">Ordenar por </p>

@@ -19,10 +19,6 @@
     @apply w-full h-full flex flex-col items-center;
 }
 
-h2 {
-    @apply text-xl font-bold;
-}
-
 .text-align {
     @apply flex items-center justify-center w-full h-full flex-col pt-16;   
 }
@@ -39,15 +35,9 @@ button {
 .yes-button {
     background-color: $primaryColor;
 }
-
 .no-button {
-    background-color: #BDBDBD;
+    background-color: $emphasis;
 }
-
-h2 {
-    @apply text-xl font-bold;
-}
-
 .deleted {
     @apply flex items-center justify-center w-full h-full pb-16;
 }
