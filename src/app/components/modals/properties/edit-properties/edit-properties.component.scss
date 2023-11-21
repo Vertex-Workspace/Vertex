@@ -12,11 +12,6 @@
         @apply w-[90%] flex items-center;
     }
 }
-
-h2 {
-    @apply text-[1.5rem] font-bold cursor-pointer pl-3;
-}
-
 .modal {
     @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
     items-end justify-start text-center p-8 border-t-8;
@@ -43,8 +38,9 @@ h2 {
 .task-name{
     @apply w-full h-[10%] border-b border-[#092C4C] pt-3 flex items-end justify-start;
 
-    p{
-        color:$primaryColor
+    input{
+        background-color: $secondColor;
+        @apply flex flex-row justify-start;
     }
 }
 
@@ -61,7 +57,7 @@ h2 {
 }
 
 .properties-answers {
-    @apply w-full h-[20%] pt-3;
+    @apply w-full h-[20%];
 
 
     div:last-child{
@@ -78,12 +74,8 @@ h2 {
 }
 
 input {
-    @apply w-[200px] h-[30px] pt-3 pl-10 rounded-md shadow-2xl;
+    @apply w-[200px] h-[30px] pt-3 rounded-md shadow-2xl;
 };
-
-p{
-    color: $primaryColor;
-}
 
 .delete {
     @apply w-full h-[10%] border-t border-[#092C4C] flex items-center gap-2;

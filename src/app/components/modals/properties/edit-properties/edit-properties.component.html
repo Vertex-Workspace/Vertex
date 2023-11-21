@@ -1,9 +1,9 @@
 <div class="task-name">
-    <p>Nome da tarefa</p>
+    <input value="Nome da tarefa" class="regular-text"/>
 </div>
 
 <section>
-    <p>Tipo de dado</p>
+    <p class="medium-text">Tipo de dado</p>
     <div class="properties-types">
         <ng-container *ngFor="let type of propertyTypes; index as i">
             <div [ngClass]="type.value === true ? '' : 'opacity' " (click)="selectValue(i)" (click)="selectIcon(i)">
@@ -17,7 +17,7 @@
             <fa-icon *ngIf="check.visibility" [icon]="faSquare"
                 [ngClass]="check.value ? 'checkBox-unselected' : 'checkBox-selected'" (click)="defineValue(i)">
             </fa-icon>
-            <p *ngIf="check.visibility">{{check.p}}</p>
+            <p class="small-text" *ngIf="check.visibility">{{check.p}}</p>
         </div>
         <div class="value-input">
             <p *ngIf="openInput">Valor padrão:</p>
@@ -26,6 +26,6 @@
     </div>
     <div class="delete">
         <fa-icon [icon]="faTrashCan" class="trash-icon"></fa-icon>
-        <p>Excluir propriedade</p>
+        <p class="regular-text">Excluir propriedade</p>
     </div>
 </section>

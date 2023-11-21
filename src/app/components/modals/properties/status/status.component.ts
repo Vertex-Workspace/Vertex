@@ -65,4 +65,12 @@ export class StatusComponent {
   chooseColor(){
     this.colorModal = true;
   }
+
+  add(item:number){
+    this.statusList[item].properties.push({name: 'New Status'});
+  }
+
+  delete(item: number){
+    this.statusList[item].properties.pop();
+  }
 }

@@ -1,38 +1,7 @@
 @import '../../../../../variables';
-.modal-overlay {
-    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
-
-}
-
-.exitModal {
-    @apply flex w-full justify-between;
-    color: $primaryColor;
-
-    div:first-child {
-        @apply w-1/2 flex items-center;
-    }
-}
-
-.modal {
-    @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
-    items-end justify-start text-center p-8 border-t-8;
-    border-color: $primaryColor;
-}
 
 .ng-contentDiv{
     @apply w-full h-full flex flex-col items-center pt-6;
-}
-
-.text-align {
-    @apply flex items-center justify-center w-full h-full flex-col pt-16;   
-}
-
-input {
-    @apply w-full h-full pl-6 rounded-md flex justify-center items-start shadow-2xl;
-};
-
-span {
-    @apply w-full h-[50px];
 }
 
 .icon {
@@ -40,7 +9,11 @@ span {
 }
 
 .visible-unvisible {
-    @apply w-full h-[85%] pt-10 border-[#092C4C] border-b;
+    @apply w-full h-[85%] border-[#092C4C] border-b pt-4;
+}
+
+input {
+    @apply bg-[#EAEFF8];
 }
 
 .visible {

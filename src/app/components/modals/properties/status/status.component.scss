@@ -24,14 +24,6 @@
     font-size:1rem;
 }
 
-p {
-    color:$primaryColor;
-}
-
-h2 {
-    @apply text-lg
-}
-
 .main-property {
     @apply flex justify-between items-center w-full pt-3;
 

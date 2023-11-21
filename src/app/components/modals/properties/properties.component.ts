@@ -10,11 +10,14 @@ export class PropertiesComponent {
 
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;
-  currentModal: string = 'general';
+  currentModal: string = 'items-selection';
   generalModal: boolean = true;
 
   @Output()
   close = new EventEmitter<Event>();
+
+  @Output()
+  item = new EventEmitter<String>();
 
   @Input()
   height?: String;
@@ -34,6 +37,8 @@ export class PropertiesComponent {
       console.log('add')
     }else if(type === 'pencil'){
       this.currentModal = 'colors'
+    }else if(type === 'edit'){
+      this.currentModal = 'edit'
     }
   }
 
@@ -44,12 +49,14 @@ export class PropertiesComponent {
       this.currentModal = 'general'
     }else if(this.currentModal === 'colors'){
       this.currentModal = 'status'
+    }else if(this.currentModal === 'items-selection'){
+      this.currentModal = 'edit'
     }
   }
 
   openModals(modal: string){
-    if(modal === 'add'){
-      this.currentModal='add';
+    if(modal === 'edit'){
+      this.currentModal='edit';
     }else if(modal==='status'){
       this.currentModal='status';
   }

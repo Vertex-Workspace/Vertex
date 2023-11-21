@@ -56,6 +56,11 @@ export class GeneralPropertiesComponent {
   clickPlus(type: string) {
     this.plus.emit(type);
   }
+  
+  editProperty(type: string){
+    this.edit.emit(type);
+    console.log(type);
+  }
 
   propertiesList = [
     { name: 'Nome da Tarefa', status: 'visible', icon: faEye, icon2: faFont },
@@ -84,8 +89,5 @@ export class GeneralPropertiesComponent {
     console.log(this.generalModal);
   }
 
-  editProperty(type: string){
-    this.edit.emit(type);
-  }
 }
 

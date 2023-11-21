@@ -1,8 +1,8 @@
 <div class="properties">
-    <ng-container *ngFor="let status of statusList">
+    <ng-container *ngFor="let status of statusList; index as item">
         <div class="main-property">
-            <p>{{status.name}}</p>
-            <fa-icon [icon]="faPlus" class="little-icon"></fa-icon>
+            <p class="regular-text">{{status.name}}</p>
+            <fa-icon [icon]="faPlus" class="little-icon" (click)="add(item)"></fa-icon>
         </div>
         <ng-container *ngFor="let name of status.properties">
             <div class="specific-properties" [ngStyle]="{'background-color': status.color}">
@@ -11,11 +11,11 @@
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon"></fa-icon>
                 </div>
                 <div>
-                    <p>{{name.name}}</p>
+                   <input type="text" class="small-text" value="{{name.name}}" [ngStyle]="{'background-color': status.color}">
                 </div>
                 <div>
                     <fa-icon (click)="chooseColor()" [icon]="faPaintBrush" (click)="clickPencil()" class="little-icon"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(item)"></fa-icon>
                 </div>
             </div>
         </ng-container>

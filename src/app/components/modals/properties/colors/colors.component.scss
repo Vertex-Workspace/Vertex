@@ -13,10 +13,6 @@
     }
 }
 
-h2 {
-    @apply text-[1.5rem] font-bold cursor-pointer pl-3;
-}
-
 .modal {
     @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
     items-end justify-start text-center p-8 border-t-8;
@@ -41,7 +37,6 @@ li {
 }
 
 p{
-    color:$primaryColor;
     @apply pl-3;
 }
 

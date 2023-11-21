@@ -5,10 +5,11 @@
         <div class="exitModal">
             <div>
                 <fa-icon [icon]="faArrowLeft" class="icon" (click)="arrowLeft()" *ngIf="currentModal != 'general'"></fa-icon>
-                <h2 *ngIf="currentModal === 'general'">Propriedades</h2>
-                <h2 *ngIf="currentModal === 'status'">Status</h2>
-                <h2 *ngIf="currentModal === 'colors'">Cores</h2>
-                <h2 *ngIf="currentModal === 'edit'">Edite a propriedade</h2>
+                <p class="large-text" *ngIf="currentModal === 'general'">Propriedades</p>
+                <p class="large-text" *ngIf="currentModal === 'status'">Status</p>
+                <p class="large-text" *ngIf="currentModal === 'colors'">Cores</p>
+                <p class="large-text" *ngIf="currentModal === 'edit'">Edite a propriedade</p>
+                <p class="large-text" *ngIf="currentModal === 'items-selection'">Itens Seleção</p>
             </div>
             <div>
                 <fa-icon [icon]="faXmark" class="icon" (click)="closeModal()"></fa-icon>
@@ -20,5 +21,6 @@
         <app-edit-properties style="width: 100%; height: 100%;" *ngIf="currentModal === 'edit'" />
         <app-status (pencil)="clickGear('pencil')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'status'" />
         <app-colors style="width: 100%; height: 100%;" *ngIf="currentModal === 'colors'"></app-colors>
+        <app-items-selection style="width: 100%; height: 100%;" *ngIf="currentModal === 'items-selection'"></app-items-selection>
     </div>
 </div>

@@ -1,6 +1,11 @@
-$titleFont: 'Manrope', sans-serif;
-$primaryFont: 'Inter', sans-serif;
-$primaryColor: #092C4C;
+$fontFamily: 'Manrope', sans-serif;
+$primaryColor: #465492;
 $secondColor: #F3F3F3;
 
-$borderBottom: 1px solid rgb(9, 44, 76, 0.3);
+$emphasis: #D9D9D9;
+
+$card: #FFFFFF;
+
+$error: #872323;
+
+$borderBottom: 1px solid $primaryColor;
