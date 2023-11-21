@@ -1,78 +1,99 @@
 @import '../../../../variables';
 
-section{
-    @apply flex w-screen h-full justify-center items-center; 
+section {
+    @apply flex w-screen h-full justify-center items-center;
 }
 
-.main-div{
+.main-div {
     @apply flex flex-col w-[90%] h-full;
 }
 
-.top-side{
+.top-side {
     @apply flex h-[38%] w-full;
 }
 
-.top-side-left{
+.top-side-left {
     @apply flex items-center h-full w-1/2;
 }
 
-.top-side-user-img{
+.top-side-user-img {
     @apply flex justify-center items-center h-full w-[30%];
 }
 
-.user-img{
+.user-img {
     @apply text-[180px];
     color: $primaryColor;
 }
 
-.top-side-user-informations{
-    @apply flex flex-col justify-start items-center h-[80%] w-[70%] ;
+.top-side-user-informations {
+    @apply flex flex-col justify-start items-center h-[80%] w-[70%];
 }
 
-.userName-creationData{
+.userName-creationData {
     @apply flex justify-between items-center h-full w-[88%];
 }
 
-.realName-location{
+.realName-location {
     @apply flex gap-[35px] justify-center items-center h-full w-full;
 }
 
-.user-description{
+.user-description {
     @apply flex justify-center items-center h-full w-full;
 }
 
-.description{
+.description {
     @apply text-justify w-[88%];
 }
 
-.top-side-right{
-    @apply flex flex-col justify-center items-center h-full w-1/2;
+.top-side-right {
+    @apply flex flex-col justify-between items-center h-full w-1/2;
     border-left: $borderBottom;
 }
 
-.top-side-right-text{
-    @apply flex flex-col justify-end items-start h-[25%]  w-[90%];
+.top-side-right-text {
+    @apply flex flex-col justify-end items-start h-[25%] w-[90%];
 }
 
-.top-side-right-projects{
-    @apply flex flex-col justify-start items-start h-[75%] overflow-auto w-[90%];
+.top-side-right-projects {
+    @apply flex flex-col justify-start items-start h-[69%] overflow-auto w-[90%];
 }
 
-.under-side{
+.under-side {
     @apply flex h-[62%] w-full bg-white;
 }
 
-.h1{
+.h1 {
     @apply text-2xl font-bold;
     color: $primaryColor;
 }
 
-.h1-formated{
+.h1-formated {
     @apply text-[20px] font-bold;
     color: $primaryColor;
 }
 
-.card-project{
-    @apply w-[90%] h-[30px];
+.card-project {
+    @apply flex justify-between w-[90%] h-[120px] min-h-[120px] rounded-sm;
     background-color: $card;
+}
+
+.indicator-color {
+    @apply w-[2%] h-full bg-green-600 rounded-sm;
+}
+
+.project-informations {
+    @apply flex flex-col justify-between items-start w-[70%] h-full;
+}
+
+.name-project {
+    @apply flex flex-col pt-2;
+}
+
+.mat-spinner {
+    ::ng-deep circle {
+        stroke: $primaryColor;
+        fill: green;
+        stroke-width: 2px; // Largura da borda
+        stroke-linecap: round;
+    }
 }

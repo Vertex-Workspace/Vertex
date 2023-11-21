@@ -25,11 +25,11 @@ import { ChatModule } from './pages/chat/chat.module';
 import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
 import { NotificationModule } from './components/modals/notification/notification.module';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
+import { UserInformationsModule } from './pages/user-informations/user-informations/user-informations.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        UserInformationsComponent,
     ],
     providers: [
         PersonalizationService,
@@ -59,7 +59,8 @@ import { UserInformationsComponent } from './pages/user-informations/user-inform
         ChartModule,
         ChatModule,
         MinichatModule,
-        NotificationModule
+        NotificationModule,
+        UserInformationsModule
     ]
 })
 export class AppModule { }

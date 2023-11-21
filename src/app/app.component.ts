@@ -15,7 +15,7 @@ import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons
   styleUrls: ['app.component.scss'],
   animations: [
     slideInAnimation
-  ]
+  ],
 })
 export class AppComponent{
 [x: string]: any;

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-user-informations',
@@ -8,11 +9,12 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 })
 export class UserInformationsComponent {
   faCircleUser = faCircleUser;
+  faTrashCan = faTrashCan;
 
   projects = [
     {
       name: 'Project 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget metus.',
+      description: 'Front-end do sistema de gerenciamento de projetos',
       date: '01/01/2021'
     },
   ]
