@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import {
   CdkDragDrop,
@@ -12,6 +12,13 @@ import {
 })
 export class KanbanComponent {
 
+
+  // @ViewChildren('card') cards!: any[];
+  // ngAfterViewInit() {
+  //   this.cards.forEach(card => {
+  //     console.log(card.nativeElement.offsetHeight);
+  //   });
+  // }
   selectedCards ?: Task[];
 
   categories: any[] = [
@@ -75,7 +82,7 @@ export class KanbanComponent {
       category: this.categories[0]
     },
     {
-      name: 'REALIZAR PROCESSO BACK-END À PELÉ',
+      name: 'REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ',
       category: this.categories[0]
     },
     {
@@ -119,12 +126,14 @@ export class KanbanComponent {
     );
   };
 
-  getHeight(property: any): string {
-    const propertyTasksQtt = 
-            this.specificPropertyArray(property).length;
 
-    return ((propertyTasksQtt * 150) + 110) + "px";
-  }
+
+  // getHeight(property: any): string {
+  //   const propertyTasksQtt = 
+  //           this.specificPropertyArray(property).length;
+  //   this.listaHeight.push(propertyTasksQtt);
+  //   return ((propertyTasksQtt * 150) + 110) + "px";
+  // }
 
 
 }

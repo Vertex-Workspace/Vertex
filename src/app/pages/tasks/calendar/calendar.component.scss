@@ -11,7 +11,7 @@ section {
     text-align: center;
 
     .title {
-        @apply flex flex-col text-3xl;
+        @apply flex flex-col;
         div {
             @apply flex flex-row justify-center pt-2 items-center;
 
@@ -19,9 +19,8 @@ section {
                 color: $primaryColor;
             }
 
-            span {
+            p {
                 @apply pl-4;
-                font-size: 20px;
             }
         }
     }
@@ -38,7 +37,7 @@ section {
 
 
     .days-of-week {
-        @apply text-xl pb-4;
+        @apply pb-4;
         border: $borderBottom;
         border-top: none;
         text-align: center;
@@ -97,25 +96,19 @@ section {
 
 
 
-.model-show-tasks{
-    p{
-        @apply pb-8;
+.div-tasks{
+    @apply w-full h-[80%] flex flex-col gap-4;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .card-task{
+        @apply flex w-full flex-row items-center justify-between px-8 py-10;
+        min-height: 70px;
+        text-align: start;
+        border-bottom: $borderBottom;
     }
-    .div-tasks{
-        @apply w-full h-[80%] flex flex-col gap-4;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        .card-task{
-            @apply flex w-full flex-row items-center justify-between px-8;
-            min-height: 70px;
-            height: 70px;
-            border-bottom: $borderBottom;
-        }
-
-    }
-
 }
+
+
 
 
 

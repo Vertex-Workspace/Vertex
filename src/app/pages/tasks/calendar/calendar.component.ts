@@ -21,7 +21,7 @@ export class CalendarComponent {
   //TASKS
   tasks: any[] = [
     {
-      "name": "teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE",
+      "name": "teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE",
       date: new Date(),
       category: {
         name: 'ÚLTIMA CATEGORIA',
@@ -30,7 +30,7 @@ export class CalendarComponent {
       }
     },
     {
-      "name": "teste",
+      "name": "FINALIZAR PRIMEIRA FASE",
       date: new Date(),
       category: {
         name: 'ÚLTIMA CATEGORIA',
