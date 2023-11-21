@@ -41,7 +41,7 @@ input:focus {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: $emphasis;
 }
 
   
@@ -50,7 +50,7 @@ input:focus {
     height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #092C4C;
+    background-color: $primaryColor;
 }
 h1, h2, h3, h4, h5, h6{
     font-family: $fontFamily;

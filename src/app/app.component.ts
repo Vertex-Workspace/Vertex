@@ -18,7 +18,7 @@ import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons
   ],
 })
 export class AppComponent{
-[x: string]: any;
+  [x: string]: any;
   title = 'Vertex';
   faMessage = faMessage;
   faTimes = faTimes;
@@ -38,9 +38,6 @@ export class AppComponent{
 
   isSideBarExpanded:boolean = false;
 
-  rota:String = window.location.href;
-  rotaChat:String = "http://localhost:4200/chat";
-  rotaAtual:string = window.location.href;
 
   constructor(
     private personalization : PersonalizationService, 
