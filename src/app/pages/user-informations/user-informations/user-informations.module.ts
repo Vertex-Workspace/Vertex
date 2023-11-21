@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserInformationsComponent } from './user-informations.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChartModule } from 'primeng/chart';
+
 
 
 
@@ -11,7 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ChartModule
   ],
   exports: [
     UserInformationsComponent

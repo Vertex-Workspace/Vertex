@@ -58,20 +58,6 @@ section {
     @apply flex flex-col justify-start gap-2 items-start h-[69%] overflow-auto w-[90%];
 }
 
-.under-side {
-    @apply flex h-[62%] w-full bg-white;
-}
-
-.h1 {
-    @apply text-2xl font-bold;
-    color: $primaryColor;
-}
-
-.h1-formated {
-    @apply text-[20px] font-bold;
-    color: $primaryColor;
-}
-
 .card-project {
     @apply flex justify-between w-[90%] h-[120px] min-h-[120px] rounded-sm;
     background-color: $card;
@@ -82,7 +68,7 @@ section {
 }
 
 .project-informations {
-    @apply flex flex-col justify-between items-start w-[60%] h-full;
+    @apply flex flex-col justify-between items-start w-[70%] h-full;
 }
 
 .name-project {
@@ -90,7 +76,7 @@ section {
 }
 
 .div-dashboard{
-    @apply flex relative items-center justify-center w-[20%] h-full;
+    @apply flex relative items-center justify-start w-[20%] h-full;
 }
 
 .div-trashIcon{
@@ -105,9 +91,6 @@ section {
 mat-progress-spinner {
     ::ng-deep circle {
         stroke: $primaryColor;
-        position: absolute;
-        border-width: 1px; // Largura da borda
-
     }
 }
 
@@ -123,4 +106,34 @@ mat-progress-spinner {
     border-radius: 50%;
     border-style: solid;
     border-width: 10px;
+}
+
+.under-side {
+    @apply flex justify-center items-center h-[62%] w-full;
+}
+
+.div-dashboards{
+    @apply flex flex-col justify-evenly pt-5 items-start w-[97%] h-[90%];
+}
+
+.dashboards{
+    @apply flex gap-5 justify-start items-start w-[100%] h-[70%];
+}
+
+.div-dashboard-pie-doughnut{
+    @apply flex justify-center items-center w-[25%] h-[85%] bg-[#fff] border-t-8 shadow-md rounded-md;
+    border-top:8px solid $primaryColor; 
+}
+
+.dashboard-pie-doughnut{
+    @apply flex justify-center items-center w-[70%] h-[90%];
+}
+
+.div-dashboard-bar{
+    @apply flex justify-center items-center w-[25%] h-[85%] bg-[#fff] border-t-8 shadow-md rounded-md;
+    border-top:8px solid $primaryColor; 
+}
+
+.dashboard-bar{
+    @apply flex justify-center items-center w-[95%] h-[100%];
 }
