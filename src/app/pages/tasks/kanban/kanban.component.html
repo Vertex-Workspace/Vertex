@@ -5,6 +5,7 @@
                 class="col"
                 *ngFor="let property of categories" 
                 [style.backgroundColor]="property.color"
+                [style.height]="getHeight(property)"
                 cdkDropList 
                 [cdkDropListData]="taskList" 
                 (cdkDropListDropped)="dropCard($event, property)"

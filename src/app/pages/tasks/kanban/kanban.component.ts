@@ -103,7 +103,6 @@ export class KanbanComponent {
     }
   ];
 
-
   specificPropertyArray(property: any): any[] {
     return this.taskList.filter(task => {
       return task.category === property;
@@ -126,14 +125,10 @@ export class KanbanComponent {
     );
   };
 
+  getHeight(property: any): string {
+    return ((this.specificPropertyArray(property).length * 174) + 70) + "px";
+  }
 
-
-  // getHeight(property: any): string {
-  //   const propertyTasksQtt = 
-  //           this.specificPropertyArray(property).length;
-  //   this.listaHeight.push(propertyTasksQtt);
-  //   return ((propertyTasksQtt * 150) + 110) + "px";
-  // }
 
 
 }

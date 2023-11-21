@@ -182,5 +182,4 @@ export class CalendarComponent {
   toggleCharts(): void {
     this.toggle = !this.toggle;
   }
-
 }
