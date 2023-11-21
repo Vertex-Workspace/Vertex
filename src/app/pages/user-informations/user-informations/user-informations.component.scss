@@ -46,16 +46,16 @@ section {
 }
 
 .top-side-right {
-    @apply flex flex-col justify-between items-center h-full w-1/2;
+    @apply pb-6 flex flex-col justify-between items-center h-full w-1/2;
     border-left: $borderBottom;
 }
 
 .top-side-right-text {
-    @apply flex flex-col justify-end items-start h-[25%] w-[90%];
+    @apply flex flex-col justify-end items-start h-[26.5%] w-[90%];
 }
 
 .top-side-right-projects {
-    @apply flex flex-col justify-start items-start h-[69%] overflow-auto w-[90%];
+    @apply flex flex-col justify-start gap-2 items-start h-[69%] overflow-auto w-[90%];
 }
 
 .under-side {
@@ -78,22 +78,49 @@ section {
 }
 
 .indicator-color {
-    @apply w-[2%] h-full bg-green-600 rounded-sm;
+    @apply w-[2%] h-full rounded-sm;
 }
 
 .project-informations {
-    @apply flex flex-col justify-between items-start w-[70%] h-full;
+    @apply flex flex-col justify-between items-start w-[60%] h-full;
 }
 
 .name-project {
     @apply flex flex-col pt-2;
 }
 
-.mat-spinner {
+.div-dashboard{
+    @apply flex relative items-center justify-center w-[20%] h-full;
+}
+
+.div-trashIcon{
+    @apply flex items-center justify-center w-[10%] h-full;
+    color: $primaryColor;
+}
+
+.trashIcon{
+    color: $primaryColor;
+}
+
+mat-progress-spinner {
     ::ng-deep circle {
         stroke: $primaryColor;
-        fill: green;
-        stroke-width: 2px; // Largura da borda
-        stroke-linecap: round;
+        position: absolute;
+        border-width: 1px; // Largura da borda
+
     }
+}
+
+
+.spinner-background {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    line-height: 80px;
+    text-align: center;
+    overflow: hidden;
+    border-color: rgba(103, 58, 183, 0.12);
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 10px;
 }

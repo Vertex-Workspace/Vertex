@@ -40,7 +40,7 @@
                 <div class="top-side-right-projects">
                     <ng-container *ngFor="let project of projects">
                         <div class="card-project">
-                            <div class="indicator-color">
+                            <div class="indicator-color" [ngStyle]="{'background-color':project.color}">
                             </div>
 
                             <div class="project-informations">
@@ -51,14 +51,17 @@
 
                                 <p class="small-text">{{project.date}}</p>
                             </div>
-                            
+
                             <div class="div-dashboard">
-                                <mat-spinner color="accent" mode="determinate" [value]=50 class="loading"></mat-spinner>
-                                aa
+
+                                <div class="spinner-background">{{spinner.value}}%</div>
+                                <mat-progress-spinner #spinner mode="determinate" [value]=project.progress>
+                                </mat-progress-spinner>
+
                             </div>
 
                             <div class="div-trashIcon">
-                                <fa-icon [icon]="faTrashCan"></fa-icon>
+                                <fa-icon class="trashIcon" [icon]="faTrashCan"></fa-icon>
                             </div>
                         </div>
                     </ng-container>
