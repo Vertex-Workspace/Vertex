@@ -19,7 +19,10 @@ import { TeamInformationsModule } from './pages/team-informations/team-informati
 import { CommonModule } from '@angular/common';
 import { TasksModule } from './pages/tasks/tasks.module';
 import { ChartModule } from 'primeng/chart';
+import { ChatModule } from './pages/chat/chat.module';
+import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
 import { NotificationModule } from './components/modals/notification/notification.module';
+import { UserInformationsModule } from './pages/user-informations/user-informations/user-informations.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { NotificationModule } from './components/modals/notification/notificatio
     TeamInformationsModule,
     ChartModule,
     NotificationModule,
+    ChatModule,
+    MinichatModule,
+    UserInformationsModule
   ],
   providers: [
     PersonalizationService,

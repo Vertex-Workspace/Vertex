@@ -1,7 +1,13 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { ChildrenOutletContexts, RouterLink, RouterOutlet } from '@angular/router';
+import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
+import { faMessage, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +15,34 @@ import { PersonalizationService } from './services/personalization.service';
   styleUrls: ['app.component.scss'],
   animations: [
     slideInAnimation
-  ]
+  ],
 })
 export class AppComponent{
+  [x: string]: any;
   title = 'Vertex';
+  faMessage = faMessage;
+  faTimes = faTimes;
+  faUser = faUser;
+  faExpand = faExpand;
+  faPaperPlane = faPaperPlane;
+  faPaperclip = faPaperclip;
+  faMicrophoneLines = faMicrophoneLines;
 
   userLogged: boolean = true;
+
+  miniChatOpen: boolean = false;
+
+  chatExpanded: boolean = false;
+  
   notification:boolean = false;
+
   isSideBarExpanded:boolean = false;
+
 
   constructor(
     private personalization : PersonalizationService, 
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private router:Router
   ){
     personalization.setPersonalization();
   }
@@ -49,8 +71,20 @@ export class AppComponent{
     document.documentElement.style.setProperty('--font-size', fontSize);
   }
 
+  expandChat():boolean{
+    return this.chatExpanded = !this.chatExpanded;
+  }
+
+  minimizeChat():boolean{
+    return this.chatExpanded = !this.chatExpanded;
+  }
+
+  openMiniChat(){
+    this.miniChatOpen = !this.miniChatOpen;
+  }
 
   switchNotifications():void{
     this.notification = !this.notification;
   }
 }
+

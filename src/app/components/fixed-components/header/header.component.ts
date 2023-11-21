@@ -13,6 +13,7 @@ export class HeaderComponent {
   openNotification = new EventEmitter();
 
   openNotifications():void{
+    console.log("openNotifications");
     this.openNotification.emit();
   }
 }

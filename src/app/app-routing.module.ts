@@ -9,6 +9,7 @@ import { TeamInformationsComponent } from './pages/team-informations/team-inform
 import { TeamsComponent } from './pages/teams/teams.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { ChatComponent } from './pages/chat/chat.component';
 import { ProfileComponent } from './pages/user-settings/profile/profile.component';
 import { NotificationsComponent } from './pages/user-settings/notifications/notifications.component';
 import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/teams-settings.component';
@@ -17,6 +18,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
 import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
 import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
+import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 
 const routes: Routes = [
   {
@@ -25,8 +27,12 @@ const routes: Routes = [
     data: { animation: 'loginPage' }
   },
   {
-    path:"team-informations",
+    path: "team-informations",
     component: TeamInformationsComponent
+  },
+  {
+    path: "user-informations",
+    component: UserInformationsComponent
   },
   {
     path: "home",
@@ -35,11 +41,15 @@ const routes: Routes = [
   {
     path: "project",
     component: ProjectsComponent
-  },  
+  },
   {
     path: 'mural',
     component: MuralComponent,
     data: { animation: 'muralPage' }
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
   },
   {
     path: 'task',
@@ -75,32 +85,32 @@ const routes: Routes = [
   {
     path: 'configuracoes',
     component: UserSettingsComponent,
-    children:[
+    children: [
       {
-      path: 'aparencia',
-      component: AppearanceComponent
+        path: 'aparencia',
+        component: AppearanceComponent
       },
       {
-      path: 'perfil',
-      component: ProfileComponent
+        path: 'perfil',
+        component: ProfileComponent
       },
       {
-      path: 'equipes',
-      component: TeamsSettingsComponent
+        path: 'equipes',
+        component: TeamsSettingsComponent
       },
       {
-      path: 'notificacoes',
-      component: NotificationsComponent
+        path: 'notificacoes',
+        component: NotificationsComponent
       },
       {
-      path: 'seguranca',
-      component: SecurityComponent
+        path: 'seguranca',
+        component: SecurityComponent
       },
-      
+
       {
-      path: "",
-      pathMatch: "full",
-      redirectTo: "perfil",
+        path: "",
+        pathMatch: "full",
+        redirectTo: "perfil",
       },
     ]
   },
