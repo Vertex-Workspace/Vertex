@@ -6,7 +6,8 @@
 }
 
 .title {
-    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
+    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+    border-color: $emphasis;
 
         div {
             @apply flex w-[20%] items-center justify-start gap-7;

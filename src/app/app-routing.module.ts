@@ -43,15 +43,6 @@ const routes: Routes = [
     component: ProjectsComponent
   },
   {
-    path: 'mural',
-    component: MuralComponent,
-    data: { animation: 'muralPage' }
-  },
-  {
-    path: 'chat',
-    component: ChatComponent,
-  },
-  {
     path: 'task',
     component: TaskComponent
   },

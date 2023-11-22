@@ -9,28 +9,25 @@
                 </div>
 
                 <div class="divTextHead">
-                    <div>
-                        <h1 class="textHead">
-                            Nome Equipe
-                        </h1>
-
-                        <div class="divMembers">
-                            <p class="membersInvite">3 membros</p>
-                            <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
-                            <p>Copiar link de convite</p>
-                        </div>
+                    <h3 class="font-bold">
+                        Nome Equipe
+                    </h3>
+                    <div class="divMembers">
+                        <p class="medium-text">3 membros</p>
+                        <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
+                        <p class="medium-text">Copiar link de convite</p>
                     </div>
 
-                    <h1 class="data">Data de Criação: 24/10/2022</h1>
+                    <p class="medium-text">Data de Criação: 24/10/2022</p>
                 </div>
             </div>
 
             <div class="high-div-members">
                 <div class="div-members">
-                    <h1 class="textHead">Membros da equipe</h1>
+                    <h5>Membros da equipe</h5>
                     <div class="members ">
                         <ng-container *ngFor="let item of menuItems">
-                            <label class="data gap-3 " [ngClass]="clicked === item.id ? 'clicked' : 'default'">
+                            <label class="gap-3 " [ngClass]="clicked === item.id ? 'clicked' : 'default'">
                                 <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
                                 <button routerLink="[item.id]" (click)="changePreviewMode(item.id)">
                                     {{ item.label }}
@@ -43,7 +40,7 @@
 
                 <div class="high-listDiv-members">
                     <div class="listDiv-members">
-                        <h6>Lista de membros</h6>
+                        <p class="large-text">Lista de membros</p>
                         <p> | </p>
                         <div class="flex gap-1">
                             <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
@@ -66,8 +63,8 @@
                         </div>
 
                         <div class="highDiv-card-informations">
-                            <h1 class="text-title">{{ user.name }}</h1>
-                            <p class="text-function">{{ user.function }}</p>
+                            <p class="medium-text">{{ user.name }}</p>
+                            <p class="small-text opacity-60">{{ user.function }}</p>
                             <div class="divSocial-media">
                                 <ng-container *ngFor="let item of user.socialMedia">
                                     <fa-icon class="social-media" [icon]="item"></fa-icon>
@@ -88,8 +85,8 @@
                             </div>
 
                             <div class="div-permission-nameFunction">
-                                <h1 class="text-title">{{ user.name }}</h1>
-                                <p class="text-function">{{ user.function }}</p>
+                                <p class="medium-text">{{ user.name }}</p>
+                                <p class="small-text opacity-60">{{ user.function }}</p>
                             </div>
 
                             <div class="div-swap-permission">

@@ -23,25 +23,15 @@ section {
 
 .divTextHead {
     @apply flex flex-col w-[80%] gap-2;
-    color: $primaryColor;
 }
 
-.textHead {
-    @apply text-[24px] font-bold;
-    color: $primaryColor;
-}
 
 .divMembers {
     @apply flex gap-2
 }
-
 .iconLink {
     @apply flex items-center text-[15px];
-    color: $primaryColor;
-}
-
-.data {
-    @apply text-lg
+    color: $text;
 }
 
 .extense-card{
@@ -84,14 +74,6 @@ section {
     border-radius: 5px;
 }
 
-.text-title{
-    @apply text-2xl flex justify-end;
-}
-
-.text-function{
-    @apply font-light;
-    color: $emphasis
-}
 
 .div-permission{
     @apply w-full h-full flex justify-evenly;

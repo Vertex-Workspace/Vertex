@@ -6,8 +6,8 @@
 }
 
 .title {
-    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
-
+    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+    border-color: $emphasis;
         div {
             @apply flex w-[20%] items-center justify-start gap-5;
         }
@@ -30,8 +30,8 @@ input {
     @apply flex py-3 w-full h-full;
 
     .iconBox {
-         @apply flex w-[46px] h-[46px] justify-center items-center rounded-l-sm;
-         background-color: #CDD8EA;
+         @apply flex w-[12%] h-12 justify-center items-center rounded-l-sm;
+         background-color: $emphasis;
      }
 }
 
@@ -42,10 +42,6 @@ section {
         @apply flex justify-end;
     };
     
-    p {
-        @apply text-sm font-bold;
-        color: $primaryColor;
-    }
 }
 
 .requires{
@@ -56,8 +52,7 @@ section {
     }
 
     p {
-        @apply pt-[4px] text-sm;
-        color: $primaryColor;
+        @apply pt-[4px];
     }
 
     div:first-child {
@@ -75,7 +70,7 @@ section {
 }
 
 .noEdit {
-    background-color: grey;
+    background-color: $disabled;
 }
 
 .edit {
@@ -83,7 +78,7 @@ section {
 }
 
 form {
-    @apply h-full w-full
+    @apply h-full w-[92%];
 }
 
 h2 {
