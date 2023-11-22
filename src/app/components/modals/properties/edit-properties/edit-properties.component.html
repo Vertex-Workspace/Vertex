@@ -1,5 +1,6 @@
 <div class="task-name">
-    <input value="Nome da tarefa" class="regular-text"/>
+    <input value="{{name}}" class="regular-text" #textBox (change)="textBox.value"
+    (click)="saveP(textBox.value)" />
 </div>
 
 <section>
@@ -8,7 +9,6 @@
         <ng-container *ngFor="let type of propertyTypes; index as i">
             <div [ngClass]="type.value === true ? '' : 'opacity' " (click)="selectValue(i)" (click)="selectIcon(i)">
                 <fa-icon [icon]="type.icon" class="icon" 
-                (icon)="check($event)"
                 (click)="selectionItems(i)"></fa-icon>
             </div>
         </ng-container>

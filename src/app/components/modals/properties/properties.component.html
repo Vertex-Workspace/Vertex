@@ -20,9 +20,13 @@
         <!-- output in general and input in edit -->
         <app-general-properties 
         (select)="clickGear('items-selection')"
-        (edit)="clickG($event)" 
-        (gear)="clickGear('gear')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'general'"></app-general-properties>
-        <app-edit-properties (selection)="clickGear('items-selection')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'edit'" />
+        (status)="clickGear('status')"
+        (gear)="clickG($event)" 
+        (gear)="clickGear('gear')"
+        (edit)="clickGear('edit')"
+        (edit)="clickG($event)" style="width: 100%; height: 100%;" *ngIf="currentModal === 'general'"
+        [propertiesList]="propertiesList"></app-general-properties>
+        <app-edit-properties [propertiesList]="propertiesList" [name]="name" (gear)="clickGear('edit')" (selection)="clickGear('items-selection')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'edit'" />
 
         <!-- REQUIREMENTS -->
         <app-colors style="width: 100%; height: 100%;" *ngIf="currentModal === 'colors'"></app-colors>

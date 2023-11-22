@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   faArrowLeft, faXmark, faEye, faGear,
   faTrashCan, faEyeSlash, faEllipsisVertical,
@@ -11,7 +11,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   templateUrl: './general-properties.component.html',
   styleUrls: ['./general-properties.component.scss']
 })
-export class GeneralPropertiesComponent {
+export class GeneralPropertiesComponent{
 
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;
@@ -26,6 +26,8 @@ export class GeneralPropertiesComponent {
   faSpinner = faSpinner;
   currentModal: string = 'general';
   generalModal: boolean = true;
+
+  @Input() propertiesList: any[] = [];
 
   @Output()
   close = new EventEmitter();
@@ -48,12 +50,16 @@ export class GeneralPropertiesComponent {
   @Output()
   select = new EventEmitter();
 
+  @Output()
+  status = new EventEmitter();
+
   closeModal() {
     this.close.emit();
   }
 
   clickGear(type: string, i: number) {
-      this.edit.emit({list: this.propertiesList[i].name});
+      this.gear.emit({list: this.propertiesList[i].name});
+      console.log(this.propertiesList[i].name)
   }
 
   clickPlus(type: string) {
@@ -62,20 +68,13 @@ export class GeneralPropertiesComponent {
 
   editProperty(i: number) {
     if (this.propertiesList[i].icon2 === faSpinner) {
-      this.gear.emit();
+      this.status.emit();
     } else if (this.propertiesList[i].icon2 === faCaretDown) {
       this.select.emit();
     } else {
-      this.edit.emit();
+      this.edit.emit({list: this.propertiesList[i].name});
     }
   }
-
-  propertiesList = [
-    { name: 'Nome da Tarefa', status: 'visible', icon: faEye, icon2: faFont },
-    { name: 'Prazo', status: 'visible', icon: faEye, icon2: faCalendarDays },
-    { name: 'Status', status: 'invisible', icon: faEyeSlash, icon2: faSpinner },
-    { name: 'Itens Seleção', status: 'invisible', icon: faEyeSlash, icon2: faCaretDown }
-  ]
 
 
   changeStatus(i: number) {

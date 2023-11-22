@@ -9,10 +9,9 @@
         <p class="pl-3 regular-text">Visíveis</p>
         <ng-container *ngFor="let item of propertiesList; index as i">
             <div *ngIf="item.status==='visible'" class="visible"
-                [ngClass]="item.status === 'visible' ? '' : 'opacity'" 
-                cdkDrag>
+                [ngClass]="item.status === 'visible' ? '' : 'opacity'" >
                 <div (click)="editProperty(i)">
-                    <div cdkDropList (cdkDropListDropped)="drop($event)">
+                    <div>
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
                     </div>
@@ -30,7 +29,7 @@
         </ng-container>
         <p class="pt-3 pl-3 regular-text">Não visíveis</p>
         <ng-container *ngFor="let item of propertiesList; index as i">
-            <div *ngIf="item.status==='invisible'" class="visible opacity">
+            <div *ngIf="item.status==='invisible'" class="visible opacity" cdkDrag (cdkDragDropped)="drop($event)">
                 <div>
                     <div>
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>

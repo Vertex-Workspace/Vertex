@@ -16,7 +16,6 @@ section{
 .card-workspace{
     @apply flex w-2/3 h-[25%] bg-white flex-col items-center rounded-md shadow-md;
     color: $primaryColor;
-    font-family: $titleFont;
 }
 .card-workspace > :first-child{
     @apply flex w-full h-[30%] bg-white flex-col items-center justify-center text-xl;

@@ -11,10 +11,4 @@ import { GeneralPropertiesComponent } from './general-properties.component';
 })
 export class GeneralPropertiesModule { 
 
-  @Output()
-  click = new EventEmitter<Event>();
-  
-  clickModal(){
-    this.click.emit();
-  }
 }

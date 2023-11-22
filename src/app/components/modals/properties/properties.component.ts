@@ -1,17 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { faArrowLeft, faXmark, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
+faFont, faCalendarDays, faSpinner, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-properties',
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.scss']
 })
-export class PropertiesComponent {
+export class PropertiesComponent{
 
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;
   faPlus = faPlus;
   faTrashCan = faTrashCan;
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
+  faFont = faFont;
+  faCalendarDays = faCalendarDays;
+  faSpinner = faSpinner;
+  faCaretDown = faCaretDown;
   currentModal: string = 'general';
   generalModal: boolean = true;
   text: string | undefined;
@@ -26,9 +33,6 @@ export class PropertiesComponent {
   @Input()
   height?: String;
 
-  @Output()
-  name = new EventEmitter();
-
   @Input()
   width?: String;
 
@@ -36,23 +40,35 @@ export class PropertiesComponent {
     this.close.emit();
   }
 
+  name?: string;
+
+  propertiesList = [
+    { name: 'Nome da Tarefa', status: 'visible', icon: faEye, icon2: faFont },
+    { name: 'Prazo', status: 'visible', icon: faEye, icon2: faCalendarDays },
+    { name: 'Status', status: 'invisible', icon: faEyeSlash, icon2: faSpinner },
+    { name: 'Itens Seleção', status: 'invisible', icon: faEyeSlash, icon2: faCaretDown }
+  ]
+
   clickGear(type: string) {
     if (type === 'gear') {
-      this.currentModal = 'status'
+      this.currentModal = 'edit'
     } else if (type === 'plus') {
       this.currentModal = 'edit'
+      this.name = 'Nova Propriedade'
     } else if (type === 'pencil') {
       this.currentModal = 'colors'
     } else if (type === 'edit') {
       this.currentModal = 'edit'
     } else if (type === 'items-selection') {
       this.currentModal = 'items-selection'
+    }else if(type === 'status'){
+      this.currentModal = 'status'
     }
   }
 
-  clickG(event : any){
-    console.log(event.list)
-    console.log({name: event.list});
+  clickG(event: any) {
+    this.name = event.list;
+    console.log(this.name);
   }
 
   arrowLeft() {
