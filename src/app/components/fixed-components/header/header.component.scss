@@ -14,3 +14,7 @@
 .items-header{
     @apply flex w-[5%] h-full justify-between items-center;
 }
+i{
+    @apply text-xl;
+    color: $primaryColor;
+}

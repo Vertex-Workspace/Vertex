@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { provideRouter, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/tasks/mural/mural.component';
@@ -17,6 +17,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
 import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
 import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
+import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 
 const routes: Routes = [
   {
@@ -25,33 +26,28 @@ const routes: Routes = [
     data: { animation: 'loginPage' }
   },
   {
-    path:"team-informations",
+    path: "equipe",
     component: TeamInformationsComponent
+  },
+  {
+    path: "perfil",
+    component: UserInformationsComponent
   },
   {
     path: "home",
     component: TeamsComponent
   },
   {
-    path: "project",
+    path: "projetos",
     component: ProjectsComponent
-  },  
-  {
-    path: 'mural',
-    component: MuralComponent,
-    data: { animation: 'muralPage' }
   },
   {
-    path: 'task',
-    component: TaskComponent
-  },
-  {
-    path: 'register',
+    path: 'cadastro',
     component: RegisterComponent,
     data: { animation: 'registerPage' }
   },
   {
-    path: 'tasks',
+    path: 'tarefas',
     component: TasksComponent,
     children: [
       {
@@ -75,32 +71,32 @@ const routes: Routes = [
   {
     path: 'configuracoes',
     component: UserSettingsComponent,
-    children:[
+    children: [
       {
-      path: 'aparencia',
-      component: AppearanceComponent
+        path: 'aparencia',
+        component: AppearanceComponent
       },
       {
-      path: 'perfil',
-      component: ProfileComponent
+        path: 'perfil',
+        component: ProfileComponent
       },
       {
-      path: 'equipes',
-      component: TeamsSettingsComponent
+        path: 'equipes',
+        component: TeamsSettingsComponent
       },
       {
-      path: 'notificacoes',
-      component: NotificationsComponent
+        path: 'notificacoes',
+        component: NotificationsComponent
       },
       {
-      path: 'seguranca',
-      component: SecurityComponent
+        path: 'seguranca',
+        component: SecurityComponent
       },
-      
+
       {
-      path: "",
-      pathMatch: "full",
-      redirectTo: "perfil",
+        path: "",
+        pathMatch: "full",
+        redirectTo: "perfil",
       },
     ]
   },

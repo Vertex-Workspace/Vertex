@@ -6,9 +6,10 @@
 
 .title {
     @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
+    border-color: $disabled;
 
         div {
-            @apply flex w-[25%] items-center justify-start gap-7;
+            @apply flex items-center justify-start gap-7;
         }
         
         p{
@@ -37,7 +38,9 @@
 }
 
 .box-modes {
-    @apply flex w-full h-[45%] bg-[#EAEFF8] items-center pl-3 border border-[#373131] rounded;
+    @apply flex w-full h-[45%]  items-center pl-3 border rounded-sm;
+    background-color: $emphasis;
+    border-color: $primaryColor;
 
     .mode {
         @apply flex h-[85%] w-[20%];
@@ -91,6 +94,10 @@
             background-color: $primaryColor;
             color: $secondColor;
             @apply text-sm rounded-md h-[30%];
+
+            option{
+                color: $secondColor;
+            }
         }
     }
 }
@@ -113,8 +120,4 @@
 
 .unselected {
     @apply opacity-25;
-}
-
-p{
-    color: $primaryColor;
 }

@@ -4,8 +4,8 @@
         overflow-y: scroll;
     }
     .card{
-        @apply flex w-[98%] min-h-[200px] bg-white shadow-lg rounded-lg flex-row;
-        font-family: $primaryFont;
+        @apply flex w-[98%] min-h-[200px] bg-white shadow-lg rounded-sm flex-row;
+        font-family: $fontFamily;
         color: $primaryColor;
     
         .image {
@@ -44,15 +44,6 @@
             @apply flex flex-row;
         }
     }
-
-    h2 {
-        @apply text-xl font-bold flex;
-    }
-
-    h3 {
-        @apply text-lg font-bold flex px-3 pt-16;
-    }
-
 // @media screen and (max-width: 1599px){
 //     .list{
 //         @apply flex w-full h-[500px] flex-col gap-[16px];
@@ -60,7 +51,7 @@
 //     }
 //     .card{
 //         @apply flex w-[98%] min-h-[150px] bg-white shadow-lg rounded-lg flex-row;
-//         font-family: $primaryFont;
+//         font-family: $fontFamily;
 //         color: $primaryColor;
     
 //         .image {

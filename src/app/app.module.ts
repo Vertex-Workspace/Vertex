@@ -18,8 +18,13 @@ import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
+import { ChatModule } from './pages/chat/chat.module';
+import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
 import { NotificationModule } from './components/modals/notification/notification.module';
 import { TasksModule } from './pages/tasks/tasks.module';
+import { UserInformationsModule } from './pages/user-informations/user-informations/user-informations.module';
+import { SearchAllComponent } from './components/modals/search-all/search-all.component';
+import { SearchAllModule } from './components/modals/search-all/search-all.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,10 @@ import { TasksModule } from './pages/tasks/tasks.module';
     TeamInformationsModule,
     ChartModule,
     NotificationModule,
+    ChatModule,
+    MinichatModule,
+    UserInformationsModule,
+    SearchAllModule
   ],
   providers: [
     PersonalizationService,

@@ -1,7 +1,7 @@
 <section class="section-aside">
     <div class="start-mid-items">
-        <ul  class="top-logo">
-            <li class="div-logo"><img class="logo" src="../assets/white-logo.svg" /></li>
+        <ul class="top-logo">
+            <li class="div-logo" routerLink="home"><img class="logo" src="../assets/white-logo.svg"/></li>
         </ul>
         <ul *ngIf="!isSideBarExpanded" class="center-items">
             <li><fa-icon [icon]="faMagnifyingGlass"></fa-icon></li>
@@ -10,28 +10,28 @@
         </ul>
         <ul *ngIf="isSideBarExpanded" class="center-items2">
             <div class="w-[100%] h-full flex flex-col items-center justify-evenly">
-                <li class="liOpen">
+                <li class="liOpen" (click)="switchSearch()">
                     <div>
                         <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
                     </div>
                     <div>
-                        <p class="pOpen">Pesquisar</p>
+                        <p class="pOpen large-text">Pesquisar</p>
                     </div>
                 </li>
-                <li class="liOpen">
+                <li class="liOpen" (click)="openChatExpanded(true)">
                     <div>
                         <fa-icon [icon]="faMessage"></fa-icon>
                     </div>
                     <div>
-                        <p class="pOpen">Conversas</p>
+                        <p class="pOpen large-text">Conversas</p>
                     </div>
                 </li>
-                <li class="liOpen">
+                <li class="liOpen" (click)="disabledChat()" routerLink="tarefas/kanban">
                     <div>
                         <fa-icon [icon]="faClipboardList"></fa-icon>
                     </div>
                     <div>
-                        <p class="pOpen">Meu espaço de trabalho</p>
+                        <p class="pOpen large-text">Meu espaço de trabalho</p>
                     </div>
                 </li>
             </div>
@@ -46,20 +46,20 @@
 
     <ul *ngIf="isSideBarExpanded" class="footer-items2">
         <div class="w-[100%] h-full flex flex-col items-center justify-evenly">
-            <li class="liOpen">
+            <li class="liOpen" routerLink="perfil" (click)="disabledChat()">
                 <div class="w-[13.5%]">
                     <fa-icon [icon]="faUser"></fa-icon>
                 </div>
                 <div>
-                    <p class="pOpen">Perfil</p>
+                    <p class="pOpen large-text">Perfil</p>
                 </div>
             </li>
-            <li class="liOpen">
+            <li class="liOpen" routerLink="configuracoes" (click)="disabledChat()">
                 <div class="w-[14%]">
                     <fa-icon [icon]="faGear"></fa-icon>
                 </div>
                 <div>
-                    <p class="pOpen">Configurações</p>
+                    <p class="pOpen large-text">Configurações</p>
                 </div>
             </li>
             <li class="liOpen">
@@ -67,10 +67,11 @@
                     <fa-icon [icon]="faSignOut"></fa-icon>
                 </div>
                 <div>
-                    <p class="pOpen">Sair</p>
+                    <p class="pOpen large-text">Sair</p>
                 </div>
             </li>
         </div>
     </ul>
 </section>
 
+<app-search-all *ngIf="search" (close)="switchSearch()"></app-search-all>

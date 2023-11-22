@@ -18,7 +18,7 @@
         label {
             @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
             transition-colors items-center justify-center 
-            rounded cursor-pointer;
+            rounded-sm cursor-pointer;
         }
 
         label:hover {
@@ -34,10 +34,11 @@
 
         .search {
             @apply w-[300px] h-full flex items-center justify-between 
-            bg-white p-3 rounded shadow-md border-none;
+            bg-white p-3 rounded-sm shadow-md border-none;
 
             i {
                 @apply w-[10%];
+                color: $primaryColor;
             }
 
             input {
@@ -49,7 +50,7 @@
             color: $primaryColor;
             border-color: $secondColor;
             @apply h-[53px] w-[53px] flex items-center justify-center 
-            border-2 transition-colors rounded p-3;
+            border-2 transition-colors rounded-sm p-3;
         }
 
         button:hover {
@@ -62,8 +63,8 @@
             background-color: $primaryColor;
             border-color: $primaryColor;
             color: $secondColor;
-            @apply h-full w-[180px] flex items-center justify-center gap-4 text-lg p-3 
-            rounded font-light border-2 transition-colors;
+            @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
+            rounded-sm font-light border-2 transition-colors;
         }
 
         .create:hover {
@@ -82,9 +83,6 @@
     div:first-child {
         @apply w-[230px] flex justify-between items-center;
   
-        p {
-          @apply text-lg;
-        }
   
         select {
           @apply h-[35px] w-[100px] outline-none text-center;
@@ -93,7 +91,7 @@
 
     p {
         color: $primaryColor;
-        @apply text-lg ml-4;
+        @apply  ml-4;
     }
 
     select {

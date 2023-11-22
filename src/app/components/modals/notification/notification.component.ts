@@ -204,6 +204,7 @@ export class NotificationComponent {
   }
 
   closeNotification(): void{
+    console.log("close");
     this.close.emit();
   }
 }

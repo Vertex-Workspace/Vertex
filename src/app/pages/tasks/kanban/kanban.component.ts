@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import {
   CdkDragDrop,
@@ -13,10 +13,96 @@ import { categories, taskList } from '../data-test';
 })
 export class KanbanComponent {
 
+
+  // @ViewChildren('card') cards!: any[];
+  // ngAfterViewInit() {
+  //   this.cards.forEach(card => {
+  //     console.log(card.nativeElement.offsetHeight);
+  //   });
+  // }
   selectedCards ?: Task[];
 
-  categories = categories;
-  taskList = taskList;
+  categories: any[] = [
+    {
+      name: 'TO-DO',
+      color: '#FFE7E94D',
+      borderColor: '#FF9D9Df3'
+    },
+    {
+      name: 'DOING',
+      color: '#FFF6C54D',
+      borderColor: '#FFD600f3'
+    },
+    {
+      name: 'DONE',
+      color: '#d7ffc94D',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'OUTRA CATEGORIA',
+      color: '#d7ffc94D',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc94D',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc94D',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc94D',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc94D',
+      borderColor: '#7be057de'
+    },
+    {
+      name: 'ÚLTIMA CATEGORIA',
+      color: '#d7ffc94D',
+      borderColor: '#7be057de'
+    }
+  ];
+
+  //ADICIONAR "80" NO FINAL DO HEXADECIMAL DA COLOR -> 50% OPACIDADE
+  //ADICIONAR "DE" NO FINAL DO HEXADECIMAL DA BORDA -> 80%+-
+
+  taskList: Task[] = [
+    {
+      name: 'Tarefa 1',
+      category: this.categories[0]
+    },
+    {
+      name: 'Tarefa 2 Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2',
+      category: this.categories[0]
+    },
+    {
+      name: 'REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ',
+      category: this.categories[0]
+    },
+    {
+      name: 'Tarefa 4',
+      category: this.categories[1]
+    },
+    {
+      name: 'Tarefa 5',
+      category: this.categories[1]
+    },
+    {
+      name: 'Tarefa 6',
+      category: this.categories[1]
+    },
+    {
+      name: 'Tarefa 7',
+      category: this.categories[2]
+    }
+  ];
 
   specificPropertyArray(property: any): any[] {
     return this.taskList.filter(task => {
@@ -41,11 +127,9 @@ export class KanbanComponent {
   };
 
   getHeight(property: any): string {
-    const propertyTasksQtt = 
-            this.specificPropertyArray(property).length;
-
-    return ((propertyTasksQtt * 150) + 110) + "px";
+    return ((this.specificPropertyArray(property).length * 174) + 70) + "px";
   }
+
 
 
 }

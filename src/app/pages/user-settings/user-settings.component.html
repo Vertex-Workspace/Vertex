@@ -3,7 +3,7 @@
         <!-- Left side -->
         <section>
             <div>
-                <p class="title">Configurações e Preferências</p>
+                <h5>Configurações e Preferências</h5>
             </div>
             <!-- Take each item of the itemsList -->
             <ng-container *ngFor="let item of itemsList">
@@ -17,7 +17,7 @@
                         <!-- Take each option inside the itemsList -->
                         <button class="divOptions" [ngClass]="click === item.id ? 'click' : 'default'"
                             (click)="clickOption(item.id)">
-                            <p [ngClass]="click === item.id ? 'click' : 'default'">{{item.option}}</p>
+                            <p class="medium-text" [ngClass]="click === item.id ? 'click' : 'default'">{{item.option}}</p>
                         </button>
                     </li>
                 </ul>
