@@ -316,4 +316,19 @@ export const categories: any[] = [
     },
   ];
 
+  export const homeCols = [
+    {
+      field: "name",
+      headerText: "Nome",
+      width: '70%',
+      icon: "pi pi-user",
+    },
+    {
+      field: "status",
+      headerText: "Status",
+      width: '30%',
+      icon: "pi pi-tag",
+    },
+  ]
+
   

@@ -15,17 +15,17 @@ import { FormsModule } from '@angular/forms';
 import { CalendarModule } from './calendar/calendar.module';
 import { KanbanModule } from './kanban/kanban.module';
 import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
+import { ListModule } from './list/list.module';
 import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
 import { MuralComponent } from './mural/mural.component';
-
 
 @NgModule({
   declarations: [
     TasksComponent,
-    ListComponent,
+    KanbanComponent,
+    MuralComponent,
+    CardComponent,
     MuralCardComponent,
-    RowCardComponent,
-    MuralComponent
    ],
   exports:[
     TasksComponent
@@ -38,6 +38,7 @@ import { MuralComponent } from './mural/mural.component';
     DragDropModule,
     FormsModule,
     CalendarModule,
+    ListModule
     KanbanModule
   ],
 })

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamsComponent } from './teams.component';
 import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
-import { ChartModule } from 'primeng/chart';
 import { QuickAccessModule } from 'src/app/components/reusable-components/quick-access/quick-access.module';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
-
+import { TasksModule } from '../tasks/tasks.module';
+import { ListModule } from '../tasks/list/list.module';
 
 @NgModule({
   declarations: [TeamsComponent],
@@ -14,7 +14,8 @@ import { CreateTeamProjectModule } from 'src/app/components/reusable-components/
     CommonModule,
     CardListModule,
     QuickAccessModule,
-    CreateTeamProjectModule
+    CreateTeamProjectModule,
+    ListModule
   ],
 })
 export class TeamsModule { }
