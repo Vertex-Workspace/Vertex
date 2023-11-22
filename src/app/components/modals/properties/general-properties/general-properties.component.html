@@ -7,9 +7,9 @@
     <!-- Visible and invisible -->
     <div class="visible-unvisible">
         <p class="pl-3 regular-text">Visíveis</p>
-        <ng-container *ngFor="let item of propertiesList; index as i">
-            <div *ngIf="item.status==='visible'" class="visible"
-                [ngClass]="item.status === 'visible' ? '' : 'opacity'" >
+        <div *ngFor="let item of propertiesList; index as i" cdkDropList (cdkDropListDropped)="drop($event)">
+            <div *ngIf="item.status==='visible'" class="visible" cdkDrag
+                [ngClass]="item.status === 'visible' ? '' : 'opacity'">
                 <div (click)="editProperty(i)">
                     <div>
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
@@ -26,10 +26,10 @@
                     <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i)"></fa-icon>
                 </div>
             </div>
-        </ng-container>
+        </div>
         <p class="pt-3 pl-3 regular-text">Não visíveis</p>
-        <ng-container *ngFor="let item of propertiesList; index as i">
-            <div *ngIf="item.status==='invisible'" class="visible opacity" cdkDrag (cdkDragDropped)="drop($event)">
+        <div *ngFor="let item of propertiesList; index as i" cdkDropList (cdkDropListDropped)="drop($event)">
+            <div *ngIf="item.status==='invisible'" class="visible opacity" cdkDrag >
                 <div>
                     <div>
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
@@ -46,6 +46,6 @@
                     <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i)"></fa-icon>
                 </div>
             </div>
-        </ng-container>
+        </div>
     </div>
 </div>

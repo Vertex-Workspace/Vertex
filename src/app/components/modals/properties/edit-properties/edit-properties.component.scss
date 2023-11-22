@@ -40,7 +40,7 @@
 
     input{
         background-color: $secondColor;
-        @apply flex flex-row justify-start;
+        @apply flex flex-row justify-start w-[330px];
     }
 }
 
@@ -70,13 +70,13 @@
 }
 
 .value-input{
-    @apply h-[40%] w-full flex flex-row justify-center items-start;
-}
+    @apply h-[30%] w-full flex py-3;
 
-input {
-    @apply w-[200px] h-[30px] pt-3 rounded-md shadow-2xl;
-    outline: none;
-};
+    input {
+        @apply w-2/3 h-[32px] rounded-sm shadow-2xl pl-3;
+        outline: none;
+    };
+}
 
 .delete {
     @apply w-full h-[10%] border-t border-[#092C4C] flex items-center gap-2;
@@ -91,6 +91,6 @@ section{
     @apply w-full h-full items-center pl-10;
 
     p:first-child {
-        @apply pr-10 pt-4;
+        @apply pr-10 pt-10;
     }
 }

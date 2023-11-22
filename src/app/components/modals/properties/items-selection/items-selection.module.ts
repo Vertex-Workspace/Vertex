@@ -11,10 +11,4 @@ import { ItemsSelectionComponent } from './items-selection.component';
 })
 export class GeneralPropertiesModule { 
 
-  @Output()
-  click = new EventEmitter<Event>();
-  
-  clickModal(){
-    this.click.emit();
-  }
 }

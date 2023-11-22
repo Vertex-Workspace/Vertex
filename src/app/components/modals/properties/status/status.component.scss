@@ -42,6 +42,11 @@
 
     div:nth-child(2){
         @apply w-[86%] flex justify-start pl-2 items-center;
+
+        input {
+            @apply w-full;
+            outline: none;
+        }
     }
 
     div:last-child {
@@ -52,10 +57,6 @@
 .bigger-icon {
     color: $primaryColor;
     font-size:1.5rem;
-}
-
-input {
-    outline: none;
 }
 
 .new-property {

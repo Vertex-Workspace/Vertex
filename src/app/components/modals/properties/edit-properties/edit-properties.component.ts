@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import {
   faArrowLeft, faXmark, faCaretDown, faSpinner, faUser, faPaperclip,
-  faFont, faCalendarDays, faSquare, faTrashCan
+  faFont, faCalendarDays, faSquare, faTrashCan, faEye
 } from '@fortawesome/free-solid-svg-icons';
 import { ConnectableObservable } from 'rxjs';
 
@@ -13,18 +13,7 @@ import { ConnectableObservable } from 'rxjs';
 export class EditPropertiesComponent{
 
   @Output()
-  close = new EventEmitter<Event>();
-
-  @Output()
   selection = new EventEmitter<String>();
-
-  @Input()
-  height?: String;
-
-  @Input()
-  width?: String;
-
-  @Input() propertiesList: any[] = [];
 
 @Input() name?: string;
 
@@ -38,6 +27,7 @@ export class EditPropertiesComponent{
   faCalendarDays = faCalendarDays;
   faSquare = faSquare;
   faTrashCan = faTrashCan;
+  faEye = faEye;
 
   value: boolean = false;
   openInput: boolean = false;
@@ -108,11 +98,5 @@ export class EditPropertiesComponent{
     }else if(this.name === 'Anexo'){
       this.propertyTypes[5].value = true;
     }
-  }
-
-  saveP(name2: string){
-    this.propertiesList.push({name: name2})
-    console.log('in')
-    console.log(name2)
   }
 }

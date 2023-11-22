@@ -9,16 +9,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 export class ColorsComponent {
 
     faArrowLeft = faArrowLeft;
-
-    @Output()
-    close = new EventEmitter<Event>();
-  
-    @Input()
-    height?: String;
-  
-    @Input()
-    width?: String;
-
+    
     colorsList =[
         {name: 'Azul', color: '#49759D', status: 'selected'},
         {name: 'Verde', color: '#D9EED2', status: 'unselected'},
@@ -35,7 +26,6 @@ export class ColorsComponent {
         this.colorsList.forEach((item, index) => {
             if(index === i){
                 item.status = 'selected';
-                localStorage.setItem('color', item.color);
             }else{
                 item.status = 'unselected';
             }

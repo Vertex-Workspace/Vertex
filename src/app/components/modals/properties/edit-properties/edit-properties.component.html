@@ -1,6 +1,5 @@
 <div class="task-name">
-    <input value="{{name}}" class="regular-text" #textBox (change)="textBox.value"
-    (click)="saveP(textBox.value)" />
+    <input value="{{name}}" class="regular-text" />
 </div>
 
 <section>
@@ -8,8 +7,7 @@
     <div class="properties-types">
         <ng-container *ngFor="let type of propertyTypes; index as i">
             <div [ngClass]="type.value === true ? '' : 'opacity' " (click)="selectValue(i)" (click)="selectIcon(i)">
-                <fa-icon [icon]="type.icon" class="icon" 
-                (click)="selectionItems(i)"></fa-icon>
+                <fa-icon [icon]="type.icon" class="icon" (click)="selectionItems(i)"></fa-icon>
             </div>
         </ng-container>
     </div>
@@ -22,8 +20,7 @@
             <p class="small-text" *ngIf="check.visibility">{{check.p}}</p>
         </div>
         <div class="value-input">
-            <p *ngIf="openInput">Valor padrão:</p>
-            <input *ngIf="openInput">
+            <input *ngIf="openInput" placeholder="Valor padrão">
         </div>
     </div>
 </section>

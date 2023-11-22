@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
 faFont, faCalendarDays, faSpinner, faCaretDown} from '@fortawesome/free-solid-svg-icons';
+import { elements } from 'chart.js';
 
 @Component({
   selector: 'app-properties',
@@ -21,14 +22,11 @@ export class PropertiesComponent{
   faCaretDown = faCaretDown;
   currentModal: string = 'general';
   generalModal: boolean = true;
-  text: string | undefined;
+  text ?:string;
   propertiesType: any;
 
   @Output()
   close = new EventEmitter<Event>();
-
-  @Output()
-  item = new EventEmitter<String>();
 
   @Input()
   height?: String;
@@ -42,12 +40,11 @@ export class PropertiesComponent{
 
   name?: string;
 
-  propertiesList = [
-    { name: 'Nome da Tarefa', status: 'visible', icon: faEye, icon2: faFont },
-    { name: 'Prazo', status: 'visible', icon: faEye, icon2: faCalendarDays },
-    { name: 'Status', status: 'invisible', icon: faEyeSlash, icon2: faSpinner },
-    { name: 'Itens Seleção', status: 'invisible', icon: faEyeSlash, icon2: faCaretDown }
-  ]
+  itemsList = [
+    { name: 'Renda Fixa', status: 'visible', icon: faEye },
+    { name: 'FII', status: 'visible', icon: faEye },
+    { name: 'Renda variável', status: 'invisible', icon: faEyeSlash }
+]
 
   clickGear(type: string) {
     if (type === 'gear') {
@@ -68,7 +65,6 @@ export class PropertiesComponent{
 
   clickG(event: any) {
     this.name = event.list;
-    console.log(this.name);
   }
 
   arrowLeft() {
@@ -79,7 +75,7 @@ export class PropertiesComponent{
     } else if (this.currentModal === 'colors') {
       this.currentModal = 'status'
     } else if (this.currentModal === 'items-selection') {
-      this.currentModal = 'edit'
+      this.currentModal = 'general'
     }
   }
 
@@ -93,8 +89,10 @@ export class PropertiesComponent{
 
   clickPlus() {
     if (this.currentModal === 'general') {
-      this.currentModal = 'edit'
+      this.name = 'Nova Propriedade'
+      this.currentModal = 'edit';
+    }if (this.currentModal === 'items-selection') {
+      this.itemsList.push({ name: 'Novo item', status: 'visible', icon: faEye });
     }
   }
-
 }

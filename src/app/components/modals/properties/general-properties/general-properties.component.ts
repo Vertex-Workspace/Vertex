@@ -4,7 +4,7 @@ import {
   faTrashCan, faEyeSlash, faEllipsisVertical,
   faFont, faCalendarDays, faPlus, faSpinner, faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-general-properties',
@@ -26,8 +26,6 @@ export class GeneralPropertiesComponent{
   faSpinner = faSpinner;
   currentModal: string = 'general';
   generalModal: boolean = true;
-
-  @Input() propertiesList: any[] = [];
 
   @Output()
   close = new EventEmitter();
@@ -56,6 +54,13 @@ export class GeneralPropertiesComponent{
   closeModal() {
     this.close.emit();
   }
+
+  propertiesList = [
+    { name: 'Nome da Tarefa', status: 'visible', icon: faEye, icon2: faFont },
+    { name: 'Prazo', status: 'visible', icon: faEye, icon2: faCalendarDays },
+    { name: 'Status', status: 'invisible', icon: faEyeSlash, icon2: faSpinner },
+    { name: 'Itens Seleção', status: 'invisible', icon: faEyeSlash, icon2: faCaretDown }
+  ]
 
   clickGear(type: string, i: number) {
       this.gear.emit({list: this.propertiesList[i].name});
@@ -101,10 +106,14 @@ export class GeneralPropertiesComponent{
     this.propertiesList.splice(i, 1);
   }
 
+
+
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.propertiesList, event.previousIndex, event.currentIndex);
+    console.log(this.propertiesList)
+    console.log(event.previousIndex);
+    console.log(event.currentIndex);
+    
   }
-
-
 }
 

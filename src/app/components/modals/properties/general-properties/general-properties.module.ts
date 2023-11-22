@@ -6,7 +6,7 @@ import { GeneralPropertiesComponent } from './general-properties.component';
   declarations: [GeneralPropertiesComponent],
   exports: [GeneralPropertiesComponent],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class GeneralPropertiesModule { 

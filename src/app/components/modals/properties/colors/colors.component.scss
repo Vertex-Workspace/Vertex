@@ -29,10 +29,10 @@ ul {
 }
 
 li {
-    @apply w-full h-[10%] flex items-center justify-start;
+    @apply w-full h-[10%] flex items-center justify-start pl-3;
 
     div{
-        @apply h-[70%] w-[20%];
+        @apply h-[70%] w-[20%] border border-[#B0B0B0];
     }
 }
 

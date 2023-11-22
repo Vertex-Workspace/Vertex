@@ -5,7 +5,6 @@
     }
     .card{
         @apply flex w-[98%] min-h-[200px] bg-white shadow-lg rounded-lg flex-row;
-        font-family: $primaryFont;
         color: $primaryColor;
     
         .image {

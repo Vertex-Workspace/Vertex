@@ -24,18 +24,18 @@
         (gear)="clickG($event)" 
         (gear)="clickGear('gear')"
         (edit)="clickGear('edit')"
-        (edit)="clickG($event)" style="width: 100%; height: 100%;" *ngIf="currentModal === 'general'"
-        [propertiesList]="propertiesList"></app-general-properties>
-        <app-edit-properties [propertiesList]="propertiesList" [name]="name" (gear)="clickGear('edit')" (selection)="clickGear('items-selection')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'edit'" />
+        (edit)="clickG($event)" style="width: 100%; height: 100%;" *ngIf="currentModal === 'general'"></app-general-properties>
+        <app-edit-properties [name]="name" (gear)="clickGear('edit')" (selection)="clickGear('items-selection')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'edit'" />
 
         <!-- REQUIREMENTS -->
         <app-colors style="width: 100%; height: 100%;" *ngIf="currentModal === 'colors'"></app-colors>
         <app-status (pencil)="clickGear('pencil')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'status'" />
-        <app-items-selection style="width: 100%; height: 100%;" *ngIf="currentModal === 'items-selection'"></app-items-selection>
+        <app-items-selection (pencil)="clickGear('pencil')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'items-selection'" [itemsList]="itemsList"></app-items-selection>
 
         <div class="new-property" 
-        [ngClass]="currentModal === 'general' || currentModal === 'edit' || currentModal === 'items-selection' ? 'footer-border' : ''">
-            <fa-icon *ngIf="currentModal === 'general' || currentModal === 'items-selection'" [icon]="faPlus" class="icon" (click)="clickPlus()"></fa-icon>
+        [ngClass]="currentModal === 'general' || currentModal === 'edit' || currentModal === 'items-selection' ? 'footer-border' : ''"
+        (click)="clickPlus()">
+            <fa-icon *ngIf="currentModal === 'general' || currentModal === 'items-selection'" [icon]="faPlus" class="icon"></fa-icon>
             <fa-icon *ngIf="currentModal === 'edit'" [icon]="faTrashCan" class="icon"></fa-icon>
             <p class="regular-text" *ngIf="currentModal === 'general'">Adicionar Propriedade</p>
             <p class="regular-text" *ngIf="currentModal === 'edit'">Excluir Propriedade</p>

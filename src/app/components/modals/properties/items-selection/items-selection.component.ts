@@ -11,6 +11,12 @@ import {
 })
 export class ItemsSelectionComponent {
 
+    @Input()
+    itemsList: any;
+
+    @Output()
+    pencil = new EventEmitter();
+
     faEllipsisVertical = faEllipsisVertical;
     faPaintBrush = faPaintBrush;
     faEye = faEye;
@@ -18,24 +24,17 @@ export class ItemsSelectionComponent {
     faTrashCan = faTrashCan;
     faPlus = faPlus;
 
-    itemsList = [
-        { name: 'Renda Fixa', status: 'visible', icon: faEye },
-        { name: 'Fill', status: 'visible', icon: faEye },
-        { name: 'Renda variável', status: 'invisible', icon: faEyeSlash }
-    ]
-
     eyeVisibility(i: number) {
         if (this.itemsList[i].status == 'visible') {
             this.itemsList[i].status = 'invisible';
             this.itemsList[i].icon = faEyeSlash;
-        }else if(this.itemsList[i].status == 'invisible'){
+        } else if (this.itemsList[i].status == 'invisible') {
             this.itemsList[i].status = 'visible';
             this.itemsList[i].icon = faEye;
         }
     }
 
-    add(){
-        this.itemsList.push({name: 'New Item', status: 'visible', icon: faEye});
+    pencilClick() {
+        this.pencil.emit();
     }
-
 }
