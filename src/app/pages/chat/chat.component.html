@@ -1,12 +1,9 @@
 <section>
 
-    <!-- Código aqui -->
-
     <header>
-        <!--     -->
 
         <div class="conversations-div">
-            <h1 class="conversations">Conversas</h1>
+            <h3 class="conversations">Conversas</h3>
         </div>
 
         <div class="header-right">
@@ -18,12 +15,12 @@
 
                 <div class="rightChatPerson">
                     <div class="divNamesPerson">
-                        <p class="userName">Nome user</p>
+                        <p class="userName large-text">Nome user</p>
 
                         <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
                     </div>
 
-                    <div class="divNamesPerson">
+                    <div class="divNamesPerson regular-text">
                         <p>Nome equipe</p>
                         |
                         <p>Objetivo equipe</p>
@@ -40,8 +37,24 @@
         <div class="section-left-chat">
             <div class="header-section-left">
                 <div class="search-div">
-                    <input id="search" type="text">
+                    <input id="search" type="text" placeholder="Pesquise por uma conversa...">
                     <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>
+                </div>
+            </div>
+            <div class="footer-section-left regular-text">
+                <div class="text-group-individual">
+                    <fa-icon class="section-icons" [icon]="faGlobe"></fa-icon>
+                    <p>Todos</p>
+                </div>
+
+                <div class="text-group-individual">
+                    <fa-icon class="section-icons" [icon]="faUser"></fa-icon>
+                    <p>Individual</p>
+                </div>
+
+                <div class="text-group-individual">
+                    <fa-icon class="section-icons" [icon]="faUsers"></fa-icon>
+                    <p>Grupos</p>
                 </div>
             </div>
 
@@ -68,30 +81,13 @@
 
                 </ng-container>
             </div>
-
-            <div class="footer-section-left">
-                <div class="text-group-individual">
-                    <fa-icon class="section-icons" [icon]="faGlobe"></fa-icon>
-                    <p>Todos</p>
-                </div>
-
-                <div class="text-group-individual">
-                    <fa-icon class="section-icons" [icon]="faUser"></fa-icon>
-                    <p>Individual</p>
-                </div>
-
-                <div class="text-group-individual">
-                    <fa-icon class="section-icons" [icon]="faUsers"></fa-icon>
-                    <p>Grupos</p>
-                </div>
-            </div>
         </div>
 
         <div class="section-right-chat">
             <div class="center-div">
-                <div class="h-[20%] min-h-[20%]" *ngFor="let message of messages">
+                <div class="min-h-[60px]" *ngFor="let message of messages">
                     <div [ngClass]="message.id % 2==0 ? 'left' : 'right'">
-                        <div [ngClass]="message.id % 2==0 ? 'answer' : 'messageUser'">
+                        <div class="regular-text" [ngClass]="message.id % 2==0 ? 'answer' : 'messageUser'">
                             <p class="pChat">{{message.content}}</p>
                         </div>
                         <div>

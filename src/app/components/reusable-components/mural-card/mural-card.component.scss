@@ -20,9 +20,6 @@
     .left {
       @apply flex flex-col gap-4 h-full w-4/5;
   
-      .title {
-        @apply text-xl;
-      }
   
       .text {
         @apply text-justify h-full w-full;
@@ -41,7 +38,6 @@
       right: 0;
   
       .date {
-        @apply text-sm;
         position: absolute;
         top: 0;
         right: 0;
@@ -62,11 +58,10 @@
           font-size: 1rem;
           cursor: pointer;
           padding: 4px;
+          color: $primaryColor;
 
           &:hover {
-            color: $secondColor;
-            background-color: $primaryColor;
-            border-radius: 15px;
+            @apply scale-105;
           }
         }
       }

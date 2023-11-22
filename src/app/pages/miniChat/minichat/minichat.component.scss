@@ -3,7 +3,7 @@
 .miniChat{
     @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col
     justify-between items-start shadow-lg;
-    background-color: #fff;
+    background-color: $card;
 }
 
 .miniChat-header{
@@ -13,12 +13,16 @@
 
 .miniChat-header-title{
     @apply flex w-[70%] h-full items-center justify-start gap-5;
-    color: #fff;
+    color: $card;
+
+    h6{
+        color: $secondColor;
+    }
 }
 
 .miniChat-header-close{
     @apply flex w-[15%] h-full items-center justify-end gap-5;
-    color: #fff;
+    color: $card;
 }
 
 .miniChat-main{
@@ -30,7 +34,8 @@
 }
 
 .div-search{
-    @apply flex border-2 w-[80%] h-full border-gray-300 rounded-md;
+    @apply flex border-2 w-[80%] h-full  rounded-sm;
+    border: 1px solid $emphasis;
 }
 
 .input-search{
@@ -51,7 +56,7 @@
 }
 
 .square-chat{
-    @apply w-[10%] h-[100%] rounded-lg flex items-center justify-center;
+    @apply w-[10%] h-[100%] rounded-sm flex items-center justify-center;
     background-color: $primaryColor;
 }
 
@@ -62,13 +67,15 @@
 }
 
 .div-searchStep1{
-    @apply flex border-2 w-[97%] h-full border-gray-300 rounded-md;
+    @apply flex border-2 w-[97%] h-full rounded-sm;
+    border: 1px solid $emphasis;
+
 }
 
 .miniChatStep1{
     @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col
     justify-between items-start shadow-lg;
-    background-color: #fff;
+    background-color: $card;
 }
 
 .minichatStep1-main{
@@ -82,7 +89,7 @@
 .card-chat{
     @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm
     cursor-pointer min-h-[100px];
-    border: 1px solid #D3D3D3;
+    border: 1px solid $emphasis;
     animation: leftPulse 0.3s;
 }
 

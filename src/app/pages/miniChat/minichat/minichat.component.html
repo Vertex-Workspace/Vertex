@@ -3,7 +3,7 @@
     <div class="miniChat-header">
         <div class="miniChat-header-title">
             <img class="imgLogo" src="../../../../assets/white-logo.svg" alt="">
-            <h2>Conversas</h2>
+            <h6>Conversas</h6>
         </div>
         <div class="miniChat-header-close">
             <fa-icon (click)="openMiniChat(true)" [icon]="faTimes"></fa-icon>
@@ -12,7 +12,7 @@
 
     <div class="miniChat-main-input">
         <div class="div-searchStep1">
-            <input class="input-searchStep1" type="text" placeholder="Pesquisar conversa" />
+            <input class="input-searchStep1 regular-text" type="text" placeholder="Pesquisar conversa" />
         </div>
     </div>
     
@@ -20,7 +20,7 @@
         
 
         <ng-container *ngFor="let user of users,let i = index">
-            <div (click)="openConversation(i)" class="card-chat">
+            <div (click)="openConversation(i)" class="card-chat regular-text">
                 <div class="user-card-message">
                     <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
                     <div class="flex flex-col">
@@ -48,7 +48,7 @@
         <div class="miniChat-header-title">
             <fa-icon (click)="step = 1" [icon]="faArrowLeft"></fa-icon>
             <fa-icon [icon]="faUser"></fa-icon>
-            <h2>Nome User</h2>
+            <h6>Nome User</h6>
         </div>
         <div class="miniChat-header-close">
             <fa-icon (click)="expandChat(true)" [icon]="faExpand"></fa-icon>
@@ -57,7 +57,7 @@
     </div>
     
     <div class="miniChat-main">
-        <div class="miniChat-main-input">
+        <div class="miniChat-main-input regular-text">
             <div class="div-search">
                 <input class="input-search" type="text" placeholder="Digite sua mensagem" />
                 <div class="div-icons">

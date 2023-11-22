@@ -38,7 +38,7 @@ section {
 
     .days-of-week {
         @apply pb-4;
-        border: $borderBottom;
+        border: 1px solid $emphasis;
         border-top: none;
         text-align: center;
     }
@@ -51,7 +51,7 @@ section {
     .calendar-day {
         @apply flex p-2 flex-col;
         min-height: 150px;
-        border: $borderBottom;
+        border: 1px solid $emphasis;
 
         .day-informations {
             text-align: center;

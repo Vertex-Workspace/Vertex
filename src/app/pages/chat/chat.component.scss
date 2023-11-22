@@ -29,7 +29,7 @@ header {
 }
 
 .conversations{
-    @apply text-3xl;
+    @apply pl-[12.5%];
     color: $primaryColor
 }
 
@@ -86,7 +86,7 @@ main{
 }
 
 .main-section-left {
-    @apply flex flex-col w-full h-[80%] items-start justify-start overflow-auto;
+    @apply flex flex-col w-full h-[80%] items-center justify-start overflow-auto;
 }
 
 .footer-section-left {
@@ -162,7 +162,7 @@ main{
 
 .section-right-chat {
     @apply flex flex-col items-center justify-center w-[70%] h-[100%] gap-2 rounded-sm;
-    border: 1px solid #D3D3D3;
+    border: 1px solid $emphasis;
     background-color: $secondColor;
 }
 
@@ -171,21 +171,21 @@ main{
 }
 
 .left{
-   @apply w-[100%] h-[60%] flex flex-col items-start  gap-2;
+   @apply w-[100%] min-h-[60px] flex flex-col items-start  gap-2;
 }
 
 .right{
-    @apply w-[100%] h-[60%] flex flex-col items-end gap-2;
+    @apply w-[100%] min-h-[60px] flex flex-col items-end gap-2;
 }
 
 .answer{
-    @apply flex rounded-sm items-center flex-wrap justify-center p-3 h-[60px] min-h-[60px] gap-1;
+    @apply flex rounded-sm items-center justify-center p-3 min-h-[60px] gap-1 break-words;
     border: $borderBottom;
     max-width: 50%;    
 }
 
 .messageUser{
-    @apply flex rounded-sm items-center flex-wrap justify-center p-3  h-[60px] min-h-[60px] gap-1;
+    @apply flex rounded-sm items-center justify-center p-3  min-h-[60px] gap-1 break-words;
     background-color: $primaryColor;
     color: $secondColor;
     max-width: 50%;
@@ -195,10 +195,6 @@ main{
     @apply h-[30%] flex items-center min-h-[30%];
 }
 
-// .pChat{
-//     @apply ;
-    
-// }
 
 .high-input-div{
     @apply w-[65%] h-[20%] flex items-center gap-3;
@@ -206,7 +202,7 @@ main{
 
 .div-input-chat{
     @apply w-[100%] h-[45%] flex;
-    background-color: #fff;
+    background-color: $card;
 }
 
 .square-chat{
@@ -215,6 +211,6 @@ main{
 
     .section-icons{
         @apply flex justify-between items-center;
-        color: #fff !important;
+        color: $card !important;
     }
 }

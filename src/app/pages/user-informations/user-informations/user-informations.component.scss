@@ -102,7 +102,7 @@ mat-progress-spinner {
     line-height: 80px;
     text-align: center;
     overflow: hidden;
-    border-color: rgba(103, 58, 183, 0.12);
+    border-color: $emphasis;
     border-radius: 50%;
     border-style: solid;
     border-width: 10px;
@@ -121,7 +121,8 @@ mat-progress-spinner {
 }
 
 .div-dashboard-pie-doughnut{
-    @apply flex justify-center items-center w-[25%] h-[85%] bg-[#fff] border-t-8 shadow-md rounded-md;
+    @apply flex justify-center items-center w-[25%] h-[85%] border-t-8 shadow-md rounded-md;
+    background-color: $card;
     border-top:8px solid $primaryColor; 
 }
 
@@ -130,7 +131,8 @@ mat-progress-spinner {
 }
 
 .div-dashboard-bar{
-    @apply flex justify-center items-center w-[25%] h-[85%] bg-[#fff] border-t-8 shadow-md rounded-md;
+    @apply flex justify-center items-center w-[25%] h-[85%] border-t-8 shadow-md rounded-md;
+    background-color: $card;
     border-top:8px solid $primaryColor; 
 }
 

@@ -6,12 +6,12 @@
 
     .name {
         @apply min-w-[40%] h-[55px] flex items-center justify-between pl-4 overflow-hidden;
-        border: 1px solid #0303031A;
+        border: 1px solid $emphasis;
     }
 
     .properties {
         @apply h-[55px] flex items-center justify-start pl-4;
-        border: 1px solid #0303031A;
+        border: 1px solid $emphasis;
         background-color: $secondColor;
 
         p {
@@ -29,7 +29,7 @@
             font-size: 1.1rem;
 
             &:hover {
-                @apply rotate-[20deg];
+                @apply scale-105;
             }
         }
     }
