@@ -42,33 +42,35 @@
                         </div>
                     </div>
                 </div>
+                <section 
+                    class="filter-settings" 
+                    *ngIf="filterOpen || orderOpen"
+                >
+                    <!-- <p *ngIf="orderOpen">Ordenar por </p> -->
+                    <p *ngIf="filterOpen || orderOpen">Filtrar por </p>
+
+                    <ng-container>
+                        <select *ngIf="filterOpen">
+                            <option *ngFor="let item of filterSettings">
+                                {{ item.label }}
+                            </option>
+                        </select>
+                        
+                        <select *ngIf="orderOpen">
+                            <option *ngFor="let item of orderSettings">
+                                {{ item.label }}
+                            </option>
+                        </select>
+                    </ng-container>
+                </section>
+                
                 <div class="w-full h-full">
                     <app-list></app-list>
                 </div>
             </div>
 
             <!-- SETTING OF ORDER AND FILTER -->
-        <section 
-            class="filter-settings" 
-            *ngIf="filterOpen || orderOpen"
-        >
-            <p *ngIf="orderOpen">Ordenar por </p>
-            <p *ngIf="filterOpen">Filtrar por </p>
-
-            <ng-container>
-                <select *ngIf="filterOpen">
-                    <option *ngFor="let item of filterSettings">
-                        {{ item.label }}
-                    </option>
-                </select>
-                
-                <select *ngIf="orderOpen">
-                    <option *ngFor="let item of orderSettings">
-                        {{ item.label }}
-                    </option>
-                </select>
-            </ng-container>
-        </section>
+    
         
 
             <div class="default-size" *ngIf="clicked === 'team'">

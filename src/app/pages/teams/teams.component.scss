@@ -89,6 +89,14 @@ section{
     }
 }
 
+.icons {
+    button {
+        i {
+            font-size: 1.5rem;
+        }
+    }
+}
+
 .clicked {
     color: $secondColor;
     background-color: $primaryColor;
@@ -100,7 +108,7 @@ section{
 
 @media only screen and (min-width: 1600px) and (max-width: 1920px){
     .container-grid{
-        @apply flex flex-col h-full w-full pt-10 ;
+        @apply flex flex-col h-[90%] w-full pt-10 ;
     }
     .default-size{
         @apply flex w-full h-full;
@@ -119,7 +127,7 @@ section{
 
 // TASK - FILTER ORDER
 .filter-settings {
-    @apply flex gap-3 items-center;
+    @apply flex gap-3 h-[5%] pt-8 justify-start;
 
     p {
         color: $primaryColor;
