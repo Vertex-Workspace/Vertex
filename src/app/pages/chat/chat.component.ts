@@ -30,9 +30,6 @@ export class ChatComponent {
   faPaperPlane = faPaperPlane;
   faTimes = faTimes;
 
-  rota: String = window.location.href;
-  rotaChat: String = "http://localhost:4200/chat";
-
   messageUser: any = "";
   @Output()
   chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -293,17 +290,4 @@ export class ChatComponent {
       this.messageUser = '';
     }
   }
-
-  // answers = [
-  //   {
-  //     content: 'OK. Começarei a trabalhar nela amanhã.',
-  //     time: '12:13'
-  //   },
-  //   {
-  //     content: 'Já verifiquei e percebi que não tenho uma permissão para editá-la.',
-  //     time: '06:37'
-  //   }
-  // ]
-
-
 }

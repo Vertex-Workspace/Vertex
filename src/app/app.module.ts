@@ -23,6 +23,8 @@ import { ChatModule } from './pages/chat/chat.module';
 import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
 import { NotificationModule } from './components/modals/notification/notification.module';
 import { UserInformationsModule } from './pages/user-informations/user-informations/user-informations.module';
+import { SearchAllComponent } from './components/modals/search-all/search-all.component';
+import { SearchAllModule } from './components/modals/search-all/search-all.module';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { UserInformationsModule } from './pages/user-informations/user-informati
     NotificationModule,
     ChatModule,
     MinichatModule,
-    UserInformationsModule
+    UserInformationsModule,
+    SearchAllModule
   ],
   providers: [
     PersonalizationService,

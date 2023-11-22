@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { provideRouter, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/tasks/mural/mural.component';
@@ -9,7 +9,6 @@ import { TeamInformationsComponent } from './pages/team-informations/team-inform
 import { TeamsComponent } from './pages/teams/teams.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
-import { ChatComponent } from './pages/chat/chat.component';
 import { ProfileComponent } from './pages/user-settings/profile/profile.component';
 import { NotificationsComponent } from './pages/user-settings/notifications/notifications.component';
 import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/teams-settings.component';
@@ -27,11 +26,11 @@ const routes: Routes = [
     data: { animation: 'loginPage' }
   },
   {
-    path: "team-informations",
+    path: "equipe",
     component: TeamInformationsComponent
   },
   {
-    path: "user-informations",
+    path: "perfil",
     component: UserInformationsComponent
   },
   {
@@ -39,20 +38,16 @@ const routes: Routes = [
     component: TeamsComponent
   },
   {
-    path: "project",
+    path: "projetos",
     component: ProjectsComponent
   },
   {
-    path: 'task',
-    component: TaskComponent
-  },
-  {
-    path: 'register',
+    path: 'cadastro',
     component: RegisterComponent,
     data: { animation: 'registerPage' }
   },
   {
-    path: 'tasks',
+    path: 'tarefas',
     component: TasksComponent,
     children: [
       {

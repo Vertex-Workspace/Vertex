@@ -1,21 +1,21 @@
 @import '../../../../variables';
 .modal-overlay {
     @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
-
+    z-index: 999;
 }
 
 .exitModal {
-    @apply text-[2rem] font-bold cursor-pointer;
+    @apply text-[2rem] font-bold cursor-pointer h-[8%];
     color: $primaryColor;
 }
 
 .modal {
-    @apply absolute w-1/4 h-2/5 rounded-sm flex flex-col 
+    @apply absolute rounded-sm flex flex-col 
     items-end justify-start text-center p-8 border-t-8;
     background-color: $secondColor;
     border-color: $primaryColor;
 }
 
 .ng-contentDiv{
-    @apply w-full h-full flex flex-col items-center;
+    @apply w-full h-[92%] flex flex-col items-center;
 }

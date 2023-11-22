@@ -70,12 +70,12 @@ export class AppComponent{
     document.documentElement.style.setProperty('--font-size', fontSize);
   }
 
-  expandChat():boolean{
-    return this.chatExpanded = !this.chatExpanded;
+  expandChat(event:any){
+    this.chatExpanded = event.action;
   }
 
-  minimizeChat():boolean{
-    return this.chatExpanded = !this.chatExpanded;
+  minimizeChat(){
+    this.chatExpanded = !this.chatExpanded;
   }
 
   openMiniChat(){
