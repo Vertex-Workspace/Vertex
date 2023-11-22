@@ -1,5 +1,6 @@
 <div class="card">
-    <div class="name">
+    <div class="name" 
+        [style.min-width]="getNameWidth()">
         <p>
             {{task.name}}
         </p>
@@ -7,7 +8,6 @@
             <ng-container *ngFor="let item of icons">
                 <fa-icon
                     [icon]="item.icon"
-                    (click)="item.onclick"
                     class="icon"
                 ></fa-icon>
             </ng-container>
@@ -15,7 +15,7 @@
     </div>
 
     <ng-container 
-        *ngFor="let col of cols"
+        *ngFor="let col of getCols()"
     >
         <div *ngIf="col.field !== 'name'" 
             class="properties"

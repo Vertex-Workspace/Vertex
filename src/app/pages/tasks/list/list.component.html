@@ -2,7 +2,7 @@
     <div class="table">
         <div class="thead">
             <label 
-                *ngFor="let col of cols"
+                *ngFor="let col of getCols()"
                 [style.min-width]="col.width"
             >              
                 <h3>

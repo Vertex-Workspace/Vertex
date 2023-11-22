@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { cols } from 'src/app/pages/tasks/data-test';
+import { cols,
+         homeCols } from 'src/app/pages/tasks/data-test';
 import {
   faTrashCan, 
   faEnvelope, 
   faClockRotateLeft 
 } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-row-card',
@@ -19,26 +21,35 @@ export class RowCardComponent {
   faTrashCan = faTrashCan;
 
   cols: any[] = cols;
+  homeCols: any[] = homeCols;
 
   @Input()
   task!: Task;
 
   icons: any[] = [
-    { id: 'clock', icon: this.faClock, onclick: () => this.clock() },
-    { id: 'chat', icon: this.faEnvelope, onclick: () => this.openChat() },
-    { id: 'delete', icon: this.faTrashCan, onclick: () => this.delete() }
+    { id: 'clock', icon: this.faClock },
+    { id: 'chat', icon: this.faEnvelope },
+    { id: 'delete', icon: this.faTrashCan }
   ];
 
-  openChat(): void {
-    console.log('open chat');
+  constructor(
+    private router: Router
+  ) {}
+
+  getNameWidth(): string {
+    const obj = this.getCols().find(c => {
+      return c.field === 'name';
+    })
+
+    return obj.width;
   }
 
-  delete(): void {
-    console.log('delete');
-  }
+  getCols(): any[] {
+    if (this.router.url === '/tasks/list') {
+      return this.cols;
+    }
 
-  clock(): void {
-    console.log('clock');
+    return this.homeCols;
   }
 
   getPropertyValue(col: any): string {

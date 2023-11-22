@@ -17,9 +17,9 @@ import { TaskModule } from './components/modals/task/task.module';
 import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { CommonModule } from '@angular/common';
-import { TasksModule } from './pages/tasks/tasks.module';
 import { ChartModule } from 'primeng/chart';
 import { NotificationModule } from './components/modals/notification/notification.module';
+import { TasksModule } from './pages/tasks/tasks.module';
 
 @NgModule({
   declarations: [

@@ -5,7 +5,7 @@
     background-color: $secondColor;
 
     .name {
-        @apply min-w-[40%] h-[55px] flex items-center justify-between pl-4 overflow-hidden;
+        @apply h-[55px] flex items-center justify-between pl-4 overflow-hidden;
         border: 1px solid #0303031A;
     }
 
