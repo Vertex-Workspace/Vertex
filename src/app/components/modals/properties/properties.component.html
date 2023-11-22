@@ -17,10 +17,25 @@
         </div>
 
         <!-- Search and properties -->
-        <app-general-properties (edit)="clickGear('add')" (gear)="clickGear('gear')" (plus)="clickGear('plus')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'general'"></app-general-properties>
-        <app-edit-properties style="width: 100%; height: 100%;" *ngIf="currentModal === 'edit'" />
-        <app-status (pencil)="clickGear('pencil')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'status'" />
+        <!-- output in general and input in edit -->
+        <app-general-properties 
+        (select)="clickGear('items-selection')"
+        (edit)="clickG($event)" 
+        (gear)="clickGear('gear')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'general'"></app-general-properties>
+        <app-edit-properties (selection)="clickGear('items-selection')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'edit'" />
+
+        <!-- REQUIREMENTS -->
         <app-colors style="width: 100%; height: 100%;" *ngIf="currentModal === 'colors'"></app-colors>
+        <app-status (pencil)="clickGear('pencil')" style="width: 100%; height: 100%;" *ngIf="currentModal === 'status'" />
         <app-items-selection style="width: 100%; height: 100%;" *ngIf="currentModal === 'items-selection'"></app-items-selection>
+
+        <div class="new-property" 
+        [ngClass]="currentModal === 'general' || currentModal === 'edit' || currentModal === 'items-selection' ? 'footer-border' : ''">
+            <fa-icon *ngIf="currentModal === 'general' || currentModal === 'items-selection'" [icon]="faPlus" class="icon" (click)="clickPlus()"></fa-icon>
+            <fa-icon *ngIf="currentModal === 'edit'" [icon]="faTrashCan" class="icon"></fa-icon>
+            <p class="regular-text" *ngIf="currentModal === 'general'">Adicionar Propriedade</p>
+            <p class="regular-text" *ngIf="currentModal === 'edit'">Excluir Propriedade</p>
+            <p class="regular-text" *ngIf="currentModal === 'items-selection'">Adicionar Elemento</p>
+        </div>
     </div>
 </div>

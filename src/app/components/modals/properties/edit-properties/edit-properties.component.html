@@ -7,7 +7,9 @@
     <div class="properties-types">
         <ng-container *ngFor="let type of propertyTypes; index as i">
             <div [ngClass]="type.value === true ? '' : 'opacity' " (click)="selectValue(i)" (click)="selectIcon(i)">
-                <fa-icon [icon]="type.icon" class="icon"></fa-icon>
+                <fa-icon [icon]="type.icon" class="icon" 
+                (icon)="check($event)"
+                (click)="selectionItems(i)"></fa-icon>
             </div>
         </ng-container>
     </div>
@@ -23,9 +25,5 @@
             <p *ngIf="openInput">Valor padrão:</p>
             <input *ngIf="openInput">
         </div>
-    </div>
-    <div class="delete">
-        <fa-icon [icon]="faTrashCan" class="trash-icon"></fa-icon>
-        <p class="regular-text">Excluir propriedade</p>
     </div>
 </section>

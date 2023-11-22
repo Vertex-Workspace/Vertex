@@ -54,7 +54,19 @@
     font-size:1.5rem;
 }
 
-.border-div {
-    @apply w-full h-[4%] border-b border-[#969397];
+input {
+    outline: none;
 }
+
+.new-property {
+    @apply flex w-full items-center pt-3;
+ 
+    p{
+     @apply pl-3 items-center;
+    }
+ }
+
+ .icon {
+    color:$primaryColor;
+ }
 

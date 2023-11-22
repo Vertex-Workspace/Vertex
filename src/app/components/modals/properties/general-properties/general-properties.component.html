@@ -8,22 +8,23 @@
     <div class="visible-unvisible">
         <p class="pl-3 regular-text">Visíveis</p>
         <ng-container *ngFor="let item of propertiesList; index as i">
-            <div *ngIf="item.status==='visible'" class="visible "
-                [ngClass]="item.status === 'visible' ? '' : 'opacity'">
-                <div>
-                    <div>
+            <div *ngIf="item.status==='visible'" class="visible"
+                [ngClass]="item.status === 'visible' ? '' : 'opacity'" 
+                cdkDrag>
+                <div (click)="editProperty(i)">
+                    <div cdkDropList (cdkDropListDropped)="drop($event)">
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
                     </div>
-                    <div (click)="editProperty(item.name)">
+                    <div (click)="editProperty(i)">
                         <fa-icon [icon]="item.icon2" class="icon pl-2"></fa-icon>
                         <p class="regular-text">{{item.name}}</p>
                     </div>
                 </div>
                 <div>
                     <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(i)"></fa-icon>
-                    <fa-icon [icon]="faGear" class="little-icon"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear('gear', i)"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i)"></fa-icon>
                 </div>
             </div>
         </ng-container>
@@ -35,21 +36,17 @@
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
                         <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
                     </div>
-                    <div (click)="editProperty('add')">
+                    <div (click)="editProperty(i)">
                         <fa-icon [icon]="item.icon2" class="icon pl-2"></fa-icon>
                         <p class="regular-text">{{item.name}}</p>
                     </div>
                 </div>
                 <div>
                     <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(i)"></fa-icon>
-                    <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear('gear')"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear('gear', i)"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i)"></fa-icon>
                 </div>
             </div>
         </ng-container>
-    </div>
-    <div class="new-property">
-        <fa-icon [icon]="faPlus" class="icon" (click)="clickPlus('plus')"></fa-icon>
-        <p class="regular-text">Adicionar propriedade</p>
     </div>
 </div>

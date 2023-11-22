@@ -10,6 +10,10 @@
 
     div:first-child {
         @apply w-[60%] flex items-center;
+
+        p{
+            @apply pt-3;
+        }
     }
 }
 
@@ -45,6 +49,7 @@ span {
 
 .icon {
     color: $primaryColor;
+    @apply pt-3;
 }
 
 .visible-unvisible {
@@ -81,7 +86,7 @@ p{
    @apply flex w-full items-center;
 
    p{
-    @apply pl-3
+    @apply pl-3 pt-3 flex items-center;
    }
 }
 
@@ -92,5 +97,9 @@ p{
 .little-icon {
     color:$primaryColor;
     font-size: 1rem;
+}
+
+.footer-border {
+    @apply border-[#092C4C] border-t
 }
 

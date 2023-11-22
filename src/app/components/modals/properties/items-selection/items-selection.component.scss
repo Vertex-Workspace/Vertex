@@ -9,11 +9,12 @@
 }
 
 .visible-unvisible {
-    @apply w-full h-[85%] border-[#092C4C] border-b pt-4;
+    @apply w-full h-[85%] pt-4;
 }
 
 input {
     @apply bg-[#EAEFF8];
+    outline: none;
 }
 
 .visible {
@@ -40,14 +41,6 @@ input {
 p{
     @apply flex justify-start items-start;
     color:$primaryColor;
-}
-
-.new-property {
-   @apply flex w-full items-center pt-3;
-
-   p{
-    @apply pl-3 items-center;
-   }
 }
 
 .opacity{

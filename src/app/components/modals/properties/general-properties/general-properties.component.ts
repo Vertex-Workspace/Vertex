@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   faArrowLeft, faXmark, faEye, faGear,
   faTrashCan, faEyeSlash, faEllipsisVertical,
-  faFont, faCalendarDays, faPlus, faSpinner
+  faFont, faCalendarDays, faPlus, faSpinner, faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-general-properties',
@@ -27,7 +28,7 @@ export class GeneralPropertiesComponent {
   generalModal: boolean = true;
 
   @Output()
-  close = new EventEmitter<Event>();
+  close = new EventEmitter();
 
   @Input()
   height?: String;
@@ -36,36 +37,44 @@ export class GeneralPropertiesComponent {
   width?: String;
 
   @Output()
-   gear = new EventEmitter<String>();
+  gear = new EventEmitter();
 
   @Output()
-   plus = new EventEmitter<String>();
+  plus = new EventEmitter();
 
-   @Output()
-   edit = new EventEmitter<String>();
+  @Output()
+  edit = new EventEmitter();
+
+  @Output()
+  select = new EventEmitter();
 
   closeModal() {
     this.close.emit();
   }
 
-  clickGear(type: string) {
-    this.gear.emit(type);
-    console.log(type);
+  clickGear(type: string, i: number) {
+      this.edit.emit({list: this.propertiesList[i].name});
   }
 
   clickPlus(type: string) {
-    this.plus.emit(type);
+    this.plus.emit();
   }
-  
-  editProperty(type: string){
-    this.edit.emit(type);
-    console.log(type);
+
+  editProperty(i: number) {
+    if (this.propertiesList[i].icon2 === faSpinner) {
+      this.gear.emit();
+    } else if (this.propertiesList[i].icon2 === faCaretDown) {
+      this.select.emit();
+    } else {
+      this.edit.emit();
+    }
   }
 
   propertiesList = [
     { name: 'Nome da Tarefa', status: 'visible', icon: faEye, icon2: faFont },
     { name: 'Prazo', status: 'visible', icon: faEye, icon2: faCalendarDays },
-    { name: 'Status', status: 'invisible', icon: faEyeSlash, icon2: faSpinner }
+    { name: 'Status', status: 'invisible', icon: faEyeSlash, icon2: faSpinner },
+    { name: 'Itens Seleção', status: 'invisible', icon: faEyeSlash, icon2: faCaretDown }
   ]
 
 
@@ -88,6 +97,15 @@ export class GeneralPropertiesComponent {
     }
     console.log(this.generalModal);
   }
+
+  delete(i: number) {
+    this.propertiesList.splice(i, 1);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.propertiesList, event.previousIndex, event.currentIndex);
+  }
+
 
 }
 

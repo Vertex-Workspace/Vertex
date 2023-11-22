@@ -75,6 +75,7 @@
 
 input {
     @apply w-[200px] h-[30px] pt-3 rounded-md shadow-2xl;
+    outline: none;
 };
 
 .delete {

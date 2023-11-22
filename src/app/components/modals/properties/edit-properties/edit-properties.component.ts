@@ -3,6 +3,7 @@ import {
   faArrowLeft, faXmark, faCaretDown, faSpinner, faUser, faPaperclip,
   faFont, faCalendarDays, faSquare, faTrashCan
 } from '@fortawesome/free-solid-svg-icons';
+import { ConnectableObservable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-properties',
@@ -79,4 +80,13 @@ export class EditPropertiesComponent {
     }
   }
 
+  selectionItems(i :number){
+    if(this.propertyTypes[i].name === 'Seleção'){
+    this.selection.emit();
+    }
+  }
+
+  check(event:any){
+    console.log(event)
+  }
 }

@@ -19,9 +19,6 @@ export class ColorsComponent {
     @Input()
     width?: String;
 
-    @Output()
-    color = new EventEmitter<String>();
-
     colorsList =[
         {name: 'Azul', color: '#49759D', status: 'selected'},
         {name: 'Verde', color: '#D9EED2', status: 'unselected'},
@@ -38,7 +35,7 @@ export class ColorsComponent {
         this.colorsList.forEach((item, index) => {
             if(index === i){
                 item.status = 'selected';
-                this.color.emit('item.color');
+                localStorage.setItem('color', item.color);
             }else{
                 item.status = 'unselected';
             }

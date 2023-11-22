@@ -7,6 +7,7 @@ import { StatusComponent } from './status/status.component';
 import { ColorsComponent } from './colors/colors.component';
 import { GeneralPropertiesComponent } from './general-properties/general-properties.component';
 import { ItemsSelectionComponent } from './items-selection/items-selection.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -24,7 +25,8 @@ import { ItemsSelectionComponent } from './items-selection/items-selection.compo
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DragDropModule
   ]
 })
 export class PropertiesModule { }
