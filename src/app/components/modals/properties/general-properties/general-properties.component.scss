@@ -81,6 +81,10 @@ p{
     @apply opacity-25;
 }
 
+.opacity-icon{
+    @apply opacity-75;
+}
+
 .little-icon {
     color:$primaryColor;
     font-size: 1rem;

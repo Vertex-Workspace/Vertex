@@ -12,8 +12,8 @@
                 <div cdkDrag class="visible" [ngClass]="item.status === 'Visíveis' ? '' : 'opacity'">
                     <div (click)="editProperty(i, i2)">
                         <div>
-                            <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
-                            <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                            <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
+                            <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                         </div>
                         <div (click)="editProperty(i, i2)">
                             <fa-icon [icon]="name.icon" class="icon pl-2"></fa-icon>

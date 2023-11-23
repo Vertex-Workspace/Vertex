@@ -55,3 +55,7 @@ p{
     color:$primaryColor;
     font-size: 1rem;
 }
+
+.opacity-icon{
+    @apply opacity-75;
+}
