@@ -20,7 +20,7 @@
 }
 
 .ng-contentDiv{
-    @apply w-full h-full flex flex-col items-center pt-6;
+    @apply w-full h-full flex flex-col items-center;
 }
 
 .text-align {
@@ -32,22 +32,22 @@ input {
 };
 
 span {
-    @apply w-full h-[50px];
+    @apply w-full h-[62px] pt-3;
 }
 
 .icon {
-    color: $primaryColor;
+    color: $primaryColor!important;
 }
 
 .visible-unvisible {
-    @apply w-full h-[85%] pt-10;
+    @apply w-full h-[85%];
 }
 
 .visible {
     @apply w-full h-[10%] bg-[#EAEFF8] border-2 flex flex-row justify-between;
 
     div:first-child {
-        @apply flex w-[70%] pr-3 items-center;
+        @apply flex w-[70%] pr-3 items-center ;
 
         div:first-child{
             @apply pl-3 w-[15%] flex justify-between;

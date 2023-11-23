@@ -41,9 +41,22 @@ export class PropertiesComponent{
   name?: string;
 
   itemsList = [
-    { name: 'Renda Fixa', status: 'visible', icon: faEye },
-    { name: 'FII', status: 'visible', icon: faEye },
-    { name: 'Renda variável', status: 'invisible', icon: faEyeSlash }
+    {
+      status: 'Visíveis',
+      icon: faEye,
+      name : [
+        {name: 'Renda Fixa'},
+        {name: 'FII'},
+      ]
+    },
+    {
+      status: 'Não visíveis',
+      icon: faEyeSlash,
+      name : [
+        {name: 'Ações'},
+      ]
+    }
+  
 ]
 
   clickGear(type: string) {
@@ -92,7 +105,7 @@ export class PropertiesComponent{
       this.name = 'Nova Propriedade'
       this.currentModal = 'edit';
     }if (this.currentModal === 'items-selection') {
-      this.itemsList.push({ name: 'Novo item', status: 'visible', icon: faEye });
+      this.itemsList[0].name.push({ name: 'Novo item'});
     }
   }
 }

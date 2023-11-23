@@ -1,49 +1,31 @@
 <div class="ng-contentDiv" *ngIf="generalModal">
     <span class="p-input-icon-right">
         <input type="search" class="small-text" placeholder="Digite o que procura..." />
-        <i class="pi pi-search search"></i>
+        <i class="pi pi-search pt-2 icon"></i>
     </span>
 
-    <!-- Visible and invisible -->
-    <div class="visible-unvisible">
-        <p class="pl-3 regular-text">Visíveis</p>
-        <div *ngFor="let item of propertiesList; index as i" cdkDropList (cdkDropListDropped)="drop($event)">
-            <div *ngIf="item.status==='visible'" class="visible" cdkDrag
-                [ngClass]="item.status === 'visible' ? '' : 'opacity'">
-                <div (click)="editProperty(i)">
+    <div class="visible-unvisible" cdkDropListGroup>
+        <div *ngFor="let item of propertiesList; index as i" cdkDropList (cdkDropListDropped)="drop($event, i)"
+        [cdkDropListData]="item.properties">
+            <p class="pl-3 pt-4 regular-text">{{item.status}}</p>
+            <div *ngFor="let name of item.properties; index as i2">
+                <div cdkDrag class="visible" [ngClass]="item.status === 'Visíveis' ? '' : 'opacity'">
+                    <div (click)="editProperty(i, i2)">
+                        <div>
+                            <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                            <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                        </div>
+                        <div (click)="editProperty(i, i2)">
+                            <fa-icon [icon]="name.icon" class="icon pl-2"></fa-icon>
+                            <p class="regular-text">{{name.name}}</p>
+                        </div>
+                    </div>
                     <div>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
+                        <fa-icon [icon]="item.icon" class="little-icon"
+                            (click)="changeStatus(name.name, name.icon, i, i2)"></fa-icon>
+                        <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear('gear', i, i2)"></fa-icon>
+                        <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i, i2)"></fa-icon>
                     </div>
-                    <div (click)="editProperty(i)">
-                        <fa-icon [icon]="item.icon2" class="icon pl-2"></fa-icon>
-                        <p class="regular-text">{{item.name}}</p>
-                    </div>
-                </div>
-                <div>
-                    <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(i)"></fa-icon>
-                    <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear('gear', i)"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i)"></fa-icon>
-                </div>
-            </div>
-        </div>
-        <p class="pt-3 pl-3 regular-text">Não visíveis</p>
-        <div *ngFor="let item of propertiesList; index as i" cdkDropList (cdkDropListDropped)="drop($event)">
-            <div *ngIf="item.status==='invisible'" class="visible opacity" cdkDrag >
-                <div>
-                    <div>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon"></fa-icon>
-                    </div>
-                    <div (click)="editProperty(i)">
-                        <fa-icon [icon]="item.icon2" class="icon pl-2"></fa-icon>
-                        <p class="regular-text">{{item.name}}</p>
-                    </div>
-                </div>
-                <div>
-                    <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(i)"></fa-icon>
-                    <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear('gear', i)"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i)"></fa-icon>
                 </div>
             </div>
         </div>

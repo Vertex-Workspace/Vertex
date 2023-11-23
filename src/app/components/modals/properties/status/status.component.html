@@ -1,11 +1,12 @@
 <div class="properties">
-    <ng-container *ngFor="let status of statusList; index as item">
+    <div *ngFor="let status of statusList; index as item"  cdkDropListGroup>
         <div class="main-property">
             <p class="regular-text">{{status.name}}</p>
             <fa-icon [icon]="faPlus" class="little-icon" (click)="add(item)"></fa-icon>
         </div>
-        <ng-container *ngFor="let name of status.properties">
-            <div class="specific-properties" [ngStyle]="{'background-color': status.color}">
+        <div *ngFor="let name of status.properties; index as i2" cdkDropList (cdkDropListDropped)="drop($event, item)"
+        [cdkDropListData]="status.properties">
+            <div cdkDrag class="specific-properties" [ngStyle]="{'background-color': status.color}">
                 <div>
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon"></fa-icon>
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon"></fa-icon>
@@ -15,9 +16,9 @@
                 </div>
                 <div>
                     <fa-icon (click)="chooseColor()" [icon]="faPaintBrush" (click)="clickPencil()" class="little-icon"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(item)"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(item, i2)"></fa-icon>
                 </div>
             </div>
-        </ng-container>
-    </ng-container>
+        </div>
+    </div>
 </div>

@@ -3,7 +3,7 @@
         <li (click)="selectColor(i)" [ngClass]="color.status === 'selected' ? 'emphasis' : ''">
             <div [ngStyle]="{'background-color': color.color}">
             </div>
-            <p class="medium-text">{{color.name}}</p>
+            <p class="regular-text">{{color.name}}</p>
         </li>
     </ng-container>
 </ul>

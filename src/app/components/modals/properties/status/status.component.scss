@@ -25,7 +25,7 @@
 }
 
 .main-property {
-    @apply flex justify-between items-center w-full pt-3;
+    @apply flex justify-between items-center w-full h-full pt-3;
 
 }
 
@@ -37,11 +37,11 @@
     @apply w-full flex flex-row items-center justify-start h-[8%] border-b border-[#969397];
 
     div:first-child {
-        @apply w-[4%] flex justify-between items-center;
+        @apply pl-2 w-[6%] flex justify-between items-center;
     }
 
     div:nth-child(2){
-        @apply w-[86%] flex justify-start pl-2 items-center;
+        @apply w-[84%] flex justify-start pl-2 items-center;
 
         input {
             @apply w-full;
@@ -50,7 +50,7 @@
     }
 
     div:last-child {
-        @apply w-[10%] flex justify-between items-center;
+        @apply w-[12%] pr-2 flex justify-between items-center;
     }
 }
 

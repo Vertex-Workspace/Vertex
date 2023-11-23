@@ -4,14 +4,14 @@ import {
   faTrashCan, faEyeSlash, faEllipsisVertical,
   faFont, faCalendarDays, faPlus, faSpinner, faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
-import {CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-general-properties',
   templateUrl: './general-properties.component.html',
   styleUrls: ['./general-properties.component.scss']
 })
-export class GeneralPropertiesComponent{
+export class GeneralPropertiesComponent {
 
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;
@@ -55,40 +55,55 @@ export class GeneralPropertiesComponent{
     this.close.emit();
   }
 
-  propertiesList = [
-    { name: 'Nome da Tarefa', status: 'visible', icon: faEye, icon2: faFont },
-    { name: 'Prazo', status: 'visible', icon: faEye, icon2: faCalendarDays },
-    { name: 'Status', status: 'invisible', icon: faEyeSlash, icon2: faSpinner },
-    { name: 'Itens Seleção', status: 'invisible', icon: faEyeSlash, icon2: faCaretDown }
+  propertiesList: any[] = [
+    {
+      status: 'Visíveis',
+      icon: faEye,
+      properties: [
+        { name: 'Nome da Tarefa', icon: faFont },
+        { name: 'Prazo', icon: faCalendarDays },
+      ]
+    },
+    {
+      status: 'Não visíveis',
+      icon: faEyeSlash,
+      properties: [
+        { name: 'Status', icon: faSpinner },
+        { name: 'Itens Seleção', icon: faCaretDown }
+      ]
+    },
   ]
 
-  clickGear(type: string, i: number) {
-      this.gear.emit({list: this.propertiesList[i].name});
-      console.log(this.propertiesList[i].name)
+  clickGear(type: string, i: number, i2: number) {
+    this.gear.emit({ list: this.propertiesList[i].properties[i2].name });
+    console.log(this.propertiesList[i].properties[i2].name)
   }
 
   clickPlus(type: string) {
     this.plus.emit();
   }
 
-  editProperty(i: number) {
-    if (this.propertiesList[i].icon2 === faSpinner) {
+  editProperty(i: number, i2: number) {
+    if (this.propertiesList[i].properties[i2].icon === faSpinner) {
       this.status.emit();
-    } else if (this.propertiesList[i].icon2 === faCaretDown) {
+    } else if (this.propertiesList[i].properties[i2].icon === faCaretDown) {
       this.select.emit();
     } else {
-      this.edit.emit({list: this.propertiesList[i].name});
+      this.edit.emit({ list: this.propertiesList[i].properties[i2].name });
     }
   }
 
 
-  changeStatus(i: number) {
-    if (this.propertiesList[i].status === 'visible') {
-      this.propertiesList[i].status = 'invisible';
-      this.propertiesList[i].icon = faEyeSlash;
+  changeStatus(namep: string, icon: any, i: number, i2: number) {
+    let visibles: any = this.propertiesList[0].properties;
+    let invisibles: any = this.propertiesList[1].properties;
+
+    if (this.propertiesList[i].icon === faEye) {
+      invisibles.push({ name: namep, icon: icon });
+      visibles.splice(i2, 1);
     } else {
-      this.propertiesList[i].status = 'visible';
-      this.propertiesList[i].icon = faEye;
+      visibles.push({ name: namep, icon: icon });
+      invisibles.splice(i2, 1);
     }
   }
 
@@ -102,18 +117,26 @@ export class GeneralPropertiesComponent{
     console.log(this.generalModal);
   }
 
-  delete(i: number) {
-    this.propertiesList.splice(i, 1);
+  delete(i:number, i2:number) {
+      console.log(i2);
+      this.propertiesList[i].properties.splice(i2,1);
+      
   }
 
 
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.propertiesList, event.previousIndex, event.currentIndex);
-    console.log(this.propertiesList)
-    console.log(event.previousIndex);
-    console.log(event.currentIndex);
-    
+  // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
+  drop(event: CdkDragDrop<any[]>, i: number) {
+    if ((event.previousContainer === event.container) && i==0) {
+      moveItemInArray(this.propertiesList[0].properties, event.previousIndex, event.currentIndex);
+    }else if((event.previousContainer === event.container) && i==1){
+      moveItemInArray(this.propertiesList[1].properties, event.previousIndex, event.currentIndex);
+    }else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      )
+    }
   }
 }
 
