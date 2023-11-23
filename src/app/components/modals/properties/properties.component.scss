@@ -10,10 +10,6 @@
 
     div:first-child {
         @apply w-[60%] flex items-center;
-
-        p{
-            @apply pt-3;
-        }
     }
 }
 
@@ -30,7 +26,6 @@ p{
 .icon {
     color: $primaryColor;
     font-size: 1rem;
-    @apply pt-3;
 }
 
 
@@ -40,10 +35,10 @@ p{
 }
 
 .new-property {
-   @apply flex w-full items-center;
+   @apply flex w-full items-center pt-3;
 
    p{
-    @apply pl-3 pt-3 flex items-center;
+    @apply pl-3 flex items-center;
    }
 }
 
@@ -55,6 +50,13 @@ p{
     color:$primaryColor;
     font-size: 1.5rem;
  }
+
+ .pattern-style {
+    width: 100%; 
+    height: 100%;
+ }
+
+
 
 
 

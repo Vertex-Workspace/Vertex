@@ -1,5 +1,5 @@
-<div class="properties">
-    <div *ngFor="let status of statusList; index as item"  cdkDropListGroup>
+<div class="properties" cdkDropListGroup>
+    <div *ngFor="let status of statusList; index as item">
         <div class="main-property">
             <p class="regular-text">{{status.name}}</p>
             <fa-icon [icon]="faPlus" class="little-icon" (click)="add(item)"></fa-icon>
@@ -15,7 +15,7 @@
                    <input type="text" class="small-text" value="{{name.name}}" [ngStyle]="{'background-color': status.color}">
                 </div>
                 <div>
-                    <fa-icon (click)="chooseColor()" [icon]="faPaintBrush" (click)="clickPencil()" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faPaintBrush" (click)="clickPencil()" class="little-icon"></fa-icon>
                     <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(item, i2)"></fa-icon>
                 </div>
             </div>

@@ -107,30 +107,19 @@ export class GeneralPropertiesComponent {
     }
   }
 
-  openModals(modal: string) {
-    if (modal === 'add') {
-      this.currentModal = 'add';
-    } else if (modal === 'status') {
-      this.currentModal = 'status';
-      this.generalModal = false;
-    }
-    console.log(this.generalModal);
-  }
+  delete(i: number, i2: number) {
+    console.log(i2);
+    this.propertiesList[i].properties.splice(i2, 1);
 
-  delete(i:number, i2:number) {
-      console.log(i2);
-      this.propertiesList[i].properties.splice(i2,1);
-      
   }
-
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
   drop(event: CdkDragDrop<any[]>, i: number) {
-    if ((event.previousContainer === event.container) && i==0) {
+    if ((event.previousContainer === event.container) && i == 0) {
       moveItemInArray(this.propertiesList[0].properties, event.previousIndex, event.currentIndex);
-    }else if((event.previousContainer === event.container) && i==1){
+    } else if ((event.previousContainer === event.container) && i == 1) {
       moveItemInArray(this.propertiesList[1].properties, event.previousIndex, event.currentIndex);
-    }else {
+    } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,

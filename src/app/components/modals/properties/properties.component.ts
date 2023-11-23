@@ -21,8 +21,8 @@ export class PropertiesComponent{
   faSpinner = faSpinner;
   faCaretDown = faCaretDown;
   currentModal: string = 'general';
-  generalModal: boolean = true;
-  text ?:string;
+  text ?:string = 'Propriedades';
+  footerText ?: string = 'Adicionar Propriedade';
   propertiesType: any;
 
   @Output()
@@ -39,6 +39,10 @@ export class PropertiesComponent{
   }
 
   name?: string;
+
+  ngOnInit():void{
+
+  }
 
   itemsList = [
     {
@@ -59,44 +63,40 @@ export class PropertiesComponent{
   
 ]
 
-  clickGear(type: string) {
-    if (type === 'gear') {
+  clickGear(type: string, event: any) {
+    this.name = event.list;
       this.currentModal = 'edit'
-    } else if (type === 'plus') {
-      this.currentModal = 'edit'
-      this.name = 'Nova Propriedade'
-    } else if (type === 'pencil') {
-      this.currentModal = 'colors'
-    } else if (type === 'edit') {
-      this.currentModal = 'edit'
-    } else if (type === 'items-selection') {
-      this.currentModal = 'items-selection'
-    }else if(type === 'status'){
-      this.currentModal = 'status'
-    }
+      this.text = 'Edite a Propriedade'
+      this.footerText = 'Excluir Propriedade'
   }
 
-  clickG(event: any) {
-    this.name = event.list;
+  openStatusSelection(type: string) {
+    if (type === 'items-selection') {
+      this.currentModal = 'items-selection'
+      this.text = "Itens Seleção"
+      this.footerText = 'Adicionar Elemento'
+    }else if(type === 'status'){
+      this.currentModal = 'status'
+      this.text = "Status"
+      this.footerText = ''
+    }else if (type === 'pencil') {
+      this.currentModal = 'colors'
+      this.text = "Cores"
+      this.footerText = ''
+    }
   }
 
   arrowLeft() {
-    if (this.currentModal === 'status') {
+    if (this.currentModal === 'status' 
+    || this.currentModal === 'edit' 
+    || this.currentModal === 'items-selection') {
       this.currentModal = 'general'
-    } else if (this.currentModal === 'edit') {
-      this.currentModal = 'general'
+      this.text = 'Propriedades'
+      this.footerText = 'Adicionar Propriedade'
     } else if (this.currentModal === 'colors') {
       this.currentModal = 'status'
-    } else if (this.currentModal === 'items-selection') {
-      this.currentModal = 'general'
-    }
-  }
-
-  openModals(modal: string) {
-    if (modal === 'edit') {
-      this.currentModal = 'edit';
-    } else if (modal === 'status') {
-      this.currentModal = 'status';
+      this.text = 'Status'
+      this.footerText = ''
     }
   }
 
@@ -104,6 +104,8 @@ export class PropertiesComponent{
     if (this.currentModal === 'general') {
       this.name = 'Nova Propriedade'
       this.currentModal = 'edit';
+      this.text = 'Edite a Propriedade'
+      this.footerText = 'Excluir Propriedade'
     }if (this.currentModal === 'items-selection') {
       this.itemsList[0].name.push({ name: 'Novo item'});
     }

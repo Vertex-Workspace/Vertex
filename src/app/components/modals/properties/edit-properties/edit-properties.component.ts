@@ -28,8 +28,6 @@ export class EditPropertiesComponent{
   faSquare = faSquare;
   faTrashCan = faTrashCan;
   faEye = faEye;
-
-  value: boolean = false;
   openInput: boolean = false;
   selectedProperty: string = "Texto";
 
@@ -49,8 +47,7 @@ export class EditPropertiesComponent{
   checkboxList = [
     { p: 'Tornar a propriedade obrigatória', value: false, visibility: true },
     { p: 'Definir um valor padrão?', value: false, visibility: false },
-    { p: 'Definir data de término?', value: false, visibility: false },
-    { p: 'Definir itens da seleção', value: false, visibility: false }
+    { p: 'Definir data de término?', value: false, visibility: false }
   ]
 
   defineValue(i: number) {
@@ -73,8 +70,6 @@ export class EditPropertiesComponent{
     }
     if(this.selectedProperty === 'Data'){
       this.checkboxList[2].visibility = true;
-    }if(this.selectedProperty === 'Seleção'){
-      this.checkboxList[3].visibility = true;
     }
   }
 

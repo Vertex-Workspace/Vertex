@@ -1,23 +1,4 @@
 @import '../../../../../variables';
-.modal-overlay {
-    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
-
-}
-
-.exitModal {
-    @apply text-[2rem] font-bold cursor-pointer w-full h-[10%] border-b border-[#092C4C];
-    color: $primaryColor;
-
-    div {
-        @apply flex flex-row items-center gap-2;
-    }
-}
-
-.modal {
-    @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
-    items-end justify-start text-center p-8 border-t-8;
-    border-color: $primaryColor;
-}
 
 .little-icon {
     color: $primaryColor;

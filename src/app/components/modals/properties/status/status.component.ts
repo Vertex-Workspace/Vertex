@@ -15,23 +15,10 @@ export class StatusComponent {
     faTrashCan = faTrashCan;
     faEllipsisVertical = faEllipsisVertical;
     faPlus = faPlus;
-    colorModal: boolean = false;
-  
-  @Output()
-  close = new EventEmitter<Event>();
+    colorModal: boolean = false
 
   @Output()
   pencil = new EventEmitter<String>();
-
-  @Input()
-  height?: String;
-
-  @Input()
-  width?: String;
-
-  closeModal(){
-    this.close.emit();
-  }
 
   clickPencil(){
     this.pencil.emit();
@@ -62,10 +49,6 @@ export class StatusComponent {
         ]
     }
   ]
-
-  chooseColor(){
-    this.colorModal = true;
-  }
 
   add(item:number){
     this.statusList[item].properties.push({name: 'New Status'});
