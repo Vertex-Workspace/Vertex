@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ForgotPasswordComponent } from './forgot-password.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -10,7 +11,8 @@ import { ForgotPasswordComponent } from './forgot-password.component';
   ],
   exports:[ForgotPasswordComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ]
 })
 export class ForgotPasswordModule { }

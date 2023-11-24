@@ -2,8 +2,7 @@
 
     <div class=" flex flex-col justify-center items-center w-3/5 gap-10">
 
-        <h2 style="font-family: 'Manrope'; font-weight: lighter;"
-            class="text-center text-2xl font-bold leading-9 tracking-tight text-white">Crie sua Conta</h2>
+        <h1 id="h1-access-account">Crie sua Conta</h1>
 
 
         <div class="w-2/3">
@@ -19,7 +18,7 @@
                             </div>
                             <input style="font-family: 'Inter';" id="nome" name="nome" type="text" autocomplete="nome"
                                 required placeholder="Nome"
-                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="inputs">
                         </div>
                     </div>
 
@@ -32,7 +31,7 @@
                             </div>
                             <input style="font-family: 'Inter';" id="sobrenome" name="sobrenome" type="text"
                                 autocomplete="sobrenome" required placeholder="Sobrenome"
-                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="inputs">
                         </div>
                     </div>
                 </div>
@@ -46,7 +45,7 @@
                             </div>
                             <input style="font-family: 'Inter';" id="email" name="email" type="email"
                                 autocomplete="email" required placeholder="E-mail"
-                                class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                class="inputs">
                         </div>
                     </div>
                 </div>
@@ -62,7 +61,7 @@
                                 </div>
                                 <input style="font-family: 'Inter';" id="password" [type]="invisibleEye1 ? 'password' : 'text'"
                                     autocomplete="password" required placeholder="Senha"
-                                    class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="inputs">
                                     <div class="eyesDiv">
                                         <fa-icon *ngIf="!invisibleEye1" (click)="passwordToggle1()" class="eyeIcon" [icon]="faEye">
                                         </fa-icon>
@@ -80,7 +79,7 @@
                                 </div>
                                 <input style="font-family: 'Inter';" id="password" [type]="invisibleEye2 ? 'password' : 'text'"
                                     autocomplete="password" required placeholder="Confirme sua Senha"
-                                    class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="inputs">
                                     <div class="eyesDiv">
                                         <fa-icon *ngIf="!invisibleEye2" (click)="passwordToggle2()" class="eyeIcon" [icon]="faEye">
                                         </fa-icon>
@@ -91,7 +90,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col justify-center text-[16px] text-white">
+                    <div class="flex flex-col justify-center text-[16px] text-[#092C4C]">
                         <p class="w-80">Requisitos para uma boa senha:</p>
                         <p>*Mínimo de 8 caracteres</p>
                         <p>*Mínimo de 1 letra maiúscula</p>
@@ -107,8 +106,7 @@
                 <!-- Div do botão de Enviar -->
                 <div class="flex justify-center">
                     <button type="submit"
-                        class="flex w-44 h-10 items-center justify-center rounded-md bg-[#2E5DA6] text-sm font-semibold leading-6 text-white shadow-sm
-                        hover:bg-[#224680] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#224680]">
+                        id="enter-btn">
                         Cadastrar</button>
                 </div>
 
@@ -116,11 +114,11 @@
             <br>
 
             <!-- Texto Não possui conta -->
-            <p class="text-center text-sm text-white">
+            <p class="text-center text-sm text-[#092C4C]">
                 Já possui uma conta?
                 <br>
                 <a [routerLink]="['/login']"
-                    class="font-semibold leading-6 text-blue-400 hover:text-blue-600 transition">Clique
+                    class="font-semibold leading-6 text-[#092c4c]">Clique
                     aqui</a>
                 para entrar
             </p>
@@ -129,7 +127,7 @@
 
 
     <div class=" flex pb-5 items-center justify-end h-screen w-2/5">
-        <img class="w-80 h-80" src="../../../assets/vertex-logo.png" alt="">
+        <img class="w-80 h-80" src="../../../assets/white-logo.svg" alt="">
 
 
     </div>
