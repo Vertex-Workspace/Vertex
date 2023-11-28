@@ -6,12 +6,13 @@ import { KanbanComponent } from './kanban/kanban.component';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { TaskComponent } from 'src/app/components/modals/task/task.component';
 import { RouterModule } from '@angular/router';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from './calendar/calendar.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PropertiesModule } from 'src/app/components/modals/properties/properties.module';
 import { KanbanModule } from './kanban/kanban.module';
 import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
 import { ListModule } from './list/list.module';
@@ -35,6 +36,7 @@ import { MuralComponent } from './mural/mural.component';
     DragDropModule,
     FormsModule,
     CalendarModule,
+    PropertiesModule
     ListModule,
     KanbanModule
   ],

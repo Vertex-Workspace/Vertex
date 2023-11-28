@@ -1,0 +1,78 @@
+@import '../../../../../variables';
+
+.icon {
+    color: $primaryColor;
+    font-size: 3rem;
+}
+
+.checkBox-selected {
+    color: $primaryColor;
+    font-size: 1.5rem;
+    @apply opacity-25;
+}
+
+.checkBox-unselected {
+    color: $primaryColor;
+    font-size: 1.5rem;
+}
+
+
+.task-name{
+    @apply w-full h-[10%] border-b border-[#092C4C] pt-3 flex items-end justify-start;
+
+    input{
+        background-color: $secondColor;
+        @apply flex flex-row justify-start w-[330px];
+    }
+}
+
+.properties-types {
+    @apply pt-3 w-full h-[50%] grid grid-cols-3 justify-center items-center;
+
+    div{
+        @apply w-[80px] h-[80px] bg-[#EAEFF8] flex justify-center items-center shadow-2xl rounded-md;
+    }
+}
+
+.opacity{
+    @apply opacity-25;
+}
+
+.properties-answers {
+    @apply w-full h-[20%];
+
+
+    div:last-child{
+        @apply flex flex-row;
+    }
+}
+
+.checkboxes{
+    @apply flex flex-row items-center gap-2;
+}
+
+.value-input{
+    @apply h-[30%] w-full flex py-3;
+
+    input {
+        @apply w-2/3 h-[32px] rounded-sm shadow-2xl pl-3;
+        outline: none;
+    };
+}
+
+.delete {
+    @apply w-full h-[10%] border-t border-[#092C4C] flex items-center gap-2;
+}
+
+.trash-icon{
+    font-size:1rem;
+    color:$primaryColor;
+}
+
+section{
+    @apply w-full h-full items-center pl-10;
+
+    p:first-child {
+        @apply pr-10 pt-10;
+    }
+}

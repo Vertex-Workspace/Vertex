@@ -12,6 +12,15 @@ section {
     .workspace-title {
         @apply flex w-full h-[30%] flex-col items-center justify-center text-xl;
 
+
+//CARDS
+.card-workspace{
+    @apply flex w-2/3 h-[25%] bg-white flex-col items-center rounded-md shadow-md;
+    color: $primaryColor;
+}
+.card-workspace > :first-child{
+    @apply flex w-full h-[30%] bg-white flex-col items-center justify-center text-xl;
+    
         h5 {
             @apply flex h-full items-center;
             border-bottom: $borderBottom;
