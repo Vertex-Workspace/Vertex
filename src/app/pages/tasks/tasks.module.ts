@@ -36,7 +36,7 @@ import { MuralComponent } from './mural/mural.component';
     DragDropModule,
     FormsModule,
     CalendarModule,
-    PropertiesModule
+    PropertiesModule,
     ListModule,
     KanbanModule
   ],
