@@ -58,10 +58,12 @@ export class AppComponent{
   };
 
   ngOnInit(): void {
-    this.userService.getAll()
-      .subscribe(users => {
-        console.log(users);
-    })
+    
+
+    // this.userService.getAll()
+    //   .subscribe(users => {
+    //     console.log(users);
+    // })
 
     
     // this.userService.getOneById(3)
@@ -69,15 +71,15 @@ export class AppComponent{
     //     console.log(user);
     // })
 
-    this.userService.create(this.user)
-    .subscribe(user => {
-      console.log(user);
-  })
+  //   this.userService.create(this.user)
+  //   .subscribe(user => {
+  //     console.log(user);
+  // })
 
-    this.userService.getAll()
-      .subscribe(users => {
-        console.log(users);
-    })
+  //   this.userService.getAll()
+  //     .subscribe(users => {
+  //       console.log(users);
+  //   })
 
     // this.userService.delete(12)
     //   .subscribe(users => {
