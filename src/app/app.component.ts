@@ -8,6 +8,8 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -42,9 +44,46 @@ export class AppComponent{
   constructor(
     private personalization : PersonalizationService, 
     private contexts: ChildrenOutletContexts,
-    private router:Router
+    private router:Router,
+    private userService: UserService
   ){
     personalization.setPersonalization();
+  }
+
+  user : User = {
+    firstName: "asdasd",
+    lastName: "avcbcvbcv",
+    email: "abc@gmail.com",
+    password: "123"
+  };
+
+  ngOnInit(): void {
+    this.userService.getAll()
+      .subscribe(users => {
+        console.log(users);
+    })
+
+    
+    // this.userService.getOneById(3)
+    //   .subscribe(user => {
+    //     console.log(user);
+    // })
+
+    this.userService.create(this.user)
+    .subscribe(user => {
+      console.log(user);
+  })
+
+    this.userService.getAll()
+      .subscribe(users => {
+        console.log(users);
+    })
+
+    // this.userService.delete(12)
+    //   .subscribe(users => {
+    //     console.log(users);
+    // })
+
   }
 
   getRouteAnimationData() {
