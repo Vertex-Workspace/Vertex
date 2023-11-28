@@ -25,7 +25,7 @@
                     <div class="divRegisterIcons">
                         <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
                     </div>
-                    <input class="inputs" name="email" type="email" autocomplete="email" placeholder="Digite seu E-mail" required>
+                    <input class="inputs" name="email" type="email" placeholder="Digite seu E-mail" required>
                 </div>
             </div>
 
@@ -37,8 +37,7 @@
                     <div class="divRegisterIcons">
                         <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
                     </div>
-                    <input class="inputs" name="password" placeholder="Digite sua senha" [type]="invisibleEye ? 'password' : 'text'"
-                        autocomplete="current-password" required>
+                    <input class="inputs" name="password" placeholder="Digite sua senha" [type]="invisibleEye ? 'password' : 'text'" required>
                     <div class="eyesDiv">
                         <fa-icon *ngIf="!invisibleEye" (click)="passwordToggle()" class="eyeIcon" [icon]="faEye">
                         </fa-icon>
