@@ -1,1 +1,26 @@
-<p>edit-properties works!</p>
+<div class="task-name">
+    <input value="{{name}}" class="regular-text" />
+</div>
+
+<section>
+    <p class="medium-text">Tipo de dado</p>
+    <div class="properties-types">
+        <ng-container *ngFor="let type of propertyTypes; index as i">
+            <div [ngClass]="type.value === true ? '' : 'opacity' " (click)="selectValue(i)" (click)="selectIcon(i)">
+                <fa-icon [icon]="type.icon" class="icon" (click)="selectionItems(i)"></fa-icon>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="properties-answers">
+        <div *ngFor="let check of checkboxList; index as i" class="checkboxes">
+            <fa-icon *ngIf="check.visibility" [icon]="faSquare"
+                [ngClass]="check.value ? 'checkBox-unselected' : 'checkBox-selected'" (click)="defineValue(i)">
+            </fa-icon>
+            <p class="small-text" *ngIf="check.visibility">{{check.p}}</p>
+        </div>
+        <div class="value-input">
+            <input *ngIf="openInput" placeholder="Valor padrão">
+        </div>
+    </div>
+</section>

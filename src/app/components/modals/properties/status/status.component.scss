@@ -1,0 +1,58 @@
+@import '../../../../../variables';
+
+.little-icon {
+    color: $primaryColor;
+    font-size:1rem;
+}
+
+.main-property {
+    @apply flex justify-between items-center w-full h-full pt-3;
+
+}
+
+.properties {
+    @apply h-full w-full;
+}
+
+.specific-properties {
+    @apply w-full flex flex-row items-center justify-start h-[8%] border-b border-[#969397];
+
+    div:first-child {
+        @apply pl-2 w-[6%] flex justify-between items-center;
+    }
+
+    div:nth-child(2){
+        @apply w-[84%] flex justify-start pl-2 items-center;
+
+        input {
+            @apply w-full;
+            outline: none;
+        }
+    }
+
+    div:last-child {
+        @apply w-[12%] pr-2 flex justify-between items-center;
+    }
+}
+
+.bigger-icon {
+    color: $primaryColor;
+    font-size:1.5rem;
+}
+
+.new-property {
+    @apply flex w-full items-center pt-3;
+ 
+    p{
+     @apply pl-3 items-center;
+    }
+ }
+
+ .icon {
+    color:$primaryColor;
+ }
+
+ .opacity-icon{
+    @apply opacity-75;
+}
+

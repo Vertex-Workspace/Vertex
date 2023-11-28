@@ -47,6 +47,7 @@
                     >
                         <i class="{{ item.iconClass }}"></i>
                     </button>
+                    
                 </ng-container>
 
                 <button class="create">
@@ -81,3 +82,5 @@
 
     </div>
 </section>
+
+<app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()"></app-properties>
