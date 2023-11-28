@@ -45,7 +45,7 @@ export class RowCardComponent {
   }
 
   getCols(): any[] {
-    if (this.router.url === '/tasks/list') {
+    if (this.router.url === '/tarefas/list') {
       return this.cols;
     }
 
