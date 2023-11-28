@@ -10,6 +10,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { ProjectService } from './services/project.service';
 
 @Component({
   selector: 'app-root',
@@ -45,7 +46,8 @@ export class AppComponent{
     private personalization : PersonalizationService, 
     private contexts: ChildrenOutletContexts,
     private router:Router,
-    private userService: UserService
+    private userService: UserService,
+    private projectService: ProjectService
   ){
     personalization.setPersonalization();
   }
@@ -58,10 +60,10 @@ export class AppComponent{
   };
 
   ngOnInit(): void {
-    this.userService.getAll()
-      .subscribe(users => {
-        console.log(users);
-    })
+    // this.userService.getAll()
+    //   .subscribe(users => {
+    //     console.log(users);
+    // })
 
     
     // this.userService.getOneById(3)
@@ -69,21 +71,30 @@ export class AppComponent{
     //     console.log(user);
     // })
 
-    this.userService.create(this.user)
-    .subscribe(user => {
-      console.log(user);
-  })
+  //   this.userService.create(this.user)
+  //   .subscribe(user => {
+  //     console.log(user);
+  // })
 
-    this.userService.getAll()
-      .subscribe(users => {
-        console.log(users);
-    })
+  //   this.userService.getAll()
+  //     .subscribe(users => {
+  //       console.log(users);
+  //   })
 
     // this.userService.delete(12)
     //   .subscribe(users => {
     //     console.log(users);
     // })
 
+    this.projectService.getAll()
+      .subscribe(projects => {
+        console.log(projects);
+      });
+
+    this.projectService.getOneById(1)
+      .subscribe(project => {
+        console.log(project);
+      });
   }
 
   getRouteAnimationData() {
