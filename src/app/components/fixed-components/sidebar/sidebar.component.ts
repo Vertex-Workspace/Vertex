@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faMessage, faMagnifyingGlass, faClipboardList, 
   faUser, faGear, faSignOut, faBellSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,4 +19,18 @@ export class SidebarComponent {
   @Input()
   isSideBarExpanded!: boolean;
 
+  search: boolean = false;
+  switchSearch():void{
+    this.search = !this.search;
+  }
+
+  @Output()
+  openChat = new EventEmitter();
+  openChatExpanded(bool: boolean){
+    this.openChat.emit({ action: bool });
+  }
+
+  disabledChat(){
+    this.openChatExpanded(false);
+  }
 }

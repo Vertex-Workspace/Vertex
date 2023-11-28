@@ -1,7 +1,7 @@
 <div class="bg">
     <div class="title">
         <div>
-            <p>Segurança</p>
+            <h5>Segurança</h5>
             <fa-icon [icon]="faLock" class="icon size"></fa-icon>
         </div>
     </div>
@@ -10,17 +10,17 @@
     <div class="w-[85%]">
         <div *ngFor="let item of passwords; index as i">
             <section>
-                <label>{{item.label}}</label>
+                <p class="regular-text text-bold">{{item.label}}</p>
                 <div class="iconInputBlock">
                     <div class="iconBox">
                         <fa-icon [icon]="item.icon" class="icon"></fa-icon>
                     </div>
                     <form (ngSubmit)="passwordValidation()">
                         <div class="h-full w-full p-input-icon-right">
-                            <input (input)="onChange(i)" [type]="statusEye ? 'text' : 'password'"
-                                [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" />
-                            <i (click)="passwordEye()" class="pi pi-eye icon" *ngIf="!statusEye"></i>
-                            <i (click)="passwordEye()" class="pi pi-eye-slash icon" *ngIf="statusEye"></i>
+                            <input (input)="onChange(i)" [type]="item.statusEye ? 'text' : 'password'"
+                                [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" class="small-text"/>
+                            <i (click)="passwordEye(item)" class="pi pi-eye icon" *ngIf="!item.statusEye"></i>
+                            <i (click)="passwordEye(item)" class="pi pi-eye-slash icon" *ngIf="item.statusEye"></i>
                         </div>
                     </form>
                 </div>
@@ -28,8 +28,8 @@
         </div>
 
         <div class="requires">
-            <div>
-                <p>Requisitos para uma boa senha:</p>
+            <div class="small-text">
+                <p class="medium-text">Requisitos para uma boa senha:</p>
                 <p>*8 caracteres ou mais</p>
                 <p>*Pelo menos uma letra maiúscula</p>
                 <p>*Pelo menos um caractere especial (#@!%$)</p>
@@ -50,6 +50,6 @@
 
 <app-modal-warn *ngIf="!validPassword" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
     <div class="modal">
-        <h2>As senhas não coincidem</h2>
+        <p class="large-text">As senhas não coincidem</p>
     </div>
 </app-modal-warn>

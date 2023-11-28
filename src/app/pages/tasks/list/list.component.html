@@ -1,1 +1,30 @@
-<p>list works!</p>
+<section>
+    <div class="table">
+        <div class="thead">
+            <label 
+                *ngFor="let col of getCols()"
+                [style.min-width]="col.width"
+            >              
+                <h6>
+                    {{col.headerText}}
+                </h6>
+              </label>
+        </div>
+
+        <div class="tbody" 
+            cdkDropList 
+            (cdkDropListDropped)="dropCard($event)"
+        >
+            <div class="trow regular-text" *ngFor="let task of taskList">
+                <app-row-card
+                    [task]="task"
+                    [cdkDragData]="task"
+                    cdkDrag
+                    cdkDragLockAxis="y"
+                    cdkDragBoundary=".table"
+                ></app-row-card>
+            </div>
+        </div>       
+    </div>
+</section>
+

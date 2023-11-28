@@ -1,11 +1,12 @@
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -16,11 +17,13 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 export class TeamInformationsComponent {
     // ICONS
     faLink = faLink;
+    faImage = faImage;
     faCircleUser = faCircleUser;
     faSearch = faSearch;
     faEnvelope = faEnvelope;
     faUserMinus = faUserMinus;
     faComment = faComment;
+    faChevronDown = faChevronDown;
 
     // VARIABLES
     clicked!: string;
@@ -38,25 +41,30 @@ export class TeamInformationsComponent {
         { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' }
     ];
 
-    
-
     users = [
-        { picture: "", name: "Ana Borchardt", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
-        { picture: "", name: "Kaique Fernandes", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
-        { picture: "", name: "Miguel Bertoldi", function: "Back-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] },
-        { picture: "", name: "Otávio Rocha", function: "Front-end developer", socialMedia: [faUserMinus,faEnvelope,faComment] }, 
+        { id: 0, picture: "", name: "Ana Borchardt", function: "Front-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
+        { id: 1, picture: "", name: "Kaique Fernandes", function: "Front-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
+        { id: 2, picture: "", name: "Miguel Bertoldi", function: "Back-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
+        { id: 3, picture: "", name: "Otávio Rocha", function: "Front-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
     ];
+
 
     changePreviewMode(preview: string): void {
         this.clicked = preview;
     }
+
+
+    swapPermissionExpanded(id: number): void {
+        this.users[id].open = !this.users[id].open;
+    }
+
 
     ngOnInit() {
 
         this.clicked = "participants"
 
         console.log(this.users);
-        
+
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');

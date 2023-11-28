@@ -6,24 +6,18 @@
 }
 
 .title {
-    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
-
+    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+    border-color: $emphasis;
         div {
             @apply flex w-[25%] items-center justify-start gap-7;
         }
         
-        p{
-            @apply text-xl font-medium;
-        }
 }
 
 .size {
     @apply text-[18px];
 }
 
-label {
- @apply py-3 text-sm;
-}
 
 .iconProfile {
     color: $primaryColor;
@@ -36,7 +30,7 @@ label {
 
 .iconInput {
     color: $primaryColor;
-    background-color:#CDD8EA;
+    background-color:$emphasis;
 }
 
 .generalDiv {
@@ -48,21 +42,16 @@ label {
 
     .iconBox {
          @apply flex w-[6%] h-12 justify-center items-center rounded-l-sm;
-         background-color: #CDD8EA;
+         background-color: $emphasis;
      }
 }
 
 textarea {
-    @apply bg-white
+    @apply
     rounded-r-sm
-    placeholder-slate-400 
     px-3 flex py-3;
     resize: none;
-}
-
-label {
-    @apply text-xl;
-    color: $primaryColor;
+    background-color: $card;
 }
 
 .divInputs {
@@ -74,6 +63,10 @@ label {
 
     section {
        @apply flex h-[85%] flex-col border-b-2 justify-evenly;
+    }
+
+    p {
+        @apply py-3;
     }
 }
 
@@ -87,12 +80,12 @@ label {
 
 .divInputIcon {
     @apply flex w-12 h-[6%] justify-center items-center rounded-l-sm;
-    background-color: #CDD8EA
+    background-color: $emphasis;
 }
 
 .angleDownIcon {
     @apply flex justify-center items-center w-[10%];
-    background-color:white;
+    background-color:$card;
 }
 
 
@@ -102,7 +95,7 @@ label {
 }
 
 .noEdit {
-    background-color: grey;
+    background-color: $disabled;
 }
 
 .edit {
@@ -130,17 +123,10 @@ label {
 }
 
 .charts {
-    @apply h-[20%] w-full pt-4;
-
-    p:first-child {
-        @apply text-[16px];
-    }
-    p:last-child {
-        @apply text-sm pt-2;
-    }
+    @apply h-[20%] w-full pt-4 items-center;
 
     div {
-        @apply flex items-start pt-2;
+        @apply flex items-center pt-2;
     }
 }
 

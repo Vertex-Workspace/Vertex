@@ -48,19 +48,22 @@ ul > li {
 }
 
 .liOpen:hover{
-    @apply w-[95%] scale-[1.05] pl-8 rounded-l-sm bg-[#f3f3f3] text-black;
+    @apply w-[95%] scale-[1.05] pl-8 rounded-l-sm text-black;
     transition: all 0.3s ease-in-out; 
     cursor: pointer;
-    color: $primaryColor !important;
+    background-color: $secondColor;
+    color: $primaryColor;
 
     fa-icon{
         @apply text-[1.2rem] ;
         color: $primaryColor;
     }
+    .pOpen{
+        color: $primaryColor;
+    }
 }
 
 .pOpen{
-    @apply text-[1.2rem] ;
-
+    color: $secondColor;
 }
 

@@ -1,0 +1,98 @@
+<section>
+
+    <div class="main-div">
+
+        <div class="top-side">
+            <div class="top-side-left">
+                <div class="top-side-user-img">
+                    <fa-icon class="user-img" [icon]="faCircleUser"></fa-icon>
+                </div>
+
+                <div class="top-side-user-informations">
+                    <div class="userName-creationData">
+                        <h4>KaiqueFLH</h4>
+                        <p class="regular-text">20/11/2023</p>
+                    </div>
+
+                    <div class="realName-location">
+                        <p class="regular-text">Kaique Fernandes Lima Homem</p>
+                        |
+                        <p class="regular-text">Brasil, Jaraguá do Sul - SC</p>
+                    </div>
+
+                    <div class="user-description">
+                        <p class="regular-text description">
+                            Kaique Fernandes Lima é um talentoso programador que se destaca no mundo da tecnologia. Com
+                            uma paixão inabalável pela programação, ele encontrou seu lugar na renomada empresa WEG,
+                            onde contribui de maneira significativa para projetos inovadores e desafiadores.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-side-right">
+                <div class="top-side-right-text">
+                    <h6>
+                        Projetos com maior desempenho
+                    </h6>
+                </div>
+
+                <div class="top-side-right-projects">
+                    <ng-container *ngFor="let project of projects">
+                        <div class="card-project">
+                            <div class="indicator-color" [ngStyle]="{'background-color':project.color}">
+                            </div>
+
+                            <div class="project-informations">
+                                <div class="name-project">
+                                    <p class="medium-text">{{project.name}}</p>
+                                    <p class="small-text text-justify overflow-auto">{{project.description}}</p>
+                                </div>
+
+                                <p class="small-text">{{project.date}}</p>
+                            </div>
+
+                            <div class="div-dashboard">
+
+                                <div class="spinner-background">{{spinner.value}}%</div>
+                                <mat-progress-spinner #spinner mode="determinate" [value]=project.progress>
+                                </mat-progress-spinner>
+
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="under-side">
+            <div class="div-dashboards">
+                <h5>Desempenho pessoal</h5>
+                <div class="dashboards">
+                    <div class="div-dashboard-pie-doughnut">
+                        <p-chart class="dashboard-pie-doughnut" type="doughnut" [data]="dataPie" [options]="optionsPie">
+                        </p-chart>
+                    </div>
+
+                    <div class="div-dashboard-bar">
+                        <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [options]="optionsBar">
+                        </p-chart>
+                    </div>
+
+                    <div class="div-dashboard-bar">
+                        <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [options]="optionsBar">
+                        </p-chart>
+                    </div>
+
+                    <div class="div-dashboard-pie-doughnut">
+                        <p-chart class="dashboard-pie-doughnut" type="doughnut" [data]="dataPie" [options]="optionsPie">
+                        </p-chart>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

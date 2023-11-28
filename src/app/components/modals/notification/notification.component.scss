@@ -1,0 +1,117 @@
+@import "../../../../variables";
+
+section{
+    @apply absolute flex w-full h-full justify-end max-w-[96%];
+}
+.clickOut{
+    @apply flex w-[75%] h-full;
+}
+
+.modal{
+    @apply w-[25%] flex h-full rounded-sm flex-col shadow-xl;
+    z-index: 999;
+    background-color: $secondColor;
+    
+    .header{
+        @apply flex flex-col w-full h-[15%] p-4;
+        background-color: $primaryColor;
+        color: $secondColor;
+
+        .header-title{
+            @apply flex w-full h-1/2 flex-row justify-between items-center;
+
+            h5{
+                color: $secondColor;
+            }
+            p{
+                @apply text-sm;
+            }
+        }
+
+        ul{
+            @apply flex flex-row items-end justify-between w-full h-1/2;
+
+            .tool-icons{
+                @apply flex flex-row w-1/4 items-center justify-between;
+
+                .colorAllCheckbox{
+                    color: $secondColor;
+                }
+            }
+        
+            .search {
+                @apply flex w-full h-3/4 items-center justify-between 
+                bg-white p-3 rounded shadow-md border-none;
+                color: $primaryColor;
+    
+                i {
+                    @apply w-[10%];
+                    color: $primaryColor;
+                }
+    
+                input {
+                    @apply w-[90%] h-full outline-none flex items-center pl-2;
+                }
+            }
+
+            .search-settings{
+                @apply flex flex-row items-end justify-between w-[15%];
+            }
+        }
+
+
+    }
+
+    .notifications{
+        @apply flex flex-col w-full h-[85%] overflow-y-auto;
+
+        .notification{
+            @apply flex w-full border-b-2 items-center p-4 justify-between;
+            min-height: 90px;
+
+            :first-child{
+                @apply flex flex-row items-center justify-between;
+
+                .iconUser > fa-icon{
+                    @apply flex text-5xl rounded-full pl-5;
+                    color: $primaryColor;
+                }
+
+                .description{
+                    @apply flex flex-col pl-4;
+                }
+                .color{
+                    color: $primaryColor;
+                }
+            }
+            
+            .barOpenClose > fa-icon{
+                @apply flex text-2xl;
+                color: $primaryColor;
+            }
+            .rotate{
+                transform: rotate(90deg);
+            }
+        }
+        .notification:hover{
+            @apply cursor-pointer bg-white;
+        }
+        .openedNotification{
+            @apply flex w-full;
+            min-height: 90px;
+            background-color: $primaryColor;
+        }
+    }
+}
+
+
+
+fa-icon , i{
+    @apply text-xl;
+    color: $secondColor;
+}
+input[type=checkbox]{
+    width: 18px;
+    height: 20px;
+    cursor: pointer;
+}

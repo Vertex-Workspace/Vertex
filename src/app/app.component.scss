@@ -3,19 +3,20 @@
     @apply flex w-screen h-screen ;
 }
 
-
 .side-bar {
-    @apply flex w-[4%] h-full flex-col items-center;
+    @apply flex w-[4%] h-full flex-col items-center z-[999];
     background-color: $primaryColor;
     transition: width 0.32s ease-out;
+    z-index: 999;
     position: fixed;
 }
 
 .side-barOpen {
-    @apply flex w-[20%] h-full flex-col items-center;
+    @apply flex w-[20%] h-full flex-col items-center z-[999];
     transition: width 0.32s ease-in-out;
     background-color: $primaryColor;
     position: fixed;
+    z-index: 999;
 }
 
 .main-div {
@@ -26,6 +27,7 @@
 
 .main-divOpen {
     @apply flex w-[100%] h-full flex-col items-end;
+    background-color: $secondColor;
 }
 
 
@@ -36,5 +38,22 @@
     @apply flex w-full h-[92%] justify-end;
 }
 
+.main-contentChat{
+    @apply flex w-full h-[100%] justify-end;
+}
 
+.chat-circle{
+    @apply cursor-pointer absolute right-10 bottom-10 w-[70px] h-[70px] rounded-full flex 
+    justify-center items-center;
+    background-color: $primaryColor;
+}
 
+.section-icons {
+    @apply flex justify-between items-center text-lg;
+    color: $primaryColor  !important;
+}
+
+.square-chat{
+    @apply w-[10%] h-[100%] rounded-lg flex items-center justify-center;
+    background-color: $primaryColor;
+}

@@ -1,0 +1,35 @@
+@import "../../../../variables";
+
+.search {
+    @apply flex w-full h-[10%] items-center justify-between p-3 rounded shadow-md border-none;
+    background-color: $card;
+    i {
+        @apply w-[10%];
+        color: $primaryColor;
+    }
+
+    input {
+        @apply w-[90%] h-full outline-none flex items-center pl-2;
+    }
+}
+.order{
+    @apply flex flex-row w-full h-[10%] items-center gap-5;
+
+}
+
+.div-searched{
+    @apply w-full h-[80%] flex flex-col gap-4;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .card-searched{
+        @apply flex w-full flex-row items-center justify-between px-8 py-10;
+        min-height: 70px;
+        text-align: start;
+        background-color: $card;
+        cursor: pointer;
+
+        &:hover{
+            background-color: $emphasis;
+        }
+    }
+}

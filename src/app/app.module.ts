@@ -17,10 +17,14 @@ import { TaskModule } from './components/modals/task/task.module';
 import { UserSettingsModule } from './pages/user-settings/user-settings.module';
 import { TeamInformationsModule } from './pages/team-informations/team-informations.module';
 import { CommonModule } from '@angular/common';
-import { TasksModule } from './pages/tasks/tasks.module';
-import { MuralComponent } from './pages/mural/mural.component';
-import { MuralModule } from './pages/mural/mural.module';
 import { ChartModule } from 'primeng/chart';
+import { ChatModule } from './pages/chat/chat.module';
+import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
+import { NotificationModule } from './components/modals/notification/notification.module';
+import { TasksModule } from './pages/tasks/tasks.module';
+import { UserInformationsModule } from './pages/user-informations/user-informations/user-informations.module';
+import { SearchAllComponent } from './components/modals/search-all/search-all.component';
+import { SearchAllModule } from './components/modals/search-all/search-all.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,6 @@ import { ChartModule } from 'primeng/chart';
     RegisterModule,
     TeamsModule,
     ProjectsModule,
-    MuralModule,
     InputModule,
     ButtonModule,
     AppRoutingModule,
@@ -47,7 +50,12 @@ import { ChartModule } from 'primeng/chart';
     TasksModule,
     UserSettingsModule,
     TeamInformationsModule,
-    ChartModule
+    ChartModule,
+    NotificationModule,
+    ChatModule,
+    MinichatModule,
+    UserInformationsModule,
+    SearchAllModule
   ],
   providers: [
     PersonalizationService,

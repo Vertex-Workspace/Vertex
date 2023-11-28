@@ -1,0 +1,117 @@
+@import '../../../../_variables.scss';
+
+.miniChat{
+    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col
+    justify-between items-start shadow-lg;
+    background-color: $card;
+}
+
+.miniChat-header{
+    @apply flex w-full h-[12%] items-start justify-around;
+    background-color: $primaryColor;
+}
+
+.miniChat-header-title{
+    @apply flex w-[70%] h-full items-center justify-start gap-5;
+    color: $card;
+
+    h6{
+        color: $secondColor;
+    }
+}
+
+.miniChat-header-close{
+    @apply flex w-[15%] h-full items-center justify-end gap-5;
+    color: $card;
+}
+
+.miniChat-main{
+    @apply flex w-full h-[88%] items-end pb-5 justify-center;
+}
+
+.miniChat-main-input{
+    @apply flex w-full h-[10%] items-center justify-evenly ;
+}
+
+.div-search{
+    @apply flex border-2 w-[80%] h-full  rounded-sm;
+    border: 1px solid $emphasis;
+}
+
+.input-search{
+    @apply pl-[10px] w-[84%] h-[100%];
+}
+
+.div-icons{
+    @apply flex gap-2 w-[16%];
+}
+
+.icons {
+    @apply flex justify-between items-center text-lg;
+    color: $primaryColor  !important;
+}
+
+.paperplane{
+    @apply text-base pr-1;
+}
+
+.square-chat{
+    @apply w-[10%] h-[100%] rounded-sm flex items-center justify-center;
+    background-color: $primaryColor;
+}
+
+
+// ==============================================================================
+.imgLogo{
+    @apply w-[40px] h-[40px] ;
+}
+
+.div-searchStep1{
+    @apply flex border-2 w-[97%] h-full rounded-sm;
+    border: 1px solid $emphasis;
+
+}
+
+.miniChatStep1{
+    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col
+    justify-between items-start shadow-lg;
+    background-color: $card;
+}
+
+.minichatStep1-main{
+    @apply flex flex-col w-full h-[75%] p-4 items-center gap-4 justify-start overflow-auto;
+}
+
+.input-searchStep1{
+    @apply pl-[10px] w-[100%] h-[100%];
+}
+
+.card-chat{
+    @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm
+    cursor-pointer min-h-[100px];
+    border: 1px solid $emphasis;
+    animation: leftPulse 0.3s;
+}
+
+.user-card-message{
+    @apply flex gap-6 items-center w-[70%];
+}
+
+.chat-icons {
+    @apply flex justify-between items-center;
+    color: $primaryColor  !important;
+    font-size: 70px
+}
+
+.section-icons {
+    @apply flex justify-between items-center;
+    color: $primaryColor  !important;
+}
+
+.div-time-message{
+    @apply flex items-center justify-center w-[20%];
+}
+
+.div-time{
+    @apply flex flex-col gap-2 items-center;
+}

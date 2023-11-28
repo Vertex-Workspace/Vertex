@@ -1,1 +1,60 @@
-<p>notification works!</p>
+<section>
+    <div (click)="closeNotification()" class="clickOut"></div>
+    <div class="modal">
+        <div class="header">
+            <div class="header-title">
+                <h5>Notificações</h5>
+                <fa-icon [icon]="faClose" (click)="closeNotification()"></fa-icon>
+            </div>
+            <ul>
+                <li class="tool-icons" *ngIf="!searchBarOpen">
+                    <fa-icon (click)="changeSelectedStateAll()" class="colorAllCheckbox" [icon]="faSquare"
+                        [ngStyle]="{'opacity' : checkbox ? '1.0' : '0.2'}" title="Selecionar Todas"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" [icon]="faEnvelope" title="Marcar como lida"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" [icon]="faTrash" title="Excluir"></fa-icon>
+                </li>
+                <li class="search" *ngIf="searchBarOpen">
+                    <input type="text" placeholder="Pesquise por uma notificação..." [(ngModel)]="query">
+                    <i class="pi pi-times cursor-pointer" style="font-size: 20px;" (click)="toggleSearchBar()"></i>
+                </li>
+                <div class="search-settings" *ngIf="!searchBarOpen">
+                    <li>
+                        <button (click)="toggleSearchBar()" title="Pesquisar">
+                            <i class="pi pi-search"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <fa-icon [icon]="faGear" title="Configurações"></fa-icon>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div class="notifications">
+            <ng-container *ngFor="let notification of notifications;">
+                <div class="notification">
+                    <div>
+                        <div class="checkbox-div">
+                            <fa-icon (click)="changeSelectedState(notification)" class="color" [icon]="faSquare"
+                                [ngStyle]="{'opacity' : notification.isSelected ? '1.0' : '0.2'}"></fa-icon>
+                        </div>
+                        <div class="iconUser">
+                            <fa-icon [icon]="notification.icon"></fa-icon>
+                        </div>
+                        <div class="description" [ngStyle]="{'opacity' : notification.new ? '1.0' : '0.55'}">
+                            <p>{{notification.author}} {{notification.action}} {{notification.project}}</p>
+                            <p>
+                                {{notification.date.getDate()+1}} /
+                                {{notification.date.getMonth()+1}} /
+                                {{notification.date.getFullYear()}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="barOpenClose">
+                        <fa-icon [icon]="faArrowUpRightFromSquare" *ngIf="!notification.moreInformations"
+                            (click)="notificationDetails(notification)"></fa-icon>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>

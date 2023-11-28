@@ -28,12 +28,18 @@ button, a{
     cursor: pointer;
 }
 
+input:focus {
+    outline: none;
+}
+
+/* width */
+
 ::-webkit-scrollbar {
     width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: $emphasis;
+    background: $emphasis;
 }
 
   
@@ -79,7 +85,7 @@ h6{
 
 .large-text , .medium-text , .regular-text , .small-text{
     font-family: $fontFamily;
-    color: $primaryColor;
+    color: $text;
 }
 
 .large-text{
@@ -99,4 +105,7 @@ h6{
 .small-text{
     font-size: 14px;
     line-height: 19.6px;
+
+input {
+    outline: none;
 }
