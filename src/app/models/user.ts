@@ -1,3 +1,5 @@
+import { Team } from "./team";
+
 export class User {
 
     id ?: number | undefined;
@@ -10,6 +12,9 @@ export class User {
     image ?: string | undefined;
     publicProfile ?: boolean = true;
     showCharts ?: boolean = false;
+
+    //brainstorming
+    teams?: Team[] = [];
 
     constructor(
         user: User
