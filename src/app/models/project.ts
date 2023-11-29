@@ -3,10 +3,9 @@ import { Team } from "./team";
 import { User } from "./user";
 
 export class Project {
-
     id ?: number;
     name !: string;
-    team !: Team;
+    team ?: Team;
     description ?: string;
     image ?: string;
     creator ?: User;
@@ -14,15 +13,15 @@ export class Project {
     taskList : Task[]; 
 
     constructor(
-        project: Project
+        project: Project,
     ) {
-
+        // this.id = project.id;
         this.name = project.name;
         this.team = project.team;
         this.description = '';
         this.image = '';
         this.taskList = [];
-        
+
     }
 
 }

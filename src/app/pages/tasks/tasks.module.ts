@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksComponent } from './tasks.component';
-import { ListComponent } from './list/list.component';
-import { KanbanComponent } from './kanban/kanban.component';
-import { TaskModule } from 'src/app/components/modals/task/task.module';
-import { TaskComponent } from 'src/app/components/modals/task/task.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { CardComponent } from 'src/app/components/reusable-components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from './calendar/calendar.module';
@@ -16,7 +11,6 @@ import { PropertiesModule } from 'src/app/components/modals/properties/propertie
 import { KanbanModule } from './kanban/kanban.module';
 import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
 import { ListModule } from './list/list.module';
-import { RowCardComponent } from 'src/app/components/reusable-components/row-task/row-card.component';
 import { MuralComponent } from './mural/mural.component';
 
 @NgModule({

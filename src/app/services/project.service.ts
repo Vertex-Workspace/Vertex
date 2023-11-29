@@ -28,5 +28,14 @@ export class ProjectService {
       .pipe(map((project: Project) => new Project(project)));
   }
 
+  public create(project: Project, teamId: number): Observable<Project> {
+    return this.http
+      .post<Project>(`${URL}project/${teamId}`, project);
+  }
+
+  public delete(id: number): Observable<Project> {
+    return this.http
+      .delete<Project>(`${URL}project/${id}`)
+  }
 
 }

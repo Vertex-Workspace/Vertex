@@ -4,7 +4,7 @@ import { User } from "./user";
 
 export class Team {
 
-    id ?: number | undefined;
+    id?: number;
     name !: string;
     creationDate !: Date;
     description !: string;

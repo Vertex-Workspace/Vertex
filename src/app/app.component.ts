@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
@@ -7,9 +7,10 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { Project } from './models/project';
 import { ProjectService } from './services/project.service';
 
 @Component({
@@ -22,7 +23,9 @@ import { ProjectService } from './services/project.service';
 })
 export class AppComponent{
   [x: string]: any;
+  
   title = 'Vertex';
+
   faMessage = faMessage;
   faTimes = faTimes;
   faUser = faUser;
@@ -59,12 +62,18 @@ export class AppComponent{
     password: "123"
   };
 
+  project : Project = {
+    name: 'project post',
+    description: '',
+    image: '',
+    taskList: [],
+  }
+
   ngOnInit(): void {
     // this.userService.getAll()
     //   .subscribe(users => {
     //     console.log(users);
     // })
-
     
     // this.userService.getOneById(3)
     //   .subscribe(user => {
@@ -87,14 +96,15 @@ export class AppComponent{
     // })
 
     this.projectService.getAll()
-      .subscribe(projects => {
-        console.log(projects);
-      });
+    .subscribe((projects: Project[]) => {
+      console.log(projects);
+    });
 
-    this.projectService.getOneById(1)
-      .subscribe(project => {
-        console.log(project);
-      });
+  this.projectService.getOneById(1)
+    .subscribe((project: Project) => {
+      console.log(project);
+    });
+
   }
 
   getRouteAnimationData() {
