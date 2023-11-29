@@ -18,6 +18,7 @@ import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
 import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -26,29 +27,35 @@ const routes: Routes = [
     data: { animation: 'loginPage' }
   },
   {
-    path: "equipe",
-    component: TeamInformationsComponent
-  },
-  {
-    path: "perfil",
-    component: UserInformationsComponent
-  },
-  {
-    path: "home",
-    component: TeamsComponent
-  },
-  {
-    path: "projetos",
-    component: ProjectsComponent
-  },
-  {
     path: 'cadastro',
     component: RegisterComponent,
     data: { animation: 'registerPage' }
   },
   {
+    path: "equipe",
+    component: TeamInformationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "perfil",
+    component: UserInformationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "home",
+    component: TeamsComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: "projetos",
+    component: ProjectsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'tarefas',
     component: TasksComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'kanban',
@@ -71,6 +78,7 @@ const routes: Routes = [
   {
     path: 'configuracoes',
     component: UserSettingsComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'aparencia',

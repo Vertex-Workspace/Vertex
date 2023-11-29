@@ -10,6 +10,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -44,6 +45,7 @@ export class AppComponent{
   constructor(
     private personalization : PersonalizationService, 
     private contexts: ChildrenOutletContexts,
+    private authService: AuthService,
     private router:Router,
     private userService: UserService
   ){
@@ -58,7 +60,7 @@ export class AppComponent{
   };
 
   ngOnInit(): void {
-    
+    this.userLogged = this.authService.isLoggedIn();
 
     // this.userService.getAll()
     //   .subscribe(users => {
