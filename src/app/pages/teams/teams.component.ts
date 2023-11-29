@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { catchError } from 'rxjs';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -7,9 +8,9 @@ import { TeamService } from 'src/app/services/team.service';
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.scss']
 })
-export class TeamsComponent{
+export class TeamsComponent {
 
-  constructor(private teamService: TeamService){
+  constructor(private teamService: TeamService) {
 
   }
 
@@ -20,16 +21,29 @@ export class TeamsComponent{
     { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
   ];
 
+  teams: Team[] = [];
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+    if (this.clicked == "team") {
+      this.teamService.getAll().subscribe((teams) => {
+        this.teams = teams;
+      });
+    } else {
+      this.teams = [];
+    }
   }
 
-  switchCreateView():void{
+  switchCreateView(): void {
     this.isCreating = !this.isCreating;
+    if (!this.isCreating) {
+      this.teamService.getAll().subscribe((teams) => {
+        this.teams = teams;
+      });
+    } else {
+      this.teams = [];
+    }
   }
-
-
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
   orderSettings: any[] = [];
@@ -45,19 +59,10 @@ export class TeamsComponent{
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
   }
-  
+
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
 
-  getTeams() : Team[] {
-    if(this.clicked == 'team'){
-      let teams: Team[] = [];
-      this.teamService.getAll().subscribe(async(teams) => {
-        return teams;
-      });
-    }
-    return [];
-  }
 
 }

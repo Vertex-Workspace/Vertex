@@ -35,11 +35,13 @@ export class CardListComponent implements OnInit{
 
   deleteTeam(operation: any) {
     if(operation){
-      console.log(this.idTeamWillBeDeleted);
-      this.teamService.delete(this.idTeamWillBeDeleted).subscribe((team) => {
-        console.log(team);
-      });
-      this.teams?.splice(this.teams.findIndex(team => team.id == this.idTeamWillBeDeleted), 1);
+      this.teamService.delete(this.idTeamWillBeDeleted).subscribe(
+        (team) => {
+          if(team == null){
+            this.teams?.splice(this.teams.findIndex(team => team.id == this.idTeamWillBeDeleted), 1);
+          }
+        }
+      );
     }
     this.changeModalState();
   }
