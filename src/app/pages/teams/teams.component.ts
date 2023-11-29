@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Team } from 'src/app/models/team';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-teams',
@@ -6,6 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent{
+
+  constructor(private teamService: TeamService){
+
+  }
 
   isCreating: boolean = false;
   clicked: string = 'task';
@@ -42,6 +48,16 @@ export class TeamsComponent{
   
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
+  }
+
+  getTeams() : Team[] {
+    if(this.clicked == 'team'){
+      let teams: Team[] = [];
+      this.teamService.getAll().subscribe(async(teams) => {
+        return teams;
+      });
+    }
+    return [];
   }
 
 }
