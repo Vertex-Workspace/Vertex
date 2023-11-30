@@ -22,8 +22,8 @@ export class CreateTeamProjectComponent implements OnInit {
 
   primaryColor: string;
   secondColor: string;
-  
-  constructor(private personalization : PersonalizationService, private teamService: TeamService){
+
+  constructor(private personalization: PersonalizationService, private teamService: TeamService) {
     this.primaryColor = personalization.getPrimaryColor();
     this.secondColor = personalization.getSecondColor();
   }
@@ -38,24 +38,22 @@ export class CreateTeamProjectComponent implements OnInit {
       projects: []
     };
 
-    this.teamService.create(teamTest).subscribe((team) => {
-      console.log(team);
-    });
+    this.teamService.create(teamTest).subscribe();
   }
 
-  closeScreen():void{
+  closeScreen(): void {
     this.close.emit();
   }
-  confirmCreateTeam():void{
-    if(this.typeString === "project"){
+  confirmCreateTeam(): void {
+    if (this.typeString === "project") {
       this.closeScreen();
     }
     //validations
-  
+
     this.modalCopyLink = true;
   }
 
-  copyLink():void{
+  copyLink(): void {
     //copiar para a area te transferência
     console.log("Dale");
     this.closeScreen();

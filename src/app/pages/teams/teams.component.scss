@@ -31,7 +31,7 @@ section{
 }
 
 .functionally-items-task {
-    @apply flex flex-col w-4/5 h-full pt-4 justify-between;
+    @apply flex flex-col w-full h-full pt-4 justify-between;
 
     .filter-items {
         @apply flex;
@@ -106,23 +106,12 @@ section{
     background-color: $secondColor;
 }
 
-@media only screen and (min-width: 1600px) and (max-width: 1920px){
     .container-grid{
         @apply flex flex-col h-[90%] w-full pt-10 ;
     }
     .default-size{
         @apply flex w-full h-full;
     }
-}
-
-@media only screen and (min-width: 1400px) and (max-height: 900px){
-    .default-size{
-        @apply flex w-full h-[95%];
-    }
-    .container-grid{
-        @apply flex flex-col h-full w-full pt-10;
-    }
-}
 
 
 // TASK - FILTER ORDER
