@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input,Output } from '@angular/core';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-forgot-password',
@@ -6,6 +7,14 @@ import { Component, EventEmitter, Input,Output } from '@angular/core';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
+
+  faEnvelope = faEnvelope;
+
+  @Input()
+  step:number = 1;
+
+  @Input()
+  forgotPassword:boolean = false;
 
   @Input()
   width!: string;
@@ -19,11 +28,13 @@ export class ForgotPasswordComponent {
   @Output()
   forgot = new EventEmitter<Event>();
 
-
-  forgotPassword(){
-    this.forgot.emit();
-    
+  toForgotPassword():void{
+    // localStorage.setItem("toForgotPassword",JSON.stringify(!this.forgotPassword));
+    this.forgotPassword = !this.forgotPassword;
+    this.step=1;
   }
+
+  
   
 
 }

@@ -62,11 +62,11 @@ const routes: Routes = [
         component: KanbanComponent
       },
       {
-        path: 'list',
+        path: 'lista',
         component: ListComponent
       },
       {
-        path: 'calendar',
+        path: 'calendario',
         component: CalendarComponent
       },
       {

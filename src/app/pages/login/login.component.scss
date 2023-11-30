@@ -7,7 +7,11 @@
     flex
     ;
 
-    background-image: url(../../../assets/Vertex-bg-login.jpg);
+    background-image: url(../../../assets/Vertex-bg-login-new.jpg);
+}
+
+.center{
+    @apply flex justify-center;
 }
 
 .bg-loginOpacity{
@@ -21,7 +25,7 @@
     opacity-60
     ;
     
-    background-image: url(../../../assets/Vertex-bg-login.jpg);
+    background-image: url(../../../assets/Vertex-bg-login-new.jpg);
 }
 
 #left-div-login{
@@ -39,7 +43,7 @@
     text-3xl
     h-[95%]
     ml-5
-    text-[#092C4C]
+    text-[#f3f3f3]
     ;
     font-family: 'Manrope', sans-serif;
 }
@@ -80,33 +84,32 @@
 #h1-access-account{
     @apply
     text-3xl
-    text-[#f3f3f3];
+    text-[#092c4c];
     font-family: 'Manrope', sans-serif;
 }
 
 .labels{
     @apply
-    text-[#f3f3f3]
+    text-[#092c4c]
     text-sm;
     font-family: 'Inter', sans-serif;
 }
 
 .inputs{
     @apply block 
-    h-10 
+    h-14 
     w-full 
     py-1.5 
     border-none
     px-3 
     text-black 
-    shadow-sm  ring-inset ring-gray-300 placeholder:text-gray-400 
-    focus:ring-2 focus:ring-inset focus:ring-[#092c4c] sm:text-sm sm:leading-6;
+    shadow-sm  ring-inset ring-gray-300 placeholder:text-[#092c4c]  sm:text-sm sm:leading-6;
     font-family: "Inter", sans-serif;
 }
 .divRegisterIcons{
     @apply w-14
-    h-10
-    bg-slate-100
+    h-14
+    bg-slate-300
     flex
     justify-center
     items-center
@@ -122,7 +125,7 @@
 }
 
 .registerIcons{
-    @apply w-6
+    @apply w-14
     text-[#092c4c]
     flex
     justify-center
@@ -148,8 +151,8 @@
 
 #a-forget-password{
     @apply
-    text-[#f3f3f3]
-    text-sm hover:text-blue-600
+    text-[#092c4c]
+    text-sm
     ;
     font-family: 'Inter', sans-serif;
 }
@@ -162,17 +165,17 @@
     items-center 
     justify-center 
     rounded-md 
-    bg-[#2E5DA6]
+    bg-[#092C4C]
     text-sm 
     font-semibold 
     leading-6 
     text-white shadow-sm
-    hover:bg-[#224680] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#224680];
+    hover:bg-[#20478b] transition-all ;
 }
 
 #p-haveNot-account{
     @apply
-    text-center text-sm text-white
+    text-center text-sm text-[#092c4c]
 }
 
 #a-goTo-register{
@@ -180,8 +183,7 @@
     font-semibold 
     leading-6 
     cursor-pointer
-    text-blue-400 
-    hover:text-blue-600;
+    text-[#092c4c];
 }
 
 .divH1Modal{

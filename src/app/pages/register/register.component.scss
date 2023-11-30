@@ -1,41 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Manrope:wght@200;300;400;500&display=swap');
+@import "../../../variables";
 
-.register-bg{
+.register-bg {
     @apply flex bg-cover bg-no-repeat h-screen w-screen;
-    background-image: url("../../../assets/Vertex-bg-Register.jpg");
+    background-image: url("../../../assets/Vertex-bg-register-new.jpg");
 }
 
-.divRegisterIcons{
-    @apply w-14
-    h-10
-    bg-slate-100
-    flex
-    justify-center
-    items-center
+.main-div{
+    @apply flex flex-col justify-center items-center w-3/5 gap-10;
 }
 
-.registerIcons{
-    @apply w-6
-    text-[#092c4c]
-    flex
-    justify-center
-    items-center
-    
+form{
+    @apply space-y-7;
 }
 
-.eyesDiv{
-    @apply w-14
-    bg-white
-    flex
-    items-center
-    justify-center
-    
+.divRegisterIcons {
+    @apply w-14 h-14 bg-slate-300 flex justify-center items-center;
 }
 
-.eyeIcon{
-    @apply w-6
-    h-10
-    text-[#092c4c]
+#h1-access-account{
+    @apply
+    text-3xl
+    text-[#092c4c];
+    font-family: 'Manrope', sans-serif;
+}
+
+.center-all{
+    @apply flex items-center justify-center w-full;
+}
+
+.div-password-input{
+    @apply flex flex-col space-y-7 w-full;
+}
+
+.div-toStrong-password{
+    @apply flex flex-col justify-center text-[16px];
+    color: $primaryColor;
+}
+
+.inputs{
+    @apply block h-14 w-full border-0 py-1.5 px-3 text-black shadow-sm placeholder:text-[#092C4C] sm:text-sm sm:leading-6;
+    font-family: "Inter";
+}
+
+.registerIcons {
+    @apply w-14 text-[#092c4c] flex justify-center items-center;
+}
+
+.eyesDiv {
+    @apply w-14 bg-white flex items-center justify-center;
+}
+
+.eyeIcon {
+    @apply w-6 h-14 text-[#092c4c] flex items-center;
+}
+
+#enter-btn{
+    @apply
     flex
-    items-center
+    w-44
+    h-10 
+    items-center 
+    justify-center 
+    rounded-md 
+    bg-[#092C4C]
+    text-sm 
+    font-semibold 
+    leading-6 
+    text-white shadow-sm
+    hover:bg-[#20478b] transition-all ;
+}
+
+.div-white-logo{
+    @apply flex pb-5 items-center justify-end h-screen w-2/5;
 }

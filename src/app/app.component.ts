@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
@@ -7,10 +7,14 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { AuthService } from './services/auth.service';
+import { Project } from './models/project';
+import { ProjectService } from './services/project.service';
+import { MessageService } from 'primeng/api';
+import { AlertService } from './services/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +26,9 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent{
   [x: string]: any;
+  
   title = 'Vertex';
+
   faMessage = faMessage;
   faTimes = faTimes;
   faUser = faUser;
@@ -31,7 +37,7 @@ export class AppComponent{
   faPaperclip = faPaperclip;
   faMicrophoneLines = faMicrophoneLines;
 
-  userLogged: boolean = true;
+  userLogged: boolean = false;
 
   miniChatOpen: boolean = false;
 
@@ -47,7 +53,9 @@ export class AppComponent{
     private contexts: ChildrenOutletContexts,
     private authService: AuthService,
     private router:Router,
-    private userService: UserService
+    private userService: UserService,
+    private projectService: ProjectService,
+    private alert: AlertService
   ){
     personalization.setPersonalization();
   }
@@ -61,12 +69,11 @@ export class AppComponent{
 
   ngOnInit(): void {
     this.userLogged = this.authService.isLoggedIn();
-
+    
     // this.userService.getAll()
     //   .subscribe(users => {
     //     console.log(users);
     // })
-
     
     // this.userService.getOneById(3)
     //   .subscribe(user => {
@@ -88,6 +95,23 @@ export class AppComponent{
     //     console.log(users);
     // })
 
+  //   this.projectService.getAll()
+  //   .subscribe((projects: Project[]) => {
+  //     console.log(projects);
+  //   });
+
+  // this.projectService.getOneById(1)
+  //   .subscribe((project: Project) => {
+  //     console.log(project);
+  //   });
+    
+  }
+  
+  project : Project = {
+    name: 'project post',
+    description: '',
+    image: '',
+    taskList: [],
   }
 
   getRouteAnimationData() {
@@ -96,6 +120,11 @@ export class AppComponent{
 
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;
+  }
+
+  
+  show() {
+    this.alert.successAlert("parabéns você é um lixo de ser humano!");
   }
 
 

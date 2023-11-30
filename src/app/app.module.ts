@@ -26,6 +26,8 @@ import { UserInformationsModule } from './pages/user-informations/user-informati
 import { SearchAllComponent } from './components/modals/search-all/search-all.component';
 import { SearchAllModule } from './components/modals/search-all/search-all.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -57,10 +59,12 @@ import { HttpClientModule } from '@angular/common/http';
     MinichatModule,
     UserInformationsModule,
     SearchAllModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastModule
   ],
   providers: [
     PersonalizationService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
