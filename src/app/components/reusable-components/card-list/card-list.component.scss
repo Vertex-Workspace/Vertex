@@ -6,8 +6,14 @@
     .card{
         @apply flex w-[98%] min-h-[200px] max-h-[200px] bg-white shadow-lg rounded-sm flex-row;
         font-family: $fontFamily;
-        color: $primaryColor;
+        color: $text;
+        cursor: pointer;
     
+        &:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+
         .image {
             @apply flex h-full w-2/6 rounded-lg;
             object-fit: cover;

@@ -10,12 +10,12 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { AuthService } from './services/auth.service';
 import { Project } from './models/project';
 import { ProjectService } from './services/project.service';
 import { MessageService } from 'primeng/api';
 import { AlertService } from './services/alert.service';
 import { LoadingService } from './services/loading.service';
-
 
 @Component({
   selector: 'app-root',
@@ -52,6 +52,7 @@ export class AppComponent{
   constructor(
     private personalization : PersonalizationService, 
     private contexts: ChildrenOutletContexts,
+    private authService: AuthService,
     private router:Router,
     private userService: UserService,
     private projectService: ProjectService,
@@ -68,14 +69,9 @@ export class AppComponent{
     password: "123"
   };
 
-  project : Project = {
-    name: 'project post',
-    description: '',
-    image: '',
-    taskList: [],
-  }
-
   ngOnInit(): void {
+    this.userLogged = this.authService.isLoggedIn();
+    
     // this.userService.getAll()
     //   .subscribe(users => {
     //     console.log(users);
@@ -110,7 +106,14 @@ export class AppComponent{
   //   .subscribe((project: Project) => {
   //     console.log(project);
   //   });
-
+    
+  }
+  
+  project : Project = {
+    name: 'project post',
+    description: '',
+    image: '',
+    taskList: [],
   }
 
   getRouteAnimationData() {

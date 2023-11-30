@@ -1,4 +1,6 @@
-<div *ngIf="loadingService.loading$ | async" class="absolute left-1/2 top-[40%]  flex justify-center items-center">
-    <img class="w-20 h-20" src="../assets/vertex-logo.png" alt="">
-    <img class="w-20 h-20 absolute invert-[40%] animate-pulse" src="../assets/white-logo.png" alt="">
+<div *ngIf="loadingService.loading$ | async" class="absolute z-10 flex justify-center h-[100%] w-[100%] opacity-75 bg-black">
+    <div class="flex justify-center items-center">
+        <img class="w-20 h-20" src="../assets/vertex-logo.png" alt="">
+        <img class="w-20 h-20 absolute invert-[40%] animate-pulse" src="../assets/white-logo.png" alt="">
+    </div>
 </div>

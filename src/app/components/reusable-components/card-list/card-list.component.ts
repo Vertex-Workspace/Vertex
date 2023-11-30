@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -10,38 +11,22 @@ import { TeamService } from 'src/app/services/team.service';
 export class CardListComponent implements OnInit{
 
 
-  constructor(private teamService: TeamService) { 
+
+  constructor(private teamService: TeamService, private route: Router) { 
 
   }
-  teams?: Team[];
+  
+  @Input()
+  teams!: Team[];
 
-  ngOnInit(): void {
-    this.teamService.getAll().subscribe((teams) => {
-      this.teams = teams;
-      console.log(teams);
-    });
-  }
+  ngOnInit(): void {}
 
   delete: boolean = false;
 
-  // it will be an input
-  // teams = [
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  //   {image: '../../../../assets/teste/teste.jpg', name: 'AKMO', date: '06/06/2023', leader: 'Otávio Miguel Rocha'},
-  // ];
-
   idTeamWillBeDeleted!: number;
   showModalDelete(idTeam: number | undefined): void {
-    this.delete = !this.delete;
-    if(this.delete && idTeam){
+    this.changeModalState();
+    if(this.delete && idTeam != undefined){
       this.idTeamWillBeDeleted = idTeam;
     } else{
       this.idTeamWillBeDeleted = 0;
@@ -50,10 +35,25 @@ export class CardListComponent implements OnInit{
 
   deleteTeam(operation: any) {
     if(operation){
-      console.log("deletou");
-      this.teamService.delete(this.idTeamWillBeDeleted).subscribe((team) => {
-        console.log(team);
-      });
+      this.teamService.delete(this.idTeamWillBeDeleted).subscribe(
+        (team) => {
+          if(team == null){
+            this.teams?.splice(this.teams.findIndex(team => team.id == this.idTeamWillBeDeleted), 1);
+          }
+        }
+      );
     }
+    this.changeModalState();
+  }
+
+  changeModalState(): void {
+    this.delete = !this.delete;
+  }
+
+  openTeam(id: number|undefined) {
+    this.teamService.getOneById(id!).subscribe(async(team) => {
+      await localStorage.setItem('team', JSON.stringify(new Team(team)));
+      this.route.navigate(['/projetos']);
+    });
   }
 }

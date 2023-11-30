@@ -20,7 +20,7 @@ export class AlertService {
     );
   }
 
-  errorAlert(message: string) {
+  errorAlert(message: string): void {
     this.messageService.add(
       {
         severity: 'error',
@@ -28,6 +28,16 @@ export class AlertService {
         detail: message
       }
     );
+  }
+
+  notificationAlert(message: string): void {
+    this.messageService.add(
+      {
+        severity: 'info',
+        summary: 'Notificação',
+        detail: message
+      }
+    )
   }
 
 }

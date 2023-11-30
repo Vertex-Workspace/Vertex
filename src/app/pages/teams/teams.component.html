@@ -16,7 +16,7 @@
             </div>
 
             <!-- UTILITY NAV BAR TEAM -->
-            <div class="functionally-items" *ngIf="clicked === 'team' && !isCreating">
+            <div class="functionally-items regular-text" *ngIf="clicked === 'team' && !isCreating">
                 <div class="container">
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
@@ -79,7 +79,9 @@
 
                 <app-card-list 
                 style="width: 100%; height: 90%; padding-top: 3%;" 
-                *ngIf="clicked === 'team' && !isCreating"></app-card-list>
+                *ngIf="clicked === 'team' && !isCreating"
+                [teams]="teams"
+                ></app-card-list>
 
 
                 <app-create-team-project 
@@ -100,7 +102,3 @@
         </div>
     </div>
 </section>
-
-<div *ngFor="let userr of listaUser">
-    {{userr.firstName}}
-</div>

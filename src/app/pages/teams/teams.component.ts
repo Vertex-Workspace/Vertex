@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { catchError } from 'rxjs';
+import { Team } from 'src/app/models/team';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-teams',
@@ -9,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class TeamsComponent implements OnInit{
 
   listaUser:any = [];
-  constructor(public userService : UserService) {
+  constructor(public userService : UserService, public teamService: TeamService) {
     
   }
   ngOnInit(): void {
@@ -19,8 +22,6 @@ export class TeamsComponent implements OnInit{
     })
   }
 
-
-
   isCreating: boolean = false;
   clicked: string = 'task';
   menuItems = [
@@ -28,16 +29,29 @@ export class TeamsComponent implements OnInit{
     { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
   ];
 
+  teams: Team[] = [];
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+    if (this.clicked == "team") {
+      this.teamService.getAll().subscribe((teams) => {
+        this.teams = teams;
+      });
+    } else {
+      this.teams = [];
+    }
   }
 
-  switchCreateView():void{
+  switchCreateView(): void {
     this.isCreating = !this.isCreating;
+    if (!this.isCreating) {
+      this.teamService.getAll().subscribe((teams) => {
+        this.teams = teams;
+      });
+    } else {
+      this.teams = [];
+    }
   }
-
-
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
   orderSettings: any[] = [];
@@ -53,9 +67,10 @@ export class TeamsComponent implements OnInit{
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
   }
-  
+
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
+
 
 }

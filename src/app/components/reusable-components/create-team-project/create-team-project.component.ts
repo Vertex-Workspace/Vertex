@@ -22,40 +22,41 @@ export class CreateTeamProjectComponent implements OnInit {
 
   primaryColor: string;
   secondColor: string;
-  
-  constructor(private personalization : PersonalizationService, private teamService: TeamService){
+
+  constructor(private personalization: PersonalizationService, private teamService: TeamService) {
     this.primaryColor = personalization.getPrimaryColor();
     this.secondColor = personalization.getSecondColor();
   }
   ngOnInit(): void {
-    let teamTest: Team = {
-      name: "Teste",
-      creationDate: new Date(),
-      description: "Teste",
-      users: [],
-      creator: undefined,
-      groups: [],
-      projects: []
-    };
-
-    this.teamService.create(teamTest).subscribe((team) => {
-      console.log(team);
-    });
+    for(let i =0 ; i < 100; i++){
+      let teamTest: Team = {
+        name: "Teste",
+        creationDate: new Date(),
+        description: "Teste",
+        users: [],
+        creator: undefined,
+        groups: [],
+        projects: []
+      };
+  
+      this.teamService.create(teamTest).subscribe();
+    }
+    
   }
 
-  closeScreen():void{
+  closeScreen(): void {
     this.close.emit();
   }
-  confirmCreateTeam():void{
-    if(this.typeString === "project"){
+  confirmCreateTeam(): void {
+    if (this.typeString === "project") {
       this.closeScreen();
     }
     //validations
-  
+
     this.modalCopyLink = true;
   }
 
-  copyLink():void{
+  copyLink(): void {
     //copiar para a area te transferência
     console.log("Dale");
     this.closeScreen();

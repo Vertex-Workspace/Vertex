@@ -3,8 +3,8 @@ import { Team } from "./team";
 export class User {
 
     id ?: number | undefined;
-    firstName !: string;
-    lastName !: string;
+    firstName !: string | undefined;
+    lastName !: string | undefined;
     email !: string;
     password !: string;
     passwordConf ?: string;

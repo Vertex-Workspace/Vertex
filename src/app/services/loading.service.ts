@@ -11,7 +11,9 @@ export class LoadingService {
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
   hide():void{
-    this.loadingSubject.next(false);
+    setTimeout(() => {
+      this.loadingSubject.next(false);
+    }, 3000);
   }
 
   show():void{
