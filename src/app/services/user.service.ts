@@ -32,10 +32,10 @@ export class UserService {
           this.alert
             .successAlert("Sucesso ao cadastrar usuário!")
         },
-        err => {
-          console.log(err);
+        e => {
+          console.log(e);
           this.alert
-            .errorAlert(err.error);
+            .errorAlert(e.error);
         }
       )
   }
