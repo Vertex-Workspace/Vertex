@@ -2,23 +2,25 @@
 
     <aside (mouseenter)="openSideBar()" (mouseleave)="openSideBar()"
         [ngClass]="isSideBarExpanded ? 'side-barOpen': 'side-bar'">
-        <app-sidebar [isSideBarExpanded]="isSideBarExpanded" style="width: 100%; height: 100%;" 
-        (openChat)="expandChat($event)"
-        />
+        <app-sidebar [isSideBarExpanded]="isSideBarExpanded" style="width: 100%; height: 100%;"
+            (openChat)="expandChat($event)" />
     </aside>
 
     <div [ngClass]="isSideBarExpanded ? 'main-divOpen': 'main-div'"
         [ngStyle]="{'overflow-y' : notification ? 'hidden' : 'auto'}">
         <div class="h-full w-[96%]">
             <app-notification *ngIf="notification" style="width: 100%; height:100%" (close)="switchNotifications()">
-          </app-notification>
+            </app-notification>
 
             <header class="main-header">
-                <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()"/>
+                <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()" />
             </header>
 
 
             <main class="main-content" [@routeAnimations]="getRouteAnimationData()">
+                <div class="absolute z-10 bg-[#f3f3f3] w-full h-[90%] flex justify-center items-center">
+                    <app-loading></app-loading>
+                </div>
                 <router-outlet></router-outlet>
             </main>
         </div>
@@ -35,6 +37,8 @@
             <app-chat (chatExpanded)="minimizeChat()"></app-chat>
         </div>
     </div>
+
+
 </section>
 
 

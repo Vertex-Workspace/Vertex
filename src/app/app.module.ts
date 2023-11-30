@@ -25,10 +25,12 @@ import { TasksModule } from './pages/tasks/tasks.module';
 import { UserInformationsModule } from './pages/user-informations/user-informations/user-informations.module';
 import { SearchAllComponent } from './components/modals/search-all/search-all.component';
 import { SearchAllModule } from './components/modals/search-all/search-all.module';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

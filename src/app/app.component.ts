@@ -28,7 +28,7 @@ export class AppComponent{
   faPaperclip = faPaperclip;
   faMicrophoneLines = faMicrophoneLines;
 
-  userLogged: boolean = false;
+  userLogged: boolean = true;
 
   miniChatOpen: boolean = false;
 
