@@ -7,6 +7,7 @@ export class User {
     lastName !: string;
     email !: string;
     password !: string;
+    passwordConf ?: string;
     description ?: string | undefined;
     location ?: string | undefined;
     image ?: string | undefined;
@@ -25,6 +26,11 @@ export class User {
         this.lastName = user.lastName;
         this.email = user.email;
         this.password = user.password;
+
+        if (user.passwordConf) {
+            this.passwordConf = user.passwordConf;
+        }
+        
         this.description = user.description;
         this.location = user.location;
         this.image = user.image;

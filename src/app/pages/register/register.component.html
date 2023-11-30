@@ -7,7 +7,7 @@
 
 
         <div class="w-2/3">
-            <form class="space-y-7" action="#" method="POST">
+            <form class="space-y-7" action="#" method="POST" [formGroup]="form" (ngSubmit)="onSubmit()">
 
                 <div class="flex gap-2">
                     <!-- Div Input Nome -->
@@ -17,7 +17,7 @@
                             <div class="divRegisterIcons">
                                 <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
                             </div>
-                            <input style="font-family: 'Inter';" id="nome" name="nome" type="text" autocomplete="nome"
+                            <input style="font-family: 'Inter';" id="nome" formControlName="firstName" type="text" autocomplete="nome"
                                 required placeholder="Nome"
                                 class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
@@ -30,7 +30,7 @@
                             <div class="divRegisterIcons">
                                 <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
                             </div>
-                            <input style="font-family: 'Inter';" id="sobrenome" name="sobrenome" type="text"
+                            <input style="font-family: 'Inter';" id="sobrenome" formControlName="lastName" type="text"
                                 autocomplete="sobrenome" required placeholder="Sobrenome"
                                 class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
@@ -44,7 +44,7 @@
                             <div class="divRegisterIcons">
                                 <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
                             </div>
-                            <input style="font-family: 'Inter';" id="email" name="email" type="email"
+                            <input style="font-family: 'Inter';" id="email" formControlName="email" type="email"
                                 autocomplete="email" required placeholder="E-mail"
                                 class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
@@ -61,7 +61,7 @@
                                     <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
                                 </div>
                                 <input style="font-family: 'Inter';" id="password" [type]="invisibleEye1 ? 'password' : 'text'"
-                                    autocomplete="password" required placeholder="Senha"
+                                    autocomplete="password" required placeholder="Senha" formControlName="password"
                                     class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     <div class="eyesDiv">
                                         <fa-icon *ngIf="!invisibleEye1" (click)="passwordToggle1()" class="eyeIcon" [icon]="faEye">
@@ -79,7 +79,7 @@
                                     <fa-icon class="registerIcons" [icon]="faKey"></fa-icon>
                                 </div>
                                 <input style="font-family: 'Inter';" id="password" [type]="invisibleEye2 ? 'password' : 'text'"
-                                    autocomplete="password" required placeholder="Confirme sua Senha"
+                                    autocomplete="password" required placeholder="Confirme sua Senha" formControlName="passwordConf"
                                     class="block h-10 w-full border-0 py-1.5 px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     <div class="eyesDiv">
                                         <fa-icon *ngIf="!invisibleEye2" (click)="passwordToggle2()" class="eyeIcon" [icon]="faEye">
@@ -102,14 +102,13 @@
                 </div>
 
 
-
-
                 <!-- Div do botão de Enviar -->
                 <div class="flex justify-center">
                     <button type="submit"
                         class="flex w-44 h-10 items-center justify-center rounded-md bg-[#2E5DA6] text-sm font-semibold leading-6 text-white shadow-sm
                         hover:bg-[#224680] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#224680]">
-                        Cadastrar</button>
+                        Cadastrar
+                    </button>
                 </div>
 
             </form>
@@ -135,8 +134,6 @@
     </div>
     <h1 style="font-family: 'Manrope'; font-weight: lighter;" class=" text-4xl p-7 text-right text-[#092C4C]">VERTEX
     </h1>
-
-
 
 
 </div>

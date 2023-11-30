@@ -40,4 +40,8 @@
 
 <div class="main-content" *ngIf="!userLogged" [@routeAnimations]="getRouteAnimationData()">
     <router-outlet></router-outlet>
+    <div class="card">
+        <p-toast></p-toast>
+    </div>
 </div>
+

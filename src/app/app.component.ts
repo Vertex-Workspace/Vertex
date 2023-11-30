@@ -12,6 +12,9 @@ import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { Project } from './models/project';
 import { ProjectService } from './services/project.service';
+import { MessageService } from 'primeng/api';
+import { AlertService } from './services/alert.service';
+
 
 @Component({
   selector: 'app-root',
@@ -34,7 +37,7 @@ export class AppComponent{
   faPaperclip = faPaperclip;
   faMicrophoneLines = faMicrophoneLines;
 
-  userLogged: boolean = true;
+  userLogged: boolean = false;
 
   miniChatOpen: boolean = false;
 
@@ -50,7 +53,8 @@ export class AppComponent{
     private contexts: ChildrenOutletContexts,
     private router:Router,
     private userService: UserService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private alert: AlertService
   ){
     personalization.setPersonalization();
   }
@@ -95,15 +99,15 @@ export class AppComponent{
     //     console.log(users);
     // })
 
-    this.projectService.getAll()
-    .subscribe((projects: Project[]) => {
-      console.log(projects);
-    });
+  //   this.projectService.getAll()
+  //   .subscribe((projects: Project[]) => {
+  //     console.log(projects);
+  //   });
 
-  this.projectService.getOneById(1)
-    .subscribe((project: Project) => {
-      console.log(project);
-    });
+  // this.projectService.getOneById(1)
+  //   .subscribe((project: Project) => {
+  //     console.log(project);
+  //   });
 
   }
 
@@ -113,6 +117,11 @@ export class AppComponent{
 
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;
+  }
+
+  
+  show() {
+    this.alert.successAlert("parabéns você é um lixo de ser humano!");
   }
 
 
