@@ -1,11 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.scss']
 })
-export class TeamsComponent{
+export class TeamsComponent implements OnInit{
+
+  listaUser:any = [];
+  constructor(public userService : UserService) {
+    
+  }
+  ngOnInit(): void {
+    this.userService.getAll()
+      .subscribe(users => {
+        this.listaUser = users;
+    })
+  }
+
+
 
   isCreating: boolean = false;
   clicked: string = 'task';

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
@@ -7,7 +7,15 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
+import { Project } from './models/project';
+import { ProjectService } from './services/project.service';
+import { MessageService } from 'primeng/api';
+import { AlertService } from './services/alert.service';
+import { LoadingService } from './services/loading.service';
+
 
 @Component({
   selector: 'app-root',
@@ -19,7 +27,9 @@ import { faPaperclip,faMicrophoneLines } from '@fortawesome/free-solid-svg-icons
 })
 export class AppComponent{
   [x: string]: any;
+  
   title = 'Vertex';
+
   faMessage = faMessage;
   faTimes = faTimes;
   faUser = faUser;
@@ -42,9 +52,65 @@ export class AppComponent{
   constructor(
     private personalization : PersonalizationService, 
     private contexts: ChildrenOutletContexts,
-    private router:Router
+    private router:Router,
+    private userService: UserService,
+    private projectService: ProjectService,
+    private alert: AlertService
   ){
     personalization.setPersonalization();
+  }
+
+
+  user : User = {
+    firstName: "asdasd",
+    lastName: "avcbcvbcv",
+    email: "abc@gmail.com",
+    password: "123"
+  };
+
+  project : Project = {
+    name: 'project post',
+    description: '',
+    image: '',
+    taskList: [],
+  }
+
+  ngOnInit(): void {
+    // this.userService.getAll()
+    //   .subscribe(users => {
+    //     console.log(users);
+    // })
+    
+    // this.userService.getOneById(3)
+    //   .subscribe(user => {
+    //     console.log(user);
+    // })
+
+  //   this.userService.create(this.user)
+  //   .subscribe(user => {
+  //     console.log(user);
+  // })
+
+    // this.userService.getAll()
+    //   .subscribe(users => {
+    //     this.listaUser = users;
+    // })
+
+    // this.userService.delete(12)
+    //   .subscribe(users => {
+    //     console.log(users);
+    // })
+
+  //   this.projectService.getAll()
+  //   .subscribe((projects: Project[]) => {
+  //     console.log(projects);
+  //   });
+
+  // this.projectService.getOneById(1)
+  //   .subscribe((project: Project) => {
+  //     console.log(project);
+  //   });
+
   }
 
   getRouteAnimationData() {
@@ -53,6 +119,11 @@ export class AppComponent{
 
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;
+  }
+
+  
+  show() {
+    this.alert.successAlert("parabéns você é um lixo de ser humano!");
   }
 
 

@@ -1,1 +1,48 @@
-<p>properties works!</p>
+<div class="modal-overlay">
+    <div class="modal" [style.height]="height" [style.width]="width">
+
+        <!-- Properties and X button -->
+        <div class="exitModal">
+            <div>
+                <fa-icon [icon]="faArrowLeft" class="icon" (click)="arrowLeft()"
+                    *ngIf="currentModal != 'general'"></fa-icon>
+                <p class="large-text">{{text}}</p>
+            </div>
+            <div>
+                <fa-icon [icon]="faXmark" class="iconX" (click)="closeModal()"></fa-icon>
+            </div>
+        </div>
+
+        <!-- Search and properties -->
+        <!-- output in general and input in edit -->
+        <app-general-properties 
+            (select)="openStatusSelection('items-selection')"
+            (status)="openStatusSelection('status')" 
+            (gear)="clickGear('edit', $event)"
+            (edit)="clickGear('edit', $event)" 
+            class="pattern-style"
+            *ngIf="currentModal === 'general'">
+        </app-general-properties>
+        <app-edit-properties 
+            [name]="name" 
+            (gear)="clickGear('edit', $event)"
+            (selection)="openStatusSelection('items-selection')" 
+            class="pattern-style" 
+            *ngIf="currentModal === 'edit'" />
+
+        <!-- REQUIREMENTS -->
+        <app-colors class="pattern-style" *ngIf="currentModal === 'colors'"></app-colors>
+        <app-status (pencil)="openStatusSelection('pencil')" class="pattern-style" *ngIf="currentModal === 'status'" />
+        <app-items-selection (pencil)="openStatusSelection('pencil')" class="pattern-style"
+            *ngIf="currentModal === 'items-selection'" [itemsList]="itemsList"></app-items-selection>
+
+        <div class="new-property"
+            [ngClass]="currentModal === 'general' || currentModal === 'edit' || currentModal === 'items-selection' ? 'footer-border' : ''"
+            (click)="clickPlus()">
+            <fa-icon *ngIf="currentModal === 'general' || currentModal === 'items-selection'" [icon]="faPlus"
+                class="icon"></fa-icon>
+            <fa-icon *ngIf="currentModal === 'edit'" [icon]="faTrashCan" class="icon"></fa-icon>
+            <p class="regular-text">{{footerText}}</p>
+        </div>
+    </div>
+</div>

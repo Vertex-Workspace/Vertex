@@ -32,10 +32,10 @@ export class QuickAccessComponent implements OnInit {
   }
 
   workSpace: any[] = [
-    {icon: "pi pi-th-large", label: "Kanban"},
-    {icon: "pi pi-calendar", label: "Calendário"},
-    {icon: "pi pi-list", label: "Linhas"},
-    {icon: "pi pi-chart-bar", label: "Mural"},
+    {id: 'kanban', icon: "pi pi-th-large", label: "Kanban"},
+    {id: 'calendar', icon: "pi pi-calendar", label: "Calendário"},
+    {id: 'list', icon: "pi pi-list", label: "Linhas"},
+    {id: 'mural', icon: "pi pi-chart-bar", label: "Mural"},
   ]
 
   recentsTeams: any[] = [
@@ -43,4 +43,9 @@ export class QuickAccessComponent implements OnInit {
     { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"},
     { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"}
   ]
+
+  redirect(section: any): string {
+    console.log('tasks/' + section.id)
+    return 'tasks/' + section.id;
+  }
 }

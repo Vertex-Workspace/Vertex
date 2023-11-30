@@ -26,11 +26,15 @@ import { UserInformationsModule } from './pages/user-informations/user-informati
 import { SearchAllComponent } from './components/modals/search-all/search-all.component';
 import { SearchAllModule } from './components/modals/search-all/search-all.module';
 import { LoadingComponent } from './components/loading/loading.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -57,10 +61,15 @@ import { LoadingComponent } from './components/loading/loading.component';
     ChatModule,
     MinichatModule,
     UserInformationsModule,
-    SearchAllModule
+    SearchAllModule,
+    HttpClientModule,
+    ToastModule,
+    
   ],
   providers: [
     PersonalizationService,
+    MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

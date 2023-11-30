@@ -1,0 +1,20 @@
+@import '../../../../../variables';
+ul {
+    @apply w-full h-full pt-4;
+}
+
+li {
+    @apply w-full h-[10%] flex items-center justify-start pl-3;
+
+    div{
+        @apply h-[70%] w-[20%] border border-[#B0B0B0];
+    }
+}
+
+p{
+    @apply pl-3;
+}
+
+.emphasis {
+    @apply shadow-2xl bg-white;
+}

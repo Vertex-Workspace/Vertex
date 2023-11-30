@@ -10,7 +10,7 @@ export class ConfirmModalComponent {
   secondModal: boolean = false;
 
     @Output()
-    close = new EventEmitter<Event>();
+    close = new EventEmitter();
   
     @Input()
     height?: String;
@@ -28,18 +28,15 @@ export class ConfirmModalComponent {
 
     deleteTeamConfirm(answer : string): void {
         if(answer == 'yes'){
-            console.log('deletado');
-            this.secondModal = true
-            console.log(this.secondModal)
+          this.close.emit(true);
         }
         else{
-            console.log('cancelado');
-            this.closeModal()
+          this.close.emit(false);
         }
     }
 
-    deletedTeam(): void {
-      this.secondModal = false;
-      this.closeModal()
-    }
+    // deletedTeam(): void {
+    //   this.secondModal = false;
+    //   this.closeModal()
+    // }
 }

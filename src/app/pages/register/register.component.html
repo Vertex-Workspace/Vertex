@@ -1,22 +1,22 @@
 <div class="register-bg">
 
-    <div class=" flex flex-col justify-center items-center w-3/5 gap-10">
+    <div class="main-div">
 
         <h1 id="h1-access-account">Crie sua Conta</h1>
 
 
         <div class="w-2/3">
-            <form class="space-y-7" action="#" method="POST">
+            <form action="#" method="POST" [formGroup]="form" (ngSubmit)="onSubmit()">
 
                 <div class="flex gap-2">
                     <!-- Div Input Nome -->
                     <div class="w-full">
 
-                        <div class="flex items-center justify-center w-full">
+                        <div class="center-all">
                             <div class="divRegisterIcons">
                                 <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
                             </div>
-                            <input style="font-family: 'Inter';" id="nome" name="nome" type="text"
+                            <input id="nome" formControlName="firstName" type="text"
                                 required placeholder="Nome"
                                 class="inputs">
                         </div>
@@ -25,11 +25,11 @@
                     <!-- Div input Sobrenome -->
                     <div class="w-full">
 
-                        <div class=" flex justify-center w-full">
+                        <div class=" center-all">
                             <div class="divRegisterIcons">
                                 <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
                             </div>
-                            <input style="font-family: 'Inter';" id="sobrenome" name="sobrenome" type="text"
+                            <input id="sobrenome" formControlName="lastName" type="text"
                              required placeholder="Sobrenome"
                                 class="inputs">
                         </div>
@@ -39,11 +39,11 @@
                 <div class="flex">
                     <!-- Div Input Email -->
                     <div class="w-full">
-                        <div class="flex items-center justify-center w-full">
+                        <div class="center-all">
                             <div class="divRegisterIcons">
                                 <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
                             </div>
-                            <input style="font-family: 'Inter';" id="email" name="email" type="email"
+                            <input id="email" formControlName="email" type="email"
                              required placeholder="E-mail"
                                 class="inputs">
                         </div>
@@ -51,16 +51,16 @@
                 </div>
 
 
-                <div class="flex gap-5">
-                    <div class="flex flex-col space-y-7 w-full">
+                <div class="flex gap-7">
+                    <div class="div-password-input">
                         <!-- Div input Senha -->
                         <div class="w-full">
-                            <div class="flex items-center justify-start w-full">
+                            <div class="center-all">
                                 <div class="divRegisterIcons">
                                     <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
                                 </div>
-                                <input style="font-family: 'Inter';" id="password" [type]="invisibleEye1 ? 'password' : 'text'"
-                                 required placeholder="Senha"
+                                <input id="password" [type]="invisibleEye1 ? 'password' : 'text'"
+                                 required placeholder="Senha" formControlName="password"
                                     class="inputs">
                                     <div class="eyesDiv">
                                         <fa-icon *ngIf="!invisibleEye1" (click)="passwordToggle1()" class="eyeIcon" [icon]="faEye">
@@ -73,12 +73,12 @@
 
                         <!-- Div input Confirmar Senha -->
                         <div class="w-full">
-                            <div class="flex items-center justify-center w-full">
+                            <div class="center-all">
                                 <div class="divRegisterIcons">
                                     <fa-icon class="registerIcons" [icon]="faKey"></fa-icon>
                                 </div>
-                                <input style="font-family: 'Inter';" id="password" [type]="invisibleEye2 ? 'password' : 'text'"
-                                 required placeholder="Confirme sua Senha"
+                                <input id="passwordConfirm" [type]="invisibleEye2 ? 'password' : 'text'"
+                                 required placeholder="Confirme sua Senha" formControlName="passwordConf"
                                     class="inputs">
                                     <div class="eyesDiv">
                                         <fa-icon *ngIf="!invisibleEye2" (click)="passwordToggle2()" class="eyeIcon" [icon]="faEye">
@@ -90,7 +90,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col justify-center text-[16px] text-[#092C4C]">
+                    <div class="div-toStrong-password">
                         <p class="w-80">Requisitos para uma boa senha:</p>
                         <p>*Mínimo de 8 caracteres</p>
                         <p>*Mínimo de 1 letra maiúscula</p>
@@ -126,7 +126,7 @@
     </div>
 
 
-    <div class=" flex pb-5 items-center justify-end h-screen w-2/5">
+    <div class="div-white-logo">
         <img class="w-80 h-80" src="../../../assets/white-logo.svg" alt="">
 
 

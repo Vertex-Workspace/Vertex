@@ -10,6 +10,10 @@
     background-image: url(../../../assets/Vertex-bg-login-new.jpg);
 }
 
+.center{
+    @apply flex justify-center;
+}
+
 .bg-loginOpacity{
     
     @apply 
