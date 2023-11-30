@@ -25,11 +25,11 @@ export class User {
         this.lastName = user.lastName;
         this.email = user.email;
         this.password = user.password;
-        // this.description = user.description;
-        // this.location = user.location;
-        // this.image = user.image;
-        // this.publicProfile = user.publicProfile;
-        // this.showCharts = user.showCharts;
+        this.description = user.description;
+        this.location = user.location;
+        this.image = user.image;
+        this.publicProfile = user.publicProfile;
+        this.showCharts = user.showCharts;
 
     }
 
