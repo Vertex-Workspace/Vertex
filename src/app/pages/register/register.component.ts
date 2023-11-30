@@ -48,16 +48,6 @@ export class RegisterComponent {
     
   }
 
-  user: User = {
-
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    passwordConf: ''
-
-  }
-
   invisibleEye1:boolean = true;
   invisibleEye2:boolean = true;
   

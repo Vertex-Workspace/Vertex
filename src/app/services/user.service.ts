@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
@@ -33,16 +33,43 @@ export class UserService {
             .successAlert("Sucesso ao cadastrar usuário!")
         },
         e => {
-          console.log(e);
           this.alert
             .errorAlert(e.error);
         }
       )
   }
 
+  public authenticate(form: User): void {
 
+    const user: User = {
+      firstName: undefined,
+      lastName: undefined,
+      email: form.email,
+      password: form.password
+    };
 
-  public getAll(): Observable<User[]> {
+    this.http
+      .post<User>(`${URL}user/authenticate`, user)
+      .subscribe((userL: User) => {
+        this.login(userL);
+      },
+      e => {
+        this.alert.errorAlert(e.error);
+      });
+
+  }
+
+  private login(user: User): void {
+    this.alert.successAlert(`Bem-vindo, ${user.firstName}`);
+    this.mockLoggedUser(user);
+    this.router.navigate(['/home']);
+  }
+
+  private mockLoggedUser(user: User): void {
+
+  }
+
+  public getAll(): Observable<User[]> { 
     return this.http
       .get<User[]>(`${URL}user`)
       .pipe(map((users: User[]) => users.map(user => new User(user))));
@@ -63,6 +90,5 @@ export class UserService {
     return this.http
       .delete<User>(`${URL}user/${id}`);
   }
-
 
 }
