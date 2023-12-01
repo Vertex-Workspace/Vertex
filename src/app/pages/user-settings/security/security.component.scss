@@ -45,7 +45,7 @@ section {
 }
 
 .requires{
-    @apply w-[45%] h-[27%] pt-4 flex flex-row;
+    @apply w-[45%] h-[27%] flex flex-row pt-6;
     
     p:first-child{
         @apply font-bold
