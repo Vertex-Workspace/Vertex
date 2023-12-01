@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faLock, faEye, faKey } from '@fortawesome/free-solid-svg-icons'
+import { User } from 'src/app/models/user';
+import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-security',
@@ -10,18 +13,23 @@ import { faLock, faEye, faKey } from '@fortawesome/free-solid-svg-icons'
 export class SecurityComponent {
   faLock = faLock;
   faKey = faKey;
-  contentEditable: boolean = false;
   click: string = 'initial';
-  validPassword: boolean = true;
+
+  logged !: User;
 
   form !: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private alert: AlertService
+  ) {
+    this.logged = userService.getLogged();
+  }
 
   ngOnInit(): void {
-
+    console.log(this.logged);
+    
     this.form = this.formBuilder.group({
 
       oldPassword: [null, [Validators.required]],
@@ -39,36 +47,39 @@ export class SecurityComponent {
   ]
 
   onSubmit(): void {
-    console.log(this.form.value);
+    const formValue = this.form.value;
+
+    if (this.passwordValidation()) {
+      this.logged = {
+        ...this.logged,
+        password: formValue.newPassword
+      };
+
+      this.userService
+        .update(this.logged)
+        .subscribe((user: User) => {
+          this.alert.successAlert('Senha alterada com sucesso!')
+        })
+      
+    } else {
+      this.alert
+        .errorAlert('Senhas incompatíveis!')
+    }
   }
 
   clickOption(id: string): void {
     this.click = id;
-    this.contentEditable = !this.contentEditable
-  }
-
-  onChange(item: number): void {
-    this.passwords[item].status = true;
-    if ((this.passwords[0].status == true) &&
-      (this.passwords[1].status == true) &&
-      (this.passwords[2].status == true)) {
-      this.contentEditable = true;
-    }
   }
 
   passwordEye(item: any): void {
     item.statusEye = !item.statusEye;
   }
 
+  passwordValidation(): boolean {
+    const formValue = this.form.value;
 
-  passwordValidation(): void {
-    if (this.passwords[1].value != this.passwords[2].value) {
-      this.validPassword = false;
-    }
-  }
-
-  closeModal() {
-    this.validPassword = true;
+    return formValue.newPassword === formValue.newPasswordConf
+      && formValue.oldPassword === this.logged.password;
   }
 
 }
