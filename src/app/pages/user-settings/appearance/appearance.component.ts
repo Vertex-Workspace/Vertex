@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { faPencil, faSun, faMoon, faToggleOff, faToggleOn, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from '../../../services/personalization.service';
+import { Personalization } from '../../../models/personalization';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-appearance',
   templateUrl: './appearance.component.html',
   styleUrls: ['./appearance.component.scss']
 })
-export class AppearanceComponent implements OnInit{
+export class AppearanceComponent implements OnInit {
   faPencil = faPencil;
   faSun = faSun;
   faMoon = faMoon;
@@ -15,9 +17,23 @@ export class AppearanceComponent implements OnInit{
   faToggleOff = faToggleOff;
   faCheck = faCheck;
 
-  constructor(private personalizationService : PersonalizationService) { }
+  constructor(private personalizationService: PersonalizationService) { }
+
+  themesBack!: Personalization[];
+
   ngOnInit(): void {
-    this.personalizationService.getAllPersonalization();
+
+    this.takeAllPersonalizations();
+
+  }
+
+  async takeAllPersonalizations() {
+    await this.personalizationService.getAllPersonalization().subscribe(
+      (personalizations: any) => {
+        this.themesBack = personalizations;
+        console.log(this.themesBack);
+      }
+      )
   }
 
   themesList: any[] = [
@@ -31,10 +47,10 @@ export class AppearanceComponent implements OnInit{
           title: "Cor de Fundo",
           iconColor: '$primaryColor',
           colors: [
-            { 'color': '#FFFFFF', status: 'unselected'},
-            { 'color': '#F3F3F3', status: 'selected'},
+            { 'color': '#FFFFFF', status: 'unselected' },
+            { 'color': '#F3F3F3', status: 'selected' },
             { 'color': '#E5DDF5', status: 'unselected' },
-            { 'color': '#DCE8F2', status: 'unselected'},
+            { 'color': '#DCE8F2', status: 'unselected' },
             { 'color': '#FAEAEA', status: 'unselected' },
             { 'color': '#F5FCF2', status: 'unselected' },
           ]
@@ -43,12 +59,12 @@ export class AppearanceComponent implements OnInit{
           title: "Cor Secundária",
           iconColor: '#F3F3F3',
           colors: [
-            { 'color': '#092C4C', status: 'selected'},
-            { 'color': '#F5B1B1', status: 'unselected'},
-            { 'color': '#6F57A1', status: 'unselected'},
-            { 'color': '#000000', status: 'unselected'},
-            { 'color': '#A5A973', status: 'unselected'},
-            { 'color': '#83B172', status: 'unselected'},
+            { 'color': '#092C4C', status: 'selected' },
+            { 'color': '#F5B1B1', status: 'unselected' },
+            { 'color': '#6F57A1', status: 'unselected' },
+            { 'color': '#000000', status: 'unselected' },
+            { 'color': '#A5A973', status: 'unselected' },
+            { 'color': '#83B172', status: 'unselected' },
           ]
         }
       ]
@@ -111,28 +127,48 @@ export class AppearanceComponent implements OnInit{
   ];
 
 
-  selectColor(theme: any, type:any,item: number): void {
+  selectColor(theme: any, type: any, item: number): void {
+
+    const user: User = window.localStorage.getItem('logged') ? JSON.parse(window.localStorage.getItem('logged') || '{}') : {};
+    
+    const personalization: Personalization = {
+      id: user.id,
+      listeningText:true,
+      voiceCommand:true,
+      primaryColor: type.colors[item].color,
+      secondColor: theme.secondColor,
+      fontFamily: 3,
+      fontSize: 12,
+    }
+    console.log(personalization);
+
+    this.personalizationService.patchPersonalization(personalization);
+    console.log(personalization);
+    
 
     type.colors.forEach((element: { status: string; }) => {
       element.status = 'unselected';
-    
-    type.colors[item].status = 'selected';
-    if(type.title === 'Cor Secundária' && theme.mode === 'Tema Claro'){
-      this.themesList[0].secondColor = type.colors[item].color;
-      console.log("segunda")
-    }
-    else if(type.title === 'Cor Secundária' && theme.mode === 'Tema Escuro'){
-      this.themesList[1].secondColor = type.colors[item].color;
-    }
-  });
-  console.log(theme)
-}
 
-  selectTheme(item : number): void {
+      type.colors[item].status = 'selected';
+      if (type.title === 'Cor Secundária' && theme.mode === 'Tema Claro') {
+        this.themesList[0].secondColor = type.colors[item].color;
+        console.log(type.colors[item].color);
+        
+
+      }
+      else if (type.title === 'Cor Secundária' && theme.mode === 'Tema Escuro') {
+        this.themesList[1].secondColor = type.colors[item].color;
+        console.log(type.colors[item].color);
+      }
+    });
+
+  }
+
+  selectTheme(item: number): void {
     this.themesList.forEach((element: { status: string; }) => {
       element.status = 'unselected';
     });
     this.themesList[item].status = 'selected';
-    console.log(this.themesList[item].status = 'selected')
+
   }
 }

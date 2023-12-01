@@ -45,7 +45,6 @@ const routes: Routes = [
     path: "home",
     component: TeamsComponent,
     canActivate: [AuthGuard]
-
   },
   {
     path: "projetos",
