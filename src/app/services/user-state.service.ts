@@ -9,7 +9,7 @@ export class UserStateService {
   private isAuthenticated: BehaviorSubject<boolean> = 
       new BehaviorSubject<boolean>(
         localStorage.getItem('logged') !== null
-      );
+      ); //validate token
   
   constructor() { }
 

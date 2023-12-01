@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { faUser,faEnvelope, faLock, faKey,faEye,faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/user';
+import { UserStateService } from 'src/app/services/user-state.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,7 +24,17 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-  ) {}
+    private router: Router,
+    private userState: UserStateService
+  ) {
+    this.userState
+      .getAuthenticationStatus()
+      .subscribe((status: boolean) => {
+        if (status) {
+          this.router.navigate(['/home']);
+        }
+      })
+  }
 
   ngOnInit(): void {
 

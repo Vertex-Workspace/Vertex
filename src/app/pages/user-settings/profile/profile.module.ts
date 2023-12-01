@@ -4,6 +4,8 @@ import { ButtonModule } from 'primeng/button';
 import { ProfileComponent } from './profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -18,7 +20,9 @@ import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn
     CommonModule,
     ButtonModule,
     FontAwesomeModule,
-    ModalWarnModule
+    ModalWarnModule,
+    ReactiveFormsModule,
+    ToastModule
   ]
 })
 export class ProfileModule { }

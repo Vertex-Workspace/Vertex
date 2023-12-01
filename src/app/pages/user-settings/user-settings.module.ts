@@ -29,7 +29,7 @@ import { SecurityModule } from './security/security.module';
     ButtonModule,
     ProfileModule,
     TeamsSettingsModule,
-    SecurityModule
+    SecurityModule,
   ]
 })
 export class UserSettingsModule { }

@@ -10,15 +10,18 @@
             <div class="divLeftSide">
                 <!-- E-mail -->
                 <section>
-                    <form (ngSubmit)="passwordValidation()">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="divEachInput" *ngFor="let item of itemsList">
                             <p class="medium-text">{{item.option}}</p>
                             <div class="iconInputBlock">
                                 <div class="iconBox" *ngIf="item.id != 'description'">
                                     <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                                 </div>
-                                <textarea (input)="onChange()" type="text" [ngClass]="item.id" [value]="item.placeholder"
-                                    #textBox (change)="item.placeholder = textBox.value" class="regular-text">
+                                <textarea (input)="onChange()" type="text" 
+                                    [ngClass]="item.id"
+                                    #textBox class="regular-text"
+                                    formControlName="{{item.formControlName}}"    
+                                >
                             </textarea>
                             </div>
                         </div>
@@ -42,9 +45,9 @@
                     <div>
                         <div *ngIf="!buttonConfirm">
                                 <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
-                                    [disabled]="contentEditable === true ? false : true"
-                                    [ngClass]="contentEditable === true ? 'edit' : 'noEdit'" type="submit"
-                                    (click)="passwordValidation()">
+                                    [disabled]="contentEditable ? false : true"
+                                    [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit"
+                                    (click)="onSubmit()">
                                     Atualizar
                                 </button>
                         </div>
@@ -55,8 +58,9 @@
     </div>
 </div>
 
+<!-- 
 <app-modal-warn *ngIf="!validInput" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
     <div class="modal">
         <h5>Não pode haver campos vazios</h5>
     </div>
-</app-modal-warn>
+</app-modal-warn> -->
