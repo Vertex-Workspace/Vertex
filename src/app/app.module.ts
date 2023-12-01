@@ -30,6 +30,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     SearchAllModule,
     HttpClientModule,
     ToastModule,
-    
+    MatProgressBarModule,
   ],
   providers: [
     PersonalizationService,

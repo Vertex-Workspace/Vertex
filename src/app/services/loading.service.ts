@@ -10,13 +10,13 @@ export class LoadingService {
 
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
-  hide():void{
-    setTimeout(() => {
-      this.loadingSubject.next(false);
-    }, 3000);
+  hide(): void {
+
+    this.loadingSubject.next(false);
+
   }
 
-  show():void{
+  show(): void {
     this.loadingSubject.next(true);
   }
 }

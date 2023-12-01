@@ -21,21 +21,23 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.clicked = this.getClicked();
   }
 
   getClicked(): string {
-    return this.router.url.split('/')[2];
+
+    console.log(this.router.url.split('/')[1]);
+    return "/" + this.router.url.split('/')[1] + "/" + this.router.url.split('/')[2];
   }
 
   menuItems = [
-    { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
-    { id: 'list', iconClass: 'pi pi-list', label: 'Lista' },
-    { id: 'calendar', iconClass: 'pi pi-calendar', label: 'Calendário' },
-    { id: 'mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
+    { id: '/tarefas/kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
+    { id: '/tarefas/lista', iconClass: 'pi pi-list', label: 'Lista' },
+    { id: '/tarefas/calendario', iconClass: 'pi pi-calendar', label: 'Calendário' },
+    { id: '/tarefas/mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
   ];
 
   configItems = [
@@ -46,12 +48,12 @@ export class TasksComponent implements OnInit {
 
   toggleSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;
-  } 
-  
+  }
+
   toggleFilter(): void {
     this.filterOpen = !this.filterOpen;
   }
-  
+
   toggleOrder(): void {
     this.orderOpen = !this.orderOpen;
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LoadingService } from '../../services/loading.service';
 
 @Component({
@@ -11,5 +11,8 @@ export class LoadingComponent {
   constructor(public loadingService :LoadingService) {
     
   }
+
+  @Input()
+  userLogged!:boolean;
 
 }

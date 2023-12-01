@@ -7,7 +7,7 @@
     @apply flex w-[4%] h-full flex-col items-center z-[999];
     background-color: $primaryColor;
     transition: width 0.32s ease-out;
-    z-index: 999;
+    z-index: 10;
     position: fixed;
 }
 
@@ -16,7 +16,7 @@
     transition: width 0.32s ease-in-out;
     background-color: $primaryColor;
     position: fixed;
-    z-index: 999;
+    z-index: 10;
 }
 
 .main-div {
