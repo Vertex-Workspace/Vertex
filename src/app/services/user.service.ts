@@ -5,6 +5,7 @@ import { map, Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
+import { UserStateService } from './user-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private alert: AlertService
+    private alert: AlertService,
+    private userState: UserStateService
   ) { }
 
   public register(form: User): void {
@@ -39,7 +41,7 @@ export class UserService {
       )
   }
 
-  public authenticate(form: User): void {
+  public authenticate(form: User): Observable<User> {
 
     const user: User = {
       firstName: undefined,
@@ -48,25 +50,25 @@ export class UserService {
       password: form.password
     };
 
-    this.http
-      .post<User>(`${URL}user/authenticate`, user)
-      .subscribe((userL: User) => {
-        this.login(userL);
-      },
-      e => {
-        this.alert.errorAlert(e.error);
-      });
-
+    return this.http
+      .post<User>(`${URL}user/authenticate`, user);
   }
 
-  private login(user: User): void {
+  public login(user: User): void {
     this.alert.successAlert(`Bem-vindo, ${user.firstName}`);
     this.mockLoggedUser(user);
     this.router.navigate(['/home']);
   }
 
   private mockLoggedUser(user: User): void {
+    this.userState.setAuthenticationStatus(true);
+    localStorage.setItem('logged', JSON.stringify(user)); //cookies
+  }
 
+  public logout(): void {
+    this.userState.setAuthenticationStatus(false);
+    localStorage.removeItem('logged'); //cookies
+    this.router.navigate(['/login']);
   }
 
   public getAll(): Observable<User[]> { 
