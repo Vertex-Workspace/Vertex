@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { catchError } from 'rxjs';
 import { Team } from 'src/app/models/team';
+import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -10,8 +11,10 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamsComponent {
 
-  constructor(private teamService: TeamService) {
-
+  constructor(
+    private teamService: TeamService,
+    private alert: AlertService
+  ) {
   }
 
   isCreating: boolean = false;

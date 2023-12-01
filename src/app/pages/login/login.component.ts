@@ -53,8 +53,9 @@ export class LoginComponent implements OnInit {
         this.userService.login(user);
       },
       e => {
-        this.alert.errorAlert(e.error);
+        return this.alert.errorAlert(e.error);
       });
+
   }
   
   passwordToggle():void{

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable, of } from 'rxjs';
@@ -69,6 +69,17 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
+  getLogged(): User {
+    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+
+    this.getOneByEmail(user.email)
+      .subscribe((userFor => {
+        user = userFor;
+      }))
+
+    return user;
+  }
+
   public getAll(): Observable<User[]> { 
     return this.http
       .get<User[]>(`${URL}user`)
@@ -81,6 +92,12 @@ export class UserService {
       .pipe(map((user: User) => new User(user)));
   }
 
+  public getOneByEmail(email: string): Observable<User> {
+    return this.http
+      .get<User>(`${URL}user/email/${email}`)
+      .pipe(map((user: User) => new User(user)));
+  }
+
   public create(user: User): Observable<User> {
     return this.http
       .post<User>(`${URL}user`, user);
@@ -89,6 +106,12 @@ export class UserService {
   public delete(id: number): Observable<User> {
     return this.http
       .delete<User>(`${URL}user/${id}`);
+  }
+
+  public update(user: User): Observable<User> {
+    this.saveLoggedUser(user);
+    return this.http
+      .put<User>(`${URL}user`, user);
   }
 
 }

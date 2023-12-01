@@ -4,8 +4,10 @@ import { faUser, faEnvelope,
      faPencil, faToggleOn, faCircleUser,
     faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from 'src/app/services/personalization.service';
-import { NgModel } from '@angular/forms';
+import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +15,8 @@ import { ThisReceiver } from '@angular/compiler';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
+
+  logged !: User;
 
   faUser = faUser;
   faEnvelope = faEnvelope;
@@ -28,11 +32,20 @@ export class ProfileComponent {
   primaryColor: string;
   secondColor: string;
 
+  toogleOn: boolean = true;
+  buttonEdit: boolean = true;
+  buttonConfirm: boolean = false;
+  contentEditable: boolean = false;
+  click: string = 'initial';
+  validInput: boolean = true;
+
+  form !: FormGroup;
+
   itemsList = [
-    { id: 'email', icon: faEnvelope, placeholder: 'ana_cb@estudante.sesisenai.org.br', option: 'E-mail'},
-    { id: 'name', icon: faUser, placeholder :'Ana Clara', option: 'Nome'},
-    { id: 'location', icon: faEarthAmericas, placeholder :'São Paulo, Brazil', option: 'Localização'},
-    { id: 'description', icon: faEarthAmericas, placeholder: '"Lorem ipsum dolor sit amet, consectetur adipiscing elitaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', option: 'Descrição'}
+    { id: 'email', icon: faEnvelope, option: 'E-mail', formControlName: 'email'},
+    { id: 'name', icon: faUser, option: 'Nome', formControlName: 'name'},
+    { id: 'location', icon: faEarthAmericas, option: 'Localização', formControlName: 'location'},
+    { id: 'description', icon: faEarthAmericas, option: 'Descrição', formControlName: 'description'}
   ];
 
   tooglesList = [
@@ -40,21 +53,36 @@ export class ProfileComponent {
     {text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff}
   ];
 
-  constructor(private personalization : PersonalizationService){
+  constructor(
+    private personalization : PersonalizationService,
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ){
     this.primaryColor = personalization.getPrimaryColor();
     this.secondColor = personalization.getSecondColor();
+    
+    this.logged = userService.getLogged();
   }
 
-  teste(){
-    console.log("teste");
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+
+      email: [this.logged.email],
+      name: [`${this.logged.firstName} ${this.logged.lastName}`],
+      location: [this.logged.location],
+      description: [this.logged.description]
+
+    })
   }
 
-  toogleOn: boolean = true;
-  buttonEdit: boolean = true;
-  buttonConfirm: boolean = false;
-  contentEditable: boolean = false;
-  click: string = 'initial';
-  validInput: boolean = true;
+  getFullLogged(): void {
+    this.userService
+      .getOneByEmail(this.logged.email)
+      .subscribe((user: User) => {
+        this.logged = user;
+      });
+
+  }
 
   // Alter the status of toogle
   toogleCharts(item :number): void{
@@ -68,25 +96,52 @@ export class ProfileComponent {
   clickOption(id: string): void{
     this.click = id;
     this.contentEditable = !this.contentEditable
-    console.log(this.click)
-    console.log(this.itemsList[0].placeholder)
   }
 
     onChange(): void {
     console.log(this.contentEditable)
-    if(this.contentEditable == false){
-    this.contentEditable = !this.contentEditable;
+    if(!this.contentEditable){
+      this.contentEditable = !this.contentEditable;
     }
   }
 
   passwordValidation(): void {
-    if((this.itemsList[0].placeholder === '') ||
-      (this.itemsList[1].placeholder === '')){
-        this.validInput = false;
-    }
+    // if((this.itemsList[0].placeholder === '') ||
+    //   (this.itemsList[1].placeholder === '')){
+    //     this.validInput = false;
+    // }
   }
 
   closeModal():void {
     this.validInput = true;
   }
+
+  onSubmit(): void {
+
+    this.organizeValues();
+
+    this.userService
+      .update(this.logged)
+      .subscribe((user: User) => {
+        console.log(user);
+      })
+    
+  }
+
+  organizeValues(): void {
+    const formValue = this.form.value;
+    const firstName = formValue.name.split(' ')[0];
+    const lastName = formValue.name.slice(firstName.length + 1);
+
+    this.logged = {
+      ...this.logged,
+      email: formValue.email,
+      firstName: firstName,
+      lastName: lastName,
+      description: formValue.description,
+      location: formValue.location,
+    };
+
+  }
+
 }

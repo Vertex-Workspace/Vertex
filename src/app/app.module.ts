@@ -28,6 +28,7 @@ import { SearchAllModule } from './components/modals/search-all/search-all.modul
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { MessageService } from 'primeng/api';
   ],
   providers: [
     PersonalizationService,
-    MessageService
+    MessageService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })
