@@ -18,7 +18,7 @@ import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
 import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
   {

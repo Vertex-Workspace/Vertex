@@ -8,13 +8,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from './services/user.service';
 import { User } from './models/user';
-import { AuthService } from './services/auth.service';
 import { Project } from './models/project';
-import { ProjectService } from './services/project.service';
-import { MessageService } from 'primeng/api';
 import { AlertService } from './services/alert.service';
+import { UserStateService } from './services/user-state.service';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +25,11 @@ export class AppComponent{
   [x: string]: any;
   
   title = 'Vertex';
+
+  inputColor: string = '#FFFFFF';
+  fontColor: string = '#000000';
+  buttonColor: string = '#FFFFFF';
+  fontSize!: number;
 
   faMessage = faMessage;
   faTimes = faTimes;
@@ -51,67 +53,22 @@ export class AppComponent{
   constructor(
     private personalization : PersonalizationService, 
     private contexts: ChildrenOutletContexts,
-    private authService: AuthService,
     private router:Router,
-    private userService: UserService,
-    private projectService: ProjectService,
-    private alert: AlertService
+    private alert: AlertService,
+    private userState: UserStateService
   ){
     personalization.setPersonalization();
-  }
+    
+    this.userState
+      .getAuthenticationStatus()
+      .subscribe((status: boolean) => {
+        this.userLogged = status;
+      })
 
-  user : User = {
-    firstName: "asdasd",
-    lastName: "avcbcvbcv",
-    email: "abc@gmail.com",
-    password: "123"
-  };
+  }
 
   ngOnInit(): void {
-    this.userLogged = this.authService.isLoggedIn();
     
-    // this.userService.getAll()
-    //   .subscribe(users => {
-    //     console.log(users);
-    // })
-    
-    // this.userService.getOneById(3)
-    //   .subscribe(user => {
-    //     console.log(user);
-    // })
-
-  //   this.userService.create(this.user)
-  //   .subscribe(user => {
-  //     console.log(user);
-  // })
-
-  //   this.userService.getAll()
-  //     .subscribe(users => {
-  //       console.log(users);
-  //   })
-
-    // this.userService.delete(12)
-    //   .subscribe(users => {
-    //     console.log(users);
-    // })
-
-  //   this.projectService.getAll()
-  //   .subscribe((projects: Project[]) => {
-  //     console.log(projects);
-  //   });
-
-  // this.projectService.getOneById(1)
-  //   .subscribe((project: Project) => {
-  //     console.log(project);
-  //   });
-    
-  }
-  
-  project : Project = {
-    name: 'project post',
-    description: '',
-    image: '',
-    taskList: [],
   }
 
   getRouteAnimationData() {
@@ -121,17 +78,10 @@ export class AppComponent{
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;
   }
-
   
   show() {
     this.alert.successAlert("parabéns você é um lixo de ser humano!");
   }
-
-
-  inputColor: string = '#FFFFFF';
-  fontColor: string = '#000000';
-  buttonColor: string = '#FFFFFF';
-  fontSize!: number;
 
   updateColor(): void {
     document.documentElement.style.setProperty('--custom-color', this.inputColor);
@@ -157,5 +107,10 @@ export class AppComponent{
   switchNotifications():void{
     this.notification = !this.notification;
   }
+
+  logout(): void {
+    localStorage.removeItem('loggedUser');
+  }
+
 }
 

@@ -56,11 +56,11 @@ export class UserService {
 
   public login(user: User): void {
     this.alert.successAlert(`Bem-vindo, ${user.firstName}`);
-    this.mockLoggedUser(user);
+    this.saveLoggedUser(user);
     this.router.navigate(['/home']);
   }
 
-  private mockLoggedUser(user: User): void {
+  private saveLoggedUser(user: User): void {
     this.userState.setAuthenticationStatus(true);
     localStorage.setItem('logged', JSON.stringify(user)); //cookies
   }
