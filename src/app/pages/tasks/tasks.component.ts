@@ -33,8 +33,8 @@ export class TasksComponent implements OnInit {
 
   menuItems = [
     { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
-    { id: 'list', iconClass: 'pi pi-list', label: 'Lista' },
-    { id: 'calendar', iconClass: 'pi pi-calendar', label: 'Calendário' },
+    { id: 'lista', iconClass: 'pi pi-list', label: 'Lista' },
+    { id: 'calendario', iconClass: 'pi pi-calendar', label: 'Calendário' },
     { id: 'mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
   ];
 

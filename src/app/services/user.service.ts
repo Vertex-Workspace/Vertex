@@ -31,8 +31,7 @@ export class UserService {
     this.create(user)
       .subscribe(
         (user: User) => {
-          this.alert
-            .successAlert("Sucesso ao cadastrar usuário!")
+          this.login(user);
         },
         e => {
           this.alert
@@ -55,7 +54,6 @@ export class UserService {
   }
 
   public login(user: User): void {
-    this.alert.successAlert(`Bem-vindo, ${user.firstName}`);
     this.saveLoggedUser(user);
     this.router.navigate(['/home']);
   }
