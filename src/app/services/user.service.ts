@@ -54,6 +54,7 @@ export class UserService {
   }
 
   public login(user: User): void {
+    this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
     this.saveLoggedUser(user);
     this.router.navigate(['/home']);
   }

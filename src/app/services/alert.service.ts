@@ -11,7 +11,6 @@ export class AlertService {
   ) { }
 
   successAlert(message: string): void {
-    console.log('a');
     
     this.messageService.add(
       { 

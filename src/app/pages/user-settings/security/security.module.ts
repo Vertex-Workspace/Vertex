@@ -4,9 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { SecurityComponent } from './security.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AlertService } from 'src/app/services/alert.service';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,8 +21,6 @@ import { AlertService } from 'src/app/services/alert.service';
     ModalWarnModule,
     ReactiveFormsModule
   ],
-  providers: [
-    AlertService
-  ]
+  providers: []
 })
 export class SecurityModule { }

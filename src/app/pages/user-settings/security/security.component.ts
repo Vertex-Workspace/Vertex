@@ -28,7 +28,6 @@ export class SecurityComponent {
   }
 
   ngOnInit(): void {
-    console.log(this.logged);
     
     this.form = this.formBuilder.group({
 
@@ -58,13 +57,15 @@ export class SecurityComponent {
       this.userService
         .update(this.logged)
         .subscribe((user: User) => {
-          this.alert.successAlert('Senha alterada com sucesso!')
+          this.alert.successAlert('Senha alterada com sucesso!');
         })
       
     } else {
       this.alert
         .errorAlert('Senhas incompatíveis!')
     }
+    
+    this.form.reset();
   }
 
   clickOption(id: string): void {

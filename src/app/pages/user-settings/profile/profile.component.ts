@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-profile',
@@ -56,7 +57,8 @@ export class ProfileComponent {
   constructor(
     private personalization : PersonalizationService,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private alert: AlertService
   ){
     this.primaryColor = personalization.getPrimaryColor();
     this.secondColor = personalization.getSecondColor();
@@ -89,19 +91,12 @@ export class ProfileComponent {
     this.contentEditable = !this.contentEditable
   }
 
-    onChange(): void {
-    console.log(this.contentEditable)
+  onChange(): void {
     if(!this.contentEditable){
       this.contentEditable = !this.contentEditable;
     }
   }
 
-  passwordValidation(): void {
-    // if((this.itemsList[0].placeholder === '') ||
-    //   (this.itemsList[1].placeholder === '')){
-    //     this.validInput = false;
-    // }
-  }
 
   closeModal():void {
     this.validInput = true;
@@ -114,7 +109,7 @@ export class ProfileComponent {
     this.userService
       .update(this.logged)
       .subscribe((user: User) => {
-        console.log(user);
+        this.alert.successAlert('Informações atualizadas com sucesso!')
       })
     
   }

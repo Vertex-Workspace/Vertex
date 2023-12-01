@@ -36,6 +36,7 @@ import { AlertService } from './services/alert.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,    
     LoginModule,
     RegisterModule,

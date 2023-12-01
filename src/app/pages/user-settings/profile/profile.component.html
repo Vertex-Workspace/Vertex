@@ -10,7 +10,7 @@
             <div class="divLeftSide">
                 <!-- E-mail -->
                 <section>
-                    <form (ngSubmit)="passwordValidation()" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="divEachInput" *ngFor="let item of itemsList">
                             <p class="medium-text">{{item.option}}</p>
                             <div class="iconInputBlock">
@@ -45,8 +45,8 @@
                     <div>
                         <div *ngIf="!buttonConfirm">
                                 <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
-                                    [disabled]="contentEditable === true ? false : true"
-                                    [ngClass]="contentEditable === true ? 'edit' : 'noEdit'" type="submit"
+                                    [disabled]="contentEditable ? false : true"
+                                    [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit"
                                     (click)="onSubmit()">
                                     Atualizar
                                 </button>
@@ -58,8 +58,9 @@
     </div>
 </div>
 
+<!-- 
 <app-modal-warn *ngIf="!validInput" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
     <div class="modal">
         <h5>Não pode haver campos vazios</h5>
     </div>
-</app-modal-warn>
+</app-modal-warn> -->
