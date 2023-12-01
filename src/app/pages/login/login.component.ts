@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faEnvelope, faEye,faEyeSlash,faLock } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { Project } from 'src/app/models/project';
+import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { UserStateService } from 'src/app/services/user-state.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -27,7 +29,9 @@ export class LoginComponent implements OnInit {
  
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private alert: AlertService,
+    private userState: UserStateService
   ) {}
 
   ngOnInit(): void {
@@ -38,10 +42,19 @@ export class LoginComponent implements OnInit {
 
     })
 
+    this.userState
+      .getAuthenticationStatus();
   }
 
   onSubmit(): void {
-    this.userService.authenticate(this.form.value);
+    this.userService
+      .authenticate(this.form.value)
+      .subscribe(user => {
+        this.userService.login(user);
+      },
+      e => {
+        this.alert.errorAlert(e.error);
+      });
   }
   
   passwordToggle():void{

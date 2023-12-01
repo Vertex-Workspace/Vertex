@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faMessage, faMagnifyingGlass, faClipboardList, 
   faUser, faGear, faSignOut, faBellSlash } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -16,8 +17,12 @@ export class SidebarComponent {
   faGear = faGear;
   faSignOut = faSignOut;
 
+  constructor(
+    private userService: UserService
+  ) {}
+
   @Input()
-  isSideBarExpanded!: boolean;
+  isSideBarExpanded !: boolean;
 
   search: boolean = false;
   switchSearch():void{
@@ -33,4 +38,9 @@ export class SidebarComponent {
   disabledChat(){
     this.openChatExpanded(false);
   }
+
+  logout(): void {
+    this.userService.logout();
+  }
+
 }
