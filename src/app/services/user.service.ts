@@ -55,12 +55,12 @@ export class UserService {
 
   public login(user: User): void {
     this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
+    this.userState.setAuthenticationStatus(true);
     this.saveLoggedUser(user);
     this.router.navigate(['/home']);
   }
 
   private saveLoggedUser(user: User): void {
-    this.userState.setAuthenticationStatus(true);
     localStorage.setItem('logged', JSON.stringify(user)); //cookies
   }
 
