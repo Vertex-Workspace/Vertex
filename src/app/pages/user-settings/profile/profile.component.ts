@@ -75,15 +75,6 @@ export class ProfileComponent {
     })
   }
 
-  getFullLogged(): void {
-    this.userService
-      .getOneByEmail(this.logged.email)
-      .subscribe((user: User) => {
-        this.logged = user;
-      });
-
-  }
-
   // Alter the status of toogle
   toogleCharts(item :number): void{
     if(this.tooglesList[item].icon == faToggleOff){
