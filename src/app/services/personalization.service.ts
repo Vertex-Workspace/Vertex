@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { URL } from './path/api_url';
 
 interface Personalization {
   primaryColor: string;
@@ -11,7 +13,7 @@ interface Personalization {
   providedIn: 'root',
 })
 export class PersonalizationService {
-  constructor() {}
+  constructor(private http : HttpClient) {}
 
   setPersonalization(): void {
     const defaultColors: Personalization = {
@@ -25,6 +27,13 @@ export class PersonalizationService {
 
   getPrimaryColor(): string {
     return JSON.parse(localStorage.getItem('personalization')!).primaryColor;
+  }
+
+  getAllPersonalization(): any{
+    return this.http.get(`${URL}personalization`).subscribe((response:any) => {
+     console.log(response);
+      
+    })
   }
 
   getSecondColor(): string {

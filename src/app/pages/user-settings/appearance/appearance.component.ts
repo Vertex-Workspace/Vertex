@@ -1,18 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faPencil, faSun, faMoon, faToggleOff, faToggleOn, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { PersonalizationService } from '../../../services/personalization.service';
 
 @Component({
   selector: 'app-appearance',
   templateUrl: './appearance.component.html',
   styleUrls: ['./appearance.component.scss']
 })
-export class AppearanceComponent {
+export class AppearanceComponent implements OnInit{
   faPencil = faPencil;
   faSun = faSun;
   faMoon = faMoon;
   faToggleOn = faToggleOn;
   faToggleOff = faToggleOff;
   faCheck = faCheck;
+
+  constructor(private personalizationService : PersonalizationService) { }
+  ngOnInit(): void {
+    this.personalizationService.getAllPersonalization();
+  }
 
   themesList: any[] = [
     {
