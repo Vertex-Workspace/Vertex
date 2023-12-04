@@ -6,6 +6,7 @@ import { QuickAccessModule } from 'src/app/components/reusable-components/quick-
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 import { ListModule } from '../tasks/list/list.module';
 
+
 @NgModule({
   declarations: [TeamsComponent],
   exports:[TeamsComponent],
@@ -14,7 +15,7 @@ import { ListModule } from '../tasks/list/list.module';
     CardListModule,
     QuickAccessModule,
     CreateTeamProjectModule,
-    ListModule
+    ListModule,
   ],
 })
 export class TeamsModule { }

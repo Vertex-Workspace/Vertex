@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
@@ -8,8 +8,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
-import { User } from './models/user';
-import { Project } from './models/project';
 import { AlertService } from './services/alert.service';
 import { UserStateService } from './services/user-state.service';
 
@@ -39,7 +37,7 @@ export class AppComponent{
   faPaperclip = faPaperclip;
   faMicrophoneLines = faMicrophoneLines;
 
-  userLogged: boolean = false;
+  userLogged: boolean = true;
 
   miniChatOpen: boolean = false;
 
@@ -68,7 +66,7 @@ export class AppComponent{
   }
 
   ngOnInit(): void {
-    
+
   }
 
   getRouteAnimationData() {
@@ -77,10 +75,6 @@ export class AppComponent{
 
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;
-  }
-  
-  show() {
-    this.alert.successAlert("parabéns você é um lixo de ser humano!");
   }
 
   updateColor(): void {
@@ -106,10 +100,6 @@ export class AppComponent{
 
   switchNotifications():void{
     this.notification = !this.notification;
-  }
-
-  logout(): void {
-    localStorage.removeItem('loggedUser');
   }
 
 }

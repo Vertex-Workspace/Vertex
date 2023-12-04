@@ -7,7 +7,7 @@
     @apply flex w-[4%] h-full flex-col items-center z-[999];
     background-color: $primaryColor;
     transition: width 0.32s ease-out;
-    z-index: 999;
+    z-index: 10;
     position: fixed;
 }
 
@@ -16,7 +16,7 @@
     transition: width 0.32s ease-in-out;
     background-color: $primaryColor;
     position: fixed;
-    z-index: 999;
+    z-index: 10;
 }
 
 .main-div {
@@ -56,4 +56,13 @@
 .square-chat{
     @apply w-[10%] h-[100%] rounded-lg flex items-center justify-center;
     background-color: $primaryColor;
+}
+
+@keyframes pulse {
+    50% {
+        opacity:0;
+    }
+}
+.animate-pulse {
+    animation: pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

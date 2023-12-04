@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 import { catchError } from 'rxjs';
 import { Team } from 'src/app/models/team';
 import { AlertService } from 'src/app/services/alert.service';
@@ -9,12 +10,14 @@ import { TeamService } from 'src/app/services/team.service';
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.scss']
 })
-export class TeamsComponent {
-
+export class TeamsComponent implements OnInit{
+  
   constructor(
-    private teamService: TeamService,
-    private alert: AlertService
-  ) {
+    public userService : UserService, 
+    public teamService: TeamService
+  ) {}
+
+  ngOnInit(): void {
   }
 
   isCreating: boolean = false;

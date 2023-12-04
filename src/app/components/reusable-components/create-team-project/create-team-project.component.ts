@@ -28,17 +28,20 @@ export class CreateTeamProjectComponent implements OnInit {
     this.secondColor = personalization.getSecondColor();
   }
   ngOnInit(): void {
-    let teamTest: Team = {
-      name: "Teste",
-      creationDate: new Date(),
-      description: "Teste",
-      users: [],
-      creator: undefined,
-      groups: [],
-      projects: []
-    };
-
-    this.teamService.create(teamTest).subscribe();
+    for(let i =0 ; i < 100; i++){
+      let teamTest: Team = {
+        name: "Teste",
+        creationDate: new Date(),
+        description: "Teste",
+        users: [],
+        creator: undefined,
+        groups: [],
+        projects: []
+      };
+  
+      this.teamService.create(teamTest).subscribe();
+    }
+    
   }
 
   closeScreen(): void {
