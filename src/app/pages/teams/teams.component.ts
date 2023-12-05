@@ -27,8 +27,6 @@ export class TeamsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getRecentsTeams();
-    console.log(this.logged);
-    
   }
 
   isCreating: boolean = false;
