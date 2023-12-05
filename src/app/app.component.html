@@ -48,7 +48,8 @@
 <div class="main-content" *ngIf="!userLogged" [@routeAnimations]="getRouteAnimationData()">
     <app-loading *ngIf="!userLogged" [userLogged]="userLogged"></app-loading>
     <router-outlet></router-outlet>
-    <div class="card">
-        <p-toast></p-toast>
-    </div>
+</div>
+
+<div class="card">
+    <p-toast></p-toast>
 </div>

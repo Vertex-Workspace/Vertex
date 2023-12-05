@@ -29,9 +29,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { AlertService } from './services/alert.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -40,6 +39,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,    
     LoginModule,
     RegisterModule,
@@ -66,11 +66,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SearchAllModule,
     HttpClientModule,
     ToastModule,
-    MatProgressBarModule,
   ],
   providers: [
     PersonalizationService,
     MessageService,
+    AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

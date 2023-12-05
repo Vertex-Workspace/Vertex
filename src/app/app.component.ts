@@ -8,8 +8,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
-import { User } from './models/user';
-import { Project } from './models/project';
 import { AlertService } from './services/alert.service';
 import { LoadingService } from './services/loading.service';
 import { UserStateService } from './services/user-state.service';
@@ -69,43 +67,6 @@ export class AppComponent {
 
   ngOnInit(): void {
 
-    // this.userService.getOneById(3)
-    //   .subscribe(user => {
-    //     console.log(user);
-    // })
-
-    //   this.userService.create(this.user)
-    //   .subscribe(user => {
-    //     console.log(user);
-    // })
-
-    // this.userService.getAll()
-    //   .subscribe(users => {
-    //     this.listaUser = users;
-    // })
-
-    // this.userService.delete(12)
-    //   .subscribe(users => {
-    //     console.log(users);
-    // })
-
-    //   this.projectService.getAll()
-    //   .subscribe((projects: Project[]) => {
-    //     console.log(projects);
-    //   });
-
-    // this.projectService.getOneById(1)
-    //   .subscribe((project: Project) => {
-    //     console.log(project);
-    //   });
-
-  }
-
-  project: Project = {
-    name: 'project post',
-    description: '',
-    image: '',
-    taskList: [],
   }
 
   getRouteAnimationData() {
@@ -114,10 +75,6 @@ export class AppComponent {
 
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;
-  }
-
-  show() {
-    this.alert.successAlert("parabéns você é um lixo de ser humano!");
   }
 
   expandChat(event: any) {
@@ -134,10 +91,6 @@ export class AppComponent {
 
   switchNotifications(): void {
     this.notification = !this.notification;
-  }
-
-  logout(): void {
-    localStorage.removeItem('loggedUser');
   }
 
 }

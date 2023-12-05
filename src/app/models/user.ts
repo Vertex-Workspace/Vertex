@@ -7,7 +7,7 @@ export class User {
     firstName !: string | undefined;
     lastName !: string | undefined;
     email !: string;
-    password !: string;
+    password ?: string;
     passwordConf ?: string;
     description ?: string | undefined;
     location ?: string | undefined;
@@ -23,7 +23,7 @@ export class User {
         user: User
     ) {
 
-        // this.id = user.id;
+        this.id = user.id;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.email = user.email;

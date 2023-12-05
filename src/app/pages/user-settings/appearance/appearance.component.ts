@@ -20,22 +20,12 @@ export class AppearanceComponent implements OnInit {
 
   constructor(private personalizationService: PersonalizationService, private userService: UserService) { }
 
-  themesBack!: Personalization[];
-
   logged !: User;
 
   ngOnInit(): void {
     this.logged = this.userService.getLogged();
   }
 
-  async takeAllPersonalizations() {
-    await this.personalizationService.getAllPersonalization().subscribe(
-      (personalizations: any) => {
-        this.themesBack = personalizations;
-        console.log(this.themesBack);
-      }
-    )
-  }
 
   themesList: any[] = [
     {
@@ -128,45 +118,54 @@ export class AppearanceComponent implements OnInit {
   ];
 
 
-   selectColor(theme: any, type: any, item: number): void {
-
+  selectColor(theme: any, type: any, item: number): void {
     const newPersonalization: Personalization = {
-      id: user.id,
-      primaryColor: 8,
-      secondColor: 8,
+      id: this.logged.id,
+      primaryColor: item,
+      secondColor: item,
       fontFamily: 1,
       fontSize: 1,
       listeningText: true,
       voiceCommand: true,
     }
 
+    const pers: Personalization = new Personalization(newPersonalization);
 
-    this.userService.patchPersonalization(newPersonalization).subscribe((personalization: any) => {
-      console.log(personalization);
+    this.userService.patchPersonalization(pers)
+      .subscribe((personalization: Personalization) => {
+        console.log("LOGGED" + this.logged.personalization);
+        console.log(personalization);
+        this.logged.personalization = personalization;
+        localStorage.setItem('logged', JSON.stringify(this.logged));
       });
 
 
-    // document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
-    // document.documentElement.style.setProperty('--secondColor', theme.secondColor);
-    // document.documentElement.style.setProperty('--font-family', 'Inter');
-    // const fontSize = this.fontSizes[0].split(' ')[0];
 
+    const fontSize = this.fontSizes[0].split(' ')[0];
+
+    this.foreachColors(theme, type, item);
+
+  }
+
+  foreachColors(theme: any, type: any, item: number): void {
     type.colors.forEach((element: { status: string; }) => {
       element.status = 'unselected';
 
       type.colors[item].status = 'selected';
       if (type.title === 'Cor Secundária' && theme.mode === 'Tema Claro') {
         this.themesList[0].secondColor = type.colors[item].color;
-        // console.log(type.colors[item].color);;
-
-
+        document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
+        document.documentElement.style.setProperty('--font-family', 'Inter');
       }
       else if (type.title === 'Cor Secundária' && theme.mode === 'Tema Escuro') {
         this.themesList[1].secondColor = type.colors[item].color;
-        // console.log(type.colors[item].color);
+        document.documentElement.style.setProperty('--primaryColor', theme.secondColor);
+        document.documentElement.style.setProperty('--font-family', 'Inter');
+      }
+      else{
+        document.documentElement.style.setProperty('--secondColor', type.colors[item].color);
       }
     });
-
   }
 
   selectTheme(item: number): void {

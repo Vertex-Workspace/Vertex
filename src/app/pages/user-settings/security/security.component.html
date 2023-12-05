@@ -8,24 +8,29 @@
 
 
     <div class="w-[85%]">
-        <div *ngFor="let item of passwords; index as i">
-            <section>
-                <p class="regular-text text-bold">{{item.label}}</p>
-                <div class="iconInputBlock">
-                    <div class="iconBox">
-                        <fa-icon [icon]="item.icon" class="icon"></fa-icon>
-                    </div>
-                    <form (ngSubmit)="passwordValidation()">
-                        <div class="h-full w-full p-input-icon-right">
-                            <input (input)="onChange(i)" [type]="item.statusEye ? 'text' : 'password'"
-                                [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" class="small-text"/>
-                            <i (click)="passwordEye(item)" class="pi pi-eye icon" *ngIf="!item.statusEye"></i>
-                            <i (click)="passwordEye(item)" class="pi pi-eye-slash icon" *ngIf="item.statusEye"></i>
+        <form action="POST" [formGroup]="form" 
+            (ngSubmit)="onSubmit()" class="w-full max-h-full"
+        >
+
+            <div *ngFor="let item of passwords; index as i">
+                <section>
+                    <p class="regular-text text-bold">{{item.label}}</p>
+                    <div class="iconInputBlock">
+                        <div class="iconBox">
+                            <fa-icon [icon]="item.icon" class="icon"></fa-icon>
                         </div>
-                    </form>
-                </div>
-            </section>
-        </div>
+                        <span (ngSubmit)="passwordValidation()">
+                            <div class="h-full w-full p-input-icon-right">
+                                <input [type]="item.statusEye ? 'text' : 'password'"
+                                class="small-text" formControlName="{{item.formControlName}}" />
+                                <i (click)="passwordEye(item)" class="pi pi-eye icon" *ngIf="!item.statusEye"></i>
+                                <i (click)="passwordEye(item)" class="pi pi-eye-slash icon" *ngIf="item.statusEye"></i>
+                            </div>
+                        </span>
+                    </div>
+                </section>
+            </div>
+        
 
         <div class="requires">
             <div class="small-text">
@@ -37,19 +42,14 @@
             </div>
 
             <div>
-                <button type="submit" (click)="clickOption('edit')" (click)="passwordValidation()"
-                    [disabled]="contentEditable === true ? false : true"
-                    [ngClass]="contentEditable === true ? 'edit' : 'noEdit'">
+                <button type="submit" (click)="clickOption('edit')"
+                    [disabled]="!form.valid"
+                    [ngClass]="form.valid ? 'edit' : 'noEdit'">
                     Redefinir
                 </button>
             </div>
         </div>
+    </form>
     </div>
 
 </div>
-
-<app-modal-warn *ngIf="!validPassword" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
-    <div class="modal">
-        <p class="large-text">As senhas não coincidem</p>
-    </div>
-</app-modal-warn>

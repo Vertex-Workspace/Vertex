@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { catchError } from 'rxjs';
 import { Team } from 'src/app/models/team';
+import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -10,16 +11,13 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent implements OnInit{
+  
+  constructor(
+    public userService : UserService, 
+    public teamService: TeamService
+  ) {}
 
-  listaUser:any = [];
-  constructor(public userService : UserService, public teamService: TeamService) {
-    
-  }
   ngOnInit(): void {
-    this.userService.getAll()
-      .subscribe(users => {
-        this.listaUser = users;
-    })
   }
 
   isCreating: boolean = false;

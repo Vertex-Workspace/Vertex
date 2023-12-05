@@ -2,10 +2,10 @@
 
 export class Personalization{
 
-    id?: number;
+    id !: number | undefined;
     listeningText?: boolean;
     voiceCommand?: boolean;
-    primaryColor?: number;
+    primaryColor!: number ;
     secondColor?: number;
     fontFamily?: number;
     fontSize?: number;

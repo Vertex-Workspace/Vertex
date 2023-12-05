@@ -28,8 +28,6 @@ export class TasksComponent implements OnInit {
   }
 
   getClicked(): string {
-
-    console.log(this.router.url.split('/')[1]);
     return "/" + this.router.url.split('/')[1] + "/" + this.router.url.split('/')[2];
   }
 

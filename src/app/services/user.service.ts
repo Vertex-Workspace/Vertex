@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable, of } from 'rxjs';
 import { Personalization } from '../models/personalization';
+import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
@@ -32,8 +32,7 @@ export class UserService {
     this.create(user)
       .subscribe(
         (user: User) => {
-          this.alert
-            .successAlert("Sucesso ao cadastrar usuário!")
+          this.login(user);
         },
         e => {
           this.alert
@@ -56,13 +55,13 @@ export class UserService {
   }
 
   public login(user: User): void {
-    this.alert.successAlert(`Bem-vindo, ${user.firstName}`);
+    this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
+    this.userState.setAuthenticationStatus(true);
     this.saveLoggedUser(user);
     this.router.navigate(['/home']);
   }
 
   private saveLoggedUser(user: User): void {
-    this.userState.setAuthenticationStatus(true);
     localStorage.setItem('logged', JSON.stringify(user)); //cookies
   }
 
@@ -70,6 +69,17 @@ export class UserService {
     this.userState.setAuthenticationStatus(false);
     localStorage.removeItem('logged'); //cookies
     this.router.navigate(['/login']);
+  }
+
+  getLogged(): User {
+    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+
+    this.getOneByEmail(user.email)
+      .subscribe((userFor => {
+        user = userFor;
+      }))
+
+    return user;
   }
 
   public getAll(): Observable<User[]> { 
@@ -84,21 +94,31 @@ export class UserService {
       .pipe(map((user: User) => new User(user)));
   }
 
+  public getOneByEmail(email: string): Observable<User> {
+    return this.http
+      .get<User>(`${URL}user/email/${email}`)
+      .pipe(map((user: User) => new User(user)));
+  }
+
   public create(user: User): Observable<User> {
     return this.http
       .post<User>(`${URL}user`, user);
   }
 
-  public patchPersonalization(personalization:Personalization): Observable<Personalization> {
-    const user = JSON.parse(localStorage.getItem('logged')!);
-    
+  public patchPersonalization(personalization:Personalization): Observable<Personalization> {    
     return this.http
-      .patch<any>(`${URL}user/${user.id}/personalization`, personalization);
+      .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
   }
 
   public delete(id: number): Observable<User> {
     return this.http
       .delete<User>(`${URL}user/${id}`);
+  }
+
+  public update(user: User): Observable<User> {
+    this.saveLoggedUser(user);
+    return this.http
+      .put<User>(`${URL}user`, user);
   }
 
 }

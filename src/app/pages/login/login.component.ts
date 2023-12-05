@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faEnvelope, faEye,faEyeSlash,faLock } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { Project } from 'src/app/models/project';
@@ -31,8 +32,17 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alert: AlertService,
-    private userState: UserStateService
-  ) {}
+    private userState: UserStateService,
+    private router: Router
+  ) {
+    this.userState
+      .getAuthenticationStatus()
+      .subscribe((status: boolean) => {
+        if (status) {
+          this.router.navigate(['/home']);
+        }
+      })
+  }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -53,8 +63,9 @@ export class LoginComponent implements OnInit {
         this.userService.login(user);
       },
       e => {
-        this.alert.errorAlert(e.error);
+        return this.alert.errorAlert(e.error);
       });
+
   }
   
   passwordToggle():void{
