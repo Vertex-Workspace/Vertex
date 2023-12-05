@@ -133,7 +133,7 @@ export class AppearanceComponent implements OnInit {
 
     this.userService.patchPersonalization(pers)
       .subscribe((personalization: Personalization) => {
-        console.log("LOGGED" + this.logged.personalization);
+        console.log(this.logged.personalization);
         console.log(personalization);
         this.logged.personalization = personalization;
         localStorage.setItem('logged', JSON.stringify(this.logged));

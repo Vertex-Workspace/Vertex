@@ -11,6 +11,8 @@ import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icon
 import { AlertService } from './services/alert.service';
 import { LoadingService } from './services/loading.service';
 import { UserStateService } from './services/user-state.service';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +41,7 @@ export class AppComponent {
   faMicrophoneLines = faMicrophoneLines;
 
   userLogged: boolean = true;
+  logged!: User;
 
   miniChatOpen: boolean = false;
 
@@ -54,6 +57,7 @@ export class AppComponent {
     private contexts: ChildrenOutletContexts,
     private router: Router,
     private alert: AlertService,
+    private userService: UserService,
     private userState: UserStateService
   ) {
     personalization.setPersonalization();
@@ -66,6 +70,18 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+    this.logged = this.userService.getLogged();
+
+    let personalization;
+
+    this.personalization.findById(this.logged.id!).subscribe((pers:any) =>{
+      personalization = pers;
+      console.log(personalization);
+    });
+
+    
+
+    //setar o tema do usuário com o document.documentElement.style.setProperty('--primary-color', personalization.primaryColor);
 
   }
 

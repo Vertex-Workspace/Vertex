@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL } from './path/api_url';
 import { map, Observable } from 'rxjs';
 import { Personalization } from '../models/personalization';
+import { User } from '../models/user';
 
 
 
@@ -20,6 +21,11 @@ export class PersonalizationService {
     //   textFont: "'Inter', sans-serif",
     // };
     // localStorage.setItem('personalization', JSON.stringify(defaultColors));
+  }
+
+  findById(id:number): Observable<Personalization> {
+    return this.http.get<Personalization>(`${URL}personalization/${id}`)
+    .pipe(map((personalization: Personalization) => new Personalization(personalization)));;
   }
 
   getPrimaryColor(): string {
