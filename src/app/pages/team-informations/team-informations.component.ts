@@ -1,5 +1,6 @@
-import { Input } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +8,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Team } from 'src/app/models/team';
+import { TeamService } from 'src/app/services/team.service';
 
 
 @Component({
@@ -14,56 +17,34 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
     templateUrl: './team-informations.component.html',
     styleUrls: ['./team-informations.component.scss']
 })
-export class TeamInformationsComponent {
-    // ICONS
-    faLink = faLink;
-    faImage = faImage;
-    faCircleUser = faCircleUser;
-    faSearch = faSearch;
-    faEnvelope = faEnvelope;
-    faUserMinus = faUserMinus;
-    faComment = faComment;
-    faChevronDown = faChevronDown;
+export class TeamInformationsComponent implements OnInit {
 
-    // VARIABLES
-    clicked!: string;
-    @Input()
-    basicData: any;
-    @Input()
-    basicOptions: any;
-    @Input()
-    data: any;
-    @Input()
-    options: any;
+    team !: Team;
+    //to-do: add creation date, user social media, fix cards, charts
 
-    menuItems = [
-        { id: 'participants', iconClass: 'pi pi-users', label: 'Visualizar participantes' },
-        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' }
-    ];
+    constructor(
+        private route: ActivatedRoute,
+        private teamService: TeamService
+    ) {}
 
-    users = [
-        { id: 0, picture: "", name: "Ana Borchardt", function: "Front-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
-        { id: 1, picture: "", name: "Kaique Fernandes", function: "Front-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
-        { id: 2, picture: "", name: "Miguel Bertoldi", function: "Back-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
-        { id: 3, picture: "", name: "Otávio Rocha", function: "Front-end developer", socialMedia: [faUserMinus, faEnvelope, faComment],open:false },
-    ];
-
-
-    changePreviewMode(preview: string): void {
-        this.clicked = preview;
+    ngOnInit(): void {
+        this.getTeam();
+        this.start();
     }
 
+    getTeam(): void {
+        const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    swapPermissionExpanded(id: number): void {
-        this.users[id].open = !this.users[id].open;
+        this.teamService
+            .getOneById(id)
+            .subscribe((team: Team) => {
+                this.team = team;                
+            })
+        
     }
 
-
-    ngOnInit() {
-
+    start(): void {
         this.clicked = "participants"
-
-        console.log(this.users);
 
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
@@ -137,4 +118,45 @@ export class TeamInformationsComponent {
             }
         };
     }
+
+    getMembersQtt(): number | undefined {
+        return this.team.users?.length;
+    }
+
+    // ICONS
+    faLink = faLink;
+    faImage = faImage;
+    faCircleUser = faCircleUser;
+    faSearch = faSearch;
+    faEnvelope = faEnvelope;
+    faUserMinus = faUserMinus;
+    faComment = faComment;
+    faChevronDown = faChevronDown;
+
+    // VARIABLES
+    clicked!: string;
+    @Input()
+    basicData: any;
+    @Input()
+    basicOptions: any;
+    @Input()
+    data: any;
+    @Input()
+    options: any;
+
+    menuItems = [
+        { id: 'participants', iconClass: 'pi pi-users', label: 'Visualizar participantes' },
+        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' }
+    ];
+
+
+    changePreviewMode(preview: string): void {
+        this.clicked = preview;
+    }
+
+
+    swapPermissionExpanded(id: number): void {
+        // this.users[id].open = !this.users[id].open;
+    }
+
 }

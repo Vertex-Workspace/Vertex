@@ -38,7 +38,8 @@ export class TeamService {
 
   public getTeamsByUser(userId: number): Observable<Team[]> {
     return this.http
-      .get<Team[]>(`${URL}user-team/teams/${userId}`);
+      .get<Team[]>(`${URL}user-team/teams/${userId}`)
+      .pipe(map((teams: Team[]) => teams.map(team => new Team(team))));
 
   }
 

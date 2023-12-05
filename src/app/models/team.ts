@@ -25,6 +25,9 @@ export class Team {
         this.creationDate = team.creationDate;
         this.description = team.description;
         this.creator = team.creator;
+        this.users = team.users;         
+        this.groups = team.groups;
+        this.projects = team.projects;       
         
     }
 

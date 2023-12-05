@@ -15,7 +15,7 @@ export class CardListComponent implements OnInit{
 
   constructor(
     private teamService: TeamService, 
-    private route: Router,
+    private router: Router,
     private alert: AlertService
   ) { }
   
@@ -53,9 +53,13 @@ export class CardListComponent implements OnInit{
   }
 
   openTeam(id: number|undefined) {
-    this.teamService.getOneById(id!).subscribe(async(team) => {
-      await localStorage.setItem('team', JSON.stringify(new Team(team)));
-      this.route.navigate(['/projetos']);
-    });
+
+    this.router.navigate(['/equipe/' + id]);
+    
+
+    // this.teamService.getOneById(id!).subscribe(async(team) => {
+    //   await localStorage.setItem('team', JSON.stringify(new Team(team)));
+    //   this.router.navigate(['/projetos']);
+    // });
   }
 }

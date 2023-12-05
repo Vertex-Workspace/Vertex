@@ -10,10 +10,10 @@
 
                 <div class="divTextHead">
                     <h3 class="font-bold">
-                        Nome Equipe
+                        {{team.name}}
                     </h3>
                     <div class="divMembers">
-                        <p class="medium-text">3 membros</p>
+                        <p class="medium-text">{{getMembersQtt()}} {{getMembersQtt() === 1 ? "membro" : "membros"}}</p>
                         <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
                         <p class="medium-text">Copiar link de convite</p>
                     </div>
@@ -56,19 +56,19 @@
 
 
             <div *ngIf="clicked == 'participants'" class="grid-participants">
-                <ng-container *ngFor="let user of users">
+                <ng-container *ngFor="let user of team.users">
                     <div class="card-user-grid">
                         <div class="div-text-card">
                             <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon>
                         </div>
 
                         <div class="highDiv-card-informations">
-                            <p class="medium-text">{{ user.name }}</p>
-                            <p class="small-text opacity-60">{{ user.function }}</p>
+                            <p class="medium-text">{{ user.firstName }} {{user.lastName}}</p>
+                            <p class="small-text opacity-60">(( user.function ))</p>
                             <div class="divSocial-media">
-                                <ng-container *ngFor="let item of user.socialMedia">
+                                <!-- <ng-container *ngFor="let item of user.socialMedia">
                                     <fa-icon class="social-media" [icon]="item"></fa-icon>
-                                </ng-container>
+                                </ng-container> -->
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
 
 
             <div *ngIf="clicked == 'permissions'" class="grid-permissions">
-                <ng-container *ngFor="let user of users; let id = index">
+                <ng-container *ngFor="let user of team.users; let id = index">
                     <div class="extense-card">
                         <div class="div-permission">
                             <div class="div-permission-icon">
@@ -85,8 +85,8 @@
                             </div>
 
                             <div class="div-permission-nameFunction">
-                                <p class="medium-text">{{ user.name }}</p>
-                                <p class="small-text opacity-60">{{ user.function }}</p>
+                                <p class="medium-text">{{ user.firstName }} {{user.lastName}}</p>
+                                <p class="small-text opacity-60">(( user.function ))</p>
                             </div>
 
                             <div class="div-swap-permission">
@@ -95,7 +95,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="user.open" class="extense-cardExpanded">
+                        <!-- <div *ngIf="user.open" class="extense-cardExpanded">
                             <div class="div-checkbox1">
                                 <input type="checkbox" id="editionCheck">
                                 <label for="editionCheck">Edição</label>
@@ -110,7 +110,7 @@
                                 <input type="checkbox" id="createCheck">
                                 <label for="createCheck">Criação</label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
 
@@ -125,12 +125,7 @@
                 <div class="flex w-[82%] items-center h-[30%]">
                     <h5>Descrição da equipe</h5>
                 </div>
-                <p class="regular-text w-[82%] h-[58%] text-justify overflow-auto">"Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum."</p>
+                <p class="regular-text w-[82%] h-[58%] text-justify overflow-auto">{{team.description}}</p>
             </div>
 
             <div class="h-[8.5%] w-full items-end justify-center flex">
