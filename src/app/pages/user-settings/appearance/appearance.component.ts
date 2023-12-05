@@ -22,7 +22,10 @@ export class AppearanceComponent implements OnInit {
 
   themesBack!: Personalization[];
 
+  logged !: User;
+
   ngOnInit(): void {
+    this.logged = this.userService.getLogged();
   }
 
   async takeAllPersonalizations() {
@@ -127,27 +130,20 @@ export class AppearanceComponent implements OnInit {
 
    selectColor(theme: any, type: any, item: number): void {
 
-    const storedUser = JSON.parse(localStorage.getItem('logged') || '{}');
-    const user: User = storedUser ? storedUser : {};
-
     const newPersonalization: Personalization = {
       id: user.id,
       primaryColor: 8,
       secondColor: 8,
-      fontFamily: 1s,
+      fontFamily: 1,
       fontSize: 1,
       listeningText: true,
       voiceCommand: true,
     }
 
 
-    this.userService.patchPersonalization(newPersonalization).subscribe(
-      (personalization: any) => {
-        console.log(user);
-        
-        console.log(personalization);
-      }
-    );
+    this.userService.patchPersonalization(newPersonalization).subscribe((personalization: any) => {
+      console.log(personalization);
+      });
 
 
     // document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);

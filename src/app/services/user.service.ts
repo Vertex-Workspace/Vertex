@@ -89,10 +89,11 @@ export class UserService {
       .post<User>(`${URL}user`, user);
   }
 
-  public patchPersonalization(personalization: Personalization): Observable<Personalization> {
+  public patchPersonalization(personalization:Personalization): Observable<Personalization> {
     const user = JSON.parse(localStorage.getItem('logged')!);
-    return this.http.patch<any>(`${URL}user/${user.id}/personalization`, personalization)
-    .pipe(map((personalization: Personalization) => new Personalization(personalization)));
+    
+    return this.http
+      .patch<any>(`${URL}user/${user.id}/personalization`, personalization);
   }
 
   public delete(id: number): Observable<User> {
