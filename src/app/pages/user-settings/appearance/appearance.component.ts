@@ -3,6 +3,7 @@ import { faPencil, faSun, faMoon, faToggleOff, faToggleOn, faCheck } from '@fort
 import { PersonalizationService } from '../../../services/personalization.service';
 import { Personalization } from '../../../models/personalization';
 import { User } from 'src/app/models/user';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-appearance',
@@ -17,14 +18,11 @@ export class AppearanceComponent implements OnInit {
   faToggleOff = faToggleOff;
   faCheck = faCheck;
 
-  constructor(private personalizationService: PersonalizationService) { }
+  constructor(private personalizationService: PersonalizationService, private userService: UserService) { }
 
   themesBack!: Personalization[];
 
   ngOnInit(): void {
-
-    this.takeAllPersonalizations();
-
   }
 
   async takeAllPersonalizations() {
@@ -33,7 +31,7 @@ export class AppearanceComponent implements OnInit {
         this.themesBack = personalizations;
         console.log(this.themesBack);
       }
-      )
+    )
   }
 
   themesList: any[] = [
@@ -127,24 +125,35 @@ export class AppearanceComponent implements OnInit {
   ];
 
 
-  selectColor(theme: any, type: any, item: number): void {
+   selectColor(theme: any, type: any, item: number): void {
 
-    const user: User = window.localStorage.getItem('logged') ? JSON.parse(window.localStorage.getItem('logged') || '{}') : {};
-    
-    const personalization: Personalization = {
+    const storedUser = JSON.parse(localStorage.getItem('logged') || '{}');
+    const user: User = storedUser ? storedUser : {};
+
+    const newPersonalization: Personalization = {
       id: user.id,
-      listeningText:true,
-      voiceCommand:true,
-      primaryColor: type.colors[item].color,
-      secondColor: theme.secondColor,
-      fontFamily: 3,
-      fontSize: 12,
+      primaryColor: 8,
+      secondColor: 8,
+      fontFamily: 1s,
+      fontSize: 1,
+      listeningText: true,
+      voiceCommand: true,
     }
-    console.log(personalization);
 
-    this.personalizationService.patchPersonalization(personalization);
-    console.log(personalization);
-    
+
+    this.userService.patchPersonalization(newPersonalization).subscribe(
+      (personalization: any) => {
+        console.log(user);
+        
+        console.log(personalization);
+      }
+    );
+
+
+    // document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
+    // document.documentElement.style.setProperty('--secondColor', theme.secondColor);
+    // document.documentElement.style.setProperty('--font-family', 'Inter');
+    // const fontSize = this.fontSizes[0].split(' ')[0];
 
     type.colors.forEach((element: { status: string; }) => {
       element.status = 'unselected';
@@ -152,13 +161,13 @@ export class AppearanceComponent implements OnInit {
       type.colors[item].status = 'selected';
       if (type.title === 'Cor Secundária' && theme.mode === 'Tema Claro') {
         this.themesList[0].secondColor = type.colors[item].color;
-        console.log(type.colors[item].color);
-        
+        // console.log(type.colors[item].color);;
+
 
       }
       else if (type.title === 'Cor Secundária' && theme.mode === 'Tema Escuro') {
         this.themesList[1].secondColor = type.colors[item].color;
-        console.log(type.colors[item].color);
+        // console.log(type.colors[item].color);
       }
     });
 

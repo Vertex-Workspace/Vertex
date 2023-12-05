@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable, of } from 'rxjs';
+import { Personalization } from '../models/personalization';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
@@ -86,6 +87,12 @@ export class UserService {
   public create(user: User): Observable<User> {
     return this.http
       .post<User>(`${URL}user`, user);
+  }
+
+  public patchPersonalization(personalization: Personalization): Observable<Personalization> {
+    const user = JSON.parse(localStorage.getItem('logged')!);
+    return this.http.patch<any>(`${URL}user/${user.id}/personalization`, personalization)
+    .pipe(map((personalization: Personalization) => new Personalization(personalization)));
   }
 
   public delete(id: number): Observable<User> {

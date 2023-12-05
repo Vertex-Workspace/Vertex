@@ -1,9 +1,21 @@
-$fontFamily: 'Manrope', sans-serif;
-$primaryColor: #161616;
-$secondColor: #F3F3F3;
-$emphasis: #D9D9D9;
-$card: #FFFFFF;
-$error: #872323;
-$text: #000000;
-$disabled: grey;
-$borderBottom: 1px solid $primaryColor;
+:root {
+    --fontFamily: 'Manrope', sans-serif;
+    --primaryColor: #161616;
+    --secondColor: #F3F3F3;
+    --emphasis: #D9D9D9;
+    --card: #FFFFFF;
+    --error: #872323;
+    --text: #000000;
+    --disabled: grey;
+    --borderBottom: 1px solid var(--primaryColor);
+}
+
+$fontFamily: var(--fontFamily);
+$primaryColor: var(--primaryColor);
+$secondColor: var(--secondColor);
+$emphasis: var(--emphasis);
+$card: var(--card);
+$error: var(--error);
+$text: var(--text);
+$disabled: var(--disabled);
+$borderBottom: var(--borderBottom);

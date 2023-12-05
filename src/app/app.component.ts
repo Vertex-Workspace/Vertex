@@ -120,15 +120,6 @@ export class AppComponent {
     this.alert.successAlert("parabéns você é um lixo de ser humano!");
   }
 
-  updateColor(): void {
-    document.documentElement.style.setProperty('--custom-color', this.inputColor);
-    document.documentElement.style.setProperty('--font-color', this.fontColor);
-    document.documentElement.style.setProperty('--button-color', this.buttonColor);
-
-    const fontSize = this.fontSize + "px";
-    document.documentElement.style.setProperty('--font-size', fontSize);
-  }
-
   expandChat(event: any) {
     this.chatExpanded = event.action;
   }

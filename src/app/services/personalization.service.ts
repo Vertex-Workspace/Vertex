@@ -10,7 +10,7 @@ import { Personalization } from '../models/personalization';
   providedIn: 'root',
 })
 export class PersonalizationService {
-  constructor(private http : HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   setPersonalization(): void {
     // const defaultColors: Personalization = {
@@ -26,12 +26,8 @@ export class PersonalizationService {
     return JSON.parse(localStorage.getItem('personalization')!).primaryColor;
   }
 
-  getAllPersonalization(): Observable<Personalization[]>{
+  getAllPersonalization(): Observable<Personalization[]> {
     return this.http.get<Personalization[]>(`${URL}personalization`);
-  }
-
-  patchPersonalization(personalization: Personalization): Observable<Personalization>{
-    return this.http.patch<Personalization>(`${URL}personalization`, personalization);
   }
 
   getSecondColor(): string {
