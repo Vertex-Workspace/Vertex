@@ -3,7 +3,7 @@
 
 <br>
 
-- 📫 Como encontrar nosso projeto? **https://github.com/Otavio-Miguel-Rocha/Vertex**
+- 📫 Como encontrar nosso projeto? **https://github.com/Vertex-Workspace/Vertex**
 
 <br>
 
