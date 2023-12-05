@@ -85,10 +85,11 @@
 
 
                 <app-create-team-project 
-                style="width: 100%; height: 90%; padding-top: 3%;"  
-                *ngIf="clicked === 'team' && isCreating" 
-                (close)="switchCreateView()"
-                [typeString]="'team'"
+                    style="width: 100%; height: 90%; padding-top: 3%;"  
+                    *ngIf="clicked === 'team' && isCreating"
+                    (create)="createTeam($event)"
+                    (close)="switchCreateView()"
+                    [typeString]="'team'"
                 ></app-create-team-project>
             </div>
         </div>
@@ -97,7 +98,10 @@
         <!-- RIGHT SIDE - QUICK ACCESS -->
         <div class="container-grid">
             <div class="default-size">
-                <app-quick-access style="width: 100%; height:100%;" [typeString]="'home'"></app-quick-access>
+                <app-quick-access style="width: 100%; height:100%;" 
+                    [typeString]="'home'"
+                    [recentTeams]="recentTeams"
+                ></app-quick-access>
             </div>
         </div>
     </div>

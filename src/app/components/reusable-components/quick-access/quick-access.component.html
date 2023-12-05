@@ -46,13 +46,14 @@
         <h6 class="title" *ngIf="typeString === 'project'">Projetos Recentes de ...</h6>
 
         <div class="div-recently-teams">
-            <div class="recently-teams-team" *ngFor="let team of recentsTeams">
+            <div class="recently-teams-team" *ngFor="let team of recentTeams">
                 <div class="recently-team-image">
-                    <img src="{{team.image}}" alt="">
+                    <!-- <img src="{{team.image}}" alt=""> -->
+                    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/819.png" alt="">
                 </div>
                 <div class="recently-team-info">
                     <p class="large-text">{{team.name}}</p>
-                    <p class="regular-text">{{team.date}}</p>
+                    <p class="regular-text">{{team.creationDate}}</p>
                 </div>
             </div>
         </div>

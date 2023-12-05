@@ -24,6 +24,8 @@ export class Team {
         this.name = team.name;
         this.creationDate = team.creationDate;
         this.description = team.description;
+        this.creator = team.creator;
+        
     }
 
 }

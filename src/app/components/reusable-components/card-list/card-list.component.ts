@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Team } from 'src/app/models/team';
+import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -12,9 +13,11 @@ export class CardListComponent implements OnInit{
 
 
 
-  constructor(private teamService: TeamService, private route: Router) { 
-
-  }
+  constructor(
+    private teamService: TeamService, 
+    private route: Router,
+    private alert: AlertService
+  ) { }
   
   @Input()
   teams!: Team[];
@@ -33,16 +36,15 @@ export class CardListComponent implements OnInit{
     }
   }
 
-  deleteTeam(operation: any) {
-    if(operation){
-      this.teamService.delete(this.idTeamWillBeDeleted).subscribe(
-        (team) => {
-          if(team == null){
-            this.teams?.splice(this.teams.findIndex(team => team.id == this.idTeamWillBeDeleted), 1);
-          }
-        }
-      );
+  deleteTeam(operation: boolean) {
+    if (operation) {
+      this.teamService
+      .delete(this.idTeamWillBeDeleted)
+      .subscribe((team: Team) => {
+        this.alert.successAlert(`Equipe ${team.name} deletada com sucesso!`);
+      });
     }
+
     this.changeModalState();
   }
 

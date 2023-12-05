@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/team';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,12 @@ export class TeamService {
   public delete(id: number): Observable<Team> {
     return this.http
       .delete<Team>(`${URL}team/${id}`);
+  }
+
+  public getTeamsByUser(userId: number): Observable<Team[]> {
+    return this.http
+      .get<Team[]>(`${URL}user-team/teams/${userId}`);
+
   }
 
 

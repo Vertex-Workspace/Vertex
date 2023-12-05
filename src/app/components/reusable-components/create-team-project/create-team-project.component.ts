@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { Team } from 'src/app/models/team';
 import { PersonalizationService } from 'src/app/services/personalization.service';
@@ -14,39 +15,49 @@ export class CreateTeamProjectComponent implements OnInit {
 
   modalCopyLink: boolean = false;
 
+  form !: FormGroup;
+
   @Output()
   close = new EventEmitter();
 
+  @Output()
+  create = new EventEmitter<Team>();
+
   @Input()
   typeString!: String;
+  
 
   primaryColor: string;
   secondColor: string;
 
-  constructor(private personalization: PersonalizationService, private teamService: TeamService) {
+  constructor(
+    private personalization: PersonalizationService, 
+    private teamService: TeamService,
+    private formBuilder: FormBuilder
+  ) {
     this.primaryColor = personalization.getPrimaryColor();
     this.secondColor = personalization.getSecondColor();
   }
+
   ngOnInit(): void {
-    for(let i =0 ; i < 100; i++){
-      let teamTest: Team = {
-        name: "Teste",
-        creationDate: new Date(),
-        description: "Teste",
-        users: [],
-        creator: undefined,
-        groups: [],
-        projects: []
-      };
-  
-      this.teamService.create(teamTest).subscribe();
-    }
-    
+    this.form = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      description: [null],
+      image: [null],
+    });
+  }
+
+  onSubmit(): void { 
+    const team = this.form.getRawValue() as Team;
+    this.create.emit(team);
+
+    this.confirmCreateTeam();
   }
 
   closeScreen(): void {
     this.close.emit();
   }
+
   confirmCreateTeam(): void {
     if (this.typeString === "project") {
       this.closeScreen();

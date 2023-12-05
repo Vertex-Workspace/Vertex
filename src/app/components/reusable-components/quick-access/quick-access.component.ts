@@ -1,4 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Team } from 'src/app/models/team';
+import { User } from 'src/app/models/user';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-quick-access',
@@ -11,8 +16,20 @@ export class QuickAccessComponent implements OnInit {
   @Input()
   typeString!: String;
 
-  ngOnInit() {
-      const documentStyle = getComputedStyle(document.documentElement);
+  @Input()
+  recentTeams !: Team[];
+
+  constructor(
+    private teamService: TeamService,
+    private userService: UserService
+  ) { }
+
+  ngOnInit(): void {
+      this.start();
+  }
+
+  start(): void {
+    const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
       const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
       const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
@@ -38,14 +55,10 @@ export class QuickAccessComponent implements OnInit {
     {id: 'mural', icon: "pi pi-chart-bar", label: "Mural"},
   ]
 
-  recentsTeams: any[] = [
-    { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"},
-    { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"},
-    { image: "../../../assets/teste/teste.jpg", name: "AKMO", date: "11/10/2023"}
-  ]
-
   redirect(section: any): string {
     console.log('tasks/' + section.id)
     return 'tasks/' + section.id;
   }
+
+
 }

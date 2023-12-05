@@ -4,6 +4,7 @@ import { CreateTeamProjectComponent } from './create-team-project.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 import { ButtonModule } from '../button/button.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,7 +15,8 @@ import { ButtonModule } from '../button/button.module';
     CommonModule,
     FontAwesomeModule,
     ModalWarnModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule,
   ]
 })
 export class CreateTeamProjectModule { }

@@ -4,6 +4,7 @@ import { catchError } from 'rxjs';
 import { Team } from 'src/app/models/team';
 import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-teams',
@@ -11,13 +12,23 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent implements OnInit{
+
+  logged !: User;
+
+  recentTeams !: Team[];
   
   constructor(
     public userService : UserService, 
     public teamService: TeamService
-  ) {}
+  ) {
+    this.logged = this.userService.getLogged();
+    
+  }
 
   ngOnInit(): void {
+    this.getRecentsTeams();
+    console.log(this.logged);
+    
   }
 
   isCreating: boolean = false;
@@ -28,6 +39,15 @@ export class TeamsComponent implements OnInit{
   ];
 
   teams: Team[] = [];
+
+  createTeam(team: Team): void {
+    team.creator = this.logged;
+    this.teamService
+      .create(team)
+      .subscribe((team: Team) => {
+        console.log(team);
+      });
+  }
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
@@ -68,6 +88,16 @@ export class TeamsComponent implements OnInit{
 
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
+  }
+
+  getRecentsTeams(): void {
+    this.teamService
+      .getTeamsByUser(this.logged.id!)
+      .subscribe((teams) => {
+        console.log(this.logged.id!);
+        
+        this.recentTeams = teams;
+      });
   }
 
 
