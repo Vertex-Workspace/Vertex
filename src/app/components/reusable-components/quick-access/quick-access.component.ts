@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Team } from 'src/app/models/team';
 import { User } from 'src/app/models/user';
@@ -21,11 +22,16 @@ export class QuickAccessComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
       this.start();
+  }
+
+  openTeam(team: Team): void {
+    this.router.navigate(['/equipe/', team.id]);
   }
 
   start(): void {
@@ -50,14 +56,13 @@ export class QuickAccessComponent implements OnInit {
 
   workSpace: any[] = [
     {id: 'kanban', icon: "pi pi-th-large", label: "Kanban"},
-    {id: 'calendar', icon: "pi pi-calendar", label: "Calendário"},
-    {id: 'list', icon: "pi pi-list", label: "Linhas"},
+    {id: 'calendario', icon: "pi pi-calendar", label: "Calendário"},
+    {id: 'lista', icon: "pi pi-list", label: "Linhas"},
     {id: 'mural', icon: "pi pi-chart-bar", label: "Mural"},
   ]
 
-  redirect(section: any): string {
-    console.log('tasks/' + section.id)
-    return 'tasks/' + section.id;
+  redirect(section: string): string {
+    return 'tarefas/' + section;
   }
 
 

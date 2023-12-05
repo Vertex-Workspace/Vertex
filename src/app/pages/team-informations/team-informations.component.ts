@@ -20,7 +20,7 @@ import { TeamService } from 'src/app/services/team.service';
 export class TeamInformationsComponent implements OnInit {
 
     team !: Team;
-    //to-do: add creation date, user social media, fix cards, charts
+    //to-do: add creation date, user social media, fix cards, -- charts
 
     constructor(
         private route: ActivatedRoute,

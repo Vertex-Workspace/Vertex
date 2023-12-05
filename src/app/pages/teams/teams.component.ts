@@ -18,8 +18,9 @@ export class TeamsComponent implements OnInit{
   recentTeams !: Team[];
   
   constructor(
-    public userService : UserService, 
-    public teamService: TeamService
+    private userService : UserService, 
+    private teamService: TeamService,
+    private alert: AlertService
   ) {
     this.logged = this.userService.getLogged();
     
@@ -43,7 +44,7 @@ export class TeamsComponent implements OnInit{
     this.teamService
       .create(team)
       .subscribe((team: Team) => {
-        console.log(team);
+        this.alert.successAlert(`Equipe ${team.name} criada com sucesso!`);
       });
   }
 

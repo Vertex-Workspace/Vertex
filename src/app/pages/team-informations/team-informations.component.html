@@ -10,7 +10,7 @@
 
                 <div class="divTextHead">
                     <h3 class="font-bold">
-                        {{team.name}}
+                        {{team.name ? team.name : "Equipe sem nome"}}
                     </h3>
                     <div class="divMembers">
                         <p class="medium-text">{{getMembersQtt()}} {{getMembersQtt() === 1 ? "membro" : "membros"}}</p>
