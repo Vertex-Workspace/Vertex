@@ -7,11 +7,11 @@ import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/models/user';
 
 @Component({
-  selector: 'app-teams',
-  templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class TeamsComponent implements OnInit{
+export class HomeComponent implements OnInit{
 
   logged !: User;
 

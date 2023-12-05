@@ -7,12 +7,18 @@ import { Component } from '@angular/core';
 })
 export class ProjectsComponent {
   isCreating: boolean = false;
+  filterOpen: boolean = false;
+  orderOpen: boolean = false;
   clicked: string = 'task';
+
+  //TASKS - FILTER AND ORDER
+  filterSettings: any[] = [];
+  orderSettings: any[] = [];
+
   menuItems = [
     { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
     { id: 'project', iconClass: 'pi pi-users', label: 'Projetos' },
   ];
-
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
@@ -22,18 +28,10 @@ export class ProjectsComponent {
     this.isCreating = !this.isCreating;
   }
 
-
-  //TASKS - FILTER AND ORDER
-  filterSettings: any[] = [];
-  orderSettings: any[] = [];
-
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
   ];
-
-  filterOpen: boolean = false;
-  orderOpen: boolean = false;
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
