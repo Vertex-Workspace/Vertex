@@ -22,8 +22,7 @@ export class HomeComponent implements OnInit{
     private teamService: TeamService,
     private alert: AlertService
   ) {
-    this.logged = this.userService.getLogged();
-    
+    this.logged = this.userService.getLogged();  
   }
 
   ngOnInit(): void {

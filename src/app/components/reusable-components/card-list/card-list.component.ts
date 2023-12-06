@@ -54,7 +54,7 @@ export class CardListComponent implements OnInit{
 
   openTeam(id: number|undefined) {
 
-    this.router.navigate(['/equipe/' + id]);
+    this.router.navigate(['/equipe/' + id + '/projetos']);
     
 
     // this.teamService.getOneById(id!).subscribe(async(team) => {

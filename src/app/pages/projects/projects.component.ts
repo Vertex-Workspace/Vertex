@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Project } from 'src/app/models/project';
+import { User } from 'src/app/models/user';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -11,6 +14,8 @@ export class ProjectsComponent {
   orderOpen: boolean = false;
   clicked: string = 'task';
 
+  logged !: User;
+
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
   orderSettings: any[] = [];
@@ -19,6 +24,10 @@ export class ProjectsComponent {
     { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
     { id: 'project', iconClass: 'pi pi-users', label: 'Projetos' },
   ];
+
+  constructor(
+    private projectService: ProjectService
+  ) {}
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
@@ -40,4 +49,10 @@ export class ProjectsComponent {
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
+
+  createProject(project: Project): void {
+    console.log(project);
+    
+  }
+
 }

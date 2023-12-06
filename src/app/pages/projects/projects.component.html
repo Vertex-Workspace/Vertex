@@ -64,7 +64,12 @@
 
             <div class="default-size">
                 <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" *ngIf="clicked === 'project' && !isCreating"></app-card-list>
-                <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;" *ngIf="clicked === 'project' && isCreating" (close)="switchCreateView()" [typeString]="'project'"></app-create-team-project>
+                <app-create-team-project 
+                    style="width: 100%; height: 90%; padding-top: 3%;" 
+                    *ngIf="clicked === 'project' && isCreating" 
+                    (close)="switchCreateView()" 
+                    [typeString]="'project'"
+                ></app-create-team-project>
             </div>
         </div>
     </div>
