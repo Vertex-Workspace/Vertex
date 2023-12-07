@@ -21,78 +21,107 @@ export class AppearanceComponent implements OnInit {
   constructor(private personalizationService: PersonalizationService, private userService: UserService) { }
 
   logged !: User;
+  primary!: string;
+  second!: string;
+
+  themesList:any[]=[];
 
   ngOnInit(): void {
     this.logged = this.userService.getLogged();
+
+    this.userService.getOneById(this.logged.id!).subscribe((user) => {
+
+      this.primary = user.personalization?.primaryColor!;
+      this.second = user.personalization?.secondColor!;
+
+      this.themesList = [
+        {
+          mode: 'Tema Claro',
+          icon: faSun,
+          status: 'selected',
+          secondColor: this.second,
+          primaryColor: this.primary,
+          types: [
+            {
+              title: "Cor de Fundo",
+              iconColor: '#000000',
+              colors: [
+                { 'color': '#FFFFFF', status: 'unselected' },
+                { 'color': '#F3F3F3', status: 'selected' },
+                { 'color': '#E5DDF5', status: 'unselected' },
+                { 'color': '#DCE8F2', status: 'unselected' },
+                { 'color': '#FAEAEA', status: 'unselected' },
+                { 'color': '#F5FCF2', status: 'unselected' },
+              ]
+            },
+            {
+              title: "Cor Primária",
+              iconColor: '#F3F3F3',
+              colors: [
+                { 'color': '#092C4C', status: 'selected' },
+                { 'color': '#F5B1B1', status: 'unselected' },
+                { 'color': '#6F57A1', status: 'unselected' },
+                { 'color': '#000000', status: 'unselected' },
+                { 'color': '#A5A973', status: 'unselected' },
+                { 'color': '#83B172', status: 'unselected' },
+              ]
+            }
+          ]
+        },
+        {
+          mode: 'Tema Escuro',
+          icon: faMoon,
+          status: 'unselected',
+          secondColor: this.second,
+          primaryColor: this.primary,
+          types: [
+            {
+              title: "Cor de Fundo",
+              iconColor: '#F3F3F3',
+              colors: [
+                { 'color': '#574444', status: 'selected' },
+                { 'color': '#5B5555', status: 'unselected' },
+                { 'color': '#0B2740', status: 'unselected' },
+                { 'color': '#464646', status: 'unselected' },
+                { 'color': '#787878', status: 'unselected' },
+                { 'color': '#322438', status: 'unselected' },
+              ]
+            },
+            {
+              title: "Cor Primária",
+              iconColor: '#000000',
+              colors: [
+                { 'color': '#F3F3F3', status: 'selected' },
+                { 'color': '#F5B1B1', status: 'unselected' },
+                { 'color': '#A697C6', status: 'unselected' },
+                { 'color': '#BEDFF4', status: 'unselected' },
+                { 'color': '#FFC1C9', status: 'unselected' },
+                { 'color': '#83B172', status: 'unselected' },
+              ]
+            }
+          ]
+        }
+      ]
+      this.changeThemesListSelected();
+    })
+    
   }
 
 
-  themesList: any[] = [
-    {
-      mode: 'Tema Claro',
-      icon: faSun,
-      status: 'selected',
-      secondColor: '#092C4C',
-      types: [
-        {
-          title: "Cor de Fundo",
-          iconColor: '$primaryColor',
-          colors: [
-            { 'color': '#FFFFFF', status: 'unselected' },
-            { 'color': '#F3F3F3', status: 'selected' },
-            { 'color': '#E5DDF5', status: 'unselected' },
-            { 'color': '#DCE8F2', status: 'unselected' },
-            { 'color': '#FAEAEA', status: 'unselected' },
-            { 'color': '#F5FCF2', status: 'unselected' },
-          ]
-        },
-        {
-          title: "Cor Secundária",
-          iconColor: '#F3F3F3',
-          colors: [
-            { 'color': '#092C4C', status: 'selected' },
-            { 'color': '#F5B1B1', status: 'unselected' },
-            { 'color': '#6F57A1', status: 'unselected' },
-            { 'color': '#000000', status: 'unselected' },
-            { 'color': '#A5A973', status: 'unselected' },
-            { 'color': '#83B172', status: 'unselected' },
-          ]
-        }
-      ]
-    },
-    {
-      mode: 'Tema Escuro',
-      icon: faMoon,
-      status: 'unselected',
-      secondColor: '#F3F3F3',
-      types: [
-        {
-          title: "Cor de Fundo",
-          iconColor: '#F3F3F3',
-          colors: [
-            { 'color': '#574444', status: 'selected' },
-            { 'color': '#5B5555', status: 'unselected' },
-            { 'color': '#0B2740', status: 'unselected' },
-            { 'color': '#464646', status: 'unselected' },
-            { 'color': '#787878', status: 'unselected' },
-            { 'color': '#322438', status: 'unselected' },
-          ]
-        },
-        {
-          title: "Cor Secundária",
-          iconColor: '$primaryColor',
-          colors: [
-            { 'color': '#F3F3F3', status: 'selected' },
-            { 'color': '#F5B1B1', status: 'unselected' },
-            { 'color': '#A697C6', status: 'unselected' },
-            { 'color': '#BEDFF4', status: 'unselected' },
-            { 'color': '#FFC1C9', status: 'unselected' },
-            { 'color': '#83B172', status: 'unselected' },
-          ]
-        }
-      ]
-    }
-  ]
+  changeThemesListSelected() {
+
+    this.themesList.forEach((themes) => {
+      themes.types.forEach((type: any) => {
+        type.colors.forEach((color: any) => {
+          if(color.color == this.primary || color.color == this.second){
+            color.status = "selected"
+          } else color.status = "unselected"
+        });
+      });
+    })
+
+  }
+
 
   toggles = [
     { text: "Habilitar comando de voz", icon: faToggleOff },
@@ -118,32 +147,25 @@ export class AppearanceComponent implements OnInit {
   ];
 
 
-  selectColor(theme: any, type: any, item: number): void {
-    const newPersonalization: Personalization = {
-      id: this.logged.id,
-      primaryColor: item,
-      secondColor: item,
-      fontFamily: 1,
-      fontSize: 1,
-      listeningText: true,
-      voiceCommand: true,
-    }
-
-    const pers: Personalization = new Personalization(newPersonalization);
-
-    this.userService.patchPersonalization(pers)
-      .subscribe((personalization: Personalization) => {
-        console.log(this.logged.personalization);
-        console.log(personalization);
-        this.logged.personalization = personalization;
-        localStorage.setItem('logged', JSON.stringify(this.logged));
-      });
-
-
-
-    const fontSize = this.fontSizes[0].split(' ')[0];
+  selectColor(theme: any, type: any, item: any): void {
 
     this.foreachColors(theme, type, item);
+    let newPers = new Personalization({
+      id: this.logged.id!,
+      primaryColor: theme.primaryColor,
+      secondColor: theme.secondColor,
+      fontFamily: this.fontFamily[0],
+      fontSize: parseInt(this.fontSizes[0]),
+      voiceCommand: true,
+      listeningText: true
+    });
+
+    this.userService.patchPersonalization(newPers).subscribe((pers) => {
+
+      this.logged.personalization = pers;
+      localStorage.setItem("logged", JSON.stringify(this.logged))
+      console.log(this.logged.personalization);
+    })
 
   }
 
@@ -152,17 +174,20 @@ export class AppearanceComponent implements OnInit {
       element.status = 'unselected';
 
       type.colors[item].status = 'selected';
-      if (type.title === 'Cor Secundária' && theme.mode === 'Tema Claro') {
-        this.themesList[0].secondColor = type.colors[item].color;
+      if (type.title === 'Cor Primária' && theme.mode === 'Tema Claro') {
+        theme.primaryColor = type.colors[item].color;
         document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
-        document.documentElement.style.setProperty('--font-family', 'Inter');
       }
-      else if (type.title === 'Cor Secundária' && theme.mode === 'Tema Escuro') {
-        this.themesList[1].secondColor = type.colors[item].color;
-        document.documentElement.style.setProperty('--primaryColor', theme.secondColor);
-        document.documentElement.style.setProperty('--font-family', 'Inter');
+      if (type.title === 'Cor Primária' && theme.mode === 'Tema Escuro') {
+        theme.primaryColor = type.colors[item].color;
+        document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
       }
-      else{
+      if (type.title === 'Cor de Fundo' && theme.mode === 'Tema Claro') {
+        theme.secondColor = type.colors[item].color;
+        document.documentElement.style.setProperty('--secondColor', type.colors[item].color);
+      }
+      if (type.title === 'Cor de Fundo' && theme.mode === 'Tema Escuro') {
+        theme.secondColor = type.colors[item].color;
         document.documentElement.style.setProperty('--secondColor', type.colors[item].color);
       }
     });

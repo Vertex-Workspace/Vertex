@@ -70,16 +70,22 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.logged = this.userService.getLogged();
 
-    let personalization;
+    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+    
 
-    this.personalization.findById(this.logged.id!).subscribe((pers:any) =>{
-      personalization = pers;
-      console.log(personalization);
+
+
+    this.userService.getOneById(user.id!).subscribe((logged) => {
+      console.log(logged);
+
+      this.logged = logged;
+      console.log(logged);
+
+      document.documentElement.style.setProperty('--primaryColor',this.logged.personalization?.primaryColor!);
+      document.documentElement.style.setProperty('--secondColor',this.logged.personalization?.secondColor!);
     });
 
-    
 
     //setar o tema do usuário com o document.documentElement.style.setProperty('--primary-color', personalization.primaryColor);
 
