@@ -1,14 +1,26 @@
-export interface Task {
-    name: string,
-    category: any, //propriedade
-    description ?: string,
-    creator ?: string,
-    properties ?: any[],
-    isDragging ?: boolean,
-    isSelected ?: boolean,
-    status ?: string,
-    width ?: string,
-    height ?: string,
-    top ?: string,
-    left ?: string
+
+import { Property } from "./property";
+import { Value } from "./value";
+
+export class Task {
+
+    id!: number;
+    name!: string;
+    description?: string;
+    values!: Value[];
+    properties!: Property[];
+
+
+    //mural
+    width?: string;
+    height?: string;
+    top?: string;
+    left?: string;
+
+    constructor(
+        team: Task
+    ) {
+        this.id = team.id;
+    }
+
 }

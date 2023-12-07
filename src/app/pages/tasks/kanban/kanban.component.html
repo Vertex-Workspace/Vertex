@@ -3,23 +3,23 @@
         <div class="col-container" >
             <div 
                 class="col"
-                *ngFor="let property of categories" 
-                [style.backgroundColor]="property.color"
-                [style.height]="getHeight(property)"
+                *ngFor="let propertyList of properties" 
+                [style.backgroundColor]="getColor(propertyList.color)"
+                [style.height]="getHeight(propertyList)"
                 cdkDropList 
                 [cdkDropListData]="taskList" 
-                (cdkDropListDropped)="dropCard($event, property)"
+                (cdkDropListDropped)="dropCard($event, propertyList)"
             >
 
-                <h6>{{ property.name }}</h6>
+                <h6>{{ propertyList.value }}</h6>
 
                 <div class="col-items">
 
-                    <ng-container *ngFor="let task of taskList">
+                    <ng-container *ngFor="let task of project.tasks">
                         <app-card
                             [minHeight]="'150px'" 
                             [width]="'300px'" 
-                            *ngIf="task.category === property"
+                            *ngIf="getTaskByProperty(task, propertyList)"
                             [task]="task" 
                             [cdkDragData]="task" 
                             cdkDrag

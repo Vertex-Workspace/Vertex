@@ -1,0 +1,16 @@
+<app-modal-warn [height]="'750px'" [width]="'600px'" [title]="'Grupos'">
+    <div class="groups-select">
+        <ng-container *ngFor="let group of groups">
+            <div class="group-card" [style.background]="'#D9D9D9'">
+                <h5>{{group.name}}</h5>
+                <div    >
+                    <input type="checkbox" name="" id="">
+                    <i *ngIf="!group.open" class="pi pi-chevron-down cursor-pointer" (click)="getGroupById(group)"></i>
+                    <i *ngIf="group.open" class="pi pi-chevron-up cursor-pointer" (click)="getGroupById(group)"></i>
+                </div>
+            </div>
+            <div class="flex w-full justify-end">
+            </div>
+        </ng-container>
+    </div>
+</app-modal-warn>

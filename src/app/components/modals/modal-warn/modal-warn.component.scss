@@ -5,7 +5,7 @@
 }
 
 .exitModal {
-    @apply text-[2rem] font-bold cursor-pointer h-[8%];
+    @apply flex font-bold h-[8%] w-full justify-between flex-row p-4;
     color: $primaryColor;
 }
 

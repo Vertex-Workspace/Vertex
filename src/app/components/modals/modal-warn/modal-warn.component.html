@@ -2,8 +2,9 @@
     <div class="modal" 
     [style.height]="height"
     [style.width]="width">
-        <div class="exitModal" (click)="closeModal()">
-            X
+        <div class="exitModal">
+            <h4>{{title}}</h4>
+            <h4 class="cursor-pointer" (click)="closeModal()">X</h4>
         </div>
         
         <div class="ng-contentDiv">

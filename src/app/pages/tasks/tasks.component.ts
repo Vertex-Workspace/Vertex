@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
+import { Project } from 'src/app/models/project';
+import { TaskService } from 'src/app/services/task.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 
 @Component({
@@ -19,12 +22,19 @@ export class TasksComponent implements OnInit {
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
 
+  project!: Project;
   constructor(
-    private router: Router
+    private router: Router,
+    private projectService: ProjectService,
+    private taskService: TaskService
   ) { }
 
   ngOnInit(): void {
     this.clicked = this.getClicked();
+
+    this.projectService.getOneById(1).subscribe((project: Project) => {
+      this.project = project;
+    });
   }
 
   getClicked(): string {

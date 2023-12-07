@@ -19,6 +19,7 @@ import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path: "projetos",
     component: ProjectsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "groups",
+    component: GroupsSelectComponent,
     canActivate: [AuthGuard]
   },
   {
