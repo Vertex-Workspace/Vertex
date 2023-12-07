@@ -7,7 +7,7 @@ export class Personalization{
     secondColor?: string;
     fontFamily?: string;
     fontSize?: number;
-    theme?:string;
+    theme?: number;
     listeningText?: boolean;
     voiceCommand?: boolean;
 

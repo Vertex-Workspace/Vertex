@@ -4,6 +4,7 @@ import { PersonalizationService } from '../../../services/personalization.servic
 import { Personalization } from '../../../models/personalization';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../../services/user.service';
+import TypedRegistry from 'chart.js/dist/core/core.typedRegistry';
 
 @Component({
   selector: 'app-appearance',
@@ -23,8 +24,10 @@ export class AppearanceComponent implements OnInit {
   logged !: User;
   primary!: string;
   second!: string;
+  theme!: number;
 
-  themesList:any[]=[];
+  themesList!: any[];
+
 
   ngOnInit(): void {
     this.logged = this.userService.getLogged();
@@ -33,12 +36,13 @@ export class AppearanceComponent implements OnInit {
 
       this.primary = user.personalization?.primaryColor!;
       this.second = user.personalization?.secondColor!;
+      this.theme = user.personalization?.theme!;
 
       this.themesList = [
         {
           mode: 'Tema Claro',
           icon: faSun,
-          status: 'selected',
+          status: "selected",
           secondColor: this.second,
           primaryColor: this.primary,
           types: [
@@ -71,7 +75,7 @@ export class AppearanceComponent implements OnInit {
         {
           mode: 'Tema Escuro',
           icon: faMoon,
-          status: 'unselected',
+          status: "unselected",
           secondColor: this.second,
           primaryColor: this.primary,
           types: [
@@ -101,23 +105,64 @@ export class AppearanceComponent implements OnInit {
             }
           ]
         }
-      ]
+      ];
+
+
+      if (this.theme == 0) {
+        this.themesList[0].status = 'selected';
+        this.themesList[1].status = 'unselected';
+      } else {
+        this.themesList[1].status = 'selected';
+        this.themesList[0].status = 'unselected';
+      }
+
+
+
+
+
       this.changeThemesListSelected();
+      this.saveTheme();
+      console.log(this.themesList);
     })
-    
   }
 
 
   changeThemesListSelected() {
 
     this.themesList.forEach((themes) => {
-      themes.types.forEach((type: any) => {
-        type.colors.forEach((color: any) => {
-          if(color.color == this.primary || color.color == this.second){
-            color.status = "selected"
-          } else color.status = "unselected"
-        });
-      });
+      if (themes.mode == "Tema Claro") {
+
+        themes.types.forEach((type: any) => {
+
+
+
+          type.colors.forEach((color: any) => {
+
+            if (color.color == this.primary || color.color == this.second) {
+              type.colors.forEach((color: any) => {
+                color.status = 'unselected';
+              })
+              color.status = 'selected';
+            }
+
+          })
+        }, this);
+      } else if (themes.mode == "Tema Escuro") {
+
+        themes.types.forEach((type: any) => {
+
+          type.colors.forEach((color: any) => {
+
+            if (color.color == this.primary || color.color == this.second) {
+              type.colors.forEach((color: any) => {
+                color.status = 'unselected';
+              })
+              color.status = 'selected';
+            }
+
+          })
+        }, this);
+      }
     })
 
   }
@@ -156,6 +201,7 @@ export class AppearanceComponent implements OnInit {
       secondColor: theme.secondColor,
       fontFamily: this.fontFamily[0],
       fontSize: parseInt(this.fontSizes[0]),
+      theme: this.theme,
       voiceCommand: true,
       listeningText: true
     });
@@ -193,11 +239,44 @@ export class AppearanceComponent implements OnInit {
     });
   }
 
-  selectTheme(item: number): void {
+  selectTheme(item: any): void {
+
+    console.log(this.themesList);
+
+
+    // this.saveTheme();
+
+    this.theme = item;
+
+
+
     this.themesList.forEach((element: { status: string; }) => {
       element.status = 'unselected';
     });
-    this.themesList[item].status = 'selected';
+
+    this.themesList[this.theme].status = 'selected';
 
   }
+
+  saveTheme(): void {
+    const newPers = new Personalization({
+      id: this.logged.id!,
+      primaryColor: this.primary,
+      secondColor: this.second,
+      fontFamily: this.fontFamily[0],
+      fontSize: parseInt(this.fontSizes[0]),
+      theme: this.theme,
+      voiceCommand: true,
+      listeningText: true
+    });
+
+
+
+    this.userService.patchPersonalization(newPers).subscribe((pers) => {
+      this.logged.personalization = pers;
+      localStorage.setItem("logged", JSON.stringify(this.logged))
+      console.log(this.logged.personalization);
+    })
+  }
+
 }
