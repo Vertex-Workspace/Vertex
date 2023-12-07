@@ -3,7 +3,10 @@
         <!-- LEFT SIDE - QUICK ACCESS -->
         <div class="container-grid">
             <div class="default-size">
-                <app-quick-access style="width: 100%; height:100%;" [typeString]="'project'"></app-quick-access>
+                <app-quick-access 
+                    style="width: 100%; height:100%;" 
+                    [typeString]="'project'"
+                ></app-quick-access>
             </div>
         </div>
 
@@ -63,10 +66,17 @@
             </div>
 
             <div class="default-size">
-                <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" *ngIf="clicked === 'project' && !isCreating"></app-card-list>
+                <app-card-list 
+                    style="width: 100%; height: 90%; padding-top: 3%;" 
+                    *ngIf="clicked === 'project' && !isCreating"
+                    (deleteEmitter)="delete($event)"
+                    [type]="'project'"
+                    [team]="team"
+                ></app-card-list>
                 <app-create-team-project 
                     style="width: 100%; height: 90%; padding-top: 3%;" 
-                    *ngIf="clicked === 'project' && isCreating" 
+                    *ngIf="clicked === 'project' && isCreating"
+                    (createProject)="createProject($event)"
                     (close)="switchCreateView()" 
                     [typeString]="'project'"
                 ></app-create-team-project>

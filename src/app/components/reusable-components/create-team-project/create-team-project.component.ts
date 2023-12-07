@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -21,7 +22,10 @@ export class CreateTeamProjectComponent implements OnInit {
   close = new EventEmitter();
 
   @Output()
-  create = new EventEmitter<Team>();
+  createTeam = new EventEmitter<Team>();
+
+  @Output()
+  createProject = new EventEmitter<Project>();
 
   @Input()
   typeString!: String;
@@ -48,8 +52,14 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   onSubmit(): void { 
-    const team = this.form.getRawValue() as Team;
-    this.create.emit(team);
+    if (this.typeString === 'team') {
+      const team = this.form.getRawValue() as Team;
+      this.createTeam.emit(team);
+
+    } else {
+      const project = this.form.getRawValue() as Project;
+      this.createProject.emit(project);
+    }
 
     this.confirmCreateTeam();
   }
@@ -59,16 +69,13 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   confirmCreateTeam(): void {
-    if (this.typeString === "project") {
-      this.closeScreen();
-    }
     //validations
 
     this.modalCopyLink = true;
   }
 
   copyLink(): void {
-    //copiar para a area te transferência
+    //copiar para a area de transferência
     console.log("Dale");
     this.closeScreen();
   }

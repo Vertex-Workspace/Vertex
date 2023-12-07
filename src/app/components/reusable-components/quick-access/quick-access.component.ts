@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
 import { User } from 'src/app/models/user';
 import { TeamService } from 'src/app/services/team.service';
@@ -18,7 +19,7 @@ export class QuickAccessComponent implements OnInit {
   typeString!: String;
 
   @Input()
-  recentTeams !: Team[];
+  recentTeams !: Team[];  
 
   constructor(
     private teamService: TeamService,

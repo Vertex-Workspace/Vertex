@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project';
+import { Team } from 'src/app/models/team';
 import { User } from 'src/app/models/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-projects',
@@ -14,7 +19,11 @@ export class ProjectsComponent {
   orderOpen: boolean = false;
   clicked: string = 'task';
 
+  recentProjects !: Project[];
+
   logged !: User;
+
+  team !: Team;
 
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
@@ -26,15 +35,58 @@ export class ProjectsComponent {
   ];
 
   constructor(
-    private projectService: ProjectService
-  ) {}
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private alert: AlertService,
+    private userService: UserService,
+    private teamService: TeamService
+  ) {
+    this.logged = this.userService.getLogged();
+    this.getTeam();
+  }
+
+  getTeam(): void {
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.teamService
+      .getOneById(teamId)
+      .subscribe((team: Team) => {
+        this.team = team;
+      })
+
+  }
+
+  delete(id: number): void {    
+    this.projectService
+      .delete(id)
+      .subscribe((project: Project) => {
+        this.alert.successAlert(`Projeto deletado com sucesso!`);
+        this.getAfterChange();
+      },
+      e => {
+        this.alert.errorAlert('Erro ao deletar projeto!');
+      });
+  }
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
   }
 
-  switchCreateView():void{
+  switchCreateView(): void {
     this.isCreating = !this.isCreating;
+    this.getAfterChange();
+  }
+
+  getAfterChange(): void {
+    if (!this.isCreating) {
+      this.projectService
+        .getAllByTeam(this.team.id!)
+        .subscribe((projects) => {
+        this.team.projects = projects;
+      });
+    } else {
+      this.team.projects = [];
+    }
   }
 
   configItems = [
@@ -51,8 +103,24 @@ export class ProjectsComponent {
   }
 
   createProject(project: Project): void {
-    console.log(project);
+
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+    project.creator = this.logged;
+
+    this.projectService
+      .create(project, teamId)
+      .subscribe((project: Project) => {
+        this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
+      });
     
+  }
+
+  getRecentsProjects(): void {
+    this.projectService
+      .getAllByTeam(this.team.id!)
+      .subscribe((projects: Project[]) => {        
+        this.recentProjects = projects;
+      });
   }
 
 }
