@@ -8,6 +8,8 @@ import { categories, taskList } from '../data-test';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
 import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { TaskService } from 'src/app/services/task.service';
+import { ValueUpdate } from 'src/app/models/value';
 
 @Component({
   selector: 'app-kanban',
@@ -16,7 +18,8 @@ import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/
 })
 export class KanbanComponent implements OnInit {
 
-  constructor(private projectService: ProjectService){
+
+  constructor(private projectService: ProjectService, private taskService: TaskService) {
 
   }
 
@@ -37,13 +40,6 @@ export class KanbanComponent implements OnInit {
   }
 
 
-  // @ViewChildren('card') cards!: any[];
-  // ngAfterViewInit() {
-  //   this.cards.forEach(card => {
-  //     console.log(card.nativeElement.offsetHeight);
-  //   });
-  // }
-  selectedCards ?: Task[];
 
   categories: any[] = [
     {
@@ -129,21 +125,46 @@ export class KanbanComponent implements OnInit {
 
 
 
-  dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {  
+  dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     const task = event.item.data;
-    task.values[0].value = propertyList;
-    console.log(task);
+    const previousPropertyList : PropertyList = task.values[0].value as PropertyList;
 
-    const newIndexTask = 
-            this.specificPropertyArray(task.category)[event.currentIndex];
-    const newIndex = this.taskList.indexOf(newIndexTask);
-    const previousIndex = this.taskList.indexOf(task);
-    
+    task.values[0].value = propertyList;
+
+    const newIndexTask =
+      this.specificPropertyArray(propertyList)[event.currentIndex];
+    const newIndex = this.project.tasks.indexOf(newIndexTask);
+    const previousIndex = this.project.tasks.indexOf(task);
+
+
     moveItemInArray(
-      this.taskList, 
-      previousIndex, 
+      this.taskList,
+      previousIndex,
       newIndex
     );
+
+  
+    //If the value of status task is different of the previous value, then, the request is sent
+    if (propertyList.id != previousPropertyList.id) {
+      //Object to change the value of the status task
+      const valueUpdate: ValueUpdate = {
+        id: task.id,
+        value: {
+          property: {
+            id: task.values[0].property.id
+          },
+          value: {
+            id: task.values[0].id,
+            value: propertyList.id
+          }
+        }
+      };
+
+      //Patch the value of the status task
+      this.taskService.patchValue(valueUpdate).subscribe((taskdaje: Task) => {
+        console.log(taskdaje);
+      });
+    }
   };
 
   getHeight(propertyList: PropertyList): string {
@@ -160,14 +181,14 @@ export class KanbanComponent implements OnInit {
 
   //Temporary
   getColor(color: string) {
-    if(color === "RED"){
-      return "#FF9D9Df3";
-    } else if(color === "YELLOW"){
-      return "#FFD600f3";
-    } else if(color === "GREEN"){
-      return "#7be057de";
+    if (color === "RED") {
+      return "#FFE7E9";
+    } else if (color === "YELLOW") {
+      return "#FFF6C5";
+    } else if (color === "GREEN") {
+      return "#d7ffc9";
     } else {
-      return "#7be057de";
+      return "#7be057";
     }
   }
 
@@ -176,6 +197,10 @@ export class KanbanComponent implements OnInit {
     return valueIntoPropertyList.value == propertyList.value;
   }
 
+
+  deleteTask(task: Task): void {
+    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+  }
 
 
 }

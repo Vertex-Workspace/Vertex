@@ -23,7 +23,7 @@ export class Property {
 }
 
 export class PropertyList{
-    id?: number;
+    id!: number;
     value!: string;
     color!: string;
     propertyListKind!: PropertyListKind;

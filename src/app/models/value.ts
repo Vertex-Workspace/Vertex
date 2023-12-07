@@ -20,3 +20,17 @@ export class Value {
     }
 
 }
+
+
+export class ValueUpdate {
+    id!: number;
+    value!: {
+        property: {
+            id: number;
+        };
+        value: {
+            id: number;
+            value: string | number;
+        }
+    };
+}

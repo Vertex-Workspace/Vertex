@@ -3,6 +3,7 @@
 
     [style.width]="width"
     [style.min-height]="minHeight"
+    [style.borderColor]="borderColor"
 >
     <div class="top">
         <div class="left">
@@ -17,7 +18,7 @@
             <ng-container *ngFor="let item of settings">
                 <fa-icon
                     [icon]="item.icon"
-                    (click)="item.onclick"
+                    (click)="item.onclick()"
                     class="icon"
                 >
                 </fa-icon>
