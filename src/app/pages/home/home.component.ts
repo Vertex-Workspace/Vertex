@@ -78,6 +78,7 @@ export class HomeComponent implements OnInit{
     } else {
       this.teams = [];
     }
+    
   }
 
   delete(id: number): void {

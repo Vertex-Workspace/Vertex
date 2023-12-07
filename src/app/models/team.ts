@@ -9,11 +9,8 @@ export class Team {
     creationDate !: Date;
     description !: string;
     users?: User[];
-
     creator?: User;
-
     groups?: Group[];
-    //List Project - Miguel
     projects?: Project[];
 
     constructor(
