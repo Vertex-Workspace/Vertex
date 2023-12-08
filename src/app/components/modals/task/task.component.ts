@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
+
+  @Output() close = new EventEmitter();
 
   selectedComponent: string = 'log';
   task: any = {
@@ -55,4 +57,7 @@ export class TaskComponent {
     this.selectedComponent = component;
   }
 
+  closeModal(): void {
+    this.close.emit();
+  }
 }

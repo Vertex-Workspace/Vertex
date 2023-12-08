@@ -30,3 +30,4 @@
 </div>
 
 <!--     [style.borderColor]="task.category.borderColor" -->
+<app-confirm-modal [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'" *ngIf="modalDelete" (close)="delete($event)"></app-confirm-modal>

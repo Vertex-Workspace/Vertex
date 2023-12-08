@@ -24,3 +24,16 @@ export class Task {
     }
 
 }
+
+
+export class TaskCreate {
+    name: string = "Nova Tarefa";
+    description: string = "Descreva um pouco sobre sua Tarefa Aqui";
+    project!: {
+        id: number;
+    };
+    values = [];
+    creator!: {
+        id: number;
+    };
+}

@@ -9,7 +9,6 @@
                             style="font-size: 1rem"
                         ></i>
                         <button 
-                            [routerLink]="[item.id]"
                             (click)="changePreviewMode(item.id)"
                         >
                                 {{ item.label }}
@@ -50,7 +49,7 @@
                     
                 </ng-container>
 
-                <button class="create">
+                <button class="create" (click)="createTask()">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
@@ -78,9 +77,16 @@
 
         <section class="router">
             <router-outlet />
+            <app-kanban *ngIf="clicked  === 'Kanban'" style="width: 100%; height: 100%;"></app-kanban>
+            <app-list *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
+            <app-calendar *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
+            <app-mural *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
+            <!-- app-kanban -->
         </section>
 
     </div>
 </section>
 
 <app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()"></app-properties>
+
+<app-task *ngIf="taskOpen" (close)="changeModalTaskState(false)"></app-task>

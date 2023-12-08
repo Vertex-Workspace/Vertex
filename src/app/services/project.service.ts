@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Project } from '../models/project';
 import { URL } from './path/api_url';
+import { Task } from '../models/task';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,12 @@ export class ProjectService {
     return this.http
       .delete<Project>(`${URL}project/${id}`)
   }
-
+  public getTasksByProject(id: number): Observable<Task[]> {
+    return this.http
+      .get<Task[]>(`${URL}project/${id}/tasks`)
+      .pipe(map((tasks: Task[]) => 
+          tasks.map(task => new Task(task))
+        )
+      )
+  }
 }

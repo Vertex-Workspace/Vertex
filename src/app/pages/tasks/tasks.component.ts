@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { TaskCreate } from 'src/app/models/task';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class TasksComponent implements OnInit {
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
+  taskOpen: boolean = false;
 
   project!: Project;
   constructor(
@@ -31,21 +34,20 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.clicked = this.getClicked();
-
     this.projectService.getOneById(1).subscribe((project: Project) => {
       this.project = project;
     });
   }
 
   getClicked(): string {
-    return "/" + this.router.url.split('/')[1] + "/" + this.router.url.split('/')[2];
+    return "Kanban";
   }
 
   menuItems = [
-    { id: '/tarefas/kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
-    { id: '/tarefas/lista', iconClass: 'pi pi-list', label: 'Lista' },
-    { id: '/tarefas/calendario', iconClass: 'pi pi-calendar', label: 'Calendário' },
-    { id: '/tarefas/mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
+    { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
+    { id: 'List', iconClass: 'pi pi-list', label: 'Lista' },
+    { id: 'Calendar', iconClass: 'pi pi-calendar', label: 'Calendário' },
+    { id: 'Mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
   ];
 
   configItems = [
@@ -72,6 +74,33 @@ export class TasksComponent implements OnInit {
 
   onInputType(): void {
 
+  }
+
+  createTask(): void {
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: 1
+      },
+      values: [],
+      creator: {
+        id: 1
+      }
+    }
+    this.taskService.create(taskCreate).subscribe(
+      (task) => {
+        this.project.tasks.push(task);
+        this.changeModalTaskState(true);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  changeModalTaskState(bool: boolean): void{
+    this.taskOpen = bool;
   }
 
   openPropertiesModal(): void {

@@ -1,10 +1,10 @@
 <div class="modal-overlay" *ngIf="!secondModal">
-    <div class="modal" [style.height]="height" [style.width]="width" [title]="title">
+    <div class="modal" [style.height]="height" [style.width]="width">
             <div class="text-align">
                 <h6 *ngIf="!secondModal">Tem certeza que deseja excluir {{title}}?</h6>
                 <div class="button-div">
-                    <button  (click)="deleteTeamConfirm('no')" class="no-button regular-text">Não</button>
-                    <button (click)="deleteTeamConfirm('yes')" class="yes-button regular-text">Sim</button>
+                    <button title="Manter" (click)="deleteTeamConfirm('no')" class="no-button regular-text">Não</button>
+                    <button title="Excluir" (click)="deleteTeamConfirm('yes')" class="yes-button regular-text">Sim</button>
                 </div>
             </div>
         <div class="ng-contentDiv">

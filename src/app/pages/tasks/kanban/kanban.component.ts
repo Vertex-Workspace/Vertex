@@ -182,13 +182,13 @@ export class KanbanComponent implements OnInit {
   //Temporary
   getColor(color: string) {
     if (color === "RED") {
-      return "#FFE7E9";
+      return "#FF9D9D50";
     } else if (color === "YELLOW") {
-      return "#FFF6C5";
+      return "#FFD60035";
     } else if (color === "GREEN") {
-      return "#d7ffc9";
+      return "#65D73C50";
     } else {
-      return "#7be057";
+      return "#7be05750";
     }
   }
 
