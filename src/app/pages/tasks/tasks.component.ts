@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 
@@ -21,22 +21,28 @@ export class TasksComponent implements OnInit {
   propertiesOpen: boolean = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.clicked = this.getClicked();
+    this.getClicked();
   }
 
-  getClicked(): string {
-    return "/" + this.router.url.split('/')[1] + "/" + this.router.url.split('/')[2];
+  getClicked(): void {
+    const url: string = this.router.url;
+    this.menuItems.forEach(item => {
+      if (url.includes(item.id)) {
+        this.clicked = item.id;
+      }
+    })
   }
 
   menuItems = [
-    { id: '/tarefas/kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
-    { id: '/tarefas/lista', iconClass: 'pi pi-list', label: 'Lista' },
-    { id: '/tarefas/calendario', iconClass: 'pi pi-calendar', label: 'Calendário' },
-    { id: '/tarefas/mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
+    { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
+    { id: 'lista', iconClass: 'pi pi-list', label: 'Lista' },
+    { id: 'calendario', iconClass: 'pi pi-calendar', label: 'Calendário' },
+    { id: 'mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
   ];
 
   configItems = [
@@ -57,12 +63,23 @@ export class TasksComponent implements OnInit {
     this.orderOpen = !this.orderOpen;
   }
 
-  redirect(preview: string): void {
-    console.log(this.router.url.includes('equipe'));
+  redirect(page: string): void {
+    const url: string = this.router.url;
+
+    if (url.includes('equipe')) {
+      const teamId: number = Number(this.route.snapshot.paramMap.get('teamId'));
+      this.router.navigate([`equipe/${teamId}/tarefas/${page}`]);
+      
+
+    } else {
+      this.router.navigate([`/tarefas/${page}`])
+      
+      
+    }
     
     
 
-    this.clicked = preview;
+    this.clicked = page;
   }
 
   // getUrlType(): boolean {
