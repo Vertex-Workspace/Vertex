@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .section-aside{
-    @apply flex h-full w-full justify-between items-center flex-col;
+    @apply flex h-full w-full justify-between items-center flex-col overflow-hidden;
 }
 
 .start-mid-items{
@@ -33,7 +33,7 @@ ul > li {
 
 .logo{
     display: flex;
-    width: 70px;
+    width: 55px;
     height: auto;
     cursor: pointer;
 }

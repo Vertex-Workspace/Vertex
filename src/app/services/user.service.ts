@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Personalization } from '../models/personalization';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
@@ -11,6 +12,7 @@ import { UserStateService } from './user-state.service';
   providedIn: 'root'
 })
 export class UserService {
+  
 
   constructor(
     private http: HttpClient,
@@ -102,6 +104,11 @@ export class UserService {
   public create(user: User): Observable<User> {
     return this.http
       .post<User>(`${URL}user`, user);
+  }
+
+  public patchPersonalization(personalization:Personalization): Observable<User> {    
+    return this.http
+      .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
   }
 
   public delete(id: number): Observable<User> {

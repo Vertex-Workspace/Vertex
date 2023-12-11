@@ -9,7 +9,10 @@ import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
 import { AlertService } from './services/alert.service';
+import { LoadingService } from './services/loading.service';
 import { UserStateService } from './services/user-state.service';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +22,9 @@ import { UserStateService } from './services/user-state.service';
     slideInAnimation
   ],
 })
-export class AppComponent{
+export class AppComponent {
   [x: string]: any;
-  
+
   title = 'Vertex';
 
   inputColor: string = '#FFFFFF';
@@ -38,34 +41,58 @@ export class AppComponent{
   faMicrophoneLines = faMicrophoneLines;
 
   userLogged: boolean = true;
+  logged!: User;
 
   miniChatOpen: boolean = false;
 
   chatExpanded: boolean = false;
-  
-  notification:boolean = false;
 
-  isSideBarExpanded:boolean = false;
+  notification: boolean = false;
+
+  isSideBarExpanded: boolean = false;
 
 
   constructor(
-    private personalization : PersonalizationService, 
+    private personalization: PersonalizationService,
     private contexts: ChildrenOutletContexts,
-    private router:Router,
+    private router: Router,
     private alert: AlertService,
+    private userService: UserService,
     private userState: UserStateService
-  ){
+  ) {
     personalization.setPersonalization();
-    
+
     this.userState
       .getAuthenticationStatus()
       .subscribe((status: boolean) => {
         this.userLogged = status;
-      })
-
+      });
   }
 
   ngOnInit(): void {
+
+    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+    
+
+
+
+    this.userService.getOneById(user.id!).subscribe((logged) => {
+      
+      user = logged;
+      console.log(user.personalization!.theme);
+
+      if(user.personalization!.theme == 0){
+        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
+        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
+      } else if(user.personalization!.theme == 1) {
+        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
+        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+      }
+      
+    });
+
+
+    //setar o tema do usuário com o document.documentElement.style.setProperty('--primary-color', personalization.primaryColor);
 
   }
 
@@ -77,28 +104,19 @@ export class AppComponent{
     this.isSideBarExpanded = !this.isSideBarExpanded;
   }
 
-  updateColor(): void {
-    document.documentElement.style.setProperty('--custom-color', this.inputColor);
-    document.documentElement.style.setProperty('--font-color', this.fontColor);
-    document.documentElement.style.setProperty('--button-color', this.buttonColor);
-    
-    const fontSize = this.fontSize + "px";
-    document.documentElement.style.setProperty('--font-size', fontSize);
-  }
-
-  expandChat(event:any){
+  expandChat(event: any) {
     this.chatExpanded = event.action;
   }
 
-  minimizeChat(){
+  minimizeChat() {
     this.chatExpanded = !this.chatExpanded;
   }
 
-  openMiniChat(){
+  openMiniChat() {
     this.miniChatOpen = !this.miniChatOpen;
   }
 
-  switchNotifications():void{
+  switchNotifications(): void {
     this.notification = !this.notification;
   }
 

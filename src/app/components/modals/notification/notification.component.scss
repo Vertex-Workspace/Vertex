@@ -1,8 +1,9 @@
 @import "../../../../variables";
 
 section{
-    @apply absolute flex w-full h-full justify-end max-w-[96%];
+    @apply absolute z-10 flex  h-full justify-end w-[100%] max-w-[96%];
 }
+
 .clickOut{
     @apply flex w-[75%] h-full;
 }
