@@ -10,13 +10,8 @@ export class LoadingService {
 
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
-  hide(): void {
+  hide(): void {this.loadingSubject.next(false);}
 
-    this.loadingSubject.next(false);
-
-  }
-
-  show(): void {
-    this.loadingSubject.next(true);
-  }
+  show(): void {this.loadingSubject.next(true);}
+  
 }
