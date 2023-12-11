@@ -22,13 +22,10 @@ export class LoadingInterceptor implements HttpInterceptor {
     }
 
     this.activeRequests++;
-    // console.log(this.activeRequests);
-    
 
     return next.handle(request).pipe(
       finalize(() => {
         this.activeRequests--;
-    // console.log(this.activeRequests);
 
         if (this.activeRequests === 0) {
           this.loadingService.hide();
