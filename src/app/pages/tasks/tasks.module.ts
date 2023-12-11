@@ -12,6 +12,7 @@ import { KanbanModule } from './kanban/kanban.module';
 import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
 import { ListModule } from './list/list.module';
 import { MuralComponent } from './mural/mural.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MuralComponent } from './mural/mural.component';
     CalendarModule,
     PropertiesModule,
     ListModule,
-    KanbanModule
+    KanbanModule,
+    ChartModule
   ],
 })
 export class TasksModule { }

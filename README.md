@@ -1,9 +1,9 @@
-<h1 align="center">VERTEX Gerencie cada vértice da sua história.</h1>
+<h1 align="center">VERTEX: Gerencie cada vértice da sua história.</h1>
 <h3 align="center">O foco deste trabalho é garantir para o usuário um software personalizável e eficiente, visando a permanência do usuário final na aplicação desenvolvida. A seguir, irei abordar as linguagens utilizadas e algumas das etapas de criação do mesmo.</h3>
 
 <br>
 
-- 📫 Como encontrar nosso projeto? **https://github.com/Otavio-Miguel-Rocha/Vertex**
+- 📫 Como encontrar nosso projeto? **https://github.com/Vertex-Workspace/Vertex**
 
 <br>
 

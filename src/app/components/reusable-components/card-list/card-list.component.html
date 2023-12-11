@@ -1,22 +1,22 @@
 <div class="list">
-    <ng-container *ngFor="let team of teams">
+    <ng-container *ngFor="let item of getType()">
         <div class="card">
-            <div class="image" (click)="openTeam(team.id)">
+            <div class="image" (click)="openTeam(item.id)">
                 <img src="../../../../assets/teste/teste.jpg">
             </div>
             <div class="informations">
-                <div class="informations-text" (click)="openTeam(team.id)">
-                    <p class="large-text">{{team.name}}</p>
+                <div class="informations-text" (click)="openTeam(item.id)">
+                    <p class="large-text">{{item.name}}</p>
                     <div>
                         <p class="medium-text">Data de criação: </p>
-                        <p class="medium-text">{{team.creator?.firstName}}</p>
+                        <p class="medium-text">{{item.creator?.firstName}}</p>
                     </div>
                 </div>
                 <div class="informations-input">
                     <p class="regular-text">Visualizar Informações</p>
                     <div>
                         <i class="pi pi-comment"></i>
-                        <i class="pi pi-trash" (click)="showModalDelete(team.id)"></i>
+                        <i class="pi pi-trash" (click)="deleteEmit(item.id)"></i>
                     </div>
                 </div>
             </div>
@@ -24,8 +24,11 @@
     </ng-container>
 </div>
 
-<app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'a equipe'" (close)="deleteTeam($event)">
-</app-confirm-modal>
+<app-confirm-modal *ngIf="delete" 
+    [width]="'450px'" 
+    [height]="'250px'" 
+    [title]="'a equipe'" (close)="deleteTeam($event)"
+></app-confirm-modal>
 
 
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/team';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,19 @@ export class TeamService {
     return this.http
       .delete<Team>(`${URL}team/${id}`);
   }
+
+  public getTeamsByUser(userId: number): Observable<Team[]> {
+    return this.http
+      .get<Team[]>(`${URL}user-team/teams/${userId}`)
+      .pipe(map((teams: Team[]) => teams.map(team => new Team(team))));
+
+  }
+
+  public existsByIdAndUserBelongs(teamId: number, userId: number): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${URL}team/exists/${teamId}/${userId}`);
+  }
+
 
 
 }

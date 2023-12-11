@@ -1,16 +1,16 @@
 <!-- QUICK ACCESS COMPONENT -->
 <section [ngStyle]="{'align-items': typeString === 'project' ? 'flex-start' : 'flex-end'}">
 
-    <!-- CARD WORKSPACE -->
+    <!-- WORKSPACE TITLE -->
     <div class="card-workspace">
         <div class="workspace-title">
             <h5 *ngIf="typeString === 'home'">Meu espaço de trabalho</h5>
-            <h5 *ngIf="typeString === 'project'">Espaço de trabalho de </h5>
+            <h5 *ngIf="typeString === 'project'">Espaço de trabalho de</h5>
         </div>
         <div class="workspace-options">
             <div class="grid-card-workspace" *ngFor="let section of workSpace">
                 <div>
-                    <div class="card-workspace-label">
+                    <div class="card-workspace-label" (click)="redirectToWorkspace(section.id)">
                         <i class="{{section.icon}}"></i>
                         <a class="large-text">{{section.label}}</a>
                     </div>
@@ -21,22 +21,15 @@
 
     <!-- CHARTS -->
     <div class="charts">
-        <div class="card-spaces">
-            <h6>Seu Desempenho Pessoal</h6>
+        <div class="card-spaces" *ngFor="let chart of ['Seu Desempenho Pessoal', 'Tarefas em Cada Equipe']">
+            <h6>{{chart}}</h6>
             <div>
                 <div class="card-chart">
                     <p-chart type="pie" [data]="basicData" style="width:70%"></p-chart>
                 </div>
             </div>
-        </div>
-        <div class="card-spaces">
-            <h6>Tarefas em Cada Equipe</h6>
-            <div>
-                <div class="card-chart">
-                    <p-chart type="pie" [data]="basicData" style="width:70%"></p-chart>
-                </div>
-            </div>
-            <a class="regular-text">Visualizar todos os gráficos</a>
+            <a class="regular-text" *ngIf="chart === 'Tarefas em Cada Equipe'"
+            (click)="redirectToProfile()">Visualizar todos os gráficos</a>
         </div>
     </div>
 
@@ -46,13 +39,13 @@
         <h6 class="title" *ngIf="typeString === 'project'">Projetos Recentes de ...</h6>
 
         <div class="div-recently-teams">
-            <div class="recently-teams-team" *ngFor="let team of recentsTeams">
+            <div class="recently-teams-team" *ngFor="let team of recentTeams" (click)="redirectToTeam(team)">
                 <div class="recently-team-image">
-                    <img src="{{team.image}}" alt="">
+                    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/819.png" alt="">
                 </div>
                 <div class="recently-team-info">
                     <p class="large-text">{{team.name}}</p>
-                    <p class="regular-text">{{team.date}}</p>
+                    <p class="regular-text">{{team.creationDate}}</p>
                 </div>
             </div>
         </div>

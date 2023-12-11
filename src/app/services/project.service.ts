@@ -35,7 +35,21 @@ export class ProjectService {
 
   public delete(id: number): Observable<Project> {
     return this.http
-      .delete<Project>(`${URL}project/${id}`)
+      .delete<Project>(`${URL}project/${id}`);
+  }
+
+  public getAllByTeam(id: number): Observable<Project[]> {
+    return this.http
+      .get<Project[]>(`${URL}project/team/${id}`)
+      .pipe(map((projects: Project[]) => 
+          projects.map(project => new Project(project))
+        )
+      )
+  }
+
+  public existsById(id: number): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${URL}project/exists/${id}`)
   }
 
 }

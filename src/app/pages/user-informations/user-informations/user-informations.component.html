@@ -10,18 +10,19 @@
 
                 <div class="top-side-user-informations">
                     <div class="userName-creationData">
-                        <h4>KaiqueFLH</h4>
+                        <h4>{{logged.firstName}}</h4>
                         <p class="regular-text">20/11/2023</p>
                     </div>
 
                     <div class="realName-location">
-                        <p class="regular-text">Kaique Fernandes Lima Homem</p>
+                        <p class="regular-text">{{logged.firstName}} {{logged.lastName}}</p>
                         |
-                        <p class="regular-text">Brasil, Jaraguá do Sul - SC</p>
+                        <p class="regular-text">{{logged.location}}</p>
                     </div>
 
                     <div class="user-description">
                         <p class="regular-text description">
+                            <!-- {{logged.description}} -->
                             Kaique Fernandes Lima é um talentoso programador que se destaca no mundo da tecnologia. Com
                             uma paixão inabalável pela programação, ele encontrou seu lugar na renomada empresa WEG,
                             onde contribui de maneira significativa para projetos inovadores e desafiadores.
