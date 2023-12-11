@@ -12,6 +12,7 @@ import { UserStateService } from './user-state.service';
   providedIn: 'root'
 })
 export class UserService {
+  
 
   constructor(
     private http: HttpClient,
@@ -105,7 +106,7 @@ export class UserService {
       .post<User>(`${URL}user`, user);
   }
 
-  public patchPersonalization(personalization:Personalization): Observable<Personalization> {    
+  public patchPersonalization(personalization:Personalization): Observable<User> {    
     return this.http
       .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
   }

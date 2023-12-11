@@ -77,13 +77,18 @@ export class AppComponent {
 
 
     this.userService.getOneById(user.id!).subscribe((logged) => {
-      console.log(logged);
+      
+      user = logged;
+      console.log(user.personalization!.theme);
 
-      this.logged = logged;
-      console.log(logged);
-
-      document.documentElement.style.setProperty('--primaryColor',this.logged.personalization?.primaryColor!);
-      document.documentElement.style.setProperty('--secondColor',this.logged.personalization?.secondColor!);
+      if(user.personalization!.theme == 0){
+        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
+        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
+      } else if(user.personalization!.theme == 1) {
+        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
+        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+      }
+      
     });
 
 

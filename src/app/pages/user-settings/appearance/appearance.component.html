@@ -64,6 +64,7 @@
                     <option *ngFor="let font of fontFamily" [value]="font" class="small-text">{{font}}</option>
                 </select>
             </div>
+            
         </div>
         <p class="medium-text">Acessibilidade</p>
         <ng-container *ngFor="let toggle of toggles; index as item">
@@ -73,6 +74,7 @@
                 <p class="small-text">{{toggle.text}}</p>
             </div>
         </ng-container>
+
 
     </div>
 </div>

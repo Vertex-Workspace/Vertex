@@ -13,6 +13,7 @@ export class User {
     location ?: string | undefined;
     image ?: string | undefined;
     personalization?:Personalization;
+    theme ?: number | undefined;
     publicProfile ?: boolean = true;
     showCharts ?: boolean = false;
 
@@ -37,6 +38,7 @@ export class User {
         this.description = user.description;
         this.location = user.location;
         this.image = user.image;
+        this.theme = user.theme;
         this.publicProfile = user.publicProfile;
         this.showCharts = user.showCharts;
 
