@@ -30,7 +30,7 @@ export class AppearanceComponent implements OnInit {
 
   themesList!: any[];
 
-
+  // Sets the theme by default and make the persistence of the theme in this component
   ngOnInit(): void {
     this.logged = this.userService.getLogged();
 
@@ -120,10 +120,6 @@ export class AppearanceComponent implements OnInit {
         this.themesList[0].status = 'unselected';
       }
 
-
-
-
-
       this.changeThemesListSelected();
       this.saveTheme();
       console.log(this.themesList);
@@ -135,42 +131,30 @@ export class AppearanceComponent implements OnInit {
 
     this.themesList.forEach((themes) => {
       if (themes.mode == "Tema Claro") {
-
         themes.types.forEach((type: any) => {
-
-
-
           type.colors.forEach((color: any) => {
-
             if (color.color == this.primaryLight || color.color == this.secondLight) {
               type.colors.forEach((color: any) => {
                 color.status = 'unselected';
               })
               color.status = 'selected';
             }
-
           })
         }, this);
       } else if (themes.mode == "Tema Escuro") {
-
         themes.types.forEach((type: any) => {
-
           type.colors.forEach((color: any) => {
-
             if (color.color == this.primaryDark || color.color == this.secondDark) {
               type.colors.forEach((color: any) => {
                 color.status = 'unselected';
               })
               color.status = 'selected';
             }
-
           })
         }, this);
       }
     })
-
   }
-
 
   toggles = [
     { text: "Habilitar comando de voz", icon: faToggleOff },
@@ -186,7 +170,6 @@ export class AppearanceComponent implements OnInit {
     }
   }
 
-
   fontSizes = [
     '12 (Padrão)', '14'
   ]
@@ -194,7 +177,6 @@ export class AppearanceComponent implements OnInit {
   fontFamily = [
     'Inter (Padrão)', 'Helvetica', 'Times New Roman'
   ];
-
 
   selectColor(theme: any, type: any, item: any): void {
 
@@ -215,16 +197,11 @@ export class AppearanceComponent implements OnInit {
 
     console.log(newPers, "newPers");
 
-
-
-
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
-
       this.logged.personalization = pers.personalization;
       localStorage.setItem("logged", JSON.stringify(this.logged))
       console.log(this.logged.personalization);
     })
-
   }
 
   foreachColors(theme: any, type: any, item: number): void {
@@ -277,14 +254,11 @@ export class AppearanceComponent implements OnInit {
       listeningText: true
     });
 
-
-
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
       this.logged.personalization = pers.personalization;
       localStorage.setItem("logged", JSON.stringify(this.logged))
       console.log(this.logged.personalization);
     })
-
     if (this.logged.personalization!.theme == 0) {
       document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
       document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
@@ -293,5 +267,4 @@ export class AppearanceComponent implements OnInit {
       document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
     }
   }
-
 }
