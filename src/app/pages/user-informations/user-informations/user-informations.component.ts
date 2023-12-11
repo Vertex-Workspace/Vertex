@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-informations',
@@ -16,6 +18,14 @@ export class UserInformationsComponent {
 
   dataBar: any;
   optionsBar: any;
+
+  logged !: User;
+
+  constructor(
+    private userService: UserService
+  ) {
+    this.logged = this.userService.getLogged();
+  }
 
   ngOnInit() {
     const documentStyle = getComputedStyle(document.documentElement);

@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
+import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -10,18 +12,34 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class CardListComponent implements OnInit{
 
-
-
-  constructor(private teamService: TeamService, private route: Router) { 
-
-  }
+  constructor(
+    private teamService: TeamService, 
+    private router: Router,
+    private alert: AlertService
+  ) { }
   
   @Input()
-  teams!: Team[];
+  teams ?: Team[]; //se estiver na home
+
+  @Input()
+  team ?: Team; //se estiver na tela projetos
+
+  @Input()
+  type !: string;
+
+  @Output()
+  deleteEmitter: EventEmitter<number> = new EventEmitter<number>();
+
+  delete: boolean = false;
 
   ngOnInit(): void {}
 
-  delete: boolean = false;
+  getType(): any[] {
+    if (this.type === 'project') {
+      return this.team?.projects!;
+    }
+    return this.teams!;
+  }
 
   idTeamWillBeDeleted!: number;
   showModalDelete(idTeam: number | undefined): void {
@@ -33,27 +51,30 @@ export class CardListComponent implements OnInit{
     }
   }
 
-  deleteTeam(operation: any) {
-    if(operation){
-      this.teamService.delete(this.idTeamWillBeDeleted).subscribe(
-        (team) => {
-          if(team == null){
-            this.teams?.splice(this.teams.findIndex(team => team.id == this.idTeamWillBeDeleted), 1);
-          }
-        }
-      );
-    }
+  deleteTeam(operation: boolean) {
     this.changeModalState();
+  }
+
+  deleteEmit(id: number): void {    
+    this.deleteEmitter.emit(id)
   }
 
   changeModalState(): void {
     this.delete = !this.delete;
   }
 
-  openTeam(id: number|undefined) {
-    this.teamService.getOneById(id!).subscribe(async(team) => {
-      await localStorage.setItem('team', JSON.stringify(new Team(team)));
-      this.route.navigate(['/projetos']);
-    });
+  openTeam(id: number) {
+
+    if (this.type === 'team') {
+      this.router.navigate(['/equipe/' + id + '/projetos']);      
+    } else {
+      console.log(id);
+      
+    }
+
+    // this.teamService.getOneById(id!).subscribe(async(team) => {
+    //   await localStorage.setItem('team', JSON.stringify(new Team(team)));
+    //   this.router.navigate(['/projetos']);
+    // });
   }
 }

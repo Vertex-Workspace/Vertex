@@ -9,11 +9,8 @@ export class Team {
     creationDate !: Date;
     description !: string;
     users?: User[];
-
     creator?: User;
-
     groups?: Group[];
-    //List Project - Miguel
     projects?: Project[];
 
     constructor(
@@ -24,6 +21,11 @@ export class Team {
         this.name = team.name;
         this.creationDate = team.creationDate;
         this.description = team.description;
+        this.creator = team.creator;
+        this.users = team.users;         
+        this.groups = team.groups;
+        this.projects = team.projects;       
+        
     }
 
 }
