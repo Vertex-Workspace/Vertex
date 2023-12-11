@@ -47,4 +47,9 @@ export class ProjectService {
       )
   }
 
+  public existsById(id: number): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${URL}project/exists/${id}`)
+  }
+
 }

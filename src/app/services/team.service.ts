@@ -43,5 +43,11 @@ export class TeamService {
 
   }
 
+  public existsByIdAndUserBelongs(teamId: number, userId: number): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${URL}team/exists/${teamId}/${userId}`);
+  }
+
+
 
 }
