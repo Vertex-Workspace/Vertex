@@ -133,12 +133,5 @@ export class ProjectsComponent {
     
   }
 
-  getRecentsProjects(): void {
-    this.projectService
-      .getAllByTeam(this.team.id!)
-      .subscribe((projects: Project[]) => {        
-        this.recentProjects = projects;
-      });
-  }
 
 }

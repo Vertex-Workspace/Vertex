@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit{
     private alert: AlertService
   ) {
     this.logged = this.userService.getLogged();  
+    this.getRecentsTeams();
   }
 
-  ngOnInit(): void {
-    this.getRecentsTeams();
+  ngOnInit(): void {  
   }
 
   isCreating: boolean = false;

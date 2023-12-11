@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -56,9 +57,17 @@ export class TasksComponent implements OnInit {
     this.orderOpen = !this.orderOpen;
   }
 
-  changePreviewMode(preview: string): void {
+  redirect(preview: string): void {
+    console.log(this.router.url.includes('equipe'));
+    
+    
+
     this.clicked = preview;
   }
+
+  // getUrlType(): boolean {
+    
+  // }
 
   onInputType(): void {
 

@@ -21,37 +21,26 @@
                 </ng-container>
             </div>
 
-            <!-- UTILITY NAV BAR PROJECT/TASK -->
-            <div class="functionally-items regular-text" *ngIf="(clicked === 'project' && !isCreating) || (clicked === 'task')">
+            <div class="functionally-items regular-text" *ngIf="clicked === 'project' && !isCreating">
                 <div class="container">
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        {{ clicked === 'project' ? 'Novo Projeto' : 'Nova Tarefa' }}
+                        Novo projeto
                     </button>
                     <div class="search">
-                        <input type="text" [placeholder]="clicked === 'project' ? 'Pesquisar por um projeto...' : 'Pesquisar por uma tarefa...'" />
+                        <input type="text" placeholder="Pesquisar por uma equipe...">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                 </div>
             </div>
 
             <!-- FILTER AND ORDER SETTINGS -->
-            <section class="filter-settings" *ngIf="filterOpen || orderOpen">
-                <p>Filtrar por </p>
-                <ng-container *ngIf="filterOpen">
-                    <select>
-                        <option *ngFor="let item of filterSettings">{{ item.label }}</option>
-                    </select>
-                </ng-container>
-                <ng-container *ngIf="orderOpen">
-                    <select>
-                        <option *ngFor="let item of orderSettings">{{ item.label }}</option>
-                    </select>
-                </ng-container>
-            </section>
-
             <div class="functionally-items-task" *ngIf="clicked === 'task'">
                 <div class="container">
+                    <div class="search">
+                        <input type="text" placeholder="Pesquise por uma tarefa...">
+                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                    </div>
                     <div class="filter-items">
                         <div *ngFor="let item of configItems" class="icons">
                             <button (click)="item.click()">
@@ -60,12 +49,34 @@
                         </div>
                     </div>
                 </div>
+                <section 
+                    class="filter-settings" 
+                    *ngIf="filterOpen || orderOpen"
+                >
+                    <!-- <p *ngIf="orderOpen">Ordenar por </p> -->
+                    <p *ngIf="filterOpen || orderOpen">Filtrar por </p>
+
+                    <ng-container>
+                        <select *ngIf="filterOpen">
+                            <option *ngFor="let item of filterSettings">
+                                {{ item.label }}
+                            </option>
+                        </select>
+                        
+                        <select *ngIf="orderOpen">
+                            <option *ngFor="let item of orderSettings">
+                                {{ item.label }}
+                            </option>
+                        </select>
+                    </ng-container>
+                </section>
+                
                 <div class="w-full h-full">
                     <app-list></app-list>
                 </div>
             </div>
 
-            <div class="default-size">
+            <div class="default-size" *ngIf="clicked === 'project'">
                 <app-card-list 
                     style="width: 100%; height: 90%; padding-top: 3%;" 
                     *ngIf="clicked === 'project' && !isCreating"
