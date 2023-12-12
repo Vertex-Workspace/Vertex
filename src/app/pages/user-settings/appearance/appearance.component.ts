@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { faPencil, faSun, faMoon, faToggleOff, faToggleOn, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from '../../../services/personalization.service';
 import { Personalization } from '../../../models/personalization';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../../services/user.service';
 import TypedRegistry from 'chart.js/dist/core/core.typedRegistry';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-appearance',
@@ -19,7 +20,7 @@ export class AppearanceComponent implements OnInit {
   faToggleOff = faToggleOff;
   faCheck = faCheck;
 
-  constructor(private personalizationService: PersonalizationService, private userService: UserService) { }
+  constructor(private personalizationService: PersonalizationService, private userService: UserService,private zone: NgZone, private cdr : ChangeDetectorRef) { }
 
   logged !: User;
   primaryLight!: string;
@@ -34,7 +35,7 @@ export class AppearanceComponent implements OnInit {
   ngOnInit(): void {
     this.logged = this.userService.getLogged();
 
-    this.userService.getOneById(this.logged.id!).subscribe((user) => {
+    this.userService.getOneById(this.logged.id!).pipe(take(1)).subscribe((user) => {
 
       this.primaryLight = user.personalization?.primaryColorLight!;
       this.secondLight = user.personalization?.secondColorLight!;
@@ -125,7 +126,7 @@ export class AppearanceComponent implements OnInit {
 
 
       this.changeThemesListSelected();
-      this.saveTheme();
+      // this.saveTheme();
       console.log(this.themesList);
     })
   }
@@ -171,7 +172,6 @@ export class AppearanceComponent implements OnInit {
 
   }
 
-
   toggles = [
     { text: "Habilitar comando de voz", icon: faToggleOff },
     { text: "Habilitar leitura de texto", icon: faToggleOff },
@@ -186,7 +186,6 @@ export class AppearanceComponent implements OnInit {
     }
   }
 
-
   fontSizes = [
     '12 (Padrão)', '14'
   ]
@@ -195,17 +194,17 @@ export class AppearanceComponent implements OnInit {
     'Inter (Padrão)', 'Helvetica', 'Times New Roman'
   ];
 
-
-  selectColor(theme: any, type: any, item: any): void {
-
+  
+  selectColor(theme: any, type: any, item: any) {
+    
     this.foreachColors(theme, type, item);
 
     let newPers = new Personalization({
       id: this.logged.id!,
-      primaryColorLight: this.primaryLight,
-      secondColorLight: this.secondLight,
-      primaryColorDark: this.primaryDark,
-      secondColorDark: this.secondDark,
+      primaryColorLight: this.themesList[0].primaryColor,
+      secondColorLight: this.themesList[0].secondColor,
+      primaryColorDark: this.themesList[1].primaryColor,
+      secondColorDark: this.themesList[1].secondColor,
       fontFamily: this.fontFamily[0],
       fontSize: parseInt(this.fontSizes[0]),
       theme: this.theme,
@@ -213,28 +212,34 @@ export class AppearanceComponent implements OnInit {
       listeningText: true
     });
 
-    console.log(newPers, "newPers");
-
-
-
-
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
-
+      console.log(pers,"PERS");
+      
       this.logged.personalization = pers.personalization;
       localStorage.setItem("logged", JSON.stringify(this.logged))
       console.log(this.logged.personalization);
+      if(this.logged.personalization!.theme == 0){
+        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
+        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
+      } else if(this.logged.personalization!.theme == 1) {
+        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
+        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
+      }
     })
-
+  
+    
   }
-
-  foreachColors(theme: any, type: any, item: number): void {
+  
+  foreachColors(theme: any, type: any, item: number): void {-
     type.colors.forEach((element: { status: string; }) => {
       element.status = 'unselected';
 
       type.colors[item].status = 'selected';
       if (type.title === 'Cor Primária' && theme.mode === 'Tema Claro') {
         theme.primaryColor = type.colors[item].color;
-        document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
+        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
+        
+        console.log(theme.primaryColor);  
       }
       if (type.title === 'Cor Primária' && theme.mode === 'Tema Escuro') {
         theme.primaryColor = type.colors[item].color;
@@ -258,12 +263,11 @@ export class AppearanceComponent implements OnInit {
     })
     this.themesList[item].status = 'selected';
     this.theme = item;
-    // this.changeThemesListSelected();
     this.saveTheme();
 
   }
 
-  saveTheme(): void {
+  saveTheme() {
     let newPers = new Personalization({
       id: this.logged.id!,
       primaryColorLight: this.themesList[0].primaryColor,
@@ -277,21 +281,18 @@ export class AppearanceComponent implements OnInit {
       listeningText: true
     });
 
-
-
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
       this.logged.personalization = pers.personalization;
-      localStorage.setItem("logged", JSON.stringify(this.logged))
-      console.log(this.logged.personalization);
-    })
+      localStorage.setItem("logged", JSON.stringify(this.logged));
 
-    if (this.logged.personalization!.theme == 0) {
-      document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
-      document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
-    } else if (this.logged.personalization!.theme == 1) {
-      document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
-      document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
-    }
+      if(this.logged.personalization!.theme == 0){
+        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
+        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
+      } else if(this.logged.personalization!.theme == 1) {
+        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
+        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
+      }
+    });
+
   }
-
 }
