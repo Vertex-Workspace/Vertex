@@ -22,7 +22,6 @@ export class LoadingInterceptor implements HttpInterceptor {
     }
 
     this.activeRequests++;
-    
 
     return next.handle(request).pipe(
       finalize(() => {
