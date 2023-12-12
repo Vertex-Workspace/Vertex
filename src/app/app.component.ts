@@ -70,15 +70,11 @@ export class AppComponent {
       });
   }
 
+  // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
-
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
-    
-
-
-
     this.userService.getOneById(user.id!).subscribe((logged) => {
-      
+
       user = logged;
       console.log(user.personalization!.theme);
 
@@ -91,10 +87,6 @@ export class AppComponent {
       }
       
     });
-
-
-    //setar o tema do usuário com o document.documentElement.style.setProperty('--primary-color', personalization.primaryColor);
-
   }
 
   getRouteAnimationData() {

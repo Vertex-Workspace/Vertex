@@ -198,16 +198,19 @@ main{
 
 .high-input-div{
     @apply w-[65%] h-[20%] flex items-center gap-3;
+    
 }
 
 .div-input-chat{
     @apply w-[100%] h-[45%] flex;
     background-color: $card;
+    border: $borderBottom;
 }
 
 .square-chat{
-    @apply w-[7.5%] h-[40%] flex items-center justify-center;
+    @apply w-[9%] h-[45%] flex items-center justify-center;
     background-color: $primaryColor;
+    border: $borderBottom;
 
     .section-icons{
         @apply flex justify-between items-center;

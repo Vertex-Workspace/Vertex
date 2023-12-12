@@ -20,7 +20,7 @@ export class AppearanceComponent implements OnInit {
   faToggleOff = faToggleOff;
   faCheck = faCheck;
 
-  constructor(private personalizationService: PersonalizationService, private userService: UserService,private zone: NgZone, private cdr : ChangeDetectorRef) { }
+  constructor(private personalizationService: PersonalizationService, private userService: UserService, private zone: NgZone, private cdr: ChangeDetectorRef) { }
 
   logged !: User;
   primaryLight!: string;
@@ -31,7 +31,7 @@ export class AppearanceComponent implements OnInit {
 
   themesList!: any[];
 
-
+  // Sets the theme by default and make the persistence of the theme in this component
   ngOnInit(): void {
     this.logged = this.userService.getLogged();
 
@@ -121,10 +121,6 @@ export class AppearanceComponent implements OnInit {
         this.themesList[0].status = 'unselected';
       }
 
-
-
-
-
       this.changeThemesListSelected();
       // this.saveTheme();
       console.log(this.themesList);
@@ -136,40 +132,29 @@ export class AppearanceComponent implements OnInit {
 
     this.themesList.forEach((themes) => {
       if (themes.mode == "Tema Claro") {
-
         themes.types.forEach((type: any) => {
-
-
-
           type.colors.forEach((color: any) => {
-
             if (color.color == this.primaryLight || color.color == this.secondLight) {
               type.colors.forEach((color: any) => {
                 color.status = 'unselected';
               })
               color.status = 'selected';
             }
-
           })
         }, this);
       } else if (themes.mode == "Tema Escuro") {
-
         themes.types.forEach((type: any) => {
-
           type.colors.forEach((color: any) => {
-
             if (color.color == this.primaryDark || color.color == this.secondDark) {
               type.colors.forEach((color: any) => {
                 color.status = 'unselected';
               })
               color.status = 'selected';
             }
-
           })
         }, this);
       }
     })
-
   }
 
   toggles = [
@@ -194,9 +179,8 @@ export class AppearanceComponent implements OnInit {
     'Inter (Padrão)', 'Helvetica', 'Times New Roman'
   ];
 
-  
-  selectColor(theme: any, type: any, item: any) {
-    
+
+  selectColor(theme: any, type: any, item: any): void {
     this.foreachColors(theme, type, item);
 
     let newPers = new Personalization({
@@ -212,25 +196,24 @@ export class AppearanceComponent implements OnInit {
       listeningText: true
     });
 
+    console.log(newPers, "newPers");
+
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
-      console.log(pers,"PERS");
-      
       this.logged.personalization = pers.personalization;
       localStorage.setItem("logged", JSON.stringify(this.logged))
       console.log(this.logged.personalization);
-      if(this.logged.personalization!.theme == 0){
+      if (this.logged.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
-      } else if(this.logged.personalization!.theme == 1) {
+      } else if (this.logged.personalization!.theme == 1) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
       }
-    })
-  
-    
+    });
   }
-  
-  foreachColors(theme: any, type: any, item: number): void {-
+
+  foreachColors(theme: any, type: any, item: number): void {
+    -
     type.colors.forEach((element: { status: string; }) => {
       element.status = 'unselected';
 
@@ -238,8 +221,8 @@ export class AppearanceComponent implements OnInit {
       if (type.title === 'Cor Primária' && theme.mode === 'Tema Claro') {
         theme.primaryColor = type.colors[item].color;
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
-        
-        console.log(theme.primaryColor);  
+
+        console.log(theme.primaryColor);
       }
       if (type.title === 'Cor Primária' && theme.mode === 'Tema Escuro') {
         theme.primaryColor = type.colors[item].color;
@@ -283,16 +266,18 @@ export class AppearanceComponent implements OnInit {
 
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
       this.logged.personalization = pers.personalization;
+
       localStorage.setItem("logged", JSON.stringify(this.logged));
 
-      if(this.logged.personalization!.theme == 0){
+
+      if (this.logged.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
-      } else if(this.logged.personalization!.theme == 1) {
+      } else if (this.logged.personalization!.theme == 1) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
       }
     });
-
   }
+
 }
