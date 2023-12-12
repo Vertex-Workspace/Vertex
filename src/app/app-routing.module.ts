@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/tasks/mural/mural.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
@@ -86,7 +85,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'equipe/:teamId/tarefas',
+    path: 'projeto/:projectId/tarefas',
     component: TasksComponent,
     canActivate: [AuthGuard],
     children: [
