@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 
 @Component({
@@ -20,13 +22,22 @@ export class TasksComponent implements OnInit {
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
 
+  logged !: User;
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {
+    const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
+    console.log(projectId);
+    
+    this.logged = this.userService.getLogged();
+   }
 
   ngOnInit(): void {
     this.getClicked();
+    this.logged = this.userService.getLogged();
   }
 
   getClicked(): void {
@@ -66,9 +77,9 @@ export class TasksComponent implements OnInit {
   redirect(page: string): void {
     const url: string = this.router.url;
 
-    if (url.includes('equipe')) {
-      const teamId: number = Number(this.route.snapshot.paramMap.get('teamId'));
-      this.router.navigate([`equipe/${teamId}/tarefas/${page}`]);
+    if (url.includes('projeto')) {
+      const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
+      this.router.navigate([`/projeto/${projectId}/tarefas/${page}`]);
       
 
     } else {
@@ -92,6 +103,6 @@ export class TasksComponent implements OnInit {
 
   openPropertiesModal(): void {
     this.propertiesOpen = !this.propertiesOpen;
-    console.log(this.propertiesOpen)
   }
+  
 }

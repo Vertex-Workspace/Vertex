@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
-import { AlertService } from 'src/app/services/alert.service';
-import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-card-list',
@@ -13,9 +10,7 @@ import { TeamService } from 'src/app/services/team.service';
 export class CardListComponent implements OnInit{
 
   constructor(
-    private teamService: TeamService, 
     private router: Router,
-    private alert: AlertService
   ) { }
   
   @Input()
@@ -68,7 +63,7 @@ export class CardListComponent implements OnInit{
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);      
     } else {
-      this.router.navigate([`/equipe/${id}/tarefas/kanban`])
+      this.router.navigate([`/projeto/${id}/tarefas/kanban`])
     }
 
     // this.teamService.getOneById(id!).subscribe(async(team) => {
