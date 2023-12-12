@@ -7,10 +7,12 @@
                     <p>{{value.property.name}}</p>
                 </div>
                 <div>
-                    <p *ngIf="getKind(value)">{{getValue(value)}}</p>
-                    <select name="" id="" *ngIf="getKind(value)" [(ngModel)]="selectedOption">
-                        <ng-container *ngFor="let option of getSelectOptions(value)">
-                            <option [ngValue]="option" [attr.selected]="option == selectedOption ? true : null">{{option.value}}</option>
+                    <input (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/>
+                    <input (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/>
+                    
+                    <select name="" id="" *ngIf="getKind(value.property, 'STATUS')" (change)="change($event, value)">
+                        <ng-container *ngFor="let option of getSelectOptions(value)" >
+                            <option [attr.value]="option.id" [attr.selected]="isSelected(option, value) ? true : null">{{option.value}}</option>
                         </ng-container>
                     </select>
                 </div>

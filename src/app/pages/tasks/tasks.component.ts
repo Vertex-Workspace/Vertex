@@ -114,4 +114,14 @@ export class TasksComponent implements OnInit {
   openPropertiesModal(): void {
     this.propertiesOpen = !this.propertiesOpen;
   }
+
+  updateProjectByTaskChanges(event: any): void{
+    let taskUpdated: Task = event;
+    this.project.tasks = this.project.tasks.map(task => {
+      if(task.id === taskUpdated.id){
+        return taskUpdated;
+      }
+      return task;
+    });
+  }
 }

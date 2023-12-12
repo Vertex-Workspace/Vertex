@@ -13,7 +13,7 @@
                     <h4>{{task.name}}</h4>
                 </div>
                 <div class="properties">
-                    <app-properties [task]="task" style="width: 100%; height: 100%;"/>
+                    <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)"/>
                 </div>
                 <div class="down">
                     <div class="buttons">

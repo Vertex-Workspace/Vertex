@@ -2,7 +2,7 @@ import { Value } from "./value";
 
 export class Property {
 
-    id?: number;
+    id!: number;
     name!: string;
     kind!: PropertyKind;
     isObligated!: boolean;

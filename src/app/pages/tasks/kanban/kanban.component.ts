@@ -79,7 +79,7 @@ export class KanbanComponent implements OnInit {
   specificPropertyArray(propertyList: PropertyList): Task[] {
     return this.project.tasks.filter(task => {
       let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
-      return valueIntoPropertyList.value == propertyList.value;
+      return valueIntoPropertyList.id == propertyList.id;
     });
   }
 
@@ -99,7 +99,7 @@ export class KanbanComponent implements OnInit {
 
   getTaskByProperty(task: Task, propertyList: PropertyList): boolean {
     let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
-    return valueIntoPropertyList.value == propertyList.value;
+    return valueIntoPropertyList.id == propertyList.id;
   }
 
 

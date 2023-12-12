@@ -5,7 +5,7 @@
 }
 
 table {
-    @apply w-4/5 h-[100%] flex flex-col gap-8 items-start overflow-auto;
+    @apply w-4/5 h-[100%] flex flex-col gap-8 items-start overflow-x-hidden;
 }
 
 tr {
@@ -18,10 +18,29 @@ td {
 }
 
 td div {
-    @apply w-1/2 flex justify-start items-center pl-5;
+    @apply w-1/2 flex h-full justify-start items-center pl-5;
 }
 
 fa-icon {
     @apply w-12 h-12 flex justify-center items-center;
     color: $primaryColor; 
+}
+select{
+    @apply w-full h-2/3 flex rounded-sm px-2;
+}
+select:hover{
+    background-color: #f3f0f0;
+    cursor: pointer;
+}
+
+input{
+    @apply w-full h-2/3 flex rounded-sm px-2;
+}
+input:hover{
+    background-color: #f3f0f0;
+    cursor: pointer;
+}
+input:focus{
+    cursor: text;
+    border-bottom: 1px solid $primaryColor;
 }
