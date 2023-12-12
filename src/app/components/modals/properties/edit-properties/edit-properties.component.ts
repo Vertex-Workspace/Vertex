@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import {
-  faArrowLeft, faXmark, faCaretDown, faSpinner, faUser, faPaperclip,
-  faFont, faCalendarDays, faSquare, faTrashCan, faEye
+  faCaretDown, faSpinner, faUser, faPaperclip,
+  faFont, faCalendarDays, faSquare, faTrashCan, faListOl
 } from '@fortawesome/free-solid-svg-icons';
+import TypedRegistry from 'chart.js/dist/core/core.typedRegistry';
 import { ConnectableObservable } from 'rxjs';
 
 @Component({
@@ -10,15 +11,13 @@ import { ConnectableObservable } from 'rxjs';
   templateUrl: './edit-properties.component.html',
   styleUrls: ['./edit-properties.component.scss']
 })
-export class EditPropertiesComponent{
+export class EditPropertiesComponent {
 
   @Output()
   selection = new EventEmitter<String>();
 
-@Input() name?: string;
+  @Input() name?: string;
 
-  faArrowLeft = faArrowLeft;
-  faXmark = faXmark;
   faCaretDown = faCaretDown;
   faSpinner = faSpinner;
   faUser = faUser;
@@ -27,11 +26,11 @@ export class EditPropertiesComponent{
   faCalendarDays = faCalendarDays;
   faSquare = faSquare;
   faTrashCan = faTrashCan;
-  faEye = faEye;
+  faListOl = faListOl;
   openInput: boolean = false;
   selectedProperty: string = "Texto";
 
-  ngOnInit():void{
+  ngOnInit(): void {
     this.check();
   }
 
@@ -39,9 +38,7 @@ export class EditPropertiesComponent{
     { name: 'Texto', icon: faFont, value: false },
     { name: 'Data', icon: faCalendarDays, value: false },
     { name: 'Seleção', icon: faCaretDown, value: false },
-    { name: 'Status', icon: faSpinner, value: false },
-    { name: 'Responsável', icon: faUser, value: false },
-    { name: 'Anexo', icon: faPaperclip, value: false }
+    { name: 'Número', icon: faListOl, value: false },
   ]
 
   checkboxList = [
@@ -57,40 +54,60 @@ export class EditPropertiesComponent{
     }
   }
 
+
   selectValue(i: number) {
+    let cont1 = 0;
+    for (let cont = 0; cont < this.propertyTypes.length; cont++) {
+      if (this.propertyTypes[cont].value === true) {
+        cont1 = cont1 + 1
+        if (cont1 == 1) {
+          this.propertyTypes[cont].value = false;
+          cont1 = 0;
+        }
+      }
+    };
     this.propertyTypes[i].value = !this.propertyTypes[i].value;
   }
 
   selectIcon(icon: number) {
-    this.selectedProperty = this.propertyTypes[icon].name;
     console.log(this.selectedProperty);
+
+    this.selectedProperty = this.propertyTypes[icon].name;
+
+    if(this.selectedProperty != 'Texto'){
+      this.openInput = false;
+    }
 
     if (this.selectedProperty === 'Texto') {
       this.checkboxList[1].visibility = true;
-    }
-    if(this.selectedProperty === 'Data'){
+      this.checkboxList[2].visibility = false;
+    } else if (this.selectedProperty === 'Data') {
       this.checkboxList[2].visibility = true;
+      this.checkboxList[1].visibility = false;
+    } else {
+      this.checkboxList[1].visibility = false;
+      this.checkboxList[2].visibility = false;
     }
   }
 
-  selectionItems(i :number){
-    if(this.propertyTypes[i].name === 'Seleção'){
-    this.selection.emit();
+  selectionItems(i: number) {
+    if (this.propertyTypes[i].name === 'Seleção') {
+      this.selection.emit();
     }
   }
 
-  check(){
-    if(this.name === 'Nome da Tarefa'){
+  check() {
+    if (this.name === 'Nome da Tarefa') {
       this.propertyTypes[0].value = true;
-    }else if(this.name === 'Prazo'){
+    } else if (this.name === 'Prazo') {
       this.propertyTypes[1].value = true;
-    }else if(this.name === 'Status'){
+    } else if (this.name === 'Status') {
       this.propertyTypes[3].value = true;
-    }else if(this.name === 'Itens Seleção'){
+    } else if (this.name === 'Itens Seleção') {
       this.propertyTypes[2].value = true;
-    }else if(this.name === 'Responsável'){
+    } else if (this.name === 'Responsável') {
       this.propertyTypes[4].value = true;
-    }else if(this.name === 'Anexo'){
+    } else if (this.name === 'Anexo') {
       this.propertyTypes[5].value = true;
     }
   }

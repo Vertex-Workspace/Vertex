@@ -8,7 +8,7 @@
                 [ngClass]="item.status === 'Visíveis' ? '' : 'opacity'"
                 *ngFor="let name of item.name; index as i2" cdkDrag>
                 <div>
-                    <div>
+                    <div cdkDragHandle>
                         <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                         <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                     </div>

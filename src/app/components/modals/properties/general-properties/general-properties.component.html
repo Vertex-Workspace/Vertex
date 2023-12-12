@@ -1,6 +1,6 @@
 <div class="ng-contentDiv" *ngIf="generalModal">
     <span class="p-input-icon-right">
-        <input type="search" class="small-text" placeholder="Digite o que procura..." />
+        <input type="text" class="small-text" placeholder="Digite o que procura..." />
         <i class="pi pi-search pt-2 icon"></i>
     </span>
 
@@ -11,7 +11,7 @@
             <div *ngFor="let name of item.properties; index as i2">
                 <div cdkDrag class="visible" [ngClass]="item.status === 'Visíveis' ? '' : 'opacity'">
                     <div (click)="editProperty(i, i2)">
-                        <div>
+                        <div cdkDragHandle>
                             <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                             <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                         </div>
