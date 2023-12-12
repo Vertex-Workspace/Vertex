@@ -2,13 +2,18 @@ import { Component } from '@angular/core';
 import { faUser, faEnvelope,
     faEarthAmericas, faKey, faAngleDown, faToggleOff,
      faPencil, faToggleOn, faCircleUser,
-    faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+    faPenToSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
+
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
 
 @Component({
   selector: 'app-profile',
@@ -128,6 +133,15 @@ export class ProfileComponent {
       location: formValue.location,
     };
 
+  }
+
+  onUpload(): void {
+
+  }
+
+  onChangeFile(e: any): void {
+    console.log(e.target.files[0]);
+    
   }
 
 }
