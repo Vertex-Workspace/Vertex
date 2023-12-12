@@ -39,12 +39,12 @@ export class PropertyList{
 }
 
 export enum PropertyKind {
-    STATUS,
-    LIST,
-    TEXT,
-    NUMBER,
-    DATE,
-    FILE
+    STATUS = "STATUS",
+    LIST = "LIST",
+    TEXT = "TEXT",
+    NUMBER = "NUMBER",
+    DATE = "DATE",
+    FILE = "FILE"
 }
 export enum PropertyListKind {
     TODO,

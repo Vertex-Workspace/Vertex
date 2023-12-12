@@ -1,12 +1,18 @@
 <div class="base">
     <table>
         <tr>
-            <td *ngFor="let property of task.properties">
+            <td *ngFor="let value of task.values">
                 <div>
-                    <p>{{property.name}}</p>
+                    <fa-icon [icon]="getIcon(value)"></fa-icon>
+                    <p>{{value.property.name}}</p>
                 </div>
                 <div>
-                    <p>{{property.content}}</p>
+                    <p *ngIf="getKind(value)">{{getValue(value)}}</p>
+                    <select name="" id="" *ngIf="getKind(value)" [(ngModel)]="selectedOption">
+                        <ng-container *ngFor="let option of getSelectOptions(value)">
+                            <option [ngValue]="option" [attr.selected]="option == selectedOption ? true : null">{{option.value}}</option>
+                        </ng-container>
+                    </select>
                 </div>
             </td>
         </tr>

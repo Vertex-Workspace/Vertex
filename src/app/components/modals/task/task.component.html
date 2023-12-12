@@ -1,49 +1,52 @@
 <div class="modal-overlay">
     <div class="base">
-        <div class="side">
-            <div class="location">
+        <div class="location">
+            <div class="routes regular-text">
                 <p>Nome da equipe</p>
-                <p>Nome da tarefa</p>
+                <p>{{task.name}}</p>
             </div>
-
-            <div class="title">
-                <h3>Nome da tarefa</h3>
-                <p>Ea sunt consectetur ad minim. In sunt duis eu elit nisi velit magna.
-                    Commodo duis cupidatat culpa cillum. Pariatur sit fugiat Lorem anim
-                    ea magna excepteur qui elit nisi consectetur tempor deserunt.
-                    Ea aliquip deserunt officia esse labore velit laborum velit.</p>
-                <div class="button">
-                    <button>Editar descrição</button>
-                </div>
-            </div>
-
-            <div class="down">
-                <div class="buttons">
-                    <button>Ver participantes</button>
-                    <button>Iniciar chat</button>
-                </div>
-            </div>
+            <button (click)="closeModal()" class="large-text">X</button>
         </div>
-        <div class="side right">
-            <div>
-                <button (click)="closeModal()">X</button>
+        <div class="informations">
+            <div class="side">
+                <div class="title">
+                    <h4>{{task.name}}</h4>
+                </div>
+                <div class="properties">
+                    <app-properties [task]="task" style="width: 100%; height: 100%;"/>
+                </div>
+                <div class="down">
+                    <div class="buttons">
+                        <button>Ver participantes</button>
+                        <button>Iniciar chat</button>
+                    </div>
+                </div>
             </div>
-            <nav>
-                <ul>
-                    <a (click)="navigate('properties')">Propriedades</a>|
-                    <a (click)="navigate('comments')">Comentários</a>|
-                    <a (click)="navigate('log')">Histórico</a>
-                </ul>
-            </nav>
-            <div class="components">
-                <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
+            <div class="side right">
+                <nav>
+                    <ul>
+                        <a (click)="navigate('description')">Descrição</a>
+                        <span>|</span>
+                        <a (click)="navigate('comments')">Comentários</a>
+                        <span>|</span>
+                        <a (click)="navigate('log')">Histórico</a>
+                    </ul>
+                </nav>
+                <div class="components">
+                    <div *ngIf="selectedComponent === 'description'">
+                        <p>{{task.description}}</p>
+                        <div class="button">
+                            <button>Editar descrição</button>
+                        </div>
+                    </div>
 
-                <app-comments [task]="task" *ngIf="selectedComponent === 'comments'" />
+                    <app-comments [task]="task" *ngIf="selectedComponent === 'comments'" />
 
-                <app-properties [task]="task" *ngIf="selectedComponent === 'properties'" />
-            </div>
-            <div class="submit">
-                <button>Confirmar</button>
+                    <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
+                </div>
+                <div class="submit">
+                    <button>Finalizar Tarefa</button>
+                </div>
             </div>
         </div>
     </div>

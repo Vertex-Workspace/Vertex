@@ -76,11 +76,19 @@
         </section>
 
         <section class="router">
-            <router-outlet />
-            <app-kanban *ngIf="clicked  === 'Kanban'" style="width: 100%; height: 100%;"></app-kanban>
-            <app-list *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
-            <app-calendar *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
-            <app-mural *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
+            <app-kanban 
+
+            [project]="project" 
+            *ngIf="clicked  === 'Kanban'" 
+            style="width: 100%; height: 100%;"
+            (openTaskDetails)="changeModalTaskState(true, $event)"
+            ></app-kanban>
+
+
+
+            <app-list   *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
+            <app-calendar  *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
+            <app-mural  *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
             <!-- app-kanban -->
         </section>
 
@@ -89,4 +97,4 @@
 
 <app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()"></app-properties>
 
-<app-task *ngIf="taskOpen" (close)="changeModalTaskState(false)"></app-task>
+<app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>

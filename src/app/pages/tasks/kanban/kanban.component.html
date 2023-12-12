@@ -3,7 +3,7 @@
         <div class="col-container" >
             <div 
                 class="col"
-                *ngFor="let propertyList of properties" 
+                *ngFor="let propertyList of project.properties[0].propertyLists" 
                 [style.backgroundColor]="getColor(propertyList.color)"
                 [style.height]="getHeight(propertyList)"
                 cdkDropList 
@@ -25,6 +25,7 @@
                             [task]="task" 
                             [cdkDragData]="task" 
                             cdkDrag
+                            (click)="openTaskModal(task)"
                         />
                     </ng-container>
 

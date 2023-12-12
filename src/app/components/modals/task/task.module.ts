@@ -4,6 +4,8 @@ import { TaskComponent } from './task.component';
 import { CommentsComponent } from './comments/comments.component';
 import { LogComponent } from './log/log.component';
 import { PropertiesComponent } from './properties/properties.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,6 @@ import { PropertiesComponent } from './properties/properties.component';
     PropertiesComponent
   ],
   exports: [TaskComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule, FormsModule],
 })
 export class TaskModule {}

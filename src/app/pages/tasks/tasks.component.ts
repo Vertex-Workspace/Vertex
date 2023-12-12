@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { TaskCreate } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/task';
 import { User } from 'src/app/models/user';
 
 
@@ -26,21 +26,23 @@ export class TasksComponent implements OnInit {
   taskOpen: boolean = false;
 
   project!: Project;
+
+
+
   constructor(
     private router: Router,
     private projectService: ProjectService,
     private taskService: TaskService
-  ) { }
+  ) { 
+}
 
-  ngOnInit(): void {
-    this.clicked = this.getClicked();
-    this.projectService.getOneById(1).subscribe((project: Project) => {
-      this.project = project;
-    });
-  }
-
-  getClicked(): string {
-    return "Kanban";
+  async ngOnInit(): Promise<void> {
+    let projectRequested : Project | undefined = await this.projectService.getOneById(1).toPromise();
+    console.log(projectRequested);
+    if(projectRequested){
+      this.project = projectRequested;
+    }
+    this.clicked = "Kanban";
   }
 
   menuItems = [
@@ -91,7 +93,7 @@ export class TasksComponent implements OnInit {
     this.taskService.create(taskCreate).subscribe(
       (task) => {
         this.project.tasks.push(task);
-        this.changeModalTaskState(true);
+        this.changeModalTaskState(true, task);
       },
       (error) => {
         console.log(error);
@@ -99,12 +101,17 @@ export class TasksComponent implements OnInit {
     );
   }
 
-  changeModalTaskState(bool: boolean): void{
+  taskOpenObject!: Task;
+  changeModalTaskState(bool: boolean, task: Task): void{
     this.taskOpen = bool;
+    if(this.taskOpen){
+      this.taskOpenObject = task;
+    } else{
+      this.taskOpenObject = {} as Task;
+    }
   }
 
   openPropertiesModal(): void {
     this.propertiesOpen = !this.propertiesOpen;
-    console.log(this.propertiesOpen)
   }
 }
