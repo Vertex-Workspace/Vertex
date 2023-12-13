@@ -75,7 +75,9 @@ export class TasksComponent implements OnInit {
   toggleOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
-
+  changePreviewMode(preview: string): void {
+    this.clicked = preview;
+  }
 
   onInputType(): void {
 

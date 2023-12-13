@@ -5,7 +5,7 @@ import { Task } from "./task";
 export class Value {
 
     id!: number;
-    value!: string | PropertyList;
+    value!: string | PropertyList | Date;
     property!: Property;
     task!: Task;
 
