@@ -7,10 +7,20 @@
     --error: #872323;
     --text: #000000;
     --disabled: grey;
+    --largeText: 20px;
+    --mediumText: 18px;
+    --regularText: 16px;
+    --smallText: 14px;
     --borderBottom: 1px solid var(--primaryColor);
 }
 
 $fontFamily: var(--fontFamily);
+
+$largeText: var(--largeText);
+$mediumText: var(--mediumText);
+$regularText: var(--regularText);
+$smallText: var(--smallText);
+
 $primaryColor: var(--primaryColor);
 $secondColor: var(--secondColor);
 $emphasis: var(--emphasis);

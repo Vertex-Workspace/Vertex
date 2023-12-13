@@ -53,14 +53,14 @@
             <div>
                 <p class="medium-text">Tamanho da letra</p>
                 <p class="small-text">Defina o tamanho da letra para o sistema</p>
-                <select>
+                <select [(ngModel)]="fontSizeChoosed" (change)="changeFontSize()">
                     <option *ngFor="let size of fontSizes" [value]="size" class="small-text">{{size}}</option>
                 </select>
             </div>
             <div>
                 <p class="medium-text">Estilo da letra</p>
                 <p class="small-text">Defina o estilo da letra</p>
-                <select>
+                <select [(ngModel)]="fontFamilyChoosed" (change)="changeFontFamily()">
                     <option *ngFor="let font of fontFamily" [value]="font" class="small-text">{{font}}</option>
                 </select>
             </div>
