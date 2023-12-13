@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginModule } from './pages/login/login.module';
 import { RegisterModule } from './pages/register/register.module';
-import { TeamsModule } from './pages/teams/teams.module';
+import { HomeModule } from './pages/home/home.module';
 import { ProjectsModule } from './pages/projects/projects.module';
 import { InputModule } from './components/reusable-components/input/input.module';
 import { ButtonModule } from 'primeng/button';
@@ -45,7 +45,7 @@ import { GroupsSelectModule } from './components/modals/groups-select/groups-sel
     CommonModule,    
     LoginModule,
     RegisterModule,
-    TeamsModule,
+    HomeModule,
     ProjectsModule,
     InputModule,
     ButtonModule,

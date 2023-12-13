@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/tasks/mural/mural.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { TeamInformationsComponent } from './pages/team-informations/team-informations.component';
-import { TeamsComponent } from './pages/teams/teams.component';
+import { HomeComponent } from './pages/home/home.component';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { ProfileComponent } from './pages/user-settings/profile/profile.component';
@@ -20,6 +19,7 @@ import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
+import { UserTeamGuard } from './services/guards/user-team.guard';
 
 const routes: Routes = [
   {
@@ -38,15 +38,19 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "perfil",
+    path: "equipe/:id",
+    component: TeamInformationsComponent,
+    canActivate: [AuthGuard, UserTeamGuard] //add verificação de 
+  },
+  {
+    path: "perfil-usuario",
     component: UserInformationsComponent,
     canActivate: [AuthGuard]
   },
   {
     path: "home",
-    component: TeamsComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard]
-
   },
   {
     path: "projetos",
@@ -54,14 +58,37 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "groups",
-    component: GroupsSelectComponent,
-    canActivate: [AuthGuard]
+    path: "equipe/:id/projetos",
+    component: ProjectsComponent,
+    canActivate: [AuthGuard, UserTeamGuard]
   },
   {
     path: 'tarefas',
     component: TasksComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'projeto/:projectId/tarefas',
+    component: TasksComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'kanban',
+        component: KanbanComponent
+      },
+      {
+        path: 'lista',
+        component: ListComponent
+      },
+      {
+        path: 'calendario',
+        component: CalendarComponent
+      },
+      {
+        path: 'mural',
+        component: MuralComponent
+      }
+    ]
   },
   {
     path: 'configuracoes',

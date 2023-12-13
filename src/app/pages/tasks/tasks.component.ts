@@ -1,11 +1,14 @@
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate } from 'src/app/models/task';
 import { User } from 'src/app/models/user';
+import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -31,17 +34,21 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route : ActivatedRoute,
     private projectService: ProjectService,
     private taskService: TaskService
   ) { 
 }
 
   async ngOnInit(): Promise<void> {
-    let projectRequested : Project | undefined = await this.projectService.getOneById(1).toPromise();
+    if (this.router.url.includes('projeto')) {
+    const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
+    let projectRequested : Project | undefined = await this.projectService.getOneById(projectId).toPromise();
     if(projectRequested){
       this.project = projectRequested;
     }
     this.clicked = "Kanban";
+    }
   }
 
   menuItems = [
@@ -69,9 +76,6 @@ export class TasksComponent implements OnInit {
     this.orderOpen = !this.orderOpen;
   }
 
-  changePreviewMode(preview: string): void {
-    this.clicked = preview;
-  }
 
   onInputType(): void {
 
@@ -123,4 +127,5 @@ export class TasksComponent implements OnInit {
       return task;
     });
   }
+  
 }

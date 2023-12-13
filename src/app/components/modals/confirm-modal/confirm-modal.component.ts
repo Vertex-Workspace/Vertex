@@ -26,13 +26,8 @@ export class ConfirmModalComponent {
       this.close.emit();
     }
 
-    deleteTeamConfirm(answer : string): void {
-        if(answer == 'yes'){
-          this.close.emit(true);
-        }
-        else{
-          this.close.emit(false);
-        }
+    deleteTeamConfirm(answer : boolean): void {
+        this.close.emit(answer);
     }
 
     // deletedTeam(): void {

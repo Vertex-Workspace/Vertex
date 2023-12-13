@@ -1,60 +1,63 @@
 @import "../../../../variables";
 
-section{
-    @apply absolute flex w-full h-full justify-end max-w-[96%];
+section {
+@apply absolute z-10 flex h-full justify-end w-[100%] max-w-[96%];
+animation: slideIn 0.5s ease-out;
+overflow: hidden;
 }
-.clickOut{
+
+.clickOut {
     @apply flex w-[75%] h-full;
 }
 
-.modal{
+.modal {
     @apply w-[25%] flex h-full rounded-sm flex-col shadow-xl;
     z-index: 999;
     background-color: $secondColor;
-    
-    .header{
+
+    .header {
         @apply flex flex-col w-full h-[15%] p-4;
         background-color: $primaryColor;
         color: $secondColor;
 
-        .header-title{
+        .header-title {
             @apply flex w-full h-1/2 flex-row justify-between items-center;
 
-            h5{
+            h5 {
                 color: $secondColor;
             }
-            p{
+
+            p {
                 @apply text-sm;
             }
         }
 
-        ul{
+        ul {
             @apply flex flex-row items-end justify-between w-full h-1/2;
 
-            .tool-icons{
+            .tool-icons {
                 @apply flex flex-row w-1/4 items-center justify-between;
 
-                .colorAllCheckbox{
+                .colorAllCheckbox {
                     color: $secondColor;
                 }
             }
-        
+
             .search {
-                @apply flex w-full h-3/4 items-center justify-between 
-                bg-white p-3 rounded shadow-md border-none;
+                @apply flex w-full h-3/4 items-center justify-between bg-white p-3 rounded shadow-md border-none;
                 color: $primaryColor;
-    
+
                 i {
                     @apply w-[10%];
                     color: $primaryColor;
                 }
-    
+
                 input {
                     @apply w-[90%] h-full outline-none flex items-center pl-2;
                 }
             }
 
-            .search-settings{
+            .search-settings {
                 @apply flex flex-row items-end justify-between w-[15%];
             }
         }
@@ -62,41 +65,45 @@ section{
 
     }
 
-    .notifications{
+    .notifications {
         @apply flex flex-col w-full h-[85%] overflow-y-auto;
 
-        .notification{
+        .notification {
             @apply flex w-full border-b-2 items-center p-4 justify-between;
             min-height: 90px;
 
-            :first-child{
+            :first-child {
                 @apply flex flex-row items-center justify-between;
 
-                .iconUser > fa-icon{
+                .iconUser>fa-icon {
                     @apply flex text-5xl rounded-full pl-5;
                     color: $primaryColor;
                 }
 
-                .description{
+                .description {
                     @apply flex flex-col pl-4;
                 }
-                .color{
+
+                .color {
                     color: $primaryColor;
                 }
             }
-            
-            .barOpenClose > fa-icon{
+
+            .barOpenClose>fa-icon {
                 @apply flex text-2xl;
                 color: $primaryColor;
             }
-            .rotate{
+
+            .rotate {
                 transform: rotate(90deg);
             }
         }
-        .notification:hover{
+
+        .notification:hover {
             @apply cursor-pointer bg-white;
         }
-        .openedNotification{
+
+        .openedNotification {
             @apply flex w-full;
             min-height: 90px;
             background-color: $primaryColor;
@@ -106,11 +113,13 @@ section{
 
 
 
-fa-icon , i{
+fa-icon,
+i {
     @apply text-xl;
     color: $secondColor;
 }
-input[type=checkbox]{
+
+input[type=checkbox] {
     width: 18px;
     height: 20px;
     cursor: pointer;

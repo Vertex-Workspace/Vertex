@@ -1,8 +1,6 @@
 <section>
     <div class="container-custom">
 
-        
-
         <!-- LEFT SIDE TASKS/TEAMS -->
         <div class="container-grid">
             <div class="nav-tasks-teams">
@@ -74,21 +72,23 @@
             <!-- SETTING OF ORDER AND FILTER -->
     
         
-
             <div class="default-size" *ngIf="clicked === 'team'">
 
                 <app-card-list 
-                style="width: 100%; height: 90%; padding-top: 3%;" 
-                *ngIf="clicked === 'team' && !isCreating"
-                [teams]="teams"
+                    style="width: 100%; height: 90%; padding-top: 3%;" 
+                    *ngIf="clicked === 'team' && !isCreating"
+                    (deleteEmitter)="delete($event)"
+                    [teams]="teams"
+                    [type]="'team'"
                 ></app-card-list>
 
 
                 <app-create-team-project 
-                style="width: 100%; height: 90%; padding-top: 3%;"  
-                *ngIf="clicked === 'team' && isCreating" 
-                (close)="switchCreateView()"
-                [typeString]="'team'"
+                    style="width: 100%; height: 90%; padding-top: 3%;"  
+                    *ngIf="clicked === 'team' && isCreating"
+                    (createTeam)="createTeam($event)"
+                    (close)="switchCreateView()"
+                    [typeString]="'team'"
                 ></app-create-team-project>
             </div>
         </div>
@@ -97,7 +97,10 @@
         <!-- RIGHT SIDE - QUICK ACCESS -->
         <div class="container-grid">
             <div class="default-size">
-                <app-quick-access style="width: 100%; height:100%;" [typeString]="'home'"></app-quick-access>
+                <app-quick-access style="width: 100%; height:100%;" 
+                    [typeString]="'home'"
+                    [recentTeams]="recentTeams"
+                ></app-quick-access>
             </div>
         </div>
     </div>

@@ -13,6 +13,7 @@ import { MuralCardComponent } from 'src/app/components/reusable-components/mural
 import { ListModule } from './list/list.module';
 import { MuralComponent } from './mural/mural.component';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
     PropertiesModule,
     TaskModule,
     ListModule,
-    KanbanModule
+    KanbanModule,
+    ChartModule
   ],
 })
 export class TasksModule { }
