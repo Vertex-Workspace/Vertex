@@ -6,7 +6,7 @@ export class Task {
 
     id!: number;
     name!: string;
-    description?: string;
+    description!: string;
     values!: Value[];
     properties!: Property[];
 
@@ -36,4 +36,10 @@ export class TaskCreate {
     creator!: {
         id: number;
     };
+}
+
+export class TaskEdit {
+    id!:number;
+    name!: string;
+    description!: string;
 }

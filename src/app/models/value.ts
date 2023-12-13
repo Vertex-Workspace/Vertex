@@ -30,7 +30,7 @@ export class ValueUpdate {
         };
         value: {
             id: number;
-            value: string | number;
+            value: string | number | Date;
         }
     };
 }

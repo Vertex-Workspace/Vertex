@@ -3,6 +3,7 @@ import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpin
 import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
 import { Task } from 'src/app/models/task';
 import { Value, ValueUpdate } from 'src/app/models/value';
+import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class PropertiesComponent implements OnInit {
 
   @Input() task!: Task;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private alertService : AlertService) { }
 
   icons: any = [
     { name: 'TEXT', icon: faFont },
@@ -31,13 +32,15 @@ export class PropertiesComponent implements OnInit {
   }
 
   @Output() changes = new EventEmitter();
+  date!: Date;
+
 
   getValue(value: Value): string {
     if (value.value === null) {
-      if(value.property.kind === PropertyKind.DATE){
+      if (value.property.kind === PropertyKind.DATE) {
 
       }
-      if(value.property.kind === PropertyKind.NUMBER){
+      if (value.property.kind === PropertyKind.NUMBER) {
         return "0";
       }
       return "Vazio";
@@ -73,33 +76,36 @@ export class PropertiesComponent implements OnInit {
 
   change(event: any, value: Value): void {
     console.log(event.target.value);
-    let newValue: string | number;
-    if(value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS){
-      newValue = event.target.value as number;
-    } else {
-      newValue = event.target.value as string;
-    }
-    const valueUpdate: ValueUpdate = {
-      id: this.task.id,
-      value: {
-        property: {
-          id: value.property.id
-        },
+    if (value.value !== event.target.value) {
+
+      let newValue: string | number | Date;
+      if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {
+        newValue = event.target.value as number;
+      }
+      else {
+        newValue = event.target.value as string;
+      }
+      const valueUpdate: ValueUpdate = {
+        id: this.task.id,
         value: {
-          id: value.id,
-          value: newValue
+          property: {
+            id: value.property.id
+          },
+          value: {
+            id: value.id,
+            value: newValue
+          }
         }
-      }
-    };
-    console.log(valueUpdate);
-    this.taskService.patchValue(valueUpdate).subscribe(
-      (task) => {
-        console.log(task);
-        this.changes.emit(task);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      };
+      this.taskService.patchValue(valueUpdate).subscribe(
+        (task) => {
+          this.alertService.successAlert( value.property.name  +  " alterado com sucesso!");
+          this.changes.emit(task);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

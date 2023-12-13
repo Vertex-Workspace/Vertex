@@ -66,9 +66,7 @@ export class KanbanComponent implements OnInit {
       };
 
       //Patch the value of the status task
-      this.taskService.patchValue(valueUpdate).subscribe((taskdaje: Task) => {
-        console.log(taskdaje);
-      });
+      this.taskService.patchValue(valueUpdate).subscribe();
     }
   };
 
@@ -102,7 +100,7 @@ export class KanbanComponent implements OnInit {
     return valueIntoPropertyList.id == propertyList.id;
   }
 
-
+  
   deleteTask(task: Task): void {
     this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
   }

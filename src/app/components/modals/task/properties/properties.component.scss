@@ -1,11 +1,11 @@
 @import '../../../../../variables.scss';
 
 .base {
-    @apply w-full h-full flex
+    @apply w-full h-full flex;
 }
 
 table {
-    @apply w-4/5 h-[100%] flex flex-col gap-8 items-start overflow-x-hidden;
+    @apply w-4/5 h-[100%] flex flex-col gap-8 items-start overflow-x-hidden pr-5;
 }
 
 tr {

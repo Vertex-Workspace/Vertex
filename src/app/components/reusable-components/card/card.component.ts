@@ -73,6 +73,18 @@ export class CardComponent implements OnInit{
   clock(): void {
     console.log('clock');
   }
+  
+  @Output() openTaskDetails = new EventEmitter();
+  openTask(): void {
+    if(!this.modalDelete){
+      this.openTaskDetails.emit();
+    }
+  }
+
+  dale(): void {
+    console.log('dale');
+  }
+
 
 }
 

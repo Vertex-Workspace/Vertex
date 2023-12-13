@@ -57,9 +57,6 @@
     }
 
 }
-.properties{
-    @apply flex w-full h-[50%];
-}
 
 .button {
     @apply w-full flex justify-end;
@@ -104,7 +101,7 @@
     @apply w-full flex justify-end;
 }
 .components{
-    @apply flex w-full items-center flex-col;
+    @apply flex w-[70%] items-center flex-col;
 }
 
 @media (max-width: 1420px) {
@@ -120,6 +117,10 @@
     .title p {
         @apply text-base;
     }
+    .properties{
+        @apply flex w-full h-[50%];
+    }
+    
 
     .components {
         @apply h-[55%];
@@ -140,9 +141,36 @@
         @apply w-[220px] h-[50px];
     }
 
+    .properties{
+        @apply flex w-full h-[60%];
+        max-height: 400px;
+    }
+    
     .components {
         @apply h-[65%];
     }
 }
 
 @media (max-width: 899px) {}
+
+input:hover{
+    background-color: #f3f0f0;
+    cursor: pointer;
+}
+input:focus{
+    cursor: text;
+    border-bottom: 1px solid $primaryColor;
+}
+
+textarea {
+    @apply flex px-4 py-2;
+    resize: none;
+    min-height: 100px;
+    border: none;
+    background-color: inherit;
+}
+textarea:focus{
+    @apply shadow-md rounded-sm;
+    border: 0 none;
+    outline: 0;
+}

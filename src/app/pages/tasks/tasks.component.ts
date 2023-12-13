@@ -38,7 +38,6 @@ export class TasksComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     let projectRequested : Project | undefined = await this.projectService.getOneById(1).toPromise();
-    console.log(projectRequested);
     if(projectRequested){
       this.project = projectRequested;
     }
