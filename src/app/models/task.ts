@@ -1,6 +1,6 @@
 
 import { Property } from "./property";
-import { Value } from "./value";
+import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from "./value";
 
 export class Task {
 
@@ -32,7 +32,7 @@ export class TaskCreate {
     project!: {
         id: number;
     };
-    values = [];
+    values!: ValueCreatedWhenTaskCreated[];
     creator!: {
         id: number;
     };

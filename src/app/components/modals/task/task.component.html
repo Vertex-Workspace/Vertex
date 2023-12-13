@@ -10,7 +10,7 @@
         <div class="informations">
             <div class="side">
                 <div class="title">
-                    <h4><input (blur)="changeName()" [(ngModel)]="task.name" type="text" name="name" id="name" value="{{task.name}}"></h4>
+                    <h4><input (blur)="updateTaskNameAndDescription()" [(ngModel)]="task.name" type="text" name="name" id="name" value="{{task.name}}"></h4>
                 </div>
                 <div class="properties">
                     <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)"/>
@@ -25,18 +25,19 @@
             <div class="side right">
                 <nav>
                     <ul>
-                        <a (click)="navigate('description')">Descrição</a>
+                        <a (click)="navigate('description')" [style.background]="'description' === selectedComponent ? '#D6D6D6' : 'inherit'">Descrição</a>
                         <span>|</span>
-                        <a (click)="navigate('comments')">Comentários</a>
+                        <a (click)="navigate('comments')" [style.background]="'comments' === selectedComponent ? '#D6D6D6' : 'inherit'">Comentários</a>
                         <span>|</span>
-                        <a (click)="navigate('log')">Histórico</a>
+                        <a (click)="navigate('log')" [style.background]="'log' === selectedComponent ? '#D6D6D6' : 'inherit'">Histórico</a>
                     </ul>
                 </nav>
                 <div class="components">
                     <div *ngIf="selectedComponent === 'description'" class="flex flex-col">
                         <textarea 
                         [disabled]="!descriptionEditable"
-                        [style.background]="descriptionEditable ? '#f5f5f5' :  '#fff'" 
+                        [style.background]="descriptionEditable ? '#f5f5f5' :  '#fff'"
+                        [(ngModel)]="task.description"
                         >{{task.description}}</textarea>
                         <div class="button">
                             <button *ngIf="!descriptionEditable" (click)="changeEditDescription()">Editar descrição</button>

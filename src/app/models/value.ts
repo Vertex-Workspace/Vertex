@@ -23,14 +23,24 @@ export class Value {
 
 
 export class ValueUpdate {
-    id!: number;
+    id?: number;
     value!: {
         property: {
             id: number;
         };
         value: {
-            id: number;
+            id?: number;
             value: string | number | Date;
         }
     };
+}
+
+
+export class ValueCreatedWhenTaskCreated {
+    property!: {
+        id: number;
+    };
+    value!: {
+        value: string | number | Date;
+    }
 }

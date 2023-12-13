@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/task';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -8,7 +8,8 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
 import { PropertyList } from 'src/app/models/property';
 import { TaskService } from 'src/app/services/task.service';
-import { ValueUpdate } from 'src/app/models/value';
+import { ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-kanban',
@@ -18,7 +19,7 @@ import { ValueUpdate } from 'src/app/models/value';
 export class KanbanComponent implements OnInit {
 
 
-  constructor(private projectService: ProjectService, private taskService: TaskService) {
+  constructor(private projectService: ProjectService, private taskService: TaskService, private alertService: AlertService) {
 
   }
 
@@ -28,6 +29,7 @@ export class KanbanComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.project);
   }
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
@@ -100,7 +102,7 @@ export class KanbanComponent implements OnInit {
     return valueIntoPropertyList.id == propertyList.id;
   }
 
-  
+
   deleteTask(task: Task): void {
     this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
   }
@@ -108,6 +110,39 @@ export class KanbanComponent implements OnInit {
   @Output() openTaskDetails = new EventEmitter();
   openTaskModal(task: Task): void {
     this.openTaskDetails.emit(task);
+  }
+
+  createTask(propertyList: PropertyList) {
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: 1
+      },
+      values: [
+        {
+          property: {
+            id: this.project.properties[0].id
+          },
+          value: {
+            value: propertyList.id as number
+          }
+        }
+      ],
+      creator: {
+        id: 1
+      }
+    }
+
+    this.taskService.create(taskCreate).subscribe(
+      (task: Task) => {
+        this.project.tasks.push(task);
+        this.alertService.successAlert("Tarefa criada com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert("Erro ao criar tarefa!");
+      }
+    );
   }
 
 }

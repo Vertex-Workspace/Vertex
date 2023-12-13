@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PropertyList } from 'src/app/models/property';
 import { Task, TaskEdit } from 'src/app/models/task';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -31,7 +32,7 @@ export class TaskComponent {
     this.changes.emit(event);
   }
 
-  changeName(): void {
+  updateTaskNameAndDescription(): void {
 
     let taskEdit: TaskEdit = {
       id: this.task.id,
@@ -40,19 +41,28 @@ export class TaskComponent {
     };
     if (this.task.name === "") {
       this.task.name = "Nova tarefa";
-    } else {
-      this.taskService.edit(taskEdit).subscribe(
-        (task: Task) => {
-        this.task.name = task.name;
-
-        this.alertService.successAlert("Nome alterado com sucesso!");
+    } 
+    if (this.task.description === "") {
+      this.task.name = "Insira uma breve descrição sobre a tarefa aqui...";
+    } 
+    this.taskService.edit(taskEdit).subscribe(
+      (task: Task) => {
+      this.task.name = task.name  
+      this.task.description = task.description;
+      this.alertService.successAlert("Tarefa alterada com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert("Erro ao alterar tarefa!");
       }
-      );
-    }
+    );
   }
 
   descriptionEditable: boolean = false;
   changeEditDescription(): void {
+    if(this.descriptionEditable){
+      this.updateTaskNameAndDescription();
+    }
     this.descriptionEditable = !this.descriptionEditable;
   }
+
 }

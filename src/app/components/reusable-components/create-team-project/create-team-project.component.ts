@@ -39,7 +39,14 @@ export class CreateTeamProjectComponent implements OnInit {
         projects: []
       };
   
-      this.teamService.create(teamTest).subscribe();
+      this.teamService.create(teamTest).subscribe(
+        (team: Team) => {
+          console.log(team);
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
     }
     
   }
