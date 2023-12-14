@@ -30,6 +30,8 @@ export class AppearanceComponent implements OnInit {
   theme!: number;
   fontSizeChoosed!: number;
   fontFamilyChoosed!: string;
+  voiceCommand!: boolean;
+  listeningText!: boolean;
 
   themesList!: any[];
 
@@ -131,6 +133,8 @@ export class AppearanceComponent implements OnInit {
 
       this.fontSizeChoosed = user.personalization?.fontSize!;
       this.fontFamilyChoosed = user.personalization?.fontFamily!;
+      this.voiceCommand = user.personalization?.voiceCommand!;
+      this.listeningText = user.personalization?.listeningText!;
     });
   }
 
@@ -163,18 +167,60 @@ export class AppearanceComponent implements OnInit {
     })
   }
 
-  toggles = [
-    { text: "Habilitar comando de voz", icon: faToggleOff },
-    { text: "Habilitar leitura de texto", icon: faToggleOff },
-  ];
 
-  toggleChange(item: number): void {
-    if (this.toggles[item].icon == faToggleOn) {
-      this.toggles[item].icon = faToggleOff;
-    }
-    else {
-      this.toggles[item].icon = faToggleOn;
-    }
+  toggleChangeVoice(): boolean {
+    this.voiceCommand = !this.voiceCommand;
+
+
+    let newPers = new Personalization({
+      id: this.logged.id!,
+      primaryColorLight: this.themesList[0].primaryColor,
+      secondColorLight: this.themesList[0].secondColor,
+      primaryColorDark: this.themesList[1].primaryColor,
+      secondColorDark: this.themesList[1].secondColor,
+      fontFamily: this.fontFamilyChoosed,
+      fontSize: this.fontSizeChoosed,
+      theme: this.theme,
+      voiceCommand: this.voiceCommand,
+      listeningText: this.listeningText
+    });
+
+    console.log(newPers, "newPers");
+
+    this.userService.patchPersonalization(newPers).subscribe((pers) => {
+      this.logged.personalization = pers.personalization;
+      localStorage.setItem("logged", JSON.stringify(this.logged))
+    });
+
+
+    return this.voiceCommand;
+
+  }
+
+  toggleChangeListening(): boolean {
+    this.listeningText = !this.listeningText;
+
+    let newPers = new Personalization({
+      id: this.logged.id!,
+      primaryColorLight: this.themesList[0].primaryColor,
+      secondColorLight: this.themesList[0].secondColor,
+      primaryColorDark: this.themesList[1].primaryColor,
+      secondColorDark: this.themesList[1].secondColor,
+      fontFamily: this.fontFamilyChoosed,
+      fontSize: this.fontSizeChoosed,
+      theme: this.theme,
+      voiceCommand: this.voiceCommand,
+      listeningText: this.listeningText
+    });
+
+    console.log(newPers, "newPers");
+
+    this.userService.patchPersonalization(newPers).subscribe((pers) => {
+      this.logged.personalization = pers.personalization;
+      localStorage.setItem("logged", JSON.stringify(this.logged))
+    });
+
+    return this.listeningText;
   }
 
   fontSizes: number[] = [
@@ -326,14 +372,14 @@ export class AppearanceComponent implements OnInit {
       voiceCommand: true,
       listeningText: true
     });
-    
+
     let smallText = this.fontSizeChoosed - 2;
     console.log(smallText);
 
     let regularText = this.fontSizeChoosed;
     let mediumText = Number(this.fontSizeChoosed) + 2;
     let largeText = Number(this.fontSizeChoosed) + 4;
-    
+
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
       this.logged.personalization = pers.personalization;
 
@@ -342,7 +388,7 @@ export class AppearanceComponent implements OnInit {
       document.documentElement.style.setProperty('--regularText', regularText + 'px');
       document.documentElement.style.setProperty('--mediumText', mediumText + 'px');
       document.documentElement.style.setProperty('--largeText', largeText + 'px');
-      
+
     })
   }
 
