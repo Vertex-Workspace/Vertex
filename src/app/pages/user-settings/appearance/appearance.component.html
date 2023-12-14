@@ -67,13 +67,23 @@
             
         </div>
         <p class="medium-text">Acessibilidade</p>
-        <ng-container *ngFor="let toggle of toggles; index as item">
-            <div class="accessibility">
-                <fa-icon class="icon" (click)="toggleChange(item)" [icon]="toggle.icon">
+        
+            <div [(ngModel)]="voiceCommand" (click)="toggleChangeVoice()" class="accessibility">
+                <fa-icon *ngIf="!voiceCommand" class="icon"  [icon]="faToggleOff">
                 </fa-icon>
-                <p class="small-text">{{toggle.text}}</p>
+                <fa-icon *ngIf="voiceCommand" class="icon"  [icon]="faToggleOn">
+                </fa-icon>
+                <p class="small-text">Habilitar comando de voz</p>
             </div>
-        </ng-container>
+
+            <div [(ngModel)]="listeningText" (click)="toggleChangeListening()" class="accessibility">
+                <fa-icon *ngIf="!listeningText" class="icon"  [icon]="faToggleOff">
+                </fa-icon>
+                <fa-icon *ngIf="listeningText" class="icon"  [icon]="faToggleOn">
+                </fa-icon>
+                <p class="small-text">Habilitar leitura de texto</p>
+            </div>
+        
 
 
     </div>

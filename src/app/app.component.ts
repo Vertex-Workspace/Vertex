@@ -94,6 +94,8 @@ export class AppComponent {
       document.documentElement.style.setProperty('--regularText', (user.personalization?.fontSize!) + 'px');
       document.documentElement.style.setProperty('--mediumText', (user.personalization?.fontSize! + 2) + 'px');
       document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
+      document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
+
 
     });
   }
