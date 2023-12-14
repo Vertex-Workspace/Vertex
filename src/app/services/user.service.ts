@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Personalization } from '../models/personalization';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
@@ -12,6 +12,8 @@ import { UserStateService } from './user-state.service';
   providedIn: 'root'
 })
 export class UserService {
+
+  private loggedSubject !: BehaviorSubject<User>;
   
 
   constructor(
@@ -19,7 +21,8 @@ export class UserService {
     private router: Router,
     private alert: AlertService,
     private userState: UserStateService
-  ) { }
+  ) { 
+  }
 
   public register(form: User): void {
     const user: User = {
@@ -120,6 +123,11 @@ export class UserService {
     this.saveLoggedUser(user);
     return this.http
       .put<User>(`${URL}user`, user);
+  }
+
+  public uploadImage(data: FormData) {
+    // return this.http
+    //   .post(`${URL}user/`)
   }
 
 }

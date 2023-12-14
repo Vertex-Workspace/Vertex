@@ -13,6 +13,7 @@ export class Project {
     projectDependency ?: Project;
     tasks : Task[]; 
     properties!: Property[];
+    idTeam?: number;
 
     constructor(
         project: Project,
@@ -24,6 +25,7 @@ export class Project {
         this.image = project.description;
         this.tasks = project.tasks;
         this.properties = project.properties;
+        this.idTeam = project.idTeam;
     }
 
 }

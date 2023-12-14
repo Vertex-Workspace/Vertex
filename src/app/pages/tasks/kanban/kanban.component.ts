@@ -6,20 +6,24 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
-import { PropertyList } from 'src/app/models/property';
+import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
 import { TaskService } from 'src/app/services/task.service';
-import { ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
+import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
 import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-kanban',
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.scss']
 })
-export class KanbanComponent implements OnInit {
+export class KanbanComponent {
 
 
-  constructor(private projectService: ProjectService, private taskService: TaskService, private alertService: AlertService) {
+  constructor(
+    private taskService: TaskService, 
+    private alertService: AlertService,
+    private userService : UserService) {
 
   }
 
@@ -31,10 +35,34 @@ export class KanbanComponent implements OnInit {
   }
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
-    const task = event.item.data;
-    const previousPropertyList: PropertyList = task.values[0].value as PropertyList;
+    const task: Task = event.item.data;
 
-    task.values[0].value = propertyList;
+    let previousPropertyList!: PropertyList;
+    let newValue!: Value;
+
+    //For each to find the value of current and future property List
+    this.project.properties.forEach((property) => {
+      if (property.kind == PropertyKind.STATUS) {
+        task.values.forEach((value) => {
+          if (value.property.id == property.id) {
+            //Save the old value
+            previousPropertyList = value.value as PropertyList;
+
+            //Save the new value
+            value.value = propertyList;
+
+            //Save on a local variable the value of the task
+            newValue = value;
+            console.log(newValue);
+          }
+        });
+      }
+    });
+
+    //It points out that the previousValue is incorrect
+    if (previousPropertyList == null) {
+      return;
+    }
 
     const newIndexTask =
       this.specificPropertyArray(propertyList)[event.currentIndex];
@@ -56,10 +84,10 @@ export class KanbanComponent implements OnInit {
         id: task.id,
         value: {
           property: {
-            id: task.values[0].property.id
+            id: newValue.property.id
           },
           value: {
-            id: task.values[0].id,
+            id: newValue.id,
             value: propertyList.id
           }
         }
@@ -111,6 +139,26 @@ export class KanbanComponent implements OnInit {
   }
 
   createTask(propertyList: PropertyList) {
+    let propertyUsed!: Property;
+
+    //For each to find the property of the clicked Property List
+    this.project.properties.forEach((property) => {
+
+      if (property.kind == PropertyKind.STATUS) {
+
+        property.propertyLists.forEach((propertyListForEach) => {
+
+          if (propertyListForEach.id == propertyList.id) {
+            propertyUsed = property;
+          }
+        });
+      }
+    });
+
+    if(propertyUsed == null){
+      return;
+    }
+
     let taskCreate: TaskCreate = {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
@@ -120,7 +168,7 @@ export class KanbanComponent implements OnInit {
       values: [
         {
           property: {
-            id: this.project.properties[0].id
+            id: propertyUsed.id
           },
           value: {
             value: propertyList.id as number
@@ -128,8 +176,9 @@ export class KanbanComponent implements OnInit {
         }
       ],
       creator: {
-        id: 1
-      }
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
     }
 
     this.taskService.create(taskCreate).subscribe(
