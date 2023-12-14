@@ -36,16 +36,20 @@ export class TasksComponent implements OnInit {
     private router: Router,
     private route : ActivatedRoute,
     private projectService: ProjectService,
-    private taskService: TaskService
-  ) { 
-}
+    private taskService: TaskService,
+    private userService : UserService
+  ) {}
+
+  projectId!:number;
 
   async ngOnInit(): Promise<void> {
     if (this.router.url.includes('projeto')) {
     const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
-    let projectRequested : Project | undefined = await this.projectService.getOneById(projectId).toPromise();
-    if(projectRequested){
-      this.project = projectRequested;
+    if(projectId){
+      let projectRequested : Project | undefined = await this.projectService.getOneById(projectId).toPromise();
+      if(projectRequested){
+        this.project = projectRequested;
+      }
     }
     this.clicked = "Kanban";
     }
@@ -88,12 +92,13 @@ export class TasksComponent implements OnInit {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
       project: {
-        id: 1
+        id: this.projectId
       },
       values: [],
       creator: {
-        id: 1
-      }
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
     }
     this.taskService.create(taskCreate).subscribe(
       (task) => {
