@@ -11,6 +11,7 @@ export class Task {
     properties!: Property[];
 
 
+
     //mural
     width?: string;
     height?: string;
@@ -18,9 +19,13 @@ export class Task {
     left?: string;
 
     constructor(
-        team: Task
+        task: Task
     ) {
-        this.id = team.id;
+        this.id = task.id;
+        this.name = task.name;
+        this.description = task.description;
+        this.values = task.values;
+        this.properties = task.properties;
     }
 
 }
@@ -36,6 +41,7 @@ export class TaskCreate {
     creator!: {
         id: number;
     };
+    teamId!: number;
 }
 
 export class TaskEdit {
