@@ -1,122 +1,176 @@
 @import '../../../../variables';
 
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    z-index: 999;
+}
+
 .button {
     @apply bg-transparent text-zinc-500 rounded-md;
+
     button {
         @apply cursor-pointer hover:bg-zinc-200 p-2;
     }
 }
 
-.buttons button, .submit button {
+.buttons button,
+.submit button {
     border: 1px solid $primaryColor;
     background-color: $primaryColor;
     color: $secondColor;
     @apply p-2;
 }
 
+.base {
+    @apply flex flex-col p-5 rounded-md;
+}
+
+.location {
+    @apply flex w-full h-[5%] justify-between;
+
+    .routes{
+        @apply flex w-1/2 gap-5 divide-x-2;
+    }
+    p {
+        @apply flex items-center justify-center;
+    }
+    p:last-child {
+        @apply px-5;
+    }
+}
+.informations{
+    @apply grid w-full h-[95%] grid-cols-2 pt-10 px-6;
+
+
+}
+
+.side {
+    @apply w-full h-full flex flex-col gap-16 justify-between;
+
+}
+
+.title {
+    @apply w-full h-[10%] text-justify flex flex-col gap-6;
+
+    p:first-child {
+        @apply w-full;
+    }
+
+}
+
+.button {
+    @apply w-full flex justify-end;
+}
+
+.down {
+    @apply h-[20%] flex flex-row w-full items-end ;
+}
+
+.buttons {
+    @apply flex w-full gap-2;
+}
+
+.buttons button:hover,
+.submit button:hover {
+    background-color: $secondColor;
+    color: $primaryColor;
+    border: 1px solid $primaryColor;
+    transition: 0.1s;
+}
+
+.right {
+    @apply flex flex-col items-center justify-between;
+
+    nav{
+        @apply flex w-full m-1;
+
+        ul{
+            @apply flex w-full justify-center gap-7;
+        }
+        a {
+            @apply hover:bg-zinc-200 p-1 rounded-md;
+        }
+    }
+
+    div:first-child {
+        @apply w-full flex justify-end;
+    }
+}
+
+.submit {
+    @apply w-full flex justify-end;
+}
+.components{
+    @apply flex w-[70%] items-center flex-col;
+}
+
+@media (max-width: 1420px) {
     .base {
-        @apply flex p-5 rounded-md;
+        @apply w-[933px] h-[566px] bg-white;
     }
 
-    .location {
-        @apply flex gap-5 divide-x-2;
-        p:last-child {
-            @apply px-5;
-        }
+    .buttons button,
+    .submit button {
+        @apply w-[160px];
     }
 
-    .side {
-        @apply w-1/2 h-full flex flex-col gap-16;
-        &:last-child {
-            @apply gap-8 mt-10;
-        }
-        &:first-child {
-            @apply pl-6;
-        }
+    .title p {
+        @apply text-base;
+    }
+    .properties{
+        @apply flex w-full h-[50%];
+    }
+    
+
+    .components {
+        @apply h-[55%];
+    }
+}
+
+@media (min-width: 1421px) {
+    .title p {
+        @apply text-xl;
     }
 
-    .title {
-        @apply w-[80%] text-justify flex flex-col gap-6;
-        p:first-child {
-            @apply w-full;
-        }
-        h3 {
-            @apply text-3xl;
-        }
+    .base {
+        @apply w-[1300px] h-[750px] bg-white;
     }
 
-    .button {
-        @apply w-full flex justify-end;
+    .buttons button,
+    .submit button {
+        @apply w-[220px] h-[50px];
     }
 
-    .down {
-        @apply h-1/2 flex items-end;
+    .properties{
+        @apply flex w-full h-[60%];
+        max-height: 400px;
     }
-
-    .buttons {
-        @apply flex gap-2;
+    
+    .components {
+        @apply h-[65%];
     }
+}
 
-    .buttons button:hover, .submit button:hover {
-        background-color: $secondColor;
-        color: $primaryColor;
-        border: 1px solid $primaryColor;
-        transition: 0.1s;
-    }
+@media (max-width: 899px) {}
 
-    .right {
-        @apply flex flex-col items-center;
-        nav ul {
-            @apply flex gap-5 text-zinc-500 m-1;
-            a {
-                @apply hover:bg-zinc-200 p-1 rounded-md;
-            }
-        }
-        div:first-child {
-            @apply w-full flex justify-end;
-        }
-    }
+input:hover{
+    background-color: #f3f0f0;
+    cursor: pointer;
+}
+input:focus{
+    cursor: text;
+    border-bottom: 1px solid $primaryColor;
+}
 
-    .submit {
-        @apply w-full flex justify-end;
-    }
-
-    @media (max-width: 1420px) {
-        .base {
-            @apply w-[933px] h-[566px] bg-white;
-        }
-
-        .buttons button, .submit button {
-            @apply w-[160px];
-        }
-
-        .title p {
-            @apply text-base;
-        }
-
-        .components {
-            @apply w-full h-[55%];
-        }
-    }
-
-    @media (min-width: 1421px) {
-        .title p {
-            @apply text-xl;
-        }
-
-        .base {
-            @apply w-[1300px] h-[750px] bg-white;
-        }
-
-        .buttons button, .submit button {
-            @apply w-[220px] h-[50px];
-        }
-
-        .components {
-            @apply w-full h-[65%];
-        }
-    }
-
-@media (max-width: 899px) {
-
+textarea {
+    @apply flex px-4 py-2;
+    resize: none;
+    min-height: 100px;
+    border: none;
+    background-color: inherit;
+}
+textarea:focus{
+    @apply shadow-md rounded-sm;
+    border: 0 none;
+    outline: 0;
 }

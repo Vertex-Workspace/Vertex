@@ -33,7 +33,6 @@ export class AppComponent {
   inputColor: string = '#FFFFFF';
   fontColor: string = '#000000';
   buttonColor: string = '#FFFFFF';
-  fontSize!: number;
 
   faMessage = faMessage;
   faTimes = faTimes;
@@ -102,14 +101,26 @@ export class AppComponent {
       user = logged;
       console.log(user.personalization!.theme);
 
-      if(user.personalization!.theme == 0){
+      if (user.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
-      } else if(user.personalization!.theme == 1) {
+        document.documentElement.style.setProperty('--text', "#000000");
+      } else if (user.personalization!.theme == 1) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+        document.documentElement.style.setProperty('--text', "#FFFFFF");
       }
+
+      console.log(user.personalization?.fontSize!);
       
+
+      document.documentElement.style.setProperty('--smallText', (user.personalization?.fontSize! - 2) + 'px');
+      document.documentElement.style.setProperty('--regularText', (user.personalization?.fontSize!) + 'px');
+      document.documentElement.style.setProperty('--mediumText', (user.personalization?.fontSize! + 2) + 'px');
+      document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
+      document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
+
+
     });
   }
 

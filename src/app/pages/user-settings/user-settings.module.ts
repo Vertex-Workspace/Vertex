@@ -10,6 +10,7 @@ import { ProfileModule } from './profile/profile.module';
 import { TeamsSettingsModule } from './teams-settings/teams-settings.module';
 import { SecurityComponent } from './security/security.component';
 import { SecurityModule } from './security/security.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -30,6 +31,7 @@ import { SecurityModule } from './security/security.module';
     ProfileModule,
     TeamsSettingsModule,
     SecurityModule,
+    FormsModule
   ]
 })
 export class UserSettingsModule { }

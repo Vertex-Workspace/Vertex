@@ -1,0 +1,18 @@
+@import '../../../../variables';
+
+.groups-select{
+  @apply flex w-full h-full flex-col items-end;
+  overflow-y: auto;
+
+  .group-card{
+    @apply flex flex-row w-full items-center p-8 justify-between;
+    border: 1px solid black;
+    min-height: 100px;
+
+     input{
+      @apply w-5 h-5;
+      color: $primaryColor;
+     }
+  
+  }
+}

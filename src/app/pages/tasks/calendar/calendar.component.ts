@@ -1,6 +1,8 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { Project } from 'src/app/models/project';
+import { PropertyKind, PropertyList } from 'src/app/models/property';
 import { Task } from 'src/app/models/task';
 
 @Component({
@@ -14,59 +16,11 @@ export class CalendarComponent {
   faToggleOff = faToggleOff;
   faCircleUser = faCircleUser;
 
+  @Input() project!: Project;
+
   ngOnInit() {
     this.buildCalendar();
   }
-
-  //TASKS
-  tasks: any[] = [
-    {
-      "name": "teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE teste ASDASD LÇGKSERÇLGKSERGÇLKSERGLÇSERGK LÇREKERLÇG KÇERLG KÇRLE",
-      date: new Date(),
-      category: {
-        name: 'ÚLTIMA CATEGORIA',
-        color: '#d7ffc94D',
-        borderColor: '#FFD600f3'
-      }
-    },
-    {
-      "name": "FINALIZAR PRIMEIRA FASE",
-      date: new Date(),
-      category: {
-        name: 'ÚLTIMA CATEGORIA',
-        color: '#d7ffc94D',
-        borderColor: '#FF9D9Df3'
-      }
-    },
-    {
-      "name": "teste",
-      date: new Date(),
-      category: {
-        name: 'ÚLTIMA CATEGORIA',
-        color: '#d7ffc94D',
-        borderColor: '#7be057de'
-      }
-    },
-    {
-      "name": "teste",
-      date: new Date(2023, 10, 4),
-      category: {
-        name: 'ÚLTIMA CATEGORIA',
-        color: '#d7ffc94D',
-        borderColor: '#7be027de'
-      }
-    },
-    {
-      "name": "teste",
-      date: new Date(2023, 10, 4),
-      category: {
-        name: 'ÚLTIMA CATEGORIA',
-        color: '#d7ffc94D',
-        borderColor: '#7be057de'
-      }
-    },
-  ];
-
   modalTasks: boolean = false;
   modalDate?: Date;
   openModalTasks(date: Date | null): void {
@@ -78,19 +32,23 @@ export class CalendarComponent {
     this.modalTasks = !this.modalTasks;
   }
 
-  getTasksByDate(date: Date | undefined): any[] {
+  getTasksByDate(date: Date | undefined): Task[] {
+    let tasks: Task[] = [];
     if (date != undefined) {
-      let tasks: any[] = [];
-      this.tasks.forEach((task) => {
-        if (task.date.getDate() == date.getDate()
-          && task.date.getMonth() == date.getMonth()
-          && task.date.getFullYear() == date.getFullYear()) {
-          tasks.push(task);
-        }
+      this.project.tasks.forEach((task) => {
+        task.values.forEach((value) => {
+          if (value.property.kind === PropertyKind.DATE) {
+            let valuePropertyDate: Date = value.value as Date;
+            if (valuePropertyDate.getDate() == date.getDate()
+              && valuePropertyDate.getMonth() == date.getMonth()
+              && valuePropertyDate.getFullYear() == date.getFullYear()) {
+              tasks.push(task);
+            }
+          }
+        });
       });
-      return tasks;
     }
-    return [];
+    return tasks;
   }
 
 
@@ -181,5 +139,31 @@ export class CalendarComponent {
   toggle: boolean = true;
   toggleCharts(): void {
     this.toggle = !this.toggle;
+  }
+
+  //Temporary
+  getColor(task: Task): string {
+    task.properties.forEach(
+      (property) => {
+        if (property.kind === PropertyKind.STATUS) {
+          console.log("STATUS " + task);
+          task.values.forEach(
+            (value) => {
+              if (value.property.id === property.id) {
+                let valuePropertyList: PropertyList = value.value as PropertyList;
+                if (valuePropertyList.color === "RED") {
+                  return "#FF9D9D50";
+                } else if (valuePropertyList.color === "YELLOW") {
+                  return "#FFD60035";
+                } else if (valuePropertyList.color === "GREEN") {
+                  return "#65D73C50";
+                }
+              }
+              return "#7be05750";
+            });
+        }
+      }
+    );
+    return "#7be05750";
   }
 }

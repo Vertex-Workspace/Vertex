@@ -18,6 +18,7 @@ import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { UserTeamGuard } from './services/guards/user-team.guard';
 
 const routes: Routes = [
@@ -64,25 +65,7 @@ const routes: Routes = [
   {
     path: 'tarefas',
     component: TasksComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'kanban',
-        component: KanbanComponent
-      },
-      {
-        path: 'lista',
-        component: ListComponent
-      },
-      {
-        path: 'calendario',
-        component: CalendarComponent
-      },
-      {
-        path: 'mural',
-        component: MuralComponent
-      }
-    ],
+    canActivate: [AuthGuard]
   },
   {
     path: 'projeto/:projectId/tarefas',

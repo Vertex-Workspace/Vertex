@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from 'src/app/services/alert.service';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
+import { Project } from 'src/app/models/project';
+import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { Task, TaskCreate } from 'src/app/models/task';
+import { User } from 'src/app/models/user';
+import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -21,39 +26,36 @@ export class TasksComponent implements OnInit {
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
+  taskOpen: boolean = false;
 
-  logged !: User;
+  project!: Project;
+
+
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private userService: UserService
-  ) {
+    private route : ActivatedRoute,
+    private projectService: ProjectService,
+    private taskService: TaskService
+  ) { 
+}
+
+  async ngOnInit(): Promise<void> {
+    if (this.router.url.includes('projeto')) {
     const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
-    console.log(projectId);
-    
-    this.logged = this.userService.getLogged();
-   }
-
-  ngOnInit(): void {
-    this.getClicked();
-    this.logged = this.userService.getLogged();
-  }
-
-  getClicked(): void {
-    const url: string = this.router.url;
-    this.menuItems.forEach(item => {
-      if (url.includes(item.id)) {
-        this.clicked = item.id;
-      }
-    })
+    let projectRequested : Project | undefined = await this.projectService.getOneById(projectId).toPromise();
+    if(projectRequested){
+      this.project = projectRequested;
+    }
+    this.clicked = "Kanban";
+    }
   }
 
   menuItems = [
-    { id: 'kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
-    { id: 'lista', iconClass: 'pi pi-list', label: 'Lista' },
-    { id: 'calendario', iconClass: 'pi pi-calendar', label: 'Calendário' },
-    { id: 'mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
+    { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
+    { id: 'List', iconClass: 'pi pi-list', label: 'Lista' },
+    { id: 'Calendar', iconClass: 'pi pi-calendar', label: 'Calendário' },
+    { id: 'Mural', iconClass: 'pi pi-chart-bar', label: 'Mural' }
   ];
 
   configItems = [
@@ -73,36 +75,59 @@ export class TasksComponent implements OnInit {
   toggleOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
-
-  redirect(page: string): void {
-    const url: string = this.router.url;
-
-    if (url.includes('projeto')) {
-      const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
-      this.router.navigate([`/projeto/${projectId}/tarefas/${page}`]);
-      
-
-    } else {
-      this.router.navigate([`/tarefas/${page}`])
-      
-      
-    }
-    
-    
-
-    this.clicked = page;
+  changePreviewMode(preview: string): void {
+    this.clicked = preview;
   }
-
-  // getUrlType(): boolean {
-    
-  // }
 
   onInputType(): void {
 
   }
 
+  createTask(): void {
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: 1
+      },
+      values: [],
+      creator: {
+        id: 1
+      }
+    }
+    this.taskService.create(taskCreate).subscribe(
+      (task) => {
+        this.project.tasks.push(task);
+        this.changeModalTaskState(true, task);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  taskOpenObject!: Task;
+  changeModalTaskState(bool: boolean, task: Task): void{
+    this.taskOpen = bool;
+    if(this.taskOpen){
+      this.taskOpenObject = task;
+    } else{
+      this.taskOpenObject = {} as Task;
+    }
+  }
+
   openPropertiesModal(): void {
     this.propertiesOpen = !this.propertiesOpen;
+  }
+
+  updateProjectByTaskChanges(event: any): void{
+    let taskUpdated: Task = event;
+    this.project.tasks = this.project.tasks.map(task => {
+      if(task.id === taskUpdated.id){
+        return taskUpdated;
+      }
+      return task;
+    });
   }
   
 }

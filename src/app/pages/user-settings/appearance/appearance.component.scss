@@ -93,10 +93,12 @@
         select {
             background-color: $primaryColor;
             color: $secondColor;
-            @apply text-sm rounded-md h-[30%];
+            @apply text-sm rounded-sm h-[30%];
 
             option{
+                @apply rounded-full;
                 color: $secondColor;
+
             }
         }
     }

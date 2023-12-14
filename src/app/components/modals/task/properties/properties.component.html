@@ -1,12 +1,21 @@
 <div class="base">
     <table>
         <tr>
-            <td *ngFor="let property of task.properties">
+            <td *ngFor="let value of task.values">
                 <div>
-                    <p>{{property.name}}</p>
+                    <fa-icon [icon]="getIcon(value)"></fa-icon>
+                    <p>{{value.property.name}}</p>
                 </div>
                 <div>
-                    <p>{{property.content}}</p>
+                    <input (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/>
+                    <input (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/>
+                    <input (blur)="change($event, value)" type="date" *ngIf="getKind(value.property, 'DATE')" value="{{getValue(value)}}"/>
+                    <p *ngIf="getKind(value.property, 'LIST')">NÃO FAÇO IDEIA NO MOMENTO</p>
+                    <select name="" id="" *ngIf="getKind(value.property, 'STATUS')" (change)="change($event, value)">
+                        <ng-container *ngFor="let option of getSelectOptions(value)" >
+                            <option [attr.value]="option.id" [attr.selected]="isSelected(option, value) ? true : null">{{option.value}}</option>
+                        </ng-container>
+                    </select>
                 </div>
             </td>
         </tr>

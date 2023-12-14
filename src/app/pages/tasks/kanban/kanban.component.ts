@@ -1,135 +1,148 @@
-import { Component, ViewChild, ViewChildren } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Task, TaskCreate } from 'src/app/models/task';
 import {
   CdkDragDrop,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { categories, taskList } from '../data-test';
+import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/models/project';
+import { PropertyList } from 'src/app/models/property';
+import { TaskService } from 'src/app/services/task.service';
+import { ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-kanban',
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.scss']
 })
-export class KanbanComponent {
+export class KanbanComponent implements OnInit {
 
 
-  // @ViewChildren('card') cards!: any[];
-  // ngAfterViewInit() {
-  //   this.cards.forEach(card => {
-  //     console.log(card.nativeElement.offsetHeight);
-  //   });
-  // }
-  selectedCards ?: Task[];
+  constructor(private projectService: ProjectService, private taskService: TaskService, private alertService: AlertService) {
 
-  categories: any[] = [
-    {
-      name: 'TO-DO',
-      color: '#FFE7E94D',
-      borderColor: '#FF9D9Df3'
-    },
-    {
-      name: 'DOING',
-      color: '#FFF6C54D',
-      borderColor: '#FFD600f3'
-    },
-    {
-      name: 'DONE',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'OUTRA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
+  }
+
+  @Input()
+  project!: Project;
+
+
+
+  ngOnInit(): void {
+    console.log(this.project);
+  }
+
+  dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
+    const task = event.item.data;
+    const previousPropertyList: PropertyList = task.values[0].value as PropertyList;
+
+    task.values[0].value = propertyList;
+
+    const newIndexTask =
+      this.specificPropertyArray(propertyList)[event.currentIndex];
+    const newIndex = this.project.tasks.indexOf(newIndexTask);
+    const previousIndex = this.project.tasks.indexOf(task);
+
+
+    moveItemInArray(
+      this.project.tasks,
+      previousIndex,
+      newIndex
+    );
+
+
+    //If the value of status task is different of the previous value, then, the request is sent
+    if (propertyList.id != previousPropertyList.id) {
+      //Object to change the value of the status task
+      const valueUpdate: ValueUpdate = {
+        id: task.id,
+        value: {
+          property: {
+            id: task.values[0].property.id
+          },
+          value: {
+            id: task.values[0].id,
+            value: propertyList.id
+          }
+        }
+      };
+
+      //Patch the value of the status task
+      this.taskService.patchValue(valueUpdate).subscribe();
     }
-  ];
+  };
 
-  //ADICIONAR "80" NO FINAL DO HEXADECIMAL DA COLOR -> 50% OPACIDADE
-  //ADICIONAR "DE" NO FINAL DO HEXADECIMAL DA BORDA -> 80%+-
+  getHeight(propertyList: PropertyList): string {
+    return ((this.specificPropertyArray(propertyList).length * 174) + 70) + "px";
+  }
 
-  taskList: Task[] = [
-    {
-      name: 'Tarefa 1',
-      category: this.categories[0]
-    },
-    {
-      name: 'Tarefa 2 Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2',
-      category: this.categories[0]
-    },
-    {
-      name: 'REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ',
-      category: this.categories[0]
-    },
-    {
-      name: 'Tarefa 4',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 5',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 6',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 7',
-      category: this.categories[2]
-    }
-  ];
-
-  specificPropertyArray(property: any): any[] {
-    return this.taskList.filter(task => {
-      return task.category === property;
+  specificPropertyArray(propertyList: PropertyList): Task[] {
+    return this.project.tasks.filter(task => {
+      let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
+      return valueIntoPropertyList.id == propertyList.id;
     });
   }
 
-  dropCard(event: CdkDragDrop<Task[]>, category: any): void {  
-    const task = event.item.data;
-    task.category = category;
 
-    const newIndexTask = 
-            this.specificPropertyArray(task.category)[event.currentIndex];
-    const newIndex = this.taskList.indexOf(newIndexTask);
-    const previousIndex = this.taskList.indexOf(task);
-    
-    moveItemInArray(
-      this.taskList, 
-      previousIndex, 
-      newIndex
-    );
-  };
+  //Temporary
+  getColor(color: string) {
+    if (color === "RED") {
+      return "#FF9D9D50";
+    } else if (color === "YELLOW") {
+      return "#FFD60035";
+    } else if (color === "GREEN") {
+      return "#65D73C50";
+    } else {
+      return "#7be05750";
+    }
+  }
 
-  getHeight(property: any): string {
-    return ((this.specificPropertyArray(property).length * 174) + 70) + "px";
+  getTaskByProperty(task: Task, propertyList: PropertyList): boolean {
+    let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
+    return valueIntoPropertyList.id == propertyList.id;
   }
 
 
+  deleteTask(task: Task): void {
+    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+  }
+
+  @Output() openTaskDetails = new EventEmitter();
+  openTaskModal(task: Task): void {
+    this.openTaskDetails.emit(task);
+  }
+
+  createTask(propertyList: PropertyList) {
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: 1
+      },
+      values: [
+        {
+          property: {
+            id: this.project.properties[0].id
+          },
+          value: {
+            value: propertyList.id as number
+          }
+        }
+      ],
+      creator: {
+        id: 1
+      }
+    }
+
+    this.taskService.create(taskCreate).subscribe(
+      (task: Task) => {
+        this.project.tasks.push(task);
+        this.alertService.successAlert("Tarefa criada com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert("Erro ao criar tarefa!");
+      }
+    );
+  }
 
 }

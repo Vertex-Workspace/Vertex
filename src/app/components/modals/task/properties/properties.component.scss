@@ -1,19 +1,46 @@
+@import '../../../../../variables.scss';
+
 .base {
-    @apply w-full h-full flex justify-center ml-2;
+    @apply w-full h-full flex;
 }
 
 table {
-    @apply w-[65%] h-[100%] flex flex-col gap-8 items-start overflow-auto ml-10;
+    @apply w-4/5 h-[100%] flex flex-col gap-8 items-start overflow-x-hidden pr-5;
 }
 
 tr {
-    @apply w-full flex flex-col items-center gap-3 divide-y-2;
+    @apply w-full flex flex-col items-center justify-center;
 }
 
 td {
-    @apply flex justify-center gap-10 w-[100%] mr-10 px-2 items-center pt-2;
+    @apply flex justify-center w-[100%] px-2 items-center border-b-2;
+    min-height: 75px;
 }
 
 td div {
-    @apply w-1/2 flex justify-start pl-5;
+    @apply w-1/2 flex h-full justify-start items-center pl-5;
+}
+
+fa-icon {
+    @apply w-12 h-12 flex justify-center items-center;
+    color: $primaryColor; 
+}
+select{
+    @apply w-full h-2/3 flex rounded-sm px-2;
+}
+select:hover{
+    background-color: #f3f0f0;
+    cursor: pointer;
+}
+
+input{
+    @apply w-full h-2/3 flex rounded-sm px-2;
+}
+input:hover{
+    background-color: #f3f0f0;
+    cursor: pointer;
+}
+input:focus{
+    cursor: text;
+    border-bottom: 1px solid $primaryColor;
 }
