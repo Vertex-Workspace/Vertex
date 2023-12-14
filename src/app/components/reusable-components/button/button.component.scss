@@ -1,4 +1,5 @@
 // SUPER CSS CASO O BOTÃO NÃO POSSUA INPUT
+@import "../../../../variables";
 .icon-button{
     @apply grid justify-center items-center rounded;
     grid-template-columns: 25% 75%;
@@ -11,6 +12,11 @@
 // FORMATO PADRÃO
 .default-div{
     @apply flex w-full h-full justify-center items-center;
+}
+
+a{
+    background-color: $primaryColor;
+    color: $secondColor;
 }
 
 

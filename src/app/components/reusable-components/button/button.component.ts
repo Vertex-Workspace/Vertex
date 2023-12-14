@@ -15,11 +15,6 @@ export class ButtonComponent implements OnInit {
   @Input()
   height!: string;
 
-  @Input()
-  background!: string;
-
-  @Input()
-  textColor!: string;
 
   @Input()
   icon!: string;
@@ -42,12 +37,6 @@ export class ButtonComponent implements OnInit {
     if (this.title) {
       this.checkText = true;
     }
-  }
-
-  changeColor(): void {
-    let backgroundDefault: string = this.background;
-    this.background = this.textColor;
-    this.textColor = backgroundDefault;
   }
 
   eventEmitter(): void {

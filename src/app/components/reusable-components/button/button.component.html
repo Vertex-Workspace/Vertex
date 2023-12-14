@@ -1,13 +1,9 @@
-<a 
-[style.backgroundColor]="background" 
-[style.color]="textColor" 
+<a  
 [style.width]="width" 
 [style.height]="height"
 [style.border]="'2px solid ' + border"
 style="cursor: pointer; transition: 0.3s ease-in;"
 (click)="eventEmitter()"
-(mouseover)="changeColor()"
-(mouseout)="changeColor()"
 [ngClass]="checkInput == true && checkText == true ? 'icon-button' : 'just-button'"
 >
     <div class="default-div" *ngIf="checkInput">

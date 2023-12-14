@@ -29,7 +29,7 @@ export class PersonalizationService {
   }
 
   getPrimaryColor(): string {
-    return JSON.parse(localStorage.getItem('personalization')!).primaryColor;
+    return JSON.parse(localStorage.getItem('personalization')!).primaryColorLi;
   }
 
   getAllPersonalization(): Observable<Personalization[]> {

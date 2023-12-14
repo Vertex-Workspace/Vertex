@@ -31,17 +31,11 @@ export class CreateTeamProjectComponent implements OnInit {
   typeString!: String;
   
 
-  primaryColor: string;
-  secondColor: string;
-
   constructor(
     private personalization: PersonalizationService, 
     private teamService: TeamService,
     private formBuilder: FormBuilder
-  ) {
-    this.primaryColor = personalization.getPrimaryColor();
-    this.secondColor = personalization.getSecondColor();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
