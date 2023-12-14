@@ -87,10 +87,7 @@ export class AppComponent {
   }
 
   generateRoute(url: string): string {
-    const path: string = `${url.split('/')}`;
-    console.log(path);
-    
-    return url;
+    return `${url.split('/')}`;
   }
 
   // Sets the theme by default and make the persistence of the theme in all components
