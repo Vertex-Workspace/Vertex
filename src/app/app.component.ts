@@ -88,7 +88,6 @@ export class AppComponent {
 
   generateRoute(url: string): string {
     const path: string = `${url.split('/')}`;
-    console.log(path);
     
     return url;
   }
@@ -99,7 +98,6 @@ export class AppComponent {
     this.userService.getOneById(user.id!).subscribe((logged) => {
 
       user = logged;
-      console.log(user.personalization!.theme);
 
       if (user.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
@@ -109,10 +107,7 @@ export class AppComponent {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
         document.documentElement.style.setProperty('--text', "#FFFFFF");
-      }
-
-      console.log(user.personalization?.fontSize!);
-      
+      }      
 
       document.documentElement.style.setProperty('--smallText', (user.personalization?.fontSize! - 2) + 'px');
       document.documentElement.style.setProperty('--regularText', (user.personalization?.fontSize!) + 'px');

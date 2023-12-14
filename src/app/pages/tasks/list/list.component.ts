@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
   }
 
   getCols(): any {
-    if (this.router.url === '/tarefas/lista') {
+    if (this.router.url.includes('/tarefas')) {
       return this.cols;
     }
 

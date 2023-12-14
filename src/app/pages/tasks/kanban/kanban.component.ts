@@ -26,8 +26,6 @@ export class KanbanComponent implements OnInit {
   @Input()
   project!: Project;
 
-
-
   ngOnInit(): void {
     console.log(this.project);
   }

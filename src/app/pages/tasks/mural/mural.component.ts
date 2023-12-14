@@ -19,15 +19,10 @@ export class MuralComponent implements OnInit, AfterViewInit {
   cards !: QueryList<any>;
 
   taskList: Task[] = taskList;
-  primaryColor: string;
-  secondColor: string;
 
   constructor(
     private personalization : PersonalizationService
-  ){
-    this.primaryColor = personalization.getPrimaryColor();
-    this.secondColor = personalization.getSecondColor();
-  }
+  ){}
 
   ngOnInit(): void {
   }

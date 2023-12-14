@@ -15,7 +15,12 @@
 }
 
 .image {
-    @apply w-[300px] h-[240px] flex flex-col justify-start items-center;
+    @apply w-[230px] h-[230px] shadow-sm p-2 rounded-full flex flex-col justify-center items-center;
+    background-color: white;
+
+    img {
+        @apply w-[80%];
+    }
 }
 
 .size {

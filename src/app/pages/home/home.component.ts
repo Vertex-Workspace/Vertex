@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { catchError } from 'rxjs';
+import { catchError, Subscription } from 'rxjs';
 import { Team } from 'src/app/models/team';
 import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit{
   logged !: User;
 
   recentTeams !: Team[];
+
+  private teamsSubscription !: Subscription;
   
   constructor(
     private userService : UserService, 
@@ -23,14 +25,22 @@ export class HomeComponent implements OnInit{
     private alert: AlertService
   ) {
     this.logged = this.userService.getLogged();  
+  }
+
+  ngOnInit(): void { 
+    this.subscribeToTeams(); 
     this.getRecentsTeams();
   }
 
-  ngOnInit(): void {  
+  ngOnDestroy(): void {
+    if (this.teamsSubscription) {
+      this.teamsSubscription.unsubscribe();
+    }
   }
 
   isCreating: boolean = false;
   clicked: string = 'task';
+
   menuItems = [
     { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
     { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
@@ -38,13 +48,22 @@ export class HomeComponent implements OnInit{
 
   teams: Team[] = [];
 
+  subscribeToTeams(): void {
+    this.teamsSubscription = this.teamService.getAllTeams()
+      .subscribe((teams: Team[]) => {
+        this.recentTeams = teams;
+        if (this.clicked === 'team') {
+          this.teams = teams;
+        }
+      })
+  }
+
   createTeam(team: Team): void {
     team.creator = this.logged;
     this.teamService
       .create(team)
       .subscribe((team: Team) => {
         this.alert.successAlert(`Equipe ${team.name} criada com sucesso!`);
-        this.getAfterChange();
       },
       e => {
         this.alert.errorAlert(`Erro ao criar a equipe!`)
@@ -58,8 +77,6 @@ export class HomeComponent implements OnInit{
         .subscribe((teams) => {
           this.teams = teams;
         });
-    } else {
-      this.teams = [];
     }
   }
 
@@ -120,6 +137,5 @@ export class HomeComponent implements OnInit{
         this.recentTeams = teams;
       });
   }
-
 
 }

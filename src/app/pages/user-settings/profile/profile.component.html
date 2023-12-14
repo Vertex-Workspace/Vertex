@@ -41,7 +41,7 @@
             <div class="rightSide">
                 <section>
                     <div class="image relative">
-                        <fa-icon class="hover" size="8x" [icon]="faCircleUser" title="Adicione uma foto de perfil"></fa-icon>
+                        <img src="data:image/jpg;base64, {{logged.image}}" alt="">
                         <form class="input-div">
                             <input type="file" class="input-file" (change)="onFileSelected($event)">
                             <button (click)="onUpload()"></button>
