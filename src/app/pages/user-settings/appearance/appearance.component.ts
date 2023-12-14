@@ -20,7 +20,7 @@ export class AppearanceComponent implements OnInit {
   faToggleOff = faToggleOff;
   faCheck = faCheck;
 
-  constructor(private personalizationService: PersonalizationService, private userService: UserService, private zone: NgZone, private cdr: ChangeDetectorRef) { }
+  constructor(private personalizationService: PersonalizationService, private userService: UserService) { }
 
   logged !: User;
   primaryLight!: string;
@@ -39,7 +39,7 @@ export class AppearanceComponent implements OnInit {
   ngOnInit(): void {
     this.logged = this.userService.getLogged();
 
-    this.userService.getOneById(this.logged.id!).pipe(take(1)).subscribe((user) => {
+    this.userService.getOneById(this.logged.id!).subscribe((user) => {
 
       this.primaryLight = user.personalization?.primaryColorLight!;
       this.secondLight = user.personalization?.secondColorLight!;
@@ -265,7 +265,6 @@ export class AppearanceComponent implements OnInit {
   }
 
   foreachColors(theme: any, type: any, item: number): void {
-    -
       type.colors.forEach((element: { status: string; }) => {
         element.status = 'unselected';
 

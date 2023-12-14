@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PropertyList } from 'src/app/models/property';
 import { Task, TaskEdit } from 'src/app/models/task';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faPause } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-task',
@@ -16,9 +18,13 @@ export class TaskComponent {
   @Output() changes = new EventEmitter();
 
   @Input() task!: Task;
+  faClock = faClock;
+  faPause = faPause;
 
   constructor(private taskService : TaskService, private alertService : AlertService) { }
+  
   selectedComponent: string = 'description';
+  initiated: boolean = true;
 
   navigate(component: string): void {
     this.selectedComponent = component;
@@ -63,6 +69,17 @@ export class TaskComponent {
       this.updateTaskNameAndDescription();
     }
     this.descriptionEditable = !this.descriptionEditable;
+  }
+
+  startTimer(): void {
+    this.initiated = true;
+
+    
+
+  }
+
+  stopTimer(): void {
+    this.initiated = false;
   }
 
 }

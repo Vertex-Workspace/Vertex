@@ -28,17 +28,42 @@
 .location {
     @apply flex w-full h-[5%] justify-between;
 
-    .routes{
-        @apply flex w-1/2 gap-5 divide-x-2;
+    .routes {
+        @apply flex w-2/3 gap-5 divide-x-2;
     }
+
     p {
         @apply flex items-center justify-center;
     }
+
     p:last-child {
         @apply px-5;
     }
+
+    .rightLocation {
+        @apply w-1/4 flex justify-evenly
+    }
 }
-.informations{
+
+.taskInit {
+    @apply w-[55%] h-10 flex justify-evenly items-center rounded-sm ;
+    background-color: $primaryColor;
+    color: $secondColor;
+    
+}
+
+.taskInit:hover{
+    background-color: $secondColor;
+    color: $primaryColor;
+    border: 1px solid $primaryColor;
+    transition: 0.1s;   
+    fa-icon{
+        color: $primaryColor;
+    
+    }
+}
+
+.informations {
     @apply grid w-full h-[95%] grid-cols-2 pt-10 px-6;
 
 
@@ -63,7 +88,7 @@
 }
 
 .down {
-    @apply h-[20%] flex flex-row w-full items-end ;
+    @apply h-[20%] flex flex-row w-full items-end;
 }
 
 .buttons {
@@ -81,12 +106,13 @@
 .right {
     @apply flex flex-col items-center justify-between;
 
-    nav{
+    nav {
         @apply flex w-full m-1;
 
-        ul{
+        ul {
             @apply flex w-full justify-center gap-7;
         }
+
         a {
             @apply hover:bg-zinc-200 p-1 rounded-md;
         }
@@ -100,7 +126,8 @@
 .submit {
     @apply w-full flex justify-end;
 }
-.components{
+
+.components {
     @apply flex w-[70%] items-center flex-col;
 }
 
@@ -117,10 +144,11 @@
     .title p {
         @apply text-base;
     }
-    .properties{
+
+    .properties {
         @apply flex w-full h-[50%];
     }
-    
+
 
     .components {
         @apply h-[55%];
@@ -141,11 +169,11 @@
         @apply w-[220px] h-[50px];
     }
 
-    .properties{
+    .properties {
         @apply flex w-full h-[60%];
         max-height: 400px;
     }
-    
+
     .components {
         @apply h-[65%];
     }
@@ -153,11 +181,12 @@
 
 @media (max-width: 899px) {}
 
-input:hover{
+input:hover {
     background-color: #f3f0f0;
     cursor: pointer;
 }
-input:focus{
+
+input:focus {
     cursor: text;
     border-bottom: 1px solid $primaryColor;
 }
@@ -169,8 +198,14 @@ textarea {
     border: none;
     background-color: inherit;
 }
-textarea:focus{
+
+textarea:focus {
     @apply shadow-md rounded-sm;
     border: 0 none;
     outline: 0;
+}
+
+#finishTask {
+    @apply hover:bg-zinc-200 p-2;
+    background-color: $error;
 }
