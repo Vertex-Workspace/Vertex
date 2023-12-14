@@ -3,7 +3,6 @@ import { faUser, faEnvelope,
     faEarthAmericas, faKey, faAngleDown, faToggleOff,
      faPencil, faToggleOn, faCircleUser,
     faPenToSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { PersonalizationService } from 'src/app/services/personalization.service';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
 import { User } from 'src/app/models/user';
@@ -35,9 +34,6 @@ export class ProfileComponent {
   faCircleUser = faCircleUser;
   faPenToSquare = faPenToSquare;
 
-  primaryColor: string;
-  secondColor: string;
-
   toogleOn: boolean = true;
   buttonEdit: boolean = true;
   buttonConfirm: boolean = false;
@@ -46,6 +42,8 @@ export class ProfileComponent {
   validInput: boolean = true;
 
   form !: FormGroup;
+
+  selectedFile !: any;
 
   itemsList = [
     { id: 'email', icon: faEnvelope, option: 'E-mail', formControlName: 'email'},
@@ -60,14 +58,10 @@ export class ProfileComponent {
   ];
 
   constructor(
-    private personalization : PersonalizationService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alert: AlertService
   ){
-    this.primaryColor = personalization.getPrimaryColor();
-    this.secondColor = personalization.getSecondColor();
-    
     this.logged = userService.getLogged();
   }
 
@@ -136,12 +130,20 @@ export class ProfileComponent {
   }
 
   onUpload(): void {
+    const fd: FormData = new FormData();
+    fd.append('image', this.selectedFile, this.selectedFile.name);
 
+    console.log(fd);
+    
+    // this.userService
+    //   .uploadImage(fd);
   }
 
-  onChangeFile(e: any): void {
-    console.log(e.target.files[0]);
-    
+  onFileSelected(e: any): void {
+    this.selectedFile = e.target.files[0]
+    const fd: FormData = new FormData();
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+    console.log(fd);
   }
 
 }

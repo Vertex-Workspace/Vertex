@@ -40,7 +40,7 @@ export class ProjectsComponent {
     private alert: AlertService,
     private userService: UserService,
     private teamService: TeamService,
-    private router: Router
+    private router: Router,
   ) {
     this.logged = this.userService.getLogged();
     this.getTeam();
@@ -70,7 +70,8 @@ export class ProjectsComponent {
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
-      })
+        
+      })      
 
   }
 

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, ChildrenOutletContexts, NavigationEnd, NavigationError, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
 import { faMessage, faBell } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,7 @@ import { UserStateService } from './services/user-state.service';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
+import { TeamService } from './services/team.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { AppearanceComponent } from './pages/user-settings/appearance/appearance
   ],
 })
 export class AppComponent {
+
   [x: string]: any;
 
   title = 'Vertex';
@@ -52,6 +54,8 @@ export class AppComponent {
 
   isSideBarExpanded: boolean = false;
 
+  currentRoute : string = "Home";
+
 
   constructor(
     private personalization: PersonalizationService,
@@ -59,15 +63,35 @@ export class AppComponent {
     private router: Router,
     private alert: AlertService,
     private userService: UserService,
-    private userState: UserStateService
+    private userState: UserStateService,
+    private teamService: TeamService
   ) {
     personalization.setPersonalization();
+
+    this.getCurrentRoute();
 
     this.userState
       .getAuthenticationStatus()
       .subscribe((status: boolean) => {
         this.userLogged = status;
       });
+  }
+
+  getCurrentRoute(): void {
+    this.router.events
+      .subscribe((event: any) => {
+        if (event instanceof NavigationEnd) {
+            this.currentRoute = this.generateRoute(event.url);          
+        }
+
+    });
+  }
+
+  generateRoute(url: string): string {
+    const path: string = `${url.split('/')}`;
+    console.log(path);
+    
+    return url;
   }
 
   // Sets the theme by default and make the persistence of the theme in all components
