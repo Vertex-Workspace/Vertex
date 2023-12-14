@@ -125,9 +125,9 @@ export class UserService {
       .put<User>(`${URL}user`, user);
   }
 
-  public uploadImage(data: FormData) {
-    // return this.http
-    //   .post(`${URL}user/`)
+  public uploadImage(data: FormData, id: number): Observable<any> {
+    return this.http
+      .post<any>(`${URL}user/${id}/image`, data);
   }
 
 }

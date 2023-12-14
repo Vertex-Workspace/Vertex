@@ -30,9 +30,7 @@ export class KanbanComponent {
   @Input()
   project!: Project;
 
-  ngOnInit(): void {
-    console.log(this.project);
-  }
+
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     const task: Task = event.item.data;
