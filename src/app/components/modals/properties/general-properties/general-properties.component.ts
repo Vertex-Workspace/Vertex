@@ -57,21 +57,30 @@ export class GeneralPropertiesComponent {
 
   propertiesList: any[] = [
     {
+      status: 'Fixas',
+      opacity: false,
+      icon: faEye,
+      properties: [
+        { name: 'Prazo', icon: faCalendarDays },
+        { name: 'Status', icon: faSpinner },
+      ]
+    },
+    {
       status: 'Visíveis',
+      opacity: false,
       icon: faEye,
       properties: [
         { name: 'Nome da Tarefa', icon: faFont },
-        { name: 'Prazo', icon: faCalendarDays },
       ]
     },
     {
       status: 'Não visíveis',
+      opacity: true,
       icon: faEyeSlash,
       properties: [
-        { name: 'Status', icon: faSpinner },
         { name: 'Itens Seleção', icon: faCaretDown }
       ]
-    },
+    }
   ]
 
   clickGear(type: string, i: number, i2: number) {
@@ -95,12 +104,13 @@ export class GeneralPropertiesComponent {
 
 
   changeStatus(namep: string, icon: any, i: number, i2: number) {
-    let visibles: any = this.propertiesList[0].properties;
-    let invisibles: any = this.propertiesList[1].properties;
-
+    let visibles: any = this.propertiesList[1].properties; 
+    let invisibles: any = this.propertiesList[2].properties;
     if (this.propertiesList[i].icon === faEye) {
+
       invisibles.push({ name: namep, icon: icon });
       visibles.splice(i2, 1);
+
     } else {
       visibles.push({ name: namep, icon: icon });
       invisibles.splice(i2, 1);
@@ -110,7 +120,6 @@ export class GeneralPropertiesComponent {
   delete(i: number, i2: number) {
     console.log(i2);
     this.propertiesList[i].properties.splice(i2, 1);
-
   }
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct

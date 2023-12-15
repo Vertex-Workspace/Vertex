@@ -27,7 +27,7 @@
 }
 
 .properties-types {
-    @apply pt-3 w-[80%] h-[50%] grid grid-cols-2 justify-center items-center;
+    @apply pt-12 w-[80%] h-[35%] grid grid-cols-3 justify-center;
 
     div{
         @apply w-[80px] h-[80px] bg-[#EAEFF8] flex justify-center items-center shadow-2xl rounded-md;

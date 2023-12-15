@@ -36,15 +36,13 @@ export class EditPropertiesComponent {
 
   propertyTypes = [
     { name: 'Texto', icon: faFont, value: false },
-    { name: 'Data', icon: faCalendarDays, value: false },
     { name: 'Seleção', icon: faCaretDown, value: false },
     { name: 'Número', icon: faListOl, value: false },
   ]
 
   checkboxList = [
     { p: 'Tornar a propriedade obrigatória', value: false, visibility: true },
-    { p: 'Definir um valor padrão?', value: false, visibility: false },
-    { p: 'Definir data de término?', value: false, visibility: false }
+    { p: 'Definir um valor padrão?', value: false, visibility: false }
   ]
 
   defineValue(i: number) {
@@ -53,7 +51,6 @@ export class EditPropertiesComponent {
       this.openInput = true;
     }
   }
-
 
   selectValue(i: number) {
     let cont1 = 0;
@@ -81,9 +78,6 @@ export class EditPropertiesComponent {
     if (this.selectedProperty === 'Texto') {
       this.checkboxList[1].visibility = true;
       this.checkboxList[2].visibility = false;
-    } else if (this.selectedProperty === 'Data') {
-      this.checkboxList[2].visibility = true;
-      this.checkboxList[1].visibility = false;
     } else {
       this.checkboxList[1].visibility = false;
       this.checkboxList[2].visibility = false;
@@ -99,16 +93,10 @@ export class EditPropertiesComponent {
   check() {
     if (this.name === 'Nome da Tarefa') {
       this.propertyTypes[0].value = true;
-    } else if (this.name === 'Prazo') {
-      this.propertyTypes[1].value = true;
-    } else if (this.name === 'Status') {
-      this.propertyTypes[3].value = true;
     } else if (this.name === 'Itens Seleção') {
+      this.propertyTypes[1].value = true;
+    } else if (this.name === 'Número'){
       this.propertyTypes[2].value = true;
-    } else if (this.name === 'Responsável') {
-      this.propertyTypes[4].value = true;
-    } else if (this.name === 'Anexo') {
-      this.propertyTypes[5].value = true;
     }
   }
 }
