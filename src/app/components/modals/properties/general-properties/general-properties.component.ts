@@ -98,7 +98,9 @@ export class GeneralPropertiesComponent {
     } else if (this.propertiesList[i].properties[i2].icon === faCaretDown) {
       this.select.emit();
     } else {
+      if(this.propertiesList[i].properties[i2].icon != faCalendarDays){
       this.edit.emit({ list: this.propertiesList[i].properties[i2].name });
+      }
     }
   }
 
@@ -122,19 +124,15 @@ export class GeneralPropertiesComponent {
     this.propertiesList[i].properties.splice(i2, 1);
   }
 
-  // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
+  // the number of fixed itens list is 0, so the user can't move the other itens into it
   drop(event: CdkDragDrop<any[]>, i: number) {
-    if ((event.previousContainer === event.container) && i == 0) {
-      moveItemInArray(this.propertiesList[0].properties, event.previousIndex, event.currentIndex);
-    } else if ((event.previousContainer === event.container) && i == 1) {
-      moveItemInArray(this.propertiesList[1].properties, event.previousIndex, event.currentIndex);
-    } else {
+    if(i != 0){
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
-      )
+      );
     }
-  }
+  } 
 }
 

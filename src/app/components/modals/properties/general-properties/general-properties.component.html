@@ -15,9 +15,9 @@
                             <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                             <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                         </div>
-                        <div (click)="editProperty(i, i2)">
+                        <div>
                             <fa-icon [icon]="name.icon" class="icon pl-2"></fa-icon>
-                            <p class="regular-text">{{name.name}}</p>
+                            <input class="regular-text" value="{{name.name}}" /> 
                         </div>
                     </div>
                     <div>

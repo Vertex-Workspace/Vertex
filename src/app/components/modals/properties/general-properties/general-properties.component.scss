@@ -32,6 +32,10 @@ span {
 
         div:last-child{
             @apply w-[75%] flex justify-start items-center gap-3;
+
+            input{
+                @apply bg-[#EAEFF8];
+            }
         }
 
     }

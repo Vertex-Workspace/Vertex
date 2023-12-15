@@ -52,53 +52,53 @@ export class AppComponent {
   isSideBarExpanded: boolean = false;
 
 
-  constructor(
-    private personalization: PersonalizationService,
-    private contexts: ChildrenOutletContexts,
-    private router: Router,
-    private alert: AlertService,
-    private userService: UserService,
-    private userState: UserStateService
-  ) {
-    personalization.setPersonalization();
+   constructor(
+     private personalization: PersonalizationService,
+  private contexts: ChildrenOutletContexts,
+     private router: Router,
+     private alert: AlertService,
+     private userService: UserService,
+     private userState: UserStateService
+   ) {
+     personalization.setPersonalization();
 
-    this.userState
-      .getAuthenticationStatus()
-      .subscribe((status: boolean) => {
-        this.userLogged = status;
-      });
-  }
+     this.userState
+       .getAuthenticationStatus()
+       .subscribe((status: boolean) => {
+         this.userLogged = status;
+       });
+   }
 
   ngOnInit(): void {
 
-    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+     let user: User = JSON.parse(localStorage.getItem('logged') || '');
     
 
 
 
-    this.userService.getOneById(user.id!).subscribe((logged) => {
+     this.userService.getOneById(user.id!).subscribe((logged) => {
       
-      user = logged;
-      console.log(user.personalization!.theme);
+       user = logged;
+       console.log(user.personalization!.theme);
 
-      if(user.personalization!.theme == 0){
-        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
-        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
-      } else if(user.personalization!.theme == 1) {
-        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
-        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
-      }
+       if(user.personalization!.theme == 0){
+         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
+         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
+       } else if(user.personalization!.theme == 1) {
+         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
+         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+       }
       
-    });
+     });
 
 
     //setar o tema do usuário com o document.documentElement.style.setProperty('--primary-color', personalization.primaryColor);
 
   }
 
-  getRouteAnimationData() {
-    return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
-  }
+   getRouteAnimationData() {
+     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+   }
 
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;
