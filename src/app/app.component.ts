@@ -57,7 +57,7 @@ export class AppComponent {
 
 
 
-  let user: User = JSON.parse(localStorage.getItem('logged') || '');
+  user: User = JSON.parse(localStorage.getItem('logged') || '');
 
   constructor(
     private personalization: PersonalizationService,
@@ -150,4 +150,5 @@ export class AppComponent {
   }
 
 }
+
 
