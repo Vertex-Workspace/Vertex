@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PropertyList } from 'src/app/models/property';
+import { Task, TaskEdit } from 'src/app/models/task';
+import { AlertService } from 'src/app/services/alert.service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-task',
@@ -7,52 +11,58 @@ import { Component } from '@angular/core';
 })
 export class TaskComponent {
 
-  selectedComponent: string = 'log';
-  task: any = {
-    name: 'Nome da tarefa',
-    team: 'Nome da equipe',
-    comments: [
-      {
-        author: 'Marcos',
-        comment: 'Comentário de número 1',
-        date: '20/09/2018 - 14:55' //mudar
-      },
-      {
-        author: 'Sérgio',
-        comment: 'Comentário de número 2',
-        date: '20/09/2018 - 14:55' //mudar
-      }
-    ],
-    log: [
-      {
-        author: 'Marcos',
-        action: 'adicionou uma propriedade',
-        date: '20/09/2018 - 14:55' //mudar
-      },
-      {
-        author: 'Sérgio',
-        action: 'alterou a descrição',
-        date: '20/09/2018 - 14:55' //mudar
-      }
-    ],
-    properties: [ //mudar
-      {
-        name: 'Status',
-        content: 'Doing',
-      },
-      {
-        name: 'Responsável',
-        content: 'Marcos'
-      },
-      {
-        name: 'Prazo',
-        content: '25/10/2023'
-      }
-    ]
-  }
+  @Output() close = new EventEmitter();
+
+  @Output() changes = new EventEmitter();
+
+  @Input() task!: Task;
+
+  constructor(private taskService : TaskService, private alertService : AlertService) { }
+  selectedComponent: string = 'description';
 
   navigate(component: string): void {
     this.selectedComponent = component;
+  }
+
+  closeModal(): void {
+    this.close.emit();
+  }
+
+  changeTask(event: any): void {
+    this.changes.emit(event);
+  }
+
+  updateTaskNameAndDescription(): void {
+
+    let taskEdit: TaskEdit = {
+      id: this.task.id,
+      name: this.task.name,
+      description: this.task.description
+    };
+    if (this.task.name === "") {
+      this.task.name = "Nova tarefa";
+    } 
+    if (this.task.description === "") {
+      this.task.name = "Insira uma breve descrição sobre a tarefa aqui...";
+    } 
+    this.taskService.edit(taskEdit).subscribe(
+      (task: Task) => {
+      this.task.name = task.name  
+      this.task.description = task.description;
+      this.alertService.successAlert("Tarefa alterada com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert("Erro ao alterar tarefa!");
+      }
+    );
+  }
+
+  descriptionEditable: boolean = false;
+  changeEditDescription(): void {
+    if(this.descriptionEditable){
+      this.updateTaskNameAndDescription();
+    }
+    this.descriptionEditable = !this.descriptionEditable;
   }
 
 }

@@ -14,10 +14,27 @@
         
 }
 
+.image {
+    @apply w-[300px] h-[240px] flex flex-col justify-start items-center;
+}
+
 .size {
     @apply text-[18px];
 }
 
+p-fileUpload {
+    @apply absolute bottom-0 mx-auto w-[150px];
+}
+
+.input-div {
+    @apply w-full h-full flex justify-center items-center absolute;
+    opacity: 0;
+
+    .input-file {
+        @apply cursor-pointer w-full h-full;
+    }
+
+}
 
 .iconProfile {
     color: $primaryColor;

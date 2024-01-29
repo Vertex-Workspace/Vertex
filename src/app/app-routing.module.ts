@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TaskComponent } from './components/modals/task/task.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MuralComponent } from './pages/tasks/mural/mural.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
@@ -19,6 +18,7 @@ import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { UserTeamGuard } from './services/guards/user-team.guard';
 
 const routes: Routes = [
@@ -43,7 +43,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, UserTeamGuard] //add verificação de 
   },
   {
-    path: "perfil",
+    path: "perfil-usuario",
     component: UserInformationsComponent,
     canActivate: [AuthGuard]
   },
@@ -65,28 +65,10 @@ const routes: Routes = [
   {
     path: 'tarefas',
     component: TasksComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'kanban',
-        component: KanbanComponent
-      },
-      {
-        path: 'lista',
-        component: ListComponent
-      },
-      {
-        path: 'calendario',
-        component: CalendarComponent
-      },
-      {
-        path: 'mural',
-        component: MuralComponent
-      }
-    ],
+    canActivate: [AuthGuard]
   },
   {
-    path: 'equipe/:teamId/tarefas',
+    path: 'projeto/:projectId/tarefas',
     component: TasksComponent,
     canActivate: [AuthGuard],
     children: [

@@ -31,11 +31,13 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { AlertService } from './services/alert.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
+import { GroupsSelectModule } from './components/modals/groups-select/groups-select.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     SearchAllModule,
     HttpClientModule,
     ToastModule,
+    GroupsSelectModule
   ],
   providers: [
     PersonalizationService,

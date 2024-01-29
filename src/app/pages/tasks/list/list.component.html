@@ -15,15 +15,24 @@
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >
-            <div class="trow regular-text" *ngFor="let task of taskList">
-                <app-row-card
-                    [task]="task"
+            <ng-container *ngFor="let task of taskList">
+                <div 
+                    class="trow regular-text relative"
                     [cdkDragData]="task"
                     cdkDrag
                     cdkDragLockAxis="y"
                     cdkDragBoundary=".table"
-                ></app-row-card>
-            </div>
+                >
+                    <span class="drag-handle" cdkDragHandle>
+                        <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+                        <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+                    </span>
+                    <app-row-card
+                        [task]="task"
+                    >
+                </app-row-card>
+                </div>
+            </ng-container>
         </div>       
     </div>
 </section>

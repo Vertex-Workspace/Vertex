@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ChildrenOutletContexts, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, ChildrenOutletContexts, NavigationEnd, NavigationError, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
 import { faMessage, faBell } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,8 @@ import { LoadingService } from './services/loading.service';
 import { UserStateService } from './services/user-state.service';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
+import { TeamService } from './services/team.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,7 @@ import { User } from './models/user';
   ],
 })
 export class AppComponent {
+
   [x: string]: any;
 
   title = 'Vertex';
@@ -30,7 +33,6 @@ export class AppComponent {
   inputColor: string = '#FFFFFF';
   fontColor: string = '#000000';
   buttonColor: string = '#FFFFFF';
-  fontSize!: number;
 
   faMessage = faMessage;
   faTimes = faTimes;
@@ -51,49 +53,76 @@ export class AppComponent {
 
   isSideBarExpanded: boolean = false;
 
+  currentRoute : string = "Home";
 
-   constructor(
-     private personalization: PersonalizationService,
-  private contexts: ChildrenOutletContexts,
-     private router: Router,
-     private alert: AlertService,
-     private userService: UserService,
-     private userState: UserStateService
-   ) {
-     personalization.setPersonalization();
 
-     this.userState
-       .getAuthenticationStatus()
-       .subscribe((status: boolean) => {
-         this.userLogged = status;
-       });
-   }
 
-  ngOnInit(): void {
+  let user: User = JSON.parse(localStorage.getItem('logged') || '');
 
-     let user: User = JSON.parse(localStorage.getItem('logged') || '');
+  constructor(
+    private personalization: PersonalizationService,
+    private contexts: ChildrenOutletContexts,
+    private router: Router,
+    private alert: AlertService,
+    private userService: UserService,
+    private userState: UserStateService,
+    private teamService: TeamService
+  ) {
+    personalization.setPersonalization();
+
+    this.getCurrentRoute();
+
+    this.userState
+      .getAuthenticationStatus()
+      .subscribe((status: boolean) => {
+        this.userLogged = status;
+      });
+  }
+
+  getCurrentRoute(): void {
+    this.router.events
+      .subscribe((event: any) => {
+        if (event instanceof NavigationEnd) {
+            this.currentRoute = this.generateRoute(event.url);          
+        }
+
+    });
+  }
+
+  generateRoute(url: string): string {
+    const path: string = `${url.split('/')}`;
+    console.log(path);
     
+    return url;
+  }
+
+  // Sets the theme by default and make the persistence of the theme in all components
+  ngOnInit(): void {
+    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+    this.userService.getOneById(user.id!).subscribe((logged) => {
+
+      user = logged;
+
+      if (user.personalization!.theme == 0) {
+        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
+        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
+        document.documentElement.style.setProperty('--text', "#000000");
+      } else if (user.personalization!.theme == 1) {
+        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
+        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+        document.documentElement.style.setProperty('--text', "#FFFFFF");
+      }
+
+     
+
+      document.documentElement.style.setProperty('--smallText', (user.personalization?.fontSize! - 2) + 'px');
+      document.documentElement.style.setProperty('--regularText', (user.personalization?.fontSize!) + 'px');
+      document.documentElement.style.setProperty('--mediumText', (user.personalization?.fontSize! + 2) + 'px');
+      document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
+      document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
 
 
-
-     this.userService.getOneById(user.id!).subscribe((logged) => {
-      
-       user = logged;
-       console.log(user.personalization!.theme);
-
-       if(user.personalization!.theme == 0){
-         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
-         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
-       } else if(user.personalization!.theme == 1) {
-         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
-         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
-       }
-      
-     });
-
-
-    //setar o tema do usuário com o document.documentElement.style.setProperty('--primary-color', personalization.primaryColor);
-
+    });
   }
 
    getRouteAnimationData() {

@@ -5,6 +5,7 @@ import { taskList,
          homeCols  } from '../data-test';
 import {  CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list',
@@ -15,6 +16,7 @@ export class ListComponent implements OnInit {
   protected taskList = taskList;
   protected cols = cols;
   protected homeCols = homeCols;
+  faEllipsisVertical = faEllipsisVertical;
 
   constructor(
     private router: Router

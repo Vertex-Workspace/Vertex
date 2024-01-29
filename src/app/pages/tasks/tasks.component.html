@@ -9,7 +9,7 @@
                             style="font-size: 1rem"
                         ></i>
                         <button 
-                            (click)="redirect(item.id)"
+                            (click)="changePreviewMode(item.id)"
                         >
                                 {{ item.label }}
                         </button>
@@ -49,7 +49,7 @@
                     
                 </ng-container>
 
-                <button class="create">
+                <button class="create" (click)="createTask()">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
@@ -76,10 +76,25 @@
         </section>
 
         <section class="router">
-            <router-outlet />
+            <app-kanban 
+
+            [project]="project" 
+            *ngIf="clicked  === 'Kanban'" 
+            style="width: 100%; height: 100%;"
+            (openTaskDetails)="changeModalTaskState(true, $event)"
+            ></app-kanban>
+
+
+
+            <app-list   *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
+            <app-calendar  *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
+            <app-mural  *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
+            <!-- app-kanban -->
         </section>
 
     </div>
 </section>
 
 <app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()"></app-properties>
+
+<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>

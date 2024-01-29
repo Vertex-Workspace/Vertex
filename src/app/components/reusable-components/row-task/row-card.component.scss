@@ -7,6 +7,10 @@
     .name {
         @apply h-[55px] flex items-center justify-between pl-4 overflow-hidden;
         border: 1px solid #0303031A;
+
+        p {
+            @apply pl-[3rem];
+        }
     }
 
     .properties {
@@ -17,7 +21,6 @@
         p {
             @apply p-[0.15rem] rounded-sm overflow-hidden;
         }
-
         
     }
 

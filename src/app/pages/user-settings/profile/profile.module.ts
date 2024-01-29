@@ -6,6 +6,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import { FileUploadModule } from 'primeng/fileupload';
+
 
 
 
@@ -22,7 +24,8 @@ import { ToastModule } from 'primeng/toast';
     FontAwesomeModule,
     ModalWarnModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    FileUploadModule
   ]
 })
 export class ProfileModule { }

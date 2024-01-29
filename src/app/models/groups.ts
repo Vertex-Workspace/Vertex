@@ -3,25 +3,25 @@ import { User } from "./user";
 
 export class Group {
 
-    id ?: number | undefined;
+    id!: number;
     name !: string;
     creationDate !: Date;
     description !: string;
     users: User[] = [];
-
+    open: boolean = false;
     creator?: User;
 
     //List Project - Miguel
     projects?: Project[];
 
     constructor(
-        team: Group
+        group: Group
     ) {
-
-        this.id = team.id;
-        this.name = team.name;
-        this.creationDate = team.creationDate;
-        this.description = team.description;
+        this.id = group.id;
+        this.name = group.name;
+        this.creationDate = group.creationDate;
+        this.description = group.description;
+        this.open = false;
     }
 
 }

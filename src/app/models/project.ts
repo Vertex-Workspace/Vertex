@@ -1,3 +1,4 @@
+import { Property } from "./property";
 import { Task } from "./task";
 import { Team } from "./team";
 import { User } from "./user";
@@ -10,7 +11,9 @@ export class Project {
     image ?: string;
     creator ?: User;
     projectDependency ?: Project;
-    taskList : Task[]; 
+    tasks : Task[]; 
+    properties!: Property[];
+    idTeam?: number;
 
     constructor(
         project: Project,
@@ -18,10 +21,11 @@ export class Project {
         this.id = project.id;
         this.name = project.name;
         this.team = project.team;
-        this.description = '';
-        this.image = '';
-        this.taskList = [];
-
+        this.description = project.description;
+        this.image = project.description;
+        this.tasks = project.tasks;
+        this.properties = project.properties;
+        this.idTeam = project.idTeam;
     }
 
 }

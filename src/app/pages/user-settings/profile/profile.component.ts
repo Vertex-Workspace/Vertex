@@ -2,13 +2,17 @@ import { Component } from '@angular/core';
 import { faUser, faEnvelope,
     faEarthAmericas, faKey, faAngleDown, faToggleOff,
      faPencil, faToggleOn, faCircleUser,
-    faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { PersonalizationService } from 'src/app/services/personalization.service';
+    faPenToSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
+
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
 
 @Component({
   selector: 'app-profile',
@@ -30,9 +34,6 @@ export class ProfileComponent {
   faCircleUser = faCircleUser;
   faPenToSquare = faPenToSquare;
 
-  primaryColor: string;
-  secondColor: string;
-
   toogleOn: boolean = true;
   buttonEdit: boolean = true;
   buttonConfirm: boolean = false;
@@ -41,6 +42,8 @@ export class ProfileComponent {
   validInput: boolean = true;
 
   form !: FormGroup;
+
+  selectedFile !: any;
 
   itemsList = [
     { id: 'email', icon: faEnvelope, option: 'E-mail', formControlName: 'email'},
@@ -55,14 +58,10 @@ export class ProfileComponent {
   ];
 
   constructor(
-    private personalization : PersonalizationService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alert: AlertService
   ){
-    this.primaryColor = personalization.getPrimaryColor();
-    this.secondColor = personalization.getSecondColor();
-    
     this.logged = userService.getLogged();
   }
 
@@ -128,6 +127,23 @@ export class ProfileComponent {
       location: formValue.location,
     };
 
+  }
+
+  onUpload(): void {
+    const fd: FormData = new FormData();
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+
+    console.log(fd);
+    
+    // this.userService
+    //   .uploadImage(fd);
+  }
+
+  onFileSelected(e: any): void {
+    this.selectedFile = e.target.files[0]
+    const fd: FormData = new FormData();
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+    console.log(fd);
   }
 
 }

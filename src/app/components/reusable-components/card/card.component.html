@@ -1,9 +1,11 @@
 <div 
     class="card" 
-    [style.borderColor]="task.category.borderColor"
+
     [style.width]="width"
     [style.min-height]="minHeight"
->
+    [style.borderColor]="borderColor"
+    (click)="openTask()"
+    >
     <div class="top">
         <div class="left">
             <fa-icon
@@ -17,7 +19,7 @@
             <ng-container *ngFor="let item of settings">
                 <fa-icon
                     [icon]="item.icon"
-                    (click)="item.onclick"
+                    (click)="item.onclick()"
                     class="icon"
                 >
                 </fa-icon>
@@ -27,3 +29,6 @@
 
     <p class="medium-text">{{task.name}}</p>
 </div>
+
+<!--     [style.borderColor]="task.category.borderColor" -->
+<app-confirm-modal [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'" *ngIf="modalDelete" (close)="delete($event)"></app-confirm-modal>

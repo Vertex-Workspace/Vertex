@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
 import { LoadingService } from '../../services/loading.service';
 
 @Component({
@@ -8,9 +8,7 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class LoadingComponent {
 
-  constructor(public loadingService :LoadingService) {
-    
-  }
+  constructor(public loadingService :LoadingService) {}
 
   @Input()
   userLogged!:boolean;

@@ -16,6 +16,9 @@ export class ModalWarnComponent {
   @Input()
   width?: String;
 
+  @Input()
+  title?: String;
+
   closeModal(){
     this.close.emit();
   }

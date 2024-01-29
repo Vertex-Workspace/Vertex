@@ -1,10 +1,16 @@
-import { Component, ViewChild, ViewChildren } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Task, TaskCreate } from 'src/app/models/task';
 import {
   CdkDragDrop,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { categories, taskList } from '../data-test';
+import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/models/project';
+import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
+import { TaskService } from 'src/app/services/task.service';
+import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
+import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-kanban',
@@ -14,122 +20,174 @@ import { categories, taskList } from '../data-test';
 export class KanbanComponent {
 
 
-  // @ViewChildren('card') cards!: any[];
-  // ngAfterViewInit() {
-  //   this.cards.forEach(card => {
-  //     console.log(card.nativeElement.offsetHeight);
-  //   });
-  // }
-  selectedCards ?: Task[];
+  constructor(
+    private taskService: TaskService, 
+    private alertService: AlertService,
+    private userService : UserService) {
 
-  categories: any[] = [
-    {
-      name: 'TO-DO',
-      color: '#FFE7E94D',
-      borderColor: '#FF9D9Df3'
-    },
-    {
-      name: 'DOING',
-      color: '#FFF6C54D',
-      borderColor: '#FFD600f3'
-    },
-    {
-      name: 'DONE',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'OUTRA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
-    },
-    {
-      name: 'ÚLTIMA CATEGORIA',
-      color: '#d7ffc94D',
-      borderColor: '#7be057de'
+  }
+
+  @Input()
+  project!: Project;
+
+
+
+  dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
+    const task: Task = event.item.data;
+
+    let previousPropertyList!: PropertyList;
+    let newValue!: Value;
+
+    //For each to find the value of current and future property List
+    this.project.properties.forEach((property) => {
+      if (property.kind == PropertyKind.STATUS) {
+        task.values.forEach((value) => {
+          if (value.property.id == property.id) {
+            //Save the old value
+            previousPropertyList = value.value as PropertyList;
+
+            //Save the new value
+            value.value = propertyList;
+
+            //Save on a local variable the value of the task
+            newValue = value;
+            console.log(newValue);
+          }
+        });
+      }
+    });
+
+    //It points out that the previousValue is incorrect
+    if (previousPropertyList == null) {
+      return;
     }
-  ];
 
-  //ADICIONAR "80" NO FINAL DO HEXADECIMAL DA COLOR -> 50% OPACIDADE
-  //ADICIONAR "DE" NO FINAL DO HEXADECIMAL DA BORDA -> 80%+-
+    const newIndexTask =
+      this.specificPropertyArray(propertyList)[event.currentIndex];
+    const newIndex = this.project.tasks.indexOf(newIndexTask);
+    const previousIndex = this.project.tasks.indexOf(task);
 
-  taskList: Task[] = [
-    {
-      name: 'Tarefa 1',
-      category: this.categories[0]
-    },
-    {
-      name: 'Tarefa 2 Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2Tarefa 2',
-      category: this.categories[0]
-    },
-    {
-      name: 'REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ REALIZAR PROCESSO BACK-END À PELÉ',
-      category: this.categories[0]
-    },
-    {
-      name: 'Tarefa 4',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 5',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 6',
-      category: this.categories[1]
-    },
-    {
-      name: 'Tarefa 7',
-      category: this.categories[2]
+
+    moveItemInArray(
+      this.project.tasks,
+      previousIndex,
+      newIndex
+    );
+
+
+    //If the value of status task is different of the previous value, then, the request is sent
+    if (propertyList.id != previousPropertyList.id) {
+      //Object to change the value of the status task
+      const valueUpdate: ValueUpdate = {
+        id: task.id,
+        value: {
+          property: {
+            id: newValue.property.id
+          },
+          value: {
+            id: newValue.id,
+            value: propertyList.id
+          }
+        }
+      };
+
+      //Patch the value of the status task
+      this.taskService.patchValue(valueUpdate).subscribe();
     }
-  ];
+  };
 
-  specificPropertyArray(property: any): any[] {
-    return this.taskList.filter(task => {
-      return task.category === property;
+  getHeight(propertyList: PropertyList): string {
+    return ((this.specificPropertyArray(propertyList).length * 174) + 70) + "px";
+  }
+
+  specificPropertyArray(propertyList: PropertyList): Task[] {
+    return this.project.tasks.filter(task => {
+      let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
+      return valueIntoPropertyList.id == propertyList.id;
     });
   }
 
-  dropCard(event: CdkDragDrop<Task[]>, category: any): void {  
-    const task = event.item.data;
-    task.category = category;
 
-    const newIndexTask = 
-            this.specificPropertyArray(task.category)[event.currentIndex];
-    const newIndex = this.taskList.indexOf(newIndexTask);
-    const previousIndex = this.taskList.indexOf(task);
-    
-    moveItemInArray(
-      this.taskList, 
-      previousIndex, 
-      newIndex
-    );
-  };
+  //Temporary
+  getColor(color: string) {
+    if (color === "RED") {
+      return "#FF9D9D50";
+    } else if (color === "YELLOW") {
+      return "#FFD60035";
+    } else if (color === "GREEN") {
+      return "#65D73C50";
+    } else {
+      return "#7be05750";
+    }
+  }
 
-  getHeight(property: any): string {
-    return ((this.specificPropertyArray(property).length * 174) + 70) + "px";
+  getTaskByProperty(task: Task, propertyList: PropertyList): boolean {
+    let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
+    return valueIntoPropertyList.id == propertyList.id;
   }
 
 
+  deleteTask(task: Task): void {
+    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+  }
+
+  @Output() openTaskDetails = new EventEmitter();
+  openTaskModal(task: Task): void {
+    this.openTaskDetails.emit(task);
+  }
+
+  createTask(propertyList: PropertyList) {
+    let propertyUsed!: Property;
+
+    //For each to find the property of the clicked Property List
+    this.project.properties.forEach((property) => {
+
+      if (property.kind == PropertyKind.STATUS) {
+
+        property.propertyLists.forEach((propertyListForEach) => {
+
+          if (propertyListForEach.id == propertyList.id) {
+            propertyUsed = property;
+          }
+        });
+      }
+    });
+
+    if(propertyUsed == null){
+      return;
+    }
+
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: 1
+      },
+      values: [
+        {
+          property: {
+            id: propertyUsed.id
+          },
+          value: {
+            value: propertyList.id as number
+          }
+        }
+      ],
+      creator: {
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
+    }
+
+    this.taskService.create(taskCreate).subscribe(
+      (task: Task) => {
+        this.project.tasks.push(task);
+        this.alertService.successAlert("Tarefa criada com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert("Erro ao criar tarefa!");
+      }
+    );
+  }
 
 }

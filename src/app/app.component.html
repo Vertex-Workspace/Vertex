@@ -8,7 +8,8 @@
 
     <div [ngClass]="isSideBarExpanded ? 'main-divOpen': 'main-div'"
         [ngStyle]="{'overflow-y' : notification ? 'hidden' : 'auto'}">
-        <div class="h-full w-[96%]">
+        <div class="h-full w-[96%] overflow-hidden">
+
             <app-notification *ngIf="notification" style="width: 100%; height:100%" (close)="switchNotifications()">
             </app-notification>
 
@@ -16,7 +17,11 @@
             
             <header class="main-header">
                 <app-loading *ngIf="userLogged" [userLogged]="userLogged"></app-loading>
-                <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()" />
+                <app-header 
+                    style="width: 100%; height: 100%;" 
+                    (openNotification)="switchNotifications()" 
+                    [currentRoute]="currentRoute"
+                />
             </header>
 
             <main class="main-content" [@routeAnimations]="getRouteAnimationData()">

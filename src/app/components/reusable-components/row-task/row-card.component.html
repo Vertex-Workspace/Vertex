@@ -1,27 +1,22 @@
 <div class="card">
-    <div class="name" 
-        [style.min-width]="getNameWidth()">
+    <div class="name" [style.min-width]="getNameWidth()">
         <p>
             {{task.name}}
         </p>
         <div class="icons">
             <ng-container *ngFor="let item of icons">
-                <fa-icon
-                    [icon]="item.icon"
-                    class="icon"
-                ></fa-icon>
+                <fa-icon [icon]="item.icon" class="icon"></fa-icon>
             </ng-container>
         </div>
     </div>
 
-    <ng-container 
-        *ngFor="let col of getCols()"
-    >
-        <div *ngIf="col.field !== 'name'" 
-            class="properties"
+    <ng-container *ngFor="let col of getCols()">
+        <div 
+            *ngIf="col.field !== 'name'" 
+            class="properties" 
             [style.min-width]="col.width"
         >
-            
+
             <p [style.backgroundColor]="getPropertyColor(col)">
                 {{ getPropertyValue(col) }}
             </p>
