@@ -24,7 +24,7 @@ export class UserSettingsComponent {
   itemsList = [
     { id: 'perfil', icon: faUser, option: 'Perfil'},
     { id: 'seguranca', icon: faLock, option: 'Segurança'},
-    { id: 'aparencia', icon: faPaintBrush, option: 'Aparência do Sistema'},
+    { id: 'aparencia', icon: faPaintBrush, option: 'Aparência'},
     { id: 'equipes', icon: faUsers, option: 'Equipes'},
     { id: 'notificacoes', icon: faBell, option: 'Notificações'}
   ];

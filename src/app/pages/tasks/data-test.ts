@@ -285,58 +285,37 @@ export const categories: any[] = [
     // },
  ];
 
+
+ //Properties Default
   export const cols = [
     {
       field: "name",
       headerText: "Nome",
       width: '40%',
-      icon: "pi pi-user",
-    },
-    {
-      field: "status",
-      headerText: "Status",
-      width: '15%',
-      icon: "pi pi-tag",
     },
     {
       field: "creator",
-      headerText: "Responsável",
+      headerText: "Responsáveis",
       width: '15%',
-      icon: "pi pi-user",
     },
     {
       field: "term",
       headerText: "Prazo",
       width: '15%',
-      icon: "pi pi-clock",
-    },
-    {
-      field: "term",
-      headerText: "Prazo",
-      width: '15%',
-      icon: "pi pi-clock",
-    },
-    {
-      field: "term",
-      headerText: "Prazo",
-      width: '15%',
-      icon: "pi pi-clock",
-    },
+    }
   ];
 
-  export const homeCols = [
-    {
-      field: "name",
-      headerText: "Nome",
-      width: '70%',
-      icon: "pi pi-user",
-    },
-    {
-      field: "status",
-      headerText: "Status",
-      width: '30%',
-      icon: "pi pi-tag",
-    },
-  ]
+  // export const homeCols = [
+  //   {
+
+  //     icon: "pi pi-user",
+  //   },
+  //   {
+  //     field: "status",
+  //     headerText: "Status",
+  //     width: '30%',
+  //     icon: "pi pi-tag",
+  //   },
+  // ]
 
   

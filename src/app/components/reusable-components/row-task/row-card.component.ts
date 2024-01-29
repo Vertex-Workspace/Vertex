@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import { cols,
-         homeCols } from 'src/app/pages/tasks/data-test';
+     } from 'src/app/pages/tasks/data-test';
 import {
   faTrashCan, 
   faEnvelope, 
@@ -20,11 +20,12 @@ export class RowCardComponent {
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;
 
-  cols: any[] = cols;
-  homeCols: any[] = homeCols;
 
   @Input()
   task!: Task;
+
+  @Input()
+  cols!: any[];
 
   icons: any[] = [
     { id: 'clock', icon: this.faClock },
@@ -32,24 +33,11 @@ export class RowCardComponent {
     { id: 'delete', icon: this.faTrashCan }
   ];
 
-  constructor(
-    private router: Router
-  ) {}
-
   getNameWidth(): string {
-    const obj = this.getCols().find(c => {
+    const obj = cols.find(c => {
       return c.field === 'name';
     })
-
-    return obj.width;
-  }
-
-  getCols(): any[] {
-    if (this.router.url === '/tarefas/lista') {
-      return this.cols;
-    }
-
-    return this.homeCols;
+    return obj!.width;
   }
 
   getPropertyValue(col: any): string {
