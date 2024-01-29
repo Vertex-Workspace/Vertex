@@ -128,6 +128,7 @@ export class UserService {
   public uploadImage(data: FormData, id: number): Observable<any> {
     return this.http
       .post<any>(`${URL}user/${id}/image`, data);
-  }
 
+  }
+  
 }

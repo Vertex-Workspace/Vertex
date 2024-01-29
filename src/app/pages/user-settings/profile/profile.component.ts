@@ -142,16 +142,17 @@ export class ProfileComponent {
   onFileSelected(e: any): void {
     this.selectedFile = e.target.files[0]
     const fd: FormData = new FormData();
-    fd.append('image', this.selectedFile, 'aaaaaa');
-    console.log('aaaaaaa');
-    
-    
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+
     this.userService
       .uploadImage(fd, this.logged.id!)
       .subscribe((a: any) => {
         console.log(a);
         this.alert.successAlert('Imagem alterada com sucesso!');
       })
+
+
   }
+  
 
 }
