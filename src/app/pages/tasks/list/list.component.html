@@ -2,7 +2,7 @@
     <div class="table">
         <div class="thead">
             <label 
-                *ngFor="let col of getCols()"
+                *ngFor="let col of cols"
                 [style.min-width]="col.width"
             >              
                 <h6>
@@ -15,7 +15,7 @@
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >
-            <ng-container *ngFor="let task of taskList">
+            <ng-container *ngFor="let task of project.tasks">
                 <div 
                     class="trow regular-text relative"
                     [cdkDragData]="task"
@@ -29,6 +29,7 @@
                     </span>
                     <app-row-card
                         [task]="task"
+                        [cols]="cols"
                     >
                 </app-row-card>
                 </div>
