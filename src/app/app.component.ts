@@ -56,6 +56,9 @@ export class AppComponent {
   currentRoute : string = "Home";
 
 
+
+  let user: User = JSON.parse(localStorage.getItem('logged') || '');
+
   constructor(
     private personalization: PersonalizationService,
     private contexts: ChildrenOutletContexts,
@@ -122,9 +125,9 @@ export class AppComponent {
     });
   }
 
-  getRouteAnimationData() {
-    return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
-  }
+   getRouteAnimationData() {
+     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+   }
 
   openSideBar() {
     this.isSideBarExpanded = !this.isSideBarExpanded;

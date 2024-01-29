@@ -1,5 +1,9 @@
 @import '../../../../../variables';
 
+.ng-contentDiv{
+    @apply w-full;
+}
+
 span {
     @apply w-full h-[62px] pt-3;
 
@@ -28,6 +32,10 @@ span {
 
         div:last-child{
             @apply w-[75%] flex justify-start items-center gap-3;
+
+            input{
+                @apply bg-[#EAEFF8];
+            }
         }
 
     }
