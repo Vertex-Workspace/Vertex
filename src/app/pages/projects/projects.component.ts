@@ -70,7 +70,6 @@ export class ProjectsComponent {
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
-        
       })      
 
   }
@@ -97,15 +96,7 @@ export class ProjectsComponent {
   }
 
   getAfterChange(): void {
-    if (!this.isCreating) {
-      this.projectService
-        .getAllByTeam(this.team.id!)
-        .subscribe((projects) => {
-        this.team.projects = projects;
-      });
-    } else {
-      this.team.projects = [];
-    }
+    this.getTeam();
   }
 
   configItems = [
