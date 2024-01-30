@@ -1,0 +1,52 @@
+@import "../../../../variables";
+
+form{
+    @apply w-full h-full flex flex-col justify-between;
+    color: $primaryColor;
+}
+
+.title{
+    @apply flex h-[15%];
+}
+
+.input-name{
+    @apply flex flex-col w-[80%] h-[40%];
+
+    p{
+        @apply text-xl pb-6;
+    }
+    input{
+        @apply flex h-52 rounded-md pl-4;
+    }
+}
+
+.input-description{
+    @apply flex flex-col w-full h-[30%];
+
+    p{
+        @apply pb-6;
+    }
+    textarea{
+        @apply pl-4 pt-4 rounded-md h-full;
+        resize: none;
+    }
+}
+
+.div-buttons{
+    @apply flex h-[25%] w-full justify-end items-center;
+
+    .buttons{
+        @apply flex w-full h-full justify-end items-center;
+    }
+
+    .cancel-button{
+        @apply flex items-center justify-center w-32 h-12 rounded-sm mr-4;
+        background-color: $error;
+        color: white;
+    }
+    .confirm-button{
+        @apply flex items-center justify-center w-32 h-12 rounded-sm;
+        background-color: $primaryColor;
+        color: white;
+    }
+}

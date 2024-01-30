@@ -1,0 +1,8 @@
+<ng-container *ngFor="let user of getUser()">
+    <div class="card" [style.width]="width" [style.height]="height">
+        <div style="background-color:aqua">
+            <fa-icon [icon]="faCircleUser" style="color:blue"></fa-icon>
+            <p>{{user.firstName}}</p>
+        </div>
+    </div>
+</ng-container>

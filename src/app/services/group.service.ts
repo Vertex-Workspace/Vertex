@@ -8,12 +8,14 @@ import { Group } from '../models/groups';
   providedIn: 'root'
 })
 export class GroupService {
-
-
-
   constructor(
     private http: HttpClient
   ) { }
+
+  public create(group: Group): Observable<Group> {
+    return this.http
+      .post<Group>(`${URL}team/groups`, group);
+  }
 
 
   public getGroupsByTeam(teamID: number): Observable<Group[]> {

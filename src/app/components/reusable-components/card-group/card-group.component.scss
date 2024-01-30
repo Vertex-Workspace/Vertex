@@ -1,0 +1,9 @@
+@import '../../../../variables';
+
+.card{
+    @apply bg-white;
+
+    div{
+        @apply w-[3%] h-full;
+    }
+}

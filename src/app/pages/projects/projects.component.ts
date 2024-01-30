@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Group } from '@syncfusion/ej2-angular-grids';
 import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
 import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
+import { GroupService } from 'src/app/services/group.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
@@ -25,13 +27,16 @@ export class ProjectsComponent {
 
   team !: Team;
 
+  group !: Group;
+
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
   orderSettings: any[] = [];
 
   menuItems = [
-    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
-    { id: 'project', iconClass: 'pi pi-users', label: 'Projetos' },
+    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas'},
+    { id: 'project', iconClass: 'pi pi-folder-open', label: 'Projetos', button: 'Novo Projeto'},
+    { id: 'group', iconClass: 'pi pi-users', label: 'Grupos' , button: 'Novo grupo'},
   ];
 
   constructor(
@@ -40,6 +45,7 @@ export class ProjectsComponent {
     private alert: AlertService,
     private userService: UserService,
     private teamService: TeamService,
+    private groupService: GroupService,
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
@@ -72,8 +78,8 @@ export class ProjectsComponent {
         this.team = team;
         
       })      
-
   }
+
 
   delete(id: number): void {    
     this.projectService
@@ -132,6 +138,14 @@ export class ProjectsComponent {
         this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
       });
     
+  }
+
+  createGroup(group: Group): void{
+
+    // this.groupService.create(group).subscribe((group: Group) => {
+    //   this.alert.successAlert('Criado')
+    // })
+
   }
 
 

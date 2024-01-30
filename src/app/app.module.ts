@@ -37,7 +37,7 @@ import { GroupsSelectModule } from './components/modals/groups-select/groups-sel
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
