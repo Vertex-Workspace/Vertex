@@ -70,25 +70,7 @@ const routes: Routes = [
   {
     path: 'projeto/:projectId/tarefas',
     component: TasksComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'kanban',
-        component: KanbanComponent
-      },
-      {
-        path: 'lista',
-        component: ListComponent
-      },
-      {
-        path: 'calendario',
-        component: CalendarComponent
-      },
-      {
-        path: 'mural',
-        component: MuralComponent
-      }
-    ]
+    canActivate: [AuthGuard]
   },
   {
     path: 'configuracoes',

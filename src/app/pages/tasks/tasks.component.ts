@@ -51,7 +51,7 @@ export class TasksComponent implements OnInit {
         this.project = projectRequested;
       }
     }
-    this.clicked = "Kanban";
+    this.clicked = localStorage.getItem('mode-task-view') || 'Kanban';
     }
   }
 
@@ -81,6 +81,7 @@ export class TasksComponent implements OnInit {
   }
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+    localStorage.setItem('mode-task-view', preview);
   }
 
   onInputType(): void {
