@@ -51,7 +51,7 @@ export class StatusComponent {
   ]
 
   add(item:number){
-    this.statusList[item].properties.push({name: 'New Status'});
+    this.statusList[item].properties.push({name: 'Novo Status'});
   }
 
   delete(item: number, i2:number){

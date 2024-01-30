@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/task';
 import {  CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { PropertyKind } from 'src/app/models/property';
+import { UserService } from 'src/app/services/user.service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +21,7 @@ export class ListComponent implements OnInit {
   cols: any[] = [];
 
   constructor(
-    private router: Router
+    private userService: UserService, private taskService:TaskService
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class ListComponent implements OnInit {
         id: property.id,
         field: property.kind,
         headerText: property.name,
-        width: '15%',
+        width: '300px',
       }
       this.cols.push(newCol);
     });
