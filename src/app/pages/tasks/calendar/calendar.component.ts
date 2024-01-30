@@ -20,6 +20,7 @@ export class CalendarComponent {
 
   ngOnInit() {
     this.buildCalendar();
+    console.log(this.project);
   }
   modalTasks: boolean = false;
   modalDate?: Date;
@@ -38,7 +39,8 @@ export class CalendarComponent {
       this.project.tasks.forEach((task) => {
         task.values.forEach((value) => {
           if (value.property.kind === PropertyKind.DATE) {
-            let valuePropertyDate: Date = value.value as Date;
+  
+            let valuePropertyDate: Date = new Date(value.value as string);
             if (valuePropertyDate.getDate() == date.getDate()
               && valuePropertyDate.getMonth() == date.getMonth()
               && valuePropertyDate.getFullYear() == date.getFullYear()) {

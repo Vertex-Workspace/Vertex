@@ -1,14 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { cols,
-     } from 'src/app/pages/tasks/data-test';
 import {
   faTrashCan, 
   faEnvelope, 
   faClockRotateLeft 
 } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
-import { Property } from 'src/app/models/property';
+import { Value } from 'src/app/models/value';
+import { PropertyKind } from 'src/app/models/property';
 
 @Component({
   selector: 'app-row-card',
@@ -27,6 +25,8 @@ export class RowCardComponent {
 
   @Input()
   cols!: any[];
+
+  value!: Value;
 
   icons: any[] = [
     { id: 'clock', icon: this.faClock },
@@ -48,30 +48,14 @@ export class RowCardComponent {
     return "40%";
   }
 
-  getPropertyValue(col: any): string {
-    this.task.values?.find(values => {
-      this.cols.forEach((col) => {
-        if (col.field === values.property.kind) {
-          return values.value;
-        }
-      });     
+  getPropertyValue(col: any) : Value {
+    let value : Value;
+    this.task.values?.forEach(values => {
+      if (col.id === values.property.id) {
+        value = values;
+      }
     });
-    return " - ";    
-  }
-
-  findPropertyInTask(prop: any): any {
-    return 
-  }
-
-  getPropertyColor(col: any): string {
-    const prop = this.findPropertyInTask(col);
-
-    if (prop !== undefined 
-              && Object.hasOwn(prop, 'bgColor')) {
-      return prop.bgColor + "99";
-    }
-
-    return "#F3F3F3";
+    return value!;
   }
 
 }

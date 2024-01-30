@@ -33,6 +33,7 @@ import { AlertService } from './services/alert.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { GroupsSelectModule } from './components/modals/groups-select/groups-select.module';
+import { InputValuePropertyComponent } from './components/reusable-components/input-value-property/input-value-property.component';
 
 @NgModule({
   declarations: [
