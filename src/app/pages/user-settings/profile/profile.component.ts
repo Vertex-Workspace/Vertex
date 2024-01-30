@@ -62,7 +62,7 @@ export class ProfileComponent {
     private userService: UserService,
     private alert: AlertService
   ){
-    this.logged = userService.getLogged();
+    this.updateLoggedUser();
   }
 
   ngOnInit(): void {
@@ -74,6 +74,10 @@ export class ProfileComponent {
       description: [this.logged.description]
 
     })
+  }
+
+  updateLoggedUser() {
+    this.logged = this.userService.getLogged();
   }
 
   // Alter the status of toogle
@@ -147,7 +151,7 @@ export class ProfileComponent {
     this.userService
       .uploadImage(fd, this.logged.id!)
       .subscribe((a: any) => {
-        console.log(a);
+        this.logged = this.userService.getLogged();
         this.alert.successAlert('Imagem alterada com sucesso!');
       })
   }

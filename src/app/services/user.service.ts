@@ -13,7 +13,8 @@ import { UserStateService } from './user-state.service';
 })
 export class UserService {
 
-  private loggedSubject !: BehaviorSubject<User>;
+  private $logged !: BehaviorSubject<User>;
+  private logged !: User;
   
 
   constructor(
@@ -62,6 +63,7 @@ export class UserService {
     this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
     this.userState.setAuthenticationStatus(true);
     this.saveLoggedUser(user);
+    this.logged = user;
     this.router.navigate(['/home']);
   }
 
@@ -126,8 +128,14 @@ export class UserService {
   }
 
   public uploadImage(data: FormData, id: number): Observable<any> {
+    this.getOneById(id)
+      .subscribe((user: User) => {
+        this.saveLoggedUser(user);
+      });
+
     return this.http
       .post<any>(`${URL}user/${id}/image`, data);
+      
   }
 
 }
