@@ -57,7 +57,6 @@ export class AppComponent {
 
 
 
-  user: User = JSON.parse(localStorage.getItem('logged') || '');
 
   constructor(
     private personalization: PersonalizationService,
@@ -95,31 +94,34 @@ export class AppComponent {
 
   // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
-    let user: User = JSON.parse(localStorage.getItem('logged') || '');
-    this.userService.getOneById(user.id!).subscribe((logged) => {
-
-      user = logged;
-
-      if (user.personalization!.theme == 0) {
-        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
-        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
-        document.documentElement.style.setProperty('--text', "#000000");
-      } else if (user.personalization!.theme == 1) {
-        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
-        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
-        document.documentElement.style.setProperty('--text', "#FFFFFF");
-      }
-
-     
-
-      document.documentElement.style.setProperty('--smallText', (user.personalization?.fontSize! - 2) + 'px');
-      document.documentElement.style.setProperty('--regularText', (user.personalization?.fontSize!) + 'px');
-      document.documentElement.style.setProperty('--mediumText', (user.personalization?.fontSize! + 2) + 'px');
-      document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
-      document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
-
-
-    });
+    let user: User = JSON.parse(localStorage.getItem('logged')!);
+    if(!user) {
+      this.router.navigate(['/login']);
+    } else{
+      this.userService.getOneById(user.id!).subscribe(
+        (logged) => {
+          
+          user = logged;
+          if (user.personalization!.theme == 0) {
+            document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
+            document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
+            document.documentElement.style.setProperty('--text', "#000000");
+          } else if (user.personalization!.theme == 1) {
+            document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
+            document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+            document.documentElement.style.setProperty('--text', "#FFFFFF");
+          }
+          
+          
+          
+          document.documentElement.style.setProperty('--smallText', (user.personalization?.fontSize! - 2) + 'px');
+          document.documentElement.style.setProperty('--regularText', (user.personalization?.fontSize!) + 'px');
+          document.documentElement.style.setProperty('--mediumText', (user.personalization?.fontSize! + 2) + 'px');
+          document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
+          document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
+        }
+        );
+    }
   }
 
    getRouteAnimationData() {

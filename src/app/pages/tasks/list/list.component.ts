@@ -34,14 +34,13 @@ export class ListComponent implements OnInit {
 
     this.project.properties.forEach( (property) => {
       let newCol: any = {
+        id: property.id,
         field: property.kind,
         headerText: property.name,
         width: '15%',
       }
       this.cols.push(newCol);
     });
-    console.log(this.cols);
-    console.log(this.project.properties);
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {

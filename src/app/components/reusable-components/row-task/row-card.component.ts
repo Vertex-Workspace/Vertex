@@ -8,6 +8,7 @@ import {
   faClockRotateLeft 
 } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { Property } from 'src/app/models/property';
 
 @Component({
   selector: 'app-row-card',
@@ -33,27 +34,33 @@ export class RowCardComponent {
     { id: 'delete', icon: this.faTrashCan }
   ];
 
+  getCols(): any[] {
+    let cols : any [] = [];
+    this.cols.map((col) => { 
+      if(col.field !== "name") {
+        cols.push(col);
+      }
+    });
+    return cols;
+  }
+
   getNameWidth(): string {
-    const obj = cols.find(c => {
-      return c.field === 'name';
-    })
-    return obj!.width;
+    return "40%";
   }
 
   getPropertyValue(col: any): string {
-    const prop = this.findPropertyInTask(col);
-
-    if (prop) {
-      return prop.value.toString();
-    }
-
+    this.task.values?.find(values => {
+      this.cols.forEach((col) => {
+        if (col.field === values.property.kind) {
+          return values.value;
+        }
+      });     
+    });
     return " - ";    
   }
 
   findPropertyInTask(prop: any): any {
-    return this.task.properties?.find(p => {
-      return p.name === prop.field;
-    });
+    return 
   }
 
   getPropertyColor(col: any): string {

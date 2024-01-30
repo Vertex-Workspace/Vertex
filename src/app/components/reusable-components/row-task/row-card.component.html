@@ -10,13 +10,12 @@
         </div>
     </div>
 
-    <ng-container *ngFor="let col of cols">
+    <ng-container *ngFor="let col of getCols()">
         <div 
             *ngIf="col.field !== 'name'" 
             class="properties" 
-            [style.min-width]="col.width"
+            [style.min-width]="'15%'"
         >
-
             <p [style.backgroundColor]="getPropertyColor(col)">
                 {{ getPropertyValue(col) }}
             </p>
