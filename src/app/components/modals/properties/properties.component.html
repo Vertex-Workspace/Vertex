@@ -35,14 +35,5 @@
         <app-status (pencil)="openStatusSelection('pencil')" class="pattern-style" *ngIf="currentModal === 'status'" />
         <app-items-selection (pencil)="openStatusSelection('pencil')" class="pattern-style"
             *ngIf="currentModal === 'items-selection'" [itemsList]="itemsList"></app-items-selection>
-
-        <div class="new-property"
-            [ngClass]="currentModal === 'general' || currentModal === 'edit' || currentModal === 'items-selection' ? 'footer-border' : ''"
-            (click)="clickPlus()">
-            <fa-icon *ngIf="currentModal === 'general' || currentModal === 'items-selection'" [icon]="faPlus"
-                class="icon"></fa-icon>
-            <fa-icon *ngIf="currentModal === 'edit'" [icon]="faTrashCan" class="icon"></fa-icon>
-            <p class="regular-text">{{footerText}}</p>
-        </div>
     </div>
 </div>

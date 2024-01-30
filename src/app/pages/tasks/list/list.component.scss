@@ -21,6 +21,21 @@ section {
         
         .tbody {
             @apply w-full h-full;
+
+            .newTaskButton {
+              @apply w-full h-[60px] flex items-center pl-4;
+              background-color: $emphasis;
+              color: $primaryColor;
+              border: 1px solid $emphasis;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              position: static;
+              
+              &:hover {
+                  background-color: $primaryColor;
+                  color: $emphasis;
+              }
+          }
         }
         
         .thead {

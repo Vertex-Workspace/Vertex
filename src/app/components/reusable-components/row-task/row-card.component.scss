@@ -1,11 +1,11 @@
 @import '../../../../variables';
 
 .card {
-    @apply min-w-full flex shadow-sm cursor-pointer;
+    @apply w-full flex shadow-sm cursor-pointer;
     background-color: $secondColor;
 
     .name {
-        @apply h-[55px] flex items-center justify-between pl-4 overflow-hidden;
+        @apply h-[55px] flex items-center justify-between px-4 overflow-hidden;
         border: 1px solid #0303031A;
 
         p {
@@ -14,7 +14,7 @@
     }
 
     .properties {
-        @apply h-[55px] flex items-center justify-start pl-4;
+        @apply h-[55px] flex items-center justify-start px-4;
         border: 1px solid $emphasis;
         background-color: $secondColor;
 

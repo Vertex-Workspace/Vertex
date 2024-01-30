@@ -14,12 +14,9 @@
         <div 
             *ngIf="col.field !== 'name'" 
             class="properties" 
-            [style.min-width]="col.width"
+            [style.min-width]="'300px'"
         >
-
-            <p [style.backgroundColor]="getPropertyColor(col)">
-                {{ getPropertyValue(col) }}
-            </p>
+            <app-input-value-property style="width: 100%; height: 100%;" [task]="task" [value]="getPropertyValue(col)"></app-input-value-property>
         </div>
     </ng-container>
 </div>

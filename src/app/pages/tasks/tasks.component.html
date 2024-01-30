@@ -61,8 +61,8 @@
 
 
             <app-list [project]="project" *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
-            <app-calendar *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
-            <app-mural *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
+            <app-calendar [project]="project" *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
+            <app-mural  *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
             <!-- app-kanban -->
         </section>
 

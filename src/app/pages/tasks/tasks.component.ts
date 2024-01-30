@@ -40,7 +40,6 @@ export class TasksComponent implements OnInit {
     private userService : UserService
   ) {}
 
-  projectId!:number;
 
   async ngOnInit(): Promise<void> {
     if (this.router.url.includes('projeto')) {
@@ -93,7 +92,7 @@ export class TasksComponent implements OnInit {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
       project: {
-        id: this.projectId
+        id: this.project.id!
       },
       values: [],
       creator: {

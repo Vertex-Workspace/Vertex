@@ -92,11 +92,9 @@ export class PropertiesComponent{
     || this.currentModal === 'items-selection') {
       this.currentModal = 'general'
       this.text = 'Propriedades'
-      this.footerText = 'Adicionar Propriedade'
     } else if (this.currentModal === 'colors') {
       this.currentModal = 'status'
       this.text = 'Status'
-      this.footerText = ''
     }
   }
 
