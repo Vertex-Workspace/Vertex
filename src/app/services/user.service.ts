@@ -7,6 +7,7 @@ import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
 import { UserStateService } from './user-state.service';
+import { defaultImage } from 'src/assets/data/defaultImg';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +16,26 @@ export class UserService {
 
   private $logged !: BehaviorSubject<User>;
   private logged !: User;
+  private defaultImg : string = defaultImage;
   
-
   constructor(
     private http: HttpClient,
     private router: Router,
     private alert: AlertService,
-    private userState: UserStateService
+    private userState: UserStateService,
   ) { 
   }
 
   public register(form: User): void {
+    
     const user: User = {
       firstName: form.firstName,
       lastName: form.lastName,
       email: form.email,
+      image: this.defaultImg,
       password: form.password,
       passwordConf: form.passwordConf
-    }
+    }    
 
     this.create(user)
       .subscribe(
@@ -62,12 +65,12 @@ export class UserService {
   public login(user: User): void {
     this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
     this.userState.setAuthenticationStatus(true);
-    this.saveLoggedUser(user);
+    this.saveLoggedUser(user);    
     this.logged = user;
     this.router.navigate(['/home']);
   }
 
-  private saveLoggedUser(user: User): void {
+  private saveLoggedUser(user: User): void {    
     localStorage.setItem('logged', JSON.stringify(user)); //cookies
   }
 
@@ -128,14 +131,12 @@ export class UserService {
   }
 
   public uploadImage(data: FormData, id: number): Observable<any> {
-    this.getOneById(id)
-      .subscribe((user: User) => {
-        this.saveLoggedUser(user);
-      });
-
     return this.http
       .post<any>(`${URL}user/${id}/image`, data);
-      
+  }
+
+  public updateLoggedUser(user: User): void {
+    this.saveLoggedUser(user);
   }
 
 }

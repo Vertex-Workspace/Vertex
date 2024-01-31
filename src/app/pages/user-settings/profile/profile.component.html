@@ -41,10 +41,9 @@
             <div class="rightSide">
                 <section>
                     <div class="image relative">
-                        <img src="data:image/jpg;base64, {{logged.image}}" alt="">
+                        <img src="data:image/jpg;base64, {{logged.image}}" alt="" class="rounded-full">
                         <form class="input-div">
                             <input type="file" class="input-file" (change)="onFileSelected($event)">
-                            <button (click)="onUpload()"></button>
                         </form>
                     </div>
 
@@ -63,10 +62,3 @@
         </div>
     </div>
 </div>
-
-<!-- 
-<app-modal-warn *ngIf="!validInput" [height]="'300px'" [width]="'500px'" (close)="closeModal()">
-    <div class="modal">
-        <h5>Não pode haver campos vazios</h5>
-    </div>
-</app-modal-warn> -->
