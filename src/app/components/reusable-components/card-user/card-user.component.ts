@@ -11,14 +11,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CardUserComponent implements OnInit{
 
+    users: User[] = [];
+    constructor(private userService: UserService) {}
+  
     ngOnInit(): void {
-        console.log(this.userService.getAll());
-    }
-
-    constructor(
-        private userService: UserService
-    ){
-        this.getUser()
+      this.userService.getAll().subscribe((users: User[]) => {
+        this.users = users;
+      });
     }
 
     faCircleUser = faCircleUser;
@@ -38,7 +37,7 @@ export class CardUserComponent implements OnInit{
     team !: Team
 
     getUser(): any[]{
-        return this.team?.users!;
+        return this.users;
     }
 
     selectUser(){

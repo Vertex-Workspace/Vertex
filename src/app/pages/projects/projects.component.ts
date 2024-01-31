@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/models/groups';
 import { Project } from 'src/app/models/project';
@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit{
   isCreatingProject: boolean = false;
   isCreatingGroup: boolean = false;
   filterOpen: boolean = false;
@@ -52,6 +52,9 @@ export class ProjectsComponent {
     this.logged = this.userService.getLogged();
     this.getTeam();
     this.validateProjectId();
+  }
+  ngOnInit(): void {
+    console.log(this.logged)
   }
 
   validateProjectId(): void {

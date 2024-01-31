@@ -1,9 +1,9 @@
-<div class="card" [style.width]="width" [style.height]="height">
+<div class="card" [style.width]="width" [style.height]="height" *ngFor="let user of users">
     <div>
         <fa-icon size="2x" [icon]="faCircleUser" class="icon"></fa-icon>
     </div>
     <div>
-        <p>Ola</p>
+        <p>{{user.firstName}}</p>
     </div>
     <div>
         <fa-icon *ngIf="!isSelected" size="1x" [icon]="faSquare" class="icon-not-selected" (click)="selectUser()"></fa-icon>

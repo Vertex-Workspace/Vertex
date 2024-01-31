@@ -5,11 +5,11 @@
             <p>{{group.name}}</p>
         </div>
         <div>
-            <fa-icon *ngIf="!open" [icon]="faCaretDown" class="icon" (click)="openModal()"></fa-icon>
-            <fa-icon *ngIf="open" [icon]="faCaretUp" class="icon" (click)="openModal()"></fa-icon>
+            <fa-icon *ngIf="!group.open" [icon]="faCaretDown" class="icon" (click)="openModal(group)"></fa-icon>
+            <fa-icon *ngIf="group.open" [icon]="faCaretUp" class="icon" (click)="openModal(group)"></fa-icon>
         </div>
     </div>
-    <div *ngIf="open" class="user">
+    <div *ngIf="group.open" class="user">
         <p>Participantes</p>
         <app-card-user [width]="'1000px'" [height]="'70px'"></app-card-user>
     </div>
