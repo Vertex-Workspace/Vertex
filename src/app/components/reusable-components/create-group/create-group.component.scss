@@ -25,10 +25,11 @@ form{
 }
 
 .input-description{
-    @apply flex flex-col w-full h-[75%] bg-white;
+    @apply flex flex-col w-full h-[65%] bg-white;
+    overflow-y: scroll;
 
     p{
-        @apply pb-6;
+        @apply pl-4;
     }
     textarea{
         @apply pl-4 pt-4 rounded-md h-full;

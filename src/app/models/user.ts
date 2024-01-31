@@ -16,6 +16,8 @@ export class User {
     theme ?: number | undefined;
     publicProfile ?: boolean = true;
     showCharts ?: boolean = false;
+    //selected for groups
+    selected ?: boolean = false;
 
     //brainstorming
     teams?: Team[] = [];
@@ -41,6 +43,7 @@ export class User {
         this.theme = user.theme;
         this.publicProfile = user.publicProfile;
         this.showCharts = user.showCharts;
+        this.selected = user.selected;
 
     }
 

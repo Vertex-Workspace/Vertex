@@ -15,19 +15,15 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit{
+export class ProjectsComponent implements OnInit {
   isCreatingProject: boolean = false;
   isCreatingGroup: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   clicked: string = 'task';
-
   recentProjects !: Project[];
-
   logged !: User;
-
   team !: Team;
-
   group !: Group;
 
   //TASKS - FILTER AND ORDER
@@ -35,9 +31,9 @@ export class ProjectsComponent implements OnInit{
   orderSettings: any[] = [];
 
   menuItems = [
-    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas'},
-    { id: 'project', iconClass: 'pi pi-folder-open', label: 'Projetos', button: 'Novo Projeto'},
-    { id: 'group', iconClass: 'pi pi-users', label: 'Grupos' , button: 'Novo grupo'},
+    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
+    { id: 'project', iconClass: 'pi pi-folder-open', label: 'Projetos', button: 'Novo Projeto' },
+    { id: 'group', iconClass: 'pi pi-users', label: 'Grupos', button: 'Novo grupo' },
   ];
 
   constructor(
@@ -61,16 +57,16 @@ export class ProjectsComponent implements OnInit{
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
       .existsByIdAndUserBelongs(teamId, this.logged.id!)
-      .subscribe((exists: boolean) => {  
+      .subscribe((exists: boolean) => {
         if (!exists) {
           this.router.navigate(['/home']);
           this.alert.errorAlert('Equipe inexistente!')
         }
       },
-      e => {
-        
-      })
-  
+        e => {
+
+        })
+
   }
 
   getTeam(): void {
@@ -79,21 +75,21 @@ export class ProjectsComponent implements OnInit{
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
-        
-      })      
+
+      })
   }
 
 
-  delete(id: number): void {    
+  delete(id: number): void {
     this.projectService
       .delete(id)
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto deletado com sucesso!`);
         this.getAfterChange();
       },
-      e => {
-        this.alert.errorAlert('Erro ao deletar projeto!');
-      });
+        e => {
+          this.alert.errorAlert('Erro ao deletar projeto!');
+        });
   }
 
   changePreviewMode(preview: string): void {
@@ -103,7 +99,7 @@ export class ProjectsComponent implements OnInit{
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;
     console.log(this.isCreatingProject);
-    
+
     // this.getAfterChange();
   }
 
@@ -112,8 +108,8 @@ export class ProjectsComponent implements OnInit{
       this.projectService
         .getAllByTeam(this.team.id!)
         .subscribe((projects) => {
-        this.team.projects = projects;
-      });
+          this.team.projects = projects;
+        });
     } else {
       this.team.projects = [];
     }
@@ -127,7 +123,7 @@ export class ProjectsComponent implements OnInit{
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
   }
-  
+
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
@@ -142,21 +138,23 @@ export class ProjectsComponent implements OnInit{
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
       });
-    
+
   }
 
   createGroup(group: Group): void {
     console.log(this.logged);
     this.groupService
       .create(group)
-      .subscribe((group:Group) => {
+      .subscribe((group: Group) => {
         this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
         this.getAfterChange();
       },
-      e => {
-        this.alert.errorAlert(`Erro ao criar o grupo!`)
-        
-      });
+        e => {
+          if (group.name == null) {
+            this.alert.errorAlert(`Você precisa adicionar um nome`)
+          }
+
+        });
   }
 
   switchCreateViewGroup(): void {

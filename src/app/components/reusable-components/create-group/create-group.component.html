@@ -14,7 +14,7 @@
   
     <div class="input-description">
       <p class="large-text">Selecionar participantes</p>
-      <app-card-user [width]="'800px'" [height]="'70px'" class="shadow-lg"></app-card-user>
+      <app-card-user [width]="'800px'" [height]="'70px'" class="shadow-lg" (user)="selectUsers($event)"></app-card-user>
     </div>
   
     <div class="div-buttons">

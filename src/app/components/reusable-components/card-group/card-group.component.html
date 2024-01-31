@@ -1,5 +1,4 @@
-<ng-container *ngFor="let group of getGroup()">
-<div class="pt-3 overflow-y: scroll">
+<div class="main-div" *ngFor="let group of getGroup()">
     <div class="card" [style.width]="width" [style.height]="height">
         <div>
             <p>{{group.name}}</p>
@@ -11,7 +10,6 @@
     </div>
     <div *ngIf="group.open" class="user">
         <p>Participantes</p>
-        <app-card-user [width]="'1000px'" [height]="'70px'"></app-card-user>
+        <app-card-user [width]="'1000px'" [height]="'180px'"></app-card-user>
     </div>
 </div>
-</ng-container>

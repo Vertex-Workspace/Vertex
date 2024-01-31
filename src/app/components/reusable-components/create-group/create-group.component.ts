@@ -4,6 +4,8 @@ import { Group } from 'src/app/models/groups';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-group',
@@ -16,13 +18,15 @@ export class CreateGroupComponent implements OnInit{
 
   team !: Team
 
+  users : User []=[];
+
   @Output()
   createGroup = new EventEmitter<Group>()
 
   constructor( private formBuilder: FormBuilder,
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private router: Router){  
+    private userService: UserService){  
     this.getTeam();
   }
 
@@ -31,7 +35,8 @@ export class CreateGroupComponent implements OnInit{
     
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
-      team: [this.team]
+      team: [this.team],
+      users: [this.users]
     })
   }
 
@@ -50,6 +55,11 @@ export class CreateGroupComponent implements OnInit{
         this.team = team;
         console.log(this.team);
       }) 
+  }
+
+  selectUsers(user : User): void{
+    console.log(user);
+    this.users.push(user);
   }
 
 }

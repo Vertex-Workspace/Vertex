@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .card{
-    @apply bg-white border-l-8 flex;
+    @apply bg-white border-l-8 flex shadow-lg;
 
     div:first-child{
         @apply h-full w-[90%] flex items-center pl-6;
@@ -18,6 +18,10 @@
 
 .user{
     @apply w-full bg-white h-[100px] pl-8;
+}
+
+.main-div {
+    @apply flex w-[95%] h-[25%] flex-col;
 }
 
 

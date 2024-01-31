@@ -6,7 +6,7 @@
         <p>{{user.firstName}}</p>
     </div>
     <div>
-        <fa-icon *ngIf="!isSelected" size="1x" [icon]="faSquare" class="icon-not-selected" (click)="selectUser()"></fa-icon>
-        <fa-icon *ngIf="isSelected" size="1x" [icon]="faSquare" class="icon" (click)="selectUser()"></fa-icon>
+        <fa-icon *ngIf="!user.selected" size="1x" [icon]="faSquare" class="icon-not-selected" (click)="selectUser(user)"></fa-icon>
+        <fa-icon *ngIf="user.selected" size="1x" [icon]="faSquare" class="icon" (click)="selectUser(user)"></fa-icon>
     </div>
 </div>

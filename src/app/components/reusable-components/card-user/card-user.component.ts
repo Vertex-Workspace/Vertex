@@ -22,7 +22,9 @@ export class CardUserComponent implements OnInit{
 
     faCircleUser = faCircleUser;
     faSquare = faSquare;
-    isSelected: boolean = false
+
+    @Output()
+    user = new EventEmitter<User>();
 
     @Input()
     height?: String;
@@ -31,16 +33,17 @@ export class CardUserComponent implements OnInit{
     width?: String;
 
     @Input()
-    user !: User
-
-    @Input()
     team !: Team
 
     getUser(): any[]{
         return this.users;
     }
 
-    selectUser(){
-        this.isSelected = !this.isSelected;
+    selectUser(user: User): void {    
+        user.selected = !user.selected;
+        if(user.selected){
+          this.user.emit(user);
+          console.log(user);
+        }
     }
 }
