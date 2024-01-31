@@ -3,7 +3,10 @@ import { Component, Input } from '@angular/core';
 import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { PropertyKind, PropertyList } from 'src/app/models/property';
-import { Task } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/task';
+import { ValueUpdate } from 'src/app/models/value';
+import { TaskService } from 'src/app/services/task.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-calendar',
@@ -18,11 +21,18 @@ export class CalendarComponent {
 
   @Input() project!: Project;
 
+  constructor(private taskService: TaskService, private userService: UserService) { }
+
   ngOnInit() {
     this.buildCalendar();
     console.log(this.project);
   }
+
+  plus : boolean = false;
+  
   modalTasks: boolean = false;
+
+
   modalDate?: Date;
   openModalTasks(date: Date | null): void {
     if (date != null) {
@@ -145,27 +155,73 @@ export class CalendarComponent {
 
   //Temporary
   getColor(task: Task): string {
-    task.properties.forEach(
-      (property) => {
-        if (property.kind === PropertyKind.STATUS) {
-          console.log("STATUS " + task);
-          task.values.forEach(
-            (value) => {
-              if (value.property.id === property.id) {
-                let valuePropertyList: PropertyList = value.value as PropertyList;
-                if (valuePropertyList.color === "RED") {
-                  return "#FF9D9D50";
-                } else if (valuePropertyList.color === "YELLOW") {
-                  return "#FFD60035";
-                } else if (valuePropertyList.color === "GREEN") {
-                  return "#65D73C50";
-                }
-              }
-              return "#7be05750";
-            });
+    let color: string;
+    task.values.forEach(
+      (value) => {
+        if (value.property.kind === PropertyKind.STATUS) {
+            let valuePropertyList: PropertyList = value.value as PropertyList;
+            console.log(valuePropertyList.color);
+            if (valuePropertyList.color === "RED") {
+              color = "#FF9D9D50";
+            } else if (valuePropertyList.color === "YELLOW") {
+              color = "#FFD60035";
+            } else if (valuePropertyList.color === "GREEN") {
+              color = "#65D73C50";
+            }
         }
       }
     );
-    return "#7be05750";
+    return color!;
+  }
+
+
+  //Create a new task in the project according the day was clicked
+  newTaskOnDay(day: Date) {
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: this.project.id!
+      },
+      values: [],
+      creator: {
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
+    }
+    this.taskService.create(taskCreate).subscribe(
+      (task) => {
+        this.project.tasks.push(task);
+        
+        task.values.forEach((value) => {
+          if (value.property.kind === PropertyKind.DATE) {
+            const valueUpdate: ValueUpdate = {
+              id: task.id,
+              value: {
+                property: {
+                  id: value.property.id
+                },
+                value: {
+                  id: value.id,
+                  value: day
+                }
+              }
+            };
+            this.taskService.patchValue(valueUpdate).subscribe(
+              (task) => {
+                console.log("Data alterada com sucesso!");
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
   }
 }

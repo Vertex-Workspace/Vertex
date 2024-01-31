@@ -53,6 +53,11 @@ section {
         min-height: 150px;
         border: 1px solid $emphasis;
 
+        &:hover{
+            background-color: $emphasis;
+            cursor: pointer;
+        }
+
         .day-informations {
             text-align: center;
             @apply flex h-[20%] w-full justify-end;

@@ -1,4 +1,8 @@
 <section>
+    <!-- 
+        HEADER CALENDAR
+        JUST INFORMATIONS ABOUT THE MONTH AND THE YEAR
+    -->
     <div class="header-calendar">
         <div>
             <button (click)="changeMonth(-1)" class="regular-text">
@@ -21,7 +25,12 @@
             </button>
         </div>
     </div>
+
     <div class="calendar">
+
+        <!-- 
+            WRITTEN DAYS OF THE WEEK
+        -->
         <div class="calendar-rows">
             <ng-container *ngFor="let day of calendarDays; index as index">
                 <div *ngIf="index < 7" class="days-of-week large-text">
@@ -30,15 +39,19 @@
             </ng-container>
         </div>
 
-        <div class="calendar-rows" *ngFor="let week of groupCalendarDays()">
-            <div *ngFor="let day of week; index as index" class="calendar-day"
-                [class.day-not-month]="currentDate.getMonth() !== day.getMonth()">
 
+        <div class="calendar-rows" *ngFor="let week of groupCalendarDays()">
+            <div *ngFor="let day of week; index as index" class="calendar-day" (click)="newTaskOnDay(day)"
+                [class.day-not-month]="currentDate.getMonth() !== day.getMonth()">
+                <!-- 
+                    DAYS OF THE MONTH (NUMBER)
+                -->
                 <div class="day-informations">
                     <div [class.today]="today(day)">
                         {{day | date : 'dd'}}
                     </div>
                 </div>
+
 
                 <div class="tasks-informations" *ngIf="getTasksByDate(day).length > 0 && !toggle">
                     <div class="tasks-link-informations regular-text" (click)="openModalTasks(day)">
@@ -49,15 +62,12 @@
 
 
                 <div class="tasks-list-in-calendar" *ngIf="toggle">
-                    <div *ngFor="let task of getTasksByDate(day);">
-                        <app-card
-                        [minHeight]="'60px'" 
-                        [width]="'210px'"
-                        [task]="task"
-                        cdkDrag
-                        [borderColor]="getColor(task)" 
-                        ></app-card>
-                    </div>
+                    <ng-container *ngFor="let task of getTasksByDate(day);">
+                        <div>
+                            <app-card [minHeight]="'60px'" [width]="'210px'" [task]="task" cdkDrag
+                                [borderColor]="getColor(task)"></app-card>
+                        </div>
+                    </ng-container>
                 </div>
 
             </div>
