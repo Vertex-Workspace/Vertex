@@ -160,7 +160,6 @@ export class CalendarComponent {
       (value) => {
         if (value.property.kind === PropertyKind.STATUS) {
             let valuePropertyList: PropertyList = value.value as PropertyList;
-            console.log(valuePropertyList.color);
             if (valuePropertyList.color === "RED") {
               color = "#FF9D9D50";
             } else if (valuePropertyList.color === "YELLOW") {
@@ -192,7 +191,7 @@ export class CalendarComponent {
     this.taskService.create(taskCreate).subscribe(
       (task) => {
         this.project.tasks.push(task);
-        
+
         task.values.forEach((value) => {
           if (value.property.kind === PropertyKind.DATE) {
             const valueUpdate: ValueUpdate = {
@@ -203,13 +202,14 @@ export class CalendarComponent {
                 },
                 value: {
                   id: value.id,
-                  value: day
+                  value: day.toISOString()
                 }
               }
             };
+            console.log(valueUpdate);
             this.taskService.patchValue(valueUpdate).subscribe(
               (task) => {
-                console.log("Data alterada com sucesso!");
+                console.log(task);
               },
               (error) => {
                 console.log(error);

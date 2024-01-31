@@ -24,9 +24,6 @@ export class InputValuePropertyComponent {
   constructor(private taskService: TaskService, private alertService: AlertService) { }
 
 
-  ngOnInit(): void{
-    console.log(this.value);
-  }
   getValue(value: Value): string {
     if (value.value === null) {
       if (value.property.kind === PropertyKind.DATE) {
