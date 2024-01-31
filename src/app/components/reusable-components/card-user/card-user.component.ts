@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Team } from 'src/app/models/team';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faSquare} from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,14 +12,18 @@ import { UserService } from 'src/app/services/user.service';
 export class CardUserComponent implements OnInit{
 
     ngOnInit(): void {
-        console.log(this.getUser());
+        console.log(this.userService.getAll());
     }
 
     constructor(
         private userService: UserService
-    ){}
+    ){
+        this.getUser()
+    }
 
     faCircleUser = faCircleUser;
+    faSquare = faSquare;
+    isSelected: boolean = false
 
     @Input()
     height?: String;
@@ -34,7 +38,10 @@ export class CardUserComponent implements OnInit{
     team !: Team
 
     getUser(): any[]{
-         return this.team?.users!;
-    
+        return this.team?.users!;
+    }
+
+    selectUser(){
+        this.isSelected = !this.isSelected;
     }
 }

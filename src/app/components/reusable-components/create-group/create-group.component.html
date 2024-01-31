@@ -1,10 +1,11 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <h4 class="title" >Crie um novo grupo</h4>
   
-    <div class="div-grid-name-image">
+    <div class="div-name">
       <div class="input-name">
         <p class="large-text">Nome do grupo</p>
-        <input 
+        <input
+            formControlName="name" 
             [placeholder]="'Adicione um nome para o grupo'"
             type="text" 
         >
@@ -13,8 +14,7 @@
   
     <div class="input-description">
       <p class="large-text">Selecionar participantes</p>
-      <app-card-user [width]="'1000px'"
-      [height]="'70px'"></app-card-user>
+      <app-card-user [width]="'800px'" [height]="'70px'" class="shadow-lg"></app-card-user>
     </div>
   
     <div class="div-buttons">

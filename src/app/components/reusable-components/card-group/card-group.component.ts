@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Team } from 'src/app/models/team';
+import { faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-card-group',
@@ -7,6 +8,10 @@ import { Team } from 'src/app/models/team';
     styleUrls: ['./card-group.component.scss']
 })
 export class CardGroupComponent {
+
+    faCaretDown = faCaretDown;
+    faCaretUp = faCaretUp;
+    open: boolean = false;
 
     @Output()
     close = new EventEmitter<Event>();
@@ -29,5 +34,9 @@ export class CardGroupComponent {
 
     closeModal() {
         this.close.emit();
+    }
+
+    openModal():void{
+        this.open = ! this.open;
     }
 }

@@ -13,10 +13,11 @@ export class GroupService {
   ) { }
 
   public create(group: Group): Observable<Group> {
+    console.log(group);
+    
     return this.http
-      .post<Group>(`${URL}team/groups`, group);
+      .patch<Group>(`${URL}team/group`, group);
   }
-
 
   public getGroupsByTeam(teamID: number): Observable<Group[]> {
     return this.http

@@ -1,9 +1,21 @@
 @import '../../../../variables';
 
 .card{
-    @apply bg-white;
+    @apply bg-white flex flex-row items-center;
 
-    div{
-        @apply w-[3%] h-full;
+    div:first-child{
+        @apply pl-2 w-[10%];
     }
+
+    div:nth-child(2){
+        @apply pl-2 w-[80%]
+    }
+}
+
+.icon {
+    color: $primaryColor;
+}
+
+.icon-not-selected {
+    color: $secondColor;
 }

@@ -1,7 +1,17 @@
 <ng-container *ngFor="let group of getGroup()">
+<div class="pt-3 overflow-y: scroll">
     <div class="card" [style.width]="width" [style.height]="height">
-        <div style="background-color:aqua">
+        <div>
             <p>{{group.name}}</p>
         </div>
+        <div>
+            <fa-icon *ngIf="!open" [icon]="faCaretDown" class="icon" (click)="openModal()"></fa-icon>
+            <fa-icon *ngIf="open" [icon]="faCaretUp" class="icon" (click)="openModal()"></fa-icon>
+        </div>
     </div>
+    <div *ngIf="open" class="user">
+        <p>Participantes</p>
+        <app-card-user [width]="'1000px'" [height]="'70px'"></app-card-user>
+    </div>
+</div>
 </ng-container>

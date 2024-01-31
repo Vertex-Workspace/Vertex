@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Group } from '@syncfusion/ej2-angular-grids';
+import { Group } from 'src/app/models/groups';
 import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
 import { User } from 'src/app/models/user';
@@ -16,7 +16,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
-  isCreating: boolean = false;
+  isCreatingProject: boolean = false;
+  isCreatingGroup: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   clicked: string = 'task';
@@ -71,7 +72,6 @@ export class ProjectsComponent {
 
   getTeam(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-
     this.teamService
       .getOneById(teamId)
       .subscribe((team: Team) => {
@@ -98,12 +98,14 @@ export class ProjectsComponent {
   }
 
   switchCreateView(): void {
-    this.isCreating = !this.isCreating;
-    this.getAfterChange();
+    this.isCreatingProject = !this.isCreatingProject;
+    console.log(this.isCreatingProject);
+    
+    // this.getAfterChange();
   }
 
   getAfterChange(): void {
-    if (!this.isCreating) {
+    if (!this.isCreatingProject) {
       this.projectService
         .getAllByTeam(this.team.id!)
         .subscribe((projects) => {
@@ -140,12 +142,23 @@ export class ProjectsComponent {
     
   }
 
-  createGroup(group: Group): void{
+  createGroup(group: Group): void {
+    console.log(this.logged);
+    this.groupService
+      .create(group)
+      .subscribe((group:Group) => {
+        this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
+        this.getAfterChange();
+      },
+      e => {
+        this.alert.errorAlert(`Erro ao criar o grupo!`)
+        
+      });
+  }
 
-    // this.groupService.create(group).subscribe((group: Group) => {
-    //   this.alert.successAlert('Criado')
-    // })
-
+  switchCreateViewGroup(): void {
+    this.isCreatingGroup = !this.isCreatingGroup;
+    this.getAfterChange();
   }
 
 

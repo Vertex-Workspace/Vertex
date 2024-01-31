@@ -9,8 +9,12 @@ form{
     @apply flex h-[15%];
 }
 
+.div-name{
+    @apply h-[25%]
+}
+
 .input-name{
-    @apply flex flex-col w-[80%] h-[40%];
+    @apply flex flex-col w-[80%] h-[80%];
 
     p{
         @apply text-xl pb-6;
@@ -21,7 +25,7 @@ form{
 }
 
 .input-description{
-    @apply flex flex-col w-full h-[30%];
+    @apply flex flex-col w-full h-[75%] bg-white;
 
     p{
         @apply pb-6;

@@ -1,9 +1,23 @@
 @import '../../../../variables';
 
 .card{
-    @apply bg-white;
+    @apply bg-white border-l-8 flex;
 
-    div{
-        @apply w-[3%] h-full;
+    div:first-child{
+        @apply h-full w-[90%] flex items-center pl-6;
+    };
+
+    div:nth-child(2){
+        @apply w-[10%] flex items-center h-full;
     }
 }
+
+.icon {
+    color: $primaryColor;
+}
+
+.user{
+    @apply w-full bg-white h-[100px] pl-8;
+}
+
+

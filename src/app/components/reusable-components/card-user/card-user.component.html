@@ -1,8 +1,12 @@
-<ng-container *ngFor="let user of getUser()">
-    <div class="card" [style.width]="width" [style.height]="height">
-        <div style="background-color:aqua">
-            <fa-icon [icon]="faCircleUser" style="color:blue"></fa-icon>
-            <p>{{user.firstName}}</p>
-        </div>
+<div class="card" [style.width]="width" [style.height]="height">
+    <div>
+        <fa-icon size="2x" [icon]="faCircleUser" class="icon"></fa-icon>
     </div>
-</ng-container>
+    <div>
+        <p>Ola</p>
+    </div>
+    <div>
+        <fa-icon *ngIf="!isSelected" size="1x" [icon]="faSquare" class="icon-not-selected" (click)="selectUser()"></fa-icon>
+        <fa-icon *ngIf="isSelected" size="1x" [icon]="faSquare" class="icon" (click)="selectUser()"></fa-icon>
+    </div>
+</div>
