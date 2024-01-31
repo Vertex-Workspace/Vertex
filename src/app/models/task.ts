@@ -1,5 +1,6 @@
 
 import { Property } from "./property";
+import { TaskResponsable } from "./taskResponsable";
 import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from "./value";
 
 export class Task {
@@ -10,6 +11,9 @@ export class Task {
     values!: Value[];
     properties!: Property[];
 
+
+    //taskHour
+    taskResponsables?:TaskResponsable[];
 
 
     //mural

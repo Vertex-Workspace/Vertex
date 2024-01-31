@@ -57,7 +57,7 @@ export class AppComponent {
 
 
 
-  user: User = JSON.parse(localStorage.getItem('logged') || '');
+  
 
   constructor(
     private personalization: PersonalizationService,
