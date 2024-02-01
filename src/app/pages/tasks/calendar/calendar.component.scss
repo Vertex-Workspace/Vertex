@@ -45,7 +45,7 @@ section {
 
     .calendar-rows{
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(7, 235px);
     }
 
     .calendar-day {
@@ -53,13 +53,9 @@ section {
         min-height: 150px;
         border: 1px solid $emphasis;
 
-        &:hover{
-            background-color: $emphasis;
-        }
-
         .day-informations {
             text-align: center;
-            @apply flex h-[20%] w-full justify-end;
+            @apply flex min-h-[30px] w-full justify-end;
 
             div{
                 @apply w-8 h-7 rounded-full;

@@ -47,6 +47,14 @@
                     DAYS OF THE MONTH (NUMBER)
                 -->
                 <div class="day-informations">
+
+                    <!-- FUTURE -->
+                    <div *ngIf="day == buttonDay">
+                        +
+                    </div>
+
+
+
                     <div [class.today]="today(day)">
                         {{day | date : 'dd'}}
                     </div>
@@ -64,12 +72,11 @@
                 <div class="tasks-list-in-calendar" *ngIf="toggle">
                     <ng-container *ngFor="let task of getTasksByDate(day);">
                         <div>
-                            <app-card [minHeight]="'60px'" [width]="'210px'" [task]="task" cdkDrag
-                                [borderColor]="getColor(task)"></app-card>
+                            <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'" [task]="task" cdkDrag
+                                [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)"></app-card>
                         </div>
                     </ng-container>
                 </div>
-
             </div>
         </div>
     </div>

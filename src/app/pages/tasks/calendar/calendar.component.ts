@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { PropertyKind, PropertyList } from 'src/app/models/property';
@@ -20,18 +20,32 @@ export class CalendarComponent {
   faCircleUser = faCircleUser;
 
   @Input() project!: Project;
+  day: any;
 
   constructor(private taskService: TaskService, private userService: UserService) { }
 
   ngOnInit() {
     this.buildCalendar();
-    console.log(this.project);
   }
 
   plus : boolean = false;
   
   modalTasks: boolean = false;
 
+
+
+  @Output() openTaskDetails = new EventEmitter();
+  openCardTask(task: Task): void {
+    this.openTaskDetails.emit(task);
+  }
+
+
+  //FUTURE 
+  buttonDay!: Date;
+  showAdd(day : Date): void{
+    this.buttonDay = day;
+    console.log(this.buttonDay);
+  }
 
   modalDate?: Date;
   openModalTasks(date: Date | null): void {
@@ -188,6 +202,9 @@ export class CalendarComponent {
       },
       teamId: this.project.idTeam!
     }
+
+
+  
     this.taskService.create(taskCreate).subscribe(
       (task) => {
         this.project.tasks.push(task);
@@ -202,14 +219,16 @@ export class CalendarComponent {
                 },
                 value: {
                   id: value.id,
-                  value: day.toISOString()
+                  //SLICE RETIRAR O "Z" NO FINAL
+                  value: day.toISOString().slice(0, -1)
                 }
               }
             };
             console.log(valueUpdate);
             this.taskService.patchValue(valueUpdate).subscribe(
-              (task) => {
-                console.log(task);
+              (taskDate) => {
+                task.values = taskDate.values;
+                this.openCardTask(task);
               },
               (error) => {
                 console.log(error);
@@ -223,5 +242,9 @@ export class CalendarComponent {
       }
     );
 
+  }
+
+  deleteTask(task: Task): void {
+    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
   }
 }
