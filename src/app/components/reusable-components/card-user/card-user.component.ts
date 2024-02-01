@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Team } from 'src/app/models/team';
-import { faCircleUser, faSquare} from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faSquare, faUserMinus} from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class CardUserComponent implements OnInit{
 
     users: User[] = [];
+
     constructor(private userService: UserService) {}
   
     ngOnInit(): void {
@@ -22,6 +23,7 @@ export class CardUserComponent implements OnInit{
 
     faCircleUser = faCircleUser;
     faSquare = faSquare;
+    faUserMinus = faUserMinus;
 
     @Output()
     user = new EventEmitter<User>();
@@ -35,9 +37,8 @@ export class CardUserComponent implements OnInit{
     @Input()
     team !: Team
 
-    getUser(): any[]{
-        return this.users;
-    }
+    @Input()
+    typeString!: String;
 
     selectUser(user: User): void {    
         user.selected = !user.selected;
@@ -45,5 +46,9 @@ export class CardUserComponent implements OnInit{
           this.user.emit(user);
           console.log(user);
         }
+    }
+
+    removeUser(): void {
+      
     }
 }

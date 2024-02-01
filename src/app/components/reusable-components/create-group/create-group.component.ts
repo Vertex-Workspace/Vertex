@@ -23,6 +23,9 @@ export class CreateGroupComponent implements OnInit{
   @Output()
   createGroup = new EventEmitter<Group>()
 
+  @Output()
+  close = new EventEmitter();
+
   constructor( private formBuilder: FormBuilder,
     private teamService: TeamService,
     private route: ActivatedRoute,
@@ -60,6 +63,10 @@ export class CreateGroupComponent implements OnInit{
   selectUsers(user : User): void{
     console.log(user);
     this.users.push(user);
+  }
+
+  closeGroup(){
+    this.close.emit()
   }
 
 }

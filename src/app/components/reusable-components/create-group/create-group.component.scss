@@ -14,7 +14,7 @@ form{
 }
 
 .input-name{
-    @apply flex flex-col w-[80%] h-[80%];
+    @apply flex flex-col w-full h-[80%];
 
     p{
         @apply text-xl pb-6;
@@ -25,15 +25,11 @@ form{
 }
 
 .input-description{
-    @apply flex flex-col w-full h-[65%] bg-white;
+    @apply flex flex-col w-full h-[50%] bg-white;
     overflow-y: scroll;
 
     p{
         @apply pl-4;
-    }
-    textarea{
-        @apply pl-4 pt-4 rounded-md h-full;
-        resize: none;
     }
 }
 

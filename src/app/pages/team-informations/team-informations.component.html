@@ -55,24 +55,8 @@
             </div>
 
 
-            <div *ngIf="clicked == 'participants'" class="grid-participants">
-                <ng-container *ngFor="let user of team.users">
-                    <div class="card-user-grid">
-                        <div class="div-text-card">
-                            <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon>
-                        </div>
-
-                        <div class="highDiv-card-informations">
-                            <p class="medium-text">{{ user.firstName }} {{user.lastName}}</p>
-                            <p class="small-text opacity-60">(( user.function ))</p>
-                            <div class="divSocial-media">
-                                <!-- <ng-container *ngFor="let item of user.socialMedia">
-                                    <fa-icon class="social-media" [icon]="item"></fa-icon>
-                                </ng-container> -->
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
+            <div *ngIf="clicked == 'participants'" class="grid-permissions">
+                <app-card-user [width]="'600px'" [height]="'90px'" [typeString]="'inTheGroup'"></app-card-user>
             </div>
 
 
@@ -115,6 +99,10 @@
 
 
                 </ng-container>
+            </div>
+
+            <div *ngIf="clicked == 'groups'" class="grid-permissions">
+                <app-card-group [team]="team" [width]="'900px'" [height]="'90px'"></app-card-group>
             </div>
         </div>
 

@@ -159,7 +159,6 @@ export class ProjectsComponent implements OnInit {
 
   switchCreateViewGroup(): void {
     this.isCreatingGroup = !this.isCreatingGroup;
-    this.getAfterChange();
   }
 
 

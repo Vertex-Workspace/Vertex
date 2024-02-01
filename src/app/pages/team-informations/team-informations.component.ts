@@ -2,7 +2,7 @@ import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
@@ -30,6 +30,7 @@ export class TeamInformationsComponent implements OnInit {
     ngOnInit(): void {
         this.getTeam();
         this.start();
+        this.getGroup()
     }
 
     getTeam(): void {
@@ -145,8 +146,9 @@ export class TeamInformationsComponent implements OnInit {
     options: any;
 
     menuItems = [
-        { id: 'participants', iconClass: 'pi pi-users', label: 'Visualizar participantes' },
-        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' }
+        { id: 'participants', iconClass: 'pi pi-user', label: 'Visualizar participantes' },
+        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' },
+        { id: 'groups', iconClass: 'pi pi-users', label: 'Grupos' }
     ];
 
 
@@ -154,9 +156,12 @@ export class TeamInformationsComponent implements OnInit {
         this.clicked = preview;
     }
 
-
     swapPermissionExpanded(id: number): void {
         // this.users[id].open = !this.users[id].open;
+    }
+
+    getGroup(): any[] {
+        return this.team?.groups!;
     }
 
 }

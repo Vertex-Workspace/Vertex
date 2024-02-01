@@ -1,15 +1,17 @@
 @import '../../../../variables';
 
 .card{
-    @apply bg-white border-l-8 flex shadow-lg;
+    @apply bg-white border-l-8 flex shadow-lg w-full;
+    min-height: 80px;
 
     div:first-child{
-        @apply h-full w-[90%] flex items-center pl-6;
+        @apply w-[90%] flex items-center pl-6 h-full;
     };
 
     div:nth-child(2){
         @apply w-[10%] flex items-center h-full;
-    }
+    };
+
 }
 
 .icon {
@@ -17,11 +19,19 @@
 }
 
 .user{
-    @apply w-full bg-white h-[100px] pl-8;
+    @apply flex w-full bg-white pl-8 py-2 flex-col h-[300px];
 }
 
 .main-div {
-    @apply flex w-[95%] h-[25%] flex-col;
+    @apply flex w-[95%] flex-col py-2;
 }
+
+.user-card {
+    @apply pt-5 flex flex-col gap-6;
+
+    
+    overflow-y: scroll;
+}
+
 
 
