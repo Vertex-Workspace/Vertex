@@ -8,6 +8,8 @@ import { taskHour } from '../../../models/taskHour';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
+import { User } from 'src/app/models/user';
+import { TimeInTask } from 'src/app/models/timeInTask';
 
 @Component({
   selector: 'app-task',
@@ -23,27 +25,29 @@ export class TaskComponent implements OnInit {
 
   @Input() task!: Task;
 
+  taskStep!: Task;
+  user!: User;
   project!: Project;
-
-  step: number = 1;
-
+  timeInTask!: TimeInTask;
+  working!: boolean;
   seconds: number = 0;
   minutes: number = 0;
   hours: number = 0;
-
   timer: String = "00:00:00";
-
   id!: any;
+  miniChatOpen: boolean=false;
+  chatExpanded: boolean=false;
 
   constructor(private taskService: TaskService, private projectService: ProjectService, private alertService: AlertService, private taskHourService: taskHourService) { }
   selectedComponent: string = 'description';
 
-
   async ngOnInit() {
     await this.getTimeInTask();
-    await this.getProject();
-    console.log(this.project);
-
+    await this.getProject()
+    this.working = this.timeInTask.workingOnTask
+    if (this.working) {
+      this.startTimer()
+    }
   }
 
   async getProject(): Promise<void> {
@@ -53,32 +57,34 @@ export class TaskComponent implements OnInit {
           this.project = project;
           resolve();
         },
-        (error: any) => {
-          console.log(error);
-          reject(error);
+        (e: any) => {
+          console.log(e.error);
         }
       );
     });
   }
 
   async getTimeInTask() {
-    this.taskHourService.getTimeInTask(1).subscribe(
-      (taskHour: String) => {
-        this.seconds = parseInt(taskHour.substring(6, 8));
-        this.minutes = parseInt(taskHour.substring(3, 5));
-        this.hours = parseInt(taskHour.substring(0, 2));
+    this.taskHourService.getTimeInTask(this.task.id).subscribe(
+      (time: TimeInTask) => {
+        this.timer = time.timeInTask;
+        this.seconds = parseInt(time.timeInTask.substring(6, 8));
+        this.minutes = parseInt(time.timeInTask.substring(3, 5));
+        this.hours = parseInt(time.timeInTask.substring(0, 2));
+        this.timeInTask = time;
+        console.log(time, "TIME-IN BACK");
       },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+      (e: any) => {
+        console.log(e);
+      });
   }
 
   navigate(component: string): void {
     this.selectedComponent = component;
   }
 
-  closeModal(): void {
+  async closeModal() {
+    this.stopTimer()
     this.close.emit();
   }
 
@@ -87,7 +93,6 @@ export class TaskComponent implements OnInit {
   }
 
   updateTaskNameAndDescription(): void {
-
     let taskEdit: TaskEdit = {
       id: this.task.id,
       name: this.task.name,
@@ -103,10 +108,15 @@ export class TaskComponent implements OnInit {
       (task: Task) => {
         this.task.name = task.name
         this.task.description = task.description;
+        if (task.description.length > 1000) {
+          this.alertService.errorAlert("O número máximo de caracteres permitido é 1000, reduza o tamanho da sua");
+        }
         this.alertService.successAlert("Tarefa alterada com sucesso!");
       },
       (error: any) => {
-        this.alertService.errorAlert("Erro ao alterar tarefa!");
+        console.log(error);
+        
+        this.alertService.errorAlert("Máximo de caracteres permitido: 1000. Reduza o tamanho da sua descrição.");
       }
     );
   }
@@ -119,22 +129,17 @@ export class TaskComponent implements OnInit {
     this.descriptionEditable = !this.descriptionEditable;
   }
 
+
   idResponsable: number = 0;
   startTimer() {
-    this.step = 2;
-
-
-    
-
+    this.timeInTask.workingOnTask = true;
+    this.working = true;
+    this.user = JSON.parse(localStorage.getItem('logged')!);
     this.task.taskResponsables!.forEach((taskResponsable) => {
-      //pegar user do localstorage
-      // if(taskResponsable.userTeam.user.id == ){
-      //   this.idResponsable = taskResponsable.id;
-      // }
+      if (taskResponsable.userTeam.user.id == this.user.id) {
+        this.idResponsable = taskResponsable.id;
+      }
     });
-
-    console.log(this.task);
-    
 
     let taskHour: taskHour = {
       task: {
@@ -144,9 +149,6 @@ export class TaskComponent implements OnInit {
         id: this.idResponsable
       }
     }
-
-    console.log(taskHour);
-    
 
     this.id = setInterval(() => {
       this.seconds++;
@@ -163,41 +165,46 @@ export class TaskComponent implements OnInit {
 
     this.taskHourService.saveTaskHour(taskHour).subscribe(
       (taskHour: taskHour) => {
-        console.log(taskHour);
+        console.log(taskHour, "START TIMER");
       },
       (error: any) => {
         console.log(error);
+        this.alertService.errorAlert(error.error)
       }
     );
-
-
   }
 
-  stopTimer() {
+  async stopTimer() {
+    this.working = false;
+    this.timeInTask.workingOnTask = false;
 
     let taskHour: taskHour = {
       task: {
-        id: this.idResponsable
+        id: this.task.id
       },
       taskResponsable: {
         id: this.idResponsable
       },
-
     }
-
 
     clearInterval(this.id);
 
     this.taskHourService.patchTaskHour(taskHour).subscribe(
       (taskHour: taskHour) => {
-        console.log(taskHour);
+        console.log(taskHour, "STOP TIMER");
       },
       (error: any) => {
         console.log(error);
+        this.alertService.errorAlert(error.error)
       }
     );
-
-    this.step = 1;
-
   }
+
+  openMiniChat() {
+    this.miniChatOpen = !this.miniChatOpen;
+  }
+  minimizeChat() {
+    this.chatExpanded = !this.chatExpanded;
+  }
+
 }

@@ -14,6 +14,7 @@ export class Task {
 
     //taskHour
     taskResponsables?:TaskResponsable[];
+    step?: number;
 
 
     //mural
@@ -27,6 +28,7 @@ export class Task {
     ) {
         this.id = task.id;
         this.name = task.name;
+        this.step = task.step;
         this.description = task.description;
         this.values = task.values;
         this.properties = task.properties;

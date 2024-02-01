@@ -7,11 +7,12 @@
             </div>
 
             <div class="div-timer-closeModal">
+                <div class="text-black">Tempo gasto na tarefa:</div>
                 <div class="div-timer">
                     <fa-icon [icon]="faClock"></fa-icon>
                     <p>{{timer}}</p>
                 </div>
-                <button (click)="closeModal()" class="large-text">X</button>
+                <button *ngIf="!working" (click)="closeModal()" class="large-text">X</button>
             </div>
         </div>
         <div class="informations">
@@ -25,8 +26,11 @@
                 </div>
                 <div class="down">
                     <div class="buttons">
-                        <button>Ver Responsáveis</button>
-                        <button>Iniciar chat</button>
+                        <button (click)="openMiniChat()">Iniciar chat</button>
+                    </div>
+
+                    <div *ngIf="miniChatOpen">
+                        <app-minichat (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat>
                     </div>
                 </div>
             </div>
@@ -61,8 +65,8 @@
                     <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
                 </div>
                 <div class="submit">
-                    <button *ngIf="step==1" (click)="startTimer()">Trabalhar na Tarefa</button>
-                    <button id="red-btn" *ngIf="step==2" (click)="stopTimer()">Finalizar Tarefa</button>
+                    <button *ngIf="!working" (click)="startTimer()">Trabalhar na Tarefa</button>
+                    <button id="red-btn" *ngIf="working" (click)="stopTimer()">Finalizar Tarefa</button>
                 </div>
             </div>
         </div>
