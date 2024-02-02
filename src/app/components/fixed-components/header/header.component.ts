@@ -37,10 +37,7 @@ export class HeaderComponent implements OnInit {
         if (val instanceof NavigationEnd) {
           this.updateLocation(val);
         }
-      })
-      console.log(_location.normalize(_location.path()));
-      
-      
+      })    
   }
 
   ngOnInit(): void {
@@ -59,56 +56,62 @@ export class HeaderComponent implements OnInit {
     this.locations
       .find((loc: LocationItem) => {
         if (activeRoute.includes(loc.url)) {
-          this.location = loc.name;          
+          this.location = loc.name;    
+          const id = val.url.replace(/[^0-9]/g, "") as number;
+          
+          if (id) {
+            this.location += this.verifyUrlId(activeRoute, id)
+          }
         }
-      })
+      })          
+
   }
 
   back(): void {
     this._location.back();
   }
 
-  verifyUrlId(activeRoute: string, name: string): string {
-    if (activeRoute.includes('projetos')) return ` ${this.getTeam()}`;
-    if (activeRoute.includes('tarefas')) return ` ${this.getProject()}`;
-    if (activeRoute.includes('usuario/perfil')) return ` ${this.getUser()}`;
-    return name;
+  verifyUrlId(activeRoute: string, id: number): string {    
+    if (activeRoute.includes('projetos')) return ` ${this.getTeam(id)}`;
+    if (activeRoute.includes('tarefas')) return ` ${this.getProject(id)}`;
+    if (activeRoute.includes('usuario/perfil')) return ` ${this.getUser(id)}`;
+    return "a";
   }
 
-  getTeam(): string {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+  getTeam(id: number): string {
+    let name: string = "";
 
     this.teamService
       .getOneById(id)
       .subscribe((team: Team) => {
-        return team.name;
+        name = team.name;
       })
 
-      return "t";
+      return name;
   }
 
-  getProject(): string {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+  getProject(id: number): string {
+    let name: string = "";
 
     this.projectService
       .getOneById(id)
       .subscribe((project: Project) => {
-        return project.name;
+        name = project.name;
       })
       
-      return "p";
+      return name;
   }
 
-  getUser(): string {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'))
+  getUser(id: number): string {
+    let name: string = "";
 
     this.userService
       .getOneById(id)
       .subscribe((user: User) => {
-        return user.firstName;
+        name = user.firstName!;
       })
 
-    return "u";
+    return name;
   }
 
 }
