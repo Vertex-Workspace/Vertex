@@ -1,5 +1,10 @@
 <div class="card">
-    <div class="name" [style.min-width]="getNameWidth()">
+
+    <div class="name test-name" [style.min-width]="getNameWidth()">
+        <span class="drag-handle" cdkDragHandle>
+            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+        </span>
         <p>
             {{task.name}}
         </p>

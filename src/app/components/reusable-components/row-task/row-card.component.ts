@@ -3,7 +3,8 @@ import { Task } from 'src/app/models/task';
 import {
   faTrashCan, 
   faEnvelope, 
-  faClockRotateLeft 
+  faClockRotateLeft, 
+  faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
 import { Value } from 'src/app/models/value';
 import { PropertyKind } from 'src/app/models/property';
@@ -14,7 +15,7 @@ import { PropertyKind } from 'src/app/models/property';
   styleUrls: ['./row-card.component.scss']
 })
 export class RowCardComponent {
-  
+  faEllipsisVertical = faEllipsisVertical;
   faClock = faClockRotateLeft;
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;

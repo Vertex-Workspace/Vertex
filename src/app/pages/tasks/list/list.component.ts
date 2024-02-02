@@ -14,7 +14,6 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  faEllipsisVertical = faEllipsisVertical;
 
   @Input() project!: Project;
 

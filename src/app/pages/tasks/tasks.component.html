@@ -69,7 +69,7 @@
     </div>
 </section>
 
-<app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()">
+<app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
 </app-properties>
 
 <app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"

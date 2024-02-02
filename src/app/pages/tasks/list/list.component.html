@@ -4,8 +4,9 @@
             <label 
                 *ngFor="let col of cols"
                 [style.min-width]="col.width"
+                [class.nameHeader]="col.field == 'name'"
             >              
-                <h6>
+                <h6 >
                     {{col.headerText}}
                 </h6>
             </label>
@@ -23,10 +24,6 @@
                     cdkDragLockAxis="y"
                     cdkDragBoundary=".table"
                 >
-                    <span class="drag-handle" cdkDragHandle>
-                        <fa-icon [icon]="faEllipsisVertical"></fa-icon>
-                        <fa-icon [icon]="faEllipsisVertical"></fa-icon>
-                    </span>
                     <app-row-card
                         [task]="task"
                         [cols]="cols"
@@ -34,9 +31,6 @@
                 </app-row-card>
                 </div>
             </ng-container>
-                <div class="newTaskButton flex w-full h-[55px] items-center pl-4">
-                    <button >Nova Tarefa (arrumar css)</button>
-                </div>
         </div>       
     </div>
 </section>

@@ -11,7 +11,7 @@
             </button>
         </div>
         <div class="title">
-            <h5>{{translateMonth(currentDate.getMonth())}}</h5>
+            <h5>{{translateMonth(currentDate.getMonth())}} - {{currentDate.getFullYear()}}</h5>
             <div>
                 <fa-icon (click)="toggleCharts()" [icon]="faToggleOn" *ngIf="toggle"></fa-icon>
                 <fa-icon (click)="toggleCharts()" [icon]="faToggleOff" *ngIf="!toggle"></fa-icon>
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="calendar">
+    <div class="calendar" dropzone="true">
 
         <!-- 
             WRITTEN DAYS OF THE WEEK
@@ -41,7 +41,9 @@
 
 
         <div class="calendar-rows" *ngFor="let week of groupCalendarDays()">
-            <div *ngFor="let day of week; index as index" class="calendar-day" (click)="newTaskOnDay(day)"
+
+            <div *ngFor="let day of week; index as index" class="calendar-day" (click)="newTaskOnDay(day)" 
+    
                 [class.day-not-month]="currentDate.getMonth() !== day.getMonth()">
                 <!-- 
                     DAYS OF THE MONTH (NUMBER)
@@ -70,11 +72,9 @@
 
 
                 <div class="tasks-list-in-calendar" *ngIf="toggle">
-                    <ng-container *ngFor="let task of getTasksByDate(day);">
-                        <div>
-                            <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'" [task]="task" cdkDrag
-                                [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)"></app-card>
-                        </div>
+                    <ng-container *ngFor="let task of getTasksByDate(day);" >
+                        <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'" [task]="task"
+                          [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)" cdkDrag></app-card>
                     </ng-container>
                 </div>
             </div>

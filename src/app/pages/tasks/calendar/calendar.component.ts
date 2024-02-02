@@ -247,4 +247,9 @@ export class CalendarComponent {
   deleteTask(task: Task): void {
     this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
   }
+
+  //DRAG AND DROP
+  drag(task : Task): void {
+    console.log(task);
+  }
 }

@@ -58,7 +58,7 @@ section {
             @apply flex min-h-[30px] w-full justify-end;
 
             div{
-                @apply w-8 h-7 rounded-full;
+                @apply w-8 h-8 rounded-full justify-center flex items-center;
             }
 
             .today {
