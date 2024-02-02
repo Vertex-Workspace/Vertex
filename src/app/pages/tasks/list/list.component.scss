@@ -4,10 +4,10 @@
 
 section {
     color: $primaryColor;
-    @apply w-full flex justify-center pt-8 pb-12;
+    @apply flex h-full justify-center pt-8 overflow-x-auto overflow-y-hidden;
     
     .table {
-        @apply w-full flex flex-col overflow-x-auto overflow-y-hidden rounded-sm;
+        @apply  flex h-[90%] flex-col overflow-y-hidden rounded-sm mb-12;
         
         .tbody {
             @apply w-full h-full;

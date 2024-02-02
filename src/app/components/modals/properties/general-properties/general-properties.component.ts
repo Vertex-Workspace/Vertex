@@ -84,7 +84,6 @@ export class GeneralPropertiesComponent {
   ]
 
   ngOnInit(): void {
-    console.log(this.project);
     this.project.properties.forEach(
       (property) => {
         // [0] - FIXED, [1] - VISIBLE, [2] - INVISIBLE
@@ -137,16 +136,14 @@ export class GeneralPropertiesComponent {
     this.plus.emit();
   }
 
-  editProperty() {
-    // if (this.propertiesList[i].properties[i2].icon === faSpinner) {
-    //   this.status.emit();
-    // } else if (this.propertiesList[i].properties[i2].icon === faCaretDown) {
-    //   this.select.emit();
-    // } else {
-    //   if (this.propertiesList[i].properties[i2].icon != faCalendarDays) {
-    //     this.edit.emit({ list: this.propertiesList[i].properties[i2].name });
-    //   }
-    // }
+  editProperty(propertyKind: PropertyKind) {
+    if (propertyKind === PropertyKind.STATUS) {
+      this.status.emit();
+    } else if (propertyKind === PropertyKind.LIST) {
+      this.select.emit();
+    } else {
+        this.edit.emit();
+    }
   }
 
 
@@ -163,7 +160,7 @@ export class GeneralPropertiesComponent {
     this.projectService.createProperty(this.project.id!, property).subscribe(
       (property) => {
         console.log(property);
-        
+
       }, (error) => {
         console.log(error);
       });
@@ -196,15 +193,14 @@ export class GeneralPropertiesComponent {
     );
   }
 
-  getIconProperty(kindProperty : PropertyKind) : any {
-    if(kindProperty === PropertyKind.TEXT){
+  getIconProperty(kindProperty: PropertyKind): any {
+    if (kindProperty === PropertyKind.TEXT) {
       return faFont;
-    } else if(kindProperty === PropertyKind.DATE){
+    } else if (kindProperty === PropertyKind.DATE) {
       return faCalendarDays;
     } else {
       return faSpinner;
     }
-
   }
 }
 

@@ -39,7 +39,6 @@ export class CalendarComponent {
     this.openTaskDetails.emit(task);
   }
 
-
   //FUTURE 
   buttonDay!: Date;
   showAdd(day : Date): void{

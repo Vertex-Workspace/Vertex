@@ -22,7 +22,13 @@
 }
 
 .visible {
-    @apply w-full h-[10%] bg-[#EAEFF8] border-2 flex flex-row justify-between;
+    @apply w-full h-[10%] border-2 flex flex-row justify-between;
+    background-color: $primaryColor + "FF";
+
+    &:hover{
+        background-color: $emphasis;
+        cursor: pointer;
+    }
 
     div:first-child {
         @apply flex w-[70%] pr-3 items-center ;

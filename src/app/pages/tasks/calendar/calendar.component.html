@@ -73,8 +73,14 @@
 
                 <div class="tasks-list-in-calendar" *ngIf="toggle">
                     <ng-container *ngFor="let task of getTasksByDate(day);" >
-                        <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'" [task]="task"
-                          [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)" cdkDrag></app-card>
+                        <app-card 
+                        (openTaskDetails)="openCardTask(task)" 
+                        [minHeight]="'60px'" 
+                        [width]="'210px'" 
+                        [task]="task"
+                        [borderColor]="getColor(task)" 
+                        (deleteTask)="deleteTask(task)"  
+                        ></app-card>
                     </ng-container>
                 </div>
             </div>
