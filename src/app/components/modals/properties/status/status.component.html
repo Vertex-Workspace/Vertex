@@ -7,7 +7,7 @@
         <div *ngFor="let name of status.properties; index as i2" cdkDropList (cdkDropListDropped)="drop($event, item)"
         [cdkDropListData]="status.properties">
             <div cdkDrag class="specific-properties" [ngStyle]="{'background-color': status.color}">
-                <div>
+                <div cdkDragHandle>
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
                 </div>

@@ -51,7 +51,6 @@ export class KanbanComponent {
 
             //Save on a local variable the value of the task
             newValue = value;
-            console.log(newValue);
           }
         });
       }

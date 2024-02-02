@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { cols,
-         homeCols } from 'src/app/pages/tasks/data-test';
 import {
   faTrashCan, 
   faEnvelope, 
-  faClockRotateLeft 
+  faClockRotateLeft, 
+  faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { Value } from 'src/app/models/value';
+import { PropertyKind } from 'src/app/models/property';
 
 @Component({
   selector: 'app-row-card',
@@ -15,16 +15,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./row-card.component.scss']
 })
 export class RowCardComponent {
-  
+  faEllipsisVertical = faEllipsisVertical;
   faClock = faClockRotateLeft;
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;
 
-  cols: any[] = cols;
-  homeCols: any[] = homeCols;
 
   @Input()
   task!: Task;
+
+  @Input()
+  cols!: any[];
+
+  value!: Value;
 
   icons: any[] = [
     { id: 'clock', icon: this.faClock },
@@ -32,51 +35,28 @@ export class RowCardComponent {
     { id: 'delete', icon: this.faTrashCan }
   ];
 
-  constructor(
-    private router: Router
-  ) {}
+  getCols(): any[] {
+    let cols : any [] = [];
+    this.cols.map((col) => { 
+      if(col.field !== "name") {
+        cols.push(col);
+      }
+    });
+    return cols;
+  }
 
   getNameWidth(): string {
-    const obj = this.getCols().find(c => {
-      return c.field === 'name';
-    })
-
-    return obj.width;
+    return "40%";
   }
 
-  getCols(): any[] {
-    if (this.router.url === '/tarefas/lista') {
-      return this.cols;
-    }
-
-    return this.homeCols;
-  }
-
-  getPropertyValue(col: any): string {
-    const prop = this.findPropertyInTask(col);
-
-    if (prop) {
-      return prop.value.toString();
-    }
-
-    return " - ";    
-  }
-
-  findPropertyInTask(prop: any): any {
-    return this.task.properties?.find(p => {
-      return p.name === prop.field;
+  getPropertyValue(col: any) : Value {
+    let value : Value;
+    this.task.values?.forEach(values => {
+      if (col.id === values.property.id) {
+        value = values;
+      }
     });
-  }
-
-  getPropertyColor(col: any): string {
-    const prop = this.findPropertyInTask(col);
-
-    if (prop !== undefined 
-              && Object.hasOwn(prop, 'bgColor')) {
-      return prop.bgColor + "99";
-    }
-
-    return "#F3F3F3";
+    return value!;
   }
 
 }

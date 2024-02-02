@@ -22,7 +22,15 @@
                     }
                     
                     .divOptions {
-                        @apply flex w-[70%] h-full items-center
+                        @apply flex w-[100%] h-full items-center
+                    }
+
+                    button {
+                        @apply w-full;
+
+                        p{
+                            @apply w-full flex items-start;
+                        }
                     }
                 }
             }

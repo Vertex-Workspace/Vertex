@@ -4,49 +4,30 @@
             <div>
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="regular-text">
-                        <i 
-                            class="{{ item.iconClass }}" 
-                            style="font-size: 1rem"
-                        ></i>
-                        <button 
-                            (click)="changePreviewMode(item.id)"
-                        >
-                                {{ item.label }}
+                        <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
+                        <button (click)="changePreviewMode(item.id)">
+                            {{ item.label }}
                         </button>
                     </label>
                 </ng-container>
             </div>
 
             <div class="config-menu medium-text">
-                <button 
-                    *ngIf="!searchBarOpen" 
-                    (click)="toggleSearchBar()"
-                >
-                    <i class="pi pi-search" ></i>
+                <button *ngIf="!searchBarOpen" (click)="toggleSearchBar()">
+                    <i class="pi pi-search"></i>
                 </button>
 
-                <div 
-                    class="search " 
-                    *ngIf="searchBarOpen"
-                >
-                    <input 
-                        type="text" 
-                        placeholder="Pesquise por uma tarefa..."
-                        [(ngModel)]="query"
-                    >
-                    <i class="pi pi-times cursor-pointer" 
-                        style="font-size: 1.4rem;" 
-                        (click)="toggleSearchBar()"></i>
+                <div class="search " *ngIf="searchBarOpen">
+                    <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="query">
+                    <i class="pi pi-times cursor-pointer" style="font-size: 1.4rem;" (click)="toggleSearchBar()"></i>
                 </div>
 
                 <ng-container *ngFor="let item of configItems">
-                    <button 
-                        class="config-buttons" 
-                        (click)="item.click()"
-                    >
-                        <i class="{{ item.iconClass }}"></i>
+                    <button class="config-buttons" (click)="item.click()">
+                        <i [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
+                            class="{{ item.iconClass }}"></i>
                     </button>
-                    
+
                 </ng-container>
 
                 <button class="create" (click)="createTask()">
@@ -56,9 +37,7 @@
             </div>
         </section>
 
-        <section 
-            class="filter-settings regular-text" 
-        >
+        <section class="filter-settings regular-text">
             <ng-container *ngIf="filterOpen || orderOpen">
                 <p>Ordenar por </p>
                 <select *ngIf="filterOpen">
@@ -66,7 +45,7 @@
                         {{ item.label }}
                     </option>
                 </select>
-                
+
                 <select *ngIf="orderOpen">
                     <option *ngFor="let item of orderSettings">
                         {{ item.label }}
@@ -76,18 +55,13 @@
         </section>
 
         <section class="router">
-            <app-kanban 
-
-            [project]="project" 
-            *ngIf="clicked  === 'Kanban'" 
-            style="width: 100%; height: 100%;"
-            (openTaskDetails)="changeModalTaskState(true, $event)"
-            ></app-kanban>
+            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'" style="width: 100%; height: 100%;"
+                (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
 
 
 
-            <app-list   *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
-            <app-calendar  *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
+            <app-list [project]="project" *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
+            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
             <app-mural  *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
             <!-- app-kanban -->
         </section>
@@ -95,6 +69,9 @@
     </div>
 </section>
 
-<app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()"></app-properties>
+<app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
+</app-properties>
 
-<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
+<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
+    (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
+
