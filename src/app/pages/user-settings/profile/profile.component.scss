@@ -15,7 +15,18 @@
 }
 
 .image {
-    @apply w-[300px] h-[240px] flex flex-col justify-start items-center;
+    @apply w-[250px] h-[250px] p-2 rounded-full flex flex-col justify-center items-center;
+
+
+    img {
+        @apply w-[80%];
+    }
+
+    .profile-photo {
+        color: $primaryColor;
+        font-size: 10rem;
+        padding-left: 27%; 
+    }
 }
 
 .size {

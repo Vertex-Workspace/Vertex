@@ -21,13 +21,26 @@ export class UserInformationsComponent {
 
   logged !: User;
 
+  imageUrl !: string;
+
   constructor(
-    private userService: UserService
+    private userService: UserService,
   ) {
     this.logged = this.userService.getLogged();
   }
 
   ngOnInit() {
+    this.start();    
+
+    this.image();
+
+  }
+
+  image(): void {
+    
+  }
+
+  start(): void {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
 
@@ -102,8 +115,6 @@ export class UserInformationsComponent {
         }
       }
     };
-
-
   }
 
   projects = [

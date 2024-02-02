@@ -43,7 +43,7 @@ export class TasksComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     if (this.router.url.includes('projeto')) {
-    const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
+    const projectId: number = Number(this.route.snapshot.paramMap.get('id'));
     if(projectId){
       let projectRequested : Project | undefined = await this.projectService.getOneById(projectId).toPromise();
       if(projectRequested){
