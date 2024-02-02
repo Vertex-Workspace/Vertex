@@ -52,6 +52,7 @@ export class TasksComponent implements OnInit {
     }
     this.clicked = localStorage.getItem('mode-task-view') || 'Kanban';
     }
+    console.log(this.project);
   }
 
   menuItems = [

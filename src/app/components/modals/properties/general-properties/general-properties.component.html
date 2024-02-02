@@ -1,30 +1,36 @@
 <div class="ng-contentDiv">
-    <span class="p-input-icon-right">
-        <input type="text" class="small-text" placeholder="Digite o que procura..." />
-        <i class="pi pi-search pt-2 icon"></i>
-    </span>
+    <div class="p-input-icon-right">
+        <input type="text" class="regular-text" placeholder="Digite o que procura..." />
+        <i class="pi pi-search icon"></i>
+    </div>
 
     <div class="visible-unvisible" cdkDropListGroup>
-        <div *ngFor="let item of propertiesList; index as i" cdkDropList (cdkDropListDropped)="drop($event, i)"
-        [cdkDropListData]="item.properties">
-            <p class="pl-3 pt-4 regular-text">{{item.status}}</p>
-            <div *ngFor="let name of item.properties; index as i2">
-                <div cdkDrag [cdkDragDisabled]="item.status === 'Fixas'" class="visible" [ngClass]="item.opacity === false ? '' : 'opacity'">
-                    <div (click)="editProperty(i, i2)">
+        <div *ngFor="let item of propertiesList" cdkDropList (cdkDropListDropped)="drop($event)"
+            [cdkDropListData]="item.properties" class="properties">
+            <div class="flex w-full justify-between items-center">
+                <p class="pl-3 pt-4 medium-text pb-4">{{item.status}}</p>
+                <p class="text-3xl cursor-pointer" *ngIf="item.status == 'Visíveis'" (click)="createProperty()">+</p>
+            </div>
+            <div *ngFor="let property of item.properties">
+                <div cdkDrag [cdkDragDisabled]="item.status === 'Fixas'" class="visible"
+                    [ngClass]="item.opacity === false ? '' : 'opacity'">
+                    <div (click)="editProperty(property.kind)">
                         <div cdkDragHandle [style.opacity]="item.status === 'Fixas' ? '0.30' : '1'">
                             <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                             <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                         </div>
                         <div>
-                            <fa-icon [icon]="name.icon" class="icon"></fa-icon>
-                            <input class="regular-text" value="{{name.name}}" /> 
+                            <fa-icon [icon]="getIconProperty(property.kind)" class="teste"></fa-icon>
+                            <p class="regular-text">{{property.name}}</p>
                         </div>
                     </div>
                     <div>
-                        <fa-icon *ngIf="item.status != 'Fixas'" [icon]="item.icon" class="little-icon"
-                            (click)="changeStatus(name.name, name.icon, i, i2)"></fa-icon>
-                        <fa-icon *ngIf="item.status != 'Fixas'" [icon]="faGear" class="little-icon" (click)="clickGear('gear', i, i2)"></fa-icon>
-                        <fa-icon *ngIf="item.status != 'Fixas'" [icon]="faTrashCan" class="little-icon" (click)="delete(i, i2)"></fa-icon>
+                        <ng-container *ngIf="item.status != 'Fixas'">
+                            <fa-icon [icon]="item.icon" class="little-icon"
+                                (click)="changeStatus(property)"></fa-icon>
+                            <fa-icon [icon]="faGear" class="little-icon" (click)="clickGear()"></fa-icon>
+                            <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(property)"></fa-icon>
+                        </ng-container>
                     </div>
                 </div>
             </div>

@@ -24,14 +24,8 @@ export class InputValuePropertyComponent {
   constructor(private taskService: TaskService, private alertService: AlertService) { }
 
 
-  ngOnInit(): void{
-    console.log(this.value);
-  }
-  getValue(value: Value): string {
+  getValue(value: Value): string{
     if (value.value === null) {
-      if (value.property.kind === PropertyKind.DATE) {
-        
-      }
       if (value.property.kind === PropertyKind.NUMBER) {
         return "0";
       }
@@ -40,6 +34,11 @@ export class InputValuePropertyComponent {
     if (value.property.kind === PropertyKind.STATUS) {
       let valueProperty = value.value as PropertyList;
       return valueProperty.value;
+    }
+    if (value.property.kind === PropertyKind.DATE) {
+      let date = new Date(value.value as string);
+      //to format the date to yyyy-mm-dd
+      return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
     }
     return value.value as string;
   }
@@ -60,10 +59,15 @@ export class InputValuePropertyComponent {
 
   change(event: any, value: Value): void {
     if (value.value !== event.target.value) {
-
       let newValue: string | number | Date;
       if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {
         newValue = event.target.value as number;
+      } else if(value.property.kind === PropertyKind.DATE) {
+
+        let date = new Date(event.target.value as string);
+
+        //SLICE RETIRAR O "Z" NO FINAL
+        newValue = date.toISOString().slice(0, -1);
       }
       else {
         newValue = event.target.value as string;

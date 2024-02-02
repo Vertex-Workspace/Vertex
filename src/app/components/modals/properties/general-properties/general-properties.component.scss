@@ -1,14 +1,14 @@
 @import '../../../../../variables';
 
 .ng-contentDiv{
-    @apply w-full;
+    @apply flex h-full flex-col w-full ;
 }
 
-span {
-    @apply w-full h-[62px] pt-3;
+.p-input-icon-right {
+    @apply w-full h-[62px] pt-3 flex justify-center items-start;
 
     input {
-        @apply w-full h-full pl-6 rounded-sm flex justify-center items-start shadow-2xl;
+        @apply w-full h-full pl-4 rounded-sm flex  shadow-2xl;
     };
 }
 
@@ -18,11 +18,17 @@ span {
 }
 
 .visible-unvisible {
-    @apply w-full h-[85%];
+    @apply flex flex-col  overflow-y-auto;
 }
 
 .visible {
-    @apply w-full h-[10%] bg-[#EAEFF8] border-2 flex flex-row justify-between;
+    @apply w-full h-[10%] border-2 flex flex-row justify-between;
+    background-color: $primaryColor + "FF";
+
+    &:hover{
+        background-color: $emphasis;
+        cursor: pointer;
+    }
 
     div:first-child {
         @apply flex w-[70%] pr-3 items-center ;
@@ -32,10 +38,14 @@ span {
         }
 
         div:last-child{
-            @apply w-[75%] flex justify-start items-center gap-3;
+            @apply w-full flex justify-start items-center gap-3;
 
             input{
-                @apply bg-[#EAEFF8];
+                @apply flex w-[80%] bg-[#EAEFF8];
+            }
+            fa-icon{
+                color: $primaryColor;
+                @apply text-2xl;
             }
         }
 
@@ -70,4 +80,9 @@ p{
 .little-icon {
     color:$primaryColor;
     font-size: 1rem;
+}
+
+
+.teste{
+    @apply text-3xl z-[999];
 }

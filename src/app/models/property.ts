@@ -8,6 +8,7 @@ export class Property {
     isObligated!: boolean;
     defaultValue?: string;
     propertyLists!: PropertyList[];
+    propertyStatus!: PropertyStatus;
     
     constructor(
         property: Property
@@ -20,6 +21,12 @@ export class Property {
         this.propertyLists = property.propertyLists;
     }
 
+}
+
+export enum PropertyStatus{
+    FIXED = "FIXED",
+    VISIBLE = "VISIBLE",
+    INVISIBLE = "INVISIBLE",
 }
 
 export class PropertyList{
