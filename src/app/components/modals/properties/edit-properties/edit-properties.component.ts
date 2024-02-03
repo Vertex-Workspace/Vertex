@@ -3,8 +3,7 @@ import {
   faCaretDown, faSpinner, faUser, faPaperclip,
   faFont, faCalendarDays, faSquare, faTrashCan, faListOl
 } from '@fortawesome/free-solid-svg-icons';
-import TypedRegistry from 'chart.js/dist/core/core.typedRegistry';
-import { ConnectableObservable } from 'rxjs';
+import { Property, PropertyKind } from 'src/app/models/property';
 
 @Component({
   selector: 'app-edit-properties',
@@ -16,7 +15,7 @@ export class EditPropertiesComponent {
   @Output()
   selection = new EventEmitter<String>();
 
-  @Input() name?: string;
+  @Input() property!: Property;
 
   faCaretDown = faCaretDown;
   faSpinner = faSpinner;
@@ -31,7 +30,7 @@ export class EditPropertiesComponent {
   selectedProperty: string = "Texto";
 
   ngOnInit(): void {
-    this.check();
+    console.log(this.property);
   }
 
   propertyTypes = [
@@ -90,13 +89,26 @@ export class EditPropertiesComponent {
     }
   }
 
-  check() {
-    if (this.name === 'Nome da Tarefa') {
-      this.propertyTypes[0].value = true;
-    } else if (this.name === 'Itens Seleção') {
-      this.propertyTypes[1].value = true;
-    } else if (this.name === 'Número'){
-      this.propertyTypes[2].value = true;
+  getKindProperty(property: PropertyKind) {
+    if (property === PropertyKind.TEXT) {
+      return true;
+    } else if (property === PropertyKind.LIST) {
+      return true;
+    } else if (property === PropertyKind.NUMBER) {
+      return true;
     }
+    return false;
   }
+
+
+
+  // check() {
+  //   if (this.name === 'Nome da Tarefa') {
+  //     this.propertyTypes[0].value = true;
+  //   } else if (this.name === 'Itens Seleção') {
+  //     this.propertyTypes[1].value = true;
+  //   } else if (this.name === 'Número'){
+  //     this.propertyTypes[2].value = true;
+  //   }
+  // }
 }

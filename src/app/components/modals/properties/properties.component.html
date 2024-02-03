@@ -18,16 +18,15 @@
         <app-general-properties 
             (select)="openStatusSelection('items-selection')"
             (status)="openStatusSelection('status')" 
-            (gear)="clickGear('edit', $event)"
-            (edit)="clickGear('edit', $event)" 
+            (edit)="editTask('edit', $event)" 
             class="pattern-style"
             *ngIf="currentModal === 'general'"
             [project]="project"
             style="width: 100%; height: 100%;">
         </app-general-properties>
         <app-edit-properties 
-            [name]="name" 
-            (gear)="clickGear('edit', $event)"
+            [property]="property"
+            (gear)="editTask('edit', $event)"
             (selection)="openStatusSelection('items-selection')" 
             class="pattern-style" 
             *ngIf="currentModal === 'edit'" />

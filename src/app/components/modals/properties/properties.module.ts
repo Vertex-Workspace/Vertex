@@ -8,24 +8,29 @@ import { ColorsComponent } from './colors/colors.component';
 import { GeneralPropertiesComponent } from './general-properties/general-properties.component';
 import { ItemsSelectionComponent } from './items-selection/items-selection.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { EditPropertiesModule } from './edit-properties/edit-properties.module';
+import { GeneralPropertiesModule } from './general-properties/general-properties.module';
+import { ItemsSelectionModule } from './items-selection/items-selection.module';
+import { ColorsModule } from './colors/colors.module';
+import { StatusModule } from './status/status.module';
 
 
 
 @NgModule({
   declarations: [
     PropertiesComponent,
-    EditPropertiesComponent,
-    StatusComponent,
-    ColorsComponent,
-    GeneralPropertiesComponent,
-    ItemsSelectionComponent
   ],
   exports: [
     PropertiesComponent
   ],
   imports: [
     CommonModule,
+    EditPropertiesModule,
+    GeneralPropertiesModule,
+    StatusModule,
+    ItemsSelectionModule,
     FontAwesomeModule,
+    ColorsModule,
     DragDropModule
   ]
 })

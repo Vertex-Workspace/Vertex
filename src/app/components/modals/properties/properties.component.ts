@@ -3,6 +3,7 @@ import { faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
 faFont, faCalendarDays, faSpinner, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { elements } from 'chart.js';
 import { Project } from 'src/app/models/project';
+import { Property } from 'src/app/models/property';
 
 @Component({
   selector: 'app-properties',
@@ -42,7 +43,7 @@ export class PropertiesComponent{
     this.close.emit();
   }
 
-  name?: string;
+  property!: Property;
 
 
   itemsList = [
@@ -64,11 +65,12 @@ export class PropertiesComponent{
   
 ]
 
-  clickGear(type: string, event: any) {
-    this.name = event.list;
-      this.currentModal = 'edit'
-      this.text = 'Edite a Propriedade'
-      this.footerText = 'Excluir Propriedade'
+  editTask(type: string, event: any) {
+    console.log(event);
+    this.property = event;
+    this.currentModal = type
+    this.text = 'Edite a Propriedade'
+    this.footerText = 'Excluir Propriedade'
   }
 
   openStatusSelection(type: string) {
@@ -101,7 +103,6 @@ export class PropertiesComponent{
 
   clickPlus() {
     if (this.currentModal === 'general') {
-      this.name = 'Nova Propriedade'
       this.currentModal = 'edit';
       this.text = 'Edite a Propriedade'
       this.footerText = 'Excluir Propriedade'

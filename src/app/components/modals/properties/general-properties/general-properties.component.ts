@@ -127,22 +127,17 @@ export class GeneralPropertiesComponent {
 
 
 
-  clickGear() {
-    // this.gear.emit({ list: this.propertiesList[i].properties[i2].name });
-    // console.log(this.propertiesList[i].properties[i2].name)
-  }
-
   clickPlus(type: string) {
     this.plus.emit();
   }
 
-  editProperty(propertyKind: PropertyKind) {
-    if (propertyKind === PropertyKind.STATUS) {
-      this.status.emit();
-    } else if (propertyKind === PropertyKind.LIST) {
-      this.select.emit();
+  editProperty(property: Property) {
+    if (property.kind === PropertyKind.STATUS) {
+      this.status.emit(property);
+    } else if (property.kind === PropertyKind.LIST) {
+      this.select.emit(property);
     } else {
-        this.edit.emit();
+      this.edit.emit(property);
     }
   }
 
@@ -198,9 +193,12 @@ export class GeneralPropertiesComponent {
       return faFont;
     } else if (kindProperty === PropertyKind.DATE) {
       return faCalendarDays;
-    } else {
+    } else if (kindProperty === PropertyKind.STATUS) {
       return faSpinner;
+    } else if (kindProperty === PropertyKind.LIST) {
+      return faCaretDown;
     }
+
   }
 }
 

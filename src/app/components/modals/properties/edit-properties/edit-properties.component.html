@@ -1,12 +1,12 @@
 <div class="task-name">
-    <input value="{{name}}" class="regular-text" />
+    <input value="{{property.name}}" class="regular-text" />
 </div>
 
 <section>
-    <p class="medium-text">Tipo de dado</p>
+    <p class="medium-text pt-8">Tipo de dado</p>
     <div class="properties-types">
         <ng-container *ngFor="let type of propertyTypes; index as i">
-            <div [ngClass]="type.value === true ? '' : 'opacity' " (click)="selectValue(i)" (click)="selectIcon(i)">
+            <div [ngClass]=" getKindProperty(property.kind) ? '' : 'opacity' " (click)="selectValue(i)" (click)="selectIcon(i)">
                 <fa-icon [icon]="type.icon" class="icon" (click)="selectionItems(i)"></fa-icon>
             </div>
         </ng-container>
