@@ -24,13 +24,13 @@
                 <div class="properties">
                     <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)" />
                 </div>
-                <div class="down">
+                <div class="down relative">
                     <div class="buttons">
                         <button (click)="openMiniChat()">Iniciar chat</button>
                     </div>
 
-                    <div *ngIf="miniChatOpen">
-                        <app-minichat (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat>
+                    <div *ngIf="miniChatOpen" class="absolute">
+                        <app-minichat-task (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat-task>
                     </div>
                 </div>
             </div>

@@ -6,16 +6,21 @@ import { LogComponent } from './log/log.component';
 import { PropertiesComponent } from './properties/properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { MinichatModule } from 'src/app/pages/miniChat/minichat/minichat.module';
+import { MinichatModule } from '../minichat/minichat.module';
+import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
+
 
 @NgModule({
   declarations: [
     TaskComponent,
     CommentsComponent,
     LogComponent,
-    PropertiesComponent
+    PropertiesComponent,
   ],
   exports: [TaskComponent],
-  imports: [CommonModule, FontAwesomeModule, FormsModule,MinichatModule],
+  imports: [
+    CommonModule,
+     FontAwesomeModule, 
+     FormsModule, MinichatTASKModule],
 })
 export class TaskModule {}

@@ -19,7 +19,7 @@ import { TeamInformationsModule } from './pages/team-informations/team-informati
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { ChatModule } from './pages/chat/chat.module';
-import { MinichatModule } from './pages/miniChat/minichat/minichat.module';
+
 import { NotificationModule } from './components/modals/notification/notification.module';
 import { TasksModule } from './pages/tasks/tasks.module';
 import { UserInformationsModule } from './pages/user-informations/user-informations/user-informations.module';
@@ -33,6 +33,8 @@ import { AlertService } from './services/alert.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { GroupsSelectModule } from './components/modals/groups-select/groups-select.module';
+import { MinichatModule } from './components/modals/minichat/minichat.module';
+import { MinichatTASKModule } from './components/modals/minichat-task/minichat-task.module';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { GroupsSelectModule } from './components/modals/groups-select/groups-sel
     NotificationModule,
     ChatModule,
     MinichatModule,
+    MinichatTASKModule,
     UserInformationsModule,
     SearchAllModule,
     HttpClientModule,
@@ -74,7 +77,9 @@ import { GroupsSelectModule } from './components/modals/groups-select/groups-sel
     PersonalizationService,
     MessageService,
     AlertService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true },
   ],
   bootstrap: [AppComponent]
 })

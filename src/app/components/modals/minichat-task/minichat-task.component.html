@@ -1,0 +1,38 @@
+<div class="miniChat2">
+    <div class="miniChat-header">
+        <div class="miniChat-header-title">
+            <fa-icon [icon]="faUser"></fa-icon>
+            <h6>Nome User</h6>
+        </div>
+        <div class="miniChat-header-close">
+            
+            <fa-icon (click)="openMiniChat(true)" [icon]="faTimes"></fa-icon>
+        </div>
+    </div>
+    
+    <div class="miniChat-main">
+
+        <div class="w-full h-[88%] flex">
+            <div class="w-1/2 h-full flex flex-col">
+
+            </div>
+
+            <div class="w-1/2 h-full flex flex-col">
+
+            </div>
+        </div>
+
+        <div class="miniChat-main-input regular-text">
+            <div class="div-search">
+                <input class="input-search" type="text" placeholder="Digite sua mensagem" />
+                <div class="div-icons">
+                    <fa-icon class="icons" [icon]="faPaperclip"></fa-icon>
+                    <fa-icon class="icons" [icon]="faMicrophoneLines"></fa-icon>
+                </div>
+            </div>
+            <div class="square-chat">
+                <fa-icon (click)="submit()" class="paperplane" [icon]="faPaperPlane"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>

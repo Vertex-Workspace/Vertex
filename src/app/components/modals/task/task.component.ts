@@ -84,7 +84,6 @@ export class TaskComponent implements OnInit {
   }
 
   async closeModal() {
-    this.stopTimer()
     this.close.emit();
   }
 
