@@ -6,6 +6,7 @@ import { QuickAccessModule } from 'src/app/components/reusable-components/quick-
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 import { ListModule } from '../tasks/list/list.module';
 import { CardGroupModule } from 'src/app/components/reusable-components/card-group/card-group.module';
+import { CardUserModule } from 'src/app/components/reusable-components/card-user/card-user.module';
 import { CreateGroupModule } from 'src/app/components/reusable-components/create-group/create-group.module';
 
 

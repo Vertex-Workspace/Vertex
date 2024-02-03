@@ -61,7 +61,9 @@
 
 
             <div *ngIf="clicked == 'permissions'" class="grid-permissions">
-                <ng-container *ngFor="let user of team.users; let id = index">
+                <app-card-user [width]="'600px'" [height]="'90px'" [typeString]="'permissions'"></app-card-user>
+            </div>    
+                <!-- <ng-container *ngFor="let user of team.users; let id = index">
                     <div class="extense-card">
                         <div class="div-permission">
                             <div class="div-permission-icon">
@@ -77,7 +79,7 @@
                                 <fa-icon (click)="swapPermissionExpanded(id)" class="icon-swap-permission"
                                     [icon]="faChevronDown"></fa-icon>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <div *ngIf="user.open" class="extense-cardExpanded">
                             <div class="div-checkbox1">
@@ -95,11 +97,11 @@
                                 <label for="createCheck">Criação</label>
                             </div>
                         </div> -->
-                    </div>
+                    <!-- </div>
 
 
                 </ng-container>
-            </div>
+            </div> -->
 
             <div *ngIf="clicked == 'groups'" class="grid-permissions">
                 <app-card-group [team]="team" [width]="'900px'" [height]="'90px'"></app-card-group>

@@ -31,10 +31,13 @@ export class CreateGroupComponent implements OnInit{
     private route: ActivatedRoute,
     private userService: UserService){  
     this.getTeam();
+    this.users;
   }
 
   ngOnInit(): void {
-    console.log(this.team);
+    this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
+      this.users = users;
+    });
     
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
@@ -44,6 +47,8 @@ export class CreateGroupComponent implements OnInit{
   }
 
   onSubmit(): void {
+    console.log(this.users);
+    
     const group = this.form.getRawValue() as Group
     group.team = this.team
     this.createGroup.emit(group);
@@ -60,9 +65,11 @@ export class CreateGroupComponent implements OnInit{
       }) 
   }
 
-  selectUsers(user : User): void{
+  selectUsers(user : User): User[]{
     console.log(user);
     this.users.push(user);
+
+    return this.users;
   }
 
   closeGroup(){

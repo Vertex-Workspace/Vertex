@@ -18,6 +18,8 @@ export class User {
     showCharts ?: boolean = false;
     //selected for groups
     selected ?: boolean = false;
+    //open component with user permissions in team-informations
+    openPermission ?: boolean = false;
 
     //brainstorming
     teams?: Team[] = [];
@@ -44,6 +46,7 @@ export class User {
         this.publicProfile = user.publicProfile;
         this.showCharts = user.showCharts;
         this.selected = user.selected;
+        this.openPermission = user.openPermission;
 
     }
 

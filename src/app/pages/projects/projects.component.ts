@@ -92,6 +92,18 @@ export class ProjectsComponent implements OnInit {
         });
   }
 
+  deleteGroup(groupId: number):void {
+    console.log('entrei no dg');
+    console.log(event);
+    
+    this.groupService.delete(groupId).subscribe((group: Group) => {
+      this.alert.successAlert('Grupo deletado com sucesso')
+    },
+    e=> {
+      this.alert.errorAlert("Não foi possível deletar");
+    })
+  }
+
   changePreviewMode(preview: string): void {
     this.clicked = preview;
   }
@@ -147,7 +159,7 @@ export class ProjectsComponent implements OnInit {
       .create(group)
       .subscribe((group: Group) => {
         this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
-        this.getAfterChange();
+        this.switchCreateViewGroup();
       },
         e => {
           if (group.name == null) {

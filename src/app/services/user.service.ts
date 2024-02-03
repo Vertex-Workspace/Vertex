@@ -95,6 +95,19 @@ export class UserService {
       .pipe(map((user: User) => new User(user)));
   }
 
+  public getUsersByGroup(groupId: number): Observable<User[]> { 
+    return this.http
+      .get<User[]>(`${URL}user/usersByGroup/${groupId}`)
+      .pipe(map((users: User[]) => users.map(user => new User(user))));
+  }
+
+  public getUsersByTeam(teamId: any): Observable<User[]> {
+    return this.http
+      .get<User[]>(`${URL}user/usersByGroup/${teamId}`)
+      .pipe(map((users: User[]) => users.map(user => new User(user))));
+  }
+
+
   public getOneByEmail(email: string): Observable<User> {
     return this.http
       .get<User>(`${URL}user/email/${email}`)

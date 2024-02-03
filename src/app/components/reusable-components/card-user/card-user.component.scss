@@ -5,12 +5,12 @@
     min-height: 100px;
 
     div:first-child{
-        @apply pl-2 w-[10%];
+        @apply pl-2;
     }
 
     div:nth-child(2){
-        @apply pl-2 w-[80%]
-    }
+        @apply pl-2 w-[80%];
+    };
 }
 
 .icon {
@@ -19,4 +19,8 @@
 
 .icon-not-selected {
     color: $secondColor;
+}
+
+.permissions {
+    @apply flex flex-col;
 }

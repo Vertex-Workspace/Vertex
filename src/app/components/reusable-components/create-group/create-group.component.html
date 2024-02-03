@@ -12,9 +12,10 @@
       </div>
     </div>
   
+    <p class="large-text pb-5">Selecionar participantes</p>
     <div class="input-description">
-      <p class="large-text">Selecionar participantes</p>
-      <app-card-user [typeString]="'creating'" [width]="'300px'" [height]="'70px'" class="shadow-lg pl-5" (user)="selectUsers($event)"></app-card-user>
+      <p>Participantes</p>
+      <app-card-user [typeString]="'creating'" [width]="'300px'" [height]="'70px'" class="shadow-lg pl-4 pt-5" (user)="selectUsers($event)"></app-card-user>
     </div>
   
     <div class="div-buttons">
