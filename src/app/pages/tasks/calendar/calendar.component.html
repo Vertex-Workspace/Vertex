@@ -46,12 +46,12 @@
             <div class="calendar-rows" *ngFor="let week of weeks" >
                 
                 <div *ngFor="let day of week; index as index" 
-                class="calendar-day h-full"
-                (mouseenter)="hover(day)"
-                [class.day-not-month]="currentDate.getMonth() !== day.getMonth()"   
-                cdkDropList
-                [cdkDropListData]="day"
-                (cdkDropListDropped)="drop($event, day)" 
+                    class="calendar-day h-full"
+                    (mouseenter)="hover(day)"
+                    [class.day-not-month]="currentDate.getMonth() !== day.getMonth()"   
+                    cdkDropList
+                    [cdkDropListData]="day"
+                    (cdkDropListDropped)="drop($event, day)" 
                 >
                 <!-- 
                     DAYS OF THE MONTH (NUMBER)

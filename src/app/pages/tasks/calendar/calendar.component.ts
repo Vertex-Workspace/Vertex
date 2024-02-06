@@ -298,5 +298,6 @@ export class CalendarComponent {
   hover(day: Date) {
     this.hoveringDay = day;
   }
+  
 
 }
