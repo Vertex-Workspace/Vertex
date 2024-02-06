@@ -28,6 +28,7 @@ export class Task {
     ) {
         this.id = task.id;
         this.name = task.name;
+        this.taskResponsables = task.taskResponsables;
         this.step = task.step;
         this.description = task.description;
         this.values = task.values;

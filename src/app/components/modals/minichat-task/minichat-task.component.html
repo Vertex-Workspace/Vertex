@@ -12,26 +12,29 @@
     
     <div class="miniChat-main">
 
-        <div class="w-full h-[88%] flex">
-            <div class="w-1/2 h-full flex flex-col">
-
-            </div>
-
-            <div class="w-1/2 h-full flex flex-col">
-
+        <div class="center-div">
+            <div class="min-h-[60px]" *ngFor="let message of messages">
+                <div [ngClass]="message.id % 2==0 ? 'left' : 'right'">
+                    <div class="regular-text" [ngClass]="message.id % 2==0 ? 'answer' : 'messageUser'">
+                        <p class="pChat">{{message.content}}</p>
+                    </div>
+                    <div>
+                        <p class="pChat">{{message.time}}</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="miniChat-main-input regular-text">
             <div class="div-search">
-                <input class="input-search" type="text" placeholder="Digite sua mensagem" />
+                <input class="input-search" [(ngModel)]="messageUser" type="text" placeholder="Digite sua mensagem" />
                 <div class="div-icons">
                     <fa-icon class="icons" [icon]="faPaperclip"></fa-icon>
                     <fa-icon class="icons" [icon]="faMicrophoneLines"></fa-icon>
                 </div>
             </div>
-            <div class="square-chat">
-                <fa-icon (click)="submit()" class="paperplane" [icon]="faPaperPlane"></fa-icon>
+            <div class="square-chat" (click)="submit()">
+                <fa-icon  class="paperplane" [icon]="faPaperPlane"></fa-icon>
             </div>
         </div>
     </div>

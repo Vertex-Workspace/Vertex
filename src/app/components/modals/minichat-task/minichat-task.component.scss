@@ -23,6 +23,8 @@
     }
 }
 
+
+
 .miniChat-header {
     @apply flex w-full h-[12%] items-start justify-around;
     background-color: $primaryColor;
@@ -76,3 +78,33 @@
     @apply w-[10%] h-[100%] rounded-sm flex items-center justify-center;
     background-color: $primaryColor;
 }
+
+.center-div{
+    @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto
+ }
+
+.left{
+    @apply w-[100%] min-h-[30px] flex flex-col items-start  gap-2;
+ }
+ 
+ .right{
+     @apply w-[100%] min-h-[30px] flex flex-col items-end gap-2;
+ }
+ 
+ .answer{
+     @apply flex rounded-sm items-center justify-center p-3 min-h-[30px] gap-1 break-words;
+     border: $borderBottom;
+     max-width: 50%;    
+ }
+ 
+ .messageUser{
+     @apply flex rounded-sm items-center justify-center p-3  min-h-[30px] gap-1 break-words;
+     background-color: $primaryColor;
+     color: $secondColor;
+     max-width: 50%;
+ }
+ 
+ .pChat {
+     @apply h-[30%] flex items-center min-h-[30%];
+ }
+ 

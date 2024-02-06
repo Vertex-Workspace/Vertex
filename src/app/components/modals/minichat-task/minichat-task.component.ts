@@ -25,6 +25,9 @@ export class MinichatTASKComponent {
   faStar = faStar;
   faArrowLeft = faArrowLeft;
 
+  messageUser: any = " ";
+  side: boolean = true;
+
   @Output() miniChatOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output() chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -185,8 +188,25 @@ export class MinichatTASKComponent {
     }
   ]
   
-  submit(){
+  submit() {
+    console.log(this.messageUser);
+    
+    if (this.messageUser != "") {
+      let hora = new Date().getHours() + ":" + new Date().getMinutes();
+      if (new Date().getMinutes() < 10) {
+        hora = new Date().getHours() + ":0" + new Date().getMinutes();
+      }
 
+      this.messageUser = {
+        id: this.messages.length + 1,
+        content: this.messageUser,
+        time: hora
+      }
+
+      this.messages.push(this.messageUser)
+      this.side = !this.side;
+      this.messageUser = '';
+    }
   }
 
   expandChat(value: boolean) {

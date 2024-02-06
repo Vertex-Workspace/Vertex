@@ -19,6 +19,9 @@ import { TimeInTask } from 'src/app/models/timeInTask';
 export class TaskComponent implements OnInit {
   faClock = faClock;
 
+  @Input()
+  project!: Project;
+
   @Output() close = new EventEmitter();
 
   @Output() changes = new EventEmitter();
@@ -27,9 +30,8 @@ export class TaskComponent implements OnInit {
 
   taskStep!: Task;
   user!: User;
-  project!: Project;
   timeInTask!: TimeInTask;
-  working!: boolean;
+  
   seconds: number = 0;
   minutes: number = 0;
   hours: number = 0;
@@ -42,36 +44,34 @@ export class TaskComponent implements OnInit {
   selectedComponent: string = 'description';
 
   async ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('logged')!);
+    console.log(this.task.taskResponsables);
+    this.task.taskResponsables!.forEach((taskResponsable) => {
+      if (taskResponsable.userTeam.user.id == this.user.id) {
+        this.idResponsable = taskResponsable.id;
+      }
+    });
     await this.getTimeInTask();
-    await this.getProject()
-    this.working = this.timeInTask.workingOnTask
-    if (this.working) {
+    if (this.timeInTask.working) {
       this.startTimer()
     }
+    console.log(this.task);
   }
-
-  async getProject(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.projectService.getOneById(1).subscribe(
-        (project: Project) => {
-          this.project = project;
-          resolve();
-        },
-        (e: any) => {
-          console.log(e.error);
-        }
-      );
-    });
-  }
-
+  
+  
   async getTimeInTask() {
-    this.taskHourService.getTimeInTask(this.task.id).subscribe(
+    this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
       (time: TimeInTask) => {
+        console.log(time);
+        
         this.timer = time.timeInTask;
+        
         this.seconds = parseInt(time.timeInTask.substring(6, 8));
         this.minutes = parseInt(time.timeInTask.substring(3, 5));
         this.hours = parseInt(time.timeInTask.substring(0, 2));
         this.timeInTask = time;
+        console.log(this.timeInTask);
+        
         console.log(time, "TIME-IN BACK");
       },
       (e: any) => {
@@ -130,15 +130,9 @@ export class TaskComponent implements OnInit {
 
 
   idResponsable: number = 0;
+  
   startTimer() {
-    this.timeInTask.workingOnTask = true;
-    this.working = true;
-    this.user = JSON.parse(localStorage.getItem('logged')!);
-    this.task.taskResponsables!.forEach((taskResponsable) => {
-      if (taskResponsable.userTeam.user.id == this.user.id) {
-        this.idResponsable = taskResponsable.id;
-      }
-    });
+    this.timeInTask.working = true;
 
     let taskHour: taskHour = {
       task: {
@@ -148,6 +142,7 @@ export class TaskComponent implements OnInit {
         id: this.idResponsable
       }
     }
+    console.log(taskHour);
 
     this.id = setInterval(() => {
       this.seconds++;
@@ -160,7 +155,7 @@ export class TaskComponent implements OnInit {
         this.hours++;
       }
       this.timer = `${this.hours < 10 ? '0' + this.hours : this.hours}:${this.minutes < 10 ? '0' + this.minutes : this.minutes}:${this.seconds < 10 ? '0' + this.seconds : this.seconds}`;
-    }, 1000);
+    }, 1000);  
 
     this.taskHourService.saveTaskHour(taskHour).subscribe(
       (taskHour: taskHour) => {
@@ -174,8 +169,7 @@ export class TaskComponent implements OnInit {
   }
 
   async stopTimer() {
-    this.working = false;
-    this.timeInTask.workingOnTask = false;
+    this.timeInTask.working = false;
 
     let taskHour: taskHour = {
       task: {

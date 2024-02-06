@@ -12,7 +12,7 @@
                     <fa-icon [icon]="faClock"></fa-icon>
                     <p>{{timer}}</p>
                 </div>
-                <button *ngIf="!working" (click)="closeModal()" class="large-text">X</button>
+                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
             </div>
         </div>
         <div class="informations">
@@ -65,8 +65,8 @@
                     <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
                 </div>
                 <div class="submit">
-                    <button *ngIf="!working" (click)="startTimer()">Trabalhar na Tarefa</button>
-                    <button id="red-btn" *ngIf="working" (click)="stopTimer()">Finalizar Tarefa</button>
+                    <button *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar na Tarefa</button>
+                    <button id="red-btn" *ngIf="timeInTask.working" (click)="stopTimer()">Finalizar Tarefa</button>
                 </div>
             </div>
         </div>
