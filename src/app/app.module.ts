@@ -36,6 +36,9 @@ import { GroupsSelectModule } from './components/modals/groups-select/groups-sel
 import { MinichatModule } from './components/modals/minichat/minichat.module';
 import { MinichatTASKModule } from './components/modals/minichat-task/minichat-task.module';
 
+import { InputValuePropertyComponent } from './components/reusable-components/input-value-property/input-value-property.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,

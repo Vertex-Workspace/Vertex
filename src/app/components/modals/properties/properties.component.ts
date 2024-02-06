@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
 faFont, faCalendarDays, faSpinner, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { elements } from 'chart.js';
+import { Project } from 'src/app/models/project';
 
 @Component({
   selector: 'app-properties',
@@ -29,6 +30,9 @@ export class PropertiesComponent{
   close = new EventEmitter<Event>();
 
   @Input()
+  project!: Project;
+
+  @Input()
   height?: String;
 
   @Input()
@@ -40,9 +44,6 @@ export class PropertiesComponent{
 
   name?: string;
 
-  ngOnInit():void{
-
-  }
 
   itemsList = [
     {
@@ -92,11 +93,9 @@ export class PropertiesComponent{
     || this.currentModal === 'items-selection') {
       this.currentModal = 'general'
       this.text = 'Propriedades'
-      this.footerText = 'Adicionar Propriedade'
     } else if (this.currentModal === 'colors') {
       this.currentModal = 'status'
       this.text = 'Status'
-      this.footerText = ''
     }
   }
 

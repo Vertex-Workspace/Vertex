@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { cols,
-     } from 'src/app/pages/tasks/data-test';
 import {
   faTrashCan, 
   faEnvelope, 
-  faClockRotateLeft 
+  faClockRotateLeft, 
+  faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { Value } from 'src/app/models/value';
+import { PropertyKind } from 'src/app/models/property';
 
 @Component({
   selector: 'app-row-card',
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./row-card.component.scss']
 })
 export class RowCardComponent {
-  
+  faEllipsisVertical = faEllipsisVertical;
   faClock = faClockRotateLeft;
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;
@@ -27,44 +27,36 @@ export class RowCardComponent {
   @Input()
   cols!: any[];
 
+  value!: Value;
+
   icons: any[] = [
     { id: 'clock', icon: this.faClock },
     { id: 'chat', icon: this.faEnvelope },
     { id: 'delete', icon: this.faTrashCan }
   ];
 
-  getNameWidth(): string {
-    const obj = cols.find(c => {
-      return c.field === 'name';
-    })
-    return obj!.width;
-  }
-
-  getPropertyValue(col: any): string {
-    const prop = this.findPropertyInTask(col);
-
-    if (prop) {
-      return prop.value.toString();
-    }
-
-    return " - ";    
-  }
-
-  findPropertyInTask(prop: any): any {
-    return this.task.properties?.find(p => {
-      return p.name === prop.field;
+  getCols(): any[] {
+    let cols : any [] = [];
+    this.cols.map((col) => { 
+      if(col.field !== "name") {
+        cols.push(col);
+      }
     });
+    return cols;
   }
 
-  getPropertyColor(col: any): string {
-    const prop = this.findPropertyInTask(col);
+  getNameWidth(): string {
+    return "40%";
+  }
 
-    if (prop !== undefined 
-              && Object.hasOwn(prop, 'bgColor')) {
-      return prop.bgColor + "99";
-    }
-
-    return "#F3F3F3";
+  getPropertyValue(col: any) : Value {
+    let value : Value;
+    this.task.values?.forEach(values => {
+      if (col.id === values.property.id) {
+        value = values;
+      }
+    });
+    return value!;
   }
 
 }

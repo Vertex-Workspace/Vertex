@@ -1,5 +1,5 @@
 <!-- QUICK ACCESS COMPONENT -->
-<section [ngStyle]="{'align-items': typeString === 'project' ? 'flex-start' : 'flex-end'}">
+<section [ngStyle]="{'align-items': typeString === 'project' ? 'flex-start' : 'flex-end'}" class="pt-2">
 
     <!-- WORKSPACE TITLE -->
     <div class="card-workspace">
@@ -21,7 +21,7 @@
 
     <!-- CHARTS -->
     <div class="charts">
-        <div class="card-spaces" *ngFor="let chart of ['Seu Desempenho Pessoal', 'Tarefas em Cada Equipe']">
+        <div class="card-spaces pt-6" *ngFor="let chart of ['Seu Desempenho', 'Tarefas por Equipe']">
             <h6>{{chart}}</h6>
             <div>
                 <div class="card-chart">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <a class="regular-text" *ngIf="chart === 'Tarefas em Cada Equipe'"
-            (click)="redirectToProfile()">Visualizar todos os gráficos</a>
+            (click)="redirectToProfile()">Visualizar tudo</a>
         </div>
     </div>
 

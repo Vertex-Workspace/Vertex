@@ -2,7 +2,8 @@
     <ng-container *ngFor="let item of getType()">
         <div class="card">
             <div class="image" (click)="openTeam(item.id)">
-                <img src="../../../../assets/teste/teste.jpg">
+                <img src="data:image/jpg;base64, {{item.image}}" alt="">
+
             </div>
             <div class="informations">
                 <div class="informations-text" (click)="openTeam(item.id)">

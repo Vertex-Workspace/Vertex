@@ -1,9 +1,12 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { PropertyKind, PropertyList } from 'src/app/models/property';
-import { Task } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/task';
+import { ValueUpdate } from 'src/app/models/value';
+import { TaskService } from 'src/app/services/task.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-calendar',
@@ -17,11 +20,32 @@ export class CalendarComponent {
   faCircleUser = faCircleUser;
 
   @Input() project!: Project;
+  day: any;
+
+  constructor(private taskService: TaskService, private userService: UserService) { }
 
   ngOnInit() {
     this.buildCalendar();
   }
+
+  plus : boolean = false;
+  
   modalTasks: boolean = false;
+
+
+
+  @Output() openTaskDetails = new EventEmitter();
+  openCardTask(task: Task): void {
+    this.openTaskDetails.emit(task);
+  }
+
+  //FUTURE 
+  buttonDay!: Date;
+  showAdd(day : Date): void{
+    this.buttonDay = day;
+    console.log(this.buttonDay);
+  }
+
   modalDate?: Date;
   openModalTasks(date: Date | null): void {
     if (date != null) {
@@ -38,7 +62,8 @@ export class CalendarComponent {
       this.project.tasks.forEach((task) => {
         task.values.forEach((value) => {
           if (value.property.kind === PropertyKind.DATE) {
-            let valuePropertyDate: Date = value.value as Date;
+  
+            let valuePropertyDate: Date = new Date(value.value as string);
             if (valuePropertyDate.getDate() == date.getDate()
               && valuePropertyDate.getMonth() == date.getMonth()
               && valuePropertyDate.getFullYear() == date.getFullYear()) {
@@ -143,27 +168,87 @@ export class CalendarComponent {
 
   //Temporary
   getColor(task: Task): string {
-    task.properties.forEach(
-      (property) => {
-        if (property.kind === PropertyKind.STATUS) {
-          console.log("STATUS " + task);
-          task.values.forEach(
-            (value) => {
-              if (value.property.id === property.id) {
-                let valuePropertyList: PropertyList = value.value as PropertyList;
-                if (valuePropertyList.color === "RED") {
-                  return "#FF9D9D50";
-                } else if (valuePropertyList.color === "YELLOW") {
-                  return "#FFD60035";
-                } else if (valuePropertyList.color === "GREEN") {
-                  return "#65D73C50";
-                }
-              }
-              return "#7be05750";
-            });
+    let color: string;
+    task.values.forEach(
+      (value) => {
+        if (value.property.kind === PropertyKind.STATUS) {
+            let valuePropertyList: PropertyList = value.value as PropertyList;
+            if (valuePropertyList.color === "RED") {
+              color = "#FF9D9D50";
+            } else if (valuePropertyList.color === "YELLOW") {
+              color = "#FFD60035";
+            } else if (valuePropertyList.color === "GREEN") {
+              color = "#65D73C50";
+            }
         }
       }
     );
-    return "#7be05750";
+    return color!;
+  }
+
+
+  //Create a new task in the project according the day was clicked
+  newTaskOnDay(day: Date) {
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: this.project.id!
+      },
+      values: [],
+      creator: {
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
+    }
+
+
+  
+    this.taskService.create(taskCreate).subscribe(
+      (task) => {
+        this.project.tasks.push(task);
+
+        task.values.forEach((value) => {
+          if (value.property.kind === PropertyKind.DATE) {
+            const valueUpdate: ValueUpdate = {
+              id: task.id,
+              value: {
+                property: {
+                  id: value.property.id
+                },
+                value: {
+                  id: value.id,
+                  //SLICE RETIRAR O "Z" NO FINAL
+                  value: day.toISOString().slice(0, -1)
+                }
+              }
+            };
+            console.log(valueUpdate);
+            this.taskService.patchValue(valueUpdate).subscribe(
+              (taskDate) => {
+                task.values = taskDate.values;
+                this.openCardTask(task);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  }
+
+  deleteTask(task: Task): void {
+    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+  }
+
+  //DRAG AND DROP
+  drag(task : Task): void {
+    console.log(task);
   }
 }

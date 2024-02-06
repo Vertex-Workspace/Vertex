@@ -9,7 +9,11 @@
 }
 
 .current-location{
-    @apply flex w-[50%] h-full justify-start items-center
+    @apply flex w-[50%] h-full justify-start items-center;
+
+    p {
+        @apply pl-2;
+    }
 }
 .items-header{
     @apply flex w-[5%] h-full justify-between items-center;
@@ -17,4 +21,14 @@
 i{
     @apply text-xl;
     color: $primaryColor;
+}
+
+.back {
+    @apply p-1 transition-colors rounded-md cursor-pointer;
+
+    &:hover {
+        @apply transition-colors;
+        background-color: $primaryColor;
+        color: $secondColor;
+    }
 }
