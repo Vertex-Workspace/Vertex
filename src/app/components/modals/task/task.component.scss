@@ -22,17 +22,26 @@
 }
 
 .base {
-    @apply flex flex-col p-5 rounded-md;
+    @apply w-full flex flex-col p-5 rounded-md ;
+}
+
+.div-timer-closeModal{
+    @apply w-[30%] gap-[3%] flex justify-around items-center text-white;
+}
+
+.div-timer{
+    @apply w-40 h-10  flex justify-evenly items-center;
+    background-color: $primaryColor;
 }
 
 .location {
-    @apply flex w-full h-[5%] justify-between;
+    @apply flex w-[100%] h-[5%] justify-center;
 
     .routes{
-        @apply flex w-1/2 gap-5 divide-x-2;
+        @apply flex w-[67%] gap-5 divide-x-2;
     }
     p {
-        @apply flex items-center justify-center;
+        @apply flex items-center justify-center ;
     }
     p:last-child {
         @apply px-5;
@@ -78,6 +87,17 @@
     transition: 0.1s;
 }
 
+#red-btn{
+    background-color: $error;
+    color: $secondColor;
+}
+#red-btn:hover{
+    background-color: $secondColor;
+    color: $primaryColor;
+    border: 1px solid $primaryColor;
+    transition: 0.1s;
+}
+
 .right {
     @apply flex flex-col items-center justify-between;
 
@@ -100,6 +120,11 @@
 .submit {
     @apply w-full flex justify-end;
 }
+
+.submit-btn-red{
+    background-color: $error;
+}
+
 .components{
     @apply flex w-[70%] items-center flex-col;
 }
@@ -165,7 +190,7 @@ input:focus{
 textarea {
     @apply flex px-4 py-2;
     resize: none;
-    min-height: 100px;
+    min-height: 150px;
     border: none;
     background-color: inherit;
 }

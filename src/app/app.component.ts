@@ -98,6 +98,7 @@
         document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
 
 
+
       });
     }
 

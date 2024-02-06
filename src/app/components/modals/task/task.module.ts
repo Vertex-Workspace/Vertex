@@ -5,6 +5,8 @@ import { CommentsComponent } from './comments/comments.component';
 import { LogComponent } from './log/log.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { MinichatModule } from '../minichat/minichat.module';
+import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
 import { PropertiesModule } from './properties/properties.module';
 
 
@@ -13,6 +15,13 @@ import { PropertiesModule } from './properties/properties.module';
     TaskComponent,
     CommentsComponent,
     LogComponent,
+    PropertiesComponent,
+  ],
+  exports: [TaskComponent],
+  imports: [
+    CommonModule,
+     FontAwesomeModule, 
+     FormsModule, MinichatTASKModule],
   ],
   exports: [TaskComponent],
   imports: [CommonModule, FontAwesomeModule, FormsModule, PropertiesModule],

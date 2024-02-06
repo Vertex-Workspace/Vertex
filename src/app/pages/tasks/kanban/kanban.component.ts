@@ -178,10 +178,16 @@ export class KanbanComponent {
         id: this.userService.getLogged().id!
       },
       teamId: this.project.idTeam!
+    
     }
 
     this.taskService.create(taskCreate).subscribe(
+
       (task: Task) => {
+        console.log(task,"CRIAR");
+        console.log(this.project);
+        
+        
         this.project.tasks.push(task);
         this.alertService.successAlert("Tarefa criada com sucesso!");
       },

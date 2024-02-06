@@ -1,0 +1,110 @@
+@import '../../../../_variables.scss';
+
+
+.miniChat2 {
+    @apply w-[500px] h-[550px] rounded-sm flex flex-col justify-between items-start shadow-lg;
+    background-color: $card;
+    animation: bottomToTop 1s;
+}
+
+@media screen and (max-width:1421px) {
+    .miniChat2 {
+        @apply w-[320px] h-[400px] rounded-sm flex flex-col justify-between items-start shadow-lg;
+    }
+}
+@keyframes bottomToTop {
+    0% {
+        height: 0px;
+        overflow: hidden
+    }
+
+    100% {
+        height: 550px;
+    }
+}
+
+
+
+.miniChat-header {
+    @apply flex w-full h-[12%] items-start justify-around;
+    background-color: $primaryColor;
+}
+
+.miniChat-header-title {
+    @apply flex w-[70%] h-full items-center justify-start gap-5;
+    color: $card;
+
+    h6 {
+        color: $secondColor;
+    }
+}
+
+.miniChat-header-close {
+    @apply flex w-[15%] h-full items-center justify-end gap-5;
+    color: $card;
+}
+
+.miniChat-main {
+    @apply flex flex-col w-full h-[88%] items-end pb-2 justify-evenly;
+}
+
+.miniChat-main-input {
+    @apply flex w-full h-[10%] items-center justify-evenly;
+}
+
+.div-search {
+    @apply flex border-2 w-[80%] h-full rounded-sm;
+    border: 1px solid $emphasis;
+}
+
+.input-search {
+    @apply pl-[10px] w-[84%] h-[100%];
+}
+
+.div-icons {
+    @apply flex gap-2 w-[16%];
+}
+
+.icons {
+    @apply flex justify-between items-center text-lg;
+    color: $primaryColor  !important;
+}
+
+.paperplane {
+    @apply text-base pr-1;
+}
+
+.square-chat {
+    @apply w-[10%] h-[100%] rounded-sm flex items-center justify-center;
+    background-color: $primaryColor;
+}
+
+.center-div{
+    @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto
+ }
+
+.left{
+    @apply w-[100%] min-h-[30px] flex flex-col items-start  gap-2;
+ }
+ 
+ .right{
+     @apply w-[100%] min-h-[30px] flex flex-col items-end gap-2;
+ }
+ 
+ .answer{
+     @apply flex rounded-sm items-center justify-center p-3 min-h-[30px] gap-1 break-words;
+     border: $borderBottom;
+     max-width: 50%;    
+ }
+ 
+ .messageUser{
+     @apply flex rounded-sm items-center justify-center p-3  min-h-[30px] gap-1 break-words;
+     background-color: $primaryColor;
+     color: $secondColor;
+     max-width: 50%;
+ }
+ 
+ .pChat {
+     @apply h-[30%] flex items-center min-h-[30%];
+ }
+ 
