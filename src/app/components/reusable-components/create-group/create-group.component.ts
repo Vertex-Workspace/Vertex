@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Group } from 'src/app/models/groups';
 import { Team } from 'src/app/models/team';
@@ -12,13 +12,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './create-group.component.html',
   styleUrls: ['./create-group.component.scss']
 })
-export class CreateGroupComponent implements OnInit{
+export class CreateGroupComponent implements OnInit {
 
   form !: FormGroup;
 
+  @Input()
   team !: Team
 
-  users : User []=[];
+  users: User[] = [];
 
   @Output()
   createGroup = new EventEmitter<Group>()
@@ -26,19 +27,14 @@ export class CreateGroupComponent implements OnInit{
   @Output()
   close = new EventEmitter();
 
-  constructor( private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private userService: UserService){  
+    private userService: UserService) {
     this.getTeam();
-    this.users;
   }
 
   ngOnInit(): void {
-    this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
-      this.users = users;
-    });
-    
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       team: [this.team],
@@ -47,32 +43,29 @@ export class CreateGroupComponent implements OnInit{
   }
 
   onSubmit(): void {
-    console.log(this.users);
-    
     const group = this.form.getRawValue() as Group
     group.team = this.team
-    this.createGroup.emit(group);
+    group.users = this.users
+    this.createGroup.emit(group);  
   }
 
-  getTeam(): void{
+  getTeam(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.teamService
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
-        console.log(this.team);
-      }) 
+      })
   }
 
-  selectUsers(user : User): User[]{
-    console.log(user);
-    this.users.push(user);
-
-    return this.users;
+  selectUsers(user: User): void {
+    if (user.selected) {
+      this.users.push(user);
+    }
   }
 
-  closeGroup(){
+  closeGroup() {
     this.close.emit()
   }
 

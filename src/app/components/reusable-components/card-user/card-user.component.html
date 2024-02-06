@@ -10,7 +10,7 @@
             class="icon-not-selected" (click)="selectUser(user)"></fa-icon>
         <fa-icon *ngIf="user.selected && typeString === 'creating'" size="1x" [icon]="faSquare" class="icon"
             (click)="selectUser(user)"></fa-icon>
-        <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon" (click)="removeUser()">
+        <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon" (click)="removeUser(user)">
         </fa-icon>
         <fa-icon *ngIf="typeString === 'permissions'" size="1x" [icon]="faCaretDown" class="icon" (click)="openPermissions(user)">
         </fa-icon>

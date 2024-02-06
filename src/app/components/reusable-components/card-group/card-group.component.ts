@@ -5,6 +5,7 @@ import { Group } from 'src/app/models/groups';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { TeamService } from 'src/app/services/team.service';
+import { GroupService } from 'src/app/services/group.service';
 
 @Component({
     selector: 'app-card-group',
@@ -21,7 +22,7 @@ export class CardGroupComponent{
     close = new EventEmitter<Event>();
 
     @Output()
-    deleteEmitter: EventEmitter<number> = new EventEmitter<number>();
+    deleteEmitter: EventEmitter<Group> = new EventEmitter<Group>();
 
     @Output()
     numberTeam: EventEmitter<number> = new EventEmitter<number>();
@@ -38,6 +39,13 @@ export class CardGroupComponent{
     @Input()
     group !: Group
 
+    @Input()
+    user !: User  
+
+    constructor(
+        private groupService: GroupService
+    ){}
+
     getGroup(): any[] {
         return this.team?.groups!;
     }
@@ -51,18 +59,13 @@ export class CardGroupComponent{
     }
 
     users: User[] = [];
-    constructor(private userService: UserService) {}
   
     ngOnInit(): void {
-      this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
-        this.users = users;
-      });
       this.team = this.group.team;
     }
 
-    deleteEmit(id: number): void {  
-        console.log(id);  
-        this.deleteEmitter.emit(id)
+    deleteEmit(group: Group): void {   
+        this.deleteEmitter.emit(group)
     }
 
 }

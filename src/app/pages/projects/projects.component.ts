@@ -80,11 +80,12 @@ export class ProjectsComponent implements OnInit {
   }
 
 
-  delete(id: number): void {
+  delete(projectId: Project): void {
     this.projectService
-      .delete(id)
+      .delete(projectId.id)
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto deletado com sucesso!`);
+        this.team.projects?.splice(this.team.projects.indexOf(projectId),1)
         this.getAfterChange();
       },
         e => {
@@ -92,12 +93,11 @@ export class ProjectsComponent implements OnInit {
         });
   }
 
-  deleteGroup(groupId: number):void {
-    console.log('entrei no dg');
-    console.log(event);
-    
-    this.groupService.delete(groupId).subscribe((group: Group) => {
+  deleteGroup(groupId: Group):void {
+    console.log(groupId); 
+    this.groupService.delete(groupId.id).subscribe((group: Group) => {
       this.alert.successAlert('Grupo deletado com sucesso')
+      this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
     },
     e=> {
       this.alert.errorAlert("Não foi possível deletar");
@@ -149,6 +149,7 @@ export class ProjectsComponent implements OnInit {
       .create(project, teamId)
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
+        this.team.projects?.splice(this.team.projects.push(project))
       });
 
   }
@@ -159,7 +160,9 @@ export class ProjectsComponent implements OnInit {
       .create(group)
       .subscribe((group: Group) => {
         this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
+        this.team.groups?.splice(this.team.groups.push(group))
         this.switchCreateViewGroup();
+
       },
         e => {
           if (group.name == null) {

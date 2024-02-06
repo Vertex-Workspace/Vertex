@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
 
 @Component({
@@ -23,7 +24,10 @@ export class CardListComponent implements OnInit{
   type !: string;
 
   @Output()
-  deleteEmitter: EventEmitter<number> = new EventEmitter<number>();
+  deleteEmitter: EventEmitter<Project> = new EventEmitter<Project>();
+
+  @Output()
+  deleteEmitterTeam: EventEmitter<Team> = new EventEmitter<Team>();
 
   delete: boolean = false;
 
@@ -50,8 +54,12 @@ export class CardListComponent implements OnInit{
     this.changeModalState();
   }
 
-  deleteEmit(id: number): void {    
-    this.deleteEmitter.emit(id)
+  deleteEmit(project: Project): void {    
+    this.deleteEmitter.emit(project)
+  }
+
+  deleteEmitTeam(team: Team): void {
+    this.deleteEmitterTeam.emit(team)
   }
 
   changeModalState(): void {

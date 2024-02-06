@@ -83,7 +83,7 @@ export class UserService {
     return user;
   }
 
-  public getAll(): Observable<User[]> { 
+  public getAll(): Observable<User[]> {    
     return this.http
       .get<User[]>(`${URL}user`)
       .pipe(map((users: User[]) => users.map(user => new User(user))));
@@ -103,7 +103,7 @@ export class UserService {
 
   public getUsersByTeam(teamId: any): Observable<User[]> {
     return this.http
-      .get<User[]>(`${URL}user/usersByGroup/${teamId}`)
+      .get<User[]>(`${URL}team/usersByTeam/${teamId}`)
       .pipe(map((users: User[]) => users.map(user => new User(user))));
   }
 
@@ -134,5 +134,4 @@ export class UserService {
     return this.http
       .put<User>(`${URL}user`, user);
   }
-
 }

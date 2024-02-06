@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateGroupComponent } from './create-group.component';
-import { CardUserModule } from '../card-user/card-user.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardUserModule } from '../card-user/card-user.module';
 
 
 

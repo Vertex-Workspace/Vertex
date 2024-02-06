@@ -81,9 +81,9 @@ export class HomeComponent implements OnInit{
     
   }
 
-  delete(id: number): void {
+  delete(team : Team): void {
     this.teamService
-      .delete(id)
+      .delete(team.id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
         this.getAfterChange();

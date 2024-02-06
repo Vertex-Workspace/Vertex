@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './pages/login/login.module';
 import { RegisterModule } from './pages/register/register.module';
 import { HomeModule } from './pages/home/home.module';
-import { ProjectsModule } from './pages/projects/projects.module';
 import { InputModule } from './components/reusable-components/input/input.module';
 import { ButtonModule } from 'primeng/button';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +32,7 @@ import { AlertService } from './services/alert.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { GroupsSelectModule } from './components/modals/groups-select/groups-select.module';
+import { ProjectsModule } from './pages/projects/projects.module';
 
 @NgModule({
   declarations: [

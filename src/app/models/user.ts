@@ -3,7 +3,7 @@ import { Personalization } from './personalization';
 
 export class User {
 
-    id ?: number | undefined;
+    id ?: number ;
     firstName !: string | undefined;
     lastName !: string | undefined;
     email !: string;
