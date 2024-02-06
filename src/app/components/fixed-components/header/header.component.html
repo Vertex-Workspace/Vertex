@@ -1,7 +1,15 @@
 <header class="header">
     <section>
         <div class="current-location medium-text">
-            {{currentRoute}}
+
+            <i 
+                (click)="back()" 
+                class="pi pi-angle-double-left back"
+                *ngIf="location !== 'Home'"
+            ></i>
+            <p>
+                {{location}}
+            </p>
         </div>
         <div class="items-header">
             <i class="pi pi-bell cursor-pointer" (click)="openNotifications()"></i>

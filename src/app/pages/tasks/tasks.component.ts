@@ -40,19 +40,19 @@ export class TasksComponent implements OnInit {
     private userService : UserService
   ) {}
 
-  projectId!:number;
 
   async ngOnInit(): Promise<void> {
     if (this.router.url.includes('projeto')) {
-    const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
+    const projectId: number = Number(this.route.snapshot.paramMap.get('id'));
     if(projectId){
       let projectRequested : Project | undefined = await this.projectService.getOneById(projectId).toPromise();
       if(projectRequested){
         this.project = projectRequested;
       }
     }
-    this.clicked = "Kanban";
+    this.clicked = localStorage.getItem('mode-task-view') || 'Kanban';
     }
+    console.log(this.project);
   }
 
   menuItems = [
@@ -81,6 +81,7 @@ export class TasksComponent implements OnInit {
   }
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+    localStorage.setItem('mode-task-view', preview);
   }
 
   onInputType(): void {
@@ -92,7 +93,7 @@ export class TasksComponent implements OnInit {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
       project: {
-        id: this.projectId
+        id: this.project.id!
       },
       values: [],
       creator: {

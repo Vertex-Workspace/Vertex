@@ -44,8 +44,7 @@ export class CardComponent implements OnInit{
   ];
 
   openChat(): void {
-    console.log('open chat');
-    console.log(this.borderColor);
+
   }
 
   openModalDelete(): void {
@@ -54,11 +53,11 @@ export class CardComponent implements OnInit{
 
   delete(event: any): void {
     this.modalDelete = false;
+    console.log(event);
     if(event){
     this.taskService.delete(this.task.id).subscribe(
       (task) => {
         //Alert
-        
         this.deleteTask.emit();
       },
       (error) => {
@@ -81,9 +80,6 @@ export class CardComponent implements OnInit{
     }
   }
 
-  dale(): void {
-    console.log('dale');
-  }
 
 
 }

@@ -33,7 +33,7 @@ export class KanbanComponent {
 
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
-    const task: Task = event.item.data;
+    const task: Task = event.item.data;    
 
     let previousPropertyList!: PropertyList;
     let newValue!: Value;
@@ -51,7 +51,6 @@ export class KanbanComponent {
 
             //Save on a local variable the value of the task
             newValue = value;
-            console.log(newValue);
           }
         });
       }
@@ -91,6 +90,8 @@ export class KanbanComponent {
         }
       };
 
+      console.log(valueUpdate);
+      
       //Patch the value of the status task
       this.taskService.patchValue(valueUpdate).subscribe();
     }

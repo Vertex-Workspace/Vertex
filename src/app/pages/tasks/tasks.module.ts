@@ -32,11 +32,11 @@ import { ChartModule } from 'primeng/chart';
     DragDropModule,
     FormsModule,
     CalendarModule,
-    PropertiesModule,
     TaskModule,
     ListModule,
     KanbanModule,
-    ChartModule
+    ChartModule,
+    PropertiesModule
   ],
 })
 export class TasksModule { }

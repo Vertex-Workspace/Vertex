@@ -5,6 +5,9 @@ import {
   faFont, faCalendarDays, faPlus, faSpinner, faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
 import { CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Property, PropertyKind, PropertyStatus } from 'src/app/models/property';
+import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/models/project';
 
 @Component({
   selector: 'app-general-properties',
@@ -51,80 +54,152 @@ export class GeneralPropertiesComponent {
   @Output()
   status = new EventEmitter();
 
-  closeModal() {
-    this.close.emit();
+  @Input()
+  project!: Project;
+
+
+  constructor(private projectService: ProjectService) {
+
   }
 
   propertiesList: any[] = [
     {
-      status: 'Visíveis',
+      status: 'Fixas',
+      opacity: false,
       icon: faEye,
-      properties: [
-        { name: 'Nome da Tarefa', icon: faFont },
-        { name: 'Prazo', icon: faCalendarDays },
-      ]
+      properties: []
+    },
+    {
+      status: 'Visíveis',
+      opacity: false,
+      icon: faEye,
+      properties: []
     },
     {
       status: 'Não visíveis',
+      opacity: true,
       icon: faEyeSlash,
-      properties: [
-        { name: 'Status', icon: faSpinner },
-        { name: 'Itens Seleção', icon: faCaretDown }
-      ]
-    },
+      properties: []
+    }
   ]
 
-  clickGear(type: string, i: number, i2: number) {
-    this.gear.emit({ list: this.propertiesList[i].properties[i2].name });
-    console.log(this.propertiesList[i].properties[i2].name)
+  ngOnInit(): void {
+    this.project.properties.forEach(
+      (property) => {
+        // [0] - FIXED, [1] - VISIBLE, [2] - INVISIBLE
+        if (property.propertyStatus === PropertyStatus.FIXED) {
+          this.propertiesList[0].properties.push(property);
+        } else if (property.propertyStatus === PropertyStatus.VISIBLE) {
+          this.propertiesList[1].properties.push(property);
+        } else {
+          this.propertiesList[2].properties.push(property);
+        }
+      });
+
+    console.log(this.propertiesList);
+  }
+
+  closeModal() {
+    this.close.emit();
+  }
+
+  createProperty() {
+    //BUROCRACY, THE BACK END DOESN'T NEED THIS TO CREATE A DEFAULT PROPERTY
+    let genericProperty = new Property({
+      id: 0,
+      name: 'Nova Propriedade',
+      kind: PropertyKind.TEXT,
+      propertyStatus: PropertyStatus.VISIBLE,
+      propertyLists: [],
+      isObligated: false,
+    });
+
+    this.projectService.createProperty(this.project.id!, genericProperty).subscribe(
+      (property) => {
+        console.log(property);
+        property.propertyLists = [];
+        this.project.properties.push(property);
+        this.propertiesList[1].properties.push(property);
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+
+
+  clickGear() {
+    // this.gear.emit({ list: this.propertiesList[i].properties[i2].name });
+    // console.log(this.propertiesList[i].properties[i2].name)
   }
 
   clickPlus(type: string) {
     this.plus.emit();
   }
 
-  editProperty(i: number, i2: number) {
-    if (this.propertiesList[i].properties[i2].icon === faSpinner) {
+  editProperty(propertyKind: PropertyKind) {
+    if (propertyKind === PropertyKind.STATUS) {
       this.status.emit();
-    } else if (this.propertiesList[i].properties[i2].icon === faCaretDown) {
+    } else if (propertyKind === PropertyKind.LIST) {
       this.select.emit();
     } else {
-      this.edit.emit({ list: this.propertiesList[i].properties[i2].name });
+        this.edit.emit();
     }
   }
 
 
-  changeStatus(namep: string, icon: any, i: number, i2: number) {
-    let visibles: any = this.propertiesList[0].properties;
-    let invisibles: any = this.propertiesList[1].properties;
-
-    if (this.propertiesList[i].icon === faEye) {
-      invisibles.push({ name: namep, icon: icon });
-      visibles.splice(i2, 1);
+  changeStatus(property: Property) {
+    if (property.propertyStatus === PropertyStatus.VISIBLE) {
+      this.propertiesList[1].properties.splice(this.propertiesList[1].properties.indexOf(property), 1);
+      this.propertiesList[2].properties.push(property);
+      property.propertyStatus = PropertyStatus.INVISIBLE;
     } else {
-      visibles.push({ name: namep, icon: icon });
-      invisibles.splice(i2, 1);
+      this.propertiesList[2].properties.splice(this.propertiesList[2].properties.indexOf(property), 1);
+      this.propertiesList[1].properties.push(property);
+      property.propertyStatus = PropertyStatus.VISIBLE;
     }
+    this.projectService.createProperty(this.project.id!, property).subscribe(
+      (property) => {
+        console.log(property);
+
+      }, (error) => {
+        console.log(error);
+      });
   }
 
-  delete(i: number, i2: number) {
-    console.log(i2);
-    this.propertiesList[i].properties.splice(i2, 1);
+  delete(property: Property) {
+    console.log(property.id);
+    this.projectService.deleteProperty(this.project.id!, property.id).subscribe(
+      (project) => {
+        console.log(project);
 
+        //[1] - VISIBLE, [2] - INVISIBLE
+        if (property.propertyStatus === PropertyStatus.VISIBLE) {
+          this.propertiesList[1].properties.splice(this.propertiesList[1].properties.indexOf(property), 1);
+        } else {
+          this.propertiesList[2].properties.splice(this.propertiesList[2].properties.indexOf(property), 1);
+        }
+        this.project.properties = this.project.properties.filter((p) => p.id !== property.id);
+      }, (error) => {
+        console.log(error);
+      });
   }
 
-  // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
-  drop(event: CdkDragDrop<any[]>, i: number) {
-    if ((event.previousContainer === event.container) && i == 0) {
-      moveItemInArray(this.propertiesList[0].properties, event.previousIndex, event.currentIndex);
-    } else if ((event.previousContainer === event.container) && i == 1) {
-      moveItemInArray(this.propertiesList[1].properties, event.previousIndex, event.currentIndex);
+  // the number of fixed itens list is 0, so the user can't move the other itens into it
+  drop(event: CdkDragDrop<any[]>) {
+    transferArrayItem(event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+
+  getIconProperty(kindProperty: PropertyKind): any {
+    if (kindProperty === PropertyKind.TEXT) {
+      return faFont;
+    } else if (kindProperty === PropertyKind.DATE) {
+      return faCalendarDays;
     } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      )
+      return faSpinner;
     }
   }
 }

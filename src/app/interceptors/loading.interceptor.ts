@@ -17,11 +17,11 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (this.activeRequests === 0) {
-      this.loadingService.show();
+      if(request.method !== 'PATCH'){
+        this.loadingService.show();
+      }
     }
-
     this.activeRequests++;
-
     return next.handle(request).pipe(
       finalize(() => {
         this.activeRequests--;

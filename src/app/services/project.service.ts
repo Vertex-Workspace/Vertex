@@ -4,6 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Project } from '../models/project';
 import { URL } from './path/api_url';
 import { Task } from '../models/task';
+import { Property } from '../models/property';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,17 @@ export class ProjectService {
           tasks.map(task => new Task(task))
         )
       )
+  }
+
+
+
+  //Properties
+
+  public createProperty(projectID:number, property : Property): Observable<Property> {
+    return this.http.patch<Property>(`${URL}project/${projectID}/property`, property);
+  }
+
+  public deleteProperty(projectID:number, propertyId : number): Observable<Property> {
+    return this.http.delete<Property>(`${URL}project/${projectID}/${propertyId}`, {});
   }
 }

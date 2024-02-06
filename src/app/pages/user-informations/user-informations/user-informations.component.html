@@ -5,7 +5,7 @@
         <div class="top-side">
             <div class="top-side-left">
                 <div class="top-side-user-img">
-                    <img src="data:image/jpg;base64, {{logged.image}}" alt="">
+                    <img src="data:image/jpg;base64, {{logged.image}}" alt="" class="rounded-full">
                     <!-- <fa-icon class="user-img" [icon]="faCircleUser"></fa-icon> -->
                 </div>
 
@@ -18,15 +18,12 @@
                     <div class="realName-location">
                         <p class="regular-text">{{logged.firstName}} {{logged.lastName}}</p>
                         |
-                        <p class="regular-text">{{logged.location}}</p>
+                        <p class="regular-text">{{logged.location ? logged.location : "Localização não informada"}}</p>
                     </div>
 
                     <div class="user-description">
                         <p class="regular-text description">
-                            <!-- {{logged.description}} -->
-                            Kaique Fernandes Lima é um talentoso programador que se destaca no mundo da tecnologia. Com
-                            uma paixão inabalável pela programação, ele encontrou seu lugar na renomada empresa WEG,
-                            onde contribui de maneira significativa para projetos inovadores e desafiadores.
+                            {{logged.description ? logged.description : "Sem descrição"}}
                         </p>
                     </div>
                 </div>

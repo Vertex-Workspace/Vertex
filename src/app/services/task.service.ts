@@ -45,5 +45,11 @@ export class TaskService {
     return this.http.patch<Task>(`${URL}task/value`, valueUpdate);
   }
 
+  public getAllByProject(id: number): Observable<Task[]> {
+    return this.http
+      .get<Task[]>(`${URL}task/project/${id}`)
+      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
+  }
+
 
 }

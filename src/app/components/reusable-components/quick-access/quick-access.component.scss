@@ -70,7 +70,7 @@ section {
 
 //RECENTLY TEAMS
 .recently-teams {
-    @apply flex w-2/3 h-[25.5%] justify-between items-center flex-col;
+    @apply flex w-2/3 h-[25.5%] justify-between items-center flex-col pt-8;
 
     .title {
         @apply flex w-full h-[10%];
