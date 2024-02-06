@@ -73,5 +73,5 @@
 </app-properties>
 
 <app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
-    (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
-
+    (close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>
+    

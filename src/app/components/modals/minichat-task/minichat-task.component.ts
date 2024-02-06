@@ -1,47 +1,36 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {
-  faChevronRight, faPaperPlane,
-  faMicrophoneLines, faPaperclip,
-  faCheckDouble, faUsers, faUser, faGlobe,
-  faMinimize, faStar, faCircleUser, faSearch,
-  faTimes
-} from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
-import { getLocaleDateFormat } from '@angular/common';
-
+import { Component, EventEmitter, Output } from '@angular/core';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faMicrophoneLines,
+        faCircleUser, faCheckDouble, faStar,faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  selector: 'app-minichat-task',
+  templateUrl: './minichat-task.component.html',
+  styleUrls: ['./minichat-task.component.scss']
 })
-export class ChatComponent {
-  faSearch = faSearch;
-  faCircleUser = faCircleUser;
-  faStar = faStar;
-  faMinimize = faMinimize;
-  faGlobe = faGlobe;
+export class MinichatTASKComponent {
+  faMessage = faMessage;
+  faTimes = faTimes;
   faUser = faUser;
-  faUsers = faUsers;
-  faCheckDouble = faCheckDouble;
+  faExpand = faExpand;
+  faPaperPlane = faPaperPlane;
   faPaperclip = faPaperclip;
   faMicrophoneLines = faMicrophoneLines;
-  faChevronRight = faChevronRight;
-  faPaperPlane = faPaperPlane;
-  faTimes = faTimes;
+  faCircleUser = faCircleUser;
+  faCheckDouble = faCheckDouble;
+  faStar = faStar;
+  faArrowLeft = faArrowLeft;
 
-  messageUser: any = "";
-  @Output()
-  chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  conversationOpen: boolean = false;
-
-  cardChat:number=0;
-
+  messageUser: any = " ";
   side: boolean = true;
 
-  constructor(private router: Router) { }
+  @Output() miniChatOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Output() chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   users = [
     {
@@ -60,25 +49,7 @@ export class ChatComponent {
         }
       ],
       conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
+    },{
       name: 'John Doe',
       status: 'online',
       avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
@@ -94,25 +65,7 @@ export class ChatComponent {
         }
       ],
       conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
+    },{
       name: 'John Doe',
       status: 'online',
       avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
@@ -128,25 +81,7 @@ export class ChatComponent {
         }
       ],
       conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
+    },{
       name: 'John Doe',
       status: 'online',
       avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
@@ -162,25 +97,7 @@ export class ChatComponent {
         }
       ],
       conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
+    },{
       name: 'John Doe',
       status: 'online',
       avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
@@ -196,26 +113,7 @@ export class ChatComponent {
         }
       ],
       conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-
-    {
+    },{
       name: 'John Doe',
       status: 'online',
       avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
@@ -231,11 +129,42 @@ export class ChatComponent {
         }
       ],
       conversationOpen: false
-    },
-    {
+    },{
       name: 'John Doe',
       status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },{
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      messages: [
+        {
+          content: 'Hello',
+          time: '12:10'
+        },
+
+        {
+          content: 'How are you?',
+          time: '12:10'
+        }
+      ],
+      conversationOpen: false
+    },{
+      name: 'John Doe',
+      status: 'online',
+      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
       messages: [
         {
           content: 'Hello',
@@ -250,16 +179,6 @@ export class ChatComponent {
       conversationOpen: false
     },
   ]
-
-  openConversation(i: number) {
-    this.users[this.cardChat].conversationOpen = false;
-    this.users[i].conversationOpen = true;
-    this.cardChat = i;
-  }
-
-  minimizeChat(value: boolean) {
-    this.chatExpanded.emit(value);
-  }
 
   messages = [
     {
@@ -268,13 +187,11 @@ export class ChatComponent {
       time: '12:10'
     }
   ]
-
+  
   submit() {
     console.log(this.messageUser);
     
     if (this.messageUser != "") {
-      console.log(this.messageUser);
-      
       let hora = new Date().getHours() + ":" + new Date().getMinutes();
       if (new Date().getMinutes() < 10) {
         hora = new Date().getHours() + ":0" + new Date().getMinutes();
@@ -286,11 +203,17 @@ export class ChatComponent {
         time: hora
       }
 
-      console.log(this.messageUser.id);
-
       this.messages.push(this.messageUser)
       this.side = !this.side;
       this.messageUser = '';
     }
+  }
+
+  expandChat(value: boolean) {
+    this.chatExpanded.emit(value);
+  }
+
+  openMiniChat(value: boolean) {
+    this.miniChatOpen.emit(value);
   }
 }
