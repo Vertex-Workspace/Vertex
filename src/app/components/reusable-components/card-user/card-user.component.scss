@@ -1,26 +1,48 @@
 @import '../../../../variables';
 
 .card{
-    @apply flex flex-row items-center w-[90%] shadow-lg;
-    min-height: 100px;
+    @apply flex flex-col items-center w-[95%] py-2;
 
     div:first-child{
-        @apply pl-2;
-    }
+        @apply pl-2 flex w-full bg-white shadow-lg items-center;
+        min-height: 40px;
 
-    div:nth-child(2){
-        @apply pl-2 w-[80%];
-    };
+        div:first-child{
+            @apply w-[30%] flex items-center pl-6 h-full;
+        };
+    
+        div:nth-child(2){
+            @apply pl-5 w-[60%] flex items-center h-full;
+        };
+
+        div:nth-child(3){
+            @apply pl-12 w-[10%] h-full;
+        };
+    }
 }
 
 .icon {
     color: $primaryColor;
+    font-size: 1rem;
 }
 
 .icon-not-selected {
-    color: $secondColor;
+    color: #f3f3ff;
+    font-size: 1rem;
+}
+
+.size{
+    font-size:1.5rem
 }
 
 .permissions {
-    @apply flex flex-col;
+    @apply flex flex-col w-[800px] bg-white h-[150px];
+
+    .single-permissions{
+        @apply w-full h-[20%]
+    };
+
+    p{
+        color:$primaryColor
+    }
 }

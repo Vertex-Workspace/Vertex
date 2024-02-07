@@ -55,7 +55,6 @@ import { ProjectsModule } from './pages/projects/projects.module';
     BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule,
-    UserSettingsModule,
     TeamInformationsModule,
     TasksModule,
     UserSettingsModule,

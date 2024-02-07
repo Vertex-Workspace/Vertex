@@ -1,25 +1,27 @@
 <div class="card" *ngFor="let user of users">
     <div [style.width]="width" [style.min-height]="height">
         <fa-icon size="2x" [icon]="faCircleUser" class="icon"></fa-icon>
-    </div>
-    <div>
-        <p>{{user.firstName}}</p>
-    </div>
-    <div>
-        <fa-icon *ngIf="!user.selected && typeString === 'creating'" size="1x" [icon]="faSquare"
-            class="icon-not-selected" (click)="selectUser(user)"></fa-icon>
-        <fa-icon *ngIf="user.selected && typeString === 'creating'" size="1x" [icon]="faSquare" class="icon"
-            (click)="selectUser(user)"></fa-icon>
-        <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon" (click)="removeUser(user)">
-        </fa-icon>
-        <fa-icon *ngIf="typeString === 'permissions'" size="1x" [icon]="faCaretDown" class="icon" (click)="openPermissions(user)">
-        </fa-icon>
+        <div>
+            <p>{{user.firstName}}</p>
+        </div>
+        <div>
+            <fa-icon *ngIf="!user.selected && typeString === 'creating'" size="1x" [icon]="faSquare"
+                class="icon-not-selected" (click)="selectUser(user)"></fa-icon>
+            <fa-icon *ngIf="user.selected && typeString === 'creating'" size="1x" [icon]="faSquare" class="icon"
+                (click)="selectUser(user)"></fa-icon>
+            <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon"
+                (click)="removeUser(user)">
+            </fa-icon>
+            <fa-icon *ngIf="typeString === 'permissions'" size="1x" [icon]="faCaretDown" class="icon"
+                (click)="openPermissions(user)">
+            </fa-icon>
+        </div>
     </div>
 
-    <div *ngIf="typeString === 'permissions' && user.openPermission" clas="flex flex-col">
-        <div *ngFor="let permission of permissionTypes" class="permissions">
-        <fa-icon size="1x" [icon]="faSquare" class="icon" *ngIf=""></fa-icon>
-            <p class="flex flex-col">{{permission.label}}</p>
+    <div *ngIf="typeString === 'permissions' && user.openPermission" class="permissions">
+        <div *ngFor="let permission of permissionTypes">
+            <fa-icon [icon]="faSquare" class="icon"></fa-icon>
+            <p>{{permission.label}}</p>
         </div>
     </div>
 </div>

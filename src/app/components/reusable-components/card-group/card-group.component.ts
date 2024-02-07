@@ -40,7 +40,9 @@ export class CardGroupComponent{
     group !: Group
 
     @Input()
-    user !: User  
+    user !: User
+    
+    users: User[] = [];
 
     constructor(
         private groupService: GroupService
@@ -57,8 +59,6 @@ export class CardGroupComponent{
     openModal(group: Group): void {
         group.open = !group.open;
     }
-
-    users: User[] = [];
   
     ngOnInit(): void {
       this.team = this.group.team;

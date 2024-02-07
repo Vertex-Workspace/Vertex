@@ -12,7 +12,7 @@
     </div>
     <div *ngIf="group.open" class="user">
         <p>Participantes</p>
-        <app-card-user [typeString]="'inTheGroup'" [width]="'40px'" [height]="'20px'" class="user-card" 
-        [group]="group" [team]="team"></app-card-user>
+        <app-card-user [typeString]="'inTheGroup'" [width]="'800px'" [height]="'20px'" class="user-card" 
+        [group]="group" [team]="team" *ngIf="users!=null"></app-card-user>
     </div>
 </div>
