@@ -18,19 +18,32 @@
 
 
 .task-name{
-    @apply w-full h-[10%] border-b border-[#092C4C] pt-3 flex items-end justify-start;
+    @apply w-full h-[25%]  pt-8 flex justify-evenly flex-col;
 
     input{
+        @apply flex flex-row justify-start w-full h-[40px] border-b;
         background-color: $secondColor;
-        @apply flex flex-row justify-start w-[330px];
+        border-color: $primaryColor;
+    }
+    p{
+        @apply flex w-full text-start;
+        color: $primaryColor;
     }
 }
 
 .properties-types {
-    @apply pt-12 w-[85%] h-[35%] grid grid-cols-3 justify-center gap-4 items-center;
+    @apply pt-2 w-[85%] h-[30%] grid grid-cols-3 justify-center gap-4;
 
-    div{
-        @apply w-full h-[50%] bg-[#EAEFF8] flex justify-center items-center shadow-2xl rounded-md;
+
+
+    .square-icon{
+        @apply w-full h-[60%] flex justify-center shadow-md items-center;
+        cursor: pointer;
+        background-color: $emphasis;
+
+        &:hover{
+            @apply scale-105;
+        }
     }
 }
 
@@ -39,7 +52,7 @@
 }
 
 .properties-answers {
-    @apply w-full h-[20%];
+    @apply flex w-full h-[20%] justify-end flex-col;
 
 
     div:last-child{
@@ -70,6 +83,23 @@
 }
 
 section{
-    @apply w-full h-full flex flex-col items-center;
+    @apply w-full h-[80%] flex flex-col items-center justify-evenly;
 
+
+    .info{
+        @apply flex w-full justify-center items-center;
+        opacity: 0.5;
+
+        fa-icon{
+            @apply w-4 h-4 flex justify-center items-center;
+            color: $primaryColor;
+            cursor: default;
+        }
+    }
+
+    button{
+        @apply w-[40%] h-[12%] rounded-sm shadow-2xl self-end;
+        background-color: $primaryColor;
+        color: $secondColor;
+    }
 }

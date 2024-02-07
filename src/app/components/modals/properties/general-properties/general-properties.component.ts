@@ -95,8 +95,6 @@ export class GeneralPropertiesComponent {
           this.propertiesList[2].properties.push(property);
         }
       });
-
-    console.log(this.propertiesList);
   }
 
   closeModal() {

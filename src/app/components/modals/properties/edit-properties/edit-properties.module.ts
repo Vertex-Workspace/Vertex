@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditPropertiesComponent } from './edit-properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -10,7 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   exports: [EditPropertiesComponent],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ]
 })
 export class EditPropertiesModule { }
