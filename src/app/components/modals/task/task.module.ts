@@ -8,22 +8,22 @@ import { FormsModule } from '@angular/forms';
 import { MinichatModule } from '../minichat/minichat.module';
 import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
 import { PropertiesModule } from './properties/properties.module';
+import { PropertiesComponent } from './properties/properties.component';
 
 
 @NgModule({
   declarations: [
     TaskComponent,
     CommentsComponent,
-    LogComponent,
-    PropertiesComponent,
+    LogComponent
   ],
   exports: [TaskComponent],
   imports: [
     CommonModule,
-     FontAwesomeModule, 
-     FormsModule, MinichatTASKModule],
-  ],
-  exports: [TaskComponent],
-  imports: [CommonModule, FontAwesomeModule, FormsModule, PropertiesModule],
+    FontAwesomeModule,
+    FormsModule, 
+    PropertiesModule,
+    MinichatTASKModule
+  ]
 })
-export class TaskModule {}
+export class TaskModule { }

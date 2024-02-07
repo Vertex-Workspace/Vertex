@@ -37,12 +37,14 @@ import { MinichatModule } from './components/modals/minichat/minichat.module';
 import { MinichatTASKModule } from './components/modals/minichat-task/minichat-task.module';
 
 import { InputValuePropertyComponent } from './components/reusable-components/input-value-property/input-value-property.component';
+import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
+    InvitationPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ export class Team {
     name !: string;
     creationDate !: Date;
     description !: string;
+    invitationCode!: String;
     users?: User[];
     creator?: User;
     groups?: Group[];
@@ -19,6 +20,7 @@ export class Team {
 
         this.id = team.id;
         this.name = team.name;
+        this.invitationCode = team.invitationCode;
         this.creationDate = team.creationDate;
         this.description = team.description;
         this.creator = team.creator;

@@ -28,6 +28,11 @@ export class TeamService {
       .pipe(map((team: Team) => new Team(team)));
   }
 
+  public getInvitationCodeById(id: number){
+    return this.http
+      .get<String>(`${URL}team/invitation/${id}`);
+  }
+
   public create(team: Team): Observable<Team> {
     return this.http
       .post<Team>(`${URL}team`, team)

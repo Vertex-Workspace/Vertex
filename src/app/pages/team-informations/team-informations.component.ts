@@ -10,6 +10,7 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
+import { AlertService } from '../../services/alert.service';
 
 
 @Component({
@@ -19,28 +20,59 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class TeamInformationsComponent implements OnInit {
 
-    team !: Team;
+
+
+    invitationCode!: String;
+    team!: Team;
     //to-do: add creation date, user social media, fix cards, -- charts
 
     constructor(
         private route: ActivatedRoute,
-        private teamService: TeamService
-    ) {}
-
-    ngOnInit(): void {
+        private teamService: TeamService,
+        private alertService: AlertService
+    ) {
         this.getTeam();
         this.start();
     }
+    
+    ngOnInit() {
+        
+        console.log(this.team);
+        
 
-    getTeam(): void {
+    }
+
+    getTeam() {
         const id = Number(this.route.snapshot.paramMap.get('id'));
 
-        this.teamService
-            .getOneById(id)
-            .subscribe((team: Team) => {
-                this.team = team;                
-            })
-        
+        this.teamService.getOneById(id).subscribe(
+            (team: Team) => {
+                this.team = team;
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
+
+
+    copyInviteLink() {
+
+        this.teamService.getInvitationCodeById(this.team.id!).subscribe(
+            (invitationCode: any) => {
+                console.log(invitationCode);
+                
+            },
+            (error) => {
+
+                console.log(error);
+            }
+        )
+        console.log(this.invitationCode);
+
+        this.alertService.successAlert("Link copiado com sucesso!");
+
+
     }
 
     start(): void {

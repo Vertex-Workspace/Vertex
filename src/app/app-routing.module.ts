@@ -20,6 +20,7 @@ import { UserInformationsComponent } from './pages/user-informations/user-inform
 import { AuthGuard } from './services/guards/auth.guard';
 import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { UserTeamGuard } from './services/guards/user-team.guard';
+import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,11 @@ const routes: Routes = [
   {
     path: "projetos",
     component: ProjectsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "aceitar-convite/:id",
+    component: InvitationPageComponent,
     canActivate: [AuthGuard]
   },
   {
