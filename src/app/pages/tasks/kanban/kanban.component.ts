@@ -3,12 +3,12 @@ import { Task, TaskCreate } from 'src/app/models/task';
 import {
   CdkDragDrop,
   moveItemInArray,
+  transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
 import { TaskService } from 'src/app/services/task.service';
-import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
+import { Value, ValueUpdate } from 'src/app/models/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -29,8 +29,6 @@ export class KanbanComponent {
 
   @Input()
   project!: Project;
-
-
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     const task: Task = event.item.data;    
@@ -183,11 +181,7 @@ export class KanbanComponent {
 
     this.taskService.create(taskCreate).subscribe(
 
-      (task: Task) => {
-        console.log(task,"CRIAR");
-        console.log(this.project);
-        
-        
+      (task: Task) => {    
         this.project.tasks.push(task);
         this.alertService.successAlert("Tarefa criada com sucesso!");
       },

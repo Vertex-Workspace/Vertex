@@ -16,7 +16,7 @@
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >
-            <ng-container *ngFor="let task of project.tasks">
+            <ng-container *ngFor="let task of taskList">
                 <div 
                     class="trow regular-text relative"
                     [cdkDragData]="task"

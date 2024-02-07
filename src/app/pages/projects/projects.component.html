@@ -72,11 +72,14 @@
                 </section>
                 
                 <div class="w-full h-full">
-                    <app-list></app-list>
+                    <app-list
+                        [team]="team"
+                    ></app-list>
                 </div>
             </div>
 
             <div class="default-size" *ngIf="clicked === 'project'">
+                
                 <app-card-list 
                     style="width: 100%; height: 90%; padding-top: 3%;" 
                     *ngIf="clicked === 'project' && !isCreating"
@@ -84,6 +87,7 @@
                     [type]="'project'"
                     [team]="team"
                 ></app-card-list>
+
                 <app-create-team-project 
                     style="width: 100%; height: 90%; padding-top: 3%;" 
                     *ngIf="clicked === 'project' && isCreating"
@@ -91,6 +95,7 @@
                     (close)="switchCreateView()" 
                     [typeString]="'project'"
                 ></app-create-team-project>
+
             </div>
         </div>
     </div>

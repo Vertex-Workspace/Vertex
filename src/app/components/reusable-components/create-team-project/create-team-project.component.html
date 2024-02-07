@@ -12,8 +12,18 @@
         >
       </div>
       <div class="input-image">
-        <fa-icon [icon]="faImage" id="image-icon"></fa-icon>
-        <p class="medium-text">{{ typeString === 'team' ? 'Adicione uma foto à equipe' : 'Adicione uma foto ao projeto' }}</p>
+        <div class="image relative">
+            <img *ngIf="selectedFile" src="{{url}}" alt="" class="rounded-full">
+            <fa-icon 
+              [icon]="faImage" 
+              class="image-icon" 
+              *ngIf="!selectedFile"
+            ></fa-icon>
+
+          <form class="input-div">
+              <input type="file" class="input-file" (change)="onFileSelected($event)">
+          </form>
+      </div>
       </div>
     </div>
   
