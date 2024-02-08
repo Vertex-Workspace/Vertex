@@ -3,21 +3,21 @@
 .card{
     @apply flex flex-col items-center w-[95%] py-2;
 
-    div:first-child{
+    .sections-in-card{
         @apply pl-2 flex w-full bg-white shadow-lg items-center;
         min-height: 40px;
 
         div:first-child{
-            @apply w-[30%] flex items-center pl-6 h-full;
+            @apply w-[10%] flex items-center pl-6 h-full;
         };
     
         div:nth-child(2){
-            @apply pl-5 w-[60%] flex items-center h-full;
+            @apply pl-5 w-[70%] flex items-center h-full;
         };
 
         div:nth-child(3){
-            @apply pl-12 w-[10%] h-full;
-        };
+            @apply w-[20%] flex items-center pl-6 h-full; 
+        }
     }
 }
 
@@ -36,13 +36,18 @@
 }
 
 .permissions {
-    @apply flex flex-col w-[800px] bg-white h-[150px];
+    @apply flex flex-col w-[800px] bg-white h-[120px] items-end;
 
     .single-permissions{
-        @apply w-full h-[20%]
+        @apply w-[92%] h-[20%] flex flex-row items-center;
+
+        .square-permission{
+            @apply pl-5;
+        }
     };
 
     p{
-        color:$primaryColor
+        color:$primaryColor;
+        @apply pl-5;
     }
 }

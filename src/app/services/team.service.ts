@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/team';
-import { User } from '../models/user';
+import { CreatePermission, Permission, User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,12 @@ export class TeamService {
       .get<boolean>(`${URL}team/exists/${teamId}/${userId}`);
   }
 
+  public permission(createPermission : CreatePermission): Observable<Permission> {  
+    return this.http
+      .patch<Permission>(`${URL}team/permission`, createPermission);
+  }
 
-
+  public deletePermission(permission: Permission):Observable<Permission> {
+    return this.http.delete<Permission>(`${URL}permission/${permission.id}`)
+  }
 }

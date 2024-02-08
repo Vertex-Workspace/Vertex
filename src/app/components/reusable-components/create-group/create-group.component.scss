@@ -28,8 +28,8 @@ form{
     @apply flex flex-col w-full h-[50%] bg-white;
     overflow-y: scroll;
 
-    p{
-        @apply pl-4 pt-3;
+    p:first-child{
+        @apply pl-4 pt-3 text-base;
     }
 }
 

@@ -1,13 +1,15 @@
 <div class="card" *ngFor="let user of users">
-    <div [style.width]="width" [style.min-height]="height">
-        <fa-icon size="2x" [icon]="faCircleUser" class="icon"></fa-icon>
+    <div [style.width]="width" [style.min-height]="height" class="sections-in-card">
+        <div>
+            <fa-icon size="2x" [icon]="faCircleUser" class="icon"></fa-icon>
+        </div>
         <div>
             <p>{{user.firstName}}</p>
         </div>
         <div>
-            <fa-icon *ngIf="!user.selected && typeString === 'creating'" size="1x" [icon]="faSquare"
-                class="icon-not-selected" (click)="selectUser(user)"></fa-icon>
-            <fa-icon *ngIf="user.selected && typeString === 'creating'" size="1x" [icon]="faSquare" class="icon"
+            <fa-icon *ngIf="!user.selected && typeString === 'creating'" [icon]="faSquare" class="icon-not-selected size"
+                (click)="selectUser(user)"></fa-icon>
+            <fa-icon *ngIf="user.selected && typeString === 'creating'" [icon]="faSquare" class="icon size"
                 (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon"
                 (click)="removeUser(user)">
@@ -19,8 +21,9 @@
     </div>
 
     <div *ngIf="typeString === 'permissions' && user.openPermission" class="permissions">
-        <div *ngFor="let permission of permissionTypes">
-            <fa-icon [icon]="faSquare" class="icon"></fa-icon>
+        <div *ngFor="let permission of permissionTypes;" class="single-permissions">
+            <fa-icon [icon]="faSquare" (click)="selectPermission(user, permission)" 
+            [ngClass]="permission.selected === true ? 'icon' : 'icon-not-selected'"></fa-icon>
             <p>{{permission.label}}</p>
         </div>
     </div>

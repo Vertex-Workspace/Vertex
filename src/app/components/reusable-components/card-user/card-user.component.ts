@@ -4,7 +4,7 @@ import {
   faCircleUser, faSquare, faUserMinus,
   faCaretDown, faCaretUp
 } from '@fortawesome/free-solid-svg-icons';
-import { User } from 'src/app/models/user';
+import { PermissionsType, Permission, User, CreatePermission } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Group } from 'src/app/models/groups';
 import { TeamService } from 'src/app/services/team.service';
@@ -43,23 +43,26 @@ export class CardUserComponent implements OnInit {
   @Input()
   typeString!: String;
 
+  permissions: Permissions[] = []
+
   constructor(private userService: UserService,
     private groupService: GroupService,
-    private alert: AlertService) {
-    }
+    private alert: AlertService,
+    private teamService: TeamService) {
+  }
 
-    ngOnInit(): void {
-      if (this.typeString === 'inTheGroup') {
-        this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
-          this.users = users;
-          
-        });
-      }else if(this.typeString === 'creating' || this.typeString === 'permissions'){
-        this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
-          this.users = users;
-        });
-      }
+  ngOnInit(): void {
+    if (this.typeString === 'inTheGroup') {
+      this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
+        this.users = users;
+
+      });
+    } else if (this.typeString === 'creating' || this.typeString === 'permissions') {
+      this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
+        this.users = users;
+      });
     }
+  }
 
   faCircleUser = faCircleUser;
   faSquare = faSquare;
@@ -75,23 +78,39 @@ export class CardUserComponent implements OnInit {
 
   removeUser(user: User): void {
     this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
-    .subscribe((group: Group) => {
-      this.alert.successAlert(`Usuário retirado do grupo`)
-      this.group.users?.splice(this.group.users.indexOf(user), 1);
-    }, 
-    e => {
-      this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
-    }
-    )
+      .subscribe((group: Group) => {
+        this.alert.successAlert(`Usuário retirado do grupo`)
+        this.group.users?.splice(this.group.users.indexOf(user), 1);
+      },
+        e => {
+          this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
+        }
+      )
   }
 
   openPermissions(user: User): void {
     user.openPermission = !user.openPermission;
   }
 
-  permissionTypes = [
-    { id: 'edit', label: 'Edição' },
-    { id: 'preview', label: 'Visualização' },
-    { id: 'create', label: 'Criação' }
+  permissionTypes: Permission[] = [
+    { name: PermissionsType.CREATE, label: 'Criar', selected: false },
+    { name: PermissionsType.EDIT, label: 'Editar', selected: false },
+    { name: PermissionsType.DELETE, label: 'Remover', selected: false },
+    { name: PermissionsType.VIEW, label: 'Visualizar', selected: false },
   ]
+
+  selectPermission(user: User, permission: Permission): void {
+    let createPermission: CreatePermission = {
+      name: permission.name,
+      userId: user.id,
+      team: {
+        id: this.team.id
+      }
+    }
+    this.teamService.permission(createPermission).subscribe(
+      (permission) => {
+        user.permissions?.push(permission);
+        permission.selected = true;
+      })
+  }
 }

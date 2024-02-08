@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Personalization } from '../models/personalization';
 import { map, Observable } from 'rxjs';
-import { User } from '../models/user';
+import { Permission, User } from '../models/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
 import { UserStateService } from './user-state.service';
+import { Team } from '../models/team';
 
 @Injectable({
   providedIn: 'root'
@@ -134,4 +135,5 @@ export class UserService {
     return this.http
       .put<User>(`${URL}user`, user);
   }
+
 }

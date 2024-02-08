@@ -20,6 +20,7 @@ export class User {
     selected ?: boolean = false;
     //open component with user permissions in team-informations
     openPermission ?: boolean = false;
+    permissions ?: Permission[];
 
     //brainstorming
     teams?: Team[] = [];
@@ -47,7 +48,39 @@ export class User {
         this.showCharts = user.showCharts;
         this.selected = user.selected;
         this.openPermission = user.openPermission;
+        this.permissions = user.permissions
 
     }
+}
 
+export class Permission {
+    id?: number;
+    name : PermissionsType;
+    user ?: User;
+    team ?: Team;
+    label?: String
+    selected ?: boolean
+
+    constructor(permission : Permission){
+        this.id = permission.id;
+        this.name = permission.name;
+        this.user = permission.user;
+        this.team = permission.team;
+    }
+}
+
+export enum PermissionsType {
+    CREATE = "CREATE",
+    EDIT = "EDIT", 
+    VIEW = "VIEW",
+    DELETE = "REMOVE"
+}
+
+export class CreatePermission {
+    name !: PermissionsType;
+    userId ?:number
+    team !: {
+        id:number
+    }
+    
 }
