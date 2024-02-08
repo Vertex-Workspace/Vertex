@@ -6,13 +6,13 @@
                 [style.min-width]="col.width"
                 [class.nameHeader]="col.field == 'name'"
             >              
-                <h6 >
+                <h6>
                     {{col.headerText}}
                 </h6>
             </label>
         </div>
 
-        <div class="tbody" 
+        <div class="tbody"
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >

@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/team';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-list',
@@ -21,27 +22,27 @@ export class ListComponent implements OnInit {
   project !: Project;
 
   @Input()
-  team ?: Team
+  team ?: Team;
 
   cols: any[] = [];
 
-  taskList !: Task[];
+  taskList: Task[] = [];
 
   constructor(
     private userService: UserService, 
     private taskService: TaskService,
     private projectService: ProjectService,
+    private teamService: TeamService,
     private route: ActivatedRoute,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {  
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (this.project) this.getProject(id);
-    else if (this.team) this.getTeam(id);
+  ngOnInit(): void {              
+    if (this.project) this.getProject();
+    else if (this.team) this.getTeam();
     else this.getAllTasks();
 
-    this.getCols();
+    this.getCols();  
   }
 
   getCols(): void {
@@ -54,8 +55,9 @@ export class ListComponent implements OnInit {
       }  
     );
 
-      
     if (this.project) {
+      console.log('a');
+      
 
       this.project.properties.forEach((property) => {
         const newCol: any = {
@@ -67,36 +69,35 @@ export class ListComponent implements OnInit {
         this.cols.push(newCol);
       });
     } else {
-      console.log(this.taskList);
+      this.taskList.forEach(t => {
+        console.log(t);
+        
+      })      
       
-      
-
-      // const newCol: any = {
-      //   id: 
-      // }
     }
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
     moveItemInArray(
-      this.project.tasks, 
+      this.taskList, 
       event.previousIndex, 
       event.currentIndex
     );
   }
 
-  getTeam(id: number): void {
-
+  getTeam(): void {
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.taskService
+      .getAllByTeam(id)
+      .subscribe((tl: Task[]) => {
+        tl.forEach((t: Task) => {
+          this.taskList.push(t);
+        }) 
+      })
   }
 
-  getProject(id: number): void {
-    this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-        this.taskList = p.tasks;
-      })
-
+  getProject(): void {
+    this.taskList = this.project.tasks;
   }
 
   getAllTasks(): void {

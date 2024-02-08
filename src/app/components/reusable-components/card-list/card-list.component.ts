@@ -28,7 +28,6 @@ export class CardListComponent implements OnInit{
   delete: boolean = false;
 
   ngOnInit(): void {
-    console.log(this.team);
     
   }
 

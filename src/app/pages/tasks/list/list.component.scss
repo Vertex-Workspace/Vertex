@@ -1,7 +1,5 @@
 @import '../../../../variables.scss';
 
-
-
 section {
     color: $primaryColor;
     @apply flex h-full justify-center pt-8 overflow-x-auto overflow-y-hidden;
@@ -29,9 +27,8 @@ section {
         }
         
         .thead {
-            @apply w-full min-h-[60px] flex sticky top-0;
+            @apply w-full min-h-[50px] flex sticky top-0;
             background-color: $secondColor;
-
             
             label {
                 @apply flex items-center justify-center;

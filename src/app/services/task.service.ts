@@ -50,6 +50,12 @@ export class TaskService {
       .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 
+  public getAllByTeam(id: number):Observable<Task[]> {
+    return this.http
+      .get<Task[]>(`${URL}task/team/${id}`)
+      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
+  }
+
   public getAllByUser(id: number): Observable<Task[]> {
     return this.http
       .get<Task[]>(`${URL}task/user/${id}`)
