@@ -28,31 +28,21 @@ export class InvitationPageComponent {
   }
 
   ngOnInit(): void {
-
   }
 
   // to-do: add user to team
   addUserOnTeam() {
     let userLogged = JSON.parse(localStorage.getItem('logged') || '{}');
-    console.log(userLogged);
-
     const id = Number(this.route.snapshot.paramMap.get('idTeam'));
-
-    console.log(id);
-
-
-
 
     this.teamService.addUserOnTeam(userLogged.id, id).subscribe(
       (res) => {
-        console.log(res);
+        this.router.navigate(['home']);
       },
       (error) => {
         console.log(error);
       }
     )
-
-
   }
 
 }
