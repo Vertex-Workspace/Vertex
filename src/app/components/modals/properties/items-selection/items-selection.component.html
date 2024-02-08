@@ -1,26 +1,25 @@
 <div class="ng-contentDiv" cdkDropListGroup>
 
     <!-- Visible and invisible -->
-    <div class="whole-content" *ngFor="let item of itemsList; index as i" cdkDropList (cdkDropListDropped)="drop($event, i)"
-    [cdkDropListData]="item.properties">
-        <p class="regular-text">{{item.status}}</p>
-            <div class="visible"
-                [ngClass]="item.status === 'Visíveis' ? '' : 'opacity'"
-                *ngFor="let name of item.name; index as i2" cdkDrag>
-                <div>
-                    <div cdkDragHandle>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
-                    </div>
-                    <div>
-                        <input class="regular-text" value="{{name.name}}" />
-                    </div>
+    <div class="whole-content" *ngFor="let section of sections; index as i" cdkDropList
+        (cdkDropListDropped)="drop($event, i)" [cdkDropListData]="section.propertyLists">
+        <p class="regular-text">{{section.name}}</p>
+        <div class="visible" [ngClass]="section.name === 'Visíveis' ? '' : 'opacity'"
+            *ngFor="let propertyList of section.propertyLists; index as i2" cdkDrag>
+            <div>
+                <div cdkDragHandle>
+                    <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
+                    <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                 </div>
                 <div>
-                    <fa-icon [icon]="item.icon" class="little-icon" (click)="eyeVisibility(name.name, i, i2)"></fa-icon>
-                    <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick()"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i, i2)"></fa-icon>
+                    <input class="regular-text" value="{{propertyList.value}}" />
                 </div>
             </div>
+            <div>
+                <fa-icon [icon]="section.icon" class="little-icon" (click)="eyeVisibility(propertyList)"></fa-icon>
+                <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick()"></fa-icon>
+                <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(propertyList)"></fa-icon>
+            </div>
         </div>
+    </div>
 </div>

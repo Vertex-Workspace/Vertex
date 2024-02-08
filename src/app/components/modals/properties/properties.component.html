@@ -26,7 +26,9 @@
         </app-general-properties>
         
         <app-edit-properties 
+            [project]="project"
             [property]="property"
+            (edit)="editTask('edit', $event)" 
             (gear)="editTask('edit', $event)"
             (selection)="openStatusSelection('items-selection')" 
             class="pattern-style" 
@@ -36,6 +38,6 @@
         <app-colors class="pattern-style" *ngIf="currentModal === 'colors'"></app-colors>
         <app-status (pencil)="openStatusSelection('pencil')" class="pattern-style" *ngIf="currentModal === 'status'" />
         <app-items-selection (pencil)="openStatusSelection('pencil')" class="pattern-style"
-            *ngIf="currentModal === 'items-selection'" [itemsList]="itemsList"></app-items-selection>
+            *ngIf="currentModal === 'items-selection'" [property]="property"></app-items-selection>
     </div>
 </div>

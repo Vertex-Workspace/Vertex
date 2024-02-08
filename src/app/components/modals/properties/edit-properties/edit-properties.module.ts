@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EditPropertiesComponent } from './edit-properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { ItemsSelectionModule } from '../items-selection/items-selection.module';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    ItemsSelectionModule
   ]
 })
 export class EditPropertiesModule { }

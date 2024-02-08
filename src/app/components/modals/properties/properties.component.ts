@@ -62,8 +62,7 @@ export class PropertiesComponent{
         {name: 'Ações'},
       ]
     }
-  
-]
+  ]
 
   editTask(type: string, event: any) {
     console.log(event);

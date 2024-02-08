@@ -1,63 +1,71 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-    faEllipsisVertical, faPaintBrush, faEye, faEyeSlash,
-    faTrashCan, faPlus
+  faEllipsisVertical, faPaintBrush, faEye, faEyeSlash,
+  faTrashCan, faPlus
 } from '@fortawesome/free-solid-svg-icons';
+import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
 
 @Component({
-    selector: 'app-items-selection',
-    templateUrl: './items-selection.component.html',
-    styleUrls: ['./items-selection.component.scss']
+  selector: 'app-items-selection',
+  templateUrl: './items-selection.component.html',
+  styleUrls: ['./items-selection.component.scss']
 })
 export class ItemsSelectionComponent {
 
-    @Input()
-    itemsList: any;
+  @Input()
+  property!: Property;
 
-    @Output()
-    pencil = new EventEmitter();
+  @Output()
+  pencil = new EventEmitter();
 
-    faEllipsisVertical = faEllipsisVertical;
-    faPaintBrush = faPaintBrush;
-    faEye = faEye;
-    faEyeSlash = faEyeSlash;
-    faTrashCan = faTrashCan;
-    faPlus = faPlus;
+  faEllipsisVertical = faEllipsisVertical;
+  faPaintBrush = faPaintBrush;
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
+  faTrashCan = faTrashCan;
+  faPlus = faPlus;
 
-    eyeVisibility(namep: string, i: number, i2: number) {
-        let visibles: any = this.itemsList[0].name;
-        let invisibles: any = this.itemsList[1].name;
-    
-        if (this.itemsList[i].icon === faEye) {
-          invisibles.push({ name: namep});
-          visibles.splice(i2, 1);
-        } else {
-          visibles.push({ name: namep});
-          invisibles.splice(i2, 1);
-        }
+  sections: any[] = [
+    { name: "Visíveis", icon: faEye, propertyLists: [] },
+    { name: "Não Visíveis", icon: faEyeSlash, propertyLists: [] }
+  ]
+
+  ngOnInit(): void {
+    this.property.propertyLists!.forEach((propertyList) => {
+      if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
+        this.sections[0].propertyLists.push(propertyList);
+      } else {
+        this.sections[1].propertyLists.push(propertyList);
       }
+    });
+  }
 
-    pencilClick() {
-        this.pencil.emit();
-    }
+  eyeVisibility(propertyList:PropertyList) {
+    propertyList.propertyListKind = 
+    propertyList.propertyListKind == PropertyListKind.VISIBLE ? PropertyListKind.INVISIBLE : PropertyListKind.VISIBLE;
+  }
 
-    delete(i:number, i2:number){
-        this.itemsList[i].name.splice(i2,1);
-    }
+  pencilClick() {
+    this.pencil.emit();
+  }
 
-      // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
+  delete(propertyList:PropertyList) {
+    this.property.propertyLists = this.property.propertyLists.filter((p) => p.id != propertyList.id);
+  }
+
+  // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
   drop(event: CdkDragDrop<any[]>, i: number) {
-    if ((event.previousContainer === event.container) && i==0) {
-      moveItemInArray(this.itemsList[0].name, event.previousIndex, event.currentIndex);
-    }else if((event.previousContainer === event.container) && i==1){
-      moveItemInArray(this.itemsList[1].name, event.previousIndex, event.currentIndex);
-    }else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      )
-    }
+    // if ((event.previousContainer === event.container) && i == 0) {
+    //   moveItemInArray(this.itemsList[0].name, event.previousIndex, event.currentIndex);
+    // } else if ((event.previousContainer === event.container) && i == 1) {
+    //   moveItemInArray(this.itemsList[1].name, event.previousIndex, event.currentIndex);
+    // } else {
+    //   transferArrayItem(event.previousContainer.data,
+    //     event.container.data,
+    //     event.previousIndex,
+    //     event.currentIndex
+    //   )
+    // }
   }
 }

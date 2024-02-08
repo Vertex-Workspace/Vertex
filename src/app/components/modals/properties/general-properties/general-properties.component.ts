@@ -129,12 +129,13 @@ export class GeneralPropertiesComponent {
     this.plus.emit();
   }
 
-  editProperty(property: Property) {
+  editProperty(property: Property, type : string) {
     if (property.kind === PropertyKind.STATUS) {
       this.status.emit(property);
-    } else if (property.kind === PropertyKind.LIST) {
+    } else if (property.kind === PropertyKind.LIST && type === 'row') {
       this.select.emit(property);
-    } else {
+    } 
+    else {
       this.edit.emit(property);
     }
   }

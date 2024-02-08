@@ -51,6 +51,11 @@
     @apply opacity-25;
 }
 
+.list-button{
+    @apply w-full h-[50px] rounded-sm shadow-md;
+    background-color: $emphasis;
+    color: $primaryColor;
+}
 .properties-answers {
     @apply flex w-full h-[20%] justify-end flex-col;
 
@@ -58,6 +63,12 @@
     div:last-child{
         @apply flex flex-row;
     }
+    input {
+        @apply w-2/3 h-[32px] rounded-sm shadow-2xl pl-3;
+        outline: none;
+    }
+
+
 }
 
 .checkboxes{
@@ -97,8 +108,8 @@ section{
         }
     }
 
-    button{
-        @apply w-[40%] h-[12%] rounded-sm shadow-2xl self-end;
+    .save-button{
+        @apply w-[40%] h-[50px] rounded-sm shadow-2xl self-end;
         background-color: $primaryColor;
         color: $secondColor;
     }

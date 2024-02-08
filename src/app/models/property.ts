@@ -19,6 +19,7 @@ export class Property {
         this.isObligated = property.isObligated;
         this.defaultValue = property.defaultValue;
         this.propertyLists = property.propertyLists;
+        this.propertyStatus = property.propertyStatus;
     }
 
 }
@@ -56,5 +57,7 @@ export enum PropertyKind {
 export enum PropertyListKind {
     TODO,
     DOING,
-    DONE
+    DONE,
+    VISIBLE,
+    INVISIBLE
 }
