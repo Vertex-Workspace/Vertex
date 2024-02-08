@@ -8,7 +8,9 @@ export class Team {
     name !: string;
     creationDate !: Date;
     description !: string;
-    invitationCode!: String;
+    invitationCode!: {
+        code: string;
+    };
     users?: User[];
     creator?: User;
     groups?: Group[];
@@ -29,5 +31,6 @@ export class Team {
         this.projects = team.projects;       
         
     }
+    
 
 }

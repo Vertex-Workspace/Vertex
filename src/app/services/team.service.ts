@@ -10,17 +10,17 @@ import { User } from '../models/user';
 })
 export class TeamService {
 
-  private teamsSubject: BehaviorSubject<Team[]> = 
+  private teamsSubject: BehaviorSubject<Team[]> =
     new BehaviorSubject<Team[]>([]);
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   public getAllTeams(): Observable<Team[]> {
     return this.teamsSubject
       .asObservable();
-  } 
+  }
 
   public getOneById(id: number): Observable<Team> {
     return this.http
@@ -28,9 +28,29 @@ export class TeamService {
       .pipe(map((team: Team) => new Team(team)));
   }
 
-  public getInvitationCodeById(id: number){
+  public addUserOnTeam(userId: number, teamId: number): Observable<any> {
+
+    let cabaco = {
+      team: {
+        id: teamId
+      },
+      user:{
+        id: userId
+      } 
+    }
+
     return this.http
-      .get<String>(`${URL}team/invitation/${id}`);
+      .patch<Team>(`${URL}team/user`, cabaco);
+  }
+
+  public userIsOnTeam(userId: number, teamId: number): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${URL}team/userIsOnTeam/${userId}/${teamId}`);
+  }
+
+  public getInvitationCodeById(id: number) {
+    return this.http
+      .get<string>(`${URL}team/invitation/${id}`);
   }
 
   public create(team: Team): Observable<Team> {
@@ -48,13 +68,13 @@ export class TeamService {
   public delete(id: number): Observable<Team> {
     return this.http
       .delete<Team>(`${URL}team/${id}`)
-        .pipe(tap(() => {
-          const currentTeams: Team[] = this.teamsSubject.getValue();
-          const updatedTeams: Team[] = currentTeams.filter((team: Team) => {
-            team.id !== id;
-          })
-          this.teamsSubject.next(updatedTeams);
-        }));
+      .pipe(tap(() => {
+        const currentTeams: Team[] = this.teamsSubject.getValue();
+        const updatedTeams: Team[] = currentTeams.filter((team: Team) => {
+          team.id !== id;
+        })
+        this.teamsSubject.next(updatedTeams);
+      }));
   }
 
   public getTeamsByUser(userId: number): Observable<Team[]> {

@@ -45,13 +45,14 @@ export class TaskComponent implements OnInit {
 
   async ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('logged')!);
-    console.log(this.task.taskResponsables);
+
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
       }
     });
     await this.getTimeInTask();
+    
     if (this.timeInTask.working) {
       this.startTimer()
     }

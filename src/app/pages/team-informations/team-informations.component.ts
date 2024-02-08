@@ -11,6 +11,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 import { AlertService } from '../../services/alert.service';
+import { catchError, of, switchMap, tap } from 'rxjs';
 
 
 @Component({
@@ -19,10 +20,28 @@ import { AlertService } from '../../services/alert.service';
     styleUrls: ['./team-informations.component.scss']
 })
 export class TeamInformationsComponent implements OnInit {
+    // this.teamService.getOneById(id).pipe(
+    //     switchMap((team: Team) => {
+    //         this.team = team;
+    //         console.log(this.team);
+    //         // Você pode retornar qualquer coisa aqui, como um Observable vazio
+    //         return of(null);
+    //     }),
+    //     catchError((error) => {
+    //         console.log(error);
+    //         // Trate o erro conforme necessário
+    //         return of(null); // Ou retorne um Observable com um valor padrão, por exemplo
+    //     })
+    // ).subscribe();
+    onClipboardCopy($event: Event) {
+        throw new Error('Method not implemented.');
+    }
 
 
 
-    invitationCode!: String;
+    invitationCode!: {
+        code: string;
+    };
     team!: Team;
     //to-do: add creation date, user social media, fix cards, -- charts
 
@@ -31,44 +50,69 @@ export class TeamInformationsComponent implements OnInit {
         private teamService: TeamService,
         private alertService: AlertService
     ) {
-        this.getTeam();
-        this.start();
+        this.team = this.getTeam();
     }
-    
+
     ngOnInit() {
-        
+        this.start();
         console.log(this.team);
-        
+
+        this.verifyIfUserIsInTeam();
+    }
+
+    sla() {
+        let aaa = this.copyInviteLink();
+        console.log(aaa);
 
     }
 
-    getTeam() {
+    verifyIfUserIsInTeam() {
         const id = Number(this.route.snapshot.paramMap.get('id'));
+        this.teamService.getTeamsByUser(id).subscribe(
+            (teams : Team[]) => {
 
-        this.teamService.getOneById(id).subscribe(
-            (team: Team) => {
-                this.team = team;
+                console.log(teams);
+                
             },
             (error) => {
                 console.log(error);
             }
         )
+
+    }
+
+    getTeam(): Team {
+        const id = Number(this.route.snapshot.paramMap.get('id'));
+        this.teamService.getOneById(id).subscribe(
+            (team: Team) => {
+                this.team = team;
+                console.log(this.team);
+                return team;
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+        return this.team;
     }
 
 
     copyInviteLink() {
-
         this.teamService.getInvitationCodeById(this.team.id!).subscribe(
             (invitationCode: any) => {
-                console.log(invitationCode);
-                
+                this.team.invitationCode = invitationCode;
+                this.invitationCode = invitationCode;
+
+                const id = Number(this.route.snapshot.paramMap.get('id'));
+
+                navigator.clipboard.writeText("http://localhost:4200/aceitar-convite/" + id + "/" + invitationCode.invitationCode)
+                return invitationCode;
             },
             (error) => {
 
                 console.log(error);
             }
         )
-        console.log(this.invitationCode);
 
         this.alertService.successAlert("Link copiado com sucesso!");
 

@@ -59,7 +59,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "aceitar-convite/:id",
+    path: "aceitar-convite/:idTeam/:token",
     component: InvitationPageComponent,
     canActivate: [AuthGuard]
   },
