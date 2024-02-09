@@ -23,7 +23,8 @@ export class KanbanComponent {
   constructor(
     private taskService: TaskService, 
     private alertService: AlertService,
-    private userService : UserService) {
+    private userService : UserService
+  ) {
 
   }
 

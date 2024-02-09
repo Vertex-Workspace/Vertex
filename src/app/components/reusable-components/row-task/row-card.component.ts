@@ -46,7 +46,7 @@ export class RowCardComponent {
   }
 
   getNameWidth(): string {
-    return "40%";
+    return "300px";
   }
 
   getPropertyValue(col: any) : Value {

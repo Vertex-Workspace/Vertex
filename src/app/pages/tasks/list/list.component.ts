@@ -4,7 +4,7 @@ import {  CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
-import { PropertyKind, PropertyList } from 'src/app/models/property';
+import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
 import { UserService } from 'src/app/services/user.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -31,6 +31,8 @@ export class ListComponent implements OnInit {
 
   logged !: User;
 
+  isNull : boolean = true;
+
   constructor(
     private userService: UserService, 
     private taskService: TaskService,
@@ -39,46 +41,24 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnInit(): void {              
-    if (this.project) this.getProject();
-    else if (this.team) this.getTeam();
-    else this.getAllTasks();    
-
-    this.getCols();  
-    
-  }
-  
-  ngOnDestroy(): void {
-    this.taskList = [];
-  }
-
-  getCols(): void {
+  ngOnInit(): void {    
     //Define o primeiro campo da tabela como o nome
     this.cols.push( 
       {
         field: "name",
         headerText: "Nome",
-        width: '40%',
+        width: '300px',
       }  
-    );
+    );     
 
-    if (this.project) {
-      console.log('a');
-      
+    if (this.project) this.getProject();
+    else if (this.team) this.getTeam();
+    else this.getAllTasks();      
 
-      this.project.properties.forEach((property) => {
-        const newCol: any = {
-          id: property.id,
-          field: property.kind,
-          headerText: property.name,
-          width: '300px',
-        }
-        this.cols.push(newCol);
-      });
-    } else {
-      
-      
-    };
+  }
+  
+  ngOnDestroy(): void {
+    this.taskList = [];
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
@@ -95,21 +75,13 @@ export class ListComponent implements OnInit {
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
         this.taskList = tl;
-
-        console.log(tl);
-        
-        this.teste(tl) 
+        this.getStatusAndNameCols(tl);
       });
   }
 
-  teste(tl: Task[]): void {
-    this.cols.push(tl[0].values[0].property)
-    
-  }
-
   getProject(): void {
+    this.isNull = false;  
     this.taskList = this.project.tasks;
-    
   }
 
   getAllTasks(): void {
@@ -117,8 +89,35 @@ export class ListComponent implements OnInit {
       .getAllByUser(this.logged.id!)
       .subscribe((tl: Task[]) => {
         this.taskList = tl;
-        this.teste(tl);
+        this.getStatusAndNameCols(tl);
       })
+  }
+
+  getAllCols(): void {
+    if (this.project) {
+
+      this.project.properties.forEach((property) => {
+        const newCol: any = {
+          id: property.id,
+          field: property.kind,
+          headerText: property.name,
+          width: '300px',
+        }
+        this.cols.push(newCol);
+      });
+    } 
+  }
+
+  getStatusAndNameCols(tl: Task[]): void {
+      const property: Property = tl[0].values[0].property;
+      const newCol: any = {
+        id: property.id,
+        field: property.kind,
+        headerText: property.name,
+        width: '300px'
+      };
+      this.cols.push(newCol);
+      
   }
 
 }

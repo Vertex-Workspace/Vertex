@@ -27,7 +27,7 @@ section {
         }
         
         .thead {
-            @apply w-full min-h-[50px] flex sticky top-0;
+            @apply w-[full] min-h-[50px] flex sticky top-0;
             background-color: $secondColor;
             
             label {
