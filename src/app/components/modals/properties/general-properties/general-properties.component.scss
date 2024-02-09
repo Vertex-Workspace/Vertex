@@ -39,11 +39,8 @@
         }
 
         div:last-child{
-            @apply w-full flex justify-start items-center gap-3;
+            @apply w-full h-full flex justify-between items-center gap-4;
 
-            input{
-                @apply flex w-[80%] bg-[#EAEFF8];
-            }
             fa-icon{
                 color: $primaryColor;
                 @apply text-2xl;
@@ -83,7 +80,8 @@ p{
     font-size: 1rem;
 }
 
+.number-type-icon{
+    padding-left: 4px;
+    margin-right: 3px;
 
-.teste{
-    @apply text-3xl z-[999];
 }

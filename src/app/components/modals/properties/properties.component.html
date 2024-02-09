@@ -29,8 +29,8 @@
         </app-general-properties>
 
         <app-edit-properties [project]="project" [property]="property" (edit)="editTask('edit', $event)"
-            (gear)="editTask('edit', $event)" (selection)="openStatusSelection('items-selection')" class="pattern-style"
-            *ngIf="currentModal === 'edit'" />
+            (gear)="editTask('general', $event)" (selection)="openStatusSelection('items-selection')" class="pattern-style"
+            *ngIf="currentModal === 'edit'" (from)="defineArrowBack($event)"/>
 
         <!-- REQUIREMENTS -->
         <app-colors class="pattern-style" *ngIf="currentModal === 'colors'"></app-colors>

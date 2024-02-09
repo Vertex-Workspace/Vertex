@@ -22,6 +22,7 @@ export class ItemsSelectionComponent {
   @Input()
   project!: Project;
 
+
   @Output()
   pencil = new EventEmitter();
 

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   faArrowLeft, faXmark, faEye, faGear,
   faTrashCan, faEyeSlash, faEllipsisVertical,
-  faFont, faCalendarDays, faPlus, faSpinner, faCaretDown
+  faFont, faCalendarDays, faPlus, faSpinner, faCaretDown, fa1, faListNumeric, faList
 } from '@fortawesome/free-solid-svg-icons';
 import { CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Property, PropertyKind, PropertyStatus } from 'src/app/models/property';
@@ -27,6 +27,7 @@ export class GeneralPropertiesComponent {
   faCalendarDays = faCalendarDays;
   faPlus = faPlus;
   faSpinner = faSpinner;
+
   currentModal: string = 'general';
   generalModal: boolean = true;
 
@@ -58,7 +59,7 @@ export class GeneralPropertiesComponent {
   project!: Project;
 
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService) { 
 
   }
 
@@ -109,7 +110,7 @@ export class GeneralPropertiesComponent {
       kind: PropertyKind.TEXT,
       propertyStatus: PropertyStatus.VISIBLE,
       propertyLists: [],
-      isObligated: false,
+      isObligate: false,
     });
 
     this.projectService.createProperty(this.project.id!, genericProperty).subscribe(
@@ -195,7 +196,9 @@ export class GeneralPropertiesComponent {
     } else if (kindProperty === PropertyKind.STATUS) {
       return faSpinner;
     } else if (kindProperty === PropertyKind.LIST) {
-      return faCaretDown;
+      return faList;
+    } else if(kindProperty === PropertyKind.NUMBER){
+      return fa1;
     }
 
   }

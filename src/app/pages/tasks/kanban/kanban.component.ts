@@ -177,9 +177,14 @@ export class KanbanComponent {
       },
       teamId: this.project.idTeam!
     }
-
+    console.log("Task", taskCreate);
+    
     this.taskService.create(taskCreate).subscribe(
       (task: Task) => {
+        console.log("Task Back end", task);
+
+        //Remove the redudant property
+        task.values.splice(0, 1);
         this.project.tasks.push(task);
         this.alertService.successAlert("Tarefa criada com sucesso!");
       },

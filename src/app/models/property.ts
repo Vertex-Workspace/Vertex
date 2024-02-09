@@ -5,7 +5,7 @@ export class Property {
     id!: number;
     name!: string;
     kind!: PropertyKind;
-    isObligated!: boolean;
+    isObligate!: boolean;
     defaultValue?: string;
     propertyLists!: PropertyList[];
     propertyStatus!: PropertyStatus;
@@ -16,7 +16,7 @@ export class Property {
         this.id = property.id;
         this.name = property.name;
         this.kind = property.kind;
-        this.isObligated = property.isObligated;
+        this.isObligate = property.isObligate;
         this.defaultValue = property.defaultValue;
         this.propertyLists = property.propertyLists;
         this.propertyStatus = property.propertyStatus;

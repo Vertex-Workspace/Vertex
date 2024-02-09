@@ -11,7 +11,6 @@ import { Property } from 'src/app/models/property';
   styleUrls: ['./properties.component.scss']
 })
 export class PropertiesComponent{
-
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;
   faPlus = faPlus;
@@ -73,7 +72,14 @@ export class PropertiesComponent{
     }
   }
 
+  //Determines the arrow back behavior
+  from!: String;
   arrowLeft() {
+    console.log(this.from);
+    
+    if (this.from == 'edit') {
+      this.currentModal = 'edit'
+    } else
     if (this.currentModal === 'status' 
     || this.currentModal === 'edit' 
     || this.currentModal === 'items-selection') {
@@ -83,5 +89,13 @@ export class PropertiesComponent{
       this.currentModal = 'status'
       this.text = 'Status'
     }
+    console.log(this.currentModal);
+    
+  }
+
+  defineArrowBack(event: any) {
+    console.log(event);
+    this.from = event;
+    this.currentModal = "items-selection";
   }
 }

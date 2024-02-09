@@ -17,10 +17,14 @@ import { ProjectService } from 'src/app/services/project.service';
 export class EditPropertiesComponent {
 
 
-  @Input()
-  project!: Project;
+  @Input() project!: Project;
 
   @Input() property!: Property;
+
+  @Output() gear = new EventEmitter<Event>();
+
+  @Output() from = new EventEmitter<String>();
+
   faSpinner = faSpinner;
   faUser = faUser;
   faPaperclip = faPaperclip;
@@ -59,11 +63,11 @@ export class EditPropertiesComponent {
   defaultProperty!: Property
   ngOnInit(): void {
     console.log(this.property);
-    
+
     //Create a new object to compare with the original
     this.defaultProperty = new Property(this.property);
 
-    if (this.property.isObligated) {
+    if (this.property.isObligate) {
       this.checkboxList[0].value = true;
     }
     if (this.property.defaultValue) {
@@ -92,22 +96,34 @@ export class EditPropertiesComponent {
     //Change current state
     check.value = !check.value;
 
-    if (this.checkboxList[0] == check) {
-      this.property.isObligated = check.value;
+    if (this.checkboxList[0].value == check.value) {
+      this.property.isObligate = check.value;
     } else {
       this.openInput = check.value;
       if (!this.openInput) {
         this.property.defaultValue = "";
       }
     }
+    console.log(this.property);
+
   }
   saveProperty(): void {
-    this.projectService.createProperty(this.project.id!, this.property).subscribe(
+
+    this.projectService.createProperty(this.project.id!, this.defaultProperty).subscribe(
       (property) => {
         console.log(property);
         this.alertService.successAlert("Propriedade alterada com sucesso!");
+
+        this.project.properties.splice(this.project.properties.indexOf(this.defaultProperty), 1, property);
+      
+        console.log(this.project);
+        
+        //If the button pressed was the confirm changes, emit the event
+        //Else, just update the property through define elements list
+        this.gear.emit();
+
       }, (error) => {
-        console.log(error);
+        this.alertService.errorAlert("Erro ao alterar propriedade!");
       });
 
   }
@@ -119,14 +135,13 @@ export class EditPropertiesComponent {
   hasChange(): boolean {
     return this.property.name !== this.defaultProperty.name ||
       this.property.kind !== this.defaultProperty.kind ||
-      this.property.isObligated !== this.defaultProperty.isObligated ||
+      this.property.isObligate !== this.defaultProperty.isObligate ||
       this.property.defaultValue !== this.defaultProperty.defaultValue;
   }
 
 
-  editList: boolean = false;
   openEditList(): void {
-    if (!this.editList && this.property.propertyLists.length === 0) {
+    if (this.property.propertyLists.length === 0) {
       this.property.propertyLists = [
         { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: 'RED' },
         { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Média", color: 'YELLOW' },
@@ -134,17 +149,18 @@ export class EditPropertiesComponent {
         { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: "Não essencial", color: 'BLUE' },
       ]
 
-      console.log(this.property);
-      
       this.projectService.createProperty(this.project.id!, this.property).subscribe(
         (property) => {
           this.property = property;
-          this.editList = true;
+          this.from.emit('edit');
         }, (error) => {
           console.log(error);
         });
-    } else{
-      this.editList = !this.editList;
+    } else {
+      if (this.hasChange()) {
+        this.saveProperty();
+      }
+      this.from.emit('edit');
     }
   }
 }

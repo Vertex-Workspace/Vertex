@@ -20,14 +20,18 @@
                             <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
                         </div>
                         <div>
-                            <fa-icon [icon]="getIconProperty(property.kind)" class="teste"></fa-icon>
-                            <p class="regular-text w-full">{{property.name}}</p>
+                            <fa-icon [icon]="getIconProperty(property.kind)"
+                                [ngClass]="property.kind == 'NUMBER' ? 'number-type-icon' : ''"></fa-icon>
+                            <div class="flex w-[90%] h-full">
+                                <p class="regular-text">{{property.name}}</p>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <ng-container *ngIf="item.status != 'Fixas'">
                             <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(property)"></fa-icon>
-                            <fa-icon [icon]="faGear" class="little-icon" (click)="editProperty(property, 'gear')"></fa-icon>
+                            <fa-icon [icon]="faGear" class="little-icon"
+                                (click)="editProperty(property, 'gear')"></fa-icon>
                             <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(property)"></fa-icon>
                         </ng-container>
                     </div>
