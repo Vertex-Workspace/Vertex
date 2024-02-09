@@ -46,25 +46,10 @@ export class PropertiesComponent{
   property!: Property;
 
 
-  itemsList = [
-    {
-      status: 'Visíveis',
-      icon: faEye,
-      name : [
-        {name: 'Renda Fixa'},
-        {name: 'FII'},
-      ]
-    },
-    {
-      status: 'Não visíveis',
-      icon: faEyeSlash,
-      name : [
-        {name: 'Ações'},
-      ]
-    }
-  ]
 
   editTask(type: string, event: any) {
+    console.log(type);
+    
     console.log(event);
     this.property = event;
     this.currentModal = type
@@ -97,16 +82,6 @@ export class PropertiesComponent{
     } else if (this.currentModal === 'colors') {
       this.currentModal = 'status'
       this.text = 'Status'
-    }
-  }
-
-  clickPlus() {
-    if (this.currentModal === 'general') {
-      this.currentModal = 'edit';
-      this.text = 'Edite a Propriedade'
-      this.footerText = 'Excluir Propriedade'
-    }if (this.currentModal === 'items-selection') {
-      this.itemsList[0].name.push({ name: 'Novo item'});
     }
   }
 }

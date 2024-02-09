@@ -3,7 +3,10 @@
     <!-- Visible and invisible -->
     <div class="whole-content" *ngFor="let section of sections; index as i" cdkDropList
         (cdkDropListDropped)="drop($event, i)" [cdkDropListData]="section.propertyLists">
-        <p class="regular-text">{{section.name}}</p>
+        <div class="flex w-full justify-between items-center">
+            <p class="pl-3 pt-4 medium-text pb-4">{{section.name}}</p>
+            <span class="text-3xl cursor-pointer" *ngIf="section.name == 'Visíveis'" (click)="createProperty()">+</span>
+        </div>
         <div class="visible" [ngClass]="section.name === 'Visíveis' ? '' : 'opacity'"
             *ngFor="let propertyList of section.propertyLists; index as i2" cdkDrag>
             <div>

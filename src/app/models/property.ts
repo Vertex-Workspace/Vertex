@@ -55,9 +55,9 @@ export enum PropertyKind {
     FILE = "FILE"
 }
 export enum PropertyListKind {
-    TODO,
-    DOING,
-    DONE,
-    VISIBLE,
-    INVISIBLE
+    TODO = "TODO",
+    DOING = "DOING",
+    DONE = "DONE",
+    VISIBLE = "VISIBLE",
+    INVISIBLE = "INVISIBLE"
 }

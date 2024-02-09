@@ -58,6 +58,8 @@ export class EditPropertiesComponent {
 
   defaultProperty!: Property
   ngOnInit(): void {
+    console.log(this.property);
+    
     //Create a new object to compare with the original
     this.defaultProperty = new Property(this.property);
 
@@ -124,7 +126,7 @@ export class EditPropertiesComponent {
 
   editList: boolean = false;
   openEditList(): void {
-    if (!this.editList) {
+    if (!this.editList && this.property.propertyLists.length === 0) {
       this.property.propertyLists = [
         { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: 'RED' },
         { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Média", color: 'YELLOW' },
@@ -136,10 +138,13 @@ export class EditPropertiesComponent {
       
       this.projectService.createProperty(this.project.id!, this.property).subscribe(
         (property) => {
+          this.property = property;
           this.editList = true;
         }, (error) => {
           console.log(error);
         });
+    } else{
+      this.editList = !this.editList;
     }
   }
 }

@@ -67,8 +67,6 @@ export class ProjectService {
   //Properties
 
   public createProperty(projectID:number, property : Property): Observable<Property> {
-    console.log(projectID);
-    console.log(property);
     return this.http.patch<Property>(`${URL}project/${projectID}/property`, property);
   }
 
