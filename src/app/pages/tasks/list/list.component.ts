@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-list',
@@ -28,21 +29,27 @@ export class ListComponent implements OnInit {
 
   taskList: Task[] = [];
 
+  logged !: User;
+
   constructor(
     private userService: UserService, 
     private taskService: TaskService,
-    private projectService: ProjectService,
-    private teamService: TeamService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  ) {
+    this.logged = userService.getLogged();
+  }
 
   ngOnInit(): void {              
     if (this.project) this.getProject();
     else if (this.team) this.getTeam();
-    else this.getAllTasks();
+    else this.getAllTasks();    
 
     this.getCols();  
+    
+  }
+  
+  ngOnDestroy(): void {
+    this.taskList = [];
   }
 
   getCols(): void {
@@ -69,12 +76,9 @@ export class ListComponent implements OnInit {
         this.cols.push(newCol);
       });
     } else {
-      this.taskList.forEach(t => {
-        console.log(t);
-        
-      })      
       
-    }
+      
+    };
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
@@ -90,18 +94,31 @@ export class ListComponent implements OnInit {
     this.taskService
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
-        tl.forEach((t: Task) => {
-          this.taskList.push(t);
-        }) 
-      })
+        this.taskList = tl;
+
+        console.log(tl);
+        
+        this.teste(tl) 
+      });
+  }
+
+  teste(tl: Task[]): void {
+    this.cols.push(tl[0].values[0].property)
+    
   }
 
   getProject(): void {
     this.taskList = this.project.tasks;
+    
   }
 
   getAllTasks(): void {
-    
+    this.taskService
+      .getAllByUser(this.logged.id!)
+      .subscribe((tl: Task[]) => {
+        this.taskList = tl;
+        this.teste(tl);
+      })
   }
 
 }
