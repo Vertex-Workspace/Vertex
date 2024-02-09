@@ -21,8 +21,8 @@
     </div>
 
     <div *ngIf="typeString === 'permissions' && user.openPermission" class="permissions">
-        <div *ngFor="let permission of permissionTypes;" class="single-permissions">
-            <fa-icon [icon]="faSquare" (click)="selectPermission(user, permission)" 
+        <div *ngFor="let permission of permissionTypes; index as i" class="single-permissions">
+            <fa-icon [icon]="faSquare" (click)="selectPermission(user, permission, i)" 
             [ngClass]="permission.selected === true ? 'icon' : 'icon-not-selected'"></fa-icon>
             <p>{{permission.label}}</p>
         </div>

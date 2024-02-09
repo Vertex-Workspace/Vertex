@@ -66,6 +66,7 @@ export class Permission {
         this.name = permission.name;
         this.user = permission.user;
         this.team = permission.team;
+        this.selected = permission.selected;
     }
 }
 
@@ -73,14 +74,15 @@ export enum PermissionsType {
     CREATE = "CREATE",
     EDIT = "EDIT", 
     VIEW = "VIEW",
-    DELETE = "REMOVE"
+    DELETE = "DELETE"
 }
 
 export class CreatePermission {
     name !: PermissionsType;
-    userId ?:number
+    userId ?:number;
     team !: {
         id:number
-    }
+    };
+    selected ?: boolean
     
 }

@@ -56,4 +56,8 @@ export class TeamService {
   public deletePermission(permission: Permission):Observable<Permission> {
     return this.http.delete<Permission>(`${URL}permission/${permission.id}`)
   }
+
+  public getPermission(team: Team, user: User): Observable<Permission[]> {
+    return this.http.get<Permission[]>(`${URL}permission/${user.id}/${team.id}`)
+  }
 }

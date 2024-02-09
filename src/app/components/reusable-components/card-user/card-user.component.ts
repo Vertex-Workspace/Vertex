@@ -99,18 +99,24 @@ export class CardUserComponent implements OnInit {
     { name: PermissionsType.VIEW, label: 'Visualizar', selected: false },
   ]
 
-  selectPermission(user: User, permission: Permission): void {
+  selectPermission(user: User, permission: Permission, i: number): void {
     let createPermission: CreatePermission = {
       name: permission.name,
       userId: user.id,
       team: {
         id: this.team.id
-      }
+      },
+      selected: true
     }
+
     this.teamService.permission(createPermission).subscribe(
       (permission) => {
-        user.permissions?.push(permission);
         permission.selected = true;
+        user.permissions?.push(permission);
       })
+
+      // this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
+
+      // })
   }
 }
