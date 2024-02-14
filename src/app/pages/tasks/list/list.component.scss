@@ -76,3 +76,7 @@ section {
   .nameHeader{
     @apply sticky left-0;
   }
+
+  .null-list {
+    @apply w-full h-full pt-10 flex justify-center;
+  }

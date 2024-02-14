@@ -11,6 +11,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/models/user';
+import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -31,7 +32,7 @@ export class ListComponent implements OnInit {
 
   logged !: User;
 
-  isNull : boolean = true;
+  isNull !: boolean;
 
   statusProperty: any = {
     defaultValue: 'STATUS',
@@ -70,11 +71,10 @@ export class ListComponent implements OnInit {
         width: '300px'
       }
     );    
-
+  
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.team) this.getTeam(); //atribui todas as tarefas da equipe a taskList
     else this.getAllTasks(); //atribui todas as tarefas do usuário para taskList
-
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
@@ -85,27 +85,34 @@ export class ListComponent implements OnInit {
     );
   }
 
+  getProject(): void { //é chamado quando está na tela do espaço de trabalho
+    this.taskList = this.project.tasks;//atribui para taskList todas as tarefas existentes no projeto
+    this.getAllCols(); //recebe o restante das colunas com base nas propriedades do projeto
+  }
+
   getTeam(): void {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     this.taskService
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
-        this.taskList = tl;
+        if (tl.length > 0) {
+          this.isNull = false;
+          this.taskList = tl;
+        }
+        else this.isNull = true;
       }); //busca a equipe com base no id da url
       //busca todas as tarefas criadas dentro da equipe
-  }
-
-  getProject(): void { //é chamado quando está na tela do espaço de trabalho
-    this.isNull = false;  //não lembro pra que serve
-    this.taskList = this.project.tasks;//atribui para taskList todas as tarefas existentes no projeto
-    this.getAllCols(); //recebe o restante das colunas com base nas propriedades do projeto
   }
 
   getAllTasks(): void {
     this.taskService
       .getAllByUser(this.logged.id!)
       .subscribe((tl: Task[]) => {
-        this.taskList = tl;
+        if (tl.length > 0) {
+          this.isNull = false;
+          this.taskList = tl;
+        }
+        else this.isNull = true;
       }) //busca todas as tarefas de equipes e projetos que possuem o usuário atual
       //--> talvez seja interessante fazer outra validação <--
   }

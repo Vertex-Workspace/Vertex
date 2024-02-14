@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="!isNull">
     <div class="table">
         <div class="thead">
             <label 
@@ -7,12 +7,13 @@
                 [class.nameHeader]="col.field == 'name'"
             >              
                 <h6>
-                    {{col.headerText}}
+                {{col.headerText}}
                 </h6>
             </label>
         </div>
 
         <div class="tbody"
+            
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >
@@ -25,13 +26,20 @@
                     cdkDragBoundary=".table"
                 >
                     <app-row-card
+                        
                         [task]="task"
                         [cols]="cols"
-                    >
-                </app-row-card>
+                    ></app-row-card>
+                    
                 </div>
             </ng-container>
         </div>       
+        
     </div>
 </section>
+<div class="null-list" *ngIf="isNull">
+    <h6>
+        Nenhuma tarefa disponível...
+    </h6>
+</div>
 

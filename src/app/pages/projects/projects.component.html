@@ -73,6 +73,7 @@
                 
                 <div class="w-full h-full">
                     <app-list
+                        *ngIf="team.projects"
                         [team]="team"
                     ></app-list>
                 </div>
