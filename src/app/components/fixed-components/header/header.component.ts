@@ -51,14 +51,13 @@ export class HeaderComponent implements OnInit {
   }
 
   updateLocation(val: any): void {
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
     const activeRoute: string = val.url as string;        
 
     this.locations
       .find((loc: LocationItem) => {
         if (activeRoute.includes(loc.url)) {
-          this.location = loc.name;    
-          const id = val.url.replace(/[^0-9]/g, "") as number;
-          
+          this.location = loc.name;              
           if (id) {
             this.location += this.verifyUrlId(activeRoute, id)
           }
