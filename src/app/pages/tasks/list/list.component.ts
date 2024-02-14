@@ -91,13 +91,14 @@ export class ListComponent implements OnInit {
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
         this.taskList = tl;
-      });
+      }); //busca a equipe com base no id da url
+      //busca todas as tarefas criadas dentro da equipe
   }
 
-  getProject(): void {
-    this.isNull = false;  
-    this.taskList = this.project.tasks;
-    this.getAllCols();
+  getProject(): void { //é chamado quando está na tela do espaço de trabalho
+    this.isNull = false;  //não lembro pra que serve
+    this.taskList = this.project.tasks;//atribui para taskList todas as tarefas existentes no projeto
+    this.getAllCols(); //recebe o restante das colunas com base nas propriedades do projeto
   }
 
   getAllTasks(): void {
@@ -105,13 +106,14 @@ export class ListComponent implements OnInit {
       .getAllByUser(this.logged.id!)
       .subscribe((tl: Task[]) => {
         this.taskList = tl;
-      })
+      }) //busca todas as tarefas de equipes e projetos que possuem o usuário atual
+      //--> talvez seja interessante fazer outra validação <--
   }
 
-  getAllCols(): void {
-    if (this.project.properties) {
-      this.project.properties.forEach((property) => {
-        if (property.kind !== this.statusProperty.kind) { 
+  getAllCols(): void { //no espaço de trabalho, cria as colunas com base nas propriedades do projeto
+    if (this.project.properties) { //verifica se o projeto possui alguma propriedade
+      this.project.properties.forEach((property) => { //iteração -> cada propriedade do projeto
+        if (property.kind !== this.statusProperty.kind) { //evita repetição da coluna status, já adicionada no onInit
           const newCol: any = {
             id: property.id,
             field: property.kind,
