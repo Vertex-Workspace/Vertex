@@ -4,7 +4,7 @@ import {  CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
+import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/property';
 import { UserService } from 'src/app/services/user.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -33,6 +33,19 @@ export class ListComponent implements OnInit {
 
   isNull : boolean = true;
 
+  statusProperty: any = {
+    defaultValue: 'STATUS',
+    id: 1,
+    isObligated: true,
+    kind: PropertyKind.STATUS,
+    name: 'STATUS',
+    propertyLists: [
+      {id: 1, value: 'to-do default', color: 'RED', propertyListKind: PropertyListKind.TODO},
+      {id: 2, value: 'doing default', color: 'YELLOW', propertyListKind: PropertyListKind.DOING},
+      {id: 3, value: 'done default', color: 'GREEN', propertyListKind: PropertyListKind.DONE},
+    ]
+  };
+
   constructor(
     private userService: UserService, 
     private taskService: TaskService,
@@ -43,22 +56,25 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {    
     //Define o primeiro campo da tabela como o nome
+    //Adiciona nome e status como colunas padrão
     this.cols.push( 
       {
         field: "name",
         headerText: "Nome",
         width: '300px',
-      }  
-    );     
+      },
+      {
+        id: this.statusProperty.id,
+        field: this.statusProperty.kind,
+        headerText: this.statusProperty.name,
+        width: '300px'
+      }
+    );    
 
-    if (this.project) this.getProject();
-    else if (this.team) this.getTeam();
-    else this.getAllTasks();      
+    if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
+    else if (this.team) this.getTeam(); //atribui todas as tarefas da equipe a taskList
+    else this.getAllTasks(); //atribui todas as tarefas do usuário para taskList
 
-  }
-  
-  ngOnDestroy(): void {
-    this.taskList = [];
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
@@ -75,13 +91,13 @@ export class ListComponent implements OnInit {
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
         this.taskList = tl;
-        this.getStatusAndNameCols(tl);
       });
   }
 
   getProject(): void {
     this.isNull = false;  
     this.taskList = this.project.tasks;
+    this.getAllCols();
   }
 
   getAllTasks(): void {
@@ -89,35 +105,23 @@ export class ListComponent implements OnInit {
       .getAllByUser(this.logged.id!)
       .subscribe((tl: Task[]) => {
         this.taskList = tl;
-        this.getStatusAndNameCols(tl);
       })
   }
 
   getAllCols(): void {
-    if (this.project) {
-
+    if (this.project.properties) {
       this.project.properties.forEach((property) => {
-        const newCol: any = {
-          id: property.id,
-          field: property.kind,
-          headerText: property.name,
-          width: '300px',
+        if (property.kind !== this.statusProperty.kind) { 
+          const newCol: any = {
+            id: property.id,
+            field: property.kind,
+            headerText: property.name,
+            width: '300px',
+          }
+          this.cols.push(newCol);
         }
-        this.cols.push(newCol);
       });
     } 
-  }
-
-  getStatusAndNameCols(tl: Task[]): void {
-      const property: Property = tl[0].values[0].property;
-      const newCol: any = {
-        id: property.id,
-        field: property.kind,
-        headerText: property.name,
-        width: '300px'
-      };
-      this.cols.push(newCol);
-      
   }
 
 }
