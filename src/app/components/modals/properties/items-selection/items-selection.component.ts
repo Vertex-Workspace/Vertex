@@ -38,7 +38,7 @@ export class ItemsSelectionComponent {
     { name: "Não Visíveis", icon: faEyeSlash, propertyLists: [] }
   ]
 
-  constructor(private projectService: ProjectService, private alertService: AlertService) {}
+  constructor(private projectService: ProjectService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.property.propertyLists!.forEach((propertyList) => {
@@ -60,17 +60,12 @@ export class ItemsSelectionComponent {
       this.sections[0].propertyLists.push(propertyList);
       propertyList.propertyListKind = PropertyListKind.VISIBLE;
     }
-    console.log(this.sections);
-    
-
     this.projectService.createProperty(this.project.id!, this.property).subscribe(
       (property) => {
-        this.alertService.successAlert("Propriedade alterada com sucesso!");
+        this.alertService.successAlert("Visibilidade alterada com sucesso!");
       }, (error) => {
         console.log(error);
       });
-
-    
   }
 
   pencilClick() {
@@ -82,21 +77,43 @@ export class ItemsSelectionComponent {
   }
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
-  drop(event: CdkDragDrop<any[]>, i: number) {
-    // if ((event.previousContainer === event.container) && i == 0) {
-    //   moveItemInArray(this.itemsList[0].name, event.previousIndex, event.currentIndex);
-    // } else if ((event.previousContainer === event.container) && i == 1) {
-    //   moveItemInArray(this.itemsList[1].name, event.previousIndex, event.currentIndex);
-    // } else {
-    //   transferArrayItem(event.previousContainer.data,
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex
-    //   )
-    // }
+  drop(event: CdkDragDrop<PropertyList[]>, i: number) {
+    if (event.previousContainer.data != event.container.data) {
+      //If the previous container is the visible list, the new value of property list
+      //Will be invisible
+      if (event.previousContainer.data == this.sections[1].propertyLists) {
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
+        this.sections[0].propertyLists.forEach((propertyList: PropertyList) => {
+          if (propertyList.propertyListKind == PropertyListKind.INVISIBLE) {
+            propertyList.propertyListKind = PropertyListKind.VISIBLE;
+          }
+        });
+      } else {
+        transferArrayItem(event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
+        this.sections[1].propertyLists.forEach((propertyList: PropertyList) => {
+          if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
+            propertyList.propertyListKind = PropertyListKind.INVISIBLE;
+          }
+        });
+      }
+      this.projectService.createProperty(this.project.id!, this.property).subscribe(
+        (property) => {
+          this.alertService.successAlert("Visibilidade alterada com sucesso!");
+        }, (error) => {
+          console.log(error);
+        });
+    }
   }
 
-  createProperty() : void{
+  createProperty(): void {
     let newPropertyList: PropertyList = { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Novo Item", color: 'BLUE' };
     this.property.propertyLists.push(newPropertyList);
     this.projectService.createProperty(this.project.id!, this.property).subscribe(

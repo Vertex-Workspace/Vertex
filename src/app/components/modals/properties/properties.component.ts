@@ -48,19 +48,17 @@ export class PropertiesComponent{
 
   editTask(type: string, event: any) {
     console.log(type);
-    
     console.log(event);
     this.property = event;
+
     this.currentModal = type
     this.text = 'Edite a Propriedade'
-    this.footerText = 'Excluir Propriedade'
   }
 
   openStatusSelection(type: string) {
     if (type === 'items-selection') {
       this.currentModal = 'items-selection'
       this.text = "Itens Seleção"
-      this.footerText = 'Adicionar Elemento'
     }else if(type === 'status'){
       this.currentModal = 'status'
       this.text = "Status"
@@ -79,23 +77,16 @@ export class PropertiesComponent{
     
     if (this.from == 'edit') {
       this.currentModal = 'edit'
-    } else
-    if (this.currentModal === 'status' 
-    || this.currentModal === 'edit' 
-    || this.currentModal === 'items-selection') {
+    } else if (this.from == 'general') {
       this.currentModal = 'general'
-      this.text = 'Propriedades'
-    } else if (this.currentModal === 'colors') {
-      this.currentModal = 'status'
-      this.text = 'Status'
     }
-    console.log(this.currentModal);
+
     
   }
 
   defineArrowBack(event: any) {
-    console.log(event);
     this.from = event;
-    this.currentModal = "items-selection";
+    console.log(this.from);
+    
   }
 }

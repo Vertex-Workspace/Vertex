@@ -202,12 +202,8 @@ export class CalendarComponent {
       teamId: this.project.idTeam!
     }
 
-
-  
     this.taskService.create(taskCreate).subscribe(
       (task) => {
-        this.project.tasks.push(task);
-
         task.values.forEach((value) => {
           if (value.property.kind === PropertyKind.DATE) {
             const valueUpdate: ValueUpdate = {
@@ -227,6 +223,7 @@ export class CalendarComponent {
             this.taskService.patchValue(valueUpdate).subscribe(
               (taskDate) => {
                 task.values = taskDate.values;
+                this.project.tasks.push(task);
                 this.openCardTask(task);
               },
               (error) => {

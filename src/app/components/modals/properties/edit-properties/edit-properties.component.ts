@@ -74,6 +74,8 @@ export class EditPropertiesComponent {
       this.checkboxList[1].value = true;
       this.openInput = true;
     }
+
+    this.from.emit('general');
   }
 
   selectValue(type: any) {
