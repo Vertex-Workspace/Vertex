@@ -51,6 +51,9 @@ export class TaskComponent implements OnInit {
         this.idResponsable = taskResponsable.id;
       }
     });
+
+    console.log(this.idResponsable);
+    
     await this.getTimeInTask();
     
     if (this.timeInTask.working) {

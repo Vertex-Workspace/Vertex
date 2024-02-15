@@ -20,19 +20,7 @@ import { catchError, of, switchMap, tap } from 'rxjs';
     styleUrls: ['./team-informations.component.scss']
 })
 export class TeamInformationsComponent implements OnInit {
-    // this.teamService.getOneById(id).pipe(
-    //     switchMap((team: Team) => {
-    //         this.team = team;
-    //         console.log(this.team);
-    //         // Você pode retornar qualquer coisa aqui, como um Observable vazio
-    //         return of(null);
-    //     }),
-    //     catchError((error) => {
-    //         console.log(error);
-    //         // Trate o erro conforme necessário
-    //         return of(null); // Ou retorne um Observable com um valor padrão, por exemplo
-    //     })
-    // ).subscribe();
+    
     onClipboardCopy($event: Event) {
         throw new Error('Method not implemented.');
     }
@@ -56,28 +44,11 @@ export class TeamInformationsComponent implements OnInit {
     ngOnInit() {
         this.start();
         console.log(this.team);
-
-        this.verifyIfUserIsInTeam();
     }
 
     sla() {
         let aaa = this.copyInviteLink();
         console.log(aaa);
-
-    }
-
-    verifyIfUserIsInTeam() {
-        const id = Number(this.route.snapshot.paramMap.get('id'));
-        this.teamService.getTeamsByUser(id).subscribe(
-            (teams : Team[]) => {
-
-                console.log(teams);
-                
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
 
     }
 

@@ -30,7 +30,6 @@ export class InvitationPageComponent {
   ngOnInit(): void {
   }
 
-  // to-do: add user to team
   addUserOnTeam() {
     let userLogged = JSON.parse(localStorage.getItem('logged') || '{}');
     const id = Number(this.route.snapshot.paramMap.get('idTeam'));
