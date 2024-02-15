@@ -14,7 +14,7 @@
     optionLabel="value" 
     optionGroupLabel="name" 
     [optionGroupChildren]="['states', 'cities']" 
-    [style]="{ minWidth: '14rem' }" 
-    placeholder="{{value.toString()}}"
-    (change)="change($event, value)"
+    [style]="{ width: '100%' }" 
+    placeholder="{{getValue(value)}}"
+    (onChange)="change($event, value)"
 ></p-cascadeSelect>

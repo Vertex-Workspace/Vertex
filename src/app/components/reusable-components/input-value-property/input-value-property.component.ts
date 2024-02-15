@@ -61,12 +61,12 @@ export class InputValuePropertyComponent {
   }
 
   change(event: any, value: Value): void {
-    console.log('MUDOUUUUU');
+    const propertyId: number = event.value.id;    
     
-    if (value.value !== event.target.value) {
+    if (value.value !== event.value.id) {
       let newValue: string | number | Date;
       if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {
-        newValue = event.target.value as number;
+        newValue = event.value.id as number;
       } else if(value.property.kind === PropertyKind.DATE) {
 
         let date = new Date(event.target.value as string);
