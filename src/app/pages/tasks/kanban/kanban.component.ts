@@ -161,7 +161,7 @@ export class KanbanComponent {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
       project: {
-        id: 1
+        id: this.project.id!
       },
       values: [
         {

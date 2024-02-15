@@ -5,6 +5,7 @@ import { Value, ValueUpdate } from 'src/app/models/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
 
+
 @Component({
   selector: 'app-input-value-property',
   templateUrl: './input-value-property.component.html',
@@ -20,6 +21,8 @@ export class InputValuePropertyComponent {
 
   @Input()
   task!: Task;
+
+  selectedCity !: any;
 
   constructor(private taskService: TaskService, private alertService: AlertService) { }
 
@@ -58,6 +61,8 @@ export class InputValuePropertyComponent {
   }
 
   change(event: any, value: Value): void {
+    console.log('MUDOUUUUU');
+    
     if (value.value !== event.target.value) {
       let newValue: string | number | Date;
       if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {

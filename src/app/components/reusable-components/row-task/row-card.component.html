@@ -21,7 +21,11 @@
             class="properties" 
             [style.min-width]="'300px'"
         >
-            <app-input-value-property style="width: 100%; height: 100%;" [task]="task" [value]="getPropertyValue(col)"></app-input-value-property>
+        <app-input-value-property 
+            style="width: 100%; height: 100%;" 
+            [task]="task" 
+            [value]="getPropertyValue(col)"
+        ></app-input-value-property>
         </div>
     </ng-container>
 </div>

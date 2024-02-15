@@ -10,7 +10,9 @@ import { ListModule } from '../tasks/list/list.module';
 
 @NgModule({
   declarations: [ProjectsComponent],
-  exports:[ProjectsComponent],
+  exports:[
+    ProjectsComponent
+  ],
   imports: [
     CommonModule,
     CardListModule,

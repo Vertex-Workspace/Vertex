@@ -9,6 +9,7 @@ import {
 import { Value } from 'src/app/models/value';
 import { PropertyKind } from 'src/app/models/property';
 
+
 @Component({
   selector: 'app-row-card',
   templateUrl: './row-card.component.html',
@@ -30,10 +31,15 @@ export class RowCardComponent {
   value!: Value;
 
   icons: any[] = [
-    { id: 'clock', icon: this.faClock },
-    { id: 'chat', icon: this.faEnvelope },
+    // { id: 'clock', icon: this.faClock },
+    // { id: 'chat', icon: this.faEnvelope },
     { id: 'delete', icon: this.faTrashCan }
   ];
+
+  ngOnInit(): void {
+    console.log(this.task);
+    
+  }
 
   getCols(): any[] {
     let cols : any [] = [];
@@ -52,7 +58,7 @@ export class RowCardComponent {
   getPropertyValue(col: any) : Value {
     let value : Value;
     this.task.values?.forEach(values => {
-      if (col.id === values.property.id) {
+      if (col.field === values.property.kind) {
         value = values;
       }
     });

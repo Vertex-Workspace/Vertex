@@ -43,6 +43,10 @@ export class ProjectsComponent {
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
+    
+  }
+
+  ngOnInit(): void {
     this.getTeam();
     this.validateProjectId();
   }

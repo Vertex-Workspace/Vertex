@@ -87,7 +87,7 @@ export class ListComponent implements OnInit {
 
   getProject(): void { //é chamado quando está na tela do espaço de trabalho
     this.taskList = this.project.tasks;//atribui para taskList todas as tarefas existentes no projeto
-    this.getAllCols(); //recebe o restante das colunas com base nas propriedades do projeto
+    this.getAllCols(); //recebe o restante das colunas com base nas propriedades do projeto    
   }
 
   getTeam(): void {
