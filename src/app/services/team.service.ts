@@ -58,6 +58,6 @@ export class TeamService {
   }
 
   public getPermission(team: Team, user: User): Observable<Permission[]> {
-    return this.http.get<Permission[]>(`${URL}permission/${user.id}/${team.id}`)
+    return this.http.get<Permission[]>(`${URL}team/permission/${user.id}/${team.id}`)
   }
 }

@@ -43,7 +43,8 @@ export class CardUserComponent implements OnInit {
   @Input()
   typeString!: String;
 
-  permissions: Permissions[] = []
+  permissions: Permission[] = []
+  permission!: PermissionsType;
 
   constructor(private userService: UserService,
     private groupService: GroupService,
@@ -90,18 +91,29 @@ export class CardUserComponent implements OnInit {
 
   openPermissions(user: User): void {
     user.openPermission = !user.openPermission;
+    this.getPermission(user);
   }
 
-  permissionTypes: Permission[] = [
-    { name: PermissionsType.CREATE, label: 'Criar', selected: false },
-    { name: PermissionsType.EDIT, label: 'Editar', selected: false },
-    { name: PermissionsType.DELETE, label: 'Remover', selected: false },
-    { name: PermissionsType.VIEW, label: 'Visualizar', selected: false },
-  ]
+  // permissionTypes: Permission[] = [
+  //   { name: PermissionsType.CREATE, label: 'Criar', selected: false },
+  //   { name: PermissionsType.EDIT, label: 'Editar', selected: false },
+  //   { name: PermissionsType.DELETE, label: 'Remover', selected: false },
+  //   { name: PermissionsType.VIEW, label: 'Visualizar', selected: false },
+  // ]
 
-  selectPermission(user: User, permission: Permission, i: number): void {
+  selectPermission(user: User, permissionName: String): void {
+    if(permissionName === 'Criar') {
+      this.permission = PermissionsType.CREATE
+    } else if(permissionName === 'Editar') {
+      this.permission = PermissionsType.EDIT
+    } else if(permissionName === 'Remover') {
+      this.permission = PermissionsType.DELETE
+    } else if(permissionName === 'Visualizar') {
+      this.permission = PermissionsType.VIEW
+    }
+
     let createPermission: CreatePermission = {
-      name: permission.name,
+      name: this.permission,
       userId: user.id,
       team: {
         id: this.team.id
@@ -113,10 +125,27 @@ export class CardUserComponent implements OnInit {
       (permission) => {
         permission.selected = true;
         user.permissions?.push(permission);
+        permission.selected = true;
       })
+    }
 
-      // this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
+      getPermission(user: User): void {
+        this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
+          user.permissions = permissions;
+          console.log(user.permissions);
+          const hasCreatePermission = user.permissions.some(permission => permission.name === PermissionsType.CREATE);
+          user.hasCreatePermission = hasCreatePermission;
+          const hasEditPermission = user.permissions.some(permission => permission.name === PermissionsType.EDIT);
+          user.hasEditPermission = hasEditPermission;
+          const hasDeletePermission = user.permissions.some(permission => permission.name === PermissionsType.DELETE);
+          user.hasDeletePermission = hasDeletePermission;
+          const hasViewPermission = user.permissions.some(permission => permission.name === PermissionsType.VIEW);
+          user.hasViewPermission = hasViewPermission;
+          
+          
+        })
+        console.log(user.permissions);
+        
+      }
 
-      // })
-  }
 }

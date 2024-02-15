@@ -24,6 +24,10 @@ export class User {
 
     //brainstorming
     teams?: Team[] = [];
+  hasCreatePermission ?: boolean;
+  hasEditPermission ?: boolean;
+  hasDeletePermission ?: boolean;
+  hasViewPermission ?: boolean;
 
     constructor(
         user: User

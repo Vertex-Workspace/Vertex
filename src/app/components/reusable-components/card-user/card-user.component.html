@@ -7,8 +7,8 @@
             <p>{{user.firstName}}</p>
         </div>
         <div>
-            <fa-icon *ngIf="!user.selected && typeString === 'creating'" [icon]="faSquare" class="icon-not-selected size"
-                (click)="selectUser(user)"></fa-icon>
+            <fa-icon *ngIf="!user.selected && typeString === 'creating'" [icon]="faSquare"
+                class="icon-not-selected size" (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="user.selected && typeString === 'creating'" [icon]="faSquare" class="icon size"
                 (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon"
@@ -21,10 +21,27 @@
     </div>
 
     <div *ngIf="typeString === 'permissions' && user.openPermission" class="permissions">
-        <div *ngFor="let permission of permissionTypes; index as i" class="single-permissions">
-            <fa-icon [icon]="faSquare" (click)="selectPermission(user, permission, i)" 
-            [ngClass]="permission.selected === true ? 'icon' : 'icon-not-selected'"></fa-icon>
-            <p>{{permission.label}}</p>
+        <div class="single-permissions">
+            <div>
+                <fa-icon [icon]="faSquare" (click)="selectPermission(user, 'Criar')"
+                    [ngClass]="user.hasCreatePermission === true ? 'icon' : 'icon-not-selected'"></fa-icon>
+                <p>Criar</p>
+            </div>
+            <div>
+                <fa-icon [icon]="faSquare" (click)="selectPermission(user, 'Editar')"
+                    [ngClass]="user.hasEditPermission === true ? 'icon' : 'icon-not-selected'"></fa-icon>
+                <p>Editar</p>
+            </div>
+            <div>
+                <fa-icon [icon]="faSquare" (click)="selectPermission(user, 'Remover')"
+                    [ngClass]="user.hasDeletePermission === true ? 'icon' : 'icon-not-selected'"></fa-icon>
+                <p>Remover</p>
+            </div>
+            <div>
+                <fa-icon [icon]="faSquare" (click)="selectPermission(user, 'Visualizar')"
+                    [ngClass]="user.hasViewPermission === true ? 'icon' : 'icon-not-selected'"></fa-icon>
+                <p>Visualizar</p>
+            </div>
         </div>
     </div>
 </div>

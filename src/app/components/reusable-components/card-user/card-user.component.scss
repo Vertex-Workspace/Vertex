@@ -39,10 +39,14 @@
     @apply flex flex-col w-[800px] bg-white h-[120px] items-end;
 
     .single-permissions{
-        @apply w-[92%] h-[20%] flex flex-row items-center;
+        @apply w-[92%] h-[20%] flex flex-col items-start pb-10;
 
-        .square-permission{
-            @apply pl-5;
+        div{
+            @apply flex flex-row;
+
+            p{
+                @apply pt-1
+            }
         }
     };
 
