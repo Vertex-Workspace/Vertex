@@ -59,14 +59,15 @@ export class Permission {
     user ?: User;
     team ?: Team;
     label?: String
-    selected ?: boolean
+    enabled?: boolean
 
     constructor(permission : Permission){
         this.id = permission.id;
         this.name = permission.name;
         this.user = permission.user;
         this.team = permission.team;
-        this.selected = permission.selected;
+        this.label = permission.label
+        this.enabled = permission.enabled;
     }
 }
 
@@ -83,6 +84,6 @@ export class CreatePermission {
     team !: {
         id:number
     };
-    selected ?: boolean
+    enabled ?: true
     
 }

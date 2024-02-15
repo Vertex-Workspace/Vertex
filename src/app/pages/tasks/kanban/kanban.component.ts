@@ -11,24 +11,31 @@ import { TaskService } from 'src/app/services/task.service';
 import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
+import { TeamService } from 'src/app/services/team.service';
+import { Permission } from 'src/app/models/user';
+import { Team } from 'src/app/models/team';
 
 @Component({
   selector: 'app-kanban',
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.scss']
 })
-export class KanbanComponent {
+export class KanbanComponent{
 
 
   constructor(
     private taskService: TaskService, 
     private alertService: AlertService,
-    private userService : UserService) {
+    private userService : UserService,
+    private teamService: TeamService) {
 
   }
 
   @Input()
   project!: Project;
+
+  permissions: Permission[] =[]
+  team !: Team
 
 
 
@@ -136,7 +143,7 @@ export class KanbanComponent {
     this.openTaskDetails.emit(task);
   }
 
-  createTask(propertyList: PropertyList) {
+  createTask(propertyList: PropertyList) { 
     let propertyUsed!: Property;
 
     //For each to find the property of the clicked Property List
@@ -189,5 +196,13 @@ export class KanbanComponent {
       }
     );
   }
+
+  hasPermission(): void {
+    this.teamService.getPermission(this.project.team,  this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.permissions = permissions;
+      
+    }) 
+  }
+
 
 }

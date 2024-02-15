@@ -6,7 +6,7 @@ import { User } from "./user";
 export class Project {
     id !: number;
     name !: string;
-    team ?: Team;
+    team : Team;
     description ?: string;
     image ?: string;
     creator ?: User;

@@ -10,6 +10,7 @@ import { Group } from 'src/app/models/groups';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { create } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-card-user',
@@ -43,7 +44,7 @@ export class CardUserComponent implements OnInit {
   @Input()
   typeString!: String;
 
-  permissions: Permissions[] = []
+  permissions: Permission[] = [];
 
   constructor(private userService: UserService,
     private groupService: GroupService,
@@ -93,30 +94,40 @@ export class CardUserComponent implements OnInit {
   }
 
   permissionTypes: Permission[] = [
-    { name: PermissionsType.CREATE, label: 'Criar', selected: false },
-    { name: PermissionsType.EDIT, label: 'Editar', selected: false },
-    { name: PermissionsType.DELETE, label: 'Remover', selected: false },
-    { name: PermissionsType.VIEW, label: 'Visualizar', selected: false },
+    { 
+      name: PermissionsType.CREATE, 
+      label: 'Criar',
+      enabled: false
+    },
+    { 
+      name: PermissionsType.EDIT, 
+      label: 'Editar',
+      enabled: false
+    },
+    { name: PermissionsType.DELETE, label: 'Remover', enabled: false},
+    { name: PermissionsType.VIEW, label: 'Visualizar', enabled: false},
   ]
 
-  selectPermission(user: User, permission: Permission, i: number): void {
+  selectPermission(user: User, permission: Permission): void {
     let createPermission: CreatePermission = {
       name: permission.name,
       userId: user.id,
       team: {
         id: this.team.id
-      },
-      selected: true
+      }
     }
 
     this.teamService.permission(createPermission).subscribe(
       (permission) => {
-        permission.selected = true;
         user.permissions?.push(permission);
-      })
+      }) 
+  }
 
-      // this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
-
-      // })
+  getPermission(user: User): any[] | undefined{ 
+    this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
+      this.permissions = permissions;
+    }) 
+    console.log(this.permissions);
+    return this.permissions
   }
 }

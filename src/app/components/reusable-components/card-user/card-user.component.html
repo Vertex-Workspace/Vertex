@@ -7,24 +7,30 @@
             <p>{{user.firstName}}</p>
         </div>
         <div>
-            <fa-icon *ngIf="!user.selected && typeString === 'creating'" [icon]="faSquare" class="icon-not-selected size"
-                (click)="selectUser(user)"></fa-icon>
+            <fa-icon *ngIf="!user.selected && typeString === 'creating'" [icon]="faSquare"
+                class="icon-not-selected size" (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="user.selected && typeString === 'creating'" [icon]="faSquare" class="icon size"
                 (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon"
                 (click)="removeUser(user)">
             </fa-icon>
             <fa-icon *ngIf="typeString === 'permissions'" size="1x" [icon]="faCaretDown" class="icon"
-                (click)="openPermissions(user)">
+                (click)="openPermissions(user)" (click)="getPermission(user)">
             </fa-icon>
         </div>
     </div>
 
     <div *ngIf="typeString === 'permissions' && user.openPermission" class="permissions">
-        <div *ngFor="let permission of permissionTypes; index as i" class="single-permissions">
-            <fa-icon [icon]="faSquare" (click)="selectPermission(user, permission, i)" 
-            [ngClass]="permission.selected === true ? 'icon' : 'icon-not-selected'"></fa-icon>
-            <p>{{permission.label}}</p>
+        <div *ngFor="let type of permissionTypes; index as i" class="single-permissions">
+            <ng-container *ngFor="let permission of permissions; index as i">
+                <ng-container *ngFor="let name of permission.name">
+                    <p>{{name}}</p>
+                </ng-container>
+                <fa-icon [icon]="faSquare" (click)="selectPermission(user, type)"
+                    [ngClass]="'icon-not-selected'"></fa-icon>
+                <p>{{type.label}}</p>
+            </ng-container>
+            
         </div>
     </div>
 </div>
