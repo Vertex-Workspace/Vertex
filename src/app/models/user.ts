@@ -55,7 +55,7 @@ export class User {
 
 export class Permission {
     id?: number;
-    name : PermissionsType;
+    name ?: PermissionsType;
     user ?: User;
     team ?: Team;
     label?: String
@@ -78,12 +78,8 @@ export enum PermissionsType {
     DELETE = "DELETE"
 }
 
-export class CreatePermission {
-    name !: PermissionsType;
-    userId ?:number;
-    team !: {
-        id:number
-    };
-    enabled ?: true
-    
+export class HasPermission {
+    projectId ?: number
+    userId ?: number
+    permission ?: Permission 
 }

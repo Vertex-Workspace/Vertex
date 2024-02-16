@@ -21,16 +21,14 @@
     </div>
 
     <div *ngIf="typeString === 'permissions' && user.openPermission" class="permissions">
-        <div *ngFor="let type of permissionTypes; index as i" class="single-permissions">
-            <ng-container *ngFor="let permission of permissions; index as i">
-                <ng-container *ngFor="let name of permission.name">
-                    <p>{{name}}</p>
-                </ng-container>
-                <fa-icon [icon]="faSquare" (click)="selectPermission(user, type)"
-                    [ngClass]="'icon-not-selected'"></fa-icon>
-                <p>{{type.label}}</p>
-            </ng-container>
-            
+        <div class="single-permissions" *ngFor="let permission of user.permissions">
+            <div>
+                <fa-icon [icon]="faSquare" 
+                [ngClass]="permission.enabled === true ? 'icon' : 'icon-not-selected'"
+                (click)="selectPermission(user, permission)">
+                </fa-icon>
+                <p>{{permission.name}}</p>
+            </div>
         </div>
     </div>
 </div>

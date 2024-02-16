@@ -12,7 +12,7 @@ import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { TeamService } from 'src/app/services/team.service';
-import { Permission } from 'src/app/models/user';
+import { HasPermission, Permission, PermissionsType, User } from 'src/app/models/user';
 import { Team } from 'src/app/models/team';
 
 @Component({
@@ -20,13 +20,13 @@ import { Team } from 'src/app/models/team';
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.scss']
 })
-export class KanbanComponent{
+export class KanbanComponent {
 
 
   constructor(
-    private taskService: TaskService, 
+    private taskService: TaskService,
     private alertService: AlertService,
-    private userService : UserService,
+    private userService: UserService,
     private teamService: TeamService) {
 
   }
@@ -34,10 +34,7 @@ export class KanbanComponent{
   @Input()
   project!: Project;
 
-  permissions: Permission[] =[]
-  team !: Team
-
-
+  canCreate: boolean = false;
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     const task: Task = event.item.data;
@@ -143,7 +140,8 @@ export class KanbanComponent{
     this.openTaskDetails.emit(task);
   }
 
-  createTask(propertyList: PropertyList) { 
+  createTask(propertyList: PropertyList) {
+    this.hasPermission(this.userService.getLogged(), this.project)
     let propertyUsed!: Property;
 
     //For each to find the property of the clicked Property List
@@ -160,7 +158,7 @@ export class KanbanComponent{
       }
     });
 
-    if(propertyUsed == null){
+    if (propertyUsed == null) {
       return;
     }
 
@@ -186,22 +184,31 @@ export class KanbanComponent{
       teamId: this.project.idTeam!
     }
 
-    this.taskService.create(taskCreate).subscribe(
-      (task: Task) => {
-        this.project.tasks.push(task);
-        this.alertService.successAlert("Tarefa criada com sucesso!");
-      },
-      (error: any) => {
-        this.alertService.errorAlert("Erro ao criar tarefa!");
-      }
-    );
+    if (this.canCreate) {
+      this.taskService.create(taskCreate).subscribe(
+        (task: Task) => {
+          this.project.tasks.push(task);
+          this.alertService.successAlert("Tarefa criada com sucesso!");
+        },
+        (error: any) => {
+          this.alertService.errorAlert("Erro ao criar tarefa!");
+        }
+      );
+    }
   }
 
-  hasPermission(): void {
-    this.teamService.getPermission(this.project.team,  this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.permissions = permissions;
-      
-    }) 
+  hasPermission(user: User, project: Project): void {
+
+    this.teamService.hasPermission(project, user).subscribe((permissions: Permission[]) => {
+      user.permissions = permissions
+      console.log(user.permissions);
+
+      for (let i = 0; i < permissions.length; i++) {
+        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+          this.canCreate = true
+        }
+      }
+    })
   }
 
 

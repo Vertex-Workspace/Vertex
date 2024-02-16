@@ -4,13 +4,12 @@ import {
   faCircleUser, faSquare, faUserMinus,
   faCaretDown, faCaretUp
 } from '@fortawesome/free-solid-svg-icons';
-import { PermissionsType, Permission, User, CreatePermission } from 'src/app/models/user';
+import { PermissionsType, Permission, User} from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Group } from 'src/app/models/groups';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
-import { create } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-card-user',
@@ -44,7 +43,7 @@ export class CardUserComponent implements OnInit {
   @Input()
   typeString!: String;
 
-  permissions: Permission[] = [];
+  permissions: Permission[] = []
 
   constructor(private userService: UserService,
     private groupService: GroupService,
@@ -91,43 +90,19 @@ export class CardUserComponent implements OnInit {
 
   openPermissions(user: User): void {
     user.openPermission = !user.openPermission;
+    this.getPermission(user);
   }
-
-  permissionTypes: Permission[] = [
-    { 
-      name: PermissionsType.CREATE, 
-      label: 'Criar',
-      enabled: false
-    },
-    { 
-      name: PermissionsType.EDIT, 
-      label: 'Editar',
-      enabled: false
-    },
-    { name: PermissionsType.DELETE, label: 'Remover', enabled: false},
-    { name: PermissionsType.VIEW, label: 'Visualizar', enabled: false},
-  ]
 
   selectPermission(user: User, permission: Permission): void {
-    let createPermission: CreatePermission = {
-      name: permission.name,
-      userId: user.id,
-      team: {
-        id: this.team.id
-      }
-    }
-
-    this.teamService.permission(createPermission).subscribe(
-      (permission) => {
-        user.permissions?.push(permission);
-      }) 
+    this.teamService.changePermissionEnable(permission, user, this.team).subscribe((permission) => {
+      this.alert.successAlert('Autorização alterada!')
+    })
   }
 
-  getPermission(user: User): any[] | undefined{ 
+  getPermission(user: User): Permission[] | any {
     this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
-      this.permissions = permissions;
-    }) 
-    console.log(this.permissions);
-    return this.permissions
+      user.permissions = permissions;
+    })
   }
+
 }

@@ -6,7 +6,7 @@
                 cdkDropList [cdkDropListData]="project.tasks" (cdkDropListDropped)="dropCard($event, propertyList)">
                 <div class="flex flex-row justify-between w-full items-center">
                     <h6>{{ propertyList.value }}</h6>
-                    <h4 (click)="createTask(propertyList)">+</h4>
+                    <button (click)="createTask(propertyList)">+</button>
                 </div>
                 <div class="col-items">
 
