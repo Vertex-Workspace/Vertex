@@ -25,7 +25,9 @@ export class KanbanComponent {
     private alertService: AlertService,
     private userService : UserService
   ) {
+  }
 
+  ngOnInit(): void {
   }
 
   @Input()

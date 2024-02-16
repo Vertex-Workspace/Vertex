@@ -11,6 +11,8 @@ import { TeamsSettingsModule } from './teams-settings/teams-settings.module';
 import { SecurityComponent } from './security/security.component';
 import { SecurityModule } from './security/security.module';
 import { FormsModule } from '@angular/forms';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 
@@ -31,7 +33,9 @@ import { FormsModule } from '@angular/forms';
     ProfileModule,
     TeamsSettingsModule,
     SecurityModule,
-    FormsModule
+    FormsModule,
+    CascadeSelectModule,
+    InputSwitchModule
   ]
 })
 export class UserSettingsModule { }

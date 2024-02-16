@@ -62,7 +62,6 @@ export class TaskComponent implements OnInit {
   async getTimeInTask() {
     this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
       (time: TimeInTask) => {
-        console.log(time);
         
         this.timer = time.timeInTask;
         
@@ -70,9 +69,6 @@ export class TaskComponent implements OnInit {
         this.minutes = parseInt(time.timeInTask.substring(3, 5));
         this.hours = parseInt(time.timeInTask.substring(0, 2));
         this.timeInTask = time;
-        console.log(this.timeInTask);
-        
-        console.log(time, "TIME-IN BACK");
       },
       (e: any) => {
         console.log(e);

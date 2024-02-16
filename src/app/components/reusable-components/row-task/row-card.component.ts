@@ -36,9 +36,7 @@ export class RowCardComponent {
     { id: 'delete', icon: this.faTrashCan }
   ];
 
-  ngOnInit(): void {
-    console.log(this.task);
-    
+  ngOnInit(): void {    
   }
 
   getCols(): any[] {
