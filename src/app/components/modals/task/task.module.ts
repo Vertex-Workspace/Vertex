@@ -15,15 +15,14 @@ import { PropertiesModule } from './properties/properties.module';
     TaskComponent,
     CommentsComponent,
     LogComponent,
-    PropertiesComponent,
   ],
   exports: [TaskComponent],
   imports: [
     CommonModule,
      FontAwesomeModule, 
-     FormsModule, MinichatTASKModule],
-  ],
-  exports: [TaskComponent],
-  imports: [CommonModule, FontAwesomeModule, FormsModule, PropertiesModule],
+     FormsModule, 
+     MinichatTASKModule,
+     PropertiesModule
+    ],
 })
 export class TaskModule {}

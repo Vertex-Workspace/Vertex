@@ -48,9 +48,7 @@ export class CardComponent implements OnInit{
   }
 
   openModalDelete(): void {
-    console.log("cliquei");
     this.modalDelete = true;
-    console.log(this.modalDelete);
   }
 
   delete(event: any): void {

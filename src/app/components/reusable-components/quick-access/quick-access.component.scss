@@ -70,14 +70,14 @@ section {
 
 //RECENTLY TEAMS
 .recently-teams {
-    @apply flex w-2/3 h-[25.5%] justify-between items-center flex-col;
+    @apply flex w-2/3 h-[25.5%] justify-between items-center flex-col pt-8;
 
     .title {
         @apply flex w-full h-[10%];
     }
 
     .div-recently-teams {
-        @apply flex w-full flex-row h-[80%] justify-between;
+        @apply flex w-full flex-row h-[80%] gap-4 mt-8;
         color: $primaryColor;
     }
 

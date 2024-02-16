@@ -153,5 +153,6 @@ export class ProfileComponent {
         this.userService.updateLoggedUser(user);
       })
   }
+  
 
 }

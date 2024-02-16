@@ -43,6 +43,10 @@ export class ProjectsComponent {
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
+    
+  }
+
+  ngOnInit(): void {
     this.getTeam();
     this.validateProjectId();
   }
@@ -113,7 +117,6 @@ export class ProjectsComponent {
   }
 
   createProject(project: Project): void {
-
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     project.creator = this.logged;
 
@@ -122,7 +125,7 @@ export class ProjectsComponent {
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
       });
-    
+      
   }
 
 

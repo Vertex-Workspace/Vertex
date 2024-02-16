@@ -20,7 +20,12 @@ export class AppearanceComponent implements OnInit {
   faToggleOff = faToggleOff;
   faCheck = faCheck;
 
-  constructor(private personalizationService: PersonalizationService, private userService: UserService, private zone: NgZone, private cdr: ChangeDetectorRef) { }
+  constructor(
+    private personalizationService: PersonalizationService, 
+    private userService: UserService, 
+    private zone: NgZone,
+     private cdr: ChangeDetectorRef
+  ) { }
 
   logged !: User;
   primaryLight!: string;
@@ -28,10 +33,12 @@ export class AppearanceComponent implements OnInit {
   primaryDark!: string;
   secondDark!: string;
   theme!: number;
-  fontSizeChoosed!: number;
-  fontFamilyChoosed!: string;
+  selectedFontSize !: number;
+  selectedFontFamily!: string;
   voiceCommand!: boolean;
   listeningText!: boolean;
+  checked!: boolean;
+  checked2!: boolean;
 
   themesList!: any[];
 
@@ -131,8 +138,8 @@ export class AppearanceComponent implements OnInit {
       console.log(this.themesList);
 
 
-      this.fontSizeChoosed = user.personalization?.fontSize!;
-      this.fontFamilyChoosed = user.personalization?.fontFamily!;
+      this.selectedFontSize = user.personalization?.fontSize!;
+      this.selectedFontFamily = user.personalization?.fontFamily!;
       this.voiceCommand = user.personalization?.voiceCommand!;
       this.listeningText = user.personalization?.listeningText!;
     });
@@ -178,8 +185,8 @@ export class AppearanceComponent implements OnInit {
       secondColorLight: this.themesList[0].secondColor,
       primaryColorDark: this.themesList[1].primaryColor,
       secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.fontFamilyChoosed,
-      fontSize: this.fontSizeChoosed,
+      fontFamily: this.selectedFontFamily,
+      fontSize: this.selectedFontSize,
       theme: this.theme,
       voiceCommand: this.voiceCommand,
       listeningText: this.listeningText
@@ -206,8 +213,8 @@ export class AppearanceComponent implements OnInit {
       secondColorLight: this.themesList[0].secondColor,
       primaryColorDark: this.themesList[1].primaryColor,
       secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.fontFamilyChoosed,
-      fontSize: this.fontSizeChoosed,
+      fontFamily: this.selectedFontFamily,
+      fontSize: this.selectedFontSize,
       theme: this.theme,
       voiceCommand: this.voiceCommand,
       listeningText: this.listeningText
@@ -241,8 +248,8 @@ export class AppearanceComponent implements OnInit {
       secondColorLight: this.themesList[0].secondColor,
       primaryColorDark: this.themesList[1].primaryColor,
       secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.fontFamilyChoosed,
-      fontSize: this.fontSizeChoosed,
+      fontFamily: this.selectedFontFamily,
+      fontSize: this.selectedFontSize,
       theme: this.theme,
       voiceCommand: true,
       listeningText: true
@@ -309,8 +316,8 @@ export class AppearanceComponent implements OnInit {
       secondColorLight: this.themesList[0].secondColor,
       primaryColorDark: this.themesList[1].primaryColor,
       secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.fontFamilyChoosed,
-      fontSize: this.fontSizeChoosed,
+      fontFamily: this.selectedFontFamily,
+      fontSize: this.selectedFontSize,
       theme: this.theme,
       voiceCommand: true,
       listeningText: true
@@ -341,8 +348,8 @@ export class AppearanceComponent implements OnInit {
       secondColorLight: this.themesList[0].secondColor,
       primaryColorDark: this.themesList[1].primaryColor,
       secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.fontFamilyChoosed,
-      fontSize: this.fontSizeChoosed,
+      fontFamily: this.selectedFontFamily,
+      fontSize: this.selectedFontSize,
       theme: this.theme,
       voiceCommand: true,
       listeningText: true
@@ -366,19 +373,19 @@ export class AppearanceComponent implements OnInit {
       secondColorLight: this.themesList[0].secondColor,
       primaryColorDark: this.themesList[1].primaryColor,
       secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.fontFamilyChoosed,
-      fontSize: this.fontSizeChoosed,
+      fontFamily: this.selectedFontFamily,
+      fontSize: this.selectedFontSize,
       theme: this.theme,
       voiceCommand: true,
       listeningText: true
     });
 
-    let smallText = this.fontSizeChoosed - 2;
+    let smallText = this.selectedFontSize - 2;
     console.log(smallText);
 
-    let regularText = this.fontSizeChoosed;
-    let mediumText = Number(this.fontSizeChoosed) + 2;
-    let largeText = Number(this.fontSizeChoosed) + 4;
+    let regularText = this.selectedFontSize;
+    let mediumText = Number(this.selectedFontSize) + 2;
+    let largeText = Number(this.selectedFontSize) + 4;
 
     this.userService.patchPersonalization(newPers).subscribe((pers) => {
       this.logged.personalization = pers.personalization;
@@ -390,6 +397,11 @@ export class AppearanceComponent implements OnInit {
       document.documentElement.style.setProperty('--largeText', largeText + 'px');
 
     })
+  }
+
+  getSelectedOptions(): void {
+    this.selectedFontSize = this.logged.personalization!.fontSize!;
+    this.selectedFontFamily = this.logged.personalization!.fontFamily!;
   }
 
 }

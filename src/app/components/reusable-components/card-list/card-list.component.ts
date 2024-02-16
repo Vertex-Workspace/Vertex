@@ -27,7 +27,9 @@ export class CardListComponent implements OnInit{
 
   delete: boolean = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   getType(): any[] {
     if (this.type === 'project') {

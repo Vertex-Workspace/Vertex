@@ -1,6 +1,6 @@
 <div class="card">
 
-    <div class="name test-name" [style.min-width]="getNameWidth()">
+    <div class="name test-name z-[1]" [style.min-width]="getNameWidth()">
         <span class="drag-handle" cdkDragHandle>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
@@ -15,13 +15,17 @@
         </div>
     </div>
 
-    <ng-container *ngFor="let col of cols">
-        <div 
+        <ng-container *ngFor="let col of cols">
+            <div 
             *ngIf="col.field !== 'name'" 
             class="properties" 
             [style.min-width]="'300px'"
-        >
-            <app-input-value-property style="width: 100%; height: 100%;" [task]="task" [value]="getPropertyValue(col)"></app-input-value-property>
+            >
+            <app-input-value-property 
+            style="width: 100%; height: 100%;" 
+            [task]="task" 
+            [value]="getPropertyValue(col)"
+            ></app-input-value-property>
         </div>
     </ng-container>
 </div>

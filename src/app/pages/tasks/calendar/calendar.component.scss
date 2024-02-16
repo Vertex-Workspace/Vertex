@@ -54,8 +54,15 @@ section {
         border: 1px solid $emphasis;
 
         .day-informations {
-            text-align: center;
-            @apply flex min-h-[30px] w-full justify-end;
+            @apply flex min-h-[30px] w-full justify-between;
+
+            .pi {
+                @apply text-[1.1rem] cursor-pointer font-light flex items-center justify-center;
+
+                &:hover {
+                    @apply text-[1.2rem];
+                }
+            }
 
             div{
                 @apply w-8 h-8 rounded-full justify-center flex items-center;

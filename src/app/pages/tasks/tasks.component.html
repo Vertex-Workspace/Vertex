@@ -55,14 +55,12 @@
         </section>
 
         <section class="router">
-            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'" style="width: 100%; height: 100%;"
+            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
 
-
-
-            <app-list [project]="project" *ngIf="clicked  === 'List'" style="width: 100%; height: 100%;"></app-list>
-            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'" style="width: 100%; height: 100%;"></app-calendar>
-            <app-mural  *ngIf="clicked  === 'Mural'" style="width: 100%; height: 100%;"></app-mural>
+            <app-list [project]="project" *ngIf="clicked  === 'List'"></app-list>
+            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'"></app-calendar>
+            <app-mural  *ngIf="clicked  === 'Mural'"></app-mural>
             <!-- app-kanban -->
         </section>
 

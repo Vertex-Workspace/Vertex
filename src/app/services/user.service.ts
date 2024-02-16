@@ -134,8 +134,8 @@ export class UserService {
     return this.http
       .post<any>(`${URL}user/${id}/image`, data);
   }
-
-  public updateLoggedUser(user: User): void {
+  
+    public updateLoggedUser(user: User): void {
     this.saveLoggedUser(user);
   }
 

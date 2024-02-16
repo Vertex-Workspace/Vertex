@@ -1,9 +1,58 @@
-<input (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/>
-<input (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/>
-<input (blur)="change($event, value)" type="date" *ngIf="getKind(value.property, 'DATE')" value="{{getValue(value)}}"/>
-<p *ngIf="getKind(value.property, 'LIST')">NÃO FAÇO IDEIA NO MOMENTO</p>
-<select name="" id="" *ngIf="getKind(value.property, 'STATUS')" (change)="change($event, value)">
-    <ng-container *ngFor="let option of getSelectOptions(value)" >
-        <option [attr.value]="option.id" [attr.selected]="isSelected(option, value) ? true : null">{{option.value}}</option>
-    </ng-container>
-</select>
+<!-- <input (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/> -->
+<!-- text -> verificar $event -->
+<input
+    *ngIf="getKind(value.property, 'NUMBER')"
+    type="text" 
+    pInputText 
+    [(ngModel)]="textValue"
+    (onBlur)="change($event, value)" 
+/>
+
+<!-- <input (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/> -->
+<!-- number -> verificar $event -->
+<p-inputNumber 
+    *ngIf="getKind(value.property, 'NUMBER')"
+    [(ngModel)]="numberValue" 
+    inputId="minmaxfraction"
+    mode="decimal" 
+    [minFractionDigits]="2" 
+    [maxFractionDigits]="5"
+    (onBlur)="change($event, value)"
+> </p-inputNumber>
+
+
+
+<!-- date -->
+<span class="p-float-label" *ngIf="getKind(value.property, 'DATE')">
+    <p-calendar 
+        [(ngModel)]="currentDate" 
+        appendTo="body"
+        [style]="{ width: '250px' }" 
+        (onSelect)="changeDate($event, value)"
+        dateFormat="dd.mm.yy"
+    ></p-calendar>
+    <label for="birth_date">{{getValue(value)}}</label>
+</span>
+
+<!-- status -->
+ <p-cascadeSelect 
+     *ngIf="getKind(value.property, 'STATUS')"
+    [(ngModel)]="selectedStatus" 
+    [options]="getSelectOptions(value)" 
+    optionLabel="value" 
+    optionGroupLabel="name" 
+    [optionGroupChildren]="[]" 
+    [style]="{ width: '250px' }" 
+    placeholder="{{getValue(value)}}"
+    (onChange)="change($event, value)"
+    appendTo="body"
+>
+    <ng-template pTemplate="option" let-option>
+        <div class="flex items-center justify-center gap-2">
+            <span class="mr-2 w-[17px] h-[17px] rounded-full" 
+                [style.backgroundColor]="getColor(option.color)"
+            ></span>
+            <span>{{ option.value }}</span>
+        </div>
+    </ng-template>
+</p-cascadeSelect>
