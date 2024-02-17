@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpinner, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Project } from 'src/app/models/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
 import { Task } from 'src/app/models/task';
+import { Permission, PermissionsType } from 'src/app/models/user';
 import { Value, ValueUpdate } from 'src/app/models/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-properties',
@@ -14,8 +18,13 @@ import { TaskService } from 'src/app/services/task.service';
 export class PropertiesComponent implements OnInit {
 
   @Input() task!: Task;
+  @Input() project !:Project
+  canEdit: boolean = false;
 
-  constructor(private taskService: TaskService, private alertService : AlertService) { }
+  constructor(private taskService: TaskService, 
+    private alertService : AlertService,
+    private teamService: TeamService,
+    private userService: UserService) { }
 
   icons: any = [
     { name: 'TEXT', icon: faFont },
@@ -28,7 +37,15 @@ export class PropertiesComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions
 
+      for (let i = 0; i < permissions.length; i++) {
+        if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+          this.canEdit = true;
+        }
+      }
+    })
   }
 
   @Output() changes = new EventEmitter();

@@ -20,7 +20,7 @@ import { Team } from 'src/app/models/team';
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.scss']
 })
-export class KanbanComponent {
+export class KanbanComponent implements OnInit {
 
 
   constructor(
@@ -29,6 +29,18 @@ export class KanbanComponent {
     private userService: UserService,
     private teamService: TeamService) {
 
+  }
+  ngOnInit(): void {
+    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions
+      console.log(this.userService.getLogged().permissions);
+
+      for (let i = 0; i < permissions.length; i++) {
+        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+          this.canCreate = true
+        }
+      }
+    })
   }
 
   @Input()
@@ -141,7 +153,7 @@ export class KanbanComponent {
   }
 
   createTask(propertyList: PropertyList) {
-    this.hasPermission(this.userService.getLogged(), this.project)
+    // this.hasPermission(this.userService.getLogged(), this.project)
     let propertyUsed!: Property;
 
     //For each to find the property of the clicked Property List
@@ -197,19 +209,21 @@ export class KanbanComponent {
     }
   }
 
-  hasPermission(user: User, project: Project): void {
+  // hasPermission(user: User, project: Project): void {
 
-    this.teamService.hasPermission(project, user).subscribe((permissions: Permission[]) => {
-      user.permissions = permissions
-      console.log(user.permissions);
+  //   this.teamService.hasPermission(project, user).subscribe((permissions: Permission[]) => {
+  //     user.permissions = permissions
+  //     console.log(user.permissions);
 
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-          this.canCreate = true
-        }
-      }
-    })
-  }
+  //     for (let i = 0; i < permissions.length; i++) {
+  //       if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+  //         this.canCreate = true
+  //       }else {
+  //         this.alertService.errorAlert("Você não tem permissão para criar uma tarefa!")
+  //       }
+  //     }
+  //   })
+  // }
 
 
 }

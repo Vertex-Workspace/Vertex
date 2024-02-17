@@ -7,11 +7,11 @@
                     <p>{{value.property.name}}</p>
                 </div>
                 <div>
-                    <input (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/>
-                    <input (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/>
-                    <input (blur)="change($event, value)" type="date" *ngIf="getKind(value.property, 'DATE')" value="{{getValue(value)}}"/>
+                    <input [disabled]="!canEdit" (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/>
+                    <input [disabled]="!canEdit" (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/>
+                    <input  [disabled]="!canEdit" (blur)="change($event, value)" type="date" *ngIf="getKind(value.property, 'DATE')" value="{{getValue(value)}}"/>
                     <p *ngIf="getKind(value.property, 'LIST')">NÃO FAÇO IDEIA NO MOMENTO</p>
-                    <select name="" id="" *ngIf="getKind(value.property, 'STATUS')" (change)="change($event, value)">
+                    <select [disabled]="!canEdit" name="" id="" *ngIf="getKind(value.property, 'STATUS')" (change)="change($event, value)">
                         <ng-container *ngFor="let option of getSelectOptions(value)" >
                             <option [attr.value]="option.id" [attr.selected]="isSelected(option, value) ? true : null">{{option.value}}</option>
                         </ng-container>

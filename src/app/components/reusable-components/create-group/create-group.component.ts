@@ -39,10 +39,15 @@ export class CreateGroupComponent implements OnInit {
       name: [null, [Validators.required]],
       team: [this.team],
       users: [this.users]
+      
     })
   }
 
   onSubmit(): void {
+    console.log(this.team);
+    console.log(this.users);
+    
+    
     const group = this.form.getRawValue() as Group
     group.team = this.team
     group.users = this.users
