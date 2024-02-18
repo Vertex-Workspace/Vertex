@@ -119,6 +119,17 @@ export class UserService {
       .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
   }
 
+  public patchPassword(emailTo:String, password:String): Observable<User> {
+
+    let passwordObj = {
+      email: emailTo,
+      password: password
+    }
+
+    return this.http
+      .patch<any>(`${URL}user/edit-password`, passwordObj);
+  }
+
   public delete(id: number): Observable<User> {
     return this.http
       .delete<User>(`${URL}user/${id}`);

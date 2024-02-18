@@ -5,6 +5,7 @@ import { faEnvelope, faEye,faEyeSlash,faLock } from '@fortawesome/free-solid-svg
 import { Observable } from 'rxjs';
 import { Project } from 'src/app/models/project';
 import { AlertService } from 'src/app/services/alert.service';
+import { ForgotPasswordService } from 'src/app/services/forgotPassword.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserStateService } from 'src/app/services/user-state.service';
 import { UserService } from 'src/app/services/user.service';
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private alert: AlertService,
     private userState: UserStateService,
+    private forgotPasswordService : ForgotPasswordService,
     private router: Router
   ) {
     this.userState
@@ -72,9 +74,10 @@ export class LoginComponent implements OnInit {
     this.invisibleEye = !this.invisibleEye;
   }
   
-  toForgotPassword():void{
+  toForgotPassword() {
     // localStorage.setItem("toForgotPassword",JSON.stringify(!this.forgotPassword));
     this.forgotPassword = !this.forgotPassword;
-    this.step=1;
+    this.step = 1;
+    
   }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,10 +10,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [
     ForgotPasswordComponent
   ],
-  exports:[ForgotPasswordComponent],
+  exports: [ForgotPasswordComponent],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
   ]
 })
-export class ForgotPasswordModule { }
+export class ForgotPasswordModule {
+  
+  
+
+}
