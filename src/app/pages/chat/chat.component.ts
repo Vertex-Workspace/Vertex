@@ -8,6 +8,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { getLocaleDateFormat } from '@angular/common';
+import { WebSocketService } from 'src/app/services/websocket.service';
+import { Chat } from '../../models/chat';
+import { NgForm } from '@angular/forms';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -36,12 +40,33 @@ export class ChatComponent {
 
   conversationOpen: boolean = false;
 
-  cardChat:number=0;
+  cardChat: number = 0;
 
   side: boolean = true;
 
-  constructor(private router: Router) { }
+  logged!: User;
 
+  constructor(public webSocketService: WebSocketService) {
+    this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
+  }
+
+  clcik() {
+    this.side = !this.side;
+  }
+
+  ngOnInit(): void {
+    this.webSocketService.openWebSocket();
+  }
+
+  ngOnDestroy(): void {
+    this.webSocketService.closeWebSocket();
+  }
+
+  sendMessage(sendForm: NgForm) {
+    const chatMessageDto = new Chat(this.logged.firstName!, sendForm.value.message);
+    this.webSocketService.sendMessage(chatMessageDto);
+    sendForm.controls['message'].reset();
+  }
 
   users = [
     {
@@ -60,195 +85,7 @@ export class ChatComponent {
         }
       ],
       conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
-
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    },
+    }
   ]
 
   openConversation(i: number) {
@@ -271,10 +108,10 @@ export class ChatComponent {
 
   submit() {
     console.log(this.messageUser);
-    
+
     if (this.messageUser != "") {
       console.log(this.messageUser);
-      
+
       let hora = new Date().getHours() + ":" + new Date().getMinutes();
       if (new Date().getMinutes() < 10) {
         hora = new Date().getHours() + ":0" + new Date().getMinutes();

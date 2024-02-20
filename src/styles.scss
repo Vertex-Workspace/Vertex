@@ -20,6 +20,7 @@ body {
     margin: 0;
     padding: 0;
     max-width: 100%;
+    
 }
 
 fa-icon{
@@ -45,8 +46,7 @@ input:focus {
 ::-webkit-scrollbar-track {
     background: $emphasis;
 }
-
-  
+ 
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;

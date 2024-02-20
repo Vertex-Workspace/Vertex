@@ -85,30 +85,28 @@
 
         <div class="section-right-chat">
             <div class="center-div">
-                <div class="min-h-[60px]" *ngFor="let message of messages">
-                    <div [ngClass]="message.id % 2==0 ? 'left' : 'right'">
-                        <div class="regular-text" [ngClass]="message.id % 2==0 ? 'answer' : 'messageUser'">
-                            <p class="pChat">{{message.content}}</p>
+                <div class="min-h-[60px]" *ngFor="let message of webSocketService.chatMessages">
+                    <div [ngClass]="message.user != logged.firstName ? 'left' : 'right'">
+                        <div class="regular-text" [ngClass]="message.user != logged.firstName ? 'answer' : 'messageUser'">
+                            <p class="pChat">{{message.message}}</p>
                         </div>
                         <div>
-                            <p class="pChat">{{message.time}}</p>
+                            <p class="pChat">{{message.user}}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="high-input-div">
-                <div class="div-input-chat">
-                    <input class="pl-[15px] w-[90%] h-[100%]" [(ngModel)]="messageUser" placeHolder="Digite aqui...">
-                    <div class="flex gap-4">
-                        <fa-icon class="section-icons" [icon]="faPaperclip"></fa-icon>
-                        <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
-                    </div>
+            <form (ngSubmit)="sendMessage(sendForm)" #sendForm="ngForm" class="high-input-div">
+                <input type="text" name="message" id="input-message" class="form-control pl-[15px] w-[90%] h-[100%]" [(ngModel)]="messageUser" placeholder="Digite aqui...">
+                <div class="flex gap-4">
+                    <fa-icon class="section-icons" [icon]="faPaperclip"></fa-icon>
+                    <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
                 </div>
-                <button (click)="submit()" class="square-chat">
+                <button type="submit" class="square-chat">
                     <fa-icon class="text-lg pr-1" [icon]="faPaperPlane"></fa-icon>
                 </button>
-            </div>
+            </form>
         </div>
     </main>
 
