@@ -24,7 +24,7 @@ export class ItemsSelectionComponent {
 
 
   @Output()
-  pencil = new EventEmitter();
+  pencil = new EventEmitter<PropertyList>();
 
   faEllipsisVertical = faEllipsisVertical;
   faPaintBrush = faPaintBrush;
@@ -41,6 +41,8 @@ export class ItemsSelectionComponent {
   constructor(private projectService: ProjectService, private alertService: AlertService) { }
 
   ngOnInit(): void {
+    console.log(this.property.propertyLists);
+    
     this.property.propertyLists!.forEach((propertyList) => {
       if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
         this.sections[0].propertyLists.push(propertyList);
@@ -68,12 +70,25 @@ export class ItemsSelectionComponent {
       });
   }
 
-  pencilClick() {
-    this.pencil.emit();
+  pencilClick(propertyList:PropertyList) {
+    this.pencil.emit(propertyList);
   }
 
   delete(propertyList: PropertyList) {
-    this.property.propertyLists = this.property.propertyLists.filter((p) => p.id != propertyList.id);
+    for(const section of this.sections){
+      section.propertyLists.forEach((propertyListFor: PropertyList) => {
+        if(propertyList === propertyListFor){
+          section.propertyLists.splice(section.propertyLists.indexOf(propertyListFor), 1);
+        }
+      });
+    }
+    this.property.propertyLists.splice(this.property.propertyLists.indexOf(propertyList), 1);
+    this.projectService.createProperty(this.project.id!, this.property).subscribe(
+      (property) => {
+        this.alertService.successAlert("Propriedade excluída com sucesso!");
+      }, (error) => {
+        console.log(error);
+      });
   }
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
@@ -113,8 +128,8 @@ export class ItemsSelectionComponent {
     }
   }
 
-  createProperty(): void {
-    let newPropertyList: PropertyList = { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Novo Item", color: 'BLUE' };
+  createPropertyList(): void {
+    let newPropertyList: PropertyList = { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Novo Item", color: "#d3e5ef"};
     this.property.propertyLists.push(newPropertyList);
     this.projectService.createProperty(this.project.id!, this.property).subscribe(
       (property) => {
@@ -123,5 +138,27 @@ export class ItemsSelectionComponent {
       }, (error) => {
         console.log(error);
       });
+  }
+
+  saveName(propertyListChanged : PropertyList) {
+    if(propertyListChanged.value == "") {
+      propertyListChanged.value = "Novo Item";
+    }
+    console.log(propertyListChanged);
+    
+    this.property.propertyLists.forEach((propertyList) => {
+      if(propertyList.id == propertyListChanged.id){
+        propertyList.value = propertyListChanged.value;
+      }
+    });
+    console.log(this.property);
+    this.projectService.createProperty(this.project.id!, this.property).subscribe(
+      (property) => {
+        
+      },
+      (error) => {
+        
+      }
+    );
   }
 }

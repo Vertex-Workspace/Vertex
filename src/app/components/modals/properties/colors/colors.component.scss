@@ -1,20 +1,40 @@
 @import '../../../../../variables';
+
 ul {
-    @apply w-full h-full pt-4;
+    @apply w-full h-[80%] pt-4 items-center justify-center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 li {
-    @apply w-full h-[10%] flex items-center justify-start pl-3;
+    @apply w-full h-full flex justify-center items-center;
 
-    div{
-        @apply h-[70%] w-[20%] border border-[#B0B0B0];
+
+    div {
+        @apply flex items-center h-[70%] w-[80%] shadow-md border justify-between px-3 cursor-pointer;
+
     }
 }
 
-p{
-    @apply pl-3;
+fa-icon {
+    @apply text-xl;
+    color: $text;
 }
 
-.emphasis {
-    @apply shadow-2xl bg-white;
+
+.info {
+    @apply flex w-full h-[20%] justify-center items-center pt-5 flex-col gap-3;
+
+    fa-icon {
+        @apply w-4 h-4 flex justify-center items-center;
+        color: $primaryColor;
+        cursor: default;
+    }
+
+    .real-time-view{
+        @apply h-10 flex justify-center items-center rounded-2xl px-3 py-1;
+        color: $text;
+        border: 1px solid $text;
+    }
 }

@@ -31,7 +31,7 @@ export class CardComponent implements OnInit{
 
   ngOnInit(): void {
     //Opacity
-    this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);;
+    this.borderColor.concat("50");
   }
 
   modalDelete: boolean = false;

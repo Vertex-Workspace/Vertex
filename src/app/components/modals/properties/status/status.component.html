@@ -1,22 +1,22 @@
 <div class="properties" cdkDropListGroup>
     <div *ngFor="let status of statusList; index as item">
         <div class="main-property">
-            <p class="regular-text">{{status.name}}</p>
-            <fa-icon [icon]="faPlus" class="little-icon" (click)="add(item)"></fa-icon>
+            <p class="medium-text">{{status.name}}</p>
+            <fa-icon [icon]="faPlus" class="little-icon" (click)="add(status)"></fa-icon>
         </div>
-        <div *ngFor="let name of status.properties; index as i2" cdkDropList (cdkDropListDropped)="drop($event, item)"
+        <div *ngFor="let propertyList of status.properties; index as i2" cdkDropList (cdkDropListDropped)="drop($event, item)"
         [cdkDropListData]="status.properties">
-            <div cdkDrag class="specific-properties" [ngStyle]="{'background-color': status.color}">
+            <div cdkDrag class="specific-properties" [ngStyle]="{'background-color': propertyList.color}">
                 <div cdkDragHandle>
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
                 </div>
                 <div>
-                   <input type="text" class="small-text" value="{{name.name}}" [ngStyle]="{'background-color': status.color}">
+                   <input type="text" class="regular-text" value="{{propertyList.value}}" [ngStyle]="{'background-color': propertyList.color}">
                 </div>
                 <div>
                     <fa-icon [icon]="faPaintBrush" (click)="clickPencil()" class="little-icon"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(item, i2)"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(status, propertyList)"></fa-icon>
                 </div>
             </div>
         </div>

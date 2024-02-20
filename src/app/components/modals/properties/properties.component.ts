@@ -1,16 +1,20 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
-faFont, faCalendarDays, faSpinner, faCaretDown} from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
+  faFont, faCalendarDays, faSpinner, faCaretDown
+} from '@fortawesome/free-solid-svg-icons';
 import { elements } from 'chart.js';
 import { Project } from 'src/app/models/project';
-import { Property } from 'src/app/models/property';
+import { Property, PropertyList } from 'src/app/models/property';
+import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-properties',
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.scss']
 })
-export class PropertiesComponent{
+export class PropertiesComponent {
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;
   faPlus = faPlus;
@@ -22,8 +26,8 @@ export class PropertiesComponent{
   faSpinner = faSpinner;
   faCaretDown = faCaretDown;
   currentModal: string = 'general';
-  text ?:string = 'Propriedades';
-  footerText ?: string = 'Adicionar Propriedade';
+  text?: string = 'Propriedades';
+  footerText?: string = 'Adicionar Propriedade';
   propertiesType: any;
 
   @Output()
@@ -44,49 +48,86 @@ export class PropertiesComponent{
 
   property!: Property;
 
+  constructor(private projectService: ProjectService, private alertService: AlertService) { }
+
 
 
   editTask(type: string, event: any) {
-    console.log(type);
     console.log(event);
     this.property = event;
-
-    this.currentModal = type
-    this.text = 'Edite a Propriedade'
+    this.currentModal = type;
+    if (type === 'items-selection') {
+      console.log('Itens de Seleção');
+      this.text = 'Itens de Seleção'
+    } else if (type === 'edit') {
+      console.log('Edit');
+      this.text = 'Edite a Propriedade'
+    }
   }
 
-  openStatusSelection(type: string) {
-    if (type === 'items-selection') {
-      this.currentModal = 'items-selection'
-      this.text = "Itens Seleção"
-    }else if(type === 'status'){
-      this.currentModal = 'status'
-      this.text = "Status"
-      this.footerText = ''
-    }else if (type === 'pencil') {
-      this.currentModal = 'colors'
-      this.text = "Cores"
-      this.footerText = ''
+  propertyListColor!: PropertyList;
+  openColors(type: string, propertyList: PropertyList) {
+    if (type == 'items-selection') {
+      this.from = 'items-selection';
+    } else if (type == 'status') {
+      this.from = 'status';
     }
+    this.propertyListColor = propertyList;
+    this.currentModal = 'colors'
+    this.text = "Cores"
   }
 
   //Determines the arrow back behavior
   from!: String;
   arrowLeft() {
-    console.log(this.from);
-    
-    if (this.from == 'edit') {
-      this.currentModal = 'edit'
-    } else if (this.from == 'general') {
-      this.currentModal = 'general'
+    if (this.currentModal === 'general') {
+      this.closeModal();
+    } else if (this.currentModal === 'edit' || this.currentModal === 'status') {
+      this.currentModal = 'general';
+      this.text = 'Propriedades'
+    } else if (this.currentModal === 'items-selection' && this.from == 'edit') {
+      this.currentModal = 'edit';
+      this.text = 'Edite a Propriedade'
+    } else if (this.currentModal === 'items-selection') {
+      this.currentModal = 'general';
+      this.text = 'Edite a Propriedade'
+    } else if (this.currentModal === 'colors' && this.from == 'items-selection') {
+      this.currentModal = 'items-selection';
+      this.text = 'Itens de Seleção'
+    } else if (this.currentModal === 'colors' && this.from == 'status') {
+      this.currentModal = 'status';
+      this.text = 'Itens de Seleção'
     }
 
-    
+
   }
 
-  defineArrowBack(event: any) {
+  defineItemsSelectionPathBack(event: any) {
     this.from = event;
-    console.log(this.from);
-    
+    if (this.from == 'edit') {
+      this.currentModal = 'items-selection';
+      this.text = 'Edite a Propriedade'
+    }
   }
+
+  changePropertyListColor(propertyList: PropertyList): void {
+    if (this.property) {
+      this.projectService.createProperty(this.project.id!, this.property).subscribe(
+        (property) => {
+          
+        },
+        (error) => {
+          
+        }
+      );
+    }
+  }
+
+  openStatus(property: Property) {
+    this.currentModal = 'status';
+    this.text = 'Status';
+    this.from = 'general';
+    this.property = property;
+  }
+
 }

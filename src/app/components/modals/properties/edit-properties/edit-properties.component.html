@@ -1,8 +1,8 @@
 <div class="flex w-full h-full flex-col">
     <div class="task-name">
         <p class="large-text">Nome</p>
-        <input *ngIf="property.name !== 'Nova Propriedade'" [(ngModel)]="defaultProperty.name" class="regular-text" required />
-        <input *ngIf="property.name == 'Nova Propriedade'" [(ngModel)]="defaultProperty.name"
+        <input *ngIf="property.name !== 'Nova Propriedade'" [(ngModel)]="property.name" class="regular-text" required />
+        <input *ngIf="property.name == 'Nova Propriedade'" [(ngModel)]="property.name"
             placeholder="Digite o nome que deseja para propriedade..." class="regular-text" required />
     </div>
 
@@ -34,14 +34,14 @@
                     <!-- VALIDATIONS -->
                     <p class="small-text" *ngIf="!openInput && checkboxList[1] == check || checkboxList[0] == check">
                         {{check.p}}</p>
-                    <input placeholder="Valor padrão" [(ngModel)]="defaultProperty.defaultValue"
+                    <input placeholder="Valor padrão" [(ngModel)]="property.defaultValue"
                         *ngIf="openInput && checkboxList[1] == check">
                 </div>
             </ng-container>
         </div>
         <div class="flex w-full h-[50px] flex-row justify-between">
             <div class="flex w-1/2">
-                <button *ngIf="defaultProperty.kind == 'LIST'" class="list-button" (click)="openEditList()">Definir Elementos
+                <button *ngIf="property.kind == 'LIST'" class="list-button" (click)="openEditList()">Definir Elementos
                     de Lista</button>
             </div>
             <button class="save-button" (click)="saveProperty()" [style.opacity]="hasChange() ? '1' : '0.5'">Confirmar

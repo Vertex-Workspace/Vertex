@@ -21,7 +21,7 @@ export class EditPropertiesComponent {
 
   @Input() property!: Property;
 
-  @Output() gear = new EventEmitter<Event>();
+  @Output() confirmChanges = new EventEmitter<Property>();
 
   @Output() from = new EventEmitter<String>();
 
@@ -62,8 +62,6 @@ export class EditPropertiesComponent {
 
   defaultProperty!: Property
   ngOnInit(): void {
-    console.log(this.property);
-
     //Create a new object to compare with the original
     this.defaultProperty = new Property(this.property);
 
@@ -98,7 +96,7 @@ export class EditPropertiesComponent {
     //Change current state
     check.value = !check.value;
 
-    if (this.checkboxList[0].value == check.value) {
+    if (this.checkboxList[0] == check) {
       this.property.isObligate = check.value;
     } else {
       this.openInput = check.value;
@@ -110,24 +108,26 @@ export class EditPropertiesComponent {
 
   }
   saveProperty(): void {
+    if (this.property.kind === PropertyKind.LIST && this.property.propertyLists.length === 0) {
+      this.openEditList();
+    } else {
 
-    this.projectService.createProperty(this.project.id!, this.defaultProperty).subscribe(
-      (property) => {
-        console.log(property);
-        this.alertService.successAlert("Propriedade alterada com sucesso!");
 
-        this.project.properties.splice(this.project.properties.indexOf(this.defaultProperty), 1, property);
-      
-        console.log(this.project);
-        
-        //If the button pressed was the confirm changes, emit the event
-        //Else, just update the property through define elements list
-        this.gear.emit();
+      this.projectService.createProperty(this.project.id!, this.property).subscribe(
+        (property) => {
+          this.alertService.successAlert("Propriedade alterada com sucesso!");
 
-      }, (error) => {
-        this.alertService.errorAlert("Erro ao alterar propriedade!");
-      });
+          this.project.properties.splice(this.project.properties.indexOf(this.defaultProperty), 1, property);
 
+          //If the button pressed was the confirm changes, emit the event
+          //Else, just update the property through define elements list
+          this.confirmChanges.emit(property);
+
+        }, (error) => {
+          this.alertService.errorAlert("Erro ao alterar propriedade!");
+        });
+
+    }
   }
 
   containsKindInto(check: any): boolean {
@@ -145,10 +145,10 @@ export class EditPropertiesComponent {
   openEditList(): void {
     if (this.property.propertyLists.length === 0) {
       this.property.propertyLists = [
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: 'RED' },
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Média", color: 'YELLOW' },
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Baixa", color: 'GREEN' },
-        { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: "Não essencial", color: 'BLUE' },
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: "#ffe2dd" },
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Média", color: "#fdecc8" },
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Baixa", color: "#dbeddb" },
+        { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: "Não essencial", color: "#d3e5ef" },
       ]
 
       this.projectService.createProperty(this.project.id!, this.property).subscribe(

@@ -173,13 +173,7 @@ export class CalendarComponent {
       (value) => {
         if (value.property.kind === PropertyKind.STATUS) {
             let valuePropertyList: PropertyList = value.value as PropertyList;
-            if (valuePropertyList.color === "RED") {
-              color = "#FF9D9D50";
-            } else if (valuePropertyList.color === "YELLOW") {
-              color = "#FFD60035";
-            } else if (valuePropertyList.color === "GREEN") {
-              color = "#65D73C50";
-            }
+            color = valuePropertyList.color;
         }
       }
     );

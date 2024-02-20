@@ -107,19 +107,6 @@ export class KanbanComponent {
   }
 
 
-  //Temporary
-  getColor(color: string) {
-    if (color === "RED") {
-      return "#FF9D9D50";
-    } else if (color === "YELLOW") {
-      return "#FFD60035";
-    } else if (color === "GREEN") {
-      return "#65D73C50";
-    } else {
-      return "#7be05750";
-    }
-  }
-
   getTaskByProperty(task: Task, propertyList: PropertyList): boolean {
     let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
     return valueIntoPropertyList.id == propertyList.id;
@@ -137,6 +124,7 @@ export class KanbanComponent {
 
   createTask(propertyList: PropertyList) {
     let propertyUsed!: Property;
+
 
     //For each to find the property of the clicked Property List
     this.project.properties.forEach((property) => {
@@ -160,7 +148,7 @@ export class KanbanComponent {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
       project: {
-        id: 1
+        id: this.project.id!
       },
       values: [
         {
