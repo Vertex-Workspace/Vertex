@@ -44,6 +44,7 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
     //Opacity
     this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);;
+    
     this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions;
       this.settings[2].disabled = true
@@ -59,6 +60,7 @@ export class CardComponent implements OnInit {
   }
 
   modalDelete: boolean = false;
+  modalDelete2: boolean = false;
 
 
   settings = [
@@ -68,15 +70,15 @@ export class CardComponent implements OnInit {
   ];
 
   openChat(): void {
-    console.log('open chat');
-    console.log(this.borderColor);
+    
   }
 
   openModalDelete(): void {
     if(this.canDelete){
       this.modalDelete = true;
     }else{
-      this.alertService.errorAlert("No remove")
+      this.modalDelete2 = true;
+      this.alertService.errorAlert("Você não tem permissão para remover a tarefa!")
     }
   }
 
@@ -104,15 +106,15 @@ export class CardComponent implements OnInit {
 
   @Output() openTaskDetails = new EventEmitter();
   openTask(): void {
-    if (!this.modalDelete) {
+    if (!this.modalDelete && !this.modalDelete2) {
       this.openTaskDetails.emit();
+      this.modalDelete2 = false;
     }
   }
 
   dale(): void {
     console.log('dale');
   }
-
-
+  
 }
 

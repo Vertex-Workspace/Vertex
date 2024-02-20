@@ -14,7 +14,10 @@
             <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon"
                 (click)="removeUser(user)">
             </fa-icon>
-            <fa-icon *ngIf="typeString === 'permissions'" size="1x" [icon]="faCaretDown" class="icon"
+            <fa-icon *ngIf="typeString === 'permissions' && !user.openPermission" size="1x" [icon]="faCaretDown" class="icon"
+                (click)="openPermissions(user)" (click)="getPermission(user)">
+            </fa-icon>
+            <fa-icon *ngIf="typeString === 'permissions' && user.openPermission" size="1x" [icon]="faCaretUp" class="icon"
                 (click)="openPermissions(user)" (click)="getPermission(user)">
             </fa-icon>
         </div>

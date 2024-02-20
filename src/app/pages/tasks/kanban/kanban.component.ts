@@ -38,6 +38,8 @@ export class KanbanComponent implements OnInit {
       for (let i = 0; i < permissions.length; i++) {
         if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
           this.canCreate = true
+        } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+          this.canEdit = true;
         }
       }
     })
@@ -46,7 +48,10 @@ export class KanbanComponent implements OnInit {
   @Input()
   project!: Project;
 
+  @Input() canDeleteVerification ?: boolean
+
   canCreate: boolean = false;
+  canEdit: boolean = false;
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     const task: Task = event.item.data;
@@ -55,60 +60,65 @@ export class KanbanComponent implements OnInit {
     let newValue!: Value;
 
     //For each to find the value of current and future property List
-    this.project.properties.forEach((property) => {
-      if (property.kind == PropertyKind.STATUS) {
-        task.values.forEach((value) => {
-          if (value.property.id == property.id) {
-            //Save the old value
-            previousPropertyList = value.value as PropertyList;
+    if (this.canEdit != false) {
+      this.project.properties.forEach((property) => {
+        if (property.kind == PropertyKind.STATUS) {
+          task.values.forEach((value) => {
+            if (value.property.id == property.id) {
+              //Save the old value
+              previousPropertyList = value.value as PropertyList;
 
-            //Save the new value
-            value.value = propertyList;
+              //Save the new value
+              value.value = propertyList;
 
-            //Save on a local variable the value of the task
-            newValue = value;
-            console.log(newValue);
-          }
-        });
-      }
-    });
-
-    //It points out that the previousValue is incorrect
-    if (previousPropertyList == null) {
-      return;
-    }
-
-    const newIndexTask =
-      this.specificPropertyArray(propertyList)[event.currentIndex];
-    const newIndex = this.project.tasks.indexOf(newIndexTask);
-    const previousIndex = this.project.tasks.indexOf(task);
-
-
-    moveItemInArray(
-      this.project.tasks,
-      previousIndex,
-      newIndex
-    );
-
-
-    //If the value of status task is different of the previous value, then, the request is sent
-    if (propertyList.id != previousPropertyList.id) {
-      //Object to change the value of the status task
-      const valueUpdate: ValueUpdate = {
-        id: task.id,
-        value: {
-          property: {
-            id: newValue.property.id
-          },
-          value: {
-            id: newValue.id,
-            value: propertyList.id
-          }
+              //Save on a local variable the value of the task
+              newValue = value;
+              console.log(newValue);
+            }
+          });
         }
-      };
+      });
 
-      //Patch the value of the status task
-      this.taskService.patchValue(valueUpdate).subscribe();
+      //It points out that the previousValue is incorrect
+      if (previousPropertyList == null) {
+        return;
+      }
+
+
+      const newIndexTask =
+        this.specificPropertyArray(propertyList)[event.currentIndex];
+      const newIndex = this.project.tasks.indexOf(newIndexTask);
+      const previousIndex = this.project.tasks.indexOf(task);
+
+
+      moveItemInArray(
+        this.project.tasks,
+        previousIndex,
+        newIndex
+      );
+
+
+      //If the value of status task is different of the previous value, then, the request is sent
+      if (propertyList.id != previousPropertyList.id) {
+        //Object to change the value of the status task
+        const valueUpdate: ValueUpdate = {
+          id: task.id,
+          value: {
+            property: {
+              id: newValue.property.id
+            },
+            value: {
+              id: newValue.id,
+              value: propertyList.id
+            }
+          }
+        };
+
+        //Patch the value of the status task
+        this.taskService.patchValue(valueUpdate).subscribe();
+      }
+    } else {
+      this.alertService.errorAlert("Você não tem permissão para alterar o Status da tarefa!")
     }
   };
 
@@ -148,6 +158,7 @@ export class KanbanComponent implements OnInit {
   }
 
   @Output() openTaskDetails = new EventEmitter();
+
   openTaskModal(task: Task): void {
     this.openTaskDetails.emit(task);
   }
@@ -157,73 +168,59 @@ export class KanbanComponent implements OnInit {
     let propertyUsed!: Property;
 
     //For each to find the property of the clicked Property List
-    this.project.properties.forEach((property) => {
-
-      if (property.kind == PropertyKind.STATUS) {
-
-        property.propertyLists.forEach((propertyListForEach) => {
-
-          if (propertyListForEach.id == propertyList.id) {
-            propertyUsed = property;
-          }
-        });
-      }
-    });
-
-    if (propertyUsed == null) {
-      return;
-    }
-
-    let taskCreate: TaskCreate = {
-      name: "Nova Tarefa",
-      description: "Descreva um pouco sobre sua Tarefa Aqui",
-      project: {
-        id: 1
-      },
-      values: [
-        {
-          property: {
-            id: propertyUsed.id
-          },
-          value: {
-            value: propertyList.id as number
-          }
-        }
-      ],
-      creator: {
-        id: this.userService.getLogged().id!
-      },
-      teamId: this.project.idTeam!
-    }
-
     if (this.canCreate) {
-      this.taskService.create(taskCreate).subscribe(
-        (task: Task) => {
-          this.project.tasks.push(task);
-          this.alertService.successAlert("Tarefa criada com sucesso!");
-        },
-        (error: any) => {
-          this.alertService.errorAlert("Erro ao criar tarefa!");
+      this.project.properties.forEach((property) => {
+
+        if (property.kind == PropertyKind.STATUS) {
+
+          property.propertyLists.forEach((propertyListForEach) => {
+
+            if (propertyListForEach.id == propertyList.id) {
+              propertyUsed = property;
+            }
+          });
         }
-      );
+      });
+
+      if (propertyUsed == null) {
+        return;
+      }
+
+      let taskCreate: TaskCreate = {
+        name: "Nova Tarefa",
+        description: "Descreva um pouco sobre sua Tarefa Aqui",
+        project: {
+          id: 1
+        },
+        values: [
+          {
+            property: {
+              id: propertyUsed.id
+            },
+            value: {
+              value: propertyList.id as number
+            }
+          }
+        ],
+        creator: {
+          id: this.userService.getLogged().id!
+        },
+        teamId: this.project.idTeam!
+      }
+
+      if (this.canCreate) {
+        this.taskService.create(taskCreate).subscribe(
+          (task: Task) => {
+            this.project.tasks.push(task);
+            this.alertService.successAlert("Tarefa criada com sucesso!");
+          },
+          (error: any) => {
+            this.alertService.errorAlert("Erro ao criar tarefa!");
+          }
+        );
+      }
+    } else {
+      this.alertService.errorAlert("Você não tem permissão para criar essa tarefa!")
     }
   }
-
-  // hasPermission(user: User, project: Project): void {
-
-  //   this.teamService.hasPermission(project, user).subscribe((permissions: Permission[]) => {
-  //     user.permissions = permissions
-  //     console.log(user.permissions);
-
-  //     for (let i = 0; i < permissions.length; i++) {
-  //       if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-  //         this.canCreate = true
-  //       }else {
-  //         this.alertService.errorAlert("Você não tem permissão para criar uma tarefa!")
-  //       }
-  //     }
-  //   })
-  // }
-
-
 }

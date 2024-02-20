@@ -22,6 +22,7 @@ export class TaskComponent implements OnInit {
   @Input() task!: Task;
   @Input() project !: Project;
 
+
   canEdit: boolean = false;
 
   constructor(private taskService: TaskService,
@@ -93,5 +94,4 @@ export class TaskComponent implements OnInit {
       this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
     }
   }
-
 }

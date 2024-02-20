@@ -55,19 +55,19 @@ export class CardUserComponent implements OnInit {
     if (this.typeString === 'inTheGroup') {
       this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
         this.users = users;
-
       });
     } else if (this.typeString === 'creating' || this.typeString === 'permissions') {
       this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
         this.users = users;
       });
-    }
+    } 
   }
 
   faCircleUser = faCircleUser;
   faSquare = faSquare;
   faUserMinus = faUserMinus;
   faCaretDown = faCaretDown;
+  faCaretUp = faCaretUp;
 
   selectUser(user: User): void {
     user.selected = !user.selected;
