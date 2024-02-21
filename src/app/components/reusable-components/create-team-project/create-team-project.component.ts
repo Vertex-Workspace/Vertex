@@ -64,8 +64,37 @@ export class CreateTeamProjectComponent implements OnInit {
 
 
   onSubmit(): void { 
-    if (this.typeString === 'team') {
-      const team = this.form.getRawValue() as Team;
+    if (!this.fd) this.getDefaultImg();
+    if (this.typeString === 'team') this.createTeam();
+    else this.createProject();
+
+    this.confirmCreateTeam();
+  }
+
+  getDefaultImg(): void {
+    const file = this.DataURIToBlob(this.base64)
+    const formData = new FormData();
+    this.fd.append('file', file, 'file') 
+    console.log(this.fd);
+    
+
+  }
+
+    DataURIToBlob(dataURI: string): any {
+        const splitDataURI = dataURI.split(',')
+        const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1])
+        const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
+
+        const ia = new Uint8Array(byteString.length)
+        for (let i = 0; i < byteString.length; i++)
+            ia[i] = byteString.charCodeAt(i)
+
+        return new Blob([ia], { type: mimeString })
+      }
+
+
+  createTeam(): void {
+    const team = this.form.getRawValue() as Team;
 
       team.creator = this.logged;
       this.teamService
@@ -79,49 +108,29 @@ export class CreateTeamProjectComponent implements OnInit {
         e => {
           this.alert.errorAlert(`Erro ao criar a equipe!`)
         });
-      
-    } else {
-      const project = this.form.getRawValue() as Project;
+  }
 
-      const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-      project.creator = this.logged;
-  
-      this.projectService
-        .create(project, teamId)
-        .subscribe((project: Project) => {
-          this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
-          this.projectService
-            .updateImage(project.id!, this.fd)
-            .subscribe();
-        });
-        
-        
-    }
+  createProject(): void {
+    const project = this.form.getRawValue() as Project;
 
-    this.confirmCreateTeam();
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+    project.creator = this.logged;
+
+    this.projectService
+      .create(project, teamId)
+      .subscribe((project: Project) => {
+        this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
+        this.projectService
+          .updateImage(project.id!, this.fd)
+          .subscribe();
+      });
   }
 
   url!: any;
 
   onFileSelected(e: any): void {   
     this.selectedFile = e.target.files[0];
-    this.fd.append('file', this.selectedFile, this.selectedFile.name);  
-    console.log(this.fd);
-    
-
-    let reader = new FileReader();
-
-    
-
-    if(e.target.files && e.target.files.length > 0) {
-      let file = e.target.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const base = reader.result as string;    
-        this.base64 = base.split(",").pop();
-        this.url = reader.result;
-      };
-    }
+    this.fd.append('file', this.selectedFile, this.selectedFile.name);      
   }
 
   closeScreen(): void {
