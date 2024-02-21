@@ -88,7 +88,7 @@ export class ProjectsComponent {
       .delete(id)
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto deletado com sucesso!`);
-        this.getAfterChange();
+        this.team.projects?.splice(this.team.projects.indexOf(project), 1);
       },
       e => {
         this.alert.errorAlert('Erro ao deletar projeto!');
@@ -101,10 +101,10 @@ export class ProjectsComponent {
 
   switchCreateView(): void {
     this.isCreating = !this.isCreating;
-    this.getAfterChange();
+    this.updateList();
   }
 
-  getAfterChange(): void {
+  updateList(): void {
     this.getTeam();
   }
 
