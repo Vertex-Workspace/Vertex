@@ -4,6 +4,7 @@ import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.mod
 import { CardGroupComponent } from './card-group.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardUserModule } from '../card-user/card-user.module';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CardGroupComponent],
@@ -12,7 +13,9 @@ import { CardUserModule } from '../card-user/card-user.module';
     CommonModule,
     ConfirmModalModule,
     FontAwesomeModule,
-    CardUserModule
+    CardUserModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 

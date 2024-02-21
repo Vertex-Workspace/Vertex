@@ -7,18 +7,24 @@
             <p>{{user.firstName}}</p>
         </div>
         <div>
+
+            <!-- this icons gotta be refactored -->
             <fa-icon *ngIf="!user.selected && typeString === 'creating'" [icon]="faSquare"
                 class="icon-not-selected size" (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="user.selected && typeString === 'creating'" [icon]="faSquare" class="icon size"
                 (click)="selectUser(user)"></fa-icon>
-            <fa-icon *ngIf="typeString === 'inTheGroup'" size="1x" [icon]="faUserMinus" class="icon"
-                (click)="removeUser(user)">
+                <fa-icon *ngIf="!user.selected && typeString === 'addUsers'" [icon]="faSquare"
+                class="icon-not-selected size" (click)="selectUser(user)"></fa-icon>
+            <fa-icon *ngIf="user.selected && typeString === 'addUsers'" [icon]="faSquare" class="icon size"
+                (click)="selectUser(user)"></fa-icon>
+            <fa-icon *ngIf="typeString === 'inTheGroup' || typeString === 'view-infos'" [icon]="faUserMinus" class="icon pr-3"
+                (click)="removeUser(user, typeString)">
             </fa-icon>
-            <fa-icon *ngIf="typeString === 'permissions' && !user.openPermission" size="1x" [icon]="faCaretDown" class="icon"
-                (click)="openPermissions(user)" (click)="getPermission(user)">
+            <fa-icon *ngIf="typeString === 'permissions' && !user.openPermission || typeString === 'view-infos' && !user.openInfo" size="1x" [icon]="faCaretDown" class="icon"
+                (click)="openPermissions(user, typeString)" (click)="getPermission(user)">
             </fa-icon>
-            <fa-icon *ngIf="typeString === 'permissions' && user.openPermission" size="1x" [icon]="faCaretUp" class="icon"
-                (click)="openPermissions(user)" (click)="getPermission(user)">
+            <fa-icon *ngIf="typeString === 'permissions' && user.openPermission || typeString === 'view-infos' && user.openInfo" size="1x" [icon]="faCaretUp" class="icon"
+                (click)="openPermissions(user, typeString)" (click)="getPermission(user)">
             </fa-icon>
         </div>
     </div>
@@ -33,5 +39,10 @@
                 <p>{{permission.name}}</p>
             </div>
         </div>
+    </div>
+
+    <div *ngIf="typeString === 'view-infos' && user.openInfo" class="permissions">
+          <p>{{user.email}}</p>
+          <p>{{user.description}}</p>
     </div>
 </div>

@@ -8,7 +8,10 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Group } from 'src/app/models/groups';
 import { Team } from 'src/app/models/team';
+import { AlertService } from 'src/app/services/alert.service';
+import { GroupService } from 'src/app/services/group.service';
 import { TeamService } from 'src/app/services/team.service';
 
 
@@ -24,7 +27,9 @@ export class TeamInformationsComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private teamService: TeamService
+        private teamService: TeamService,
+        private groupService: GroupService,
+        private alertService: AlertService
     ) {}
 
     ngOnInit(): void {
@@ -163,5 +168,16 @@ export class TeamInformationsComponent implements OnInit {
     getGroup(): any[] {
         return this.team?.groups!;
     }
+
+    deleteGroup(groupId: Group):void {
+        console.log(groupId); 
+        this.groupService.delete(groupId.id).subscribe((group: Group) => {
+          this.alertService.successAlert('Grupo deletado com sucesso')
+          this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
+        },
+        e=> {
+          this.alertService.errorAlert("Não foi possível deletar");
+        })
+      }
 
 }

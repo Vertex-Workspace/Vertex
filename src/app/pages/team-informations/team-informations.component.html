@@ -40,7 +40,9 @@
 
                 <div class="high-listDiv-members">
                     <div class="listDiv-members">
-                        <p class="large-text">Lista de membros</p>
+                        <p class="large-text" *ngIf="clicked == 'participants'">Lista de membros</p>
+                        <p class="large-text" *ngIf="clicked == 'permissions'">Permissões de usuários</p>
+                        <p class="large-text" *ngIf="clicked == 'groups'">Grupos</p>
                         <p> | </p>
                         <div class="flex gap-1">
                             <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
@@ -56,7 +58,7 @@
 
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
-                <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'creating'"
+                <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'view-infos'"
                 [team]="team"></app-card-user>
             </div>
 
@@ -67,7 +69,7 @@
             </div>  
 
             <div *ngIf="clicked == 'groups'" class="grid-permissions">
-                <app-card-group [team]="team" [width]="'800px'" [height]="'90px'"></app-card-group>
+                <app-card-group [team]="team" [width]="'800px'" [height]="'90px'" (deleteEmitter)="deleteGroup($event)"></app-card-group>
             </div>
             
         </div>

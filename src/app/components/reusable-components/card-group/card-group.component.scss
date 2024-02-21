@@ -2,10 +2,9 @@
 
 .card{
     @apply bg-white border-l-8 flex shadow-lg w-full;
-    min-height: 80px;
 
     div:first-child{
-        @apply w-[90%] flex items-center pl-6 h-full;
+        @apply w-[85%] flex items-center pl-6 h-full;
     };
 
     div:nth-child(2){
@@ -19,7 +18,13 @@
 }
 
 .user{
-    @apply flex w-full bg-white pl-8 py-2 flex-col h-[300px];
+    @apply flex w-full bg-white pl-8 py-2 flex-col;
+
+    button {
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply w-[100px] h-[40px]
+    }
 }
 
 .main-div {
@@ -33,6 +38,7 @@
 .size{
     font-size: 1rem;
 }
+
 
 
 

@@ -20,6 +20,7 @@ export class User {
     selected ?: boolean = false;
     //open component with user permissions in team-informations
     openPermission ?: boolean = false;
+    openInfo ?: boolean = false;
     permissions ?: Permission[];
 
     //brainstorming
@@ -72,10 +73,10 @@ export class Permission {
 }
 
 export enum PermissionsType {
-    CREATE = "CREATE",
-    EDIT = "EDIT", 
-    VIEW = "VIEW",
-    DELETE = "DELETE"
+    CREATE = "Criar",
+    EDIT = "Editar", 
+    VIEW = "Visualizar",
+    DELETE = "Deletar"
 }
 
 export class HasPermission {

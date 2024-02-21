@@ -155,17 +155,17 @@ export class ProjectsComponent implements OnInit {
   }
 
   createGroup(group: Group): void {
-    console.log(this.logged);
     this.groupService
       .create(group)
       .subscribe((group: Group) => {
         this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
         this.team.groups?.splice(this.team.groups.push(group))
         this.switchCreateViewGroup();
-
       },
         e => {
           if (group.name == null) {
+            this.alert.errorAlert(`Você precisa adicionar um nome`)
+          }else {
             this.alert.errorAlert(`Você precisa adicionar um nome`)
           }
 

@@ -59,6 +59,8 @@ export class CardListComponent implements OnInit{
   }
 
   deleteEmitTeam(team: Team): void {
+    console.log(1);
+    
     this.deleteEmitterTeam.emit(team)
   }
 

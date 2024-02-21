@@ -10,6 +10,7 @@ import { Group } from 'src/app/models/groups';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { EventManager } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-card-user',
@@ -27,6 +28,9 @@ export class CardUserComponent implements OnInit {
 
   @Output()
   deleteUser = new EventEmitter<User>();
+
+  @Output()
+  patchOrSave = new EventEmitter<String>();
 
   @Input()
   height?: String;
@@ -56,11 +60,15 @@ export class CardUserComponent implements OnInit {
       this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
         this.users = users;
       });
-    } else if (this.typeString === 'creating' || this.typeString === 'permissions') {
+    } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
       this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
         this.users = users;
       });
-    } 
+    } else if (this.typeString === 'addUsers') {
+      this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
+        this.users = users;
+      });
+    }
   }
 
   faCircleUser = faCircleUser;
@@ -76,7 +84,8 @@ export class CardUserComponent implements OnInit {
     }
   }
 
-  removeUser(user: User): void {
+  removeUser(user: User, typeString2: String): void {
+    if(typeString2 === 'inTheGroup'){
     this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
       .subscribe((group: Group) => {
         this.alert.successAlert(`Usuário retirado do grupo`)
@@ -86,11 +95,18 @@ export class CardUserComponent implements OnInit {
           this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
         }
       )
+    }else {
+      this.deleteUserTeam()
+    }
   }
 
-  openPermissions(user: User): void {
-    user.openPermission = !user.openPermission;
-    this.getPermission(user);
+  openPermissions(user: User, typeString2: String): void {
+    if(typeString2 === 'permissions'){
+      user.openPermission = !user.openPermission;
+      this.getPermission(user);
+    }else {
+      user.openInfo = !user.openInfo
+    }
   }
 
   selectPermission(user: User, permission: Permission): void {
@@ -102,6 +118,14 @@ export class CardUserComponent implements OnInit {
   getPermission(user: User): Permission[] | any {
     this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
       user.permissions = permissions;
+    })
+  }
+
+  deleteUserTeam(): void {
+    this.teamService.saveOrDeleteUserTeam(this.team).subscribe((team: Team) => {
+      this.alert.successAlert("Usuário retirado da equipe")
+      console.log(team);
+      
     })
   }
 
