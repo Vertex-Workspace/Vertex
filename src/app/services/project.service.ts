@@ -62,7 +62,10 @@ export class ProjectService {
       )
   }
 
-
+  public updateImage(teamId: number, fd: FormData) {
+    return this.http
+      .patch(`${URL}project/image/${teamId}`, fd)
+  }
 
   //Properties
 

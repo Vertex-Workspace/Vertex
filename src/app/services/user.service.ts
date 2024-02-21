@@ -130,9 +130,9 @@ export class UserService {
       .put<User>(`${URL}user`, user);
   }
 
-  public uploadImage(data: FormData, id: number): Observable<any> {
+  public uploadImage(file: FormData, id: number): Observable<any> {
     return this.http
-      .post<any>(`${URL}user/${id}/image`, data);
+      .patch<any>(`${URL}user/upload/${id}`, file);
   }
   
     public updateLoggedUser(user: User): void {
