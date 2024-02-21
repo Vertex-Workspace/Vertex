@@ -29,7 +29,7 @@ export class CardComponent implements OnInit{
 
   @Output() deleteTask = new EventEmitter();
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     //Opacity
     this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);;
   }

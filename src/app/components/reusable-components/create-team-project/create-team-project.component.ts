@@ -64,11 +64,17 @@ export class CreateTeamProjectComponent implements OnInit {
 
 
   onSubmit(): void { 
+    // if (!this.fd.has('file')) this.setDefaultImage();
     if (this.typeString === 'team') this.createTeam();
     else this.createProject();
 
     this.confirmCreateTeam();
   }
+
+  setDefaultImage(): void {
+    // this.fd.append('file', this.defaultImg);
+  }
+
 
   createTeam(): void {
     const team = this.form.getRawValue() as Team;
