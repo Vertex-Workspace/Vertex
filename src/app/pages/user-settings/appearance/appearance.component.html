@@ -84,16 +84,18 @@
         <p class="medium-text">Acessibilidade</p>
         
             <div [(ngModel)]="voiceCommand" (click)="toggleChangeVoice()" class="accessibility">
-                <!-- <fa-icon *ngIf="!voiceCommand" class="icon"  [icon]="faToggleOff">
+                <fa-icon *ngIf="!voiceCommand" class="icon"  [icon]="faToggleOff">
                 </fa-icon>
                 <fa-icon *ngIf="voiceCommand" class="icon"  [icon]="faToggleOn">
-                </fa-icon> -->
-                <p-inputSwitch [style]="{ height: '25px' }" [(ngModel)]="checked2"></p-inputSwitch>
+                </fa-icon>
                 <p class="small-text">Habilitar comando de voz</p>
             </div>
 
             <div [(ngModel)]="listeningText" (click)="toggleChangeListening()" class="accessibility">
-                <p-inputSwitch [style]="{ height: '25px' }" [(ngModel)]="checked"></p-inputSwitch>
+                <fa-icon *ngIf="!voiceCommand" class="icon"  [icon]="faToggleOff">
+                </fa-icon>
+                <fa-icon *ngIf="voiceCommand" class="icon"  [icon]="faToggleOn">
+                </fa-icon>
                 <p class="small-text">Habilitar leitura de texto</p>
             </div>
         
