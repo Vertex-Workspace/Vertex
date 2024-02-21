@@ -31,37 +31,36 @@ export class CardComponent implements OnInit {
     private alertService: AlertService) {
 
   }
-  @Input() task !: Task;
+  @Input() task!: Task;
   @Input() width!: string;
   @Input() minHeight!: string;
   @Input() borderColor!: string;
-  @Input() project !: Project
+  @Input() project!: Project;
 
   @Output() deleteTask = new EventEmitter();
 
-  canDelete?: boolean = false
+  canDelete?: boolean = false;
 
   ngOnInit(): void {
-    //Opacity
-    this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);;
+    // Opacity
+    this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);
     
     this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions;
-      this.settings[2].disabled = true
+      this.settings[2].disabled = true;
 
       for (let i = 0; i < permissions.length; i++) {
         if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
           this.canDelete = true;
-          this.settings[2].disabled = false
+          this.settings[2].disabled = false;
         }
       }
-    })
+    });
     console.log(this.canDelete);
   }
 
   modalDelete: boolean = false;
   modalDelete2: boolean = false;
-
 
   settings = [
     { id: 'clock', icon: this.faClock, onclick: () => this.clock(), disabled: false},
@@ -74,11 +73,14 @@ export class CardComponent implements OnInit {
   }
 
   openModalDelete(): void {
-    if(this.canDelete){
+    if (this.canDelete) {
       this.modalDelete = true;
-    }else{
+    } else {
       this.modalDelete2 = true;
-      this.alertService.errorAlert("Você não tem permissão para remover a tarefa!")
+      this.alertService.errorAlert("Você não tem permissão para remover a tarefa!");
+      setTimeout(() => {
+        this.modalDelete2 = false; 
+      }, 1000);
     }
   }
 
@@ -87,13 +89,13 @@ export class CardComponent implements OnInit {
     if (event) {
         this.taskService.delete(this.task.id).subscribe(
           (task) => {
-            //Alert
+            // Alert
 
             this.deleteTask.emit();
           },
           (error) => {
 
-            //Alert
+            // Alert
             console.log(error);
           }
         );
@@ -107,14 +109,13 @@ export class CardComponent implements OnInit {
   @Output() openTaskDetails = new EventEmitter();
   openTask(): void {
     if (!this.modalDelete && !this.modalDelete2) {
-      this.openTaskDetails.emit();
-      this.modalDelete2 = false;
+      
+        this.openTaskDetails.emit();
+      
     }
   }
 
   dale(): void {
     console.log('dale');
   }
-  
 }
-
