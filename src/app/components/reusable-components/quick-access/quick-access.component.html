@@ -35,13 +35,13 @@
 
     <!-- RECENTLY TEAMS -->
     <div class="recently-teams">
-        <h6 class="title" *ngIf="typeString === 'home'">Equipes Recentes</h6>
+    <h6 class="title" *ngIf="typeString === 'home'">Equipes Recentes</h6>
         <h6 class="title" *ngIf="typeString === 'project'">Projetos Recentes de ...</h6>
 
         <div class="div-recently-teams">
-            <div class="recently-teams-team" *ngFor="let item of recentTeams | slice:0:3;" (click)="redirectToTeam(item)">
+            <div class="recently-teams-team" *ngFor="let item of recentItems | slice:0:3;" (click)="redirectToTeam(item)">
                 <div class="recently-team-image">
-                    <img src="https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/819.png" alt="">
+                    <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">
                 </div>
                 <div class="recently-team-info">
                     <p class="large-text">{{item.name}}</p>
@@ -49,5 +49,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        
+        </div>
+    </section>
+    

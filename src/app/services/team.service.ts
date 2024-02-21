@@ -64,6 +64,10 @@ export class TeamService {
       .get<boolean>(`${URL}team/exists/${teamId}/${userId}`);
   }
 
+  public updateImage(teamId: number, fd: FormData) {
+    return this.http
+      .patch(`${URL}team/image/${teamId}`, fd)
+  }
 
 
 }

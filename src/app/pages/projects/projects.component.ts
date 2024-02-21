@@ -49,6 +49,11 @@ export class ProjectsComponent {
   ngOnInit(): void {
     this.getTeam();
     this.validateProjectId();
+    this.getRecentProjects();
+  }
+
+  getRecentProjects(): void {
+    this.recentProjects = this.team.projects!;
   }
 
   validateProjectId(): void {
@@ -116,17 +121,6 @@ export class ProjectsComponent {
     this.orderOpen = !this.orderOpen;
   }
 
-  createProject(project: Project): void {
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    project.creator = this.logged;
-
-    this.projectService
-      .create(project, teamId)
-      .subscribe((project: Project) => {
-        this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
-      });
-      
-  }
 
 
 }

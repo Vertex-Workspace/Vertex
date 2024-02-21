@@ -8,7 +8,7 @@ export class Team {
     name !: string;
     creationDate !: Date;
     description !: string;
-    image !: string;
+    image ?: string;
     users?: User[];
     creator?: User;
     groups?: Group[];

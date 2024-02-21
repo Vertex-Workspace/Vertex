@@ -31,7 +31,8 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void { 
     this.subscribeToTeams(); 
-    this.getRecentsTeams();
+    this.getRecentsTeams();       
+    
   }
 
   ngOnDestroy(): void {
@@ -58,26 +59,14 @@ export class HomeComponent implements OnInit{
       })
   }
 
-  createTeam(team: Team): void {
-    team.creator = this.logged;
-    this.teamService
-      .create(team)
-      .subscribe((team: Team) => {
-        this.alert.successAlert(`Equipe ${team.name} criada com sucesso!`);
-      },
-      e => {
-        this.alert.errorAlert(`Erro ao criar a equipe!`)
-      });
-  }
-
   changePreviewMode(preview: string): void {
     this.clicked = preview;
     if (this.clicked == "team") {
       this.teamService.getTeamsByUser(this.logged.id!)
         .subscribe((teams) => {
-          this.teams = teams;
+          this.teams = teams;          
         });
-    }
+    }    
   }
 
   switchCreateView(): void {

@@ -32,12 +32,6 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private _location: Location
   ) {
-    // router.events
-    //   .subscribe((val: any) => {
-    //     if (val instanceof NavigationEnd) {
-    //       this.updateLocation(val);          
-    //     }
-    //   })   
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         const activeRoute: string = val.url as string;  
@@ -84,11 +78,9 @@ export class HeaderComponent implements OnInit {
   }
 
   incrementUrlById(activeRoute: string, id: number): void {     
-    console.log(this.location);
-       
-    if (activeRoute.includes('projetos'))  this.getTeam(id);
-    if (activeRoute.includes('tarefas'))  this.getProject(id);
-    if (activeRoute.includes('usuario/perfil'))  this.getUser(id);
+    if (activeRoute.includes('projetos')) this.getTeam(id);
+    if (activeRoute.includes('tarefas')) this.getProject(id);
+    if (activeRoute.includes('usuario/perfil')) this.getUser(id);
   }
 
   getTeam(id: number): void {
