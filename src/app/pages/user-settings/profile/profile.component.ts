@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { faUser, faEnvelope,
     faEarthAmericas, faKey, faAngleDown, faToggleOff,
      faPencil, faToggleOn, faCircleUser,
-    faPenToSquare, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
-import { ThisReceiver } from '@angular/compiler';
+    faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
@@ -60,12 +59,13 @@ export class ProfileComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private alert: AlertService
+    private alert: AlertService,
   ){
-    this.logged = userService.getLogged();
+    this.getLoggedUser();
   }
 
   ngOnInit(): void {
+
     this.form = this.formBuilder.group({
 
       email: [this.logged.email],
@@ -76,7 +76,11 @@ export class ProfileComponent {
     })
   }
 
-  // Alter the status of toogle
+  getLoggedUser(): void {
+      this.logged = this.userService.getLogged();
+  }
+
+  // Alter the status of toggle
   toogleCharts(item :number): void{
     if(this.tooglesList[item].icon == faToggleOff){
       this.tooglesList[item].icon = faToggleOn;
@@ -96,7 +100,6 @@ export class ProfileComponent {
     }
   }
 
-
   closeModal():void {
     this.validInput = true;
   }
@@ -107,7 +110,7 @@ export class ProfileComponent {
 
     this.userService
       .update(this.logged)
-      .subscribe((user: User) => {
+      .subscribe(() => {
         this.alert.successAlert('Informações atualizadas com sucesso!')
       })
     
@@ -129,21 +132,30 @@ export class ProfileComponent {
 
   }
 
-  onUpload(): void {
-    const fd: FormData = new FormData();
-    fd.append('image', this.selectedFile, this.selectedFile.name);
-
-    console.log(fd);
-    
-    // this.userService
-    //   .uploadImage(fd);
-  }
-
-  onFileSelected(e: any): void {
+  onFileSelected(e: any): void {    
     this.selectedFile = e.target.files[0]
     const fd: FormData = new FormData();
-    fd.append('image', this.selectedFile, this.selectedFile.name);
+    fd.append('file', this.selectedFile, this.selectedFile.name);    
+    
     console.log(fd);
+    
+
+    this.userService
+      .uploadImage(fd, this.logged.id!)
+      .subscribe(() => {
+        this.alert.successAlert('Imagem atualizada com sucesso!');
+        this.updateLoggedUser();
+      });
   }
+
+  updateLoggedUser(): void {
+    this.userService
+      .getOneById(this.logged.id!)
+      .subscribe((user: User) => {
+        this.logged = user;
+        this.userService.updateLoggedUser(user);
+      })
+  }
+  
 
 }

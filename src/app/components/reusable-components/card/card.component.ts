@@ -56,7 +56,6 @@ export class CardComponent implements OnInit {
         }
       }
     });
-    console.log(this.canDelete);
   }
 
   modalDelete: boolean = false;
@@ -69,7 +68,6 @@ export class CardComponent implements OnInit {
   ];
 
   openChat(): void {
-    
   }
 
   openModalDelete(): void {
@@ -99,6 +97,19 @@ export class CardComponent implements OnInit {
             console.log(error);
           }
         );
+    console.log(event);
+    if(event){
+    this.taskService.delete(this.task.id).subscribe(
+      (task) => {
+        //Alert
+        this.deleteTask.emit();
+      },
+      (error) => {
+
+        //Alert
+        console.log(error);
+      }
+    );
     }
   }
 
@@ -110,7 +121,15 @@ export class CardComponent implements OnInit {
   openTask(): void {
     if (!this.modalDelete && !this.modalDelete2) {
         this.openTaskDetails.emit();  
+    if(!this.modalDelete){
+      this.openTaskDetails.emit();
     }
+  }
+
+  @Output() current = new EventEmitter();
+
+  takeCurrentTime(): void {
+    
   }
 
   dale(): void {

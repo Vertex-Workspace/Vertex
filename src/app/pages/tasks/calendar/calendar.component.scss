@@ -45,7 +45,7 @@ section {
 
     .calendar-rows{
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(7, 235px);
     }
 
     .calendar-day {
@@ -54,11 +54,18 @@ section {
         border: 1px solid $emphasis;
 
         .day-informations {
-            text-align: center;
-            @apply flex h-[20%] w-full justify-end;
+            @apply flex min-h-[30px] w-full justify-between;
+
+            .pi {
+                @apply text-[1.1rem] cursor-pointer font-light flex items-center justify-center;
+
+                &:hover {
+                    @apply text-[1.2rem];
+                }
+            }
 
             div{
-                @apply w-8 h-7 rounded-full;
+                @apply w-8 h-8 rounded-full justify-center flex items-center;
             }
 
             .today {

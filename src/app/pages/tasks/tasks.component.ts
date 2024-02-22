@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
-  clicked !: string;
+  clicked : string = 'Kanban';
   query: string = '';
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
@@ -68,6 +68,19 @@ export class TasksComponent implements OnInit {
         }
       }
     })
+    private userService : UserService
+  ) {
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.projectService
+      .getOneById(id)
+      .subscribe((p: Project) => {
+        this.project = p;
+      })
+  }
+
+
+  ngOnInit(): void {
   }
 
   menuItems = [
@@ -96,6 +109,7 @@ export class TasksComponent implements OnInit {
   }
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+    localStorage.setItem('mode-task-view', preview);
   }
 
   onInputType(): void {

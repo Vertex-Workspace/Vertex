@@ -270,8 +270,11 @@ export class ChatComponent {
   ]
 
   submit() {
-
+    console.log(this.messageUser);
+    
     if (this.messageUser != "") {
+      console.log(this.messageUser);
+      
       let hora = new Date().getHours() + ":" + new Date().getMinutes();
       if (new Date().getMinutes() < 10) {
         hora = new Date().getHours() + ":0" + new Date().getMinutes();

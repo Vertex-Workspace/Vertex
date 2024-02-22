@@ -8,6 +8,7 @@ export class Team {
     name !: string;
     creationDate !: Date;
     description !: string;
+    image ?: string;
     users?: User[];
     creator!: User;
     groups?: Group[];
@@ -24,8 +25,8 @@ export class Team {
         this.creator = team.creator;
         this.users = team.users;         
         this.groups = team.groups;
-        this.projects = team.projects;       
-        
+        this.projects = team.projects;    
+        this.image = team.image;   
     }
 
 }

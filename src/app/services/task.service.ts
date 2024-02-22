@@ -40,9 +40,26 @@ export class TaskService {
       .delete<Task>(`${URL}task/${id}`);
   }
 
-
   public patchValue(valueUpdate: ValueUpdate):Observable<Task>{
     return this.http.patch<Task>(`${URL}task/value`, valueUpdate);
+  }
+
+  public getAllByProject(id: number): Observable<Task[]> {
+    return this.http
+      .get<Task[]>(`${URL}task/project/${id}`)
+      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
+  }
+
+  public getAllByTeam(id: number):Observable<Task[]> {
+    return this.http
+      .get<Task[]>(`${URL}task/team/${id}`)
+      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
+  }
+
+  public getAllByUser(id: number): Observable<Task[]> {
+    return this.http
+      .get<Task[]>(`${URL}task/user/${id}`)
+      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 
 

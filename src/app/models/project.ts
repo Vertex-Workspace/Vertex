@@ -8,7 +8,7 @@ export class Project {
     name !: string;
     team : Team;
     description ?: string;
-    image ?: string;
+    image ?: string | undefined;
     creator ?: User;
     projectDependency ?: Project;
     tasks : Task[]; 

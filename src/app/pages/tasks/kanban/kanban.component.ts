@@ -3,12 +3,12 @@ import { Task, TaskCreate } from 'src/app/models/task';
 import {
   CdkDragDrop,
   moveItemInArray,
+  transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
 import { TaskService } from 'src/app/services/task.service';
-import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
+import { Value, ValueUpdate } from 'src/app/models/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -28,7 +28,11 @@ export class KanbanComponent implements OnInit {
     private alertService: AlertService,
     private userService: UserService,
     private teamService: TeamService) {
+    private userService : UserService
+  ) {
+  }
 
+  ngOnInit(): void {
   }
   ngOnInit(): void {
     this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
@@ -54,12 +58,13 @@ export class KanbanComponent implements OnInit {
   canEdit: boolean = false;
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
-    const task: Task = event.item.data;
+    const task: Task = event.item.data;    
 
     let previousPropertyList!: PropertyList;
     let newValue!: Value;
 
     //For each to find the value of current and future property List
+
     if (this.canEdit != false) {
       this.project.properties.forEach((property) => {
         if (property.kind == PropertyKind.STATUS) {
@@ -82,6 +87,20 @@ export class KanbanComponent implements OnInit {
       //It points out that the previousValue is incorrect
       if (previousPropertyList == null) {
         return;
+    this.project.properties.forEach((property) => {
+      if (property.kind == PropertyKind.STATUS) {
+        task.values.forEach((value) => {
+          if (value.property.id == property.id) {
+            //Save the old value
+            previousPropertyList = value.value as PropertyList;
+
+            //Save the new value
+            value.value = propertyList;
+
+            //Save on a local variable the value of the task
+            newValue = value;
+          }
+        });
       }
 
 
@@ -119,6 +138,10 @@ export class KanbanComponent implements OnInit {
       }
     } else {
       this.alertService.errorAlert("Você não tem permissão para alterar o Status da tarefa!")
+      console.log(valueUpdate);
+      
+      //Patch the value of the status task
+      this.taskService.patchValue(valueUpdate).subscribe();
     }
   };
 
@@ -213,11 +236,38 @@ export class KanbanComponent implements OnInit {
           (task: Task) => {
             this.project.tasks.push(task);
             this.alertService.successAlert("Tarefa criada com sucesso!");
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: this.project.id!
+      },
+      values: [
+        {
+          property: {
+            id: propertyUsed.id
           },
           (error: any) => {
             this.alertService.errorAlert("Erro ao criar tarefa!");
           }
         );
+        }
+      ],
+      creator: {
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
+    
+    }
+
+    this.taskService.create(taskCreate).subscribe(
+
+      (task: Task) => {    
+        this.project.tasks.push(task);
+        this.alertService.successAlert("Tarefa criada com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert("Erro ao criar tarefa!");
       }
     } else {
       this.alertService.errorAlert("Você não tem permissão para criar essa tarefa!")

@@ -46,8 +46,17 @@ export class ProjectsComponent implements OnInit {
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
+    
+  }
+
+  ngOnInit(): void {
     this.getTeam();
     this.validateProjectId();
+    this.getRecentProjects();
+  }
+
+  getRecentProjects(): void {
+    this.recentProjects = this.team.projects!;
   }
   ngOnInit(): void {
     console.log(this.logged)
@@ -75,7 +84,7 @@ export class ProjectsComponent implements OnInit {
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
-
+      })      
       })
   }
 
@@ -87,6 +96,7 @@ export class ProjectsComponent implements OnInit {
         this.alert.successAlert(`Projeto deletado com sucesso!`);
         this.team.projects?.splice(this.team.projects.indexOf(projectId),1)
         this.getAfterChange();
+        this.team.projects?.splice(this.team.projects.indexOf(project), 1);
       },
         e => {
           this.alert.errorAlert('Erro ao deletar projeto!');
@@ -125,6 +135,12 @@ export class ProjectsComponent implements OnInit {
     } else {
       this.team.projects = [];
     }
+    this.isCreating = !this.isCreating;
+    this.updateList();
+  }
+
+  updateList(): void {
+    this.getTeam();
   }
 
   configItems = [
@@ -175,6 +191,4 @@ export class ProjectsComponent implements OnInit {
   switchCreateViewGroup(): void {
     this.isCreatingGroup = !this.isCreatingGroup;
   }
-
-
 }

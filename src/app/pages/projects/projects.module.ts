@@ -12,7 +12,9 @@ import { CreateGroupModule } from 'src/app/components/reusable-components/create
 
 @NgModule({
   declarations: [ProjectsComponent],
-  exports:[ProjectsComponent],
+  exports:[
+    ProjectsComponent
+  ],
   imports: [
     CommonModule,
     CardListModule,

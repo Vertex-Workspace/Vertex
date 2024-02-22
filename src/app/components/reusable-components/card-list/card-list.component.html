@@ -1,8 +1,9 @@
 <div class="list">
     <ng-container *ngFor="let item of getType()">
         <div class="card">
-            <div class="image" (click)="openTeam(item.id)">
-                <img src="../../../../assets/teste/teste.jpg">
+        <div class="image flex justify-center items-center pr-4" (click)="openTeam(item.id)">
+                <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">
+
             </div>
             <div class="informations">
                 <div class="informations-text" (click)="openTeam(item.id)">

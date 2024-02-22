@@ -71,11 +71,15 @@
                 </section>
 
                 <div class="w-full h-full">
-                    <app-list></app-list>
+                    <app-list
+                        *ngIf="team.projects && team.projects.length > 0"
+                        [team]="team"
+                    ></app-list>
                 </div>
             </div>
 
             <div class="default-size" *ngIf="clicked === 'project'">
+              
                 <app-card-list style="width: 100%; height: 90%; padding-top: 3%"
                     *ngIf="clicked === 'project' && !isCreatingProject" (deleteEmitterProject)="delete($event)"
                     [type]="'project'" [team]="team"></app-card-list>

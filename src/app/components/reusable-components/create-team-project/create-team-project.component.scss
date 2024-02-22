@@ -25,15 +25,40 @@ form{
     }
 }
 
+.image {
+    @apply w-[250px] h-[250px] p-2 rounded-full flex flex-col justify-center items-center;
+
+
+    img {
+        @apply w-[80%];
+    }
+
+    .profile-photo {
+        color: $primaryColor;
+        font-size: 10rem;
+        padding-left: 27%; 
+    }
+}
+
+.input-div {
+    @apply w-full h-full flex justify-center items-center absolute;
+    opacity: 0;
+
+    .input-file {
+        @apply cursor-pointer w-full h-full;
+    }
+
+}
+
 .input-image{
     @apply flex flex-col w-full h-[50%] justify-center items-center;
 
-    #image-icon{
+    .image-icon{
         @apply text-9xl;
         color: $primaryColor;
     }
 
-    #image-icon:hover{
+    .image-icon:hover{
         opacity: 0.5;
     }
 

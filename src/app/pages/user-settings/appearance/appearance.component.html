@@ -53,16 +53,31 @@
             <div>
                 <p class="medium-text">Tamanho da letra</p>
                 <p class="small-text">Defina o tamanho da letra para o sistema</p>
-                <select [(ngModel)]="fontSizeChoosed" (change)="changeFontSize()">
-                    <option *ngFor="let size of fontSizes" [value]="size" class="small-text">{{size}}</option>
-                </select>
+                <p-cascadeSelect 
+                    [(ngModel)]="selectedFontSize" 
+                    [options]="fontSizes" 
+                    optionGroupLabel="name" 
+                    [optionGroupChildren]="[]" 
+                    [style]="{ width: '120px', height: '40px' }" 
+                    placeholder="{{selectedFontSize}}"
+                    (onChange)="changeFontSize()"
+                 ></p-cascadeSelect>
             </div>
             <div>
                 <p class="medium-text">Estilo da letra</p>
                 <p class="small-text">Defina o estilo da letra</p>
-                <select [(ngModel)]="fontFamilyChoosed" (change)="changeFontFamily()">
+                <!-- <select [(ngModel)]="fontFamilyChoosed" (change)="changeFontFamily()">
                     <option *ngFor="let font of fontFamily" [value]="font" class="small-text">{{font}}</option>
-                </select>
+                </select> -->
+                <p-cascadeSelect 
+                    [(ngModel)]="selectedFontFamily" 
+                    [options]="fontFamily" 
+                    optionGroupLabel="name" 
+                    [optionGroupChildren]="[]" 
+                    [style]="{ width: '180px', height: '40px' }" 
+                    placeholder="{{selectedFontSize}}"
+                    (onChange)="changeFontFamily()"
+                 ></p-cascadeSelect>
             </div>
             
         </div>
@@ -77,9 +92,9 @@
             </div>
 
             <div [(ngModel)]="listeningText" (click)="toggleChangeListening()" class="accessibility">
-                <fa-icon *ngIf="!listeningText" class="icon"  [icon]="faToggleOff">
+                <fa-icon *ngIf="!voiceCommand" class="icon"  [icon]="faToggleOff">
                 </fa-icon>
-                <fa-icon *ngIf="listeningText" class="icon"  [icon]="faToggleOn">
+                <fa-icon *ngIf="voiceCommand" class="icon"  [icon]="faToggleOn">
                 </fa-icon>
                 <p class="small-text">Habilitar leitura de texto</p>
             </div>

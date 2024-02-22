@@ -27,7 +27,7 @@
 }
 
 .properties-types {
-    @apply pt-3 w-full h-[50%] grid grid-cols-3 justify-center items-center;
+    @apply pt-12 w-[80%] h-[35%] grid grid-cols-3 justify-center;
 
     div{
         @apply w-[80px] h-[80px] bg-[#EAEFF8] flex justify-center items-center shadow-2xl rounded-md;
@@ -70,7 +70,7 @@
 }
 
 section{
-    @apply w-full h-full items-center pl-10;
+    @apply w-full h-full flex flex-col items-center pl-10;
 
     p:first-child {
         @apply pr-10 pt-10;
