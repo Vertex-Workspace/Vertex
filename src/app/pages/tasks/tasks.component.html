@@ -30,7 +30,8 @@
 
                 </ng-container>
 
-                <button class="create" (click)="createTask()">
+                <button class="create" (click)="createTask()" [disabled]="canCreate" 
+                [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
@@ -67,9 +68,9 @@
     </div>
 </section>
 
-<app-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
-</app-properties>
+<app-modal-properties *ngIf="propertiesOpen" [height]="'700px'" [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
+</app-modal-properties>
 
-<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
-    (close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>
-    
+<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen" 
+(close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>
+

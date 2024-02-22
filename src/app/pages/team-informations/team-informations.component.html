@@ -40,7 +40,9 @@
 
                 <div class="high-listDiv-members">
                     <div class="listDiv-members">
-                        <p class="large-text">Lista de membros</p>
+                        <p class="large-text" *ngIf="clicked == 'participants'">Lista de membros</p>
+                        <p class="large-text" *ngIf="clicked == 'permissions'">Permissões de usuários</p>
+                        <p class="large-text" *ngIf="clicked == 'groups'">Grupos</p>
                         <p> | </p>
                         <div class="flex gap-1">
                             <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
@@ -55,67 +57,21 @@
             </div>
 
 
-            <div *ngIf="clicked == 'participants'" class="grid-participants">
-                <ng-container *ngFor="let user of team.users">
-                    <div class="card-user-grid">
-                        <div class="div-text-card">
-                            <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon>
-                        </div>
-
-                        <div class="highDiv-card-informations">
-                            <p class="medium-text">{{ user.firstName }} {{user.lastName}}</p>
-                            <p class="small-text opacity-60">(( user.function ))</p>
-                            <div class="divSocial-media">
-                                <!-- <ng-container *ngFor="let item of user.socialMedia">
-                                    <fa-icon class="social-media" [icon]="item"></fa-icon>
-                                </ng-container> -->
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
+            <div *ngIf="clicked == 'participants'" class="grid-permissions">
+                <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'view-infos'"
+                [team]="team" (deleteEmitterUserTeam)="deleteUserTeam($event)"></app-card-user>
             </div>
 
 
             <div *ngIf="clicked == 'permissions'" class="grid-permissions">
-                <ng-container *ngFor="let user of team.users; let id = index">
-                    <div class="extense-card">
-                        <div class="div-permission">
-                            <div class="div-permission-icon">
-                                <fa-icon class="permission-icon" [icon]="faCircleUser"></fa-icon>
-                            </div>
+                <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'permissions'"
+                [team]="team"></app-card-user>
+            </div>  
 
-                            <div class="div-permission-nameFunction">
-                                <p class="medium-text">{{ user.firstName }} {{user.lastName}}</p>
-                                <p class="small-text opacity-60">(( user.function ))</p>
-                            </div>
-
-                            <div class="div-swap-permission">
-                                <fa-icon (click)="swapPermissionExpanded(id)" class="icon-swap-permission"
-                                    [icon]="faChevronDown"></fa-icon>
-                            </div>
-                        </div>
-
-                        <!-- <div *ngIf="user.open" class="extense-cardExpanded">
-                            <div class="div-checkbox1">
-                                <input type="checkbox" id="editionCheck">
-                                <label for="editionCheck">Edição</label>
-                            </div>
-
-                            <div class="div-checkbox2">
-                                <input type="checkbox" id="visualizeCheck">
-                                <label for="visualizeCheck">Visualização</label>
-                            </div>
-
-                            <div class="div-checkbox3">
-                                <input type="checkbox" id="createCheck">
-                                <label for="createCheck">Criação</label>
-                            </div>
-                        </div> -->
-                    </div>
-
-
-                </ng-container>
+            <div *ngIf="clicked == 'groups'" class="grid-permissions">
+                <app-card-group [team]="team" [width]="'800px'" [height]="'90px'" (deleteEmitterGroup)="deleteGroup($event)"></app-card-group>
             </div>
+            
         </div>
 
         <!-- =============================================================================================== -->

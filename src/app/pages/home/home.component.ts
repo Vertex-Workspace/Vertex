@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit{
 
   recentTeams !: Team[];
 
+  userCreator !: User
   teams: Team[] = [];
 
   private teamsSubscription !: Subscription;
@@ -87,9 +88,15 @@ export class HomeComponent implements OnInit{
     
   }
 
-  delete(id: number): void {
+  delete(team : Team): void {
+    // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
+    //   this.userCreator = user;
+    //   console.log(user); 
+    // })
+  
+    
     this.teamService
-      .delete(id)
+      .delete(team.id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
         this.logged.teams?.splice(this.logged.teams.indexOf(team), 1);

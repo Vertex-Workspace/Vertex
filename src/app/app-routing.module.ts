@@ -14,7 +14,6 @@ import { TeamsSettingsComponent } from './pages/user-settings/teams-settings/tea
 import { SecurityComponent } from './pages/user-settings/security/security.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { KanbanComponent } from './pages/tasks/kanban/kanban.component';
-import { ListComponent } from './pages/tasks/list/list.component';
 import { CalendarComponent } from './pages/tasks/calendar/calendar.component';
 import { UserInformationsComponent } from './pages/user-informations/user-informations/user-informations.component';
 import { AuthGuard } from './services/guards/auth.guard';

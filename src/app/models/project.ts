@@ -4,9 +4,9 @@ import { Team } from "./team";
 import { User } from "./user";
 
 export class Project {
-    id ?: number;
+    id !: number;
     name !: string;
-    team ?: Team;
+    team : Team;
     description ?: string;
     image ?: string | undefined;
     creator ?: User;

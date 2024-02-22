@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Personalization } from '../models/personalization';
+import { Permission} from '../models/user';
+import { Team } from '../models/team';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
@@ -91,7 +93,7 @@ export class UserService {
     return user;
   }
 
-  public getAll(): Observable<User[]> { 
+  public getAll(): Observable<User[]> {    
     return this.http
       .get<User[]>(`${URL}user`)
       .pipe(map((users: User[]) => users.map(user => new User(user))));
@@ -102,6 +104,19 @@ export class UserService {
       .get<User>(`${URL}user/${id}`)
       .pipe(map((user: User) => new User(user)));
   }
+
+  public getUsersByGroup(groupId: number): Observable<User[]> { 
+    return this.http
+      .get<User[]>(`${URL}user/usersByGroup/${groupId}`)
+      .pipe(map((users: User[]) => users.map(user => new User(user))));
+  }
+
+  public getUsersByTeam(teamId: any): Observable<User[]> {
+    return this.http
+      .get<User[]>(`${URL}team/usersByTeam/${teamId}`)
+      .pipe(map((users: User[]) => users.map(user => new User(user))));
+  }
+
 
   public getOneByEmail(email: string): Observable<User> {
     return this.http
