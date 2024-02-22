@@ -6,9 +6,10 @@ import { Project } from 'src/app/models/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate } from 'src/app/models/task';
-import { User } from 'src/app/models/user';
+import { Permission, PermissionsType, User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
+import { TeamService } from 'src/app/services/team.service';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class TasksComponent implements OnInit {
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
   taskOpen: boolean = false;
+  permissions: Permission[] = [];
+  canCreate: boolean = false;
 
   project!: Project;
 
@@ -34,9 +37,37 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route : ActivatedRoute,
+    private route: ActivatedRoute,
     private projectService: ProjectService,
     private taskService: TaskService,
+    private userService: UserService,
+    private teamService: TeamService,
+    private alertService: AlertService
+  ) { }
+
+  projectId!: number;
+
+  async ngOnInit(): Promise<void> {
+    if (this.router.url.includes('projeto')) {
+      const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
+      if (projectId) {
+        let projectRequested: Project | undefined = await this.projectService.getOneById(projectId).toPromise();
+        if (projectRequested) {
+          this.project = projectRequested;
+        }
+      }
+      this.clicked = "Kanban";
+    }
+
+    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions;
+
+      for (let i = 0; i < permissions.length; i++) {
+        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+          this.canCreate = true;
+        }
+      }
+    })
     private userService : UserService
   ) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
@@ -50,7 +81,6 @@ export class TasksComponent implements OnInit {
 
 
   ngOnInit(): void {
-
   }
 
   menuItems = [
@@ -87,35 +117,39 @@ export class TasksComponent implements OnInit {
   }
 
   createTask(): void {
-    let taskCreate: TaskCreate = {
-      name: "Nova Tarefa",
-      description: "Descreva um pouco sobre sua Tarefa Aqui",
-      project: {
-        id: this.project.id!
-      },
-      values: [],
-      creator: {
-        id: this.userService.getLogged().id!
-      },
-      teamId: this.project.idTeam!
-    }
-    this.taskService.create(taskCreate).subscribe(
-      (task) => {
-        this.project.tasks.push(task);
-        this.changeModalTaskState(true, task);
-      },
-      (error) => {
-        console.log(error);
+    if (this.canCreate) {
+      let taskCreate: TaskCreate = {
+        name: "Nova Tarefa",
+        description: "Descreva um pouco sobre sua Tarefa Aqui",
+        project: {
+          id: this.projectId
+        },
+        values: [],
+        creator: {
+          id: this.userService.getLogged().id!
+        },
+        teamId: this.project.idTeam!
       }
-    );
+      this.taskService.create(taskCreate).subscribe(
+        (task) => {
+          this.project.tasks.push(task);
+          this.changeModalTaskState(true, task);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }else {
+      this.alertService.errorAlert("Você não tem permissão para criar uma tarefa")
+    }
   }
 
   taskOpenObject!: Task;
-  changeModalTaskState(bool: boolean, task: Task): void{
+  changeModalTaskState(bool: boolean, task: Task): void {
     this.taskOpen = bool;
-    if(this.taskOpen){
+    if (this.taskOpen) {
       this.taskOpenObject = task;
-    } else{
+    } else {
       this.taskOpenObject = {} as Task;
     }
   }
@@ -124,14 +158,15 @@ export class TasksComponent implements OnInit {
     this.propertiesOpen = !this.propertiesOpen;
   }
 
-  updateProjectByTaskChanges(event: any): void{
+  updateProjectByTaskChanges(event: any): void {
     let taskUpdated: Task = event;
     this.project.tasks = this.project.tasks.map(task => {
-      if(task.id === taskUpdated.id){
+      if (task.id === taskUpdated.id) {
         return taskUpdated;
       }
       return task;
     });
   }
-  
+
+
 }

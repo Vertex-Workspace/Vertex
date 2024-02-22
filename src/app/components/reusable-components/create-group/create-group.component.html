@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h4 class="title" >Crie um novo grupo</h4>
+  
+    <div class="div-name">
+      <div class="input-name">
+        <p>Nome do grupo</p>
+        <input
+            formControlName="name" 
+            [placeholder]="'Adicione um nome para o grupo'"
+            type="text" 
+        >
+      </div>
+    </div>
+  
+    <p class="large-text pb-5">Selecionar participantes</p>
+    <div class="input-description">
+      <p>Participantes</p>
+      <app-card-user [typeString]="'creating'" [width]="'700px'" [height]="'70px'" (user)="selectUsers($event)"
+      [team]="team" class="pl-4 pt-2"></app-card-user>
+    </div>
+  
+    <div class="div-buttons">
+      <div class="buttons">
+        <button class="cancel-button" (click)="closeGroup()">Cancelar</button>
+        <button class="confirm-button" type="submit">Criar grupo</button>
+      </div>
+    </div>
+</form>
+  

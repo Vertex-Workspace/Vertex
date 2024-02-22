@@ -1,0 +1,73 @@
+@import '../../../../variables';
+
+.card{
+    @apply flex flex-col items-center w-[95%] py-2;
+
+    .sections-in-card{
+        @apply pl-2 flex w-full bg-white shadow-lg items-center;
+        min-height: 40px;
+
+        div:first-child{
+            @apply w-[10%] flex items-center pl-6 h-full;
+        };
+    
+        div:nth-child(2){
+            @apply pl-5 w-[70%] flex items-center h-full;
+
+            p{
+                font-size:$regularText
+            }
+        };
+
+        div:nth-child(3){
+            @apply w-[20%] flex items-center pl-6 h-full; 
+        }
+    }
+}
+
+.icon {
+    color: $primaryColor;
+    font-size: 1rem;
+}
+
+.icon-not-selected {
+    color: #f3f3ff;
+    font-size: 1rem;
+}
+
+.size{
+    font-size:1.5rem
+}
+
+.permissions {
+    @apply flex flex-col w-[800px] bg-white h-[170px] items-end;
+
+    .single-permissions{
+        @apply w-[92%] h-[20%] flex flex-col items-start pb-10;
+
+        div{
+            @apply flex flex-row;
+
+            p{
+                @apply pt-1
+            }
+        }
+    };
+
+    p{
+        color:$primaryColor;
+        @apply pl-5;
+    }
+}
+
+.user-infos {
+    @apply flex flex-col w-[700px] bg-white h-[100px] pl-8;
+
+    .email-description {
+        @apply flex flex-row;
+
+        label, p{
+            font-size: $regularText;
+        }
+    }
+}

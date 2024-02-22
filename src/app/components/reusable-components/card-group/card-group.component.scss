@@ -1,0 +1,48 @@
+@import '../../../../variables';
+
+.card{
+    @apply bg-white border-l-8 flex shadow-lg w-full;
+
+    div:first-child{
+        @apply w-[85%] flex items-center pl-6 h-full;
+    };
+
+    div:nth-child(2){
+        @apply w-[10%] flex items-center h-full;
+    };
+
+}
+
+.icon {
+    color: $primaryColor;
+}
+
+.user{
+    @apply flex w-full bg-white pl-8 py-2 flex-col;
+
+    button {
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply w-[100px] h-[40px]
+    };
+
+    p{
+        font-size: $regularText;
+    }
+}
+
+.main-div {
+    @apply flex w-[95%] flex-col py-2;
+}
+
+.user-card {
+    @apply pt-5 flex flex-col gap-6 w-full;
+}
+
+.size{
+    font-size: 1rem;
+}
+
+
+
+
