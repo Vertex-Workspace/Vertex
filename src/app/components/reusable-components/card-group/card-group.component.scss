@@ -24,6 +24,10 @@
         background-color: $primaryColor;
         color: $secondColor;
         @apply w-[100px] h-[40px]
+    };
+
+    p{
+        font-size: $regularText;
     }
 }
 

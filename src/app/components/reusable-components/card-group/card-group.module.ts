@@ -16,6 +16,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
     CardUserModule,
     FormsModule,
     ReactiveFormsModule,
+    ConfirmModalModule
   ]
 })
 

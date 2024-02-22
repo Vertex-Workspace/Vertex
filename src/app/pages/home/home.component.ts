@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit{
   logged !: User;
 
   recentTeams !: Team[];
+
+  userCreator !: User
   
   constructor(
     private userService : UserService, 
@@ -82,6 +84,12 @@ export class HomeComponent implements OnInit{
   }
 
   delete(team : Team): void {
+    // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
+    //   this.userCreator = user;
+    //   console.log(user); 
+    // })
+  
+    
     this.teamService
       .delete(team.id)
       .subscribe((team: Team) => {

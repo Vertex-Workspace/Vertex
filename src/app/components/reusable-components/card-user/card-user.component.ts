@@ -4,7 +4,7 @@ import {
   faCircleUser, faSquare, faUserMinus,
   faCaretDown, faCaretUp
 } from '@fortawesome/free-solid-svg-icons';
-import { PermissionsType, Permission, User} from 'src/app/models/user';
+import { PermissionsType, Permission, User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Group } from 'src/app/models/groups';
 import { TeamService } from 'src/app/services/team.service';
@@ -27,10 +27,7 @@ export class CardUserComponent implements OnInit {
   user = new EventEmitter<User>();
 
   @Output()
-  deleteUser = new EventEmitter<User>();
-
-  @Output()
-  patchOrSave = new EventEmitter<String>();
+  deleteUserGroup = new EventEmitter<User>();
 
   @Input()
   height?: String;
@@ -48,6 +45,7 @@ export class CardUserComponent implements OnInit {
   typeString!: String;
 
   permissions: Permission[] = []
+  delete: boolean = false;
 
   constructor(private userService: UserService,
     private groupService: GroupService,
@@ -69,6 +67,8 @@ export class CardUserComponent implements OnInit {
         this.users = users;
       });
     }
+
+    console.log("Vasco")
   }
 
   faCircleUser = faCircleUser;
@@ -84,27 +84,23 @@ export class CardUserComponent implements OnInit {
     }
   }
 
-  removeUser(user: User, typeString2: String): void {
-    if(typeString2 === 'inTheGroup'){
-    this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
-      .subscribe((group: Group) => {
-        this.alert.successAlert(`Usuário retirado do grupo`)
-        this.group.users?.splice(this.group.users.indexOf(user), 1);
-      },
-        e => {
-          this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
-        }
-      )
-    }else {
-      this.deleteUserTeam()
-    }
+  removeUser(user: User): void {
+      this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
+        .subscribe((group: Group) => {
+          this.alert.successAlert(`Usuário retirado do grupo`)
+          this.group.users?.splice(this.group.users.indexOf(user), 1);
+        },
+          e => {
+            this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
+          }
+        )
   }
 
   openPermissions(user: User, typeString2: String): void {
-    if(typeString2 === 'permissions'){
+    if (typeString2 === 'permissions') {
       user.openPermission = !user.openPermission;
       this.getPermission(user);
-    }else {
+    } else {
       user.openInfo = !user.openInfo
     }
   }
@@ -121,12 +117,39 @@ export class CardUserComponent implements OnInit {
     })
   }
 
-  deleteUserTeam(): void {
-    this.teamService.saveOrDeleteUserTeam(this.team).subscribe((team: Team) => {
-      this.alert.successAlert("Usuário retirado da equipe")
-      console.log(team);
-      
-    })
+  // deleteUserTeam(user: User): void {
+  //   console.log("fui chamado");
+
+  //   this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
+  //     this.alert.successAlert("Usuário retirado da equipe")
+  //   })
+  // }
+
+  deleteBoolean(): void {
+    this.delete = !this.delete
   }
 
+  @Output()
+  deleteEmitterUserTeam: EventEmitter<User> = new EventEmitter<User>();
+
+  deleteEmitUserTeam(user: User): void {
+    this.deleteEmitterUserTeam.emit(user);
+  }
+
+  deleteEmitUserGroup(user: User): void {
+    this.deleteUserGroup.emit(user)
+  }
+
+  validatingDelete(user: User, type: boolean, typeString2: String): void {
+    if (type === true) {
+      if (typeString2 === 'inTheGroup') {
+        this.removeUser(user)
+      } else if (typeString2 === 'view-infos') {
+        this.deleteEmitUserTeam(user)
+      }
+    } else {
+      this.alert.notificationAlert("Usuário continua na equipe")
+    }
+
+  }
 }

@@ -2,9 +2,10 @@
     [style.width]="width"
     [style.min-height]="minHeight"
     [style.borderColor]="borderColor"
-    (click)="openTask()">
+    (click)="openTask()"
+>
     <div class="top">
-        <div class="left">
+        <div class="left z-[999]">
             <fa-icon [icon]="faCircleUser" class="icon"></fa-icon>
         </div>
         
@@ -12,7 +13,7 @@
             <ng-container *ngFor="let item of settings">
                 <fa-icon [icon]="item.icon"
                          (click)="item.onclick()"
-                         class="icon"
+                         class="icon z-[999]"
                          [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'">
                 </fa-icon>
             </ng-container>

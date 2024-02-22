@@ -10,6 +10,7 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Group } from 'src/app/models/groups';
 import { Team } from 'src/app/models/team';
+import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -35,7 +36,8 @@ export class TeamInformationsComponent implements OnInit {
     ngOnInit(): void {
         this.getTeam();
         this.start();
-        this.getGroup()
+        this.getGroup();
+        this.getUser();
     }
 
     getTeam(): void {
@@ -169,6 +171,10 @@ export class TeamInformationsComponent implements OnInit {
         return this.team?.groups!;
     }
 
+    getUser(): any[] {
+        return this.team?.users!
+    }
+
     deleteGroup(groupId: Group):void {
         console.log(groupId); 
         this.groupService.delete(groupId.id).subscribe((group: Group) => {
@@ -179,5 +185,13 @@ export class TeamInformationsComponent implements OnInit {
           this.alertService.errorAlert("Não foi possível deletar");
         })
       }
+
+    deleteUserTeam(user: User): void {
+      console.log("fui chamado");
+      
+      this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
+        this.alertService.successAlert("Usuário retirado da equipe") 
+      })
+    }
 
 }

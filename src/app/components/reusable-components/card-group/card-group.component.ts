@@ -25,12 +25,6 @@ export class CardGroupComponent{
     @Output()
     close = new EventEmitter<Event>();
 
-    @Output()
-    deleteEmitter: EventEmitter<Group> = new EventEmitter<Group>();
-
-    @Output()
-    numberTeam: EventEmitter<number> = new EventEmitter<number>();
-
     @Input()
     height?: String;
 
@@ -51,6 +45,8 @@ export class CardGroupComponent{
     selectMoreUsers: boolean = false
 
     form !: FormGroup
+
+    delete ?: boolean
 
     constructor(
         private groupService: GroupService,
@@ -94,11 +90,6 @@ export class CardGroupComponent{
         })
       return this.team
     }
-  
-
-    deleteEmit(group: Group): void {   
-        this.deleteEmitter.emit(group)
-    }
 
     addParticipants(): void{
       this.selectMoreUsers = !this.selectMoreUsers
@@ -126,5 +117,25 @@ export class CardGroupComponent{
           e => {
             this.alertService.errorAlert("erro")
         });
+    }
+
+    deleteBoolean(): void {
+      this.delete = !this.delete
+    }
+  
+    @Output()
+    deleteEmitterGroup: EventEmitter<Group> = new EventEmitter<Group>();
+  
+    deleteEmitUserTeam(group: Group): void {
+      this.deleteEmitterGroup.emit(group);
+    }
+  
+    validatingDelete(group: Group, type: boolean): void{
+      if(type === true){
+        this.deleteEmitUserTeam(group)
+      }else {
+        this.alertService.notificationAlert("Usuário continua na equipe")
+      } 
+    
     }
 }

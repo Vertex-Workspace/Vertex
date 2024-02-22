@@ -4,9 +4,11 @@
             <p>{{group.name}}</p>
         </div>
         <div>
-            <fa-icon *ngIf="!group.open" [icon]="faCaretDown" class="icon" (click)="openModal(group)" style="font-size:1rem"></fa-icon>
-            <fa-icon *ngIf="group.open" [icon]="faCaretUp" class="icon" (click)="openModal(group)" style="font-size:1rem"></fa-icon>
-            <fa-icon [icon]="faTrashCan" class="icon size pl-4" (click)="deleteEmit(group)"></fa-icon>
+            <fa-icon *ngIf="!group.open" [icon]="faCaretDown" class="icon" (click)="openModal(group)"
+                style="font-size:1rem"></fa-icon>
+            <fa-icon *ngIf="group.open" [icon]="faCaretUp" class="icon" (click)="openModal(group)"
+                style="font-size:1rem"></fa-icon>
+            <fa-icon [icon]="faTrashCan" class="icon size pl-4" (click)="deleteBoolean()"></fa-icon>
 
         </div>
     </div>
@@ -31,5 +33,9 @@
             <p class="pl-2" *ngIf="selectMoreUsers" (click)="addParticipants()">Adicionar participantes</p>
         </div>
     </div>
+
+    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'"
+        (close)="deleteBoolean()" [type]="'userTeam'" (confirmEvent)="validatingDelete(group, $event)">
+    </app-confirm-modal>
 
 </div>

@@ -65,7 +65,7 @@ export class TeamService {
       .pipe(map((permissions: Permission[]) => permissions.map(permission => new Permission(permission))));
   }
 
-  public saveOrDeleteUserTeam(team: Team): Observable<Team>{
-    return this.http.patch<Team>(`${URL}team/user`, team)
+  public deleteUserTeam(team: Team, user:User): Observable<Team>{
+    return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
   }
 }

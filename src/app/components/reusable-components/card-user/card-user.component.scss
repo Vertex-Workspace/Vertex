@@ -13,6 +13,10 @@
     
         div:nth-child(2){
             @apply pl-5 w-[70%] flex items-center h-full;
+
+            p{
+                font-size:$regularText
+            }
         };
 
         div:nth-child(3){
@@ -53,5 +57,17 @@
     p{
         color:$primaryColor;
         @apply pl-5;
+    }
+}
+
+.user-infos {
+    @apply flex flex-col w-[700px] bg-white h-[100px] pl-8;
+
+    .email-description {
+        @apply flex flex-row;
+
+        label, p{
+            font-size: $regularText;
+        }
     }
 }

@@ -59,7 +59,7 @@
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
                 <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'view-infos'"
-                [team]="team"></app-card-user>
+                [team]="team" (deleteEmitterUserTeam)="deleteUserTeam($event)"></app-card-user>
             </div>
 
 
@@ -69,7 +69,7 @@
             </div>  
 
             <div *ngIf="clicked == 'groups'" class="grid-permissions">
-                <app-card-group [team]="team" [width]="'800px'" [height]="'90px'" (deleteEmitter)="deleteGroup($event)"></app-card-group>
+                <app-card-group [team]="team" [width]="'800px'" [height]="'90px'" (deleteEmitterGroup)="deleteGroup($event)"></app-card-group>
             </div>
             
         </div>

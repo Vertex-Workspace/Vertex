@@ -109,9 +109,7 @@ export class CardComponent implements OnInit {
   @Output() openTaskDetails = new EventEmitter();
   openTask(): void {
     if (!this.modalDelete && !this.modalDelete2) {
-      
-        this.openTaskDetails.emit();
-      
+        this.openTaskDetails.emit();  
     }
   }
 
