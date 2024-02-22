@@ -1,122 +1,108 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, Input, ViewChild } from '@angular/core';
+import { CdkDragMove } from '@angular/cdk/drag-drop';
+import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Note } from 'src/app/models/note';
-
-export type ResizeAnchorType =
-  | 'top'
-  | 'left'
-  | 'bottom'
-  | 'right'
-
-export type ResizeDirectionType =
-  | 'x'
-  | 'y'
-  | 'xy';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss']
 })
-export class NoteComponent {
-  @Input()
+export class NoteComponent implements OnInit, AfterViewInit {
+
+  @Input() 
   note !: Note;
-  @ViewChild('resizeCorner') resizeCornerRef!: ElementRef;
 
-  @ViewChild('wrapper') wrapperRef!: ElementRef;
+  @ViewChild('resizeBox') resizeBox!: ElementRef;
+  @ViewChild('dragHandleCorner') dragHandleCorner!: ElementRef;
+  @ViewChild('dragHandleRight') dragHandleRight!: ElementRef;
+  @ViewChild('dragHandleBottom') dragHandleBottom!: ElementRef;
 
-  @ViewChild('topBar') topBarRef!: ElementRef;
+  constructor(private ngZone: NgZone) {}
 
-  position: { x: number, y: number } = { x: 100, y: 100 };
+  basicData: any;
 
-  size: { w: number, h: number } = { w: 200, h: 200 };
-
-  lastPosition!: { x: number; y: number; };
-
-  lastSize !: { w: number, h: number };
-
-  minSize: { w: number, h: number } = { w: 200, h: 200 };
-
-  constructor(@Inject(DOCUMENT) private _document: Document,
-              private _el: ElementRef) { }
-
-  startDrag($event: { preventDefault: () => void; clientX: any; clientY: any; }): void {
-    $event.preventDefault();
-    const mouseX = $event.clientX;
-    const mouseY = $event.clientY;
-
-    const positionX = this.position.x;
-    const positionY = this.position.y;
-
-    const duringDrag = (e: { clientX: number; clientY: number; }) => {
-      const dx = e.clientX - mouseX;
-      const dy = e.clientY - mouseY;
-      this.position.x = positionX + dx;
-      this.position.y = positionY + dy;
-      this.lastPosition = { ...this.position };
-    };
-
-    const finishDrag = (e: any) => {
-      this._document.removeEventListener('mousemove', duringDrag);
-      this._document.removeEventListener('mouseup', finishDrag);
-    };
-
-    this._document.addEventListener('mousemove', duringDrag);
-    this._document.addEventListener('mouseup', finishDrag);
+  ngOnInit(): void {  
   }
 
-  startResize($event: { preventDefault: () => void; clientX: any; clientY: any; }, anchors: ResizeAnchorType[], direction: ResizeDirectionType): void {
-    $event.preventDefault();
-    const mouseX = $event.clientX;
-    const mouseY = $event.clientY;
-    const lastX = this.position.x;
-    const lastY = this.position.y;
-    const dimensionWidth = this.resizeCornerRef.nativeElement.parentNode.offsetWidth;
-    const dimensionHeight = this.resizeCornerRef.nativeElement.parentNode.offsetHeight;
 
-    const duringResize = (e: { clientX: number; clientY: number; }) => {
-      let dw = dimensionWidth;
-      let dh = dimensionHeight;
-      if (direction === 'x' || direction === 'xy') {
-        if (anchors.includes('left')) {
-          this.note.width += ( mouseX - e.clientX );
-        } else if (anchors.includes('right')) {
-          dw -= ( mouseX - e.clientX );
-        }
-      }
-      if (direction === 'y' || direction === 'xy') {
-        if (anchors.includes('top')) {
-          dh += ( mouseY - e.clientY );
-        } else if (anchors.includes('bottom')) {
-          dh -= ( mouseY - e.clientY );
-        }
-      }
+  ngAfterViewInit() {
+    this.setAllHandleTransform();
+  }
 
-      if (anchors.includes('left')) {
-        this.position.x = lastX + e.clientX - mouseX;
-        this.size.w = Math.max(dw, this.minSize.w);
-      }
+  configItems = [
+    { id: 'link', iconClass: 'pi pi-link' },
+    { id: 'image', iconClass: 'pi pi-images' },
+    { id: 'edit', iconClass: 'pi pi-pencil' },
+  ];
 
-      if (anchors.includes('top')) {
-        this.position.y = lastY + e.clientY - mouseY;
-        this.size.h = Math.max(dh, this.minSize.h);
-      }
+  hasImage(): boolean {
+    return Object.hasOwn(this.note, 'image');;
+  }
 
-      if (anchors.includes('bottom') || anchors.includes('right')) {
-        this.size.w = Math.max(dw, this.minSize.w);
-        this.size.h = Math.max(dh, this.minSize.h);
-      }
+  get resizeBoxElement(): HTMLElement {
+    return this.resizeBox.nativeElement;
+  }
 
-      this.lastSize = { ...this.size };
-    };
+  get dragHandleCornerElement(): HTMLElement {
+    return this.dragHandleCorner.nativeElement;
+  }
 
-    const finishResize = (e: any) => {
-      this._document.removeEventListener('mousemove', duringResize);
-      this._document.removeEventListener('mouseup', finishResize);
-    };
+  get dragHandleRightElement(): HTMLElement {
+    return this.dragHandleRight.nativeElement;
+  }
 
-    this._document.addEventListener('mousemove', duringResize);
-    this._document.addEventListener('mouseup', finishResize);
+  get dragHandleBottomElement(): HTMLElement {
+    return this.dragHandleBottom.nativeElement;
+  }
+
+  setAllHandleTransform() {
+    const rect = this.resizeBoxElement.getBoundingClientRect();
+    this.setHandleTransform(this.dragHandleCornerElement, rect, 'both');
+    this.setHandleTransform(this.dragHandleRightElement, rect, 'x');
+    this.setHandleTransform(this.dragHandleBottomElement, rect, 'y');
+  }
+
+  setHandleTransform(
+    dragHandle: HTMLElement,
+    targetRect: ClientRect | DOMRect,
+    position: 'x' | 'y' | 'both'
+  ) {
+    const dragRect = dragHandle.getBoundingClientRect();
+    const translateX = targetRect.width - dragRect.width;
+    const translateY = targetRect.height - dragRect.height;
+
+    if (position === 'x') {
+      dragHandle.style.transform = `translate(${translateX}px, 0)`;
+    }
+
+    if (position === 'y') {
+      dragHandle.style.transform = `translate(0, ${translateY}px)`;
+    }
+
+    if (position === 'both') {
+      dragHandle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    }
+  }
+
+  dragMove(dragHandle: HTMLElement, $event: CdkDragMove<any>) {
+    this.ngZone.runOutsideAngular(() => {
+      this.resize(dragHandle, this.resizeBoxElement);
+    });
+  }
+
+  resize(dragHandle: HTMLElement, target: HTMLElement) {
+    const dragRect = dragHandle.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    const width = dragRect.left - targetRect.left + dragRect.width;
+    const height = dragRect.top - targetRect.top + dragRect.height;
+
+    target.style.width = width + 'px';
+    target.style.height = height + 'px';
+    this.note.width = width;
+    this.note.height = height;
+
+    this.setAllHandleTransform();
   }
 
 }

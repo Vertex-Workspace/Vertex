@@ -1,13 +1,10 @@
 
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate } from 'src/app/models/task';
-import { User } from 'src/app/models/user';
-import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -20,7 +17,7 @@ export class TasksComponent implements OnInit {
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
-  clicked : string = 'Kanban';
+  clicked : string = 'Mural';
   query: string = '';
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
