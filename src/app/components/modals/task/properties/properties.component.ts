@@ -39,6 +39,10 @@ export class PropertiesComponent {
   ngOnInit(): void {
   }
 
+  isSelected(option: any, value: any): boolean {
+    return false;
+  }
+
 
   @Output() changes = new EventEmitter();
 
@@ -52,5 +56,21 @@ export class PropertiesComponent {
         return icon.icon;
       }
     }
+  }
+
+  getSelectOptions(property: any): any[] {
+    return [];
+  }
+
+  change(e: any, value: any): void {
+    
+  }
+
+  getKind(valueProperty: any, text: string): any {
+
+  }
+
+  getValue(valueProperty: any): any {
+    
   }
 }

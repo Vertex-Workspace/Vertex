@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from './calendar/calendar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { PropertiesModule } from 'src/app/components/modals/properties/properties.module';
+import { PropertiesModule } from 'src/app/components/modals/properties/modal-properties.module';
 import { KanbanModule } from './kanban/kanban.module';
 import { MuralCardComponent } from 'src/app/components/reusable-components/mural-card/mural-card.component';
 import { ListModule } from './list/list.module';

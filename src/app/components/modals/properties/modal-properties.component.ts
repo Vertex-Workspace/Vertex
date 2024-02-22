@@ -5,11 +5,11 @@ import { elements } from 'chart.js';
 import { Project } from 'src/app/models/project';
 
 @Component({
-  selector: 'app-properties',
-  templateUrl: './properties.component.html',
-  styleUrls: ['./properties.component.scss']
+  selector: 'app-modal-properties',
+  templateUrl: './modal-properties.component.html',
+  styleUrls: ['./modal-properties.component.scss']
 })
-export class PropertiesComponent{
+export class ModalPropertiesComponent{
 
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;

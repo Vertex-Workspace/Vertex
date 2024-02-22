@@ -154,7 +154,7 @@ export class ProjectsComponent implements OnInit {
     this.orderOpen = !this.orderOpen;
   }
 
-  createProject(project: Project): void {
+  createProject(project: any): void {
 
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     project.creator = this.logged;

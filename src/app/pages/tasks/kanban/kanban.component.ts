@@ -132,7 +132,7 @@ export class KanbanComponent implements OnInit {
             }
           }
         };
-
+        
         //Patch the value of the status task
         this.taskService.patchValue(valueUpdate).subscribe();
       }
@@ -140,7 +140,7 @@ export class KanbanComponent implements OnInit {
       this.alertService.errorAlert("Você não tem permissão para alterar o Status da tarefa!")
       
       //Patch the value of the status task
-      this.taskService.patchValue(valueUpdate).subscribe();
+      // this.taskService.patchValue(valueUpdate).subscribe();
     }
   };
 
