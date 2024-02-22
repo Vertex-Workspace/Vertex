@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import {
   faTrashCan, 
@@ -27,6 +27,9 @@ export class RowCardComponent {
 
   @Input()
   cols!: any[];
+
+  modalDelete: boolean = false;
+  @Output() openTaskDetails = new EventEmitter();
 
   value!: Value;
 
@@ -61,6 +64,13 @@ export class RowCardComponent {
       }
     });
     return value!;
+  }
+
+  openTask(): void {
+    if(!this.modalDelete){
+      this.openTaskDetails.emit();
+
+    }
   }
 
 }

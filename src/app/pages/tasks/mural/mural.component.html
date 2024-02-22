@@ -1,8 +1,10 @@
-<section class="mural-section">
+<section class="mural-section" >
 
-    <app-mural-card 
-      #card 
-    />
-
+  <ng-container *ngFor="let note of defaultNotes"> 
+    <app-note
+      [note]="note"
+    ></app-note>
+  </ng-container>
+  
 </section> 
 
