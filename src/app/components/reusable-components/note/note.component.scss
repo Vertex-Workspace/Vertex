@@ -1,20 +1,27 @@
-.frame-wrapper {
+@import 'src/_variables.scss';
+
+.note {
   position: absolute;
-  border: 2px solid black;
+  background-color: $whiteDefault;
 }
 
 .content-wrapper {
   position: absolute;
-  background-color: lightblue;
   overflow: auto;
 }
 
-.top-bar-wrapper {
+.drag-handle {
   width: 100%;
-  height: 20px;
-  background-color: black;
-}
+  height: 15%;
+  @apply flex justify-end;
 
+  i {
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 10px;
+  }
+
+}
 
 .resizers {
   box-sizing: border-box;
@@ -24,7 +31,6 @@
     height: 6px;
     border-radius: 1px;
     background: white;
-    border: 1px solid #d50000;
     position: absolute;
   }
 
@@ -33,6 +39,12 @@
     right: -3px;
     height: 100%;
     cursor: ew-resize;
+    transition: 0.3s;
+
+    &:hover {
+      border-right: 2px solid $primaryColor;
+      transition: 0.3s;
+    }
   }
 
   .bottom {
@@ -40,6 +52,12 @@
     left: 0;
     width: 100%;
     cursor: ns-resize;
+    transition: 0.3s;
+
+    &:hover {
+      border-bottom: 2px solid $primaryColor;
+      transition: 0.3s;
+    }
   }
 
   .top {
@@ -47,6 +65,12 @@
     left: 0;
     width: 100%;
     cursor: ns-resize;
+    transition: 0.3s;
+
+    &:hover {
+      border-top: 2px solid $primaryColor;
+      transition: 0.3s;
+    }
   }
 
   .left {
@@ -54,29 +78,59 @@
     left: -3px;
     height: 100%;
     cursor: ew-resize;
+    transition: 0.3s;
+
+    &:hover {
+      border-left: 2px solid $primaryColor;
+      transition: 0.3s;
+    }
   }
 
   .bottom-right {
     right: -3px;
     bottom: -3px;
     cursor: nwse-resize;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $primaryColor;
+      transition: 0.3s;
+    }
   }
 
   .top-right {
     right: -3px;
     top: -3px;
     cursor: nesw-resize;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $primaryColor;
+      transition: 0.3s;
+    }
   }
 
   .top-left {
     left: -3px;
     top: -3px;
     cursor: nwse-resize;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $primaryColor;
+      transition: 0.3s;
+    }
   }
 
   .bottom-left {
     left: -3px;
     bottom: -3px;
     cursor: nesw-resize;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $primaryColor;
+      transition: 0.3s;
+    }
   }
 }

@@ -23,7 +23,7 @@ export class MuralComponent implements OnInit, AfterViewInit {
       description: 'Description 1',
       width: 200,
       height: 200,
-      color: 'yellow',
+      color: '"#65D73C',
       positionX: 0,
       positionY: 0
     },
@@ -33,7 +33,7 @@ export class MuralComponent implements OnInit, AfterViewInit {
       description: 'Description 2',
       width: 200,
       height: 200,
-      color: 'blue',
+      color: '#FFD600',
       positionX: 0,
       positionY: 0
     },
@@ -43,17 +43,7 @@ export class MuralComponent implements OnInit, AfterViewInit {
       description: 'Description 3',
       width: 200,
       height: 200,
-      color: 'green',
-      positionX: 0,
-      positionY: 0
-    },
-    {
-      id: 4,
-      title: 'Note 4',
-      description: 'Description 4',
-      width: 200,
-      height: 200,
-      color: 'red',
+      color: '#FF9D9D',
       positionX: 0,
       positionY: 0
     }

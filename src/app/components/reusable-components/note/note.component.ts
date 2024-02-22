@@ -79,7 +79,7 @@ export class NoteComponent {
       let dh = dimensionHeight;
       if (direction === 'x' || direction === 'xy') {
         if (anchors.includes('left')) {
-          dw += ( mouseX - e.clientX );
+          this.note.width += ( mouseX - e.clientX );
         } else if (anchors.includes('right')) {
           dw -= ( mouseX - e.clientX );
         }
