@@ -20,7 +20,7 @@ export class TasksComponent implements OnInit {
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
-  clicked : string = 'Mural';
+  clicked : string = 'Kanban';
   query: string = '';
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
