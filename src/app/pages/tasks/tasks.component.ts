@@ -68,8 +68,7 @@ export class TasksComponent implements OnInit {
         }
       }
     })
-    private userService : UserService
-  ) {
+    
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
@@ -79,9 +78,6 @@ export class TasksComponent implements OnInit {
       })
   }
 
-
-  ngOnInit(): void {
-  }
 
   menuItems = [
     { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },

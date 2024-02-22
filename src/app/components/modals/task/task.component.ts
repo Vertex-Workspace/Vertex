@@ -11,7 +11,6 @@ import { taskHourService } from 'src/app/services/taskHour.service';
 import { taskHour } from '../../../models/taskHour';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'src/app/services/project.service';
-import { Project } from 'src/app/models/project';
 import { User } from 'src/app/models/user';
 import { TimeInTask } from 'src/app/models/timeInTask';
 
@@ -32,27 +31,8 @@ export class TaskComponent implements OnInit {
   @Output() changes = new EventEmitter();
 
   @Input() task!: Task;
-  @Input() project !: Project;
 
   canEdit: boolean = false;
-
-  constructor(private taskService: TaskService,
-    private alertService: AlertService,
-    private teamService: TeamService,
-    private userService: UserService) { }
-
-  ngOnInit(): void {
-    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions
-
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-          this.canEdit = true;
-        }
-      }
-    })
-
-  }
 
   taskStep!: Task;
   user!: User;
@@ -66,7 +46,12 @@ export class TaskComponent implements OnInit {
   miniChatOpen: boolean=false;
   chatExpanded: boolean=false;
 
-  constructor(private taskService: TaskService, private projectService: ProjectService, private alertService: AlertService, private taskHourService: taskHourService) { }
+  constructor(private taskService: TaskService, 
+    private projectService: ProjectService, 
+    private alertService: AlertService, 
+    private taskHourService: taskHourService,
+    private teamService: TeamService,
+    private userService: UserService) { }
 
   selectedComponent: string = 'description';
 
@@ -100,6 +85,16 @@ export class TaskComponent implements OnInit {
       (e: any) => {
         console.log(e);
       });
+
+      this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+        this.userService.getLogged().permissions = permissions
+  
+        for (let i = 0; i < permissions.length; i++) {
+          if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+            this.canEdit = true;
+          }
+        }
+      })
   }
 
   navigate(component: string): void {
@@ -141,7 +136,7 @@ export class TaskComponent implements OnInit {
           this.alertService.errorAlert("O número máximo de caracteres permitido é 1000, reduza o tamanho da sua");
         }
         this.alertService.successAlert("Tarefa alterada com sucesso!");
-      },
+      }),
       (error: any) => {
         console.log(error);
         
@@ -163,8 +158,10 @@ export class TaskComponent implements OnInit {
         }
       );
   }
+}
 
   descriptionEditable: boolean = false;
+
   changeEditDescription(): void {
     if (this.canEdit) {
       if (this.descriptionEditable) {

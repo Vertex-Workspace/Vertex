@@ -112,6 +112,7 @@ export class CardComponent implements OnInit {
     );
     }
   }
+  }
 
   clock(): void {
     console.log('clock');
@@ -125,14 +126,11 @@ export class CardComponent implements OnInit {
       this.openTaskDetails.emit();
     }
   }
+  }
 
   @Output() current = new EventEmitter();
 
   takeCurrentTime(): void {
     
-  }
-
-  dale(): void {
-    console.log('dale');
   }
 }

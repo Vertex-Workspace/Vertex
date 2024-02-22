@@ -18,6 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ProjectsComponent implements OnInit {
   isCreatingProject: boolean = false;
   isCreatingGroup: boolean = false;
+  isCreating: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   clicked: string = 'task';
@@ -58,9 +59,7 @@ export class ProjectsComponent implements OnInit {
   getRecentProjects(): void {
     this.recentProjects = this.team.projects!;
   }
-  ngOnInit(): void {
-    console.log(this.logged)
-  }
+
 
   validateProjectId(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
@@ -85,8 +84,7 @@ export class ProjectsComponent implements OnInit {
       .subscribe((team: Team) => {
         this.team = team;
       })      
-      })
-  }
+    }
 
 
   delete(projectId: Project): void {

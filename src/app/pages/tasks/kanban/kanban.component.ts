@@ -28,12 +28,8 @@ export class KanbanComponent implements OnInit {
     private alertService: AlertService,
     private userService: UserService,
     private teamService: TeamService) {
-    private userService : UserService
-  ) {
   }
-
-  ngOnInit(): void {
-  }
+  
   ngOnInit(): void {
     this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions
@@ -87,6 +83,7 @@ export class KanbanComponent implements OnInit {
       //It points out that the previousValue is incorrect
       if (previousPropertyList == null) {
         return;
+      }
     this.project.properties.forEach((property) => {
       if (property.kind == PropertyKind.STATUS) {
         task.values.forEach((value) => {
@@ -102,10 +99,13 @@ export class KanbanComponent implements OnInit {
           }
         });
       }
+    })
+  
+
 
 
       const newIndexTask =
-        this.specificPropertyArray(propertyList)[event.currentIndex];
+      this.specificPropertyArray(propertyList)[event.currentIndex];
       const newIndex = this.project.tasks.indexOf(newIndexTask);
       const previousIndex = this.project.tasks.indexOf(task);
 
@@ -138,7 +138,6 @@ export class KanbanComponent implements OnInit {
       }
     } else {
       this.alertService.errorAlert("Você não tem permissão para alterar o Status da tarefa!")
-      console.log(valueUpdate);
       
       //Patch the value of the status task
       this.taskService.patchValue(valueUpdate).subscribe();
@@ -229,43 +228,13 @@ export class KanbanComponent implements OnInit {
           id: this.userService.getLogged().id!
         },
         teamId: this.project.idTeam!
-      }
-
-      if (this.canCreate) {
-        this.taskService.create(taskCreate).subscribe(
-          (task: Task) => {
-            this.project.tasks.push(task);
-            this.alertService.successAlert("Tarefa criada com sucesso!");
-    let taskCreate: TaskCreate = {
-      name: "Nova Tarefa",
-      description: "Descreva um pouco sobre sua Tarefa Aqui",
-      project: {
-        id: this.project.id!
-      },
-      values: [
-        {
-          property: {
-            id: propertyUsed.id
-          },
-          (error: any) => {
-            this.alertService.errorAlert("Erro ao criar tarefa!");
-          }
-        );
-        }
-      ],
-      creator: {
-        id: this.userService.getLogged().id!
-      },
-      teamId: this.project.idTeam!
-    
     }
 
     this.taskService.create(taskCreate).subscribe(
-
       (task: Task) => {    
         this.project.tasks.push(task);
         this.alertService.successAlert("Tarefa criada com sucesso!");
-      },
+      }),
       (error: any) => {
         this.alertService.errorAlert("Erro ao criar tarefa!");
       }
@@ -273,4 +242,5 @@ export class KanbanComponent implements OnInit {
       this.alertService.errorAlert("Você não tem permissão para criar essa tarefa!")
     }
   }
+  
 }
