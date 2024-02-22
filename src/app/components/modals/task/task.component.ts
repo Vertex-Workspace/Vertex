@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { PropertyList } from 'src/app/models/property';
 import { Task, TaskEdit } from 'src/app/models/task';
 import { AlertService } from 'src/app/services/alert.service';
@@ -18,6 +18,8 @@ import { TimeInTask } from 'src/app/models/timeInTask';
 })
 export class TaskComponent implements OnInit {
   faClock = faClock;
+
+
 
   @Input()
   project!: Project;

@@ -26,7 +26,7 @@
                     cdkDragBoundary=".table"
                 >
                     <app-row-card
-                        
+                        (openTaskDetails)="openTaskModal(task)"
                         [task]="task"
                         [cols]="cols"
                     ></app-row-card>

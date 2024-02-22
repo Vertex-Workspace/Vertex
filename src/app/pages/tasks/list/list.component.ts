@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task, TaskCreate } from 'src/app/models/task';
 import {  CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -75,6 +75,11 @@ export class ListComponent implements OnInit {
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.team) this.getTeam(); //atribui todas as tarefas da equipe a taskList
     else this.getAllTasks(); //atribui todas as tarefas do usuário para taskList
+  }
+
+  @Output() openTaskDetails = new EventEmitter();
+  openTaskModal(task: Task): void {
+    this.openTaskDetails.emit(task);
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {

@@ -36,6 +36,7 @@ import { MinichatModule } from './components/modals/minichat/minichat.module';
 import { MinichatTASKModule } from './components/modals/minichat-task/minichat-task.module';
 import { InputValuePropertyComponent } from './components/reusable-components/input-value-property/input-value-property.component';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { NoteComponent } from './components/reusable-components/note/note.component';
 
 
 @NgModule({

@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
@@ -29,8 +29,6 @@ export class TasksComponent implements OnInit {
   taskOpen: boolean = false;
 
   project!: Project;
-
-
 
   constructor(
     private router: Router,
