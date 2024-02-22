@@ -6,9 +6,10 @@ import { Project } from 'src/app/models/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate } from 'src/app/models/task';
-import { User } from 'src/app/models/user';
+import { Permission, PermissionsType, User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
+import { TeamService } from 'src/app/services/team.service';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class TasksComponent implements OnInit {
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
   taskOpen: boolean = false;
+  permissions: Permission[] = [];
+  canCreate: boolean = false;
 
   project!: Project;
 
@@ -35,7 +38,8 @@ export class TasksComponent implements OnInit {
     private route : ActivatedRoute,
     private projectService: ProjectService,
     private taskService: TaskService,
-    private userService : UserService
+    private userService : UserService,
+    private teamService: TeamService
   ) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -48,7 +52,15 @@ export class TasksComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions;
 
+      for (let i = 0; i < permissions.length; i++) {
+        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+          this.canCreate = true;
+        }
+      }
+    });
   }
 
   menuItems = [

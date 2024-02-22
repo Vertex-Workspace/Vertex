@@ -6,7 +6,6 @@ import { AfterViewInit,
          ViewChildren } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import { PersonalizationService } from 'src/app/services/personalization.service';
-import { taskList } from '../data-test';
 import { Note } from 'src/app/models/note';
 
 @Component({
