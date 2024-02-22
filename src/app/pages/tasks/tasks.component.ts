@@ -33,8 +33,6 @@ export class TasksComponent implements OnInit {
 
   project!: Project;
 
-
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -61,10 +59,15 @@ export class TasksComponent implements OnInit {
 
     this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions;
+      console.log(this.userService.getLogged());
+      
 
       for (let i = 0; i < permissions.length; i++) {
+        console.log(permissions);
+        
         if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
           this.canCreate = true;
+          
         }
       }
     })
@@ -113,6 +116,7 @@ export class TasksComponent implements OnInit {
   }
 
   createTask(): void {
+    console.log(this.canCreate);
     if (this.canCreate) {
       let taskCreate: TaskCreate = {
         name: "Nova Tarefa",
