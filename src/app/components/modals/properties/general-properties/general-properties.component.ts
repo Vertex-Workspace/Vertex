@@ -8,6 +8,7 @@ import { CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag, transferArrayItem }
 import { Property, PropertyKind, PropertyStatus } from 'src/app/models/property';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-general-properties',
@@ -40,11 +41,6 @@ export class GeneralPropertiesComponent {
   @Input()
   width?: String;
 
-  @Output()
-  gear = new EventEmitter();
-
-  @Output()
-  plus = new EventEmitter();
 
   @Output()
   edit = new EventEmitter();
@@ -55,11 +51,14 @@ export class GeneralPropertiesComponent {
   @Output()
   status = new EventEmitter<Property>();
 
+  @Output()
+  changeProject = new EventEmitter<Project>();
+
   @Input()
   project!: Project;
 
 
-  constructor(private projectService: ProjectService) { 
+  constructor(private propertyService: PropertyService, private projectService : ProjectService) { 
 
   }
 
@@ -85,6 +84,13 @@ export class GeneralPropertiesComponent {
   ]
 
   ngOnInit(): void {
+    this.separePropertiesKind();
+  }
+
+  private separePropertiesKind() {
+    this.propertiesList[0].properties = [];
+    this.propertiesList[1].properties = [];
+    this.propertiesList[2].properties = [];
     this.project.properties.forEach(
       (property) => {
         // [0] - FIXED, [1] - VISIBLE, [2] - INVISIBLE
@@ -98,6 +104,7 @@ export class GeneralPropertiesComponent {
       });
   }
 
+
   closeModal() {
     this.close.emit();
   }
@@ -110,15 +117,20 @@ export class GeneralPropertiesComponent {
       kind: PropertyKind.TEXT,
       propertyStatus: PropertyStatus.VISIBLE,
       propertyLists: [],
-      isObligate: false,
+  
     });
 
-    this.projectService.createProperty(this.project.id!, genericProperty).subscribe(
+    this.propertyService.createOrEditProperty(this.project.id!, genericProperty).subscribe(
       (property) => {
-        console.log(property);
         property.propertyLists = [];
-        this.project.properties.push(property);
-        this.propertiesList[1].properties.push(property);
+        this.projectService.getOneById(this.project.id!).subscribe(
+          (project) => {
+            this.project = project;
+            this.propertiesList[1].properties.push(property);
+            this.changeProject.emit(project);
+          }, (error) => {
+            console.log(error);
+          });
       }, (error) => {
         console.log(error);
       });
@@ -126,9 +138,7 @@ export class GeneralPropertiesComponent {
 
 
 
-  clickPlus(type: string) {
-    this.plus.emit();
-  }
+
 
   editProperty(property: Property, type : string) {
     if (property.kind === PropertyKind.STATUS) {
@@ -154,7 +164,7 @@ export class GeneralPropertiesComponent {
       this.propertiesList[1].properties.push(property);
       property.propertyStatus = PropertyStatus.VISIBLE;
     }
-    this.projectService.createProperty(this.project.id!, property).subscribe(
+    this.propertyService.createOrEditProperty(this.project.id!, property).subscribe(
       (property) => {
         console.log(property);
 
@@ -164,11 +174,8 @@ export class GeneralPropertiesComponent {
   }
 
   delete(property: Property) {
-    console.log(property.id);
-    this.projectService.deleteProperty(this.project.id!, property.id).subscribe(
+    this.propertyService.deleteProperty(this.project.id!, property.id).subscribe(
       (project) => {
-        console.log(project);
-
         //[1] - VISIBLE, [2] - INVISIBLE
         if (property.propertyStatus === PropertyStatus.VISIBLE) {
           this.propertiesList[1].properties.splice(this.propertiesList[1].properties.indexOf(property), 1);

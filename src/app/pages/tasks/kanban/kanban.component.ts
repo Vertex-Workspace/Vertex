@@ -150,16 +150,7 @@ export class KanbanComponent {
       project: {
         id: this.project.id!
       },
-      values: [
-        {
-          property: {
-            id: propertyUsed.id
-          },
-          value: {
-            value: propertyList.id as number
-          }
-        }
-      ],
+      values: [],
       creator: {
         id: this.userService.getLogged().id!
       },
@@ -169,12 +160,32 @@ export class KanbanComponent {
     
     this.taskService.create(taskCreate).subscribe(
       (task: Task) => {
-        console.log("Task Back end", task);
 
-        //Remove the redudant property
-        task.values.splice(0, 1);
-        this.project.tasks.push(task);
-        this.alertService.successAlert("Tarefa criada com sucesso!");
+        const valueUpdate: ValueUpdate = {
+          id: task.id,
+          value: {
+            property: {
+              id: propertyUsed.id
+            },
+            value: {
+              //It always gonna be the status
+              id: task.values[0].id,
+              value: propertyList.id as number
+            }
+          }
+        };
+        console.log(valueUpdate);
+        this.taskService.patchValue(valueUpdate).subscribe(
+          (taskDate) => {
+            task.values = taskDate.values;
+            this.project.tasks.push(task);
+            this.alertService.successAlert("Tarefa criada com sucesso!");
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
       },
       (error: any) => {
         this.alertService.errorAlert("Erro ao criar tarefa!");

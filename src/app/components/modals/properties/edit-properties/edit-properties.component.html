@@ -32,10 +32,10 @@
                         [ngClass]="check.value ? 'checkBox-unselected' : 'checkBox-selected'">
                     </fa-icon>
                     <!-- VALIDATIONS -->
-                    <p class="small-text" *ngIf="!openInput && checkboxList[1] == check || checkboxList[0] == check">
+                    <p class="small-text" *ngIf="!openInput">
                         {{check.p}}</p>
                     <input placeholder="Valor padrão" [(ngModel)]="property.defaultValue"
-                        *ngIf="openInput && checkboxList[1] == check">
+                        *ngIf="openInput">
                 </div>
             </ng-container>
         </div>

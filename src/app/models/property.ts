@@ -5,7 +5,6 @@ export class Property {
     id!: number;
     name!: string;
     kind!: PropertyKind;
-    isObligate!: boolean;
     defaultValue?: string;
     propertyLists!: PropertyList[];
     propertyStatus!: PropertyStatus;
@@ -16,7 +15,6 @@ export class Property {
         this.id = property.id;
         this.name = property.name;
         this.kind = property.kind;
-        this.isObligate = property.isObligate;
         this.defaultValue = property.defaultValue;
         this.propertyLists = property.propertyLists;
         this.propertyStatus = property.propertyStatus;
@@ -35,6 +33,7 @@ export class PropertyList{
     value!: string;
     color!: string;
     propertyListKind!: PropertyListKind;
+    isFixed!: boolean;
 
     constructor(
         property: PropertyList 
@@ -43,6 +42,7 @@ export class PropertyList{
         this.value = property.value;
         this.color = property.color;
         this.propertyListKind = property.propertyListKind;
+        this.isFixed = property.isFixed;
     }
 }
 

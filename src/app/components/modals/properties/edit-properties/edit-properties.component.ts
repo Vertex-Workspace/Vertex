@@ -8,6 +8,7 @@ import { Project } from 'src/app/models/project';
 import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-edit-properties',
@@ -24,6 +25,10 @@ export class EditPropertiesComponent {
   @Output() confirmChanges = new EventEmitter<Property>();
 
   @Output() from = new EventEmitter<String>();
+
+  @Output()
+  changeProject = new EventEmitter<Project>();
+
 
   faSpinner = faSpinner;
   faUser = faUser;
@@ -43,20 +48,15 @@ export class EditPropertiesComponent {
 
   checkboxList = [
     {
-      p: 'Tornar a propriedade obrigatória', value: false,
-      kinds: [
-        PropertyKind.TEXT, PropertyKind.NUMBER
-      ]
-    },
-    {
       p: 'Definir um valor padrão', value: false,
       kinds: [
         PropertyKind.TEXT
       ]
     }
-  ]
+  ];
+  
 
-  constructor(private projectService: ProjectService, private alertService: AlertService) {
+  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) {
 
   }
 
@@ -65,11 +65,8 @@ export class EditPropertiesComponent {
     //Create a new object to compare with the original
     this.defaultProperty = new Property(this.property);
 
-    if (this.property.isObligate) {
-      this.checkboxList[0].value = true;
-    }
     if (this.property.defaultValue) {
-      this.checkboxList[1].value = true;
+      this.checkboxList[0].value = true;
       this.openInput = true;
     }
 
@@ -95,33 +92,31 @@ export class EditPropertiesComponent {
   checkBox(check: any): void {
     //Change current state
     check.value = !check.value;
+    this.openInput = check.value;
 
-    if (this.checkboxList[0] == check) {
-      this.property.isObligate = check.value;
-    } else {
-      this.openInput = check.value;
-      if (!this.openInput) {
-        this.property.defaultValue = "";
-      }
+    if (!this.openInput) {
+      this.property.defaultValue = "";
     }
-    console.log(this.property);
-
   }
   saveProperty(): void {
     if (this.property.kind === PropertyKind.LIST && this.property.propertyLists.length === 0) {
       this.openEditList();
     } else {
-
-
-      this.projectService.createProperty(this.project.id!, this.property).subscribe(
+      this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
         (property) => {
-          this.alertService.successAlert("Propriedade alterada com sucesso!");
-
-          this.project.properties.splice(this.project.properties.indexOf(this.defaultProperty), 1, property);
-
-          //If the button pressed was the confirm changes, emit the event
-          //Else, just update the property through define elements list
+          this.projectService.getOneById(this.project.id!).subscribe(
+            (project) => {
+              this.project = project;
+              console.log(this.project);
+              this.changeProject.emit(this.project);
+              //If the button pressed was the confirm changes, emit the event
+              //Else, just update the property through define elements list
           this.confirmChanges.emit(property);
+            }, (error) => {
+              console.log(error);
+            });
+
+
 
         }, (error) => {
           this.alertService.errorAlert("Erro ao alterar propriedade!");
@@ -137,7 +132,6 @@ export class EditPropertiesComponent {
   hasChange(): boolean {
     return this.property.name !== this.defaultProperty.name ||
       this.property.kind !== this.defaultProperty.kind ||
-      this.property.isObligate !== this.defaultProperty.isObligate ||
       this.property.defaultValue !== this.defaultProperty.defaultValue;
   }
 
@@ -145,13 +139,13 @@ export class EditPropertiesComponent {
   openEditList(): void {
     if (this.property.propertyLists.length === 0) {
       this.property.propertyLists = [
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: "#ffe2dd" },
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Média", color: "#fdecc8" },
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Baixa", color: "#dbeddb" },
-        { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: "Não essencial", color: "#d3e5ef" },
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: "#ffe2dd" , isFixed: false},
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Média", color: "#fdecc8" , isFixed: false},
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Baixa", color: "#dbeddb" , isFixed: false},
+        { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: "Não essencial", color: "#d3e5ef" , isFixed: false},
       ]
 
-      this.projectService.createProperty(this.project.id!, this.property).subscribe(
+      this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
         (property) => {
           this.property = property;
           this.from.emit('edit');

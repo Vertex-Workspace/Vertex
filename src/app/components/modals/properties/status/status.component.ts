@@ -8,6 +8,7 @@ import { Project } from 'src/app/models/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-status',
@@ -26,6 +27,10 @@ export class StatusComponent {
   @Output()
   pencil = new EventEmitter<String>();
 
+  @Output()
+  changeProject = new EventEmitter<Project>();
+
+
   @Input()
   project!: Project;
 
@@ -36,7 +41,7 @@ export class StatusComponent {
     this.pencil.emit();
   }
 
-  constructor(private projectService: ProjectService, private alertService: AlertService) { }
+  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
 
 
   statusList: any[] = [
@@ -60,6 +65,13 @@ export class StatusComponent {
     }
   ]
   ngOnInit(): void {
+    this.getPropertiesKind();
+  }
+
+  private getPropertiesKind(){
+    this.statusList[0].properties = [];
+    this.statusList[1].properties = [];
+    this.statusList[2].properties = [];
     this.property.propertyLists.forEach((propertyList) => {
       if (propertyList.propertyListKind == PropertyListKind.TODO) {
         this.statusList[0].properties.push(propertyList);
@@ -74,9 +86,10 @@ export class StatusComponent {
   add(status: any) {
     let newPropertyList: PropertyList = {
       id: 0,
-      value: 'Novo Status',
+      value: status.name,
       color: status.color,
-      propertyListKind: status.kind
+      propertyListKind: status.kind, 
+      isFixed: false
     };
     this.property.propertyLists.push(newPropertyList);
     status.properties.push(newPropertyList);
@@ -87,39 +100,61 @@ export class StatusComponent {
   }
 
   delete(status:any, propertyList: PropertyList) {
-    status.properties.splice(status.properties.indexOf(propertyList), 1); 
-    this.property.propertyLists.splice(this.property.propertyLists.indexOf(propertyList), 1);
+    if(!propertyList.isFixed){
 
-    
-    console.log(this.property);
-    
-    this.saveProperty();
-  }
-
-  drop(event: CdkDragDrop<any>, i: number) {
-    if ((event.previousContainer === event.container) && i == 0) {
-      moveItemInArray(this.statusList[0].properties, event.previousIndex, event.currentIndex);
-    } else if ((event.previousContainer === event.container) && i == 1) {
-      moveItemInArray(this.statusList[1].properties, event.previousIndex, event.currentIndex);
-    } else if ((event.previousContainer === event.container) && i == 2) {
-      moveItemInArray(this.statusList[2].properties, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      )
+      this.propertyService.deletePropertyList(this.property.id!, propertyList.id).subscribe(
+        (propertyResponse) => {
+          this.projectService.getOneById(this.project.id!).subscribe(
+            (projectResponse) => {
+              this.project = projectResponse;
+              this.property = this.project.properties[0];
+              this.getPropertiesKind();
+              this.changeProject.emit(this.project);
+            },
+            (error) => {
+              console.log("ERRO!" + error);
+            }
+          )
+        },
+        (error) => {
+          console.log("ERRO!" + error);
+          
+        }
+        )
     }
   }
 
+  drop(event: CdkDragDrop<any>, status: any) {
+    transferArrayItem(event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+
+    status.properties.forEach((propertyList : PropertyList) => {
+      if(propertyList.propertyListKind != status.kind){
+        this.property.propertyLists.forEach((propertyListOriginal: PropertyList) => {
+          if(propertyListOriginal.id == propertyList.id){
+            //Change the current value of Kind
+            propertyListOriginal.propertyListKind = status.kind;
+            propertyList.propertyListKind = status.kind;
+            this.saveProperty();
+          }
+        });
+
+      }
+    });
+  }
+
   private saveProperty(){
-    this.projectService.createProperty(this.project.id!, this.property).subscribe(
-      (property) => {
-        this.property = property;
-        this.alertService.successAlert('Status criado com sucesso!');
+    this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
+      (propertyResponse) => {
+        this.project.properties[0] = propertyResponse;
+        this.getPropertiesKind();
+        this.changeProject.emit(this.project);
       },
       (error) => {
-        this.alertService.errorAlert('Erro ao criar Status!');
+
       }
     );
   }

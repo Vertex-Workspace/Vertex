@@ -61,16 +61,4 @@ export class ProjectService {
         )
       )
   }
-
-
-
-  //Properties
-
-  public createProperty(projectID:number, property : Property): Observable<Property> {
-    return this.http.patch<Property>(`${URL}project/${projectID}/property`, property);
-  }
-
-  public deleteProperty(projectID:number, propertyId : number): Observable<Property> {
-    return this.http.delete<Property>(`${URL}project/${projectID}/${propertyId}`, {});
-  }
 }

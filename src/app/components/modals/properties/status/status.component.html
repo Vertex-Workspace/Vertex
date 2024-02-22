@@ -4,7 +4,7 @@
             <p class="medium-text">{{status.name}}</p>
             <fa-icon [icon]="faPlus" class="little-icon" (click)="add(status)"></fa-icon>
         </div>
-        <div *ngFor="let propertyList of status.properties; index as i2" cdkDropList (cdkDropListDropped)="drop($event, item)"
+        <div *ngFor="let propertyList of status.properties; index as i2" cdkDropList (cdkDropListDropped)="drop($event, status)"
         [cdkDropListData]="status.properties">
             <div cdkDrag class="specific-properties" [ngStyle]="{'background-color': propertyList.color}">
                 <div cdkDragHandle>
@@ -15,8 +15,9 @@
                    <input type="text" class="regular-text" value="{{propertyList.value}}" [ngStyle]="{'background-color': propertyList.color}">
                 </div>
                 <div>
-                    <fa-icon [icon]="faPaintBrush" (click)="clickPencil()" class="little-icon"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(status, propertyList)"></fa-icon>
+                    <p class="regular-text" *ngIf="propertyList.isFixed">(Padrão)</p>
+                    <fa-icon [icon]="faPaintBrush" *ngIf="!propertyList.isFixed" (click)="clickPencil()" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(status, propertyList)" *ngIf="!propertyList.isFixed"></fa-icon>
                 </div>
             </div>
         </div>

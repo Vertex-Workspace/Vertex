@@ -8,6 +8,7 @@ import { Project } from 'src/app/models/project';
 import { Property, PropertyList } from 'src/app/models/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-properties',
@@ -42,25 +43,26 @@ export class PropertiesComponent {
   @Input()
   width?: String;
 
+  @Output()
+  changeProjectSettings = new EventEmitter<Project>();
+
+
   closeModal() {
     this.close.emit();
   }
 
   property!: Property;
 
-  constructor(private projectService: ProjectService, private alertService: AlertService) { }
+  constructor(private propertyService: PropertyService, private alertService: AlertService) { }
 
 
 
   editTask(type: string, event: any) {
-    console.log(event);
     this.property = event;
     this.currentModal = type;
     if (type === 'items-selection') {
-      console.log('Itens de Seleção');
       this.text = 'Itens de Seleção'
     } else if (type === 'edit') {
-      console.log('Edit');
       this.text = 'Edite a Propriedade'
     }
   }
@@ -112,7 +114,7 @@ export class PropertiesComponent {
 
   changePropertyListColor(propertyList: PropertyList): void {
     if (this.property) {
-      this.projectService.createProperty(this.project.id!, this.property).subscribe(
+      this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
         (property) => {
           
         },
@@ -122,6 +124,11 @@ export class PropertiesComponent {
       );
     }
   }
+  updateProject(project : Project) {
+    this.project = project;
+    this.changeProjectSettings.emit(project);
+  }
+
 
   openStatus(property: Property) {
     this.currentModal = 'status';

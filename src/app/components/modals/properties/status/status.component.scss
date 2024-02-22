@@ -15,23 +15,23 @@
 }
 
 .specific-properties {
-    @apply w-full flex flex-row items-center justify-start min-h-[40px];
+    @apply w-full flex flex-row items-center justify-start min-h-[40px] pr-3;
 
     div:first-child {
         @apply pl-2 w-[6%] flex justify-between items-center;
     }
 
     div:nth-child(2){
-        @apply w-[84%] flex justify-start pl-2 items-center;
+        @apply w-[80%] flex justify-start pl-2 items-center;
 
         input {
-            @apply w-full;
+            @apply w-full flex;
             outline: none;
         }
     }
 
     div:last-child {
-        @apply w-[12%] pr-2 flex justify-between items-center;
+        @apply w-[14%] flex justify-between items-center;
     }
 }
 
