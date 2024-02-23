@@ -1,6 +1,7 @@
 import { AfterViewInit, 
          Component, 
          ElementRef, 
+         Input, 
          OnInit, 
          QueryList, 
          ViewChildren } from '@angular/core';
@@ -8,6 +9,9 @@ import { Task } from 'src/app/models/task';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { taskList } from '../data-test';
 import { Note } from 'src/app/models/note';
+import { Project } from 'src/app/models/project';
+import { NoteService } from 'src/app/services/note.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mural',
@@ -16,44 +20,36 @@ import { Note } from 'src/app/models/note';
 })
 export class MuralComponent implements OnInit, AfterViewInit {
 
-  defaultNotes: Note[] = [
-    {
-      id: 1,
-      title: 'Note 1',
-      description: 'Description 1',
-      width: 200,
-      height: 200,
-      color: '"#65D73C',
-      positionX: 0,
-      positionY: 0
-    },
-    {
-      id: 2,
-      title: 'Note 2',
-      description: 'Description 2',
-      width: 200,
-      height: 200,
-      color: '#FFD600',
-      positionX: 0,
-      positionY: 0
-    },
-    {
-      id: 3,
-      title: 'Note 3',
-      description: 'Description 3',
-      width: 200,
-      height: 200,
-      color: '#FF9D9D',
-      positionX: 0,
-      positionY: 0
-    }
-  ]
+  @Input()
+  project!: Project;
+
+  notes !: Note[];
 
   constructor(
-    private personalization : PersonalizationService
-  ){}
+    private noteService: NoteService,
+    private route: ActivatedRoute
+  ){
+    route.params.subscribe(params => {
+      if (params) {
+        this.getNotes(params['id']);           
+      }
+    });
+  }
+
+  getNotes(id: number): void {
+    this.noteService
+    .getAllByProject(id)
+    .subscribe((notes: Note[]) => {
+      this.notes = notes;
+    });
+  }
 
   ngOnInit(): void {
+    this.noteService
+    .getAllByProject(this.project.id!)
+    .subscribe((notes: Note[]) => {
+      this.notes = notes;
+    });
   }
 
   ngAfterViewInit(): void {

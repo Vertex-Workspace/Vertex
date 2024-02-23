@@ -9,12 +9,9 @@ import { Group } from '../models/groups';
 })
 export class GroupService {
 
-
-
   constructor(
     private http: HttpClient
   ) { }
-
 
   public getGroupsByTeam(teamID: number): Observable<Group[]> {
     return this.http

@@ -22,7 +22,7 @@ export class SidebarComponent {
   ) {}
 
   @Input()
-  isSideBarExpanded !: boolean;
+  isSideBarExpanded: boolean = false;
 
   search: boolean = false;
   switchSearch():void{
@@ -40,6 +40,7 @@ export class SidebarComponent {
   }
 
   logout(): void {
+    this.isSideBarExpanded = false;
     this.userService.logout();
   }
 

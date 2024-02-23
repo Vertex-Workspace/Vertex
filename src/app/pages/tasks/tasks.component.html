@@ -23,17 +23,23 @@
                 </div>
 
                 <ng-container *ngFor="let item of configItems">
-                    <button class="config-buttons" (click)="item.click()">
+                    <button class="config-buttons" (click)="item.click()" *ngIf="item.onMural || clicked !== 'Mural'">
                         <i [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
                             class="{{ item.iconClass }}"></i>
                     </button>
 
                 </ng-container>
 
-                <button class="create" (click)="createTask()">
+                <button class="create" (click)="createTask()" *ngIf="clicked !== 'Mural'; else buttonMural">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
+                <ng-template #buttonMural>
+                    <button class="create" (click)="createNote()" >
+                        <i class="pi pi-plus-circle"></i>
+                       Nova nota
+                    </button>
+                </ng-template>
             </div>
         </section>
 
@@ -60,7 +66,7 @@
 
             <app-list [project]="project" *ngIf="clicked  === 'List'"></app-list>
             <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'"></app-calendar>
-            <app-mural  *ngIf="clicked  === 'Mural'"></app-mural>
+            <app-mural [project]="project" *ngIf="clicked  === 'Mural'"></app-mural>
             <!-- app-kanban -->
         </section>
 

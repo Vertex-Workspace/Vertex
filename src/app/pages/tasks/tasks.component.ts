@@ -6,6 +6,9 @@ import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate } from 'src/app/models/task';
 import { UserService } from 'src/app/services/user.service';
+import { Note } from 'src/app/models/note';
+import { NoteService } from 'src/app/services/note.service';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -24,6 +27,7 @@ export class TasksComponent implements OnInit {
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
   taskOpen: boolean = false;
+  logged !: User;
 
   project!: Project;
 
@@ -32,8 +36,10 @@ export class TasksComponent implements OnInit {
     private route : ActivatedRoute,
     private projectService: ProjectService,
     private taskService: TaskService,
+    private noteService: NoteService,
     private userService : UserService
   ) {
+    this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
@@ -42,7 +48,6 @@ export class TasksComponent implements OnInit {
         this.project = p;
       })
   }
-
 
   ngOnInit(): void {
 
@@ -56,9 +61,9 @@ export class TasksComponent implements OnInit {
   ];
 
   configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
-    { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
+    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter(), onMural: false },
+    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder(), onMural: false },
+    { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal(), onMural: true },
   ];
 
   toggleSearchBar(): void {
@@ -103,6 +108,20 @@ export class TasksComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  createNote(): void {
+    const note: Note = {
+      title: 'Nova nota',
+      description: '',
+      width: 300,
+      height: 300,
+      color: 'WHITE',
+    }
+
+    this.noteService
+      .create(note, this.logged.id!, this.project.id!)
+      .subscribe();
   }
 
   taskOpenObject!: Task;

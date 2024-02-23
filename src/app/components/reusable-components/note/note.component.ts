@@ -1,6 +1,7 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Note } from 'src/app/models/note';
+import { NoteService } from 'src/app/services/note.service';
 
 @Component({
   selector: 'app-note',
@@ -17,7 +18,10 @@ export class NoteComponent implements OnInit, AfterViewInit {
   @ViewChild('dragHandleRight') dragHandleRight!: ElementRef;
   @ViewChild('dragHandleBottom') dragHandleBottom!: ElementRef;
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone, 
+    private noteService: NoteService
+  ) {}
 
   basicData: any;
 
@@ -103,6 +107,13 @@ export class NoteComponent implements OnInit, AfterViewInit {
     this.note.height = height;
 
     this.setAllHandleTransform();
+    this.edit();
+  }
+
+  edit(): void {
+    this.noteService
+      .patchAttribute(this.note)
+      .subscribe();
   }
 
 }

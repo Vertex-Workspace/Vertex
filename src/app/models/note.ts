@@ -1,12 +1,12 @@
 export class Note {
-    id !: number;
+    id ?: number | undefined;
     title !: string;
     description !: string;
     width !: number;
     height !: number;
     color !: string;
-    positionX !: number;
-    positionY !: number;
+    positionX ?: number | undefined;
+    positionY ?: number | undefined;
 
     constructor(
         note: Note,
