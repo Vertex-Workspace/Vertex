@@ -18,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './mural.component.html',
   styleUrls: ['./mural.component.scss']
 })
-export class MuralComponent implements OnInit, AfterViewInit {
+export class MuralComponent implements OnInit {
 
   @Input()
   project!: Project;
@@ -36,6 +36,11 @@ export class MuralComponent implements OnInit, AfterViewInit {
     });
   }
 
+  teste(e: any): void {
+    console.log(e);
+    
+  }
+
   getNotes(id: number): void {
     this.noteService
     .getAllByProject(id)
@@ -44,15 +49,6 @@ export class MuralComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit(): void {
-    this.noteService
-    .getAllByProject(this.project.id!)
-    .subscribe((notes: Note[]) => {
-      this.notes = notes;
-    });
-  }
-
-  ngAfterViewInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

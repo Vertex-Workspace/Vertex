@@ -1,9 +1,11 @@
-<section class="mural-section" >
+<section class="mural-section">
 
-  <ng-container *ngFor="let note of notes"> 
-    <app-note
-      [note]="note"
-    ></app-note>
+  <ng-container>
+    <div *ngFor="let note of notes" cdkDropList (cdkDropListDropped)="teste($event)">
+        <app-note
+        [note]="note"
+        ></app-note>
+    </div>
   </ng-container>
   
 </section> 

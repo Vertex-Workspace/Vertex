@@ -5,8 +5,8 @@ export class Note {
     width !: number;
     height !: number;
     color !: string;
-    positionX ?: number | undefined;
-    positionY ?: number | undefined;
+    left ?: number | undefined;
+    top ?: number | undefined;
 
     constructor(
         note: Note,
@@ -17,7 +17,7 @@ export class Note {
         this.width = note.width;
         this.height = note.height;
         this.color = note.color;
-        this.positionX = note.positionX;
-        this.positionY = note.positionY;
+        this.left = note.left;
+        this.top = note.top;
     }
 }
