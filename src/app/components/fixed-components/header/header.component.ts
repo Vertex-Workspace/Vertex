@@ -95,7 +95,6 @@ export class HeaderComponent implements OnInit {
     this.projectService
       .getOneById(id)
       .subscribe((project: Project) => {
-        console.log(this.location);
         this.location += " " + project.name;
       })
   }
