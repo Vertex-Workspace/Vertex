@@ -1,15 +1,18 @@
 <div class="base">
     <table>
         <tr>
-            <td *ngFor="let value of task.values">
-                <div>
-                    <fa-icon [icon]="getIcon(value)"></fa-icon>
-                    <p>{{value.property.name}}</p>
-                </div>
-                <div>
-                    <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value"></app-input-value-property>
-                </div>
-            </td>
+            <ng-container *ngFor="let value of task.values">
+                <td *ngIf="isNotInvisible(value)">
+                    <div>
+                        <fa-icon [icon]="getIcon(value)"></fa-icon>
+                        <p>{{value.property.name}}</p>
+                    </div>
+                    <div>
+                        <app-input-value-property (changes)="changeTask($event)" [task]="task"
+                            [value]="value"></app-input-value-property>
+                    </div>
+                </td>
+            </ng-container>
         </tr>
     </table>
 </div>

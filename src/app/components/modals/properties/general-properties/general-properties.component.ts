@@ -33,6 +33,9 @@ export class GeneralPropertiesComponent {
   generalModal: boolean = true;
 
   @Output()
+  openNewProperty = new EventEmitter<Property>();
+
+  @Output()
   close = new EventEmitter();
 
   @Input()
@@ -113,27 +116,13 @@ export class GeneralPropertiesComponent {
     //BUROCRACY, THE BACK END DOESN'T NEED THIS TO CREATE A DEFAULT PROPERTY
     let genericProperty = new Property({
       id: 0,
-      name: 'Nova Propriedade',
+      name: '',
       kind: PropertyKind.TEXT,
       propertyStatus: PropertyStatus.VISIBLE,
       propertyLists: [],
   
     });
-
-    this.propertyService.createOrEditProperty(this.project.id!, genericProperty).subscribe(
-      (property) => {
-        property.propertyLists = [];
-        this.projectService.getOneById(this.project.id!).subscribe(
-          (project) => {
-            this.project = project;
-            this.propertiesList[1].properties.push(property);
-            this.changeProject.emit(project);
-          }, (error) => {
-            console.log(error);
-          });
-      }, (error) => {
-        console.log(error);
-      });
+    this.openNewProperty.emit(genericProperty);
   }
 
 
@@ -156,18 +145,20 @@ export class GeneralPropertiesComponent {
 
   changeStatus(property: Property) {
     if (property.propertyStatus === PropertyStatus.VISIBLE) {
-      this.propertiesList[1].properties.splice(this.propertiesList[1].properties.indexOf(property), 1);
-      this.propertiesList[2].properties.push(property);
       property.propertyStatus = PropertyStatus.INVISIBLE;
     } else {
-      this.propertiesList[2].properties.splice(this.propertiesList[2].properties.indexOf(property), 1);
-      this.propertiesList[1].properties.push(property);
       property.propertyStatus = PropertyStatus.VISIBLE;
     }
     this.propertyService.createOrEditProperty(this.project.id!, property).subscribe(
       (property) => {
-        console.log(property);
-
+        this.projectService.getOneById(this.project.id!).subscribe(
+          (project) => {
+            this.project = project;
+            this.separePropertiesKind();
+            this.changeProject.emit(project);
+          }, (error) => {
+            console.log(error);
+          });
       }, (error) => {
         console.log(error);
       });
@@ -186,15 +177,6 @@ export class GeneralPropertiesComponent {
       }, (error) => {
         console.log(error);
       });
-  }
-
-  // the number of fixed itens list is 0, so the user can't move the other itens into it
-  drop(event: CdkDragDrop<any[]>) {
-    transferArrayItem(event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
   }
 
   getIconProperty(kindProperty: PropertyKind): any {

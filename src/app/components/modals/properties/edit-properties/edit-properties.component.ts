@@ -75,6 +75,11 @@ export class EditPropertiesComponent {
 
   selectValue(type: any) {
     this.property.kind = type.type;
+
+    //CLEAR THE PROPERTY LISTS ON DATABASE
+    if(this.property.kind !== PropertyKind.LIST){
+      this.property.propertyLists = [];
+    }
   }
 
   getKindProperty(propertyKind: PropertyKind): boolean {
@@ -99,19 +104,22 @@ export class EditPropertiesComponent {
     }
   }
   saveProperty(): void {
+    console.log(this.property);
     if (this.property.kind === PropertyKind.LIST && this.property.propertyLists.length === 0) {
       this.openEditList();
     } else {
       this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
         (property) => {
+          
+          console.log(this.project.id!);
+          
           this.projectService.getOneById(this.project.id!).subscribe(
             (project) => {
               this.project = project;
-              console.log(this.project);
               this.changeProject.emit(this.project);
               //If the button pressed was the confirm changes, emit the event
               //Else, just update the property through define elements list
-          this.confirmChanges.emit(property);
+              this.confirmChanges.emit(property);
             }, (error) => {
               console.log(error);
             });
@@ -146,9 +154,17 @@ export class EditPropertiesComponent {
       ]
 
       this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-        (property) => {
-          this.property = property;
-          this.from.emit('edit');
+        (property) => {  
+          this.projectService.getOneById(this.project.id!).subscribe(
+            (project) => {
+              this.project = project;
+              this.property = property;
+              this.changeProject.emit(this.project);
+              this.from.emit('edit');
+            }, (error) => {
+              console.log(error);
+            });
+
         }, (error) => {
           console.log(error);
         });

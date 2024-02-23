@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpinner, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
+import { Property, PropertyKind, PropertyList, PropertyStatus } from 'src/app/models/property';
 import { Task } from 'src/app/models/task';
 import { Value, ValueUpdate } from 'src/app/models/value';
 import { AlertService } from 'src/app/services/alert.service';
@@ -40,5 +40,9 @@ export class PropertiesComponent {
         return icon.icon;
       }
     }
+  }
+
+  isNotInvisible(value : Value) : boolean {
+    return value.property.propertyStatus !== PropertyStatus.INVISIBLE;
   }
 }

@@ -1,9 +1,9 @@
 <div class="flex w-full h-full flex-col">
     <div class="task-name">
         <p class="large-text">Nome</p>
-        <input *ngIf="property.name !== 'Nova Propriedade'" [(ngModel)]="property.name" class="regular-text" required />
-        <input *ngIf="property.name == 'Nova Propriedade'" [(ngModel)]="property.name"
-            placeholder="Digite o nome que deseja para propriedade..." class="regular-text" required />
+        <input [(ngModel)]="property.name" class="regular-text"
+        placeholder="Digite o nome que deseja para propriedade..."
+        required />
     </div>
 
     <section>

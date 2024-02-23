@@ -8,8 +8,10 @@
         [cdkDropListData]="status.properties">
             <div cdkDrag class="specific-properties" [ngStyle]="{'background-color': propertyList.color}">
                 <div cdkDragHandle>
-                    <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
-                    <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
+                    <ng-container *ngIf="!propertyList.isFixed">
+                        <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
+                        <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
+                    </ng-container>
                 </div>
                 <div>
                    <input type="text" class="regular-text" value="{{propertyList.value}}" [ngStyle]="{'background-color': propertyList.color}">
