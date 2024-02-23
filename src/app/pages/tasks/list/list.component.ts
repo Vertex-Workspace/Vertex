@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
-import { User } from 'src/app/models/user';
+import { Permission, PermissionsType, User } from 'src/app/models/user';
 import { isEmpty } from 'rxjs';
 
 @Component({
@@ -34,6 +34,10 @@ export class ListComponent implements OnInit {
 
   isNull !: boolean;
 
+  canCreate: boolean = false;
+
+  canEdit: boolean = false;
+
   statusProperty: any = {
     defaultValue: 'STATUS',
     id: 1,
@@ -51,11 +55,21 @@ export class ListComponent implements OnInit {
     private userService: UserService, 
     private taskService: TaskService,
     private route: ActivatedRoute,
+    private teamService: TeamService,
+    private projectService: ProjectService
   ) {
     this.logged = userService.getLogged();
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.projectService
+      .getOneById(id)
+      .subscribe((p: Project) => {
+        this.project = p;
+      }) 
+    
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
     //Define o primeiro campo da tabela como o nome
     //Adiciona nome e status como colunas padrão
     this.cols.push( 

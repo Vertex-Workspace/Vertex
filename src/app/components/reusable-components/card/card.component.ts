@@ -45,7 +45,7 @@ export class CardComponent implements OnInit {
     // Opacity
     this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);
     
-    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions;
       this.settings[2].disabled = true;
 

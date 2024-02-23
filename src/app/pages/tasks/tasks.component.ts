@@ -1,5 +1,4 @@
-
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
@@ -35,52 +34,23 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private route : ActivatedRoute,
     private projectService: ProjectService,
     private taskService: TaskService,
-    private userService: UserService,
-    private teamService: TeamService,
-    private alertService: AlertService
-  ) { }
+    private userService : UserService,
+    private teamService: TeamService
+  ) { 
+  }
 
-  projectId!: number;
-
-  async ngOnInit(): Promise<void> {
-    if (this.router.url.includes('projeto')) {
-      const projectId: number = Number(this.route.snapshot.paramMap.get('projectId'));
-      if (projectId) {
-        let projectRequested: Project | undefined = await this.projectService.getOneById(projectId).toPromise();
-        if (projectRequested) {
-          this.project = projectRequested;
-        }
-      }
-      this.clicked = "Kanban";
-    }
-
-    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-      console.log(this.userService.getLogged());
-      
-
-      for (let i = 0; i < permissions.length; i++) {
-        console.log(permissions);
-        
-        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-          this.canCreate = true;
-          
-        }
-      }
-    })
-    
+  ngOnInit(): void {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
       .getOneById(id)
       .subscribe((p: Project) => {
         this.project = p;
-      })
+      })  
   }
-
 
   menuItems = [
     { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
@@ -116,40 +86,35 @@ export class TasksComponent implements OnInit {
   }
 
   createTask(): void {
-    console.log(this.canCreate);
-    if (this.canCreate) {
-      let taskCreate: TaskCreate = {
-        name: "Nova Tarefa",
-        description: "Descreva um pouco sobre sua Tarefa Aqui",
-        project: {
-          id: this.projectId
-        },
-        values: [],
-        creator: {
-          id: this.userService.getLogged().id!
-        },
-        teamId: this.project.idTeam!
-      }
-      this.taskService.create(taskCreate).subscribe(
-        (task) => {
-          this.project.tasks.push(task);
-          this.changeModalTaskState(true, task);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }else {
-      this.alertService.errorAlert("Você não tem permissão para criar uma tarefa")
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: this.project.id!
+      },
+      values: [],
+      creator: {
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
     }
+    this.taskService.create(taskCreate).subscribe(
+      (task) => {
+        this.project.tasks.push(task);
+        this.changeModalTaskState(true, task);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   taskOpenObject!: Task;
-  changeModalTaskState(bool: boolean, task: Task): void {
+  changeModalTaskState(bool: boolean, task: Task): void{
     this.taskOpen = bool;
-    if (this.taskOpen) {
+    if(this.taskOpen){
       this.taskOpenObject = task;
-    } else {
+    } else{
       this.taskOpenObject = {} as Task;
     }
   }
@@ -158,15 +123,14 @@ export class TasksComponent implements OnInit {
     this.propertiesOpen = !this.propertiesOpen;
   }
 
-  updateProjectByTaskChanges(event: any): void {
+  updateProjectByTaskChanges(event: any): void{
     let taskUpdated: Task = event;
     this.project.tasks = this.project.tasks.map(task => {
-      if (task.id === taskUpdated.id) {
+      if(task.id === taskUpdated.id){
         return taskUpdated;
       }
       return task;
     });
   }
-
-
+  
 }

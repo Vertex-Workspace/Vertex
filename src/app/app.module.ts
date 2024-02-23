@@ -41,7 +41,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

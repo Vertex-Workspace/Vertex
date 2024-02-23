@@ -14,6 +14,8 @@ import { UserService } from 'src/app/services/user.service';
 import { TeamService } from 'src/app/services/team.service';
 import { HasPermission, Permission, PermissionsType, User } from 'src/app/models/user';
 import { Team } from 'src/app/models/team';
+import { ProjectService } from 'src/app/services/project.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-kanban',
@@ -27,22 +29,24 @@ export class KanbanComponent implements OnInit {
     private taskService: TaskService,
     private alertService: AlertService,
     private userService: UserService,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private projectService : ProjectService,
+    private route : ActivatedRoute) {
+
   }
   
   ngOnInit(): void {
-    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions
-      console.log(this.userService.getLogged().permissions);
-
+      
       for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+        if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) { 
           this.canCreate = true
         } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
           this.canEdit = true;
         }
       }
-    })
+    }) 
   }
 
   @Input()

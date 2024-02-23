@@ -86,7 +86,7 @@ export class TaskComponent implements OnInit {
         console.log(e);
       });
 
-      this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
         this.userService.getLogged().permissions = permissions
   
         for (let i = 0; i < permissions.length; i++) {

@@ -10,27 +10,28 @@ form{
 }
 
 .div-grid-name-image{
-    @apply grid w-full h-[30%];
+    @apply grid w-full h-[40%];
     grid-template-columns: 65% 35%;
 }
 
 .input-name{
-    @apply flex flex-col w-full h-[50%];
+    @apply flex flex-col w-full h-[50%] justify-start items-start;
 
     p{
-        @apply text-xl pb-6;
+        @apply pt-6 pb-6;
+        font-size: $regularText
     }
     input{
-        @apply flex h-52 rounded-md pl-4;
+        @apply flex h-52 rounded-md pl-4 w-full;
     }
 }
 
 .image {
-    @apply w-[250px] h-[250px] p-2 rounded-full flex flex-col justify-center items-center;
+    @apply w-full h-full p-2 rounded-full flex flex-col justify-center items-center;
 
 
     img {
-        @apply w-[80%];
+        @apply w-full;
     }
 
     .profile-photo {
@@ -51,10 +52,10 @@ form{
 }
 
 .input-image{
-    @apply flex flex-col w-full h-[50%] justify-center items-center;
+    @apply flex flex-col w-full h-[50%] justify-end items-end;
 
     .image-icon{
-        @apply text-9xl;
+        font-size: 8rem;
         color: $primaryColor;
     }
 
@@ -68,31 +69,31 @@ form{
 }
 
 .input-description{
-    @apply flex flex-col w-full h-[30%];
+    @apply flex flex-col w-full h-[60%] w-full items-start;
 
     p{
         @apply pb-6;
     }
     textarea{
-        @apply pl-4 pt-4 rounded-md h-full;
+        @apply pl-4 pt-4 rounded-md h-full w-[99%];
         resize: none;
     }
 }
 
 .div-buttons{
-    @apply flex h-[25%] w-full justify-end items-center;
+    @apply flex h-[20%] w-full justify-end items-end;
 
     .buttons{
-        @apply flex w-full h-full justify-end items-center;
+        @apply flex w-full h-full justify-end items-end;
     }
 
     .cancel-button{
-        @apply flex items-center justify-center w-32 h-12 rounded-sm mr-4;
+        @apply flex items-center justify-center w-24 h-8 rounded-sm mr-4;
         background-color: $error;
         color: white;
     }
     .confirm-button{
-        @apply flex items-center justify-center w-32 h-12 rounded-sm;
+        @apply flex items-center justify-center w-24 h-8 rounded-sm;
         background-color: $primaryColor;
         color: white;
     }
@@ -114,4 +115,16 @@ app-modal-warn{
     app-button{
         @apply pt-12;
     }
+}
+
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    z-index: 999;
+}
+
+.modal {
+    @apply absolute rounded-md flex flex-col w-[40%] h-[60%]
+    items-start justify-start text-center p-8 border-t-8;
+    border-color: $primaryColor;
+    background-color: $secondColor;
 }
