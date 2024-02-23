@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
 
   isNull !: boolean;
 
-  canCreate: boolean = false;
+  canDelete: boolean = false;
 
   canEdit: boolean = false;
 
@@ -58,20 +58,13 @@ export class ListComponent implements OnInit {
     private teamService: TeamService,
     private projectService: ProjectService
   ) {
-    this.logged = userService.getLogged();
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-      }) 
     
   }
 
   ngOnInit(): void {   
     //Define o primeiro campo da tabela como o nome
     //Adiciona nome e status como colunas padrão
+
     this.cols.push( 
       {
         field: "name",

@@ -5,8 +5,12 @@ import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-s
 import { Project } from 'src/app/models/project';
 import { PropertyKind, PropertyList } from 'src/app/models/property';
 import { Task, TaskCreate } from 'src/app/models/task';
+import { Permission, PermissionsType } from 'src/app/models/user';
 import { ValueUpdate } from 'src/app/models/value';
+import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
+import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,11 +27,33 @@ export class CalendarComponent {
   @Input() project!: Project;
   day: any;
 
+  canCreate: boolean = false;
+
   constructor(
     private taskService: TaskService, 
     private userService: UserService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private projectService: ProjectService,
+    private teamService: TeamService,
+    private alert: AlertService)  { 
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.projectService
+      .getOneById(id)
+      .subscribe((p: Project) => {
+        this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions;
+    
+          for (let i = 0; i < permissions.length; i++) {
+            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+              this.canCreate = true;
+            }
+          }
+        });
+      })
+  }
 
   ngOnInit() {
     this.buildCalendar();
@@ -212,6 +238,7 @@ export class CalendarComponent {
 
   //Create a new task in the project according the day was clicked
   newTaskOnDay(day: Date) {
+    if(this.canCreate){
     let taskCreate: TaskCreate = {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
@@ -235,6 +262,9 @@ export class CalendarComponent {
         console.log(error);
       }
     );
+    }else {
+      this.alert.errorAlert("Você não tem permissão para criar tarefas");
+    }
 
   }
 

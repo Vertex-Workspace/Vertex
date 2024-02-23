@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   faCircleUser,
   faTrashCan,
@@ -9,6 +10,7 @@ import { Project } from 'src/app/models/project';
 import { Task } from 'src/app/models/task';
 import { Permission, PermissionsType } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
@@ -28,7 +30,28 @@ export class CardComponent implements OnInit {
   constructor(private taskService: TaskService,
     private teamService: TeamService,
     private userService: UserService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private route: ActivatedRoute,
+    private projectService: ProjectService) {
+
+      const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+      this.projectService
+        .getOneById(id)
+        .subscribe((p: Project) => {
+          this.project = p;
+  
+          this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+            this.userService.getLogged().permissions = permissions;
+      
+            for (let i = 0; i < permissions.length; i++) {
+              if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
+                this.canDelete = true;
+                this.settings[2].disabled = false;
+              }
+            }
+          });
+        })
 
   }
   @Input() task!: Task;
@@ -43,19 +66,6 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
     // Opacity
-    this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);
-    
-    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-      this.settings[2].disabled = true;
-
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
-          this.canDelete = true;
-          this.settings[2].disabled = false;
-        }
-      }
-    });
   }
 
   modalDelete: boolean = false;

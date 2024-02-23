@@ -10,7 +10,8 @@
         </p>
         <div class="icons">
             <ng-container *ngFor="let item of icons">
-                <fa-icon [icon]="item.icon" class="icon"></fa-icon>
+                <fa-icon [icon]="item.icon" class="icon"
+                [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'"></fa-icon>
             </ng-container>
         </div>
     </div>

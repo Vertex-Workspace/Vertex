@@ -8,6 +8,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Value } from 'src/app/models/value';
 import { PropertyKind } from 'src/app/models/property';
+import { TeamService } from 'src/app/services/team.service';
+import { ProjectService } from 'src/app/services/project.service';
+import { ActivatedRoute } from '@angular/router';
+import { Project } from 'src/app/models/project';
+import { UserService } from 'src/app/services/user.service';
+import { Permission, PermissionsType } from 'src/app/models/user';
 
 
 @Component({
@@ -21,6 +27,32 @@ export class RowCardComponent {
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;
 
+  project !: Project;
+
+  constructor(private teamService: TeamService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private userService: UserService) { 
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.projectService
+      .getOneById(id)
+      .subscribe((p: Project) => {
+        this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions;
+    
+          for (let i = 0; i < permissions.length; i++) {
+            if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
+              this.canDelete = true;
+              this.icons[0].disabled = false;
+            }
+          }
+        });
+      })
+  }
+
 
   @Input()
   task!: Task;
@@ -30,13 +62,16 @@ export class RowCardComponent {
 
   value!: Value;
 
+  canDelete : boolean = false;
+
   icons: any[] = [
     // { id: 'clock', icon: this.faClock },
     // { id: 'chat', icon: this.faEnvelope },
-    { id: 'delete', icon: this.faTrashCan }
+    { id: 'delete', icon: this.faTrashCan, disabled: true }
   ];
 
-  ngOnInit(): void {    
+  ngOnInit(): void { 
+     
   }
 
   getCols(): any[] {
