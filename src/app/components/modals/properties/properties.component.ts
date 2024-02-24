@@ -98,7 +98,7 @@ export class PropertiesComponent {
       this.text = 'Itens de Seleção'
     } else if (this.currentModal === 'colors' && this.from == 'status') {
       this.currentModal = 'status';
-      this.text = 'Itens de Seleção'
+      this.text = 'Status'
     }
 
 

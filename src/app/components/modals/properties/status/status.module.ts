@@ -5,6 +5,7 @@ import { ColorsComponent } from '../colors/colors.component';
 import { ColorsModule } from '../colors/colors.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [StatusComponent],
@@ -13,7 +14,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CommonModule,
     ColorsModule,
     FontAwesomeModule,
-    DragDropModule
+    DragDropModule,
+    FormsModule
   ]
 })
 export class StatusModule { }

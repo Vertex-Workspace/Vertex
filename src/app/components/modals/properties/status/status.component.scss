@@ -1,32 +1,63 @@
 @import '../../../../../variables';
 
 .little-icon {
-    color: $primaryColor;
+    color: $text;
     font-size:1rem;
 }
 
 .main-property {
     @apply flex justify-between items-center w-full h-full py-3;
-
 }
 
 .properties {
-    @apply h-full w-full;
+    @apply flex flex-col h-[445px] w-full  gap-3 items-center;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .status-space{
+        @apply flex flex-col w-[95%] ;
+        border-top: 2px solid $emphasis;
+
+    }
+
+    
+}
+.info-status{
+    @apply flex flex-col h-[10%] justify-end pt-4;
+
+    p{
+        color: $primaryColor;
+    }
+}
+
+::-webkit-scrollbar {
+    margin-left: 1px !important;
+    width: 2px !important;
 }
 
 .specific-properties {
-    @apply w-full flex flex-row items-center justify-start min-h-[40px] pr-3;
+    @apply flex flex-row items-center justify-start min-h-[40px] rounded-sm;
 
-    div:first-child {
-        @apply pl-2 w-[6%] flex justify-between items-center;
+
+    div:first-child{
+        @apply flex w-[6%] h-full justify-evenly;
+        
+        fa-icon{
+            color: $text;
+        }
     }
 
     div:nth-child(2){
-        @apply w-[80%] flex justify-start pl-2 items-center;
-
+        @apply flex w-[80%] h-full justify-start pl-2 items-center;
+    
         input {
-            @apply w-full flex;
+            @apply flex rounded-lg px-2;
             outline: none;
+          }
+
+        p{
+            @apply px-2 rounded-xl; 
+            width: auto;
         }
     }
 
@@ -49,10 +80,30 @@
  }
 
  .icon {
-    color:$primaryColor;
+    color:$text;
  }
 
  .opacity-icon{
     @apply opacity-75;
 }
+.color-text{
+    color: $primaryColor;
+}
 
+
+.disabled-trash{
+    @apply opacity-50;
+    cursor: not-allowed;
+}
+.isFixedDrag{
+    @apply opacity-50;
+    
+    fa-icon{
+        cursor: default !important;
+    }
+}
+.isDraggable{
+    fa-icon{
+        cursor: grab !important;
+    }
+}

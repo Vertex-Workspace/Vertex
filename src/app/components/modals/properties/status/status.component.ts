@@ -25,7 +25,7 @@ export class StatusComponent {
   colorModal: boolean = false
 
   @Output()
-  pencil = new EventEmitter<String>();
+  pencil = new EventEmitter<PropertyList>();
 
   @Output()
   changeProject = new EventEmitter<Project>();
@@ -36,10 +36,6 @@ export class StatusComponent {
 
   @Input()
   property!: Property;
-
-  clickPencil() {
-    this.pencil.emit();
-  }
 
   constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
 
@@ -64,7 +60,19 @@ export class StatusComponent {
       properties: []
     }
   ]
+
+  initialProperty!: Property;
   ngOnInit(): void {
+    //Manually copy the object
+    this.initialProperty = {
+      id: this.property.id,
+      name: this.property.name,
+      propertyLists: this.property.propertyLists,
+      propertyStatus : this.property.propertyStatus,
+      kind: this.property.kind
+    };
+    console.log(this.initialProperty);
+    
     this.getPropertiesKind();
   }
 
@@ -95,13 +103,20 @@ export class StatusComponent {
     status.properties.push(newPropertyList);
 
     this.saveProperty();
-
-    // this.statusList[item].properties.push({name: 'Novo Status'});
   }
+
+  drop(event: CdkDragDrop<any[]>, status: any) {
+    this.property.propertyLists.forEach((propertyList) => {
+      if (propertyList.id == event.item.data.id) {
+        propertyList.propertyListKind = status.kind;
+      }
+    });
+    this.saveProperty();
+  }
+
 
   delete(status:any, propertyList: PropertyList) {
     if(!propertyList.isFixed){
-
       this.propertyService.deletePropertyList(this.property.id!, propertyList.id).subscribe(
         (propertyResponse) => {
           this.projectService.getOneById(this.project.id!).subscribe(
@@ -123,39 +138,42 @@ export class StatusComponent {
         )
     }
   }
+  nameEdit!: string;
+  propertyListNameEditId!: number;
 
-  drop(event: CdkDragDrop<any>, status: any) {
-    transferArrayItem(event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
-
-    status.properties.forEach((propertyList : PropertyList) => {
-      if(propertyList.propertyListKind != status.kind){
-        this.property.propertyLists.forEach((propertyListOriginal: PropertyList) => {
-          if(propertyListOriginal.id == propertyList.id){
-            //Change the current value of Kind
-            propertyListOriginal.propertyListKind = status.kind;
-            propertyList.propertyListKind = status.kind;
-            this.saveProperty();
-          }
-        });
-
-      }
-    });
-  }
-
-  private saveProperty(){
+  saveProperty() {
     this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
       (propertyResponse) => {
         this.project.properties[0] = propertyResponse;
+        this.property = propertyResponse;
         this.getPropertiesKind();
         this.changeProject.emit(this.project);
       },
       (error) => {
-
+        
       }
     );
   }
+  saveName(propertyList : PropertyList){
+    if(this.nameEdit.length > 3 && this.nameEdit.length < 20){
+      propertyList!.value = this.nameEdit;
+      this.saveProperty();
+      this.propertyListNameEditId = -1;
+      this.nameEdit = '';
+    } else{
+      this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
+      return;
+    }
+  }
+
+
+  editName(propertyList : PropertyList){
+    this.propertyListNameEditId = propertyList.id!;
+    this.nameEdit = propertyList.value;
+  }
+
+  clickPencil(propertyList: PropertyList) {
+    this.pencil.emit(propertyList);
+  }
+
 }

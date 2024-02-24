@@ -1,27 +1,34 @@
 <div class="properties" cdkDropListGroup>
-    <div *ngFor="let status of statusList; index as item">
+    <div *ngFor="let status of statusList; index as item" class="status-space" [ngStyle]="{'border': status.kind == 'TODO' ? 'none' : ''}" >
         <div class="main-property">
-            <p class="medium-text">{{status.name}}</p>
+            <p class="medium-text color-text">{{status.name}}</p>
             <fa-icon [icon]="faPlus" class="little-icon" (click)="add(status)"></fa-icon>
         </div>
-        <div *ngFor="let propertyList of status.properties; index as i2" cdkDropList (cdkDropListDropped)="drop($event, status)"
-        [cdkDropListData]="status.properties">
-            <div cdkDrag class="specific-properties" [ngStyle]="{'background-color': propertyList.color}">
-                <div cdkDragHandle>
-                    <ng-container *ngIf="!propertyList.isFixed">
-                        <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
-                        <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
-                    </ng-container>
+        <div *ngFor="let propertyList of status.properties; index as i2" cdkDropList
+            (cdkDropListDropped)="drop($event, status)" [cdkDropListData]="status.properties">
+            <div class="specific-properties" cdkDrag [cdkDragDisabled]="propertyList.isFixed" [cdkDragData]="propertyList">
+                <div cdkDragHandle [ngClass]="propertyList.isFixed ? 'isFixedDrag' : 'isDraggable'">
+                    <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
+                    <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
                 </div>
                 <div>
-                   <input type="text" class="regular-text" value="{{propertyList.value}}" [ngStyle]="{'background-color': propertyList.color}">
+                    <p *ngIf="propertyList.id != propertyListNameEditId" (click)="editName(propertyList)"
+                        class="regular-text cursor-pointer" [ngStyle]="{'background-color': propertyList.color}">
+                        {{propertyList.value}}</p>
+                    <input *ngIf="propertyList.id == propertyListNameEditId" type="text" class="regular-text"
+                        [(ngModel)]="nameEdit" [ngStyle]="{'background-color': propertyList.color}">
+                    <p *ngIf="propertyList.id == propertyListNameEditId" (click)="saveName(propertyList)"
+                        class="cursor-pointer">✔</p>
                 </div>
                 <div>
-                    <p class="regular-text" *ngIf="propertyList.isFixed">(Padrão)</p>
-                    <fa-icon [icon]="faPaintBrush" *ngIf="!propertyList.isFixed" (click)="clickPencil()" class="little-icon"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(status, propertyList)" *ngIf="!propertyList.isFixed"></fa-icon>
+                    <fa-icon [icon]="faPaintBrush" (click)="clickPencil(propertyList)" class="little-icon"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(status, propertyList)"
+                        [ngClass]="propertyList.isFixed ? 'disabled-trash' : ''"></fa-icon>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="info-status">
+    <p class="regular-text">Define o estado atual das tarefas</p>
 </div>
