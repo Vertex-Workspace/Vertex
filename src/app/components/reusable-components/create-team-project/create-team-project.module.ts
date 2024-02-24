@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 import { ButtonModule } from '../button/button.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardUserModule } from '../card-user/card-user.module';
 
 
 
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ModalWarnModule,
     ButtonModule,
     ReactiveFormsModule,
+    CardUserModule
   ]
 })
 export class CreateTeamProjectModule { }

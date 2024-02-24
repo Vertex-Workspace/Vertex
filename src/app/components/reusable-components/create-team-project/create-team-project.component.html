@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="!modalCopyLink">
 
   <div class="modal">
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
@@ -21,8 +21,8 @@
       </div>
     </div>
 
-    <div class="input-description">
-      <p class="large-text">{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
+    <div class="input-description" *ngIf="typeString === 'team' || typeString === 'project'">
+      <p>{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
       <textarea formControlName="description"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
     </div>
@@ -37,11 +37,12 @@
 </form>
 
 <app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink">
-  <h5>Equipe {{form.value.name}} criada com sucesso!</h5>
+  <h5 *ngIf="typeString === 'team'">Equipe {{form.value.name}} criada com sucesso!</h5>
+  <h5 *ngIf="typeString === 'project'">Projeto {{form.value.name}} criado com sucesso!</h5>
   <div class="informations-modal medium-text">
-    <p>Convide pessoas para {{form.value.name}}</p>
-    <p>através do link abaixo.</p>
+    <p *ngIf="typeString === 'team'">Convide pessoas para {{form.value.name}}</p>
+    <p *ngIf="typeString === 'team'">através do link abaixo.</p>
   </div>
-  <app-button [title]="'Copiar Link de Convite'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
+  <app-button [title]="'Copiar Link de Convite'" *ngIf="typeString === 'team'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
     (clickEvent)="copyLink()" />
 </app-modal-warn>

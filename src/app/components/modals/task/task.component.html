@@ -21,11 +21,6 @@
                     <h4><input (blur)="updateTaskNameAndDescription()" [disabled]="!canEdit" [(ngModel)]="task.name" type="text" name="name" id="name" value="{{task.name}}"></h4>
                 </div>
                 <div class="properties">
-                    <app-properties [project]="project" [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)"/>
-                    <h4><input (blur)="updateTaskNameAndDescription()" [(ngModel)]="task.name" type="text" name="name"
-                            id="name" value="{{task.name}}"></h4>
-                </div>
-                <div class="properties">
                     <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)" />
                 </div>
                 <div class="down relative">

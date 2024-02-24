@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import {
   faTrashCan, 
@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { UserService } from 'src/app/services/user.service';
 import { Permission, PermissionsType } from 'src/app/models/user';
+import { TaskService } from 'src/app/services/task.service';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class RowCardComponent {
   constructor(private teamService: TeamService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private userService: UserService) { 
+    private userService: UserService,
+    private taskService: TaskService) { 
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
@@ -63,6 +65,7 @@ export class RowCardComponent {
   value!: Value;
 
   canDelete : boolean = false;
+  canEdit : boolean = false;
 
   icons: any[] = [
     // { id: 'clock', icon: this.faClock },
@@ -98,4 +101,40 @@ export class RowCardComponent {
     return value!;
   }
 
+  @Output() deleteTask = new EventEmitter();
+  modalDelete: boolean = false
+
+  delete(event: any): void {
+    this.modalDelete = false;
+    if (event) {
+        this.taskService.delete(this.task.id).subscribe(
+          (task) => {
+            // Alert
+
+            this.deleteTask.emit();
+          },
+          (error) => {
+
+            // Alert
+            console.log(error);
+          }
+        );
+    console.log(event);
+    if(event){
+    this.taskService.delete(this.task.id).subscribe(
+      (task) => {
+        //Alert
+        this.deleteTask.emit();
+      },
+      (error) => {
+
+        //Alert
+        console.log(error);
+      }
+    );
+    }
+  }
+  }
+
 }
+

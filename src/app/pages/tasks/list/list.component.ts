@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task, TaskCreate } from 'src/app/models/task';
 import {  CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,6 +37,7 @@ export class ListComponent implements OnInit {
   canDelete: boolean = false;
 
   canEdit: boolean = false;
+
 
   statusProperty: any = {
     defaultValue: 'STATUS',

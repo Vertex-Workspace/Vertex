@@ -10,43 +10,45 @@ form{
 }
 
 .div-name{
-    @apply h-[25%]
+    @apply h-[25%] w-full
 }
 
 .input-name{
-    @apply flex flex-col w-full h-[80%];
+    @apply flex flex-col w-full h-[80%] justify-start items-start;
+    
+    input{
+        @apply flex h-52 rounded-md pl-4 w-full;
+    }
 
     p{
-        @apply pb-6;
-    }
-    input{
-        @apply flex h-52 rounded-md pl-4;
+        @apply pb-4
     }
 }
 
 .input-description{
-    @apply flex flex-col w-full h-[50%] bg-white;
+    @apply flex flex-col w-full h-[50%] bg-white items-start;
     overflow-y: scroll;
 
-    p:first-child{
+    p{
         @apply pl-4 pt-3;
+        font-size: $regularText
     }
 }
 
 .div-buttons{
-    @apply flex h-[25%] w-full justify-end items-center;
+    @apply flex h-[15%] w-[99%] justify-end items-end;
 
     .buttons{
-        @apply flex w-full h-full justify-end items-center;
+        @apply flex w-full h-full justify-end items-end;
     }
 
     .cancel-button{
-        @apply flex items-center justify-center w-32 h-12 rounded-sm mr-4;
+        @apply flex items-center justify-center w-24 h-8 rounded-sm mr-4;
         background-color: $error;
         color: white;
     }
     .confirm-button{
-        @apply flex items-center justify-center w-32 h-12 rounded-sm;
+        @apply flex items-center justify-center w-24 h-8 rounded-sm;
         background-color: $primaryColor;
         color: white;
     }
@@ -54,4 +56,16 @@ form{
 
 p{
     font-size: $largeText;
+}
+
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    z-index: 999;
+}
+
+.modal {
+    @apply absolute rounded-md flex flex-col w-[30%] h-[60%]
+    items-start justify-start text-center p-8 border-t-8;
+    border-color: $primaryColor;
+    background-color: $secondColor;
 }

@@ -30,7 +30,7 @@
 
                 </ng-container>
 
-                <button class="create" (click)="createTask()" [disabled]="canCreate" 
+                <button class="create" (click)="createTask()" [disabled]="!canCreate" 
                 [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa

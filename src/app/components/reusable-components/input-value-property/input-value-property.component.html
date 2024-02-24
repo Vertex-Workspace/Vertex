@@ -30,6 +30,7 @@
         [style]="{ width: '250px' }" 
         (onSelect)="changeDate($event, value)"
         dateFormat="dd.mm.yy"
+        [disabled]="!canEdit"
     ></p-calendar>
     <label for="birth_date">{{getValue(value)}}</label>
 </span>
@@ -46,9 +47,10 @@
     placeholder="{{getValue(value)}}"
     (onChange)="change($event, value)"
     appendTo="body"
+    [disabled]="!canEdit"
 >
     <ng-template pTemplate="option" let-option>
-        <div class="flex items-center justify-center gap-2">
+        <div class="flex items-center justify-center gap-2" >
             <span class="mr-2 w-[17px] h-[17px] rounded-full" 
                 [style.backgroundColor]="getColor(option.color)"
             ></span>

@@ -40,8 +40,7 @@
 
                 <div class="high-listDiv-members">
                     <div class="listDiv-members">
-                        <p class="large-text" *ngIf="clicked == 'participants'">Lista de membros</p>
-                        <p class="large-text" *ngIf="clicked == 'permissions'">Permissões de usuários</p>
+                        <p class="large-text" *ngIf="clicked == 'participants'">Participantes</p>
                         <p class="large-text" *ngIf="clicked == 'groups'">Grupos</p>
                         <p> | </p>
                         <div class="flex gap-1">
@@ -58,12 +57,6 @@
 
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
-                <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'view-infos'"
-                [team]="team" (deleteEmitterUserTeam)="deleteUserTeam($event)"></app-card-user>
-            </div>
-
-
-            <div *ngIf="clicked == 'permissions'" class="grid-permissions">
                 <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'permissions'"
                 [team]="team"></app-card-user>
             </div>  

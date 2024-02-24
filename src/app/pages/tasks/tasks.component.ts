@@ -40,26 +40,28 @@ export class TasksComponent implements OnInit {
     private userService : UserService,
     private teamService: TeamService
   ) {
+    
+  }
+
+
+  ngOnInit(): void {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
       .getOneById(id)
       .subscribe((p: Project) => {
         this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions;
+    
+          for (let i = 0; i < permissions.length; i++) {
+            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+              this.canCreate = true;
+            }
+          }
+        });
       })
-  }
-
-
-  ngOnInit(): void {
-    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-          this.canCreate = true;
-        }
-      }
-    });
   }
 
   menuItems = [

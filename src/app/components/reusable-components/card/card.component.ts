@@ -34,25 +34,6 @@ export class CardComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService) {
 
-      const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
-      this.projectService
-        .getOneById(id)
-        .subscribe((p: Project) => {
-          this.project = p;
-  
-          this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-            this.userService.getLogged().permissions = permissions;
-      
-            for (let i = 0; i < permissions.length; i++) {
-              if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
-                this.canDelete = true;
-                this.settings[2].disabled = false;
-              }
-            }
-          });
-        })
-
   }
   @Input() task!: Task;
   @Input() width!: string;
@@ -65,7 +46,25 @@ export class CardComponent implements OnInit {
   canDelete?: boolean = false;
 
   ngOnInit(): void {
-    // Opacity
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.projectService
+      .getOneById(id)
+      .subscribe((p: Project) => {
+        this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions;
+    
+          for (let i = 0; i < permissions.length; i++) {
+            if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
+              this.canDelete = true;
+              this.settings[2].disabled = false;
+            }
+          }
+        });
+      })
+    
   }
 
   modalDelete: boolean = false;

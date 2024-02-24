@@ -65,6 +65,7 @@
                         (click)="newTaskOnDay(day)" 
                         *ngIf="hoveringDay === day" 
                         class="pi pi-plus-circle"
+                        [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'"
                     ></i>
                     </div>
                     

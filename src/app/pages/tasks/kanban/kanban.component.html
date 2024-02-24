@@ -15,7 +15,8 @@
 
                 <div class="flex flex-row justify-between w-full items-center">
                     <h6>{{ propertyList.value }}</h6>
-                    <button (click)="createTask(propertyList)" [ngClass]="canEdit ? 'opacity-20' : 'opacity-100'">+</button>
+                    <button (click)="createTask(propertyList)"
+                    [ngClass]="canEdit ? 'opacity-20' : 'opacity-100'" [disabled]="canEdit">+</button>
                 </div>
 
                 <div class="col-items">
@@ -24,19 +25,6 @@
                         <app-card [minHeight]="'150px'" [width]="'300px'" *ngIf="getTaskByProperty(task, propertyList)"
                             [borderColor]="getColor(propertyList.color)" (deleteTask)="deleteTask(task)" [task]="task"
                             [cdkDragData]="task" cdkDrag (openTaskDetails)="openTaskModal(task)" [project]="project"/>
-
-                        <app-card 
-                            [minHeight]="'150px'" 
-                            [width]="'300px'" 
-                            *ngIf="getTaskByProperty(task, propertyList)"
-                            [borderColor]="getColor(propertyList.color)" 
-                            (deleteTask)="deleteTask(task)" 
-                            [task]="task"
-                            [cdkDragData]="task"
-                            cdkDrag 
-                            (openTaskDetails)="openTaskModal(task)" 
-                        />
-
                     </ng-container>
 
                 </div>

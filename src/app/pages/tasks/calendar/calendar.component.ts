@@ -28,14 +28,15 @@ export class CalendarComponent {
   day: any;
 
   canCreate: boolean = false;
+  canEdit: boolean = false
 
   constructor(
-    private taskService: TaskService, 
+    private taskService: TaskService,
     private userService: UserService,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private teamService: TeamService,
-    private alert: AlertService)  { 
+    private alert: AlertService) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
@@ -45,10 +46,12 @@ export class CalendarComponent {
 
         this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
           this.userService.getLogged().permissions = permissions;
-    
+
           for (let i = 0; i < permissions.length; i++) {
             if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
               this.canCreate = true;
+            } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+              this.canEdit = true;
             }
           }
         });
@@ -61,8 +64,8 @@ export class CalendarComponent {
     this.teste();
   }
 
-  plus : boolean = false;
-  
+  plus: boolean = false;
+
   modalTasks: boolean = false;
 
 
@@ -78,13 +81,13 @@ export class CalendarComponent {
     this.taskService
       .getAllByProject(projectId)
       .subscribe((tasks: Task[]) => {
-        this.tasks = tasks;        
+        this.tasks = tasks;
       })
   }
 
   //FUTURE 
   buttonDay!: Date;
-  showAdd(day : Date): void{
+  showAdd(day: Date): void {
     this.buttonDay = day;
     console.log(this.buttonDay);
   }
@@ -107,7 +110,7 @@ export class CalendarComponent {
       this.project.tasks.forEach((task) => {
         task.values.forEach((value) => {
           if (value.property.kind === PropertyKind.DATE) {
-  
+
             let valuePropertyDate: Date = new Date(value.value as string);
             if (valuePropertyDate.getDate() == date.getDate()
               && valuePropertyDate.getMonth() == date.getMonth()
@@ -200,7 +203,7 @@ export class CalendarComponent {
       currentWeek.push(day);
 
       if (currentWeek.length === 7 || index === this.calendarDays.length - 1) {
-        weeks.push([...currentWeek]);''
+        weeks.push([...currentWeek]); ''
         currentWeek = [];
       }
     });
@@ -221,14 +224,14 @@ export class CalendarComponent {
     task.values.forEach(
       (value) => {
         if (value.property.kind === PropertyKind.STATUS) {
-            let valuePropertyList: PropertyList = value.value as PropertyList;
-            if (valuePropertyList.color === "RED") {
-              color = "#FF9D9D50";
-            } else if (valuePropertyList.color === "YELLOW") {
-              color = "#FFD60035";
-            } else if (valuePropertyList.color === "GREEN") {
-              color = "#65D73C50";
-            }
+          let valuePropertyList: PropertyList = value.value as PropertyList;
+          if (valuePropertyList.color === "RED") {
+            color = "#FF9D9D50";
+          } else if (valuePropertyList.color === "YELLOW") {
+            color = "#FFD60035";
+          } else if (valuePropertyList.color === "GREEN") {
+            color = "#65D73C50";
+          }
         }
       }
     );
@@ -238,31 +241,31 @@ export class CalendarComponent {
 
   //Create a new task in the project according the day was clicked
   newTaskOnDay(day: Date) {
-    if(this.canCreate){
-    let taskCreate: TaskCreate = {
-      name: "Nova Tarefa",
-      description: "Descreva um pouco sobre sua Tarefa Aqui",
-      project: {
-        id: this.project.id!
-      },
-      values: [],
-      creator: {
-        id: this.userService.getLogged().id!
-      },
-      teamId: this.project.idTeam!
-    }
-  
-    this.taskService.create(taskCreate).subscribe(
-      (task) => {
-        this.project.tasks.push(task);
-        this.patchValue(task, day);
-        this.openCardTask(task);
-      },
-      (error) => {
-        console.log(error);
+    if (this.canCreate) {
+      let taskCreate: TaskCreate = {
+        name: "Nova Tarefa",
+        description: "Descreva um pouco sobre sua Tarefa Aqui",
+        project: {
+          id: this.project.id!
+        },
+        values: [],
+        creator: {
+          id: this.userService.getLogged().id!
+        },
+        teamId: this.project.idTeam!
       }
-    );
-    }else {
+
+      this.taskService.create(taskCreate).subscribe(
+        (task) => {
+          this.project.tasks.push(task);
+          this.patchValue(task, day);
+          this.openCardTask(task);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
       this.alert.errorAlert("Você não tem permissão para criar tarefas");
     }
 
@@ -275,52 +278,58 @@ export class CalendarComponent {
   drop(e: CdkDragDrop<any>, day: Date): void {
     const task: Task = e.item.data;
     let property: any;
+    if (this.canEdit) {
 
-    task.values
-      .forEach((prop) => {
-        if (prop.property.kind === PropertyKind.DATE) {
-          prop.value = day;
-          property = prop;
-        }
-      })
+      task.values
+        .forEach((prop) => {
+          if (prop.property.kind === PropertyKind.DATE) {
+            prop.value = day;
+            property = prop;
+          }
+        })
 
       this.patchValue(task, day)
-    
+    } else {
+      this.alert.errorAlert("Você não tem permissão para alterar as propriedades")
+    }
+
   }
 
   //DRAG AND DROP
-  drag(task : Task): void { 
+  drag(task: Task): void {
     console.log(task);
   }
 
 
   patchValue(task: Task, day: Date): void {
-    task.values.forEach((value) => {
-      if (value.property.kind === PropertyKind.DATE) {
-        const valueUpdate: ValueUpdate = {
-          id: task.id,
-          value: {
-            property: {
-              id: value.property.id
-            },
+    if (this.canEdit) {
+      task.values.forEach((value) => {
+        if (value.property.kind === PropertyKind.DATE) {
+          const valueUpdate: ValueUpdate = {
+            id: task.id,
             value: {
-              id: value.id,
-              //SLICE RETIRAR O "Z" NO FINAL
-              value: day.toISOString().slice(0, -1)
+              property: {
+                id: value.property.id
+              },
+              value: {
+                id: value.id,
+                //SLICE RETIRAR O "Z" NO FINAL
+                value: day.toISOString().slice(0, -1)
+              }
             }
-          }
-        };
+          };
 
-        this.taskService.patchValue(valueUpdate).subscribe(
-          (taskDate) => {
-            task.values = taskDate.values;
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }
-    });
+          this.taskService.patchValue(valueUpdate).subscribe(
+            (taskDate) => {
+              task.values = taskDate.values;
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
+      });
+    }
   }
 
   hoveringDay: Date | null = null;
