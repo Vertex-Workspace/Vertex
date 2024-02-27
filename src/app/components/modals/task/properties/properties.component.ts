@@ -19,7 +19,7 @@ export class PropertiesComponent {
 
   @Input() task!: Task;
   @Input() project !:Project
-  canEdit: boolean = false;
+  @Input() canEdit !: boolean;
 
   constructor(private taskService: TaskService, 
     private alertService : AlertService,
@@ -72,5 +72,11 @@ export class PropertiesComponent {
 
   getValue(valueProperty: any): any {
     
+  }
+
+  cantEdit(): void{
+    if(!this.canEdit){
+      this.alertService.errorAlert("Você não tem permissão para editar essa tarefa!")
+    }
   }
 }

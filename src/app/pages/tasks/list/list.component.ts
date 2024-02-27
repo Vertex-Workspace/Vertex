@@ -53,11 +53,8 @@ export class ListComponent implements OnInit {
   };
 
   constructor(
-    private userService: UserService, 
     private taskService: TaskService,
-    private route: ActivatedRoute,
-    private teamService: TeamService,
-    private projectService: ProjectService
+    private route: ActivatedRoute
   ) {
     
   }

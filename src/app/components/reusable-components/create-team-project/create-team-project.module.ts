@@ -6,6 +6,7 @@ import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 import { ButtonModule } from '../button/button.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardUserModule } from '../card-user/card-user.module';
+import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
 
 
 
@@ -18,7 +19,7 @@ import { CardUserModule } from '../card-user/card-user.module';
     ModalWarnModule,
     ButtonModule,
     ReactiveFormsModule,
-    CardUserModule
+    CardUserModule,
   ]
 })
 export class CreateTeamProjectModule { }

@@ -27,7 +27,7 @@ form{
 }
 
 .image {
-    @apply w-full h-full p-2 rounded-full flex flex-col justify-end items-end;
+    @apply w-full h-full flex justify-end items-end;
 
 
     img {
@@ -52,7 +52,7 @@ form{
 }
 
 .input-image{
-    @apply flex flex-col w-full h-[50%] justify-end items-end;
+    @apply flex w-full h-[50%] justify-end items-end;
 
     .image-icon{
         font-size: 8rem;

@@ -6,7 +6,7 @@
                     <fa-icon [icon]="getIcon(value)"></fa-icon>
                     <p>{{value.property.name}}</p>
                 </div>
-                <div>
+                <div (click)="cantEdit()">
                     <input [disabled]="!canEdit" (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/>
                     <input [disabled]="!canEdit" (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/>
                     <input  [disabled]="!canEdit" (blur)="change($event, value)" type="date" *ngIf="getKind(value.property, 'DATE')" value="{{getValue(value)}}"/>

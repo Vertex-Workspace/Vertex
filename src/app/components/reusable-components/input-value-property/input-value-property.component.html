@@ -36,18 +36,19 @@
 </span>
 
 <!-- status -->
- <p-cascadeSelect 
-     *ngIf="getKind(value.property, 'STATUS')"
-    [(ngModel)]="selectedStatus" 
-    [options]="getSelectOptions(value)" 
-    optionLabel="value" 
-    optionGroupLabel="name" 
-    [optionGroupChildren]="[]" 
-    [style]="{ width: '250px' }" 
-    placeholder="{{getValue(value)}}"
-    (onChange)="change($event, value)"
-    appendTo="body"
-    [disabled]="!canEdit"
+<p-cascadeSelect 
+   *ngIf="getKind(value.property, 'STATUS')"
+   [(ngModel)]="selectedStatus" 
+   [options]="getSelectOptions(value)" 
+   optionLabel="value" 
+   optionGroupLabel="name" 
+   [optionGroupChildren]="[]" 
+   [style]="{ width: '250px' }" 
+   placeholder="{{getValue(value)}}"
+   (onChange)="change($event, value)"
+   appendTo="body"
+   [disabled]="!canEdit"
+   style="background-color: #FF9D9D50; border-radius: 8px;"
 >
     <ng-template pTemplate="option" let-option>
         <div class="flex items-center justify-center gap-2" >
@@ -58,3 +59,4 @@
         </div>
     </ng-template>
 </p-cascadeSelect>
+

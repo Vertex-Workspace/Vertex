@@ -95,7 +95,7 @@ export class KanbanComponent {
     }
 
     const newIndexTask =
-      this.specificPropertyArray(propertyList)[event.currentIndex];
+    this.specificPropertyArray(propertyList)[event.currentIndex];
     const newIndex = this.project.tasks.indexOf(newIndexTask);
     const previousIndex = this.project.tasks.indexOf(task);
 

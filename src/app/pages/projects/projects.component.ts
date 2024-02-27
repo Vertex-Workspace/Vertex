@@ -118,8 +118,7 @@ export class ProjectsComponent implements OnInit {
 
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;
-    console.log(this.isCreatingProject);
-
+    this.getAfterChange()
     // this.getAfterChange();
   }
 
@@ -180,7 +179,9 @@ export class ProjectsComponent implements OnInit {
           if (group.name == null) {
             this.alert.errorAlert(`Você precisa adicionar um nome`)
           }else {
-            this.alert.errorAlert(`Você precisa adicionar um nome`)
+            this.alert.errorAlert(`Erro ao criar equipe`)
+            console.log(group);
+            
           }
 
         });

@@ -260,4 +260,10 @@ export class TaskComponent implements OnInit {
     this.chatExpanded = !this.chatExpanded;
   }
 
+  cantEdit(){
+    if(!this.canEdit){
+      this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
+    } 
+  }
+
 }
