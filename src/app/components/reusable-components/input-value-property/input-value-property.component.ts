@@ -22,6 +22,8 @@ export class InputValuePropertyComponent {
   @Output()
   changes = new EventEmitter();
 
+  @Input() backgroundColor ?: string = '#000000';
+
   @Input()
   value!: Value;
 
@@ -64,6 +66,7 @@ export class InputValuePropertyComponent {
 
 
   ngOnInit(): void {
+    
   }
 
   getValue(value: Value): string {
@@ -75,6 +78,7 @@ export class InputValuePropertyComponent {
     }
     if (value.property.kind === PropertyKind.STATUS) {
       let valueProperty = value.value as PropertyList;
+      this.propertyListId.emit(valueProperty.id)
       return valueProperty.value;
     }
     if (value.property.kind === PropertyKind.DATE) {
@@ -97,7 +101,7 @@ export class InputValuePropertyComponent {
     }
   }
 
-  getSelectOptions(value: Value): PropertyList[] {
+  getSelectOptions(value: Value): PropertyList[] { 
     return value.property.propertyLists;
   }
 
@@ -107,7 +111,9 @@ export class InputValuePropertyComponent {
 
   isSelected(propertyList: PropertyList, value: Value): boolean {
     let valueProperty = value.value as PropertyList;
+    
     return propertyList.id === valueProperty.id;
+    
   }
 
   changeDate(event: any, value: Value): void {
@@ -120,6 +126,7 @@ export class InputValuePropertyComponent {
     }
   }
 
+  @Output() propertyListId = new EventEmitter<number>();
   change(event: any, value: Value): void {
     if(this.canEdit){
     const propertyId: number = event.value.id;
@@ -127,10 +134,10 @@ export class InputValuePropertyComponent {
       let newValue: string | number | Date;
       if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {
         newValue = event.value.id as number;
+        this.propertyListId.emit(newValue)
       } else {
         newValue = event.target.value as string;
       }
-
       this.updateTask(value, newValue)
     }
   }else {

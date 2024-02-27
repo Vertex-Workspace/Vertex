@@ -43,7 +43,7 @@
     optionLabel="value" 
     optionGroupLabel="name" 
     [optionGroupChildren]="[]" 
-    [style]="{ width: '250px' }" 
+    [style]="{ width: '250px',  'background-color': backgroundColor }" 
     placeholder="{{getValue(value)}}"
     (onChange)="change($event, value)"
     appendTo="body"

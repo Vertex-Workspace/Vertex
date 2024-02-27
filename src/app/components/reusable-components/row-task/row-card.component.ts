@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import {
-  faTrashCan, 
-  faEnvelope, 
-  faClockRotateLeft, 
+  faTrashCan,
+  faEnvelope,
+  faClockRotateLeft,
   faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
 import { Value } from 'src/app/models/value';
@@ -34,7 +34,7 @@ export class RowCardComponent {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private userService: UserService,
-    private taskService: TaskService) { 
+    private taskService: TaskService) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
@@ -44,7 +44,7 @@ export class RowCardComponent {
 
         this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
           this.userService.getLogged().permissions = permissions;
-    
+
           for (let i = 0; i < permissions.length; i++) {
             if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
               this.canDelete = true;
@@ -64,8 +64,8 @@ export class RowCardComponent {
 
   value!: Value;
 
-  canDelete : boolean = false;
-  canEdit : boolean = false;
+  canDelete: boolean = false;
+  canEdit: boolean = false;
 
   icons: any[] = [
     // { id: 'clock', icon: this.faClock },
@@ -73,14 +73,14 @@ export class RowCardComponent {
     { id: 'delete', icon: this.faTrashCan, disabled: true }
   ];
 
-  ngOnInit(): void { 
-     
+  ngOnInit(): void {
+
   }
 
   getCols(): any[] {
-    let cols : any [] = [];
-    this.cols.map((col) => { 
-      if(col.field !== "name") {
+    let cols: any[] = [];
+    this.cols.map((col) => {
+      if (col.field !== "name") {
         cols.push(col);
       }
     });
@@ -91,8 +91,8 @@ export class RowCardComponent {
     return "300px";
   }
 
-  getPropertyValue(col: any) : Value {
-    let value : Value;
+  getPropertyValue(col: any): Value {
+    let value: Value;
     this.task.values?.forEach(values => {
       if (col.field === values.property.kind) {
         value = values;
@@ -107,34 +107,53 @@ export class RowCardComponent {
   delete(event: any): void {
     this.modalDelete = false;
     if (event) {
+      this.taskService.delete(this.task.id).subscribe(
+        (task) => {
+          // Alert
+
+          this.deleteTask.emit();
+        },
+        (error) => {
+
+          // Alert
+          console.log(error);
+        }
+      );
+      console.log(event);
+      if (event) {
         this.taskService.delete(this.task.id).subscribe(
           (task) => {
-            // Alert
-
+            //Alert
             this.deleteTask.emit();
           },
           (error) => {
 
-            // Alert
+            //Alert
             console.log(error);
           }
         );
-    console.log(event);
-    if(event){
-    this.taskService.delete(this.task.id).subscribe(
-      (task) => {
-        //Alert
-        this.deleteTask.emit();
-      },
-      (error) => {
-
-        //Alert
-        console.log(error);
       }
-    );
     }
   }
+
+  numberPropertyColor ?: number
+
+  returnColors(): string | undefined{
+    if(this.numberPropertyColor === 1){
+      return "#FF9D9D50"
+    }
+    else if(this.numberPropertyColor === 2){
+      return "#FFD60035"
+    }
+    else if(this.numberPropertyColor === 3){
+      return "#65D73C50"
+    }
   }
 
+  findNumber(id: number): void {
+   this.numberPropertyColor = id;
+   console.log(this.numberPropertyColor);
+   
+  }
 }
 

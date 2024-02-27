@@ -66,7 +66,6 @@ export class CardListComponent implements OnInit{
   validatingDeleteProject(project: Project, answer: boolean): void{
     if(answer === true){
       this.deleteEmitProject(project)
-      this.alertService.successAlert("Projeto removido!")
     }else {
       this.alertService.notificationAlert("Projeto não removido")
     } 
@@ -75,7 +74,6 @@ export class CardListComponent implements OnInit{
   validatingDeleteTeam(team:Team, answer: boolean): void{
     if(answer === true){
       this.deleteEmitTeam(team)
-      this.alertService.successAlert("Equipe removida!")
     }else {
       this.alertService.notificationAlert("Equipe não removida!")
     } 
