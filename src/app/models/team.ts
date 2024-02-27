@@ -1,3 +1,4 @@
+import { Chat } from "./chat";
 import { Group } from "./groups";
 import { Project } from "./project";
 import { User } from "./user";
@@ -11,6 +12,7 @@ export class Team {
     invitationCode!: {
         code: string;
     };
+    chat?: Chat;
     users?: User[];
     creator?: User;
     groups?: Group[];
@@ -23,14 +25,15 @@ export class Team {
         this.id = team.id;
         this.name = team.name;
         this.invitationCode = team.invitationCode;
+        this.chat = team.chat;
         this.creationDate = team.creationDate;
         this.description = team.description;
         this.creator = team.creator;
-        this.users = team.users;         
+        this.users = team.users;
         this.groups = team.groups;
-        this.projects = team.projects;       
-        
+        this.projects = team.projects;
+
     }
-    
+
 
 }

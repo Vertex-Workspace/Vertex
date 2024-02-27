@@ -1,9 +1,24 @@
-export class Chat {
-    user: string;
-    message: string;
+import { Message } from "./message";
 
-    constructor(user: string, message: string){
-        this.user = user;
-        this.message = message;
+
+export class Chat {
+    id?: number;
+    name:String;
+    messages?: Message[];
+    conversationOpen?: boolean;
+    userTeams?: {
+        user: {
+            id: number;
+        },
+        team: {
+            id: number;
+        }
+    }[];
+
+    constructor(chat: Chat) {
+        this.name = chat.name;
+        this.id = chat.id;
+        this.messages = chat.messages;
+        this.userTeams = chat.userTeams;
     }
 }

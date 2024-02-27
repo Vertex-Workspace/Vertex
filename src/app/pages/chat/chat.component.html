@@ -13,17 +13,15 @@
                     <fa-icon class="section-icons-7xl" [icon]="faCircleUser"></fa-icon>
                 </div>
 
-                <div class="rightChatPerson">
+                <div class="gap-3 flex flex-col">
                     <div class="divNamesPerson">
-                        <p class="userName large-text">Nome user</p>
+                        <p class="userName large-text">chat</p>
 
                         <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
                     </div>
 
                     <div class="divNamesPerson regular-text">
                         <p>Nome equipe</p>
-                        |
-                        <p>Objetivo equipe</p>
                     </div>
                 </div>
             </div>
@@ -59,13 +57,12 @@
             </div>
 
             <div class="main-section-left">
-                <ng-container *ngFor="let user of users,let i = index">
-                    <div (click)="openConversation(i)" [ngClass]="user.conversationOpen ? 'card-chatOpen' : 'card-chat'">
+                <ng-container *ngFor="let chatFor of conversations">
+                    <div (click)="openConversation(chatFor)" [ngClass]="chatFor.conversationOpen ? 'card-chatOpen' : 'card-chat'">
                         <div class="user-card-message">
                             <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
                             <div class="flex flex-col">
-                                <p>{{user.name}}</p>
-                                <p>{{user.messages[0].content}}</p>
+                                <p>{{chatFor.name}}</p>
                             </div>
                         </div>
 
@@ -73,7 +70,6 @@
                         <div class="div-time-message">
 
                             <div class="div-time">
-                                <p>{{user.messages[0].time}}</p>
                                 <fa-icon class="section-icons" [icon]="faCheckDouble"></fa-icon>
                             </div>
                         </div>
@@ -83,15 +79,17 @@
             </div>
         </div>
 
-        <div class="section-right-chat">
+        <div class="section-right-chat" >
             <div class="center-div">
-                <div class="min-h-[60px]" *ngFor="let message of webSocketService.chatMessages">
-                    <div [ngClass]="message.user != logged.firstName ? 'left' : 'right'">
-                        <div class="regular-text" [ngClass]="message.user != logged.firstName ? 'answer' : 'messageUser'">
-                            <p class="pChat">{{message.message}}</p>
-                        </div>
+                <div class="min-h-[60px]" *ngIf="chat">
+                    <div *ngFor="let message of chat.messages" [ngClass]="message.user.id != logged.id ? 'left' : 'right'">
                         <div>
-                            <p class="pChat">{{message.user}}</p>
+                            <p class="pChat">{{message.user.firstName}}</p>
+                        </div>
+                        <div class="regular-text"  [ngClass]="message.user.id != logged.id ? 'answer' : 'messageUser'">
+                            <div class="pChat" >
+                                {{message.contentMessage}}
+                            </div>
                         </div>
                     </div>
                 </div>

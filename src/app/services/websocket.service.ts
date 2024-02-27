@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chat } from '../models/chat';
+import { Message } from '../models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,8 @@ export class WebSocketService {
       };
 
       this.webSocket.onmessage = (event) => {
+        console.log('WebSocket message received:', event.data);
+        
         const chatMessageDto = JSON.parse(event.data);
         this.chatMessages.push(chatMessageDto);
       };
@@ -36,7 +39,7 @@ export class WebSocketService {
     }
   }
 
-  public sendMessage(chatMessageDto: Chat) {
+  public sendMessage(chatMessageDto: Message) {
     try {
       if (this.webSocket.readyState === WebSocket.OPEN) {
         this.webSocket.send(JSON.stringify(chatMessageDto));

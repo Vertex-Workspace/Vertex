@@ -12,6 +12,8 @@ import { WebSocketService } from 'src/app/services/websocket.service';
 import { Chat } from '../../models/chat';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { Message } from 'src/app/models/message';
+import { TeamService } from '../../services/team.service';
 
 
 @Component({
@@ -40,22 +42,41 @@ export class ChatComponent {
 
   conversationOpen: boolean = false;
 
+  conversations: Chat[] = []
+
+  messages: Message[] = [];
+
+  chat!: Chat;
+
   cardChat: number = 0;
 
   side: boolean = true;
 
   logged!: User;
 
-  constructor(public webSocketService: WebSocketService) {
+  constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
+    this.teamService.findAllChats().subscribe((chats: Chat[]) => {
+      chats.forEach((chat: Chat) => {
+        this.conversations.push(chat);
+        // this.chat = chat;
+        console.log(this.logged, "Logged");
+
+        console.log(chat, "Chat");
+
+        console.log(this.conversations);
+
+      });
+    });
   }
 
-  clcik() {
+  click() {
     this.side = !this.side;
   }
 
   ngOnInit(): void {
     this.webSocketService.openWebSocket();
+
   }
 
   ngOnDestroy(): void {
@@ -63,71 +84,53 @@ export class ChatComponent {
   }
 
   sendMessage(sendForm: NgForm) {
-    const chatMessageDto = new Chat(this.logged.firstName!, sendForm.value.message);
-    this.webSocketService.sendMessage(chatMessageDto);
-    sendForm.controls['message'].reset();
+    let date = new Date();
+    let dateString = date.toISOString();
+
+    this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
+
+    const messageDto: Message = {
+      id: this.messages.length + 1,
+      user: this.logged,
+      contentMessage: this.messageUser,
+      time: dateString,
+      viewed: false
+    };
+    console.log(messageDto);
+
+    this.webSocketService.sendMessage(messageDto);
+    this.teamService.patchMessagesOnChat(messageDto.id!, this.logged.id!, messageDto).subscribe(
+      (response: any) => {
+        this.chat = response;
+        console.log(response, "Message sentALLL");
+        sendForm.controls['message'].reset();
+        let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
+        a.scrollTo(a.scrollTop, a.scrollHeight);
+      });
+
+
   }
 
-  users = [
-    {
-      name: 'John Doe',
-      status: 'online',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      messages: [
-        {
-          content: 'Hello',
-          time: '12:10'
-        },
 
-        {
-          content: 'How are you?',
-          time: '12:10'
-        }
-      ],
-      conversationOpen: false
-    }
-  ]
 
-  openConversation(i: number) {
-    this.users[this.cardChat].conversationOpen = false;
-    this.users[i].conversationOpen = true;
-    this.cardChat = i;
+  openConversation(chat: Chat) {
+    this.chat = chat;
+    // this.conversations[this.cardChat].conversationOpen = false;
+    // this.conversations[i].conversationOpen = true;
+    // this.cardChat = i;
+
+    this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
+      this.chat.messages = messages;
+      console.log(this.chat, "Messages");
+
+      let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
+      a.scrollTo(a.scrollTop, a.scrollHeight);
+    });
   }
 
   minimizeChat(value: boolean) {
     this.chatExpanded.emit(value);
   }
 
-  messages = [
-    {
-      id: 1,
-      content: 'Hello',
-      time: '12:10'
-    }
-  ]
 
-  submit() {
-    console.log(this.messageUser);
-
-    if (this.messageUser != "") {
-      console.log(this.messageUser);
-
-      let hora = new Date().getHours() + ":" + new Date().getMinutes();
-      if (new Date().getMinutes() < 10) {
-        hora = new Date().getHours() + ":0" + new Date().getMinutes();
-      }
-
-      this.messageUser = {
-        id: this.messages.length + 1,
-        content: this.messageUser,
-        time: hora
-      }
-
-      console.log(this.messageUser.id);
-
-      this.messages.push(this.messageUser)
-      this.side = !this.side;
-      this.messageUser = '';
-    }
-  }
 }

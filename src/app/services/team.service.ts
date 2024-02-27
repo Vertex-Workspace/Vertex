@@ -4,6 +4,8 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/team';
 import { User } from '../models/user';
+import { Chat } from '../models/chat';
+import { Message } from '../models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,7 @@ export class TeamService {
 
   public addUserOnTeam(userId: number, teamId: number): Observable<any> {
 
-    let cabaco = {
+    let userTeam = {
       team: {
         id: teamId
       },
@@ -40,7 +42,39 @@ export class TeamService {
     }
 
     return this.http
-      .patch<Team>(`${URL}team/user`, cabaco);
+      .patch<Team>(`${URL}team/user`, userTeam);
+      
+  }
+
+  public findAllChats():Observable<Chat[]>{
+    return this.http.get<Chat[]>(`${URL}chatController`);
+  }
+
+  public findAllMessagesByChatId(idChat:number):Observable<Message[]>{
+    return this.http.get<Message[]>(`${URL}chatController/messagesByChatId/${idChat}`);
+  }
+
+  public patchMessagesOnChat(idChat:number,idUser:number, message:Message):Observable<any>{
+    console.log(idChat)
+    console.log(idUser);
+    
+    
+    return this.http.patch<any>(`${URL}chatController/messagePatch/${idChat}/${idUser}`, message);
+  }
+
+  public patchChat(idChat:number, teamId: number, userId:number):Observable<any>{
+    console.log(idChat)
+    let userTeam = {
+      team: {
+        id: teamId
+      },
+      user:{
+        id: userId
+      } 
+    }
+    console.log(userTeam);
+    
+    return this.http.patch<any>(`${URL}chatController/chat/${idChat}`, userTeam);
   }
 
   public userIsOnTeam(userId: number, teamId: number): Observable<boolean> {
