@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PropertiesComponent } from './properties.component';
+import { ModalPropertiesComponent } from './modal-properties.component';
 import { EditPropertiesComponent } from './edit-properties/edit-properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StatusComponent } from './status/status.component';
@@ -13,7 +13,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
-    PropertiesComponent,
+    ModalPropertiesComponent,
     EditPropertiesComponent,
     StatusComponent,
     ColorsComponent,
@@ -21,7 +21,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ItemsSelectionComponent
   ],
   exports: [
-    PropertiesComponent
+    ModalPropertiesComponent,
   ],
   imports: [
     CommonModule,

@@ -22,7 +22,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     FontAwesomeModule,
     ModalWarnModule,
     DragDropModule,
-    CardModule
+    CardModule,
+    DragDropModule
   ]
 })
 export class CalendarModule { }

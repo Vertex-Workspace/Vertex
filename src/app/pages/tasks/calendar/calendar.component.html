@@ -10,6 +10,7 @@
                 {{translateMonth(currentDate.getMonth()-1)}}
             </button>
         </div>
+
         <div class="title">
             <h5>{{translateMonth(currentDate.getMonth())}} - {{currentDate.getFullYear()}}</h5>
             <div>
@@ -26,7 +27,7 @@
         </div>
     </div>
 
-    <div class="calendar" dropzone="true">
+    <div class="calendar">
 
         <!-- 
             WRITTEN DAYS OF THE WEEK
@@ -40,51 +41,66 @@
         </div>
 
 
-        <div class="calendar-rows" *ngFor="let week of groupCalendarDays()">
+        <div cdkDropListGroup>
 
-            <div *ngFor="let day of week; index as index" class="calendar-day" (click)="newTaskOnDay(day)" 
-    
-                [class.day-not-month]="currentDate.getMonth() !== day.getMonth()">
+            <div class="calendar-rows" *ngFor="let week of weeks" >
+                
+                <div *ngFor="let day of week; index as index" 
+                    class="calendar-day h-full"
+                    (mouseenter)="hover(day)"
+                    [class.day-not-month]="currentDate.getMonth() !== day.getMonth()"   
+                    cdkDropList
+                    [cdkDropListData]="day"
+                    (cdkDropListDropped)="drop($event, day)" 
+                >
                 <!-- 
                     DAYS OF THE MONTH (NUMBER)
                 -->
+                
                 <div class="day-informations">
-
+                    
                     <!-- FUTURE -->
-                    <div *ngIf="day == buttonDay">
-                        +
+                    <div class="add-button">
+                    <i 
+                        (click)="newTaskOnDay(day)" 
+                        *ngIf="hoveringDay === day" 
+                        class="pi pi-plus-circle"
+                    ></i>
                     </div>
-
-
-
+                    
                     <div [class.today]="today(day)">
                         {{day | date : 'dd'}}
                     </div>
                 </div>
-
-
+                
+                
                 <div class="tasks-informations" *ngIf="getTasksByDate(day).length > 0 && !toggle">
                     <div class="tasks-link-informations regular-text" (click)="openModalTasks(day)">
                         <p>{{getTasksByDate(day).length}} tarefas atribuídas</p>
                         <i class="pi pi-external-link"></i>
                     </div>
                 </div>
-
-
-                <div class="tasks-list-in-calendar" *ngIf="toggle">
-                    <ng-container *ngFor="let task of getTasksByDate(day);" >
-                        <app-card 
-                        (openTaskDetails)="openCardTask(task)" 
-                        [minHeight]="'60px'" 
-                        [width]="'210px'" 
-                        [task]="task"
-                        [borderColor]="getColor(task)" 
-                        (deleteTask)="deleteTask(task)"  
-                        ></app-card>
-                    </ng-container>
+                
+                <div>
+                    
+                    <div class="tasks-list-in-calendar" *ngIf="toggle" cdkDropListGroup>
+                        <ng-container *ngFor="let task of getTasksByDate(day);">
+                            <app-card 
+                            (openTaskDetails)="openCardTask(task)" 
+                            [minHeight]="'60px'" 
+                            [width]="'210px'" 
+                            [task]="task"
+                            [borderColor]="getColor(task)" 
+                            (deleteTask)="deleteTask(task)"
+                            [cdkDragData]="task"
+                            cdkDrag
+                            ></app-card>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 

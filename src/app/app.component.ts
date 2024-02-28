@@ -16,6 +16,7 @@
   import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
   import { TeamService } from './services/team.service';
 
+
   @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
@@ -62,7 +63,7 @@
       private router: Router,
       private userService: UserService,
       private userState: UserStateService,
-      private teamService: TeamService
+      private teamService: TeamService,
     ) {
       personalization.setPersonalization();
 

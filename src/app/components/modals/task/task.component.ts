@@ -1,13 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Project } from 'src/app/models/project';
 import { PropertyList } from 'src/app/models/property';
 import { Task, TaskEdit } from 'src/app/models/task';
+import { Permission, PermissionsType } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 import { taskHourService } from 'src/app/services/taskHour.service';
 import { taskHour } from '../../../models/taskHour';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'src/app/services/project.service';
-import { Project } from 'src/app/models/project';
 import { User } from 'src/app/models/user';
 import { TimeInTask } from 'src/app/models/timeInTask';
 
@@ -17,7 +20,10 @@ import { TimeInTask } from 'src/app/models/timeInTask';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
+  
   faClock = faClock;
+
+
 
   @Input()
   project!: Project;
@@ -27,6 +33,8 @@ export class TaskComponent implements OnInit {
   @Output() changes = new EventEmitter();
 
   @Input() task!: Task;
+
+  canEdit: boolean = false;
 
   taskStep!: Task;
   user!: User;
@@ -40,7 +48,13 @@ export class TaskComponent implements OnInit {
   miniChatOpen: boolean=false;
   chatExpanded: boolean=false;
 
-  constructor(private taskService: TaskService, private projectService: ProjectService, private alertService: AlertService, private taskHourService: taskHourService) { }
+  constructor(private taskService: TaskService, 
+    private projectService: ProjectService, 
+    private alertService: AlertService, 
+    private taskHourService: taskHourService,
+    private teamService: TeamService,
+    private userService: UserService) { }
+
   selectedComponent: string = 'description';
 
   async ngOnInit() {
@@ -66,7 +80,6 @@ export class TaskComponent implements OnInit {
   async getTimeInTask() {
     this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
       (time: TimeInTask) => {
-        console.log(time);
         
         this.timer = time.timeInTask;
         
@@ -74,13 +87,20 @@ export class TaskComponent implements OnInit {
         this.minutes = parseInt(time.timeInTask.substring(3, 5));
         this.hours = parseInt(time.timeInTask.substring(0, 2));
         this.timeInTask = time;
-        console.log(this.timeInTask);
-        
-        console.log(time, "TIME-IN BACK");
       },
       (e: any) => {
         console.log(e);
       });
+
+      this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+        this.userService.getLogged().permissions = permissions
+  
+        for (let i = 0; i < permissions.length; i++) {
+          if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+            this.canEdit = true;
+          }
+        }
+      })
   }
 
   navigate(component: string): void {
@@ -96,6 +116,13 @@ export class TaskComponent implements OnInit {
   }
 
   updateTaskNameAndDescription(): void {
+      let taskEdit: TaskEdit = {
+        id: this.task.id,
+        name: this.task.name,
+        description: this.task.description
+      };
+      if (this.task.name === "") {
+        this.task.name = "Nova tarefa";
     let taskEdit: TaskEdit = {
       id: this.task.id,
       name: this.task.name,
@@ -115,24 +142,45 @@ export class TaskComponent implements OnInit {
           this.alertService.errorAlert("O número máximo de caracteres permitido é 1000, reduza o tamanho da sua");
         }
         this.alertService.successAlert("Tarefa alterada com sucesso!");
-      },
+      }),
       (error: any) => {
         console.log(error);
         
         this.alertService.errorAlert("Máximo de caracteres permitido: 1000. Reduza o tamanho da sua descrição.");
       }
-    );
+      if (this.task.description === "") {
+        this.task.name = "Insira uma breve descrição sobre a tarefa aqui...";
+      }
+      this.taskService.edit(taskEdit).subscribe(
+        (task: Task) => {
+          console.log(2);
+          
+          this.task.name = task.name
+          this.task.description = task.description;
+          this.alertService.successAlert("Tarefa alterada com sucesso!");
+        },
+        (error: any) => {
+          this.alertService.errorAlert("Erro ao alterar tarefa!");
+        }
+      );
   }
+}
 
   descriptionEditable: boolean = false;
+
   changeEditDescription(): void {
+    if (this.canEdit) {
+      if (this.descriptionEditable) {
+        this.updateTaskNameAndDescription();
+      }
+      this.descriptionEditable = !this.descriptionEditable;
+    }else {
+      this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
     if (this.descriptionEditable) {
       this.updateTaskNameAndDescription();
     }
-    this.descriptionEditable = !this.descriptionEditable;
   }
-
-
+}
   idResponsable: number = 0;
   
   startTimer() {

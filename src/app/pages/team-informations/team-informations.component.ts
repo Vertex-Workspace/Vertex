@@ -2,15 +2,18 @@ import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Group } from 'src/app/models/groups';
 import { Team } from 'src/app/models/team';
+import { User } from 'src/app/models/user';
+import { AlertService } from 'src/app/services/alert.service';
+import { GroupService } from 'src/app/services/group.service';
 import { TeamService } from 'src/app/services/team.service';
-import { AlertService } from '../../services/alert.service';
 import { catchError, of, switchMap, tap } from 'rxjs';
 
 
@@ -36,11 +39,12 @@ export class TeamInformationsComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private teamService: TeamService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private groupService: GroupService
     ) {
         this.team = this.getTeam();
     }
-
+       
     ngOnInit() {
         this.start();
         console.log(this.team);
@@ -50,6 +54,8 @@ export class TeamInformationsComponent implements OnInit {
         let aaa = this.copyInviteLink();
         console.log(aaa);
 
+        this.getGroup();
+        this.getUser();
     }
 
     getTeam(): Team {
@@ -192,8 +198,9 @@ export class TeamInformationsComponent implements OnInit {
     options: any;
 
     menuItems = [
-        { id: 'participants', iconClass: 'pi pi-users', label: 'Visualizar participantes' },
-        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' }
+        { id: 'participants', iconClass: 'pi pi-user', label: 'Visualizar participantes' },
+        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' },
+        { id: 'groups', iconClass: 'pi pi-users', label: 'Grupos' }
     ];
 
 
@@ -201,9 +208,35 @@ export class TeamInformationsComponent implements OnInit {
         this.clicked = preview;
     }
 
-
     swapPermissionExpanded(id: number): void {
         // this.users[id].open = !this.users[id].open;
+    }
+
+    getGroup(): any[] {
+        return this.team?.groups!;
+    }
+
+    getUser(): any[] {
+        return this.team?.users!
+    }
+
+    deleteGroup(groupId: Group):void {
+        console.log(groupId); 
+        this.groupService.delete(groupId.id).subscribe((group: Group) => {
+          this.alertService.successAlert('Grupo deletado com sucesso')
+          this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
+        },
+        e=> {
+          this.alertService.errorAlert("Não foi possível deletar");
+        })
+      }
+
+    deleteUserTeam(user: User): void {
+      console.log("fui chamado");
+      
+      this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
+        this.alertService.successAlert("Usuário retirado da equipe") 
+      })
     }
 
 }

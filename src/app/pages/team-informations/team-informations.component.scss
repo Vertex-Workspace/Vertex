@@ -157,7 +157,7 @@ section {
 }
 
 .grid-participants{
-    @apply grid grid-cols-2 gap-3 w-[77%] h-[35%] pr-3 overflow-auto;
+    @apply grid grid-cols-2 gap-3 w-full h-[35%] pr-3 overflow-auto;
 }
 
 .card-user-grid{
@@ -194,16 +194,6 @@ section {
 .div-description-top-right{
     @apply h-[32%] flex flex-col items-center justify-end;
 }
-
-// .h1-description{
-//     @apply flex justify-center font-bold text-[22px];
-//     color: $primaryColor;
-// }
-
-// .h3-description{
-//     @apply text-justify flex justify-center w-[80%];
-//     color: $primaryColor;
-// }
 
 .div-project-dashboards{
     @apply flex flex-col justify-center w-full h-[54.5%];

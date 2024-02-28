@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import {
   faTrashCan, 
@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Value } from 'src/app/models/value';
 import { PropertyKind } from 'src/app/models/property';
+
 
 @Component({
   selector: 'app-row-card',
@@ -27,13 +28,19 @@ export class RowCardComponent {
   @Input()
   cols!: any[];
 
+  modalDelete: boolean = false;
+  @Output() openTaskDetails = new EventEmitter();
+
   value!: Value;
 
   icons: any[] = [
-    { id: 'clock', icon: this.faClock },
-    { id: 'chat', icon: this.faEnvelope },
+    // { id: 'clock', icon: this.faClock },
+    // { id: 'chat', icon: this.faEnvelope },
     { id: 'delete', icon: this.faTrashCan }
   ];
+
+  ngOnInit(): void {    
+  }
 
   getCols(): any[] {
     let cols : any [] = [];
@@ -46,17 +53,24 @@ export class RowCardComponent {
   }
 
   getNameWidth(): string {
-    return "40%";
+    return "300px";
   }
 
   getPropertyValue(col: any) : Value {
     let value : Value;
     this.task.values?.forEach(values => {
-      if (col.id === values.property.id) {
+      if (col.field === values.property.kind) {
         value = values;
       }
     });
     return value!;
+  }
+
+  openTask(): void {
+    if(!this.modalDelete){
+      this.openTaskDetails.emit();
+
+    }
   }
 
 }

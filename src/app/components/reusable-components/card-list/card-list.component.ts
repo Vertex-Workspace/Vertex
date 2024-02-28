@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-card-list',
@@ -11,6 +13,7 @@ export class CardListComponent implements OnInit{
 
   constructor(
     private router: Router,
+    private alertService : AlertService
   ) { }
   
   @Input()
@@ -23,11 +26,15 @@ export class CardListComponent implements OnInit{
   type !: string;
 
   @Output()
-  deleteEmitter: EventEmitter<number> = new EventEmitter<number>();
+  deleteEmitterTeam: EventEmitter<Team> = new EventEmitter<Team>();
+
+  @Output()
+  deleteEmitterProject: EventEmitter<Project> = new EventEmitter<Project>();
 
   delete: boolean = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {        
+  }
 
   getType(): any[] {
     if (this.type === 'project') {
@@ -36,39 +43,41 @@ export class CardListComponent implements OnInit{
     return this.teams!;
   }
 
-  idTeamWillBeDeleted!: number;
-  showModalDelete(idTeam: number | undefined): void {
-    this.changeModalState();
-    if(this.delete && idTeam != undefined){
-      this.idTeamWillBeDeleted = idTeam;
-    } else{
-      this.idTeamWillBeDeleted = 0;
-    }
-  }
-
-  deleteTeam(operation: boolean) {
-    this.changeModalState();
-  }
-
-  deleteEmit(id: number): void {    
-    this.deleteEmitter.emit(id)
-  }
-
-  changeModalState(): void {
-    this.delete = !this.delete;
-  }
-
   openTeam(id: number) {
-
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);      
     } else {
       this.router.navigate([`/projeto/${id}/tarefas`])
     }
+  }
 
-    // this.teamService.getOneById(id!).subscribe(async(team) => {
-    //   await localStorage.setItem('team', JSON.stringify(new Team(team)));
-    //   this.router.navigate(['/projetos']);
-    // });
+  deleteBoolean(): void {
+    this.delete = !this.delete
+  }
+
+  deleteEmitProject(project: Project): void {
+    this.deleteEmitterProject.emit(project);
+  }
+
+  deleteEmitTeam(team: Team){
+    this.deleteEmitterTeam.emit(team)
+  }
+
+  validatingDeleteProject(project: Project, answer: boolean): void{
+    if(answer === true){
+      this.deleteEmitProject(project)
+      this.alertService.successAlert("Projeto removido!")
+    }else {
+      this.alertService.notificationAlert("Projeto não removido")
+    } 
+  }
+
+  validatingDeleteTeam(team:Team, answer: boolean): void{
+    if(answer === true){
+      this.deleteEmitTeam(team)
+      this.alertService.successAlert("Equipe removida!")
+    }else {
+      this.alertService.notificationAlert("Equipe não removida!")
+    } 
   }
 }

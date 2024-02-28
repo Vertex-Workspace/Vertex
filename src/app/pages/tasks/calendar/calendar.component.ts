@@ -1,5 +1,6 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { PropertyKind, PropertyList } from 'src/app/models/property';
@@ -22,10 +23,16 @@ export class CalendarComponent {
   @Input() project!: Project;
   day: any;
 
-  constructor(private taskService: TaskService, private userService: UserService) { }
+  constructor(
+    private taskService: TaskService, 
+    private userService: UserService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.buildCalendar();
+    this.groupCalendarDays();
+    this.teste();
   }
 
   plus : boolean = false;
@@ -37,6 +44,16 @@ export class CalendarComponent {
   @Output() openTaskDetails = new EventEmitter();
   openCardTask(task: Task): void {
     this.openTaskDetails.emit(task);
+  }
+
+  teste(): void {
+    const projectId: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.taskService
+      .getAllByProject(projectId)
+      .subscribe((tasks: Task[]) => {
+        this.tasks = tasks;        
+      })
   }
 
   //FUTURE 
@@ -55,6 +72,8 @@ export class CalendarComponent {
     }
     this.modalTasks = !this.modalTasks;
   }
+
+  tasks !: Task[];
 
   getTasksByDate(date: Date | undefined): Task[] {
     let tasks: Task[] = [];
@@ -110,11 +129,13 @@ export class CalendarComponent {
       this.calendarDays.push(new Date(date.getTime()));
     }
   }
+
   changeMonth(offsetMes: number) {
     this.currentDate.setMonth(this.currentDate.getMonth() + offsetMes);
     this.currentDate = new Date(this.currentDate.getTime());
     this.buildCalendar();
   }
+
   translateMonth(index: number): string {
     const monthNames = [
       "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -143,7 +164,9 @@ export class CalendarComponent {
       && date.getFullYear() == day.getFullYear();
   }
 
-  groupCalendarDays(): Date[][] {
+  weeks!: Date[][];
+
+  groupCalendarDays() {
     const weeks: Date[][] = [];
     let currentWeek: Date[] = [];
 
@@ -151,12 +174,12 @@ export class CalendarComponent {
       currentWeek.push(day);
 
       if (currentWeek.length === 7 || index === this.calendarDays.length - 1) {
-        weeks.push([...currentWeek]);
+        weeks.push([...currentWeek]);''
         currentWeek = [];
       }
     });
 
-    return weeks;
+    this.weeks = weeks;
   }
 
 
@@ -201,40 +224,12 @@ export class CalendarComponent {
       },
       teamId: this.project.idTeam!
     }
-
-
   
     this.taskService.create(taskCreate).subscribe(
       (task) => {
         this.project.tasks.push(task);
-
-        task.values.forEach((value) => {
-          if (value.property.kind === PropertyKind.DATE) {
-            const valueUpdate: ValueUpdate = {
-              id: task.id,
-              value: {
-                property: {
-                  id: value.property.id
-                },
-                value: {
-                  id: value.id,
-                  //SLICE RETIRAR O "Z" NO FINAL
-                  value: day.toISOString().slice(0, -1)
-                }
-              }
-            };
-            console.log(valueUpdate);
-            this.taskService.patchValue(valueUpdate).subscribe(
-              (taskDate) => {
-                task.values = taskDate.values;
-                this.openCardTask(task);
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-          }
-        });
+        this.patchValue(task, day);
+        this.openCardTask(task);
       },
       (error) => {
         console.log(error);
@@ -247,8 +242,61 @@ export class CalendarComponent {
     this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
   }
 
+  drop(e: CdkDragDrop<any>, day: Date): void {
+    const task: Task = e.item.data;
+    let property: any;
+
+    task.values
+      .forEach((prop) => {
+        if (prop.property.kind === PropertyKind.DATE) {
+          prop.value = day;
+          property = prop;
+        }
+      })
+
+      this.patchValue(task, day)
+    
+  }
+
   //DRAG AND DROP
-  drag(task : Task): void {
+  drag(task : Task): void { 
     console.log(task);
   }
+
+
+  patchValue(task: Task, day: Date): void {
+    task.values.forEach((value) => {
+      if (value.property.kind === PropertyKind.DATE) {
+        const valueUpdate: ValueUpdate = {
+          id: task.id,
+          value: {
+            property: {
+              id: value.property.id
+            },
+            value: {
+              id: value.id,
+              //SLICE RETIRAR O "Z" NO FINAL
+              value: day.toISOString().slice(0, -1)
+            }
+          }
+        };
+
+        this.taskService.patchValue(valueUpdate).subscribe(
+          (taskDate) => {
+            task.values = taskDate.values;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    });
+  }
+
+  hoveringDay: Date | null = null;
+
+  hover(day: Date) {
+    this.hoveringDay = day;
+  }
+
 }

@@ -32,12 +32,24 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private _location: Location
   ) {
-    router.events
-      .subscribe((val: any) => {
-        if (val instanceof NavigationEnd) {
-          this.updateLocation(val);
+    this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        const activeRoute: string = val.url as string;  
+
+        let r = this.route;
+        while (r.firstChild) {
+          r = r.firstChild;
         }
-      })    
+        this.updateLocation(activeRoute);
+
+        r.params.subscribe(params => {
+          if (params) {
+            const id: number = params['id'];            
+            this.incrementUrlById(activeRoute, id);
+          }
+        });
+      }
+    }); 
   }
 
   ngOnInit(): void {
@@ -50,18 +62,12 @@ export class HeaderComponent implements OnInit {
     this.openNotification.emit();
   }
 
-  updateLocation(val: any): void {
-    const activeRoute: string = val.url as string;        
+  updateLocation(activeRoute: string): void {
 
     this.locations
       .find((loc: LocationItem) => {
-        if (activeRoute.includes(loc.url)) {
-          this.location = loc.name;    
-          const id = val.url.replace(/[^0-9]/g, "") as number;
-          
-          if (id) {
-            this.location += this.verifyUrlId(activeRoute, id)
-          }
+        if (activeRoute.includes(loc.url)) {      
+          this.location = loc.name;       
         }
       })          
 
@@ -71,47 +77,35 @@ export class HeaderComponent implements OnInit {
     this._location.back();
   }
 
-  verifyUrlId(activeRoute: string, id: number): string {    
-    if (activeRoute.includes('projetos')) return ` ${this.getTeam(id)}`;
-    if (activeRoute.includes('tarefas')) return ` ${this.getProject(id)}`;
-    if (activeRoute.includes('usuario/perfil')) return ` ${this.getUser(id)}`;
-    return "a";
+  incrementUrlById(activeRoute: string, id: number): void {     
+    if (activeRoute.includes('projetos')) this.getTeam(id);
+    if (activeRoute.includes('tarefas')) this.getProject(id);
+    if (activeRoute.includes('usuario/perfil')) this.getUser(id);
   }
 
-  getTeam(id: number): string {
-    let name: string = "";
-
+  getTeam(id: number): void {
     this.teamService
       .getOneById(id)
       .subscribe((team: Team) => {
-        name = team.name;
+        this.location += " " + team.name;      
       })
-
-      return name;
   }
 
-  getProject(id: number): string {
-    let name: string = "";
-
+  getProject(id: number): void {
     this.projectService
       .getOneById(id)
       .subscribe((project: Project) => {
-        name = project.name;
+        console.log(this.location);
+        this.location += " " + project.name;
       })
-      
-      return name;
   }
 
-  getUser(id: number): string {
-    let name: string = "";
-
+  getUser(id: number): void {
     this.userService
       .getOneById(id)
       .subscribe((user: User) => {
-        name = user.firstName!;
+        this.location += " " + user.firstName!;
       })
-
-    return name;
   }
 
 }

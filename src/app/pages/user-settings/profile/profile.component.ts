@@ -136,6 +136,9 @@ export class ProfileComponent {
     this.selectedFile = e.target.files[0]
     const fd: FormData = new FormData();
     fd.append('file', this.selectedFile, this.selectedFile.name);    
+    
+    console.log(fd);
+    
 
     this.userService
       .uploadImage(fd, this.logged.id!)
@@ -153,5 +156,6 @@ export class ProfileComponent {
         this.userService.updateLoggedUser(user);
       })
   }
+  
 
 }

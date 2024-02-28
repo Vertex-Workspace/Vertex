@@ -27,7 +27,7 @@ section{
 }
 
 .functionally-items {
-    @apply flex flex-col w-full h-full pt-4 justify-between;
+    @apply flex flex-col w-full h-[15%] pt-4 justify-between;
 }
 
 .functionally-items-task {
@@ -107,10 +107,10 @@ section{
 }
 
     .container-grid{
-        @apply flex flex-col h-[90%] w-full pt-10 ;
+        @apply flex flex-col h-[90%] w-full pt-10;
     }
     .default-size{
-        @apply flex w-full h-full;
+        @apply flex w-full h-[70%];
     }
 
 

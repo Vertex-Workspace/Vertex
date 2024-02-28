@@ -19,8 +19,6 @@ export class QuickAccessComponent implements OnInit {
   typeString!: String;
 
   @Input()
-  recentTeams !: Team[];  
-
   recentItems !: any[];
 
   constructor(

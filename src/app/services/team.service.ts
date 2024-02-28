@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/team';
-import { User } from '../models/user';
+
 import { Chat } from '../models/chat';
 import { Message } from '../models/message';
+import { Project } from '../models/project';
+import { HasPermission, Permission, User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +125,27 @@ export class TeamService {
       .get<boolean>(`${URL}team/exists/${teamId}/${userId}`);
   }
 
+  public getPermission(team: Team, user: User): Observable<Permission[]> {
+    return this.http.get<Permission[]>(`${URL}team/permission/${user.id}/${team.id}`)
+  }
 
+  // public hasPermission():
+  public updateImage(teamId: number, fd: FormData) {
+    return this.http
+      .patch(`${URL}team/image/${teamId}`, fd)
+  }
 
+  public changePermissionEnable(permission: Permission, user: User, team: Team):Observable<Permission>{
+    return this.http.patch<Permission>(`${URL}team/permission/${permission.id}/${user.id}/${team.id}`, permission)
+  }
+
+  public hasPermission(project: Project, user: User): Observable<Permission[]> {
+    return this.http
+      .get<Permission[]>(`${URL}team/hasPermission/${project.id}/${user.id}`)
+      .pipe(map((permissions: Permission[]) => permissions.map(permission => new Permission(permission))));
+  }
+
+  public deleteUserTeam(team: Team, user:User): Observable<Team>{
+    return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
+  }
 }

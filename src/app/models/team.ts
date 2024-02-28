@@ -5,7 +5,7 @@ import { User } from "./user";
 
 export class Team {
 
-    id?: number;
+    id!: number;
     name !: string;
     creationDate !: Date;
     description !: string;
@@ -13,8 +13,9 @@ export class Team {
         code: string;
     };
     chat?: Chat;
+    image ?: string;
     users?: User[];
-    creator?: User;
+    creator!: User;
     groups?: Group[];
     projects?: Project[];
 
@@ -31,8 +32,10 @@ export class Team {
         this.creator = team.creator;
         this.users = team.users;
         this.groups = team.groups;
-        this.projects = team.projects;
 
+  
+        this.projects = team.projects;    
+        this.image = team.image;   
     }
 
 

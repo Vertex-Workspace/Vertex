@@ -3,10 +3,7 @@
         <!-- LEFT SIDE - QUICK ACCESS -->
         <div class="container-grid">
             <div class="default-size">
-                <app-quick-access 
-                    style="width: 100%; height:100%;" 
-                    [typeString]="'project'"
-                ></app-quick-access>
+                <app-quick-access style="width: 100%; height:100%;" [typeString]="'project'"></app-quick-access>
             </div>
         </div>
 
@@ -21,11 +18,16 @@
                 </ng-container>
             </div>
 
-            <div class="functionally-items regular-text" *ngIf="clicked === 'project' && !isCreating">
+            <div class="functionally-items regular-text"
+                *ngIf="clicked === 'project' && !isCreatingProject || clicked === 'group' && !isCreatingGroup">
                 <div class="container">
-                    <button class="create" (click)="switchCreateView()">
+                    <button class="create" (click)="switchCreateView()" *ngIf="clicked === 'project'">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         Novo projeto
+                    </button>
+                    <button class="create" (click)="switchCreateViewGroup()" *ngIf="clicked === 'group'">
+                        <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                        Novo grupo
                     </button>
                     <div class="search">
                         <input type="text" placeholder="Pesquisar por uma equipe...">
@@ -49,10 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <section 
-                    class="filter-settings" 
-                    *ngIf="filterOpen || orderOpen"
-                >
+                <section class="filter-settings" *ngIf="filterOpen || orderOpen">
                     <!-- <p *ngIf="orderOpen">Ordenar por </p> -->
                     <p *ngIf="filterOpen || orderOpen">Filtrar por </p>
 
@@ -62,7 +61,7 @@
                                 {{ item.label }}
                             </option>
                         </select>
-                        
+
                         <select *ngIf="orderOpen">
                             <option *ngFor="let item of orderSettings">
                                 {{ item.label }}
@@ -70,27 +69,33 @@
                         </select>
                     </ng-container>
                 </section>
-                
+
                 <div class="w-full h-full">
-                    <app-list></app-list>
+                    <app-list
+                        *ngIf="team.projects && team.projects.length > 0"
+                        [team]="team"
+                    ></app-list>
                 </div>
             </div>
 
             <div class="default-size" *ngIf="clicked === 'project'">
-                <app-card-list 
-                    style="width: 100%; height: 90%; padding-top: 3%;" 
-                    *ngIf="clicked === 'project' && !isCreating"
-                    (deleteEmitter)="delete($event)"
-                    [type]="'project'"
-                    [team]="team"
-                ></app-card-list>
-                <app-create-team-project 
-                    style="width: 100%; height: 90%; padding-top: 3%;" 
-                    *ngIf="clicked === 'project' && isCreating"
-                    (createProject)="createProject($event)"
-                    (close)="switchCreateView()" 
-                    [typeString]="'project'"
-                ></app-create-team-project>
+              
+                <app-card-list style="width: 100%; height: 90%; padding-top: 3%"
+                    *ngIf="clicked === 'project' && !isCreatingProject" (deleteEmitterProject)="delete($event)"
+                    [type]="'project'" [team]="team"></app-card-list>
+                <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
+                    *ngIf="clicked === 'project' && isCreatingProject" (createProject)="createProject($event)"
+                    (close)="switchCreateView()" [typeString]="'project'"></app-create-team-project>
+            </div>
+
+            <div class="default-size" *ngIf="clicked === 'group'">
+                <app-card-group style="width: 100%; height: 90%; padding-top: 3%; overflow-y: scroll;"
+                    [width]="'1000px'" [height]="'90px'" [team]="team" *ngIf="!isCreatingGroup"
+                    (deleteEmitterGroup)="deleteGroup($event)">
+                </app-card-group>
+                <app-create-group style="width: 100%; height: 700px; padding-top: 3%;"
+                    *ngIf="isCreatingGroup && clicked === 'group'" [team]="team" (createGroup)="createGroup($event)"
+                    (close)="switchCreateViewGroup()"></app-create-group>
             </div>
         </div>
     </div>

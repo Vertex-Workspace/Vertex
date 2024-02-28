@@ -1,5 +1,16 @@
 @import '../../../../variables';
 
+@keyframes scale-in {
+    0% {
+      -webkit-transform: scale(0.6);
+              transform: scale(0.6);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+}
+
 .modal-overlay {
     @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
     z-index: 999;
@@ -23,6 +34,8 @@
 
 .base {
     @apply w-full flex flex-col p-5 rounded-md ;
+    -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
 
 .div-timer-closeModal{
