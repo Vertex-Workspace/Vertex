@@ -22,7 +22,7 @@ export class InputValuePropertyComponent {
   @Output()
   changes = new EventEmitter();
 
-  @Input() backgroundColor ?: string = '#000000';
+  @Input() backgroundColor ?: string = '';
 
   @Input()
   value!: Value;
@@ -134,7 +134,7 @@ export class InputValuePropertyComponent {
       let newValue: string | number | Date;
       if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {
         newValue = event.value.id as number;
-        this.propertyListId.emit(newValue)
+        this.backgroundColor = this.getColor(event.value.color);
       } else {
         newValue = event.target.value as string;
       }
