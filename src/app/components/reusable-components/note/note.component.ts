@@ -47,9 +47,9 @@ export class NoteComponent implements OnInit, AfterViewInit {
   }
 
   configItems = [
-    { id: 'link', iconClass: 'pi pi-link' },
-    { id: 'image', iconClass: 'pi pi-images' },
-    { id: 'edit', iconClass: 'pi pi-pencil' },
+    { id: 'image', iconClass: 'pi pi-images', onClick: () => this.toggleModalOpen() },
+    { id: 'edit', iconClass: 'pi pi-pencil', onClick: () => this.toggleModalOpen() },
+    { id: 'trash', iconClass: 'pi pi-trash', onClick: () => this.toggleModalOpen() },
   ];
 
   hasImage(): boolean {

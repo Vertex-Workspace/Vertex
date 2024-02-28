@@ -8,7 +8,6 @@
   cdkDragBoundary=".mural-section"
   [cdkDragFreeDragPosition]="note.position"
   (cdkDragEnded)="dragEnd($event)"
-  (click)="toggleModalOpen()"
 >
   <span #dragHandleCorner class="dragHandle corner" cdkDrag (cdkDragMoved)="dragMove(dragHandleCorner, $event)"></span>
   <span #dragHandleRight cdkDragLockAxis="x" class="dragHandle right" cdkDrag (cdkDragMoved)="dragMove(dragHandleRight, $event)"></span>
@@ -38,6 +37,7 @@
       <div class="icons" [style.backgroundColor]="note.color">
         <ng-container *ngFor="let item of configItems">
           <i 
+            (click)="item.onClick()"
             class="{{item.iconClass}}"
             style="font-size: 1rem"
           ></i>

@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Note, NoteGet } from 'src/app/models/note';
 import { Project } from 'src/app/models/project';
+import { ProjectService } from 'src/app/services/project.service';
 
 interface Color {
   color: string,
@@ -67,8 +69,28 @@ export class NoteModalComponent implements OnInit {
     }
   ];
 
-  ngOnInit(): void {
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute
+  ) {
+    route.params.subscribe(params => {
+      if (params) {
+        this.getProject(params['id']);        
+      }
+    });
+  }
 
+  ngOnInit(): void {
+    console.log(this.note);
+    
+  }
+
+  getProject(id: number): void {
+    this.projectService
+      .getOneById(id)
+      .subscribe((project: Project) => {
+        this.project = project;
+      })
   }
 
   getSelectedColor(): any {
@@ -77,16 +99,12 @@ export class NoteModalComponent implements OnInit {
     });
   };
 
-  changeColor(color: Color) {
-    console.log(color);
-    
+  changeColor(color: Color) {    
     this.note.color = color.color;
     this.colorList.forEach(c => {
       if (c === color) c.selected = true;
       else c.selected = false;
-    });
-    console.log(this.colorList);
-    
+    });    
   }
 
   toggleColorList(): void {
@@ -95,6 +113,10 @@ export class NoteModalComponent implements OnInit {
 
   toggleEditDescription(): void {
     this.descriptionEditable = !this.descriptionEditable;
+  }
+
+  clickOutHandler(): void {
+    this.closeModal.emit();
   }
 
 }

@@ -14,13 +14,13 @@ import { MuralComponent } from './mural/mural.component';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { ChartModule } from 'primeng/chart';
 import { NoteComponent } from 'src/app/components/reusable-components/note/note.component';
+import { NoteModule } from 'src/app/components/reusable-components/note/note.module';
 
 
 @NgModule({
   declarations: [
     TasksComponent,
     MuralComponent,
-    NoteComponent
    ],
   exports:[
     TasksComponent
@@ -38,6 +38,7 @@ import { NoteComponent } from 'src/app/components/reusable-components/note/note.
     KanbanModule,
     ChartModule,
     PropertiesModule,
+    NoteModule
   ],
 })
 export class TasksModule { }
