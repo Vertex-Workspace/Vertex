@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   faEllipsisVertical, faPaintBrush, faEye, faEyeSlash,
-  faTrashCan, faPlus
+  faTrashCan, faPlus, faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
@@ -34,12 +34,14 @@ export class ItemsSelectionComponent {
   faTrashCan = faTrashCan;
   faPlus = faPlus;
 
+  faInfoCircle = faInfoCircle;
+
   sections: any[] = [
-    { name: "Visíveis", icon: faEye, propertyLists: [] },
-    { name: "Não Visíveis", icon: faEyeSlash, propertyLists: [] }
+    { name: "Visíveis", icon: faEye, propertyLists: [], kind: PropertyListKind.VISIBLE },
+    { name: "Não Visíveis", icon: faEyeSlash, propertyLists: [], kind: PropertyListKind.INVISIBLE }
   ]
 
-  constructor(private propertyService: PropertyService, private alertService: AlertService) { }
+  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
 
   ngOnInit(): void {
     console.log(this.property.propertyLists);
@@ -81,90 +83,70 @@ export class ItemsSelectionComponent {
   }
 
   delete(propertyList: PropertyList) {
-    for(const section of this.sections){
-      section.propertyLists.forEach((propertyListFor: PropertyList) => {
-        if(propertyList === propertyListFor){
-          section.propertyLists.splice(section.propertyLists.indexOf(propertyListFor), 1);
-        }
-      });
-    }
-    this.property.propertyLists.splice(this.property.propertyLists.indexOf(propertyList), 1);
-    this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-      (property) => {
-        this.alertService.successAlert("Propriedade excluída com sucesso!");
+    console.log(propertyList);
+    
+    this.propertyService.deletePropertyList(this.property.id!, propertyList.id!).subscribe(
+      (project) => {
+        this.project = project;
+        this.property = project.properties.find((property) => property.id == this.property.id)!;
+        this.orderPropertyListsOnSection();
       }, (error) => {
         console.log(error);
       });
   }
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
-  drop(event: CdkDragDrop<PropertyList[]>, i: number) {
-    if (event.previousContainer.data != event.container.data) {
-      //If the previous container is the visible list, the new value of property list
-      //Will be invisible
-      if (event.previousContainer.data == this.sections[1].propertyLists) {
-        transferArrayItem(event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
-        this.sections[0].propertyLists.forEach((propertyList: PropertyList) => {
-          if (propertyList.propertyListKind == PropertyListKind.INVISIBLE) {
-            propertyList.propertyListKind = PropertyListKind.VISIBLE;
-          }
-        });
-      } else {
-        transferArrayItem(event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
-        this.sections[1].propertyLists.forEach((propertyList: PropertyList) => {
-          if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
-            propertyList.propertyListKind = PropertyListKind.INVISIBLE;
-          }
-        });
+  drop(event: CdkDragDrop<PropertyList[]>, section: any) {
+    this.property.propertyLists.forEach((propertyList) => {
+      if (propertyList.id == event.item.data.id) {
+        propertyList.propertyListKind = section.kind;
       }
-      this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-        (property) => {
-          this.alertService.successAlert("Visibilidade alterada com sucesso!");
-        }, (error) => {
-          console.log(error);
-        });
-    }
+    });
+    this.saveProperty();
   }
 
   createPropertyList(): void {
     let newPropertyList: PropertyList = { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Novo Item", color: "#d3e5ef", isFixed: false};
     this.property.propertyLists.push(newPropertyList);
     this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-      (property) => {
-        this.sections[0].propertyLists.push(newPropertyList);
-        
+      (project) => {
+        this.project = project;
+        this.property = project.properties.find((property) => property.id == this.property.id)!;
+        this.orderPropertyListsOnSection();
       }, (error) => {
         console.log(error);
       });
   }
 
-  saveName(propertyListChanged : PropertyList) {
-    if(propertyListChanged.value == "") {
-      propertyListChanged.value = "Novo Item";
-    }
-    console.log(this.property);
-
-    
-    this.property.propertyLists.forEach((propertyList) => {
-      if(propertyList.id == propertyListChanged.id){
-        propertyList.value = propertyListChanged.value;
-      }
-    });
+  private saveProperty(){
     this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-      (property) => {
-        
-      },
-      (error) => {
-        
-      }
-    );
+      (project) => {
+        this.project = project;
+        this.property = project.properties.find((property) => property.id == this.property.id)!;
+        this.orderPropertyListsOnSection();
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+
+  nameEdit!: string;
+  propertyListNameEditId!: number;
+
+  saveName(propertyList : PropertyList){
+    if(this.nameEdit.length > 3 && this.nameEdit.length < 20){
+      propertyList!.value = this.nameEdit;
+      this.saveProperty();
+      this.propertyListNameEditId = -1;
+      this.nameEdit = '';
+    } else{
+      this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
+      return;
+    }
+  }
+
+  editName(propertyList : PropertyList){
+    this.propertyListNameEditId = propertyList.id!;
+    this.nameEdit = propertyList.value;
   }
 }

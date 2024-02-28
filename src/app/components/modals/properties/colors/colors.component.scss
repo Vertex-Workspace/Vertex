@@ -24,7 +24,7 @@ fa-icon {
 
 
 .info {
-    @apply flex w-full h-[20%] justify-center items-center pt-5 flex-col gap-3;
+    @apply flex w-full h-[20%] justify-center items-center pt-5 flex-col gap-3 pb-3;
 
     fa-icon {
         @apply w-4 h-4 flex justify-center items-center;

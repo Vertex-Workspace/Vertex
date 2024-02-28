@@ -103,29 +103,18 @@ export class EditPropertiesComponent {
       this.property.defaultValue = "";
     }
   }
+
   saveProperty(): void {
-    console.log(this.property);
     if (this.property.kind === PropertyKind.LIST && this.property.propertyLists.length === 0) {
       this.openEditList();
     } else {
       this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-        (property) => {
-          
-          console.log(this.project.id!);
-          
-          this.projectService.getOneById(this.project.id!).subscribe(
-            (project) => {
-              this.project = project;
-              this.changeProject.emit(this.project);
-              //If the button pressed was the confirm changes, emit the event
-              //Else, just update the property through define elements list
-              this.confirmChanges.emit(property);
-            }, (error) => {
-              console.log(error);
-            });
-
-
-
+        (project) => {
+          this.project = project;
+          let property : Property = this.project.properties.find((property) => property.id == this.property.id)!;
+          this.property = property;
+          this.changeProject.emit(this.project);
+          this.confirmChanges.emit(property);
         }, (error) => {
           this.alertService.errorAlert("Erro ao alterar propriedade!");
         });
@@ -154,11 +143,14 @@ export class EditPropertiesComponent {
       ]
 
       this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-        (property) => {  
+        (project) => {  
           this.projectService.getOneById(this.project.id!).subscribe(
             (project) => {
               this.project = project;
-              this.property = property;
+              //
+              // this.property = projec;
+
+
               this.changeProject.emit(this.project);
               this.from.emit('edit');
             }, (error) => {

@@ -15,15 +15,15 @@ export class PropertyService {
     private http: HttpClient
   ) { }
 
-  public createOrEditProperty(projectID:number, property : Property): Observable<Property> {
-    return this.http.post<Property>(`${URL}property/project/${projectID}`, property);
+  public createOrEditProperty(projectID:number, property : Property): Observable<Project> {
+    return this.http.post<Project>(`${URL}property/project/${projectID}`, property);
   }
 
-  public deleteProperty(projectID:number, propertyId : number): Observable<Property> {
-    return this.http.delete<Property>(`${URL}property/${propertyId}/project/${projectID}`, {});
+  public deleteProperty(projectID:number, propertyId : number): Observable<Project> {
+    return this.http.delete<Project>(`${URL}property/${propertyId}/project/${projectID}`, {});
   }
 
-  public deletePropertyList(propertyID:number, propertyListId : number): Observable<Property> {
-    return this.http.delete<Property>(`${URL}property/${propertyID}/property-list/${propertyListId}`, {});
+  public deletePropertyList(propertyID:number, propertyListId : number): Observable<Project> {
+    return this.http.delete<Project>(`${URL}property/${propertyID}/property-list/${propertyListId}`, {});
   }
 }

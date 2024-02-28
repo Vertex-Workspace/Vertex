@@ -20,7 +20,7 @@ p{
 
 .modal {
     @apply absolute w-1/4 h-2/5 rounded-md flex flex-col 
-    items-center justify-start text-center py-6 border-t-8;
+    items-center justify-start text-center pt-6 border-t-8;
     background-color: $secondColor;
     border-color: $primaryColor;
 }
@@ -29,8 +29,6 @@ p{
     color: $primaryColor;
     font-size: 1rem;
 }
-
-
 p{
     @apply flex justify-start items-start;
     color:$primaryColor;

@@ -18,7 +18,7 @@
 
 
 .task-name{
-    @apply w-full h-[25%]  pt-8 flex justify-evenly flex-col;
+    @apply w-full h-[25%]  pt-4 flex justify-evenly flex-col;
 
     input{
         @apply flex flex-row justify-start w-full h-[40px] border-b;
@@ -94,7 +94,7 @@
 }
 
 section{
-    @apply w-full h-[80%] flex flex-col items-center justify-evenly;
+    @apply w-full h-[80%] flex flex-col items-center justify-evenly pb-5;
 
 
     .info{

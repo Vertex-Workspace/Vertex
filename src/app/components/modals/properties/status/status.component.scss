@@ -6,7 +6,7 @@
 }
 
 .main-property {
-    @apply flex justify-between items-center w-full h-full py-3;
+    @apply flex justify-between items-center w-[90%] h-full py-3;
 }
 
 .properties {
@@ -15,28 +15,24 @@
     overflow-x: hidden;
 
     .status-space{
-        @apply flex flex-col w-[95%] ;
-        border-top: 2px solid $emphasis;
+        @apply flex flex-col w-full items-center;
+        border-top: 1px solid $emphasis;
 
     }
 
     
 }
 .info-status{
-    @apply flex flex-col h-[10%] justify-end pt-4;
+    @apply flex flex-row h-[10%] items-end justify-center pt-4 opacity-60 gap-2;
 
     p{
         color: $primaryColor;
     }
 }
 
-::-webkit-scrollbar {
-    margin-left: 1px !important;
-    width: 2px !important;
-}
 
 .specific-properties {
-    @apply flex flex-row items-center justify-start min-h-[40px] rounded-sm;
+    @apply flex flex-row items-center justify-start min-h-[40px] rounded-sm w-[90%];
 
 
     div:first-child{
@@ -87,7 +83,7 @@
     @apply opacity-75;
 }
 .color-text{
-    color: $primaryColor;
+    color: $text;
 }
 
 
@@ -96,13 +92,14 @@
     cursor: not-allowed;
 }
 .isFixedDrag{
-    @apply opacity-50;
+    @apply opacity-50 justify-center items-center;
     
     fa-icon{
         cursor: default !important;
     }
 }
 .isDraggable{
+    @apply justify-center items-center;
     fa-icon{
         cursor: grab !important;
     }

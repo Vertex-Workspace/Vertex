@@ -1,52 +1,52 @@
 @import '../../../../../variables';
 
 .ng-contentDiv{
-    @apply w-full h-full;
-
-    p{
-        @apply pr-10;
-    }
+    @apply flex flex-col w-full h-[450px] items-center gap-4 overflow-y-auto; 
 }
 
 .whole-content {
-    @apply w-full flex flex-col items-start justify-start pt-4;
-
-    p{
-        @apply pl-3 pb-3;
-    }
+    @apply w-[90%] flex flex-col items-start justify-start;
+    
+}
+.whole-content-w-full{
+    @apply w-full flex justify-center; 
+    border-top: 1px solid $emphasis;
 }
 
 .icon {
     color: $primaryColor;
 }
 .visible {
-    @apply w-full min-h-[40px] bg-[#EAEFF8] flex flex-row justify-between ;
+    @apply w-full min-h-[40px] flex flex-row justify-between ;
 
     div:first-child {
         @apply flex w-[70%] pr-3 items-center;
 
         div:first-child{
-            @apply pl-3 w-[15%] flex justify-between;
-        }
+            @apply flex w-[85%] h-full justify-start pl-2 items-center;
+        
+            input {
+                @apply flex rounded-lg px-2;
+                outline: none;
+            }
 
-        div:last-child{
-            @apply w-[85%] flex justify-start items-center gap-3;
-
-            input{
-                @apply flex w-full;
+            p{
+                @apply px-2 rounded-xl; 
+                color: $text;
+                width: auto;
             }
         }
 
     }
 
     div:last-child {
-        @apply flex w-[20%] justify-between items-center pr-3;
+        @apply flex w-[20%] justify-between items-center;
     }
 }
 
 p{
     @apply flex justify-start items-start;
-    color:$primaryColor;
+    color:$text;
 }
 
 .opacity{
@@ -60,4 +60,17 @@ p{
 
 .opacity-icon{
     @apply opacity-75;
+    color: $text;
+}
+
+.info-status{
+    @apply flex flex-row h-[10%] items-end justify-center pt-4 opacity-60 gap-2;
+
+    p{
+        color: $text;
+    }
+
+    fa-icon{
+        color: $text;
+    }
 }

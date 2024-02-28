@@ -1,12 +1,16 @@
+<div class="flex flex-col w-full h-full items-center">
 <div class="properties" cdkDropListGroup>
-    <div *ngFor="let status of statusList; index as item" class="status-space" [ngStyle]="{'border': status.kind == 'TODO' ? 'none' : ''}" >
+    <div *ngFor="let status of statusList; index as item" class="status-space" 
+    [ngStyle]="{'border': status.kind == 'TODO' ? 'none' : ''}" cdkDropList
+    (cdkDropListDropped)="drop($event, status)" [cdkDropListData]="status.properties"
+    >
         <div class="main-property">
             <p class="medium-text color-text">{{status.name}}</p>
             <fa-icon [icon]="faPlus" class="little-icon" (click)="add(status)"></fa-icon>
         </div>
-        <div *ngFor="let propertyList of status.properties; index as i2" cdkDropList
-            (cdkDropListDropped)="drop($event, status)" [cdkDropListData]="status.properties">
-            <div class="specific-properties" cdkDrag [cdkDragDisabled]="propertyList.isFixed" [cdkDragData]="propertyList">
+        <div *ngFor="let propertyList of status.properties; index as i2" class="flex w-full justify-center" 
+        cdkDrag [cdkDragDisabled]="propertyList.isFixed" [cdkDragData]="propertyList" cdkDragBoundary=".properties">
+            <div class="specific-properties">
                 <div cdkDragHandle [ngClass]="propertyList.isFixed ? 'isFixedDrag' : 'isDraggable'">
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
                     <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>
@@ -30,5 +34,7 @@
     </div>
 </div>
 <div class="info-status">
-    <p class="regular-text">Define o estado atual das tarefas</p>
+    <fa-icon [icon]="faInfoCircle" class="color-text text-sm"></fa-icon>
+    <p class="regular-text">Clique no texto e você poderá editar o nome do status</p>
+</div>
 </div>

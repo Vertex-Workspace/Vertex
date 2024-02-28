@@ -1,51 +1,53 @@
-<div class="flex w-full h-full flex-col">
-    <div class="task-name">
-        <p class="large-text">Nome</p>
-        <input [(ngModel)]="property.name" class="regular-text"
-        placeholder="Digite o nome que deseja para propriedade..."
-        required />
-    </div>
+<div class="flex w-full h-full flex-col items-center">
+    <div class="flex w-[90%] flex-col h-full">
+        <div class="task-name">
+            <p class="large-text">Nome</p>
+            <input [(ngModel)]="property.name" class="regular-text"
+                placeholder="Digite o nome que deseja para propriedade..." required />
+        </div>
 
-    <section>
-        <p class="medium-text">Tipo de dado</p>
-        <div class="properties-types">
-            <ng-container *ngFor="let type of propertyTypes;">
-                <div class="flex w-full h-full flex-col">
-                    <div class="square-icon" [ngClass]=" getKindProperty(type.type) ? '' : 'opacity' "
-                        (click)="selectValue(type)">
-                        <fa-icon [icon]="type.icon" class="icon"></fa-icon>
+        <section>
+            <p class="medium-text">Tipo de dado</p>
+            <div class="properties-types">
+                <ng-container *ngFor="let type of propertyTypes;">
+                    <div class="flex w-full h-full flex-col">
+                        <div class="square-icon" [ngClass]=" getKindProperty(type.type) ? '' : 'opacity' "
+                            (click)="selectValue(type)">
+                            <fa-icon [icon]="type.icon" class="icon"></fa-icon>
+                        </div>
+                        <p class="regular-text pt-4">{{type.label}}</p>
                     </div>
-                    <p class="regular-text pt-4">{{type.label}}</p>
-                </div>
-            </ng-container>
-        </div>
-        <div class="info">
-            <fa-icon [icon]="circleInfo"></fa-icon>
-            <p class="small-text pl-2">
-                tipo de informação que a propriedade armazenará
-            </p>
-        </div>
-        <div class="properties-answers">
-            <ng-container *ngFor="let check of checkboxList;">
-                <div class="checkboxes" *ngIf="containsKindInto(check)">
-                    <fa-icon [icon]="faSquare" (click)="checkBox(check)"
-                        [ngClass]="check.value ? 'checkBox-unselected' : 'checkBox-selected'">
-                    </fa-icon>
-                    <!-- VALIDATIONS -->
-                    <p class="small-text" *ngIf="!openInput">
-                        {{check.p}}</p>
-                    <input placeholder="Valor padrão" [(ngModel)]="property.defaultValue"
-                        *ngIf="openInput">
-                </div>
-            </ng-container>
-        </div>
-        <div class="flex w-full h-[50px] flex-row justify-between">
-            <div class="flex w-1/2">
-                <button *ngIf="property.kind == 'LIST'" class="list-button" (click)="openEditList()">Definir Elementos
-                    de Lista</button>
+                </ng-container>
             </div>
-            <button class="save-button" (click)="saveProperty()" [style.opacity]="hasChange() ? '1' : '0.5'">Confirmar
-                Alterações</button>
-        </div>
-    </section>
+            <div class="info">
+                <fa-icon [icon]="circleInfo"></fa-icon>
+                <p class="small-text pl-2">
+                    tipo de informação que a propriedade armazenará
+                </p>
+            </div>
+            <div class="properties-answers">
+                <ng-container *ngFor="let check of checkboxList;">
+                    <div class="checkboxes" *ngIf="containsKindInto(check)">
+                        <fa-icon [icon]="faSquare" (click)="checkBox(check)"
+                            [ngClass]="check.value ? 'checkBox-unselected' : 'checkBox-selected'">
+                        </fa-icon>
+                        <!-- VALIDATIONS -->
+                        <p class="small-text" *ngIf="!openInput">
+                            {{check.p}}</p>
+                        <input placeholder="Valor padrão" [(ngModel)]="property.defaultValue" *ngIf="openInput">
+                    </div>
+                </ng-container>
+            </div>
+            <div class="flex w-full h-[50px] flex-row justify-between">
+                <div class="flex w-1/2">
+                    <button *ngIf="property.kind == 'LIST'" class="list-button" (click)="openEditList()">Definir
+                        Elementos
+                        de Lista</button>
+                </div>
+                <button class="save-button" (click)="saveProperty()"
+                    [style.opacity]="hasChange() ? '1' : '0.5'">Confirmar
+                    Alterações</button>
+            </div>
+        </section>
+    </div>
 </div>

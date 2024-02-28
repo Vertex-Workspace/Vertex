@@ -5,7 +5,7 @@ import {
   faFont, faCalendarDays, faPlus, faSpinner, faCaretDown, fa1, faListNumeric, faList
 } from '@fortawesome/free-solid-svg-icons';
 import { CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Property, PropertyKind, PropertyStatus } from 'src/app/models/property';
+import { Property, PropertyKind, PropertyListKind, PropertyStatus } from 'src/app/models/property';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/project';
 import { PropertyService } from 'src/app/services/property.service';
@@ -67,22 +67,18 @@ export class GeneralPropertiesComponent {
 
   propertiesList: any[] = [
     {
-      status: 'Fixas',
-      opacity: false,
-      icon: faEye,
-      properties: []
-    },
-    {
       status: 'Visíveis',
       opacity: false,
       icon: faEye,
       properties: [],
+      kind: PropertyListKind.VISIBLE
     },
     {
       status: 'Não visíveis',
       opacity: true,
       icon: faEyeSlash,
       properties: [],
+      kind: PropertyListKind.INVISIBLE
     }
   ]
 
@@ -93,20 +89,16 @@ export class GeneralPropertiesComponent {
   private separePropertiesKind() {
     this.propertiesList[0].properties = [];
     this.propertiesList[1].properties = [];
-    this.propertiesList[2].properties = [];
     this.project.properties.forEach(
       (property) => {
-        // [0] - FIXED, [1] - VISIBLE, [2] - INVISIBLE
-        if (property.propertyStatus === PropertyStatus.FIXED) {
+        // [0] - VISIBLE, [1] - INVISIBLE
+        if (property.propertyStatus === PropertyStatus.VISIBLE) {
           this.propertiesList[0].properties.push(property);
-        } else if (property.propertyStatus === PropertyStatus.VISIBLE) {
+        } else if (property.propertyStatus === PropertyStatus.INVISIBLE){
           this.propertiesList[1].properties.push(property);
-        } else {
-          this.propertiesList[2].properties.push(property);
         }
       });
   }
-
 
   closeModal() {
     this.close.emit();
@@ -124,10 +116,6 @@ export class GeneralPropertiesComponent {
     });
     this.openNewProperty.emit(genericProperty);
   }
-
-
-
-
 
   editProperty(property: Property, type : string) {
     if (property.kind === PropertyKind.STATUS) {
@@ -150,15 +138,10 @@ export class GeneralPropertiesComponent {
       property.propertyStatus = PropertyStatus.VISIBLE;
     }
     this.propertyService.createOrEditProperty(this.project.id!, property).subscribe(
-      (property) => {
-        this.projectService.getOneById(this.project.id!).subscribe(
-          (project) => {
-            this.project = project;
-            this.separePropertiesKind();
-            this.changeProject.emit(project);
-          }, (error) => {
-            console.log(error);
-          });
+      (project) => {
+        this.project = project;
+        this.separePropertiesKind();
+        this.changeProject.emit(this.project);
       }, (error) => {
         console.log(error);
       });
@@ -167,13 +150,9 @@ export class GeneralPropertiesComponent {
   delete(property: Property) {
     this.propertyService.deleteProperty(this.project.id!, property.id).subscribe(
       (project) => {
-        //[1] - VISIBLE, [2] - INVISIBLE
-        if (property.propertyStatus === PropertyStatus.VISIBLE) {
-          this.propertiesList[1].properties.splice(this.propertiesList[1].properties.indexOf(property), 1);
-        } else {
-          this.propertiesList[2].properties.splice(this.propertiesList[2].properties.indexOf(property), 1);
-        }
-        this.project.properties = this.project.properties.filter((p) => p.id !== property.id);
+          this.project = project;
+          this.separePropertiesKind();
+          this.changeProject.emit(this.project);
       }, (error) => {
         console.log(error);
       });

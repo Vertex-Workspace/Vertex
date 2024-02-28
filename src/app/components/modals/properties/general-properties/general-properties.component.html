@@ -1,32 +1,43 @@
 <div class="ng-contentDiv">
-    <div class="visible-unvisible">
-        <div *ngFor="let item of propertiesList" class="properties">
-            <div class="flex w-full justify-between items-center">
-                <p class="pl-3 pt-4 medium-text pb-4">{{item.status}}</p>
-                <p class="text-3xl cursor-pointer" *ngIf="item.status == 'Visíveis'" (click)="createProperty()">+</p>
-            </div>
-            <div *ngFor="let property of item.properties">
-                <div class="visible"
-                    [ngClass]="item.opacity === false ? '' : 'opacity'">
-                    <div (click)="editProperty(property, 'row')" >
-                        <div>
-                            <fa-icon [icon]="getIconProperty(property.kind)"
-                                [ngClass]="property.kind == 'NUMBER' ? 'number-type-icon' : ''"></fa-icon>
-                            <div class="flex w-[90%] h-full">
-                                <p class="regular-text">{{property.name}}</p>
+    <div class="properties">
+        <ng-container *ngFor="let item of propertiesList">
+            <div class="visible-unvisible" [ngStyle]="{'border': item.kind == 'VISIBLE' ? 'none' : ''}">
+                <div class="flex w-[90%] flex-col">
+                    <div class="flex w-full justify-between items-center">
+                        <p class="pl-3 pt-4 medium-text pb-4">{{item.status}}</p>
+                        <h4 class="cursor-pointer" *ngIf="item.status == 'Visíveis'" (click)="createProperty()">+</h4>
+                    </div>
+                    <div *ngFor="let property of item.properties">
+                        <div class="visible" [ngClass]="item.opacity === false ? '' : 'opacity'">
+                            <div (click)="editProperty(property, 'row')">
+                                <div>
+                                    <fa-icon [icon]="getIconProperty(property.kind)"
+                                        [ngClass]="property.kind == 'NUMBER' ? 'number-type-icon' : ''"></fa-icon>
+                                    <div class="flex w-[90%] h-full">
+                                        <p class="regular-text">{{property.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <ng-container *ngIf="item.status != 'Fixas'">
+                                    <fa-icon [icon]="item.icon" class="little-icon"
+                                        (click)="changeStatus(property)"></fa-icon>
+                                    <fa-icon [icon]="faGear" class="little-icon"
+                                        (click)="editProperty(property, 'gear')"></fa-icon>
+                                    <fa-icon [icon]="faTrashCan" class="little-icon"
+                                        (click)="delete(property)"></fa-icon>
+                                </ng-container>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <ng-container *ngIf="item.status != 'Fixas'">
-                            <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(property)"></fa-icon>
-                            <fa-icon [icon]="faGear" class="little-icon"
-                                (click)="editProperty(property, 'gear')"></fa-icon>
-                            <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(property)"></fa-icon>
-                        </ng-container>
-                    </div>
                 </div>
             </div>
+        </ng-container>
+    </div>
+    <div class="fixed-properties">
+        <div (click)="editProperty(project.properties[0], 'row')">
+            <fa-icon [icon]="faSpinner"></fa-icon>
+            <p class="medium-text">Gerenciar Status</p>
         </div>
     </div>
 </div>

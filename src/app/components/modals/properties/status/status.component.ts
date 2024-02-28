@@ -2,7 +2,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   faArrowLeft, faPaintBrush, faTrashCan, faEllipsisVertical,
-  faPlus
+  faPlus,
+  faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
@@ -23,6 +24,8 @@ export class StatusComponent {
   faEllipsisVertical = faEllipsisVertical;
   faPlus = faPlus;
   colorModal: boolean = false
+
+  faInfoCircle = faInfoCircle;
 
   @Output()
   pencil = new EventEmitter<PropertyList>();
@@ -118,18 +121,11 @@ export class StatusComponent {
   delete(status:any, propertyList: PropertyList) {
     if(!propertyList.isFixed){
       this.propertyService.deletePropertyList(this.property.id!, propertyList.id).subscribe(
-        (propertyResponse) => {
-          this.projectService.getOneById(this.project.id!).subscribe(
-            (projectResponse) => {
-              this.project = projectResponse;
-              this.property = this.project.properties[0];
-              this.getPropertiesKind();
-              this.changeProject.emit(this.project);
-            },
-            (error) => {
-              console.log("ERRO!" + error);
-            }
-          )
+        (project) => {
+          this.project = project;
+          this.property = project.properties.find((property) => property.id == this.property.id)!;
+          this.getPropertiesKind();
+          this.changeProject.emit(this.project);
         },
         (error) => {
           console.log("ERRO!" + error);
@@ -141,11 +137,11 @@ export class StatusComponent {
   nameEdit!: string;
   propertyListNameEditId!: number;
 
-  saveProperty() {
+  private saveProperty() {
     this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-      (propertyResponse) => {
-        this.project.properties[0] = propertyResponse;
-        this.property = propertyResponse;
+      (project) => {
+        this.project = project;
+        this.property = project.properties.find((property) => property.id == this.property.id)!;
         this.getPropertiesKind();
         this.changeProject.emit(this.project);
       },
