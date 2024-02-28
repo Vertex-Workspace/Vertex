@@ -3,10 +3,10 @@
   class="card" 
   [style.width.px]="note.width"
   [style.height.px]="note.height"
-  [cdkDragFreeDragPosition]="note.position"
   [style.backgroundColor]="note.color"
   cdkDrag  
   cdkDragBoundary=".mural-section"
+  [cdkDragFreeDragPosition]="note.position"
   (cdkDragEnded)="dragEnd($event)"
   (click)="toggleModalOpen()"
 >
@@ -47,8 +47,8 @@
   </span>
 </div>
 
-<!-- <app-note-modal
+<app-note-modal
   *ngIf="modalOpen"
   [note]="note"
   (closeModal)="toggleModalOpen()"
-></app-note-modal> -->
+></app-note-modal>

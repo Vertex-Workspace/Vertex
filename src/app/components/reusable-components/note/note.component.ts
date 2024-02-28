@@ -101,7 +101,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
     }
   }
 
-  dragMove(dragHandle: HTMLElement, $event: CdkDragMove<any>) {
+  dragMove(dragHandle: HTMLElement, $event: any) {
     this.ngZone.runOutsideAngular(() => {
       this.resize(dragHandle, this.resizeBoxElement);
     });
