@@ -87,10 +87,7 @@ export class CreateTeamProjectComponent implements OnInit {
           this.teamService
             .updateImage(team.id!, this.fd)
             .subscribe();
-        },
-        e => {
-          this.alert.errorAlert(`Erro ao criar a equipe!`)
-        });
+        })
   }
 
   createProject(): void {
@@ -102,7 +99,6 @@ export class CreateTeamProjectComponent implements OnInit {
     this.projectService
       .create(project, teamId)
       .subscribe((project: Project) => {
-        this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
         this.projectService
           .updateImage(project.id!, this.fd)
           .subscribe();

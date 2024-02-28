@@ -26,14 +26,15 @@
                     cdkDragBoundary=".table"
                 >
                     <app-row-card
+                        [taskList]="taskList"
                         [task]="task"
                         [cols]="cols"
+                        (modalTask)="openTask($event)"
                     ></app-row-card>
                     
                 </div>
             </ng-container>
-        </div>       
-        
+        </div>        
     </div>
 </section>
 <div class="null-list" *ngIf="isNull">
@@ -41,4 +42,5 @@
         Nenhuma tarefa disponível...
     </h6>
 </div>
+
 

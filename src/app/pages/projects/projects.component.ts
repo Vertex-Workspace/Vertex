@@ -119,6 +119,7 @@ export class ProjectsComponent implements OnInit {
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;
     this.getAfterChange()
+    this.getAfterChange();
     // this.getAfterChange();
   }
 
@@ -151,20 +152,6 @@ export class ProjectsComponent implements OnInit {
 
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
-  }
-
-  createProject(project: any): void {
-
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    project.creator = this.logged;
-
-    this.projectService
-      .create(project, teamId)
-      .subscribe((project: Project) => {
-        this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
-        this.team.projects?.splice(this.team.projects.push(project))
-      });
-
   }
 
   createGroup(group: Group): void {

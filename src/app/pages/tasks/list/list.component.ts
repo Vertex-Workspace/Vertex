@@ -75,7 +75,8 @@ export class ListComponent implements OnInit {
         headerText: this.statusProperty.name,
         width: '300px'
       }
-    );    
+    ); 
+      
   
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.team) this.getTeam(); //atribui todas as tarefas da equipe a taskList
@@ -136,6 +137,12 @@ export class ListComponent implements OnInit {
         }
       });
     } 
+  }
+
+  @Output() openTaskDetails = new EventEmitter;
+
+  openTask(task:Task):void{
+    this.openTaskDetails.emit(task);  
   }
 
 }

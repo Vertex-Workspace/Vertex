@@ -68,6 +68,8 @@ export class RowCardComponent {
 
   value!: Value;
 
+  @Input() taskList ?: Task[]
+
   canDelete: boolean = false;
   canEdit: boolean = false;
 
@@ -78,7 +80,7 @@ export class RowCardComponent {
   ];
 
   ngOnInit(): void {
-
+    console.log(this.taskList);
   }
 
   getCols(): any[] {
@@ -110,13 +112,15 @@ export class RowCardComponent {
   @Output() deleteTaskOftaskList = new EventEmitter()
 
   delete(event: any): void {
+    console.log(event);
+    
     this.modalDelete = false;
+    if(event === true){
     if (this.canDelete) {
         if (event) {
           this.taskService.delete(this.task.id).subscribe(
-            (task) => {
-              //Alert
-              this.deleteTask.emit();
+            (task: Task) => {
+              this.taskList?.splice(this.taskList.indexOf(task),1)
             },
             (error) => {
               //Alert
@@ -127,6 +131,9 @@ export class RowCardComponent {
     } else {
       this.alertService.errorAlert("Você não tem permissão para remover a tarefa!")
     }
+  }else {
+    this.alertService.notificationAlert("Tarefa não excluída")
+  }
   }
 
   alertCantEdit(): void{
@@ -139,5 +146,28 @@ export class RowCardComponent {
     this.modalDelete = !this.modalDelete; 
   }
 
+  numberPropertyColor ?: number
+
+  returnColors(): string | undefined{
+    if(this.numberPropertyColor === 1){
+      return "#FF9D9D50"
+    }
+    else if(this.numberPropertyColor === 2){
+      return "#FFD60035"
+    }
+    else if(this.numberPropertyColor === 3){
+      return "#65D73C50"
+    }
+  }
+
+  findNumber(id: number): void {
+   this.numberPropertyColor = id;
+  }
+
+  @Output() modalTask = new EventEmitter
+
+  openModalTask(): void {
+    this.modalTask.emit(this.task);
+  }
 }
 

@@ -19,7 +19,7 @@ export class PropertiesComponent {
 
   @Input() task!: Task;
   @Input() project !:Project
-  @Input() canEdit !: boolean;
+  @Input() canEdit !: boolean
 
   constructor(private taskService: TaskService, 
     private alertService : AlertService,
@@ -78,5 +78,25 @@ export class PropertiesComponent {
     if(!this.canEdit){
       this.alertService.errorAlert("Você não tem permissão para editar essa tarefa!")
     }
+  }
+
+  numberPropertyColor ?: number
+
+  returnColors(): string | undefined{
+    if(this.numberPropertyColor === 1){
+      return "#FF9D9D50"
+    }
+    else if(this.numberPropertyColor === 2){
+      return "#FFD60035"
+    }
+    else if(this.numberPropertyColor === 3){
+      return "#65D73C50"
+    }
+  }
+
+  findNumber(id: number): void {
+   this.numberPropertyColor = id;
+   console.log(id);
+   
   }
 }

@@ -16,7 +16,7 @@
                             <option [attr.value]="option.id" [attr.selected]="isSelected(option, value) ? true : null">{{option.value}}</option>
                         </ng-container>
                     </select>
-                    <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value"></app-input-value-property>
+                    <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="returnColors()"></app-input-value-property>
                 </div>
             </td>
         </tr>
