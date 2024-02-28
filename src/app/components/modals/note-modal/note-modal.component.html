@@ -1,0 +1,46 @@
+<section class="modal-overlay">
+    <div class="modal">
+        <div class="left">
+
+            <div class="location">
+                {{project.name}} | {{note.title}}
+            </div>
+            <div class="main-content">
+                <input type="text" [(ngModel)]="note.title">
+                <div class="content">
+                    <textarea 
+                        [disabled]="!descriptionEditable"
+                        [style.background]="descriptionEditable ? '#f5f5f5' :  '#fff'" 
+                        [(ngModel)]="note.description"
+                    >
+                        {{note.description}}
+                    </textarea>
+                    <a (click)="toggleEditDescription()">
+                        Editar descrição
+                    </a>
+                </div>
+            </div>
+            <div class="config">
+                <ng-container *ngIf="!colorListOpen">
+                    <div class="color" [style.backgroundColor]="getSelectedColor().color">
+                        <fa-icon [icon]="faCheck" class="icon">
+                        </fa-icon>
+                    </div>
+                    <i class="pi pi-chevron-right pl-2" (click)="toggleColorList()"></i>
+                </ng-container>
+                <div *ngIf="colorListOpen" class="color-list">
+                    <ng-container *ngFor="let color of colorList">
+                        <div class="color" [style.backgroundColor]="color.color" (click)="changeColor(color)">
+                            <fa-icon [icon]="faCheck" class="icon" *ngIf="color.color === getSelectedColor().color">
+                            </fa-icon>
+                        </div>
+                    </ng-container>
+                    <i class="pi pi-chevron-left pl-2" (click)="toggleColorList()"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+
+    </div>
+</section>

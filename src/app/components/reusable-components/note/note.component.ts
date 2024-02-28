@@ -1,6 +1,6 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Note } from 'src/app/models/note';
+import { Note, NoteGet } from 'src/app/models/note';
 import { NoteService } from 'src/app/services/note.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { NoteService } from 'src/app/services/note.service';
 export class NoteComponent implements OnInit, AfterViewInit {
 
   @Input() 
-  note !: Note;
+  note !: NoteGet;
 
   @ViewChild('resizeBox') resizeBox!: ElementRef;
   @ViewChild('dragHandleCorner') dragHandleCorner!: ElementRef;
@@ -24,13 +24,26 @@ export class NoteComponent implements OnInit, AfterViewInit {
   ) {}
 
   basicData: any;
+  modalOpen: boolean = false;
 
-  ngOnInit(): void {  
+  ngOnInit(): void { 
+    
   }
-
 
   ngAfterViewInit() {
     this.setAllHandleTransform();
+  }
+
+  dragEnd(e: any): void {
+    this.note.position.x = e.dropPoint.x;
+    this.note.position.y = e.dropPoint.y;
+    
+    this.edit();
+    
+  }
+
+  toggleModalOpen(): void {
+    this.modalOpen = !this.modalOpen
   }
 
   configItems = [
@@ -111,6 +124,8 @@ export class NoteComponent implements OnInit, AfterViewInit {
   }
 
   edit(): void {
+    console.log(this.note.position);
+    
     this.noteService
       .patchAttribute(this.note)
       .subscribe();

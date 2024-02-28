@@ -117,6 +117,8 @@ export class TasksComponent implements OnInit {
       width: 300,
       height: 300,
       color: 'WHITE',
+      positionX: 20,
+      positionY: 40,
     }
 
     this.noteService
