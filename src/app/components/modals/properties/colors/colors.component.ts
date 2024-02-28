@@ -42,7 +42,7 @@ export class ColorsComponent {
                 color.status = 'selected';
                 this.currentColor = color.color;
             }
-        });
+        });        
     }
 
     selectColor(color: any) {

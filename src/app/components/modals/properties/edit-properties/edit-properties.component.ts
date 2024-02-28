@@ -24,7 +24,7 @@ export class EditPropertiesComponent {
 
   @Output() confirmChanges = new EventEmitter<Property>();
 
-  @Output() from = new EventEmitter<String>();
+  @Output() from = new EventEmitter<Property>();
 
   @Output()
   changeProject = new EventEmitter<Project>();
@@ -70,15 +70,19 @@ export class EditPropertiesComponent {
       this.openInput = true;
     }
 
-    this.from.emit('general');
+    this.from.emit();
   }
 
   selectValue(type: any) {
-    this.property.kind = type.type;
-
-    //CLEAR THE PROPERTY LISTS ON DATABASE
-    if(this.property.kind !== PropertyKind.LIST){
-      this.property.propertyLists = [];
+    if(!this.property.id){
+      this.property.kind = type.type;
+      
+      //CLEAR THE PROPERTY LISTS ON DATABASE
+      if(this.property.kind !== PropertyKind.LIST){
+        this.property.propertyLists = [];
+      }
+    } else{
+      this.alertService.errorAlert("Não é possível alterar o tipo de uma propriedade já criada!");
     }
   }
 
@@ -105,20 +109,24 @@ export class EditPropertiesComponent {
   }
 
   saveProperty(): void {
-    if (this.property.kind === PropertyKind.LIST && this.property.propertyLists.length === 0) {
-      this.openEditList();
-    } else {
-      this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-        (project) => {
-          this.project = project;
-          let property : Property = this.project.properties.find((property) => property.id == this.property.id)!;
-          this.property = property;
-          this.changeProject.emit(this.project);
-          this.confirmChanges.emit(property);
-        }, (error) => {
-          this.alertService.errorAlert("Erro ao alterar propriedade!");
-        });
+    if(this.hasChange()){  
+      if(this.property.name.length < 3 || this.property.name.length > 25){
+        this.alertService.notificationAlert("O nome da propriedade deve ter entre 3 e 25 caracteres!");
+        return;
+      }
 
+      if (this.property.kind === PropertyKind.LIST && this.property.propertyLists.length === 0) {
+        this.openEditList();
+      } else {
+        this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
+          (project) => {
+            this.project = project;
+            let property : Property = this.project.properties.find((property) => property.id == this.property.id)!;
+            this.property = property;
+            this.changeProject.emit(this.project);
+            this.confirmChanges.emit(property);
+          });
+      }
     }
   }
 
@@ -133,7 +141,7 @@ export class EditPropertiesComponent {
   }
 
 
-  openEditList(): void {
+  private openEditList(): void {
     if (this.property.propertyLists.length === 0) {
       this.property.propertyLists = [
         { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: "#ffe2dd" , isFixed: false},
@@ -141,30 +149,18 @@ export class EditPropertiesComponent {
         { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Baixa", color: "#dbeddb" , isFixed: false},
         { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: "Não essencial", color: "#d3e5ef" , isFixed: false},
       ]
-
       this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
         (project) => {  
-          this.projectService.getOneById(this.project.id!).subscribe(
-            (project) => {
-              this.project = project;
-              //
-              // this.property = projec;
-
-
-              this.changeProject.emit(this.project);
-              this.from.emit('edit');
-            }, (error) => {
-              console.log(error);
-            });
+          this.property = project.properties[project.properties.length - 1];
+          console.log(this.property);
+          
+          this.project = project;
+          this.changeProject.emit(this.project);
+          this.from.emit(this.property);
 
         }, (error) => {
           console.log(error);
         });
-    } else {
-      if (this.hasChange()) {
-        this.saveProperty();
-      }
-      this.from.emit('edit');
     }
   }
 }

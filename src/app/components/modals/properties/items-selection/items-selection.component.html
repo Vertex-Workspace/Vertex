@@ -1,6 +1,5 @@
-<div class="ng-contentDiv" cdkDropListGroup>
-    <div class="whole-content-w-full" *ngFor="let section of sections; index as i" cdkDropList
-    (cdkDropListDropped)="drop($event, i)" [cdkDropListData]="section.propertyLists"
+<div class="ng-contentDiv">
+    <div class="whole-content-w-full" *ngFor="let section of sections; index as i"
     [ngStyle]="{'border': section.kind == 'VISIBLE' ? 'none' : ''}">
         <!-- Visible and invisible -->
         <div class="whole-content">
@@ -10,7 +9,7 @@
                     (click)="createPropertyList()">+</span>
             </div>
             <div class="visible" [ngClass]="section.name === 'Visíveis' ? '' : 'opacity'"
-                *ngFor="let propertyList of section.propertyLists;" cdkDrag [cdkDragData]="propertyList" cdkDragLockAxis="y">
+                *ngFor="let propertyList of section.propertyLists;">
                 <div>
                     <div>
                         <p *ngIf="propertyList.id != propertyListNameEditId" (click)="editName(propertyList)"

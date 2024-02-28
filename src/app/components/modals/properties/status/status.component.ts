@@ -74,7 +74,6 @@ export class StatusComponent {
       propertyStatus : this.property.propertyStatus,
       kind: this.property.kind
     };
-    console.log(this.initialProperty);
     
     this.getPropertiesKind();
   }
@@ -126,12 +125,7 @@ export class StatusComponent {
           this.property = project.properties.find((property) => property.id == this.property.id)!;
           this.getPropertiesKind();
           this.changeProject.emit(this.project);
-        },
-        (error) => {
-          console.log("ERRO!" + error);
-          
-        }
-        )
+        })
     }
   }
   nameEdit!: string;
@@ -151,7 +145,7 @@ export class StatusComponent {
     );
   }
   saveName(propertyList : PropertyList){
-    if(this.nameEdit.length > 3 && this.nameEdit.length < 20){
+    if(this.nameEdit.length > 2 && this.nameEdit.length <= 20){
       propertyList!.value = this.nameEdit;
       this.saveProperty();
       this.propertyListNameEditId = -1;

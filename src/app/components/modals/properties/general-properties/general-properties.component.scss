@@ -48,6 +48,7 @@
     background-color: $primaryColor + "FF";
 
     &:hover{
+        @apply rounded-sm;
         background-color: $emphasis;
         cursor: pointer;
     }

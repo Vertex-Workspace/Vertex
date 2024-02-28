@@ -82,18 +82,13 @@ export class PropertiesComponent {
   //Determines the arrow back behavior
   from!: String;
   arrowLeft() {
-    if (this.currentModal === 'general') {
-      this.closeModal();
-    } else if (this.currentModal === 'edit' || this.currentModal === 'status') {
+    if (this.currentModal === 'edit' || this.currentModal === 'status' || (this.currentModal === 'items-selection' && this.from != 'edit')) {
       this.currentModal = 'general';
       this.text = 'Propriedades'
     } else if (this.currentModal === 'items-selection' && this.from == 'edit') {
       this.currentModal = 'edit';
       this.text = 'Edite a Propriedade'
-    } else if (this.currentModal === 'items-selection') {
-      this.currentModal = 'general';
-      this.text = 'Propriedades'
-    } else if (this.currentModal === 'colors' && this.from == 'items-selection') {
+    }else if (this.currentModal === 'colors' && this.from == 'items-selection') {
       this.currentModal = 'items-selection';
       this.text = 'Itens de Seleção'
     } else if (this.currentModal === 'colors' && this.from == 'status') {
@@ -105,24 +100,27 @@ export class PropertiesComponent {
   }
 
   defineItemsSelectionPathBack(event: any) {
-    this.from = event;
-    if (this.from == 'edit') {
+    if(event == undefined){
+      this.from = 'general';
+    } else {
       this.currentModal = 'items-selection';
       this.text = 'Edite a Propriedade'
+      this.from = 'edit';
+      this.property = event;
     }
   }
 
   changePropertyListColor(propertyList: PropertyList): void {
-    if (this.property) {
-      this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-        (property) => {
-          
-        },
-        (error) => {
-          
-        }
-      );
-    }
+    this.propertyService.changeColor(propertyList).subscribe(
+      (propertyResponse) => {
+        this.project.properties!.forEach((property) => {
+          if (property.id === propertyResponse.id) {
+            property = propertyResponse;
+            this.property = propertyResponse;
+          }
+        });
+      }
+    );
   }
   updateProject(project : Project) {
     this.project = project;

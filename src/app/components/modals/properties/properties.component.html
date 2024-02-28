@@ -34,7 +34,7 @@
 
             <app-items-selection (pencil)="openColors('items-selection', $event)" class="pattern-style"
                 *ngIf="currentModal === 'items-selection'" [property]="property"
-                [project]="project"></app-items-selection>
+                [project]="project" (changeProject)="updateProject($event)"></app-items-selection>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Project } from '../models/project';
 import { URL } from './path/api_url';
 import { Task } from '../models/task';
-import { Property } from '../models/property';
+import { Property, PropertyList } from '../models/property';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,9 @@ export class PropertyService {
 
   public deletePropertyList(propertyID:number, propertyListId : number): Observable<Project> {
     return this.http.delete<Project>(`${URL}property/${propertyID}/property-list/${propertyListId}`, {});
+  }
+
+  public changeColor(propertyList : PropertyList): Observable<Property> {
+    return this.http.patch<Property>(`${URL}property/property-list-color`, propertyList);
   }
 }

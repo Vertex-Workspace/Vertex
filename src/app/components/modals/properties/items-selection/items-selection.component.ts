@@ -23,6 +23,8 @@ export class ItemsSelectionComponent {
   @Input()
   project!: Project;
 
+  @Output()
+  changeProject = new EventEmitter<Project>();
 
   @Output()
   pencil = new EventEmitter<PropertyList>();
@@ -44,7 +46,8 @@ export class ItemsSelectionComponent {
   constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
 
   ngOnInit(): void {
-    console.log(this.property.propertyLists);
+    console.log(this.property);
+    
     this.orderPropertyListsOnSection();
   }
 
@@ -70,12 +73,7 @@ export class ItemsSelectionComponent {
       this.sections[0].propertyLists.push(propertyList);
       propertyList.propertyListKind = PropertyListKind.VISIBLE;
     }
-    this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-      (property) => {
-        this.alertService.successAlert("Visibilidade alterada com sucesso!");
-      }, (error) => {
-        console.log(error);
-      });
+    this.saveProperty();
   }
 
   pencilClick(propertyList:PropertyList) {
@@ -83,39 +81,29 @@ export class ItemsSelectionComponent {
   }
 
   delete(propertyList: PropertyList) {
-    console.log(propertyList);
-    
     this.propertyService.deletePropertyList(this.property.id!, propertyList.id!).subscribe(
       (project) => {
         this.project = project;
         this.property = project.properties.find((property) => property.id == this.property.id)!;
+        this.changeProject.emit(project);
         this.orderPropertyListsOnSection();
-      }, (error) => {
-        console.log(error);
       });
   }
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
-  drop(event: CdkDragDrop<PropertyList[]>, section: any) {
-    this.property.propertyLists.forEach((propertyList) => {
-      if (propertyList.id == event.item.data.id) {
-        propertyList.propertyListKind = section.kind;
-      }
-    });
-    this.saveProperty();
-  }
+  // drop(event: CdkDragDrop<PropertyList[]>, section: any) {
+  //   this.property.propertyLists.forEach((propertyList) => {
+  //     if (propertyList.id == event.item.data.id) {
+  //       propertyList.propertyListKind = section.kind;
+  //     }
+  //   });
+  //   this.saveProperty();
+  // }
 
   createPropertyList(): void {
-    let newPropertyList: PropertyList = { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Novo Item", color: "#d3e5ef", isFixed: false};
+    let newPropertyList: PropertyList = { id: 0, value: "Novo Item", color: "#d3e5ef", propertyListKind: PropertyListKind.VISIBLE, isFixed: false};
     this.property.propertyLists.push(newPropertyList);
-    this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
-      (project) => {
-        this.project = project;
-        this.property = project.properties.find((property) => property.id == this.property.id)!;
-        this.orderPropertyListsOnSection();
-      }, (error) => {
-        console.log(error);
-      });
+    this.saveProperty();
   }
 
   private saveProperty(){
@@ -124,9 +112,9 @@ export class ItemsSelectionComponent {
         this.project = project;
         this.property = project.properties.find((property) => property.id == this.property.id)!;
         this.orderPropertyListsOnSection();
-      }, (error) => {
-        console.log(error);
+        this.changeProject.emit(project);
       });
+
   }
 
 
@@ -134,7 +122,7 @@ export class ItemsSelectionComponent {
   propertyListNameEditId!: number;
 
   saveName(propertyList : PropertyList){
-    if(this.nameEdit.length > 3 && this.nameEdit.length < 20){
+    if(this.nameEdit.length > 2 && this.nameEdit.length <= 20){
       propertyList!.value = this.nameEdit;
       this.saveProperty();
       this.propertyListNameEditId = -1;
@@ -146,6 +134,8 @@ export class ItemsSelectionComponent {
   }
 
   editName(propertyList : PropertyList){
+    console.log(propertyList);
+    
     this.propertyListNameEditId = propertyList.id!;
     this.nameEdit = propertyList.value;
   }

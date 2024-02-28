@@ -38,12 +38,7 @@
                     </div>
                 </ng-container>
             </div>
-            <div class="flex w-full h-[50px] flex-row justify-between">
-                <div class="flex w-1/2">
-                    <button *ngIf="property.kind == 'LIST'" class="list-button" (click)="openEditList()">Definir
-                        Elementos
-                        de Lista</button>
-                </div>
+            <div class="flex w-full h-[50px] flex-row justify-end">
                 <button class="save-button" (click)="saveProperty()"
                     [style.opacity]="hasChange() ? '1' : '0.5'">Confirmar
                     Alterações</button>
