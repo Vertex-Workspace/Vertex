@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task, TaskCreate } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/class/task';
 import {  CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { UserService } from 'src/app/services/user.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { Team } from 'src/app/models/team';
+import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/class/user';
 import { isEmpty } from 'rxjs';
 
 @Component({

@@ -8,7 +8,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { Team } from 'src/app/models/team';
+import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
 
 

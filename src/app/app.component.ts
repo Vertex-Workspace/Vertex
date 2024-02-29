@@ -12,7 +12,7 @@
   import { LoadingService } from './services/loading.service';
   import { UserStateService } from './services/user-state.service';
   import { UserService } from './services/user.service';
-  import { User } from './models/user';
+  import { User } from './models/class/user';
   import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
   import { TeamService } from './services/team.service';
 

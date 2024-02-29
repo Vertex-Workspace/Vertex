@@ -2,10 +2,10 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { PropertyKind, PropertyList } from 'src/app/models/property';
-import { Task, TaskCreate } from 'src/app/models/task';
-import { ValueUpdate } from 'src/app/models/value';
+import { Project } from 'src/app/models/class/project';
+import { PropertyKind, PropertyList } from 'src/app/models/class/property';
+import { Task, TaskCreate } from 'src/app/models/class/task';
+import { ValueUpdate } from 'src/app/models/class/value';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 

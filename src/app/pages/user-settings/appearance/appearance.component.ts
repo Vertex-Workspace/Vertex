@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { faPencil, faSun, faMoon, faToggleOff, faToggleOn, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from '../../../services/personalization.service';
-import { Personalization } from '../../../models/personalization';
-import { User } from 'src/app/models/user';
+import { Personalization } from '../../../models/class/personalization';
+import { User } from 'src/app/models/class/user';
 import { UserService } from '../../../services/user.service';
 import TypedRegistry from 'chart.js/dist/core/core.typedRegistry';
 import { take } from 'rxjs';

@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
-import { Team } from '../models/team';
-import { Task, TaskCreate, TaskEdit } from '../models/task';
-import { Value, ValueUpdate } from '../models/value';
+import { Team } from '../models/class/team';
+import { Task, TaskCreate, TaskEdit } from '../models/class/task';
+import { Value, ValueUpdate } from '../models/class/value';
 
 @Injectable({
   providedIn: 'root'

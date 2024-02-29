@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Note, NoteGet } from 'src/app/models/note';
-import { Project } from 'src/app/models/project';
+import { Note, NoteGet } from 'src/app/models/class/note';
+import { Project } from 'src/app/models/class/project';
 import { ProjectService } from 'src/app/services/project.service';
 
 interface Color {
@@ -65,7 +65,7 @@ export class NoteModalComponent implements OnInit {
     },
     {
       color: '#FFFFFF',
-      selected: true,
+      selected: false,
     }
   ];
 
@@ -81,8 +81,11 @@ export class NoteModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.note);
-    
+    this.setSelectedColor();
+  }
+
+  setSelectedColor(): void {
+
   }
 
   getProject(id: number): void {
@@ -101,10 +104,7 @@ export class NoteModalComponent implements OnInit {
 
   changeColor(color: Color) {    
     this.note.color = color.color;
-    this.colorList.forEach(c => {
-      if (c === color) c.selected = true;
-      else c.selected = false;
-    });    
+       
   }
 
   toggleColorList(): void {

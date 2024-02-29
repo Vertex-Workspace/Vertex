@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { URL } from './path/api_url';
-import { Team } from '../models/team';
-import { User } from '../models/user';
+import { Team } from '../models/class/team';
+import { User } from '../models/class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -29,15 +29,10 @@ export class TeamService {
   }
 
   public create(team: Team): Observable<Team> {
+    console.log(team);
+    
     return this.http
-      .post<Team>(`${URL}team`, team)
-      .pipe(tap((createdTeam: Team) => {
-        const currentTeams = this.teamsSubject.getValue();
-        this.teamsSubject.next([
-          ...currentTeams,
-          createdTeam
-        ])
-      }));
+      .post<Team>(`${URL}team`, team);
   }
 
   public delete(id: number): Observable<Team> {

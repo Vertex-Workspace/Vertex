@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
-import { Team } from 'src/app/models/team';
+import { Team } from 'src/app/models/class/team';
 import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/class/user';
 
 @Component({
   selector: 'app-home',

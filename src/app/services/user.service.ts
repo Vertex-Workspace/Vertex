@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Personalization } from '../models/personalization';
+import { Personalization } from '../models/class/personalization';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { User } from '../models/user';
+import { User } from '../models/class/user';
 import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
 import { UserStateService } from './user-state.service';

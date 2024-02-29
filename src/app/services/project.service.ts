@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Project } from '../models/project';
+import { Project } from '../models/class/project';
 import { URL } from './path/api_url';
-import { Task } from '../models/task';
-import { Property } from '../models/property';
+import { Task } from '../models/class/task';
+import { Property } from '../models/class/property';
 
 @Injectable({
   providedIn: 'root'

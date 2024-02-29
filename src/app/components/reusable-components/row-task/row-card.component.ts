@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { Task } from 'src/app/models/class/task';
 import {
   faTrashCan, 
   faEnvelope, 
   faClockRotateLeft, 
   faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
-import { Value } from 'src/app/models/value';
-import { PropertyKind } from 'src/app/models/property';
+import { Value } from 'src/app/models/class/value';
+import { PropertyKind } from 'src/app/models/class/property';
 
 
 @Component({

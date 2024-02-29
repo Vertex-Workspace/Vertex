@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Note, NoteGet } from '../models/note';
+import { Note, NoteGet } from '../models/class/note';
 import { URL } from './path/api_url';
 
 @Injectable({
@@ -31,6 +31,11 @@ export class NoteService {
     const noteEditing: Note = new Note(note); //converte o dto para note
     return this.http
       .patch<Note>(`${URL}note/att`, noteEditing)
+  }
+
+  public delete(id: number): void {
+    this.http
+      .delete<Note>(`${URL}note/${id}`);
   }
 
 }

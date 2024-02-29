@@ -1,5 +1,5 @@
-import { PropertyKind, PropertyListKind } from "src/app/models/property";
-import { Task } from "src/app/models/task";
+import { PropertyKind, PropertyListKind } from "src/app/models/class/property";
+import { Task } from "src/app/models/class/task";
 
 export const categories: any[] = [
     {

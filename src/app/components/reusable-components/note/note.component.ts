@@ -1,6 +1,6 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
-import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Note, NoteGet } from 'src/app/models/note';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { Note, NoteGet } from 'src/app/models/class/note';
 import { NoteService } from 'src/app/services/note.service';
 
 @Component({
@@ -12,6 +12,9 @@ export class NoteComponent implements OnInit, AfterViewInit {
 
   @Input() 
   note !: NoteGet;
+
+  @Output()
+  deleteNoteEmitter: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('resizeBox') resizeBox!: ElementRef;
   @ViewChild('dragHandleCorner') dragHandleCorner!: ElementRef;
@@ -49,7 +52,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
   configItems = [
     { id: 'image', iconClass: 'pi pi-images', onClick: () => this.toggleModalOpen() },
     { id: 'edit', iconClass: 'pi pi-pencil', onClick: () => this.toggleModalOpen() },
-    { id: 'trash', iconClass: 'pi pi-trash', onClick: () => this.toggleModalOpen() },
+    { id: 'trash', iconClass: 'pi pi-trash', onClick: () => this.deleteNote() },
   ];
 
   hasImage(): boolean {
@@ -121,6 +124,10 @@ export class NoteComponent implements OnInit, AfterViewInit {
 
     this.setAllHandleTransform();
     this.edit();
+  }
+
+  deleteNote(): void {
+    this.deleteNoteEmitter.emit();
   }
 
   edit(): void {

@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task, TaskCreate } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/class/task';
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { TaskService } from 'src/app/services/task.service';
-import { Value, ValueUpdate } from 'src/app/models/value';
+import { Value, ValueUpdate } from 'src/app/models/class/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
-import { Group } from '../models/groups';
+import { Group } from '../models/class/groups';
 
 @Injectable({
   providedIn: 'root'

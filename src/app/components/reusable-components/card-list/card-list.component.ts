@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Team } from 'src/app/models/team';
+import { Team } from 'src/app/models/class/team';
 
 @Component({
   selector: 'app-card-list',

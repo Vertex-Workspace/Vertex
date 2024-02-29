@@ -5,11 +5,11 @@ import { AfterViewInit,
          OnInit, 
          QueryList, 
          ViewChildren } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { Task } from 'src/app/models/class/task';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { taskList } from '../data-test';
-import { Note, NoteGet } from 'src/app/models/note';
-import { Project } from 'src/app/models/project';
+import { Note, NoteGet } from 'src/app/models/class/note';
+import { Project } from 'src/app/models/class/project';
 import { NoteService } from 'src/app/services/note.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
@@ -54,6 +54,11 @@ export class MuralComponent implements OnInit {
   }
 
   ngOnInit(): void {  
+  }
+
+  deleteNote(note: NoteGet) {
+    // this.noteService
+    //   .
   }
 
 }

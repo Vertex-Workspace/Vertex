@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from 'src/app/models/project';
-import { Team } from 'src/app/models/team';
-import { User } from 'src/app/models/user';
+import { Project } from 'src/app/models/class/project';
+import { Team } from 'src/app/models/class/team';
+import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';

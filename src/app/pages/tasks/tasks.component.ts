@@ -1,14 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from 'src/app/models/project';
+import { Project } from 'src/app/models/class/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { Task, TaskCreate } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/class/task';
 import { UserService } from 'src/app/services/user.service';
-import { Note } from 'src/app/models/note';
+import { Note } from 'src/app/models/class/note';
 import { NoteService } from 'src/app/services/note.service';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/class/user';
 
 
 @Component({
@@ -119,6 +119,7 @@ export class TasksComponent implements OnInit {
       color: 'WHITE',
       positionX: 20,
       positionY: 40,
+      files: []
     }
 
     this.noteService

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Project } from 'src/app/models/project';
-import { Team } from 'src/app/models/team';
-import { User } from 'src/app/models/user';
+import { Project } from 'src/app/models/class/project';
+import { Team } from 'src/app/models/class/team';
+import { User } from 'src/app/models/class/user';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 

@@ -1,15 +1,15 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { PropertyList } from 'src/app/models/property';
-import { Task, TaskEdit } from 'src/app/models/task';
+import { PropertyList } from 'src/app/models/class/property';
+import { Task, TaskEdit } from 'src/app/models/class/task';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
 import { taskHourService } from 'src/app/services/taskHour.service';
-import { taskHour } from '../../../models/taskHour';
+import { taskHour } from '../../../models/class/taskHour';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'src/app/services/project.service';
-import { Project } from 'src/app/models/project';
-import { User } from 'src/app/models/user';
-import { TimeInTask } from 'src/app/models/timeInTask';
+import { Project } from 'src/app/models/class/project';
+import { User } from 'src/app/models/class/user';
+import { TimeInTask } from 'src/app/models/class/timeInTask';
 
 @Component({
   selector: 'app-task',

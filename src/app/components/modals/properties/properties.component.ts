@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
 faFont, faCalendarDays, faSpinner, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { elements } from 'chart.js';
-import { Project } from 'src/app/models/project';
+import { Project } from 'src/app/models/class/project';
 
 @Component({
   selector: 'app-properties',
