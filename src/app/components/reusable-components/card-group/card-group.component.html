@@ -35,7 +35,7 @@
     </div>
 
     <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'"
-        [type]="'userTeam'" (confirmEvent)="emitItem()">
+        [type]="'userTeam'" (confirmEvent)="emitItem($event)">
     </app-confirm-modal>
 
 </div>

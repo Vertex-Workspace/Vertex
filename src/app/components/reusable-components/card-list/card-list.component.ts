@@ -10,19 +10,19 @@ import { ProjectService } from 'src/app/services/project.service';
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss']
 })
-export class CardListComponent implements OnInit{
+export class CardListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private alertService : AlertService,
+    private alertService: AlertService,
     private projectService: ProjectService
   ) { }
-  
-  @Input()
-  teams ?: Team[]; //se estiver na home
 
   @Input()
-  team ?: Team; //se estiver na tela projetos
+  teams?: Team[]; //se estiver na home
+
+  @Input()
+  team?: Team; //se estiver na tela projetos
 
   @Input()
   type !: string;
@@ -34,7 +34,7 @@ export class CardListComponent implements OnInit{
 
   delete: boolean = false;
 
-  ngOnInit(): void {        
+  ngOnInit(): void {
   }
 
   getType(): any[] {
@@ -46,20 +46,22 @@ export class CardListComponent implements OnInit{
 
   openTeam(id: number) {
     if (this.type === 'team') {
-      this.router.navigate([`/equipe/${id}/projetos`]);      
+      this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
       this.router.navigate([`/projeto/${id}/tarefas`])
     }
   }
 
-  openModalDelete(item:any){
+  openModalDelete(item: any) {
     this.delete = !this.delete
-    this.itemToDelete = item  
+    this.itemToDelete = item
   }
 
 
-  emitItem(){
-    this.emitterItem.emit(this.itemToDelete)
+  emitItem(event: boolean) {
+    if (event) {
+      this.emitterItem.emit(this.itemToDelete)
+    }
     this.delete = false;
   }
 }
