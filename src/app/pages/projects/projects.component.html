@@ -74,7 +74,7 @@
                 
                 <div class="w-full h-full">
                     <app-list
-                        *ngIf="team.projects && team.projects.length > 0"
+                        *ngIf="!emptyTeamProjects"
                         [team]="team"
                     ></app-list>
                 </div>

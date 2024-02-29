@@ -81,10 +81,7 @@ export class HomeComponent implements OnInit{
         .subscribe((teams: Team[]) => {
           this.teams = teams;
         });
-    } else {
-      this.teams = [];
     }
-    
   }
 
   delete(id: number): void {

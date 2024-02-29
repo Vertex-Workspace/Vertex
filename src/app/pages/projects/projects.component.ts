@@ -24,6 +24,7 @@ export class ProjectsComponent {
   logged !: User;
 
   team !: Team;
+  emptyTeamProjects: boolean = true;
 
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
@@ -53,7 +54,11 @@ export class ProjectsComponent {
   }
 
   getRecentProjects(): void {
-    this.recentProjects = this.team.projects!;
+    console.log(this.team);
+    
+    if (Array.isArray(this.team.projects)) {
+      this.recentProjects = this.team.projects!;
+    }
   }
 
   validateProjectId(): void {
@@ -79,6 +84,7 @@ export class ProjectsComponent {
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
+        if (team.projects) this.emptyTeamProjects = false;
       })      
 
   }
