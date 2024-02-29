@@ -148,22 +148,14 @@ export class RowCardComponent {
     this.modalDelete = !this.modalDelete; 
   }
 
-  numberPropertyColor ?: number
+  propertyColor ?: string
 
   returnColors(): string | undefined{
-    if(this.numberPropertyColor === 1){
-      return "#FF9D9D50"
-    }
-    else if(this.numberPropertyColor === 2){
-      return "#FFD60035"
-    }
-    else if(this.numberPropertyColor === 3){
-      return "#65D73C50"
-    }
+    return this.propertyColor
   }
 
-  findNumber(id: number): void {
-   this.numberPropertyColor = id;
+  findNumber(id: string): void {
+   this.propertyColor = id;
   }
 
   @Output() modalTask = new EventEmitter

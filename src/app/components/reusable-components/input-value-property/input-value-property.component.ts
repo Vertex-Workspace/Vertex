@@ -78,7 +78,7 @@ export class InputValuePropertyComponent {
     }
     if (value.property.kind === PropertyKind.STATUS) {
       let valueProperty = value.value as PropertyList;
-      this.propertyListId.emit(valueProperty.id)
+      this.propertyList.emit(valueProperty.color)
       return valueProperty.value;
     }
     if (value.property.kind === PropertyKind.DATE) {
@@ -126,7 +126,7 @@ export class InputValuePropertyComponent {
     }
   }
 
-  @Output() propertyListId = new EventEmitter<number>();
+  @Output() propertyList = new EventEmitter<string>();
   change(event: any, value: Value): void {
     if(this.canEdit){
     const propertyId: number = event.value.id;
