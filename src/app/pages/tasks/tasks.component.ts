@@ -101,6 +101,8 @@ export class TasksComponent implements OnInit {
     }
     this.taskService.create(taskCreate).subscribe(
       (task) => {
+        console.log(task);
+        
         this.project.tasks.push(task);
         this.changeModalTaskState(true, task);
       },
