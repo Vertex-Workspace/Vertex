@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from 'src/app/models/project';
-import { Team } from 'src/app/models/team';
+import { Project } from 'src/app/models/class/project';
+import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({

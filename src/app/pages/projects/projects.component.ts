@@ -104,7 +104,7 @@ export class ProjectsComponent implements OnInit {
         });
   }
 
-  deleteGroup(groupId: Group):void {
+  deleteGroup(event: any):void {
     // console.log(groupId); 
     // this.groupService.delete(groupId.id).subscribe((group: Group) => {
     //   this.alert.successAlert('Grupo deletado com sucesso')
@@ -157,7 +157,7 @@ export class ProjectsComponent implements OnInit {
     this.orderOpen = !this.orderOpen;
   }
 
-  createGroup(group: Group): void {
+  createGroup(event: any): void {
     // this.groupService
     //   .create(group)
     //   .subscribe((group: Group) => {

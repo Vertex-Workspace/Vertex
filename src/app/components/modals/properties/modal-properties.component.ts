@@ -4,8 +4,8 @@ import {
   faFont, faCalendarDays, faSpinner, faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
 import { elements } from 'chart.js';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyList } from 'src/app/models/property';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyList } from 'src/app/models/class/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
@@ -114,7 +114,7 @@ export class ModalPropertiesComponent{
   changePropertyListColor(propertyList: PropertyList): void {
     this.propertyService.changeColor(propertyList).subscribe(
       (propertyResponse) => {
-        this.project.properties!.forEach((property) => {
+        this.project.properties!.forEach((property: Property) => {
           if (property.id === propertyResponse.id) {
             property = propertyResponse;
             this.property = propertyResponse;

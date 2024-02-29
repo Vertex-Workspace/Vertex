@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faUsers, faSearch, faCircleUser, faDoorOpen,
         faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { LogarithmicScale } from 'chart.js';
-import { Team } from 'src/app/models/team';
-import { User } from 'src/app/models/user';
+import { Team } from 'src/app/models/class/team';
+import { User } from 'src/app/models/class/user';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
