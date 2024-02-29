@@ -18,19 +18,32 @@
 
 
 .task-name{
-    @apply w-full h-[10%] border-b border-[#092C4C] pt-3 flex items-end justify-start;
+    @apply w-full h-[25%]  pt-4 flex justify-evenly flex-col;
 
     input{
+        @apply flex flex-row justify-start w-full h-[40px] border-b;
         background-color: $secondColor;
-        @apply flex flex-row justify-start w-[330px];
+        border-color: $primaryColor;
+    }
+    p{
+        @apply flex w-full text-start;
+        color: $text;
     }
 }
 
 .properties-types {
-    @apply pt-12 w-[80%] h-[35%] grid grid-cols-3 justify-center;
+    @apply pt-2 w-[85%] h-[30%] grid grid-cols-3 justify-center gap-4;
 
-    div{
-        @apply w-[80px] h-[80px] bg-[#EAEFF8] flex justify-center items-center shadow-2xl rounded-md;
+
+
+    .square-icon{
+        @apply w-full h-[60%] flex justify-center shadow-md items-center;
+        cursor: pointer;
+        background-color: $emphasis;
+
+        &:hover{
+            @apply scale-105;
+        }
     }
 }
 
@@ -38,13 +51,24 @@
     @apply opacity-25;
 }
 
+.list-button{
+    @apply w-full h-[50px] rounded-sm shadow-md;
+    background-color: $emphasis;
+    color: $primaryColor;
+}
 .properties-answers {
-    @apply w-full h-[20%];
+    @apply flex w-full h-[20%] justify-end flex-col;
 
 
     div:last-child{
         @apply flex flex-row;
     }
+    input {
+        @apply w-2/3 h-[32px] rounded-sm shadow-2xl pl-3;
+        outline: none;
+    }
+
+
 }
 
 .checkboxes{
@@ -70,9 +94,23 @@
 }
 
 section{
-    @apply w-full h-full flex flex-col items-center pl-10;
+    @apply w-full h-[80%] flex flex-col items-center justify-evenly pb-5;
 
-    p:first-child {
-        @apply pr-10 pt-10;
+
+    .info{
+        @apply flex w-full justify-center items-center;
+        opacity: 0.5;
+
+        fa-icon{
+            @apply w-4 h-4 flex justify-center items-center;
+            color: $primaryColor;
+            cursor: default;
+        }
+    }
+
+    .save-button{
+        @apply w-[40%] h-[50px] rounded-sm shadow-2xl self-end;
+        background-color: $primaryColor;
+        color: $secondColor;
     }
 }

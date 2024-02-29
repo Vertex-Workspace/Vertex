@@ -5,8 +5,9 @@
 }
 
 .exitModal {
-    @apply flex w-full justify-between;
+    @apply flex w-full h-[60px] justify-between items-center px-4;
     color: $primaryColor;
+    border-bottom: 2px solid $emphasis;
 
     div:first-child {
         @apply w-[60%] flex items-center;
@@ -18,8 +19,9 @@ p{
 }
 
 .modal {
-    @apply absolute bg-[#f3f3f3] w-1/4 h-2/5 rounded-md flex flex-col 
-    items-end justify-start text-center p-8 border-t-8;
+    @apply absolute w-1/4 h-2/5 rounded-md flex flex-col 
+    items-center justify-start text-center pt-6 border-t-8;
+    background-color: $secondColor;
     border-color: $primaryColor;
 }
 
@@ -27,8 +29,6 @@ p{
     color: $primaryColor;
     font-size: 1rem;
 }
-
-
 p{
     @apply flex justify-start items-start;
     color:$primaryColor;

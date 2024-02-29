@@ -196,13 +196,7 @@ export class CalendarComponent {
       (value) => {
         if (value.property.kind === PropertyKind.STATUS) {
             let valuePropertyList: PropertyList = value.value as PropertyList;
-            if (valuePropertyList.color === "RED") {
-              color = "#FF9D9D50";
-            } else if (valuePropertyList.color === "YELLOW") {
-              color = "#FFD60035";
-            } else if (valuePropertyList.color === "GREEN") {
-              color = "#65D73C50";
-            }
+            color = valuePropertyList.color;
         }
       }
     );
@@ -224,12 +218,37 @@ export class CalendarComponent {
       },
       teamId: this.project.idTeam!
     }
-  
+
     this.taskService.create(taskCreate).subscribe(
       (task) => {
-        this.project.tasks.push(task);
-        this.patchValue(task, day);
-        this.openCardTask(task);
+        task.values.forEach((value) => {
+          if (value.property.kind === PropertyKind.DATE) {
+            const valueUpdate: ValueUpdate = {
+              id: task.id,
+              value: {
+                property: {
+                  id: value.property.id
+                },
+                value: {
+                  id: value.id,
+                  //SLICE RETIRAR O "Z" NO FINAL
+                  value: day.toISOString().slice(0, -1)
+                }
+              }
+            };
+            console.log(valueUpdate);
+            this.taskService.patchValue(valueUpdate).subscribe(
+              (taskDate) => {
+                task.values = taskDate.values;
+                this.project.tasks.push(task);
+                this.openCardTask(task);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
+        });
       },
       (error) => {
         console.log(error);

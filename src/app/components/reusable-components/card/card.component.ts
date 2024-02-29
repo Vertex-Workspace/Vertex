@@ -42,20 +42,8 @@ export class CardComponent implements OnInit {
   canDelete?: boolean = false;
 
   ngOnInit(): void {
-    // Opacity
-    this.borderColor = this.borderColor.substring(0, this.borderColor.length - 2);
-    
-    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-      this.settings[2].disabled = true;
-
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
-          this.canDelete = true;
-          this.settings[2].disabled = false;
-        }
-      }
-    });
+    //Opacity
+    this.borderColor.concat("50");
   }
 
   modalDelete: boolean = false;

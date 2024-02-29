@@ -31,18 +31,18 @@ export class KanbanComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions
-      console.log(this.userService.getLogged().permissions);
+    // this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+    //   this.userService.getLogged().permissions = permissions
+    //   console.log(this.userService.getLogged().permissions);
 
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-          this.canCreate = true
-        } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-          this.canEdit = true;
-        }
-      }
-    })
+    //   for (let i = 0; i < permissions.length; i++) {
+    //     if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+    //       this.canCreate = true
+    //     } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+    //       this.canEdit = true;
+    //     }
+    //   }
+    // })
   }
 
   @Input()
@@ -50,8 +50,8 @@ export class KanbanComponent implements OnInit {
 
   @Input() canDeleteVerification ?: boolean
 
-  canCreate: boolean = false;
-  canEdit: boolean = false;
+  canCreate: boolean = true;
+  canEdit: boolean = true;
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     const task: Task = event.item.data;    
@@ -156,19 +156,6 @@ export class KanbanComponent implements OnInit {
   }
 
 
-  //Temporary
-  getColor(color: string) {
-    if (color === "RED") {
-      return "#FF9D9D50";
-    } else if (color === "YELLOW") {
-      return "#FFD60035";
-    } else if (color === "GREEN") {
-      return "#65D73C50";
-    } else {
-      return "#7be05750";
-    }
-  }
-
   getTaskByProperty(task: Task, propertyList: PropertyList): boolean {
     let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
     return valueIntoPropertyList.id == propertyList.id;
@@ -189,6 +176,7 @@ export class KanbanComponent implements OnInit {
     // this.hasPermission(this.userService.getLogged(), this.project)
     let propertyUsed!: Property;
 
+
     //For each to find the property of the clicked Property List
     if (this.canCreate) {
       this.project.properties.forEach((property) => {
@@ -208,36 +196,53 @@ export class KanbanComponent implements OnInit {
         return;
       }
 
-      let taskCreate: TaskCreate = {
-        name: "Nova Tarefa",
-        description: "Descreva um pouco sobre sua Tarefa Aqui",
-        project: {
-          id: 1
-        },
-        values: [
-          {
+    let taskCreate: TaskCreate = {
+      name: "Nova Tarefa",
+      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      project: {
+        id: this.project.id!
+      },
+      values: [],
+      creator: {
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
+    }
+    console.log("Task", taskCreate);
+    
+    this.taskService.create(taskCreate).subscribe(
+      (task: Task) => {
+
+        const valueUpdate: ValueUpdate = {
+          id: task.id,
+          value: {
             property: {
               id: propertyUsed.id
             },
             value: {
+              //It always gonna be the status
+              id: task.values[0].id,
               value: propertyList.id as number
             }
           }
-        ],
-        creator: {
-          id: this.userService.getLogged().id!
-        },
-        teamId: this.project.idTeam!
-    }
+        };
+        console.log(valueUpdate);
+        this.taskService.patchValue(valueUpdate).subscribe(
+          (taskDate) => {
+            task.values = taskDate.values;
+            this.project.tasks.push(task);
+            this.alertService.successAlert("Tarefa criada com sucesso!");
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
 
-    this.taskService.create(taskCreate).subscribe(
-      (task: Task) => {    
-        this.project.tasks.push(task);
-        this.alertService.successAlert("Tarefa criada com sucesso!");
-      }),
+      },
       (error: any) => {
         this.alertService.errorAlert("Erro ao criar tarefa!");
       }
+    );
     } else {
       this.alertService.errorAlert("Você não tem permissão para criar essa tarefa!")
     }

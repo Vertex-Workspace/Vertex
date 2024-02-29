@@ -57,20 +57,4 @@ export class PropertiesComponent {
       }
     }
   }
-
-  getSelectOptions(property: any): any[] {
-    return [];
-  }
-
-  change(e: any, value: any): void {
-    
-  }
-
-  getKind(valueProperty: any, text: string): any {
-
-  }
-
-  getValue(valueProperty: any): any {
-    
-  }
 }
