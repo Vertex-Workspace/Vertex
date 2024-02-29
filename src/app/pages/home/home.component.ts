@@ -17,7 +17,21 @@ export class HomeComponent implements OnInit{
 
   recentTeams !: Team[];
 
-  teams: Team[] = [];
+  teams !: Team[];
+
+  isCreating !: boolean;
+  clicked !: string;
+
+    //TASKS - FILTER AND ORDER
+    filterSettings !: any[];
+    orderSettings !: any[];
+  
+    configItems !: any[];
+  
+    filterOpen !: boolean;
+    orderOpen !: boolean;
+
+    menuItems !: any[];
 
   private teamsSubscription !: Subscription;
   
@@ -30,9 +44,28 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void { 
+    this.setDefaultValues();
     this.subscribeToTeams(); 
-    this.getRecentsTeams();       
-    
+    this.getRecentsTeams(); 
+  }
+
+  setDefaultValues(): void {
+    this.teams = [];
+    this.recentTeams = [];  
+    this.isCreating = false;
+    this.clicked = 'task';    
+    this.filterSettings = [];
+    this.orderSettings = [];
+    this.configItems = [
+      { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
+      { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
+    ];
+    this.menuItems = [
+      { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
+      { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
+    ];
+    this.filterOpen = false;
+    this.orderOpen = false;
   }
 
   ngOnDestroy(): void {
@@ -40,14 +73,6 @@ export class HomeComponent implements OnInit{
       this.teamsSubscription.unsubscribe();
     }
   }
-
-  isCreating: boolean = false;
-  clicked: string = 'task';
-
-  menuItems = [
-    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
-    { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
-  ];
 
   subscribeToTeams(): void {
     this.teamsSubscription = this.teamService.getAllTeams()
@@ -95,18 +120,6 @@ export class HomeComponent implements OnInit{
         this.alert.errorAlert('Erro ao deletar equipe!')
       });
   }
-
-  //TASKS - FILTER AND ORDER
-  filterSettings: any[] = [];
-  orderSettings: any[] = [];
-
-  configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
-  ];
-
-  filterOpen: boolean = false;
-  orderOpen: boolean = false;
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;

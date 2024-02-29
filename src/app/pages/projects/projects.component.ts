@@ -24,7 +24,7 @@ export class ProjectsComponent {
   logged !: User;
 
   team !: Team;
-  emptyTeamProjects: boolean = true;
+  emptyTeamProjects !: boolean;
 
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
@@ -51,6 +51,7 @@ export class ProjectsComponent {
     this.getTeam();
     this.validateProjectId();
     this.getRecentProjects();
+    this.emptyTeamProjects = true;
   }
 
   getRecentProjects(): void {

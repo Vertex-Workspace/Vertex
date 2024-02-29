@@ -10,7 +10,7 @@ export class Team {
     description !: string;
     image ?: string;
     users?: User[];
-    creator!: User;
+    creator?: User;
     groups: Group[] = [];
     projects: Project[] = [];
 
