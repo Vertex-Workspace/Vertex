@@ -132,7 +132,7 @@ export class CardGroupComponent {
   emitItem(event: boolean) {
     if (event) {
       this.emitterItem.emit(this.groupToDelete)
-      this.delete = false;
     }
+    this.delete = false;
   }
 }
