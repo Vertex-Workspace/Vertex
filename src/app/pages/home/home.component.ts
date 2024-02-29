@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit{
       .delete(id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
-        this.logged.teams?.splice(this.logged.teams.indexOf(team), 1);
+        this.teams?.splice(this.teams.indexOf(team), 1);
       },
       e => {
         this.alert.errorAlert('Erro ao deletar equipe!')

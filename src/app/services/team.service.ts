@@ -29,8 +29,6 @@ export class TeamService {
   }
 
   public create(team: Team): Observable<Team> {
-    console.log(team);
-    
     return this.http
       .post<Team>(`${URL}team`, team);
   }
