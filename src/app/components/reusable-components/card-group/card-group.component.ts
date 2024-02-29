@@ -48,6 +48,8 @@ export class CardGroupComponent{
 
     delete ?: boolean
 
+    groupToDelete ?: Group
+
     constructor(
         private groupService: GroupService,
         private alertService: AlertService,
@@ -119,23 +121,16 @@ export class CardGroupComponent{
         });
     }
 
-    deleteBoolean(): void {
-      this.delete = !this.delete
-    }
-  
     @Output()
-    deleteEmitterGroup: EventEmitter<Group> = new EventEmitter<Group>();
+    emitterItem = new EventEmitter<Group>();
   
-    deleteEmitUserTeam(group: Group): void {
-      this.deleteEmitterGroup.emit(group);
+    openModalDelete(item:any){
+      this.delete = !this.delete
+      this.groupToDelete = item  
     }
   
-    validatingDelete(group: Group, type: boolean): void{
-      if(type === true){
-        this.deleteEmitUserTeam(group)
-      }else {
-        this.alertService.notificationAlert("Usuário continua na equipe")
-      } 
-    
+    emitItem(){
+      this.emitterItem.emit(this.groupToDelete)
+      this.delete = false;
     }
 }

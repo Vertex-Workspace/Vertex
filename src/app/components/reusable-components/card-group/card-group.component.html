@@ -8,7 +8,7 @@
                 style="font-size:1rem"></fa-icon>
             <fa-icon *ngIf="group.open" [icon]="faCaretUp" class="icon" (click)="openModal(group)"
                 style="font-size:1rem"></fa-icon>
-            <fa-icon [icon]="faTrashCan" class="icon size pl-4" (click)="deleteBoolean()"></fa-icon>
+            <fa-icon [icon]="faTrashCan" class="icon size pl-4" (click)="openModalDelete(group)"></fa-icon>
 
         </div>
     </div>
@@ -35,7 +35,7 @@
     </div>
 
     <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'"
-        (close)="deleteBoolean()" [type]="'userTeam'" (confirmEvent)="validatingDelete(group, $event)">
+        [type]="'userTeam'" (confirmEvent)="emitItem()">
     </app-confirm-modal>
 
 </div>

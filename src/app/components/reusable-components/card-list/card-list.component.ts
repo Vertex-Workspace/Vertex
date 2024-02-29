@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { Team } from 'src/app/models/team';
 import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-card-list',
@@ -13,7 +14,8 @@ export class CardListComponent implements OnInit{
 
   constructor(
     private router: Router,
-    private alertService : AlertService
+    private alertService : AlertService,
+    private projectService: ProjectService
   ) { }
   
   @Input()
@@ -26,10 +28,9 @@ export class CardListComponent implements OnInit{
   type !: string;
 
   @Output()
-  deleteEmitterTeam: EventEmitter<Team> = new EventEmitter<Team>();
+  emitterItem = new EventEmitter();
 
-  @Output()
-  deleteEmitterProject: EventEmitter<Project> = new EventEmitter<Project>();
+  itemToDelete: any
 
   delete: boolean = false;
 
@@ -51,33 +52,13 @@ export class CardListComponent implements OnInit{
     }
   }
 
-  deleteBoolean(): void {
+  openModalDelete(item:any){
     this.delete = !this.delete
+    this.itemToDelete = item  
   }
 
-  deleteEmitProject(project: Project): void {
-    this.deleteEmitterProject.emit(project);
-  }
-
-  deleteEmitTeam(team: Team){
-    this.deleteEmitterTeam.emit(team)
-  }
-
-  validatingDeleteProject(project: Project, answer: boolean): void{
-    if(answer === true){
-      this.deleteEmitProject(project)
-      this.alertService.successAlert("Projeto removido!")
-    }else {
-      this.alertService.notificationAlert("Projeto não removido")
-    } 
-  }
-
-  validatingDeleteTeam(team:Team, answer: boolean): void{
-    if(answer === true){
-      this.deleteEmitTeam(team)
-      this.alertService.successAlert("Equipe removida!")
-    }else {
-      this.alertService.notificationAlert("Equipe não removida!")
-    } 
+  emitItem(){
+    this.emitterItem.emit(this.itemToDelete)
+    this.delete = false;
   }
 }
