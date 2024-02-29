@@ -16,6 +16,8 @@ export class CreateGroupComponent implements OnInit {
 
   form !: FormGroup;
 
+  modalCopyLink: boolean = false;
+
   @Input()
   team !: Team
 
@@ -72,6 +74,21 @@ export class CreateGroupComponent implements OnInit {
 
   closeGroup() {
     this.close.emit()
+  }
+
+  closeScreen(): void {
+    this.close.emit();
+  }
+
+  confirmCreateTeam(): void {
+    //validations
+
+    this.modalCopyLink = true;
+  }
+
+  copyLink(): void {
+    //copiar para a area de transferência
+    this.closeScreen();
   }
 
 }

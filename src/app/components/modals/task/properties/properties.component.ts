@@ -19,7 +19,7 @@ export class PropertiesComponent {
 
   @Input() task!: Task;
   @Input() project !:Project
-  canEdit: boolean = false;
+  @Input() canEdit !: boolean
 
   constructor(private taskService: TaskService, 
     private alertService : AlertService,
@@ -56,21 +56,5 @@ export class PropertiesComponent {
         return icon.icon;
       }
     }
-  }
-
-  getSelectOptions(property: any): any[] {
-    return [];
-  }
-
-  change(e: any, value: any): void {
-    
-  }
-
-  getKind(valueProperty: any, text: string): any {
-
-  }
-
-  getValue(valueProperty: any): any {
-    
   }
 }

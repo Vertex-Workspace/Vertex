@@ -1,7 +1,7 @@
 <div class="card" *ngFor="let user of users">
     <div [style.width]="width" [style.min-height]="height" class="sections-in-card">
         <div>
-            <fa-icon size="2x" [icon]="faCircleUser" class="icon"></fa-icon>
+            <fa-icon style="font-size: 2.5rem" [icon]="faCircleUser" class="icon"></fa-icon>
         </div>
         <div>
             <p>{{user.firstName}}</p>
@@ -13,8 +13,8 @@
                 [ngClass]="user.selected ? 'icon size' : 'icon-not-selected size'" (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="typeString === 'addUsers'" [icon]="faSquare"
                 [ngClass]="user.selected ? 'icon size' : 'icon-not-selected size'" (click)="selectUser(user)"></fa-icon>
-            <fa-icon *ngIf="typeString === 'inTheGroup' || typeString === 'view-infos'" [icon]="faUserMinus"
-                class="icon pr-3" (click)="deleteBoolean()">
+            <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 1rem;" (click)="deleteBoolean()"
+            *ngIf="typeString === 'inTheGroup'">
             </fa-icon>
             <fa-icon
                 *ngIf="typeString === 'permissions' && !user.openPermission || typeString === 'view-infos' && !user.openInfo"
@@ -38,20 +38,12 @@
                 <p>{{permission.name}}</p>
             </div>
         </div>
-    </div>
-
-    <div *ngIf="typeString === 'view-infos' && user.openInfo" class="user-infos">
-        <div class="email-description">
-            <label>Email:</label>
-            <p>{{user.email}}</p>
+        <div class="more-infos" [routerLink]="'/perfil-usuario'">
+            <p>Ver mais informações</p>
         </div>
-        <div>
-            <label>Descrição do usuário</label>
-            <p>{{user.description}}</p>
-        </div>
-    </div>
 
-    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
-        (close)="deleteBoolean()" [type]="'userTeam'" (confirmEvent)="validatingDelete(user, $event, typeString)">
-    </app-confirm-modal>
+        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
+            (close)="deleteBoolean()" [type]="'userTeam'" (confirmEvent)="validatingDelete(user, $event, typeString)">
+        </app-confirm-modal>
+    </div>
 </div>

@@ -7,7 +7,7 @@
     >
   
     <div class="top">
-        <div class="left z-[999]">
+        <div class="left">
             <fa-icon [icon]="faCircleUser" class="icon"></fa-icon>
         </div>
         
@@ -15,7 +15,7 @@
             <ng-container *ngFor="let item of settings">
                 <fa-icon [icon]="item.icon"
                          (click)="item.onclick()"
-                         class="icon z-[999]"
+                         class="icon"
                          [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'">
                 </fa-icon>
             </ng-container>

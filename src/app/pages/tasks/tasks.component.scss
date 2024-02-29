@@ -1,5 +1,18 @@
 @import '../../../_variables.scss';
 
+@keyframes slideInRight {
+    from {
+      width: 0;
+      opacity: 1;
+    }
+    to {
+      width: 300px;
+      opacity: 1;
+    }
+  }
+
+
+
 .screen {
     @apply h-full w-screen flex justify-center overflow-x-auto;
 }
@@ -35,6 +48,9 @@
         .search {
             @apply w-[300px] h-full flex items-center justify-between 
             bg-white p-3 rounded-sm shadow-md border-none;
+            animation: slideInRight 0.3s ease-in-out;
+            
+
 
             i {
                 @apply w-[10%];

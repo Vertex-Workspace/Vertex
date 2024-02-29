@@ -1,7 +1,15 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {faArrowLeft, faPaintBrush, faTrashCan, faEllipsisVertical,
-faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft, faPaintBrush, faTrashCan, faEllipsisVertical,
+  faPlus,
+  faInfoCircle
+} from '@fortawesome/free-solid-svg-icons';
+import { Project } from 'src/app/models/project';
+import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-status',
@@ -10,67 +18,152 @@ faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class StatusComponent {
 
-    faArrowLeft = faArrowLeft;
-    faPaintBrush = faPaintBrush;
-    faTrashCan = faTrashCan;
-    faEllipsisVertical = faEllipsisVertical;
-    faPlus = faPlus;
-    colorModal: boolean = false
+  faArrowLeft = faArrowLeft;
+  faPaintBrush = faPaintBrush;
+  faTrashCan = faTrashCan;
+  faEllipsisVertical = faEllipsisVertical;
+  faPlus = faPlus;
+  colorModal: boolean = false
+
+  faInfoCircle = faInfoCircle;
 
   @Output()
-  pencil = new EventEmitter<String>();
+  pencil = new EventEmitter<PropertyList>();
 
-  clickPencil(){
-    this.pencil.emit();
-  }
+  @Output()
+  changeProject = new EventEmitter<Project>();
 
-  statusList =[
+
+  @Input()
+  project!: Project;
+
+  @Input()
+  property!: Property;
+
+  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
+
+
+  statusList: any[] = [
     {
-        name: 'Não iniciado',
-        color:'#F7E2E4',
-        properties: [
-            {name: 'To do'}
-        ]
+      kind: PropertyListKind.TODO,
+      name: 'Não iniciado',
+      color: "#ffe2dd",
+      properties: []
     },
     {
-        name:'A fazer',
-        color: '#F5EFD2',
-        properties: [
-            {name: 'Doing'},
-            {name: 'Para análise'},
-        ]
+      kind: PropertyListKind.DOING,
+      name: 'Em andamento',
+      color: "#fdecc8",
+      properties: []
     },
     {
-        name:'Concluída',
-        color:'#D9EED2',
-        properties: [
-            {name: 'Done'},
-            {name: 'Arquivados'},
-        ]
+      kind: PropertyListKind.DONE,
+      name: 'Concluída',
+      color: "#dbeddb",
+      properties: []
     }
   ]
 
-  add(item:number){
-    this.statusList[item].properties.push({name: 'Novo Status'});
+  initialProperty!: Property;
+  ngOnInit(): void {
+    //Manually copy the object
+    this.initialProperty = {
+      id: this.property.id,
+      name: this.property.name,
+      propertyLists: this.property.propertyLists,
+      propertyStatus : this.property.propertyStatus,
+      kind: this.property.kind
+    };
+    
+    this.getPropertiesKind();
   }
 
-  delete(item: number, i2:number){
-    this.statusList[item].properties.splice(i2,1);
+  private getPropertiesKind(){
+    this.statusList[0].properties = [];
+    this.statusList[1].properties = [];
+    this.statusList[2].properties = [];
+    this.property.propertyLists.forEach((propertyList) => {
+      if (propertyList.propertyListKind == PropertyListKind.TODO) {
+        this.statusList[0].properties.push(propertyList);
+      } else if (propertyList.propertyListKind == PropertyListKind.DOING) {
+        this.statusList[1].properties.push(propertyList);
+      } else if (propertyList.propertyListKind == PropertyListKind.DONE) {
+        this.statusList[2].properties.push(propertyList);
+      }
+    });
   }
 
-  drop(event: CdkDragDrop<any[]>, i: number) {
-    if ((event.previousContainer === event.container) && i==0) {
-      moveItemInArray(this.statusList[0].properties, event.previousIndex, event.currentIndex);
-    }else if((event.previousContainer === event.container) && i==1){
-      moveItemInArray(this.statusList[1].properties, event.previousIndex, event.currentIndex);
-    }else if((event.previousContainer === event.container) && i==2){
-      moveItemInArray(this.statusList[2].properties, event.previousIndex, event.currentIndex);
-    }else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      )
+  add(status: any) {
+    let newPropertyList: PropertyList = {
+      id: 0,
+      value: status.name,
+      color: status.color,
+      propertyListKind: status.kind, 
+      isFixed: false
+    };
+    this.property.propertyLists.push(newPropertyList);
+    status.properties.push(newPropertyList);
+
+    this.saveProperty();
+  }
+
+  drop(event: CdkDragDrop<any[]>, status: any) {
+    this.property.propertyLists.forEach((propertyList) => {
+      if (propertyList.id == event.item.data.id) {
+        propertyList.propertyListKind = status.kind;
+      }
+    });
+    this.saveProperty();
+  }
+
+
+  delete(status:any, propertyList: PropertyList) {
+    if(!propertyList.isFixed){
+      this.propertyService.deletePropertyList(this.property.id!, propertyList.id).subscribe(
+        (project) => {
+          this.project = project;
+          this.property = project.properties.find((property) => property.id == this.property.id)!;
+          this.getPropertiesKind();
+          this.changeProject.emit(this.project);
+        })
     }
   }
+  nameEdit!: string;
+  propertyListNameEditId!: number;
+
+  private saveProperty() {
+    this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
+      (project) => {
+        this.project = project;
+        this.property = project.properties.find((property) => property.id == this.property.id)!;
+        this.getPropertiesKind();
+        this.changeProject.emit(this.project);
+      },
+      (error) => {
+        
+      }
+    );
+  }
+  saveName(propertyList : PropertyList){
+    if(this.nameEdit.length > 2 && this.nameEdit.length <= 20){
+      propertyList!.value = this.nameEdit;
+      this.saveProperty();
+      this.propertyListNameEditId = -1;
+      this.nameEdit = '';
+    } else{
+      this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
+      return;
+    }
+  }
+
+
+  editName(propertyList : PropertyList){
+    this.propertyListNameEditId = propertyList.id!;
+    this.nameEdit = propertyList.value;
+  }
+
+  clickPencil(propertyList: PropertyList) {
+    this.pencil.emit(propertyList);
+  }
+
 }

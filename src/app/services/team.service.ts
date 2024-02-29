@@ -79,9 +79,9 @@ export class TeamService {
     return this.http.patch<Permission>(`${URL}team/permission/${permission.id}/${user.id}/${team.id}`, permission)
   }
 
-  public hasPermission(project: Project, user: User): Observable<Permission[]> {
+  public hasPermission(projectId: number, user: User): Observable<Permission[]> {   
     return this.http
-      .get<Permission[]>(`${URL}team/hasPermission/${project.id}/${user.id}`)
+      .get<Permission[]>(`${URL}team/hasPermission/${projectId}/${user.id}`)
       .pipe(map((permissions: Permission[]) => permissions.map(permission => new Permission(permission))));
   }
 

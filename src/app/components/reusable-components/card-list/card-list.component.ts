@@ -57,6 +57,7 @@ export class CardListComponent implements OnInit{
     this.itemToDelete = item  
   }
 
+
   emitItem(){
     this.emitterItem.emit(this.itemToDelete)
     this.delete = false;

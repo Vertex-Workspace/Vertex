@@ -1,63 +1,142 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-    faEllipsisVertical, faPaintBrush, faEye, faEyeSlash,
-    faTrashCan, faPlus
+  faEllipsisVertical, faPaintBrush, faEye, faEyeSlash,
+  faTrashCan, faPlus, faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { Project } from 'src/app/models/project';
+import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
-    selector: 'app-items-selection',
-    templateUrl: './items-selection.component.html',
-    styleUrls: ['./items-selection.component.scss']
+  selector: 'app-items-selection',
+  templateUrl: './items-selection.component.html',
+  styleUrls: ['./items-selection.component.scss']
 })
 export class ItemsSelectionComponent {
 
-    @Input()
-    itemsList: any;
+  @Input()
+  property!: Property;
 
-    @Output()
-    pencil = new EventEmitter();
+  @Input()
+  project!: Project;
 
-    faEllipsisVertical = faEllipsisVertical;
-    faPaintBrush = faPaintBrush;
-    faEye = faEye;
-    faEyeSlash = faEyeSlash;
-    faTrashCan = faTrashCan;
-    faPlus = faPlus;
+  @Output()
+  changeProject = new EventEmitter<Project>();
 
-    eyeVisibility(namep: string, i: number, i2: number) {
-        let visibles: any = this.itemsList[0].name;
-        let invisibles: any = this.itemsList[1].name;
+  @Output()
+  pencil = new EventEmitter<PropertyList>();
+
+  faEllipsisVertical = faEllipsisVertical;
+  faPaintBrush = faPaintBrush;
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
+  faTrashCan = faTrashCan;
+  faPlus = faPlus;
+
+  faInfoCircle = faInfoCircle;
+
+  sections: any[] = [
+    { name: "Visíveis", icon: faEye, propertyLists: [], kind: PropertyListKind.VISIBLE },
+    { name: "Não Visíveis", icon: faEyeSlash, propertyLists: [], kind: PropertyListKind.INVISIBLE }
+  ]
+
+  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
+
+  ngOnInit(): void {
+    console.log(this.property);
     
-        if (this.itemsList[i].icon === faEye) {
-          invisibles.push({ name: namep});
-          visibles.splice(i2, 1);
-        } else {
-          visibles.push({ name: namep});
-          invisibles.splice(i2, 1);
-        }
+    this.orderPropertyListsOnSection();
+  }
+
+  private orderPropertyListsOnSection(){
+    this.sections[0].propertyLists = [];
+    this.sections[1].propertyLists = [];
+    this.property.propertyLists!.forEach((propertyList) => {
+      if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
+        this.sections[0].propertyLists.push(propertyList);
+      } else {
+        this.sections[1].propertyLists.push(propertyList);
       }
+    });
+  }
 
-    pencilClick() {
-        this.pencil.emit();
+  eyeVisibility(propertyList: PropertyList) {
+    if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
+      this.sections[0].propertyLists.splice(this.sections[0].propertyLists.indexOf(propertyList), 1);
+      this.sections[1].propertyLists.push(propertyList);
+      propertyList.propertyListKind = PropertyListKind.INVISIBLE;
+    } else {
+      this.sections[1].propertyLists.splice(this.sections[1].propertyLists.indexOf(propertyList), 1);
+      this.sections[0].propertyLists.push(propertyList);
+      propertyList.propertyListKind = PropertyListKind.VISIBLE;
     }
+    this.saveProperty();
+  }
 
-    delete(i:number, i2:number){
-        this.itemsList[i].name.splice(i2,1);
-    }
+  pencilClick(propertyList:PropertyList) {
+    this.pencil.emit(propertyList);
+  }
 
-      // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
-  drop(event: CdkDragDrop<any[]>, i: number) {
-    if ((event.previousContainer === event.container) && i==0) {
-      moveItemInArray(this.itemsList[0].name, event.previousIndex, event.currentIndex);
-    }else if((event.previousContainer === event.container) && i==1){
-      moveItemInArray(this.itemsList[1].name, event.previousIndex, event.currentIndex);
-    }else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      )
+  delete(propertyList: PropertyList) {
+    this.propertyService.deletePropertyList(this.property.id!, propertyList.id!).subscribe(
+      (project) => {
+        this.project = project;
+        this.property = project.properties.find((property) => property.id == this.property.id)!;
+        this.changeProject.emit(project);
+        this.orderPropertyListsOnSection();
+      });
+  }
+
+  // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
+  // drop(event: CdkDragDrop<PropertyList[]>, section: any) {
+  //   this.property.propertyLists.forEach((propertyList) => {
+  //     if (propertyList.id == event.item.data.id) {
+  //       propertyList.propertyListKind = section.kind;
+  //     }
+  //   });
+  //   this.saveProperty();
+  // }
+
+  createPropertyList(): void {
+    let newPropertyList: PropertyList = { id: 0, value: "Novo Item", color: "#d3e5ef", propertyListKind: PropertyListKind.VISIBLE, isFixed: false};
+    this.property.propertyLists.push(newPropertyList);
+    this.saveProperty();
+  }
+
+  private saveProperty(){
+    this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
+      (project) => {
+        this.project = project;
+        this.property = project.properties.find((property) => property.id == this.property.id)!;
+        this.orderPropertyListsOnSection();
+        this.changeProject.emit(project);
+      });
+
+  }
+
+
+  nameEdit!: string;
+  propertyListNameEditId!: number;
+
+  saveName(propertyList : PropertyList){
+    if(this.nameEdit.length > 2 && this.nameEdit.length <= 20){
+      propertyList!.value = this.nameEdit;
+      this.saveProperty();
+      this.propertyListNameEditId = -1;
+      this.nameEdit = '';
+    } else{
+      this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
+      return;
     }
+  }
+
+  editName(propertyList : PropertyList){
+    console.log(propertyList);
+    
+    this.propertyListNameEditId = propertyList.id!;
+    this.nameEdit = propertyList.value;
   }
 }

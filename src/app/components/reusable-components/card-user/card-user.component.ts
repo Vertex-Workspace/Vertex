@@ -106,7 +106,9 @@ export class CardUserComponent implements OnInit {
   }
 
   selectPermission(user: User, permission: Permission): void {
-    this.teamService.changePermissionEnable(permission, user, this.team).subscribe((permission) => {
+    this.teamService.changePermissionEnable(permission, user, this.team).subscribe(
+      (permissionRes) => {
+        permission.enabled = !permission.enabled;
       this.alert.successAlert('Autorização alterada!')
     })
   }
