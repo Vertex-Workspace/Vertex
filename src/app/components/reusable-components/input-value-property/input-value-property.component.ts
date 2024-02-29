@@ -30,11 +30,6 @@ export class InputValuePropertyComponent {
   @Input()
   task!: Task;
 
-  selectedStatus !: any;
-  currentDate !: any;
-  textValue !: string;
-  numberValue !: number;
-
   project !: Project;
 
   canEdit: boolean = false;
@@ -66,7 +61,11 @@ export class InputValuePropertyComponent {
 
 
   ngOnInit(): void {
-    
+    if(this.value.property.kind === PropertyKind.STATUS || 
+      this.value.property.kind === PropertyKind.LIST){
+      let valuePropertyList : PropertyList = this.value.value as PropertyList;
+      this.backgroundColor = valuePropertyList.color;
+    }
   }
 
   getValue(value: Value): string {
@@ -76,9 +75,8 @@ export class InputValuePropertyComponent {
       }
       return "Vazio";
     }
-    if (value.property.kind === PropertyKind.STATUS) {
+    if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
       let valueProperty = value.value as PropertyList;
-      this.propertyListId.emit(valueProperty.id)
       return valueProperty.value;
     }
     if (value.property.kind === PropertyKind.DATE) {
@@ -89,17 +87,6 @@ export class InputValuePropertyComponent {
     return value.value as string;
   }
 
-  getColor(color: string) {
-    if (color === "RED") {
-      return "#FF9D9D50";
-    } else if (color === "YELLOW") {
-      return "#FFD60035";
-    } else if (color === "GREEN") {
-      return "#65D73C50";
-    } else {
-      return "#7be05750";
-    }
-  }
 
   getSelectOptions(value: Value): PropertyList[] { 
     return value.property.propertyLists;
@@ -111,7 +98,6 @@ export class InputValuePropertyComponent {
 
   isSelected(propertyList: PropertyList, value: Value): boolean {
     let valueProperty = value.value as PropertyList;
-    
     return propertyList.id === valueProperty.id;
     
   }
@@ -126,15 +112,15 @@ export class InputValuePropertyComponent {
     }
   }
 
-  @Output() propertyListId = new EventEmitter<number>();
   change(event: any, value: Value): void {
     if(this.canEdit){
     const propertyId: number = event.value.id;
     if (value.value !== event.value.id) {
       let newValue: string | number | Date;
-      if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {
+      if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS ||
+        value.property.kind === PropertyKind.LIST) {
         newValue = event.value.id as number;
-        this.backgroundColor = this.getColor(event.value.color);
+        this.backgroundColor = event.value.color;
       } else {
         newValue = event.target.value as string;
       }

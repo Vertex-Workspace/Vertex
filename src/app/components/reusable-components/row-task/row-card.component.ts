@@ -7,7 +7,7 @@ import {
   faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
 import { Value } from 'src/app/models/value';
-import { PropertyKind } from 'src/app/models/property';
+import { Property, PropertyKind } from 'src/app/models/property';
 import { TeamService } from 'src/app/services/team.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute } from '@angular/router';
@@ -29,6 +29,7 @@ export class RowCardComponent {
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;
 
+  @Input()
   project !: Project;
 
   constructor(private teamService: TeamService,
@@ -63,15 +64,11 @@ export class RowCardComponent {
   @Input()
   task!: Task;
 
-  @Input()
-  cols!: any[];
 
   modalDelete: boolean = false;
   @Output() openTaskDetails = new EventEmitter();
 
   value!: Value;
-
-  @Input() taskList ?: Task[]
 
   canDelete: boolean = false;
   canEdit: boolean = false;
@@ -83,28 +80,19 @@ export class RowCardComponent {
   ];
 
   ngOnInit(): void {
-    console.log(this.taskList);
   }
 
-  getCols(): any[] {
-    let cols: any[] = [];
-    this.cols.map((col) => {
-      if (col.field !== "name") {
-        cols.push(col);
-      }
-    });
-    return cols;
-  }
+
 
   getNameWidth(): string {
     return "300px";
   }
 
-  getPropertyValue(col: any): Value {
+  getPropertyValue(property : Property): Value {
     let value: Value;
     this.task.values?.forEach(values => {
-      if (col.field === values.property.kind) {
-        value = values;
+      if (property.id === values.property.id) {
+       value = values;
       }
     });
     return value!;
@@ -122,7 +110,7 @@ export class RowCardComponent {
         if (event) {
           this.taskService.delete(this.task.id).subscribe(
             (task: Task) => {
-              this.taskList?.splice(this.taskList.indexOf(task),1)
+              this.project.tasks.splice(this.project.tasks.indexOf(task),1);
             },
             (error) => {
               //Alert
@@ -148,23 +136,6 @@ export class RowCardComponent {
     this.modalDelete = !this.modalDelete; 
   }
 
-  numberPropertyColor ?: number
-
-  returnColors(): string | undefined{
-    if(this.numberPropertyColor === 1){
-      return "#FF9D9D50"
-    }
-    else if(this.numberPropertyColor === 2){
-      return "#FFD60035"
-    }
-    else if(this.numberPropertyColor === 3){
-      return "#65D73C50"
-    }
-  }
-
-  findNumber(id: number): void {
-   this.numberPropertyColor = id;
-  }
 
   @Output() modalTask = new EventEmitter
 

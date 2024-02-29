@@ -161,8 +161,6 @@ export class KanbanComponent {
 
   createTask(propertyList: PropertyList) {
     let propertyUsed!: Property;
-
-
     //For each to find the property of the clicked Property List
     this.project.properties.forEach((property) => {
 

@@ -123,54 +123,27 @@ export class TaskComponent implements OnInit {
   }
 
   updateTaskNameAndDescription(): void {
+    if (this.task.name === "") {
+      this.task.name = "Nova tarefa";
+    }
+    if (this.task.description === "") {
+      this.task.name = "Insira uma breve descrição sobre a tarefa aqui...";
+    }
+    if (this.task.description.length > 1000) {
+      this.alertService.notificationAlert("O número máximo de caracteres permitido é 1000, reduza o tamanho da sua");
+      return;
+    }
     let taskEdit: TaskEdit = {
       id: this.task.id,
       name: this.task.name,
       description: this.task.description
     };
-    if (this.task.name === "") {
-      this.task.name = "Nova tarefa";
-      let taskEdit: TaskEdit = {
-        id: this.task.id,
-        name: this.task.name,
-        description: this.task.description
-      };
-      if (this.task.name === "") {
-        this.task.name = "Nova tarefa";
+    this.taskService.edit(taskEdit).subscribe(
+      (task: Task) => {
+        this.task = task;
+        this.alertService.successAlert("Tarefa alterada com sucesso!");
       }
-      if (this.task.description === "") {
-        this.task.name = "Insira uma breve descrição sobre a tarefa aqui...";
-      }
-      this.taskService.edit(taskEdit).subscribe(
-        (task: Task) => {
-          this.task.name = task.name
-          this.task.description = task.description;
-          if (task.description.length > 1000) {
-            this.alertService.errorAlert("O número máximo de caracteres permitido é 1000, reduza o tamanho da sua");
-          }
-          this.alertService.successAlert("Tarefa alterada com sucesso!");
-        }),
-        (error: any) => {
-          console.log(error);
-
-          this.alertService.errorAlert("Máximo de caracteres permitido: 1000. Reduza o tamanho da sua descrição.");
-        }
-      if (this.task.description === "") {
-        this.task.name = "Insira uma breve descrição sobre a tarefa aqui...";
-      }
-      this.taskService.edit(taskEdit).subscribe(
-        (task: Task) => {
-          console.log(2);
-
-          this.task.name = task.name
-          this.task.description = task.description;
-          this.alertService.successAlert("Tarefa alterada com sucesso!");
-        },
-        (error: any) => {
-          this.alertService.errorAlert("Erro ao alterar tarefa!");
-        }
-      );
-    }
+    );
   }
 
   descriptionEditable: boolean = false;
@@ -266,4 +239,9 @@ export class TaskComponent implements OnInit {
     } 
   }
 
+  ngOnDestroy() {
+    if(this.timeInTask.working){
+      this.stopTimer();
+    }
+  }
 }

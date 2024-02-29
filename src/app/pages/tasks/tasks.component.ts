@@ -149,5 +149,11 @@ export class TasksComponent implements OnInit {
     });
   }
 
-
+  changeProject(project : Project) {
+    this.project = project;
+  }
+  
+  getProject() : Project {
+    return this.project;
+  }
 }

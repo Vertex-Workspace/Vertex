@@ -14,7 +14,7 @@ export class ProjectService {
   constructor(
     private http: HttpClient
   ) { }
-
+  
   public getAll(): Observable<Project[]> {
     return this.http
       .get<Project[]>(`${URL}project`)

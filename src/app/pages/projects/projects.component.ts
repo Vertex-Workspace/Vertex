@@ -57,6 +57,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   getRecentProjects(): void {
+    console.log(this.team);
+    
     this.recentProjects = this.team.projects!;
   }
 

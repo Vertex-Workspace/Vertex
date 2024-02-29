@@ -11,7 +11,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 import { Permission, PermissionsType, User } from 'src/app/models/user';
-import { isEmpty } from 'rxjs';
+import { Observable, isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
   @Input()
   team ?: Team;
 
-  cols: any[] = [];
+
 
   taskList: Task[] = [];
 
@@ -54,7 +54,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router : Router
   ) {
     
   }
@@ -63,25 +64,26 @@ export class ListComponent implements OnInit {
     //Define o primeiro campo da tabela como o nome
     //Adiciona nome e status como colunas padrão
 
-    this.cols.push( 
-      {
-        field: "name",
-        headerText: "Nome",
-        width: '300px',
-      },
-      {
-        id: this.statusProperty.id,
-        field: this.statusProperty.kind,
-        headerText: this.statusProperty.name,
-        width: '300px'
-      }
-    ); 
+    // this.cols.push( 
+    //   {
+    //     field: "name",
+    //     headerText: "Nome",
+    //     width: '300px',
+    //   },
+    //   {
+    //     id: this.statusProperty.id,
+    //     field: this.statusProperty.kind,
+    //     headerText: this.statusProperty.name,
+    //     width: '300px'
+    //   }
+    // ); 
       
   
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.team) this.getTeam(); //atribui todas as tarefas da equipe a taskList
     else this.getAllTasks(); //atribui todas as tarefas do usuário para taskList
   }
+
 
   @Output() openTaskDetails = new EventEmitter();
   openTaskModal(task: Task): void {
@@ -98,7 +100,7 @@ export class ListComponent implements OnInit {
 
   getProject(): void { //é chamado quando está na tela do espaço de trabalho
     this.taskList = this.project.tasks;//atribui para taskList todas as tarefas existentes no projeto
-    this.getAllCols(); //recebe o restante das colunas com base nas propriedades do projeto    
+    // this.getAllCols(); //recebe o restante das colunas com base nas propriedades do projeto    
   }
 
   getTeam(): void {
@@ -128,21 +130,40 @@ export class ListComponent implements OnInit {
       //--> talvez seja interessante fazer outra validação <--
   }
 
-  getAllCols(): void { //no espaço de trabalho, cria as colunas com base nas propriedades do projeto
-    if (this.project.properties) { //verifica se o projeto possui alguma propriedade
-      this.project.properties.forEach((property) => { //iteração -> cada propriedade do projeto
-        if (property.kind !== this.statusProperty.kind) { //evita repetição da coluna status, já adicionada no onInit
-          const newCol: any = {
-            id: property.id,
-            field: property.kind,
-            headerText: property.name,
-            width: '300px',
-          }
-          this.cols.push(newCol);
-        }
-      });
-    } 
-  }
+  // getAllCols(): any[] { //no espaço de trabalho, cria as colunas com base nas propriedades do projeto
+  //   let arrayTeste : any[] = [];
+  //   arrayTeste.push( 
+  //     {
+  //       field: "name",
+  //       headerText: "Nome",
+  //       width: '300px',
+  //     },
+  //     {
+  //       id: this.statusProperty.id,
+  //       field: this.statusProperty.kind,
+  //       headerText: this.statusProperty.name,
+  //       width: '300px'
+  //     }
+  //   );
+  //   if(this.router.url.includes('tarefas')){
+  //     if (this.project.properties) { //verifica se o projeto possui alguma propriedade
+  //       this.project.properties.forEach((property) => { //iteração -> cada propriedade do projeto
+  //         if (property.kind !== this.statusProperty.kind) { //evita repetição da coluna status, já adicionada no onInit
+  //           const newCol: any = {
+  //             id: property.id,
+  //             field: property.kind,
+  //             headerText: property.name,
+  //             width: '300px',
+  //           }
+  //           arrayTeste.push(newCol);
+  //         }
+  //       });
+  //     }
+  //   }
+  //   console.log(arrayTeste);
+    
+  //   return arrayTeste;
+  // }
 
 
 

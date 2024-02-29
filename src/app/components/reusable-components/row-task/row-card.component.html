@@ -1,6 +1,6 @@
 <div class="card">
 
-    <div class="name test-name z-[1]" [style.min-width]="getNameWidth()" (click)="openModalTask()">
+    <div class="name sticky left-0" [style.min-width]="getNameWidth()" (click)="openModalTask()">
         <span class="drag-handle" cdkDragHandle>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
@@ -16,20 +16,28 @@
             </ng-container>
         </div>
     </div>
-
-        <ng-container *ngFor="let col of cols">
+    <div 
+    class="properties" 
+    [style.min-width]="'300px'"
+    (click)="alertCantEdit()"
+    >
+    <app-input-value-property 
+    style="width: 100%; height: 100%;" 
+    [task]="task" 
+    [value]="getPropertyValue(project.properties[0])"
+    ></app-input-value-property>
+</div>
+    <ng-container *ngFor="let property of project.properties">
             <div 
-            *ngIf="col.field !== 'name'" 
             class="properties" 
             [style.min-width]="'300px'"
             (click)="alertCantEdit()"
+            *ngIf="property.id !== project.properties[0].id"
             >
             <app-input-value-property 
-            (propertyListId)="findNumber($event)"
             style="width: 100%; height: 100%;" 
             [task]="task" 
-            [value]="getPropertyValue(col)"
-            [backgroundColor]="returnColors()"
+            [value]="getPropertyValue(property)"
             ></app-input-value-property>
         </div>
     </ng-container>
