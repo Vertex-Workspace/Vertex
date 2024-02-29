@@ -14,9 +14,14 @@
             @apply pl-3;
           }
 
-          h4:hover{
+          button:hover{
             @apply cursor-pointer;
           }
+
+          button{
+            font-size: 1.5rem;
+          }
+
           .col-items {
             @apply flex flex-col gap-5 items-center pt-5;
           }

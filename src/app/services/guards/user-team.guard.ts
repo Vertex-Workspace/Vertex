@@ -3,9 +3,6 @@ import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapsho
 import { Observable } from 'rxjs';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
-import { TeamService } from '../team.service';
-import { UserStateService } from '../user-state.service';
-import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +13,7 @@ export class UserTeamGuard implements CanActivate {
   team !: Team;
 
   constructor(
-    private userState: UserStateService,
-    private userService: UserService,
-    private teamService: TeamService,
-    private route: ActivatedRoute
+    
   ) {}
 
   canActivate(

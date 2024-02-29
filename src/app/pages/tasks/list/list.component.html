@@ -1,40 +1,35 @@
 <section *ngIf="!isNull">
     <div class="table">
         <div class="thead">
-            <label 
-                *ngFor="let col of cols"
-                [style.min-width]="col.width"
-                [class.nameHeader]="col.field == 'name'"
-            >              
+            <label [style.min-width]="'300px'" class="name-header">
                 <h6>
-                {{col.headerText}}
+                    Nome
                 </h6>
             </label>
+            <label [style.min-width]="'300px'">
+                <h6>
+                    Status
+                </h6>
+            </label>
+
+            <ng-container *ngFor="let property of project.properties">
+                <label *ngIf="property.id !== project.properties[0].id" [style.min-width]="'300px'">
+                    <h6>
+                        {{property.name}}
+                    </h6>
+                </label>
+            </ng-container>
         </div>
 
-        <div class="tbody overflow-y-auto overflow-x-hidden"
-
-            cdkDropList 
-            (cdkDropListDropped)="dropCard($event)"
-        >
+        <div class="tbody overflow-y-auto overflow-x-hidden" cdkDropList (cdkDropListDropped)="dropCard($event)">
             <ng-container *ngFor="let task of taskList">
-                <div 
-                    class="trow regular-text relative"
-                    [cdkDragData]="task"
-                    cdkDrag
-                    cdkDragLockAxis="y"
-                    cdkDragBoundary=".table"
-                >
-                    <app-row-card
-                        (openTaskDetails)="openTaskModal(task)"
-                        [task]="task"
-                        [cols]="cols"
-                    ></app-row-card>
-                    
+                <div class="trow regular-text relative" [cdkDragData]="task" cdkDrag cdkDragLockAxis="y"
+                    cdkDragBoundary=".table">
+                    <app-row-card [task]="task" [project]="project" (modalTask)="openTask($event)"></app-row-card>
+
                 </div>
             </ng-container>
-        </div>       
-        
+        </div>
     </div>
 </section>
 <div class="null-list" *ngIf="isNull">
@@ -42,4 +37,3 @@
         Nenhuma tarefa disponível...
     </h6>
 </div>
-

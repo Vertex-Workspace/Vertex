@@ -2,10 +2,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
 import { Value, ValueUpdate } from 'src/app/models/class/value';
+import { ActivatedRoute } from '@angular/router';
+import { Project } from 'src/app/models/class/project';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
-
+//teste pra ver se foi
 @Component({
   selector: 'app-input-value-property',
   templateUrl: './input-value-property.component.html',
@@ -16,33 +22,60 @@ export class InputValuePropertyComponent {
   @Output()
   changes = new EventEmitter();
 
+  @Input() backgroundColor ?: string = '';
+
   @Input()
   value!: Value;
 
   @Input()
   task!: Task;
 
-  selectedStatus !: any;
-  currentDate !: any;
-  textValue !: string;
-  numberValue !: number;
+  project !: Project;
 
-  constructor(
-    private taskService: TaskService, 
-    private alertService: AlertService
-  ) { }
+  canEdit: boolean = false;
 
-  ngOnInit(): void {
+  constructor(private teamService: TeamService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private alertService: AlertService,
+    private taskService: TaskService) {
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.projectService
+      .getOneById(id)
+      .subscribe((p: Project) => {
+        this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions;
+
+          for (let i = 0; i < permissions.length; i++) {
+            if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+              this.canEdit = true
+            }
+          }
+        });
+      })
   }
 
-  getValue(value: Value): string{
+
+  ngOnInit(): void {
+    if(this.value.property.kind === PropertyKind.STATUS || 
+      this.value.property.kind === PropertyKind.LIST){
+      let valuePropertyList : PropertyList = this.value.value as PropertyList;
+      this.backgroundColor = valuePropertyList.color;
+    }
+  }
+
+  getValue(value: Value): string {
     if (value.value === null) {
       if (value.property.kind === PropertyKind.NUMBER) {
         return "0";
       }
       return "Vazio";
     }
-    if (value.property.kind === PropertyKind.STATUS) {
+    if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
       let valueProperty = value.value as PropertyList;
       return valueProperty.value;
     }
@@ -54,19 +87,8 @@ export class InputValuePropertyComponent {
     return value.value as string;
   }
 
-  getColor(color: string) {
-    if (color === "RED") {
-      return "#FF9D9D50";
-    } else if (color === "YELLOW") {
-      return "#FFD60035";
-    } else if (color === "GREEN") {
-      return "#65D73C50";
-    } else {
-      return "#7be05750";
-    }
-  }
 
-  getSelectOptions(value: Value): PropertyList[] {
+  getSelectOptions(value: Value): PropertyList[] { 
     return value.property.propertyLists;
   }
 
@@ -77,26 +99,36 @@ export class InputValuePropertyComponent {
   isSelected(propertyList: PropertyList, value: Value): boolean {
     let valueProperty = value.value as PropertyList;
     return propertyList.id === valueProperty.id;
+    
   }
 
   changeDate(event: any, value: Value): void {
-    const newValue = event.toISOString().slice(0, -1);
-    value.value = event;
-    this.updateTask(value, newValue);
+    if (this.canEdit) {
+      const newValue = event.toISOString().slice(0, -1);
+      value.value = event;
+      this.updateTask(value, newValue);
+    }else {
+      this.alertService.errorAlert("Você não tem permissão para editar!")
+    }
   }
 
   change(event: any, value: Value): void {
+    if(this.canEdit){
     const propertyId: number = event.value.id;
     if (value.value !== event.value.id) {
       let newValue: string | number | Date;
-      if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS) {
+      if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS ||
+        value.property.kind === PropertyKind.LIST) {
         newValue = event.value.id as number;
-      } else { 
+        this.backgroundColor = event.value.color;
+      } else {
         newValue = event.target.value as string;
       }
-
       this.updateTask(value, newValue)
     }
+  }else {
+    this.alertService.errorAlert("Você não tem permissão para alterar o status")
+  }
   }
 
   updateTask(value: Value, newValue: any): void {
@@ -114,7 +146,7 @@ export class InputValuePropertyComponent {
     };
     this.taskService.patchValue(valueUpdate).subscribe(
       (task) => {
-        this.alertService.successAlert( value.property.name  +  " alterado com sucesso!");
+        this.alertService.successAlert(value.property.name + " alterado com sucesso!");
         this.changes.emit(task);
       },
       (error) => {

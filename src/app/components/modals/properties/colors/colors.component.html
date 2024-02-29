@@ -1,9 +1,22 @@
 <ul>
-    <ng-container *ngFor="let color of colorsList; index as i">
-        <li (click)="selectColor(i)" [ngClass]="color.status === 'selected' ? 'emphasis' : ''">
-            <div [ngStyle]="{'background-color': color.color}">
+    <ng-container *ngFor="let color of colorsList;">
+        <li (click)="selectColor(color)" [ngClass]="color.status === 'selected' ? 'emphasis' : ''">
+            <div [ngStyle]="{'background-color': color.color , 'border' : color.color}">
+                <p class="regular-text">{{color.name}}</p>
+                <fa-icon *ngIf="color.status == 'selected'" class="regular-text" [icon]="faCheck"></fa-icon>
             </div>
-            <p class="regular-text">{{color.name}}</p>
         </li>
     </ng-container>
 </ul>
+<div class="info">
+    <div class="flex flex-row w-full h-[50%] justify-center items-center">
+        <fa-icon [icon]="circleInfo"></fa-icon>
+        <p class="small-text pl-2">
+            Escolha a cor e veja o resultado em tempo real
+        </p>
+    </div>
+
+    <div class="real-time-view" [ngStyle]="{'background-color': currentColor}">
+        {{propertyList.value}}
+    </div>
+</div>

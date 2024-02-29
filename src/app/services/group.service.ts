@@ -3,19 +3,25 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Group } from '../models/class/groups';
+import { User } from '../models/class/user';
+import { Team } from '../models/class/team';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
-
   constructor(
     private http: HttpClient
   ) { }
 
+  public create(group: Group): Observable<Group> {  
+    return this.http
+      .patch<Group>(`${URL}team/group`, group);
+  }
+
   public getGroupsByTeam(teamID: number): Observable<Group[]> {
     return this.http
-      .get<Group[]>(`${URL}team/${teamID}/groups`)
+      .get<Group[]>(`${URL}usersByTeam/${teamID}`)
       .pipe(map((groups: Group[]) =>
         groups.map(group => new Group(group))
       )
@@ -25,4 +31,24 @@ export class GroupService {
   public getGroupById(groupId: number): Observable<Group> {
     return this.http.get<Group>(`${URL}group/${groupId}`);
   }
+
+  public delete(groupId: number):Observable<Group> {
+    return this.http.delete<Group>(`${URL}team/group/${groupId}`)
+  }
+
+  public deleteUserFromGroup(user: User, teamId:number, groupId:number):Observable<Group>{
+    return this.http.delete<Group>(`${URL}team/${teamId}/group/${groupId}/user/${user.id}`)
+  }
+
+  public getUsersOutOfGroup(team: Team, group: Group): Observable<User[]>{
+    return this.http.get<User[]>(`${URL}team/${team.id}/group/${group.id}`)
+    .pipe(map((users: User[]) => users.map(user => new User(user))));
+  }
+
+  public addParticipants(group: Group): Observable<Group>{
+    console.log(group);
+    
+    return this.http.patch<Group>(`${URL}team/group/${group.id}/addParticipants`, group)
+  }
+
 }

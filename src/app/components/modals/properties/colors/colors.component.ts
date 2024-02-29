@@ -1,34 +1,60 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCheck, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import {  PropertyList } from 'src/app/models/property';
+import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
-  selector: 'app-colors',
-  templateUrl: './colors.component.html',
-  styleUrls: ['./colors.component.scss']
+    selector: 'app-colors',
+    templateUrl: './colors.component.html',
+    styleUrls: ['./colors.component.scss']
 })
 export class ColorsComponent {
 
+    faCheck = faCheck;
     faArrowLeft = faArrowLeft;
-    
-    colorsList =[
-        {name: 'Azul', color: '#49759D', status: 'selected'},
-        {name: 'Verde', color: '#D9EED2', status: 'unselected'},
-        {name: 'Amarelo', color: '#F5EFD2', status: 'unselected'},
-        {name: 'Laranja', color: '#F4D9C5', status: 'unselected'},
-        {name: 'Vermelho', color: '#F3D1D1', status: 'unselected'},
-        {name: 'Rosa', color: '#F7E2E4', status: 'unselected'},
-        {name: 'Roxo', color: '#E5DFED', status: 'unselected'},
-        {name: 'Cinza', color: '#F3F3F3', status: 'unselected'},
-        {name: 'Marrom', color: '#D5CFCC', status: 'unselected'},
+    circleInfo = faCircleInfo;
+
+    @Input()
+    propertyList!: PropertyList;
+
+    @Output()
+    changeColor = new EventEmitter<PropertyList>();
+
+    currentColor: string = '#49759D50';
+
+
+
+    colorsList = [
+        { name: 'Azul', color: "#d3e5ef", status: 'unselected' },
+        { name: 'Verde', color: "#dbeddb", status: 'unselected' },
+        { name: 'Amarelo', color: "#fdecc8", status: 'unselected' },
+        { name: 'Laranja', color: "#fadec9", status: 'unselected' },
+        { name: 'Vermelho', color: "#ffe2dd", status: 'unselected' },
+        { name: 'Rosa', color: "#f5e0e9", status: 'unselected' },
+        { name: 'Roxo', color: "#e8deee", status: 'unselected' },
+        { name: 'Cinza', color: "#e3e2e0", status: 'unselected' },
     ]
 
-    selectColor(i: number){
-        this.colorsList.forEach((item, index) => {
-            if(index === i){
+    ngOnInit() {
+        this.colorsList.forEach((color) => {
+            if (color.color == this.propertyList.color) {
+                color.status = 'selected';
+                this.currentColor = color.color;
+            }
+        });        
+    }
+
+    selectColor(color: any) {
+        this.colorsList.forEach((item) => {
+            if (item == color) {
                 item.status = 'selected';
-            }else{
+                this.currentColor = item.color;
+                this.propertyList.color = this.currentColor;
+            } else {
                 item.status = 'unselected';
             }
         });
+        this.changeColor.emit(this.propertyList);
     }
 }

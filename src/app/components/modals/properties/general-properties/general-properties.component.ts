@@ -2,12 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   faArrowLeft, faXmark, faEye, faGear,
   faTrashCan, faEyeSlash, faEllipsisVertical,
-  faFont, faCalendarDays, faPlus, faSpinner, faCaretDown
+  faFont, faCalendarDays, faPlus, faSpinner, faCaretDown, fa1, faListNumeric, faList
 } from '@fortawesome/free-solid-svg-icons';
 import { CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Property, PropertyKind, PropertyStatus } from 'src/app/models/class/property';
+import { Property, PropertyKind, PropertyListKind, PropertyStatus } from 'src/app/models/class/property';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/class/project';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-general-properties',
@@ -27,8 +28,12 @@ export class GeneralPropertiesComponent {
   faCalendarDays = faCalendarDays;
   faPlus = faPlus;
   faSpinner = faSpinner;
+
   currentModal: string = 'general';
   generalModal: boolean = true;
+
+  @Output()
+  openNewProperty = new EventEmitter<Property>();
 
   @Output()
   close = new EventEmitter();
@@ -39,11 +44,6 @@ export class GeneralPropertiesComponent {
   @Input()
   width?: String;
 
-  @Output()
-  gear = new EventEmitter();
-
-  @Output()
-  plus = new EventEmitter();
 
   @Output()
   edit = new EventEmitter();
@@ -52,51 +52,52 @@ export class GeneralPropertiesComponent {
   select = new EventEmitter();
 
   @Output()
-  status = new EventEmitter();
+  status = new EventEmitter<Property>();
+
+  @Output()
+  changeProject = new EventEmitter<Project>();
 
   @Input()
   project!: Project;
 
 
-  constructor(private projectService: ProjectService) {
+  constructor(private propertyService: PropertyService, private projectService : ProjectService) { 
 
   }
 
   propertiesList: any[] = [
     {
-      status: 'Fixas',
-      opacity: false,
-      icon: faEye,
-      properties: []
-    },
-    {
       status: 'Visíveis',
       opacity: false,
       icon: faEye,
-      properties: []
+      properties: [],
+      kind: PropertyListKind.VISIBLE
     },
     {
       status: 'Não visíveis',
       opacity: true,
       icon: faEyeSlash,
-      properties: []
+      properties: [],
+      kind: PropertyListKind.INVISIBLE
     }
   ]
 
   ngOnInit(): void {
+    this.separePropertiesKind();
+  }
+
+  private separePropertiesKind() {
+    this.propertiesList[0].properties = [];
+    this.propertiesList[1].properties = [];
     this.project.properties.forEach(
       (property) => {
-        // [0] - FIXED, [1] - VISIBLE, [2] - INVISIBLE
-        if (property.propertyStatus === PropertyStatus.FIXED) {
+        // [0] - VISIBLE, [1] - INVISIBLE
+        if (property.propertyStatus === PropertyStatus.VISIBLE) {
           this.propertiesList[0].properties.push(property);
-        } else if (property.propertyStatus === PropertyStatus.VISIBLE) {
+        } else if (property.propertyStatus === PropertyStatus.INVISIBLE){
           this.propertiesList[1].properties.push(property);
-        } else {
-          this.propertiesList[2].properties.push(property);
         }
       });
-
-    console.log(this.propertiesList);
   }
 
   closeModal() {
@@ -107,90 +108,54 @@ export class GeneralPropertiesComponent {
     //BUROCRACY, THE BACK END DOESN'T NEED THIS TO CREATE A DEFAULT PROPERTY
     let genericProperty = new Property({
       id: 0,
-      name: 'Nova Propriedade',
+      name: '',
       kind: PropertyKind.TEXT,
       propertyStatus: PropertyStatus.VISIBLE,
       propertyLists: [],
-      isObligated: false,
+  
     });
-
-    this.projectService.createProperty(this.project.id!, genericProperty).subscribe(
-      (property) => {
-        console.log(property);
-        property.propertyLists = [];
-        this.project.properties.push(property);
-        this.propertiesList[1].properties.push(property);
-      }, (error) => {
-        console.log(error);
-      });
+    this.openNewProperty.emit(genericProperty);
   }
 
-
-
-  clickGear() {
-    // this.gear.emit({ list: this.propertiesList[i].properties[i2].name });
-    // console.log(this.propertiesList[i].properties[i2].name)
-  }
-
-  clickPlus(type: string) {
-    this.plus.emit();
-  }
-
-  editProperty(propertyKind: PropertyKind) {
-    if (propertyKind === PropertyKind.STATUS) {
-      this.status.emit();
-    } else if (propertyKind === PropertyKind.LIST) {
-      this.select.emit();
+  editProperty(property: Property, type : string) {
+    if (property.kind === PropertyKind.STATUS) {
+      this.status.emit(property);
+    } else if (property.kind == PropertyKind.LIST && type == 'row') {
+      this.select.emit(property);
+    } 
+    else if(property.kind === PropertyKind.DATE){
+      //Alert or message
     } else {
-        this.edit.emit();
+      this.edit.emit(property);
     }
   }
 
 
   changeStatus(property: Property) {
     if (property.propertyStatus === PropertyStatus.VISIBLE) {
-      this.propertiesList[1].properties.splice(this.propertiesList[1].properties.indexOf(property), 1);
-      this.propertiesList[2].properties.push(property);
       property.propertyStatus = PropertyStatus.INVISIBLE;
     } else {
-      this.propertiesList[2].properties.splice(this.propertiesList[2].properties.indexOf(property), 1);
-      this.propertiesList[1].properties.push(property);
       property.propertyStatus = PropertyStatus.VISIBLE;
     }
-    this.projectService.createProperty(this.project.id!, property).subscribe(
-      (property) => {
-        console.log(property);
-
+    this.propertyService.createOrEditProperty(this.project.id!, property).subscribe(
+      (project) => {
+        this.project = project;
+        this.separePropertiesKind();
+        this.changeProject.emit(this.project);
       }, (error) => {
         console.log(error);
       });
   }
 
   delete(property: Property) {
-    console.log(property.id);
-    this.projectService.deleteProperty(this.project.id!, property.id).subscribe(
+    this.propertyService.deleteProperty(this.project.id!, property.id).subscribe(
       (project) => {
-        console.log(project);
-
-        //[1] - VISIBLE, [2] - INVISIBLE
-        if (property.propertyStatus === PropertyStatus.VISIBLE) {
-          this.propertiesList[1].properties.splice(this.propertiesList[1].properties.indexOf(property), 1);
-        } else {
-          this.propertiesList[2].properties.splice(this.propertiesList[2].properties.indexOf(property), 1);
-        }
-        this.project.properties = this.project.properties.filter((p) => p.id !== property.id);
+          this.project = project;
+          this.separePropertiesKind();
+          this.changeProject.emit(this.project);
       }, (error) => {
         console.log(error);
       });
-  }
-
-  // the number of fixed itens list is 0, so the user can't move the other itens into it
-  drop(event: CdkDragDrop<any[]>) {
-    transferArrayItem(event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
   }
 
   getIconProperty(kindProperty: PropertyKind): any {
@@ -198,9 +163,14 @@ export class GeneralPropertiesComponent {
       return faFont;
     } else if (kindProperty === PropertyKind.DATE) {
       return faCalendarDays;
-    } else {
+    } else if (kindProperty === PropertyKind.STATUS) {
       return faSpinner;
+    } else if (kindProperty === PropertyKind.LIST) {
+      return faList;
+    } else if(kindProperty === PropertyKind.NUMBER){
+      return fa1;
     }
+
   }
 }
 

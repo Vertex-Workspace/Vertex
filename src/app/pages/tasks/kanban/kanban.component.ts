@@ -3,14 +3,18 @@ import { Task, TaskCreate } from 'src/app/models/class/task';
 import {
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { TaskService } from 'src/app/services/task.service';
-import { Value, ValueUpdate } from 'src/app/models/class/value';
+import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/class/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { TeamService } from 'src/app/services/team.service';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
+import { taskHourService } from 'src/app/services/taskHour.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-kanban',
@@ -23,18 +27,47 @@ export class KanbanComponent {
   constructor(
     private taskService: TaskService, 
     private alertService: AlertService,
-    private userService : UserService
-  ) {
-  }
-
-  ngOnInit(): void {
+    private userService : UserService,
+    private route: ActivatedRoute,
+    private projectService: ProjectService,
+    private teamService: TeamService) {
   }
 
   @Input()
   project!: Project;
 
+  @Input() canDeleteVerification ?: boolean
+
+  canCreate: boolean = false;
+  canEdit: boolean = false;
+
+  ngOnInit(){
+    console.log(this.canEdit);
+
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.projectService
+      .getOneById(id)
+      .subscribe((p: Project) => {
+        this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions
+
+          for (const permission of permissions) {
+            if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+              this.canEdit = true;
+            }else if ((permission.name === PermissionsType.CREATE) && permission.enabled) {
+              this.canCreate = true;
+            }
+          }
+        })
+      })
+    
+  }
+
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
-    const task: Task = event.item.data;    
+    if(this.canEdit){
+    const task: Task = event.item.data;
 
     let previousPropertyList!: PropertyList;
     let newValue!: Value;
@@ -63,7 +96,7 @@ export class KanbanComponent {
     }
 
     const newIndexTask =
-      this.specificPropertyArray(propertyList)[event.currentIndex];
+    this.specificPropertyArray(propertyList)[event.currentIndex];
     const newIndex = this.project.tasks.indexOf(newIndexTask);
     const previousIndex = this.project.tasks.indexOf(task);
 
@@ -91,11 +124,12 @@ export class KanbanComponent {
         }
       };
 
-      console.log(valueUpdate);
-      
       //Patch the value of the status task
       this.taskService.patchValue(valueUpdate).subscribe();
     }
+  }else {
+    this.alertService.errorAlert("Você não tem permissão para alterar o status da tarefa!")
+  }
   };
 
   getHeight(propertyList: PropertyList): string {
@@ -109,19 +143,6 @@ export class KanbanComponent {
     });
   }
 
-
-  //Temporary
-  getColor(color: string) {
-    if (color === "RED") {
-      return "#FF9D9D50";
-    } else if (color === "YELLOW") {
-      return "#FFD60035";
-    } else if (color === "GREEN") {
-      return "#65D73C50";
-    } else {
-      return "#7be05750";
-    }
-  }
 
   getTaskByProperty(task: Task, propertyList: PropertyList): boolean {
     let valueIntoPropertyList: PropertyList = task.values[0].value as PropertyList;
@@ -140,7 +161,6 @@ export class KanbanComponent {
 
   createTask(propertyList: PropertyList) {
     let propertyUsed!: Property;
-
     //For each to find the property of the clicked Property List
     this.project.properties.forEach((property) => {
 
@@ -165,33 +185,47 @@ export class KanbanComponent {
       project: {
         id: this.project.id!
       },
-      values: [
-        {
-          property: {
-            id: propertyUsed.id
-          },
-          value: {
-            value: propertyList.id as number
-          }
-        }
-      ],
+      values: [],
       creator: {
         id: this.userService.getLogged().id!
       },
       teamId: this.project.idTeam!
-    
     }
-
+    console.log("Task", taskCreate);
+    
     this.taskService.create(taskCreate).subscribe(
+      (task: Task) => {
 
-      (task: Task) => {    
-        this.project.tasks.push(task);
-        this.alertService.successAlert("Tarefa criada com sucesso!");
+        const valueUpdate: ValueUpdate = {
+          id: task.id,
+          value: {
+            property: {
+              id: propertyUsed.id
+            },
+            value: {
+              //It always gonna be the status
+              id: task.values[0].id,
+              value: propertyList.id as number
+            }
+          }
+        };
+        console.log(valueUpdate);
+        this.taskService.patchValue(valueUpdate).subscribe(
+          (taskDate) => {
+            task.values = taskDate.values;
+            this.project.tasks.push(task);
+            this.alertService.successAlert("Tarefa criada com sucesso!");
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
       },
       (error: any) => {
         this.alertService.errorAlert("Erro ao criar tarefa!");
       }
     );
-  }
-
+    
+    }
 }

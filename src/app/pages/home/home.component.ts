@@ -108,9 +108,15 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  delete(id: number): void {
+  delete(team : Team): void {
+    // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
+    //   this.userCreator = user;
+    //   console.log(user); 
+    // })
+  
+    
     this.teamService
-      .delete(id)
+      .delete(team.id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
         this.teams?.splice(this.teams.indexOf(team), 1);

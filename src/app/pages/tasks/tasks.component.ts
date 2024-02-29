@@ -1,14 +1,17 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/class/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate } from 'src/app/models/class/task';
+import { Permission, PermissionsType, User } from 'src/app/models/class/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
-import { Note } from 'src/app/models/class/note';
+import { TeamService } from 'src/app/services/team.service';
 import { NoteService } from 'src/app/services/note.service';
-import { User } from 'src/app/models/class/user';
+import { Note } from 'src/app/models/class/note';
 
 
 @Component({
@@ -27,6 +30,9 @@ export class TasksComponent implements OnInit {
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
   taskOpen: boolean = false;
+  permissions: Permission[] = [];
+  canCreate: boolean = false;
+
   logged !: User;
 
   project!: Project;
@@ -37,7 +43,8 @@ export class TasksComponent implements OnInit {
     private projectService: ProjectService,
     private taskService: TaskService,
     private noteService: NoteService,
-    private userService : UserService
+    private userService : UserService,
+    private teamService: TeamService
   ) {
     this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
@@ -46,6 +53,16 @@ export class TasksComponent implements OnInit {
       .getOneById(id)
       .subscribe((p: Project) => {
         this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions;
+    
+          for (let i = 0; i < permissions.length; i++) {
+            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+              this.canCreate = true;
+            }
+          }
+        });
       })
   }
 
@@ -152,5 +169,12 @@ export class TasksComponent implements OnInit {
       return task;
     });
   }
+
+  changeProject(project : Project) {
+    this.project = project;
+  }
   
+  getProject() : Project {
+    return this.project;
+  }
 }

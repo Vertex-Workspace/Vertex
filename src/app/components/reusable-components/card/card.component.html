@@ -1,28 +1,22 @@
-<div 
-    class="card" 
-
+<div class="card"
     [style.width]="width"
     [style.min-height]="minHeight"
     [style.borderColor]="borderColor"
     (click)="openTask()"
     (click)="takeCurrentTime()"
     >
+  
     <div class="top">
         <div class="left">
-            <fa-icon
-                [icon]="faCircleUser"
-                class="icon"
-            >
-            </fa-icon>
+            <fa-icon [icon]="faCircleUser" class="icon"></fa-icon>
         </div>
         
         <div class="right">
             <ng-container *ngFor="let item of settings">
-                <fa-icon
-                    [icon]="item.icon"
-                    (click)="item.onclick()"
-                    class="icon"
-                >
+                <fa-icon [icon]="item.icon"
+                         (click)="item.onclick()"
+                         class="icon"
+                         [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'">
                 </fa-icon>
             </ng-container>
         </div>
@@ -31,5 +25,4 @@
     <p class="medium-text">{{task.name}}</p>
 </div>
 
-<!--     [style.borderColor]="task.category.borderColor" -->
-<app-confirm-modal [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'" *ngIf="modalDelete" (close)="delete($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="modalDelete" [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'" (close)="delete($event)"></app-confirm-modal>

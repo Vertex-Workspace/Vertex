@@ -1,26 +1,36 @@
-<div class="ng-contentDiv" cdkDropListGroup>
-
-    <!-- Visible and invisible -->
-    <div class="whole-content" *ngFor="let item of itemsList; index as i" cdkDropList (cdkDropListDropped)="drop($event, i)"
-    [cdkDropListData]="item.properties">
-        <p class="regular-text">{{item.status}}</p>
-            <div class="visible"
-                [ngClass]="item.status === 'Visíveis' ? '' : 'opacity'"
-                *ngFor="let name of item.name; index as i2" cdkDrag>
+<div class="ng-contentDiv">
+    <div class="whole-content-w-full" *ngFor="let section of sections; index as i"
+    [ngStyle]="{'border': section.kind == 'VISIBLE' ? 'none' : ''}">
+        <!-- Visible and invisible -->
+        <div class="whole-content">
+            <div class="flex w-full justify-between items-center">
+                <p class="pl-3 pt-4 medium-text pb-4">{{section.name}}</p>
+                <span class="text-3xl cursor-pointer" *ngIf="section.name == 'Visíveis'"
+                    (click)="createPropertyList()">+</span>
+            </div>
+            <div class="visible" [ngClass]="section.name === 'Visíveis' ? '' : 'opacity'"
+                *ngFor="let propertyList of section.propertyLists;">
                 <div>
-                    <div cdkDragHandle>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
-                        <fa-icon [icon]="faEllipsisVertical" class="icon opacity-icon"></fa-icon>
-                    </div>
                     <div>
-                        <input class="regular-text" value="{{name.name}}" />
+                        <p *ngIf="propertyList.id != propertyListNameEditId" (click)="editName(propertyList)"
+                            class="regular-text cursor-pointer" [ngStyle]="{'background-color': propertyList.color}">
+                            {{propertyList.value}}</p>
+                        <input *ngIf="propertyList.id == propertyListNameEditId" type="text" class="regular-text"
+                            [(ngModel)]="nameEdit" [ngStyle]="{'background-color': propertyList.color}">
+                        <p *ngIf="propertyList.id == propertyListNameEditId" (click)="saveName(propertyList)"
+                            class="cursor-pointer">✔</p>
                     </div>
                 </div>
                 <div>
-                    <fa-icon [icon]="item.icon" class="little-icon" (click)="eyeVisibility(name.name, i, i2)"></fa-icon>
-                    <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick()"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(i, i2)"></fa-icon>
+                    <fa-icon [icon]="section.icon" class="little-icon" (click)="eyeVisibility(propertyList)"></fa-icon>
+                    <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick(propertyList)"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(propertyList)"></fa-icon>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="info-status">
+    <fa-icon [icon]="faInfoCircle" class="color-text text-sm"></fa-icon>
+    <p class="regular-text">Clique no texto e você poderá editar o nome do item</p>
 </div>

@@ -10,27 +10,28 @@ form{
 }
 
 .div-grid-name-image{
-    @apply grid w-full h-[30%];
+    @apply grid w-full h-[35%];
     grid-template-columns: 65% 35%;
 }
 
 .input-name{
-    @apply flex flex-col w-full h-[50%];
+    @apply flex flex-col w-full h-[50%] justify-start items-start;
 
     p{
-        @apply text-xl pb-6;
+        @apply pt-6 pb-6;
+        font-size: $mediumText
     }
     input{
-        @apply flex h-52 rounded-md pl-4;
+        @apply flex h-52 rounded-md pl-4 w-96;
     }
 }
 
 .image {
-    @apply w-[250px] h-[250px] p-2 rounded-full flex flex-col justify-center items-center;
+    @apply w-full h-full flex justify-end items-end;
 
 
     img {
-        @apply w-[80%];
+        @apply flex w-full justify-end items-end;
     }
 
     .profile-photo {
@@ -41,7 +42,7 @@ form{
 }
 
 .input-div {
-    @apply w-full h-full flex justify-center items-center absolute;
+    @apply w-full h-full flex justify-end items-end absolute;
     opacity: 0;
 
     .input-file {
@@ -51,54 +52,50 @@ form{
 }
 
 .input-image{
-    @apply flex flex-col w-full h-[50%] justify-center items-center;
+    @apply flex w-full h-[50%] justify-end items-end;
 
     .image-icon{
-        @apply text-9xl;
+        font-size: 8rem;
         color: $primaryColor;
+        @apply pt-10;
     }
 
     .image-icon:hover{
         opacity: 0.5;
     }
-
-    p{
-        @apply pt-4;
-    }
 }
 
 .input-description{
-    @apply flex flex-col w-full h-[30%];
+    @apply flex flex-col w-[90%] h-[60%] w-full items-start;
 
     p{
         @apply pb-6;
+        font-size: $mediumText
     }
     textarea{
-        @apply pl-4 pt-4 rounded-md h-full;
+        @apply pl-4 pt-4 rounded-md h-full w-[99%];
         resize: none;
     }
 }
 
 .div-buttons{
-    @apply flex h-[25%] w-full justify-end items-center;
+    @apply flex h-[20%] w-[99%] justify-end items-end;
 
     .buttons{
-        @apply flex w-full h-full justify-end items-center;
+        @apply flex w-full h-full justify-end items-end;
     }
 
     .cancel-button{
-        @apply flex items-center justify-center w-32 h-12 rounded-sm mr-4;
+        @apply flex items-center justify-center w-24 h-8 rounded-sm mr-4;
         background-color: $error;
         color: white;
     }
     .confirm-button{
-        @apply flex items-center justify-center w-32 h-12 rounded-sm;
+        @apply flex items-center justify-center w-24 h-8 rounded-sm;
         background-color: $primaryColor;
         color: white;
     }
 }
-
-
 
 app-modal-warn{
     color: $primaryColor;
@@ -114,4 +111,20 @@ app-modal-warn{
     app-button{
         @apply pt-12;
     }
+}
+
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    z-index: 999;
+}
+
+.modal {
+    @apply absolute rounded-md flex flex-col w-[30%] h-[60%]
+    items-start justify-start text-center p-8 border-t-8;
+    border-color: $primaryColor;
+    background-color: $secondColor;
+}
+
+.size {
+    font-size: $largeText;
 }

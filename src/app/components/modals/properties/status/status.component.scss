@@ -1,37 +1,64 @@
 @import '../../../../../variables';
 
 .little-icon {
-    color: $primaryColor;
+    color: $text;
     font-size:1rem;
 }
 
 .main-property {
-    @apply flex justify-between items-center w-full h-full pt-3;
-
+    @apply flex justify-between items-center w-[90%] h-full py-3;
 }
 
 .properties {
-    @apply h-full w-full;
+    @apply flex flex-col h-[445px] w-full  gap-3 items-center;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .status-space{
+        @apply flex flex-col w-full items-center;
+        border-top: 1px solid $emphasis;
+
+    }
+
+    
+}
+.info-status{
+    @apply flex flex-row h-[10%] items-end justify-center pt-4 opacity-60 gap-2;
+
+    p{
+        color: $primaryColor;
+    }
 }
 
-.specific-properties {
-    @apply w-full flex flex-row items-center justify-start h-[8%] border-b border-[#969397];
 
-    div:first-child {
-        @apply pl-2 w-[6%] flex justify-between items-center;
+.specific-properties {
+    @apply flex flex-row items-center justify-start min-h-[40px] rounded-sm w-[90%];
+
+
+    div:first-child{
+        @apply flex w-[6%] h-full justify-evenly;
+        
+        fa-icon{
+            color: $text;
+        }
     }
 
     div:nth-child(2){
-        @apply w-[84%] flex justify-start pl-2 items-center;
-
+        @apply flex w-[80%] h-full justify-start pl-2 items-center;
+    
         input {
-            @apply w-full;
+            @apply flex rounded-lg px-2;
             outline: none;
+          }
+
+        p{
+            @apply px-2 rounded-xl; 
+            width: auto;
         }
     }
 
     div:last-child {
-        @apply w-[12%] pr-2 flex justify-between items-center;
+        @apply w-[14%] flex justify-between items-center;
     }
 }
 
@@ -49,10 +76,31 @@
  }
 
  .icon {
-    color:$primaryColor;
+    color:$text;
  }
 
  .opacity-icon{
     @apply opacity-75;
 }
+.color-text{
+    color: $text;
+}
 
+
+.disabled-trash{
+    @apply opacity-50;
+    cursor: not-allowed;
+}
+.isFixedDrag{
+    @apply opacity-50 justify-center items-center;
+    
+    fa-icon{
+        cursor: default !important;
+    }
+}
+.isDraggable{
+    @apply justify-center items-center;
+    fa-icon{
+        cursor: grab !important;
+    }
+}
