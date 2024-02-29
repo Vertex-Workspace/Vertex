@@ -42,7 +42,7 @@ import { NoteComponent } from './components/reusable-components/note/note.compon
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

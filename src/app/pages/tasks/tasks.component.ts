@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/project';
@@ -38,30 +38,33 @@ export class TasksComponent implements OnInit {
     private route : ActivatedRoute,
     private projectService: ProjectService,
     private taskService: TaskService,
-    private userService : UserService,
-    private teamService: TeamService
-  ) {
+    private userService: UserService,
+    private teamService: TeamService,
+    private alertService: AlertService
+  ) { }
+
+  projectId!: number;
+
+  ngOnInit(){
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
       .getOneById(id)
       .subscribe((p: Project) => {
         this.project = p;
+
+        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+          this.userService.getLogged().permissions = permissions;
+    
+          for (let i = 0; i < permissions.length; i++) {
+            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+              this.canCreate = true;
+            }
+          }
+        });
       })
   }
 
-
-  ngOnInit(): void {
-    this.teamService.hasPermission(this.project, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-          this.canCreate = true;
-        }
-      }
-    });
-  }
 
   menuItems = [
     { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
@@ -111,6 +114,8 @@ export class TasksComponent implements OnInit {
     }
     this.taskService.create(taskCreate).subscribe(
       (task) => {
+        console.log(task);
+        
         this.project.tasks.push(task);
         this.changeModalTaskState(true, task);
       },
@@ -143,7 +148,6 @@ export class TasksComponent implements OnInit {
       return task;
     });
   }
-  changeProjectSettings(project: Project){
-    this.project = project;
-  }
+
+
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
 import { CardUserComponent } from './card-user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [CardUserComponent],
@@ -10,7 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     ConfirmModalModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterLink
   ]
 })
 

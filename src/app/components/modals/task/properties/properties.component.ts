@@ -19,7 +19,7 @@ export class PropertiesComponent {
 
   @Input() task!: Task;
   @Input() project !:Project
-  canEdit: boolean = false;
+  @Input() canEdit !: boolean
 
   constructor(private taskService: TaskService, 
     private alertService : AlertService,

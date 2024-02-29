@@ -1,4 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay">
+
+  <div class="modal">
     <h4 class="title" >Crie um novo grupo</h4>
   
     <div class="div-name">
@@ -12,7 +14,7 @@
       </div>
     </div>
   
-    <p class="large-text pb-5">Selecionar participantes</p>
+    <p class="pb-4">Selecionar participantes</p>
     <div class="input-description">
       <p>Participantes</p>
       <app-card-user [typeString]="'creating'" [width]="'700px'" [height]="'70px'" (user)="selectUsers($event)"
@@ -25,5 +27,16 @@
         <button class="confirm-button" type="submit">Criar grupo</button>
       </div>
     </div>
+  </div>
 </form>
+
+<app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink">
+  <h5>Equipe {{form.value.name}} criada com sucesso!</h5>
+  <div class="informations-modal medium-text">
+    <p>Convide pessoas para {{form.value.name}}</p>
+    <p>através do link abaixo.</p>
+  </div>
+  <app-button [title]="'Copiar Link de Convite'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
+    (clickEvent)="copyLink()" />
+</app-modal-warn>
   

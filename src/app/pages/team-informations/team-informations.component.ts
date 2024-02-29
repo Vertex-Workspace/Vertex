@@ -153,8 +153,7 @@ export class TeamInformationsComponent implements OnInit {
     options: any;
 
     menuItems = [
-        { id: 'participants', iconClass: 'pi pi-user', label: 'Visualizar participantes' },
-        { id: 'permissions', iconClass: 'pi pi-lock', label: 'Gerenciar permissões' },
+        { id: 'participants', iconClass: 'pi pi-user', label: 'Participantes' },
         { id: 'groups', iconClass: 'pi pi-users', label: 'Grupos' }
     ];
 

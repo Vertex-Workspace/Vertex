@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
-import { User } from 'src/app/models/user';
+import { Permission, PermissionsType, User } from 'src/app/models/user';
 import { isEmpty } from 'rxjs';
 
 @Component({
@@ -34,6 +34,11 @@ export class ListComponent implements OnInit {
 
   isNull !: boolean;
 
+  canDelete: boolean = false;
+
+  canEdit: boolean = false;
+
+
   statusProperty: any = {
     defaultValue: 'STATUS',
     id: 1,
@@ -48,16 +53,16 @@ export class ListComponent implements OnInit {
   };
 
   constructor(
-    private userService: UserService, 
     private taskService: TaskService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
-    this.logged = userService.getLogged();
+    
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
     //Define o primeiro campo da tabela como o nome
     //Adiciona nome e status como colunas padrão
+
     this.cols.push( 
       {
         field: "name",
@@ -70,7 +75,8 @@ export class ListComponent implements OnInit {
         headerText: this.statusProperty.name,
         width: '300px'
       }
-    );    
+    ); 
+      
   
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.team) this.getTeam(); //atribui todas as tarefas da equipe a taskList
@@ -136,6 +142,12 @@ export class ListComponent implements OnInit {
         }
       });
     } 
+  }
+
+
+
+  openTask(task:Task):void{
+    this.openTaskDetails.emit(task);  
   }
 
 }

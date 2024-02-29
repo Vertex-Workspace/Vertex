@@ -1,55 +1,47 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="!modalCopyLink">
+
+  <div class="modal">
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
     <h4 class="title" *ngIf="typeString === 'project'">Crie um novo Projeto...</h4>
-  
     <div class="div-grid-name-image">
       <div class="input-name">
-        <p class="large-text">{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
-        <input 
-            formControlName="name"
-            type="text" 
-            [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
-        >
+        <p>{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
+        <input formControlName="name" type="text"
+          [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'">
       </div>
       <div class="input-image">
         <div class="image relative">
-            <img *ngIf="selectedFile" src="{{url}}" alt="" class="rounded-full">
-            <fa-icon 
-              [icon]="faImage" 
-              class="image-icon" 
-              *ngIf="!selectedFile"
-            ></fa-icon>
-
+          <img *ngIf="selectedFile" src="{{url}}" alt="">
+          <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
           <form class="input-div">
-              <input type="file" class="input-file" (change)="onFileSelected($event)">
+            <input type="file" class="input-file" (change)="onFileSelected($event)">
           </form>
-      </div>
+        </div>
       </div>
     </div>
-  
-    <div class="input-description">
-      <p class="large-text">{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
-      <textarea 
-        formControlName="description"
-        [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"
-    ></textarea>
+
+    <div class="input-description" *ngIf="typeString === 'team' || typeString === 'project'">
+      <p>{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
+      <textarea formControlName="description"
+        [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
     </div>
-  
+
     <div class="div-buttons">
       <div class="buttons">
         <button class="cancel-button" (click)="closeScreen()">Cancelar</button>
         <button class="confirm-button" type="submit">Confirmar</button>
       </div>
     </div>
+  </div>
 </form>
-  
-  <app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink">
-    <h5>Equipe {{form.value.name}} criada com sucesso!</h5>
-    <div class="informations-modal medium-text">
-      <p>Convide pessoas para {{form.value.name}}</p>
-      <p>através do link abaixo.</p>
-    </div>
-    <app-button [title]="'Copiar Link de Convite'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
-      (clickEvent)="copyLink()" />
-  </app-modal-warn>
-  
+
+<app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink">
+  <h5 *ngIf="typeString === 'team'">Equipe {{form.value.name}} criada com sucesso!</h5>
+  <h5 *ngIf="typeString === 'project'">Projeto {{form.value.name}} criado com sucesso!</h5>
+  <div class="informations-modal medium-text">
+    <p *ngIf="typeString === 'team'">Convide pessoas para {{form.value.name}}</p>
+    <p *ngIf="typeString === 'team'">através do link abaixo.</p>
+  </div>
+  <app-button [title]="'Copiar Link de Convite'" *ngIf="typeString === 'team'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
+    (clickEvent)="copyLink()" />
+</app-modal-warn>
