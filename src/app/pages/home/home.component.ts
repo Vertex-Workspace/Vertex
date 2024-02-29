@@ -22,16 +22,16 @@ export class HomeComponent implements OnInit{
   isCreating !: boolean;
   clicked !: string;
 
-    //TASKS - FILTER AND ORDER
-    filterSettings !: any[];
-    orderSettings !: any[];
-  
-    configItems !: any[];
-  
-    filterOpen !: boolean;
-    orderOpen !: boolean;
+  //TASKS - FILTER AND ORDER
+  filterSettings !: any[];
+  orderSettings !: any[];
 
-    menuItems !: any[];
+  configItems !: any[];
+
+  filterOpen !: boolean;
+  orderOpen !: boolean;
+
+  menuItems !: any[];
 
   private teamsSubscription !: Subscription;
   
@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void { 
     this.setDefaultValues();
     this.subscribeToTeams(); 
-    this.getRecentsTeams(); 
   }
 
   setDefaultValues(): void {
@@ -127,14 +126,6 @@ export class HomeComponent implements OnInit{
 
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
-  }
-
-  getRecentsTeams(): void {
-    this.teamService
-      .getTeamsByUser(this.logged.id!)
-      .subscribe((teams) => {        
-        this.recentTeams = teams;
-      });
   }
 
 }

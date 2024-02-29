@@ -44,21 +44,17 @@ export class ProjectsComponent {
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
-    
+    this.getTeam();
   }
 
   ngOnInit(): void {
-    this.getTeam();
     this.validateProjectId();
-    this.getRecentProjects();
     this.emptyTeamProjects = true;
   }
 
-  getRecentProjects(): void {
-    console.log(this.team);
-    
-    if (Array.isArray(this.team.projects)) {
-      this.recentProjects = this.team.projects!;
+  getRecentProjects(team: Team): void {
+    if (Array.isArray(team.projects)) {
+      this.recentProjects = team.projects!;
     }
   }
 
@@ -85,6 +81,7 @@ export class ProjectsComponent {
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
+        this.getRecentProjects(team);
         if (team.projects) this.emptyTeamProjects = false;
       })      
 
