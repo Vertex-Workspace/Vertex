@@ -55,9 +55,10 @@ export class ListComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router : Router
+    private router : Router,
+    private userService: UserService
   ) {
-    
+    this.logged = userService.getLogged();
   }
 
   ngOnInit(): void {   

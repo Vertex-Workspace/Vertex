@@ -12,23 +12,23 @@
                 </h6>
             </label>
 
-            <ng-container *ngFor="let property of project.properties">
+            <!-- <ng-container *ngFor="let property of project.properties">
                 <label *ngIf="property.id !== project.properties[0].id" [style.min-width]="'300px'">
                     <h6>
                         {{property.name}}
                     </h6>
                 </label>
-            </ng-container>
+            </ng-container> -->
         </div>
 
         <div class="tbody overflow-y-auto overflow-x-hidden" cdkDropList (cdkDropListDropped)="dropCard($event)">
-            <ng-container *ngFor="let task of taskList">
+            <!-- <ng-container *ngFor="let task of taskList">
                 <div class="trow regular-text relative" [cdkDragData]="task" cdkDrag cdkDragLockAxis="y"
                     cdkDragBoundary=".table">
                     <app-row-card [task]="task" [project]="project" (modalTask)="openTask($event)"></app-row-card>
 
                 </div>
-            </ng-container>
+            </ng-container> -->
         </div>
     </div>
 </section>

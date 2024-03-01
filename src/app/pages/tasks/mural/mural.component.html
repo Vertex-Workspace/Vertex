@@ -1,8 +1,7 @@
 <section class="mural-section">
 
-  <ng-container>
+  <ng-container *ngFor="let note of notes">
       <app-note
-        *ngFor="let note of notes"
         [note]="note"
         (deleteNoteEmitter)="deleteNote(note)"
       ></app-note>

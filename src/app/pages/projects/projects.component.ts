@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Group } from '@syncfusion/ej2-angular-grids';
+import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
@@ -16,12 +16,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  isCreatingProject: boolean = false;
-  isCreatingGroup: boolean = false;
-  isCreating: boolean = false;
-  filterOpen: boolean = false;
-  orderOpen: boolean = false;
-  clicked: string = 'task';
+  isCreatingProject !: boolean;
+  isCreatingGroup !: boolean;
+  isCreating !: boolean;
+  filterOpen !: boolean;
+  orderOpen !: boolean;
+  clicked !: string;
   recentProjects !: Project[];
   logged !: User;
   team !: Team;
@@ -52,7 +52,17 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateProjectId();
+    this.setDefaultValues();
+  }
+  
+  setDefaultValues(): void {
     this.emptyTeamProjects = true;
+    this.isCreatingProject = false;
+    this.isCreatingGroup = false;
+    this.isCreating = false;
+    this.filterOpen =false;
+    this.orderOpen = false;
+    this.clicked = 'task'
   }
 
   getRecentProjects(team: Team): void {
@@ -104,15 +114,14 @@ export class ProjectsComponent implements OnInit {
         });
   }
 
-  deleteGroup(event: any):void {
-    // console.log(groupId); 
-    // this.groupService.delete(groupId.id).subscribe((group: Group) => {
-    //   this.alert.successAlert('Grupo deletado com sucesso')
-    //   this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
-    // },
-    // e=> {
-    //   this.alert.errorAlert("Não foi possível deletar");
-    // })
+  deleteGroup(groupId: Group): void {
+    this.groupService.delete(groupId.id).subscribe((group: Group) => {
+      this.alert.successAlert('Grupo deletado com sucesso')
+      this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
+    },
+    e=> {
+      this.alert.errorAlert("Não foi possível deletar");
+    })
   }
 
   changePreviewMode(preview: string): void {
@@ -157,24 +166,21 @@ export class ProjectsComponent implements OnInit {
     this.orderOpen = !this.orderOpen;
   }
 
-  createGroup(event: any): void {
-    // this.groupService
-    //   .create(group)
-    //   .subscribe((group: Group) => {
-    //     this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
-    //     this.team.groups?.splice(this.team.groups.push(group))
-    //     this.switchCreateViewGroup();
-    //   },
-    //     e => {
-    //       if (group.name == null) {
-    //         this.alert.errorAlert(`Você precisa adicionar um nome`)
-    //       }else {
-    //         this.alert.errorAlert(`Erro ao criar equipe`)
-    //         console.log(group);
-            
-    //       }
-
-        // });
+  createGroup(group: Group): void {
+    this.groupService
+      .create(group)
+      .subscribe((group: Group) => {
+        this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
+        this.team.groups?.splice(this.team.groups.push(group))
+        this.switchCreateViewGroup();
+      },
+        e => {
+          if (group.name == null) {
+            this.alert.errorAlert(`Você precisa adicionar um nome`)
+          }else {
+            this.alert.errorAlert(`Erro ao criar grupo`)            
+          }
+        });
   }
 
   switchCreateViewGroup(): void {

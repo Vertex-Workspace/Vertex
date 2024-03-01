@@ -131,8 +131,6 @@ export class NoteComponent implements OnInit, AfterViewInit {
   }
 
   edit(): void {
-    console.log(this.note.position);
-    
     this.noteService
       .patchAttribute(this.note)
       .subscribe();

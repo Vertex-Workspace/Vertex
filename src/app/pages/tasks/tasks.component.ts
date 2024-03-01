@@ -32,6 +32,7 @@ export class TasksComponent implements OnInit {
   taskOpen: boolean = false;
   permissions: Permission[] = [];
   canCreate: boolean = false;
+  isMuralPage !: boolean;
 
   logged !: User;
 
@@ -67,7 +68,8 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    if (this.clicked === 'Mural') this.isMuralPage = true;
+    else this.isMuralPage = false;
   }
 
   menuItems = [
@@ -96,6 +98,8 @@ export class TasksComponent implements OnInit {
   }
   changePreviewMode(preview: string): void {
     this.clicked = preview;
+    if (this.clicked === 'Mural') this.isMuralPage = true;
+    else this.isMuralPage = false;
     localStorage.setItem('mode-task-view', preview);
   }
 

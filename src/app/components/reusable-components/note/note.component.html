@@ -5,19 +5,14 @@
   [style.width.px]="note.width"
   [style.height.px]="note.height"
   [style.backgroundColor]="note.color"
-  cdkDrag  
+  cdkDrag 
   cdkDragBoundary=".mural-section"
-  [cdkDragFreeDragPosition]="note.position"
   (cdkDragEnded)="dragEnd($event)"
 >
   <span #dragHandleCorner class="dragHandle corner" cdkDrag (cdkDragMoved)="dragMove(dragHandleCorner, $event)"></span>
   <span #dragHandleRight cdkDragLockAxis="x" class="dragHandle right" cdkDrag (cdkDragMoved)="dragMove(dragHandleRight, $event)"></span>
   <span #dragHandleBottom cdkDragLockAxis="y" class="dragHandle bottom" cdkDrag (cdkDragMoved)="dragMove(dragHandleBottom, $event)"></span>
   <span class="full" style="width: 100%;">
-
-    <div class="image" *ngIf="hasImage()">
-      <img src="#" alt="Imagem">
-    </div>
 
     <div class="left">
       <h6>{{ note.title }}</h6>
