@@ -4,13 +4,12 @@ import {
   faCircleUser, faSquare, faUserMinus,
   faCaretDown, faCaretUp
 } from '@fortawesome/free-solid-svg-icons';
-import { PermissionsType, Permission, User } from 'src/app/models/user';
+import { Permission, User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Group } from 'src/app/models/groups';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
-import { EventManager } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-card-user',
@@ -47,6 +46,8 @@ export class CardUserComponent implements OnInit {
   permissions: Permission[] = []
   delete: boolean = false;
 
+  isTeamCreator: boolean = false;
+
   constructor(private userService: UserService,
     private groupService: GroupService,
     private alert: AlertService,
@@ -55,9 +56,7 @@ export class CardUserComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.typeString === 'inTheGroup') {
-      this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
-        this.users = users;
-      });
+      this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
       this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
         this.users = users;
@@ -68,7 +67,12 @@ export class CardUserComponent implements OnInit {
       });
     }
 
-    console.log("Vasco")
+    this.teamService.getTeamCreator(this.team).subscribe((userC) => {
+      if (userC.id === this.userService.getLogged().id) {
+        this.isTeamCreator = true
+      }
+    });
+
   }
 
   faCircleUser = faCircleUser;
@@ -85,15 +89,15 @@ export class CardUserComponent implements OnInit {
   }
 
   removeUser(user: User): void {
-      this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
-        .subscribe((group: Group) => {
-          this.alert.successAlert(`Usuário retirado do grupo`)
-          this.group.users?.splice(this.group.users.indexOf(user), 1);
-        },
-          e => {
-            this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
-          }
-        )
+    this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
+      .subscribe((group: Group) => {
+        this.alert.successAlert(`Usuário retirado do grupo`)
+        this.getUsersByGroup()
+      },
+        e => {
+          this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
+        }
+      )
   }
 
   openPermissions(user: User, typeString2: String): void {
@@ -109,8 +113,8 @@ export class CardUserComponent implements OnInit {
     this.teamService.changePermissionEnable(permission, user, this.team).subscribe(
       (permissionRes) => {
         permission.enabled = !permission.enabled;
-      this.alert.successAlert('Autorização alterada!')
-    })
+        this.alert.successAlert('Autorização alterada!')
+      })
   }
 
   getPermission(user: User): Permission[] | any {
@@ -119,13 +123,11 @@ export class CardUserComponent implements OnInit {
     })
   }
 
-  // deleteUserTeam(user: User): void {
-  //   console.log("fui chamado");
-
-  //   this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
-  //     this.alert.successAlert("Usuário retirado da equipe")
-  //   })
-  // }
+  deleteUserTeam(user: User): void {
+    this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
+      this.alert.successAlert("Usuário retirado da equipe")
+    })
+  }
 
   deleteBoolean(): void {
     this.delete = !this.delete
@@ -152,6 +154,13 @@ export class CardUserComponent implements OnInit {
     } else {
       this.alert.notificationAlert("Usuário continua na equipe")
     }
+  }
 
+  getUsersByGroup(){
+    if (this.typeString === 'inTheGroup') {
+      this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
+        this.users = users;
+      });
+    }
   }
 }

@@ -14,7 +14,7 @@
             </div>
 
             <!-- UTILITY NAV BAR TEAM -->
-            <div class="functionally-items regular-text" *ngIf="clicked === 'team' && !isCreating">
+            <div class="functionally-items regular-text" *ngIf="clicked === 'team'">
                 <div class="container">
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
@@ -29,7 +29,7 @@
 
             <!-- UTILITY NAV BAR TASK -->
             <div class="functionally-items-task" *ngIf="clicked === 'task'">
-                <div class="container">
+                <div class="container" >
                     <div class="search">
                         <input type="text" placeholder="Pesquise por uma tarefa...">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
@@ -42,10 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <section 
-                    class="filter-settings" 
-                    *ngIf="filterOpen || orderOpen"
-                >
+                <section class="filter-settings" *ngIf="filterOpen || orderOpen">
                     <!-- <p *ngIf="orderOpen">Ordenar por </p> -->
                     <p *ngIf="filterOpen || orderOpen">Filtrar por </p>
 
@@ -55,7 +52,7 @@
                                 {{ item.label }}
                             </option>
                         </select>
-                        
+
                         <select *ngIf="orderOpen">
                             <option *ngFor="let item of orderSettings">
                                 {{ item.label }}
@@ -63,45 +60,39 @@
                         </select>
                     </ng-container>
                 </section>
-                
+
                 <div class="w-full h-full">
                     <app-list></app-list>
                 </div>
             </div>
 
             <!-- SETTING OF ORDER AND FILTER -->
-    
-        
+
+
             <div class="default-size" *ngIf="clicked === 'team'">
 
-                <app-card-list 
-                    style="width: 100%; height: 90%; padding-top: 3%;" 
-                    *ngIf="clicked === 'team' && !isCreating"
-                    (emitterItem)="delete($event)"
-                    [teams]="teams"
-                    [type]="'team'"
-                ></app-card-list>
+                <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" 
+                *ngIf="clicked === 'team'"
+                (emitterItem)="delete($event)" 
+                [teams]="teams" 
+                [type]="'team'"></app-card-list>
+            </div>
 
-
-                <app-create-team-project 
+            <app-create-team-project 
                     style="width: 100%; height: 90%; padding-top: 3%;"  
                     *ngIf="clicked === 'team' && isCreating"
                     (close)="switchCreateView()"
                     [typeString]="'team'"
-                ></app-create-team-project>
+            ></app-create-team-project>
             </div>
-        </div>
 
 
-        <!-- RIGHT SIDE - QUICK ACCESS -->
-        <div class="container-grid">
-            <div class="default-size">
-                <app-quick-access style="width: 100%; height:100%;" 
-                    [typeString]="'home'"
-                    [recentItems]="recentTeams"
-                ></app-quick-access>
+            <!-- RIGHT SIDE - QUICK ACCESS -->
+            <div class="container-grid">
+                <div class="default-size">
+                    <app-quick-access style="width: 100%; height:100%;" [typeString]="'home'"
+                        [recentItems]="recentTeams"></app-quick-access>
+                </div>
             </div>
         </div>
-    </div>
 </section>
-

@@ -7,9 +7,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { Permission, PermissionsType } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-status',
@@ -40,7 +43,14 @@ export class StatusComponent {
   @Input()
   property!: Property;
 
-  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
+  canDelete: boolean = false;
+  canEdit: boolean = false;
+
+  constructor(private propertyService: PropertyService,
+    private alertService: AlertService,
+    private projectService: ProjectService,
+    private userService: UserService,
+    private teamService: TeamService) { }
 
 
   statusList: any[] = [
@@ -71,14 +81,26 @@ export class StatusComponent {
       id: this.property.id,
       name: this.property.name,
       propertyLists: this.property.propertyLists,
-      propertyStatus : this.property.propertyStatus,
+      propertyStatus: this.property.propertyStatus,
       kind: this.property.kind
     };
-    
+
+    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions;
+
+      for (const permission of permissions) {
+        if (permission.name === PermissionsType.DELETE && permission.enabled) {
+          this.canDelete = true;
+        } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
+          this.canEdit = true;
+        }
+      }
+    })
+
     this.getPropertiesKind();
   }
 
-  private getPropertiesKind(){
+  private getPropertiesKind() {
     this.statusList[0].properties = [];
     this.statusList[1].properties = [];
     this.statusList[2].properties = [];
@@ -94,17 +116,21 @@ export class StatusComponent {
   }
 
   add(status: any) {
-    let newPropertyList: PropertyList = {
-      id: 0,
-      value: status.name,
-      color: status.color,
-      propertyListKind: status.kind, 
-      isFixed: false
-    };
-    this.property.propertyLists.push(newPropertyList);
-    status.properties.push(newPropertyList);
+    if (this.canEdit) {
+      let newPropertyList: PropertyList = {
+        id: 0,
+        value: status.name,
+        color: status.color,
+        propertyListKind: status.kind,
+        isFixed: false
+      };
+      this.property.propertyLists.push(newPropertyList);
+      status.properties.push(newPropertyList);
 
-    this.saveProperty();
+      this.saveProperty();
+    } else {
+      this.alertService.errorAlert("Você não tem permissão para alterar o status!")
+    }
   }
 
   drop(event: CdkDragDrop<any[]>, status: any) {
@@ -117,15 +143,19 @@ export class StatusComponent {
   }
 
 
-  delete(status:any, propertyList: PropertyList) {
-    if(!propertyList.isFixed){
-      this.propertyService.deletePropertyList(this.property.id!, propertyList.id).subscribe(
-        (project) => {
-          this.project = project;
-          this.property = project.properties.find((property) => property.id == this.property.id)!;
-          this.getPropertiesKind();
-          this.changeProject.emit(this.project);
-        })
+  delete(status: any, propertyList: PropertyList) {
+    if (this.canDelete) {
+      if (!propertyList.isFixed) {
+        this.propertyService.deletePropertyList(this.property.id!, propertyList.id).subscribe(
+          (project) => {
+            this.project = project;
+            this.property = project.properties.find((property) => property.id == this.property.id)!;
+            this.getPropertiesKind();
+            this.changeProject.emit(this.project);
+          })
+      }
+    } else {
+      this.alertService.errorAlert("Você não tem permissão para remover o status!");
     }
   }
   nameEdit!: string;
@@ -140,30 +170,34 @@ export class StatusComponent {
         this.changeProject.emit(this.project);
       },
       (error) => {
-        
+
       }
     );
   }
-  saveName(propertyList : PropertyList){
-    if(this.nameEdit.length > 2 && this.nameEdit.length <= 20){
+  saveName(propertyList: PropertyList) {
+    if (this.nameEdit.length > 2 && this.nameEdit.length <= 20) {
       propertyList!.value = this.nameEdit;
       this.saveProperty();
       this.propertyListNameEditId = -1;
       this.nameEdit = '';
-    } else{
+    } else {
       this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
       return;
     }
   }
 
 
-  editName(propertyList : PropertyList){
+  editName(propertyList: PropertyList) {
     this.propertyListNameEditId = propertyList.id!;
     this.nameEdit = propertyList.value;
   }
 
   clickPencil(propertyList: PropertyList) {
-    this.pencil.emit(propertyList);
+    if (this.canEdit) {
+      this.pencil.emit(propertyList);
+    } else {
+      this.alertService.errorAlert("Você não tem permissão para editar o status!")
+    }
   }
 
 }

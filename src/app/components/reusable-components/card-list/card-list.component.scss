@@ -1,7 +1,7 @@
 @import '../../../../variables';
     .list{
         @apply flex w-full h-[600px] flex-col gap-[16px];
-        overflow-y: scroll;
+        overflow-y: auto;
     }
     .card{
         @apply flex w-[98%] min-h-[200px] max-h-[200px] bg-white shadow-lg rounded-sm flex-row;

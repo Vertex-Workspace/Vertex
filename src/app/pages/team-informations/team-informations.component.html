@@ -58,7 +58,7 @@
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
                 <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'permissions'"
-                [team]="team"></app-card-user>
+                (deleteEmitterUserTeam)="deleteUserTeam($event)" [team]="team"></app-card-user>
             </div>  
 
             <div *ngIf="clicked == 'groups'" class="grid-permissions">
@@ -106,16 +106,14 @@
                     <div class="divOf-project-dashboards-pie">
                         <div class="divProjectDashboardsPie">
                             <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-
                         </div>
 
                         <div class="divProjectDashboardsPie">
                             <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-
                         </div>
+
                         <div class="divProjectDashboardsPie">
                             <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-
                         </div>
                     </div>
                 </div>

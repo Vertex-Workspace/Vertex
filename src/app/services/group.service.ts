@@ -15,6 +15,8 @@ export class GroupService {
   ) { }
 
   public create(group: Group): Observable<Group> {  
+    console.log(group);
+    
     return this.http
       .patch<Group>(`${URL}team/group`, group);
   }

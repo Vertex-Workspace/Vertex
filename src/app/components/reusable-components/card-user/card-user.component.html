@@ -6,26 +6,27 @@
         <div>
             <p>{{user.firstName}}</p>
         </div>
-        <div>
+        <div [ngClass]="isTeamCreator ? 'icons-div' : 'more-infos-div'">
 
             <!-- this icons gotta be refactored -->
             <fa-icon *ngIf="typeString === 'creating'" [icon]="faSquare"
                 [ngClass]="user.selected ? 'icon size' : 'icon-not-selected size'" (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="typeString === 'addUsers'" [icon]="faSquare"
                 [ngClass]="user.selected ? 'icon size' : 'icon-not-selected size'" (click)="selectUser(user)"></fa-icon>
-            <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 1rem;" (click)="deleteBoolean()"
-            *ngIf="typeString === 'inTheGroup'">
+            <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean()"
+                *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
             </fa-icon>
             <fa-icon
-                *ngIf="typeString === 'permissions' && !user.openPermission || typeString === 'view-infos' && !user.openInfo"
+                *ngIf="isTeamCreator && typeString === 'permissions' && !user.openPermission || typeString === 'view-infos' && !user.openInfo"
                 size="1x" [icon]="faCaretDown" class="icon" (click)="openPermissions(user, typeString)"
                 (click)="getPermission(user)">
             </fa-icon>
             <fa-icon
-                *ngIf="typeString === 'permissions' && user.openPermission || typeString === 'view-infos' && user.openInfo"
+                *ngIf="isTeamCreator && typeString === 'permissions' && user.openPermission || typeString === 'view-infos' && user.openInfo"
                 size="1x" [icon]="faCaretUp" class="icon" (click)="openPermissions(user, typeString)"
                 (click)="getPermission(user)">
             </fa-icon>
+            <p *ngIf="!isTeamCreator" [routerLink]="'/perfil-usuario'">Ver mais informações</p>
         </div>
     </div>
 
@@ -41,9 +42,11 @@
         <div class="more-infos" [routerLink]="'/perfil-usuario'">
             <p>Ver mais informações</p>
         </div>
-
-        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
-            (close)="deleteBoolean()" [type]="'userTeam'" (confirmEvent)="validatingDelete(user, $event, typeString)">
-        </app-confirm-modal>
     </div>
+    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'" [type]="'userTeam'"
+        (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event, 'inTheGroup')">
+    </app-confirm-modal>
+    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo'" [type]="'userTeam'"
+    (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event, 'view-infos')">
+    </app-confirm-modal>
 </div>

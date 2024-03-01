@@ -72,7 +72,6 @@ export class HomeComponent implements OnInit{
 
   switchCreateView(): void {
     this.isCreating = !this.isCreating;
-    this.updateList();
   }
 
   updateList(): void {
@@ -85,21 +84,14 @@ export class HomeComponent implements OnInit{
     } else {
       this.teams = [];
     }
-    
   }
 
   delete(team : Team): void {
-    // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
-    //   this.userCreator = user;
-    //   console.log(user); 
-    // })
-  
-    
     this.teamService
       .delete(team.id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
-        this.logged.teams?.splice(this.logged.teams.indexOf(team), 1);
+        this.updateList()
       },
       e => {
         this.alert.errorAlert('Erro ao deletar equipe!')

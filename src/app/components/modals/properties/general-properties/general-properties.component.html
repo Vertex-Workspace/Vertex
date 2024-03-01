@@ -1,11 +1,12 @@
-<div class="ng-contentDiv">
+<div class="ng-contentDiv" *ngIf="!deleteBoolean">
     <div class="properties">
         <ng-container *ngFor="let item of propertiesList">
             <div class="visible-unvisible" [ngStyle]="{'border': item.kind == 'VISIBLE' ? 'none' : ''}">
                 <div class="flex w-[90%] flex-col">
                     <div class="flex w-full justify-between items-center">
                         <p class="pl-3 pt-4 medium-text pb-4">{{item.status}}</p>
-                        <h4 class="cursor-pointer" *ngIf="item.status == 'Visíveis'" (click)="createProperty()">+</h4>
+                        <button class="cursor-pointer" *ngIf="item.status == 'Visíveis'" (click)="createProperty()"
+                            [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">+</button>
                     </div>
                     <div *ngFor="let property of item.properties">
                         <div class="visible" [ngClass]="item.opacity === false ? '' : 'opacity'">
@@ -20,12 +21,13 @@
                             </div>
                             <div>
                                 <ng-container *ngIf="item.status != 'Fixas'">
-                                    <fa-icon [icon]="item.icon" class="little-icon"
-                                        (click)="changeStatus(property)"></fa-icon>
+                                    <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(property)">
+                                    </fa-icon>
                                     <fa-icon [icon]="faGear" class="little-icon"
-                                        (click)="editProperty(property, 'gear')"></fa-icon>
-                                    <fa-icon [icon]="faTrashCan" class="little-icon"
-                                        (click)="delete(property)"></fa-icon>
+                                        (click)="editProperty(property, 'gear')"
+                                        [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'"></fa-icon>
+                                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(property)"
+                                        [ngClass]="canDelete ? 'opacity-100' : 'opacity-20'"></fa-icon>
                                 </ng-container>
                             </div>
                         </div>
@@ -41,3 +43,7 @@
         </div>
     </div>
 </div>
+
+<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'a propridade'"
+    (confirmEvent)="delete($event)">
+</app-confirm-modal>

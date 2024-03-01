@@ -118,9 +118,7 @@ export class ProjectsComponent implements OnInit {
 
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;
-    this.getAfterChange()
     this.getAfterChange();
-    // this.getAfterChange();
   }
 
   getAfterChange(): void {
@@ -155,11 +153,19 @@ export class ProjectsComponent implements OnInit {
   }
 
   createGroup(group: Group): void {
+    let teamGroup: Team = {
+      id: group.team.id,
+      name: '',
+      creationDate: undefined!,
+      description: '',
+      creator: undefined!
+    }
+    group.team = teamGroup
+    
     this.groupService
       .create(group)
       .subscribe((group: Group) => {
         this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
-        this.team.groups?.splice(this.team.groups.push(group))
         this.switchCreateViewGroup();
       },
         e => {
@@ -167,7 +173,7 @@ export class ProjectsComponent implements OnInit {
             this.alert.errorAlert(`Você precisa adicionar um nome`)
           }else {
             this.alert.errorAlert(`Erro ao criar equipe`)
-            console.log(group);
+            console.log(e);
             
           }
 
@@ -175,6 +181,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   switchCreateViewGroup(): void {
+    this.updateList()
     this.isCreatingGroup = !this.isCreatingGroup;
+    this.groupService.getGroupsByTeam(this.team.id).subscribe((groups: Group[]) => {
+      this.team.groups = groups
+    })
   }
 }

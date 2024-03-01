@@ -14,6 +14,7 @@ import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -30,8 +31,9 @@ export class TeamInformationsComponent implements OnInit {
         private route: ActivatedRoute,
         private teamService: TeamService,
         private groupService: GroupService,
-        private alertService: AlertService
-    ) {}
+        private alertService: AlertService,
+        private userService: UserService
+    ) { }
 
     ngOnInit(): void {
         this.getTeam();
@@ -46,9 +48,9 @@ export class TeamInformationsComponent implements OnInit {
         this.teamService
             .getOneById(id)
             .subscribe((team: Team) => {
-                this.team = team;                
+                this.team = team;
             })
-        
+
     }
 
     start(): void {
@@ -174,23 +176,26 @@ export class TeamInformationsComponent implements OnInit {
         return this.team?.users!
     }
 
-    deleteGroup(groupId: Group):void {
-        console.log(groupId); 
+    deleteGroup(groupId: Group): void {
+        console.log(groupId);
         this.groupService.delete(groupId.id).subscribe((group: Group) => {
-          this.alertService.successAlert('Grupo deletado com sucesso')
-          this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
+            this.alertService.successAlert('Grupo deletado com sucesso')
+            this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
         },
-        e=> {
-          this.alertService.errorAlert("Não foi possível deletar");
-        })
-      }
-
-    deleteUserTeam(user: User): void {
-      console.log("fui chamado");
-      
-      this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
-        this.alertService.successAlert("Usuário retirado da equipe") 
-      })
+            e => {
+                this.alertService.errorAlert("Não foi possível deletar");
+            })
     }
 
+    deleteUserTeam(user: User): void {
+        this.teamService.getTeamCreator(this.team).subscribe((userC) => {
+            if (userC.id === this.userService.getLogged().id) {
+                this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
+                    this.alertService.successAlert("Usuário retirado da equipe")
+                })
+            }else {
+                this.alertService.errorAlert("Você não pode remover o criador da equipe")
+            }
+        });
+    }
 }

@@ -29,4 +29,5 @@ export class Team {
         this.image = team.image;   
     }
 
+
 }

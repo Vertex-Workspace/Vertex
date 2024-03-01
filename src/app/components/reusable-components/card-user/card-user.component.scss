@@ -1,26 +1,37 @@
 @import '../../../../variables';
 
-.card{
+.card {
     @apply flex flex-col items-center w-[95%] py-2;
 
-    .sections-in-card{
+    .sections-in-card {
         @apply pl-2 flex w-full bg-white shadow-lg items-center;
         min-height: 40px;
 
-        div:first-child{
+        div:first-child {
             @apply w-[15%] flex items-center pl-6 h-full;
         };
-    
-        div:nth-child(2){
+
+        div:nth-child(2) {
             @apply w-[70%] flex items-center h-full;
 
-            p{
-                font-size:$regularText
+            p {
+                font-size: $regularText
             }
         };
 
-        div:nth-child(3){
-            @apply w-[15%] flex items-center pl-6 h-full; 
+        div:nth-child(3) {
+            p {
+                @apply font-bold pt-12;
+                font-size: $smallText;
+            };
+        };
+
+        .icons-div {
+            @apply w-[15%] flex items-center pl-6 h-full;
+        };
+
+        .more-infos-div {
+            @apply w-[35%] flex items-end pl-6 h-full;
         }
     }
 }
@@ -35,35 +46,37 @@
     font-size: 1rem;
 }
 
-.size{
-    font-size:1.5rem
+.size {
+    font-size: 1.5rem
 }
 
 .permissions {
     @apply grid grid-cols-2 w-[800px] bg-white h-[120px] items-start;
 
-    .single-permissions{
+    .single-permissions {
         @apply w-[92%] h-[20%] grid pl-9;
 
-        div{
+        div {
             @apply flex flex-row;
 
-            p{
+            p {
                 @apply pt-1
             }
         }
-    };
+    }
+
+    ;
 
     .more-infos {
         @apply w-full flex items-end pl-4 font-bold;
 
-        p{
+        p {
             font-size: $smallText;
         }
     }
 
-    p{
-        color:$primaryColor;
+    p {
+        color: $primaryColor;
         @apply pl-5;
     }
 }
