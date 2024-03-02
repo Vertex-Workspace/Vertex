@@ -104,24 +104,8 @@ export class CardComponent implements OnInit {
           },
           (error) => {
 
-            // Alert
-            console.log(error);
           }
         );
-    console.log(event);
-    if(event){
-    this.taskService.delete(this.task.id).subscribe(
-      (task) => {
-        //Alert
-        this.deleteTask.emit();
-      },
-      (error) => {
-
-        //Alert
-        console.log(error);
-      }
-    );
-    }
   }
   }
 

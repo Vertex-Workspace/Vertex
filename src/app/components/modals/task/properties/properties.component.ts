@@ -57,4 +57,13 @@ export class PropertiesComponent {
       }
     }
   }
+  getColor(value : Value) : string{
+    if(value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST){
+      let valuePropertyList : PropertyList = value.value as PropertyList;
+      if(valuePropertyList != null){
+        return valuePropertyList.color;
+      }
+    }
+    return "";
+  }
 }

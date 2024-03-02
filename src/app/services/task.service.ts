@@ -5,6 +5,7 @@ import { URL } from './path/api_url';
 import { Team } from '../models/team';
 import { Task, TaskCreate, TaskEdit } from '../models/task';
 import { Value, ValueUpdate } from '../models/value';
+import { Comment, CommentSend } from '../models/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,14 @@ export class TaskService {
     return this.http
       .get<Task[]>(`${URL}task/user/${id}`)
       .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
+  }
+
+
+
+  public saveComment(comment: CommentSend): Observable<Task> {
+    console.log(comment);
+    
+    return this.http.patch<Task>(`${URL}task/comment`, comment);
   }
 
 

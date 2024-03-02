@@ -38,17 +38,13 @@ export class KanbanComponent {
 
   @Input() canDeleteVerification ?: boolean
 
+  
   canCreate: boolean = false;
   canEdit: boolean = false;
 
   ngOnInit(){
-    console.log(this.canEdit);
-
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
+
 
         this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
           this.userService.getLogged().permissions = permissions
@@ -61,7 +57,7 @@ export class KanbanComponent {
             }
           }
         })
-      })
+
     
   }
 
@@ -227,5 +223,5 @@ export class KanbanComponent {
       }
     );
     
-    }
+    } 
 }

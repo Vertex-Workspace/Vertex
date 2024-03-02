@@ -59,29 +59,24 @@ export class TaskComponent implements OnInit {
     console.log(this.canEdit);
 
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-
-        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions
-
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-              this.canEdit = true;
-
-            }
-          }
-        })
-      })
+    this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions
+      for (let i = 0; i < permissions.length; i++) {
+        if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+          this.canEdit = true;
+        }
+      }
+    })
+    
   }
 
   selectedComponent: string = 'description';
 
   async ngOnInit() {
+
     this.user = JSON.parse(localStorage.getItem('logged')!);
-    console.log(this.task.taskResponsables);
+    console.log(this.task);
+    
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
@@ -154,9 +149,6 @@ export class TaskComponent implements OnInit {
         this.updateTaskNameAndDescription();
       }
       this.descriptionEditable = !this.descriptionEditable;
-      if (this.descriptionEditable) {
-        this.updateTaskNameAndDescription();
-      }
     } else {
       this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
     }

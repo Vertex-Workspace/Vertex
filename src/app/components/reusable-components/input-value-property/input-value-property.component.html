@@ -1,21 +1,19 @@
-<!-- <input (blur)="change($event, value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/> -->
+<!-- <input (blur)="change(value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/> -->
 <!-- text -> verificar $event -->
 <input
     *ngIf="getKind(value.property, 'TEXT')"
     type="text" 
     pInputText 
-    (onBlur)="change($event, value)" 
+    (blur)="change(value)" 
+    [(ngModel)]="valueText"
 />
 
-<!-- <input (blur)="change($event, value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/> -->
+<!-- <input (blur)="change(value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/> -->
 <!-- number -> verificar $event -->
 <p-inputNumber 
     *ngIf="getKind(value.property, 'NUMBER')"
-    inputId="minmaxfraction"
-    mode="decimal" 
-    [minFractionDigits]="2" 
-    [maxFractionDigits]="5"
-    (onBlur)="change($event, value)"
+    (onBlur)="change(value)"
+    [(ngModel)]="valueNumber"
 > </p-inputNumber>
 
 
@@ -25,7 +23,7 @@
     <p-calendar  
         appendTo="body"
         [style]="{ width: '250px' }" 
-        (onSelect)="changeDate($event, value)"
+        (onSelect)="changeDate(value)"
         dateFormat="dd.mm.yy"
         [disabled]="!canEdit"
     ></p-calendar>
@@ -36,12 +34,13 @@
  <p-cascadeSelect 
      *ngIf="getKind(value.property, 'STATUS')"
     [options]="getSelectOptions(value)" 
+    [(ngModel)]="value.value"
     optionLabel="value" 
     optionGroupLabel="name" 
     [optionGroupChildren]="[]" 
     [style]="{ width: '250px',  'background-color': backgroundColor }" 
     placeholder="{{getValue(value)}}"
-    (onChange)="change($event, value)"
+    (onChange)="changeList($event, value)"
     appendTo="body"
     [disabled]="!canEdit"
 >
@@ -57,13 +56,14 @@
 
 <p-cascadeSelect 
 *ngIf="getKind(value.property, 'LIST')"
+    [(ngModel)]="value.value"
 [options]="getSelectOptions(value)" 
 optionLabel="value" 
 optionGroupLabel="name" 
 [optionGroupChildren]="[]" 
 [style]="{ width: '250px',  'background-color': backgroundColor }" 
 placeholder="{{getValue(value)}}"
-(onChange)="change($event, value)"
+(onChange)="changeList($event, value)"
 appendTo="body"
 [disabled]="!canEdit"
 >

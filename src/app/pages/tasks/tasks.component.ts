@@ -41,19 +41,24 @@ export class TasksComponent implements OnInit {
     private userService: UserService,
     private teamService: TeamService,
     private alertService: AlertService
-  ) { }
+  ) {
+    
+
+   }
 
   projectId!: number;
 
-  ngOnInit(){
+  async ngOnInit(): Promise<void>{
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
     this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-
-        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+    .getOneById(id)
+    .subscribe((p: Project) => {
+      this.project = p;
+      let currentView = localStorage.getItem('mode-task-view');
+      if(currentView){
+        this.clicked = currentView;
+      } 
+      this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
           this.userService.getLogged().permissions = permissions;
     
           for (let i = 0; i < permissions.length; i++) {
@@ -62,7 +67,8 @@ export class TasksComponent implements OnInit {
             }
           }
         });
-      })
+    })
+
   }
 
 
@@ -112,11 +118,13 @@ export class TasksComponent implements OnInit {
       },
       teamId: this.project.idTeam!
     }
+    
     this.taskService.create(taskCreate).subscribe(
       (task) => {
         console.log(task);
-        
         this.project.tasks.push(task);
+        console.log(this.project.tasks);
+        
         this.changeModalTaskState(true, task);
       },
       (error) => {

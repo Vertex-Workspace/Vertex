@@ -1,12 +1,11 @@
+import { User } from "./user";
 
 export class TaskResponsable {
 
     id: number;
     userTeam: {
         id: number;
-        user: {
-            id: number;
-        }
+        user: User;
     }
 
     constructor(

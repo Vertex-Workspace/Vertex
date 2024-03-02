@@ -1,4 +1,5 @@
 
+import { Comment } from "./comment";
 import { Property } from "./property";
 import { TaskResponsable } from "./taskResponsable";
 import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from "./value";
@@ -11,6 +12,7 @@ export class Task {
     values!: Value[];
     properties!: Property[];
 
+    comments!: Comment[];
 
     //taskHour
     taskResponsables?:TaskResponsable[];

@@ -41,43 +41,53 @@ export class InputValuePropertyComponent {
     private alertService: AlertService,
     private taskService: TaskService) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-
-        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions;
-
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-              this.canEdit = true
-            }
-          }
-        });
-      })
+    this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions;
+      for (let i = 0; i < permissions.length; i++) {
+        if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+          this.canEdit = true
+        }
+      }
+    });
   }
 
 
   ngOnInit(): void {
+
+
+
     if(this.value.property.kind === PropertyKind.STATUS || 
       this.value.property.kind === PropertyKind.LIST){
       let valuePropertyList : PropertyList = this.value.value as PropertyList;
-      this.backgroundColor = valuePropertyList.color;
+      if(valuePropertyList != null){
+        this.backgroundColor = valuePropertyList.color;
+      }
+    }
+    if(this.value.property.kind === PropertyKind.NUMBER && this.value.value != null){
+      this.valueNumber = this.value.value as number;
+    }
+    if(this.value.property.kind === PropertyKind.TEXT && this.value.value != null){
+      this.valueText = this.value.value as string;
     }
   }
 
-  getValue(value: Value): string {
-    if (value.value === null) {
-      if (value.property.kind === PropertyKind.NUMBER) {
-        return "0";
-      }
-      return "Vazio";
-    }
+  valueNumber: number = 0;
+  valueText: string = "Vazio";
+
+  getValue(value: Value): string | number {
     if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
       let valueProperty = value.value as PropertyList;
+      if(valueProperty == null){
+        return "";
+      }
+    
       return valueProperty.value;
+    }
+    if (value.value == null) {
+      if (value.property.kind === PropertyKind.NUMBER) {
+        return 0;
+      }
+      return "Vazio";
     }
     if (value.property.kind === PropertyKind.DATE) {
       let date = new Date(value.value as string);
@@ -102,36 +112,54 @@ export class InputValuePropertyComponent {
     
   }
 
-  changeDate(event: any, value: Value): void {
+  changeDate(value: Value): void {
     if (this.canEdit) {
-      const newValue = event.toISOString().slice(0, -1);
-      value.value = event;
-      this.updateTask(value, newValue);
+      const date : Date = value.value as Date;
+      value.value = date.toISOString().slice(0, -1);
+      this.updateTask(value);
     }else {
       this.alertService.errorAlert("Você não tem permissão para editar!")
     }
   }
 
-  change(event: any, value: Value): void {
-    if(this.canEdit){
-    const propertyId: number = event.value.id;
-    if (value.value !== event.value.id) {
-      let newValue: string | number | Date;
-      if (value.property.kind === PropertyKind.NUMBER || value.property.kind === PropertyKind.STATUS ||
-        value.property.kind === PropertyKind.LIST) {
-        newValue = event.value.id as number;
-        this.backgroundColor = event.value.color;
-      } else {
-        newValue = event.target.value as string;
-      }
-      this.updateTask(value, newValue)
+  changeList(event: any, value: Value): void {
+    if (this.canEdit) { 
+      console.log(value);
+      
+      this.updateTask(value);
+    }else {
+      this.alertService.errorAlert("Você não tem permissão para editar!")
     }
-  }else {
-    this.alertService.errorAlert("Você não tem permissão para alterar o status")
-  }
   }
 
-  updateTask(value: Value, newValue: any): void {
+  change(value: Value): void {
+    if(this.canEdit){
+      if(value.property.kind === PropertyKind.NUMBER){
+        value.value = this.valueNumber;
+      }
+      if(value.property.kind === PropertyKind.TEXT){
+        value.value = this.valueText;
+      }
+      this.updateTask(value);
+    }
+    else {
+      this.alertService.errorAlert("Você não tem permissão para alterar o status")
+    }
+  }
+
+  updateTask(value: Value): void {
+    let valueTest: string | number | Date | PropertyList;
+    if (value.property.kind === PropertyKind.DATE) {
+      valueTest = value.value as Date;
+    } else if (value.property.kind === PropertyKind.NUMBER) {
+      valueTest = Number(value.value);
+    } else if(value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST){
+      let propertyList : PropertyList = value.value as PropertyList;
+      valueTest = propertyList.id;
+    } 
+    else {
+      valueTest = value.value;
+    }
     const valueUpdate: ValueUpdate = {
       id: this.task.id,
       value: {
@@ -140,10 +168,12 @@ export class InputValuePropertyComponent {
         },
         value: {
           id: value.id,
-          value: newValue
+          value: valueTest
         }
       }
     };
+    console.log(valueUpdate);
+    
     this.taskService.patchValue(valueUpdate).subscribe(
       (task) => {
         this.alertService.successAlert(value.property.name + " alterado com sucesso!");
@@ -154,4 +184,5 @@ export class InputValuePropertyComponent {
       }
     );
   }
+
 }

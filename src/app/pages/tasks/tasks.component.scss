@@ -22,11 +22,11 @@
 }
 
 .menu {
-    @apply flex justify-between mt-16 mb-4;
-
+    @apply flex justify-between pt-16 pb-4;
+    
     div:first-child {
-        border-color: $primaryColor;
-        @apply w-[550px] h-[53px] flex gap-1 border-b-[1px];
+        @apply w-[550px] h-[53px] flex gap-3 ;
+        border-bottom: 1px solid $emphasis;
 
         label {
             @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
