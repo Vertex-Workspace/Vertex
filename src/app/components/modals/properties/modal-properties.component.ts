@@ -54,7 +54,6 @@ export class ModalPropertiesComponent {
 
   delete: boolean = false;
 
-
   closeModal() {
     this.close.emit();
   }
@@ -158,4 +157,5 @@ export class ModalPropertiesComponent {
     this.from = 'general';
     this.property = property;
   }
+
 }

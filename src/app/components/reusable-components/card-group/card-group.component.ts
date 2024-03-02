@@ -114,7 +114,7 @@ export class CardGroupComponent{
         .subscribe((group: Group) => {
           //calls addPartcipants to back to normal state of card
           this.addParticipants();
-          this.alertService.successAlert("adicionado")
+          this.alertService.successAlert("Usuário adicionado")
         },
           e => {
             this.alertService.errorAlert("erro")
@@ -133,4 +133,6 @@ export class CardGroupComponent{
       this.emitterItem.emit(this.groupToDelete)
       this.delete = false;
     }
+
+    
 }

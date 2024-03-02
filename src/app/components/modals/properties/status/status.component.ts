@@ -46,6 +46,10 @@ export class StatusComponent {
   canDelete: boolean = false;
   canEdit: boolean = false;
 
+  deleteBoolean: boolean = false;
+
+  propertyListToDelete !: PropertyList
+
   constructor(private propertyService: PropertyService,
     private alertService: AlertService,
     private projectService: ProjectService,
@@ -143,21 +147,25 @@ export class StatusComponent {
   }
 
 
-  delete(status: any, propertyList: PropertyList) {
-    if (this.canDelete) {
-      if (!propertyList.isFixed) {
-        this.propertyService.deletePropertyList(this.property.id!, propertyList.id).subscribe(
-          (project) => {
-            this.project = project;
-            this.property = project.properties.find((property) => property.id == this.property.id)!;
-            this.getPropertiesKind();
-            this.changeProject.emit(this.project);
-          })
+  delete(event: any) {
+    if (event) {
+      if (this.canDelete) {
+        if (!this.propertyListToDelete.isFixed) {
+          this.propertyService.deletePropertyList(this.property.id!, this.propertyListToDelete.id).subscribe(
+            (project) => {
+              this.project = project;
+              this.property = project.properties.find((property) => property.id == this.property.id)!;
+              this.getPropertiesKind();
+              this.changeProject.emit(this.project);
+            })
+        }
+      } else {
+        this.alertService.errorAlert("Você não tem permissão para remover o status!");
       }
-    } else {
-      this.alertService.errorAlert("Você não tem permissão para remover o status!");
     }
+    this.deleteBoolean = false;
   }
+
   nameEdit!: string;
   propertyListNameEditId!: number;
 
@@ -200,4 +208,8 @@ export class StatusComponent {
     }
   }
 
+  openModalDelete(property: PropertyList): void {
+    this.deleteBoolean = !this.deleteBoolean
+    this.propertyListToDelete = property
+  }
 }

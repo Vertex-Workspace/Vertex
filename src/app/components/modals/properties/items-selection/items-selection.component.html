@@ -24,7 +24,7 @@
                 <div>
                     <fa-icon [icon]="section.icon" class="little-icon" (click)="eyeVisibility(propertyList)"></fa-icon>
                     <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick(propertyList)"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="delete(propertyList)"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(propertyList)"></fa-icon>
                 </div>
             </div>
         </div>
@@ -34,3 +34,6 @@
     <fa-icon [icon]="faInfoCircle" class="color-text text-sm"></fa-icon>
     <p class="regular-text">Clique no texto e você poderá editar o nome do item</p>
 </div>
+<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'a propridade'"
+    (confirmEvent)="delete($event)">
+</app-confirm-modal>

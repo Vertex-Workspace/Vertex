@@ -215,6 +215,5 @@ export class GeneralPropertiesComponent {
     this.deleteBoolean = !this.deleteBoolean
     this.propertyToDelete = property
   }
-
 }
 

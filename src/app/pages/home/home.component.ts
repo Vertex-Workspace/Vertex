@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
   logged !: User;
 
@@ -21,19 +21,19 @@ export class HomeComponent implements OnInit{
   teams: Team[] = [];
 
   private teamsSubscription !: Subscription;
-  
+
   constructor(
-    private userService : UserService, 
+    private userService: UserService,
     private teamService: TeamService,
     private alert: AlertService
   ) {
-    this.logged = this.userService.getLogged();   
+    this.logged = this.userService.getLogged();
   }
 
-  ngOnInit(): void { 
-    this.subscribeToTeams(); 
-    this.getRecentsTeams();       
-    
+  ngOnInit(): void {
+    this.subscribeToTeams();
+    this.getRecentsTeams();
+
   }
 
   ngOnDestroy(): void {
@@ -65,37 +65,34 @@ export class HomeComponent implements OnInit{
     if (this.clicked == "team") {
       this.teamService.getTeamsByUser(this.logged.id!)
         .subscribe((teams) => {
-          this.teams = teams;          
+          this.teams = teams;
         });
-    }    
+    }
   }
 
   switchCreateView(): void {
     this.isCreating = !this.isCreating;
+    this.updateList()
   }
 
   updateList(): void {
-    if (!this.isCreating) {
-      this.teamService
-        .getTeamsByUser(this.logged.id!)
-        .subscribe((teams: Team[]) => {
-          this.teams = teams;
-        });
-    } else {
-      this.teams = [];
-    }
+    this.teamService
+      .getTeamsByUser(this.logged.id!)
+      .subscribe((teams: Team[]) => {
+        this.teams = teams;
+      });
   }
 
-  delete(team : Team): void {
+  delete(team: Team): void {
     this.teamService
       .delete(team.id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
         this.updateList()
       },
-      e => {
-        this.alert.errorAlert('Erro ao deletar equipe!')
-      });
+        e => {
+          this.alert.errorAlert('Erro ao deletar equipe!')
+        });
   }
 
   //TASKS - FILTER AND ORDER
@@ -121,7 +118,7 @@ export class HomeComponent implements OnInit{
   getRecentsTeams(): void {
     this.teamService
       .getTeamsByUser(this.logged.id!)
-      .subscribe((teams) => {        
+      .subscribe((teams) => {
         this.recentTeams = teams;
       });
   }

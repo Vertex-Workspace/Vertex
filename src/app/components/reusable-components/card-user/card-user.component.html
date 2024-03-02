@@ -5,14 +5,15 @@
         </div>
         <div>
             <p>{{user.firstName}}</p>
+            <p>{{user.email}}</p>
         </div>
         <div [ngClass]="isTeamCreator ? 'icons-div' : 'more-infos-div'">
 
             <!-- this icons gotta be refactored -->
             <fa-icon *ngIf="typeString === 'creating'" [icon]="faSquare"
-                [ngClass]="user.selected ? 'icon size' : 'icon-not-selected size'" (click)="selectUser(user)"></fa-icon>
+                [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
             <fa-icon *ngIf="typeString === 'addUsers'" [icon]="faSquare"
-                [ngClass]="user.selected ? 'icon size' : 'icon-not-selected size'" (click)="selectUser(user)"></fa-icon>
+                [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
             <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean()"
                 *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
             </fa-icon>
@@ -43,10 +44,10 @@
             <p>Ver mais informações</p>
         </div>
     </div>
-    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'" [type]="'userTeam'"
-        (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event, 'inTheGroup')">
+    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo'" 
+        (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
     </app-confirm-modal>
-    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo'" [type]="'userTeam'"
-    (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event, 'view-infos')">
+    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
+    (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
     </app-confirm-modal>
 </div>

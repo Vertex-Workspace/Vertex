@@ -29,6 +29,10 @@ export class ItemsSelectionComponent {
   @Output()
   pencil = new EventEmitter<PropertyList>();
 
+  propertyListToDelete !: PropertyList
+
+  deleteBoolean: boolean = false;
+
   faEllipsisVertical = faEllipsisVertical;
   faPaintBrush = faPaintBrush;
   faEye = faEye;
@@ -43,15 +47,15 @@ export class ItemsSelectionComponent {
     { name: "Não Visíveis", icon: faEyeSlash, propertyLists: [], kind: PropertyListKind.INVISIBLE }
   ]
 
-  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
+  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
     console.log(this.property);
-    
+
     this.orderPropertyListsOnSection();
   }
 
-  private orderPropertyListsOnSection(){
+  private orderPropertyListsOnSection() {
     this.sections[0].propertyLists = [];
     this.sections[1].propertyLists = [];
     this.property.propertyLists!.forEach((propertyList) => {
@@ -76,18 +80,21 @@ export class ItemsSelectionComponent {
     this.saveProperty();
   }
 
-  pencilClick(propertyList:PropertyList) {
+  pencilClick(propertyList: PropertyList) {
     this.pencil.emit(propertyList);
   }
 
-  delete(propertyList: PropertyList) {
-    this.propertyService.deletePropertyList(this.property.id!, propertyList.id!).subscribe(
-      (project) => {
-        this.project = project;
-        this.property = project.properties.find((property) => property.id == this.property.id)!;
-        this.changeProject.emit(project);
-        this.orderPropertyListsOnSection();
-      });
+  delete(event: any) {
+    if (event) {
+      this.propertyService.deletePropertyList(this.property.id!, this.propertyListToDelete.id!).subscribe(
+        (project) => {
+          this.project = project;
+          this.property = project.properties.find((property) => property.id == this.property.id)!;
+          this.changeProject.emit(project);
+          this.orderPropertyListsOnSection();
+        });
+    }
+    this.deleteBoolean = false;
   }
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
@@ -101,12 +108,12 @@ export class ItemsSelectionComponent {
   // }
 
   createPropertyList(): void {
-    let newPropertyList: PropertyList = { id: 0, value: "Novo Item", color: "#d3e5ef", propertyListKind: PropertyListKind.VISIBLE, isFixed: false};
+    let newPropertyList: PropertyList = { id: 0, value: "Novo Item", color: "#d3e5ef", propertyListKind: PropertyListKind.VISIBLE, isFixed: false };
     this.property.propertyLists.push(newPropertyList);
     this.saveProperty();
   }
 
-  private saveProperty(){
+  private saveProperty() {
     this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
       (project) => {
         this.project = project;
@@ -121,22 +128,27 @@ export class ItemsSelectionComponent {
   nameEdit!: string;
   propertyListNameEditId!: number;
 
-  saveName(propertyList : PropertyList){
-    if(this.nameEdit.length > 2 && this.nameEdit.length <= 20){
+  saveName(propertyList: PropertyList) {
+    if (this.nameEdit.length > 2 && this.nameEdit.length <= 20) {
       propertyList!.value = this.nameEdit;
       this.saveProperty();
       this.propertyListNameEditId = -1;
       this.nameEdit = '';
-    } else{
+    } else {
       this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
       return;
     }
   }
 
-  editName(propertyList : PropertyList){
+  editName(propertyList: PropertyList) {
     console.log(propertyList);
-    
+
     this.propertyListNameEditId = propertyList.id!;
     this.nameEdit = propertyList.value;
+  }
+
+  openModalDelete(property: PropertyList): void {
+    this.deleteBoolean = !this.deleteBoolean
+    this.propertyListToDelete = property
   }
 }

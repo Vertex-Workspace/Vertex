@@ -10,6 +10,7 @@ import { Group } from 'src/app/models/groups';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { LogComponent } from '../../modals/task/log/log.component';
 
 @Component({
   selector: 'app-card-user',
@@ -55,6 +56,7 @@ export class CardUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.random(0,6));
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
@@ -89,6 +91,8 @@ export class CardUserComponent implements OnInit {
   }
 
   removeUser(user: User): void {
+    console.log(user);
+    
     this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
       .subscribe((group: Group) => {
         this.alert.successAlert(`Usuário retirado do grupo`)
@@ -144,11 +148,11 @@ export class CardUserComponent implements OnInit {
     this.deleteUserGroup.emit(user)
   }
 
-  validatingDelete(user: User, type: boolean, typeString2: String): void {
+  validatingDelete(user: User, type: boolean): void {
     if (type === true) {
-      if (typeString2 === 'inTheGroup') {
+      if (this.typeString === 'inTheGroup') {
         this.removeUser(user)
-      } else if (typeString2 === 'view-infos') {
+      } else if (this.typeString === 'permissions') {
         this.deleteEmitUserTeam(user)
       }
     } else {
@@ -162,5 +166,11 @@ export class CardUserComponent implements OnInit {
         this.users = users;
       });
     }
+  }
+
+  random(min: number, max:number){
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

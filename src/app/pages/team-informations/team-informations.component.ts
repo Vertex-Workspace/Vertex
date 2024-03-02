@@ -181,6 +181,7 @@ export class TeamInformationsComponent implements OnInit {
         this.groupService.delete(groupId.id).subscribe((group: Group) => {
             this.alertService.successAlert('Grupo deletado com sucesso')
             this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
+            
         },
             e => {
                 this.alertService.errorAlert("Não foi possível deletar");
@@ -189,11 +190,11 @@ export class TeamInformationsComponent implements OnInit {
 
     deleteUserTeam(user: User): void {
         this.teamService.getTeamCreator(this.team).subscribe((userC) => {
-            if (userC.id === this.userService.getLogged().id) {
+            if (userC.id === this.userService.getLogged().id) {  
                 this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
                     this.alertService.successAlert("Usuário retirado da equipe")
                 })
-            }else {
+            } else {
                 this.alertService.errorAlert("Você não pode remover o criador da equipe")
             }
         });
