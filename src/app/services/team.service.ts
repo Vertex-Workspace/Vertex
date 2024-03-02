@@ -11,17 +11,9 @@ import { Project } from '../models/project';
 })
 export class TeamService {
 
-  private teamsSubject: BehaviorSubject<Team[]> = 
-    new BehaviorSubject<Team[]>([]);
-
   constructor(
     private http: HttpClient
   ) {}
-
-  public getAllTeams(): Observable<Team[]> {
-    return this.teamsSubject
-      .asObservable();
-  } 
 
   public getOneById(id: number): Observable<Team> {
     return this.http
@@ -31,26 +23,12 @@ export class TeamService {
 
   public create(team: Team): Observable<Team> {
     return this.http
-      .post<Team>(`${URL}team`, team)
-      .pipe(tap((createdTeam: Team) => {
-        const currentTeams = this.teamsSubject.getValue();
-        this.teamsSubject.next([
-          ...currentTeams,
-          createdTeam
-        ])
-      }));
+      .post<Team>(`${URL}team`, team);
   }
 
   public delete(id: number): Observable<Team> {
     return this.http
-      .delete<Team>(`${URL}team/${id}`)
-        .pipe(tap(() => {
-          const currentTeams: Team[] = this.teamsSubject.getValue();
-          const updatedTeams: Team[] = currentTeams.filter((team: Team) => {
-            team.id !== id;
-          })
-          this.teamsSubject.next(updatedTeams);
-        }));
+      .delete<Team>(`${URL}team/${id}`);
   }
 
   public getTeamsByUser(userId: number): Observable<Team[]> {

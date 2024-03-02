@@ -107,7 +107,7 @@ section{
 }
 
     .container-grid{
-        @apply flex flex-col h-[90%] w-full pt-10 ;
+        @apply flex flex-col h-[90%] w-full pt-4 ;
     }
     .default-size{
         @apply flex w-full h-full;
@@ -130,3 +130,7 @@ section{
 }
 
 
+.icon-plus{
+    color: $primaryColor;
+    font-size: 1.75rem;
+}

@@ -1,10 +1,12 @@
 @import '../../../../variables';
     .list{
-        @apply flex w-full h-[600px] flex-col gap-[16px];
-        overflow-y: scroll;
+        @apply flex w-full h-[620px] flex-col gap-[16px];
+        
+        overflow-y: auto;
     }
     .card{
-        @apply flex w-[98%] min-h-[200px] max-h-[200px] bg-white shadow-lg rounded-sm flex-row;
+        @apply flex w-[98%] h-[400px] shadow-lg rounded-sm flex-col;
+        background-color: $card;
         font-family: $fontFamily;
         color: $text;
         cursor: pointer;
@@ -15,13 +17,13 @@
         }
 
         .image {
-            @apply flex h-full w-2/6 rounded-lg;
+            @apply flex h-4/6 w-full rounded-lg;
             object-fit: cover;
         }
     
     
         .informations{
-            @apply flex h-full w-4/6 flex-col pl-4 pr-4;
+            @apply flex h-2/6 w-full flex-col px-4 justify-evenly;
         }
     
         .informations-text{

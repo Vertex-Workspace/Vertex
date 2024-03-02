@@ -5,6 +5,7 @@ import { Team } from 'src/app/models/team';
 import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/models/user';
+import { faPlus, faPlusMinus, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit{
   userCreator !: User
   teams: Team[] = [];
 
+  faPlus = faPlusSquare;
   private teamsSubscription !: Subscription;
   
   constructor(
@@ -30,9 +32,9 @@ export class HomeComponent implements OnInit{
     this.logged = this.userService.getLogged();   
   }
 
-  ngOnInit(): void { 
-    this.subscribeToTeams(); 
-    this.getRecentsTeams();       
+  ngOnInit() { 
+    this.subscribeToTeams();
+    // this.getRecentsTeams();       
     
   }
 
@@ -43,21 +45,22 @@ export class HomeComponent implements OnInit{
   }
 
   isCreating: boolean = false;
-  clicked: string = 'task';
+  clicked: string = 'team';
 
   menuItems = [
-    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
+    // { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
     { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
   ];
 
-  subscribeToTeams(): void {
-    this.teamsSubscription = this.teamService.getAllTeams()
-      .subscribe((teams: Team[]) => {
-        this.recentTeams = teams;
-        if (this.clicked === 'team') {
-          this.teams = teams;
-        }
-      })
+  subscribeToTeams() {
+    this.teamService.getTeamsByUser(this.logged.id!)
+    .subscribe((teams: Team[]) => {
+      if (this.clicked === 'team') {
+        this.teams = teams;
+        console.log(this.teams);
+        
+      }
+    });
   }
 
   changePreviewMode(preview: string): void {

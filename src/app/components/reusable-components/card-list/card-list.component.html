@@ -1,25 +1,13 @@
 <div class="list">
+    <div class="grid grid-cols-2 h-[300px] gap-[20px]">
     <ng-container *ngFor="let item of getType()">
         <div class="card">
-        <div class="image flex justify-center items-center pr-4" (click)="openTeam(item.id)">
+            <div class="image flex justify-center items-center" (click)="openTeam(item.id)">
                 <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">
-
             </div>
-            <div class="informations">
-                <div class="informations-text" (click)="openTeam(item.id)">
-                    <p class="large-text">{{item.name}}</p>
-                    <div>
-                        <p class="medium-text">Data de criação: </p>
-                        <p class="medium-text">{{item.creator?.firstName}}</p>
-                    </div>
-                </div>
-                <div class="informations-input">
-                    <p class="regular-text">Visualizar Informações</p>
-                    <div>
-                        <i class="pi pi-comment"></i>
-                        <i class="pi pi-trash" (click)="deleteBoolean()"></i>
-                    </div>
-                </div>
+            <div class="informations" (click)="openTeam(item.id)">
+                <p class="large-text">{{item.name}}</p>
+                <p class="regular-text">Visualizar Informações</p>
             </div>
         </div>
 
@@ -28,4 +16,5 @@
         <app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
             (close)="deleteBoolean()" (confirmEvent)="validatingDeleteTeam(item, $event)"></app-confirm-modal>
     </ng-container>
+    </div>
 </div>
