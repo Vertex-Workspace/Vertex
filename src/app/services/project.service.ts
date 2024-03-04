@@ -14,6 +14,8 @@ export class ProjectService {
   constructor(
     private http: HttpClient
   ) { }
+
+  private projectHandlerSubject: BehaviorSubject<Project> = new BehaviorSubject<Project>() 
   
   public getAll(): Observable<Project[]> {
     return this.http
@@ -22,7 +24,7 @@ export class ProjectService {
           projects.map(project => new Project(project))
         )
       )
-  }
+  };
 
   public getOneById(id: number): Observable<Project> {
     return this.http
