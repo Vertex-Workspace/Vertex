@@ -1,6 +1,6 @@
-<div class="card" (click)="openTask()">
+<div class="card">
 
-    <div class="name test-name z-[1]" [style.min-width]="getNameWidth()">
+    <div class="name test-name z-[1]" [style.min-width]="getNameWidth()" (click)="openModalTask()">
         <span class="drag-handle" cdkDragHandle>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
@@ -10,7 +10,9 @@
         </p>
         <div class="icons">
             <ng-container *ngFor="let item of icons">
-                <fa-icon [icon]="item.icon" class="icon"></fa-icon>
+                <fa-icon [icon]="item.icon" class="icon"
+                [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'"
+                (click)="openModalDelete()"></fa-icon>
             </ng-container>
         </div>
     </div>
@@ -20,12 +22,17 @@
             *ngIf="col.field !== 'name'" 
             class="properties" 
             [style.min-width]="'300px'"
+            (click)="alertCantEdit()"
             >
             <app-input-value-property 
+            (propertyList)="findNumber($event)"
             style="width: 100%; height: 100%;" 
             [task]="task" 
             [value]="getPropertyValue(col)"
+            [backgroundColor]="returnColors()"
             ></app-input-value-property>
         </div>
     </ng-container>
 </div>
+
+<app-confirm-modal *ngIf="modalDelete" [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'" (close)="delete($event)"></app-confirm-modal>
