@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/models/groups';
 import { Project } from 'src/app/models/project';
+import { Task } from 'src/app/models/task';
 import { Team } from 'src/app/models/team';
 import { User } from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
@@ -21,8 +22,7 @@ export class ProjectsComponent implements OnInit {
   isCreating: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
-  clicked: string = 'task';
-  recentProjects !: Project[];
+  clicked: string = 'project';
   logged !: User;
   team !: Team;
   group !: Group;
@@ -32,7 +32,7 @@ export class ProjectsComponent implements OnInit {
   orderSettings: any[] = [];
 
   menuItems = [
-    { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
+    // { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
     { id: 'project', iconClass: 'pi pi-folder-open', label: 'Projetos', button: 'Novo Projeto' },
     { id: 'group', iconClass: 'pi pi-users', label: 'Grupos', button: 'Novo grupo' },
   ];
@@ -53,14 +53,8 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.getTeam();
     this.validateProjectId();
-    this.getRecentProjects();
   }
 
-  getRecentProjects(): void {
-    console.log(this.team);
-    
-    this.recentProjects = this.team.projects!;
-  }
 
 
   validateProjectId(): void {
@@ -179,4 +173,5 @@ export class ProjectsComponent implements OnInit {
   switchCreateViewGroup(): void {
     this.isCreatingGroup = !this.isCreatingGroup;
   }
+
 }

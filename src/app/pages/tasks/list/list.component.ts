@@ -110,7 +110,7 @@ export class ListComponent implements OnInit {
       .subscribe((tl: Task[]) => {
         if (tl.length > 0) {
           this.isNull = false;
-          this.taskList = tl;
+          this.taskList = tl;      
         }
         else this.isNull = true;
       }); //busca a equipe com base no id da url
@@ -170,5 +170,11 @@ export class ListComponent implements OnInit {
   openTask(task:Task):void{
     this.openTaskDetails.emit(task);  
   }
+
+  //   getProjectByTask(task : Task): Project{
+  //   return this.team.projects?.find(project => {
+  //     return project.tasks?.find(t => t.id === task.id);
+  //   })!;
+  // }
 
 }

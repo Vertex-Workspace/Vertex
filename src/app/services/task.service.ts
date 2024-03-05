@@ -66,9 +66,11 @@ export class TaskService {
 
 
   public saveComment(comment: CommentSend): Observable<Task> {
-    console.log(comment);
-    
     return this.http.patch<Task>(`${URL}task/comment`, comment);
+  }
+
+  public deleteComment(taskID: number, commentID: number): Observable<Task> {
+    return this.http.delete<Task>(`${URL}task/${taskID}/comment/${commentID}`);
   }
 
 

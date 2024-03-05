@@ -136,5 +136,4 @@ export class HomeComponent implements OnInit{
         this.recentTeams = teams;
       });
   }
-
 }

@@ -82,4 +82,13 @@ export class CommentsComponent {
   isLoggedUser(taskResponsable : TaskResponsable): boolean{
     return taskResponsable.userTeam.user.id === this.userLoggedId;
   }
+
+  deleteComment(comment: Comment){
+    this.taskService.deleteComment(this.task.id, comment.id!).subscribe(
+      (bool:any) => {
+        this.task.comments = this.task.comments!.filter(c => c.id !== comment.id);
+        
+      }
+    );
+  }
 }

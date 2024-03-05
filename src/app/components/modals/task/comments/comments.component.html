@@ -1,23 +1,23 @@
 <div class="base">
     <ul class="teste-scroll">
-        <li *ngFor="let item of task.comments">
+        <li *ngFor="let comment of task.comments">
             <div class="comment-informations">
                 <div>
                     <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon>
-                    <p>{{getName(item.taskResponsable!)}}</p>
+                    <p>{{getName(comment.taskResponsable!)}}</p>
                 </div>
                 <div>
-                    <p class="small-text">{{getDate(item.date!)}}</p>
-                    <fa-icon [icon]="faTrash" *ngIf="isLoggedUser(item.taskResponsable!)"></fa-icon>
+                    <p class="small-text">{{getDate(comment.date!)}}</p>
+                    <fa-icon (click)="deleteComment(comment)" [icon]="faTrash" *ngIf="isLoggedUser(comment.taskResponsable!)"></fa-icon>
                 </div>
             </div>
             <div class="comment-text">
-                <p class="regular-text">{{item.comment}}</p>
+                <p class="regular-text">{{comment.comment}}</p>
             </div>
         </li>
     </ul>
     <div class="send-message">
-        <textarea type="text" [(ngModel)]="message" placeholder="Faça algum comentário..."></textarea>
+        <textarea type="text" [(ngModel)]="message" placeholder="Faça algum comentário..." class="medium-text"></textarea>
         <button (click)="sendComment()">Enviar</button>
     </div>
 </div>

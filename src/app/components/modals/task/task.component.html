@@ -49,7 +49,7 @@
                 <div class="components">
                     <div *ngIf="selectedComponent === 'description'" class="flex flex-col">
                         <textarea [disabled]="!descriptionEditable"
-                            [style.background]="descriptionEditable ? '#f5f5f5' :  '#fff'"
+                            [style.background]="'#f5f5f5'"
                             [(ngModel)]="task.description">{{task.description}}</textarea>
                         <div class="button">
                             <button *ngIf="!descriptionEditable" (click)="changeEditDescription()">Editar
