@@ -82,7 +82,7 @@ export class TasksComponent implements OnInit {
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
-    { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
+    // { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
   ];
 
   toggleSearchBar(): void {

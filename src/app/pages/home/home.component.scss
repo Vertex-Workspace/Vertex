@@ -73,7 +73,7 @@ section{
         text-lg p-3 rounded font-light border-2 transition-colors;
     }
     .search {
-        @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
+        @apply w-1/2 h-full flex items-center justify-between bg-white p-3
         rounded shadow-md border-none;
 
         i {

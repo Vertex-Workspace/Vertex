@@ -162,6 +162,8 @@ export class CalendarComponent {
   changeMonth(offsetMes: number) {
     this.currentDate.setMonth(this.currentDate.getMonth() + offsetMes);
     this.currentDate = new Date(this.currentDate.getTime());
+    console.log(this.currentDate);
+    
     this.buildCalendar();
   }
 

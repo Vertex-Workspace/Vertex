@@ -89,25 +89,32 @@
             @apply transition-colors;
         }
 
+        .properties-button{
+            background-color: $emphasis;
+            color: $primaryColor;
+            border-color: $emphasis;
+            @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
+            rounded-sm font-light border-2 transition-colors;
+        }
+
     }
 }
 
 
 .filter-settings {
-    @apply flex gap-3 items-center;
+    @apply flex gap-6 items-center;
 
-    div:first-child {
-        @apply w-[230px] flex justify-between items-center;
+    div{
+        @apply w-[300px] flex justify-between items-center;
   
   
         select {
-          @apply h-[35px] w-[100px] outline-none text-center;
+          @apply h-[35px] w-[200px] outline-none text-center;
         }
       }
 
     p {
         color: $primaryColor;
-        @apply  ml-4;
     }
 
     select {

@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit{
     this.logged = this.userService.getLogged();   
   }
 
+  teamsBackup: Team[] = [];
+
   ngOnInit() { 
     this.subscribeToTeams();
     // this.getRecentsTeams();       
@@ -56,9 +58,9 @@ export class HomeComponent implements OnInit{
     this.teamService.getTeamsByUser(this.logged.id!)
     .subscribe((teams: Team[]) => {
       if (this.clicked === 'team') {
-        this.teams = teams;
-        console.log(this.teams);
-        
+        this.teams = teams;  
+        this.teams.forEach(team =>  this.teamsBackup.push(new Team(team)));
+
       }
     });
   }
@@ -135,5 +137,21 @@ export class HomeComponent implements OnInit{
       .subscribe((teams) => {        
         this.recentTeams = teams;
       });
+  }
+
+  searchTeamList(event: any): void {
+    if(event.target.value.length == 0) {
+      console.log(this.teamsBackup);
+      
+      this.teams = this.teamsBackup;
+      return;
+    }
+    console.log(event.target.value);
+    this.teams = this.teamsBackup.filter((team) => {
+      if (team.name?.includes(event.target.value)) {
+        return team;
+      }
+    });
+
   }
 }

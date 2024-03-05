@@ -16,7 +16,6 @@
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
                     <h4>Equipes</h4>
-                    <fa-icon [icon]="faPlus" class="icon-plus" (click)="switchCreateView()"></fa-icon>
                 </div>
                 <div class="pt-2">
                     <p class="small-text text-gray-600">As equipes são locais de trabalhos onde é possível gerenciar projetos, convidar membros,</p>
@@ -24,9 +23,16 @@
                 </div>
                 <div class="functionally-items-task">
                     <div class="search">
-                        <input type="text" placeholder="Pesquise por uma equipe...">
+                        <input type="text" placeholder="Pesquise por uma equipe..." (input)="searchTeamList($event)">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
+                    <button class="create" (click)="switchCreateView()">
+                        <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                        Nova equipe
+                    </button>
+                </div>
+                <div *ngIf="teams.length < 1" class="pt-6">
+                    <p>Nenhuma equipe encontrada!</p>
                 </div>
             </div>
 

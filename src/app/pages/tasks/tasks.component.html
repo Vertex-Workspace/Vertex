@@ -27,11 +27,15 @@
                         <i [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
                             class="{{ item.iconClass }}"></i>
                     </button>
-
                 </ng-container>
 
-                <button class="create" (click)="createTask()" [disabled]="!canCreate" 
-                [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
+
+                <button class="properties-button" (click)="openPropertiesModal()">
+                    <i class="pi pi-tags"></i>
+                    Propriedades
+                </button>
+                <button class="create" (click)="createTask()" [disabled]="!canCreate"
+                    [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
@@ -40,18 +44,22 @@
 
         <section class="filter-settings regular-text">
             <ng-container *ngIf="filterOpen || orderOpen">
-                <p>Ordenar por </p>
-                <select *ngIf="filterOpen">
-                    <option *ngFor="let item of filterSettings">
-                        {{ item.label }}
-                    </option>
-                </select>
-
-                <select *ngIf="orderOpen">
-                    <option *ngFor="let item of orderSettings">
-                        {{ item.label }}
-                    </option>
-                </select>
+                <div *ngIf="orderOpen">
+                    <p>Ordenar por </p>
+                    <select>
+                        <option *ngFor="let item of filterSettings">
+                            {{ item.label }}
+                        </option>
+                    </select>
+                </div>
+                <div *ngIf="filterOpen">
+                    <p>Filtrar por </p>
+                    <select>
+                        <option *ngFor="let item of orderSettings">
+                            {{ item.label }}
+                        </option>
+                    </select>
+                </div>
             </ng-container>
         </section>
 
@@ -59,18 +67,20 @@
             <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
 
-            <app-list [project]="project" *ngIf="clicked  === 'List'" (openTaskDetails)="changeModalTaskState(true, $event)" ></app-list>
-            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'"></app-calendar>
-            <app-mural  *ngIf="clicked  === 'Mural'"></app-mural>
+            <app-list [project]="project" *ngIf="clicked  === 'List'"
+                (openTaskDetails)="changeModalTaskState(true, $event)"></app-list>
+            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project"
+                *ngIf="clicked  === 'Calendar'"></app-calendar>
+            <app-mural *ngIf="clicked  === 'Mural'"></app-mural>
             <!-- app-kanban -->
         </section>
 
     </div>
 </section>
 
-<app-modal-properties (changeProjectSettings)="changeProject($event)" *ngIf="propertiesOpen"  [height]="'600px'" [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
+<app-modal-properties (changeProjectSettings)="changeProject($event)" *ngIf="propertiesOpen" [height]="'600px'"
+    [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
 </app-modal-properties>
 
-<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen" 
-(close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>
-
+<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
+    (close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>

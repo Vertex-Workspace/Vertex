@@ -13,6 +13,10 @@
 
             <div class="functionally-items regular-text" *ngIf="clicked === 'project' || clicked === 'group'">
                 <div class="container">
+                    <div class="search">
+                        <input type="text" placeholder="Pesquisar por uma equipe...">
+                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                    </div>
                     <button class="create" (click)="switchCreateView()" *ngIf="clicked === 'project'">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         Novo projeto
@@ -21,10 +25,6 @@
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         Novo grupo
                     </button>
-                    <div class="search">
-                        <input type="text" placeholder="Pesquisar por uma equipe...">
-                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
-                    </div>
                 </div>
             </div>
 
