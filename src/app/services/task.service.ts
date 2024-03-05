@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
-import { Team } from '../models/team';
-import { Task, TaskCreate, TaskEdit } from '../models/task';
-import { Value, ValueUpdate } from '../models/value';
-import { Comment, CommentSend } from '../models/comment';
+import { Team } from '../models/class/team';
+import { Task, TaskCreate, TaskEdit } from '../models/class/task';
+import { Value, ValueUpdate } from '../models/class/value';
+import { CommentSend } from '../models/class/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,8 @@ export class TaskService {
   }
 
   public create(taskCreate: TaskCreate): Observable<Task> {
+    console.log(taskCreate);
+    
     return this.http.post<Task>(`${URL}task`, taskCreate);
   }
 
@@ -53,7 +55,7 @@ export class TaskService {
 
   public getAllByTeam(id: number):Observable<Task[]> {
     return this.http
-      .get<Task[]>(`${URL}task/team/${id}`)
+      .get<Task[]>(`${URL}team/tasks/${id}`)
       .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 

@@ -4,8 +4,8 @@ import {
   faEllipsisVertical, faPaintBrush, faEye, faEyeSlash,
   faTrashCan, faPlus, faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
@@ -54,7 +54,7 @@ export class ItemsSelectionComponent {
   private orderPropertyListsOnSection(){
     this.sections[0].propertyLists = [];
     this.sections[1].propertyLists = [];
-    this.property.propertyLists!.forEach((propertyList) => {
+    this.property.propertyLists!.forEach((propertyList: { propertyListKind: any; }) => {
       if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
         this.sections[0].propertyLists.push(propertyList);
       } else {

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Team } from 'src/app/models/team';
+import { Team } from 'src/app/models/class/team';
 import {
   faCircleUser, faSquare, faUserMinus,
   faCaretDown, faCaretUp
 } from '@fortawesome/free-solid-svg-icons';
-import { PermissionsType, Permission, User } from 'src/app/models/user';
+import { PermissionsType, Permission, User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
-import { Group } from 'src/app/models/groups';
+import { Group } from 'src/app/models/class/groups';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';

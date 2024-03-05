@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
-import { Team } from 'src/app/models/team';
+import { Team } from 'src/app/models/class/team';
 import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
-import { User } from 'src/app/models/user';
-import { faPlus, faPlusMinus, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/models/class/user';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +18,20 @@ export class HomeComponent implements OnInit{
 
   recentTeams !: Team[];
 
-  userCreator !: User
-  teams: Team[] = [];
+  teams !: Team[];
+
+  isCreating: boolean = false;
+
+  //TASKS - FILTER AND ORDER
+  filterSettings !: any[];
+  orderSettings !: any[];
+  configItems !: any[];
+  filterOpen !: boolean;
+  orderOpen !: boolean;
+  menuItems !: any[];
 
   faPlus = faPlusSquare;
-  private teamsSubscription !: Subscription;
+  teamsBackup: Team[] = [];
   
   constructor(
     private userService : UserService, 
@@ -32,47 +41,17 @@ export class HomeComponent implements OnInit{
     this.logged = this.userService.getLogged();   
   }
 
-  teamsBackup: Team[] = [];
-
-  ngOnInit() { 
-    this.subscribeToTeams();
-    // this.getRecentsTeams();       
-    
+  ngOnInit(): void { 
+    this.subscribeToTeams();        
   }
 
-  ngOnDestroy(): void {
-    if (this.teamsSubscription) {
-      this.teamsSubscription.unsubscribe();
-    }
-  }
-
-  isCreating: boolean = false;
-  clicked: string = 'team';
-
-  menuItems = [
-    // { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
-    { id: 'team', iconClass: 'pi pi-users', label: 'Equipes' },
-  ];
 
   subscribeToTeams() {
     this.teamService.getTeamsByUser(this.logged.id!)
     .subscribe((teams: Team[]) => {
-      if (this.clicked === 'team') {
-        this.teams = teams;  
-        this.teams.forEach(team =>  this.teamsBackup.push(new Team(team)));
-
-      }
+      this.teams = teams;  
+      this.teams.forEach(team =>  this.teamsBackup.push(new Team(team)));
     });
-  }
-
-  changePreviewMode(preview: string): void {
-    this.clicked = preview;
-    if (this.clicked == "team") {
-      this.teamService.getTeamsByUser(this.logged.id!)
-        .subscribe((teams) => {
-          this.teams = teams;          
-        });
-    }    
   }
 
   switchCreateView(): void {
@@ -87,10 +66,7 @@ export class HomeComponent implements OnInit{
         .subscribe((teams: Team[]) => {
           this.teams = teams;
         });
-    } else {
-      this.teams = [];
     }
-    
   }
 
   delete(team : Team): void {
@@ -104,24 +80,12 @@ export class HomeComponent implements OnInit{
       .delete(team.id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
-        this.logged.teams?.splice(this.logged.teams.indexOf(team), 1);
+        this.teams?.splice(this.teams.indexOf(team), 1);
       },
       e => {
         this.alert.errorAlert('Erro ao deletar equipe!')
       });
   }
-
-  //TASKS - FILTER AND ORDER
-  filterSettings: any[] = [];
-  orderSettings: any[] = [];
-
-  configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
-  ];
-
-  filterOpen: boolean = false;
-  orderOpen: boolean = false;
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
@@ -131,27 +95,5 @@ export class HomeComponent implements OnInit{
     this.orderOpen = !this.orderOpen;
   }
 
-  getRecentsTeams(): void {
-    this.teamService
-      .getTeamsByUser(this.logged.id!)
-      .subscribe((teams) => {        
-        this.recentTeams = teams;
-      });
-  }
 
-  searchTeamList(event: any): void {
-    if(event.target.value.length == 0) {
-      console.log(this.teamsBackup);
-      
-      this.teams = this.teamsBackup;
-      return;
-    }
-    console.log(event.target.value);
-    this.teams = this.teamsBackup.filter((team) => {
-      if (team.name?.includes(event.target.value)) {
-        return team;
-      }
-    });
-
-  }
 }

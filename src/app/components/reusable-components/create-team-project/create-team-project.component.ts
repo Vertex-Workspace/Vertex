@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { Team } from 'src/app/models/team';
-import { User } from 'src/app/models/user';
+import { Project } from 'src/app/models/class/project';
+import { Team } from 'src/app/models/class/team';
+import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -82,7 +82,7 @@ export class CreateTeamProjectComponent implements OnInit {
       team.creator = this.logged;
       this.teamService
         .create(team)
-        .subscribe((team: Team) => {
+        .subscribe((team: Team) => {          
           this.alert.successAlert(`Equipe ${team.name} criada com sucesso!`);
           this.teamService
             .updateImage(team.id!, this.fd)

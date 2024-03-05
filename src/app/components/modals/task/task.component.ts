@@ -1,18 +1,18 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { Project } from 'src/app/models/project';
-import { PropertyList } from 'src/app/models/property';
-import { Task, TaskEdit } from 'src/app/models/task';
-import { Permission, PermissionsType } from 'src/app/models/user';
+import { Project } from 'src/app/models/class/project';
+import { PropertyList } from 'src/app/models/class/property';
+import { Task, TaskEdit } from 'src/app/models/class/task';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { taskHourService } from 'src/app/services/taskHour.service';
-import { taskHour } from '../../../models/taskHour';
+import { taskHour } from '../../../models/class/taskHour';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'src/app/services/project.service';
-import { User } from 'src/app/models/user';
-import { TimeInTask } from 'src/app/models/timeInTask';
+import { User } from 'src/app/models/class/user';
+import { TimeInTask } from 'src/app/models/class/timeInTask';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

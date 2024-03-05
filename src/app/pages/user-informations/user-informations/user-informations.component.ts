@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

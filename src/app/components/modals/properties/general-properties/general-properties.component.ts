@@ -5,9 +5,9 @@ import {
   faFont, faCalendarDays, faPlus, faSpinner, faCaretDown, fa1, faListNumeric, faList
 } from '@fortawesome/free-solid-svg-icons';
 import { CdkDragDrop, CdkDropList, moveItemInArray, CdkDrag, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Property, PropertyKind, PropertyListKind, PropertyStatus } from 'src/app/models/property';
+import { Property, PropertyKind, PropertyListKind, PropertyStatus } from 'src/app/models/class/property';
 import { ProjectService } from 'src/app/services/project.service';
-import { Project } from 'src/app/models/project';
+import { Project } from 'src/app/models/class/project';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({

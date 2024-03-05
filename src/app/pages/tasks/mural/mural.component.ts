@@ -1,61 +1,63 @@
 import { AfterViewInit, 
          Component, 
          ElementRef, 
+         Input, 
          OnInit, 
          QueryList, 
          ViewChildren } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { Task } from 'src/app/models/class/task';
 import { PersonalizationService } from 'src/app/services/personalization.service';
-import { Note } from 'src/app/models/note';
+import { Note, NoteGet } from 'src/app/models/class/note';
+import { ActivatedRoute } from '@angular/router';
+import { Project } from 'src/app/models/class/project';
+import { NoteService } from 'src/app/services/note.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-mural',
   templateUrl: './mural.component.html',
   styleUrls: ['./mural.component.scss']
 })
-export class MuralComponent implements OnInit, AfterViewInit {
+export class MuralComponent implements OnInit {
 
-  defaultNotes: Note[] = [
-    {
-      id: 1,
-      title: 'Note 1',
-      description: 'Description 1',
-      width: 200,
-      height: 200,
-      color: '"#65D73C',
-      positionX: 0,
-      positionY: 0
-    },
-    {
-      id: 2,
-      title: 'Note 2',
-      description: 'Description 2',
-      width: 200,
-      height: 200,
-      color: '#FFD600',
-      positionX: 0,
-      positionY: 0
-    },
-    {
-      id: 3,
-      title: 'Note 3',
-      description: 'Description 3',
-      width: 200,
-      height: 200,
-      color: '#FF9D9D',
-      positionX: 0,
-      positionY: 0
-    }
-  ]
+  @Input()
+  project!: Project;
+
+  notes !: NoteGet[];
 
   constructor(
-    private personalization : PersonalizationService
-  ){}
-
-  ngOnInit(): void {
+    private noteService: NoteService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute
+  ){
+    route.params.subscribe(params => {
+      if (params) {
+        this.projectService.getOneById(params['id'])
+          .subscribe(p => console.log(p))
+        this.getNotes(params['id']);           
+      }
+    });
   }
 
-  ngAfterViewInit(): void {
+  teste(e: any): void {
+    console.log(e);
+    
+  }
+
+  getNotes(id: number): void {
+    this.noteService
+    .getAllByProject(id)
+    .subscribe((notes: NoteGet[]) => {
+      this.notes = notes;
+    });
+  }
+
+  ngOnInit(): void {  
+  }
+
+  deleteNote(note: NoteGet) {
+    // this.noteService
+    //   .
   }
 
 }

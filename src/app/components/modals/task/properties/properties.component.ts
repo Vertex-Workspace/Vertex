@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpinner, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
-import { Task } from 'src/app/models/task';
-import { Permission, PermissionsType } from 'src/app/models/user';
-import { Value, ValueUpdate } from 'src/app/models/value';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
+import { Task } from 'src/app/models/class/task';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
+import { Value, ValueUpdate } from 'src/app/models/class/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';

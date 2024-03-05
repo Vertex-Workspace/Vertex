@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { faCircleUser, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Comment, CommentSend } from 'src/app/models/comment';
-import { Task } from 'src/app/models/task';
-import { TaskResponsable } from 'src/app/models/taskResponsable';
+import { Comment, CommentSend } from 'src/app/models/class/comment';
+import { Task } from 'src/app/models/class/task';
+import { TaskResponsable } from 'src/app/models/class/taskResponsable';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 

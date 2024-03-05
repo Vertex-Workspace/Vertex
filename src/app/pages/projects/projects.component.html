@@ -54,7 +54,7 @@
         <div class="container-grid">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3 pb-4">
-                    <h6>Tarefas de {{team.name}}</h6>
+                    <h6>Tarefas de {{teamName}}</h6>
                 </div>
                 <!-- FILTER AND ORDER SETTINGS -->
                 <div class="functionally-items-task">
@@ -95,7 +95,7 @@
 
 
                 <div class="w-full h-full">
-                    <app-list *ngIf="team.projects && team.projects.length > 0" [team]="team"></app-list>
+                    <app-list [team]="team"></app-list>
                 </div>
                 <!-- <app-quick-access style="width: 100%; height:100%;" [typeString]="'project'"></app-quick-access> -->
             </div>

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL } from './path/api_url';
 import { map, Observable } from 'rxjs';
-import { Personalization } from '../models/personalization';
-import { User } from '../models/user';
+import { Personalization } from '../models/class/personalization';
+import { User } from '../models/class/user';
 
 
 

@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { URL } from './path/api_url';
-import { Team } from '../models/team';
-import { HasPermission, Permission, User } from '../models/user';
-import { Project } from '../models/project';
+import { Team } from '../models/class/team';
+import { HasPermission, Permission, User } from '../models/class/user';
+import { Project } from '../models/class/project';
 
 @Injectable({
   providedIn: 'root'

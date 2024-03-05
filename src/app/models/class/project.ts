@@ -1,3 +1,4 @@
+import { Note } from "./note";
 import { Property } from "./property";
 import { Task } from "./task";
 import { Team } from "./team";
@@ -12,6 +13,7 @@ export class Project {
     creator ?: User;
     projectDependency ?: Project;
     tasks : Task[]; 
+    notes : Note[];
     properties!: Property[];
     idTeam?: number;
 
@@ -24,6 +26,7 @@ export class Project {
         this.description = project.description;
         this.image = project.description;
         this.tasks = project.tasks;
+        this.notes = project.notes;
         this.properties = project.properties;
         this.idTeam = project.idTeam;
     }

@@ -23,7 +23,7 @@
                 </div>
                 <div class="functionally-items-task">
                     <div class="search">
-                        <input type="text" placeholder="Pesquise por uma equipe..." (input)="searchTeamList($event)">
+                        <input type="text" placeholder="Pesquise por uma equipe...">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
@@ -31,19 +31,19 @@
                         Nova equipe
                     </button>
                 </div>
-                <div *ngIf="teams.length < 1" class="pt-6">
+                <!-- <div class="pt-6">
                     <p>Nenhuma equipe encontrada!</p>
-                </div>
+                </div> -->
             </div>
 
-            <div class="default-size" *ngIf="clicked === 'team'">
+            <div class="default-size">
 
-                <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" *ngIf="clicked === 'team'"
+                <app-card-list style="width: 100%; height: 90%; padding-top: 3%;"
                     (deleteEmitterTeam)="delete($event)" [teams]="teams" [type]="'team'"></app-card-list>
 
 
                 <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
-                    *ngIf="clicked === 'team' && isCreating" (close)="switchCreateView()"
+                    *ngIf="isCreating" (close)="switchCreateView()"
                     [typeString]="'team'"></app-create-team-project>
             </div>
         </div>

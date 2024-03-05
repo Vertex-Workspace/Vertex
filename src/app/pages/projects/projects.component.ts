@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Group } from 'src/app/models/groups';
-import { Project } from 'src/app/models/project';
-import { Task } from 'src/app/models/task';
-import { Team } from 'src/app/models/team';
-import { User } from 'src/app/models/user';
+import { Group } from 'src/app/models/class/groups';
+import { Project } from 'src/app/models/class/project';
+import { Team } from 'src/app/models/class/team';
+import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -25,7 +24,7 @@ export class ProjectsComponent implements OnInit {
   clicked: string = 'project';
   logged !: User;
   team !: Team;
-  group !: Group;
+  emptyTeamProjects !: boolean;
 
   //TASKS - FILTER AND ORDER
   filterSettings: any[] = [];
@@ -47,17 +46,16 @@ export class ProjectsComponent implements OnInit {
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
-    
+    this.getTeam();
   }
 
   ngOnInit(): void {
-    this.getTeam();
-    this.validateProjectId();
+    this.validateTeamId();
   }
 
 
 
-  validateProjectId(): void {
+  validateTeamId(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
       .existsByIdAndUserBelongs(teamId, this.logged.id!)
@@ -66,19 +64,18 @@ export class ProjectsComponent implements OnInit {
           this.router.navigate(['/home']);
           this.alert.errorAlert('Equipe inexistente!')
         }
-      },
-        e => {
-
-        })
-
+      });
   }
 
+  teamName: string = '';
   getTeam(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
       .getOneById(teamId)
       .subscribe((team: Team) => {
         this.team = team;
+        this.teamName = team.name!;
+        if (team.projects) this.emptyTeamProjects = false;
       })      
     }
 
@@ -97,8 +94,7 @@ export class ProjectsComponent implements OnInit {
         });
   }
 
-  deleteGroup(groupId: Group):void {
-    console.log(groupId); 
+  deleteGroup(groupId: Group): void {
     this.groupService.delete(groupId.id).subscribe((group: Group) => {
       this.alert.successAlert('Grupo deletado com sucesso')
       this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
@@ -162,11 +158,8 @@ export class ProjectsComponent implements OnInit {
           if (group.name == null) {
             this.alert.errorAlert(`Você precisa adicionar um nome`)
           }else {
-            this.alert.errorAlert(`Erro ao criar equipe`)
-            console.log(group);
-            
+            this.alert.errorAlert(`Erro ao criar grupo`)            
           }
-
         });
   }
 

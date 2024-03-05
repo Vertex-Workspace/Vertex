@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
+import { Task } from 'src/app/models/class/task';
+import { Value, ValueUpdate } from 'src/app/models/class/value';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
-import { Task } from 'src/app/models/task';
-import { Permission, PermissionsType } from 'src/app/models/user';
-import { Value, ValueUpdate } from 'src/app/models/value';
+import { Project } from 'src/app/models/class/project';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
-
+//teste pra ver se foi
 @Component({
   selector: 'app-input-value-property',
   templateUrl: './input-value-property.component.html',
@@ -41,6 +41,8 @@ export class InputValuePropertyComponent {
     private alertService: AlertService,
     private taskService: TaskService) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
+    if(id){
+
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions;
       for (let i = 0; i < permissions.length; i++) {
@@ -49,12 +51,11 @@ export class InputValuePropertyComponent {
         }
       }
     });
+    }
   }
 
 
   ngOnInit(): void {
-
-
 
     if(this.value.property.kind === PropertyKind.STATUS || 
       this.value.property.kind === PropertyKind.LIST){
@@ -184,5 +185,4 @@ export class InputValuePropertyComponent {
       }
     );
   }
-
 }

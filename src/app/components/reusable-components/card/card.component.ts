@@ -1,19 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {
-  faCircleUser,
-  faTrashCan,
-  faEnvelope,
-  faClockRotateLeft
-} from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { Task } from 'src/app/models/task';
-import { Permission, PermissionsType } from 'src/app/models/user';
+import { faCircleUser, 
+          faTrashCan, 
+          faEnvelope, 
+          faClockRotateLeft 
+        } from '@fortawesome/free-solid-svg-icons';
+import { Task } from 'src/app/models/class/task';
+import { Project } from 'src/app/models/class/project';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-card',

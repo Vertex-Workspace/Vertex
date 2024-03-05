@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faArrowLeft, faCheck, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import {  PropertyList } from 'src/app/models/property';
+import {  PropertyList } from 'src/app/models/class/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 

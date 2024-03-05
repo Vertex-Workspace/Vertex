@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
-import { Group } from '../models/groups';
-import { User } from '../models/user';
-import { Team } from '../models/team';
+import { Group } from '../models/class/groups';
+import { User } from '../models/class/user';
+import { Team } from '../models/class/team';
 
 @Injectable({
   providedIn: 'root'

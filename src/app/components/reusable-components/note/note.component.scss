@@ -1,136 +1,98 @@
-@import 'src/_variables.scss';
+@import '../../../../variables';
 
-.note {
-  position: absolute;
-  background-color: $whiteDefault;
-}
-
-.content-wrapper {
-  position: absolute;
-  overflow: auto;
-}
-
-.drag-handle {
-  width: 100%;
-  height: 15%;
-  @apply flex justify-end;
-
-  i {
-    cursor: pointer;
-    font-size: 1.2rem;
-    margin: 10px;
+.card {
+    @apply bg-white overflow-hidden shadow-md absolute
+    rounded-sm flex cursor-move transition-colors min-w-[120px] min-h-[120px];
   }
+  
+  .card span:last-child {
+    @apply p-2 ;
+  
+    &:hover {
+  
+      .right .icons {
+        @apply bg-zinc-50 transition-colors;
+      }
+    }
+  
+    .left {
+      @apply flex flex-col gap-4 h-full w-4/5;
+  
+  
+      .text {
+        @apply text-justify h-full w-full;
+  
+        p {
+          @apply h-[70%] w-full overflow-hidden;
+        }
+      }
+    }
+  
+    .right {
+      @apply min-w-[30%] h-full flex flex-col items-end 
+      justify-end transition-colors;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-right: 10px;
+  
+      .date {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-top: 10px;
+        padding-right: 10px;
+      }
+  
+      .icons {
+        @apply w-1/2 h-1/4 flex gap-3 pl-3 pb-1 items-end 
+        justify-end flex-col transition-colors;
+        position: absolute; 
+        bottom: 0;
+        right: 0;
+        padding-bottom: 10px;
+        padding-right: 10px;
+  
+        i {
+          font-size: 1rem;
+          cursor: pointer;
+          color: $primaryColor;
 
-}
-
-.resizers {
-  box-sizing: border-box;
-
-  .resizer {
-    width: 6px;
-    height: 6px;
-    border-radius: 1px;
-    background: white;
+          &:hover {
+            @apply scale-105;
+          }
+        }
+      }
+    }
+  }
+  
+  .full {
+    width: 100%;
+  }
+  
+  .dragHandle {
     position: absolute;
+    // background-color: black;
   }
-
-  .right {
-    top: 0;
-    right: -3px;
-    height: 100%;
-    cursor: ew-resize;
-    transition: 0.3s;
-
-    &:hover {
-      border-right: 2px solid $primaryColor;
-      transition: 0.3s;
-    }
-  }
-
-  .bottom {
-    bottom: -3px;
-    left: 0;
-    width: 100%;
-    cursor: ns-resize;
-    transition: 0.3s;
-
-    &:hover {
-      border-bottom: 2px solid $primaryColor;
-      transition: 0.3s;
-    }
-  }
-
-  .top {
-    top: -3px;
-    left: 0;
-    width: 100%;
-    cursor: ns-resize;
-    transition: 0.3s;
-
-    &:hover {
-      border-top: 2px solid $primaryColor;
-      transition: 0.3s;
-    }
-  }
-
-  .left {
-    top: 0;
-    left: -3px;
-    height: 100%;
-    cursor: ew-resize;
-    transition: 0.3s;
-
-    &:hover {
-      border-left: 2px solid $primaryColor;
-      transition: 0.3s;
-    }
-  }
-
-  .bottom-right {
-    right: -3px;
-    bottom: -3px;
+  
+  .dragHandle.corner {
+    width: 15px;
+    height: 15px;
+    z-index: 90;
     cursor: nwse-resize;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: $primaryColor;
-      transition: 0.3s;
-    }
   }
-
-  .top-right {
-    right: -3px;
-    top: -3px;
-    cursor: nesw-resize;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: $primaryColor;
-      transition: 0.3s;
-    }
+  
+  .dragHandle.right {
+    width: 6px;
+    height: 100%;
+    z-index: 90;
+    cursor: ew-resize;
   }
-
-  .top-left {
-    left: -3px;
-    top: -3px;
-    cursor: nwse-resize;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: $primaryColor;
-      transition: 0.3s;
-    }
+  
+  .dragHandle.bottom {
+    height: 6px;
+    width: 100%;
+    z-index: 90;
+    cursor: ns-resize;
   }
-
-  .bottom-left {
-    left: -3px;
-    bottom: -3px;
-    cursor: nesw-resize;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: $primaryColor;
-      transition: 0.3s;
-    }
-  }
-}
+  

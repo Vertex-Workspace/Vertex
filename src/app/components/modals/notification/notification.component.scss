@@ -1,5 +1,16 @@
 @import "../../../../variables";
 
+@keyframes slideInLeft {
+    from {
+      width: 0;
+      opacity: 1;
+    }
+    to {
+      width: 25%;
+      opacity: 1;
+    }
+}
+
 section {
 @apply absolute z-10 flex h-full justify-end w-[100%] max-w-[96%];
 animation: slideIn 0.5s ease-out;
@@ -14,6 +25,7 @@ overflow: hidden;
     @apply w-[25%] flex h-full rounded-sm flex-col shadow-xl;
     z-index: 999;
     background-color: $secondColor;
+    animation: slideInLeft 0.2s ease-in-out;
 
     .header {
         @apply flex flex-col w-full h-[15%] p-4;
