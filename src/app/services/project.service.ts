@@ -14,8 +14,6 @@ export class ProjectService {
   constructor(
     private http: HttpClient
   ) { }
-
-  // private projectHandlerSubject: BehaviorSubject<Project> = new BehaviorSubject<Project>() 
   
   public getAll(): Observable<Project[]> {
     return this.http

@@ -66,7 +66,7 @@
             <app-kanban [project]="getProject()" *ngIf="clicked  === 'Kanban'"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
 
-            <app-list [project]="getProject()" *ngIf="clicked  === 'List'" (openTaskDetails)="changeModalTaskState(true, $event)" ></app-list>
+            <app-list [project]="project" *ngIf="clicked  === 'List'" (openTaskDetails)="changeModalTaskState(true, $event)" ></app-list>
             <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'"></app-calendar>
             <app-mural  *ngIf="clicked  === 'Mural'"></app-mural>
             <!-- app-kanban -->

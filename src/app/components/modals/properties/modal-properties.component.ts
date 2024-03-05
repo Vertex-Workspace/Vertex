@@ -56,8 +56,6 @@ export class ModalPropertiesComponent{
 
   constructor(private propertyService: PropertyService, private alertService: AlertService) { }
 
-
-
   editTask(type: string, event: any) {
     this.property = event;
     this.currentModal = type;
@@ -124,6 +122,8 @@ export class ModalPropertiesComponent{
     );
   }
   updateProject(project : Project) {
+    console.log('a');
+    
     this.project = project;
     this.changeProjectSettings.emit(project);
   }

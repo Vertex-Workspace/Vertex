@@ -22,6 +22,22 @@ export class Property {
 
 }
 
+export class PropertyCreation {
+
+    name!: string;
+    kind!: PropertyKind;
+    defaultValue?: string;
+    
+    constructor(
+        name: string, kind: PropertyKind, defaultValue: string
+    ) {
+        this.name = name;
+        this.kind = kind;
+        this.defaultValue = defaultValue;
+    }
+
+}
+
 export enum PropertyStatus{
     FIXED = "FIXED",
     VISIBLE = "VISIBLE",

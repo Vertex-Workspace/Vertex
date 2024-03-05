@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { Task } from 'src/app/models/class/task';
 import {
   faTrashCan,
@@ -7,7 +7,7 @@ import {
   faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
 import { Value } from 'src/app/models/class/value';
-import { PropertyKind } from 'src/app/models/class/property';
+import { Property, PropertyCreation, PropertyKind } from 'src/app/models/class/property';
 import { TeamService } from 'src/app/services/team.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute } from '@angular/router';
@@ -36,7 +36,9 @@ export class RowCardComponent {
     private route: ActivatedRoute,
     private userService: UserService,
     private taskService: TaskService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private changeDetection: ChangeDetectorRef
+    ) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.projectService
@@ -59,12 +61,14 @@ export class RowCardComponent {
       })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+  }
 
   @Input()
   task!: Task;
 
   @Input()
-  cols!: any[];
+  properties!: Property[] | PropertyCreation[];
 
   modalDelete: boolean = false;
   @Output() openTaskDetails = new EventEmitter();
@@ -83,27 +87,13 @@ export class RowCardComponent {
   ];
 
   ngOnInit(): void {
-    console.log(this.taskList);
+    
   }
 
-  getCols(): any[] {
-    let cols: any[] = [];
-    this.cols.map((col) => {
-      if (col.field !== "name") {
-        cols.push(col);
-      }
-    });
-    return cols;
-  }
-
-  getNameWidth(): string {
-    return "300px";
-  }
-
-  getPropertyValue(col: any): Value {
+  getPropertyValue(property: Property | PropertyCreation): Value {
     let value: Value;
     this.task.values?.forEach((values: any) => {
-      if (col.field === values.property.kind) {
+      if (property.kind === values.property.kind) {
         value = values;
       }
     });

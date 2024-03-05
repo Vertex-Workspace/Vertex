@@ -23,7 +23,7 @@ export class TasksComponent implements OnInit {
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
-  clicked : string = 'Mural';
+  clicked : string = 'List';
   query: string = '';
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;

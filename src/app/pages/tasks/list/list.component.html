@@ -2,18 +2,35 @@
     <div class="table">
         <div class="thead">
             <label 
-                *ngFor="let col of cols"
-                [style.min-width]="col.width"
-                [class.nameHeader]="col.field == 'name'"
+                class="min-w-[300px]"
             >              
                 <h6>
-                {{col.headerText}}
+                Nome
                 </h6>
             </label>
+        <ng-container *ngIf="project">
+                <label 
+                    *ngFor="let col of project.properties"
+                    class="min-w-[300px]"
+                >              
+                <h6>
+                    {{col.name}}
+                </h6>
+            </label>
+        </ng-container>
+        <ng-container *ngIf="!project">
+                <label 
+                    *ngFor="let col of properties"
+                    class="min-w-[300px]"
+                >              
+                <h6>
+                    {{col.name}}
+                </h6>
+            </label>
+        </ng-container>
         </div>
 
         <div class="tbody overflow-y-auto overflow-x-hidden"
-
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >
@@ -26,9 +43,16 @@
                     cdkDragBoundary=".table"
                 >
                     <app-row-card
+                        *ngIf="!project"
                         (openTaskDetails)="openTaskModal(task)"
                         [task]="task"
-                        [cols]="cols"
+                        [properties]="properties"
+                    ></app-row-card>
+                    <app-row-card
+                        *ngIf="project"
+                        (openTaskDetails)="openTaskModal(task)"
+                        [task]="task"
+                        [properties]="project.properties"
                     ></app-row-card>
                     
                 </div>
