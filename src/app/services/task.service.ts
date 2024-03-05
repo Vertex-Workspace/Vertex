@@ -54,7 +54,7 @@ export class TaskService {
 
   public getAllByTeam(id: number):Observable<Task[]> {
     return this.http
-      .get<Task[]>(`${URL}task/team/${id}`)
+      .get<Task[]>(`${URL}team/tasks/${id}`)
       .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 
