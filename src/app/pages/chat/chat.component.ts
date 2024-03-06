@@ -54,13 +54,20 @@ export class ChatComponent {
 
   logged!: User;
 
+
   constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
+
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
     this.teamService.findAllChats().subscribe((chats: Chat[]) => {
       chats.forEach((chat: Chat) => {
-        this.conversations.push(chat);
-        // this.chat = chat;
+
+        this.chat = chat;
         console.log(this.logged, "Logged");
+        chat.userTeams!.forEach((userTeam) => {
+          if (userTeam.user.id == this.logged.id) {
+            this.conversations.push(chat);
+          }
+        });
 
         console.log(chat, "Chat");
 
@@ -68,50 +75,58 @@ export class ChatComponent {
 
       });
     });
+
   }
 
   click() {
     this.side = !this.side;
   }
 
-  ngOnInit(): void {
-    this.webSocketService.openWebSocket();
-
+  ngOnInit() {
+    
+      this.webSocketService.listenToServer().subscribe((change) => {
+        console.log(change, "Change")
+        this.chat.messages!.push(change);
+      });
+    
   }
 
-  ngOnDestroy(): void {
-    this.webSocketService.closeWebSocket();
-  }
+  // ngOnDestroy(): void {
+  //   this.webSocketService.closeWebSocket();
+  // }
 
-  sendMessage(sendForm: NgForm) {
+  sendMessage(sendForm: NgForm,event:any) {
     let date = new Date();
     let dateString = date.toISOString();
 
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
 
     const messageDto: Message = {
-      id: this.messages.length + 1,
-      user: this.logged,
+      user: this.logged.firstName,
       contentMessage: this.messageUser,
       time: dateString,
-      viewed: false
+      viewed: false,
     };
     console.log(messageDto);
 
-    this.webSocketService.sendMessage(messageDto);
-    this.teamService.patchMessagesOnChat(messageDto.id!, this.logged.id!, messageDto).subscribe(
-      (response: any) => {
-        this.chat = response;
-        console.log(response, "Message sentALLL");
-        sendForm.controls['message'].reset();
+    if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
+      this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
+        (response: any) => {
+          this.chat = response;
+          console.log(response, "Message sentALLL");
+          sendForm.controls['message'].reset();
+        });
+
+      this.webSocketService.sendMessage(messageDto);
+      setTimeout(() => {
         let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
-        a.scrollTo(a.scrollTop, a.scrollHeight);
-      });
-
-
+        a.scrollTop = a.scrollHeight;
+      }, 0);
+      sendForm.reset();
+    }
   }
 
-
+  
 
   openConversation(chat: Chat) {
     this.chat = chat;

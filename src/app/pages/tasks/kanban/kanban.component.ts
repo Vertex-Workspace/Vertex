@@ -50,8 +50,8 @@ export class KanbanComponent implements OnInit {
 
   @Input() canDeleteVerification ?: boolean
 
-  canCreate: boolean = false;
-  canEdit: boolean = false;
+  canCreate: boolean = true;
+  canEdit: boolean = true;
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     const task: Task = event.item.data;    
@@ -61,7 +61,6 @@ export class KanbanComponent implements OnInit {
 
     //For each to find the value of current and future property List
 
-    if (this.canEdit != false) {
       this.project.properties.forEach((property) => {
         if (property.kind == PropertyKind.STATUS) {
           task.values.forEach((value) => {
@@ -135,7 +134,7 @@ export class KanbanComponent implements OnInit {
         
         //Patch the value of the status task
         this.taskService.patchValue(valueUpdate).subscribe();
-      }
+      
     } else {
       this.alertService.errorAlert("Você não tem permissão para alterar o Status da tarefa!")
       
@@ -190,7 +189,7 @@ export class KanbanComponent implements OnInit {
     let propertyUsed!: Property;
 
     //For each to find the property of the clicked Property List
-    if (this.canCreate) {
+  
       this.project.properties.forEach((property) => {
 
         if (property.kind == PropertyKind.STATUS) {
@@ -237,9 +236,6 @@ export class KanbanComponent implements OnInit {
       (error: any) => {
         this.alertService.errorAlert("Erro ao criar tarefa!");
       }
-    } else {
-      this.alertService.errorAlert("Você não tem permissão para criar essa tarefa!")
-    }
   }
   
 }
