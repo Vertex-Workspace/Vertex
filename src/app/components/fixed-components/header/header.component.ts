@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit {
     this.teamService
       .getOneById(id)
       .subscribe((team: Team) => {
-        this.location += " " + team.name;      
+        this.location = team.name;      
       })
   }
 
@@ -96,7 +96,7 @@ export class HeaderComponent implements OnInit {
     this.projectService
       .getOneById(id)
       .subscribe((project: Project) => {
-        this.location += " " + project.name;
+        this.location = project.name;
       })
   }
 
