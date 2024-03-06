@@ -9,10 +9,10 @@
         <input formControlName="name" type="text"
           [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'">
       </div>
-      <div class="input-image">
+      <div class="input-image overflow-hidden">
         <div class="image relative">
-          <img *ngIf="selectedFile" src="{{url}}" alt="">
-          <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
+          <img *ngIf="selectedFile" src="{{url}}" class="rounded-full">
+          <fa-icon [icon]="faImage" class="image-icon rounded-full" *ngIf="!selectedFile"></fa-icon>
           <form class="input-div">
             <input type="file" class="input-file" (change)="onFileSelected($event)">
           </form>

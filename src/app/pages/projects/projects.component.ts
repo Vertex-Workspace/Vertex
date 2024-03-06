@@ -85,8 +85,6 @@ export class ProjectsComponent implements OnInit {
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto deletado com sucesso!`);
         this.team.projects?.splice(this.team.projects.indexOf(projectId),1)
-        this.getAfterChange();
-        this.team.projects?.splice(this.team.projects.indexOf(project), 1);
       },
         e => {
           this.alert.errorAlert('Erro ao deletar projeto!');
@@ -109,26 +107,6 @@ export class ProjectsComponent implements OnInit {
 
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;
-    this.getAfterChange()
-    this.getAfterChange();
-    // this.getAfterChange();
-  }
-
-  getAfterChange(): void {
-    if (!this.isCreatingProject) {
-      this.projectService
-        .getAllByTeam(this.team.id!)
-        .subscribe((projects) => {
-          this.team.projects = projects;
-        });
-    } else {
-      this.team.projects = [];
-    }
-    this.isCreating = !this.isCreating;
-    this.updateList();
-  }
-
-  updateList(): void {
     this.getTeam();
   }
 
