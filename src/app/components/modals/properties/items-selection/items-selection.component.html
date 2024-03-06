@@ -6,7 +6,8 @@
             <div class="flex w-full justify-between items-center">
                 <p class="pl-3 pt-4 medium-text pb-4">{{section.name}}</p>
                 <span class="text-3xl cursor-pointer" *ngIf="section.name == 'Visíveis'"
-                    (click)="createPropertyList()">+</span>
+                    (click)="createPropertyList()"
+                    [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">+</span>
             </div>
             <div class="visible" [ngClass]="section.name === 'Visíveis' ? '' : 'opacity'"
                 *ngFor="let propertyList of section.propertyLists;">
@@ -23,8 +24,10 @@
                 </div>
                 <div>
                     <fa-icon [icon]="section.icon" class="little-icon" (click)="eyeVisibility(propertyList)"></fa-icon>
-                    <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick(propertyList)"></fa-icon>
-                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(propertyList)"></fa-icon>
+                    <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick(propertyList)"
+                    [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'"></fa-icon>
+                    <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(propertyList)"
+                    [ngClass]="canDelete ? 'opacity-100' : 'opacity-20'"></fa-icon>
                 </div>
             </div>
         </div>

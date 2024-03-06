@@ -45,6 +45,7 @@ export class StatusComponent {
 
   canDelete: boolean = false;
   canEdit: boolean = false;
+  canCreate: boolean = false;
 
   deleteBoolean: boolean = false;
 
@@ -97,6 +98,8 @@ export class StatusComponent {
           this.canDelete = true;
         } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
           this.canEdit = true;
+        } else if (permission.name === PermissionsType.CREATE && permission.enabled) {
+          this.canCreate = true;
         }
       }
     })
@@ -133,7 +136,7 @@ export class StatusComponent {
 
       this.saveProperty();
     } else {
-      this.alertService.errorAlert("Você não tem permissão para alterar o status!")
+      this.alertService.errorAlert("Você não tem permissão para criar mais status!")
     }
   }
 
@@ -196,8 +199,12 @@ export class StatusComponent {
 
 
   editName(propertyList: PropertyList) {
+    if(this.canEdit){
     this.propertyListNameEditId = propertyList.id!;
     this.nameEdit = propertyList.value;
+    }else {
+      this.alertService.errorAlert('Você não tem permissão para editar');
+    }
   }
 
   clickPencil(propertyList: PropertyList) {

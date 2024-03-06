@@ -6,7 +6,7 @@
             <div class="main-property">
                 <p class="medium-text color-text">{{status.name}}</p>
                 <fa-icon [icon]="faPlus" class="little-icon" (click)="add(status)"
-                [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'"></fa-icon>
+                [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'"></fa-icon>
             </div>
             <div *ngFor="let propertyList of status.properties; index as i2" class="flex w-full justify-center" cdkDrag
                 [cdkDragDisabled]="propertyList.isFixed" [cdkDragData]="propertyList" cdkDragBoundary=".properties">
