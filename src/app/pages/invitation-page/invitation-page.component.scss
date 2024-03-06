@@ -1,0 +1,28 @@
+@import '../../../variables';
+
+.main-div{
+    @apply w-screen h-[92vh] flex flex-col items-center ;
+}
+
+.center-div{
+    @apply flex flex-col items-center justify-center gap-10 h-[80%];
+}
+
+.submit button {
+    border: 1px solid $primaryColor;
+    background-color: $primaryColor;
+    color: $secondColor;
+    @apply p-3;
+}
+
+.submit{
+    @apply flex flex-col justify-center w-1/2;
+}
+
+.text-invitation{
+    text-align: center ;
+}
+
+.deny-invite{
+    text-align: center;
+}

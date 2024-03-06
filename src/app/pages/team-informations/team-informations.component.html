@@ -35,7 +35,7 @@
                             </label>
                         </ng-container>
                     </div>
-                    <div class="emptyDiv"></div>
+                    <div class="emptyDiv" (click)="sla()"></div>
                 </div>
 
                 <div class="high-listDiv-members">
@@ -43,7 +43,7 @@
                         <p class="large-text" *ngIf="clicked == 'participants'">Participantes</p>
                         <p class="large-text" *ngIf="clicked == 'groups'">Grupos</p>
                         <p> | </p>
-                        <div class="flex gap-1">
+                        <div (click)="copyInviteLink()" class="flex gap-5 items-center">
                             <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
                             <p>Copiar link de convite</p>
                         </div>

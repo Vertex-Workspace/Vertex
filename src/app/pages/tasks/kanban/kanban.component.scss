@@ -14,6 +14,9 @@
             @apply pl-3;
           }
 
+          h4:hover{
+            @apply cursor-pointer
+          }
           button:hover{
             @apply cursor-pointer;
           }

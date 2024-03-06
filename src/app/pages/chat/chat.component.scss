@@ -9,6 +9,19 @@ input{
     padding: 10px;
 }
 
+.chat {
+    margin-top: 10rem;
+}
+
+div.chat-content {
+    border-radius: .25rem;
+    height: 40rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    height: 100%;
+}
 
 
 .container-custom {
@@ -167,7 +180,8 @@ main{
 }
 
 .center-div{
-   @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto
+   @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
+   
 }
 
 .left{

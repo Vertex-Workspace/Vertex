@@ -14,7 +14,7 @@ import { MenuModule } from 'primeng/menu';
   declarations: [
     TaskComponent,
     CommentsComponent,
-    LogComponent,
+    LogComponent
   ],
   exports: [TaskComponent],
   imports: [
@@ -26,4 +26,4 @@ import { MenuModule } from 'primeng/menu';
      MenuModule
     ],
 })
-export class TaskModule {}
+export class TaskModule { }

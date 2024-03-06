@@ -5,7 +5,7 @@
             <i 
                 (click)="back()" 
                 class="pi pi-angle-double-left back"
-                *ngIf="location !== 'Home'"
+                *ngIf="location !== 'Home' && location.includes('aceitar-convite')"
             ></i>
             <p>
                 {{location}}

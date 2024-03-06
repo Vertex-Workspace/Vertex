@@ -14,6 +14,7 @@ import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { TeamService } from 'src/app/services/team.service';
+import { catchError, of, switchMap, tap } from 'rxjs';
 
 
 @Component({
@@ -22,33 +23,77 @@ import { TeamService } from 'src/app/services/team.service';
     styleUrls: ['./team-informations.component.scss']
 })
 export class TeamInformationsComponent implements OnInit {
+    
+    onClipboardCopy($event: Event) {
+        throw new Error('Method not implemented.');
+    }
 
-    team !: Team;
+
+
+    invitationCode!: {
+        code: string;
+    };
+    team!: Team;
     //to-do: add creation date, user social media, fix cards, -- charts
 
     constructor(
         private route: ActivatedRoute,
         private teamService: TeamService,
-        private groupService: GroupService,
-        private alertService: AlertService
-    ) {}
-
-    ngOnInit(): void {
-        this.getTeam();
+        private alertService: AlertService,
+        private groupService: GroupService
+    ) {
+        this.team = this.getTeam();
+    }
+       
+    ngOnInit() {
         this.start();
+        console.log(this.team);
+    }
+
+    sla() {
+        let aaa = this.copyInviteLink();
+        console.log(aaa);
+
         this.getGroup();
         this.getUser();
     }
 
-    getTeam(): void {
+    getTeam(): Team {
         const id = Number(this.route.snapshot.paramMap.get('id'));
+        this.teamService.getOneById(id).subscribe(
+            (team: Team) => {
+                this.team = team;
+                console.log(this.team);
+                return team;
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+        return this.team;
+    }
 
-        this.teamService
-            .getOneById(id)
-            .subscribe((team: Team) => {
-                this.team = team;                
-            })
-        
+
+    copyInviteLink() {
+        this.teamService.getInvitationCodeById(this.team.id!).subscribe(
+            (invitationCode: any) => {
+                this.team.invitationCode = invitationCode;
+                this.invitationCode = invitationCode;
+
+                const id = Number(this.route.snapshot.paramMap.get('id'));
+
+                navigator.clipboard.writeText("http://localhost:4200/aceitar-convite/" + id + "/" + invitationCode.invitationCode)
+                return invitationCode;
+            },
+            (error) => {
+
+                console.log(error);
+            }
+        )
+
+        this.alertService.successAlert("Link copiado com sucesso!");
+
+
     }
 
     start(): void {
