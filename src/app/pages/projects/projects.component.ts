@@ -73,6 +73,8 @@ export class ProjectsComponent implements OnInit {
     .subscribe((team: Team) => {
       this.team = team;
       this.teamName = team.name!;
+      console.log(team);
+      
       if (team.projects) this.emptyTeamProjects = false;
     });
   }

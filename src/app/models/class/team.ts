@@ -32,8 +32,6 @@ export class Team {
         this.creator = team.creator;
         this.users = team.users;
         this.groups = team.groups;
-
-  
         this.projects = team.projects;    
         this.image = team.image;   
     }

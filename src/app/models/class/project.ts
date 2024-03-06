@@ -10,7 +10,7 @@ export class Project {
     team : Team;
     description ?: string;
     image ?: string | undefined;
-    creator ?: User;
+    creator ?: UserTeam;
     projectDependency ?: Project;
     tasks : Task[]; 
     notes : Note[];
@@ -31,4 +31,13 @@ export class Project {
         this.idTeam = project.idTeam;
     }
 
+}
+
+interface UserTeam {
+    user: {
+        id: number
+    },
+    team: {
+        id: number
+    }
 }
