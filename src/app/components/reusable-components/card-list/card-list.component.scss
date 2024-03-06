@@ -3,6 +3,7 @@
         @apply flex w-full h-[620px] flex-col gap-[16px];
         overflow-y: auto;
     }
+
     .card{
         @apply flex w-[98%] h-[400px] shadow-lg rounded-sm flex-col;
         background-color: $card;

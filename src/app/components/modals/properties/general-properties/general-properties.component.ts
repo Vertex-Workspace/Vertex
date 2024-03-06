@@ -20,7 +20,6 @@ import { Permission, PermissionsType } from 'src/app/models/class/user';
   styleUrls: ['./general-properties.component.scss']
 })
 export class GeneralPropertiesComponent {
-
   faArrowLeft = faArrowLeft;
   faXmark = faXmark;
   faEye = faEye;

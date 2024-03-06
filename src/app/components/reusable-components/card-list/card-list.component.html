@@ -3,9 +3,9 @@
 
     <ng-container *ngFor="let item of getType()">
         <div class="card">
-            <div class="image flex justify-center items-center" (click)="openTeam(item.id)">
+            <div class="image flex justify-center items-center overflow-hidden" (click)="openTeam(item.id)">
                 <!-- <img src="../../../../assets/logo-weg.png" alt="" class="h-[70%]"> -->
-                <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">
+                <img src="data:image/jpg;base64, {{item.image}}" alt="" class="w-[100%]">
             </div>
             <div class="informations" (click)="openTeam(item.id)">
                 <p class="large-text">{{item.name}}</p>
