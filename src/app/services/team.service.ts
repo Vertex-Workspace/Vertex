@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap, throwError  } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/class/team';
 import { HasPermission, Permission, User } from '../models/class/user';
@@ -115,17 +115,21 @@ export class TeamService {
       .patch(`${URL}team/image/${teamId}`, fd)
   }
 
-  public changePermissionEnable(permission: Permission, user: User, team: Team):Observable<Permission>{
-    return this.http.patch<Permission>(`${URL}team/permission/${permission.id}/${user.id}/${team.id}`, permission)
+  public changePermissionEnable(permission: Permission, user: User, team: Team): Observable<Permission> {
+    return this.http.patch<Permission>(`${URL}team/permission/${permission.id}/${user.id}/${team.id}`, permission)      
   }
 
-  public hasPermission(projectId: number, user: User): Observable<Permission[]> {   
+  public hasPermission(projectId: number, user: User): Observable<Permission[]> {
     return this.http
       .get<Permission[]>(`${URL}team/hasPermission/${projectId}/${user.id}`)
       .pipe(map((permissions: Permission[]) => permissions.map(permission => new Permission(permission))));
   }
 
-  public deleteUserTeam(team: Team, user:User): Observable<Team>{
+  public deleteUserTeam(team: Team, user: User): Observable<Team> {
     return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
+  }
+
+  public getTeamCreator(team: Team): Observable<Team> {
+    return this.http.get<Team>(`${URL}team/${team.id}/creator`)
   }
 }

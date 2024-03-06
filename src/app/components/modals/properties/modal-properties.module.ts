@@ -13,6 +13,7 @@ import { GeneralPropertiesModule } from './general-properties/general-properties
 import { ItemsSelectionModule } from './items-selection/items-selection.module';
 import { ColorsModule } from './colors/colors.module';
 import { StatusModule } from './status/status.module';
+import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
 
 
 
@@ -31,7 +32,8 @@ import { StatusModule } from './status/status.module';
     ItemsSelectionModule,
     FontAwesomeModule,
     ColorsModule,
-    DragDropModule
+    DragDropModule,
+    ConfirmModalModule
   ]
 })
 export class PropertiesModule { }

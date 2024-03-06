@@ -9,6 +9,10 @@ import { Property, PropertyKind, PropertyListKind, PropertyStatus } from 'src/ap
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/class/project';
 import { PropertyService } from 'src/app/services/property.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 
 @Component({
   selector: 'app-general-properties',
@@ -31,6 +35,7 @@ export class GeneralPropertiesComponent {
 
   currentModal: string = 'general';
   generalModal: boolean = true;
+  deleteBoolean: boolean = false;
 
   @Output()
   openNewProperty = new EventEmitter<Property>();
@@ -60,10 +65,11 @@ export class GeneralPropertiesComponent {
   @Input()
   project!: Project;
 
+  propertyToDelete !: Property
 
-  constructor(private propertyService: PropertyService, private projectService : ProjectService) { 
-
-  }
+  canCreate: boolean = false;
+  canDelete: boolean = false;
+  canEdit: boolean = false;
 
   propertiesList: any[] = [
     {
@@ -82,8 +88,26 @@ export class GeneralPropertiesComponent {
     }
   ]
 
+  constructor(private propertyService: PropertyService,
+    private alertService: AlertService,
+    private teamService: TeamService,
+    private userService: UserService) { }
+
   ngOnInit(): void {
     this.separePropertiesKind();
+    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions;
+
+      for (const permission of permissions) {
+        if (permission.name === PermissionsType.CREATE && permission.enabled) {
+          this.canCreate = true;
+        } else if (permission.name === PermissionsType.DELETE && permission.enabled) {
+          this.canDelete = true;
+        } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
+          this.canEdit = true;
+        }
+      }
+    })
   }
 
   private separePropertiesKind() {
@@ -94,7 +118,7 @@ export class GeneralPropertiesComponent {
         // [0] - VISIBLE, [1] - INVISIBLE
         if (property.propertyStatus === PropertyStatus.VISIBLE) {
           this.propertiesList[0].properties.push(property);
-        } else if (property.propertyStatus === PropertyStatus.INVISIBLE){
+        } else if (property.propertyStatus === PropertyStatus.INVISIBLE) {
           this.propertiesList[1].properties.push(property);
         }
       });
@@ -106,30 +130,37 @@ export class GeneralPropertiesComponent {
 
   createProperty() {
     //BUROCRACY, THE BACK END DOESN'T NEED THIS TO CREATE A DEFAULT PROPERTY
-    let genericProperty = new Property({
-      id: 0,
-      name: '',
-      kind: PropertyKind.TEXT,
-      propertyStatus: PropertyStatus.VISIBLE,
-      propertyLists: [],
-  
-    });
-    this.openNewProperty.emit(genericProperty);
+    if (this.canCreate) {
+      let genericProperty = new Property({
+        id: 0,
+        name: '',
+        kind: PropertyKind.TEXT,
+        propertyStatus: PropertyStatus.VISIBLE,
+        propertyLists: [],
+
+      });
+      this.openNewProperty.emit(genericProperty);
+    } else {
+      this.alertService.errorAlert("Você não tem autorização para criar propriedade")
+    }
   }
 
-  editProperty(property: Property, type : string) {
+  editProperty(property: Property, type: string) {
     if (property.kind === PropertyKind.STATUS) {
       this.status.emit(property);
     } else if (property.kind == PropertyKind.LIST && type == 'row') {
       this.select.emit(property);
-    } 
-    else if(property.kind === PropertyKind.DATE){
+    }
+    else if (property.kind === PropertyKind.DATE) {
       //Alert or message
     } else {
-      this.edit.emit(property);
+      if (this.canEdit) {
+        this.edit.emit(property);
+      } else {
+        this.alertService.errorAlert("Você não tem autorização para editar propriedade")
+      }
     }
   }
-
 
   changeStatus(property: Property) {
     if (property.propertyStatus === PropertyStatus.VISIBLE) {
@@ -147,15 +178,22 @@ export class GeneralPropertiesComponent {
       });
   }
 
-  delete(property: Property) {
-    this.propertyService.deleteProperty(this.project.id!, property.id).subscribe(
-      (project) => {
-          this.project = project;
-          this.separePropertiesKind();
-          this.changeProject.emit(this.project);
-      }, (error) => {
-        console.log(error);
-      });
+  delete(event: boolean) {
+    if (event) {
+      if (this.canDelete) {
+        this.propertyService.deleteProperty(this.project.id!, this.propertyToDelete.id).subscribe(
+          (project) => {
+            this.project = project;
+            this.separePropertiesKind();
+            this.changeProject.emit(this.project);
+          }, (error) => {
+            console.log(error);
+          });
+      } else {
+        this.alertService.errorAlert("Você não tem autorização para remover essa propriedade")
+      }
+    }
+    this.deleteBoolean = false
   }
 
   getIconProperty(kindProperty: PropertyKind): any {
@@ -167,10 +205,15 @@ export class GeneralPropertiesComponent {
       return faSpinner;
     } else if (kindProperty === PropertyKind.LIST) {
       return faList;
-    } else if(kindProperty === PropertyKind.NUMBER){
+    } else if (kindProperty === PropertyKind.NUMBER) {
       return fa1;
     }
 
+  }
+
+  openModalDelete(property: Property) {
+    this.deleteBoolean = !this.deleteBoolean
+    this.propertyToDelete = property
   }
 }
 

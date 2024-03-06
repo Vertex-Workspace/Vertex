@@ -4,6 +4,7 @@ import { ItemsSelectionComponent } from './items-selection.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { ConfirmModalModule } from '../../confirm-modal/confirm-modal.module';
 
 @NgModule({
   declarations: [ItemsSelectionComponent],
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     DragDropModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    ConfirmModalModule
   ]
 })
 export class ItemsSelectionModule { 

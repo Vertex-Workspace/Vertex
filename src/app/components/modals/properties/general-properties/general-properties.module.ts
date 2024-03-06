@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GeneralPropertiesComponent } from './general-properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ConfirmModalModule } from '../../confirm-modal/confirm-modal.module';
 
 @NgModule({
   declarations: [GeneralPropertiesComponent],
@@ -10,7 +11,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    DragDropModule
+    DragDropModule,
+    ConfirmModalModule
   ]
 })
 export class GeneralPropertiesModule { 

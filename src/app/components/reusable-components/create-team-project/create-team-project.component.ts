@@ -139,4 +139,5 @@ export class CreateTeamProjectComponent implements OnInit {
     //copiar para a area de transferência
     this.closeScreen();
   }
+
 }

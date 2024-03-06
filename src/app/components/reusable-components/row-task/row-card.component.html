@@ -4,14 +4,15 @@
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
         </span>
-        <p>
-            {{task.name}}
-        </p>
+        <div class="w-[80%]" (click)="openModalTask()">
+            <p>
+                {{task.name}}
+            </p>
+        </div>
         <div class="icons">
             <ng-container *ngFor="let item of icons">
-                <fa-icon [icon]="item.icon" class="icon"
-                [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'"
-                (click)="openModalDelete()"></fa-icon>
+                <fa-icon [icon]="item.icon" class="icon" [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'"
+                    (click)="openModalDelete()"></fa-icon>
             </ng-container>
         </div>
     </div>
@@ -32,4 +33,5 @@
     </ng-container>
 </div>
 
-<app-confirm-modal *ngIf="modalDelete" [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'" (close)="delete($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="modalDelete" [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'"
+    (close)="delete($event)"></app-confirm-modal>

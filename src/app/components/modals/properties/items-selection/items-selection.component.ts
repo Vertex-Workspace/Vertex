@@ -6,9 +6,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/class/property';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-items-selection',
@@ -29,6 +32,10 @@ export class ItemsSelectionComponent {
   @Output()
   pencil = new EventEmitter<PropertyList>();
 
+  propertyListToDelete !: PropertyList
+
+  deleteBoolean: boolean = false;
+
   faEllipsisVertical = faEllipsisVertical;
   faPaintBrush = faPaintBrush;
   faEye = faEye;
@@ -37,21 +44,40 @@ export class ItemsSelectionComponent {
   faPlus = faPlus;
 
   faInfoCircle = faInfoCircle;
+  canDelete: boolean = false;
+  canEdit: boolean = false;
+  canCreate: boolean = false;
 
   sections: any[] = [
     { name: "Visíveis", icon: faEye, propertyLists: [], kind: PropertyListKind.VISIBLE },
     { name: "Não Visíveis", icon: faEyeSlash, propertyLists: [], kind: PropertyListKind.INVISIBLE }
   ]
 
-  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) { }
+  constructor(private propertyService: PropertyService, 
+    private alertService: AlertService, 
+    private projectService: ProjectService,
+    private teamService: TeamService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
-    console.log(this.property);
-    
+    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.userService.getLogged().permissions = permissions;
+
+      for (const permission of permissions) {
+        if (permission.name === PermissionsType.DELETE && permission.enabled) {
+          this.canDelete = true;
+        } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
+          this.canEdit = true;
+        } else if (permission.name === PermissionsType.CREATE && permission.enabled) {
+          this.canCreate = true;
+        }
+      }
+    })
+
     this.orderPropertyListsOnSection();
   }
 
-  private orderPropertyListsOnSection(){
+  private orderPropertyListsOnSection() {
     this.sections[0].propertyLists = [];
     this.sections[1].propertyLists = [];
     this.property.propertyLists!.forEach((propertyList: { propertyListKind: any; }) => {
@@ -76,18 +102,21 @@ export class ItemsSelectionComponent {
     this.saveProperty();
   }
 
-  pencilClick(propertyList:PropertyList) {
+  pencilClick(propertyList: PropertyList) {
     this.pencil.emit(propertyList);
   }
 
-  delete(propertyList: PropertyList) {
-    this.propertyService.deletePropertyList(this.property.id!, propertyList.id!).subscribe(
-      (project) => {
-        this.project = project;
-        this.property = project.properties.find((property) => property.id == this.property.id)!;
-        this.changeProject.emit(project);
-        this.orderPropertyListsOnSection();
-      });
+  delete(event: any) {
+    if (event) {
+      this.propertyService.deletePropertyList(this.property.id!, this.propertyListToDelete.id!).subscribe(
+        (project) => {
+          this.project = project;
+          this.property = project.properties.find((property) => property.id == this.property.id)!;
+          this.changeProject.emit(project);
+          this.orderPropertyListsOnSection();
+        });
+    }
+    this.deleteBoolean = false;
   }
 
   // In this method, it verifies if the index of the list is 1 or 0 to change the position in the correct
@@ -101,12 +130,16 @@ export class ItemsSelectionComponent {
   // }
 
   createPropertyList(): void {
-    let newPropertyList: PropertyList = { id: 0, value: "Novo Item", color: "#d3e5ef", propertyListKind: PropertyListKind.VISIBLE, isFixed: false};
+    let newPropertyList: PropertyList = { id: 0, value: "Novo Item", color: "#d3e5ef", propertyListKind: PropertyListKind.VISIBLE, isFixed: false };
+    if(this.canCreate){
     this.property.propertyLists.push(newPropertyList);
     this.saveProperty();
+    }else {
+      this.alertService.errorAlert('Você não tem permissão para criar');
+    }
   }
 
-  private saveProperty(){
+  private saveProperty() {
     this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
       (project) => {
         this.project = project;
@@ -121,22 +154,31 @@ export class ItemsSelectionComponent {
   nameEdit!: string;
   propertyListNameEditId!: number;
 
-  saveName(propertyList : PropertyList){
-    if(this.nameEdit.length > 2 && this.nameEdit.length <= 20){
+  saveName(propertyList: PropertyList) {
+    if (this.nameEdit.length > 2 && this.nameEdit.length <= 20) {
       propertyList!.value = this.nameEdit;
       this.saveProperty();
       this.propertyListNameEditId = -1;
       this.nameEdit = '';
-    } else{
+    } else {
       this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
       return;
     }
   }
 
-  editName(propertyList : PropertyList){
+  editName(propertyList: PropertyList) {
     console.log(propertyList);
-    
+
+    if(this.canEdit){
     this.propertyListNameEditId = propertyList.id!;
     this.nameEdit = propertyList.value;
+    }else {
+      this.alertService.errorAlert('Você não tem permissão para editar');
+    }
+  }
+
+  openModalDelete(property: PropertyList): void {
+    this.deleteBoolean = !this.deleteBoolean
+    this.propertyListToDelete = property
   }
 }

@@ -78,7 +78,7 @@ export class  RowCardComponent {
 
   value!: Value;
 
-  @Input() taskList ?: Task[]
+  @Input() taskList?: Task[]
 
   canDelete: boolean = false;
   canEdit: boolean = false;
@@ -107,15 +107,14 @@ export class  RowCardComponent {
   @Output() deleteTaskOftaskList = new EventEmitter()
 
   delete(event: any): void {
-    console.log(event);
-    
+    console.log(this.task.id);
     this.modalDelete = false;
-    if(event === true){
-    if (this.canDelete) {
+    if (event === true) {
+      if (this.canDelete) {
         if (event) {
           this.taskService.delete(this.task.id).subscribe(
             (task: Task) => {
-              this.taskList?.splice(this.taskList.indexOf(task),1)
+              
             },
             (error) => {
               //Alert
@@ -123,27 +122,27 @@ export class  RowCardComponent {
             }
           );
         }
+      } else {
+        this.alertService.errorAlert("Você não tem permissão para remover a tarefa!")
+      }
     } else {
-      this.alertService.errorAlert("Você não tem permissão para remover a tarefa!")
+      this.alertService.notificationAlert("Tarefa não excluída")
     }
-  }else {
-    this.alertService.notificationAlert("Tarefa não excluída")
-  }
   }
 
-  alertCantEdit(): void{
-    if(!this.canEdit){
+  alertCantEdit(): void {
+    if (!this.canEdit) {
       this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
     }
   }
 
-  openModalDelete(): void{
-    this.modalDelete = !this.modalDelete; 
+  openModalDelete(): void {
+    this.modalDelete = !this.modalDelete;
   }
 
-  propertyColor ?: string
+  propertyColor?: string
 
-  returnColors(): string | undefined{
+  returnColors(): string | undefined {
     return this.propertyColor
   }
 
