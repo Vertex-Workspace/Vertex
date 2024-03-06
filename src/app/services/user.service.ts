@@ -51,6 +51,11 @@ export class UserService {
       )
   }
 
+  public findByfirstName(firstName: string): Observable<User> {
+    return this.http
+      .get<User>(`${URL}user/firstName/${firstName}`);
+  }
+
   public authenticate(form: User): Observable<User> {
 
     const user: User = {

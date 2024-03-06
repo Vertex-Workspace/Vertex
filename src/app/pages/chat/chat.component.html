@@ -57,7 +57,7 @@
             </div>
 
             <div class="main-section-left">
-                <ng-container *ngFor="let chatFor of conversations">
+                <ng-container *ngFor="let chatFor of conversations" >
                     <div (click)="openConversation(chatFor)" [ngClass]="chatFor.conversationOpen ? 'card-chatOpen' : 'card-chat'">
                         <div class="user-card-message">
                             <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
@@ -82,12 +82,12 @@
         <div class="section-right-chat" >
             <div class="center-div">
                 <div class="min-h-[60px]" *ngIf="chat">
-                    <div *ngFor="let message of chat.messages" [ngClass]="message.user.id != logged.id ? 'left' : 'right'">
-                        <div>
-                            <p class="pChat">{{message.user.firstName}}</p>
+                    <div *ngFor="let message of chat.messages" [ngClass]="message.user! != logged.firstName ? 'left' : 'right'">
+                        <div class="flex justify-center items-center">
+                            <p class="pChat">{{message.user!}}</p>
                         </div>
-                        <div class="regular-text"  [ngClass]="message.user.id != logged.id ? 'answer' : 'messageUser'">
-                            <div class="pChat" >
+                        <div class="regular-text"  [ngClass]="message.user! != logged.firstName ? 'answer' : 'messageUser'">
+                            <div class="pChat whitespace-pre-wrap" >
                                 {{message.contentMessage}}
                             </div>
                         </div>
@@ -95,9 +95,9 @@
                 </div>
             </div>
 
-            <form (ngSubmit)="sendMessage(sendForm)" #sendForm="ngForm" class="high-input-div">
-                <input type="text" name="message" id="input-message" class="form-control pl-[15px] w-[90%] h-[100%]" [(ngModel)]="messageUser" placeholder="Digite aqui...">
-                <div class="flex gap-4">
+            <form (ngSubmit)="sendMessage(sendForm,$event)" (keydown.enter)="sendMessage(sendForm,$event)" #sendForm="ngForm" class="high-input-div">
+                <div class="flex gap-4  w-[90%] h-[50%]">
+                    <textarea type="text" name="message" id="input-message" class="form-control resize-none pt-[15px] pl-[15px] w-[90%] h-[100%]" [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
                     <fa-icon class="section-icons" [icon]="faPaperclip"></fa-icon>
                     <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
                 </div>

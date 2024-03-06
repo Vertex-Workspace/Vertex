@@ -119,7 +119,6 @@ export class KanbanComponent {
           }
         }
       };
-
       //Patch the value of the status task
       this.taskService.patchValue(valueUpdate).subscribe();
     }
@@ -222,6 +221,5 @@ export class KanbanComponent {
         this.alertService.errorAlert("Erro ao criar tarefa!");
       }
     );
-    
     } 
 }

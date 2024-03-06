@@ -5,7 +5,7 @@ section {
     background-color: $secondColor;
 }
 
-input{
+input {
     padding: 10px;
 }
 
@@ -33,25 +33,25 @@ div.chat-content {
 }
 
 header {
-    @apply flex w-[100%] h-[13%] justify-between items-end ;
+    @apply flex w-[100%] h-[13%] justify-between items-end;
     background-color: $secondColor;
 }
 
-.conversations-div{
+.conversations-div {
     @apply w-[10%] h-[60%] flex flex-col justify-center items-center;
 }
 
-.conversations{
+.conversations {
     @apply pl-[12.5%];
     color: $primaryColor
 }
 
-.header-right{
+.header-right {
     @apply w-[69.8%] flex justify-between items-center;
     color: $primaryColor;
 }
 
-.header-right-informations{
+.header-right-informations {
     @apply flex gap-5 items-center pb-5;
 }
 
@@ -60,7 +60,7 @@ header {
 
 }
 
-.divNamesPerson{
+.divNamesPerson {
     @apply flex gap-5 items-center;
 }
 
@@ -69,7 +69,7 @@ header {
     color: $primaryColor;
 }
 
-main{
+main {
     @apply w-full h-[87%] flex justify-between;
 }
 
@@ -78,7 +78,7 @@ main{
     background-color: $secondColor;
 }
 
-.header-section-left{
+.header-section-left {
     @apply w-[90%] h-[6%] flex items-center justify-center
 }
 
@@ -88,8 +88,7 @@ main{
 }
 
 #search {
-    @apply flex w-[90%] h-[100%] items-center justify-center
-    ;
+    @apply flex w-[90%] h-[100%] items-center justify-center;
     background-color: $secondColor;
 }
 
@@ -103,58 +102,57 @@ main{
 }
 
 .footer-section-left {
-    @apply flex w-full h-[10%] items-center justify-evenly ;
+    @apply flex w-full h-[10%] items-center justify-evenly;
 }
 
 .section-icons {
     @apply flex justify-between items-center;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
 }
 
-.section-icons-7xl{
+.section-icons-7xl {
     @apply flex justify-between items-center;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
     font-size: 80px;
 }
 
 .chat-icons {
     @apply flex justify-between items-center;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
     font-size: 70px
 }
 
-.user-card-message{
+.user-card-message {
     @apply flex gap-6 items-center w-[70%];
 }
 
-.div-time-message{
+.div-time-message {
     @apply flex items-center justify-center w-[20%];
 }
 
-.div-time{
+.div-time {
     @apply flex flex-col gap-2 items-center;
 }
 
-.card-chat{
-    @apply flex justify-between items-center w-[95%] pl-4 h-[100px] rounded-sm
-    cursor-pointer min-h-[100px];
+.card-chat {
+    @apply flex justify-between items-center w-[95%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     border: 1px solid #D3D3D3;
     animation: leftPulse 0.3s;
 }
 
-.card-chatOpen{
-    @apply flex justify-between items-center w-[98.5%] pl-4 h-[100px] rounded-sm
-    cursor-pointer min-h-[100px];
+.card-chatOpen {
+    @apply flex justify-between items-center w-[98.5%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     background-color: #fff;
     border: 1px solid #D3D3D3;
     animation: rightPulse 0.3s;
 }
 
 @keyframes leftPulse {
-    
+
     from {
         width: 98.5%;
     }
+
     to {
         width: 95%;
     }
@@ -164,12 +162,13 @@ main{
     0% {
         width: 95%;
     }
+
     100% {
         width: 98.5%;
     }
 }
 
-.text-group-individual{
+.text-group-individual {
     @apply flex justify-between items-center gap-2 cursor-pointer;
 }
 
@@ -179,54 +178,60 @@ main{
     background-color: $secondColor;
 }
 
-.center-div{
-   @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
-   
+.center-div {
+    @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
+
 }
 
-.left{
-   @apply w-[100%] min-h-[60px] flex flex-col items-start  gap-2;
+.left {
+    @apply w-[100%] min-h-[60px] flex flex-col items-start gap-2;
+    word-break: break-all;
+    flex-wrap: wrap;
 }
 
-.right{
+.right {
     @apply w-[100%] min-h-[60px] flex flex-col items-end gap-2;
 }
 
-.answer{
-    @apply flex rounded-sm items-center justify-center p-3 min-h-[60px] gap-1 break-words;
+.answer {
+    @apply flex rounded-sm items-center justify-center p-3 min-h-[60px] gap-1;
     border: $borderBottom;
-    max-width: 50%;    
+    max-width: 50%;
 }
 
-.messageUser{
-    @apply flex rounded-sm items-center justify-center p-3  min-h-[60px] gap-1 break-words;
+.messageUser {
+    @apply flex rounded-sm items-center justify-center p-3 min-h-[60px] gap-1;
     background-color: $primaryColor;
     color: $secondColor;
     max-width: 50%;
+    word-break: break-all;
+    flex-wrap: wrap;
 }
 
 .pChat {
     @apply h-[30%] flex items-center min-h-[30%];
+    flex-wrap: wrap;
+    word-wrap: break-word;
 }
 
 
-.high-input-div{
+.high-input-div {
     @apply w-[65%] h-[20%] flex items-center gap-3;
-    
+
 }
 
-.div-input-chat{
+.div-input-chat {
     @apply w-[100%] h-[45%] flex;
     background-color: $card;
     border: $borderBottom;
 }
 
-.square-chat{
+.square-chat {
     @apply w-[9%] h-[45%] flex items-center justify-center;
     background-color: $primaryColor;
     border: $borderBottom;
 
-    .section-icons{
+    .section-icons {
         @apply flex justify-between items-center;
         color: $card !important;
     }

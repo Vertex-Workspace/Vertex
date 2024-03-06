@@ -1,30 +1,51 @@
 import { Injectable } from '@angular/core';
-import { Chat } from '../models/class/chat';
+import { Observable } from 'rxjs';
 import { Message } from '../models/class/message';
+import { Chat } from '../models/class/chat';
+import { User } from '../models/class/user';
+
+const backEnd = 'ws://localhost:7777/chat'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
 
-  private webSocket!: WebSocket;
-  chatMessages: Chat[] = [];
+  private webSocket: WebSocket;
 
-  constructor() { }
+  chatMessages: Message[] = [];
+
+  constructor() {
+    this.webSocket = new WebSocket(backEnd);
+    this.openWebSocket();
+  }
+
+//   private clientSocket: Socket;
+
+//   constructor() { 
+//     this.clientSocket = io(backEnd);
+//   }
+
+//   listenToServer(connection: string): Observable<any> {
+//     return new Observable(observer => {
+//       this.clientSocket.on(connection, (data: any) => {
+//         console.log(data)
+//         observer.next(data);
+//       });
+//     });
+//   }
+
+//   sendToServer(connection: string, object:any) {
+//     console.log("Sending message", object, connection);
+//       this.clientSocket.send(connection, object);
+//   }
+// }
 
   public openWebSocket() {
     try {
-      this.webSocket = new WebSocket('ws://localhost:7777/chat');
 
       this.webSocket.onopen = (event) => {
         console.log('WebSocket connection established.');
-      };
-
-      this.webSocket.onmessage = (event) => {
-        console.log('WebSocket message received:', event.data);
-        
-        const chatMessageDto = JSON.parse(event.data);
-        this.chatMessages.push(chatMessageDto);
       };
 
       this.webSocket.onclose = (event) => {
@@ -39,16 +60,40 @@ export class WebSocketService {
     }
   }
 
+  public listenToServer(): Observable<any> {
+    return new Observable(observer => {
+      this.webSocket.onmessage = (event) => {
+        // console.log(event, "Event");
+        // console.log(chat, "ChatONMESSAGE");
+
+        console.log(`{${event.data}}`, "Data");
+        
+
+        
+        const obj = JSON.parse(`${event.data}`)
+        
+        observer.next(obj);
+        
+      };
+    });
+  }
+
   public sendMessage(chatMessageDto: Message) {
-    try {
+    
       if (this.webSocket.readyState === WebSocket.OPEN) {
+        console.log("Sending message");
+        
+        
+        // console.log(`"user": "${chatMessageDto.user}", "contentMessage": "${chatMessageDto.contentMessage}", "time": "${chatMessageDto.time}", "viewed": ${chatMessageDto.viewed}`);
+        
         this.webSocket.send(JSON.stringify(chatMessageDto));
+        console.log("Message sent");
+        
+
       } else {
         console.error('WebSocket is not open. Unable to send message.');
       }
-    } catch (error) {
-      console.error('Error while sending message over WebSocket:', error);
-    }
+    
   }
 
   public closeWebSocket() {
