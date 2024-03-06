@@ -11,6 +11,6 @@ export class LoadingComponent {
   constructor(public loadingService :LoadingService) {}
 
   @Input()
-  userLogged!:boolean;
+  userLogged!: boolean;
 
 }

@@ -22,11 +22,11 @@
 }
 
 .menu {
-    @apply flex justify-between mt-16 mb-4;
-
+    @apply flex justify-between pt-16 pb-4;
+    
     div:first-child {
-        border-color: $primaryColor;
-        @apply w-[550px] h-[53px] flex gap-1 border-b-[1px];
+        @apply w-[550px] h-[53px] flex gap-3 ;
+        border-bottom: 1px solid $emphasis;
 
         label {
             @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
@@ -89,25 +89,32 @@
             @apply transition-colors;
         }
 
+        .properties-button{
+            background-color: $emphasis;
+            color: $primaryColor;
+            border-color: $emphasis;
+            @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
+            rounded-sm font-light border-2 transition-colors;
+        }
+
     }
 }
 
 
 .filter-settings {
-    @apply flex gap-3 items-center;
+    @apply flex gap-6 items-center;
 
-    div:first-child {
-        @apply w-[230px] flex justify-between items-center;
+    div{
+        @apply w-[300px] flex justify-between items-center;
   
   
         select {
-          @apply h-[35px] w-[100px] outline-none text-center;
+          @apply h-[35px] w-[200px] outline-none text-center;
         }
       }
 
     p {
         color: $primaryColor;
-        @apply  ml-4;
     }
 
     select {

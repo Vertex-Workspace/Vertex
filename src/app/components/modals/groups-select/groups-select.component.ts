@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Group } from 'src/app/models/groups';
+import { Group } from 'src/app/models/class/groups';
 import { GroupService } from 'src/app/services/group.service';
 
 @Component({

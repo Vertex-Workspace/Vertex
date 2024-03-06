@@ -5,7 +5,7 @@ section{
 }
 
 .container-custom{
-    @apply grid w-[90%] h-full grid-cols-2;
+    @apply grid w-[90%] h-full grid-cols-2 gap-20;
 }
 
 //TEAMS
@@ -31,7 +31,7 @@ section{
 }
 
 .functionally-items-task {
-    @apply flex flex-col w-full h-full pt-4 justify-between;
+    @apply flex flex-row w-full h-full pt-4 justify-between;
 
     .filter-items {
         @apply flex;
@@ -41,9 +41,6 @@ section{
 
 .functionally-items, .functionally-items-task {
 
-    .container {
-        @apply flex w-full justify-between;
-    }
 
     .filter-items {
         @apply flex gap-2;
@@ -76,7 +73,7 @@ section{
         text-lg p-3 rounded font-light border-2 transition-colors;
     }
     .search {
-        @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
+        @apply w-1/2 h-full flex items-center justify-between bg-white p-3
         rounded shadow-md border-none;
 
         i {
@@ -107,16 +104,16 @@ section{
 }
 
     .container-grid{
-        @apply flex flex-col h-[90%] w-full pt-10 ;
+        @apply flex flex-col h-[90%] w-full pt-4 ;
     }
     .default-size{
-        @apply flex w-full h-full;
+        @apply flex w-full flex-col;
     }
 
 
 // TASK - FILTER ORDER
 .filter-settings {
-    @apply flex gap-3 h-[5%] pt-8 justify-start;
+    @apply flex gap-3 h-[5%] justify-start;
 
     p {
         color: $primaryColor;
@@ -130,3 +127,7 @@ section{
 }
 
 
+.icon-plus{
+    color: $primaryColor;
+    font-size: 1.75rem;
+}

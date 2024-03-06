@@ -3,8 +3,8 @@
         <section class="menu">
             <div>
                 <ng-container *ngFor="let item of menuItems">
-                    <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="regular-text">
-                        <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
+                    <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="medium-text">
+                        <i class="{{ item.iconClass }}" style="font-size: 1.4rem"></i>
                         <button (click)="changePreviewMode(item.id)">
                             {{ item.label }}
                         </button>
@@ -27,31 +27,46 @@
                         <i [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
                             class="{{ item.iconClass }}"></i>
                     </button>
-
                 </ng-container>
 
-                <button class="create" (click)="createTask()" [disabled]="!canCreate" 
+
+                <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
+                    <i class="pi pi-tags"></i>
+                    Propriedades
+                </button>
+                <button *ngIf="!isMuralPage; else buttonMural"
+                class="create" (click)="createTask()" [disabled]="!canCreate"  
                 [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
+                <ng-template #buttonMural>
+                    <button class="create" (click)="createNote()" >
+                        <i class="pi pi-plus-circle"></i>
+                       Nova nota
+                    </button>
+                </ng-template>
             </div>
         </section>
 
         <section class="filter-settings regular-text">
             <ng-container *ngIf="filterOpen || orderOpen">
-                <p>Ordenar por </p>
-                <select *ngIf="filterOpen">
-                    <option *ngFor="let item of filterSettings">
-                        {{ item.label }}
-                    </option>
-                </select>
-
-                <select *ngIf="orderOpen">
-                    <option *ngFor="let item of orderSettings">
-                        {{ item.label }}
-                    </option>
-                </select>
+                <div *ngIf="orderOpen">
+                    <p>Ordenar por </p>
+                    <select>
+                        <option *ngFor="let item of filterSettings">
+                            {{ item.label }}
+                        </option>
+                    </select>
+                </div>
+                <div *ngIf="filterOpen">
+                    <p>Filtrar por </p>
+                    <select>
+                        <option *ngFor="let item of orderSettings">
+                            {{ item.label }}
+                        </option>
+                    </select>
+                </div>
             </ng-container>
         </section>
 
@@ -68,9 +83,9 @@
     </div>
 </section>
 
-<app-modal-properties *ngIf="propertiesOpen"  [height]="'600px'" [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
+<app-modal-properties (changeProjectSettings)="changeProject($event)" *ngIf="propertiesOpen" [height]="'600px'"
+    [width]="'450px'" (close)="openPropertiesModal()" [project]="project">
 </app-modal-properties>
 
-<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen" 
-(close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>
-
+<app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
+    (close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>

@@ -2,26 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { URL } from './path/api_url';
-import { Team } from '../models/team';
-import { HasPermission, Permission, User } from '../models/user';
-import { Project } from '../models/project';
+import { Team } from '../models/class/team';
+import { HasPermission, Permission, User } from '../models/class/user';
+import { Project } from '../models/class/project';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
 
-  private teamsSubject: BehaviorSubject<Team[]> = 
-    new BehaviorSubject<Team[]>([]);
-
   constructor(
     private http: HttpClient
   ) {}
-
-  public getAllTeams(): Observable<Team[]> {
-    return this.teamsSubject
-      .asObservable();
-  } 
 
   public getOneById(id: number): Observable<Team> {
     return this.http
@@ -31,26 +23,12 @@ export class TeamService {
 
   public create(team: Team): Observable<Team> {
     return this.http
-      .post<Team>(`${URL}team`, team)
-      .pipe(tap((createdTeam: Team) => {
-        const currentTeams = this.teamsSubject.getValue();
-        this.teamsSubject.next([
-          ...currentTeams,
-          createdTeam
-        ])
-      }));
+      .post<Team>(`${URL}team`, team);
   }
 
   public delete(id: number): Observable<Team> {
     return this.http
-      .delete<Team>(`${URL}team/${id}`)
-        .pipe(tap(() => {
-          const currentTeams: Team[] = this.teamsSubject.getValue();
-          const updatedTeams: Team[] = currentTeams.filter((team: Team) => {
-            team.id !== id;
-          })
-          this.teamsSubject.next(updatedTeams);
-        }));
+      .delete<Team>(`${URL}team/${id}`);
   }
 
   public getTeamsByUser(userId: number): Observable<Team[]> {
@@ -71,6 +49,9 @@ export class TeamService {
 
   // public hasPermission():
   public updateImage(teamId: number, fd: FormData) {
+
+    console.log(teamId);
+    
     return this.http
       .patch(`${URL}team/image/${teamId}`, fd)
   }

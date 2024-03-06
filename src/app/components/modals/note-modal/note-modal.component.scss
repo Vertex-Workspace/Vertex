@@ -1,0 +1,99 @@
+@import '../../../../variables';
+
+@keyframes slideInRight {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100%;
+        opacity: 100;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    z-index: 999;
+
+    .modal {
+        @apply w-[800px] h-[600px] flex flex-col p-8 rounded-sm;
+        background-color: $whiteDefault;
+
+        .left {
+            @apply w-[75%] h-full;
+
+            .location {
+            @apply w-full h-[10%];
+        }
+        
+        .main-content {
+            @apply w-full h-[80%] max-h-[80%] flex flex-col gap-6 overflow-y-auto;
+            color: $primaryColor;
+           
+            .content {
+                @apply flex flex-col px-2 h-full;
+
+                textarea {
+                    @apply text-xl min-h-[50%] h-auto overflow-y-hidden text-justify cursor-text;
+                    resize: none;
+                }
+
+                a {
+                    @apply w-[20%] py-1 text-center rounded-sm;
+                    color: grey;
+
+                    &:hover {
+                        background-color: lightgrey;
+                    }
+                }
+
+            }
+            
+            input {
+                @apply text-4xl p-2;
+                border-bottom: $primaryColor 1px solid;
+            }
+
+        }
+        
+        .config {
+            @apply h-[10%] flex items-center;
+
+            .color-list {
+                @apply flex gap-2 items-center; 
+                animation: slideInRight 0.3s ease-out;
+            }
+
+            .color {
+                @apply cursor-pointer w-[50px] h-[50px] rounded-full shadow-sm flex items-center justify-center;
+                box-shadow: 2px 2px 3px 3px lightgrey;
+
+                .icon {
+                    color: $primaryColor;
+                }
+            }
+
+        }
+    }
+
+    .right {
+        @apply w-[25%];
+    }
+        
+
+    }
+
+    i {
+        cursor: pointer;
+    }
+
+}

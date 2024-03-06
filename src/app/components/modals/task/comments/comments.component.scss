@@ -1,25 +1,53 @@
+@import "../../../../../variables";
+
 .base {
-    @apply w-full h-full flex justify-center ml-2;
+    @apply w-full h-full flex justify-center flex-col;
 }
 
 li {
-    @apply flex gap-2 flex-col;
-    p {
-        @apply text-zinc-700 flex items-center;
-    }
-    div:first-child {
-        @apply flex items-center gap-2;
+    @apply flex gap-1 flex-col w-full;
+    border-bottom: 1px solid #e5e5e5;
+    .comment-informations {
+        @apply flex items-center justify-between px-2 min-h-[40px];
 
         p {
-            @apply font-medium;
+            color: $text;
+        }
+
+        div:first-child, div:last-child{
+            @apply flex flex-row items-center gap-2;
+        }
+    }
+    .comment-text {
+        @apply flex flex-col gap-1 p-2 min-h-[60px];
+
+        p{
+            word-break: break-all;
         }
     }
 }
 
 ul {
-    @apply w-[65%] h-[100%] flex flex-col gap-8 items-start overflow-auto ml-10;
+    @apply w-full h-[300px] flex flex-col gap-3 items-start overflow-y-auto overflow-x-hidden;
 }
 
-.date {
-    @apply text-sm;
+
+.send-message{
+    @apply flex flex-col items-center gap-2 w-full ;
+    textarea{
+        @apply flex w-full h-[90px] px-3 py-1 items-start;
+        border: 0.50px solid $emphasis;
+        resize: none !important;    
+    }
+
+    button{
+        @apply self-end;
+    }
+
+}
+
+
+fa-icon{
+    color: $primaryColor;
+    font-size: 14px;
 }

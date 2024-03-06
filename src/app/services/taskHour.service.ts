@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
-import { Group } from '../models/groups';
-import { taskHour } from '../models/taskHour';
+import { Group } from '../models/class/groups';
+import { taskHour } from '../models/class/taskHour';
 
 @Injectable({
     providedIn: 'root'

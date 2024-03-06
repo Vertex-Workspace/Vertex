@@ -2,9 +2,9 @@ import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Project } from 'src/app/models/project';
-import { Team } from 'src/app/models/team';
-import { User } from 'src/app/models/user';
+import { Project } from 'src/app/models/class/project';
+import { Team } from 'src/app/models/class/team';
+import { User } from 'src/app/models/class/user';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
         });
       }
     }); 
+
   }
 
   ngOnInit(): void {
@@ -95,7 +96,6 @@ export class HeaderComponent implements OnInit {
     this.projectService
       .getOneById(id)
       .subscribe((project: Project) => {
-        console.log(this.location);
         this.location += " " + project.name;
       })
   }

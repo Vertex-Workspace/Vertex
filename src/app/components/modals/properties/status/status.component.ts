@@ -5,8 +5,8 @@ import {
   faPlus,
   faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
@@ -82,7 +82,7 @@ export class StatusComponent {
     this.statusList[0].properties = [];
     this.statusList[1].properties = [];
     this.statusList[2].properties = [];
-    this.property.propertyLists.forEach((propertyList) => {
+    this.property.propertyLists.forEach((propertyList: { propertyListKind: any; }) => {
       if (propertyList.propertyListKind == PropertyListKind.TODO) {
         this.statusList[0].properties.push(propertyList);
       } else if (propertyList.propertyListKind == PropertyListKind.DOING) {
@@ -108,7 +108,7 @@ export class StatusComponent {
   }
 
   drop(event: CdkDragDrop<any[]>, status: any) {
-    this.property.propertyLists.forEach((propertyList) => {
+    this.property.propertyLists.forEach((propertyList: { id: any; propertyListKind: any; }) => {
       if (propertyList.id == event.item.data.id) {
         propertyList.propertyListKind = status.kind;
       }

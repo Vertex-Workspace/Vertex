@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faLock, faEye, faKey } from '@fortawesome/free-solid-svg-icons'
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 

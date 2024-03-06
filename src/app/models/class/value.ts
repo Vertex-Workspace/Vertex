@@ -5,7 +5,7 @@ import { Task } from "./task";
 export class Value {
 
     id!: number;
-    value!: string | PropertyList | Date;
+    value!: string | PropertyList | Date | number;
     property!: Property;
     task!: Task;
 
@@ -30,7 +30,7 @@ export class ValueUpdate {
         };
         value: {
             id?: number;
-            value: string | number | Date;
+            value: string | number | Date | PropertyList;
         }
     };
 }

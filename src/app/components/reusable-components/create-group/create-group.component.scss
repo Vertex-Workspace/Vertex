@@ -17,7 +17,7 @@ form{
     @apply flex flex-col w-full h-[80%] justify-start items-start;
     
     input{
-        @apply flex h-52 rounded-md pl-4 w-full;
+        @apply flex h-24 rounded-md pl-4 w-full;
     }
 
     p{
@@ -26,8 +26,8 @@ form{
 }
 
 .input-description{
-    @apply flex flex-col w-full h-[50%] bg-white items-start;
-    overflow-y: scroll;
+    @apply flex flex-col w-full h-[50%] items-center;
+    overflow-y: auto;
 
     p{
         @apply pl-4 pt-3;
@@ -64,8 +64,9 @@ p{
 }
 
 .modal {
-    @apply absolute rounded-md flex flex-col w-[30%] h-[60%]
+    @apply absolute rounded-md flex flex-col w-[30%] h-[80%]
     items-start justify-start text-center p-8 border-t-8;
     border-color: $primaryColor;
     background-color: $secondColor;
 }
+

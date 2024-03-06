@@ -1,19 +1,36 @@
 <section *ngIf="!isNull">
-    <div class="table">
+    <div class="table" [ngStyle]="{'overflow-x' : project ? 'auto' : 'hidden'}">
         <div class="thead">
             <label 
-                *ngFor="let col of cols"
-                [style.min-width]="col.width"
-                [class.nameHeader]="col.field == 'name'"
+                class="min-w-[300px]"
             >              
                 <h6>
-                {{col.headerText}}
+                Nome
                 </h6>
             </label>
+        <ng-container *ngIf="project">
+                <label 
+                    *ngFor="let col of project.properties"
+                    class="min-w-[300px]"
+                >              
+                <h6>
+                    {{col.name}}
+                </h6>
+            </label>
+        </ng-container>
+        <ng-container *ngIf="!project">
+                <label 
+                    *ngFor="let col of properties"
+                    class="min-w-[245px]"
+                >              
+                <h6>
+                    {{col.name}}
+                </h6>
+            </label>
+        </ng-container>
         </div>
 
         <div class="tbody overflow-y-auto overflow-x-hidden"
-
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >
@@ -25,17 +42,23 @@
                     cdkDragLockAxis="y"
                     cdkDragBoundary=".table"
                 >
-                <!-- (openTaskDetails)="openTaskModal(task)" -->
                     <app-row-card
-                        [taskList]="taskList"
+                        *ngIf="!project"
+                        (openTaskDetails)="openTaskModal(task)"
                         [task]="task"
-                        [cols]="cols"
-                        (modalTask)="openTask($event)"
+                        [properties]="properties"
+                    ></app-row-card>
+                    <app-row-card
+                        *ngIf="project"
+                        (openTaskDetails)="openTaskModal(task)"
+                        [task]="task"
+                        [properties]="project.properties"
                     ></app-row-card>
                     
                 </div>
             </ng-container>
-        </div>        
+        </div>       
+        
     </div>
 </section>
 <div class="null-list" *ngIf="isNull">
@@ -43,5 +66,3 @@
         Nenhuma tarefa disponível...
     </h6>
 </div>
-
-

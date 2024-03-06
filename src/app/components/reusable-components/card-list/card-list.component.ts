@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project } from 'src/app/models/project';
-import { Team } from 'src/app/models/team';
+import { Team } from 'src/app/models/class/team';
+import { Project } from 'src/app/models/class/project';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 

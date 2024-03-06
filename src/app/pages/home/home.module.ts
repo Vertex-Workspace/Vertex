@@ -5,6 +5,7 @@ import { CardListModule } from 'src/app/components/reusable-components/card-list
 import { QuickAccessModule } from 'src/app/components/reusable-components/quick-access/quick-access.module';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 import { ListModule } from '../tasks/list/list.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ListModule } from '../tasks/list/list.module';
     QuickAccessModule,
     CreateTeamProjectModule,
     ListModule,
+    FontAwesomeModule
   ],
 })
 export class HomeModule { }

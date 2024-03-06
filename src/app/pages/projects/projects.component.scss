@@ -5,18 +5,19 @@ section{
 }
 
 .container-custom{
-    @apply grid w-[90%] h-full grid-cols-2;
+    @apply grid w-[90%] h-full grid-cols-2 gap-20;
 }
 
 //TEAMS
 .nav-tasks-teams{
     border-color: $primaryColor;
     @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
-    border-bottom: $borderBottom;
+    border-bottom: 0.25px solid $emphasis;
 
     label {
         @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
         items-center justify-center rounded cursor-pointer;
+
     }
 
     label:hover {
@@ -27,11 +28,11 @@ section{
 }
 
 .functionally-items {
-    @apply flex flex-col w-full h-[15%] pt-4 justify-between;
+    @apply flex flex-col w-full h-[10%] pt-4 justify-between;
 }
 
 .functionally-items-task {
-    @apply flex flex-col w-full h-full pt-4 justify-between;
+    @apply flex flex-col w-full h-[10%] justify-between;
 
     .filter-items {
         @apply flex;
@@ -107,10 +108,10 @@ section{
 }
 
     .container-grid{
-        @apply flex flex-col h-[90%] w-full pt-10;
+        @apply flex flex-col h-[90%] w-full pt-4;
     }
     .default-size{
-        @apply flex w-full h-[70%];
+        @apply flex w-full h-[70%] flex-col;
     }
 
 

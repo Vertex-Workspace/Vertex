@@ -4,7 +4,7 @@ import { faUser, faEnvelope,
      faPencil, faToggleOn, faCircleUser,
     faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 

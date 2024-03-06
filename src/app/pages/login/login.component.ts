@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faEnvelope, faEye,faEyeSlash,faLock } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { Project } from 'src/app/models/project';
+import { Project } from 'src/app/models/class/project';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserStateService } from 'src/app/services/user-state.service';

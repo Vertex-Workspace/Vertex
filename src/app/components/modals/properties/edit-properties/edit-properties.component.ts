@@ -4,8 +4,8 @@ import {
   faCaretDown, faSpinner, faUser, faPaperclip,
   faFont, faSquare, faTrashCan, fa1, faCircleInfo, faList, faEye, faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/property';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
@@ -121,7 +121,7 @@ export class EditPropertiesComponent {
         this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
           (project) => {
             this.project = project;
-            let property : Property = this.project.properties.find((property) => property.id == this.property.id)!;
+            let property : Property = this.project.properties.find((property: { id: any; }) => property.id == this.property.id)!;
             this.property = property;
             this.changeProject.emit(this.project);
             this.confirmChanges.emit(property);

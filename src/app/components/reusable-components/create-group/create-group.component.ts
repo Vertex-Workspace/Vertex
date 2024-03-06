@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Group } from 'src/app/models/groups';
-import { Team } from 'src/app/models/team';
+import { Group } from 'src/app/models/class/groups';
+import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

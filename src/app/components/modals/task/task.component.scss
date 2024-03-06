@@ -212,3 +212,8 @@ textarea:focus{
     border: 0 none;
     outline: 0;
 }
+
+
+textarea{
+    @apply rounded-sm;
+}

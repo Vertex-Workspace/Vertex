@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from 'src/app/models/task';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { Task } from 'src/app/models/class/task';
 import {
   faTrashCan,
   faEnvelope,
   faClockRotateLeft,
   faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
-import { Value } from 'src/app/models/value';
-import { PropertyKind } from 'src/app/models/property';
+import { Value } from 'src/app/models/class/value';
+import { Property, PropertyCreation, PropertyKind } from 'src/app/models/class/property';
 import { TeamService } from 'src/app/services/team.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { ActivatedRoute } from '@angular/router';
-import { Project } from 'src/app/models/project';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Project } from 'src/app/models/class/project';
 import { UserService } from 'src/app/services/user.service';
-import { Permission, PermissionsType } from 'src/app/models/user';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { TaskService } from 'src/app/services/task.service';
 import { AlertService } from 'src/app/services/alert.service';
 
@@ -23,7 +23,7 @@ import { AlertService } from 'src/app/services/alert.service';
   templateUrl: './row-card.component.html',
   styleUrls: ['./row-card.component.scss']
 })
-export class RowCardComponent {
+export class  RowCardComponent {
   faEllipsisVertical = faEllipsisVertical;
   faClock = faClockRotateLeft;
   faEnvelope = faEnvelope;
@@ -33,20 +33,24 @@ export class RowCardComponent {
 
   constructor(private teamService: TeamService,
     private projectService: ProjectService,
+    private router : Router,
     private route: ActivatedRoute,
     private userService: UserService,
     private taskService: TaskService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private changeDetection: ChangeDetectorRef
+    ) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.projectService
+    if(id && !this.router.url.includes('equipe')){
+      this.projectService
       .getOneById(id)
       .subscribe((p: Project) => {
         this.project = p;
-
+        
         this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
           this.userService.getLogged().permissions = permissions;
-
+          
           for (let i = 0; i < permissions.length; i++) {
             if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
               this.canDelete = true;
@@ -57,14 +61,17 @@ export class RowCardComponent {
           }
         });
       })
-  }
+    }
+    }
 
+  ngOnChanges(changes: SimpleChanges): void {
+  }
 
   @Input()
   task!: Task;
 
   @Input()
-  cols!: any[];
+  properties!: Property[] | PropertyCreation[];
 
   modalDelete: boolean = false;
   @Output() openTaskDetails = new EventEmitter();
@@ -83,27 +90,13 @@ export class RowCardComponent {
   ];
 
   ngOnInit(): void {
-    console.log(this.taskList);
+    
   }
 
-  getCols(): any[] {
-    let cols: any[] = [];
-    this.cols.map((col) => {
-      if (col.field !== "name") {
-        cols.push(col);
-      }
-    });
-    return cols;
-  }
-
-  getNameWidth(): string {
-    return "300px";
-  }
-
-  getPropertyValue(col: any): Value {
+  getPropertyValue(property: Property | PropertyCreation): Value {
     let value: Value;
-    this.task.values?.forEach(values => {
-      if (col.field === values.property.kind) {
+    this.task.values?.forEach((values: any) => {
+      if (property.kind === values.property.kind) {
         value = values;
       }
     });
@@ -154,9 +147,6 @@ export class RowCardComponent {
     return this.propertyColor
   }
 
-  findNumber(id: string): void {
-   this.propertyColor = id;
-  }
 
   @Output() modalTask = new EventEmitter
 
@@ -164,4 +154,3 @@ export class RowCardComponent {
     this.modalTask.emit(this.task);
   }
 }
-

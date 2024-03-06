@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Team } from 'src/app/models/team';
-import { faCaretDown, faCaretUp, faTrashCan, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { Group } from 'src/app/models/groups';
-import { User } from 'src/app/models/user';
+import { Team } from 'src/app/models/class/team';
+import { faCaretDown, faCaretUp, faTrashCan, faCirclePlus} from '@fortawesome/free-solid-svg-icons';
+import { Group } from 'src/app/models/class/groups';
+import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';

@@ -1,20 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task, TaskCreate } from 'src/app/models/task';
+import { Task, TaskCreate } from 'src/app/models/class/task';
 import {
   CdkDragDrop,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { ProjectService } from 'src/app/services/project.service';
-import { Project } from 'src/app/models/project';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/property';
+import { Project } from 'src/app/models/class/project';
+import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { TaskService } from 'src/app/services/task.service';
-import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/value';
+import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/class/value';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { TeamService } from 'src/app/services/team.service';
-import { Permission, PermissionsType } from 'src/app/models/user';
+import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { taskHourService } from 'src/app/services/taskHour.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-kanban',
@@ -38,17 +38,13 @@ export class KanbanComponent {
 
   @Input() canDeleteVerification ?: boolean
 
+  
   canCreate: boolean = false;
   canEdit: boolean = false;
 
   ngOnInit(){
-    console.log(this.canEdit);
-
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
+
 
         this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
           this.userService.getLogged().permissions = permissions
@@ -61,7 +57,7 @@ export class KanbanComponent {
             }
           }
         })
-      })
+
     
   }
 
@@ -161,8 +157,6 @@ export class KanbanComponent {
 
   createTask(propertyList: PropertyList) {
     let propertyUsed!: Property;
-
-
     //For each to find the property of the clicked Property List
     this.project.properties.forEach((property) => {
 
@@ -229,5 +223,5 @@ export class KanbanComponent {
       }
     );
     
-    }
+    } 
 }

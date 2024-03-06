@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MinichatModule } from '../minichat/minichat.module';
 import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
 import { PropertiesModule } from './properties/properties.module';
-
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { PropertiesModule } from './properties/properties.module';
      FontAwesomeModule, 
      FormsModule, 
      MinichatTASKModule,
-     PropertiesModule
+     PropertiesModule,
+     MenuModule
     ],
 })
 export class TaskModule {}
