@@ -32,13 +32,13 @@ export class CardComponent implements OnInit {
     private alertService: AlertService,
     private route: ActivatedRoute,
     private projectService: ProjectService) {
-
   }
   @Input() task!: Task;
   @Input() width!: string;
   @Input() minHeight!: string;
   @Input() borderColor!: string;
   @Input() project!: Project;
+  @Input() permissions!: Permission[];
 
   @Output() deleteTask = new EventEmitter();
 
@@ -47,15 +47,12 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
     //Opacity
     this.borderColor.concat("50");
-    this.teamService.getPermissions().subscribe((permissions: Permission[]) => {
-      for (const permission of permissions) {
-        if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
-          this.canDelete = true;
-          this.settings[2].disabled = false;
-        }
+    for (const permission of this.permissions) {
+      if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
+        this.canDelete = true;
+        this.settings[2].disabled = false;
       }
-    });
-    
+    }
   }
 
   modalDelete: boolean = false;

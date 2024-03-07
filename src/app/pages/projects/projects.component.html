@@ -80,10 +80,13 @@
 
 
                 <div class="w-full h-full">
-                    <app-list [team]="team"></app-list>
+                    <app-list [team]="team" (openTaskDetails)="changeModalTaskState(true, $event)"></app-list>
                 </div>
                 <!-- <app-quick-access style="width: 100%; height:100%;" [typeString]="'project'"></app-quick-access> -->
             </div>
         </div>
     </div>
 </section>
+
+<app-task [task]="taskOpenObject" *ngIf="taskOpen"
+    (close)="changeModalTaskState(false, taskOpenObject)" [permissions]="permissionsOpenedTask"></app-task>

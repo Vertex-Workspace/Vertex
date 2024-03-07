@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
+import { Task } from 'src/app/models/class/task';
 import { Team } from 'src/app/models/class/team';
-import { User } from 'src/app/models/class/user';
+import { Permission, User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -139,6 +140,23 @@ export class ProjectsComponent implements OnInit {
 
   switchCreateViewGroup(): void {
     this.isCreatingGroup = !this.isCreatingGroup;
+  }
+
+
+  taskOpen: boolean = false;
+  taskOpenObject!: Task;
+  permissionsOpenedTask: Permission[] = [];
+  changeModalTaskState(bool: boolean, task: Task): void {
+    if(bool == false){
+      this.taskOpenObject = {} as Task;
+      return;
+    } else {
+      this.teamService.getPermission(this.team, this.logged).subscribe((permission: Permission[]) => {
+        this.permissionsOpenedTask = permission;
+        this.taskOpen = bool;
+        this.taskOpenObject = task;
+      });
+    }
   }
 
 }

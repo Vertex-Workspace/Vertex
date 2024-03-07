@@ -44,15 +44,17 @@
                 >
                     <app-row-card
                         *ngIf="!project"
-                        (openTaskDetails)="openTaskModal(task)"
+                        (modalTask)="openTaskModal($event)"
                         [task]="task"
                         [properties]="properties"
                     ></app-row-card>
                     <app-row-card
                         *ngIf="project"
-                        (openTaskDetails)="openTaskModal(task)"
+                        (modalTask)="openTaskModal($event)"
                         [task]="task"
                         [properties]="project.properties"
+                        [project]="project"
+                        [permissions]="permissions"
                     ></app-row-card>
                     
                 </div>

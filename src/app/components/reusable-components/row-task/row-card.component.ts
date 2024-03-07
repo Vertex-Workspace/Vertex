@@ -29,7 +29,7 @@ export class  RowCardComponent {
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;
 
-  project !: Project;
+
 
   constructor(private teamService: TeamService,
     private projectService: ProjectService,
@@ -40,28 +40,6 @@ export class  RowCardComponent {
     private alertService: AlertService,
     private changeDetection: ChangeDetectorRef
     ) {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    if(id && !this.router.url.includes('equipe')){
-      this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-        
-        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions;
-          
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
-              this.canDelete = true;
-              this.icons[0].disabled = false;
-            } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-              this.canEdit = true;
-            }
-          }
-        });
-      })
-    }
     }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -69,6 +47,9 @@ export class  RowCardComponent {
 
   @Input()
   task!: Task;
+
+  @Input() 
+  project !: Project;
 
   @Input()
   properties!: Property[] | PropertyCreation[];
@@ -80,17 +61,26 @@ export class  RowCardComponent {
 
   @Input() taskList?: Task[]
 
+  @Input() permissions!: Permission[];
+
   canDelete: boolean = false;
   canEdit: boolean = false;
 
   icons: any[] = [
-    // { id: 'clock', icon: this.faClock },
-    // { id: 'chat', icon: this.faEnvelope },
     { id: 'delete', icon: this.faTrashCan, disabled: true }
   ];
 
   ngOnInit(): void {
-    
+    if(this.project){
+      for (const permission of this.permissions) {
+        if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
+          this.canDelete = true;
+          this.icons[0].disabled = false;
+        } else if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+          this.canEdit = true;
+        }
+      }
+    }
   }
 
   getPropertyValue(property: Property | PropertyCreation): Value {
@@ -147,8 +137,7 @@ export class  RowCardComponent {
   }
 
 
-  @Output() modalTask = new EventEmitter
-
+  @Output() modalTask = new EventEmitter<Task>();
   openModalTask(): void {
     this.modalTask.emit(this.task);
   }

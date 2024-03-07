@@ -25,7 +25,7 @@ export class CalendarComponent {
   faCircleUser = faCircleUser;
 
   @Input() project!: Project;
-
+  @Input() permissions!: Permission[];
   day: any;
 
   canCreate: boolean = false;
@@ -38,20 +38,16 @@ export class CalendarComponent {
     private projectService: ProjectService,
     private teamService: TeamService,
     private alert: AlertService) {
-      
-      // this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      //   this.userService.getLogged().permissions = permissions;
-      //   for (let i = 0; i < permissions.length; i++) {
-      //     if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-      //       this.canCreate = true;
-      //     } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-      //       this.canEdit = true;
-      //     }
-      //   }
-      // });
   }
 
   ngOnInit() {  
+    for (const permission of this.permissions) {
+      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+        this.canEdit = true;
+      }else if ((permission.name === PermissionsType.CREATE) && permission.enabled) {
+        this.canCreate = true;
+      }
+    }
     this.buildCalendar();
   }
 

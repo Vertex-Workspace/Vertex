@@ -26,8 +26,7 @@ export class ProjectService {
 
   public getOneById(id: number): Observable<Project> {
     return this.http
-      .get<Project>(`${URL}project/${id}`)
-      .pipe(map((project: Project) => new Project(project)));
+      .get<Project>(`${URL}project/${id}`);
   }
 
   public create(project: Project, teamId: number): Observable<Project> {

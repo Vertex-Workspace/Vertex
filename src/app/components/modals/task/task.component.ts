@@ -35,6 +35,8 @@ export class TaskComponent implements OnInit {
 
   @Input() task!: Task;
 
+  @Input() permissions!: Permission[];
+
   canEdit: boolean = false;
 
   taskStep!: Task;
@@ -56,23 +58,20 @@ export class TaskComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private route: ActivatedRoute) {
-    console.log(this.canEdit);
-
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-          this.canEdit = true;
-        }
-      }
-    })
     
   }
 
   selectedComponent: string = 'description';
 
   async ngOnInit() {
+    
+    for (const permission of this.permissions) {
+      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+        this.canEdit = true;
+      }
+    }
+    
+
     this.user = JSON.parse(localStorage.getItem('logged')!);
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
@@ -80,7 +79,6 @@ export class TaskComponent implements OnInit {
       }
     });
 
-    console.log(this.idResponsable);
     
     await this.getTimeInTask();
     

@@ -106,11 +106,7 @@ export class TeamService {
     return this.http.get<Permission[]>(`${URL}team/permission/${user.id}/${team.id}`)
   }
 
-  // public hasPermission():
   public updateImage(teamId: number, fd: FormData) {
-
-    console.log(teamId);
-    
     return this.http
       .patch(`${URL}team/image/${teamId}`, fd)
   }
@@ -127,7 +123,10 @@ export class TeamService {
   usersPermission: Subject<Permission[]> = new Subject<Permission[]>();
 
   public setPermissions(permissions: Permission[]) {
+    console.log("Set Permissions", permissions);
     this.usersPermission.next(permissions);
+    console.log(this.usersPermission);
+    
   }
 
   public getPermissions(): Observable<Permission[]> {

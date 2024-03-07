@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
-import { User } from 'src/app/models/class/user';
+import { Permission, User } from 'src/app/models/class/user';
 import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
 
 @Component({
@@ -22,6 +22,7 @@ export class ListComponent implements OnInit {
 
   @Input()
   project !: Project;
+  
   properties : PropertyCreation[] = [
     {name: 'Status', kind: PropertyKind.STATUS},
     {name: 'Data', kind: PropertyKind.DATE},
@@ -30,6 +31,8 @@ export class ListComponent implements OnInit {
   @Input()
   team ?: Team;
 
+  @Input() permissions!:Permission[];
+    
   cols: any[] = [];
 
   taskList: Task[] = [];
@@ -119,10 +122,5 @@ export class ListComponent implements OnInit {
       
   }
 
-  //   getProjectByTask(task : Task): Project{
-  //   return this.team.projects?.find(project => {
-  //     return project.tasks?.find(t => t.id === task.id);
-  //   })!;
-  // }
 
 }

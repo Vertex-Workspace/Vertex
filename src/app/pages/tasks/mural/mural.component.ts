@@ -52,6 +52,8 @@ export class MuralComponent implements OnInit {
     });
   }
 
+  //DONT FORGET TO IMPLEMENT THE PERMISSIONS AT MURAL
+  //WHEN MIGUEL FINISHES THE MURAL
   ngOnInit(): void {  
   }
 

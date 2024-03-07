@@ -38,20 +38,19 @@ export class KanbanComponent {
 
   @Input() canDeleteVerification ?: boolean
 
-  
+  @Input() permissions!: Permission[]; 
+
   canCreate: boolean = false;
   canEdit: boolean = false;
 
   ngOnInit(){
-    this.teamService.getPermissions().subscribe((permissions: Permission[]) => {
-      for (const permission of permissions) {
-        if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
-          this.canEdit = true;
-        }else if ((permission.name === PermissionsType.CREATE) && permission.enabled) {
-          this.canCreate = true;
-        }
+    for (const permission of this.permissions) {
+      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+        this.canEdit = true;
+      }else if ((permission.name === PermissionsType.CREATE) && permission.enabled) {
+        this.canCreate = true;
       }
-    });  
+    }
   }
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
