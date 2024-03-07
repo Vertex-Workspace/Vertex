@@ -24,7 +24,7 @@ export class TasksComponent implements OnInit {
   filterSettings: any[] = [];
   orderSettings: any[] = [];
   clicked : string = 'List';
-  query: string = '';
+  query: string = "";
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
@@ -65,10 +65,9 @@ export class TasksComponent implements OnInit {
         this.clicked = currentView;
       } 
       this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions;
-    
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
+        this.teamService.setPermissions(permissions);
+          for (const permission of permissions) {
+            if ((permission.name === PermissionsType.CREATE) && permission.enabled === true) {
               this.canCreate = true;
             }
           }

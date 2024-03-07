@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap, throwError  } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject, tap, throwError  } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/class/team';
 import { HasPermission, Permission, User } from '../models/class/user';
@@ -122,8 +122,18 @@ export class TeamService {
   public hasPermission(projectId: number, user: User): Observable<Permission[]> {
     return this.http
       .get<Permission[]>(`${URL}team/hasPermission/${projectId}/${user.id}`)
-      .pipe(map((permissions: Permission[]) => permissions.map(permission => new Permission(permission))));
   }
+
+  usersPermission: Subject<Permission[]> = new Subject<Permission[]>();
+
+  public setPermissions(permissions: Permission[]) {
+    this.usersPermission.next(permissions);
+  }
+
+  public getPermissions(): Observable<Permission[]> {
+    return this.usersPermission.asObservable();
+  }
+  
 
   public deleteUserTeam(team: Team, user: User): Observable<Team> {
     return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)

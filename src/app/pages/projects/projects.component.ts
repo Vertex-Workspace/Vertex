@@ -30,11 +30,6 @@ export class ProjectsComponent implements OnInit {
   filterSettings: any[] = [];
   orderSettings: any[] = [];
 
-  menuItems = [
-    // { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
-    { id: 'project', iconClass: 'pi pi-folder-open', label: 'Projetos', button: 'Novo Projeto' },
-    { id: 'group', iconClass: 'pi pi-users', label: 'Grupos', button: 'Novo grupo' },
-  ];
 
   constructor(
     private projectService: ProjectService,
