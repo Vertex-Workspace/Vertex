@@ -23,7 +23,7 @@ export class TasksComponent implements OnInit {
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
-  clicked : string = 'List';
+  clicked !: string;
   query: string = '';
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
@@ -46,10 +46,7 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService
-  ) {
-    
-
-   }
+  ) {}
 
   projectId!: number;
 
@@ -63,6 +60,7 @@ export class TasksComponent implements OnInit {
       let currentView = localStorage.getItem('mode-task-view');
       if(currentView){
         this.clicked = currentView;
+        this.muralPageListener();
       } 
       this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
           this.userService.getLogged().permissions = permissions;
@@ -74,7 +72,10 @@ export class TasksComponent implements OnInit {
           }
         });
     })
+    this.muralPageListener();
+  }
 
+  muralPageListener(): void {
     if (this.clicked === 'Mural') this.isMuralPage = true;
     else this.isMuralPage = false;
   }
@@ -133,7 +134,6 @@ export class TasksComponent implements OnInit {
       (task) => {
         console.log(task);
         this.project.tasks.push(task);
-        console.log(this.project.tasks);
         
         this.changeModalTaskState(true, task);
       },
@@ -150,8 +150,8 @@ export class TasksComponent implements OnInit {
       width: 300,
       height: 300,
       color: 'WHITE',
-      positionX: 20,
-      positionY: 40,
+      posX: 20,
+      posY: 40,
       files: []
     }
 

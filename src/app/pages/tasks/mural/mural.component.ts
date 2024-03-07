@@ -7,7 +7,7 @@ import { AfterViewInit,
          ViewChildren } from '@angular/core';
 import { Task } from 'src/app/models/class/task';
 import { PersonalizationService } from 'src/app/services/personalization.service';
-import { Note, NoteGet } from 'src/app/models/class/note';
+import { Note } from 'src/app/models/class/note';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/class/project';
 import { NoteService } from 'src/app/services/note.service';
@@ -23,7 +23,7 @@ export class MuralComponent implements OnInit {
   @Input()
   project!: Project;
 
-  notes !: NoteGet[];
+  notes !: Note[];
 
   constructor(
     private noteService: NoteService,
@@ -40,14 +40,13 @@ export class MuralComponent implements OnInit {
   }
 
   teste(e: any): void {
-    console.log(e);
     
   }
 
   getNotes(id: number): void {
     this.noteService
     .getAllByProject(id)
-    .subscribe((notes: NoteGet[]) => {
+    .subscribe((notes: Note[]) => {
       this.notes = notes;
     });
   }
@@ -55,9 +54,12 @@ export class MuralComponent implements OnInit {
   ngOnInit(): void {  
   }
 
-  deleteNote(note: NoteGet) {
-    // this.noteService
-    //   .
+  deleteNote(note: Note) {    
+    this.noteService
+      .delete(note.id!)
+      .subscribe();
+
+    this.project.notes.splice(this.project.notes.indexOf(note), 1);
   }
 
 }

@@ -25,39 +25,19 @@
             </div>
 
             <div class="config">
-                <ng-container *ngIf="!colorListOpen">
-                    <div class="color" 
-                        [style.backgroundColor]="getSelectedColor().color"
-                    >
-                        <fa-icon 
-                            [icon]="faCheck" 
-                            class="icon">
-                        </fa-icon>
-                    </div>
-                    <i 
-                        class="pi pi-chevron-right pl-2" 
-                        (click)="toggleColorList()"
-                    ></i>
-                    
-                </ng-container>
-                <div *ngIf="colorListOpen" class="color-list">
+                <div class="color-list">
 
                     <ng-container *ngFor="let color of colorList">
                         <div class="color" 
                             [style.backgroundColor]="color.color" 
                             (click)="changeColor(color)"
                         >
-                            <fa-icon 
+                            <!-- <fa-icon 
                                 [icon]="faCheck"
-                                 class="icon" 
-                                 *ngIf="color.color === getSelectedColor().color">
-                            </fa-icon>
+                                 class="icon" >
+                            </fa-icon> -->
                         </div>
                     </ng-container>
-
-                    <i class="pi pi-chevron-left pl-2" 
-                        (click)="toggleColorList()"
-                    ></i>
                 </div>
             </div>
         </div>

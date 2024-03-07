@@ -7,6 +7,7 @@
   [style.backgroundColor]="note.color"
   cdkDrag 
   cdkDragBoundary=".mural-section"
+  [cdkDragFreeDragPosition]="getNotePosition()"
   (cdkDragEnded)="dragEnd($event)"
 >
   <span #dragHandleCorner class="dragHandle corner" cdkDrag (cdkDragMoved)="dragMove(dragHandleCorner, $event)"></span>
@@ -19,18 +20,14 @@
       
       <div class="text regular-text">
         <p>
-          {{ note.description && note.description 
-            || "Sem descrição." }}
+          {{ note.description }}
         </p>
       </div>
     </div>
 
     <div class="right">
-      <div class="date small-text">
-        12/12/2020
-      </div>
 
-      <div class="icons" [style.backgroundColor]="note.color">
+      <div class="icons">
         <ng-container *ngFor="let item of configItems">
           <i 
             (click)="item.onClick()"
@@ -47,4 +44,5 @@
   *ngIf="modalOpen"
   [note]="note"
   (closeModal)="toggleModalOpen()"
+  (patchOutput)="edit()"
 ></app-note-modal>

@@ -8,13 +8,6 @@
   .card span:last-child {
     @apply p-2 ;
   
-    &:hover {
-  
-      .right .icons {
-        @apply bg-zinc-50 transition-colors;
-      }
-    }
-  
     .left {
       @apply flex flex-col gap-4 h-full w-4/5;
   
@@ -57,10 +50,6 @@
           font-size: 1rem;
           cursor: pointer;
           color: $primaryColor;
-
-          &:hover {
-            @apply scale-105;
-          }
         }
       }
     }

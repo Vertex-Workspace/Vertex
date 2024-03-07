@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Note, NoteGet } from 'src/app/models/class/note';
+import { Note } from 'src/app/models/class/note';
 import { Project } from 'src/app/models/class/project';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -18,10 +18,13 @@ interface Color {
 export class NoteModalComponent implements OnInit {
 
   @Input()
-  note !: NoteGet;
+  note !: Note;
 
   @Output()
   closeModal: EventEmitter<any> = new EventEmitter;
+
+  @Output()
+  patchOutput: EventEmitter<void> = new EventEmitter;
 
   faCheck = faCheck;
 
@@ -32,7 +35,7 @@ export class NoteModalComponent implements OnInit {
   colorListOpen: boolean = false;
   colorList: Color[] = [
     {
-      color: 'BLUE',
+      color: '#d3e5ef50',
       selected: false,
     },
     {
@@ -40,23 +43,19 @@ export class NoteModalComponent implements OnInit {
       selected: false,
     },
     {
-      color: 'PINK',
+      color: '#f5e0e950',
       selected: false,
     },
     {
-      color: 'ORANGE',
+      color: '#fadec950',
       selected: false,
     },
     {
-      color: 'GREY',
+      color: '#e3e2e050',
       selected: false,
     },
     {
       color: '#FFD60050',
-      selected: false,
-    },
-    {
-      color: 'BROWN',
       selected: false,
     },
     {
@@ -104,7 +103,8 @@ export class NoteModalComponent implements OnInit {
 
   changeColor(color: Color) {    
     this.note.color = color.color;
-       
+    this.patchOutput.emit();
+    
   }
 
   toggleColorList(): void {

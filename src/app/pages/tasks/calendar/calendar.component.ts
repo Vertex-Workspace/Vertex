@@ -60,8 +60,6 @@ export class CalendarComponent {
 
   ngOnInit() {
     this.buildCalendar();
-    this.groupCalendarDays();
-    this.teste();
   }
 
   plus: boolean = false;
@@ -75,15 +73,6 @@ export class CalendarComponent {
     this.openTaskDetails.emit(task);
   }
 
-  teste(): void {
-    const projectId: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.taskService
-      .getAllByProject(projectId)
-      .subscribe((tasks: Task[]) => {
-        this.tasks = tasks;
-      })
-  }
 
   //FUTURE 
   buttonDay!: Date;
@@ -157,13 +146,12 @@ export class CalendarComponent {
     ) {
       this.calendarDays.push(new Date(date.getTime()));
     }
+    this.groupCalendarDays();
   }
 
   changeMonth(offsetMes: number) {
     this.currentDate.setMonth(this.currentDate.getMonth() + offsetMes);
     this.currentDate = new Date(this.currentDate.getTime());
-    console.log(this.currentDate);
-    
     this.buildCalendar();
   }
 

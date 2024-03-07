@@ -1,6 +1,7 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { Note, NoteGet } from 'src/app/models/class/note';
+import { Point } from 'chart.js';
+import { Note } from 'src/app/models/class/note';
 import { NoteService } from 'src/app/services/note.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { NoteService } from 'src/app/services/note.service';
 export class NoteComponent implements OnInit, AfterViewInit {
 
   @Input() 
-  note !: NoteGet;
+  note !: Note;
 
   @Output()
   deleteNoteEmitter: EventEmitter<any> = new EventEmitter();
@@ -33,13 +34,20 @@ export class NoteComponent implements OnInit, AfterViewInit {
     
   }
 
+  getNotePosition(): Point {
+    return {
+      x: this.note.posX,
+      y: this.note.posY
+    }
+  }
+
   ngAfterViewInit() {
     this.setAllHandleTransform();
   }
 
   dragEnd(e: any): void {
-    this.note.position.x = e.dropPoint.x;
-    this.note.position.y = e.dropPoint.y;
+    this.note.posX = e.dropPoint.x - 300;
+    this.note.posY = e.dropPoint.y - 300;
     
     this.edit();
     

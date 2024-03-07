@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Note, NoteGet } from '../models/class/note';
+import { Note } from '../models/class/note';
 import { URL } from './path/api_url';
 
 @Injectable({
@@ -19,22 +19,24 @@ export class NoteService {
       .post<Note>(`${URL}note/${projectId}/${userId}`, note);
   }
 
-  public getAllByProject(teamId: number): Observable<NoteGet[]> {
+  public getAllByProject(teamId: number): Observable<Note[]> {
     return this.http
       .get<Note[]>(`${URL}note/${teamId}`)
       .pipe(map((notes: Note[]) => 
-        notes.map((note: Note) => new NoteGet(note))
+        notes.map((note: Note) => new Note(note))
       ));
   }
 
-  public patchAttribute(note: NoteGet): Observable<Note> {
+  public patchAttribute(note: Note): Observable<Note> {
     const noteEditing: Note = new Note(note); //converte o dto para note
     return this.http
-      .patch<Note>(`${URL}note/att`, noteEditing)
+      .patch<Note>(`${URL}note`, noteEditing)
   }
 
-  public delete(id: number): void {
-    this.http
+  public delete(id: number): Observable<Note> {
+    console.log('chegou aq');
+    
+    return this.http
       .delete<Note>(`${URL}note/${id}`);
   }
 
