@@ -90,9 +90,9 @@ export class TeamService {
       .delete<Team>(`${URL}team/${id}`);
   }
 
-  public getTeamsByUser(userId: number): Observable<Team[]> {
+  public getTeamsByUser(user: User): Observable<Team[]> {
     return this.http
-      .get<Team[]>(`${URL}user-team/teams/${userId}`)
+      .get<Team[]>(`${URL}user-team/teams/${user.id}`)
       .pipe(map((teams: Team[]) => teams.map(team => new Team(team))));
 
   }
@@ -129,7 +129,7 @@ export class TeamService {
     return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
   }
 
-  public getTeamCreator(team: Team): Observable<Team> {
-    return this.http.get<Team>(`${URL}team/${team.id}/creator`)
+  public getTeamCreator(team: Team): Observable<User> {
+    return this.http.get<User>(`${URL}team/${team.id}/creator`)
   }
 }

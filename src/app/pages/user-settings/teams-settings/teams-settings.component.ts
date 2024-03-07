@@ -41,7 +41,7 @@ export class TeamsSettingsComponent implements OnInit{
 
   getRecentsTeams(): void {
     this.teamService
-      .getTeamsByUser(this.logged.id!)
+      .getTeamsByUser(this.logged)
       .subscribe((teams) => {        
         this.teams = teams;
       });

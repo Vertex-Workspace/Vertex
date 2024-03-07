@@ -18,7 +18,7 @@
 }
 
 .user{
-    @apply flex w-full bg-white pl-8 py-2 flex-col;
+    @apply w-[800px] bg-white pl-2 py-2;
 
     button {
         background-color: $primaryColor;
@@ -32,7 +32,7 @@
 }
 
 .main-div {
-    @apply flex w-[95%] flex-col py-2;
+    @apply flex w-full flex-col py-2;
 }
 
 .user-card {

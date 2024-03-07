@@ -4,6 +4,8 @@ import { Team } from 'src/app/models/class/team';
 import { Project } from 'src/app/models/class/project';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { TeamService } from 'src/app/services/team.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-card-list',
@@ -14,8 +16,8 @@ export class CardListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private alertService: AlertService,
-    private projectService: ProjectService
+    private teamService: TeamService,
+    private userService: UserService
   ) { }
 
   @Input()
@@ -34,7 +36,14 @@ export class CardListComponent implements OnInit {
 
   delete: boolean = false;
 
+  
+ firstLetterName?: string
+
+ creatorName ?: String
+
+
   ngOnInit(): void {
+    this.findAllTeams()
   }
 
   getType(): any[] {
@@ -64,4 +73,19 @@ export class CardListComponent implements OnInit {
     }
     this.delete = false;
   }
+
+  findAllTeams() {
+    this.teamService.getTeamsByUser(this.userService.getLogged()).subscribe((teams: Team[]) => {
+      for (let i = 0; i < teams.length; i++) {
+        this.teamService.getTeamCreator(teams[i]).subscribe((userC) => {
+          
+          if (teams[i].name === "Equipe " + userC.firstName) {
+            this.creatorName = userC.firstName
+            this.firstLetterName = userC.firstName?.substring(0, 1).toLocaleUpperCase()       
+          }
+        })
+      }
+    })
+  }
+
 }

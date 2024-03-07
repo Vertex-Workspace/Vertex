@@ -144,26 +144,4 @@ export class ProjectsComponent implements OnInit {
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
-
-  createGroup(group: Group): void {
-    this.groupService
-      .create(group)
-      .subscribe((group: Group) => {
-        this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
-        this.team.groups?.splice(this.team.groups.push(group))
-        this.switchCreateViewGroup();
-      },
-        e => {
-          if (group.name == null) {
-            this.alert.errorAlert(`Você precisa adicionar um nome`)
-          }else {
-            this.alert.errorAlert(`Erro ao criar grupo`)            
-          }
-        });
-  }
-
-  switchCreateViewGroup(): void {
-    this.isCreatingGroup = !this.isCreatingGroup;
-  }
-
 }

@@ -4,16 +4,16 @@
     @apply flex flex-col items-center w-full py-2;
 
     .sections-in-card {
-        @apply pl-2 flex w-full bg-white items-center;
+        @apply pl-2 flex w-full bg-white items-center shadow-lg;
         min-height: 40px;
 
         div:first-child {
-            @apply w-[15%] flex items-center pl-6 h-full;
+            @apply w-[20%] flex items-center justify-center h-full;
             font-size: $regularText
         };
 
         div:nth-child(2) {
-            @apply w-[70%] flex items-start h-full flex-col;
+            @apply w-[65%] flex items-start justify-center h-full flex-col;
 
             p:first-child {
                 font-size: $regularText

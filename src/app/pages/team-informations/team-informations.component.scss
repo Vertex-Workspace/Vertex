@@ -57,21 +57,11 @@ section {
 .clicked {
     color: $secondColor;
     background-color: $primaryColor;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
 }
 
 .default {
     color: $primaryColor;
     background-color: $secondColor;
-    padding: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
 }
 
 
@@ -136,28 +126,23 @@ section {
 }
 
 .div-members{
-    @apply flex flex-col gap-5;
+    @apply flex flex-col gap-5 border-b;
+    border-color: $emphasis
 }
 
 .members{
-    @apply flex w-full gap-7;
-}
-
-.emptyDiv{
-    @apply w-[90%] h-[1px];
-    background-color:$primaryColor
+    @apply flex w-full gap-7 pb-2;
+    border-bottom: 5px;
+    border-color: $emphasis
 }
 
 .high-listDiv-members{
-    @apply w-[100%] flex items-center;
+    @apply w-[100%] h-full flex justify-between;
 }
 
-.listDiv-members{
-    @apply flex gap-4 w-[88%];
-}
-
-.grid-participants{
-    @apply grid grid-cols-2 gap-3 w-full h-[35%] pr-3 overflow-auto;
+.search {
+    @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
+    rounded shadow-md border-none;
 }
 
 .card-user-grid{
@@ -188,7 +173,7 @@ section {
 }
 
 .grid-permissions{
-    @apply flex flex-col gap-3 w-[77%] h-[35%] pr-3 overflow-auto;
+    @apply flex flex-col gap-3 w-[85%] h-[35%] pr-3 overflow-auto;
 }
 
 .div-description-top-right{
@@ -221,4 +206,9 @@ section {
 
 .dashboard-pie{
     @apply w-[60%] h-[30%] flex flex-col justify-center items-center;
+}
+
+button{
+    @apply w-[150px] h-[50px] flex gap-2 p-4 px-4 transition-colors
+    items-center justify-center rounded cursor-pointer;
 }

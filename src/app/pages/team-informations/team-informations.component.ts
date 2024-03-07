@@ -190,6 +190,7 @@ export class TeamInformationsComponent implements OnInit {
 
     // VARIABLES
     clicked!: string;
+    createGroupModal : boolean = false
     @Input()
     basicData: any;
     @Input()
@@ -244,4 +245,29 @@ export class TeamInformationsComponent implements OnInit {
             }
         });
     }
+
+    openModalCreateGroup(){
+        this.createGroupModal = true
+    }
+
+    createGroup(group: Group): void {
+        this.groupService
+          .create(group)
+          .subscribe((group: Group) => {
+            this.alertService.successAlert(`Grupo ${group.name} criado com sucesso!`);
+            this.team.groups?.splice(this.team.groups.push(group))
+            this.switchCreateViewGroup();
+          },
+            e => {
+              if (group.name == null) {
+                this.alertService.errorAlert(`Você precisa adicionar um nome`)
+              }else {
+                this.alertService.errorAlert(`Erro ao criar grupo`)            
+              }
+            });
+      }
+    
+      switchCreateViewGroup(): void {
+        this.createGroupModal = !this.createGroupModal;
+      }
 }

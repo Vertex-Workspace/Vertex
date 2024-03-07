@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit{
 
 
   subscribeToTeams() {
-    this.teamService.getTeamsByUser(this.logged.id!)
+    this.teamService.getTeamsByUser(this.logged)
     .subscribe((teams: Team[]) => {
       this.teams = teams;  
       this.teams.forEach(team =>  this.teamsBackup.push(new Team(team)));
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit{
   updateList(): void {
     if (!this.isCreating) {
       this.teamService
-        .getTeamsByUser(this.logged.id!)
+        .getTeamsByUser(this.logged)
         .subscribe((teams: Team[]) => {
           this.teams = teams;
         });

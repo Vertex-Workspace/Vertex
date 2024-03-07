@@ -21,10 +21,6 @@
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         Novo projeto
                     </button>
-                    <button class="create" (click)="switchCreateViewGroup()" *ngIf="clicked === 'group'">
-                        <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        Novo grupo
-                    </button>
                 </div>
             </div>
 
@@ -37,17 +33,13 @@
 
             <div class="default-size" *ngIf="clicked === 'group'">
                 <app-card-group style="width: 100%; height: 90%; overflow-y: auto;"
-                    [width]="'1000px'" [height]="'90px'" [team]="team" (emitterItem)="deleteGroup($event)">
+                    [width]="'1000px'" [height]="'70px'" [team]="team" (emitterItem)="deleteGroup($event)">
                 </app-card-group>
             </div>
 
             <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
                 *ngIf="clicked === 'project' && isCreatingProject" (close)="switchCreateView()"
                 [typeString]="'project'"></app-create-team-project>
-
-            <app-create-group style="width: 100%; height: 700px; padding-top: 3%;"
-                *ngIf="isCreatingGroup && clicked === 'group'" [team]="team" (createGroup)="createGroup($event)"
-                (close)="switchCreateViewGroup()"></app-create-group>
         </div>
 
         <!-- RIGHT SIDE - QUICK ACCESS -->
