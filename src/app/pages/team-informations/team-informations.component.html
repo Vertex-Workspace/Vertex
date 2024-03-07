@@ -24,11 +24,10 @@
 
             <div class="high-div-members">
                 <div class="div-members">
-                    <h5>Membros da equipe</h5>
                     <div class="members">
                         <ng-container *ngFor="let item of menuItems">
                             <button 
-                            [ngClass]="item.id === 'participants' ? 'clicked' : ''"
+                            [ngClass]="item.clicked === true ? 'clicked' : 'default'"
                                 routerLink="[item.id]" (click)="changePreviewMode(item.id)">
                                 <i class="{{ item.iconClass }}" style="font-size: 1.25rem"></i>
                                 {{ item.label }}
@@ -39,10 +38,10 @@
 
                 <div class="high-listDiv-members">
                     <div class="search">
-                        <input type="text" placeholder="Pesquisar por uma equipe...">
+                        <input type="text" placeholder={{placeholder}}>
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
-                    <button class="clicked" (click)="openModalCreateGroup()">
+                    <button class="clicked" (click)="openModalCreateGroup()" *ngIf="clicked === 'groups'">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         Novo grupo</button>
                 </div>
@@ -50,7 +49,7 @@
 
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
-                <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'permissions'"
+                <app-card-user [width]="'370px'" [height]="'80px'" [typeString]="'permissions'"
                     (deleteEmitterUserTeam)="deleteUserTeam($event)" [team]="team"></app-card-user>
             </div>
 
@@ -119,6 +118,6 @@
     </div>
 </section>
 
-<app-create-group style="width: 100%; height: 700px; padding-top: 3%;" *ngIf="createGroupModal" [team]="team"
+<app-create-group style="width: 100%; height: 500px; padding-top: 3%;" *ngIf="createGroupModal" [team]="team"
     (close)="switchCreateViewGroup()" (createGroup)="createGroup($event)">
 </app-create-group>

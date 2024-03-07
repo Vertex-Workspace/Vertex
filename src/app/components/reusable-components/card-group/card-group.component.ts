@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Team } from 'src/app/models/class/team';
-import { faCaretDown, faCaretUp, faTrashCan, faCirclePlus} from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretUp, faTrashCan, 
+  faCirclePlus, faComment} from '@fortawesome/free-solid-svg-icons';
 import { Group } from 'src/app/models/class/groups';
 import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
@@ -21,6 +22,7 @@ export class CardGroupComponent {
   faCaretUp = faCaretUp;
   faTrashCan = faTrashCan;
   faCirclePlus = faCirclePlus
+  faComment = faComment
 
   @Output()
   close = new EventEmitter<Event>();
@@ -95,6 +97,7 @@ export class CardGroupComponent {
 
   addParticipants(): void {
     this.selectMoreUsers = !this.selectMoreUsers
+    console.log(this.selectMoreUsers);
   }
 
   pushParticipants(user: User): void {

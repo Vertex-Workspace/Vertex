@@ -1,7 +1,7 @@
 import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faEarthAsia, faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +24,7 @@ import { UserService } from 'src/app/services/user.service';
     styleUrls: ['./team-informations.component.scss']
 })
 export class TeamInformationsComponent implements OnInit {
-    
+
     onClipboardCopy($event: Event) {
         throw new Error('Method not implemented.');
     }
@@ -46,7 +46,7 @@ export class TeamInformationsComponent implements OnInit {
     ) {
         this.team = this.getTeam();
     }
-       
+
     ngOnInit() {
         this.start();
         console.log(this.team);
@@ -190,7 +190,7 @@ export class TeamInformationsComponent implements OnInit {
 
     // VARIABLES
     clicked!: string;
-    createGroupModal : boolean = false
+    createGroupModal: boolean = false
     @Input()
     basicData: any;
     @Input()
@@ -199,19 +199,38 @@ export class TeamInformationsComponent implements OnInit {
     data: any;
     @Input()
     options: any;
+    placeholder: string = 'Pesquise por um participante...'
 
     menuItems = [
-        { id: 'participants', iconClass: 'pi pi-user', label: 'Participantes' },
-        { id: 'groups', iconClass: 'pi pi-users', label: 'Grupos' }
+        {
+            id: 'participants',
+            iconClass: 'pi pi-user',
+            label: 'Participantes',
+            placeholder: 'Pesquise por um participante...',
+            clicked: true
+        },
+        {
+            id: 'groups',
+            iconClass: 'pi pi-users',
+            label: 'Grupos',
+            placeholder: 'Pesquise por um grupo...',
+            clicked: false
+        }
     ];
 
 
     changePreviewMode(preview: string): void {
         this.clicked = preview;
-    }
+        if (preview === 'participants') {
+            this.placeholder = this.menuItems[0].placeholder
+            this.menuItems[0].clicked = true
+            this.menuItems[1].clicked = false
+        } else {
+            this.placeholder = this.menuItems[1].placeholder
+            this.menuItems[1].clicked = true
+            this.menuItems[0].clicked = false
+        }
 
-    swapPermissionExpanded(id: number): void {
-        // this.users[id].open = !this.users[id].open;
     }
 
     getGroup(): any[] {
@@ -227,7 +246,7 @@ export class TeamInformationsComponent implements OnInit {
         this.groupService.delete(groupId.id).subscribe((group: Group) => {
             this.alertService.successAlert('Grupo deletado com sucesso')
             this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
-            
+
         },
             e => {
                 this.alertService.errorAlert("Não foi possível deletar");
@@ -236,7 +255,7 @@ export class TeamInformationsComponent implements OnInit {
 
     deleteUserTeam(user: User): void {
         this.teamService.getTeamCreator(this.team).subscribe((userC) => {
-            if (userC.id === this.userService.getLogged().id) {  
+            if (userC.id === this.userService.getLogged().id) {
                 this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
                     this.alertService.successAlert("Usuário retirado da equipe")
                 })
@@ -246,28 +265,28 @@ export class TeamInformationsComponent implements OnInit {
         });
     }
 
-    openModalCreateGroup(){
+    openModalCreateGroup() {
         this.createGroupModal = true
     }
 
     createGroup(group: Group): void {
         this.groupService
-          .create(group)
-          .subscribe((group: Group) => {
-            this.alertService.successAlert(`Grupo ${group.name} criado com sucesso!`);
-            this.team.groups?.splice(this.team.groups.push(group))
-            this.switchCreateViewGroup();
-          },
-            e => {
-              if (group.name == null) {
-                this.alertService.errorAlert(`Você precisa adicionar um nome`)
-              }else {
-                this.alertService.errorAlert(`Erro ao criar grupo`)            
-              }
-            });
-      }
-    
-      switchCreateViewGroup(): void {
+            .create(group)
+            .subscribe((group: Group) => {
+                this.alertService.successAlert(`Grupo ${group.name} criado com sucesso!`);
+                this.team.groups?.splice(this.team.groups.push(group))
+                this.switchCreateViewGroup();
+            },
+                e => {
+                    if (group.name == null) {
+                        this.alertService.errorAlert(`Você precisa adicionar um nome`)
+                    } else {
+                        this.alertService.errorAlert(`Erro ao criar grupo`)
+                    }
+                });
+    }
+
+    switchCreateViewGroup(): void {
         this.createGroupModal = !this.createGroupModal;
-      }
+    }
 }

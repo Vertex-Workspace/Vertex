@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardUserModule } from '../card-user/card-user.module';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
+import { CreateGroupModule } from '../create-group/create-group.module';
 
 @NgModule({
   declarations: [CardGroupComponent],
@@ -18,7 +19,8 @@ import { AccordionModule } from 'primeng/accordion';
     FormsModule,
     ReactiveFormsModule,
     ConfirmModalModule,
-    AccordionModule
+    AccordionModule,
+    CreateGroupModule
   ]
 })
 

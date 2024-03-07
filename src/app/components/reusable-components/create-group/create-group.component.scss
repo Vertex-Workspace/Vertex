@@ -64,7 +64,7 @@ p{
 }
 
 .modal {
-    @apply absolute rounded-md flex flex-col w-[30%] h-[80%]
+    @apply absolute rounded-md flex flex-col w-[30%] h-[70%]
     items-start justify-start text-center p-8 border-t-8;
     border-color: $primaryColor;
     background-color: $secondColor;

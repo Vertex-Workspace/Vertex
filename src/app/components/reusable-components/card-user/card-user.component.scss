@@ -1,11 +1,11 @@
 @import '../../../../variables';
 
 .card{
-    @apply flex flex-col items-center w-full py-2;
+    @apply flex flex-col w-full py-2 shadow-lg;
 
     .sections-in-card {
-        @apply pl-2 flex w-full bg-white items-center shadow-lg;
-        min-height: 40px;
+        @apply flex w-full items-center ;
+        min-height: 70px;
 
         div:first-child {
             @apply w-[20%] flex items-center justify-center h-full;
@@ -57,32 +57,30 @@
 }
 
 .permissions {
-    @apply grid grid-cols-2 w-[800px] bg-white h-[120px] items-start;
+    @apply flex flex-row bg-white items-center justify-between px-4;
 
     .single-permissions {
-        @apply w-[92%] h-[20%] grid pl-9;
-
-        div {
-            @apply flex flex-row;
-
-            p {
-                @apply pt-1
-            }
-        }
-    }
-
-    ;
-
-    .more-infos {
-        @apply w-full flex items-end pl-4 font-bold;
-
-        p {
-            font-size: $smallText;
-        }
+        @apply flex flex-row justify-center items-center
     }
 
     p {
         color: $primaryColor;
-        @apply pl-5;
+        @apply pl-2;
     }
+}
+
+p {
+    font-size: $smallText;
+}
+
+.default-color {
+    background-color: $secondColor
+}
+
+.default-grid {
+    @apply w-full h-full grid grid-cols-2 gap-4;
+}
+
+.creating {
+    @apply flex flex-col py-4
 }

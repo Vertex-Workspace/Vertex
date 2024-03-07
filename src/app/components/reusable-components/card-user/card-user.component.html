@@ -1,53 +1,56 @@
-<div class="card" *ngFor="let user of users">
-    <div [style.width]="width" [style.min-height]="height" class="sections-in-card">
-        <div>
-            <fa-icon style="font-size: 2.5rem" [icon]="faCircleUser" class="icon"></fa-icon>
-        </div>
-        <div>
-            <p>{{user.firstName}}</p>
-            <p>{{user.email}}</p>
-        </div>
-        <div [ngClass]="isTeamCreator ? 'icons-div' : 'more-infos-div'">
-
-            <!-- this icons gotta be refactored -->
-            <fa-icon *ngIf="typeString === 'creating'" [icon]="faSquare"
-                [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
-            <fa-icon *ngIf="typeString === 'addUsers'" [icon]="faSquare"
-                [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
-            <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean()"
-                *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
-            </fa-icon>
-            <fa-icon
-                *ngIf="isTeamCreator && typeString === 'permissions' && !user.openPermission || typeString === 'view-infos' && !user.openInfo"
-                size="1x" [icon]="faCaretDown" class="icon" (click)="openPermissions(user, typeString)"
-                (click)="getPermission(user)">
-            </fa-icon>
-            <fa-icon
-                *ngIf="isTeamCreator && typeString === 'permissions' && user.openPermission || typeString === 'view-infos' && user.openInfo"
-                size="1x" [icon]="faCaretUp" class="icon" (click)="openPermissions(user, typeString)"
-                (click)="getPermission(user)">
-            </fa-icon>
-            <p *ngIf="!isTeamCreator" [routerLink]="'/perfil-usuario'">Ver mais informações</p>
-        </div>
-    </div>
-
-    <div *ngIf="typeString === 'permissions' && user.openPermission" class="permissions">
-        <div class="single-permissions" *ngFor="let permission of user.permissions">
+<div [ngClass]="typeString === 'permissions' ||  typeString === 'inTheGroup' ? 'default-grid' : 'py-4'">
+    <div class="card" *ngFor="let user of users" [style.width]="width" [style.min-height]="height"
+        [ngClass]="typeString === 'permissions' ||  typeString === 'creating' ? 'bg-white' : 'default-color'">
+        <div class="sections-in-card">
             <div>
-                <fa-icon [icon]="faSquare" [ngClass]="permission.enabled === true ? 'icon' : 'icon-not-selected'"
-                    (click)="selectPermission(user, permission)">
+                <fa-icon style="font-size: 2.5rem" [icon]="faCircleUser" class="icon"></fa-icon>
+            </div>
+            <div>
+                <p>{{user.firstName}}</p>
+                <p>{{user.email}}</p>
+            </div>
+            <div [ngClass]="isTeamCreator ? 'icons-div' : 'more-infos-div'">
+
+                <!-- this icons gotta be refactored -->
+                <fa-icon *ngIf="typeString === 'creating'" [icon]="faSquare"
+                    [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
+                <fa-icon *ngIf="typeString === 'addUsers'" [icon]="faSquare"
+                    [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
+                <fa-icon
+                    *ngIf="isTeamCreator && typeString === 'permissions' && !user.openPermission || typeString === 'view-infos' && !user.openInfo"
+                    size="1x" [icon]="faCaretDown" class="icon" (click)="openPermissions(user, typeString)"
+                    (click)="getPermission(user)">
                 </fa-icon>
-                <p>{{permission.name}}</p>
+                <fa-icon
+                    *ngIf="isTeamCreator && typeString === 'permissions' && user.openPermission || typeString === 'view-infos' && user.openInfo"
+                    size="1x" [icon]="faCaretUp" class="icon" (click)="openPermissions(user, typeString)"
+                    (click)="getPermission(user)">
+                </fa-icon>
+                <p *ngIf="!isTeamCreator" [routerLink]="'/perfil-usuario'">Ver mais informações</p>
             </div>
         </div>
-        <div class="more-infos" [routerLink]="'/perfil-usuario'">
-            <p>Ver mais informações</p>
+
+        <div class="w-full h-full flex flex-col pt-2" *ngIf="typeString === 'permissions' && user.openPermission">
+            <div class="permissions">
+                <div class="single-permissions" *ngFor="let permission of user.permissions">
+                    <fa-icon [icon]="faSquare" [ngClass]="permission.enabled === true ? 'icon' : 'icon-not-selected'"
+                        (click)="selectPermission(user, permission)">
+                    </fa-icon>
+                    <p>{{permission.name}}</p>
+                </div>
+            </div>
+            <div class="more-infos" [routerLink]="'/perfil-usuario'">
+                <p class="pl-4 pt-2 font-bold">Ver mais informações</p>
+                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean()"
+                    *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
+                </fa-icon>
+            </div>
         </div>
+        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo'"
+            (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
+        </app-confirm-modal>
+        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
+            (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
+        </app-confirm-modal>
     </div>
-    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo'" 
-        (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
-    </app-confirm-modal>
-    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
-    (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
-    </app-confirm-modal>
 </div>

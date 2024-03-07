@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="typeString != 'addingParticipants'">
 
   <div class="modal">
     <h4 class="title" >Crie um novo grupo</h4>
@@ -26,6 +26,19 @@
         <button class="confirm-button" type="submit">Criar grupo</button>
       </div>
     </div>
+  </div>
+</form>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit2(group)" class="modal-overlay" *ngIf="typeString === 'addingParticipants'">
+  <div class="modal">
+  <app-card-user [group]="group" [team]="team"
+      [width]="'1000px'" [height]="'700px'" (user)="pushParticipants($event)" [typeString]="'addingParticipants'"></app-card-user>
+  <div class="w-[95%] h-[40px] flex justify-end">
+      <button  type="submit">
+          Confirmar
+      </button>
+  </div>
   </div>
 </form>
 
