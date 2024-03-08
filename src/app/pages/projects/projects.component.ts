@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
+import { Task } from 'src/app/models/class/task';
 import { Team } from 'src/app/models/class/team';
-import { User } from 'src/app/models/class/user';
+import { Permission, User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -30,11 +32,6 @@ export class ProjectsComponent implements OnInit {
   filterSettings: any[] = [];
   orderSettings: any[] = [];
 
-  menuItems = [
-    // { id: 'task', iconClass: 'pi pi-list', label: 'Tarefas' },
-    { id: 'project', iconClass: 'pi pi-folder-open', label: 'Projetos', button: 'Novo Projeto' },
-    { id: 'group', iconClass: 'pi pi-users', label: 'Grupos', button: 'Novo grupo' },
-  ];
 
   constructor(
     private projectService: ProjectService,
@@ -46,11 +43,15 @@ export class ProjectsComponent implements OnInit {
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
-    this.getTeam();
   }
   
+  
+  permissionsOnTeam!: Permission[];
+  permissionsOnTeamObservable!: Observable<Permission[]>;
+
   ngOnInit(): void {
-    this.validateTeamId(); 
+    this.getTeam();
+    this.validateTeamId();
   }
 
   validateTeamId(): void {
@@ -73,6 +74,11 @@ export class ProjectsComponent implements OnInit {
     .subscribe((team: Team) => {
       this.team = team;
       this.teamName = team.name!;
+      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team, this.logged);
+      this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
+        this.permissionsOnTeam = permissions;
+      });
+
       if (team.projects) this.emptyTeamProjects = false;
     });
   }
@@ -142,6 +148,20 @@ export class ProjectsComponent implements OnInit {
 
   switchCreateViewGroup(): void {
     this.isCreatingGroup = !this.isCreatingGroup;
+  }
+
+
+  taskOpen: boolean = false;
+  taskOpenObject!: Task;
+  changeModalTaskState(bool: boolean, task: Task): void {
+    if(bool == false){
+      this.taskOpenObject = {} as Task;
+      this.taskOpen = false;
+      return;
+    } else {
+      this.taskOpen = true;
+      this.taskOpenObject = task;
+    }
   }
 
 }

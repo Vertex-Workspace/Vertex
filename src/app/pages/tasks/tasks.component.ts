@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 import { TeamService } from 'src/app/services/team.service';
 import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/class/note';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -23,23 +24,21 @@ export class TasksComponent implements OnInit {
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
-  clicked : string = 'List';
-  query: string = '';
+  clicked: string = 'List';
+  query: string = "";
   searchBarOpen: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   propertiesOpen: boolean = false;
   taskOpen: boolean = false;
-  permissions: Permission[] = [];
   canCreate: boolean = false;
   isMuralPage !: boolean;
 
   logged !: User;
 
-  project!: Project;
-
   constructor(
-    private route : ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private projectService: ProjectService,
     private taskService: TaskService,
     private userService: UserService,
@@ -47,33 +46,40 @@ export class TasksComponent implements OnInit {
     private alertService: AlertService,
     private noteService: NoteService
   ) {
-    
 
-   }
+
+  }
 
   projectId!: number;
 
-  async ngOnInit(): Promise<void>{
+
+  project!: Project;
+  renderProject!: Observable<Project> | undefined;
+  permissions!: Permission[];
+  ngOnInit() {
     this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.projectService
-    .getOneById(id)
-    .subscribe((p: Project) => {
+    
+    this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+      this.permissions = permissions;
+      for (const permission of permissions) {
+        if ((permission.name === PermissionsType.CREATE) && permission.enabled === true) {
+          this.canCreate = true;
+        }
+      }
+    });
+
+    //Observable que é aguardado para renderizar os componentes filhos
+    this.renderProject = this.projectService.getOneById(id);
+ 
+    //Método que atribui o valor de project vindo do observable
+    this.renderProject.forEach((p: Project) => {
       this.project = p;
       let currentView = localStorage.getItem('mode-task-view');
-      if(currentView){
+      if (currentView) {
         this.clicked = currentView;
-      } 
-      this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions;
-    
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-              this.canCreate = true;
-            }
-          }
-        });
-    })
+      }
+    });
 
     if (this.clicked === 'Mural') this.isMuralPage = true;
     else this.isMuralPage = false;
@@ -88,8 +94,8 @@ export class TasksComponent implements OnInit {
   ];
 
   configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter()},
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder()},
+    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
+    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
     // { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
   ];
 
@@ -128,13 +134,13 @@ export class TasksComponent implements OnInit {
       },
       teamId: this.project.idTeam!
     }
-    
+
     this.taskService.create(taskCreate).subscribe(
       (task) => {
         console.log(task);
         this.project.tasks.push(task);
         console.log(this.project.tasks);
-        
+
         this.changeModalTaskState(true, task);
       },
       (error) => {
@@ -161,11 +167,11 @@ export class TasksComponent implements OnInit {
   }
 
   taskOpenObject!: Task;
-  changeModalTaskState(bool: boolean, task: Task): void{
+  changeModalTaskState(bool: boolean, task: Task): void {
     this.taskOpen = bool;
-    if(this.taskOpen){
+    if (this.taskOpen) {
       this.taskOpenObject = task;
-    } else{
+    } else {
       this.taskOpenObject = {} as Task;
     }
   }
@@ -174,21 +180,21 @@ export class TasksComponent implements OnInit {
     this.propertiesOpen = !this.propertiesOpen;
   }
 
-  updateProjectByTaskChanges(event: any): void{
+  updateProjectByTaskChanges(event: any): void {
     let taskUpdated: Task = event;
     this.project.tasks = this.project.tasks.map(task => {
-      if(task.id === taskUpdated.id){
+      if (task.id === taskUpdated.id) {
         return taskUpdated;
       }
       return task;
     });
   }
 
-  changeProject(project : Project) {
+  changeProject(project: Project) {
     this.project = project;
   }
-  
-  getProject() : Project {
+
+  getProject(): Project {
     return this.project;
   }
 }

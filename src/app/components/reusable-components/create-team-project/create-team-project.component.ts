@@ -96,8 +96,15 @@ export class CreateTeamProjectComponent implements OnInit {
   createProject(): void {
     const project = this.form.getRawValue() as Project;
 
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    project.creator = this.logged;
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));    
+    project.creator = {
+      user: {
+        id: this.logged.id!
+      },
+      team: {
+        id: teamId
+      }
+    };
 
     this.projectService
       .create(project, teamId)

@@ -21,7 +21,7 @@
                     <h4 (click)="cantEdit()"><input (blur)="updateTaskNameAndDescription()" [disabled]="!canEdit" [(ngModel)]="task.name" type="text" name="name" id="name" value="{{task.name}}"></h4>
                 </div>
                 <div class="properties">
-                    <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)" [canEdit]="canEdit" />
+                    <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)" [permissions]="permissions" />
                 </div>
                 <div class="down relative">
                     <div class="buttons">

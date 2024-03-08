@@ -4,7 +4,7 @@ import { TasksComponent } from './tasks.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from './calendar/calendar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PropertiesModule } from 'src/app/components/modals/properties/modal-properties.module';
@@ -38,7 +38,8 @@ import { NoteModule } from 'src/app/components/reusable-components/note/note.mod
     KanbanModule,
     ChartModule,
     PropertiesModule,
-    NoteModule
+    NoteModule,
+    ReactiveFormsModule
   ],
 })
 export class TasksModule { }

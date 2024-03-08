@@ -4,9 +4,18 @@
     @apply w-full flex shadow-sm cursor-pointer;
     background-color: $secondColor;
 
+    &:hover{
+        background-color: $emphasis !important;
+
+        .name, .properties {
+            border: 1px solid $secondColor;
+        }
+    }
+
     .name {
         @apply h-[55px] flex items-center justify-between px-4 overflow-hidden;
-        border: 1px solid #0303031A;
+        border: 1px solid $emphasis;
+        background-color: inherit;
 
         p {
             @apply pl-[3rem];
@@ -16,7 +25,7 @@
     .properties {
         @apply h-[55px] flex items-center justify-start px-4;
         border: 1px solid $emphasis;
-        background-color: $secondColor;
+        background-color: inherit;
 
         p {
             @apply p-[0.15rem] rounded-sm overflow-hidden;

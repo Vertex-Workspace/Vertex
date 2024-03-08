@@ -7,7 +7,7 @@ import {
   faEllipsisVertical
 } from '@fortawesome/free-solid-svg-icons';
 import { Value } from 'src/app/models/class/value';
-import { Property, PropertyCreation, PropertyKind } from 'src/app/models/class/property';
+import { Property, PropertyCreation, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { TeamService } from 'src/app/services/team.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,52 +23,33 @@ import { AlertService } from 'src/app/services/alert.service';
   templateUrl: './row-card.component.html',
   styleUrls: ['./row-card.component.scss']
 })
-export class  RowCardComponent {
+export class RowCardComponent {
   faEllipsisVertical = faEllipsisVertical;
   faClock = faClockRotateLeft;
   faEnvelope = faEnvelope;
   faTrashCan = faTrashCan;
 
-  project !: Project;
+
 
   constructor(private teamService: TeamService,
     private projectService: ProjectService,
-    private router : Router,
+    private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
     private taskService: TaskService,
     private alertService: AlertService,
     private changeDetection: ChangeDetectorRef
-    ) {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    if(id && !this.router.url.includes('equipe')){
-      this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-        
-        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions;
-          
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.DELETE) && permissions[i].enabled === true) {
-              this.canDelete = true;
-              this.icons[0].disabled = false;
-            } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-              this.canEdit = true;
-            }
-          }
-        });
-      })
-    }
-    }
+  ) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
 
   @Input()
   task!: Task;
+
+  @Input()
+  project !: Project;
 
   @Input()
   properties!: Property[] | PropertyCreation[];
@@ -80,17 +61,26 @@ export class  RowCardComponent {
 
   @Input() taskList?: Task[]
 
+  @Input() permissions!: Permission[];
+
   canDelete: boolean = false;
   canEdit: boolean = false;
 
   icons: any[] = [
-    // { id: 'clock', icon: this.faClock },
-    // { id: 'chat', icon: this.faEnvelope },
     { id: 'delete', icon: this.faTrashCan, disabled: true }
   ];
 
   ngOnInit(): void {
-    
+    if (this.permissions) {
+      for (const permission of this.permissions) {
+        if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
+          this.canDelete = true;
+          this.icons[0].disabled = false;
+        } else if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+          this.canEdit = true;
+        }
+      }
+    }
   }
 
   getPropertyValue(property: Property | PropertyCreation): Value {
@@ -104,51 +94,49 @@ export class  RowCardComponent {
   }
 
   @Output() deleteTask = new EventEmitter();
-  @Output() deleteTaskOftaskList = new EventEmitter()
 
   delete(event: any): void {
-    console.log(this.task.id);
     this.modalDelete = false;
-    if (event === true) {
-      if (this.canDelete) {
-        if (event) {
-          this.taskService.delete(this.task.id).subscribe(
-            (task: Task) => {
-              
-            },
-            (error) => {
-              //Alert
-              console.log(error);
-            }
-          );
-        }
-      } else {
-        this.alertService.errorAlert("Você não tem permissão para remover a tarefa!")
+    if (this.canDelete) {
+      if (event) {
+        this.taskService.delete(this.task.id).subscribe();
+        this.deleteTask.emit(this.task);
       }
     } else {
-      this.alertService.notificationAlert("Tarefa não excluída")
-    }
-  }
-
-  alertCantEdit(): void {
-    if (!this.canEdit) {
-      this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
+      this.alertNotPermission();
     }
   }
 
   openModalDelete(): void {
-    this.modalDelete = !this.modalDelete;
+    if (this.canDelete) {
+      this.modalDelete = !this.modalDelete;
+    } else {
+      this.alertNotPermission();
+    }
   }
 
-  propertyColor?: string
+  alertNotPermission(): void {
+    if(!this.canEdit){
+      if (this.router.url.includes("home")) {
+        this.alertService.errorAlert("Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!")
+      } else {
+        this.alertService.errorAlert("Você não tem permissão para alterar a tarefa!");
+      }
+    }
+  }
 
-  returnColors(): string | undefined {
-    return this.propertyColor
+  getColor(value: Value): string {
+    if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
+      let valuePropertyList: PropertyList = value.value as PropertyList;
+      if (valuePropertyList != null) {
+        return valuePropertyList.color;
+      }
+    }
+    return "";
   }
 
 
-  @Output() modalTask = new EventEmitter
-
+  @Output() modalTask = new EventEmitter<Task>();
   openModalTask(): void {
     this.modalTask.emit(this.task);
   }

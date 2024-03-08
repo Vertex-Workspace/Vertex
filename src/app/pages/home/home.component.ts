@@ -6,6 +6,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/models/class/user';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { Task } from 'src/app/models/class/task';
 
 @Component({
   selector: 'app-home',
@@ -25,10 +26,13 @@ export class HomeComponent implements OnInit{
   //TASKS - FILTER AND ORDER
   filterSettings !: any[];
   orderSettings !: any[];
-  configItems !: any[];
+  configItems = [
+    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
+    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
+  ];
+
   filterOpen !: boolean;
   orderOpen !: boolean;
-  menuItems !: any[];
 
   faPlus = faPlusSquare;
   teamsBackup: Team[] = [];
@@ -93,6 +97,20 @@ export class HomeComponent implements OnInit{
 
   clickOrder(): void {
     this.orderOpen = !this.orderOpen;
+  }
+
+
+  taskOpen: boolean = false;
+  taskOpenObject!: Task;
+  changeModalTaskState(bool: boolean, task: Task): void {
+    if(bool == false){
+      this.taskOpenObject = {} as Task;
+      this.taskOpen = false;
+      return;
+    } else {
+      this.taskOpen = true;
+      this.taskOpenObject = task;
+    }
   }
 
 
