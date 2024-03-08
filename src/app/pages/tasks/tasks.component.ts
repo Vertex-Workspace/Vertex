@@ -53,7 +53,6 @@ export class TasksComponent implements OnInit {
   projectId!: number;
 
 
-
   project!: Project;
   renderProject!: Observable<Project> | undefined;
   permissions!: Permission[];

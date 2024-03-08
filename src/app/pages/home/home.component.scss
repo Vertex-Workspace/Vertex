@@ -101,17 +101,17 @@ section{
     background-color: $secondColor;
 }
 
-    .container-grid{
-        @apply flex flex-col h-[90%] w-full pt-4 ;
-    }
-    .default-size{
-        @apply flex w-full  flex-col;
-    }
+.container-grid{
+    @apply flex flex-col h-[90%] w-full pt-4 ;
+}
+.default-size{
+    @apply flex w-full  flex-col;
+}
 
 
 // TASK - FILTER ORDER
 .filter-settings {
-    @apply flex gap-3 h-[5%] justify-start;
+    @apply flex gap-3 h-[5%] mt-6 justify-start;
 
     p {
         color: $primaryColor;

@@ -117,7 +117,7 @@ section{
 
 // TASK - FILTER ORDER
 .filter-settings {
-    @apply flex gap-3 h-[5%] pt-8 justify-start;
+    @apply flex gap-3 h-[5%] mt-6 justify-start;
 
     p {
         color: $primaryColor;
