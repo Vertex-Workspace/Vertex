@@ -2,10 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
+import { GroupService } from 'src/app/services/group.service';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -33,6 +35,8 @@ export class CreateTeamProjectComponent implements OnInit {
 
   users !: User[];
 
+  groups !: Group[]
+
 
   @Input()
   typeString!: String;
@@ -51,7 +55,8 @@ export class CreateTeamProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private alert: AlertService
+    private alert: AlertService,
+    private groupService: GroupService 
   ) {
     this.logged = this.userService.getLogged();
 
@@ -62,6 +67,7 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getGroups();
     this.getUsers();
   }
 
@@ -83,7 +89,6 @@ export class CreateTeamProjectComponent implements OnInit {
     const team = this.form.getRawValue() as Team;
 
       team.creator = this.logged;
-      console.log(team);
       
       this.teamService
         .create(team)
@@ -143,19 +148,29 @@ export class CreateTeamProjectComponent implements OnInit {
     this.closeScreen();
   }
 
-  userNamesList: string[] = [];
+  listOfResponsibles: any [] = []
 
   private getUsers(): void{
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     
     this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
        this.users = users
-       for (let i = 0; i < this.users.length; i++) {
-        this.userNamesList.push(this.users[i].firstName!);
-      }
+       for(const user of users){
+        this.listOfResponsibles.push(user);
+       }
+       
     });
-    
-    
+  }
+
+  private getGroups(): void {
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
+      this.groups = groups
+      for(const group of groups){
+        this.listOfResponsibles.push(group)
+      }
+    })
   }
 
 }

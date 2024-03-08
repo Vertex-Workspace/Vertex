@@ -46,10 +46,7 @@ input:focus {
 ::-webkit-scrollbar-track {
     background: $emphasis;
 }
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
+
 ::-webkit-scrollbar-thumb {
     background-color: $primaryColor;
     border-radius: 3px;

@@ -56,14 +56,13 @@ export class CardUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.random(0,6));
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
       this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
         this.users = users;
       });
-    } else if (this.typeString === 'addUsers') {
+    } else if (this.typeString === 'addingParticipants') {
       this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
         this.users = users;
       });
@@ -166,11 +165,5 @@ export class CardUserComponent implements OnInit {
         this.users = users;
       });
     }
-  }
-
-  random(min: number, max:number){
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

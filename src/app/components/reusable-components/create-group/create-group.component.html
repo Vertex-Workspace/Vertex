@@ -22,8 +22,8 @@
   
     <div class="div-buttons">
       <div class="buttons">
-        <button class="cancel-button" (click)="closeGroup()">Cancelar</button>
-        <button class="confirm-button" type="submit">Criar grupo</button>
+        <button class="button cancel" (click)="closeGroup()">Cancelar</button>
+        <button class="button confirm" type="submit">Criar grupo</button>
       </div>
     </div>
   </div>
@@ -32,13 +32,15 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit2(group)" class="modal-overlay" *ngIf="typeString === 'addingParticipants'">
   <div class="modal">
-  <app-card-user [group]="group" [team]="team"
-      [width]="'1000px'" [height]="'700px'" (user)="pushParticipants($event)" [typeString]="'addingParticipants'"></app-card-user>
-  <div class="w-[95%] h-[40px] flex justify-end">
-      <button  type="submit">
-          Confirmar
-      </button>
-  </div>
+    <p>Adicionar mais participantes</p>
+    <app-card-user [group]="group" [typeString]="'creating'" [width]="'600px'" [height]="'70px'" (user)="pushParticipants($event)"
+    [team]="team" class="pt-4"></app-card-user>
+    <div class="div-buttons">
+      <div class="buttons">
+        <button class="button cancel" (click)="closeGroup()">Cancelar</button>
+        <button class="button confirm" type="submit">Criar grupo</button>
+      </div>
+    </div>
   </div>
 </form>
 

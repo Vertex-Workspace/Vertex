@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .card{
-    @apply flex flex-col w-full py-2 shadow-lg;
+    @apply flex flex-col w-full shadow-lg;
 
     .sections-in-card {
         @apply flex w-full items-center ;
@@ -78,11 +78,13 @@ p {
 }
 
 .default-grid {
-    @apply w-full h-full grid grid-cols-2 gap-4;
+    @apply w-full h-full grid grid-cols-2 gap-2;
 }
 
+
+
 .creating {
-    @apply flex flex-col py-4
+    @apply flex flex-col gap-2
 }
 
 .more-infos {

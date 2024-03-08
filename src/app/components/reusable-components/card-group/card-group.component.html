@@ -21,7 +21,7 @@
                     (click)="addParticipants()">
                 </fa-icon>
             </div>
-            <app-card-user *ngIf="selectMoreUsers" [typeString]="'inTheGroup'" [width]="'320px'" [height]="'70px'"
+            <app-card-user *ngIf="selectMoreUsers" [typeString]="'inTheGroup'" [width]="'270px'" [height]="'70px'"
                 class="user-card" [group]="group" [team]="team"></app-card-user>
             <div class="flex flex-row justify-end items-center pr-8 pt-5">
                 <fa-icon [icon]="faTrashCan" class="icon size" (click)="openModalDelete(group)"></fa-icon>
@@ -33,7 +33,8 @@
             (confirmEvent)="emitItem($event)">
         </app-confirm-modal>
 
-        <app-create-group [group]="group" [team]="team" *ngIf="!selectMoreUsers" [typeString]="'addingParticipants'">
+        <app-create-group [group]="group" [team]="team" *ngIf="!selectMoreUsers" [typeString]="'addingParticipants'"
+        (close)="addParticipants()">
 
         </app-create-group>
 

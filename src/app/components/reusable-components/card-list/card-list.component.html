@@ -1,23 +1,31 @@
 <div class="list">
     <div class="grid grid-cols-2 h-[300px] gap-[20px]">
 
-    <ng-container *ngFor="let item of getType()">
-        <div class="card">
-            <div class="image flex justify-center items-center" (click)="openTeam(item.id)">
-                <!-- <img src="../../../../assets/logo-weg.png" alt="" class="h-[70%]"> -->
-                <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">
-                <h1 *ngIf="item.name === 'Equipe ' + creatorName">{{firstLetterName}}</h1>
-            </div>
-            <div class="informations" (click)="openTeam(item.id)">
-                <p class="large-text">{{item.name}}</p>
-                <p class="regular-text">Visualizar Informações</p>
-            </div>
-        </div>
+        <ng-container *ngFor="let item of getType()">
+            <div class="card">
+                <div class="flex flex-col w-full">
+                    <div class="image flex justify-center items-center" (click)="openTeam(item.id)">
+                        <!-- <img src="../../../../assets/logo-weg.png" alt="" class="h-[70%]"> -->
+                        <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">
+                        <h1 *ngIf="item.name === 'Equipe ' + creatorName">{{firstLetterName}}</h1>
+                    </div>
+                    <div class="informations">
+                        <div class="infos-team" (click)="openTeam(item.id)">
+                            <p class="large-text">{{item.name}}</p>
+                            <p class="regular-text">Visualizar Informações</p>
+                        </div>
 
-        <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'" [title]="'o projeto'"
-            (confirmEvent)="emitItem($event)"></app-confirm-modal>
-        <app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
-            (confirmEvent)="emitItem($event)"></app-confirm-modal>
-    </ng-container>
+                        <div *ngIf="teamScreen === 'settings'" class="icon">
+                            <fa-icon [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
+                [title]="'o projeto'" (confirmEvent)="emitItem($event)"></app-confirm-modal>
+            <app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
+                (confirmEvent)="emitItem($event)"></app-confirm-modal>
+        </ng-container>
     </div>
 </div>

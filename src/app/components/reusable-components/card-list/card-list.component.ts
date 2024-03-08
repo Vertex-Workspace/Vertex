@@ -6,6 +6,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-card-list',
@@ -20,6 +21,8 @@ export class CardListComponent implements OnInit {
     private userService: UserService
   ) { }
 
+  faTrashCan = faTrashCan;
+  
   @Input()
   teams?: Team[]; //se estiver na home
 
@@ -28,6 +31,9 @@ export class CardListComponent implements OnInit {
 
   @Input()
   type !: string;
+
+  @Input()
+  teamScreen !: string;
 
   @Output()
   emitterItem = new EventEmitter();
@@ -87,5 +93,7 @@ export class CardListComponent implements OnInit {
       }
     })
   }
+
+  
 
 }

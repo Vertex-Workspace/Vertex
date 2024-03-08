@@ -105,6 +105,8 @@ export class CreateGroupComponent implements OnInit {
 
   pushParticipants(user: User): void {
     this.users.push(user)
+    console.log(user);
+    
   }
 
   onSubmit2(group: Group): void {
@@ -113,7 +115,6 @@ export class CreateGroupComponent implements OnInit {
       this.group = group;
     });
     group.users = this.users;
-    console.log(group);
 
     this.groupService
       .addParticipants(group)

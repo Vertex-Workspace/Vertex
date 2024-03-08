@@ -1,7 +1,8 @@
 @import '../../../../variables';
 
 .card{
-    @apply bg-white border-l-8 flex shadow-lg w-full;
+    @apply flex shadow-lg w-full;
+    background-color: $emphasis;
 
     div:first-child{
         @apply w-[85%] flex items-center pl-6 h-full;
@@ -18,7 +19,8 @@
 }
 
 .user{
-    @apply w-[800px] bg-white pl-2 py-2;
+    @apply w-[800px] pl-6;
+    background-color: $emphasis;
 
     button {
         background-color: $primaryColor;
@@ -42,7 +44,10 @@
 .size{
     font-size: 1rem;
 }
-
+::-webkit-scrollbar-thumb {
+    background-color: $primaryColor;
+    margin-left: 3px;
+}
 
 
 

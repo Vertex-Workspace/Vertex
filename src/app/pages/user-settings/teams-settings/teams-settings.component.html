@@ -7,10 +7,17 @@
     </div>
 
     <section>
-        <span class="p-input-icon-right">
-            <input type="text" class="regular-text" placeholder="Busque pela sua equipe aqui..." />
-            <i class="pi pi-search search"></i>
-        </span>
-        <app-card-list style="width: 85%; height: 90%; padding-top: 3%;" [teams]="teams"></app-card-list>
+        <div class="w-[85%]">
+            <div class="search">
+                <input type="text" placeholder="Pesquise por uma equipe...">
+                <i class="pi pi-search cursor-pointer " style="font-size: 1.4rem;"></i>
+            </div>
+        </div>
+        <app-card-list style="width: 85%; height: 90%; padding-top: 3%;" 
+        [type]="'team'"
+        [teams]="teams" 
+        [teamScreen]="'settings'"
+        (emitterItem)="delete($event)">
+        </app-card-list>
     </section>
 </div>

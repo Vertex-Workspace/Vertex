@@ -5,6 +5,7 @@ import { faUsers, faSearch, faCircleUser, faDoorOpen,
 import { LogarithmicScale } from 'chart.js';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -26,6 +27,7 @@ export class TeamsSettingsComponent implements OnInit{
     private route: ActivatedRoute,
     private teamService: TeamService,
     private router: Router,
+    private alert: AlertService
   ) {
     this.logged = this.userService.getLogged();  
     this.getRecentsTeams();
@@ -44,6 +46,24 @@ export class TeamsSettingsComponent implements OnInit{
       .getTeamsByUser(this.logged)
       .subscribe((teams) => {        
         this.teams = teams;
+      });
+  }
+
+  delete(team : Team): void {
+    // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
+    //   this.userCreator = user;
+    //   console.log(user); 
+    // })
+  
+    
+    this.teamService
+      .delete(team.id)
+      .subscribe((team: Team) => {
+        this.alert.successAlert('Equipe removida com sucesso!');
+        this.teams?.splice(this.teams.indexOf(team), 1);
+      },
+      e => {
+        this.alert.errorAlert('Erro ao deletar equipe!')
       });
   }
 

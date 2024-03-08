@@ -1,4 +1,4 @@
-<div [ngClass]="typeString === 'permissions' ||  typeString === 'inTheGroup' ? 'default-grid' : 'py-4'">
+<div [ngClass]="typeString === 'permissions' ||  typeString === 'inTheGroup' ? 'default-grid' : 'creating'">
     <div class="card" *ngFor="let user of users" [style.width]="width" [style.min-height]="height"
         [ngClass]="typeString === 'permissions' ||  typeString === 'creating' ? 'bg-white' : 'default-color'">
         <div class="sections-in-card">

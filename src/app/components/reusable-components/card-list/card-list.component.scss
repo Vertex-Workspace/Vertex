@@ -4,7 +4,7 @@
         overflow-y: auto;
     }
     .card{
-        @apply flex w-[98%] h-[400px] shadow-lg rounded-sm flex-col;
+        @apply flex w-[98%] h-[400px] shadow-lg rounded-sm flex-row;
         background-color: $card;
         font-family: $fontFamily;
         color: $text;
@@ -22,7 +22,15 @@
     
     
         .informations{
-            @apply flex h-2/6 w-full flex-col px-4 justify-evenly;
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly
+            };
+
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            };
         }
     
         .informations-text{
@@ -91,4 +99,9 @@
 //         }
 //     }
 // }
+
+.trash-icon {
+    color: $primaryColor;
+    font-size: 1rem;
+}
 
