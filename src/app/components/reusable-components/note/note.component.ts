@@ -28,7 +28,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
   ) {}
 
   basicData: any;
-  modalOpen: boolean = false;
+  modalOpen: boolean = true;
 
   ngOnInit(): void { 
     
@@ -46,8 +46,8 @@ export class NoteComponent implements OnInit, AfterViewInit {
   }
 
   dragEnd(e: any): void {
-    this.note.posX = e.dropPoint.x - 300;
-    this.note.posY = e.dropPoint.y - 300;
+    this.note.posX = e.dropPoint.x - 320;
+    this.note.posY = e.dropPoint.y - 320;
     
     this.edit();
     

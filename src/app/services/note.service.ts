@@ -19,9 +19,9 @@ export class NoteService {
       .post<Note>(`${URL}note/${projectId}/${userId}`, note);
   }
 
-  public getAllByProject(teamId: number): Observable<Note[]> {
-    return this.http
-      .get<Note[]>(`${URL}note/${teamId}`)
+  public getAllByProject(projectId: number): Observable<Note[]> {
+    return this.http 
+      .get<Note[]>(`${URL}note/${projectId}`)
       .pipe(map((notes: Note[]) => 
         notes.map((note: Note) => new Note(note))
       ));
@@ -33,9 +33,7 @@ export class NoteService {
       .patch<Note>(`${URL}note`, noteEditing)
   }
 
-  public delete(id: number): Observable<Note> {
-    console.log('chegou aq');
-    
+  public delete(id: number): Observable<Note> {    
     return this.http
       .delete<Note>(`${URL}note/${id}`);
   }

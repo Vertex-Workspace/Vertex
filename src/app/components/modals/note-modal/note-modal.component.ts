@@ -26,6 +26,8 @@ export class NoteModalComponent implements OnInit {
   @Output()
   patchOutput: EventEmitter<void> = new EventEmitter;
 
+  textAreaRows !: number;
+
   faCheck = faCheck;
 
   project !: Project;
@@ -35,31 +37,27 @@ export class NoteModalComponent implements OnInit {
   colorListOpen: boolean = false;
   colorList: Color[] = [
     {
-      color: '#d3e5ef50',
+      color: '#D3E5EF',
       selected: false,
     },
     {
-      color: '#FF9D9D50',
+      color: '#FF9D9D',
       selected: false,
     },
     {
-      color: '#f5e0e950',
+      color: '#F5E0E9',
       selected: false,
     },
     {
-      color: '#fadec950',
+      color: '#FFD601',
       selected: false,
     },
     {
-      color: '#e3e2e050',
+      color: '#E3E2E0',
       selected: false,
     },
     {
-      color: '#FFD60050',
-      selected: false,
-    },
-    {
-      color: '#65D73C50',
+      color: '#65D73C',
       selected: false,
     },
     {
@@ -80,6 +78,7 @@ export class NoteModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.textAreaRows = 1;
     this.setSelectedColor();
   }
 
@@ -116,6 +115,11 @@ export class NoteModalComponent implements OnInit {
   }
 
   clickOutHandler(): void {
+    this.closeModal.emit();
+  }
+
+  submit(): void {
+    this.patchOutput.emit();
     this.closeModal.emit();
   }
 

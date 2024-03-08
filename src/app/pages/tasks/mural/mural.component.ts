@@ -30,28 +30,27 @@ export class MuralComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute
   ){
-    route.params.subscribe(params => {
-      if (params) {
-        this.projectService.getOneById(params['id'])
-          .subscribe(p => console.log(p))
-        this.getNotes(params['id']);           
-      }
-    });
+    // route.params.subscribe(params => {
+    //   if (params) {
+    //     this.projectService.getOneById(params['id'])
+    //       .subscribe(p => console.log(p))
+                
+    //   }
+    // });
   }
 
   teste(e: any): void {
     
   }
 
-  getNotes(id: number): void {
-    this.noteService
-    .getAllByProject(id)
-    .subscribe((notes: Note[]) => {
-      this.notes = notes;
-    });
+  getNotes(): void {
+    this.notes = this.project.notes;
+    console.log(this.project);
+    
   }
 
   ngOnInit(): void {  
+    this.getNotes();   
   }
 
   deleteNote(note: Note) {    

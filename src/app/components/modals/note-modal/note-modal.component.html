@@ -1,24 +1,32 @@
-<section class="modal-overlay" (click)="clickOutHandler()">
-    <div class="modal">
+<section class="modal-overlay">
+    <div class="modal" [style.backgroundColor]="note.color">
         <div class="left">
 
-            <div class="location">
-                {{project.name}} | {{note.title}}
+            <div class="location pl-2">
+                <p>
+                    {{project.name}}
+                </p>
             </div>
             <div class="main-content">
-                <input type="text" [(ngModel)]="note.title">
+                <input type="text" [(ngModel)]="note.title" [style.backgroundColor]="note.color">
 
                 <div class="content">
                     <textarea 
                         [disabled]="!descriptionEditable"
                         [style.background]="descriptionEditable ? '#f5f5f5' :  '#fff'" 
                         [(ngModel)]="note.description"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        [cdkAutosizeMinRows]="1"
+                        [cdkAutosizeMaxRows]="7"
+                        maxlength="255"
+                        [style.backgroundColor]="note.color"
                     >
                         {{note.description}}
                     </textarea>
 
                     <a (click)="toggleEditDescription()">
-                        Editar descrição
+                        {{!descriptionEditable ? "Editar descrição" : "Confirmar" }}
                     </a>
                 </div>
 
@@ -32,17 +40,19 @@
                             [style.backgroundColor]="color.color" 
                             (click)="changeColor(color)"
                         >
-                            <!-- <fa-icon 
-                                [icon]="faCheck"
-                                 class="icon" >
-                            </fa-icon> -->
                         </div>
                     </ng-container>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="right">
-
+        <div class="right">
+            <i class="pi pi-plus rotate-45" (click)="clickOutHandler()"></i>
+            <div class="config-right">
+                <i class="pi pi-images"></i>
+                <button (click)="submit()">
+                    <i class="pi pi-check"></i>
+                </button>
+            </div>
+        </div>
     </div>
 </section>

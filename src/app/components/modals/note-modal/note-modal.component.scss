@@ -25,7 +25,7 @@
     z-index: 999;
 
     .modal {
-        @apply w-[800px] h-[600px] flex flex-col p-8 rounded-sm;
+        @apply w-[800px] h-[600px] flex p-8 rounded-sm;
         background-color: $whiteDefault;
 
         .left {
@@ -43,7 +43,7 @@
                 @apply flex flex-col px-2 h-full;
 
                 textarea {
-                    @apply text-xl min-h-[50%] h-auto overflow-y-hidden text-justify cursor-text;
+                    @apply text-xl overflow-y-hidden text-justify cursor-text;
                     resize: none;
                 }
 
@@ -74,9 +74,7 @@
             }
 
             .color {
-                @apply cursor-pointer w-[50px] h-[50px] rounded-full shadow-sm flex items-center justify-center;
-                box-shadow: 2px 2px 3px 3px lightgrey;
-
+                @apply cursor-pointer w-[50px] h-[50px] rounded-full flex items-center justify-center;
                 .icon {
                     color: $primaryColor;
                 }
@@ -86,7 +84,40 @@
     }
 
     .right {
-        @apply w-[25%];
+        @apply w-[25%] h-full relative;
+
+        .pi-plus {
+            @apply absolute top-0 right-0;
+            font-size: 1.3rem;
+        }
+
+        .config-right {
+            @apply flex gap-4 items-center absolute bottom-0 right-0;
+
+            .pi-images {
+                font-size: 1.8rem;
+            }
+            
+            button {
+                @apply w-[45px] h-[45px] rounded-sm flex items-center justify-center transition-colors;
+                background-color: $primaryColor;
+                border: solid 1px $primaryColor;
+                
+                i {
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    color: $secondColor;
+                }
+                
+                &:hover {
+                    @apply transition-colors;
+                    background-color: $secondColor;
+                    i {
+                        color: $primaryColor;
+                    }
+                }
+            }
+        }
     }
         
 
