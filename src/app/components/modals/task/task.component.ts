@@ -57,20 +57,22 @@ export class TaskComponent implements OnInit {
     private taskHourService: taskHourService,
     private teamService: TeamService,
     private userService: UserService,
-    private route: ActivatedRoute) {
-    
+    private route: ActivatedRoute) { 
   }
 
   selectedComponent: string = 'description';
 
   async ngOnInit() {
-    
-    for (const permission of this.permissions) {
-      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
-        this.canEdit = true;
+    if(this.permissions){
+      for (const permission of this.permissions) {
+        if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+          this.canEdit = true;
+        }
       }
+    } else {
+      console.log(this.task);
     }
-    
+
 
     this.user = JSON.parse(localStorage.getItem('logged')!);
     this.task.taskResponsables!.forEach((taskResponsable) => {
@@ -108,7 +110,9 @@ export class TaskComponent implements OnInit {
     this.selectedComponent = component;
   }
 
-  async closeModal() {
+  closeModal() {
+    console.log("Close");
+    
     this.close.emit();
   }
 

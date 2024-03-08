@@ -47,6 +47,8 @@
                         (modalTask)="openTaskModal($event)"
                         [task]="task"
                         [properties]="properties"
+                        [permissions]="permissions"
+                        (deleteTask)="updateTaskList($event)"
                     ></app-row-card>
                     <app-row-card
                         *ngIf="project"
@@ -55,6 +57,7 @@
                         [properties]="project.properties"
                         [project]="project"
                         [permissions]="permissions"
+                        (deleteTask)="updateTaskList($event)"
                     ></app-row-card>
                     
                 </div>

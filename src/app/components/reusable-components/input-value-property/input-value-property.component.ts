@@ -32,7 +32,8 @@ export class InputValuePropertyComponent {
 
   project !: Project;
 
-  canEdit: boolean = false;
+  @Input() canEdit !: boolean;
+
 
   constructor(private teamService: TeamService,
     private projectService: ProjectService,
@@ -40,24 +41,12 @@ export class InputValuePropertyComponent {
     private userService: UserService,
     private alertService: AlertService,
     private taskService: TaskService,
-    private router: Router) {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-      if(id && !this.router.url.includes('equipe')){
+    private router: Router) {}
 
-      this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-        this.userService.getLogged().permissions = permissions;
-        for (let i = 0; i < permissions.length; i++) {
-          if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-            this.canEdit = true
-          }
-        }
-      });
-    }
-  }
 
 
   ngOnInit(): void {
-
+      
     if(this.value.property.kind === PropertyKind.STATUS || 
       this.value.property.kind === PropertyKind.LIST){
       let valuePropertyList : PropertyList = this.value.value as PropertyList;
@@ -120,18 +109,27 @@ export class InputValuePropertyComponent {
       value.value = date.toISOString().slice(0, -1);
       this.updateTask(value);
     }else {
-      this.alertService.errorAlert("Você não tem permissão para editar!")
+      this.alertNotPermission();
     }
   }
 
   changeList(event: any, value: Value): void {
     if (this.canEdit) { 
-      console.log(value);
-      
       this.updateTask(value);
     }else {
-      this.alertService.errorAlert("Você não tem permissão para editar!")
+      this.alertNotPermission();
     }
+  }
+
+  private alertNotPermission(): void {
+    console.log("NOT PERMISSION");
+    if(this.router.url.includes("home")){
+      console.log("home");
+      this.alertService.errorAlert("Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!")
+    } else{
+      this.alertService.errorAlert("Você não tem permissão para editar!");
+    }
+
   }
 
   change(value: Value): void {
@@ -145,7 +143,7 @@ export class InputValuePropertyComponent {
       this.updateTask(value);
     }
     else {
-      this.alertService.errorAlert("Você não tem permissão para alterar o status")
+      this.alertNotPermission();
     }
   }
 
@@ -158,8 +156,7 @@ export class InputValuePropertyComponent {
     } else if(value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST){
       let propertyList : PropertyList = value.value as PropertyList;
       valueTest = propertyList.id;
-    } 
-    else {
+    } else {
       valueTest = value.value;
     }
     const valueUpdate: ValueUpdate = {
@@ -174,7 +171,6 @@ export class InputValuePropertyComponent {
         }
       }
     };
-    console.log(valueUpdate);
     
     this.taskService.patchValue(valueUpdate).subscribe(
       (task) => {

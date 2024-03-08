@@ -38,9 +38,9 @@ export class TaskService {
     return this.http.post<Task>(`${URL}task`, taskCreate);
   }
 
-  public delete(id: number): Observable<Task> {
+  public delete(id: number) {
     return this.http
-      .delete<Task>(`${URL}task/${id}`);
+      .delete(`${URL}task/${id}`);
   }
 
   public patchValue(valueUpdate: ValueUpdate):Observable<Task>{

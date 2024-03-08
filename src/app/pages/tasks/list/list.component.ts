@@ -65,9 +65,11 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.project) {
-      this.taskList = this.project.tasks!;
+      this.getProject();
+    } else if(this.router.url.includes("equipe")) {
+      this.getTeam();
     }
   }
 
@@ -100,7 +102,6 @@ export class ListComponent implements OnInit {
     this.taskService
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
-        console.log("Retornou");
         if (tl.length > 0) {
           this.isNull = false;
           this.taskList = tl;  
@@ -120,6 +121,10 @@ export class ListComponent implements OnInit {
         }
       })
       
+  }
+
+  updateTaskList(task: Task){
+    this.taskList.splice(this.taskList.indexOf(task), 1);
   }
 
 
