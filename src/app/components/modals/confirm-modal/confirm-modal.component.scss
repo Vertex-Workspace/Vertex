@@ -17,15 +17,15 @@
 }
 
 .ng-contentDiv{
-    @apply w-full h-full flex flex-col items-center;
+    @apply w-full h-full flex flex-col;
 }
 
 .text-align {
-    @apply flex items-center justify-center w-full h-full flex-col pt-16;   
+    @apply flex items-center justify-center w-full h-full flex-col;   
 }
 
 .button-div {
-    @apply flex flex-row pt-6 justify-evenly w-[60%];
+    @apply flex flex-row pt-6 justify-end w-full;
 }
 
 button {

@@ -14,6 +14,8 @@ import { ProjectService } from 'src/app/services/project.service';
 import { User } from 'src/app/models/class/user';
 import { TimeInTask } from 'src/app/models/class/timeInTask';
 import { ActivatedRoute } from '@angular/router';
+import { Team } from 'src/app/models/class/team';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -50,6 +52,15 @@ export class TaskComponent implements OnInit {
   id!: any;
   miniChatOpen: boolean = false;
   chatExpanded: boolean = false;
+  taskInfoDTO: any = {
+    teamName: "",
+    projectName : "",
+    creatorFullName: "",
+    email: "",
+  }
+
+  isSending: boolean = false;
+
 
   constructor(private taskService: TaskService,
     private projectService: ProjectService,
@@ -62,44 +73,50 @@ export class TaskComponent implements OnInit {
 
   selectedComponent: string = 'description';
 
+  waitRequest: boolean = false;
+
   async ngOnInit() {
+    this.taskService.getTaskInfo(this.task.id).subscribe(
+      (team: any) => {
+        this.taskInfoDTO = team;
+        console.log(this.taskInfoDTO, "TASK INFO");
+        
+      }
+    );
     if(this.permissions){
       for (const permission of this.permissions) {
         if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
           this.canEdit = true;
         }
       }
-    } else {
-      console.log(this.task);
     }
-
-
     this.user = JSON.parse(localStorage.getItem('logged')!);
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
+        console.log(this.idResponsable, "ID RESPONSABLE");
+        
       }
     });
-
-    
     await this.getTimeInTask();
-    
-    if (this.timeInTask.working) {
-      this.startTimer()
-    }
+
+    //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
+    window.onbeforeunload = () => this.ngOnDestroy();
   }
 
 
   async getTimeInTask() {
     this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
       (time: TimeInTask) => {
-
         this.timer = time.timeInTask;
-
         this.seconds = parseInt(time.timeInTask.substring(6, 8));
         this.minutes = parseInt(time.timeInTask.substring(3, 5));
         this.hours = parseInt(time.timeInTask.substring(0, 2));
         this.timeInTask = time;
+        this.waitRequest = true;
+        if (this.timeInTask.working) {
+          this.startTimer()
+        }
       },
       (e: any) => {
         console.log(e);
@@ -235,8 +252,14 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    console.log("NG ON DESTROY");
+    
     if(this.timeInTask.working){
       this.stopTimer();
     }
+  }
+
+  sendTask(){
+    this.isSending = !this.isSending;
   }
 }

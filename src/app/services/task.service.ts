@@ -76,4 +76,8 @@ export class TaskService {
   }
 
 
+  public getTaskInfo(taskId: number) {
+    return this.http.get(`${URL}task/info/${taskId}`);
+  }
+
 }

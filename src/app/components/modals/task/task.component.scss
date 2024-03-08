@@ -16,13 +16,6 @@
     z-index: 999;
 }
 
-.button {
-    @apply bg-transparent text-zinc-500 rounded-md;
-
-    button {
-        @apply cursor-pointer hover:bg-zinc-200 p-2;
-    }
-}
 
 .buttons button,
 .submit button {
@@ -216,4 +209,8 @@ textarea:focus{
 
 textarea{
     @apply rounded-sm;
+}
+
+.task-description{
+    background-color: $secondColor;
 }
