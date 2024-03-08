@@ -97,6 +97,26 @@
             .pi-images {
                 font-size: 1.8rem;
             }
+
+            .image {
+                @apply w-[45px] h-full flex items-center justify-center relative cursor-pointer;
+
+                .pi-images {
+                    @apply cursor-pointer;
+                }
+
+                form {
+                    @apply w-full h-full flex justify-center items-center absolute cursor-pointer;
+                    opacity: 0;
+                
+                    .input-file {
+                        @apply cursor-pointer w-full h-full;
+                    }
+                
+                }
+
+
+            }
             
             button {
                 @apply w-[45px] h-[45px] rounded-sm flex items-center justify-center transition-colors;
@@ -107,6 +127,7 @@
                     font-size: 1.3rem;
                     font-weight: bold;
                     color: $secondColor;
+                    cursor: pointer;
                 }
                 
                 &:hover {
@@ -126,5 +147,6 @@
     i {
         cursor: pointer;
     }
+
 
 }

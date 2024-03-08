@@ -13,7 +13,6 @@
                 <div class="content">
                     <textarea 
                         [disabled]="!descriptionEditable"
-                        [style.background]="descriptionEditable ? '#f5f5f5' :  '#fff'" 
                         [(ngModel)]="note.description"
                         cdkTextareaAutosize
                         #autosize="cdkTextareaAutosize"
@@ -48,7 +47,13 @@
         <div class="right">
             <i class="pi pi-plus rotate-45" (click)="clickOutHandler()"></i>
             <div class="config-right">
-                <i class="pi pi-images"></i>
+                <div class="image">
+                    <i class="pi pi-images"></i>
+                    <form>
+                        <input type="file" class="input-file" (change)="onFileSelected($event)">
+                    </form>
+                </div>
+                
                 <button (click)="submit()">
                     <i class="pi pi-check"></i>
                 </button>

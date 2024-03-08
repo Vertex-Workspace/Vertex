@@ -14,7 +14,7 @@ export class Note {
     color !: string;
     posX!: number;
     posY!: number;
-    files !: File[];
+    files !: any[];
 
     constructor(
         note: Note,
@@ -29,4 +29,4 @@ export class Note {
         this.posX = note.posX;
         this.posY = note.posY;
     }
-};
+}

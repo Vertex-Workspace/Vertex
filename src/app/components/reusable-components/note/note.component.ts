@@ -2,6 +2,7 @@ import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { Point } from 'chart.js';
 import { Note } from 'src/app/models/class/note';
+import { AlertService } from 'src/app/services/alert.service';
 import { NoteService } from 'src/app/services/note.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class NoteComponent implements OnInit, AfterViewInit {
 
   constructor(
     private ngZone: NgZone, 
-    private noteService: NoteService
+    private noteService: NoteService,
+    private alert: AlertService
   ) {}
 
   basicData: any;
@@ -58,13 +60,20 @@ export class NoteComponent implements OnInit, AfterViewInit {
   }
 
   configItems = [
-    { id: 'image', iconClass: 'pi pi-images', onClick: () => this.toggleModalOpen() },
     { id: 'edit', iconClass: 'pi pi-pencil', onClick: () => this.toggleModalOpen() },
     { id: 'trash', iconClass: 'pi pi-trash', onClick: () => this.deleteNote() },
   ];
 
   hasImage(): boolean {
     return Object.hasOwn(this.note, 'image');;
+  }
+
+  uploadImage(fd: FormData): void {
+    this.noteService
+      .uploadImage(this.note.id!, fd)
+      .subscribe(() => {
+        this.alert.successAlert('Imagem adicionada!')
+      });
   }
 
   get resizeBoxElement(): HTMLElement {

@@ -26,6 +26,9 @@ export class NoteModalComponent implements OnInit {
   @Output()
   patchOutput: EventEmitter<void> = new EventEmitter;
 
+  @Output()
+  uploadImageOutput: EventEmitter<FormData> = new EventEmitter;
+
   textAreaRows !: number;
 
   faCheck = faCheck;
@@ -65,7 +68,7 @@ export class NoteModalComponent implements OnInit {
       selected: false,
     }
   ];
-
+  
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute
@@ -78,12 +81,6 @@ export class NoteModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.textAreaRows = 1;
-    this.setSelectedColor();
-  }
-
-  setSelectedColor(): void {
-
   }
 
   getProject(id: number): void {
@@ -102,8 +99,6 @@ export class NoteModalComponent implements OnInit {
 
   changeColor(color: Color) {    
     this.note.color = color.color;
-    this.patchOutput.emit();
-    
   }
 
   toggleColorList(): void {
@@ -116,6 +111,14 @@ export class NoteModalComponent implements OnInit {
 
   clickOutHandler(): void {
     this.closeModal.emit();
+  }
+
+  onFileSelected(e: any): void {
+    const selectedFile = e.target.files[0]
+    const fd: FormData = new FormData();
+    fd.append('file', selectedFile, selectedFile.name);    
+    
+    this.uploadImageOutput.emit(fd);
   }
 
   submit(): void {

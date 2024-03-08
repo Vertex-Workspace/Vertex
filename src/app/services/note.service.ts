@@ -38,4 +38,9 @@ export class NoteService {
       .delete<Note>(`${URL}note/${id}`);
   }
 
+  public uploadImage(id: number, fd: FormData) {
+    return this.http
+      .patch<Note>(`${URL}note/upload/${id}`, fd);
+  }
+
 }
