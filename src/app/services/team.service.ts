@@ -120,19 +120,6 @@ export class TeamService {
       .get<Permission[]>(`${URL}team/hasPermission/${projectId}/${user.id}`)
   }
 
-  usersPermission: Subject<Permission[]> = new Subject<Permission[]>();
-
-  public setPermissions(permissions: Permission[]) {
-    console.log("Set Permissions", permissions);
-    this.usersPermission.next(permissions);
-    console.log(this.usersPermission);
-    
-  }
-
-  public getPermissions(): Observable<Permission[]> {
-    return this.usersPermission.asObservable();
-  }
-  
 
   public deleteUserTeam(team: Team, user: User): Observable<Team> {
     return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
