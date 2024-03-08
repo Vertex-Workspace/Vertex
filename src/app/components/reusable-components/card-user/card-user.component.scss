@@ -84,3 +84,7 @@ p {
 .creating {
     @apply flex flex-col py-4
 }
+
+.more-infos {
+    @apply flex flex-row justify-between 
+}

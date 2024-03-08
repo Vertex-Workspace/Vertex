@@ -26,6 +26,16 @@
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
     </div>
 
+    <p-treeSelect 
+    class="w-full md:w-20rem pt-4" 
+    containerStyleClass="w-full"  
+    display="chip"
+    [options]="users"
+     [metaKeySelection]="false" 
+     selectionMode="checkbox" 
+     placeholder="Atribue o projeto aos responsáveis"
+     *ngIf="typeString === 'project'"></p-treeSelect>
+
     <div class="div-buttons">
       <div class="buttons">
         <button class="cancel-button" (click)="closeScreen()">Cancelar</button>

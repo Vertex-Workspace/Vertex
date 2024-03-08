@@ -31,6 +31,8 @@ export class CreateTeamProjectComponent implements OnInit {
   @Input()
   team ?: Team;
 
+  users !: User[];
+
 
   @Input()
   typeString!: String;
@@ -60,6 +62,7 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsers();
   }
 
 
@@ -138,6 +141,21 @@ export class CreateTeamProjectComponent implements OnInit {
   copyLink(): void {
     //copiar para a area de transferência
     this.closeScreen();
+  }
+
+  userNamesList: string[] = [];
+
+  private getUsers(): void{
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+    
+    this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
+       this.users = users
+       for (let i = 0; i < this.users.length; i++) {
+        this.userNamesList.push(this.users[i].firstName!);
+      }
+    });
+    
+    
   }
 
 }
