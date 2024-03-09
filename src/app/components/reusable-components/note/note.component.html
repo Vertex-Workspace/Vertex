@@ -18,11 +18,15 @@
     <div class="left">
       <h6>{{ note.title }}</h6>
       
-      <div class="text regular-text">
+      <div class="text regular-text mb-4 z-[10]">
         <p>
           {{ note.description }}
         </p>
       </div>
+      <div>
+        <img src="data:image/jpg;base64, {{note.file}}" class="z-[1]">
+      </div>
+
     </div>
 
     <div class="right">

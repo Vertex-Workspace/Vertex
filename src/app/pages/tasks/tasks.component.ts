@@ -152,7 +152,7 @@ export class TasksComponent implements OnInit {
       color: 'WHITE',
       posX: 20,
       posY: 40,
-      files: []
+      file: ''
     }
 
     this.noteService

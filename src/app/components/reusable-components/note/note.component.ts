@@ -30,7 +30,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
   ) {}
 
   basicData: any;
-  modalOpen: boolean = true;
+  modalOpen: boolean = false;
 
   ngOnInit(): void { 
     

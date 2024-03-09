@@ -75,7 +75,8 @@ export class HeaderComponent implements OnInit {
   }
 
   back(): void {
-    this._location.back();
+    if (window.history.length) this._location.back();
+    else this.router.navigate(['/']);
   }
 
   incrementUrlById(activeRoute: string, id: number): void {     
