@@ -11,6 +11,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { LogComponent } from '../../modals/task/log/log.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-card-user',
@@ -44,7 +45,6 @@ export class CardUserComponent implements OnInit {
   @Input()
   typeString!: String;
 
-  permissions: Permission[] = []
   delete: boolean = false;
 
   isTeamCreator: boolean = false;
@@ -52,15 +52,20 @@ export class CardUserComponent implements OnInit {
   constructor(private userService: UserService,
     private groupService: GroupService,
     private alert: AlertService,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
       this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
         this.users = users;
+        for (const user of users) {
+          user.permissions = this.getPermission(user);
+        }
       });
     } else if (this.typeString === 'addingParticipants') {
       this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
@@ -73,7 +78,6 @@ export class CardUserComponent implements OnInit {
         this.isTeamCreator = true
       }
     });
-
   }
 
   faCircleUser = faCircleUser;
@@ -90,8 +94,6 @@ export class CardUserComponent implements OnInit {
   }
 
   removeUser(user: User): void {
-    console.log(user);
-    
     this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
       .subscribe((group: Group) => {
         this.alert.successAlert(`Usuário retirado do grupo`)
@@ -101,15 +103,6 @@ export class CardUserComponent implements OnInit {
           this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
         }
       )
-  }
-
-  openPermissions(user: User, typeString2: String): void {
-    if (typeString2 === 'permissions') {
-      user.openPermission = !user.openPermission;
-      this.getPermission(user);
-    } else {
-      user.openInfo = !user.openInfo
-    }
   }
 
   selectPermission(user: User, permission: Permission): void {
@@ -123,6 +116,7 @@ export class CardUserComponent implements OnInit {
   getPermission(user: User): Permission[] | any {
     this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
       user.permissions = permissions;
+      return user.permissions 
     })
   }
 
@@ -159,7 +153,7 @@ export class CardUserComponent implements OnInit {
     }
   }
 
-  getUsersByGroup(){
+  getUsersByGroup() {
     if (this.typeString === 'inTheGroup') {
       this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
         this.users = users;

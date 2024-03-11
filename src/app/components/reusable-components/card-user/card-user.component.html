@@ -8,6 +8,7 @@
             <div>
                 <p>{{user.firstName}}</p>
                 <p>{{user.email}}</p>
+                <!-- <fa-icon [icon]="faUserMinus"></fa-icon> -->
             </div>
             <div [ngClass]="isTeamCreator ? 'icons-div' : 'more-infos-div'">
 
@@ -16,21 +17,10 @@
                     [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
                 <fa-icon *ngIf="typeString === 'addUsers'" [icon]="faSquare"
                     [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
-                <fa-icon
-                    *ngIf="isTeamCreator && typeString === 'permissions' && !user.openPermission || typeString === 'view-infos' && !user.openInfo"
-                    size="1x" [icon]="faCaretDown" class="icon" (click)="openPermissions(user, typeString)"
-                    (click)="getPermission(user)">
-                </fa-icon>
-                <fa-icon
-                    *ngIf="isTeamCreator && typeString === 'permissions' && user.openPermission || typeString === 'view-infos' && user.openInfo"
-                    size="1x" [icon]="faCaretUp" class="icon" (click)="openPermissions(user, typeString)"
-                    (click)="getPermission(user)">
-                </fa-icon>
-                <p *ngIf="!isTeamCreator" [routerLink]="'/perfil-usuario'">Ver mais informações</p>
             </div>
         </div>
 
-        <div class="w-full h-full flex flex-col pt-2" *ngIf="typeString === 'permissions' && user.openPermission">
+        <div class="w-full h-full flex flex-col pt-2" *ngIf="typeString === 'permissions' && isTeamCreator">
             <div class="permissions">
                 <div class="single-permissions" *ngFor="let permission of user.permissions">
                     <fa-icon [icon]="faSquare" [ngClass]="permission.enabled === true ? 'icon' : 'icon-not-selected'"

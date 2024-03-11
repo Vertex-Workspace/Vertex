@@ -2,7 +2,7 @@
 
 .card{
     @apply flex shadow-lg w-full;
-    background-color: $emphasis;
+    background-color: white;
 
     div:first-child{
         @apply w-[85%] flex items-center pl-6 h-full;
@@ -20,7 +20,7 @@
 
 .user{
     @apply w-[800px] pl-6;
-    background-color: $emphasis;
+    background-color: white;
 
     button {
         background-color: $primaryColor;
