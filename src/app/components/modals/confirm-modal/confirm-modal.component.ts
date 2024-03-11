@@ -33,7 +33,7 @@ export class ConfirmModalComponent {
 
     team!:Team
 
-    @Output() confirmEvent = new EventEmitter();
+    @Output() confirmEvent = new EventEmitter<boolean>();
 
     sendTrueEvent() {
       this.confirmEvent.emit(true);
@@ -60,12 +60,4 @@ export class ConfirmModalComponent {
       }
       this.close.emit(answer);
     }
-
-
-
-
-    // deletedTeam(): void {
-    //   this.secondModal = false;
-    //   this.closeModal()
-    // }
 }

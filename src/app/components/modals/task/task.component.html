@@ -78,13 +78,18 @@
     </div>
 </div>
 
-<app-confirm-modal *ngIf="isSending" [title]="' entregar a tarefa para análise'" [height]="'350px'" [width]="'400px'">
+<app-confirm-modal 
+*ngIf="isSending" [title]="' entregar a tarefa para análise'" 
+[height]="'450px'" [width]="'400px'" (confirmEvent)="taskAction($event)">
     <ng-container #content>
         <div class="flex flex-col w-full justify-start items-start">
-            <p class="medium-text">Revisador:</p>
-            <div class="medium-text">
+            <p class="small-text">Revisador:</p>
+            <div class="small-text">
                 <p class="text-start">{{taskInfoDTO.creatorFullName}}</p>
                 <p class="text-start">{{taskInfoDTO.email}}</p>
+            </div>
+            <div class="flex w-full h-16">
+                <textarea name="description" placeholder="Descrição da tarefa finalizada..." id="description" class="flex w-full h-full"></textarea>
             </div>
         </div>
     </ng-container>

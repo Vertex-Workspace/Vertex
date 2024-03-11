@@ -54,7 +54,7 @@ export class TaskComponent implements OnInit {
   chatExpanded: boolean = false;
   taskInfoDTO: any = {
     teamName: "",
-    projectName : "",
+    projectName: "",
     creatorFullName: "",
     email: "",
   }
@@ -68,7 +68,7 @@ export class TaskComponent implements OnInit {
     private taskHourService: taskHourService,
     private teamService: TeamService,
     private userService: UserService,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute) {
   }
 
   selectedComponent: string = 'description';
@@ -80,10 +80,10 @@ export class TaskComponent implements OnInit {
       (team: any) => {
         this.taskInfoDTO = team;
         console.log(this.taskInfoDTO, "TASK INFO");
-        
+
       }
     );
-    if(this.permissions){
+    if (this.permissions) {
       for (const permission of this.permissions) {
         if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
           this.canEdit = true;
@@ -95,7 +95,7 @@ export class TaskComponent implements OnInit {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
         console.log(this.idResponsable, "ID RESPONSABLE");
-        
+
       }
     });
     await this.getTimeInTask();
@@ -129,7 +129,7 @@ export class TaskComponent implements OnInit {
 
   closeModal() {
     console.log("Close");
-    
+
     this.close.emit();
   }
 
@@ -245,21 +245,26 @@ export class TaskComponent implements OnInit {
     this.chatExpanded = !this.chatExpanded;
   }
 
-  cantEdit(){
-    if(!this.canEdit){
+  cantEdit() {
+    if (!this.canEdit) {
       this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
-    } 
+    }
   }
 
   ngOnDestroy() {
-    console.log("NG ON DESTROY");
-    
-    if(this.timeInTask.working){
+    if (this.timeInTask.working) {
       this.stopTimer();
     }
   }
 
-  sendTask(){
-    this.isSending = !this.isSending;
+  sendTask() {
+    this.isSending = true;
+  }
+
+  taskAction(bool: boolean) {
+    this.isSending = false;
+    if (bool) {
+      console.log("Enviar tarefa");
+    }
   }
 }

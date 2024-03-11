@@ -12,7 +12,7 @@
 
 <!-- date -->
 <span class="p-float-label" *ngIf="getKind(value.property, 'DATE')">
-    <p-calendar appendTo="body" [style]="{ width: '250px' }" (onSelect)="changeDate(value)" dateFormat="dd.mm.yy"
+    <p-calendar appendTo="body" [style]="{ width: '250px' }" (onSelect)="changeDate($event)" dateFormat="dd.mm.yy"
         [disabled]="!canEdit"></p-calendar>
     <label for="birth_date">{{getValue(value)}}</label>
 </span>

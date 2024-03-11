@@ -35,9 +35,10 @@ ul {
 .send-message{
     @apply flex flex-col items-center gap-2 w-full ;
     textarea{
-        @apply flex w-full h-[90px] px-3 py-1 items-start;
+        @apply flex w-full h-[70px] px-3 py-1 items-start;
         border: 0.50px solid $emphasis;
         resize: none !important;    
+        outline: none;
     }
 
     button{
