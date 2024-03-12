@@ -32,19 +32,25 @@
 }
 
 .div-timer-closeModal{
-    @apply w-[30%] gap-[3%] flex justify-around items-center text-white;
+    @apply w-[30%] gap-[3%] flex justify-end items-center text-white;
 }
 
 .div-timer{
-    @apply w-40 h-10  flex justify-evenly items-center;
-    background-color: $primaryColor;
+    @apply w-40 flex justify-evenly items-center rounded-sm;
+    background-color: $emphasis;
+    color: $primaryColor;
+
+    fa-icon{
+        color: $primaryColor;
+        cursor: default !important
+    }
 }
 
 .location {
-    @apply flex w-[100%] h-[5%] justify-center;
+    @apply flex w-[100%] h-[5%] justify-between px-6;
 
     .routes{
-        @apply flex w-[67%] gap-5 divide-x-2;
+        @apply flex gap-5 divide-x-2;
     }
     p {
         @apply flex items-center justify-center ;
@@ -53,6 +59,19 @@
         @apply px-5;
     }
 }
+.work-task-button{
+    @apply flex w-40 h-[40px] items-center justify-center rounded-sm;
+    background-color: $primaryColor;
+
+    &:hover{
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    
+    }
+}
+
 .informations{
     @apply grid w-full h-[95%] grid-cols-2 pt-10 px-6;
 
@@ -142,7 +161,7 @@
 
     .buttons button,
     .submit button {
-        @apply w-[160px];
+        @apply w-[160px] rounded-sm;
     }
 
     .title p {
@@ -194,7 +213,7 @@ input:focus{
 }
 
 textarea {
-    @apply flex px-4 py-2;
+    @apply flex px-4 py-2 rounded-sm;
     resize: none;
     min-height: 150px;
     border: none;
@@ -206,11 +225,14 @@ textarea:focus{
     outline: 0;
 }
 
-
-textarea{
-    @apply rounded-sm;
-}
-
 .task-description{
     background-color: $secondColor;
+}
+
+button{
+    @apply rounded-sm;
+}
+#description{
+    background-color: $card;
+    color: $text;
 }

@@ -29,7 +29,7 @@
 }
 
 button {
-    @apply h-full w-[100px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    @apply h-full min-w-[70px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
     color: $card;
 }
 

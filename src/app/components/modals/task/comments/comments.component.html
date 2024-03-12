@@ -15,7 +15,7 @@
                 <p class="regular-text">{{comment.comment}}</p>
             </div>
         </li>
-        <div *ngIf="task.comments.length == 0" class="flex w-full items-center flex-col h-[90%] null-comment">
+        <div *ngIf="!hasComments" class="flex w-full items-center flex-col h-[90%] null-comment">
             <p class="pt-3">Nenhum comentário feito na tarefa!</p>
             <p>Seja você o primeiro!</p>
         </div>

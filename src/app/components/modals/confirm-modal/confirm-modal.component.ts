@@ -31,6 +31,9 @@ export class ConfirmModalComponent {
     @Input()
     project?: Project
 
+    @Input()
+    buttonText?: String;
+
     team!:Team
 
     @Output() confirmEvent = new EventEmitter<boolean>();
@@ -59,5 +62,11 @@ export class ConfirmModalComponent {
         this.sendFalseEvent()
       }
       this.close.emit(answer);
+    }
+
+    ngOnInit(): void {
+      if(this.buttonText === undefined){
+        this.buttonText = "Sim"
+      }
     }
 }

@@ -5,7 +5,7 @@
 
 <!-- <input (blur)="change(value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/> -->
 <!-- number -> verificar $event -->
-<p-inputNumber *ngIf="getKind(value.property, 'NUMBER')" (onBlur)="change(value)" [(ngModel)]="valueNumber"
+<p-inputNumber  *ngIf="getKind(value.property, 'NUMBER')" (onBlur)="change(value)" [(ngModel)]="valueNumber"
     [disabled]="!canEdit"> </p-inputNumber>
 
 

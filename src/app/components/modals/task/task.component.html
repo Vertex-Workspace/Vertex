@@ -7,11 +7,18 @@
             </div>
 
             <div class="div-timer-closeModal">
-                <div class="text-black">Tempo na tarefa:</div>
-                <div class="div-timer">
-                    <fa-icon [icon]="faClock"></fa-icon>
-                    <p>{{timer}}</p>
-                </div>
+                <ng-container *ngIf="!soloResponsable">
+                    <div class="div-timer h-[40px]">
+                        <fa-icon [icon]="faClock"></fa-icon>
+                        <p>{{timer}}</p>
+                    </div>
+                    <button class="work-task-button mr-4" *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar
+                        na
+                        Tarefa</button>
+                    <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
+                        (click)="stopTimer()">Encerrar
+                        Trabalho</button>
+                </ng-container>
                 <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
             </div>
         </div>
@@ -66,30 +73,45 @@
 
                     <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
                 </div>
-                <div class="submit gap-3">
-                    <button *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar na Tarefa</button>
-                    <button id="red-btn" *ngIf="timeInTask.working" (click)="stopTimer()">Finalizar Tarefa</button>
-                    <button (click)="sendTask()">
-                        Entregar Tarefa
-                    </button>
+                <div class="submit gap-3 rounded-sm">
+                    <!-- IF THE TASK HAS ONLY ONE RESPONSIBLE, THE BUTTON OF WORK WILL BE ON SOUTH -->
+                    
+                    <ng-container *ngIf="soloResponsable">
+                        <span class="div-timer h-[50px]">
+                            <fa-icon [icon]="faClock"></fa-icon>
+                            <p>{{timer}}</p>
+                        </span>
+                        <button class="work-task-button" *ngIf="!timeInTask.working"
+                            (click)="startTimer()">Trabalhar na Tarefa</button>
+                        <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
+                            (click)="stopTimer()">Encerrar Trabalho</button>
+                    </ng-container>
+
+                    <!-- IF THE TASK HAS MANY RESPONSIBLE, THE BUTTON OF WORK WILL BE ON NORTH -->
+                    <ng-container *ngIf="!soloResponsable">
+                        <button (click)="sendTask()" id="red-btn"
+                            [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}" [disabled]="timeInTask.working">
+                            Entregar Tarefa
+                        </button>
+                    </ng-container>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<app-confirm-modal 
-*ngIf="isSending" [title]="' entregar a tarefa para análise'" 
-[height]="'450px'" [width]="'400px'" (confirmEvent)="taskAction($event)">
+<app-confirm-modal *ngIf="isSending" [title]="' entregar a tarefa para análise'" [height]="'450px'" [width]="'400px'"
+    (confirmEvent)="taskAction($event)" [buttonText]="'Enviar Tarefa'">
     <ng-container #content>
-        <div class="flex flex-col w-full justify-start items-start">
-            <p class="small-text">Revisador:</p>
-            <div class="small-text">
+        <div class="flex flex-col w-full justify-start items-start pt-5">
+            <p class="regular-text">Revisador(a):</p>
+            <div class="regular-text">
                 <p class="text-start">{{taskInfoDTO.creatorFullName}}</p>
                 <p class="text-start">{{taskInfoDTO.email}}</p>
             </div>
-            <div class="flex w-full h-16">
-                <textarea name="description" placeholder="Descrição da tarefa finalizada..." id="description" class="flex w-full h-full"></textarea>
+            <div class="flex w-full h-24 pt-5">
+                <textarea name="description" placeholder="Descrição da tarefa finalizada..." id="description"
+                    class="flex w-full h-full text-area-send-task"></textarea>
             </div>
         </div>
     </ng-container>

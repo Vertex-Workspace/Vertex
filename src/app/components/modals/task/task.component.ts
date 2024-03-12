@@ -16,6 +16,8 @@ import { TimeInTask } from 'src/app/models/class/timeInTask';
 import { ActivatedRoute } from '@angular/router';
 import { Team } from 'src/app/models/class/team';
 import { Observable } from 'rxjs';
+import { SentToReview } from 'src/app/models/class/review';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-task',
@@ -68,19 +70,19 @@ export class TaskComponent implements OnInit {
     private taskHourService: taskHourService,
     private teamService: TeamService,
     private userService: UserService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private reviewService: ReviewService) {
   }
 
   selectedComponent: string = 'description';
 
   waitRequest: boolean = false;
-
+  soloResponsable: boolean = false;
   async ngOnInit() {
+    
     this.taskService.getTaskInfo(this.task.id).subscribe(
       (team: any) => {
         this.taskInfoDTO = team;
-        console.log(this.taskInfoDTO, "TASK INFO");
-
       }
     );
     if (this.permissions) {
@@ -94,10 +96,19 @@ export class TaskComponent implements OnInit {
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
-        console.log(this.idResponsable, "ID RESPONSABLE");
 
+        //Validates if the user is the creator of the task
+        if(this.task.creator?.user.id == taskResponsable.userTeam.user.id){
+          //The creator doesn't send the task
+          this.soloResponsable = true;
+        }
       }
     });
+    
+    if(this.task.taskResponsables!.length == 1){
+      this.soloResponsable = true;
+    }
+
     await this.getTimeInTask();
 
     //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
@@ -264,7 +275,24 @@ export class TaskComponent implements OnInit {
   taskAction(bool: boolean) {
     this.isSending = false;
     if (bool) {
-      console.log("Enviar tarefa");
+      let taskSentToReview: SentToReview = {
+        description: this.task.description,
+        userThatSentReview: {
+          id: this.idResponsable
+        },
+        task: {
+          id: this.task.id
+        }
+      }
+      this.reviewService.sentToReview(taskSentToReview).subscribe(
+        (task: Boolean) => {
+          this.alertService.successAlert("Tarefa enviada para revisão com sucesso!")
+        },
+        (error: any) => {
+          this.alertService.errorAlert(error.error)
+        }
+      );
+
     }
   }
 }

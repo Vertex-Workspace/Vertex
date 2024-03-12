@@ -11,7 +11,11 @@ export class Task {
     description!: string;
     values!: Value[];
     properties!: Property[];
-
+    creator?: {
+        user: {
+            id: number;
+        }
+    }
     comments!: Comment[];
 
     //taskHour
