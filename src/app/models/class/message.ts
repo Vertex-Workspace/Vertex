@@ -8,12 +8,13 @@ export class Message {
     contentMessage?: String;
     time?: String;
     viewed?: boolean;
-    bytes?:number[]
+    file?: Uint8Array | String;
 
     constructor(message: Message) {
         this.id = message.id;
         this.user = message.user;
         this.chat = message.chat;
+        this.file = message.file;
         this.contentMessage = message.contentMessage;
         this.time = message.time;
         this.viewed = message.viewed;

@@ -1,7 +1,7 @@
 @import '../../../_variables.scss';
 
 section {
-    @apply w-screen h-full flex flex-col justify-center;
+    @apply w-screen h-screen flex flex-col justify-center;
     background-color: $secondColor;
 }
 
@@ -33,7 +33,7 @@ div.chat-content {
 }
 
 header {
-    @apply flex w-[100%] h-[13%] justify-between items-end;
+    @apply flex w-[100%] h-[15%] justify-between items-end;
     background-color: $secondColor;
 }
 
@@ -70,7 +70,7 @@ header {
 }
 
 main {
-    @apply w-full h-[87%] flex justify-between;
+    @apply w-full h-[85%] flex justify-between;
 }
 
 .section-left-chat {

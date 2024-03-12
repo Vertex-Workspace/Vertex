@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Message } from '../models/class/message';
 import { Chat } from '../models/class/chat';
 import { User } from '../models/class/user';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 
 const backEnd = 'ws://localhost:7777/chat'; 
 
@@ -67,28 +68,32 @@ export class WebSocketService {
         // console.log(chat, "ChatONMESSAGE");
 
         console.log(`{${event.data}}`, "Data");
-        
+
+        const obj = JSON.parse(`${event.data}`)
 
         
-        const obj = JSON.parse(`${event.data}`)
-        
         observer.next(obj);
-        
       };
     });
   }
 
-  public sendMessage(chatMessageDto: Message) {
+  // console.log(`"user": "${chatMessageDto.user}", "contentMessage": "${chatMessageDto.contentMessage}", "time": "${chatMessageDto.time}", "viewed": ${chatMessageDto.viewed}`);
+  public sendMessage(chatMessageDto: any) {
     
       if (this.webSocket.readyState === WebSocket.OPEN) {
-        console.log("Sending message");
+        console.log("Sending message"); 
         
+        if(chatMessageDto instanceof ArrayBuffer) {
+          const ws :WebSocketSubject<ArrayBuffer> = webSocket({url: backEnd, binaryType: 'arraybuffer'});
+          let sla = new Uint8Array(chatMessageDto); 
+          console.log(sla, "ChatMessageDto");
+          ws.next(sla);
+          console.log("ArrayBuffer");
+        }else {
+          this.webSocket.send(JSON.stringify(chatMessageDto));
+        }
         
-        // console.log(`"user": "${chatMessageDto.user}", "contentMessage": "${chatMessageDto.contentMessage}", "time": "${chatMessageDto.time}", "viewed": ${chatMessageDto.viewed}`);
-        
-        this.webSocket.send(JSON.stringify(chatMessageDto));
         console.log("Message sent");
-        
 
       } else {
         console.error('WebSocket is not open. Unable to send message.');

@@ -55,18 +55,14 @@ export class TeamService {
     return this.http.patch<any>(`${URL}chatController/messagePatch/${idChat}/${idUser}`, message);
   }
 
+  public patchArchiveOnChat(idChat:number, file:FormData):Observable<any>{
+    console.log(idChat)
+    return this.http.patch<any>(`${URL}chatController/patchFile/${idChat}`, file);
+  }
+
   public patchChat(idChat:number, teamId: number, userId:number):Observable<any>{
     console.log(idChat)
-    let userTeam = {
-      team: {
-        id: teamId
-      },
-      user:{
-        id: userId
-      } 
-    }
-    console.log(userTeam);
-    
+    let userTeam = {team: {id: teamId},user:{id: userId}}
     return this.http.patch<any>(`${URL}chatController/chat/${idChat}`, userTeam);
   }
 

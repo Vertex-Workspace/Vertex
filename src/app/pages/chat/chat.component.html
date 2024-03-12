@@ -25,8 +25,6 @@
                     </div>
                 </div>
             </div>
-            <!-- icon minimizar chat -->
-            <fa-icon (click)="minimizeChat(false)" class="section-icons pr-8" [icon]="faTimes"></fa-icon>
         </div>
     </header>
 
@@ -57,8 +55,9 @@
             </div>
 
             <div class="main-section-left">
-                <ng-container *ngFor="let chatFor of conversations" >
-                    <div (click)="openConversation(chatFor)" [ngClass]="chatFor.conversationOpen ? 'card-chatOpen' : 'card-chat'">
+                <ng-container *ngFor="let chatFor of conversations">
+                    <div (click)="openConversation(chatFor)"
+                        [ngClass]="chatFor.conversationOpen ? 'card-chatOpen' : 'card-chat'">
                         <div class="user-card-message">
                             <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
                             <div class="flex flex-col">
@@ -79,29 +78,41 @@
             </div>
         </div>
 
-        <div class="section-right-chat" >
+        <div class="section-right-chat">
             <div class="center-div">
                 <div class="min-h-[60px]" *ngIf="chat">
-                    <div *ngFor="let message of chat.messages" [ngClass]="message.user! != logged.firstName ? 'left' : 'right'">
+                    <div *ngFor="let message of chat.messages"
+                        [ngClass]="message.user! != logged.firstName ? 'left' : 'right'">
                         <div class="flex justify-center items-center">
                             <p class="pChat">{{message.user!}}</p>
                         </div>
-                        <div class="regular-text"  [ngClass]="message.user! != logged.firstName ? 'answer' : 'messageUser'">
-                            <div class="pChat whitespace-pre-wrap" >
+                        <div class="regular-text"
+                            [ngClass]="message.user! != logged.firstName ? 'answer' : 'messageUser'">
+                            <div *ngIf="message.file==null" class="pChat whitespace-pre-wrap">
                                 {{message.contentMessage}}
+                            </div>
+                            <div *ngIf="message.file!=null" class=" whitespace-pre-wrap">
+                                <img src="data:image/jpg;base64, {{message.file}}" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <form (ngSubmit)="sendMessage(sendForm,$event)" (keydown.enter)="sendMessage(sendForm,$event)" #sendForm="ngForm" class="high-input-div">
-                <div class="flex gap-4  w-[90%] h-[50%]">
-                    <textarea type="text" name="message" id="input-message" class="form-control resize-none pt-[15px] pl-[15px] w-[90%] h-[100%]" [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
-                    <fa-icon class="section-icons" [icon]="faPaperclip"></fa-icon>
+            <form (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm"
+                class="high-input-div justify-center">
+                <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
+                    <textarea type="text" name="message" id="input-message"
+                        class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
+                        [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
+                    <div class="flex relative">
+                        <input type="file" id="fileInput" class="hidden absolute left-1/2 top-1/2"
+                            (change)="onFileChange($event)">
+                        <fa-icon (click)="openFile()" class="section-icons" [icon]="faPaperclip"></fa-icon>
+                    </div>
                     <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
                 </div>
-                <button type="submit" class="square-chat">
+                <button type="submit" class="square-chat rounded-sm">
                     <fa-icon class="text-lg pr-1" [icon]="faPaperPlane"></fa-icon>
                 </button>
             </form>

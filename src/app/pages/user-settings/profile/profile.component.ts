@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { Message } from 'src/app/models/class/message';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -136,9 +137,8 @@ export class ProfileComponent {
     this.selectedFile = e.target.files[0]
     const fd: FormData = new FormData();
     fd.append('file', this.selectedFile, this.selectedFile.name);    
-    
+
     console.log(fd);
-    
 
     this.userService
       .uploadImage(fd, this.logged.id!)

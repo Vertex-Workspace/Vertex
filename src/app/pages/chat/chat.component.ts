@@ -83,19 +83,21 @@ export class ChatComponent {
   }
 
   ngOnInit() {
-    
-      this.webSocketService.listenToServer().subscribe((change) => {
-        console.log(change, "Change")
-        this.chat.messages!.push(change);
-      });
-    
+
+    this.webSocketService.listenToServer().subscribe((change) => {
+      console.log(change, "Change")
+      this.chat.messages!.push(change);
+    });
+
   }
 
-  // ngOnDestroy(): void {
-  //   this.webSocketService.closeWebSocket();
-  // }
+  // To-do: update the style of the chat component.
 
-  sendMessage(sendForm: NgForm,event:any) {
+  ngOnDestroy(): void {
+    this.webSocketService.closeWebSocket();
+  }
+
+  sendMessage(sendForm: NgForm) {
     let date = new Date();
     let dateString = date.toISOString();
 
@@ -126,7 +128,33 @@ export class ChatComponent {
     }
   }
 
-  
+  openFile() {
+    let a = document.getElementById('fileInput') as HTMLElement;
+    a.click();
+  }
+
+  selectedFile!: any;
+  onFileChange(e: any) {
+    this.selectedFile = e.target.files[0]
+    const fd: FormData = new FormData();
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+    fd.append('user', this.logged.firstName!);
+
+    let reader = new FileReader();
+
+    this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
+      (response: any) => {
+        this.chat = response;
+        console.log(response, "Message sentALLL");
+      });
+
+    reader.onload = (e: any) => {
+      const imageData = reader.result as ArrayBuffer;
+      this.webSocketService.sendMessage(imageData);
+    }
+    reader.readAsArrayBuffer(this.selectedFile);
+
+  }
 
   openConversation(chat: Chat) {
     this.chat = chat;
