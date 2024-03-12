@@ -8,6 +8,7 @@ import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
+import { taskHourService } from 'src/app/services/taskHour.service';
 
 @Component({
   selector: 'app-create-group',
@@ -40,7 +41,7 @@ export class CreateGroupComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private teamService: TeamService,
     private route: ActivatedRoute,
-    private alertService: AlertService, 
+    private alertService: AlertService,
     private groupService: GroupService) {
     this.getTeam();
   }
@@ -56,12 +57,12 @@ export class CreateGroupComponent implements OnInit {
   onSubmit(): void {
     console.log(this.team);
     console.log(this.users);
-    
-    
+
+
     const group = this.form.getRawValue() as Group
     group.team = this.team
     group.users = this.users
-    this.createGroup.emit(group);  
+    this.createGroup.emit(group);
   }
 
   getTeam(): void {
@@ -106,7 +107,7 @@ export class CreateGroupComponent implements OnInit {
   pushParticipants(user: User): void {
     this.users.push(user)
     console.log(user);
-    
+
   }
 
   onSubmit2(group: Group): void {
@@ -126,6 +127,17 @@ export class CreateGroupComponent implements OnInit {
         e => {
           this.alertService.errorAlert("erro")
         });
+        this.closeGroup()
+  }
+
+
+  @Output()
+  emitterNoUsers = new EventEmitter();
+
+  noUsers(event: boolean): void {
+    if(event){
+      this.emitterNoUsers.emit()
+    }
   }
 
 }

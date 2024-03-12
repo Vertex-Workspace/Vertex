@@ -1,5 +1,5 @@
-<div [ngClass]="typeString === 'permissions' ||  typeString === 'inTheGroup' ? 'default-grid' : 'creating'">
-    <div class="card" *ngFor="let user of users" [style.width]="width" [style.min-height]="height"
+<div class="creating">
+    <div class="card" [style.width]="width" [style.min-height]="height"
         [ngClass]="typeString === 'permissions' ||  typeString === 'creating' ? 'bg-white' : 'default-color'">
         <div class="sections-in-card">
             <div>
@@ -13,10 +13,12 @@
             <div [ngClass]="isTeamCreator ? 'icons-div' : 'more-infos-div'">
 
                 <!-- this icons gotta be refactored -->
-                <fa-icon *ngIf="typeString === 'creating'" [icon]="faSquare"
+                <fa-icon *ngIf="typeString === 'creating' || typeString === 'addingParticipants'" [icon]="faSquare"
                     [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
                 <fa-icon *ngIf="typeString === 'addUsers'" [icon]="faSquare"
                     [ngClass]="user.selected ? 'icon' : 'icon-not-selected'" (click)="selectUser(user)"></fa-icon>
+                <fa-icon [icon]="faUserMinus" class="icon pr-1 pt-10" *ngIf="typeString === 'inTheGroup'"
+                (click)="removeUser(user)"></fa-icon>
             </div>
         </div>
 
@@ -29,18 +31,12 @@
                     <p>{{permission.name}}</p>
                 </div>
             </div>
-            <div class="more-infos" [routerLink]="'/perfil-usuario'">
-                <p class="pl-4 pt-2 font-bold">Ver mais informações</p>
-                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean()"
+            <div class="more-infos">
+                <p class="pl-4 pt-2 font-bold" [routerLink]="'/perfil-usuario'">Ver mais informações</p>
+                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteEmitUserTeam(user)"
                     *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
                 </fa-icon>
             </div>
         </div>
-        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo'"
-            (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
-        </app-confirm-modal>
-        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
-            (close)="deleteBoolean()" (confirmEvent)="validatingDelete(user, $event)">
-        </app-confirm-modal>
     </div>
 </div>

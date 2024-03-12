@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardGroupModule } from 'src/app/components/reusable-components/card-group/card-group.module';
 import { CreateGroupModule } from 'src/app/components/reusable-components/create-group/create-group.module';
 import { CardUserModule } from 'src/app/components/reusable-components/card-user/card-user.module';
+import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CardUserModule } from 'src/app/components/reusable-components/card-user
     FontAwesomeModule,
     CardGroupModule,
     CreateGroupModule,
-    CardUserModule
+    CardUserModule,
+    ConfirmModalModule
 
   ]
 })

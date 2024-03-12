@@ -25,7 +25,7 @@ export class CardUserComponent implements OnInit {
   name !: String
 
   @Output()
-  user = new EventEmitter<User>();
+  userEmitter = new EventEmitter<User>();
 
   @Output()
   deleteUserGroup = new EventEmitter<User>();
@@ -49,6 +49,12 @@ export class CardUserComponent implements OnInit {
 
   isTeamCreator: boolean = false;
 
+  @Input()
+  user !: User
+
+  @Output()
+  noMoreParticipants = new EventEmitter();
+
   constructor(private userService: UserService,
     private groupService: GroupService,
     private alert: AlertService,
@@ -61,15 +67,15 @@ export class CardUserComponent implements OnInit {
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
-      this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
-        this.users = users;
-        for (const user of users) {
-          user.permissions = this.getPermission(user);
-        }
-      });
+      this.user.permissions = this.getPermission(this.user); 
     } else if (this.typeString === 'addingParticipants') {
       this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
         this.users = users;
+
+        if(this.users.length === 0){
+          this.noMoreParticipants.emit();
+        }
+        
       });
     }
 
@@ -89,20 +95,14 @@ export class CardUserComponent implements OnInit {
   selectUser(user: User): void {
     user.selected = !user.selected;
     if (user.selected) {
-      this.user.emit(user);
+      this.userEmitter.emit(user);
     }
   }
 
+
+
   removeUser(user: User): void {
-    this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
-      .subscribe((group: Group) => {
-        this.alert.successAlert(`Usuário retirado do grupo`)
-        this.getUsersByGroup()
-      },
-        e => {
-          this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
-        }
-      )
+    this.deleteUserGroup.emit(user);
   }
 
   selectPermission(user: User, permission: Permission): void {
@@ -134,23 +134,13 @@ export class CardUserComponent implements OnInit {
   deleteEmitterUserTeam: EventEmitter<User> = new EventEmitter<User>();
 
   deleteEmitUserTeam(user: User): void {
+    console.log(user);
+    
     this.deleteEmitterUserTeam.emit(user);
   }
 
   deleteEmitUserGroup(user: User): void {
     this.deleteUserGroup.emit(user)
-  }
-
-  validatingDelete(user: User, type: boolean): void {
-    if (type === true) {
-      if (this.typeString === 'inTheGroup') {
-        this.removeUser(user)
-      } else if (this.typeString === 'permissions') {
-        this.deleteEmitUserTeam(user)
-      }
-    } else {
-      this.alert.notificationAlert("Usuário continua na equipe")
-    }
   }
 
   getUsersByGroup() {

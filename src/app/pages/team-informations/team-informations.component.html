@@ -26,9 +26,8 @@
                 <div class="div-members">
                     <div class="members">
                         <ng-container *ngFor="let item of menuItems">
-                            <button 
-                            [ngClass]="item.clicked === true ? 'clicked' : 'default'"
-                                routerLink="[item.id]" (click)="changePreviewMode(item.id)">
+                            <button [ngClass]="item.clicked === true ? 'clicked' : 'default'" routerLink="[item.id]"
+                                (click)="changePreviewMode(item.id)">
                                 <i class="{{ item.iconClass }}" style="font-size: 1.25rem"></i>
                                 {{ item.label }}
                             </button>
@@ -49,13 +48,18 @@
 
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
-                <app-card-user [width]="'370px'" [height]="'90px'" [typeString]="'permissions'"
-                    (deleteEmitterUserTeam)="deleteUserTeam($event)" [team]="team"></app-card-user>
+                <ng-container *ngFor="let user of team.users">
+                    <app-card-user [width]="'370px'" [height]="'90px'" [typeString]="'permissions'"
+                        (deleteEmitterUserTeam)="openModalDeleteUser($event)" [team]="team" [user]="user"></app-card-user>
+                </ng-container>
             </div>
 
-            <div *ngIf="clicked == 'groups'" class="grid-permissions">
-                <app-card-group [team]="team" [width]="'800px'" [height]="'90px'" (emitterItem)="deleteGroup($event)">
-                </app-card-group>
+            <div *ngIf="clicked == 'groups'" class="grid-group">
+                <ng-container *ngFor="let group of team.groups">
+                    <app-card-group [team]="team" [width]="'800px'" [height]="'90px'"
+                        (emitterItem)="deleteGroup($event)" [group]="group">
+                    </app-card-group>
+                </ng-container>
             </div>
 
         </div>
@@ -117,6 +121,11 @@
         </div>
     </div>
 </section>
+
+
+<app-confirm-modal *ngIf="deleteUser" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
+    (confirmEvent)="deleteUserTeam($event)">
+</app-confirm-modal>
 
 <app-create-group style="width: 100%; height: 500px; padding-top: 3%;" *ngIf="createGroupModal" [team]="team"
     (close)="switchCreateViewGroup()" (createGroup)="createGroup($event)">

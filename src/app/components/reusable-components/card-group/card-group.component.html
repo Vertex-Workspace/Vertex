@@ -1,5 +1,5 @@
 <div class="">
-    <div class="main-div" *ngFor="let group of getGroup()">
+    <div class="main-div">
         <div class="card" [style.width]="width" [style.height]="height">
             <div>
                 <p class="large-text">{{group.name}}</p>
@@ -21,20 +21,30 @@
                     (click)="addParticipants()">
                 </fa-icon>
             </div>
-            <app-card-user *ngIf="selectMoreUsers" [typeString]="'inTheGroup'" [width]="'270px'" [height]="'50px'"
-                class="user-card" [group]="group" [team]="team"></app-card-user>
+            <div class="grid grid-cols-2">
+                <ng-container *ngFor="let user of group.users">
+                    <app-card-user *ngIf="selectMoreUsers" [typeString]="'inTheGroup'" [width]="'270px'"
+                        [height]="'0px'" class="user-card" [group]="group" [team]="team" [user]="user"
+                        (deleteUserGroup)="openModalDeleteUser($event)">
+                    </app-card-user>
+                </ng-container>
+            </div>
             <div class="flex flex-row justify-end items-center pr-8 pt-5">
                 <fa-icon [icon]="faTrashCan" class="icon size" (click)="openModalDelete(group)"></fa-icon>
                 <p class="pl-2" *ngIf="selectMoreUsers">Excluir grupo</p>
             </div>
         </div>
 
-        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'" [type]="'userTeam'"
+        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'" 
             (confirmEvent)="emitItem($event)">
         </app-confirm-modal>
 
+        <app-confirm-modal *ngIf="deleteUser" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo?'" [type]="'userTeam'"
+            (confirmEvent)="removeUser($event)">
+        </app-confirm-modal>
+
         <app-create-group [group]="group" [team]="team" *ngIf="!selectMoreUsers" [typeString]="'addingParticipants'"
-        (close)="addParticipants()">
+            (close)="addParticipants()">
 
         </app-create-group>
 

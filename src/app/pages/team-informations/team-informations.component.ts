@@ -29,7 +29,7 @@ export class TeamInformationsComponent implements OnInit {
         throw new Error('Method not implemented.');
     }
 
-
+    groups !: Group[]
 
     invitationCode!: {
         code: string;
@@ -49,15 +49,6 @@ export class TeamInformationsComponent implements OnInit {
 
     ngOnInit() {
         this.start();
-        console.log(this.team);
-    }
-
-    sla() {
-        let aaa = this.copyInviteLink();
-        console.log(aaa);
-
-        this.getGroup();
-        this.getUser();
     }
 
     getTeam(): Team {
@@ -66,6 +57,7 @@ export class TeamInformationsComponent implements OnInit {
             (team: Team) => {
                 this.team = team;
                 console.log(this.team);
+
                 return team;
             },
             (error) => {
@@ -233,36 +225,41 @@ export class TeamInformationsComponent implements OnInit {
 
     }
 
-    getGroup(): any[] {
-        return this.team?.groups!;
-    }
-
-    getUser(): any[] {
-        return this.team?.users!
-    }
-
     deleteGroup(groupId: Group): void {
         console.log(groupId);
         this.groupService.delete(groupId.id).subscribe((group: Group) => {
             this.alertService.successAlert('Grupo deletado com sucesso')
-            this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
-
+            this.getTeam()
         },
             e => {
                 this.alertService.errorAlert("Não foi possível deletar");
             })
     }
 
-    deleteUserTeam(user: User): void {
-        this.teamService.getTeamCreator(this.team).subscribe((userC) => {
-            if (userC.id === this.userService.getLogged().id) {
-                this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
-                    this.alertService.successAlert("Usuário retirado da equipe")
-                })
-            } else {
-                this.alertService.errorAlert("Você não pode remover o criador da equipe")
-            }
-        });
+    deleteUser !: boolean
+    userToDelete !: User
+
+    openModalDeleteUser(event: any) {
+        this.userToDelete = event
+        this.deleteUser = true;
+        console.log(this.userToDelete);
+        
+    }
+
+    deleteUserTeam(event: any): void {
+        if (event) {
+            this.teamService.getTeamCreator(this.team).subscribe((userC) => {
+                if (userC.id === this.userService.getLogged().id) {
+                    this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
+                        this.alertService.successAlert("Usuário retirado da equipe")
+                    })
+                } else {
+                    this.alertService.errorAlert("Você não pode remover o criador da equipe")
+                }
+            });
+        }
+        this.deleteUser = false
+        this.getTeam()
     }
 
     openModalCreateGroup() {
@@ -273,9 +270,11 @@ export class TeamInformationsComponent implements OnInit {
         this.groupService
             .create(group)
             .subscribe((group: Group) => {
-                this.alertService.successAlert(`Grupo ${group.name} criado com sucesso!`);
-                this.team.groups?.splice(this.team.groups.push(group))
+                this.alertService.successAlert(`Grupo criado com sucesso!`);
+                console.log(group.name);
+
                 this.switchCreateViewGroup();
+                this.getTeam()
             },
                 e => {
                     if (group.name == null) {
@@ -289,4 +288,5 @@ export class TeamInformationsComponent implements OnInit {
     switchCreateViewGroup(): void {
         this.createGroupModal = !this.createGroupModal;
     }
+
 }
