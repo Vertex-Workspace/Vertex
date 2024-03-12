@@ -208,6 +208,19 @@ main {
     flex-wrap: wrap;
 }
 
+.answerPhoto {
+    @apply flex rounded-sm items-center justify-center min-h-[60px] gap-1;
+    max-width: 50%;
+}
+
+.messageUserPhoto {
+    @apply flex rounded-sm items-center justify-center min-h-[60px] gap-1;
+    color: $secondColor;
+    max-width: 50%;
+    word-break: break-all;
+    flex-wrap: wrap;
+}
+
 .pChat {
     @apply h-[30%] flex items-center min-h-[30%];
     flex-wrap: wrap;
@@ -235,4 +248,8 @@ main {
         @apply flex justify-between items-center;
         color: $card !important;
     }
+}
+
+.imgMessage{
+    @apply w-96 h-52;
 }

@@ -91,8 +91,11 @@
                             <div *ngIf="message.file==null" class="pChat whitespace-pre-wrap">
                                 {{message.contentMessage}}
                             </div>
-                            <div *ngIf="message.file!=null" class=" whitespace-pre-wrap">
-                                <img src="data:image/jpg;base64, {{message.file}}" alt="">
+                        </div>
+                        <div class="regular-text"
+                            [ngClass]="message.user! != logged.firstName ? 'answerPhoto' : 'messageUserPhoto'">
+                            <div *ngIf="message.file!=null" class=" w-full h-full ">
+                                <img class="imgMessage" src="data:image/jpg;base64, {{message.file}}" alt="">
                             </div>
                         </div>
                     </div>

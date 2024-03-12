@@ -62,16 +62,12 @@ export class ChatComponent {
       chats.forEach((chat: Chat) => {
 
         this.chat = chat;
-        console.log(this.logged, "Logged");
+
         chat.userTeams!.forEach((userTeam) => {
           if (userTeam.user.id == this.logged.id) {
             this.conversations.push(chat);
           }
         });
-
-        console.log(chat, "Chat");
-
-        console.log(this.conversations);
 
       });
     });
@@ -106,7 +102,7 @@ export class ChatComponent {
     const messageDto: Message = {
       user: this.logged.firstName,
       contentMessage: this.messageUser,
-      time: dateString,
+      time: "",
       viewed: false,
     };
     console.log(messageDto);
@@ -135,25 +131,38 @@ export class ChatComponent {
 
   selectedFile!: any;
   onFileChange(e: any) {
-    this.selectedFile = e.target.files[0]
+    this.selectedFile = e.target.files[0];
     const fd: FormData = new FormData();
     fd.append('file', this.selectedFile, this.selectedFile.name);
     fd.append('user', this.logged.firstName!);
-
-    let reader = new FileReader();
-
+  
     this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
       (response: any) => {
         this.chat = response;
-        console.log(response, "Message sentALLL");
-      });
-
-    reader.onload = (e: any) => {
-      const imageData = reader.result as ArrayBuffer;
-      this.webSocketService.sendMessage(imageData);
-    }
-    reader.readAsArrayBuffer(this.selectedFile);
-
+        console.log(response, "ARCHIVE SENT DB");
+      }
+    );
+  
+    let reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = () => {
+      console.log(reader.result);
+      let base64Data = reader.result as string;
+      const base64Parts = base64Data.split(',');
+      if (base64Parts.length === 2) {
+        base64Data = base64Parts[1];
+      }
+  
+      let message: Message = {
+        user: this.logged.firstName,
+        contentMessage: "",
+        time: "",
+        file: base64Data,
+        viewed: false,
+      };
+  
+      this.webSocketService.sendMessage(message);
+    };
   }
 
   openConversation(chat: Chat) {

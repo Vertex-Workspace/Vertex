@@ -5,7 +5,7 @@ import { Chat } from '../models/class/chat';
 import { User } from '../models/class/user';
 import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 
-const backEnd = 'ws://localhost:7777/chat'; 
+const backEnd = 'ws://localhost:7777/chat';
 
 @Injectable({
   providedIn: 'root'
@@ -21,26 +21,26 @@ export class WebSocketService {
     this.openWebSocket();
   }
 
-//   private clientSocket: Socket;
+  //   private clientSocket: Socket;
 
-//   constructor() { 
-//     this.clientSocket = io(backEnd);
-//   }
+  //   constructor() { 
+  //     this.clientSocket = io(backEnd);
+  //   }
 
-//   listenToServer(connection: string): Observable<any> {
-//     return new Observable(observer => {
-//       this.clientSocket.on(connection, (data: any) => {
-//         console.log(data)
-//         observer.next(data);
-//       });
-//     });
-//   }
+  //   listenToServer(connection: string): Observable<any> {
+  //     return new Observable(observer => {
+  //       this.clientSocket.on(connection, (data: any) => {
+  //         console.log(data)
+  //         observer.next(data);
+  //       });
+  //     });
+  //   }
 
-//   sendToServer(connection: string, object:any) {
-//     console.log("Sending message", object, connection);
-//       this.clientSocket.send(connection, object);
-//   }
-// }
+  //   sendToServer(connection: string, object:any) {
+  //     console.log("Sending message", object, connection);
+  //       this.clientSocket.send(connection, object);
+  //   }
+  // }
 
   public openWebSocket() {
     try {
@@ -77,28 +77,14 @@ export class WebSocketService {
     });
   }
 
-  // console.log(`"user": "${chatMessageDto.user}", "contentMessage": "${chatMessageDto.contentMessage}", "time": "${chatMessageDto.time}", "viewed": ${chatMessageDto.viewed}`);
   public sendMessage(chatMessageDto: any) {
-    
-      if (this.webSocket.readyState === WebSocket.OPEN) {
-        console.log("Sending message"); 
-        
-        if(chatMessageDto instanceof ArrayBuffer) {
-          const ws :WebSocketSubject<ArrayBuffer> = webSocket({url: backEnd, binaryType: 'arraybuffer'});
-          let sla = new Uint8Array(chatMessageDto); 
-          console.log(sla, "ChatMessageDto");
-          ws.next(sla);
-          console.log("ArrayBuffer");
-        }else {
-          this.webSocket.send(JSON.stringify(chatMessageDto));
-        }
-        
-        console.log("Message sent");
-
-      } else {
-        console.error('WebSocket is not open. Unable to send message.');
-      }
-    
+    if (this.webSocket.readyState === WebSocket.OPEN) {
+      console.log("Sending message");
+      this.webSocket.send(JSON.stringify(chatMessageDto));
+      console.log(chatMessageDto, "MESSAGE Sent");
+    }else {
+      console.error('WebSocket is not open. Unable to send message.');
+    }
   }
 
   public closeWebSocket() {

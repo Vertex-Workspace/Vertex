@@ -8,7 +8,7 @@ export class Message {
     contentMessage?: String;
     time?: String;
     viewed?: boolean;
-    file?: Uint8Array | String;
+    file?: String;
 
     constructor(message: Message) {
         this.id = message.id;
@@ -19,7 +19,7 @@ export class Message {
         this.time = message.time;
         this.viewed = message.viewed;
     }
-    
-    
-    
+
+
+
 }
