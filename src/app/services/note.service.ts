@@ -28,9 +28,8 @@ export class NoteService {
   }
 
   public patchAttribute(note: Note): Observable<Note> {
-    const noteEditing: Note = new Note(note); //converte o dto para note
     return this.http
-      .patch<Note>(`${URL}note`, noteEditing)
+      .patch<Note>(`${URL}note`, note)
   }
 
   public delete(id: number): Observable<Note> {    

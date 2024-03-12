@@ -24,7 +24,9 @@
         </p>
       </div>
       <div>
-        <img src="data:image/jpg;base64, {{note.file}}" class="z-[1]">
+        <ng-container *ngFor="let file of note.files">
+          <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]">
+        </ng-container>
       </div>
 
     </div>

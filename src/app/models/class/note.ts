@@ -6,7 +6,7 @@ interface Position {
 }
 
 export class Note {
-    id ?: number | undefined;
+    id ?: number;
     title !: string;
     description !: string;
     width !: number;
@@ -14,7 +14,7 @@ export class Note {
     color !: string;
     posX!: number;
     posY!: number;
-    file !: string;
+    files !: any[];
 
     constructor(
         note: Note,
@@ -25,7 +25,7 @@ export class Note {
         this.width = note.width;
         this.height = note.height;
         this.color = note.color;
-        this.file = note.file;
+        this.files = note.files;
         this.posX = note.posX;
         this.posY = note.posY;
     }

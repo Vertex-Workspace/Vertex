@@ -33,7 +33,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
   modalOpen: boolean = false;
 
   ngOnInit(): void { 
-    
+    console.log(this.note)
   }
 
   getNotePosition(): Point {
