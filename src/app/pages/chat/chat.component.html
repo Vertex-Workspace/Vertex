@@ -82,13 +82,13 @@
             <div class="center-div">
                 <div class="min-h-[60px]" *ngIf="chat">
                     <div *ngFor="let message of chat.messages"
-                        [ngClass]="message.user! != logged.firstName ? 'left' : 'right'">
+                        [ngClass]="message.user! != logged.firstName ? 'left pt-5' : 'right pt-5'">
                         <div class="flex justify-center items-center">
                             <p class="pChat">{{message.user!}}</p>
                         </div>
-                        <div class="regular-text"
+                        <div *ngIf="message.file=='' || message.file == null" class="regular-text"
                             [ngClass]="message.user! != logged.firstName ? 'answer' : 'messageUser'">
-                            <div *ngIf="message.file==null" class="pChat whitespace-pre-wrap">
+                            <div class="pChat whitespace-pre-wrap">
                                 {{message.contentMessage}}
                             </div>
                         </div>
@@ -96,6 +96,10 @@
                             [ngClass]="message.user! != logged.firstName ? 'answerPhoto' : 'messageUserPhoto'">
                             <div *ngIf="message.file!=null" class=" w-full h-full ">
                                 <img class="imgMessage" src="data:image/jpg;base64, {{message.file}}" alt="">
+                                <p [ngClass]="message.user! != logged.firstName ? 'pChat' : 'pChatEnd'">{{generateTime(message)}}</p>
+                            </div>
+                            <div>
+                                
                             </div>
                         </div>
                     </div>

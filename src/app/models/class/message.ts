@@ -6,7 +6,7 @@ export class Message {
     user?: string;
     chat?: Chat;
     contentMessage?: String;
-    time?: String;
+    time?: Date;
     viewed?: boolean;
     file?: String;
 
@@ -19,6 +19,7 @@ export class Message {
         this.time = message.time;
         this.viewed = message.viewed;
     }
+
 
 
 

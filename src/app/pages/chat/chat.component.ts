@@ -79,10 +79,14 @@ export class ChatComponent {
   }
 
   ngOnInit() {
-
+    console.log(this.chat)
     this.webSocketService.listenToServer().subscribe((change) => {
       console.log(change, "Change")
       this.chat.messages!.push(change);
+      setTimeout(() => {
+        let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
+        a.scrollTop = a.scrollHeight;
+      }, 0);
     });
 
   }
@@ -94,15 +98,12 @@ export class ChatComponent {
   }
 
   sendMessage(sendForm: NgForm) {
-    let date = new Date();
-    let dateString = date.toISOString();
-
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
 
     const messageDto: Message = {
       user: this.logged.firstName,
       contentMessage: this.messageUser,
-      time: "",
+      time: new Date(),
       viewed: false,
     };
     console.log(messageDto);
@@ -116,10 +117,7 @@ export class ChatComponent {
         });
 
       this.webSocketService.sendMessage(messageDto);
-      setTimeout(() => {
-        let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
-        a.scrollTop = a.scrollHeight;
-      }, 0);
+      
       sendForm.reset();
     }
   }
@@ -128,21 +126,20 @@ export class ChatComponent {
     let a = document.getElementById('fileInput') as HTMLElement;
     a.click();
   }
-
   selectedFile!: any;
   onFileChange(e: any) {
     this.selectedFile = e.target.files[0];
     const fd: FormData = new FormData();
     fd.append('file', this.selectedFile, this.selectedFile.name);
     fd.append('user', this.logged.firstName!);
-  
+
     this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
       (response: any) => {
         this.chat = response;
         console.log(response, "ARCHIVE SENT DB");
       }
     );
-  
+
     let reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
     reader.onload = () => {
@@ -152,17 +149,18 @@ export class ChatComponent {
       if (base64Parts.length === 2) {
         base64Data = base64Parts[1];
       }
-  
       let message: Message = {
         user: this.logged.firstName,
-        contentMessage: "",
-        time: "",
+        time: new Date(),
         file: base64Data,
         viewed: false,
       };
-  
       this.webSocketService.sendMessage(message);
     };
+  }
+
+  generateTime(message:Message){
+    return new Date(message.time!).getHours() +":"+ new Date(message.time!).getMinutes()
   }
 
   openConversation(chat: Chat) {
@@ -171,8 +169,15 @@ export class ChatComponent {
     // this.conversations[i].conversationOpen = true;
     // this.cardChat = i;
 
+
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
       this.chat.messages = messages;
+
+      this.chat.messages!.forEach((message: Message) => {
+        if (message.user == this.logged.firstName) {
+          message.viewed = true;
+        }
+      });
       console.log(this.chat, "Messages");
 
       let a = document.getElementsByClassName("center-div")[0] as HTMLElement;

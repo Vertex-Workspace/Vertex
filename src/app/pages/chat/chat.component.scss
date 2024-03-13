@@ -175,7 +175,7 @@ main {
 .section-right-chat {
     @apply flex flex-col items-center justify-center w-[70%] h-[100%] gap-2 rounded-sm;
     border: 1px solid $emphasis;
-    background-color: $secondColor;
+    background-color: #f1efef;
 }
 
 .center-div {
@@ -214,8 +214,9 @@ main {
 }
 
 .messageUserPhoto {
-    @apply flex rounded-sm items-center justify-center min-h-[60px] gap-1;
-    color: $secondColor;
+    @apply flex rounded-sm items-center justify-end min-h-[60px] gap-1;
+    color: $primaryColor;
+    text-align: right;
     max-width: 50%;
     word-break: break-all;
     flex-wrap: wrap;
@@ -223,6 +224,15 @@ main {
 
 .pChat {
     @apply h-[30%] flex items-center min-h-[30%];
+    display: flex;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+}
+.pChatEnd{
+    @apply h-[30%] flex items-center min-h-[30%];
+    display: flex;
+    justify-content: end;
+    padding-right: 5px;
     flex-wrap: wrap;
     word-wrap: break-word;
 }
