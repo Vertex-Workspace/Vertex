@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { TreeNode } from 'primeng/api';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
@@ -37,7 +38,6 @@ export class CreateTeamProjectComponent implements OnInit {
 
   groups !: Group[]
 
-
   @Input()
   typeString!: String;
 
@@ -45,7 +45,7 @@ export class CreateTeamProjectComponent implements OnInit {
 
   selectedFile !: any;
   base64 !: any;
-  fd : FormData = new FormData();
+  fd !: FormData;
   
 
   constructor(
@@ -56,7 +56,7 @@ export class CreateTeamProjectComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private alert: AlertService,
-    private groupService: GroupService 
+    private groupService: GroupService
   ) {
     this.logged = this.userService.getLogged();
 
@@ -94,30 +94,43 @@ export class CreateTeamProjectComponent implements OnInit {
         .create(team)
         .subscribe((teamRes: Team) => {          
           this.alert.successAlert(`Equipe ${teamRes.name} criada com sucesso!`);
-          this.teamService
+          if (this.fd) {
+            this.teamService
             .updateImage(teamRes.id!, this.fd)
             .subscribe();
+          }
       })
   }
 
   createProject(): void {
     const project = this.form.getRawValue() as Project;
 
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    project.creator = this.logged;
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));    
+    project.creator = {
+      user: {
+        id: this.logged.id!
+      },
+      team: {
+        id: teamId
+      }
+    };
 
     this.projectService
       .create(project, teamId)
       .subscribe((project: Project) => {
-        this.projectService
+        this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
+        if (this.fd) {
+          this.projectService
           .updateImage(project.id!, this.fd)
           .subscribe();
+        }
       });
   }
 
   url!: any;
 
   onFileSelected(e: any): void {   
+    this.fd = new FormData()
     this.selectedFile = e.target.files[0];
     this.fd.append('file', this.selectedFile, this.selectedFile.name);      
     let reader = new FileReader();
@@ -164,13 +177,22 @@ export class CreateTeamProjectComponent implements OnInit {
 
   private getGroups(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-
+  
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
-      this.groups = groups
-      for(const group of groups){
-        this.listOfResponsibles.push(group)
-      }
-    })
+      this.groups = groups;
+      this.listOfResponsibles = this.groups.map(group => {
+        return {
+          label: group.name,
+          children: group.users?.map(user => {
+            return {
+              label: user.firstName,
+              data: user
+            };
+          })
+        };
+      });
+    });
   }
+  
 
 }

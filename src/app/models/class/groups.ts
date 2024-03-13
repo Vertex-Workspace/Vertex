@@ -13,6 +13,7 @@ export class Group {
     creator?: User;
     team !: Team
     label ?: string
+    children ?: User[] = [];
 
     //List Project - Miguel
     projects?: Project[];
@@ -28,6 +29,7 @@ export class Group {
         this.team = group.team;
         this.open = false;
         this.label = group.name
+        this.children = group.users;
     }
 
 }
