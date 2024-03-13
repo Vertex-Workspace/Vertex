@@ -20,8 +20,14 @@ import { AuthGuard } from './services/guards/auth.guard';
 import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { UserTeamGuard } from './services/guards/user-team.guard';
 import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
+import { ChatComponent } from './pages/chat/chat.component';
 
 const routes: Routes = [
+  {
+    path: 'chat',
+    component: ChatComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -118,7 +124,7 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "login",
-  }
+  },
 ]
 
 @NgModule({

@@ -38,7 +38,7 @@
                         <p class="pOpen large-text">Pesquisar</p>
                     </div>
                 </li>
-                <li class="liOpen" (click)="openChatExpanded(true)">
+                <li class="liOpen" routerLink="chat">
                     <div>
                         <fa-icon [icon]="faMessage"></fa-icon>
                     </div>
@@ -46,7 +46,7 @@
                         <p class="pOpen large-text">Conversas</p>
                     </div>
                 </li>
-                <li class="liOpen" (click)="disabledChat()" routerLink="tarefas">
+                <li class="liOpen" routerLink="tarefas">
                     <div>
                         <fa-icon [icon]="faClipboardList"></fa-icon>
                     </div>
@@ -66,7 +66,7 @@
 
     <ul *ngIf="isSideBarExpanded" class="footer-items2">
         <div class="w-[100%] h-full flex flex-col items-center justify-evenly">
-            <li class="liOpen" routerLink="perfil-usuario" (click)="disabledChat()">
+            <li class="liOpen" routerLink="perfil-usuario">
                 <div class="w-[13.5%]">
                     <fa-icon [icon]="faUser"></fa-icon>
                 </div>
@@ -74,7 +74,7 @@
                     <p class="pOpen large-text">Perfil</p>
                 </div>
             </li>
-            <li class="liOpen" routerLink="configuracoes" (click)="disabledChat()">
+            <li class="liOpen" routerLink="configuracoes">
                 <div class="w-[14%]">
                     <fa-icon [icon]="faGear"></fa-icon>
                 </div>
