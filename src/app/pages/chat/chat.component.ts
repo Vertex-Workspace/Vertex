@@ -4,7 +4,7 @@ import {
   faMicrophoneLines, faPaperclip,
   faCheckDouble, faUsers, faUser, faGlobe,
   faMinimize, faStar, faCircleUser, faSearch,
-  faTimes
+  faTimes, faSmile
 } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { getLocaleDateFormat } from '@angular/common';
@@ -19,9 +19,12 @@ import { TeamService } from '../../services/team.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
+
 })
 export class ChatComponent {
+
+  faSmile = faSmile;
   faSearch = faSearch;
   faCircleUser = faCircleUser;
   faStar = faStar;
@@ -74,6 +77,11 @@ export class ChatComponent {
 
   }
 
+  showEmojiPicker: boolean = false;
+  showEmoji(): void {
+    this.showEmojiPicker = !this.showEmojiPicker;
+  }
+
   click() {
     this.side = !this.side;
   }
@@ -97,8 +105,14 @@ export class ChatComponent {
     this.webSocketService.closeWebSocket();
   }
 
+  addEmoji(event: any) {
+    // Adicione aqui a lógica para adicionar o emoji ao campo de mensagem
+    this.messageUser += event.emoji.native;
+  }
+
   sendMessage(sendForm: NgForm) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
+
 
     const messageDto: Message = {
       user: this.logged.firstName,
@@ -107,6 +121,8 @@ export class ChatComponent {
       viewed: false,
     };
     console.log(messageDto);
+
+    
 
     if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
       this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
@@ -117,10 +133,12 @@ export class ChatComponent {
         });
 
       this.webSocketService.sendMessage(messageDto);
-      
+
       sendForm.reset();
     }
   }
+
+
 
   openFile() {
     let a = document.getElementById('fileInput') as HTMLElement;
@@ -152,6 +170,7 @@ export class ChatComponent {
       let message: Message = {
         user: this.logged.firstName,
         time: new Date(),
+        imageUser: this.logged.image,
         file: base64Data,
         viewed: false,
       };
@@ -159,8 +178,8 @@ export class ChatComponent {
     };
   }
 
-  generateTime(message:Message){
-    return new Date(message.time!).getHours() +":"+ new Date(message.time!).getMinutes()
+  generateTime(message: Message) {
+    return new Date(message.time!).getHours() + ":" + new Date(message.time!).getMinutes()
   }
 
   openConversation(chat: Chat) {

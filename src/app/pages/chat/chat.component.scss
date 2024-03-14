@@ -98,7 +98,7 @@ main {
 }
 
 .main-section-left {
-    @apply flex flex-col w-full h-[80%] items-center justify-start overflow-auto;
+    @apply flex flex-col w-full h-[90%] items-center justify-start overflow-auto;
 }
 
 .footer-section-left {
@@ -106,7 +106,7 @@ main {
 }
 
 .section-icons {
-    @apply flex justify-between items-center;
+    @apply flex justify-center items-center;
     color: $primaryColor !important;
 }
 
@@ -135,7 +135,13 @@ main {
 }
 
 .card-chat {
-    @apply flex justify-between items-center w-[95%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    border: 1px solid #D3D3D3;
+    animation: leftPulse 0.3s;
+}
+
+.card-chat::selection {
+    @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     border: 1px solid #D3D3D3;
     animation: leftPulse 0.3s;
 }
@@ -228,14 +234,35 @@ main {
     flex-wrap: wrap;
     word-wrap: break-word;
 }
-.pChatEnd{
+
+.pChatEnd {
     @apply h-[30%] flex items-center min-h-[30%];
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     padding-right: 5px;
     flex-wrap: wrap;
     word-wrap: break-word;
+
 }
+
+.pChatPhoto {
+    @apply h-[30%] flex items-center min-h-[30%];
+    display: flex;
+    padding-top: 8px;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+}
+
+.pChatEndPhoto {
+    @apply h-[30%] flex items-center min-h-[30%];
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+    padding-top: 8px;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+}
+
 
 
 .high-input-div {
@@ -260,6 +287,20 @@ main {
     }
 }
 
-.imgMessage{
+.imgMessage {
     @apply w-96 h-52;
 }
+
+.imgUser {
+    @apply rounded-full;
+    width: 50px;
+    height: 50px;
+}
+
+.emoji-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 85px;
+    z-index: 5;
+}
+

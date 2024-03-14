@@ -15,14 +15,14 @@
 
                 <div class="gap-3 flex flex-col">
                     <div class="divNamesPerson">
-                        <p class="userName large-text">chat</p>
+                        <p *ngIf="chat!=undefined" class="userName large-text">{{chat.name}}</p>
 
-                        <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
+                        <!-- <fa-icon class="section-icons" [icon]="faStar"></fa-icon> -->
                     </div>
 
-                    <div class="divNamesPerson regular-text">
+                    <!-- <div class="divNamesPerson regular-text">
                         <p>Nome equipe</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                     <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>
                 </div>
             </div>
-            <div class="footer-section-left regular-text">
+            <!-- <div class="footer-section-left regular-text">
                 <div class="text-group-individual">
                     <fa-icon class="section-icons" [icon]="faGlobe"></fa-icon>
                     <p>Todos</p>
@@ -52,7 +52,7 @@
                     <fa-icon class="section-icons" [icon]="faUsers"></fa-icon>
                     <p>Grupos</p>
                 </div>
-            </div>
+            </div> -->
 
             <div class="main-section-left">
                 <ng-container *ngFor="let chatFor of conversations">
@@ -65,13 +65,13 @@
                             </div>
                         </div>
 
-                        <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
+                        <!-- <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
                         <div class="div-time-message">
 
                             <div class="div-time">
                                 <fa-icon class="section-icons" [icon]="faCheckDouble"></fa-icon>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                 </ng-container>
@@ -83,23 +83,27 @@
                 <div class="min-h-[60px]" *ngIf="chat">
                     <div *ngFor="let message of chat.messages"
                         [ngClass]="message.user! != logged.firstName ? 'left pt-5' : 'right pt-5'">
-                        <div class="flex justify-center items-center">
+                        <div class="flex justify-center items-center gap-4">
                             <p class="pChat">{{message.user!}}</p>
                         </div>
+
                         <div *ngIf="message.file=='' || message.file == null" class="regular-text"
                             [ngClass]="message.user! != logged.firstName ? 'answer' : 'messageUser'">
                             <div class="pChat whitespace-pre-wrap">
-                                {{message.contentMessage}}
+                                <p>{{message.contentMessage}}</p>
                             </div>
+
                         </div>
+                        <p *ngIf="message.file=='' || message.file == null"
+                            [ngClass]="message.user! != logged.firstName ? 'pChat' : 'pChatEnd'">
+                            {{generateTime(message)}}</p>
+
                         <div class="regular-text"
                             [ngClass]="message.user! != logged.firstName ? 'answerPhoto' : 'messageUserPhoto'">
                             <div *ngIf="message.file!=null" class=" w-full h-full ">
                                 <img class="imgMessage" src="data:image/jpg;base64, {{message.file}}" alt="">
-                                <p [ngClass]="message.user! != logged.firstName ? 'pChat' : 'pChatEnd'">{{generateTime(message)}}</p>
-                            </div>
-                            <div>
-                                
+                                <p [ngClass]="message.user! != logged.firstName ? 'pChatPhoto' : 'pChatEndPhoto'">
+                                    {{generateTime(message)}}</p>
                             </div>
                         </div>
                     </div>
@@ -109,15 +113,39 @@
             <form (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm"
                 class="high-input-div justify-center">
                 <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
+
                     <textarea type="text" name="message" id="input-message"
                         class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
                         [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
+                    <div class="emoji-wrapper">
+                        <!-- <emoji-mart title="Pick your emoji…" emoji="point_up"></emoji-mart> -->
+                        <!-- <emoji-mart [set]="emojione"></emoji-mart> -->
+                        <emoji-mart *ngIf="showEmojiPicker" [i18n]="{
+                            search: 'Digite o nome do emoji em inglês',
+                            categories: {
+                            search: 'Resultados da busca',
+                            recent: 'Recentes',
+                            smileys: 'Carinhas',
+                            people: 'Pessoas',
+                            nature: 'Natureza',
+                            foods: 'Comidas',
+                            activity: 'Atividade',
+                            places: 'Lugares',
+                            objects: 'Objetos',
+                            symbols: 'Símbolos',
+                            flags: 'Bandeiras'
+                            }
+                    }" [isNative]="true"  (emojiClick)="addEmoji($event)">
+                        </emoji-mart>
+
+                    </div>
                     <div class="flex relative">
                         <input type="file" id="fileInput" class="hidden absolute left-1/2 top-1/2"
                             (change)="onFileChange($event)">
                         <fa-icon (click)="openFile()" class="section-icons" [icon]="faPaperclip"></fa-icon>
                     </div>
                     <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
+                    <fa-icon (click)="showEmoji()" class="section-icons" [icon]="faSmile"></fa-icon>
                 </div>
                 <button type="submit" class="square-chat rounded-sm">
                     <fa-icon class="text-lg pr-1" [icon]="faPaperPlane"></fa-icon>

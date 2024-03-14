@@ -39,6 +39,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { NoteComponent } from './components/reusable-components/note/note.component';
 import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { NoteModalModule } from './components/modals/note-modal/note-modal.modul
     ChartModule,
     NotificationModule,
     ChatModule,
+    PickerModule,
     MinichatModule,
     MinichatTASKModule,
     UserInformationsModule,

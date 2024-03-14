@@ -16,6 +16,7 @@ import { User } from './models/class/user';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 
 @Component({
