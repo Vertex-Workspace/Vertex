@@ -1,20 +1,15 @@
 <div class="modal-overlay" *ngIf="!secondModal">
     <div class="modal" [style.height]="height" [style.width]="width">
             <div class="text-align">
-                <h6 *ngIf="!secondModal">Tem certeza que deseja excluir {{title}}?</h6>
-                <div class="button-div">
-                    <button  (click)="deleteConfirm(false)" class="no-button regular-text">Não</button>
-                    <button (click)="deleteConfirm(true)" class="yes-button regular-text">Sim</button>
-                </div>
+                <h6 *ngIf="!secondModal">Tem certeza que deseja {{title}}?</h6>
             </div>
-        <div class="ng-contentDiv">
-            <ng-content></ng-content>
-        </div>
-
+            <div class="ng-contentDiv">
+                <ng-content #content></ng-content>
+            </div>
+            <div class="button-div">
+                <button  (click)="deleteConfirm(false)" class="no-button regular-text">Não</button>
+                <button (click)="deleteConfirm(true)" class="yes-button regular-text">{{buttonText}}</button>
+            </div>
     </div>
 </div>
-<!-- <app-deleted *ngIf="secondModal" [width]="'400px'" [height]="'250px'" (close)="deletedTeam()">
-    <div class="deleted">
-        <h6>{{title}} deixou de existir</h6>
-    </div>
-</app-deleted> -->
+

@@ -137,6 +137,34 @@
     @apply min-h-[80%];
 }
 
-i {
-    font-size: 1.7rem;
+button > i {
+    font-size: 1.5rem;
+}
+
+table, th, td {
+    border:1px solid black;
+}
+table > tr {
+    @apply h-[40px];
+}
+
+.card-task-review{
+    @apply flex h-[90px] w-[97%] items-start justify-center flex-col rounded-sm px-3;
+    background-color: $card;
+    &:hover{
+        @apply w-full cursor-pointer;
+        background-color: $primaryColor;
+
+        p{
+            color: $secondColor !important;
+        }
+    }
+}
+
+.task-reviewed-focus{
+    width: 100%;  
+    background-color: $primaryColor; 
+    p{
+        color: $secondColor !important;
+    }
 }

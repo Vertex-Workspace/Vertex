@@ -11,7 +11,11 @@ export class Task {
     description!: string;
     values!: Value[];
     properties!: Property[];
-
+    creator?: {
+        user: {
+            id: number;
+        }
+    }
     comments!: Comment[];
 
     //taskHour
@@ -57,4 +61,19 @@ export class TaskEdit {
     id!:number;
     name!: string;
     description!: string;
+}
+
+
+export class TaskWaitingToReview {
+    id!: number;
+    name!: string;
+    description!: string;
+    // values!: Value[];
+    reviewHours!: any[];
+    sender!: {
+        finalDescription: string;
+        username: string;
+        email: string;
+        date: Date;
+    }
 }

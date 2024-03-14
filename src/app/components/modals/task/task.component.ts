@@ -14,6 +14,10 @@ import { ProjectService } from 'src/app/services/project.service';
 import { User } from 'src/app/models/class/user';
 import { TimeInTask } from 'src/app/models/class/timeInTask';
 import { ActivatedRoute } from '@angular/router';
+import { Team } from 'src/app/models/class/team';
+import { Observable } from 'rxjs';
+import { SentToReview } from 'src/app/models/class/review';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-task',
@@ -50,6 +54,15 @@ export class TaskComponent implements OnInit {
   id!: any;
   miniChatOpen: boolean = false;
   chatExpanded: boolean = false;
+  taskInfoDTO: any = {
+    teamName: "",
+    projectName: "",
+    creatorFullName: "",
+    email: "",
+  }
+
+  isSending: boolean = false;
+
 
   constructor(private taskService: TaskService,
     private projectService: ProjectService,
@@ -57,49 +70,64 @@ export class TaskComponent implements OnInit {
     private taskHourService: taskHourService,
     private teamService: TeamService,
     private userService: UserService,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute,
+    private reviewService: ReviewService) {
   }
 
   selectedComponent: string = 'description';
 
+  waitRequest: boolean = false;
+  soloResponsable: boolean = false;
   async ngOnInit() {
-    if(this.permissions){
+    
+    this.taskService.getTaskInfo(this.task.id).subscribe(
+      (team: any) => {
+        this.taskInfoDTO = team;
+      }
+    );
+    if (this.permissions) {
       for (const permission of this.permissions) {
         if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
           this.canEdit = true;
         }
       }
-    } else {
-      console.log(this.task);
     }
-
-
     this.user = JSON.parse(localStorage.getItem('logged')!);
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
+
+        //Validates if the user is the creator of the task
+        if(this.task.creator?.user.id == taskResponsable.userTeam.user.id){
+          //The creator doesn't send the task
+          this.soloResponsable = true;
+        }
       }
     });
-
     
-    await this.getTimeInTask();
-    
-    if (this.timeInTask.working) {
-      this.startTimer()
+    if(this.task.taskResponsables!.length == 1){
+      this.soloResponsable = true;
     }
+
+    await this.getTimeInTask();
+
+    //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
+    window.onbeforeunload = () => this.ngOnDestroy();
   }
 
 
   async getTimeInTask() {
     this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
       (time: TimeInTask) => {
-
         this.timer = time.timeInTask;
-
         this.seconds = parseInt(time.timeInTask.substring(6, 8));
         this.minutes = parseInt(time.timeInTask.substring(3, 5));
         this.hours = parseInt(time.timeInTask.substring(0, 2));
         this.timeInTask = time;
+        this.waitRequest = true;
+        if (this.timeInTask.working) {
+          this.startTimer()
+        }
       },
       (e: any) => {
         console.log(e);
@@ -112,7 +140,7 @@ export class TaskComponent implements OnInit {
 
   closeModal() {
     console.log("Close");
-    
+
     this.close.emit();
   }
 
@@ -228,15 +256,43 @@ export class TaskComponent implements OnInit {
     this.chatExpanded = !this.chatExpanded;
   }
 
-  cantEdit(){
-    if(!this.canEdit){
+  cantEdit() {
+    if (!this.canEdit) {
       this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
-    } 
+    }
   }
 
   ngOnDestroy() {
-    if(this.timeInTask.working){
+    if (this.timeInTask.working) {
       this.stopTimer();
+    }
+  }
+
+  sendTask() {
+    this.isSending = true;
+  }
+
+  taskAction(bool: boolean) {
+    this.isSending = false;
+    if (bool) {
+      let taskSentToReview: SentToReview = {
+        description: this.task.description,
+        userThatSentReview: {
+          id: this.idResponsable
+        },
+        task: {
+          id: this.task.id
+        }
+      }
+      this.reviewService.sentToReview(taskSentToReview).subscribe(
+        (task: Boolean) => {
+          this.alertService.successAlert("Tarefa enviada para revisão com sucesso!")
+        },
+        (error: any) => {
+          this.alertService.errorAlert(error.error)
+        }
+      );
+
     }
   }
 }
