@@ -9,11 +9,11 @@
 }
 
 .start-mid-items {
-    @apply flex w-full h-[60%] flex-col items-center;
+    @apply flex w-full h-[10%] flex-col items-center;
 }
 
 .top-logo {
-    @apply flex h-[25%] flex-col justify-center;
+    @apply flex h-full flex-col justify-center;
 }
 
 .center-items {
@@ -25,15 +25,20 @@
 }
 
 .footer-items {
-    @apply flex h-[30%] flex-col items-end justify-evenly;
+    @apply flex h-[90%] flex-col items-end justify-evenly;
 }
 
 .footer-items2 {
-    @apply flex h-[35%] w-full flex-col items-start;
+    @apply flex h-[90%] w-full flex-col items-start;
 }
 
 ul>li {
-    @apply h-[10%] flex justify-center items-center;
+    @apply h-[80px] flex w-full justify-center items-center;
+
+    fa-icon, i, mat-icon {
+        font-size: 22   px !important;
+        color: $secondColor;
+    }
 }
 
 .logo {
@@ -48,9 +53,10 @@ ul>li {
 }
 
 .liOpen {
-    @apply w-full h-[80px] flex gap-5 items-center justify-start pl-10;
+    @apply w-full h-[80px] flex gap-5 items-center justify-start pl-8;
     transition: all 0.3s ease-in-out;
     color: $secondColor;
+
 }
 
 .liOpen:hover {
@@ -60,8 +66,7 @@ ul>li {
     background-color: $secondColor;
     color: $primaryColor;
 
-    fa-icon {
-        @apply text-[1.2rem];
+    fa-icon, i {
         color: $primaryColor;
     }
 

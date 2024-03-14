@@ -1,12 +1,21 @@
 <section class="screen">
     <div class="container-custom">
-        <div>
-            <h4>Espaço de Trabalho</h4>
-        </div>
-        <div class="pt-2">
-            <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você poderá filtrar,</p>
-            <p class="small-text text-gray-600"> ordenar e criar novas tarefas. Gerenciando o seu tempo e registrando cada etapa.</p>
-        </div>
+        <section class="grid w-full grid-cols-2">
+            <div>
+                <div>
+                    <h4>
+                        Espaço de Trabalho
+                    </h4>
+                </div>
+                <div class="pt-2">
+                    <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você
+                        poderá
+                        filtrar,</p>
+                    <p class="small-text text-gray-600"> ordenar e criar novas tarefas. Gerenciando o seu tempo e
+                        registrando cada etapa.</p>
+                </div>
+            </div>
+        </section>
 
         <section class="menu">
             <div>
@@ -27,31 +36,33 @@
 
                 <div class="search " *ngIf="searchBarOpen">
                     <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="query">
-                    <i class="pi pi-times cursor-pointer" style="font-size: 1.4rem;" (click)="toggleSearchBar()"></i>
+                    <i class="pi pi-times cursor-pointer" (click)="toggleSearchBar()"></i>
                 </div>
-
+                
                 <ng-container *ngFor="let item of configItems">
                     <button class="config-buttons" (click)="item.click()">
                         <i [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
-                            class="{{ item.iconClass }}"></i>
+                        class="{{ item.iconClass }}"></i>
                     </button>
                 </ng-container>
-
+                
+                <button class="config-buttons" *ngIf="tasksToReview.length > 0" (click)="toggleReview()">
+                    <i class="pi pi-check-square" pBadge value={{badgeNumber}}></i>
+                </button>
 
                 <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
                     <i class="pi pi-tags"></i>
                     Propriedades
                 </button>
-                <button *ngIf="!isMuralPage; else buttonMural"
-                class="create" (click)="createTask()" [disabled]="!canCreate"  
-                [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
+                <button *ngIf="!isMuralPage; else buttonMural" class="create" (click)="createTask()"
+                    [disabled]="!canCreate" [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
                 <ng-template #buttonMural>
-                    <button class="create" (click)="createNote()" >
+                    <button class="create" (click)="createNote()">
                         <i class="pi pi-plus-circle"></i>
-                       Nova nota
+                        Nova nota
                     </button>
                 </ng-template>
             </div>
@@ -79,10 +90,13 @@
         </section>
 
         <section class="router" *ngIf="renderProject | async">
-            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'" (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-kanban>
-            <app-list [project]="project" *ngIf="clicked  === 'List'" (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-list>
-            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'" [permissions]="permissions"></app-calendar>
-            <app-mural  *ngIf="clicked  === 'Mural'"></app-mural>
+            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'"
+                (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-kanban>
+            <app-list [project]="project" *ngIf="clicked  === 'List'"
+                (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-list>
+            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project"
+                *ngIf="clicked  === 'Calendar'" [permissions]="permissions"></app-calendar>
+            <app-mural *ngIf="clicked  === 'Mural'"></app-mural>
         </section>
 
     </div>
@@ -94,3 +108,31 @@
 
 <app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
     (close)="changeModalTaskState(false, taskOpenObject)" [project]="project" [permissions]="permissions"></app-task>
+
+<app-modal-warn *ngIf="taskReview" [height]="'650px'" [width]="'900px'" (close)="toggleReview()">
+    <h5>Tarefas para serem Revisadas</h5>
+    <section class="grid w-full h-full pt-6" style="grid-template-columns: 40% 60%;">
+        <div class="flex flex-col h-full w-full overflow-y-auto overflow-x-hidden gap-5">
+            <ng-container *ngFor="let taskToReview of tasksToReview">
+                <div class="flex h-[90px] w-full items-start justify-center flex-col bg-white border-l-8 rounded-sm px-3"
+                [style.borderColor]="getBorderColor(taskToReview)"
+                (click)="selectedReviewTask(taskToReview)"
+                >
+                    <p class="medium-text">{{ taskToReview.name }}</p>
+                    <p class="small-text">{{ taskToReview.description }}</p>
+                </div>
+            </ng-container>
+        </div>
+        <div>
+            <p class="large-text">{{taskBeingReviewed.name}}</p>
+            <table>
+                <th>Responsável</th>
+                <th>Tempo</th>
+                <tr *ngFor="let responsable of performanceTable">
+                    <td>{{responsable.username}}</td>
+                    <td>{{convertTime(responsable.time)}}</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</app-modal-warn>

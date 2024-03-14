@@ -106,7 +106,7 @@
     </div>
 </section>
 
-<app-modal-warn *ngIf="modalTasks" [height]="'650px'" [width]="'600px'" (close)="openModalTasks(null)">
+<app-modal-warn *ngIf="modalTasks" [height]="'650px'" [width]="'800px'" (close)="openModalTasks(null)">
     <h6>Tarefas Atribuídas para {{formatDate(modalDate)}}</h6>
     <div class="div-tasks">
         <ng-container *ngFor="let task of getTasksByDate(modalDate)">

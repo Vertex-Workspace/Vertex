@@ -80,4 +80,12 @@ export class TaskService {
     return this.http.get(`${URL}task/info/${taskId}`);
   }
 
+  public getTasksToReview(userID: number, projectID:number): Observable<Task[]>{
+    return this.http.get<Task[]>(`${URL}task/review/${userID}/project/${projectID}`);
+  }
+
+  public getPerformanceInTask(taskID:number): Observable<any>{
+    return this.http.get(`${URL}task/${taskID}/review/performance`);
+  }
+
 }

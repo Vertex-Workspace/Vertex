@@ -13,6 +13,8 @@ import { TeamService } from 'src/app/services/team.service';
 import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/class/note';
 import { Observable } from 'rxjs';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { PropertyList } from 'src/app/models/class/property';
 
 
 @Component({
@@ -33,7 +35,12 @@ export class TasksComponent implements OnInit {
   taskOpen: boolean = false;
   canCreate: boolean = false;
   isMuralPage !: boolean;
-
+  project!: Project;
+  renderProject!: Observable<Project> | undefined;
+  permissions!: Permission[];
+  tasksToReview: Task[] = [];
+  badgeNumber: string = '0';
+  taskReview: boolean = false;
   logged !: User;
 
   constructor(
@@ -45,17 +52,8 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService
-  ) {
+  ) {}
 
-
-  }
-
-  projectId!: number;
-
-
-  project!: Project;
-  renderProject!: Observable<Project> | undefined;
-  permissions!: Permission[];
   ngOnInit() {
     this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
@@ -79,6 +77,15 @@ export class TasksComponent implements OnInit {
       if (currentView) {
         this.clicked = currentView;
       }
+      this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
+        (tasks : Task[]) => {
+          console.log(tasks);
+          this.tasksToReview = tasks;
+          this.badgeNumber = this.tasksToReview.length.toString();
+          //Implementation
+        }
+      );
+
     });
 
     if (this.clicked === 'Mural') this.isMuralPage = true;
@@ -110,6 +117,7 @@ export class TasksComponent implements OnInit {
   toggleOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
+
   changePreviewMode(preview: string): void {
     this.clicked = preview;
     if (this.clicked === 'Mural') this.isMuralPage = true;
@@ -196,5 +204,42 @@ export class TasksComponent implements OnInit {
 
   getProject(): Project {
     return this.project;
+  }
+
+
+  //MODAL REVIEW TASK
+  toggleReview():void{
+    this.taskReview = !this.taskReview;
+    if(this.tasksToReview.length > 0){
+      this.taskBeingReviewed = this.tasksToReview[0];
+
+      this.taskService.getPerformanceInTask(this.taskBeingReviewed.id!).subscribe(
+        (performance) => {
+          this.performanceTable = performance;
+          console.log(performance);
+        }
+      );
+    }
+  }
+  performanceTable: any[] = [];
+  selectedReviewTask(taskReview : Task) {
+    this.taskBeingReviewed = taskReview;
+    this.taskService.getPerformanceInTask(this.taskBeingReviewed.id!).subscribe(
+      (performance) => {
+        this.performanceTable = performance;
+        console.log(performance);
+      }
+    );
+  }
+
+  getBorderColor(task : Task){
+    let propertyList: PropertyList = task.values[0].value as PropertyList;
+    return propertyList.color;
+  }
+
+  taskBeingReviewed!: Task;
+
+  convertTime(time:any): string{
+    return time;
   }
 }
