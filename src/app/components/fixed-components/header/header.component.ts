@@ -54,6 +54,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(window.history.length);
+    
   }
 
   @Output()
@@ -75,7 +77,10 @@ export class HeaderComponent implements OnInit {
   }
 
   back(): void {
-    this._location.back();
+    console.log(window.history.length);
+    
+    if (window.history.length > 2) this._location.back();
+    else this.router.navigate(['/']);
   }
 
   incrementUrlById(activeRoute: string, id: number): void {     

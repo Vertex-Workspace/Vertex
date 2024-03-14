@@ -1,68 +1,76 @@
-<section class="modal-overlay" (click)="clickOutHandler()">
-    <div class="modal">
+<section class="modal-overlay">
+    <div class="modal" [style.backgroundColor]="note.color">
         <div class="left">
 
-            <div class="location">
-                {{project.name}} | {{note.title}}
+            <div class="location pl-2">
+                <p>
+                    {{project.name}}
+                </p>
+            </div>
+            <div>
+                <input type="text" class="title" [(ngModel)]="note.title" [style.backgroundColor]="note.color">
             </div>
             <div class="main-content">
-                <input type="text" [(ngModel)]="note.title">
 
                 <div class="content">
                     <textarea 
                         [disabled]="!descriptionEditable"
-                        [style.background]="descriptionEditable ? '#f5f5f5' :  '#fff'" 
                         [(ngModel)]="note.description"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        [cdkAutosizeMinRows]="1"
+                        [cdkAutosizeMaxRows]="7"
+                        maxlength="500"
+                        [style.backgroundColor]="note.color"
+                        [style.border]="descriptionEditable ? 'solid black 1px' : 'none'"
+                        #description
                     >
                         {{note.description}}
                     </textarea>
 
                     <a (click)="toggleEditDescription()">
-                        Editar descrição
+                        {{!descriptionEditable ? "Editar descrição" : "Confirmar" }}
                     </a>
                 </div>
+                <div class="image-container">
+                    <ng-container *ngFor="let file of note.files">
+                        <div 
+                            class="single-image"
+                            (mouseenter)="hoverFile(file)"
+                        >
+                            <i class="pi pi-plus rotate-45" (click)="removeImage(file)" *ngIf="hoveringFile === file"></i>
+                            <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]" draggable="false">
+                        </div>
+                    </ng-container>
+                  </div>
 
             </div>
 
             <div class="config">
-                <ng-container *ngIf="!colorListOpen">
-                    <div class="color" 
-                        [style.backgroundColor]="getSelectedColor().color"
-                    >
-                        <fa-icon 
-                            [icon]="faCheck" 
-                            class="icon">
-                        </fa-icon>
-                    </div>
-                    <i 
-                        class="pi pi-chevron-right pl-2" 
-                        (click)="toggleColorList()"
-                    ></i>
-                    
-                </ng-container>
-                <div *ngIf="colorListOpen" class="color-list">
+                <div class="color-list">
 
                     <ng-container *ngFor="let color of colorList">
                         <div class="color" 
                             [style.backgroundColor]="color.color" 
                             (click)="changeColor(color)"
                         >
-                            <fa-icon 
-                                [icon]="faCheck"
-                                 class="icon" 
-                                 *ngIf="color.color === getSelectedColor().color">
-                            </fa-icon>
                         </div>
                     </ng-container>
-
-                    <i class="pi pi-chevron-left pl-2" 
-                        (click)="toggleColorList()"
-                    ></i>
+                </div>
+                <div class="config-right">
+                    <div class="image">
+                        <i class="pi pi-images"></i>
+                        <form>
+                            <input type="file" class="input-file" (change)="onFileSelected($event)">
+                        </form>
+                    </div>
+                    
+                    <button (click)="submit()">
+                        <i class="pi pi-check"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="right">
-
+        <i class="pi pi-plus rotate-45" (click)="clickOutHandler()"></i>
     </div>
 </section>

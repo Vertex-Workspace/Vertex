@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Note, NoteGet } from 'src/app/models/class/note';
+import { Note } from 'src/app/models/class/note';
 import { Project } from 'src/app/models/class/project';
+import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 interface Color {
   color: string,
-  selected: boolean
+  imgBackgroundColor: string
 }
 
 @Component({
@@ -18,10 +19,25 @@ interface Color {
 export class NoteModalComponent implements OnInit {
 
   @Input()
-  note !: NoteGet;
+  note !: Note;
+
+  @ViewChild("description") 
+  descriptionTextarea !: ElementRef;
 
   @Output()
   closeModal: EventEmitter<any> = new EventEmitter;
+
+  @Output()
+  patchOutput: EventEmitter<void> = new EventEmitter;
+
+  @Output()
+  uploadImageOutput: EventEmitter<FormData> = new EventEmitter;
+
+  @Output()
+  removeImageOutput: EventEmitter<number> = new EventEmitter;
+
+  textAreaRows !: number;
+  hoveringFile !: any;
 
   faCheck = faCheck;
 
@@ -30,48 +46,42 @@ export class NoteModalComponent implements OnInit {
   descriptionEditable: boolean = false;
 
   colorListOpen: boolean = false;
+  
   colorList: Color[] = [
     {
-      color: 'BLUE',
-      selected: false,
+      color: '#D3E5EF',
+      imgBackgroundColor: '#c5dfed'
     },
     {
-      color: '#FF9D9D50',
-      selected: false,
+      color: '#FF9D9D',
+      imgBackgroundColor: '#ff8787'
     },
     {
-      color: 'PINK',
-      selected: false,
+      color: '#F5E0E9',
+      imgBackgroundColor: '#f5d5e3'
     },
     {
-      color: 'ORANGE',
-      selected: false,
+      color: '#FFD601',
+      imgBackgroundColor: 'deba00'
     },
     {
-      color: 'GREY',
-      selected: false,
+      color: '#E3E2E0',
+      imgBackgroundColor: '#c2c2c0'
     },
     {
-      color: '#FFD60050',
-      selected: false,
-    },
-    {
-      color: 'BROWN',
-      selected: false,
-    },
-    {
-      color: '#65D73C50',
-      selected: false,
+      color: '#65D73C',
+      imgBackgroundColor: '#58cf2d'
     },
     {
       color: '#FFFFFF',
-      selected: false,
+      imgBackgroundColor: '#F3F3F3'
     }
   ];
-
+  
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertService
   ) {
     route.params.subscribe(params => {
       if (params) {
@@ -81,11 +91,7 @@ export class NoteModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setSelectedColor();
-  }
-
-  setSelectedColor(): void {
-
+    this.descriptionTextarea.nativeElement.focus();
   }
 
   getProject(id: number): void {
@@ -96,15 +102,8 @@ export class NoteModalComponent implements OnInit {
       })
   }
 
-  getSelectedColor(): any {
-    return this.colorList.find(c => {      
-      return c.selected;
-    });
-  };
-
   changeColor(color: Color) {    
     this.note.color = color.color;
-       
   }
 
   toggleColorList(): void {
@@ -112,11 +111,34 @@ export class NoteModalComponent implements OnInit {
   }
 
   toggleEditDescription(): void {
+    this.descriptionTextarea.nativeElement.focus();
     this.descriptionEditable = !this.descriptionEditable;
   }
 
   clickOutHandler(): void {
     this.closeModal.emit();
+  }
+
+  onFileSelected(e: any): void {
+    const selectedFile = e.target.files[0]
+    const fd: FormData = new FormData();
+    fd.append('file', selectedFile, selectedFile.name);    
+    
+    this.uploadImageOutput.emit(fd);
+  }
+
+  submit(): void {
+    this.patchOutput.emit();
+    this.closeModal.emit();
+  }
+
+  hoverFile(file: any): void {
+    this.hoveringFile = file;
+  }
+
+  removeImage(file: any): void {
+    this.note.files.splice(this.note.files.indexOf(file), 1);
+    this.removeImageOutput.emit(file.id);
   }
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Note, NoteGet } from '../models/class/note';
+import { Note } from '../models/class/note';
 import { URL } from './path/api_url';
 
 @Injectable({
@@ -19,23 +19,32 @@ export class NoteService {
       .post<Note>(`${URL}note/${projectId}/${userId}`, note);
   }
 
-  public getAllByProject(teamId: number): Observable<NoteGet[]> {
-    return this.http
-      .get<Note[]>(`${URL}note/${teamId}`)
+  public getAllByProject(projectId: number): Observable<Note[]> {
+    return this.http 
+      .get<Note[]>(`${URL}note/${projectId}`)
       .pipe(map((notes: Note[]) => 
-        notes.map((note: Note) => new NoteGet(note))
+        notes.map((note: Note) => new Note(note))
       ));
   }
 
-  public patchAttribute(note: NoteGet): Observable<Note> {
-    const noteEditing: Note = new Note(note); //converte o dto para note
+  public patchAttribute(note: Note): Observable<Note> {
     return this.http
-      .patch<Note>(`${URL}note/att`, noteEditing)
+      .patch<Note>(`${URL}note`, note)
   }
 
-  public delete(id: number): void {
-    this.http
+  public delete(id: number): Observable<Note> {    
+    return this.http
       .delete<Note>(`${URL}note/${id}`);
+  }
+
+  public uploadImage(id: number, fd: FormData) {
+    return this.http
+      .patch<Note>(`${URL}note/upload/${id}`, fd);
+  }
+
+  public removeImage(noteId: number, fileId: number): Observable<Note> {
+    return this.http
+      .delete<Note>(`${URL}note/remove/${noteId}/${fileId}`);
   }
 
 }
