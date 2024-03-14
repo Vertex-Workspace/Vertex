@@ -1,7 +1,7 @@
 @import '../../../_variables.scss';
 
 section {
-    @apply w-screen h-full flex flex-col justify-center;
+    @apply w-screen h-screen flex flex-col justify-center;
     background-color: $secondColor;
 }
 
@@ -33,7 +33,7 @@ div.chat-content {
 }
 
 header {
-    @apply flex w-[100%] h-[13%] justify-between items-end;
+    @apply flex w-[100%] h-[15%] justify-between items-end;
     background-color: $secondColor;
 }
 
@@ -70,7 +70,7 @@ header {
 }
 
 main {
-    @apply w-full h-[87%] flex justify-between;
+    @apply w-full h-[85%] flex justify-between;
 }
 
 .section-left-chat {
@@ -175,7 +175,7 @@ main {
 .section-right-chat {
     @apply flex flex-col items-center justify-center w-[70%] h-[100%] gap-2 rounded-sm;
     border: 1px solid $emphasis;
-    background-color: $secondColor;
+    background-color: #f1efef;
 }
 
 .center-div {
@@ -208,8 +208,31 @@ main {
     flex-wrap: wrap;
 }
 
+.answerPhoto {
+    @apply flex rounded-sm items-center justify-center min-h-[60px] gap-1;
+    max-width: 50%;
+}
+
+.messageUserPhoto {
+    @apply flex rounded-sm items-center justify-end min-h-[60px] gap-1;
+    color: $primaryColor;
+    text-align: right;
+    max-width: 50%;
+    word-break: break-all;
+    flex-wrap: wrap;
+}
+
 .pChat {
     @apply h-[30%] flex items-center min-h-[30%];
+    display: flex;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+}
+.pChatEnd{
+    @apply h-[30%] flex items-center min-h-[30%];
+    display: flex;
+    justify-content: end;
+    padding-right: 5px;
     flex-wrap: wrap;
     word-wrap: break-word;
 }
@@ -235,4 +258,8 @@ main {
         @apply flex justify-between items-center;
         color: $card !important;
     }
+}
+
+.imgMessage{
+    @apply w-96 h-52;
 }
