@@ -42,4 +42,9 @@ export class NoteService {
       .patch<Note>(`${URL}note/upload/${id}`, fd);
   }
 
+  public removeImage(noteId: number, fileId: number): Observable<Note> {
+    return this.http
+      .delete<Note>(`${URL}note/remove/${noteId}/${fileId}`);
+  }
+
 }

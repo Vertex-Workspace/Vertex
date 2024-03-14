@@ -157,7 +157,9 @@ export class TasksComponent implements OnInit {
 
     this.noteService
       .create(note, this.logged.id!, this.project.id!)
-      .subscribe();
+      .subscribe((note: Note) => {
+        this.project.notes.push(note);
+      });
   }
 
   taskOpenObject!: Task;

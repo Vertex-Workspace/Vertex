@@ -18,14 +18,16 @@
     <div class="left">
       <h6>{{ note.title }}</h6>
       
-      <div class="text regular-text mb-4 z-[10]">
+      <div class="text regular-text z-[10] break-words">
         <p>
           {{ note.description }}
         </p>
       </div>
-      <div>
+      <div class="image-container">
         <ng-container *ngFor="let file of note.files">
-          <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]">
+          <div class="single-image">
+            <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]">
+          </div>
         </ng-container>
       </div>
 
@@ -52,4 +54,5 @@
   (closeModal)="toggleModalOpen()"
   (patchOutput)="edit()"
   (uploadImageOutput)="uploadImage($event)"
+  (removeImageOutput)="removeImage($event)"
 ></app-note-modal>

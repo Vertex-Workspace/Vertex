@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Note } from 'src/app/models/class/note';
 import { Project } from 'src/app/models/class/project';
+import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 interface Color {
   color: string,
-  selected: boolean
+  imgBackgroundColor: string
 }
 
 @Component({
@@ -29,6 +30,9 @@ export class NoteModalComponent implements OnInit {
   @Output()
   uploadImageOutput: EventEmitter<FormData> = new EventEmitter;
 
+  @Output()
+  removeImageOutput: EventEmitter<number> = new EventEmitter;
+
   textAreaRows !: number;
 
   faCheck = faCheck;
@@ -41,37 +45,38 @@ export class NoteModalComponent implements OnInit {
   colorList: Color[] = [
     {
       color: '#D3E5EF',
-      selected: false,
+      imgBackgroundColor: ''
     },
     {
       color: '#FF9D9D',
-      selected: false,
+      imgBackgroundColor: ''
     },
     {
       color: '#F5E0E9',
-      selected: false,
+      imgBackgroundColor: ''
     },
     {
       color: '#FFD601',
-      selected: false,
+      imgBackgroundColor: ''
     },
     {
       color: '#E3E2E0',
-      selected: false,
+      imgBackgroundColor: ''
     },
     {
       color: '#65D73C',
-      selected: false,
+      imgBackgroundColor: ''
     },
     {
       color: '#FFFFFF',
-      selected: false,
+      imgBackgroundColor: '#F3F3F3'
     }
   ];
   
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertService
   ) {
     route.params.subscribe(params => {
       if (params) {
@@ -90,12 +95,6 @@ export class NoteModalComponent implements OnInit {
         this.project = project;
       })
   }
-
-  getSelectedColor(): any {
-    return this.colorList.find(c => {      
-      return c.selected;
-    });
-  };
 
   changeColor(color: Color) {    
     this.note.color = color.color;
@@ -124,6 +123,11 @@ export class NoteModalComponent implements OnInit {
   submit(): void {
     this.patchOutput.emit();
     this.closeModal.emit();
+  }
+
+  removeImage(file: any): void {
+    this.note.files.splice(this.note.files.indexOf(file), 1);
+    this.removeImageOutput.emit(file.id);
   }
 
 }

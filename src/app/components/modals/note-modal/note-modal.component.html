@@ -7,8 +7,10 @@
                     {{project.name}}
                 </p>
             </div>
+            <div>
+                <input type="text" class="title" [(ngModel)]="note.title" [style.backgroundColor]="note.color">
+            </div>
             <div class="main-content">
-                <input type="text" [(ngModel)]="note.title" [style.backgroundColor]="note.color">
 
                 <div class="content">
                     <textarea 
@@ -18,7 +20,7 @@
                         #autosize="cdkTextareaAutosize"
                         [cdkAutosizeMinRows]="1"
                         [cdkAutosizeMaxRows]="7"
-                        maxlength="255"
+                        maxlength="500"
                         [style.backgroundColor]="note.color"
                     >
                         {{note.description}}
@@ -28,6 +30,16 @@
                         {{!descriptionEditable ? "Editar descrição" : "Confirmar" }}
                     </a>
                 </div>
+                <div class="image-container">
+                    <ng-container *ngFor="let file of note.files">
+                        <div 
+                            class="single-image"
+                        >
+                            <i class="pi pi-plus rotate-45" (click)="removeImage(file)"></i>
+                            <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]" draggable="false">
+                        </div>
+                    </ng-container>
+                  </div>
 
             </div>
 
@@ -42,22 +54,20 @@
                         </div>
                     </ng-container>
                 </div>
-            </div>
-        </div>
-        <div class="right">
-            <i class="pi pi-plus rotate-45" (click)="clickOutHandler()"></i>
-            <div class="config-right">
-                <div class="image">
-                    <i class="pi pi-images"></i>
-                    <form>
-                        <input type="file" class="input-file" (change)="onFileSelected($event)">
-                    </form>
+                <div class="config-right">
+                    <div class="image">
+                        <i class="pi pi-images"></i>
+                        <form>
+                            <input type="file" class="input-file" (change)="onFileSelected($event)">
+                        </form>
+                    </div>
+                    
+                    <button (click)="submit()">
+                        <i class="pi pi-check"></i>
+                    </button>
                 </div>
-                
-                <button (click)="submit()">
-                    <i class="pi pi-check"></i>
-                </button>
             </div>
         </div>
+        <i class="pi pi-plus rotate-45" (click)="clickOutHandler()"></i>
     </div>
 </section>

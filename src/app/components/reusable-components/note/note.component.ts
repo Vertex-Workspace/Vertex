@@ -64,14 +64,11 @@ export class NoteComponent implements OnInit, AfterViewInit {
     { id: 'trash', iconClass: 'pi pi-trash', onClick: () => this.deleteNote() },
   ];
 
-  hasImage(): boolean {
-    return Object.hasOwn(this.note, 'image');;
-  }
-
   uploadImage(fd: FormData): void {
     this.noteService
       .uploadImage(this.note.id!, fd)
-      .subscribe(() => {
+      .subscribe((note: Note) => {
+        this.note = note;
         this.alert.successAlert('Imagem adicionada!')
       });
   }
@@ -147,10 +144,21 @@ export class NoteComponent implements OnInit, AfterViewInit {
     this.deleteNoteEmitter.emit();
   }
 
+  removeImage(fileId: number): void {
+    this.noteService
+      .removeImage(this.note.id!, fileId)
+      .subscribe((note: Note) => {
+        this.note = note;
+      })
+  }
+
   edit(): void {
+    
     this.noteService
       .patchAttribute(this.note)
-      .subscribe();
+      .subscribe((note: Note) => {        
+        this.note = note;
+      });
   }
 
 }
