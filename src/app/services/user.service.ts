@@ -89,12 +89,6 @@ export class UserService {
 
   getLogged(): User {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
-
-    this.getOneByEmail(user.email)
-      .subscribe((userFor => {
-        user = userFor;
-      }))
-
     return user;
   }
 
