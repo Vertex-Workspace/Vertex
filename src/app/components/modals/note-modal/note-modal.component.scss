@@ -33,15 +33,14 @@
         @apply w-full h-full flex flex-wrap gap-1 rounded-sm;
 
         .single-image {
-            @apply w-[270px] h-[270px] flex items-center justify-center relative;
-            background-color: $secondColor;
+            @apply w-[250px] h-[250px] flex items-center justify-center relative;
 
             .pi-plus {
                 @apply absolute top-0 right-0 m-2;
             }
             
             img {
-                @apply h-[200px] w-auto;
+                @apply h-[180px] w-auto;
             }
         }
       }
@@ -65,8 +64,13 @@
                 @apply flex flex-col px-2 h-full;
 
                 textarea {
-                    @apply text-xl overflow-y-hidden text-justify cursor-text mt-4 mb-2;
+                    @apply text-lg overflow-y-hidden text-justify cursor-text mt-4 mb-2 pr-32;
                     resize: none;
+
+                    &:focus {
+                        border: none;
+                        outline: none;
+                    }
                 }
 
                 a {

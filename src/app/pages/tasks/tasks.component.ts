@@ -57,7 +57,7 @@ export class TasksComponent implements OnInit {
     .getOneById(id)
     .subscribe((p: Project) => {
       this.project = p;
-      let currentView = localStorage.getItem('mode-task-view');
+      const currentView = localStorage.getItem('mode-task-view');
       if(currentView){
         this.clicked = currentView;
         this.muralPageListener();
@@ -117,7 +117,7 @@ export class TasksComponent implements OnInit {
   }
 
   createTask(): void {
-    let taskCreate: TaskCreate = {
+    const taskCreate: TaskCreate = {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
       project: {
@@ -177,7 +177,7 @@ export class TasksComponent implements OnInit {
   }
 
   updateProjectByTaskChanges(event: any): void{
-    let taskUpdated: Task = event;
+    const taskUpdated: Task = event;
     this.project.tasks = this.project.tasks.map(task => {
       if(task.id === taskUpdated.id){
         return taskUpdated;

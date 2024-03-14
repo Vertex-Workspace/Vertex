@@ -18,8 +18,8 @@
     <div class="left">
       <h6>{{ note.title }}</h6>
       
-      <div class="text regular-text z-[10] break-words">
-        <p>
+      <div class="text relative" >
+        <p #description>
           {{ note.description }}
         </p>
       </div>
@@ -31,7 +31,14 @@
         </ng-container>
       </div>
 
-    </div>
+      <div class="overflow-button"
+      [style.backgroundColor]="note.color"
+    >
+        <button *ngIf="isOverflowing(description)">
+          Visualizar tudo
+        </button>
+
+      </div>
 
     <div class="right">
 
@@ -45,6 +52,7 @@
         </ng-container>
       </div>
     </div>
+  </div>
   </span>
 </div>
 

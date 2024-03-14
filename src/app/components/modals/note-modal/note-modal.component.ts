@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Note } from 'src/app/models/class/note';
@@ -21,6 +21,9 @@ export class NoteModalComponent implements OnInit {
   @Input()
   note !: Note;
 
+  @ViewChild("description") 
+  descriptionTextarea !: ElementRef;
+
   @Output()
   closeModal: EventEmitter<any> = new EventEmitter;
 
@@ -34,6 +37,7 @@ export class NoteModalComponent implements OnInit {
   removeImageOutput: EventEmitter<number> = new EventEmitter;
 
   textAreaRows !: number;
+  hoveringFile !: any;
 
   faCheck = faCheck;
 
@@ -42,30 +46,31 @@ export class NoteModalComponent implements OnInit {
   descriptionEditable: boolean = false;
 
   colorListOpen: boolean = false;
+  
   colorList: Color[] = [
     {
       color: '#D3E5EF',
-      imgBackgroundColor: ''
+      imgBackgroundColor: '#c5dfed'
     },
     {
       color: '#FF9D9D',
-      imgBackgroundColor: ''
+      imgBackgroundColor: '#ff8787'
     },
     {
       color: '#F5E0E9',
-      imgBackgroundColor: ''
+      imgBackgroundColor: '#f5d5e3'
     },
     {
       color: '#FFD601',
-      imgBackgroundColor: ''
+      imgBackgroundColor: 'deba00'
     },
     {
       color: '#E3E2E0',
-      imgBackgroundColor: ''
+      imgBackgroundColor: '#c2c2c0'
     },
     {
       color: '#65D73C',
-      imgBackgroundColor: ''
+      imgBackgroundColor: '#58cf2d'
     },
     {
       color: '#FFFFFF',
@@ -86,6 +91,7 @@ export class NoteModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.descriptionTextarea.nativeElement.focus();
   }
 
   getProject(id: number): void {
@@ -105,6 +111,7 @@ export class NoteModalComponent implements OnInit {
   }
 
   toggleEditDescription(): void {
+    this.descriptionTextarea.nativeElement.focus();
     this.descriptionEditable = !this.descriptionEditable;
   }
 
@@ -123,6 +130,10 @@ export class NoteModalComponent implements OnInit {
   submit(): void {
     this.patchOutput.emit();
     this.closeModal.emit();
+  }
+
+  hoverFile(file: any): void {
+    this.hoveringFile = file;
   }
 
   removeImage(file: any): void {

@@ -22,6 +22,8 @@
                         [cdkAutosizeMaxRows]="7"
                         maxlength="500"
                         [style.backgroundColor]="note.color"
+                        [style.border]="descriptionEditable ? 'solid black 1px' : 'none'"
+                        #description
                     >
                         {{note.description}}
                     </textarea>
@@ -34,8 +36,9 @@
                     <ng-container *ngFor="let file of note.files">
                         <div 
                             class="single-image"
+                            (mouseenter)="hoverFile(file)"
                         >
-                            <i class="pi pi-plus rotate-45" (click)="removeImage(file)"></i>
+                            <i class="pi pi-plus rotate-45" (click)="removeImage(file)" *ngIf="hoveringFile === file"></i>
                             <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]" draggable="false">
                         </div>
                     </ng-container>

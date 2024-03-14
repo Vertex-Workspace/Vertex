@@ -1,9 +1,14 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { Point } from 'chart.js';
+import { Colors, Point } from 'chart.js';
 import { Note } from 'src/app/models/class/note';
 import { AlertService } from 'src/app/services/alert.service';
 import { NoteService } from 'src/app/services/note.service';
+
+interface Color {
+  color: string,
+  imgBackgroundColor: string
+}
 
 @Component({
   selector: 'app-note',
@@ -33,7 +38,11 @@ export class NoteComponent implements OnInit, AfterViewInit {
   modalOpen: boolean = false;
 
   ngOnInit(): void { 
-    console.log(this.note)
+  }
+
+  getBgColor(): string {
+    const noteColor: string = this.note.color;
+    return noteColor;
   }
 
   getNotePosition(): Point {
@@ -57,6 +66,12 @@ export class NoteComponent implements OnInit, AfterViewInit {
 
   toggleModalOpen(): void {
     this.modalOpen = !this.modalOpen
+  }
+
+  isOverflowing(element: any): boolean {    
+    return element.offsetHeight < element.scrollHeight ||
+           element.offsetWidth < element.scrollWidth;
+
   }
 
   configItems = [

@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .card {
-    @apply bg-white overflow-hidden shadow-md absolute
+    @apply overflow-hidden shadow-md absolute
     rounded-sm flex cursor-move transition-colors min-w-[120px] min-h-[120px];
   }
   
@@ -9,14 +9,15 @@
     @apply p-2 ;
   
     .left {
-      @apply flex flex-col gap-4 h-full w-[90%];
+      @apply flex flex-col h-[50%] w-[90%] p-4 gap-4;
   
   
       .text {
-        @apply text-justify h-full w-full pr-16;
+        @apply text-justify w-full pr-2 break-words pt-2;
   
         p {
-          @apply h-[70%] w-full overflow-hidden;
+          @apply h-[65%] w-full relative;
+
         }
       }
     }
@@ -42,22 +43,28 @@
           font-size: 1rem;
           cursor: pointer;
           color: $primaryColor;
+          z-index: 11;
         }
       }
     }
   }
 
   .image-container {
-    @apply w-full h-full flex flex-wrap gap-1;
+    @apply w-full h-full flex flex-wrap gap-1 relative;
 
     .single-image {
       @apply h-[180px] w-[180px] flex items-center justify-center;
-      background-color: $secondColor;
 
       img {
         @apply h-[140px];
       }
     }
+  }
+
+  .overflow-button {
+    @apply absolute bottom-0 w-full h-[1%] p-4 z-[10] flex items-center;
+    color: #797979;
+  
   }
   
   .full {
