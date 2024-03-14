@@ -1,3 +1,4 @@
+import { Group } from "./groups";
 import { Note } from "./note";
 import { Property } from "./property";
 import { Task } from "./task";
@@ -16,6 +17,7 @@ export class Project {
     notes : Note[];
     properties!: Property[];
     idTeam?: number;
+    listOfResponsibles ?: Group[] | User[]
 
     constructor(
         project: Project,
@@ -29,6 +31,9 @@ export class Project {
         this.notes = project.notes;
         this.properties = project.properties;
         this.idTeam = project.idTeam;
+        // this.collaborators = project.collaborators
+        // this.groups = project.groups
+        this.listOfResponsibles = project.listOfResponsibles
     }
 
 }
@@ -40,4 +45,9 @@ interface UserTeam {
     team: {
         id: number
     }
+}
+export class ProjectResponsible {
+    user ?: User
+    group ?: Group
+
 }

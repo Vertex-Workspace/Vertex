@@ -32,7 +32,7 @@ export class CreateTeamProjectComponent implements OnInit {
   close = new EventEmitter();
 
   @Input()
-  team ?: Team;
+  team?: Team;
 
   users !: User[];
 
@@ -46,10 +46,10 @@ export class CreateTeamProjectComponent implements OnInit {
   selectedFile !: any;
   base64 !: any;
   fd !: FormData;
-  
+
 
   constructor(
-    private personalization: PersonalizationService, 
+    private personalization: PersonalizationService,
     private teamService: TeamService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
@@ -63,6 +63,7 @@ export class CreateTeamProjectComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       description: [null],
+      listOfResponsibles: [null],
     });
   }
 
@@ -72,7 +73,7 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
 
-  onSubmit(): void { 
+  onSubmit(): void {
     // if (!this.fd.has('file')) this.setDefaultImage();
     if (this.typeString === 'team') this.createTeam();
     else this.createProject();
@@ -88,24 +89,40 @@ export class CreateTeamProjectComponent implements OnInit {
   createTeam(): void {
     const team = this.form.getRawValue() as Team;
 
-      team.creator = this.logged;
-      
-      this.teamService
-        .create(team)
-        .subscribe((teamRes: Team) => {          
-          this.alert.successAlert(`Equipe ${teamRes.name} criada com sucesso!`);
-          if (this.fd) {
-            this.teamService
+    team.creator = this.logged;
+
+    this.teamService
+      .create(team)
+      .subscribe((teamRes: Team) => {
+        this.alert.successAlert(`Equipe ${teamRes.name} criada com sucesso!`);
+        if (this.fd) {
+          this.teamService
             .updateImage(teamRes.id!, this.fd)
             .subscribe();
-          }
+        }
       })
   }
 
   createProject(): void {
-    const project = this.form.getRawValue() as Project;
+    let project = this.form.getRawValue() as Project;
 
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));    
+    let listOfResponsibles: User[] = [];
+    project.listOfResponsibles?.forEach((type => {
+      if (type instanceof Group) {
+        let group: Group = type as Group;
+        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+          for (const user of users) {
+              listOfResponsibles.push(user);
+          }
+        });
+      } else if (type instanceof User) {
+        let user: User = type as User;
+          listOfResponsibles.push(user);
+      }
+      project.listOfResponsibles = listOfResponsibles;
+    }));
+
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     project.creator = {
       user: {
         id: this.logged.id!
@@ -121,25 +138,25 @@ export class CreateTeamProjectComponent implements OnInit {
         this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
         if (this.fd) {
           this.projectService
-          .updateImage(project.id!, this.fd)
-          .subscribe();
+            .updateImage(project.id!, this.fd)
+            .subscribe();
         }
       });
   }
 
   url!: any;
 
-  onFileSelected(e: any): void {   
+  onFileSelected(e: any): void {
     this.fd = new FormData()
     this.selectedFile = e.target.files[0];
-    this.fd.append('file', this.selectedFile, this.selectedFile.name);      
+    this.fd.append('file', this.selectedFile, this.selectedFile.name);
     let reader = new FileReader();
 
-    if(e.target.files && e.target.files.length > 0) {
+    if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        const base = reader.result as string;    
+        const base = reader.result as string;
         this.base64 = base.split(",").pop();
         this.url = reader.result;
       };
@@ -161,38 +178,34 @@ export class CreateTeamProjectComponent implements OnInit {
     this.closeScreen();
   }
 
-  listOfResponsibles: any [] = []
+  listOfResponsibles: any[] = []
 
-  private getUsers(): void{
+  private getUsers(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    
+
     this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
-       this.users = users
-       for(const user of users){
+      this.users = users
+      for (const user of users) {
+        user.icon = 'pi pi-user'
         this.listOfResponsibles.push(user);
-       }
-       
+      }
     });
   }
 
   private getGroups(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-  
+
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
       this.groups = groups;
-      this.listOfResponsibles = this.groups.map(group => {
-        return {
-          label: group.name,
-          children: group.users?.map(user => {
-            return {
-              label: user.firstName,
-              data: user
-            };
-          })
-        };
-      });
+
+      for (const group of groups) {
+        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+          group.children = users
+          group.icon = 'pi pi-users'
+          this.listOfResponsibles.push(group)
+        })
+      }
     });
   }
-  
 
 }

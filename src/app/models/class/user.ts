@@ -23,6 +23,7 @@ export class User {
     openInfo ?: boolean = false;
     permissions ?: Permission[];
     label ?: string
+    icon ?: string
 
     //brainstorming
     teams?: Team[] = [];
@@ -52,6 +53,7 @@ export class User {
         this.openPermission = user.openPermission;
         this.permissions = user.permissions
         this.label = user.firstName
+        
 
     }
 }
