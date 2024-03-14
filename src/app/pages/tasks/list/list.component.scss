@@ -2,7 +2,7 @@
 
 section {
     color: $primaryColor;
-    @apply flex h-full justify-center pt-8 overflow-x-auto overflow-y-hidden;
+    @apply flex h-full justify-center overflow-x-auto overflow-y-hidden;
     
     .table {
         @apply  flex max-h-[500px] flex-col overflow-y-hidden rounded-sm mb-12;

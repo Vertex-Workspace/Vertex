@@ -47,6 +47,8 @@ export class MuralComponent implements OnInit {
     this.notes = this.project.notes;    
   }
 
+  //DONT FORGET TO IMPLEMENT THE PERMISSIONS AT MURAL
+  //WHEN MIGUEL FINISHES THE MURAL
   ngOnInit(): void {  
     this.getNotes();   
   }

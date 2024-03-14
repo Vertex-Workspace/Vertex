@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
-import { User } from 'src/app/models/class/user';
+import { Permission, User } from 'src/app/models/class/user';
 import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
 
 @Component({
@@ -22,6 +22,7 @@ export class ListComponent implements OnInit {
 
   @Input()
   project !: Project;
+  
   properties : PropertyCreation[] = [
     {name: 'Status', kind: PropertyKind.STATUS},
     {name: 'Data', kind: PropertyKind.DATE},
@@ -30,6 +31,8 @@ export class ListComponent implements OnInit {
   @Input()
   team ?: Team;
 
+  @Input() permissions!:Permission[];
+    
   cols: any[] = [];
 
   taskList: Task[] = [];
@@ -62,9 +65,11 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.project) {
-      this.taskList = this.project.tasks!;
+      this.getProject();
+    } else if(this.router.url.includes("equipe")) {
+      this.getTeam();
     }
   }
 
@@ -97,7 +102,6 @@ export class ListComponent implements OnInit {
     this.taskService
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
-        console.log("Retornou");
         if (tl.length > 0) {
           this.isNull = false;
           this.taskList = tl;  
@@ -119,10 +123,9 @@ export class ListComponent implements OnInit {
       
   }
 
-  //   getProjectByTask(task : Task): Project{
-  //   return this.team.projects?.find(project => {
-  //     return project.tasks?.find(t => t.id === task.id);
-  //   })!;
-  // }
+  updateTaskList(task: Task){
+    this.taskList.splice(this.taskList.indexOf(task), 1);
+  }
+
 
 }

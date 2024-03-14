@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { keyPressed } from '@syncfusion/ej2-angular-grids';
 import { AlertService } from 'src/app/services/alert.service';
 import { ForgotPasswordService } from 'src/app/services/forgotPassword.service';
 import { UserService } from 'src/app/services/user.service';
