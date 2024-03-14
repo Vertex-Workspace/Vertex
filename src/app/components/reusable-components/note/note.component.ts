@@ -1,7 +1,14 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { Note, NoteGet } from 'src/app/models/class/note';
+import { Colors, Point } from 'chart.js';
+import { Note } from 'src/app/models/class/note';
+import { AlertService } from 'src/app/services/alert.service';
 import { NoteService } from 'src/app/services/note.service';
+
+interface Color {
+  color: string,
+  imgBackgroundColor: string
+}
 
 @Component({
   selector: 'app-note',
@@ -11,7 +18,7 @@ import { NoteService } from 'src/app/services/note.service';
 export class NoteComponent implements OnInit, AfterViewInit {
 
   @Input() 
-  note !: NoteGet;
+  note !: Note;
 
   @Output()
   deleteNoteEmitter: EventEmitter<any> = new EventEmitter();
@@ -23,14 +30,26 @@ export class NoteComponent implements OnInit, AfterViewInit {
 
   constructor(
     private ngZone: NgZone, 
-    private noteService: NoteService
+    private noteService: NoteService,
+    private alert: AlertService
   ) {}
 
   basicData: any;
   modalOpen: boolean = false;
 
   ngOnInit(): void { 
-    
+  }
+
+  getBgColor(): string {
+    const noteColor: string = this.note.color;
+    return noteColor;
+  }
+
+  getNotePosition(): Point {
+    return {
+      x: this.note.posX,
+      y: this.note.posY
+    }
   }
 
   ngAfterViewInit() {
@@ -38,8 +57,8 @@ export class NoteComponent implements OnInit, AfterViewInit {
   }
 
   dragEnd(e: any): void {
-    this.note.position.x = e.dropPoint.x;
-    this.note.position.y = e.dropPoint.y;
+    this.note.posX = e.dropPoint.x - 320;
+    this.note.posY = e.dropPoint.y - 320;
     
     this.edit();
     
@@ -49,14 +68,24 @@ export class NoteComponent implements OnInit, AfterViewInit {
     this.modalOpen = !this.modalOpen
   }
 
+  isOverflowing(element: any): boolean {    
+    return element.offsetHeight < element.scrollHeight ||
+           element.offsetWidth < element.scrollWidth;
+
+  }
+
   configItems = [
-    { id: 'image', iconClass: 'pi pi-images', onClick: () => this.toggleModalOpen() },
     { id: 'edit', iconClass: 'pi pi-pencil', onClick: () => this.toggleModalOpen() },
     { id: 'trash', iconClass: 'pi pi-trash', onClick: () => this.deleteNote() },
   ];
 
-  hasImage(): boolean {
-    return Object.hasOwn(this.note, 'image');;
+  uploadImage(fd: FormData): void {
+    this.noteService
+      .uploadImage(this.note.id!, fd)
+      .subscribe((note: Note) => {
+        this.note = note;
+        this.alert.successAlert('Imagem adicionada!')
+      });
   }
 
   get resizeBoxElement(): HTMLElement {
@@ -130,10 +159,21 @@ export class NoteComponent implements OnInit, AfterViewInit {
     this.deleteNoteEmitter.emit();
   }
 
+  removeImage(fileId: number): void {
+    this.noteService
+      .removeImage(this.note.id!, fileId)
+      .subscribe((note: Note) => {
+        this.note = note;
+      })
+  }
+
   edit(): void {
+    
     this.noteService
       .patchAttribute(this.note)
-      .subscribe();
+      .subscribe((note: Note) => {        
+        this.note = note;
+      });
   }
 
 }

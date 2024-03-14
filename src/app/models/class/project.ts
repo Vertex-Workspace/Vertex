@@ -13,7 +13,7 @@ export class Project {
     creator ?: UserTeam;
     projectDependency ?: Project;
     tasks : Task[]; 
-    notes : Note[];
+    notes : Note[] = [];
     properties!: Property[];
     idTeam?: number;
 

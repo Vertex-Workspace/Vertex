@@ -73,8 +73,8 @@ export class TasksComponent implements OnInit {
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
       this.project = p;
-      let currentView = localStorage.getItem('mode-task-view');
-      if (currentView) {
+      const currentView = localStorage.getItem('mode-task-view');
+      if(currentView){
         this.clicked = currentView;
       }
       this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
@@ -87,7 +87,10 @@ export class TasksComponent implements OnInit {
       );
 
     });
+    this.muralPageListener();
+  }
 
+  muralPageListener(): void {
     if (this.clicked === 'Mural') this.isMuralPage = true;
     else this.isMuralPage = false;
   }
@@ -130,7 +133,7 @@ export class TasksComponent implements OnInit {
   }
 
   createTask(): void {
-    let taskCreate: TaskCreate = {
+    const taskCreate: TaskCreate = {
       name: "Nova Tarefa",
       description: "Descreva um pouco sobre sua Tarefa Aqui",
       project: {
@@ -146,8 +149,6 @@ export class TasksComponent implements OnInit {
     this.taskService.create(taskCreate).subscribe(
       (task) => {
         this.project.tasks.push(task);
-        console.log(this.project.tasks);
-
         this.changeModalTaskState(true, task);
       },
       (error) => {
@@ -163,14 +164,16 @@ export class TasksComponent implements OnInit {
       width: 300,
       height: 300,
       color: 'WHITE',
-      positionX: 20,
-      positionY: 40,
+      posX: 20,
+      posY: 40,
       files: []
     }
 
     this.noteService
       .create(note, this.logged.id!, this.project.id!)
-      .subscribe();
+      .subscribe((note: Note) => {
+        this.project.notes.push(note);
+      });
   }
 
   taskOpenObject!: Task;
@@ -187,8 +190,8 @@ export class TasksComponent implements OnInit {
     this.propertiesOpen = !this.propertiesOpen;
   }
 
-  updateProjectByTaskChanges(event: any): void {
-    let taskUpdated: Task = event;
+  updateProjectByTaskChanges(event: any): void{
+    const taskUpdated: Task = event;
     this.project.tasks = this.project.tasks.map(task => {
       if (task.id === taskUpdated.id) {
         return taskUpdated;
