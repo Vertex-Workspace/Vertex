@@ -54,6 +54,12 @@ export class TasksComponent implements OnInit {
     private noteService: NoteService
   ) {}
 
+  projectId!: number;
+
+  project!: Project;
+  renderProject!: Observable<Project> | undefined;
+  permissions!: Permission[];
+
   ngOnInit() {
     this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));

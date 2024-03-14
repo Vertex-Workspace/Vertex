@@ -57,7 +57,7 @@
         }
         
         .main-content {
-            @apply w-full h-[80%] max-h-[80%] flex flex-col gap-8 overflow-y-auto pr-10 pt-2;
+            @apply w-full h-auto max-h-[80%] flex flex-col gap-8 overflow-y-auto pr-10 pt-2;
             color: $primaryColor;
            
             .content {
@@ -141,7 +141,7 @@
             }
 
             .color-list {
-                @apply flex gap-2 items-center pt-6; 
+                @apply flex gap-2 items-center pt-6 absolute bottom-0 left-0 m-10; 
                 animation: slideInRight 0.3s ease-out;
             }
 

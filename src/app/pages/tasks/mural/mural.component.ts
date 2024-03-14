@@ -51,6 +51,7 @@ export class MuralComponent implements OnInit {
   //WHEN MIGUEL FINISHES THE MURAL
   ngOnInit(): void {  
     this.getNotes();   
+    console.log(this.project)
   }
 
   deleteNote(note: Note) {    
