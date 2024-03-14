@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/class/team';
-import { Task, TaskCreate, TaskEdit } from '../models/class/task';
+import { Task, TaskCreate, TaskEdit, TaskWaitingToReview } from '../models/class/task';
 import { Value, ValueUpdate } from '../models/class/value';
 import { CommentSend } from '../models/class/comment';
 
@@ -75,5 +75,17 @@ export class TaskService {
     return this.http.delete<Task>(`${URL}task/${taskID}/comment/${commentID}`);
   }
 
+
+  public getTaskInfo(taskId: number) {
+    return this.http.get(`${URL}task/info/${taskId}`);
+  }
+
+  public getTasksToReview(userID: number, projectID:number): Observable<TaskWaitingToReview[]>{
+    return this.http.get<TaskWaitingToReview[]>(`${URL}task/review/${userID}/project/${projectID}`);
+  }
+
+  public getPerformanceInTask(taskID:number): Observable<any>{
+    return this.http.get(`${URL}task/${taskID}/review/performance`);
+  }
 
 }

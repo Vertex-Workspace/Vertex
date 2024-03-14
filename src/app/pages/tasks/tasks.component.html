@@ -1,12 +1,21 @@
 <section class="screen">
     <div class="container-custom">
-        <div>
-            <h4>Espaço de Trabalho</h4>
-        </div>
-        <div class="pt-2">
-            <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você poderá filtrar,</p>
-            <p class="small-text text-gray-600"> ordenar e criar novas tarefas. Gerenciando o seu tempo e registrando cada etapa.</p>
-        </div>
+        <section class="grid w-full grid-cols-2">
+            <div>
+                <div>
+                    <h4>
+                        Espaço de Trabalho
+                    </h4>
+                </div>
+                <div class="pt-2">
+                    <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você
+                        poderá
+                        filtrar,</p>
+                    <p class="small-text text-gray-600"> ordenar e criar novas tarefas. Gerenciando o seu tempo e
+                        registrando cada etapa.</p>
+                </div>
+            </div>
+        </section>
 
         <section class="menu">
             <div>
@@ -27,7 +36,7 @@
 
                 <div class="search " *ngIf="searchBarOpen">
                     <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="query">
-                    <i class="pi pi-times cursor-pointer" style="font-size: 1.4rem;" (click)="toggleSearchBar()"></i>
+                    <i class="pi pi-times cursor-pointer" (click)="toggleSearchBar()"></i>
                 </div>
 
                 <ng-container *ngFor="let item of configItems">
@@ -37,21 +46,23 @@
                     </button>
                 </ng-container>
 
+                <button class="config-buttons" *ngIf="tasksToReview.length > 0" (click)="toggleReview()">
+                    <i class="pi pi-check-square" pBadge value={{badgeNumber}}></i>
+                </button>
 
                 <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
                     <i class="pi pi-tags"></i>
                     Propriedades
                 </button>
-                <button *ngIf="!isMuralPage; else buttonMural"
-                class="create" (click)="createTask()" [disabled]="!canCreate"  
-                [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
+                <button *ngIf="!isMuralPage; else buttonMural" class="create" (click)="createTask()"
+                    [disabled]="!canCreate" [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
                     Nova tarefa
                 </button>
                 <ng-template #buttonMural>
-                    <button class="create" (click)="createNote()" >
+                    <button class="create" (click)="createNote()">
                         <i class="pi pi-plus-circle"></i>
-                       Nova nota
+                        Nova nota
                     </button>
                 </ng-template>
             </div>
@@ -79,10 +90,13 @@
         </section>
 
         <section class="router" *ngIf="renderProject | async">
-            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'" (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-kanban>
-            <app-list [project]="project" *ngIf="clicked  === 'List'" (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-list>
-            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project" *ngIf="clicked  === 'Calendar'" [permissions]="permissions"></app-calendar>
-            <app-mural  *ngIf="clicked  === 'Mural'"></app-mural>
+            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'"
+                (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-kanban>
+            <app-list [project]="project" *ngIf="clicked  === 'List'"
+                (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-list>
+            <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project"
+                *ngIf="clicked  === 'Calendar'" [permissions]="permissions"></app-calendar>
+            <app-mural *ngIf="clicked  === 'Mural'"></app-mural>
         </section>
 
     </div>
@@ -94,3 +108,63 @@
 
 <app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
     (close)="changeModalTaskState(false, taskOpenObject)" [project]="project" [permissions]="permissions"></app-task>
+
+<app-modal-warn *ngIf="taskReview" [height]="'650px'" [width]="'900px'" (close)="toggleReview()">
+    <section class="grid w-full h-[500px] pt-6" style="grid-template-columns: 35% 65%;">
+        <div class="flex flex-col h-[550] w-full overflow-y-auto overflow-x-hidden gap-5">
+            <p class="large-text self-start">Tarefas para serem Revisadas</p>
+            <ng-container *ngFor="let taskToReview of tasksToReview">
+                <div class="card-task-review" (click)="selectedReviewTask(taskToReview)"
+                    [ngClass]="isTaskReviewed(taskToReview) ? 'task-reviewed-focus' : ''">
+                    <p class="medium-text">{{ taskToReview.name }}</p>
+                    <p class="small-text">{{ taskToReview.description }}</p>
+                </div>
+            </ng-container>
+        </div>
+        <div class="pl-4 border-l-4">
+            <div class="flex flex-col w-full">
+                <h6 class="self-start">Responsável pelo Envio - {{taskBeingReviewed.name}}</h6>
+                <p class="medium-text self-start pt-4 pl-6">{{taskBeingReviewed.sender.username}} -
+                    {{taskBeingReviewed.sender.email}}</p>
+                <p class="medium-text self-start pt-3">Descrição Final</p>
+                <p class="small-text self-start pl-6">{{taskBeingReviewed.sender.finalDescription}}</p>
+            </div>
+
+            <div class="flex w-full max-h-[160px] overflow-x-hidden overflow-y-auto mt-5">
+                <table class="w-full">
+                    <tr>
+                        <th>Responsável</th>
+                        <th>Tempo</th>
+                    </tr>
+                    <tr *ngFor="let responsable of taskBeingReviewed.reviewHours">
+                        <td>{{responsable.username}}</td>
+                        <td>{{convertTime(responsable.time)}}</td>
+                    </tr>
+                    <tr *ngFor="let responsable of taskBeingReviewed.reviewHours">
+                        <td>{{responsable.username}}</td>
+                        <td>{{convertTime(responsable.time)}}</td>
+                    </tr>
+                    <tr *ngFor="let responsable of taskBeingReviewed.reviewHours">
+                        <td>{{responsable.username}}</td>
+                        <td>{{convertTime(responsable.time)}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="flex flex-col pt-3">
+                <p class="medium-text self-start">Devolutiva</p>
+                <div class="grid grid-cols-2 pt-2">
+                    <textarea name="" id="" class="flex w-full h-full outline-none px-3 py-1"
+                        placeholder="Insira uma descrição devolutiva..."></textarea>
+                        <div>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-star"></i>
+                                <input type="number" pInputText placeholder="Nota de 0-10"/>
+                            </span>
+                            <p class="small-text">Nota será concedida para todos os responsáveis da tarefa.</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</app-modal-warn>

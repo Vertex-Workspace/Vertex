@@ -103,11 +103,10 @@ export class InputValuePropertyComponent {
     
   }
 
-  changeDate(value: Value): void {
+  changeDate(event: any): void {
     if (this.canEdit) {
-      const date : Date = value.value as Date;
-      value.value = date.toISOString().slice(0, -1);
-      this.updateTask(value);
+      this.value.value = new Date(event).toISOString().slice(0, -1);
+      this.updateTask(this.value);
     }else {
       this.alertNotPermission();
     }

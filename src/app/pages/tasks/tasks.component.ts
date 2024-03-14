@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/class/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { Task, TaskCreate } from 'src/app/models/class/task';
+import { Task, TaskCreate, TaskWaitingToReview } from 'src/app/models/class/task';
 import { Permission, PermissionsType, User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
@@ -13,6 +13,8 @@ import { TeamService } from 'src/app/services/team.service';
 import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/class/note';
 import { Observable } from 'rxjs';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { PropertyList } from 'src/app/models/class/property';
 
 
 @Component({
@@ -33,7 +35,12 @@ export class TasksComponent implements OnInit {
   taskOpen: boolean = false;
   canCreate: boolean = false;
   isMuralPage !: boolean;
-
+  project!: Project;
+  renderProject!: Observable<Project> | undefined;
+  permissions!: Permission[];
+  tasksToReview: TaskWaitingToReview[] = [];
+  badgeNumber: string = '0';
+  taskReview: boolean = false;
   logged !: User;
 
   constructor(
@@ -47,12 +54,6 @@ export class TasksComponent implements OnInit {
     private noteService: NoteService
   ) {}
 
-  projectId!: number;
-
-
-  project!: Project;
-  renderProject!: Observable<Project> | undefined;
-  permissions!: Permission[];
   ngOnInit() {
     this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
@@ -75,18 +76,17 @@ export class TasksComponent implements OnInit {
       const currentView = localStorage.getItem('mode-task-view');
       if(currentView){
         this.clicked = currentView;
-        this.muralPageListener();
-      } 
-      this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions;
-    
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-              this.canCreate = true;
-            }
-          }
-        });
-    })
+      }
+      this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
+        (tasks : TaskWaitingToReview[]) => {
+          console.log(tasks);
+          this.tasksToReview = tasks;
+          this.badgeNumber = this.tasksToReview.length.toString();
+          //Implementation
+        }
+      );
+
+    });
     this.muralPageListener();
   }
 
@@ -120,6 +120,7 @@ export class TasksComponent implements OnInit {
   toggleOrder(): void {
     this.orderOpen = !this.orderOpen;
   }
+
   changePreviewMode(preview: string): void {
     this.clicked = preview;
     if (this.clicked === 'Mural') this.isMuralPage = true;
@@ -147,7 +148,6 @@ export class TasksComponent implements OnInit {
 
     this.taskService.create(taskCreate).subscribe(
       (task) => {
-        console.log(task);
         this.project.tasks.push(task);
         this.changeModalTaskState(true, task);
       },
@@ -206,5 +206,33 @@ export class TasksComponent implements OnInit {
 
   getProject(): Project {
     return this.project;
+  }
+
+
+  //MODAL REVIEW TASK
+  toggleReview():void{
+    this.taskReview = !this.taskReview;
+    if(this.tasksToReview.length > 0){
+      this.taskBeingReviewed = this.tasksToReview[0];
+    }
+  }
+  performanceTable: any[] = [];
+  selectedReviewTask(taskReview : TaskWaitingToReview) {
+    this.taskBeingReviewed = taskReview;
+  }
+
+  getBorderColor(task : Task){
+    let propertyList: PropertyList = task.values[0].value as PropertyList;
+    return propertyList.color;
+  }
+
+  taskBeingReviewed!: TaskWaitingToReview;
+
+  convertTime(time:any): string{
+    return time;
+  }
+
+  isTaskReviewed(taskToReview : TaskWaitingToReview): boolean{
+    return taskToReview.id === this.taskBeingReviewed.id;
   }
 }
