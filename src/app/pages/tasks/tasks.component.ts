@@ -33,6 +33,7 @@ export class TasksComponent implements OnInit {
   permissions: Permission[] = [];
   canCreate: boolean = false;
   isMuralPage !: boolean;
+  openModalProject : boolean = false;
 
   logged !: User;
 
@@ -190,5 +191,9 @@ export class TasksComponent implements OnInit {
   
   getProject() : Project {
     return this.project;
+  }
+
+  openProjectInfos(){
+    this.openModalProject = !this.openModalProject
   }
 }

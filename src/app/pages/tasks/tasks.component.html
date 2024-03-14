@@ -1,5 +1,24 @@
 <section class="screen">
     <div class="container-custom">
+
+        <section class="grid w-full grid-cols-2">
+            <div>
+                <div class="flex flex-row gap-4">
+                    <h4>
+                        {{project.name}}
+                    </h4>
+                    <i class="pi pi-pencil pt-2" (click)="openProjectInfos()"></i>
+                </div>
+                <div class="pt-2">
+                    <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você
+                        poderá
+                        filtrar,</p>
+                    <p class="small-text text-gray-600"> ordenar e criar novas tarefas. Gerenciando o seu tempo e
+                        registrando cada etapa.</p>
+                </div>
+            </div>
+        </section>
+
         <section class="menu">
             <div>
                 <ng-container *ngFor="let item of menuItems">
@@ -89,3 +108,5 @@
 
 <app-task (changes)="updateProjectByTaskChanges($event)" [task]="taskOpenObject" *ngIf="taskOpen"
     (close)="changeModalTaskState(false, taskOpenObject)" [project]="project"></app-task>
+
+<app-create-team-project [project]="project" *ngIf="openModalProject" [typeString]="'project'"></app-create-team-project>

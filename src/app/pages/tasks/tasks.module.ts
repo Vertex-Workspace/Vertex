@@ -13,8 +13,8 @@ import { ListModule } from './list/list.module';
 import { MuralComponent } from './mural/mural.component';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { ChartModule } from 'primeng/chart';
-import { NoteComponent } from 'src/app/components/reusable-components/note/note.component';
 import { NoteModule } from 'src/app/components/reusable-components/note/note.module';
+import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import { NoteModule } from 'src/app/components/reusable-components/note/note.mod
     KanbanModule,
     ChartModule,
     PropertiesModule,
-    NoteModule
+    NoteModule,
+    CreateTeamProjectModule
   ],
 })
 export class TasksModule { }

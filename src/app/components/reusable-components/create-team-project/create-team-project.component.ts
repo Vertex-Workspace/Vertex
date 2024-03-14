@@ -41,6 +41,9 @@ export class CreateTeamProjectComponent implements OnInit {
   @Input()
   typeString!: String;
 
+  @Input()
+  project ?: Project
+
   logged !: User;
 
   selectedFile !: any;
@@ -70,6 +73,19 @@ export class CreateTeamProjectComponent implements OnInit {
   ngOnInit(): void {
     this.getGroups();
     this.getUsers();
+    this.projectExists()
+  }
+
+  projectNull: boolean = true;
+  name !: string
+  description ?: string 
+
+  projectExists(){
+    if(this.project != null){
+      this.projectNull = false
+      this.name = this.project.name
+      this.description = this.project.description
+    }
   }
 
 
@@ -105,7 +121,7 @@ export class CreateTeamProjectComponent implements OnInit {
 
   createProject(): void {
     let project = this.form.getRawValue() as Project;
-
+   
     let listOfResponsibles: User[] = [];
     project.listOfResponsibles?.forEach((type => {
       if (type instanceof Group) {
@@ -118,7 +134,8 @@ export class CreateTeamProjectComponent implements OnInit {
       } else if (type instanceof User) {
         let user: User = type as User;
           listOfResponsibles.push(user);
-      }
+      } 
+
       project.listOfResponsibles = listOfResponsibles;
     }));
 
@@ -136,7 +153,8 @@ export class CreateTeamProjectComponent implements OnInit {
       .create(project, teamId)
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
-        if (this.fd) {
+
+        if (this.fd) {   
           this.projectService
             .updateImage(project.id!, this.fd)
             .subscribe();
@@ -207,5 +225,4 @@ export class CreateTeamProjectComponent implements OnInit {
       }
     });
   }
-
 }

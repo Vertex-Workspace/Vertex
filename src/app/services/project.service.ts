@@ -5,6 +5,8 @@ import { Project } from '../models/class/project';
 import { URL } from './path/api_url';
 import { Task } from '../models/class/task';
 import { Property } from '../models/class/property';
+import { Team } from '../models/class/team';
+import { User } from '../models/class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +69,14 @@ export class ProjectService {
   public updateImage(teamId: number, fd: FormData) {
     return this.http
       .patch(`${URL}project/image/${teamId}`, fd)
+  }
+
+  public getProjectByCollaborators(team: number, user: User): Observable<Project[]> { 
+    return this.http.get<Project[]>(`${URL}project/${team}/${user.id}`)
+    .pipe(map((projects: Project[]) => 
+    projects.map(project => new Project(project))
+  )
+)
   }
 
 }

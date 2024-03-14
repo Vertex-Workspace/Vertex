@@ -7,11 +7,13 @@
       <div class="input-name">
         <p>{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
         <input formControlName="name" type="text"
-          [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'">
+          [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
+          *ngIf="projectNull">
+        <input formControlName="name" type="text" *ngIf="!projectNull" [placeholder]="name">
       </div>
       <div class="input-image">
         <div class="image relative">
-          <img *ngIf="selectedFile" src="{{url}}" alt="">
+          <img *ngIf="selectedFile" alt="">
           <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
           <form class="input-div">
             <input type="file" class="input-file" (change)="onFileSelected($event)">
@@ -22,24 +24,19 @@
 
     <div class="input-description" *ngIf="typeString === 'team' || typeString === 'project'">
       <p>{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
-      <textarea formControlName="description"
+      <textarea formControlName="description" *ngIf="projectNull"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
+      <textarea formControlName="description" *ngIf="!projectNull"
+        [placeholder]="description"></textarea>
     </div>
 
-    <p-treeSelect 
-    formControlName="listOfResponsibles"
-    class="w-[65%] md:w-20rem pt-4" 
-    containerStyleClass="w-full"  
-    display="chip"
-    [options]="listOfResponsibles"
-    [metaKeySelection]="false" 
-    selectionMode="checkbox" 
-    placeholder="Atribue responsáveis ao projeto"
-    [filter]="true" [filterInputAutoFocus]="true"
-    *ngIf="typeString === 'project'">
-</p-treeSelect>
+    <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] md:w-20rem pt-4" containerStyleClass="w-full"
+      display="chip" [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
+      placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true"
+      *ngIf="typeString === 'project'">
+    </p-treeSelect>
 
-    <div class="div-buttons">
+    <div class="div-buttons" *ngIf="projectNull">
       <div class="buttons">
         <button class="cancel-button" (click)="closeScreen()">Cancelar</button>
         <button class="confirm-button" type="submit">Confirmar</button>
@@ -48,13 +45,13 @@
   </div>
 </form>
 
-<app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink">
+<!-- <app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink" >
   <h5 *ngIf="typeString === 'team'">Equipe {{form.value.name}} criada com sucesso!</h5>
   <h5 *ngIf="typeString === 'project'">Projeto {{form.value.name}} criado com sucesso!</h5>
   <div class="informations-modal medium-text">
     <p *ngIf="typeString === 'team'">Convide pessoas para {{form.value.name}}</p>
     <p *ngIf="typeString === 'team'">através do link abaixo.</p>
   </div>
-  <app-button [title]="'Copiar Link de Convite'" *ngIf="typeString === 'team'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
-    (clickEvent)="copyLink()" />
-</app-modal-warn>
+  <app-button [title]="'Copiar Link de Convite'" *ngIf="typeString === 'team'" [icon]="'pi-link'" [width]="'250px'"
+    [height]="'50px'" (clickEvent)="copyLink()" />
+</app-modal-warn> -->

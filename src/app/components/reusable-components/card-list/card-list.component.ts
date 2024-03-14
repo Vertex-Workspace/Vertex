@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Team } from 'src/app/models/class/team';
 import { Project } from 'src/app/models/class/project';
 import { AlertService } from 'src/app/services/alert.service';
@@ -7,6 +7,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/models/class/user';
 
 @Component({
   selector: 'app-card-list',
@@ -18,7 +19,9 @@ export class CardListComponent implements OnInit {
   constructor(
     private router: Router,
     private teamService: TeamService,
-    private userService: UserService
+    private userService: UserService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute 
   ) { }
 
   faTrashCan = faTrashCan;
@@ -28,6 +31,8 @@ export class CardListComponent implements OnInit {
 
   @Input()
   team?: Team; //se estiver na tela projetos
+
+  projects : Project [] = []
 
   @Input()
   type !: string;
@@ -47,14 +52,18 @@ export class CardListComponent implements OnInit {
 
  creatorName ?: String
 
+ loggedUser ?: User
+
 
   ngOnInit(): void {
-    this.findAllTeams()
+    this.findAllTeams() 
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.findProjects(teamId); 
   }
 
   getType(): any[] {
     if (this.type === 'project') {
-      return this.team?.projects!;
+      return this.projects
     }
     return this.teams!;
   }
@@ -94,6 +103,12 @@ export class CardListComponent implements OnInit {
     })
   }
 
-  
+  findProjects(teamId: number) {
+    this.loggedUser = this.userService.getLogged();
+    // this.teamService.getOneById(this.team.)
+    this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project []) => {
+      this.projects = projects
+    })
+  }
 
 }

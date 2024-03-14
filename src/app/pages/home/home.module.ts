@@ -6,6 +6,7 @@ import { QuickAccessModule } from 'src/app/components/reusable-components/quick-
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 import { ListModule } from '../tasks/list/list.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ActivatedRoute } from '@angular/router';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     QuickAccessModule,
     CreateTeamProjectModule,
     ListModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
 })
 export class HomeModule { }
