@@ -62,3 +62,18 @@ export class TaskEdit {
     name!: string;
     description!: string;
 }
+
+
+export class TaskWaitingToReview {
+    id!: number;
+    name!: string;
+    description!: string;
+    // values!: Value[];
+    reviewHours!: any[];
+    sender!: {
+        finalDescription: string;
+        username: string;
+        email: string;
+        date: Date;
+    }
+}

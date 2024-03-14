@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/class/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
-import { Task, TaskCreate } from 'src/app/models/class/task';
+import { Task, TaskCreate, TaskWaitingToReview } from 'src/app/models/class/task';
 import { Permission, PermissionsType, User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
@@ -38,7 +38,7 @@ export class TasksComponent implements OnInit {
   project!: Project;
   renderProject!: Observable<Project> | undefined;
   permissions!: Permission[];
-  tasksToReview: Task[] = [];
+  tasksToReview: TaskWaitingToReview[] = [];
   badgeNumber: string = '0';
   taskReview: boolean = false;
   logged !: User;
@@ -78,7 +78,7 @@ export class TasksComponent implements OnInit {
         this.clicked = currentView;
       }
       this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
-        (tasks : Task[]) => {
+        (tasks : TaskWaitingToReview[]) => {
           console.log(tasks);
           this.tasksToReview = tasks;
           this.badgeNumber = this.tasksToReview.length.toString();
@@ -145,7 +145,6 @@ export class TasksComponent implements OnInit {
 
     this.taskService.create(taskCreate).subscribe(
       (task) => {
-        console.log(task);
         this.project.tasks.push(task);
         console.log(this.project.tasks);
 
@@ -212,24 +211,11 @@ export class TasksComponent implements OnInit {
     this.taskReview = !this.taskReview;
     if(this.tasksToReview.length > 0){
       this.taskBeingReviewed = this.tasksToReview[0];
-
-      this.taskService.getPerformanceInTask(this.taskBeingReviewed.id!).subscribe(
-        (performance) => {
-          this.performanceTable = performance;
-          console.log(performance);
-        }
-      );
     }
   }
   performanceTable: any[] = [];
-  selectedReviewTask(taskReview : Task) {
+  selectedReviewTask(taskReview : TaskWaitingToReview) {
     this.taskBeingReviewed = taskReview;
-    this.taskService.getPerformanceInTask(this.taskBeingReviewed.id!).subscribe(
-      (performance) => {
-        this.performanceTable = performance;
-        console.log(performance);
-      }
-    );
   }
 
   getBorderColor(task : Task){
@@ -237,9 +223,13 @@ export class TasksComponent implements OnInit {
     return propertyList.color;
   }
 
-  taskBeingReviewed!: Task;
+  taskBeingReviewed!: TaskWaitingToReview;
 
   convertTime(time:any): string{
     return time;
+  }
+
+  isTaskReviewed(taskToReview : TaskWaitingToReview): boolean{
+    return taskToReview.id === this.taskBeingReviewed.id;
   }
 }

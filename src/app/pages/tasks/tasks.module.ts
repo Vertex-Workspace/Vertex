@@ -19,6 +19,7 @@ import { BadgeModule } from 'primeng/badge';
 import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
 import { CardModule } from 'src/app/components/reusable-components/card/card.module';
 import { PropertiesModule } from 'src/app/components/modals/task/properties/properties.module';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { PropertiesModule } from 'src/app/components/modals/task/properties/prop
     BadgeModule,
     ModalWarnModule,
     CardModule,
-    PropertiesModule
+    PropertiesModule,
+    InputTextModule
   ],
 })
 export class TasksModule { }

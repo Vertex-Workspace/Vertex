@@ -38,14 +38,14 @@
                     <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="query">
                     <i class="pi pi-times cursor-pointer" (click)="toggleSearchBar()"></i>
                 </div>
-                
+
                 <ng-container *ngFor="let item of configItems">
                     <button class="config-buttons" (click)="item.click()">
                         <i [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
-                        class="{{ item.iconClass }}"></i>
+                            class="{{ item.iconClass }}"></i>
                     </button>
                 </ng-container>
-                
+
                 <button class="config-buttons" *ngIf="tasksToReview.length > 0" (click)="toggleReview()">
                     <i class="pi pi-check-square" pBadge value={{badgeNumber}}></i>
                 </button>
@@ -110,29 +110,61 @@
     (close)="changeModalTaskState(false, taskOpenObject)" [project]="project" [permissions]="permissions"></app-task>
 
 <app-modal-warn *ngIf="taskReview" [height]="'650px'" [width]="'900px'" (close)="toggleReview()">
-    <h5>Tarefas para serem Revisadas</h5>
-    <section class="grid w-full h-full pt-6" style="grid-template-columns: 40% 60%;">
-        <div class="flex flex-col h-full w-full overflow-y-auto overflow-x-hidden gap-5">
+    <section class="grid w-full h-[500px] pt-6" style="grid-template-columns: 35% 65%;">
+        <div class="flex flex-col h-[550] w-full overflow-y-auto overflow-x-hidden gap-5">
+            <p class="large-text self-start">Tarefas para serem Revisadas</p>
             <ng-container *ngFor="let taskToReview of tasksToReview">
-                <div class="flex h-[90px] w-full items-start justify-center flex-col bg-white border-l-8 rounded-sm px-3"
-                [style.borderColor]="getBorderColor(taskToReview)"
-                (click)="selectedReviewTask(taskToReview)"
-                >
+                <div class="card-task-review" (click)="selectedReviewTask(taskToReview)"
+                    [ngClass]="isTaskReviewed(taskToReview) ? 'task-reviewed-focus' : ''">
                     <p class="medium-text">{{ taskToReview.name }}</p>
                     <p class="small-text">{{ taskToReview.description }}</p>
                 </div>
             </ng-container>
         </div>
-        <div>
-            <p class="large-text">{{taskBeingReviewed.name}}</p>
-            <table>
-                <th>Responsável</th>
-                <th>Tempo</th>
-                <tr *ngFor="let responsable of performanceTable">
-                    <td>{{responsable.username}}</td>
-                    <td>{{convertTime(responsable.time)}}</td>
-                </tr>
-            </table>
+        <div class="pl-4 border-l-4">
+            <div class="flex flex-col w-full">
+                <h6 class="self-start">Responsável pelo Envio - {{taskBeingReviewed.name}}</h6>
+                <p class="medium-text self-start pt-4 pl-6">{{taskBeingReviewed.sender.username}} -
+                    {{taskBeingReviewed.sender.email}}</p>
+                <p class="medium-text self-start pt-3">Descrição Final</p>
+                <p class="small-text self-start pl-6">{{taskBeingReviewed.sender.finalDescription}}</p>
+            </div>
+
+            <div class="flex w-full max-h-[160px] overflow-x-hidden overflow-y-auto mt-5">
+                <table class="w-full">
+                    <tr>
+                        <th>Responsável</th>
+                        <th>Tempo</th>
+                    </tr>
+                    <tr *ngFor="let responsable of taskBeingReviewed.reviewHours">
+                        <td>{{responsable.username}}</td>
+                        <td>{{convertTime(responsable.time)}}</td>
+                    </tr>
+                    <tr *ngFor="let responsable of taskBeingReviewed.reviewHours">
+                        <td>{{responsable.username}}</td>
+                        <td>{{convertTime(responsable.time)}}</td>
+                    </tr>
+                    <tr *ngFor="let responsable of taskBeingReviewed.reviewHours">
+                        <td>{{responsable.username}}</td>
+                        <td>{{convertTime(responsable.time)}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="flex flex-col pt-3">
+                <p class="medium-text self-start">Devolutiva</p>
+                <div class="grid grid-cols-2 pt-2">
+                    <textarea name="" id="" class="flex w-full h-full outline-none px-3 py-1"
+                        placeholder="Insira uma descrição devolutiva..."></textarea>
+                        <div>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-star"></i>
+                                <input type="number" pInputText placeholder="Nota de 0-10"/>
+                            </span>
+                            <p class="small-text">Nota será concedida para todos os responsáveis da tarefa.</p>
+                        </div>
+                </div>
+            </div>
         </div>
     </section>
 </app-modal-warn>
