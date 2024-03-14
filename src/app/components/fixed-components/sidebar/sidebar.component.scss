@@ -25,11 +25,11 @@
 }
 
 .footer-items {
-    @apply flex h-[90%] flex-col items-end justify-evenly;
+    @apply flex h-[40%] flex-col items-end justify-around;
 }
 
 .footer-items2 {
-    @apply flex h-[90%] w-full flex-col items-start;
+    @apply flex h-[60%] w-full flex-col items-start justify-around;
 }
 
 ul>li {

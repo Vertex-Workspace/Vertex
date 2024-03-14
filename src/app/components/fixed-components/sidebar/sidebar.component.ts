@@ -39,6 +39,12 @@ export class SidebarComponent {
     this.search = !this.search;
   }
 
+  @Output()
+  openChat = new EventEmitter();
+  openChatExpanded(bool: boolean){
+    this.openChat.emit({ action: bool });
+  }
+
 
   logout(): void {
     this.isSideBarExpanded = false;
