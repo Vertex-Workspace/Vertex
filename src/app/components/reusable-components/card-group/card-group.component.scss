@@ -1,14 +1,15 @@
 @import '../../../../variables';
 
 .card{
-    @apply bg-white border-l-8 flex shadow-lg w-full;
+    @apply flex shadow-lg w-full;
+    background-color: white;
 
     div:first-child{
         @apply w-[85%] flex items-center pl-6 h-full;
     };
 
     div:nth-child(2){
-        @apply w-[10%] flex items-center h-full;
+        @apply w-[10%] flex items-center justify-between h-full;
     };
 
 }
@@ -18,7 +19,8 @@
 }
 
 .user{
-    @apply flex w-full bg-white pl-8 py-2 flex-col;
+    @apply w-[800px] pl-6 ;
+    background-color: white;
 
     button {
         background-color: $primaryColor;
@@ -32,17 +34,20 @@
 }
 
 .main-div {
-    @apply flex w-[95%] flex-col py-2;
+    @apply flex w-full flex-col py-2;
 }
 
 .user-card {
-    @apply pt-5 flex flex-col gap-6 w-full;
+    @apply pt-5 flex flex-col gap-4 w-full;
 }
 
 .size{
     font-size: 1rem;
 }
-
+::-webkit-scrollbar-thumb {
+    background-color: $primaryColor;
+    margin-left: 3px;
+}
 
 
 

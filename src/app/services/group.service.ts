@@ -23,7 +23,7 @@ export class GroupService {
 
   public getGroupsByTeam(teamID: number): Observable<Group[]> {
     return this.http
-      .get<Group[]>(`${URL}usersByTeam/${teamID}`)
+      .get<Group[]>(`${URL}team/${teamID}/groups`)
       .pipe(map((groups: Group[]) =>
         groups.map(group => new Group(group))
       )

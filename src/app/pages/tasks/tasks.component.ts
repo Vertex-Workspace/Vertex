@@ -35,6 +35,7 @@ export class TasksComponent implements OnInit {
   taskOpen: boolean = false;
   canCreate: boolean = false;
   isMuralPage !: boolean;
+  openModalProject : boolean = false;
   project!: Project;
   renderProject!: Observable<Project> | undefined;
   permissions!: Permission[];
@@ -236,5 +237,9 @@ export class TasksComponent implements OnInit {
 
   isTaskReviewed(taskToReview : TaskWaitingToReview): boolean{
     return taskToReview.id === this.taskBeingReviewed.id;
+  }
+  
+  openProjectInfos(){
+    this.openModalProject = !this.openModalProject
   }
 }

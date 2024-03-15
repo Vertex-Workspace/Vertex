@@ -12,6 +12,9 @@ export class Group {
     open?: boolean = false;
     creator?: User;
     team !: Team
+    label ?: string
+    children ?: User[]
+    icon ?: string
 
     //List Project - Miguel
     projects?: Project[];
@@ -26,6 +29,8 @@ export class Group {
         this.description = group.description;
         this.team = group.team;
         this.open = false;
+        this.label = group.name;
+        this.children = group.users
     }
 
 }
