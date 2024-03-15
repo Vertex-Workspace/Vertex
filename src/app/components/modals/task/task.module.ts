@@ -10,12 +10,14 @@ import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
 import { PropertiesModule } from './properties/properties.module';
 import { MenuModule } from 'primeng/menu';
 import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
+import { AttachmentsComponent } from 'src/app/src/app/components/modals/task/attachments/attachments.component';
 
 @NgModule({
   declarations: [
     TaskComponent,
     CommentsComponent,
-    LogComponent
+    LogComponent,
+    AttachmentsComponent
   ],
   exports: [TaskComponent],
   imports: [
