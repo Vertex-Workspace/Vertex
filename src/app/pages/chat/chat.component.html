@@ -10,12 +10,12 @@
 
             <div class="header-right-informations">
                 <div class="leftChatPerson">
-                    <fa-icon class="section-icons-7xl" [icon]="faCircleUser"></fa-icon>
+                    <fa-icon *ngIf="chat" class="section-icons-7xl" [icon]="faCircleUser"></fa-icon>
                 </div>
 
                 <div class="gap-3 flex flex-col">
                     <div class="divNamesPerson">
-                        <p *ngIf="chat!=undefined" class="userName large-text">{{chat.name}}</p>
+                        <p *ngIf="chat" class="userName large-text">{{chat.name}}</p>
 
                         <!-- <fa-icon class="section-icons" [icon]="faStar"></fa-icon> -->
                     </div>
@@ -57,7 +57,7 @@
             <div class="main-section-left">
                 <ng-container *ngFor="let chatFor of conversations">
                     <div (click)="openConversation(chatFor)"
-                        [ngClass]="chatFor.conversationOpen ? 'card-chatOpen' : 'card-chat'">
+                        [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
                         <div class="user-card-message">
                             <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
                             <div class="flex flex-col">
@@ -79,38 +79,50 @@
         </div>
 
         <div class="section-right-chat">
-            <div class="center-div">
-                <div class="min-h-[60px]" *ngIf="chat">
-                    <div *ngFor="let message of chat.messages"
-                        [ngClass]="message.user! != logged.firstName ? 'left pt-5' : 'right pt-5'">
-                        <div class="flex justify-center items-center gap-4">
-                            <p class="pChat">{{message.user!}}</p>
-                        </div>
 
-                        <div *ngIf="message.file=='' || message.file == null" class="regular-text"
-                            [ngClass]="message.user! != logged.firstName ? 'answer' : 'messageUser'">
-                            <div class="pChat whitespace-pre-wrap">
-                                <p>{{message.contentMessage}}</p>
-                            </div>
-
-                        </div>
-                        <p *ngIf="message.file=='' || message.file == null"
-                            [ngClass]="message.user! != logged.firstName ? 'pChat' : 'pChatEnd'">
-                            {{generateTime(message)}}</p>
-
-                        <div class="regular-text"
-                            [ngClass]="message.user! != logged.firstName ? 'answerPhoto' : 'messageUserPhoto'">
-                            <div *ngIf="message.file!=null" class=" w-full h-full ">
-                                <img class="imgMessage" src="data:image/jpg;base64, {{message.file}}" alt="">
-                                <p [ngClass]="message.user! != logged.firstName ? 'pChatPhoto' : 'pChatEndPhoto'">
-                                    {{generateTime(message)}}</p>
-                            </div>
-                        </div>
-                    </div>
+            <div *ngIf="!chat" class="center-div justify-center">
+                <div class="flex flex-col items-center gap-5 pb-20">
+                    <img class="w-40 h-40" src="../../../assets/messageImage.png" alt="">
+                    <h6>Não há nenhuma conversa aberta no momento.</h6>
                 </div>
             </div>
 
-            <form (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm"
+            <div *ngIf="chat" class="center-div">
+                <div class="min-h-[60px]" *ngIf="chat">
+                    <div *ngFor="let message of chat.messages" class="message-container" [ngClass]="message.user !== logged.firstName ? 'left' : 'right'">
+                        <div class="flex items-center gap-2">
+                            <p *ngIf="(logged.firstName != message.user)" class="username">{{ message.user }}</p>
+                            <p *ngIf="(logged.firstName == message.user)" class="username">Eu</p>
+                        </div>
+                
+                        <div *ngIf="!message.file" [ngClass]="logged.firstName!==message.user ? 'message-bubble-left' : 'message-bubble-right'">
+                            <p class="text-base">{{ message.contentMessage }}</p>
+                            <p [ngClass]="message.user !== logged.firstName ? 'timestamp' : 'timestamp text-right'">{{ generateTime(message) }}</p>
+                        </div>
+                
+                        <div *ngIf="message.file && !isPdfOrDocx" [ngClass]="message.user !== logged.firstName ? 'message-bubble-left with-photo' : 'message-bubble-right with-photo items-end'">
+                            <img class="w-[300px] h-[200px] object-contain" src="data:image/jpg;base64, {{ message.file }}" alt="Photo">
+                            <p [ngClass]="message.user !== logged.firstName ? 'timestamp text-[#777777]' : 'timestamp text-[#fff]'">{{ generateTime(message) }}</p>
+                        </div>
+
+                        <div *ngIf="isPdfOrDocx" [ngClass]="message.user !== logged.firstName ? 'message-bubble-left with-photo' : 'message-bubble-right with-photo items-end'">
+                            <div class="item">
+                                <img draggable="false" src="https://cdn-icons-png.flaticon.com/512/337/337946.png">
+                                <div>
+                                   <p>{{ selectedFile.name }}</p>
+                                   <a [href]="url" download="{{ selectedFile.name }}">
+                                      <i class="pi pi-download"></i> 
+                                   </a>
+                                </div>
+                             </div>
+                            <p [ngClass]="message.user !== logged.firstName ? 'timestamp text-[#777777]' : 'timestamp text-[#fff]'">{{ generateTime(message) }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <form *ngIf="chat" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm"
                 class="high-input-div justify-center">
                 <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
 
@@ -118,8 +130,7 @@
                         class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
                         [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
                     <div class="emoji-wrapper">
-                        <!-- <emoji-mart title="Pick your emoji…" emoji="point_up"></emoji-mart> -->
-                        <!-- <emoji-mart [set]="emojione"></emoji-mart> -->
+                        
                         <emoji-mart *ngIf="showEmojiPicker" [i18n]="{
                             search: 'Digite o nome do emoji em inglês',
                             categories: {
@@ -135,7 +146,7 @@
                             symbols: 'Símbolos',
                             flags: 'Bandeiras'
                             }
-                    }" [isNative]="true"  (emojiClick)="addEmoji($event)">
+                    }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
                         </emoji-mart>
 
                     </div>
@@ -144,7 +155,7 @@
                             (change)="onFileChange($event)">
                         <fa-icon (click)="openFile()" class="section-icons" [icon]="faPaperclip"></fa-icon>
                     </div>
-                    <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon>
+                    <!-- <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon> -->
                     <fa-icon (click)="showEmoji()" class="section-icons" [icon]="faSmile"></fa-icon>
                 </div>
                 <button type="submit" class="square-chat rounded-sm">

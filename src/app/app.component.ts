@@ -67,8 +67,8 @@ export class AppComponent {
     private teamService: TeamService,
   ) {
     personalization.setPersonalization();
-    
-    
+
+
 
     this.userState
       .getAuthenticationStatus()
@@ -82,8 +82,8 @@ export class AppComponent {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
     this.userService.getOneById(user.id!).subscribe((logged) => {
 
-     
-      
+
+
 
       user = logged;
 

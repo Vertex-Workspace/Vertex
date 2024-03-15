@@ -63,9 +63,6 @@ export class ChatComponent {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
     this.teamService.findAllChats().subscribe((chats: Chat[]) => {
       chats.forEach((chat: Chat) => {
-
-        this.chat = chat;
-
         chat.userTeams!.forEach((userTeam) => {
           if (userTeam.user.id == this.logged.id) {
             this.conversations.push(chat);
@@ -106,9 +103,11 @@ export class ChatComponent {
   }
 
   addEmoji(event: any) {
-    // Adicione aqui a lógica para adicionar o emoji ao campo de mensagem
     this.messageUser += event.emoji.native;
   }
+
+
+
 
   sendMessage(sendForm: NgForm) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
@@ -122,7 +121,7 @@ export class ChatComponent {
     };
     console.log(messageDto);
 
-    
+    this.showEmojiPicker = false;
 
     if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
       this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
@@ -145,6 +144,8 @@ export class ChatComponent {
     a.click();
   }
   selectedFile!: any;
+  isPdfOrDocx: boolean = false;
+  url !: string;
   onFileChange(e: any) {
     this.selectedFile = e.target.files[0];
     const fd: FormData = new FormData();
@@ -161,11 +162,22 @@ export class ChatComponent {
     let reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
     reader.onload = () => {
-      console.log(reader.result);
       let base64Data = reader.result as string;
-      const base64Parts = base64Data.split(',');
-      if (base64Parts.length === 2) {
-        base64Data = base64Parts[1];
+      console.log(base64Data, "BASE64");
+      
+      if (base64Data.includes("data:application/pdf;base64,")){
+        base64Data = base64Data.replace("data:application/pdf;base64,", "");
+        this.isPdfOrDocx = true;
+      }else if(base64Data.includes("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,")){
+        base64Data = base64Data.replace("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,", "");
+        this.isPdfOrDocx = true;
+      }
+       else {
+        this.isPdfOrDocx = false;
+        const base64Parts = base64Data.split(',');
+        if (base64Parts.length === 2) {
+          base64Data = base64Parts[1];
+        }
       }
       let message: Message = {
         user: this.logged.firstName,
@@ -179,14 +191,27 @@ export class ChatComponent {
   }
 
   generateTime(message: Message) {
-    return new Date(message.time!).getHours() + ":" + new Date(message.time!).getMinutes()
+    let minutes = new Date(message.time!).getMinutes();
+    if (minutes < 10) {
+      return new Date(message.time!).getHours() + ":0" + new Date(message.time!).getMinutes();
+    }else return new Date(message.time!).getHours() + ":" + new Date(message.time!).getMinutes();
+  }
+
+  transformHexColorToSimilarColor(hex: string) {
+    let r = parseInt(hex.substring(1, 3), 16);
+    let g = parseInt(hex.substring(3, 5), 16);
+    let b = parseInt(hex.substring(5, 7), 16);
+    return `rgba(${r},${g},${b},0.5)`;
   }
 
   openConversation(chat: Chat) {
+
     this.chat = chat;
-    // this.conversations[this.cardChat].conversationOpen = false;
-    // this.conversations[i].conversationOpen = true;
-    // this.cardChat = i;
+    this.conversations.forEach((conversation: Chat) => {
+      conversation.conversationOpen = false;
+    });
+
+    this.chat.conversationOpen = true;
 
 
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {

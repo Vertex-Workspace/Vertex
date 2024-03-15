@@ -135,38 +135,32 @@ main {
 }
 
 .card-chat {
-    @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-start self-start items-center w-[90%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     border: 1px solid #D3D3D3;
-    animation: leftPulse 0.3s;
-}
-
-.card-chat::selection {
-    @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
-    border: 1px solid #D3D3D3;
+    background-color: $secondColor;
     animation: leftPulse 0.3s;
 }
 
 .card-chatOpen {
-    @apply flex justify-between items-center w-[98.5%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-start self-start items-center w-[98.5%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     background-color: #fff;
     border: 1px solid #D3D3D3;
     animation: rightPulse 0.3s;
 }
 
 @keyframes leftPulse {
-
-    from {
+    0% {
         width: 98.5%;
     }
 
-    to {
-        width: 95%;
+    100% {
+        width: 90%;
     }
 }
 
 @keyframes rightPulse {
     0% {
-        width: 95%;
+        width: 90%;
     }
 
     100% {
@@ -181,12 +175,11 @@ main {
 .section-right-chat {
     @apply flex flex-col items-center justify-center w-[70%] h-[100%] gap-2 rounded-sm;
     border: 1px solid $emphasis;
-    background-color: #f1efef;
+    background-color: #ededed;
 }
 
 .center-div {
     @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
-
 }
 
 .left {
@@ -199,71 +192,45 @@ main {
     @apply w-[100%] min-h-[60px] flex flex-col items-end gap-2;
 }
 
-.answer {
-    @apply flex rounded-sm items-center justify-center p-3 min-h-[60px] gap-1;
-    border: $borderBottom;
-    max-width: 50%;
+/* CSS para as bolhas de mensagem */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 20px;
 }
 
-.messageUser {
-    @apply flex rounded-sm items-center justify-center p-3 min-h-[60px] gap-1;
+.message-container.right {
+    align-items: flex-end;
+}
+
+.message-bubble-left {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $card;
+    color: $primaryColor;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3;
+}
+.message-bubble-right {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 5px;
     background-color: $primaryColor;
     color: $secondColor;
-    max-width: 50%;
-    word-break: break-all;
-    flex-wrap: wrap;
-}
-
-.answerPhoto {
-    @apply flex rounded-sm items-center justify-center min-h-[60px] gap-1;
-    max-width: 50%;
-}
-
-.messageUserPhoto {
-    @apply flex rounded-sm items-center justify-end min-h-[60px] gap-1;
-    color: $primaryColor;
-    text-align: right;
-    max-width: 50%;
-    word-break: break-all;
-    flex-wrap: wrap;
-}
-
-.pChat {
-    @apply h-[30%] flex items-center min-h-[30%];
-    display: flex;
-    flex-wrap: wrap;
     word-wrap: break-word;
+    @apply flex flex-col gap-3;
 }
 
-.pChatEnd {
-    @apply h-[30%] flex items-center min-h-[30%];
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 5px;
-    flex-wrap: wrap;
-    word-wrap: break-word;
-
+.username {
+    font-weight: bold;
+    margin-bottom: 3px;
 }
 
-.pChatPhoto {
-    @apply h-[30%] flex items-center min-h-[30%];
-    display: flex;
-    padding-top: 8px;
-    flex-wrap: wrap;
-    word-wrap: break-word;
+.timestamp {
+    font-size: 12px;
 }
-
-.pChatEndPhoto {
-    @apply h-[30%] flex items-center min-h-[30%];
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 5px;
-    padding-top: 8px;
-    flex-wrap: wrap;
-    word-wrap: break-word;
-}
-
-
 
 .high-input-div {
     @apply w-[65%] h-[20%] flex items-center gap-3;
@@ -299,8 +266,7 @@ main {
 
 .emoji-wrapper {
     position: absolute;
-    right: 0;
+    right: 40px;
     bottom: 85px;
     z-index: 5;
 }
-
