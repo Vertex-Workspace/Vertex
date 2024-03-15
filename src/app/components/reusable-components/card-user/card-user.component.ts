@@ -11,6 +11,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { LogComponent } from '../../modals/task/log/log.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-card-user',
@@ -24,7 +25,7 @@ export class CardUserComponent implements OnInit {
   name !: String
 
   @Output()
-  user = new EventEmitter<User>();
+  userEmitter = new EventEmitter<User>();
 
   @Output()
   deleteUserGroup = new EventEmitter<User>();
@@ -44,28 +45,37 @@ export class CardUserComponent implements OnInit {
   @Input()
   typeString!: String;
 
-  permissions: Permission[] = []
   delete: boolean = false;
 
   isTeamCreator: boolean = false;
 
+  @Input()
+  user !: User
+
+  @Output()
+  noMoreParticipants = new EventEmitter();
+
   constructor(private userService: UserService,
     private groupService: GroupService,
     private alert: AlertService,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    console.log(this.random(0,6));
+    
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
-      this.userService.getUsersByTeam(this.team.id).subscribe((users: User[]) => {
-        this.users = users;
-      });
-    } else if (this.typeString === 'addUsers') {
+      this.user.permissions = this.getPermission(this.user); 
+    } else if (this.typeString === 'addingParticipants') {
       this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
         this.users = users;
+
+        if(this.users.length === 0){
+          this.noMoreParticipants.emit();
+        }
+        
       });
     }
 
@@ -74,7 +84,6 @@ export class CardUserComponent implements OnInit {
         this.isTeamCreator = true
       }
     });
-
   }
 
   faCircleUser = faCircleUser;
@@ -86,31 +95,14 @@ export class CardUserComponent implements OnInit {
   selectUser(user: User): void {
     user.selected = !user.selected;
     if (user.selected) {
-      this.user.emit(user);
+      this.userEmitter.emit(user);
     }
   }
+
+
 
   removeUser(user: User): void {
-    console.log(user);
-    
-    this.groupService.deleteUserFromGroup(user, this.team.id, this.group.id)
-      .subscribe((group: Group) => {
-        this.alert.successAlert(`Usuário retirado do grupo`)
-        this.getUsersByGroup()
-      },
-        e => {
-          this.alert.errorAlert('Não foi possível retirar o usuário do grupo ')
-        }
-      )
-  }
-
-  openPermissions(user: User, typeString2: String): void {
-    if (typeString2 === 'permissions') {
-      user.openPermission = !user.openPermission;
-      this.getPermission(user);
-    } else {
-      user.openInfo = !user.openInfo
-    }
+    this.deleteUserGroup.emit(user);
   }
 
   selectPermission(user: User, permission: Permission): void {
@@ -124,6 +116,7 @@ export class CardUserComponent implements OnInit {
   getPermission(user: User): Permission[] | any {
     this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
       user.permissions = permissions;
+      return user.permissions 
     })
   }
 
@@ -141,6 +134,8 @@ export class CardUserComponent implements OnInit {
   deleteEmitterUserTeam: EventEmitter<User> = new EventEmitter<User>();
 
   deleteEmitUserTeam(user: User): void {
+    console.log(user);
+    
     this.deleteEmitterUserTeam.emit(user);
   }
 
@@ -148,29 +143,11 @@ export class CardUserComponent implements OnInit {
     this.deleteUserGroup.emit(user)
   }
 
-  validatingDelete(user: User, type: boolean): void {
-    if (type === true) {
-      if (this.typeString === 'inTheGroup') {
-        this.removeUser(user)
-      } else if (this.typeString === 'permissions') {
-        this.deleteEmitUserTeam(user)
-      }
-    } else {
-      this.alert.notificationAlert("Usuário continua na equipe")
-    }
-  }
-
-  getUsersByGroup(){
+  getUsersByGroup() {
     if (this.typeString === 'inTheGroup') {
       this.userService.getUsersByGroup(this.group.id).subscribe((users: User[]) => {
         this.users = users;
       });
     }
-  }
-
-  random(min: number, max:number){
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

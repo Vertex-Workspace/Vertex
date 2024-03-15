@@ -2,10 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { TreeNode } from 'primeng/api';
+import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
+import { GroupService } from 'src/app/services/group.service';
 import { PersonalizationService } from 'src/app/services/personalization.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -29,11 +32,17 @@ export class CreateTeamProjectComponent implements OnInit {
   close = new EventEmitter();
 
   @Input()
-  team ?: Team;
+  team?: Team;
 
+  users !: User[];
+
+  groups !: Group[]
 
   @Input()
   typeString!: String;
+
+  @Input()
+  project ?: Project
 
   logged !: User;
 
@@ -43,27 +52,44 @@ export class CreateTeamProjectComponent implements OnInit {
   
 
   constructor(
-    private personalization: PersonalizationService, 
+    private personalization: PersonalizationService,
     private teamService: TeamService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private alert: AlertService
+    private alert: AlertService,
+    private groupService: GroupService
   ) {
     this.logged = this.userService.getLogged();
 
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       description: [null],
+      listOfResponsibles: [null],
     });
   }
 
   ngOnInit(): void {
+    this.getGroups();
+    this.getUsers();
+    this.projectExists()
+  }
+
+  projectNull: boolean = true;
+  name !: string
+  description ?: string 
+
+  projectExists(){
+    if(this.project != null){
+      this.projectNull = false
+      this.name = this.project.name
+      this.description = this.project.description
+    }
   }
 
 
-  onSubmit(): void { 
+  onSubmit(): void {
     // if (!this.fd.has('file')) this.setDefaultImage();
     if (this.typeString === 'team') this.createTeam();
     else this.createProject();
@@ -94,7 +120,24 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   createProject(): void {
-    const project = this.form.getRawValue() as Project;
+    let project = this.form.getRawValue() as Project;
+   
+    let listOfResponsibles: User[] = [];
+    project.listOfResponsibles?.forEach((type => {
+      if (type instanceof Group) {
+        let group: Group = type as Group;
+        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+          for (const user of users) {
+              listOfResponsibles.push(user);
+          }
+        });
+      } else if (type instanceof User) {
+        let user: User = type as User;
+          listOfResponsibles.push(user);
+      } 
+
+      project.listOfResponsibles = listOfResponsibles;
+    }));
 
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));    
     project.creator = {
@@ -123,14 +166,14 @@ export class CreateTeamProjectComponent implements OnInit {
   onFileSelected(e: any): void {   
     this.fd = new FormData()
     this.selectedFile = e.target.files[0];
-    this.fd.append('file', this.selectedFile, this.selectedFile.name);      
+    this.fd.append('file', this.selectedFile, this.selectedFile.name);
     let reader = new FileReader();
 
-    if(e.target.files && e.target.files.length > 0) {
+    if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        const base = reader.result as string;    
+        const base = reader.result as string;
         this.base64 = base.split(",").pop();
         this.url = reader.result;
       };
@@ -152,4 +195,33 @@ export class CreateTeamProjectComponent implements OnInit {
     this.closeScreen();
   }
 
+  listOfResponsibles: any[] = []
+
+  private getUsers(): void {
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
+      this.users = users
+      for (const user of users) {
+        user.icon = 'pi pi-user'
+        this.listOfResponsibles.push(user);
+      }
+    });
+  }
+
+  private getGroups(): void {
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
+      this.groups = groups;
+
+      for (const group of groups) {
+        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+          group.children = users
+          group.icon = 'pi pi-users'
+          this.listOfResponsibles.push(group)
+        })
+      }
+    });
+  }
 }

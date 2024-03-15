@@ -1,41 +1,52 @@
-<div class="main-div" *ngFor="let group of getGroup()">
-    <div class="card" [style.width]="width" [style.height]="height">
-        <div>
-            <p>{{group.name}}</p>
-        </div>
-        <div>
-            <fa-icon *ngIf="!group.open" [icon]="faCaretDown" class="icon" (click)="openModal(group)"
-                style="font-size:1rem"></fa-icon>
-            <fa-icon *ngIf="group.open" [icon]="faCaretUp" class="icon" (click)="openModal(group)"
-                style="font-size:1rem"></fa-icon>
-            <fa-icon [icon]="faTrashCan" class="icon size pl-4" (click)="openModalDelete(group)"></fa-icon>
-
-        </div>
-    </div>
-    <div *ngIf="group.open" class="user">
-        <p *ngIf="selectMoreUsers">Participantes</p>
-        <p class="pl-2" *ngIf="!selectMoreUsers">Selecione participantes</p>
-        <app-card-user *ngIf="selectMoreUsers" [typeString]="'inTheGroup'" [width]="'800px'" [height]="'70px'"
-            class="user-card" [group]="group" [team]="team"></app-card-user>
-        <form [formGroup]="form" (ngSubmit)="onSubmit(group)">
-            <app-card-user *ngIf="!selectMoreUsers" [typeString]="'addUsers'" [group]="group" [team]="team"
-                [width]="'800px'" [height]="'70px'" (user)="pushParticipants($event)"></app-card-user>
-            <div class="w-[95%] h-[40px] flex justify-end">
-                <button *ngIf="!selectMoreUsers" type="submit">
-                    Confirmar
-                </button>
+<div class="">
+    <div class="main-div">
+        <div class="card" [style.width]="width" [style.height]="height">
+            <div>
+                <p class="large-text">{{group.name}}</p>
             </div>
-        </form>
-        <div class="flex flex-row justify-end items-center pr-8">
-            <fa-icon *ngIf="selectMoreUsers" [icon]="faCirclePlus" class="icon" style="font-size:small"
-                (click)="addParticipants()">
-            </fa-icon>
-            <p class="pl-2" *ngIf="selectMoreUsers" (click)="addParticipants()">Adicionar participantes</p>
+            <div>
+                <fa-icon [icon]="faComment" class="icon" style="font-size:1rem"></fa-icon>
+                <fa-icon *ngIf="!group.open" [icon]="faCaretDown" class="icon" (click)="openModal(group)"
+                    style="font-size:1.25rem"></fa-icon>
+                <fa-icon *ngIf="group.open" [icon]="faCaretUp" class="icon" (click)="openModal(group)"
+                    style="font-size:1.25rem"></fa-icon>
+                <!-- <fa-icon [icon]="faTrashCan" class="icon size pl-4" (click)="openModalDelete(group)"></fa-icon> -->
+
+            </div>
         </div>
+        <div *ngIf="group.open" class="user">
+            <div class="flex justify-start items-center">
+                <p *ngIf="selectMoreUsers">Participantes</p>
+                <fa-icon *ngIf="selectMoreUsers" [icon]="faCirclePlus" class="icon pl-4" style="font-size:small"
+                    (click)="addParticipants()">
+                </fa-icon>
+            </div>
+            <div class="grid grid-cols-2">
+                <ng-container *ngFor="let user of group.users">
+                    <app-card-user *ngIf="selectMoreUsers" [typeString]="'inTheGroup'" [width]="'270px'"
+                        [height]="'0px'" class="user-card" [group]="group" [team]="team" [user]="user"
+                        (deleteUserGroup)="openModalDeleteUser($event)">
+                    </app-card-user>
+                </ng-container>
+            </div>
+            <div class="flex flex-row justify-end items-center pr-8 pt-5">
+                <fa-icon [icon]="faTrashCan" class="icon size" (click)="openModalDelete(group)"></fa-icon>
+                <p class="pl-2" *ngIf="selectMoreUsers">Excluir grupo</p>
+            </div>
+        </div>
+
+        <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'" 
+            (confirmEvent)="emitItem($event)">
+        </app-confirm-modal>
+
+        <app-confirm-modal *ngIf="deleteUser" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo?'" [type]="'userTeam'"
+            (confirmEvent)="removeUser($event)">
+        </app-confirm-modal>
+
+        <app-create-group [group]="group" [team]="team" *ngIf="!selectMoreUsers" [typeString]="'addingParticipants'"
+            (close)="addParticipants()">
+
+        </app-create-group>
+
     </div>
-
-    <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'"
-        [type]="'userTeam'" (confirmEvent)="emitItem($event)">
-    </app-confirm-modal>
-
 </div>

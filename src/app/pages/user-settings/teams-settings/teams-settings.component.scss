@@ -22,24 +22,14 @@
     @apply text-[18px];
 }
 
-.search {
-    font-size: 1.5rem;
-    color:$primaryColor !important;
-    @apply pr-10;
-}
-
-input {
-    @apply w-full h-full pl-10 rounded-md flex justify-center items-start;
-};
 
 section {
     @apply h-full w-[100%] flex flex-col pt-10 items-center;
 }
 
 
-span {
-    @apply h-[10%] w-[85%] rounded-sm flex flex-col items-center justify-center shadow-lg;
-    color:$primaryColor;
-    background-color: $card;
+.search {
+    @apply w-[40%] h-[50px] flex items-start justify-between bg-white p-3
+    rounded shadow-md border-none;
 }
 
