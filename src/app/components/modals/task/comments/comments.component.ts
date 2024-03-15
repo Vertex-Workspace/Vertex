@@ -36,6 +36,14 @@ export class CommentsComponent {
         }
     }
 ];
+  hasComments:boolean = false;
+  ngOnChanges(){
+    if(this.task.comments.length > 0){
+      this.hasComments = true;
+    } else{
+      this.hasComments = false;
+    }
+  }
 
 
 
@@ -43,10 +51,14 @@ export class CommentsComponent {
   ngOnInit(): void {
     this.userLoggedId = this.userService.getLogged().id!;
 
+    console.log(this.task);
+    
     setTimeout(() => {
       let a = document.getElementsByClassName("teste-scroll")[0] as HTMLElement;
       a.scrollTop = a.scrollHeight;
     }, 0);
+
+    this.ngOnChanges();    
   }
 
   sendComment(){
@@ -63,6 +75,7 @@ export class CommentsComponent {
       (task: Task) => {
         this.task = task;
         this.message = ""
+        this.ngOnChanges();
         setTimeout(() => {
           let a = document.getElementsByClassName("teste-scroll")[0] as HTMLElement;
           a.scrollTop = a.scrollHeight;
@@ -87,7 +100,7 @@ export class CommentsComponent {
     this.taskService.deleteComment(this.task.id, comment.id!).subscribe(
       (bool:any) => {
         this.task.comments = this.task.comments!.filter(c => c.id !== comment.id);
-        
+        this.ngOnChanges();
       }
     );
   }

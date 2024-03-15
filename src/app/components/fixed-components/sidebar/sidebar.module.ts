@@ -4,8 +4,7 @@ import { SidebarComponent } from './sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SearchAllModule } from '../../modals/search-all/search-all.module';
 import { RouterModule } from '@angular/router';
-
-
+import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -14,7 +13,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FontAwesomeModule,
     SearchAllModule,
-    RouterModule
+    RouterModule,
+    ModalWarnModule
   ]
 })
 export class SidebarModule { }

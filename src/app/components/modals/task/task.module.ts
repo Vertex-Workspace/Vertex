@@ -9,6 +9,7 @@ import { MinichatModule } from '../minichat/minichat.module';
 import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
 import { PropertiesModule } from './properties/properties.module';
 import { MenuModule } from 'primeng/menu';
+import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MenuModule } from 'primeng/menu';
      FormsModule, 
      MinichatTASKModule,
      PropertiesModule,
-     MenuModule
+     MenuModule,
+     ConfirmModalModule
     ],
 })
 export class TaskModule { }

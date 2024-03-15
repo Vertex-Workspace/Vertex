@@ -5,6 +5,7 @@ import { Project } from '../models/class/project';
 import { URL } from './path/api_url';
 import { Task } from '../models/class/task';
 import { Property } from '../models/class/property';
+import { Team } from '../models/class/team';
 
 @Injectable({
   providedIn: 'root'

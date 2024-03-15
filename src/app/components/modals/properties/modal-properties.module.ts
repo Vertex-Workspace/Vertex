@@ -36,4 +36,4 @@ import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
     ConfirmModalModule
   ]
 })
-export class PropertiesModule { }
+export class ModalPropertiesModule { }

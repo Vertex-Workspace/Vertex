@@ -15,6 +15,10 @@
                 <p class="regular-text">{{comment.comment}}</p>
             </div>
         </li>
+        <div *ngIf="!hasComments" class="flex w-full items-center flex-col h-[90%] null-comment">
+            <p class="pt-3">Nenhum comentário feito na tarefa!</p>
+            <p>Seja você o primeiro!</p>
+        </div>
     </ul>
     <div class="send-message">
         <textarea type="text" [(ngModel)]="message" placeholder="Faça algum comentário..." class="medium-text"></textarea>
