@@ -2,10 +2,11 @@
     <div class="container-custom">
         <section class="grid w-full grid-cols-2">
             <div>
-                <div>
+                <div class="flex flex-row gap-2">
                     <h4>
                         Espaço de Trabalho
                     </h4>
+                    <i class="pi pi-pencil pt-2" (click)="openProjectInfos()"></i>
                 </div>
                 <div class="pt-2">
                     <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você
@@ -168,3 +169,6 @@
         </div>
     </section>
 </app-modal-warn>
+
+<app-create-team-project [project]="project" *ngIf="openModalProject" [typeString]="'projectInfo'" (close)="openProjectInfos()">
+</app-create-team-project>

@@ -85,6 +85,11 @@ export class CreateTeamProjectComponent implements OnInit {
       this.projectNull = false
       this.name = this.project.name
       this.description = this.project.description
+      this.projectService.getProjectCollaborators(this.project.id).subscribe((users : User[]) => {
+        for(const user of users){
+          this.listOfResponsibles.push(user)
+        }
+      })
     }
   }
 
@@ -104,13 +109,13 @@ export class CreateTeamProjectComponent implements OnInit {
 
   createTeam(): void {
     const team = this.form.getRawValue() as Team;
-
       team.creator = this.logged;
       
       this.teamService
         .create(team)
         .subscribe((teamRes: Team) => {          
           this.alert.successAlert(`Equipe ${teamRes.name} criada com sucesso!`);
+          
           if (this.fd) {
             this.teamService
             .updateImage(teamRes.id!, this.fd)
@@ -121,6 +126,8 @@ export class CreateTeamProjectComponent implements OnInit {
 
   createProject(): void {
     let project = this.form.getRawValue() as Project;
+    console.log(this.fd);
+    
    
     let listOfResponsibles: User[] = [];
     project.listOfResponsibles?.forEach((type => {
@@ -152,10 +159,11 @@ export class CreateTeamProjectComponent implements OnInit {
     this.projectService
       .create(project, teamId)
       .subscribe((project: Project) => {
-        this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
+        this.alert.successAlert(`Projeto criado com sucesso!`);
+        console.log(project.id);
         if (this.fd) {
           this.projectService
-          .updateImage(project.id!, this.fd)
+          .updateImage(project.id, this.fd)
           .subscribe();
         }
       });
@@ -224,4 +232,10 @@ export class CreateTeamProjectComponent implements OnInit {
       }
     });
   }
+
+  optionsReview = [
+    {name: 'Revisão obrigatória'},
+    {name: 'Revisão não obrigatória'},
+    {name: 'Revisão opcional'}
+  ]
 }

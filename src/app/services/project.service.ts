@@ -16,13 +16,13 @@ export class ProjectService {
   constructor(
     private http: HttpClient
   ) { }
-  
+
   public getAll(): Observable<Project[]> {
     return this.http
       .get<Project[]>(`${URL}project`)
-      .pipe(map((projects: Project[]) => 
-          projects.map(project => new Project(project))
-        )
+      .pipe(map((projects: Project[]) =>
+        projects.map(project => new Project(project))
+      )
       )
   };
 
@@ -33,7 +33,7 @@ export class ProjectService {
 
   public create(project: Project, teamId: number): Observable<Project> {
     console.log(project);
-    
+
     return this.http
       .post<Project>(`${URL}project/${teamId}`, project);
   }
@@ -46,9 +46,9 @@ export class ProjectService {
   public getAllByTeam(id: number): Observable<Project[]> {
     return this.http
       .get<Project[]>(`${URL}project/team/${id}`)
-      .pipe(map((projects: Project[]) => 
-          projects.map(project => new Project(project))
-        )
+      .pipe(map((projects: Project[]) =>
+        projects.map(project => new Project(project))
+      )
       )
   }
 
@@ -59,9 +59,9 @@ export class ProjectService {
   public getTasksByProject(id: number): Observable<Task[]> {
     return this.http
       .get<Task[]>(`${URL}project/${id}/tasks`)
-      .pipe(map((tasks: Task[]) => 
-          tasks.map(task => new Task(task))
-        )
+      .pipe(map((tasks: Task[]) =>
+        tasks.map(task => new Task(task))
+      )
       )
   }
 
@@ -70,12 +70,20 @@ export class ProjectService {
       .patch(`${URL}project/image/${teamId}`, fd)
   }
 
-  public getProjectByCollaborators(team: number, user: User): Observable<Project[]> { 
+  public getProjectByCollaborators(team: number, user: User): Observable<Project[]> {
     return this.http.get<Project[]>(`${URL}project/${team}/${user.id}`)
-    .pipe(map((projects: Project[]) => 
-    projects.map(project => new Project(project))
-  )
-)
+      .pipe(map((projects: Project[]) =>
+        projects.map(project => new Project(project))
+      )
+      )
+  }
+
+  public getProjectCollaborators(projectId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${URL}project/users/${projectId}`)
+    .pipe(map((users: User[]) =>
+      users.map(user => new User(user))
+    )
+    ) 
   }
 
 }

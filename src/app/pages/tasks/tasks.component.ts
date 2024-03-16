@@ -240,6 +240,7 @@ export class TasksComponent implements OnInit {
   }
   
   openProjectInfos(){
-    this.openModalProject = !this.openModalProject
+    this.openModalProject = !this.openModalProject;
   }
+
 }
