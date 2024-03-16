@@ -55,11 +55,11 @@
                         <a (click)="navigate('log')"
                             [style.background]="'log' === selectedComponent ? '#D6D6D6' : 'inherit'">Histórico</a>
                         <span>|</span>
-                        <a (click)="navigate('attachment')"
-                            [style.background]="'attachment' === selectedComponent ? '#D6D6D6' : 'inherit'">Anexos</a>
+                        <a (click)="navigate('attachments')"
+                            [style.background]="'attachments' === selectedComponent ? '#D6D6D6' : 'inherit'">Anexos</a>
                     </ul>
                 </nav>
-                <div class="components">
+                <div class="components overflow-auto">
                     <div *ngIf="selectedComponent === 'description'" class="flex flex-col">
                         <textarea [disabled]="!descriptionEditable" class="task-description"
                             [(ngModel)]="task.description">{{task.description}}</textarea>
@@ -75,6 +75,10 @@
                         style="width: 100%; height: 100%;" />
 
                     <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
+
+                    <app-attachments [task]="task" *ngIf="selectedComponent === 'attachments'" 
+                        style="width: 100%; height: 100%;"
+                    />
                 </div>
                 <div class="submit gap-3 rounded-sm">
                     <!-- IF THE TASK HAS ONLY ONE RESPONSIBLE, THE BUTTON OF WORK WILL BE ON SOUTH -->

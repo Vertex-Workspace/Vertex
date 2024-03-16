@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Task } from 'src/app/models/class/task';
 
 @Component({
   selector: 'app-attachments',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./attachments.component.scss']
 })
 export class AttachmentsComponent {
+
+  @Input()
+  task !: Task;
+
 
 }

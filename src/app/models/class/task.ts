@@ -22,12 +22,7 @@ export class Task {
     taskResponsables?:TaskResponsable[];
     step?: number;
 
-
-    //mural
-    width?: string;
-    height?: string;
-    top?: string;
-    left?: string;
+    files: any[];
 
     constructor(
         task: Task
@@ -39,6 +34,8 @@ export class Task {
         this.description = task.description;
         this.values = task.values;
         this.properties = task.properties;
+        this.files = task.files;
+        console.log(task)
     }
 
 }
