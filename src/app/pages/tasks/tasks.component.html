@@ -127,10 +127,10 @@
                 <p class="medium-text self-start pt-4 pl-6">{{taskBeingReviewed.sender.username}} -
                     {{taskBeingReviewed.sender.email}}</p>
                 <p class="medium-text self-start pt-3">Descrição Final</p>
-                <p class="small-text self-start pl-6">{{taskBeingReviewed.sender.finalDescription}}</p>
+                <p class="small-text self-start pl-6 h-[50px]">{{taskBeingReviewed.sender.finalDescription}}</p>
             </div>
 
-            <div class="flex w-full max-h-[160px] overflow-x-hidden overflow-y-auto mt-5">
+            <div class="flex w-full max-h-[161px] overflow-x-hidden overflow-y-auto mt-5">
                 <table class="w-full">
                     <tr>
                         <th>Responsável</th>
@@ -154,14 +154,15 @@
             <div class="flex flex-col pt-3">
                 <p class="medium-text self-start">Devolutiva</p>
                 <div class="grid grid-cols-2 pt-2">
-                    <textarea name="" id="" class="flex w-full h-full outline-none px-3 py-1"
+                    <textarea name="" id="" class="flex w-full h-[120px] outline-none px-3 py-1"
                         placeholder="Insira uma descrição devolutiva..."></textarea>
-                        <div>
-                            <span class="p-input-icon-left">
-                                <i class="pi pi-star"></i>
-                                <input type="number" pInputText placeholder="Nota de 0-10"/>
-                            </span>
+                        <div class="review-grade">
+                            <p-rating [(ngModel)]="finalReviewResult.grade" [cancel]="false"></p-rating>
                             <p class="small-text">Nota será concedida para todos os responsáveis da tarefa.</p>
+                            <div class="flex w-full justify-evenly pt-5">
+                                <button id="red-btn" (click)="finalReview(false)">Reprovar</button>
+                                <button id="primary-btn" (click)="finalReview(true)">Aprovar</button>
+                            </div>
                         </div>
                 </div>
             </div>

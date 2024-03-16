@@ -153,11 +153,11 @@ export class CreateTeamProjectComponent implements OnInit {
       .create(project, teamId)
       .subscribe((project: Project) => {
         this.alert.successAlert(`Projeto ${project.name} criado com sucesso!`);
-        if (this.fd) {
-          this.projectService
-          .updateImage(project.id!, this.fd)
-          .subscribe();
-        }
+        console.log(this.fd);
+        this.projectService
+        .updateImage(project.id!, this.fd)
+        .subscribe();
+        
       });
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { URL } from './path/api_url';
-import { SentToReview } from '../models/class/review';
+import { ReviewCheck, SentToReview } from '../models/class/review';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,9 @@ export class ReviewService {
       .post<Boolean>(`${URL}task/review/send`, initialReview);
   }
 
-
+  public finalReview(finalReview: ReviewCheck){
+    return this.http
+      .patch(`${URL}task/review/final`, finalReview);
+  }
 
 }

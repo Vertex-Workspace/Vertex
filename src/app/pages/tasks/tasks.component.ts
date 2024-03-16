@@ -15,6 +15,8 @@ import { Note } from 'src/app/models/class/note';
 import { Observable } from 'rxjs';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { PropertyList } from 'src/app/models/class/property';
+import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
+import { ReviewService } from 'src/app/services/review.service';
 
 
 @Component({
@@ -52,7 +54,8 @@ export class TasksComponent implements OnInit {
     private userService: UserService,
     private teamService: TeamService,
     private alertService: AlertService,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private reviewService: ReviewService
   ) {}
 
   projectId!: number;
@@ -83,6 +86,7 @@ export class TasksComponent implements OnInit {
       this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
         (tasks : TaskWaitingToReview[]) => {
           console.log(tasks);
+  
           this.tasksToReview = tasks;
           this.badgeNumber = this.tasksToReview.length.toString();
           //Implementation
@@ -228,7 +232,7 @@ export class TasksComponent implements OnInit {
     let propertyList: PropertyList = task.values[0].value as PropertyList;
     return propertyList.color;
   }
-
+  value = 2.5;
   taskBeingReviewed!: TaskWaitingToReview;
 
   convertTime(time:any): string{
@@ -241,5 +245,32 @@ export class TasksComponent implements OnInit {
   
   openProjectInfos(){
     this.openModalProject = !this.openModalProject
+  }
+
+  finalReviewResult : ReviewCheck = {
+    taskID: 0,
+    reviewerID: 0,
+    grade: 0,
+    finalDescription: "",
+  }
+
+  finalReview(approved:boolean){
+    this.finalReviewResult.taskID = this.taskBeingReviewed.id!;
+    this.finalReviewResult.reviewerID = this.logged.id!;
+    this.finalReviewResult.approveStatus = approved ? ApproveStatus.APPROVED : ApproveStatus.DISAPPROVED;  
+
+    this.reviewService.finalReview(this.finalReviewResult).subscribe(
+      (response) => {
+        if(response){
+          this.alertService.successAlert("Revisão finalizada com sucesso!");
+          this.tasksToReview = this.tasksToReview.filter(task => task.id !== this.taskBeingReviewed.id);
+          this.badgeNumber = this.tasksToReview.length.toString();
+          this.toggleReview();
+        }
+      },
+      (error) => {
+        this.alertService.errorAlert("Erro ao finalizar revisão");
+      }
+    );
   }
 }

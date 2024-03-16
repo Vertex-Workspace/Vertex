@@ -32,8 +32,6 @@ export class ProjectService {
   }
 
   public create(project: Project, teamId: number): Observable<Project> {
-    console.log(project);
-    
     return this.http
       .post<Project>(`${URL}project/${teamId}`, project);
   }

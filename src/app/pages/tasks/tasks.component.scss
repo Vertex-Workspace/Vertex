@@ -168,3 +168,33 @@ table > tr {
         color: $secondColor !important;
     }
 }
+
+.review-grade{
+
+    button{
+        @apply w-[100px] h-[40px] flex items-center justify-center rounded-sm;
+    }
+
+    #primary-btn{
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply transition-colors;
+        &:hover{
+            background-color: $secondColor;
+            color: $primaryColor;
+            border: 1px solid $primaryColor;
+
+        }
+    }
+
+    #red-btn{
+        background-color: $error;
+        color: $secondColor;
+        @apply transition-colors;
+        &:hover{
+            background-color: $secondColor;
+            color: $error;
+            border: 1px solid $error;
+        }
+    }
+}

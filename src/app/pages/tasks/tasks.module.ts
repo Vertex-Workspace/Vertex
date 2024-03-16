@@ -20,7 +20,7 @@ import { CardModule } from 'src/app/components/reusable-components/card/card.mod
 import { PropertiesModule } from 'src/app/components/modals/task/properties/properties.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
-
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,8 @@ import { CreateTeamProjectModule } from 'src/app/components/reusable-components/
     PropertiesModule,
     InputTextModule,
     NoteModule,
-    CreateTeamProjectModule
+    CreateTeamProjectModule,
+    RatingModule
   ],
 })
 export class TasksModule { }
