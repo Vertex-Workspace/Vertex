@@ -3,6 +3,10 @@
   <div class="modal">
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
     <h4 class="title" *ngIf="typeString === 'project'">Crie um novo Projeto...</h4>
+    <div class="flex justify-between flex-row w-full h-[15%]">
+      <h4 *ngIf="typeString === 'projectInfo'">Informações do projeto</h4>
+      <h4 *ngIf="typeString === 'projectInfo'" (click)="closeScreen()">X</h4>
+    </div>
     <div class="div-grid-name-image">
       <div class="input-name">
         <p>{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
@@ -33,6 +37,7 @@
     <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] md:w-20rem pt-4" containerStyleClass="w-full"
       display="chip" [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
       placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true"
+      [(ngModel)]="selectedUsers" 
       *ngIf="typeString === 'project' || typeString === 'projectInfo'">
     </p-treeSelect>
 

@@ -74,24 +74,27 @@ export class CreateTeamProjectComponent implements OnInit {
     this.getGroups();
     this.getUsers();
     this.projectExists()
+    this.markCollaboratorsAsSelected();
   }
 
   projectNull: boolean = true;
   name !: string
   description ?: string 
 
-  projectExists(){
-    if(this.project != null){
-      this.projectNull = false
-      this.name = this.project.name
-      this.description = this.project.description
-      this.projectService.getProjectCollaborators(this.project.id).subscribe((users : User[]) => {
-        for(const user of users){
-          this.listOfResponsibles.push(user)
+  projectExists() {
+    if (this.project != null) {
+      this.projectNull = false;
+      this.name = this.project.name;
+      this.description = this.project.description;
+      this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
+        for (const user of users) {
+          this.listOfResponsibles.push(user);
         }
-      })
+        this.markCollaboratorsAsSelected();
+      });
     }
   }
+  
 
 
   onSubmit(): void {
@@ -133,6 +136,7 @@ export class CreateTeamProjectComponent implements OnInit {
     project.listOfResponsibles?.forEach((type => {
       if (type instanceof Group) {
         let group: Group = type as Group;
+        group.selected = true;
         this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
           for (const user of users) {
               listOfResponsibles.push(user);
@@ -140,6 +144,7 @@ export class CreateTeamProjectComponent implements OnInit {
         });
       } else if (type instanceof User) {
         let user: User = type as User;
+        user.selectedProject = true;	
           listOfResponsibles.push(user);
       } 
 
@@ -238,4 +243,20 @@ export class CreateTeamProjectComponent implements OnInit {
     {name: 'Revisão não obrigatória'},
     {name: 'Revisão opcional'}
   ]
+
+  selectedUsers: TreeNode[] = [];
+
+  markCollaboratorsAsSelected(): void {
+    this.selectedUsers = [];
+  
+    this.listOfResponsibles.forEach(item => {
+      if (item instanceof User) {
+        let collaborator: User = item as User;
+          this.selectedUsers.push({ label: collaborator.firstName, data: collaborator });
+          this.listOfResponsibles = this.selectedUsers;
+          
+        }
+      
+    });
+  }
 }
