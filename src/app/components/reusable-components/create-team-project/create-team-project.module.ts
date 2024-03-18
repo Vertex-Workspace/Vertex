@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardUserModule } from '../card-user/card-user.module';
 import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
 import { TreeSelectModule } from 'primeng/treeselect';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -21,7 +22,8 @@ import { TreeSelectModule } from 'primeng/treeselect';
     ButtonModule,
     ReactiveFormsModule,
     CardUserModule,
-    TreeSelectModule
+    TreeSelectModule,
+    DropdownModule 
   ]
 })
 export class CreateTeamProjectModule { }
