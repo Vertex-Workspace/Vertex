@@ -88,4 +88,14 @@ export class TaskService {
     return this.http.get(`${URL}task/${taskID}/review/performance`);
   }
 
+  public uploadFile(fd: FormData, id: number): Observable<Task> {
+    return this.http
+      .patch<Task>(`${URL}task/${id}/upload`, fd);
+  }
+
+  public removeFile(taskId: number, fileId: number): Observable<Task> {
+    return this.http
+      .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`)
+  }
+
 }
