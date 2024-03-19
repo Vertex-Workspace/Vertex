@@ -21,11 +21,13 @@ import { PropertiesModule } from 'src/app/components/modals/task/properties/prop
 import { InputTextModule } from 'primeng/inputtext';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 import { RatingModule } from 'primeng/rating';
+import { ReviewTaskComponent } from 'src/app/components/modals/review-task/review-task.component';
 
 @NgModule({
   declarations: [
     TasksComponent,
-    MuralComponent,
+    MuralComponent
+    
    ],
   exports:[
     TasksComponent
@@ -46,13 +48,14 @@ import { RatingModule } from 'primeng/rating';
     NoteModule,
     ReactiveFormsModule,
     BadgeModule,
-    ModalWarnModule,
     CardModule,
     PropertiesModule,
     InputTextModule,
     NoteModule,
     CreateTeamProjectModule,
-    RatingModule
+
+    //Standalone component
+    ReviewTaskComponent
   ],
 })
 export class TasksModule { }

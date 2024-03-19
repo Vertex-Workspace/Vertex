@@ -139,8 +139,6 @@ export class TaskComponent implements OnInit {
   }
 
   closeModal() {
-    console.log("Close");
-
     this.close.emit();
   }
 
@@ -272,11 +270,13 @@ export class TaskComponent implements OnInit {
     this.isSending = true;
   }
 
+
+  sentToReviewDescription: string = "";
   taskAction(bool: boolean) {
     this.isSending = false;
     if (bool) {
       let taskSentToReview: SentToReview = {
-        description: this.task.description,
+        description: this.sentToReviewDescription,
         userThatSentReview: {
           id: this.idResponsable
         },
@@ -286,7 +286,9 @@ export class TaskComponent implements OnInit {
       }
       this.reviewService.sentToReview(taskSentToReview).subscribe(
         (task: Boolean) => {
+          this.project.tasks = this.project.tasks.filter((task) => task.id != this.task.id);
           this.alertService.successAlert("Tarefa enviada para revisão com sucesso!")
+          this.closeModal();
         },
         (error: any) => {
           this.alertService.errorAlert(error.error)

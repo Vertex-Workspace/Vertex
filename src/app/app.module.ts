@@ -39,12 +39,13 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { NoteComponent } from './components/reusable-components/note/note.component';
 import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
+import { ReviewTaskComponent } from './components/modals/review-task/review-task.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

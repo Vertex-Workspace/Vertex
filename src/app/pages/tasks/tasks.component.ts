@@ -85,14 +85,12 @@ export class TasksComponent implements OnInit {
       }
       this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
         (tasks : TaskWaitingToReview[]) => {
-          console.log(tasks);
-  
           this.tasksToReview = tasks;
           this.badgeNumber = this.tasksToReview.length.toString();
           //Implementation
         }
-      );
-
+        );
+        
     });
     this.muralPageListener();
   }
@@ -164,6 +162,12 @@ export class TasksComponent implements OnInit {
     );
   }
 
+  updateTasksToReview(tasks : TaskWaitingToReview[]) {
+    this.tasksToReview = tasks;
+    this.badgeNumber = this.tasksToReview.length.toString();
+    this.toggleReview();
+  }
+
   createNote(): void {
     const note: Note = {
       title: 'Nova nota',
@@ -219,58 +223,8 @@ export class TasksComponent implements OnInit {
   //MODAL REVIEW TASK
   toggleReview():void{
     this.taskReview = !this.taskReview;
-    if(this.tasksToReview.length > 0){
-      this.taskBeingReviewed = this.tasksToReview[0];
-    }
   }
-  performanceTable: any[] = [];
-  selectedReviewTask(taskReview : TaskWaitingToReview) {
-    this.taskBeingReviewed = taskReview;
-  }
-
-  getBorderColor(task : Task){
-    let propertyList: PropertyList = task.values[0].value as PropertyList;
-    return propertyList.color;
-  }
-  value = 2.5;
-  taskBeingReviewed!: TaskWaitingToReview;
-
-  convertTime(time:any): string{
-    return time;
-  }
-
-  isTaskReviewed(taskToReview : TaskWaitingToReview): boolean{
-    return taskToReview.id === this.taskBeingReviewed.id;
-  }
-  
   openProjectInfos(){
     this.openModalProject = !this.openModalProject
-  }
-
-  finalReviewResult : ReviewCheck = {
-    taskID: 0,
-    reviewerID: 0,
-    grade: 0,
-    finalDescription: "",
-  }
-
-  finalReview(approved:boolean){
-    this.finalReviewResult.taskID = this.taskBeingReviewed.id!;
-    this.finalReviewResult.reviewerID = this.logged.id!;
-    this.finalReviewResult.approveStatus = approved ? ApproveStatus.APPROVED : ApproveStatus.DISAPPROVED;  
-
-    this.reviewService.finalReview(this.finalReviewResult).subscribe(
-      (response) => {
-        if(response){
-          this.alertService.successAlert("Revisão finalizada com sucesso!");
-          this.tasksToReview = this.tasksToReview.filter(task => task.id !== this.taskBeingReviewed.id);
-          this.badgeNumber = this.tasksToReview.length.toString();
-          this.toggleReview();
-        }
-      },
-      (error) => {
-        this.alertService.errorAlert("Erro ao finalizar revisão");
-      }
-    );
   }
 }
