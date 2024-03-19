@@ -170,5 +170,6 @@
     </section>
 </app-modal-warn>
 
-<app-create-team-project [project]="project" *ngIf="openModalProject" [typeString]="'projectInfo'" (close)="openProjectInfos()">
+<app-create-team-project [project]="project" *ngIf="openModalProject" [typeString]="'projectInfo'" (close)="openProjectInfos()"
+[team]="project.team">
 </app-create-team-project>

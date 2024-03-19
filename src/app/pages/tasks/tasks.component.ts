@@ -53,12 +53,15 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService
-  ) {}
+  ) {
+    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.projectId = id
+  }
 
+  teamId?: number
   projectId!: number;
 
   ngOnInit() {
-    this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {

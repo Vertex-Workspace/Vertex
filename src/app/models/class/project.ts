@@ -16,7 +16,7 @@ export class Project {
     tasks : Task[]; 
     notes : Note[] = [];
     properties!: Property[];
-    idTeam?: number;
+    idTeam!: number;
     listOfResponsibles ?: Group[] | User[]
 
     constructor(
@@ -50,4 +50,12 @@ export class ProjectResponsible {
     user ?: User
     group ?: Group
 
+}
+
+export class ProjectEdit {
+
+    id ?:number;
+    name?: string;
+    description?: string;
+    listOfResponsibles ?: Group[] | User[]
 }

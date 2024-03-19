@@ -53,7 +53,7 @@
         <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">Cancelar</button>
         <button class="confirm-button" type="submit" *ngIf="projectNull">Confirmar</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="!projectNull">Editar</button>
+      <button class="confirm-button" type="submit" *ngIf="!projectNull" (click)="updateProject()">Editar</button>
     </div>
   </div>
 </form>
