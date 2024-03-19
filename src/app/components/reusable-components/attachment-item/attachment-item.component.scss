@@ -1,19 +1,19 @@
 @import '../../../../variables';
 
 .item {
-    @apply relative w-[130px] h-[180px] rounded-sm flex items-center justify-center;
+    @apply relative w-[120px] h-[170px] rounded-sm flex items-center justify-center;
 
     img {
         @apply h-[70%];
     }
 
     div:last-child {
-        @apply p-2 absolute bottom-0 h-[60px] w-full flex justify-between items-center;
+        @apply p-2 absolute bottom-0 h-[60px] w-full flex justify-between items-center cursor-pointer;
         background-color: #474747af;
         color: $secondColor;
 
         p {
-            @apply w-2/3 overflow-hidden;
+            @apply w-2/3 overflow-hidden ;
         }
         
         a {

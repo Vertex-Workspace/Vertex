@@ -1,14 +1,19 @@
 <section>
    <span>
+      <form class="input-div">
+         <input type="file" class="input-file" (change)="onFileSelected($event)">
+     </form>
       <i class="pi pi-plus"></i>
       <p>
          Adicionar anexo
       </p> 
    </span>
-   <div>
-      <app-attachment-item
-      *ngFor="let attc of task.files"
-      [file]="attc"
-      ></app-attachment-item>
+   <div class="container">
+      <div>
+         <app-attachment-item
+            *ngFor="let attc of task.files"
+            [file]="attc"
+         ></app-attachment-item>
+      </div>
    </div>
 </section>

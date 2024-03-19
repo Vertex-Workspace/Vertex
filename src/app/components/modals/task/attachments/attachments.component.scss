@@ -4,16 +4,26 @@ section {
     @apply w-full h-full flex flex-col gap-4;
 
     span {
-        @apply flex items-center justify-center gap-2 text-base w-[170px] h-[40px];
+        @apply flex items-center justify-center gap-2 text-base w-[170px] h-[40px] cursor-pointer relative;
         color: #5f5f5f;
+
+        form {
+            @apply absolute z-[30] w-full h-full top-0 left-0 right-0 bottom-0;
+            opacity: 0;
+            cursor: pointer;
+        }
 
         &:hover {
             background-color: $emphasis;
         }
     }
 
-    div {
-        @apply flex flex-wrap h-full w-full overflow-auto gap-8;
+    .container {
+        @apply flex h-full w-full overflow-auto gap-8;
+
+        div {
+            @apply flex overflow-auto gap-4 flex-wrap h-[300px] max-h-full;
+        }
     }
     
 }

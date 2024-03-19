@@ -19,9 +19,19 @@ export class AttachmentItemComponent {
   }
 
   ngOnInit(): void {
-    const decodedData = atob(this.file.file);
-    const blob = new Blob([decodedData]);
-    this.url = URL.createObjectURL(blob); 
+    this.setUrl();
+  }
+
+  setUrl(): void {
+    const byteCharacters = atob(this.file.file);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+    this.url = window.URL.createObjectURL(blob);
   }
 
   getName(): string {
