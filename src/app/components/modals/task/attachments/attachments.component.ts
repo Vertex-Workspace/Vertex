@@ -25,14 +25,20 @@ export class AttachmentsComponent {
     const fd: FormData = new FormData();
     fd.append('file', selectedFile, selectedFile.name);    
 
-    console.log(fd);
-
     this.taskService
       .uploadFile(fd, this.task.id!)
       .subscribe((task: Task) => {
         this.task = task;
-        this.alert.successAlert('Imagem atualizada com sucesso!');
+        this.alert.successAlert(`Arquivo anexado em ${task.name}!`);
       });
+  }
+
+  fileRemoveHandler(file: any): void {
+    this.taskService
+      .removeFile(this.task.id, file.id)
+      .subscribe((task: Task) => {
+        this.task = task;
+      })
   }
 
 }

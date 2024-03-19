@@ -1,7 +1,7 @@
 @import '../../../../../variables';
 
 section {
-    @apply w-full h-full flex flex-col gap-4;
+    @apply w-full h-full flex flex-col gap-1;
 
     span {
         @apply flex items-center justify-center gap-2 text-base w-[170px] h-[40px] cursor-pointer relative;
@@ -19,10 +19,10 @@ section {
     }
 
     .container {
-        @apply flex h-full w-full overflow-auto gap-8;
+        @apply flex flex-col h-full w-full gap-2;
 
         div {
-            @apply flex overflow-auto gap-4 flex-wrap h-[300px] max-h-full;
+            @apply flex overflow-y-auto gap-4 flex-col h-[300px] max-h-full overflow-x-hidden;
         }
     }
     

@@ -1,9 +1,17 @@
 <div class="item">
-    <img draggable="false" src="https://cdn-icons-png.flaticon.com/512/337/337946.png">
+    <img draggable="false" [src]="getIconSrc()">
     <div>
        <p>{{getName()}}</p>
-       <a [href]="url" [download]="file.name" [type]="file.type">
-          <i class="pi pi-download"></i>
-       </a>
     </div>
+
+
+    <span class="remove">
+      <a [href]="url" [download]="file.name" [type]="file.type">
+         <i class="pi pi-download"></i>
+      </a>
+      <i 
+         class="pi pi-plus rotate-45 cursor-pointer"
+         (click)="remove()"
+      ></i>
+   </span>
  </div>

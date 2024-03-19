@@ -13,6 +13,7 @@
          <app-attachment-item
             *ngFor="let attc of task.files"
             [file]="attc"
+            (removeFile)="fileRemoveHandler($event)"
          ></app-attachment-item>
       </div>
    </div>

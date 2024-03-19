@@ -1,14 +1,15 @@
 @import '../../../../variables';
 
 .item {
-    @apply relative w-[120px] h-[170px] rounded-sm flex items-center justify-center;
+    @apply relative w-full h-[90px] rounded-sm flex items-center p-2 shadow-md;
+    background-color: $secondColor;
 
     img {
-        @apply h-[70%];
+        @apply h-[90%] mr-3;
     }
 
     div:last-child {
-        @apply p-2 absolute bottom-0 h-[60px] w-full flex justify-between items-center cursor-pointer;
+        @apply p-2 w-full flex justify-between items-center cursor-pointer;
         background-color: #474747af;
         color: $secondColor;
 
@@ -26,6 +27,14 @@
             i {
                 font-size: 1.2rem;
             }
+        }
+    }
+
+    .remove {
+        @apply absolute top-0 right-0 h-full flex items-center gap-4 pr-4;
+
+        i {
+            font-size: 1.2rem;
         }
     }
 }

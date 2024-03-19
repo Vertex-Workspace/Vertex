@@ -93,4 +93,9 @@ export class TaskService {
       .patch<Task>(`${URL}task/${id}/upload`, fd);
   }
 
+  public removeFile(taskId: number, fileId: number): Observable<Task> {
+    return this.http
+      .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`)
+  }
+
 }
