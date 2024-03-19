@@ -1,4 +1,14 @@
 <section>
-   <app-attachment-item></app-attachment-item>
-   <app-attachment-item></app-attachment-item>
+   <span>
+      <i class="pi pi-plus"></i>
+      <p>
+         Adicionar anexo
+      </p> 
+   </span>
+   <div>
+      <app-attachment-item
+      *ngFor="let attc of task.files"
+      [file]="attc"
+      ></app-attachment-item>
+   </div>
 </section>

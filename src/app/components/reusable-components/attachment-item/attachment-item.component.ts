@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { defaultImage } from 'src/assets/data/defaultImg';
 
 
@@ -9,12 +9,24 @@ import { defaultImage } from 'src/assets/data/defaultImg';
 })
 export class AttachmentItemComponent {
 
+  @Input()
+  file: any;
+
   defaultImg = defaultImage;
   url !: string;
 
   constructor() {
-    var blob = new Blob([defaultImage]);
+  }
+
+  ngOnInit(): void {
+    const decodedData = atob(this.file.file);
+    const blob = new Blob([decodedData]);
     this.url = URL.createObjectURL(blob); 
+  }
+
+  getName(): string {
+    const name: string = this.file.name;
+    return name.substr(0, name.lastIndexOf('.'));
   }
 
 }

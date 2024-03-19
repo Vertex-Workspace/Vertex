@@ -1,6 +1,19 @@
 @import '../../../../../variables';
 
 section {
-    @apply w-full h-full flex flex-wrap gap-8 justify-center;
+    @apply w-full h-full flex flex-col gap-4;
+
+    span {
+        @apply flex items-center justify-center gap-2 text-base w-[170px] h-[40px];
+        color: #5f5f5f;
+
+        &:hover {
+            background-color: $emphasis;
+        }
+    }
+
+    div {
+        @apply flex flex-wrap h-full w-full overflow-auto gap-8;
+    }
     
 }

@@ -35,7 +35,6 @@ export class Task {
         this.values = task.values;
         this.properties = task.properties;
         this.files = task.files;
-        console.log(task)
     }
 
 }

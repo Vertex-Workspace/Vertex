@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .item {
-    @apply relative w-[170px] h-[220px] rounded-sm flex items-center justify-center;
+    @apply relative w-[130px] h-[180px] rounded-sm flex items-center justify-center;
 
     img {
         @apply h-[70%];
