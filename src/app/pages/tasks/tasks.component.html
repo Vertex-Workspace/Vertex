@@ -115,7 +115,7 @@
 *ngIf="taskReview" 
 [tasksToReview]="tasksToReview" 
 (toggleReview)="toggleReview()"
-(closeModal)="updateTasksToReview($event)"
+(closeModal)="updateTasksToReview($event)"  
 ></app-review-task>
 
 <app-create-team-project [project]="project" *ngIf="openModalProject" [typeString]="'projectInfo'" (close)="openProjectInfos()"
