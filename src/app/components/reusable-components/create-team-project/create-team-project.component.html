@@ -36,7 +36,7 @@
 
     <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] md:w-20rem pt-4" containerStyleClass="w-full"
       display="chip" [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
-      placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true"
+      placeholder="Atribue responsáveis ao projeto"
       [(ngModel)]="selectedUsers" 
       *ngIf="typeString === 'project' || typeString === 'projectInfo'">
     </p-treeSelect>
@@ -45,7 +45,6 @@
     class="flex items-start justify-start w-[65%] pt-2"
     [options]="optionsReview" 
     optionLabel="name" 
-    [showClear]="true" 
     placeholder="Selecione opção de revisão"></p-dropdown>
 
     <div class="div-buttons">
