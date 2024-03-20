@@ -64,7 +64,6 @@ export class CardListComponent implements OnInit {
 
   getType(): any[] {
     if (this.type === 'project') {
-      console.log(this.projects);
       return this.projects
     }
     return this.teams!;

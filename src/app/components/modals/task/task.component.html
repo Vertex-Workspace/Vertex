@@ -5,28 +5,27 @@
                 <p>{{taskInfoDTO.teamName}}</p>
                 <p>{{taskInfoDTO.projectName}}</p>
             </div>
-
             <div class="div-timer-closeModal">
-                <ng-container *ngIf="!soloResponsable">
-                    <div class="div-timer h-[40px]">
-                        <fa-icon [icon]="faClock"></fa-icon>
-                        <p>{{timer}}</p>
-                    </div>
-                    <button class="work-task-button mr-4" *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar
-                        na
-                        Tarefa</button>
-                    <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
-                        (click)="stopTimer()">Encerrar
-                        Trabalho</button>
-                </ng-container>
+                <div class="flex h-[40px]" *ngIf="!soloResponsable && isRevisable() && task.revisable">
+                    <button (click)="sendTask()" id="red-btn" [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
+                        [disabled]="timeInTask.working">
+                        Entregar Tarefa
+                    </button>
+                </div>
+                <div class="flex flex-row gap-2" *ngIf="isCreator() && isRevisable()">
+                    <p-checkbox [(ngModel)]="checkedReview" [binary]="true" inputId="binary"
+                        (click)="updateTaskRevisable()"></p-checkbox>
+                    <p class="regular-text self-start">Obrigar Revisão</p>
+                </div>
                 <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
             </div>
         </div>
         <div class="informations">
             <div class="side">
-                <div class="title">
+                <div>
                     <h4 (click)="cantEdit()"><input (blur)="updateTaskNameAndDescription()" [disabled]="!canEdit"
-                            [(ngModel)]="task.name" type="text" name="name" id="name" value="{{task.name}}"></h4>
+                            [(ngModel)]="task.name" type="text" class="title" name="name" id="name"
+                            value="{{task.name}}"></h4>
                 </div>
                 <div class="properties">
                     <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)"
@@ -75,25 +74,16 @@
                 </div>
                 <div class="submit gap-3 rounded-sm">
                     <!-- IF THE TASK HAS ONLY ONE RESPONSIBLE, THE BUTTON OF WORK WILL BE ON SOUTH -->
-                    
-                    <ng-container *ngIf="soloResponsable">
-                        <span class="div-timer h-[50px]">
-                            <fa-icon [icon]="faClock"></fa-icon>
-                            <p>{{timer}}</p>
-                        </span>
-                        <button class="work-task-button" *ngIf="!timeInTask.working"
-                            (click)="startTimer()">Trabalhar na Tarefa</button>
-                        <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
-                            (click)="stopTimer()">Encerrar Trabalho</button>
-                    </ng-container>
-
-                    <!-- IF THE TASK HAS MANY RESPONSIBLE, THE BUTTON OF WORK WILL BE ON NORTH -->
-                    <ng-container *ngIf="!soloResponsable">
-                        <button (click)="sendTask()" id="red-btn"
-                            [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}" [disabled]="timeInTask.working">
-                            Entregar Tarefa
-                        </button>
-                    </ng-container>
+                    <span class="div-timer">
+                        <fa-icon [icon]="faClock"></fa-icon>
+                        <p>{{timer}}</p>
+                    </span>
+                    <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar
+                        na
+                        Tarefa</button>
+                    <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
+                        (click)="stopTimer()">Encerrar
+                        Trabalho</button>
                 </div>
             </div>
         </div>

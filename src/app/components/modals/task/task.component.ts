@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { Project } from 'src/app/models/class/project';
+import { Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyList } from 'src/app/models/class/property';
 import { Task, TaskEdit } from 'src/app/models/class/task';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
@@ -78,7 +78,12 @@ export class TaskComponent implements OnInit {
 
   waitRequest: boolean = false;
   soloResponsable: boolean = false;
+  checkedReview: boolean = false;
+
   async ngOnInit() {
+    if(this.task.revisable){
+      this.checkedReview = true;
+    }
     
     this.taskService.getTaskInfo(this.task.id).subscribe(
       (team: any) => {
@@ -160,12 +165,22 @@ export class TaskComponent implements OnInit {
     let taskEdit: TaskEdit = {
       id: this.task.id,
       name: this.task.name,
-      description: this.task.description
+      description: this.task.description,
     };
     this.taskService.edit(taskEdit).subscribe(
       (task: Task) => {
         this.task = task;
         this.alertService.successAlert("Tarefa alterada com sucesso!");
+      }
+    );
+  }
+
+  updateTaskRevisable(): void {
+    this.reviewService.setRevisable(this.task.id, this.checkedReview).subscribe(
+      (response) => {;
+      },
+      (error: any) => {
+        this.task.revisable = !this.task.revisable;
       }
     );
   }
@@ -296,5 +311,13 @@ export class TaskComponent implements OnInit {
       );
 
     }
+  }
+
+  isCreator(): boolean {
+    return this.task.creator?.user.id == this.user.id;
+  }
+
+  isRevisable(): boolean{
+    return this.project.projectReviewENUM !== ProjectReview.EMPTY;
   }
 }

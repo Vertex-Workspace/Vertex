@@ -10,6 +10,7 @@ import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
 import { PropertiesModule } from './properties/properties.module';
 import { MenuModule } from 'primeng/menu';
 import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
      MinichatTASKModule,
      PropertiesModule,
      MenuModule,
-     ConfirmModalModule
+     ConfirmModalModule,
+     CheckboxModule
     ],
 })
 export class TaskModule { }

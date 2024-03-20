@@ -18,6 +18,8 @@ export class Project {
     properties!: Property[];
     idTeam?: number;
     listOfResponsibles ?: Group[] | User[]
+    projectReviewENUM!: ProjectReview; 
+    
 
     constructor(
         project: Project,
@@ -31,6 +33,7 @@ export class Project {
         this.notes = project.notes;
         this.properties = project.properties;
         this.idTeam = project.idTeam;
+        this.projectReviewENUM = project.projectReviewENUM;
         // this.collaborators = project.collaborators
         // this.groups = project.groups
         this.listOfResponsibles = project.listOfResponsibles
@@ -50,4 +53,10 @@ export class ProjectResponsible {
     user ?: User
     group ?: Group
 
+}
+
+export enum ProjectReview {
+    MANDATORY,
+    OPTIONAL,
+    EMPTY,
 }

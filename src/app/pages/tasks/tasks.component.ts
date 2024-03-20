@@ -2,7 +2,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from 'src/app/models/class/project';
+import { Project, ProjectReview } from 'src/app/models/class/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate, TaskWaitingToReview } from 'src/app/models/class/task';
@@ -83,13 +83,16 @@ export class TasksComponent implements OnInit {
       if(currentView){
         this.clicked = currentView;
       }
-      this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
-        (tasks : TaskWaitingToReview[]) => {
-          this.tasksToReview = tasks;
-          this.badgeNumber = this.tasksToReview.length.toString();
-          //Implementation
-        }
-        );
+
+      //Se o projeto possuir a opção de revisão, então é feita a requisição das tarefas que estão aguardando revisão
+      if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
+        this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
+          (tasks : TaskWaitingToReview[]) => {
+            this.tasksToReview = tasks;
+            this.badgeNumber = this.tasksToReview.length.toString();
+          }
+          );
+      }
         
     });
     this.muralPageListener();

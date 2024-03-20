@@ -21,4 +21,9 @@ export class ReviewService {
       .patch(`${URL}task/review/final`, finalReview);
   }
 
+  public setRevisable(taskID: number, boolean : boolean){
+    return this.http
+      .patch(`${URL}task/${taskID}/review/change-state/${boolean}`, null);
+  }
+
 }
