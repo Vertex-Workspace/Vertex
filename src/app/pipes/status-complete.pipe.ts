@@ -8,11 +8,8 @@ import { Property, PropertyList } from '../models/class/property';
 export class StatusPipe implements PipeTransform {
 
   transform(value: Task[], filter: any, project: boolean): Task[] {
-    if (!project) {
-      console.log('ESPAÇO DE TRABALHO');
-      
-
-      if (filter) {
+    if (!project && filter) {
+    
         const index: number = filter.index;
         filter = filter.name;
         
@@ -26,8 +23,6 @@ export class StatusPipe implements PipeTransform {
           
           return filter === value;
         });
-        
-      }
     }
     return value;
   }

@@ -9,8 +9,7 @@ import { Value } from '../models/class/value';
 export class StatusBasicPipe implements PipeTransform {
 
   transform(value: Task[], filter: any, project: boolean): Task[] {
-    if (project) {
-      if (filter) { 
+    if (project && filter) {
         filter = filter.kind;
         
         return value.filter((task: Task) => {  
@@ -18,8 +17,6 @@ export class StatusBasicPipe implements PipeTransform {
            
           return filter === value.propertyListKind;
         });
-        
-      }
     }
     return value;
   }
