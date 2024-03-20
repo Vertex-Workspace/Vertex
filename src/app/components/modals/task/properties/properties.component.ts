@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpinner, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpinner, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
@@ -21,6 +21,8 @@ export class PropertiesComponent {
   @Input() project !:Project
   @Input() permissions !: Permission[];
 
+  faUsers = faUsers
+
   constructor(private taskService: TaskService, 
     private alertService : AlertService,
     private teamService: TeamService,
@@ -38,6 +40,7 @@ export class PropertiesComponent {
 
 
   canEdit: boolean = false;
+
   ngOnInit(): void {
     for(const permission of this.permissions){
       if(permission.name === PermissionsType.EDIT && permission.enabled){

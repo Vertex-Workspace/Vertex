@@ -44,3 +44,11 @@ input:focus{
     cursor: text;
     border-bottom: 1px solid $primaryColor;
 }
+
+::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.size{
+    font-size: 1.25rem;;
+}
