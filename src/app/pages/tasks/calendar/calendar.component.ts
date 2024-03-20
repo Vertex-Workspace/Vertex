@@ -289,7 +289,8 @@ export class CalendarComponent {
                 //SLICE RETIRAR O "Z" NO FINAL
                 value: day.toISOString().slice(0, -1)
               }
-            }
+            },
+            userID: this.userService.getLogged().id!
           };
 
           this.taskService.patchValue(valueUpdate).subscribe(

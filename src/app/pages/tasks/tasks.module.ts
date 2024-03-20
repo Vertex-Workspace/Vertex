@@ -24,6 +24,8 @@ import { AttachmentItemComponent } from 'src/app/components/reusable-components/
 import { AttachmentsComponent } from 'src/app/components/modals/task/attachments/attachments.component';
 import { LogComponent } from 'src/app/components/modals/task/log/log.component';
 
+import { RatingModule } from 'primeng/rating';
+import { ReviewTaskComponent } from 'src/app/components/modals/review-task/review-task.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +51,14 @@ import { LogComponent } from 'src/app/components/modals/task/log/log.component';
     NoteModule,
     ReactiveFormsModule,
     BadgeModule,
-    ModalWarnModule,
     CardModule,
     PropertiesModule,
     InputTextModule,
     NoteModule,
-    CreateTeamProjectModule
+    CreateTeamProjectModule,
+
+    //Standalone component
+    ReviewTaskComponent
   ],
 })
 export class TasksModule { }
