@@ -13,9 +13,9 @@ export class NamePipe implements PipeTransform {
       return value.filter(task => {
         return task.name.toLocaleUpperCase().indexOf(filter) >= 0
       });
-    } else {
-      return value;
-    }
+    } 
+    return value;
+  
   }
 
 }
