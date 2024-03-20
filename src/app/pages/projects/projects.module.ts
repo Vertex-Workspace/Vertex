@@ -9,6 +9,8 @@ import { CardGroupModule } from 'src/app/components/reusable-components/card-gro
 import { CardUserModule } from 'src/app/components/reusable-components/card-user/card-user.module';
 import { CreateGroupModule } from 'src/app/components/reusable-components/create-group/create-group.module';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
+import { FormsModule } from '@angular/forms';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
     ListModule,
     CardGroupModule,
     CreateGroupModule,
-    TaskModule
+    TaskModule,
+    FormsModule,
+    CascadeSelectModule
   ],
 })
 export class ProjectsModule { }

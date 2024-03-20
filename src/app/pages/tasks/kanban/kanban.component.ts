@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Task, TaskCreate } from 'src/app/models/class/task';
 import {
   CdkDragDrop,
@@ -40,10 +40,17 @@ export class KanbanComponent {
 
   @Input() permissions!: Permission[]; 
 
+  taskList !: Task[];
+
   canCreate: boolean = false;
   canEdit: boolean = false;
 
+  @Input()
+  query !: string;
+
   ngOnInit(){
+    this.taskList = this.project.tasks;
+    
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
         this.canEdit = true;
@@ -51,6 +58,10 @@ export class KanbanComponent {
         this.canCreate = true;
       }
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
   }
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {

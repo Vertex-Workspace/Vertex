@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit{
   filterOpen !: boolean;
   orderOpen !: boolean;
 
+  queryFilter !: string;
+
   faPlus = faPlusSquare;
   teamsBackup: Team[] = [];
   

@@ -7,6 +7,7 @@ import { CreateTeamProjectModule } from 'src/app/components/reusable-components/
 import { ListModule } from '../tasks/list/list.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
     CreateTeamProjectModule,
     ListModule,
     FontAwesomeModule,
-    TaskModule
+    TaskModule,
+    FormsModule
   ],
 })
 export class HomeModule { }

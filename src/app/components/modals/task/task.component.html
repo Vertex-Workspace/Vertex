@@ -19,7 +19,9 @@
                         (click)="stopTimer()">Encerrar
                         Trabalho</button>
                 </ng-container>
-                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
+                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">
+                    <i class="pi pi-plus rotate-45 text-[1.5rem]"></i>
+                </button>
             </div>
         </div>
         <div class="informations">

@@ -22,6 +22,12 @@ export class ListComponent implements OnInit {
 
   @Input()
   project !: Project;
+
+  @Input()
+  queryFilter !: string;
+
+  @Input()
+  statusFilter !: string;
   
   properties : PropertyCreation[] = [
     {name: 'Status', kind: PropertyKind.STATUS},

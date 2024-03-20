@@ -50,7 +50,7 @@
                 <!-- UTILITY NAV BAR TASK -->
                 <div class="functionally-items-task">
                     <div class="search">
-                        <input type="text" placeholder="Pesquise por uma tarefa...">
+                        <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="queryFilter">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <div class="filter-items">
@@ -81,7 +81,7 @@
                     </ng-container>
                 </section>
                 <div class="default-size">
-                    <app-list (openTaskDetails)="changeModalTaskState(true, $event)" style="padding-top: 3%;"></app-list>
+                    <app-list [queryFilter]="queryFilter" (openTaskDetails)="changeModalTaskState(true, $event)" style="padding-top: 3%;"></app-list>
                 </div>
             </div>
         </div>

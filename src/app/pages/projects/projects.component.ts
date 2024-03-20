@@ -29,8 +29,18 @@ export class ProjectsComponent implements OnInit {
   emptyTeamProjects !: boolean;
 
   //TASKS - FILTER AND ORDER
-  filterSettings: any[] = [];
+  selectedFilter !: string;
+  filterOptions: any[] = [
+    {name: 'Status', values: [
+      {name: 'Não Iniciado'},
+      {name: 'Em Andamento'},
+      {name: 'Pausado'},
+      {name: 'Concluído'}
+    ]},
+  ];
   orderSettings: any[] = [];
+
+  queryFilter !: string;
 
 
   constructor(

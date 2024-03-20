@@ -91,9 +91,9 @@
         </section>
 
         <section class="router" *ngIf="renderProject | async">
-            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'"
+            <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'" [query]="query"
                 (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-kanban>
-            <app-list [project]="project" *ngIf="clicked  === 'List'"
+            <app-list [project]="project" *ngIf="clicked  === 'List'" [queryFilter]="query"
                 (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-list>
             <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project"
                 *ngIf="clicked  === 'Calendar'" [permissions]="permissions"></app-calendar>
