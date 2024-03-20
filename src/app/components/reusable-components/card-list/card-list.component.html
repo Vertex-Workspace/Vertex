@@ -24,7 +24,7 @@
             </div>
 
             <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
-                [title]="'o projeto'" (confirmEvent)="emitItem($event)"></app-confirm-modal>
+                [title]="' excluir o projeto'" (confirmEvent)="emitItem($event)"></app-confirm-modal>
             <app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
                 (confirmEvent)="emitItem($event)"></app-confirm-modal>
         </ng-container>
@@ -32,5 +32,5 @@
 </div>
 
 <app-create-team-project [project]="project" *ngIf="openModal" [typeString]="'projectInfo'" (close)="openInformations($event)"
-[team]="project.team">
+[team]="team">
 </app-create-team-project>

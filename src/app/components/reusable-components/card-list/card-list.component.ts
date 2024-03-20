@@ -124,7 +124,12 @@ export class CardListComponent implements OnInit {
 
   openInformations(project: Project){
     this.openModal = !this.openModal;
-    this.project = project
+    this.projectService.getOneById(project.id).subscribe((project: Project) => {
+      this.project = project  
+    }) 
+    this.teamService.getOneById(this.project.idTeam).subscribe((team: Team) => {
+      this.team = team;
+    })
   }
 
 }
