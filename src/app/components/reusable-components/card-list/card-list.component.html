@@ -16,7 +16,8 @@
                         </div>
 
                         <div *ngIf="teamScreen === 'settings' || teamScreen === 'project'" class="icon">
-                            <fa-icon [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
+                            <fa-icon [icon]="faTrashCan" class="trash-icon pr-4" (click)="openModalDelete(item)"></fa-icon>
+                            <fa-icon [icon]="faGear" class="trash-icon"></fa-icon>
                         </div>
                     </div>
                 </div>

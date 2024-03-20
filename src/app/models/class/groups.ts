@@ -11,7 +11,7 @@ export class Group {
     users?: User[] = [];
     open?: boolean = false;
     creator?: User;
-    team !: Team
+    team ?: Team
     label ?: string
     children ?: User[]
     icon ?: string

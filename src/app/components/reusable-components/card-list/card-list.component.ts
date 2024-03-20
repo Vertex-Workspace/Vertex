@@ -6,7 +6,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faGear } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
 
 @Component({
@@ -25,6 +25,7 @@ export class CardListComponent implements OnInit {
   ) { }
 
   faTrashCan = faTrashCan;
+  faGear = faGear
   
   @Input()
   teams?: Team[]; //se estiver na home
@@ -59,7 +60,6 @@ export class CardListComponent implements OnInit {
     this.findAllTeams() 
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.findProjects(teamId); 
-    
   }
 
   getType(): any[] {
@@ -107,9 +107,12 @@ export class CardListComponent implements OnInit {
   findProjects(teamId: number) {
     this.loggedUser = this.userService.getLogged();
     // this.teamService.getOneById(this.team.)
+    console.log(teamId, this.loggedUser);
+    
     this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project []) => {
       this.projects = projects
     })
+    
   }
 
   getFirstLetter(item : any): string{

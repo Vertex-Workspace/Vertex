@@ -43,7 +43,7 @@ export class CreateTeamProjectComponent implements OnInit {
   typeString!: String;
 
   @Input()
-  project?: Project
+  project!: Project
 
   logged !: User;
 
@@ -168,6 +168,8 @@ export class CreateTeamProjectComponent implements OnInit {
     this.projectService
       .create(project, teamId)
       .subscribe((project: Project) => {
+        console.log(project);
+
         this.alert.successAlert(`Projeto criado com sucesso!`);
         if (this.fd) {
           this.projectService
@@ -175,9 +177,6 @@ export class CreateTeamProjectComponent implements OnInit {
             .subscribe();
         }
       });
-      this.projectService.getProjectByCollaborators(teamId, this.logged).subscribe((projects: Project []) => {
-        this.eventEmitter.emit(projects)
-      })
   }
 
   @Output()
@@ -229,10 +228,7 @@ export class CreateTeamProjectComponent implements OnInit {
       }
       if (this.project != null) {
         this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
-          this.selectedUsers = users
-          console.log(this.selectedUsers);
-          
-          this.markCollaboratorsAsSelected(this.selectedUsers)
+          this.markCollaboratorsAsSelected(users)
         })
       }
     });
@@ -249,7 +245,7 @@ export class CreateTeamProjectComponent implements OnInit {
           group.icon = 'pi pi-users'
           this.listOfResponsibles.push(group)
           if (this.project != null) {
-            // this.markCollaboratorsAsSelected()
+            this.markCollaboratorsAsSelected(groups)
           }
         })
       }
@@ -264,20 +260,23 @@ export class CreateTeamProjectComponent implements OnInit {
 
   selectedUsers: any[] = [];
 
-  markCollaboratorsAsSelected(users: any[]): void {
+  markCollaboratorsAsSelected(usersAndGroups: any[]): void {
     this.selectedUsers = [];
 
-    users.forEach(item => {
+    usersAndGroups.forEach(item => {
       if (item instanceof User) {
         let collaborator: User = item as User;
         this.selectedUsers.push({ label: collaborator.firstName, data: collaborator });
+      } else if (item instanceof Group) {
+        let group: Group = item as Group;
+        this.selectedUsers.push({ label: group.name, data: group });
       }
     });
-
   }
 
   updateProject(): void {
     let project = this.form.getRawValue() as Project;
+    let list: User[] = []
 
     const projectEdit: ProjectEdit = {
       id: this.project?.id,
@@ -285,9 +284,36 @@ export class CreateTeamProjectComponent implements OnInit {
       description: project.description,
       listOfResponsibles: project.listOfResponsibles
     }
-    
-    this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
-      this.project = project
+
+    projectEdit.listOfResponsibles!.forEach((type => {
+      if (type instanceof Group) {
+        let group: Group = type as Group;
+        group.selected = true;
+        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+          for (const user of users) {
+            list.push(user)
+          }
+        });
+      } else if (type instanceof User) {
+        let user: User = type as User;
+        user.selected = true
+        list.push(user)
+      }
+    }));
+
+    projectEdit.listOfResponsibles = list
+
+    if (projectEdit.name == null) {
+      projectEdit.name = this.project?.name
+    }
+    if (projectEdit.description == null) {
+      projectEdit.description = this.project?.description
+    }
+    if (projectEdit.listOfResponsibles == null) {
+      projectEdit.listOfResponsibles = this.project?.listOfResponsibles
+    }
+
+    this.projectService.patchValue(projectEdit).subscribe((project: Project) => {   
       this.alert.successAlert("Projeto modificado com sucesso")
     })
   }

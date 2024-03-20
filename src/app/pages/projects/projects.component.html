@@ -24,7 +24,7 @@
 
             <div class="default-size">
                 <app-card-list style="width: 100%; height: 90%; padding-top: 3%"
-                    (emitterItem)="delete($event)" [type]="'project'" [team]="team">
+                    (emitterItem)="delete($event)" [type]="'project'" [team]="team" [teamScreen]="'project'">
                 </app-card-list>
                 <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
                 *ngIf="isCreatingProject" (close)="switchCreateView()"

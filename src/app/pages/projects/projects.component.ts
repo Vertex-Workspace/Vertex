@@ -148,9 +148,6 @@ export class ProjectsComponent implements OnInit {
 
   switchCreateViewGroup(): void {
     this.isCreatingGroup = !this.isCreatingGroup;
-    // this.projectService.getProjectByCollaborators(this.team.id, this.logged).subscribe((projects: Project []) => {
-      
-    // })
   }
 
 
