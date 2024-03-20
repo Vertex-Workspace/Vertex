@@ -6,7 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
 import { CardModule } from 'src/app/components/reusable-components/card/card.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
 
 
 
