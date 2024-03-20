@@ -20,12 +20,15 @@ import { CardModule } from 'src/app/components/reusable-components/card/card.mod
 import { PropertiesModule } from 'src/app/components/modals/task/properties/properties.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
+import { AttachmentItemComponent } from 'src/app/components/reusable-components/attachment-item/attachment-item.component';
+import { AttachmentsComponent } from 'src/app/components/modals/task/attachments/attachments.component';
+import { LogComponent } from 'src/app/components/modals/task/log/log.component';
 
 
 @NgModule({
   declarations: [
     TasksComponent,
-    MuralComponent,
+    MuralComponent
    ],
   exports:[
     TasksComponent

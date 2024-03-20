@@ -17,7 +17,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (this.activeRequests === 0) {
-      if(request.method !== 'PATCH'){
+      if(request.method !== 'PATCH' && request.method !== 'DELETE'){
         this.loadingService.show();
       }
     }

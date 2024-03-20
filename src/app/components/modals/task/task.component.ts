@@ -28,8 +28,6 @@ export class TaskComponent implements OnInit {
 
   faClock = faClock;
 
-
-
   @Input()
   project!: Project;
 
@@ -71,14 +69,14 @@ export class TaskComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private reviewService: ReviewService) {
-  }
+    private reviewService: ReviewService) {}
 
-  selectedComponent: string = 'description';
+  selectedComponent: string = 'attachments';
 
   waitRequest: boolean = false;
   soloResponsable: boolean = false;
-  async ngOnInit() {
+  ngOnInit() {
+    console.log(this.task)
     
     this.taskService.getTaskInfo(this.task.id).subscribe(
       (team: any) => {
@@ -109,7 +107,7 @@ export class TaskComponent implements OnInit {
       this.soloResponsable = true;
     }
 
-    await this.getTimeInTask();
+    this.getTimeInTask();
 
     //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
     window.onbeforeunload = () => this.ngOnDestroy();
