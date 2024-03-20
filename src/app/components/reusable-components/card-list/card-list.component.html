@@ -11,13 +11,13 @@
                     </div>
                     <div class="informations">
                         <div class="infos-team" (click)="openTeam(item.id)">
-                            <p class="large-text">{{item.name}}</p>
-                            <p class="regular-text">Visualizar Informações</p>
+                            <p class="large-text" [ngClass]="teamScreen === 'project' ? 'pt-12' : ''">{{item.name}}</p>
+                            <p class="regular-text" *ngIf="teamScreen != 'project'">Visualizar Informações</p>
                         </div>
 
                         <div *ngIf="teamScreen === 'settings' || teamScreen === 'project'" class="icon">
                             <fa-icon [icon]="faTrashCan" class="trash-icon pr-4" (click)="openModalDelete(item)"></fa-icon>
-                            <fa-icon [icon]="faGear" class="trash-icon"></fa-icon>
+                            <fa-icon [icon]="faGear" class="trash-icon" (click)="openInformations(item)"></fa-icon>
                         </div>
                     </div>
                 </div>
@@ -30,3 +30,7 @@
         </ng-container>
     </div>
 </div>
+
+<app-create-team-project [project]="project" *ngIf="openModal" [typeString]="'projectInfo'" (close)="openInformations($event)"
+[team]="project.team">
+</app-create-team-project>

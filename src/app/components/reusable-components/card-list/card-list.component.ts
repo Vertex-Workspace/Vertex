@@ -119,4 +119,12 @@ export class CardListComponent implements OnInit {
     return item.name.substring(0, 1).toLocaleUpperCase();
   }
 
+  openModal: boolean = false;
+  project !: Project
+
+  openInformations(project: Project){
+    this.openModal = !this.openModal;
+    this.project = project
+  }
+
 }
