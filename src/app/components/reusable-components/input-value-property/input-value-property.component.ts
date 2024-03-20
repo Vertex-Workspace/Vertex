@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
+import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
 import { Value, ValueUpdate } from 'src/app/models/class/value';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class InputValuePropertyComponent {
   @Output()
   changes = new EventEmitter();
 
-  @Input() backgroundColor ?: string = '';
+  @Input() backgroundColor?: string = '';
 
   @Input()
   value!: Value;
@@ -41,23 +41,31 @@ export class InputValuePropertyComponent {
     private userService: UserService,
     private alertService: AlertService,
     private taskService: TaskService,
-    private router: Router) {}
+    private router: Router) { }
 
 
+  oldValue!: Value;
 
-  ngOnInit(): void {
-      
-    if(this.value.property.kind === PropertyKind.STATUS || 
-      this.value.property.kind === PropertyKind.LIST){
-      let valuePropertyList : PropertyList = this.value.value as PropertyList;
-      if(valuePropertyList != null){
-        this.backgroundColor = valuePropertyList.color;
+  ngOnChanges(){
+    if(this.value.property.kind === PropertyKind.STATUS){
+      const value : PropertyList = this.value.value as PropertyList;
+      if(value.propertyListKind !== PropertyListKind.DONE){
+        this.oldValue = new Value(this.value);
       }
     }
-    if(this.value.property.kind === PropertyKind.NUMBER && this.value.value != null){
+  }
+
+  ngOnInit(): void {
+    this.oldValue = new Value(this.value);
+
+    if (this.value.property.kind === PropertyKind.STATUS ||
+      this.value.property.kind === PropertyKind.LIST) {
+      this.setBackground();
+    }
+    if (this.value.property.kind === PropertyKind.NUMBER && this.value.value != null) {
       this.valueNumber = this.value.value as number;
     }
-    if(this.value.property.kind === PropertyKind.TEXT && this.value.value != null){
+    if (this.value.property.kind === PropertyKind.TEXT && this.value.value != null) {
       this.valueText = this.value.value as string;
     }
   }
@@ -65,31 +73,31 @@ export class InputValuePropertyComponent {
   valueNumber: number = 0;
   valueText: string = "Vazio";
 
-  getValue(value: Value): string | number {
-    if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
-      let valueProperty = value.value as PropertyList;
-      if(valueProperty == null){
+  getValue(): string | number {
+    if (this.value.property.kind === PropertyKind.STATUS || this.value.property.kind === PropertyKind.LIST) {
+      let valueProperty = this.value.value as PropertyList;
+      if (valueProperty == null) {
         return "";
       }
-    
+
       return valueProperty.value;
     }
-    if (value.value == null) {
-      if (value.property.kind === PropertyKind.NUMBER) {
+    if (this.value.value == null) {
+      if (this.value.property.kind === PropertyKind.NUMBER) {
         return 0;
       }
       return "Vazio";
     }
-    if (value.property.kind === PropertyKind.DATE) {
-      let date = new Date(value.value as string);
+    if (this.value.property.kind === PropertyKind.DATE) {
+      let date = new Date(this.value.value as string);
       //to format the date to yyyy-mm-dd
       return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
     }
-    return value.value as string;
+    return this.value.value as string;
   }
 
 
-  getSelectOptions(value: Value): PropertyList[] { 
+  getSelectOptions(value: Value): PropertyList[] {
     return value.property.propertyLists;
   }
 
@@ -100,43 +108,43 @@ export class InputValuePropertyComponent {
   isSelected(propertyList: PropertyList, value: Value): boolean {
     let valueProperty = value.value as PropertyList;
     return propertyList.id === valueProperty.id;
-    
+
   }
 
   changeDate(event: any): void {
     if (this.canEdit) {
       this.value.value = new Date(event).toISOString().slice(0, -1);
       this.updateTask(this.value);
-    }else {
+    } else {
       this.alertNotPermission();
     }
   }
 
   changeList(event: any, value: Value): void {
-    if (this.canEdit) { 
+    if (this.canEdit) {
       this.updateTask(value);
-    }else {
+    } else {
       this.alertNotPermission();
     }
   }
 
   private alertNotPermission(): void {
     console.log("NOT PERMISSION");
-    if(this.router.url.includes("home")){
+    if (this.router.url.includes("home")) {
       console.log("home");
       this.alertService.errorAlert("Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!")
-    } else{
+    } else {
       this.alertService.errorAlert("Você não tem permissão para editar!");
     }
 
   }
 
   change(value: Value): void {
-    if(this.canEdit){
-      if(value.property.kind === PropertyKind.NUMBER){
+    if (this.canEdit) {
+      if (value.property.kind === PropertyKind.NUMBER) {
         value.value = this.valueNumber;
       }
-      if(value.property.kind === PropertyKind.TEXT){
+      if (value.property.kind === PropertyKind.TEXT) {
         value.value = this.valueText;
       }
       this.updateTask(value);
@@ -152,8 +160,8 @@ export class InputValuePropertyComponent {
       valueTest = value.value as Date;
     } else if (value.property.kind === PropertyKind.NUMBER) {
       valueTest = Number(value.value);
-    } else if(value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST){
-      let propertyList : PropertyList = value.value as PropertyList;
+    } else if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
+      let propertyList: PropertyList = value.value as PropertyList;
       valueTest = propertyList.id;
     } else {
       valueTest = value.value;
@@ -168,17 +176,32 @@ export class InputValuePropertyComponent {
           id: value.id,
           value: valueTest
         }
-      }
+      },
+      userID: this.userService.getLogged().id!
     };
-    
+
     this.taskService.patchValue(valueUpdate).subscribe(
       (task) => {
         this.alertService.successAlert(value.property.name + " alterado com sucesso!");
         this.changes.emit(task);
       },
       (error) => {
-        console.log(error);
+        if (this.value.property.kind === PropertyKind.STATUS) {
+          console.log(this.oldValue);
+          this.value = this.oldValue;
+
+          this.task.values[0] = this.value;
+          this.setBackground();
+        }
+        this.alertService.errorAlert(error.error);
       }
     );
+  }
+
+  setBackground(): void {
+    let valuePropertyList: PropertyList = this.value.value as PropertyList;
+    if (valuePropertyList != null) {
+      this.backgroundColor = valuePropertyList.color;
+    }
   }
 }

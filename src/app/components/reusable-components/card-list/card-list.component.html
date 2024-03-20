@@ -11,21 +11,26 @@
                     </div>
                     <div class="informations">
                         <div class="infos-team" (click)="openTeam(item.id)">
-                            <p class="large-text">{{item.name}}</p>
-                            <p class="regular-text">Visualizar Informações</p>
+                            <p class="large-text" [ngClass]="teamScreen === 'project' ? 'pt-12' : ''">{{item.name}}</p>
+                            <p class="regular-text" *ngIf="teamScreen != 'project'">Visualizar Informações</p>
                         </div>
 
                         <div *ngIf="teamScreen === 'settings' || teamScreen === 'project'" class="icon">
-                            <fa-icon [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
+                            <fa-icon [icon]="faTrashCan" class="trash-icon pr-4" (click)="openModalDelete(item)"></fa-icon>
+                            <fa-icon [icon]="faGear" class="trash-icon" (click)="openInformations(item)"></fa-icon>
                         </div>
                     </div>
                 </div>
             </div>
 
             <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
-                [title]="'o projeto'" (confirmEvent)="emitItem($event)"></app-confirm-modal>
+                [title]="' excluir o projeto'" (confirmEvent)="emitItem($event)"></app-confirm-modal>
             <app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
                 (confirmEvent)="emitItem($event)"></app-confirm-modal>
         </ng-container>
     </div>
 </div>
+
+<app-create-team-project [project]="project" *ngIf="openModal" [typeString]="'projectInfo'" (close)="openInformations($event)"
+[team]="team">
+</app-create-team-project>

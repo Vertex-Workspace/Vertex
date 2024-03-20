@@ -33,6 +33,7 @@ export class ValueUpdate {
             value: string | number | Date | PropertyList;
         }
     };
+    userID!: number;
 }
 
 
@@ -43,4 +44,5 @@ export class ValueCreatedWhenTaskCreated {
     value!: {
         value: string | number | Date;
     }
+    userID!: number;
 }

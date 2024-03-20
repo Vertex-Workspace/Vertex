@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { Project } from 'src/app/models/class/project';
+import { Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyList } from 'src/app/models/class/property';
 import { Task, TaskEdit } from 'src/app/models/class/task';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
@@ -75,8 +75,12 @@ export class TaskComponent implements OnInit {
 
   waitRequest: boolean = false;
   soloResponsable: boolean = false;
-  ngOnInit() {
-    console.log(this.task)
+  checkedReview: boolean = false;
+
+  async ngOnInit() {
+    if(this.task.revisable){
+      this.checkedReview = true;
+    }
     
     this.taskService.getTaskInfo(this.task.id).subscribe(
       (team: any) => {
@@ -137,8 +141,6 @@ export class TaskComponent implements OnInit {
   }
 
   closeModal() {
-    console.log("Close");
-
     this.close.emit();
   }
 
@@ -160,12 +162,22 @@ export class TaskComponent implements OnInit {
     let taskEdit: TaskEdit = {
       id: this.task.id,
       name: this.task.name,
-      description: this.task.description
+      description: this.task.description,
     };
     this.taskService.edit(taskEdit).subscribe(
       (task: Task) => {
         this.task = task;
         this.alertService.successAlert("Tarefa alterada com sucesso!");
+      }
+    );
+  }
+
+  updateTaskRevisable(): void {
+    this.reviewService.setRevisable(this.task.id, this.checkedReview).subscribe(
+      (response) => {;
+      },
+      (error: any) => {
+        this.task.revisable = !this.task.revisable;
       }
     );
   }
@@ -270,11 +282,13 @@ export class TaskComponent implements OnInit {
     this.isSending = true;
   }
 
+
+  sentToReviewDescription: string = "";
   taskAction(bool: boolean) {
     this.isSending = false;
     if (bool) {
       let taskSentToReview: SentToReview = {
-        description: this.task.description,
+        description: this.sentToReviewDescription,
         userThatSentReview: {
           id: this.idResponsable
         },
@@ -284,7 +298,9 @@ export class TaskComponent implements OnInit {
       }
       this.reviewService.sentToReview(taskSentToReview).subscribe(
         (task: Boolean) => {
+          this.project.tasks = this.project.tasks.filter((task) => task.id != this.task.id);
           this.alertService.successAlert("Tarefa enviada para revisão com sucesso!")
+          this.closeModal();
         },
         (error: any) => {
           this.alertService.errorAlert(error.error)
@@ -292,5 +308,13 @@ export class TaskComponent implements OnInit {
       );
 
     }
+  }
+
+  isCreator(): boolean {
+    return this.task.creator?.user.id == this.user.id;
+  }
+
+  isRevisable(): boolean{
+    return this.project.projectReviewENUM !== ProjectReview.EMPTY;
   }
 }
