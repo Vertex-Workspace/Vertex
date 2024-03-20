@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NamePipe } from '../name.pipe';
-import { StatusPipe } from '../status.pipe';
+import { StatusPipe } from '../status-complete.pipe';
+import { StatusBasicPipe } from '../status-basic.pipe';
 
 
 
 @NgModule({
   declarations: [
     NamePipe,
-    StatusPipe
+    StatusPipe,
+    StatusBasicPipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
     NamePipe,
-    StatusPipe
+    StatusPipe,
+    StatusBasicPipe
   ]
 })
 export class PipesModule { }

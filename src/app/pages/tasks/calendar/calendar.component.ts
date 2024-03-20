@@ -31,6 +31,12 @@ export class CalendarComponent {
   canCreate: boolean = false;
   canEdit: boolean = false
 
+  @Input()
+  nameFilter !: string;
+
+  @Input()
+  statusFilter !: string;
+
   constructor(
     private taskService: TaskService,
     private userService: UserService,

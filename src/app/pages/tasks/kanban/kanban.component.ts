@@ -46,7 +46,10 @@ export class KanbanComponent {
   canEdit: boolean = false;
 
   @Input()
-  query !: string;
+  nameFilter !: string;
+
+  @Input()
+  statusFilter !: string;
 
   ngOnInit(){
     this.taskList = this.project.tasks;

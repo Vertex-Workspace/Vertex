@@ -23,6 +23,7 @@ import { CreateTeamProjectModule } from 'src/app/components/reusable-components/
 import { AttachmentItemComponent } from 'src/app/components/reusable-components/attachment-item/attachment-item.component';
 import { AttachmentsComponent } from 'src/app/components/modals/task/attachments/attachments.component';
 import { LogComponent } from 'src/app/components/modals/task/log/log.component';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { LogComponent } from 'src/app/components/modals/task/log/log.component';
     PropertiesModule,
     InputTextModule,
     NoteModule,
-    CreateTeamProjectModule
+    CreateTeamProjectModule,
+    CascadeSelectModule
   ],
 })
 export class TasksModule { }

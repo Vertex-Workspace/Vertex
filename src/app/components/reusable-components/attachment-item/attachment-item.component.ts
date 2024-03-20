@@ -37,7 +37,7 @@ export class AttachmentItemComponent {
     };
     const iconSrc = fileTypeIcons[this.file.type];
     if (iconSrc) return iconSrc;
-    else return `data:image/jpg;base64, ${this.file.file}`;
+    return `data:image/jpg;base64, ${this.file.file}`;
   }
 
   setUrl(): void {

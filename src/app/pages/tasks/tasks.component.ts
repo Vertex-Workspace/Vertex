@@ -14,7 +14,7 @@ import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/class/note';
 import { Observable } from 'rxjs';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { PropertyList } from 'src/app/models/class/property';
+import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 
 
 @Component({
@@ -43,6 +43,9 @@ export class TasksComponent implements OnInit {
   badgeNumber: string = '0';
   taskReview: boolean = false;
   logged !: User;
+
+  selectedStatusFilter !: any;
+  filterOptions: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -76,6 +79,7 @@ export class TasksComponent implements OnInit {
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
       this.project = p;
+      this.setFilters(p);
       const currentView = localStorage.getItem('mode-task-view');
       if(currentView){
         this.clicked = currentView;
@@ -92,6 +96,36 @@ export class TasksComponent implements OnInit {
     });
     this.muralPageListener();
   }
+
+  setFilters(p: Project): void {
+    p.properties.forEach((prop: Property, index: number) => {
+      this.filterOptions.push({
+        name: prop.name,
+        values: []
+      })
+
+      if (prop.kind === PropertyKind.STATUS || prop.kind === PropertyKind.LIST) {
+        
+        prop.propertyLists.forEach((pl: PropertyList) => {
+                this.filterOptions[index].values.push({
+                  name: pl.value,
+                  kind: pl.propertyListKind,
+                  index: p.properties.indexOf(prop)
+                })
+              })
+      }
+      
+    })
+    
+  }
+
+  
+  // {name: 'Status', values: [
+  //   {name: 'Não Iniciado', kind: PropertyListKind.TODO},
+  //   {name: 'Em Andamento', kind: PropertyListKind.DOING},
+  //   {name: 'Concluído', kind: PropertyListKind.DONE}
+  // ]},
+
 
   muralPageListener(): void {
     if (this.clicked === 'Mural') this.isMuralPage = true;
@@ -118,6 +152,7 @@ export class TasksComponent implements OnInit {
 
   toggleFilter(): void {
     this.filterOpen = !this.filterOpen;
+    this.selectedStatusFilter = '';
   }
 
   toggleOrder(): void {

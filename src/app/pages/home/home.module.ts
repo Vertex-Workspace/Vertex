@@ -8,6 +8,7 @@ import { ListModule } from '../tasks/list/list.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { FormsModule } from '@angular/forms';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     ListModule,
     FontAwesomeModule,
     TaskModule,
-    FormsModule
+    FormsModule,
+    CascadeSelectModule
   ],
 })
 export class HomeModule { }

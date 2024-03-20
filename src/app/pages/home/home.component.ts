@@ -7,6 +7,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/models/class/user';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Task } from 'src/app/models/class/task';
+import { PropertyListKind } from 'src/app/models/class/property';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,14 @@ export class HomeComponent implements OnInit{
   isCreating: boolean = false;
 
   //TASKS - FILTER AND ORDER
-  filterSettings !: any[];
+  selectedFilter !: any;
+  filterOptions: any[] = [
+    {name: 'Status', values: [
+      {name: 'Não Iniciado', kind: PropertyListKind.TODO},
+      {name: 'Em Andamento', kind: PropertyListKind.DOING},
+      {name: 'Concluído', kind: PropertyListKind.DONE}
+    ]},
+  ];
   orderSettings !: any[];
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
@@ -95,6 +103,7 @@ export class HomeComponent implements OnInit{
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
+    this.selectedFilter = '';
   }
 
   clickOrder(): void {
