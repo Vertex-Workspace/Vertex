@@ -37,7 +37,7 @@ import { MinichatTASKModule } from './components/modals/minichat-task/minichat-t
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

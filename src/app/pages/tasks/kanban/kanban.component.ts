@@ -25,9 +25,9 @@ export class KanbanComponent {
 
 
   constructor(
-    private taskService: TaskService, 
+    private taskService: TaskService,
     private alertService: AlertService,
-    private userService : UserService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private teamService: TeamService) {
@@ -36,9 +36,9 @@ export class KanbanComponent {
   @Input()
   project!: Project;
 
-  @Input() canDeleteVerification ?: boolean
+  @Input() canDeleteVerification?: boolean
 
-  @Input() permissions!: Permission[]; 
+  @Input() permissions!: Permission[];
 
   taskList !: Task[];
 
@@ -51,13 +51,12 @@ export class KanbanComponent {
   @Input()
   statusFilter !: string;
 
-  ngOnInit(){
+  ngOnInit() {
     this.taskList = this.project.tasks;
-    
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
         this.canEdit = true;
-      }else if ((permission.name === PermissionsType.CREATE) && permission.enabled) {
+      } else if ((permission.name === PermissionsType.CREATE) && permission.enabled) {
         this.canCreate = true;
       }
     }
@@ -68,69 +67,69 @@ export class KanbanComponent {
   }
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
-    if(this.canEdit){
-    const task: Task = event.item.data;
+    if (this.canEdit) {
+      const task: Task = event.item.data;
 
-    let previousPropertyList!: PropertyList;
-    let newValue!: Value;
+      let previousPropertyList!: PropertyList;
+      let newValue!: Value;
 
-    //For each to find the value of current and future property List
-    this.project.properties.forEach((property) => {
-      if (property.kind == PropertyKind.STATUS) {
-        task.values.forEach((value) => {
-          if (value.property.id == property.id) {
-            //Save the old value
-            previousPropertyList = value.value as PropertyList;
+      const oldProject: Project = new Project(this.project);
 
-            //Save the new value
-            value.value = propertyList;
+      //For each to find the value of current and future property List
+      this.project.properties.forEach((property) => {
+        if (property.kind == PropertyKind.STATUS) {
+          task.values.forEach((value) => {
+            if (value.property.id == property.id) {
+              //Save the old value
+              previousPropertyList = value.value as PropertyList;
 
-            //Save on a local variable the value of the task
-            newValue = value;
-          }
-        });
-      }
-    });
+              //Save the new value
+              value.value = propertyList;
 
-    //It points out that the previousValue is incorrect
-    if (previousPropertyList == null) {
-      return;
-    }
-
-    const newIndexTask =
-    this.specificPropertyArray(propertyList)[event.currentIndex];
-    const newIndex = this.project.tasks.indexOf(newIndexTask);
-    const previousIndex = this.project.tasks.indexOf(task);
-
-
-    moveItemInArray(
-      this.project.tasks,
-      previousIndex,
-      newIndex
-    );
-
-
-    //If the value of status task is different of the previous value, then, the request is sent
-    if (propertyList.id != previousPropertyList.id) {
-      //Object to change the value of the status task
-      const valueUpdate: ValueUpdate = {
-        id: task.id,
-        value: {
-          property: {
-            id: newValue.property.id
-          },
-          value: {
-            id: newValue.id,
-            value: propertyList.id
-          }
+              //Save on a local variable the value of the task
+              newValue = value;
+            }
+          });
         }
-      };
-      //Patch the value of the status task
-      this.taskService.patchValue(valueUpdate).subscribe();
+      });
+
+      //It points out that the previousValue is incorrect
+      if (previousPropertyList == null) {
+        return;
+      }
+
+
+      //If the value of status task is different of the previous value, then, the request is sent
+      if (propertyList.id != previousPropertyList.id) {
+        //Object to change the value of the status task
+        const valueUpdate: ValueUpdate = {
+          id: task.id,
+          value: {
+            property: {
+              id: newValue.property.id
+            },
+            value: {
+              id: newValue.id,
+              value: propertyList.id
+            }
+          },
+          userID: this.userService.getLogged().id!
+        };
+        //Patch the value of the status task
+        this.taskService.patchValue(valueUpdate).subscribe(
+          (taskDate) => {
+            console.log("Mudou");
+            
+          },
+          (error) => {
+            newValue.value = previousPropertyList;
+            this.alertService.errorAlert(error.error);
+          }
+        );
+      }
+    } else {
+      this.alertService.errorAlert("Você não tem permissão para alterar o status da tarefa!")
     }
-  }else {
-    this.alertService.errorAlert("Você não tem permissão para alterar o status da tarefa!")
-  }
   };
 
   getHeight(propertyList: PropertyList): string {
@@ -176,7 +175,7 @@ export class KanbanComponent {
       }
     });
 
-    if(propertyUsed == null){
+    if (propertyUsed == null) {
       return;
     }
 
@@ -193,7 +192,7 @@ export class KanbanComponent {
       teamId: this.project.idTeam!
     }
     console.log("Task", taskCreate);
-    
+
     this.taskService.create(taskCreate).subscribe(
       (task: Task) => {
 
@@ -208,7 +207,8 @@ export class KanbanComponent {
               id: task.values[0].id,
               value: propertyList.id as number
             }
-          }
+          },
+          userID: this.userService.getLogged().id!
         };
         console.log(valueUpdate);
         this.taskService.patchValue(valueUpdate).subscribe(
@@ -227,5 +227,5 @@ export class KanbanComponent {
         this.alertService.errorAlert("Erro ao criar tarefa!");
       }
     );
-    } 
+  }
 }

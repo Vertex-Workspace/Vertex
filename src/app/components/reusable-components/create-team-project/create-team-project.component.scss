@@ -57,7 +57,6 @@ form{
     .image-icon{
         font-size: 8rem;
         color: $primaryColor;
-        @apply pt-10;
     }
 
     .image-icon:hover{
@@ -119,7 +118,7 @@ app-modal-warn{
 }
 
 .modal {
-    @apply absolute rounded-md flex flex-col w-[30%] h-[65%]
+    @apply absolute rounded-md flex flex-col w-[550px] h-[650px]
     items-start justify-start text-center p-8 border-t-8;
     border-color: $primaryColor;
     background-color: $secondColor;
@@ -127,4 +126,8 @@ app-modal-warn{
 
 .size {
     font-size: $largeText;
+}
+
+textarea{
+    outline: none;
 }

@@ -18,6 +18,8 @@ export class Task {
     }
     comments!: Comment[];
 
+    revisable?: boolean;
+
     //taskHour
     taskResponsables?:TaskResponsable[];
     step?: number;
@@ -35,6 +37,7 @@ export class Task {
         this.values = task.values;
         this.properties = task.properties;
         this.files = task.files;
+        this.revisable = task.revisable;
     }
 
 }
@@ -57,6 +60,7 @@ export class TaskEdit {
     id!:number;
     name!: string;
     description!: string;
+    revisable?: boolean;
 }
 
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Project } from '../models/class/project';
+import { Project, ProjectEdit } from '../models/class/project';
 import { URL } from './path/api_url';
 import { Task } from '../models/class/task';
 import { Property } from '../models/class/property';
@@ -84,6 +84,12 @@ export class ProjectService {
       users.map(user => new User(user))
     )
     ) 
+  }
+
+  public patchValue(project: ProjectEdit):Observable<Project>{
+    console.log(project);
+    
+    return this.http.patch<Project>(`${URL}project/update`, project);
   }
 
 }

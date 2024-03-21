@@ -21,7 +21,7 @@ export class GroupService {
       .patch<Group>(`${URL}team/group`, group);
   }
 
-  public getGroupsByTeam(teamID: number): Observable<Group[]> {
+  public getGroupsByTeam(teamID: any): Observable<Group[]> {
     return this.http
       .get<Group[]>(`${URL}team/${teamID}/groups`)
       .pipe(map((groups: Group[]) =>

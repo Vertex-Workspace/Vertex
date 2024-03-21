@@ -1,7 +1,11 @@
 
 
-export class Review {
-
+export class ReviewCheck {
+    taskID !: number;
+    reviewerID !: number;
+    grade !: number;
+    finalDescription !: string;
+    approveStatus ?: ApproveStatus;
 }
 
 export class SentToReview {
@@ -13,4 +17,9 @@ export class SentToReview {
         id: number;
     };
     
+}
+
+export enum ApproveStatus {
+    APPROVED = "APPROVED",
+    DISAPPROVED = "DISAPPROVED",
 }

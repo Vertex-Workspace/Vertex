@@ -24,6 +24,7 @@ export class User {
     permissions ?: Permission[];
     label ?: string
     icon ?: string
+    selectedProject ?: boolean
 
     //brainstorming
     teams?: Team[] = [];
@@ -53,6 +54,7 @@ export class User {
         this.openPermission = user.openPermission;
         this.permissions = user.permissions
         this.label = user.firstName
+        this.selectedProject = user.selectedProject
         
 
     }

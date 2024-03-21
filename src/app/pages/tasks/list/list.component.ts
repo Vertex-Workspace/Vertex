@@ -74,15 +74,17 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnChanges(): void {
-    if (this.project) {
-      this.getProject();
-    } else if(this.router.url.includes("equipe")) {
-      this.getTeam();
-    }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    
+    this.updateGlobalValues();
   }
 
   ngOnInit(): void {      
+    this.updateGlobalValues();
+  }
+
+  updateGlobalValues(): void {
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.router.url.includes("equipe")) this.getTeam(); //atribui todas as tarefas da equipe a taskList
     else this.getAllTasks(); //atribui todas as tarefas do usuário para taskList
