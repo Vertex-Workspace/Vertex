@@ -47,8 +47,6 @@ export class TasksComponent implements OnInit {
   taskReview: boolean = false;
   logged !: User;
 
-  text !: string;
-
   selectedStatusFilter !: any;
   filterOptions: any[] = [];
 
@@ -73,12 +71,7 @@ export class TasksComponent implements OnInit {
   projectId!: number;
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     
-  }
-
-  teste(): void {
-    console.log('a')
   }
 
   ngOnInit() {
@@ -95,12 +88,9 @@ export class TasksComponent implements OnInit {
 
     //Observable que é aguardado para renderizar os componentes filhos
     this.renderProject = this.projectService.getOneById(id);
-    console.log(this.renderProject);
     
     //Método que atribui o valor de project vindo do observable
-    this.renderProject.forEach((p: Project) => {
-      console.log(p);
-      
+    this.renderProject.forEach((p: Project) => {      
       this.project = p;
       this.setFilters(p);
       this.pageTitle = this.project.name;
@@ -112,9 +102,7 @@ export class TasksComponent implements OnInit {
       //Se o projeto possuir a opção de revisão, então é feita a requisição das tarefas que estão aguardando revisão
       if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
         this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
-          (tasks : TaskWaitingToReview[]) => {
-            console.log(tasks);
-            
+          (tasks : TaskWaitingToReview[]) => {            
             this.tasksToReview = tasks;
             this.badgeNumber = this.tasksToReview.length.toString();
           }
@@ -145,7 +133,9 @@ export class TasksComponent implements OnInit {
       } else {
         this.filterOptions[index]
           .values.push({
-            name: prop.kind as string
+            name: prop.kind as string,
+            index: p.properties.indexOf(prop),
+            propName: prop.name
           })
       }
     })
@@ -240,9 +230,13 @@ export class TasksComponent implements OnInit {
   }
 
   taskOpenObject!: Task;
-  changeModalTaskState(taskOpen: boolean, task: Task): void {
-    if (taskOpen) this.taskOpenObject = task;
-    else this.taskOpenObject = {} as Task;
+  changeModalTaskState(bool: boolean, task: Task): void {
+    this.taskOpen = bool;
+    if (this.taskOpen) {
+      this.taskOpenObject = task;
+    } else {
+      this.taskOpenObject = {} as Task;
+    }
   }
 
   openPropertiesModal(): void {

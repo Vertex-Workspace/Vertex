@@ -9,7 +9,6 @@ export class StatusPipe implements PipeTransform {
 
   transform(value: Task[], filter: any, project: boolean): Task[] {
     if (!project && filter) {
-    
         const index: number = filter.index;
         filter = filter.name;
         

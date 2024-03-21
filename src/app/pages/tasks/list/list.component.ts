@@ -28,9 +28,6 @@ export class ListComponent implements OnInit {
 
   @Input()
   statusFilter !: string;
-
-  @Input()
-  propertyFilter !: string;
   
   properties : PropertyCreation[] = [
     {name: 'Status', kind: PropertyKind.STATUS},
@@ -74,9 +71,7 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    
+  ngOnChanges(changes: SimpleChanges): void {    
     this.updateGlobalValues();
   }
 

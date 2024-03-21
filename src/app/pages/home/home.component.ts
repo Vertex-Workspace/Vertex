@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit{
 
   teams !: Team[];
 
+  teamSearch !: string;
+
   isCreating: boolean = false;
 
   //TASKS - FILTER AND ORDER

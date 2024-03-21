@@ -82,28 +82,14 @@
                 <div *ngIf="filterOpen">
                     <p>Filtrar por </p>
                     <p-cascadeSelect 
-                            [(ngModel)]="selectedStatusFilter" 
+                            [(ngModel)]="selectedStatusFilter"  
                             [options]="filterOptions" 
                             optionLabel="name" 
                             optionGroupLabel="name" 
                             [optionGroupChildren]="['values']" 
                             [style]="{ minWidth: '14rem' }" 
                             placeholder="Selecione"
-                        >
-                        <ng-template pTemplate="option" let-option>
-                            <div *ngIf="option.name !== 'TEXT'" class="flex align-items-center gap-2">
-                                <span>{{ option.name }}</span>
-                            </div>
-                            <div *ngIf="option.name === 'TEXT'" (click)="$event.stopPropagation()">
-                                <input 
-                                    type="text" 
-                                    pInputText 
-                                    [(ngModel)]="text"
-                                    placeholder="Filtre por texto"
-                                >
-                            </div>
-                        </ng-template>
-                    </p-cascadeSelect>
+                        ></p-cascadeSelect>
                 </div>
             </ng-container>
         </section>
@@ -123,7 +109,6 @@
                 [project]="project" 
                 [queryFilter]="query" 
                 [statusFilter]="selectedStatusFilter" 
-                [propertyFilter]="text"
                 [permissions]="permissions"
                 (openTaskDetails)="changeModalTaskState(true, $event)"
             ></app-list> 

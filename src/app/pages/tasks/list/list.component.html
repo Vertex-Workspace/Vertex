@@ -8,20 +8,10 @@
                 Nome
                 </h6>
             </label>
-        <ng-container *ngIf="project">
+        <ng-container>
                 <label 
-                    *ngFor="let col of project.properties"
-                    class="min-w-[300px]"
-                >              
-                <h6>
-                    {{col.name}}
-                </h6>
-            </label>
-        </ng-container>
-        <ng-container *ngIf="!project">
-                <label 
-                    *ngFor="let col of properties"
-                    class="min-w-[245px]"
+                    *ngFor="let col of project ? project.properties : properties"
+                    [style.min-width]="project ? '300px' : '245px'"
                 >              
                 <h6>
                     {{col.name}}
@@ -38,8 +28,8 @@
                 *ngFor="let task of (taskList 
                     | namePipe : queryFilter 
                     | statusPipe : statusFilter : project === undefined 
-                    | statusBasicPipe : statusFilter : project === undefined
-                    | propertyPipe : propertyFilter)">
+                    | statusBasicPipe : statusFilter : project === undefined)"
+                >
                 <div 
                     class="trow regular-text relative"
                     [cdkDragData]="task"

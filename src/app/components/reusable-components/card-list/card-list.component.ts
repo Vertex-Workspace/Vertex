@@ -26,6 +26,9 @@ export class CardListComponent implements OnInit {
 
   faTrashCan = faTrashCan;
   faGear = faGear
+
+  @Input()
+  filterSearch !: string;
   
   @Input()
   teams?: Team[]; //se estiver na home

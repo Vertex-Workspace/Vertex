@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/class/groups';
@@ -41,6 +41,8 @@ export class ProjectsComponent implements OnInit {
   orderSettings: any[] = [];
 
   queryFilter !: string;
+
+  projectSearch !: string;
 
 
   constructor(

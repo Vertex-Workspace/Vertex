@@ -24,6 +24,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { RatingModule } from 'primeng/rating';
 import { ReviewTaskComponent } from 'src/app/components/modals/review-task/review-task.component';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -52,10 +53,10 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     CardModule,
     PropertiesModule,
     InputTextModule,
+    InputNumberModule,
     NoteModule,
     CreateTeamProjectModule,
     CascadeSelectModule,
-    FormsModule,
 
     //Standalone component
     ReviewTaskComponent
