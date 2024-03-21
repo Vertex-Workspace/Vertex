@@ -151,7 +151,8 @@ export class KanbanComponent {
 
 
   deleteTask(task: Task): void {
-    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+    this.taskList = this.taskList.filter(t => task.id !== t.id)  
+    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id !== task.id);
   }
 
   @Output() openTaskDetails = new EventEmitter();
@@ -215,6 +216,7 @@ export class KanbanComponent {
           (taskDate) => {
             task.values = taskDate.values;
             this.project.tasks.push(task);
+            this.taskList.push(task);
             this.alertService.successAlert("Tarefa criada com sucesso!");
           },
           (error) => {

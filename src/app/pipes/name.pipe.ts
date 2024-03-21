@@ -8,7 +8,7 @@ import { Team } from '../models/class/team';
 })
 export class NamePipe implements PipeTransform {
 
-  transform(value: any[], filter: string): any[] {
+  transform(value: any[], filter: string): any[] { // pode receber e retornar task,project,team
     if (filter) {      
       filter = filter.toUpperCase();
 
