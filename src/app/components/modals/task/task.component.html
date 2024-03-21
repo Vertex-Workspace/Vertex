@@ -6,7 +6,7 @@
                 <p>{{taskInfoDTO.projectName}}</p>
             </div>
             <div class="div-timer-closeModal">
-                <div class="flex h-[40px]" *ngIf="!soloResponsable && isRevisable() && task.revisable">
+                <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable">
                     <button (click)="sendTask()" id="red-btn" [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
                         [disabled]="timeInTask.working">
                         Entregar Tarefa

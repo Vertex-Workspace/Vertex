@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { TreeNode } from 'primeng/api';
 import { Group } from 'src/app/models/class/groups';
-import { Project, ProjectEdit } from 'src/app/models/class/project';
+import { Project, ProjectEdit, ProjectReview } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
@@ -51,7 +51,6 @@ export class CreateTeamProjectComponent implements OnInit {
   base64 !: any;
   fd !: FormData;
 
-
   constructor(
     private personalization: PersonalizationService,
     private teamService: TeamService,
@@ -63,22 +62,31 @@ export class CreateTeamProjectComponent implements OnInit {
     private groupService: GroupService
   ) {
     this.logged = this.userService.getLogged();
+  }
+  
 
+  ngOnInit(): void {
+    
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       description: [null],
       listOfResponsibles: [null],
+      projectReviewENUM: [this.convertType()]
     });
-  }
-
-  ngOnInit(): void {
     this.projectExists()
     // this.markCollaboratorsAsSelected();
   }
 
+  optionsReview = [
+    "Revisão opcional",
+    "Revisão obrigatória",
+    "Sem revisão"
+  ]
+
   projectNull: boolean = true;
   name !: string
   description?: string
+
 
   projectExists() {
     if (this.project != null) {
@@ -100,13 +108,10 @@ export class CreateTeamProjectComponent implements OnInit {
     // if (!this.fd.has('file')) this.setDefaultImage();
     if (this.typeString === 'team') {
       this.createTeam()
+      this.confirmCreateTeam();
     } else if (this.typeString === 'project') {
       this.createProject();
-    } else if (this.typeString === 'projectInfo') {
-      this.updateProject();
-    }
-
-    this.confirmCreateTeam();
+    } 
   }
 
   setDefaultImage(): void {
@@ -133,8 +138,6 @@ export class CreateTeamProjectComponent implements OnInit {
 
   createProject(): void {
     let project = this.form.getRawValue() as Project;
-    console.log(this.fd);
-
 
     let listOfResponsibles: User[] = [];
     project.listOfResponsibles?.forEach((type => {
@@ -164,12 +167,13 @@ export class CreateTeamProjectComponent implements OnInit {
         id: teamId
       }
     };
+    
+    let reviewConfig = this.form.get('projectReviewENUM')
+    project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
     this.projectService
       .create(project, teamId)
       .subscribe((project: Project) => {
-        console.log(project);
-
         this.alert.successAlert(`Projeto criado com sucesso!`);
         if (this.fd) {
           this.projectService
@@ -178,6 +182,32 @@ export class CreateTeamProjectComponent implements OnInit {
         }
       });
   }
+
+
+
+
+  convertTypeString(reviewConfig: string): ProjectReview | undefined {
+    switch (reviewConfig) {
+      case 'Revisão opcional' :
+        return ProjectReview.OPTIONAL;
+      case 'Revisão obrigatória' :
+        return ProjectReview.MANDATORY;
+      case 'Sem revisão' :
+        return ProjectReview.EMPTY;
+    }
+  }
+  convertType(): string{
+    switch (this.project?.projectReviewENUM!) {
+      case ProjectReview.OPTIONAL:
+        return 'Revisão opcional';
+      case ProjectReview.MANDATORY:
+        return 'Revisão obrigatória';
+      case ProjectReview.EMPTY:
+        return 'Sem revisão';
+    }
+    return this.project?.projectReviewENUM!
+  }
+
 
   @Output()
   eventEmitter = new EventEmitter()
@@ -206,13 +236,10 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   confirmCreateTeam(): void {
-    //validations
-
     this.modalCopyLink = true;
   }
 
   copyLink(): void {
-    //copiar para a area de transferência
     this.closeScreen();
   }
 
@@ -252,11 +279,7 @@ export class CreateTeamProjectComponent implements OnInit {
     });
   }
 
-  optionsReview = [
-    { name: 'Revisão obrigatória' },
-    { name: 'Revisão não obrigatória' },
-    { name: 'Revisão opcional' }
-  ]
+
 
   selectedUsers: any[] = [];
 
@@ -275,6 +298,8 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   updateProject(): void {
+    console.log("update");
+    
     let project = this.form.getRawValue() as Project;
     let list: User[] = []
 
@@ -282,7 +307,7 @@ export class CreateTeamProjectComponent implements OnInit {
       id: this.project?.id,
       name: project.name,
       description: project.description,
-      listOfResponsibles: project.listOfResponsibles
+      listOfResponsibles: project.listOfResponsibles,
     }
 
     projectEdit.listOfResponsibles!.forEach((type => {
@@ -313,8 +338,13 @@ export class CreateTeamProjectComponent implements OnInit {
       projectEdit.listOfResponsibles = this.project?.listOfResponsibles
     }
 
-    this.projectService.patchValue(projectEdit).subscribe((project: Project) => {   
+    let reviewConfig = this.form.get('projectReviewENUM');
+    projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
+
+    this.projectService.patchValue(projectEdit).subscribe((project: Project) => { 
+      this.project = project;
       this.alert.successAlert("Projeto modificado com sucesso")
-    })
+    });
+    this.closeScreen();
   }
 }

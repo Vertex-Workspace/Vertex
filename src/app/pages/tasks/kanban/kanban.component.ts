@@ -105,7 +105,8 @@ export class KanbanComponent {
         //Patch the value of the status task
         this.taskService.patchValue(valueUpdate).subscribe(
           (taskDate) => {
-
+            console.log("Mudou");
+            
           },
           (error) => {
             newValue.value = previousPropertyList;

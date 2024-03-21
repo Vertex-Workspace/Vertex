@@ -57,6 +57,7 @@ export class TaskComponent implements OnInit {
     projectName: "",
     creatorFullName: "",
     email: "",
+    projectReviewENUM: ""
   }
 
   isSending: boolean = false;
@@ -83,8 +84,10 @@ export class TaskComponent implements OnInit {
     }
     
     this.taskService.getTaskInfo(this.task.id).subscribe(
-      (team: any) => {
-        this.taskInfoDTO = team;
+      (task: any) => {
+        console.log(task);
+        
+        this.taskInfoDTO = task;
       }
     );
     if (this.permissions) {
@@ -95,6 +98,8 @@ export class TaskComponent implements OnInit {
       }
     }
     this.user = JSON.parse(localStorage.getItem('logged')!);
+    console.log(this.task.taskResponsables!);
+    
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
@@ -315,6 +320,7 @@ export class TaskComponent implements OnInit {
   }
 
   isRevisable(): boolean{
-    return this.project.projectReviewENUM !== ProjectReview.EMPTY;
+    return this.taskInfoDTO.projectReviewENUM == ProjectReview.OPTIONAL;
+    ;
   }
 }

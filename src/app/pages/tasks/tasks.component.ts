@@ -45,7 +45,7 @@ export class TasksComponent implements OnInit {
   badgeNumber: string = '0';
   taskReview: boolean = false;
   logged !: User;
-
+  pageTitle: string = 'Espaço de Trabalho';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -78,10 +78,14 @@ export class TasksComponent implements OnInit {
 
     //Observable que é aguardado para renderizar os componentes filhos
     this.renderProject = this.projectService.getOneById(id);
- 
+    console.log(this.renderProject);
+    
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
+      console.log(p);
+      
       this.project = p;
+      this.pageTitle = this.project.name;
       const currentView = localStorage.getItem('mode-task-view');
       if(currentView){
         this.clicked = currentView;
