@@ -67,10 +67,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(this.logged);
-    
-    
-    
+
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.permissions = permissions;
       for (const permission of permissions) {
@@ -96,7 +93,7 @@ export class TasksComponent implements OnInit {
       }
 
       //Se o projeto possuir a opção de revisão, então é feita a requisição das tarefas que estão aguardando revisão
-      // if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
+      if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
         this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
           (tasks : TaskWaitingToReview[]) => {
             console.log(tasks);
@@ -105,7 +102,7 @@ export class TasksComponent implements OnInit {
             this.badgeNumber = this.tasksToReview.length.toString();
           }
           );
-      // }
+      }
         
     });
     this.muralPageListener();
