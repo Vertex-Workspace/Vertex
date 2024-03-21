@@ -230,7 +230,7 @@ export class CreateTeamProjectComponent implements OnInit {
     this.closeScreen();
   }
 
-  listOfResponsibles: any[] = []
+  listOfResponsibles: TreeNode[] = []
 
   private getUsers(teamId: number): void {
 
@@ -272,20 +272,24 @@ export class CreateTeamProjectComponent implements OnInit {
     { name: 'Revisão opcional' }
   ]
 
-  selectedUsers: any[] = [];
+  selectedUsers: TreeNode[] = [];
 
   markCollaboratorsAsSelected(usersAndGroups: any[]): void {
-    this.selectedUsers = []
-
+    this.selectedUsers = [];
+  
     usersAndGroups.forEach(item => {
       if (item instanceof User) {
         let collaborator: User = item as User;
-        this.selectedUsers.push({ label: collaborator.firstName, data: collaborator });
+        collaborator.selected = true; // Definindo como selecionado
+        this.selectedUsers.push({ label: collaborator.firstName, data: collaborator});
       } else if (item instanceof Group) {
         let group: Group = item as Group;
-        this.selectedUsers.push({ label: group.name, data: group });
+        group.selected = true; // Definindo como selecionado
+        this.selectedUsers.push({ label: group.name, data: group});
       }
     });
+    console.log(this.selectedUsers);
+    
   }
 
   updateProject(): void {
@@ -339,4 +343,15 @@ export class CreateTeamProjectComponent implements OnInit {
     console.log("dei emit");
     this.senderEmitter.emit(project);
   }
+
+  click(node: any){
+    console.log(node);
+  }
+
+  isUserSelected(node: TreeNode): boolean {
+    const user = node.data as User;
+    return true;
+  }
+
+
 }

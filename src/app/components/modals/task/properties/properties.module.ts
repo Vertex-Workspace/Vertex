@@ -5,12 +5,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { InputValuePropertyModule } from 'src/app/components/reusable-components/input-value-property/input-value-property.module';
 import { TreeSelectModule } from 'primeng/treeselect';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
 @NgModule({
   declarations: [PropertiesComponent],
   exports: [PropertiesComponent],
-  imports: [CommonModule, FontAwesomeModule, FormsModule, InputValuePropertyModule, TreeSelectModule]
+  imports: [CommonModule, FontAwesomeModule, FormsModule, InputValuePropertyModule, 
+    TreeSelectModule, MultiSelectModule]
 })
 export class PropertiesModule { }

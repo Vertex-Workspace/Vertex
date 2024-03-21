@@ -35,11 +35,13 @@
     </div>
 
     <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] md:w-20rem pt-4" containerStyleClass="w-full"
-      display="chip" [options]="listOfResponsibles" [metaKeySelection]="true" selectionMode="checkbox"
-      placeholder="Atribue responsáveis ao projeto"
-      [(ngModel)]="selectedUsers" 
-      *ngIf="typeString === 'project' || typeString === 'projectInfo'">
-    </p-treeSelect>
+    display="chip" [options]="listOfResponsibles" [metaKeySelection]="true" selectionMode="checkbox"
+    placeholder="Atribue responsáveis ao projeto"
+    [(ngModel)]="selectedUsers">
+    <ng-template let-node pTemplate="default">
+      <span [ngClass]="isUserSelected(node) ? 'selected-node' : ''">{{node.label}}</span>
+    </ng-template>
+  </p-treeSelect>
 
     <p-dropdown 
     class="flex items-start justify-start w-[65%] pt-2"

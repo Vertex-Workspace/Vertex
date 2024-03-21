@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpinner, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faCaretDown, faFont, faListNumeric, 
+  faPaperclip, faSpinner, faUser, faUsers, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { Task, UpdateResponsibles } from 'src/app/models/class/task';
@@ -23,6 +24,7 @@ export class PropertiesComponent {
   @Input() permissions !: Permission[];
 
   faUsers = faUsers
+  faListCheck= faListCheck
 
   constructor(private taskService: TaskService,
     private projectService: ProjectService,
