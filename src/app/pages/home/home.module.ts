@@ -9,6 +9,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { FormsModule } from '@angular/forms';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
     FontAwesomeModule,
     TaskModule,
     FormsModule,
-    CascadeSelectModule
+    CascadeSelectModule,
+    CalendarModule,
+    InputTextModule
   ],
 })
 export class HomeModule { }

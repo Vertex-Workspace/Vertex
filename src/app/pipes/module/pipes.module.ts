@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NamePipe } from '../name.pipe';
 import { StatusPipe } from '../status-complete.pipe';
 import { StatusBasicPipe } from '../status-basic.pipe';
+import { SimplePropertyPipe } from '../property.pipe';
 
 
 
@@ -10,7 +11,8 @@ import { StatusBasicPipe } from '../status-basic.pipe';
   declarations: [
     NamePipe,
     StatusPipe,
-    StatusBasicPipe
+    StatusBasicPipe,
+    SimplePropertyPipe
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { StatusBasicPipe } from '../status-basic.pipe';
   exports: [
     NamePipe,
     StatusPipe,
-    StatusBasicPipe
+    StatusBasicPipe,
+    SimplePropertyPipe
   ]
 })
 export class PipesModule { }

@@ -26,12 +26,14 @@ export class HomeComponent implements OnInit{
 
   //TASKS - FILTER AND ORDER
   selectedFilter !: any;
+  filterDate !: string;
   filterOptions: any[] = [
     {name: 'Status', values: [
       {name: 'Não Iniciado', kind: PropertyListKind.TODO},
       {name: 'Em Andamento', kind: PropertyListKind.DOING},
       {name: 'Concluído', kind: PropertyListKind.DONE}
     ]},
+    {name: 'Data', values: [{name: 'date-input'}]},
   ];
   orderSettings !: any[];
   configItems = [
@@ -104,6 +106,7 @@ export class HomeComponent implements OnInit{
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
     this.selectedFilter = '';
+    this.filterDate = '';
   }
 
   clickOrder(): void {

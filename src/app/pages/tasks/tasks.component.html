@@ -89,7 +89,29 @@
                             [optionGroupChildren]="['values']" 
                             [style]="{ minWidth: '14rem' }" 
                             placeholder="Selecione"
-                        ></p-cascadeSelect>
+                        >
+                        <ng-template pTemplate="option" let-option>
+                            <div *ngIf="option.name !== 'TEXT'" class="flex align-items-center gap-2">
+                                <span>{{ option.name }}</span>
+                            </div>
+                            <div *ngIf="option.name === 'TEXT'" (click)="$event.stopPropagation()">
+                                <!-- <p-calendar 
+                                    appendTo="body"
+                                    [style]="{ width: '250px' }"  
+                                    dateFormat="dd.mm.yy"
+                                    [(ngModel)]="filterDate"
+                                    
+                                ></p-calendar> -->
+
+                                <input 
+                                    type="text" 
+                                    pInputText 
+                                    [(ngModel)]="text"
+                                    placeholder="Filtre por texto"
+                                >
+                            </div>
+                        </ng-template>
+                    </p-cascadeSelect>
                 </div>
             </ng-container>
         </section>
@@ -97,7 +119,7 @@
         <section class="router" *ngIf="renderProject | async">
             <app-kanban [project]="project" *ngIf="clicked  === 'Kanban'" [nameFilter]="query" [statusFilter]="selectedStatusFilter"
                 (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-kanban>
-            <app-list [project]="project" *ngIf="clicked  === 'List'" [queryFilter]="query" [statusFilter]="selectedStatusFilter"
+            <app-list [project]="project" *ngIf="clicked  === 'List'" [queryFilter]="query" [statusFilter]="selectedStatusFilter" [propertyFilter]="text"
                 (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissions"></app-list>
             <app-calendar (openTaskDetails)="changeModalTaskState(true, $event)" [project]="project"
                 [nameFilter]="query" [statusFilter]="selectedStatusFilter"

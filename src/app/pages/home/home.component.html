@@ -72,8 +72,25 @@
                             optionGroupLabel="name" 
                             [optionGroupChildren]="['values']" 
                             [style]="{ minWidth: '14rem' }" 
-                            placeholder="Selecione"
-                        ></p-cascadeSelect>
+                            placeholder="{{ selectedFilter ? selectedFilter : filterDate ? filterDate : 'Selecione' }}"
+                        >
+                        <ng-template pTemplate="option" let-option>
+                            <div *ngIf="option.name !== 'date-input'" class="flex align-items-center gap-2">
+                                <span>{{ option.name }}</span>
+                            </div>
+                            <div *ngIf="option.name === 'date-input'" (click)="$event.stopPropagation()">
+                                <!-- <p-calendar 
+                                    appendTo="body"
+                                    [style]="{ width: '250px' }"  
+                                    dateFormat="dd.mm.yy"
+                                    [(ngModel)]="filterDate"
+                                    
+                                ></p-calendar> -->
+
+                                <input type="text" pInputText [(ngModel)]="filterDate">
+                            </div>
+                        </ng-template>
+                    </p-cascadeSelect>
                     </ng-container>
                     <ng-container *ngIf="orderOpen">
                         <p>Ordenar por </p>
@@ -88,6 +105,7 @@
                     <app-list 
                         [statusFilter]="selectedFilter"
                         [queryFilter]="queryFilter" 
+                        [propertyFilter]="filterDate"
                         (openTaskDetails)="changeModalTaskState(true, $event)" 
                         style="padding-top: 3%;"
                     ></app-list>

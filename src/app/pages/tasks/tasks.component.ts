@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/models/class/project';
@@ -44,21 +44,30 @@ export class TasksComponent implements OnInit {
   taskReview: boolean = false;
   logged !: User;
 
+  text !: string;
+
   selectedStatusFilter !: any;
   filterOptions: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private projectService: ProjectService,
     private taskService: TaskService,
     private userService: UserService,
     private teamService: TeamService,
-    private alertService: AlertService,
     private noteService: NoteService
   ) {}
 
   projectId!: number;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    
+  }
+
+  teste(): void {
+    console.log('a')
+  }
 
   ngOnInit() {
     this.logged = this.userService.getLogged();
@@ -94,7 +103,6 @@ export class TasksComponent implements OnInit {
       );
 
     });
-    this.muralPageListener();
   }
 
   setFilters(p: Project): void {
@@ -104,34 +112,26 @@ export class TasksComponent implements OnInit {
         values: []
       })
 
-      if (prop.kind === PropertyKind.STATUS || prop.kind === PropertyKind.LIST) {
+      if (prop.kind === PropertyKind.STATUS 
+            || prop.kind === PropertyKind.LIST) {
         
-        prop.propertyLists.forEach((pl: PropertyList) => {
+        prop.propertyLists
+          .forEach((pl: PropertyList) => {
                 this.filterOptions[index].values.push({
                   name: pl.value,
                   kind: pl.propertyListKind,
                   index: p.properties.indexOf(prop)
                 })
               })
+      } else {
+        this.filterOptions[index]
+          .values.push({
+            name: prop.kind as string
+          })
       }
-      
     })
     
   }
-
-  
-  // {name: 'Status', values: [
-  //   {name: 'Não Iniciado', kind: PropertyListKind.TODO},
-  //   {name: 'Em Andamento', kind: PropertyListKind.DOING},
-  //   {name: 'Concluído', kind: PropertyListKind.DONE}
-  // ]},
-
-
-  muralPageListener(): void {
-    if (this.clicked === 'Mural') this.isMuralPage = true;
-    else this.isMuralPage = false;
-  }
-
 
   menuItems = [
     { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },

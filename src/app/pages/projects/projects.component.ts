@@ -133,6 +133,7 @@ export class ProjectsComponent implements OnInit {
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
+    this.selectedFilter = '';
   }
 
   clickOrder(): void {
