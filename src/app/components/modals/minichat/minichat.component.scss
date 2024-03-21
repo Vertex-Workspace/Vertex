@@ -1,128 +1,200 @@
 @import '../../../../_variables.scss';
 
-.miniChat2{
-    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col
-    justify-between items-start shadow-lg;
+.miniChat2 {
+    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col justify-between items-center shadow-lg;
     background-color: $card;
-    
+
 }
+
 @keyframes bottomToTop {
     0% {
         height: 0px;
         overflow: hidden
     }
+
     100% {
         height: 500px;
     }
 }
 
-.miniChat-header{
+.miniChat-header {
     @apply flex w-full h-[12%] items-start justify-around;
     background-color: $primaryColor;
 }
 
-.miniChat-header-title{
+.miniChat-header-title {
     @apply flex w-[70%] h-full items-center justify-start gap-5;
     color: $card;
 
-    h6{
+    h6 {
         color: $secondColor;
     }
 }
 
-.miniChat-header-close{
+.miniChat-header-close {
     @apply flex w-[15%] h-full items-center justify-end gap-5;
     color: $card;
 }
 
-.miniChat-main{
+.miniChat-main {
     @apply flex w-full h-[88%] items-end pb-5 justify-center;
 }
 
-.miniChat-main-input{
-    @apply flex w-full h-[10%] items-center justify-evenly ;
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 20px;
 }
 
-.div-search{
-    @apply flex border-2 w-[80%] h-full  rounded-sm;
+.message-container.right {
+    align-items: flex-end;
+}
+
+.message-bubble-left {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $card;
+    color: $primaryColor;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+
+.message-bubble-right {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $primaryColor;
+    color: $secondColor;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+
+.message-bubble-right:last-child> :last-child {
+    @apply flex-row-reverse justify-between w-full
+}
+
+.image {
+    @apply w-72 h-40;
+}
+
+.archive {
+    @apply w-16 h-16;
+
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.timestamp {
+    font-size: 12px;
+}
+
+
+.miniChat-main-input {
+    @apply flex w-full h-[10%] items-center justify-evenly;
+}
+
+.div-search {
+    @apply flex border-2 w-[80%] h-full rounded-sm;
     border: 1px solid $emphasis;
 }
 
-.input-search{
+.input-search {
     @apply pl-[10px] w-[84%] h-[100%];
 }
 
-.div-icons{
+.div-icons {
     @apply flex gap-2 w-[16%];
 }
 
 .icons {
     @apply flex justify-between items-center text-lg;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
 }
 
-.paperplane{
+.paperplane {
     @apply text-base pr-1;
 }
 
-.square-chat{
-    @apply w-[10%] h-[100%] rounded-sm flex items-center justify-center;
+.square-chat {
+    @apply w-[10%] h-[50%] rounded-sm flex items-center justify-center;
     background-color: $primaryColor;
+    .section-icons {
+        @apply flex justify-between items-center;
+        color: $card !important;
+    }
+}
+.section-icons {
+    @apply text-lg flex justify-center items-center;
+    color: $primaryColor !important;
+}
+
+.high-input-div {
+    @apply w-[80%] h-[20%] flex items-center gap-3;
+
+}
+
+.emoji-wrapper {
+    position: absolute;
+    right: 40px;
+    bottom: 85px;
+    z-index: 5;
 }
 
 
 // ==============================================================================
-.imgLogo{
-    @apply w-[40px] h-[40px] ;
+.imgLogo {
+    @apply w-[40px] h-[40px];
 }
 
-.div-searchStep1{
+.div-searchStep1 {
     @apply flex border-2 w-[97%] h-full rounded-sm;
     border: 1px solid $emphasis;
 
 }
 
-.miniChatStep1{
-    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col
-    justify-between items-start shadow-lg;
+.miniChatStep1 {
+    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col justify-between items-start shadow-lg;
     background-color: $card;
     animation: bottomToTop 0.5s;
 }
 
-.minichatStep1-main{
+.minichatStep1-main {
     @apply flex flex-col w-full h-[75%] p-4 items-center gap-4 justify-start overflow-auto;
 }
 
-.input-searchStep1{
+.input-searchStep1 {
     @apply pl-[10px] w-[100%] h-[100%];
 }
 
-.card-chat{
-    @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm
-    cursor-pointer min-h-[100px];
+.card-chat {
+    @apply flex justify-between items-center w-[100%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     border: 1px solid $emphasis;
     animation: leftPulse 0.3s;
 }
 
-.user-card-message{
+.center-div {
+    @apply pr-[7%] pl-[7%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
+}
+
+.user-card-message {
     @apply flex gap-6 items-center w-[70%];
 }
 
 .chat-icons {
     @apply flex justify-between items-center;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
     font-size: 70px
 }
 
-.section-icons {
-    @apply flex justify-between items-center;
-    color: $primaryColor  !important;
-}
-
-.div-time-message{
+.div-time-message {
     @apply flex items-center justify-center w-[20%];
 }
 
-.div-time{
+.div-time {
     @apply flex flex-col gap-2 items-center;
 }

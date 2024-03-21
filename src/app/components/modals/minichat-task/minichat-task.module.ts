@@ -4,6 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { InputModule } from '../../../components/reusable-components/input/input.module';
 import { MinichatTASKComponent } from './minichat-task.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [MinichatTASKComponent],
@@ -12,7 +13,8 @@ import { MinichatTASKComponent } from './minichat-task.component';
     CommonModule,
     FontAwesomeModule,
     FormsModule,
-    InputModule
+    InputModule,
+    PickerModule
   ]
 })
 export class MinichatTASKModule { }

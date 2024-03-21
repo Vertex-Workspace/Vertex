@@ -75,5 +75,10 @@ export class TaskService {
     return this.http.delete<Task>(`${URL}task/${taskID}/comment/${commentID}`);
   }
 
+  public getChatByTaskId(id: number): Observable<Task> {
+    return this.http
+      .get<Task>(`${URL}task/chat/${id}`)
+      .pipe(map((task: Task) => new Task(task)));
+  }
 
 }

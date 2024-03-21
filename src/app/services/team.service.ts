@@ -50,11 +50,9 @@ export class TeamService {
   public patchMessagesOnChat(idChat:number,idUser:number, message:Message):Observable<any>{
     console.log(idChat)
     console.log(idUser);
-    
-    
     return this.http.patch<any>(`${URL}chatController/messagePatch/${idChat}/${idUser}`, message);
   }
-
+  
   public patchArchiveOnChat(idChat:number, file:FormData):Observable<any>{
     console.log(idChat)
     return this.http.patch<any>(`${URL}chatController/patchFile/${idChat}`, file);

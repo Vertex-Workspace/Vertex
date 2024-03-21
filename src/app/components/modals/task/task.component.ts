@@ -14,6 +14,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { User } from 'src/app/models/class/user';
 import { TimeInTask } from 'src/app/models/class/timeInTask';
 import { ActivatedRoute } from '@angular/router';
+import { Chat } from 'src/app/models/class/chat';
 
 @Component({
   selector: 'app-task',
@@ -219,12 +220,14 @@ export class TaskComponent implements OnInit {
     );
   }
 
+  chat: any;
   openMiniChat() {
     this.miniChatOpen = !this.miniChatOpen;
   }
   minimizeChat() {
     this.chatExpanded = !this.chatExpanded;
   }
+
 
   cantEdit(){
     if(!this.canEdit){

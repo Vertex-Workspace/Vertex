@@ -1,41 +1,94 @@
-<div class="miniChat2">
+<div *ngIf="step==2" class="miniChat2">
     <div class="miniChat-header">
         <div class="miniChat-header-title">
+            <fa-icon (click)="step = 1" [icon]="faArrowLeft"></fa-icon>
             <fa-icon [icon]="faUser"></fa-icon>
             <h6>Nome User</h6>
         </div>
         <div class="miniChat-header-close">
-            
+            <fa-icon (click)="expandChat(true)" [icon]="faExpand"></fa-icon>
             <fa-icon (click)="openMiniChat(true)" [icon]="faTimes"></fa-icon>
         </div>
     </div>
-    
-    <div class="miniChat-main">
 
-        <div class="center-div">
-            <div class="min-h-[60px]" *ngFor="let message of messages">
-                <div [ngClass]="message.id % 2==0 ? 'left' : 'right'">
-                    <div class="regular-text" [ngClass]="message.id % 2==0 ? 'answer' : 'messageUser'">
-                        <p class="pChat">{{message.content}}</p>
+    <div *ngIf="chat" class="center-div">
+        <div class="min-h-[60px]" *ngIf="chat">
+            <div *ngFor="let message of chat.messages" class="message-container"
+                [ngClass]="message.user !== logged.firstName ? 'left' : 'right'">
+                <div class="flex items-center gap-2">
+                    <p *ngIf="(logged.firstName != message.user)" class="username">{{ message.user }}</p>
+                    <p *ngIf="(logged.firstName == message.user)" class="username">Eu</p>
+                </div>
+
+                <div *ngIf="!message.file"
+                    [ngClass]="logged.firstName!==message.user ? 'message-bubble-left' : 'message-bubble-right'">
+                    <p class="text-base">{{ message.contentMessage }}</p>
+                    <p [ngClass]="message.user !== logged.firstName ? 'timestamp' : 'timestamp text-right'">{{
+                        generateTime(message) }}</p>
+                </div>
+
+                <div *ngIf="message.file"
+                    [ngClass]="message.user !== logged.firstName ? 'message-bubble-left with-photo' : 'message-bubble-right with-photo items-end'">
+                    <div class="w-full h-full flex-wrap flex justify-center items-center gap-3">
+                        <img [ngClass]="messageFileIncludesImage(message) ? 'mt-[5px] image':'archive'"
+                            draggable="false" [src]="getIconSrc(message)">
+                        <div class="flex h-full justify-center items-center gap-5">
+                            <p class="text-center w-[80%]"  *ngIf="!messageFileIncludesImage(message)">{{ message.file.name }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="pChat">{{message.time}}</p>
+                    <div class="flex justify-between">
+                        <p
+                            [ngClass]="message.user !== logged.firstName ? 'timestamp  text-[#777777]' : 'timestamp text-[#fff]'">
+                            {{ generateTime(message) }}
+                        </p>
+                        <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">
+                            <i class="pi pi-download"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="miniChat-main-input regular-text">
-            <div class="div-search">
-                <input class="input-search" [(ngModel)]="messageUser" type="text" placeholder="Digite sua mensagem" />
-                <div class="div-icons">
-                    <fa-icon class="icons" [icon]="faPaperclip"></fa-icon>
-                    <fa-icon class="icons" [icon]="faMicrophoneLines"></fa-icon>
-                </div>
-            </div>
-            <div class="square-chat" (click)="submit()">
-                <fa-icon  class="paperplane" [icon]="faPaperPlane"></fa-icon>
-            </div>
-        </div>
     </div>
+
+    <form *ngIf="chat" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm"
+        class="high-input-div justify-center">
+        <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
+
+            <textarea type="text" name="message" id="input-message"
+                class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
+                [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
+            <div class="emoji-wrapper">
+
+                <emoji-mart *ngIf="showEmojiPicker" [i18n]="{
+                    search: 'Digite o nome do emoji em inglês',
+                    categories: {
+                    search: 'Resultados da busca',
+                    recent: 'Recentes',
+                    smileys: 'Carinhas',
+                    people: 'Pessoas',
+                    nature: 'Natureza',
+                    foods: 'Comidas',
+                    activity: 'Atividade',
+                    places: 'Lugares',
+                    objects: 'Objetos',
+                    symbols: 'Símbolos',
+                    flags: 'Bandeiras'
+                    }
+                }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
+                </emoji-mart>
+
+            </div>
+            <div class="flex relative">
+                <input type="file" id="fileInput" class="hidden absolute left-1/2 top-1/2"
+                    (change)="onFileChange($event)">
+                <fa-icon (click)="openFile()" class="section-icons" [icon]="faPaperclip"></fa-icon>
+            </div>
+            <!-- <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon> -->
+            <fa-icon (click)="showEmoji()" class="section-icons" [icon]="faSmile"></fa-icon>
+        </div>
+        <button type="submit" class="square-chat rounded-sm">
+            <fa-icon class="text-lg pr-1" [icon]="faPapperPlane"></fa-icon>
+        </button>
+    </form>
 </div>

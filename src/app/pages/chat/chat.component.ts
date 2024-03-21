@@ -65,10 +65,11 @@ export class ChatComponent {
       chats.forEach((chat: Chat) => {
         chat.userTeams!.forEach((userTeam) => {
           if (userTeam.user.id == this.logged.id) {
-            this.conversations.push(chat);
+            if(chat.userTeams!.length > 1){
+              this.conversations.push(chat);
+            }
           }
         });
-
       });
     });
 
@@ -79,24 +80,15 @@ export class ChatComponent {
     this.showEmojiPicker = !this.showEmojiPicker;
   }
 
-  click() {
-    this.side = !this.side;
-  }
-
   ngOnInit() {
-    console.log(this.chat)
     this.webSocketService.listenToServer().subscribe((change) => {
-      console.log(change, "Change")
       this.chat.messages!.push(change);
       setTimeout(() => {
         let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
         a.scrollTop = a.scrollHeight;
       }, 0);
     });
-
   }
-
-  // To-do: update the style of the chat component.
 
   ngOnDestroy(): void {
     this.webSocketService.closeWebSocket();
@@ -105,9 +97,6 @@ export class ChatComponent {
   addEmoji(event: any) {
     this.messageUser += event.emoji.native;
   }
-
-
-
 
   sendMessage(sendForm: NgForm) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
@@ -137,15 +126,12 @@ export class ChatComponent {
     }
   }
 
-
-
   openFile() {
     let a = document.getElementById('fileInput') as HTMLElement;
     a.click();
   }
   selectedFile!: any;
-  isPdfOrDocx: boolean = false;
-  url !: string;
+  url !: any;
   onFileChange(e: any) {
     this.selectedFile = e.target.files[0];
     const fd: FormData = new FormData();
@@ -154,58 +140,98 @@ export class ChatComponent {
 
     this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
       (response: any) => {
-        this.chat = response;
-        console.log(response, "ARCHIVE SENT DB");
+        // this.chat.messages?.push(response);
+
+        let reader = new FileReader();
+        reader.readAsDataURL(this.selectedFile);
+        reader.onload = () => {
+          let message: Message = {
+            user: this.logged.firstName,
+            contentMessage: this.selectedFile.name,
+            time: new Date(),
+            file: reader.result,
+            viewed: false,
+          };
+          this.webSocketService.sendMessage(message);
+        };
       }
     );
+  }
 
-    let reader = new FileReader();
-    reader.readAsDataURL(this.selectedFile);
-    reader.onload = () => {
-      let base64Data = reader.result as string;
-      console.log(base64Data, "BASE64");
-      
-      if (base64Data.includes("data:application/pdf;base64,")){
-        base64Data = base64Data.replace("data:application/pdf;base64,", "");
-        this.isPdfOrDocx = true;
-      }else if(base64Data.includes("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,")){
-        base64Data = base64Data.replace("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,", "");
-        this.isPdfOrDocx = true;
-      }
-       else {
-        this.isPdfOrDocx = false;
-        const base64Parts = base64Data.split(',');
-        if (base64Parts.length === 2) {
-          base64Data = base64Parts[1];
-        }
-      }
-      let message: Message = {
-        user: this.logged.firstName,
-        time: new Date(),
-        imageUser: this.logged.image,
-        file: base64Data,
-        viewed: false,
-      };
-      this.webSocketService.sendMessage(message);
+  messageFileIncludesImage(message: any): boolean {
+    if (message.file && message.file.type && typeof message.file.type === 'string') {
+      return message.file.type.includes('image');
+    }
+    return false;
+  }
+
+
+  convertDataUrlToBlob(dataUrl: string) {
+    const byteString = atob(dataUrl.split(',')[1]);
+    const mimeString = dataUrl.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
+
+  getIconSrc(message: any): string {
+    const fileTypeIcons: Record<string, string> = {
+      'application/pdf': 'https://cdn-icons-png.flaticon.com/512/337/337946.png',
+      'text/plain': 'https://cdn-icons-png.freepik.com/512/8243/8243060.png',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'https://cdn-icons-png.freepik.com/256/8361/8361174.png?uid=R112263958&ga=GA1.1.310772085.1710953572&',
+      'video/mp4': 'https://cdn-icons-png.freepik.com/512/8243/8243015.png',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
+      'application/vnd.ms-excel': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
+      'text/csv': 'https://cdn-icons-png.freepik.com/512/8242/8242984.png'
     };
+    if (typeof message.file == "string") {
+      message.file = this.convertDataUrlToBlob(message.file);
+    }
+
+    const iconSrc = fileTypeIcons[message.file.type];
+    if (iconSrc) {
+      return iconSrc;
+    }
+    else {
+      if (message.file instanceof Blob) {
+        return URL.createObjectURL(message.file);
+      }
+      return `data:image/jpg;base64,${message.file.file}`
+    };
+  }
+
+  convertBlobToFile(blob: Blob, fileName: string): File {
+    const file = new File([blob], fileName, { type: blob.type });
+    return file;
+  }
+
+  changeUrlOfArchive(response: Message) {
+    if (response.file instanceof Blob) {
+      response.file = this.convertBlobToFile(response.file, response.contentMessage! as string);
+      return window.URL.createObjectURL(response.file);
+    } else {
+      const byteCharacters = atob(response.file.file);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'application/pdf' });
+      return window.URL.createObjectURL(blob);
+    }
   }
 
   generateTime(message: Message) {
     let minutes = new Date(message.time!).getMinutes();
     if (minutes < 10) {
       return new Date(message.time!).getHours() + ":0" + new Date(message.time!).getMinutes();
-    }else return new Date(message.time!).getHours() + ":" + new Date(message.time!).getMinutes();
-  }
-
-  transformHexColorToSimilarColor(hex: string) {
-    let r = parseInt(hex.substring(1, 3), 16);
-    let g = parseInt(hex.substring(3, 5), 16);
-    let b = parseInt(hex.substring(5, 7), 16);
-    return `rgba(${r},${g},${b},0.5)`;
+    } else return new Date(message.time!).getHours() + ":" + new Date(message.time!).getMinutes();
   }
 
   openConversation(chat: Chat) {
-
     this.chat = chat;
     this.conversations.forEach((conversation: Chat) => {
       conversation.conversationOpen = false;
@@ -213,16 +239,8 @@ export class ChatComponent {
 
     this.chat.conversationOpen = true;
 
-
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
       this.chat.messages = messages;
-
-      this.chat.messages!.forEach((message: Message) => {
-        if (message.user == this.logged.firstName) {
-          message.viewed = true;
-        }
-      });
-      console.log(this.chat, "Messages");
 
       let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
       a.scrollTo(a.scrollTop, a.scrollHeight);

@@ -175,7 +175,7 @@ main {
 .section-right-chat {
     @apply flex flex-col items-center justify-center w-[70%] h-[100%] gap-2 rounded-sm;
     border: 1px solid $emphasis;
-    background-color: #ededed;
+    background-color: $secondColor;
 }
 
 .center-div {
@@ -211,16 +211,28 @@ main {
     background-color: $card;
     color: $primaryColor;
     word-wrap: break-word;
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-3 shadow-md;
 }
-.message-bubble-right {
+.message-bubble-right  {
     max-width: 70%;
     padding: 10px;
     border-radius: 5px;
     background-color: $primaryColor;
     color: $secondColor;
     word-wrap: break-word;
-    @apply flex flex-col gap-3;
+    @apply flex flex-col gap-3 shadow-md;
+}
+.message-bubble-right:last-child > :last-child {
+    @apply flex-row-reverse justify-between w-full
+    
+}
+
+.image{
+    @apply w-80 h-52;
+}
+.archive{
+    @apply w-16 h-16;   
+
 }
 
 .username {
@@ -252,10 +264,6 @@ main {
         @apply flex justify-between items-center;
         color: $card !important;
     }
-}
-
-.imgMessage {
-    @apply w-96 h-52;
 }
 
 .imgUser {
