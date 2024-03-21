@@ -33,7 +33,8 @@ export class CardListComponent implements OnInit {
   @Input()
   team?: Team; //se estiver na tela projetos
 
-  projects : Project [] = []
+  @Input()
+  projects : Project[]=[]
 
   @Input()
   type !: string;
@@ -58,12 +59,10 @@ export class CardListComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllTeams() 
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.findProjects(teamId); 
   }
 
   getType(): any[] {
-    if (this.type === 'project') {
+    if (this.type === 'project') {  
       return this.projects
     }
     return this.teams!;

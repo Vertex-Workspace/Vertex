@@ -69,6 +69,8 @@ export class HomeComponent implements OnInit{
         .getTeamsByUser(this.logged)
         .subscribe((teams: Team[]) => {
           this.teams = teams;
+          console.log(teams);
+          
         });
     }
   }
@@ -111,6 +113,10 @@ export class HomeComponent implements OnInit{
       this.taskOpen = true;
       this.taskOpenObject = task;
     }
+  }
+
+  updateTeams(team : Team){
+    this.teams.push(team)
   }
 
 

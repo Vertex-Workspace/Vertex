@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCalendarDays, faCaretDown, faFont, faListNumeric, faPaperclip, faSpinner, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
-import { Task } from 'src/app/models/class/task';
-import { Permission, PermissionsType } from 'src/app/models/class/user';
+import { Task, UpdateResponsibles } from 'src/app/models/class/task';
+import { Permission, PermissionsType, User } from 'src/app/models/class/user';
 import { Value, ValueUpdate } from 'src/app/models/class/value';
 import { AlertService } from 'src/app/services/alert.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
@@ -18,13 +19,14 @@ import { UserService } from 'src/app/services/user.service';
 export class PropertiesComponent {
 
   @Input() task!: Task;
-  @Input() project !:Project
+  @Input() project !: Project
   @Input() permissions !: Permission[];
 
   faUsers = faUsers
 
-  constructor(private taskService: TaskService, 
-    private alertService : AlertService,
+  constructor(private taskService: TaskService,
+    private projectService: ProjectService,
+    private alertService: AlertService,
     private teamService: TeamService,
     private userService: UserService) { }
 
@@ -40,13 +42,29 @@ export class PropertiesComponent {
 
 
   canEdit: boolean = false;
+  taskResponsables: any[] = []
+  selectedUsers: any[] = []
 
   ngOnInit(): void {
-    for(const permission of this.permissions){
-      if(permission.name === PermissionsType.EDIT && permission.enabled){
+    this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
+      this.taskResponsables = users
+      
+      for (const user of users) {
+        this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
+          for(const user1 of users1){
+            if(user.id === user1.id){
+              this.selectedUsers.push(user)
+            }
+          }
+        })
+      }
+    })
+
+    for (const permission of this.permissions) {
+      if (permission.name === PermissionsType.EDIT && permission.enabled) {
         this.canEdit = true;
       }
-    }   
+    }
   }
 
 
@@ -54,7 +72,6 @@ export class PropertiesComponent {
   isSelected(option: any, value: any): boolean {
     return false;
   }
-
 
   @Output() changes = new EventEmitter();
 
@@ -69,13 +86,28 @@ export class PropertiesComponent {
       }
     }
   }
-  getColor(value : Value) : string{
-    if(value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST){
-      let valuePropertyList : PropertyList = value.value as PropertyList;
-      if(valuePropertyList != null){
+
+  getColor(value: Value): string {
+    if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
+      let valuePropertyList: PropertyList = value.value as PropertyList;
+      if (valuePropertyList != null) {
         return valuePropertyList.color;
       }
     }
     return "";
   }
+
+  updateResponsible(selectedUsers : any[]): void {
+    const taskResponsibles: UpdateResponsibles = {
+      taskId: this.task.id,
+      teamId: this.project.idTeam,
+      taskResponsableList: selectedUsers
+    }
+
+    this.task.taskResponsables = selectedUsers
+    this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
+       this.alertService.successAlert("editado")
+    })
+  }
+
 }

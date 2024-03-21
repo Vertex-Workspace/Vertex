@@ -60,14 +60,25 @@ export class CreateTeamProjectComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private alert: AlertService,
-    private groupService: GroupService
+    private groupService: GroupService,
   ) {
     this.logged = this.userService.getLogged();
 
+    // this.nodeService.getFiles().then((files) => (this.nodes = files));
+    if (this.project != null) {
+      this.projectService.getProjectCollaborators(5).subscribe((users: User[]) => {
+        this.forms(users)
+      })
+    } else {
+      this.forms(null)
+    }
+  }
+
+  forms(users: any) {
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       description: [null],
-      listOfResponsibles: [null],
+      listOfResponsibles: [users],
     });
   }
 
@@ -113,6 +124,8 @@ export class CreateTeamProjectComponent implements OnInit {
     // this.fd.append('file', this.defaultImg);
   }
 
+  @Output()
+  sendTeam = new EventEmitter<Team>()
 
   createTeam(): void {
     const team = this.form.getRawValue() as Team;
@@ -128,13 +141,12 @@ export class CreateTeamProjectComponent implements OnInit {
             .updateImage(teamRes.id!, this.fd)
             .subscribe();
         }
+        this.sendTeam.emit(team)
       })
   }
 
   createProject(): void {
     let project = this.form.getRawValue() as Project;
-    console.log(this.fd);
-
 
     let listOfResponsibles: User[] = [];
     project.listOfResponsibles?.forEach((type => {
@@ -167,16 +179,18 @@ export class CreateTeamProjectComponent implements OnInit {
 
     this.projectService
       .create(project, teamId)
-      .subscribe((project: Project) => {
+      .subscribe((projectResponse: Project) => {
         console.log(project);
 
         this.alert.successAlert(`Projeto criado com sucesso!`);
         if (this.fd) {
           this.projectService
-            .updateImage(project.id, this.fd)
+            .updateImage(projectResponse.id, this.fd)
             .subscribe();
         }
+        this.emitCreation(projectResponse)
       });
+
   }
 
   @Output()
@@ -261,7 +275,7 @@ export class CreateTeamProjectComponent implements OnInit {
   selectedUsers: any[] = [];
 
   markCollaboratorsAsSelected(usersAndGroups: any[]): void {
-    this.selectedUsers = [];
+    this.selectedUsers = []
 
     usersAndGroups.forEach(item => {
       if (item instanceof User) {
@@ -313,8 +327,16 @@ export class CreateTeamProjectComponent implements OnInit {
       projectEdit.listOfResponsibles = this.project?.listOfResponsibles
     }
 
-    this.projectService.patchValue(projectEdit).subscribe((project: Project) => {   
+    this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
       this.alert.successAlert("Projeto modificado com sucesso")
     })
+  }
+
+  @Output()
+  senderEmitter = new EventEmitter<Project>();
+
+  emitCreation(project: Project) {
+    console.log("dei emit");
+    this.senderEmitter.emit(project);
   }
 }

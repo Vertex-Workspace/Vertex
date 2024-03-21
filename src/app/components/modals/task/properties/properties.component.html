@@ -7,10 +7,13 @@
                     <p>Responsáveis</p>
                 </div>
                 <div>
-                    <p-treeSelect formControlName="task.taskResponsables" class="w-[65%] md:w-20rem pt-4"
-                        containerStyleClass="w-full" display="chip" [options]="task.taskResponsables!"
+                    <p-treeSelect  class="w-full md:w-20rem "
+                        [options]="taskResponsables"
+                        [(ngModel)]="selectedUsers"
+                        containerStyleClass="w-full" display="chip" 
                         [metaKeySelection]="false" selectionMode="checkbox"
-                        placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true">
+                        placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true"
+                        (click)="updateResponsible(selectedUsers)">
                 </p-treeSelect>
                 </div>
             </td>

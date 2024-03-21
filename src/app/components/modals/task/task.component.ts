@@ -28,8 +28,7 @@ export class TaskComponent implements OnInit {
 
   faClock = faClock;
 
-  @Input()
-  project!: Project;
+  @Input() project!: Project;
 
   @Output() close = new EventEmitter();
 
@@ -120,20 +119,20 @@ export class TaskComponent implements OnInit {
 
   async getTimeInTask() {
     this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
-      (time: TimeInTask) => {
-        this.timer = time.timeInTask;
-        this.seconds = parseInt(time.timeInTask.substring(6, 8));
-        this.minutes = parseInt(time.timeInTask.substring(3, 5));
-        this.hours = parseInt(time.timeInTask.substring(0, 2));
-        this.timeInTask = time;
-        this.waitRequest = true;
-        if (this.timeInTask.working) {
-          this.startTimer()
-        }
-      },
-      (e: any) => {
-        console.log(e);
-      });
+    (time: TimeInTask) => {
+      this.timer = time.timeInTask;
+      this.seconds = parseInt(time.timeInTask.substring(6, 8));
+      this.minutes = parseInt(time.timeInTask.substring(3, 5));
+      this.hours = parseInt(time.timeInTask.substring(0, 2));
+      this.timeInTask = time;
+      this.waitRequest = true;
+      if (this.timeInTask.working) {
+        this.startTimer()
+      }
+    },
+    (e: any) => {
+      console.log(e);
+    });
   }
 
   navigate(component: string): void {

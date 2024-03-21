@@ -2,6 +2,7 @@
 import { Comment } from "./comment";
 import { Property } from "./property";
 import { TaskResponsable } from "./taskResponsable";
+import { User } from "./user";
 import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from "./value";
 
 export class Task {
@@ -76,4 +77,10 @@ export class TaskWaitingToReview {
         email: string;
         date: Date;
     }
+}
+
+export class UpdateResponsibles {
+    taskId !: number;
+    teamId!: number;
+    taskResponsableList: User[] = []
 }

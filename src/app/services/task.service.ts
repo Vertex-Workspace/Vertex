@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/class/team';
-import { Task, TaskCreate, TaskEdit, TaskWaitingToReview } from '../models/class/task';
+import { Task, TaskCreate, TaskEdit, TaskWaitingToReview, UpdateResponsibles } from '../models/class/task';
 import { Value, ValueUpdate } from '../models/class/value';
 import { CommentSend } from '../models/class/comment';
+import { User } from '../models/class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +97,17 @@ export class TaskService {
   public removeFile(taskId: number, fileId: number): Observable<Task> {
     return this.http
       .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`)
+  }
+
+  public getTaskResponsables(taskId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${URL}task/taskResponsables/${taskId}`)
+    .pipe(map((users: User[]) => users.map(user => new User(user))));
+  }
+
+  public updateTaskResponsables(updateResponsible: UpdateResponsibles): Observable<Task> {
+    console.log(updateResponsible);
+    
+    return this.http.patch<Task>(`${URL}task/taskResponsables`, updateResponsible);
   }
 
 }

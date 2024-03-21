@@ -51,7 +51,7 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeam();
-    this.validateTeamId();
+    this.validateTeamId();  
   }
 
   validateTeamId(): void {
@@ -77,6 +77,7 @@ export class ProjectsComponent implements OnInit {
       this.permissionsOnTeamObservable = this.teamService.getPermission(this.team, this.logged);
       this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
         this.permissionsOnTeam = permissions;
+        this.getProjects();  
       });
 
       if (team.projects) this.emptyTeamProjects = false;
@@ -111,9 +112,20 @@ export class ProjectsComponent implements OnInit {
     this.clicked = preview;
   }
 
+  projects: Project[] = []
+
+  getProjects(){
+    this.projectService.getProjectByCollaborators(this.team.id, this.logged).subscribe((projects:Project[]) => {
+      this.projects = projects
+    })
+  }
+
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;
-    this.getTeam();
+  }
+
+  updateProjects(project: Project){
+    this.projects.push(project)
   }
 
   configItems = [
