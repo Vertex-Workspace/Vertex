@@ -1,79 +1,43 @@
 <!-- <input (blur)="change(value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/> -->
 <!-- text -> verificar $event -->
-<input
-    *ngIf="getKind(value.property, 'TEXT')"
-    type="text" 
-    pInputText 
-    (blur)="change(value)" 
-    [(ngModel)]="valueText"
-/>
+<input *ngIf="getKind(value.property, 'TEXT')" type="text" pInputText (blur)="change(value)" [(ngModel)]="valueText"
+    [disabled]="!canEdit" />
 
 <!-- <input (blur)="change(value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/> -->
 <!-- number -> verificar $event -->
-<p-inputNumber 
-    *ngIf="getKind(value.property, 'NUMBER')"
-    (onBlur)="change(value)"
-    [(ngModel)]="valueNumber"
-> </p-inputNumber>
+<p-inputNumber  *ngIf="getKind(value.property, 'NUMBER')" (onBlur)="change(value)" [(ngModel)]="valueNumber"
+    [disabled]="!canEdit"> </p-inputNumber>
 
 
 
 <!-- date -->
 <span class="p-float-label" *ngIf="getKind(value.property, 'DATE')">
-    <p-calendar  
-        appendTo="body"
-        [style]="{ width: '250px' }" 
-        (onSelect)="changeDate(value)"
-        dateFormat="dd.mm.yy"
-        [disabled]="!canEdit"
-    ></p-calendar>
-    <label for="birth_date">{{getValue(value)}}</label>
+    <p-calendar appendTo="body" [style]="{ width: '250px' }" (onSelect)="changeDate($event)" dateFormat="dd.mm.yy"
+        [disabled]="!canEdit"></p-calendar>
+    <label for="birth_date">{{getValue()}}</label>
 </span>
 
 <!-- status -->
- <p-cascadeSelect 
-     *ngIf="getKind(value.property, 'STATUS')"
-    [options]="getSelectOptions(value)" 
-    [(ngModel)]="value.value"
-    optionLabel="value" 
-    optionGroupLabel="name" 
-    [optionGroupChildren]="[]" 
-    [style]="{ width: '250px',  'background-color': backgroundColor }" 
-    placeholder="{{getValue(value)}}"
-    (onChange)="changeList($event, value)"
-    appendTo="body"
-    [disabled]="!canEdit"
->
+<p-cascadeSelect *ngIf="getKind(value.property, 'STATUS')" [options]="getSelectOptions(value)" [(ngModel)]="value.value"
+    optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="[]"
+    [style]="{ width: '250px',  'background-color': backgroundColor }" placeholder="{{getValue()}}"
+    (onChange)="changeList($event, value)" appendTo="body" [disabled]="!canEdit">
     <ng-template pTemplate="option" let-option>
-        <div class="flex items-center justify-center gap-2" >
-            <span class="mr-2 w-[17px] h-[17px] rounded-full" 
-                [style.backgroundColor]="option.color"
-            ></span>
+        <div class="flex items-center justify-center gap-2">
+            <span class="mr-2 w-[17px] h-[17px] rounded-full" [style.backgroundColor]="option.color"></span>
             <span>{{ option.value }}</span>
         </div>
     </ng-template>
 </p-cascadeSelect>
 
-<p-cascadeSelect 
-*ngIf="getKind(value.property, 'LIST')"
-    [(ngModel)]="value.value"
-[options]="getSelectOptions(value)" 
-optionLabel="value" 
-optionGroupLabel="name" 
-[optionGroupChildren]="[]" 
-[style]="{ width: '250px',  'background-color': backgroundColor }" 
-placeholder="{{getValue(value)}}"
-(onChange)="changeList($event, value)"
-appendTo="body"
-[disabled]="!canEdit"
->
-<ng-template pTemplate="option" let-option>
-   <div class="flex items-center justify-center gap-2" >
-       <span class="mr-2 w-[17px] h-[17px] rounded-full shadow-md" 
-           [style.backgroundColor]="option.color"
-       ></span>
-       <span>{{ option.value }}</span>
-   </div>
-</ng-template>
+<p-cascadeSelect *ngIf="getKind(value.property, 'LIST')" [(ngModel)]="value.value" [options]="getSelectOptions(value)"
+    optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="[]"
+    [style]="{ width: '250px',  'background-color': backgroundColor }" placeholder="{{getValue()}}"
+    (onChange)="changeList($event, value)" appendTo="body" [disabled]="!canEdit">
+    <ng-template pTemplate="option" let-option>
+        <div class="flex items-center justify-center gap-2">
+            <span class="mr-2 w-[17px] h-[17px] rounded-full shadow-md" [style.backgroundColor]="option.color"></span>
+            <span>{{ option.value }}</span>
+        </div>
+    </ng-template>
 </p-cascadeSelect>
-

@@ -1,29 +1,47 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="typeString != 'addingParticipants'">
 
   <div class="modal">
-    <h4 class="title" >Crie um novo grupo</h4>
-  
+    <h4 class="title">Crie um novo grupo</h4>
+
     <div class="div-name">
       <div class="input-name">
         <p>Nome do grupo</p>
-        <input
-            formControlName="name" 
-            [placeholder]="'Adicione um nome para o grupo'"
-            type="text" 
-        >
+        <input formControlName="name" [placeholder]="'Adicione um nome para o grupo'" type="text">
       </div>
     </div>
-  
+
     <p class="pb-4">Selecionar participantes</p>
     <div class="input-description">
-      <app-card-user [typeString]="'creating'" [width]="'600px'" [height]="'70px'" (user)="selectUsers($event)"
-      [team]="team" class="pt-2"></app-card-user>
+      <ng-container *ngFor="let user of team.users">
+        <app-card-user [typeString]="'creating'" [width]="'600px'" [height]="'70px'" (userEmitter)="selectUsers($event)"
+          [team]="team" class="pt-2" [user]="user"></app-card-user>
+      </ng-container>
     </div>
-  
+
     <div class="div-buttons">
       <div class="buttons">
-        <button class="cancel-button" (click)="closeGroup()">Cancelar</button>
-        <button class="confirm-button" type="submit">Criar grupo</button>
+        <button class="button cancel" (click)="closeGroup()">Cancelar</button>
+        <button class="button confirm" type="submit">Criar grupo</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit2(group)" class="modal-overlay"
+  *ngIf="typeString === 'addingParticipants'">
+  <div class="modal">
+    <p>Adicionar mais participantes</p>
+    <ng-container *ngFor="let user of team.users">
+      <app-card-user [group]="group" [typeString]="'addingParticipants'" [width]="'600px'" [height]="'70px'"
+        (userEmitter)="pushParticipants($event)" [team]="team" class="pt-4" (noMoreParticipants)="noUsers($event)"
+        [user]="user">
+      </app-card-user>
+    </ng-container>
+    <div class="div-buttons">
+      <div class="buttons">
+        <button class="button cancel" (click)="closeGroup()">Cancelar</button>
+        <button class="button confirm" type="submit">Adicionar</button>
       </div>
     </div>
   </div>
@@ -38,4 +56,3 @@
   <app-button [title]="'Copiar Link de Convite'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
     (clickEvent)="copyLink()" />
 </app-modal-warn>
-  

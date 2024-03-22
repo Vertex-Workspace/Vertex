@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { Project } from 'src/app/models/class/project';
+import { Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyList } from 'src/app/models/class/property';
 import { Task, TaskEdit } from 'src/app/models/class/task';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
@@ -15,6 +15,10 @@ import { User } from 'src/app/models/class/user';
 import { TimeInTask } from 'src/app/models/class/timeInTask';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/models/class/chat';
+import { Team } from 'src/app/models/class/team';
+import { Observable } from 'rxjs';
+import { SentToReview } from 'src/app/models/class/review';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-task',
@@ -33,6 +37,8 @@ export class TaskComponent implements OnInit {
 
   @Input() task!: Task;
 
+  @Input() permissions!: Permission[];
+
   canEdit: boolean = false;
 
   taskStep!: Task;
@@ -46,6 +52,16 @@ export class TaskComponent implements OnInit {
   id!: any;
   miniChatOpen: boolean = false;
   chatExpanded: boolean = false;
+  taskInfoDTO: any = {
+    teamName: "",
+    projectName: "",
+    creatorFullName: "",
+    email: "",
+    projectReviewENUM: ""
+  }
+
+  isSending: boolean = false;
+
 
   constructor(private taskService: TaskService,
     private projectService: ProjectService,
@@ -53,53 +69,72 @@ export class TaskComponent implements OnInit {
     private taskHourService: taskHourService,
     private teamService: TeamService,
     private userService: UserService,
-    private route: ActivatedRoute) {
-    console.log(this.canEdit);
+    private route: ActivatedRoute,
+    ) {}
 
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions
-      for (let i = 0; i < permissions.length; i++) {
-        if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
+  selectedComponent: string = 'attachments';
+
+  waitRequest: boolean = false;
+  soloResponsable: boolean = false;
+  checkedReview: boolean = false;
+
+  async ngOnInit() {
+    if(this.task.revisable){
+      this.checkedReview = true;
+    }
+    
+    this.taskService.getTaskInfo(this.task.id).subscribe(
+      (task: any) => {
+        console.log(task);
+        
+        this.taskInfoDTO = task;
+      }
+    );
+    if (this.permissions) {
+      for (const permission of this.permissions) {
+        if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
           this.canEdit = true;
         }
       }
-    })
-
-  }
-
-  selectedComponent: string = 'description';
-
-  async ngOnInit() {
+    }
     this.user = JSON.parse(localStorage.getItem('logged')!);
+    console.log(this.task.taskResponsables!);
+    
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
+
+        //Validates if the user is the creator of the task
+        if(this.task.creator?.user.id == taskResponsable.userTeam.user.id){
+          //The creator doesn't send the task
+          this.soloResponsable = true;
+        }
       }
     });
-
-
-
-    console.log(this.idResponsable);
-
-    await this.getTimeInTask();
-
-    if (this.timeInTask.working) {
-      this.startTimer()
+    
+    if(this.task.taskResponsables!.length == 1){
+      this.soloResponsable = true;
     }
+
+    this.getTimeInTask();
+
+    //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
+    window.onbeforeunload = () => this.ngOnDestroy();
   }
 
 
   async getTimeInTask() {
     this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
       (time: TimeInTask) => {
-
         this.timer = time.timeInTask;
-
         this.seconds = parseInt(time.timeInTask.substring(6, 8));
         this.minutes = parseInt(time.timeInTask.substring(3, 5));
         this.hours = parseInt(time.timeInTask.substring(0, 2));
         this.timeInTask = time;
+        this.waitRequest = true;
+        if (this.timeInTask.working) {
+          this.startTimer()
+        }
       },
       (e: any) => {
         console.log(e);
@@ -110,7 +145,7 @@ export class TaskComponent implements OnInit {
     this.selectedComponent = component;
   }
 
-  async closeModal() {
+  closeModal() {
     this.close.emit();
   }
 
@@ -132,12 +167,22 @@ export class TaskComponent implements OnInit {
     let taskEdit: TaskEdit = {
       id: this.task.id,
       name: this.task.name,
-      description: this.task.description
+      description: this.task.description,
     };
     this.taskService.edit(taskEdit).subscribe(
       (task: Task) => {
         this.task = task;
         this.alertService.successAlert("Tarefa alterada com sucesso!");
+      }
+    );
+  }
+
+  updateTaskRevisable(): void {
+    this.reviewService.setRevisable(this.task.id, this.checkedReview).subscribe(
+      (response) => {;
+      },
+      (error: any) => {
+        this.task.revisable = !this.task.revisable;
       }
     );
   }
@@ -237,7 +282,6 @@ export class TaskComponent implements OnInit {
     this.chatExpanded = !this.chatExpanded;
   }
 
-
   cantEdit() {
     if (!this.canEdit) {
       this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
@@ -267,5 +311,44 @@ export class TaskComponent implements OnInit {
         this.alertService.errorAlert(error.error)
       }
     );
+  }
+
+  sendTask() {
+    this.isSending = true;
+  }
+
+  sentToReviewDescription: string = "";
+  taskAction(bool: boolean) {
+    this.isSending = false;
+    if (bool) {
+      let taskSentToReview: SentToReview = {
+        description: this.sentToReviewDescription,
+        userThatSentReview: {
+          id: this.idResponsable
+        },
+        task: {
+          id: this.task.id
+        }
+      }
+      this.reviewService.sentToReview(taskSentToReview).subscribe(
+        (task: Boolean) => {
+          this.project.tasks = this.project.tasks.filter((task) => task.id != this.task.id);
+          this.alertService.successAlert("Tarefa enviada para revisão com sucesso!")
+          this.closeModal();
+        },
+        (error: any) => {
+          this.alertService.errorAlert(error.error)
+        }
+      );
+
+    }
+  }
+
+  isCreator(): boolean {
+    return this.task.creator?.user.id == this.user.id;
+  }
+
+  isRevisable(): boolean{
+    return this.taskInfoDTO.projectReviewENUM == ProjectReview.OPTIONAL;
   }
 }

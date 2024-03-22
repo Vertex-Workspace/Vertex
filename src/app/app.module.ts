@@ -29,7 +29,6 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { AlertService } from './services/alert.service';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
-import { GroupsSelectComponent } from './components/modals/groups-select/groups-select.component';
 import { GroupsSelectModule } from './components/modals/groups-select/groups-select.module';
 import { ProjectsModule } from './pages/projects/projects.module';
 import { MinichatModule } from './components/modals/minichat/minichat.module';
@@ -45,7 +44,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

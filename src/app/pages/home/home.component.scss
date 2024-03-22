@@ -31,20 +31,18 @@ section{
 }
 
 .functionally-items {
-    @apply flex flex-col w-full h-full pt-4 justify-between;
+    @apply flex flex-row w-full h-full justify-between;
 }
 
 .functionally-items-task {
-    @apply flex flex-row w-full h-full pt-4 justify-between;
+    @apply flex flex-row w-full pt-4 justify-between;
 
     .filter-items {
         @apply flex;
     }
 
 }
-
-.functionally-items, .functionally-items-task {
-
+.functionally-items-task {
 
     .filter-items {
         @apply flex gap-2;
@@ -77,7 +75,7 @@ section{
         text-lg p-3 rounded font-light border-2 transition-colors;
     }
     .search {
-        @apply w-1/2 h-full flex items-center justify-between bg-white p-3
+        @apply w-96 h-14 flex items-center justify-between bg-white p-3
         rounded shadow-md border-none;
 
         i {
@@ -107,17 +105,17 @@ section{
     background-color: $secondColor;
 }
 
-    .container-grid{
-        @apply flex flex-col h-[90%] w-full pt-4 ;
-    }
-    .default-size{
-        @apply flex w-full flex-col;
-    }
+.container-grid{
+    @apply flex flex-col h-[90%] w-full pt-4 ;
+}
+.default-size{
+    @apply flex w-full  flex-col;
+}
 
 
 // TASK - FILTER ORDER
 .filter-settings {
-    @apply flex gap-3 h-[5%] justify-start;
+    @apply flex gap-3 h-[5%] mt-6 justify-start;
 
     p {
         color: $primaryColor;

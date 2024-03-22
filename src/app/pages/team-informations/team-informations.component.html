@@ -14,7 +14,7 @@
                     </h3>
                     <div class="divMembers">
                         <p class="medium-text">{{getMembersQtt()}} {{getMembersQtt() === 1 ? "membro" : "membros"}}</p>
-                        <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
+                        <fa-icon class="iconLink" [icon]="faLink" (click)="copyInviteLink()"></fa-icon>
                         <p class="medium-text">Copiar link de convite</p>
                     </div>
 
@@ -24,47 +24,44 @@
 
             <div class="high-div-members">
                 <div class="div-members">
-                    <h5>Membros da equipe</h5>
-                    <div class="members ">
+                    <div class="members">
                         <ng-container *ngFor="let item of menuItems">
-                            <label class="gap-3 " [ngClass]="clicked === item.id ? 'clicked' : 'default'">
-                                <i class="{{ item.iconClass }}" style="font-size: 1rem"></i>
-                                <button routerLink="[item.id]" (click)="changePreviewMode(item.id)">
-                                    {{ item.label }}
-                                </button>
-                            </label>
+                            <button [ngClass]="item.clicked === true ? 'clicked' : 'default'" routerLink="[item.id]"
+                                (click)="changePreviewMode(item.id)">
+                                <i class="{{ item.iconClass }}" style="font-size: 1.25rem"></i>
+                                {{ item.label }}
+                            </button>
                         </ng-container>
                     </div>
-                    <div class="emptyDiv" (click)="sla()"></div>
                 </div>
 
                 <div class="high-listDiv-members">
-                    <div class="listDiv-members">
-                        <p class="large-text" *ngIf="clicked == 'participants'">Participantes</p>
-                        <p class="large-text" *ngIf="clicked == 'groups'">Grupos</p>
-                        <p> | </p>
-                        <div (click)="copyInviteLink()" class="flex gap-5 items-center">
-                            <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
-                            <p>Copiar link de convite</p>
-                        </div>
+                    <div class="search">
+                        <input type="text" placeholder={{placeholder}}>
+                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
-
-                    <div>
-                        <fa-icon class="iconLink" [icon]="faSearch"></fa-icon>
-                    </div>
+                    <button class="clicked" (click)="openModalCreateGroup()" *ngIf="clicked === 'groups'">
+                        <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                        Novo grupo</button>
                 </div>
             </div>
 
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
-                <app-card-user [width]="'800px'" [height]="'90px'" [typeString]="'permissions'"
-                (deleteEmitterUserTeam)="deleteUserTeam($event)" [team]="team"></app-card-user>
-            </div>  
-
-            <div *ngIf="clicked == 'groups'" class="grid-permissions">
-                <app-card-group [team]="team" [width]="'800px'" [height]="'90px'" (emitterItem)="deleteGroup($event)"></app-card-group>
+                <ng-container *ngFor="let user of team.users">
+                    <app-card-user [width]="'370px'" [height]="'90px'" [typeString]="'permissions'"
+                        (deleteEmitterUserTeam)="openModalDeleteUser($event)" [team]="team" [user]="user"></app-card-user>
+                </ng-container>
             </div>
-            
+
+            <div *ngIf="clicked == 'groups'" class="grid-group">
+                <ng-container *ngFor="let group of team.groups">
+                    <app-card-group [team]="team" [width]="'800px'" [height]="'90px'"
+                        (emitterItem)="deleteGroup($event)" [group]="group">
+                    </app-card-group>
+                </ng-container>
+            </div>
+
         </div>
 
         <!-- =============================================================================================== -->
@@ -124,3 +121,12 @@
         </div>
     </div>
 </section>
+
+
+<app-confirm-modal *ngIf="deleteUser" [width]="'450px'" [height]="'250px'" [title]="'o usuário da equipe'"
+    (confirmEvent)="deleteUserTeam($event)">
+</app-confirm-modal>
+
+<app-create-group style="width: 100%; height: 500px; padding-top: 3%;" *ngIf="createGroupModal" [team]="team"
+    (close)="switchCreateViewGroup()" (createGroup)="createGroup($event)">
+</app-create-group>

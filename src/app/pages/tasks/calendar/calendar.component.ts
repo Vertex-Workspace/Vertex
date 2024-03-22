@@ -25,6 +25,7 @@ export class CalendarComponent {
   faCircleUser = faCircleUser;
 
   @Input() project!: Project;
+  @Input() permissions!: Permission[];
   day: any;
 
   canCreate: boolean = false;
@@ -37,31 +38,17 @@ export class CalendarComponent {
     private projectService: ProjectService,
     private teamService: TeamService,
     private alert: AlertService) {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.projectService
-      .getOneById(id)
-      .subscribe((p: Project) => {
-        this.project = p;
-
-        this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-          this.userService.getLogged().permissions = permissions;
-
-          for (let i = 0; i < permissions.length; i++) {
-            if ((permissions[i].name === PermissionsType.CREATE) && permissions[i].enabled === true) {
-              this.canCreate = true;
-            } else if ((permissions[i].name === PermissionsType.EDIT) && permissions[i].enabled === true) {
-              this.canEdit = true;
-            }
-          }
-        });
-      })
   }
 
-  ngOnInit() {
+  ngOnInit() {  
+    for (const permission of this.permissions) {
+      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+        this.canEdit = true;
+      }else if ((permission.name === PermissionsType.CREATE) && permission.enabled) {
+        this.canCreate = true;
+      }
+    }
     this.buildCalendar();
-    this.groupCalendarDays();
-    this.teste();
   }
 
   plus: boolean = false;
@@ -75,15 +62,6 @@ export class CalendarComponent {
     this.openTaskDetails.emit(task);
   }
 
-  teste(): void {
-    const projectId: number = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.taskService
-      .getAllByProject(projectId)
-      .subscribe((tasks: Task[]) => {
-        this.tasks = tasks;
-      })
-  }
 
   //FUTURE 
   buttonDay!: Date;
@@ -157,13 +135,12 @@ export class CalendarComponent {
     ) {
       this.calendarDays.push(new Date(date.getTime()));
     }
+    this.groupCalendarDays();
   }
 
   changeMonth(offsetMes: number) {
     this.currentDate.setMonth(this.currentDate.getMonth() + offsetMes);
     this.currentDate = new Date(this.currentDate.getTime());
-    console.log(this.currentDate);
-    
     this.buildCalendar();
   }
 
@@ -312,7 +289,8 @@ export class CalendarComponent {
                 //SLICE RETIRAR O "Z" NO FINAL
                 value: day.toISOString().slice(0, -1)
               }
-            }
+            },
+            userID: this.userService.getLogged().id!
           };
 
           this.taskService.patchValue(valueUpdate).subscribe(

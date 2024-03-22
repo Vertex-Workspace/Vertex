@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Team } from 'src/app/models/class/team';
-import { faCaretDown, faCaretUp, faTrashCan, faCirclePlus} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretDown, faCaretUp, faTrashCan,
+  faCirclePlus, faComment
+} from '@fortawesome/free-solid-svg-icons';
 import { Group } from 'src/app/models/class/groups';
 import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
@@ -21,6 +24,7 @@ export class CardGroupComponent {
   faCaretUp = faCaretUp;
   faTrashCan = faTrashCan;
   faCirclePlus = faCirclePlus
+  faComment = faComment
 
   @Output()
   close = new EventEmitter<Event>();
@@ -50,12 +54,15 @@ export class CardGroupComponent {
 
   groupToDelete?: Group
 
+  noUsers ?: boolean
+
   constructor(
     private groupService: GroupService,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private userService: UserService
   ) {
     this.getTeam()
   }
@@ -73,9 +80,10 @@ export class CardGroupComponent {
   }
 
   ngOnInit(): void {
+    this.getUsesrByGroup()
+
     this.selectMoreUsers = true
     this.team = this.getTeam();
-    console.log(this.team);
 
     this.form = this.formBuilder.group({
       users: [null, this.users]
@@ -97,30 +105,6 @@ export class CardGroupComponent {
     this.selectMoreUsers = !this.selectMoreUsers
   }
 
-  pushParticipants(user: User): void {
-    this.users.push(user)
-  }
-
-  onSubmit(group: Group): void {
-    console.log("entrei");
-    this.groupService.getGroupById(group.id).subscribe((group: Group) => {
-      this.group = group;
-    });
-    group.users = this.users;
-    console.log(group);
-
-    this.groupService
-      .addParticipants(group)
-      .subscribe((group: Group) => {
-        //calls addPartcipants to back to normal state of card
-        this.addParticipants();
-        this.alertService.successAlert("adicionado")
-      },
-        e => {
-          this.alertService.errorAlert("erro")
-        });
-  }
-
   @Output()
   emitterItem = new EventEmitter<Group>();
 
@@ -129,10 +113,48 @@ export class CardGroupComponent {
     this.groupToDelete = item
   }
 
+  userToDelete !: User
+  deleteUser?: boolean
+
+  openModalDeleteUser(event: any) {
+    this.userToDelete = event
+    this.deleteUser = true
+  }
+
   emitItem(event: boolean) {
     if (event) {
       this.emitterItem.emit(this.groupToDelete)
     }
     this.delete = false;
   }
+
+  removeUser(event: boolean): void {
+     if (event) {
+      this.groupService.deleteUserFromGroup(this.userToDelete, this.team.id, this.group.id)
+        .subscribe((group: Group) => {
+          this.alertService.successAlert(`Usuário retirado do grupo`)
+          this.updateGroup(group)
+        },
+          e => {
+            this.alertService.errorAlert('Não foi possível retirar o usuário do grupo ')
+          }
+        )
+    }
+    this.deleteUser = false
+  }
+
+  updateGroup(group: Group){
+    this.groupService.getGroupById(group.id).subscribe((group:Group) => {
+      this.group = group;
+    })
+  }
+
+  getUsesrByGroup(){
+    for (const group of this.getGroup()) {
+      this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+        group.users = users;
+      });
+    }
+  }
+
 }

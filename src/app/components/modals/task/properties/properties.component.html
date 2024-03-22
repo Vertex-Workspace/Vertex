@@ -1,13 +1,22 @@
 <div class="base">
     <table>
         <tr>
+            <td>
+                <div>
+                    <fa-icon ></fa-icon>
+                    <p>Responsáveis</p>
+                </div>
+                <div>
+                    <!-- <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property> -->
+                </div>
+            </td>
             <td *ngFor="let value of task.values">
                 <div>
                     <fa-icon [icon]="getIcon(value)"></fa-icon>
                     <p>{{value.property.name}}</p>
                 </div>
                 <div>
-                    <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="getColor(value)"></app-input-value-property>
+                    <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property>
                 </div>
             </td>
         </tr>

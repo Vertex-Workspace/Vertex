@@ -9,21 +9,30 @@ import { MinichatModule } from '../minichat/minichat.module';
 import { MinichatTASKModule } from '../minichat-task/minichat-task.module';
 import { PropertiesModule } from './properties/properties.module';
 import { MenuModule } from 'primeng/menu';
+import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
+import { AttachmentsComponent } from 'src/app/components/modals/task/attachments/attachments.component';
+import { AttachmentItemComponent } from '../../reusable-components/attachment-item/attachment-item.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
     TaskComponent,
     CommentsComponent,
-    LogComponent
+    LogComponent,
+    AttachmentsComponent,
+    AttachmentItemComponent
+    
   ],
   exports: [TaskComponent],
   imports: [
-    CommonModule,
+      CommonModule,
      FontAwesomeModule, 
      FormsModule, 
      MinichatTASKModule,
      PropertiesModule,
-     MenuModule
+     MenuModule,
+     ConfirmModalModule,
+     CheckboxModule
     ],
 })
 export class TaskModule { }

@@ -7,6 +7,7 @@
   [style.backgroundColor]="note.color"
   cdkDrag 
   cdkDragBoundary=".mural-section"
+  [cdkDragFreeDragPosition]="getNotePosition()"
   (cdkDragEnded)="dragEnd($event)"
 >
   <span #dragHandleCorner class="dragHandle corner" cdkDrag (cdkDragMoved)="dragMove(dragHandleCorner, $event)"></span>
@@ -17,20 +18,31 @@
     <div class="left">
       <h6>{{ note.title }}</h6>
       
-      <div class="text regular-text">
-        <p>
-          {{ note.description && note.description 
-            || "Sem descrição." }}
+      <div class="text relative" >
+        <p #description>
+          {{ note.description }}
         </p>
       </div>
-    </div>
-
-    <div class="right">
-      <div class="date small-text">
-        12/12/2020
+      <div class="image-container">
+        <ng-container *ngFor="let file of note.files">
+          <div class="single-image">
+            <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]">
+          </div>
+        </ng-container>
       </div>
 
-      <div class="icons" [style.backgroundColor]="note.color">
+      <div class="overflow-button"
+      [style.backgroundColor]="note.color"
+    >
+        <button *ngIf="isOverflowing(description)">
+          Visualizar tudo
+        </button>
+
+      </div>
+
+    <div class="right">
+
+      <div class="icons">
         <ng-container *ngFor="let item of configItems">
           <i 
             (click)="item.onClick()"
@@ -40,6 +52,7 @@
         </ng-container>
       </div>
     </div>
+  </div>
   </span>
 </div>
 
@@ -47,4 +60,7 @@
   *ngIf="modalOpen"
   [note]="note"
   (closeModal)="toggleModalOpen()"
+  (patchOutput)="edit()"
+  (uploadImageOutput)="uploadImage($event)"
+  (removeImageOutput)="removeImage($event)"
 ></app-note-modal>

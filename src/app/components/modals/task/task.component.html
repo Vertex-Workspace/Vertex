@@ -1,27 +1,35 @@
 <div class="modal-overlay">
-    <div class="base">
+    <div class="base" *ngIf="waitRequest">
         <div class="location">
             <div class="routes regular-text">
-                <p>Nome da equipe</p>
-                <p>{{task.name}}</p>
+                <p>{{taskInfoDTO.teamName}}</p>
+                <p>{{taskInfoDTO.projectName}}</p>
             </div>
-
             <div class="div-timer-closeModal">
-                <div class="text-black">Tempo na tarefa:</div>
-                <div class="div-timer">
-                    <fa-icon [icon]="faClock"></fa-icon>
-                    <p>{{timer}}</p>
+                <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable">
+                    <button (click)="sendTask()" id="red-btn" [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
+                        [disabled]="timeInTask.working">
+                        Entregar Tarefa
+                    </button>
+                </div>
+                <div class="flex flex-row gap-2" *ngIf="isCreator() && isRevisable()">
+                    <p-checkbox [(ngModel)]="checkedReview" [binary]="true" inputId="binary"
+                        (click)="updateTaskRevisable()"></p-checkbox>
+                    <p class="regular-text self-start">Obrigar Revisão</p>
                 </div>
                 <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
             </div>
         </div>
         <div class="informations">
             <div class="side">
-                <div class="title">
-                    <h4 (click)="cantEdit()"><input (blur)="updateTaskNameAndDescription()" [disabled]="!canEdit" [(ngModel)]="task.name" type="text" name="name" id="name" value="{{task.name}}"></h4>
+                <div>
+                    <h4 (click)="cantEdit()"><input (blur)="updateTaskNameAndDescription()" [disabled]="!canEdit"
+                            [(ngModel)]="task.name" type="text" class="title" name="name" id="name"
+                            value="{{task.name}}"></h4>
                 </div>
                 <div class="properties">
-                    <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)" [canEdit]="canEdit" />
+                    <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)"
+                        [permissions]="permissions" />
                 </div>
                 <div class="down relative">
                     <div class="buttons">
@@ -45,12 +53,14 @@
                         <span>|</span>
                         <a (click)="navigate('log')"
                             [style.background]="'log' === selectedComponent ? '#D6D6D6' : 'inherit'">Histórico</a>
+                        <span>|</span>
+                        <a (click)="navigate('attachments')"
+                            [style.background]="'attachments' === selectedComponent ? '#D6D6D6' : 'inherit'">Anexos</a>
                     </ul>
                 </nav>
-                <div class="components">
+                <div class="components overflow-auto">
                     <div *ngIf="selectedComponent === 'description'" class="flex flex-col">
-                        <textarea [disabled]="!descriptionEditable"
-                            [style.background]="'#f5f5f5'"
+                        <textarea [disabled]="!descriptionEditable" class="task-description"
                             [(ngModel)]="task.description">{{task.description}}</textarea>
                         <div class="button">
                             <button *ngIf="!descriptionEditable" (click)="changeEditDescription()">Editar
@@ -60,15 +70,55 @@
                         </div>
                     </div>
 
-                    <app-comments [task]="task" *ngIf="selectedComponent === 'comments'" style="width: 100%; height: 100%;"/>
+                    <app-comments [task]="task" *ngIf="selectedComponent === 'comments'"
+                        style="width: 100%; height: 100%;" />
 
                     <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
+
+                    <app-attachments [task]="task" *ngIf="selectedComponent === 'attachments'" 
+                        style="width: 100%; height: 100%;"
+                    />
                 </div>
-                <div class="submit">
-                    <button *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar na Tarefa</button>
-                    <button id="red-btn" *ngIf="timeInTask.working" (click)="stopTimer()">Finalizar Tarefa</button>
+                <div class="submit gap-3 rounded-sm">
+                    <!-- IF THE TASK HAS ONLY ONE RESPONSIBLE, THE BUTTON OF WORK WILL BE ON SOUTH -->
+                    <span class="div-timer">
+                        <fa-icon [icon]="faClock"></fa-icon>
+                        <p>{{timer}}</p>
+                    </span>
+                    <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar
+                        na
+                        Tarefa</button>
+                    <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
+                        (click)="stopTimer()">Encerrar
+                        Trabalho</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<app-confirm-modal *ngIf="isSending" [title]="' entregar a tarefa para análise'" [height]="'450px'" [width]="'400px'"
+    (confirmEvent)="taskAction($event)" [buttonText]="'Enviar Tarefa'">
+    <ng-container #content>
+        <div class="flex flex-col w-full justify-start items-start pt-5">
+            <p class="regular-text">Revisador(a):</p>
+            <div class="regular-text">
+                <p class="text-start">{{taskInfoDTO.creatorFullName}}</p>
+                <p class="text-start">{{taskInfoDTO.email}}</p>
+            </div>
+            <div class="flex w-full h-24 pt-5">
+                <textarea name="description" placeholder="Descrição da tarefa finalizada..." id="description"
+                    class="flex w-full h-full text-area-send-task" [(ngModel)]="sentToReviewDescription"></textarea>
+            </div>
+        </div>
+    </ng-container>
+</app-confirm-modal>
+
+
+
+<!-- 
+                        <div class="flex flex-col h-12">
+                        <p>{{taskInfoDTO.creatorFullName}}</p>
+                        <p>{{taskInfoDTO.email}}</p>
+                    </div>
+ -->

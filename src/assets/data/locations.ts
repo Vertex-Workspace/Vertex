@@ -10,14 +10,6 @@ export const locations: LocationItem[] = [
         name: 'Home',
     },
     {
-        url: '/projetos',
-        name: 'Projetos de',
-    },
-    {
-        url: '/tarefas',
-        name: 'Tarefas de ',
-    },
-    {
         url: '/perfil/usuario',
         name: 'Perfil de ',
     }, 

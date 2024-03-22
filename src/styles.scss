@@ -21,7 +21,6 @@ body {
     margin: 0;
     padding: 0;
     max-width: 100%;
-
 }
 
 fa-icon {
@@ -42,16 +41,12 @@ input:focus {
 /* width */
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-track {
     background: $emphasis;
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -136,4 +131,5 @@ input {
 
 textarea {
     resize: none;
+    outline: none;
 }

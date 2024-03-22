@@ -22,7 +22,7 @@
 }
 
 .menu {
-    @apply flex justify-between pt-16 pb-4;
+    @apply flex justify-between pt-8 pb-4;
     
     div:first-child {
         @apply w-[550px] h-[53px] flex gap-3 ;
@@ -137,6 +137,6 @@
     @apply min-h-[80%];
 }
 
-i {
-    font-size: 1.7rem;
+button > i {
+    font-size: 1.5rem;
 }

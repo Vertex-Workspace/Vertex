@@ -19,7 +19,7 @@ export class PropertiesComponent {
 
   @Input() task!: Task;
   @Input() project !:Project
-  @Input() canEdit !: boolean
+  @Input() permissions !: Permission[];
 
   constructor(private taskService: TaskService, 
     private alertService : AlertService,
@@ -36,8 +36,17 @@ export class PropertiesComponent {
     { name: 'NUMBER', icon: faListNumeric },
   ]
 
+
+  canEdit: boolean = false;
   ngOnInit(): void {
+    for(const permission of this.permissions){
+      if(permission.name === PermissionsType.EDIT && permission.enabled){
+        this.canEdit = true;
+      }
+    }   
   }
+
+
 
   isSelected(option: any, value: any): boolean {
     return false;

@@ -12,19 +12,20 @@ export class Task {
     description!: string;
     values!: Value[];
     properties!: Property[];
-
+    creator?: {
+        user: {
+            id: number;
+        }
+    }
     comments!: Comment[];
+
+    revisable?: boolean;
 
     //taskHour
     taskResponsables?:TaskResponsable[];
     step?: number;
 
-
-    //mural
-    width?: string;
-    height?: string;
-    top?: string;
-    left?: string;
+    files: any[];
 
     //Chat
     chat?:Chat;
@@ -42,6 +43,8 @@ export class Task {
         this.description = task.description;
         this.values = task.values;
         this.properties = task.properties;
+        this.files = task.files;
+        this.revisable = task.revisable;
     }
 
 }
@@ -64,4 +67,20 @@ export class TaskEdit {
     id!:number;
     name!: string;
     description!: string;
+    revisable?: boolean;
+}
+
+
+export class TaskWaitingToReview {
+    id!: number;
+    name!: string;
+    description!: string;
+    // values!: Value[];
+    reviewHours!: any[];
+    sender!: {
+        finalDescription: string;
+        username: string;
+        email: string;
+        date: Date;
+    }
 }
