@@ -114,6 +114,8 @@ export class TaskComponent implements OnInit {
 
     //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
     window.onbeforeunload = () => this.ngOnDestroy();
+    console.log(this.task.id);
+    
   }
 
 

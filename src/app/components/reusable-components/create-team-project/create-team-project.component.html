@@ -12,8 +12,8 @@
         <p>{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
         <input formControlName="name" type="text"
           [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
-          *ngIf="projectNull">
-        <input formControlName="name" type="text" *ngIf="!projectNull"  [(ngModel)]="name">
+          *ngIf="typeString != 'projectInfo'">
+        <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'"  [(ngModel)]="name">
       </div>
       <div class="input-image">
         <div class="image relative">
@@ -28,9 +28,9 @@
 
     <div class="input-description" *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
       <p>{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
-      <textarea formControlName="description" *ngIf="projectNull"
+      <textarea formControlName="description" *ngIf="typeString != 'projectInfo'"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
-      <textarea formControlName="description" *ngIf="!projectNull"
+      <textarea formControlName="description" *ngIf="typeString === 'projectInfo'"
         [(ngModel)]="description"></textarea>
     </div>
 
@@ -39,7 +39,7 @@
     placeholder="Atribue responsáveis ao projeto"
     [(ngModel)]="selectedUsers">
     <ng-template let-node pTemplate="default">
-      <span [ngClass]="isUserSelected(node) ? 'selected-node' : ''">{{node.label}}</span>
+      <span>{{node.label}}</span>
     </ng-template>
   </p-treeSelect>
 
@@ -52,9 +52,9 @@
     <div class="div-buttons">
       <div class="buttons" *ngIf="projectNull">
         <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">Cancelar</button>
-        <button class="confirm-button" type="submit" *ngIf="projectNull">Confirmar</button>
+        <button class="confirm-button" type="submit" *ngIf="typeString != 'projectInfo'">Confirmar</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="!projectNull" (click)="updateProject()">Editar</button>
+      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'" (click)="updateProject()">Editar</button>
     </div>
   </div>
 </form>

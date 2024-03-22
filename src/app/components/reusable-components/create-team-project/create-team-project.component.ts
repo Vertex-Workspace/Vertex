@@ -82,9 +82,25 @@ export class CreateTeamProjectComponent implements OnInit {
     });
   }
 
+  listOfResponsibles: TreeNode[] = []
+  selectedUsers: TreeNode[] = [];
+
   ngOnInit(): void {
     this.projectExists()
-    // this.markCollaboratorsAsSelected();
+    
+    this.userService.getUsersByTeam(this.project.idTeam).subscribe((users: User[]) => {
+      this.listOfResponsibles = users
+
+      for(const user of users){
+        this.projectService.getProjectCollaborators(this.project.id).subscribe((users1: User[]) => {
+          for(const user1 of users1){
+            if(user.id === user1.id){
+              this.selectedUsers.push(user)
+            }
+          }
+        })
+      }
+    })
   }
 
   projectNull: boolean = true;
@@ -96,8 +112,8 @@ export class CreateTeamProjectComponent implements OnInit {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
-      this.getGroups(this.project.idTeam)
-      this.getUsers(this.project.idTeam);
+      // this.getGroups(this.project.idTeam)
+      // this.getUsers(this.project.idTeam);
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       this.getGroups(teamId);
@@ -230,8 +246,6 @@ export class CreateTeamProjectComponent implements OnInit {
     this.closeScreen();
   }
 
-  listOfResponsibles: TreeNode[] = []
-
   private getUsers(teamId: number): void {
 
     this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
@@ -239,11 +253,6 @@ export class CreateTeamProjectComponent implements OnInit {
       for (const user of users) {
         user.icon = 'pi pi-user'
         this.listOfResponsibles.push(user);
-      }
-      if (this.project != null) {
-        this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
-          this.markCollaboratorsAsSelected(users)
-        })
       }
     });
   }
@@ -258,9 +267,6 @@ export class CreateTeamProjectComponent implements OnInit {
           group.children = users
           group.icon = 'pi pi-users'
           this.listOfResponsibles.push(group)
-          if (this.project != null) {
-            this.markCollaboratorsAsSelected(groups)
-          }
         })
       }
     });
@@ -272,36 +278,19 @@ export class CreateTeamProjectComponent implements OnInit {
     { name: 'Revisão opcional' }
   ]
 
-  selectedUsers: TreeNode[] = [];
-
-  markCollaboratorsAsSelected(usersAndGroups: any[]): void {
-    this.selectedUsers = [];
-  
-    usersAndGroups.forEach(item => {
-      if (item instanceof User) {
-        let collaborator: User = item as User;
-        collaborator.selected = true; // Definindo como selecionado
-        this.selectedUsers.push({ label: collaborator.firstName, data: collaborator});
-      } else if (item instanceof Group) {
-        let group: Group = item as Group;
-        group.selected = true; // Definindo como selecionado
-        this.selectedUsers.push({ label: group.name, data: group});
-      }
-    });
-    console.log(this.selectedUsers);
-    
-  }
-
   updateProject(): void {
     let project = this.form.getRawValue() as Project;
     let list: User[] = []
-
+  
     const projectEdit: ProjectEdit = {
       id: this.project?.id,
       name: project.name,
       description: project.description,
       listOfResponsibles: project.listOfResponsibles
     }
+
+    console.log(project.listOfResponsibles);
+    
 
     projectEdit.listOfResponsibles!.forEach((type => {
       if (type instanceof Group) {
@@ -343,15 +332,5 @@ export class CreateTeamProjectComponent implements OnInit {
     console.log("dei emit");
     this.senderEmitter.emit(project);
   }
-
-  click(node: any){
-    console.log(node);
-  }
-
-  isUserSelected(node: TreeNode): boolean {
-    const user = node.data as User;
-    return true;
-  }
-
 
 }

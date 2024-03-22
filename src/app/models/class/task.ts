@@ -82,5 +82,5 @@ export class TaskWaitingToReview {
 export class UpdateResponsibles {
     taskId !: number;
     teamId!: number;
-    taskResponsableList: User[] = []
+    user !: User
 }

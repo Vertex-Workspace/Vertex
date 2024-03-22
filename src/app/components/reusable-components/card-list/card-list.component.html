@@ -32,5 +32,5 @@
 </div>
 
 <app-create-team-project [project]="project" *ngIf="openModal" [typeString]="'projectInfo'"
-[team]="team">
+[team]="team" (close)="close()">
 </app-create-team-project>

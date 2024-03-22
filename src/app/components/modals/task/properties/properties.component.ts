@@ -69,12 +69,6 @@ export class PropertiesComponent {
     }
   }
 
-
-
-  isSelected(option: any, value: any): boolean {
-    return false;
-  }
-
   @Output() changes = new EventEmitter();
 
   changeTask(event: Task): void {
@@ -99,17 +93,22 @@ export class PropertiesComponent {
     return "";
   }
 
-  updateResponsible(selectedUsers : any[]): void {
+  updateResponsible(user : any): void {
+    console.log("entrei");
+    
     const taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,
       teamId: this.project.idTeam,
-      taskResponsableList: selectedUsers
+      user: user
     }
 
-    this.task.taskResponsables = selectedUsers
     this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
        this.alertService.successAlert("editado")
     })
+  }
+
+  clickNode(node: any){
+    console.log(node);
   }
 
 }
