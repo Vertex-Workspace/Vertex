@@ -147,6 +147,7 @@ export class KanbanComponent {
 
   deleteTask(task: Task): void {
     this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+    
   }
 
   @Output() openTaskDetails = new EventEmitter();

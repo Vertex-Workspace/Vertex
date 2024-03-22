@@ -59,20 +59,18 @@ export class ChatComponent {
 
 
   constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
-
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
     this.teamService.findAllChats().subscribe((chats: Chat[]) => {
       chats.forEach((chat: Chat) => {
         chat.userTeams!.forEach((userTeam) => {
           if (userTeam.user.id == this.logged.id) {
-            if(chat.userTeams!.length > 1){
+            if (chat.userTeams!.length > 1) {
               this.conversations.push(chat);
             }
           }
         });
       });
     });
-
   }
 
   showEmojiPicker: boolean = false;
@@ -100,7 +98,6 @@ export class ChatComponent {
 
   sendMessage(sendForm: NgForm) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
-
 
     const messageDto: Message = {
       user: this.logged.firstName,
@@ -225,10 +222,7 @@ export class ChatComponent {
   }
 
   generateTime(message: Message) {
-    let minutes = new Date(message.time!).getMinutes();
-    if (minutes < 10) {
-      return new Date(message.time!).getHours() + ":0" + new Date(message.time!).getMinutes();
-    } else return new Date(message.time!).getHours() + ":" + new Date(message.time!).getMinutes();
+    return new Date(message.time!).toLocaleString();
   }
 
   openConversation(chat: Chat) {
@@ -250,6 +244,5 @@ export class ChatComponent {
   minimizeChat(value: boolean) {
     this.chatExpanded.emit(value);
   }
-
 
 }

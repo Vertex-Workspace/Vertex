@@ -98,7 +98,7 @@
 
                         <div *ngIf="!message.file"
                             [ngClass]="logged.firstName!==message.user ? 'message-bubble-left' : 'message-bubble-right'">
-                            <p class="text-base">{{ message.contentMessage }}</p>
+                            <p class="text-base whitespace-pre-wrap">{{ message.contentMessage }}</p>
                             <p [ngClass]="message.user !== logged.firstName ? 'timestamp' : 'timestamp text-right'">{{
                                 generateTime(message) }}</p>
                         </div>

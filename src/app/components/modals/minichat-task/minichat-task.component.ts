@@ -47,9 +47,7 @@ export class MinichatTASKComponent {
   logged!: User;
 
   constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
-    
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
-    
   }
 
   showEmojiPicker: boolean = false;
@@ -57,16 +55,21 @@ export class MinichatTASKComponent {
     this.showEmojiPicker = !this.showEmojiPicker;
   }
 
+  scrollToBottom(){
+    setTimeout(() => {
+      let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
+      a.scrollTop = a.scrollHeight;
+    }, 0);
+  }
+
   ngOnInit() {
     this.webSocketService.openWebSocket();
     this.webSocketService.listenToServer().subscribe((change) => {
       this.chat.messages!.push(change);
-      setTimeout(() => {
-        let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
-        a.scrollTop = a.scrollHeight;
-      }, 0);
+      this.scrollToBottom();
     });
-
+    this.scrollToBottom();
+    
     console.log(this.chat, "CHAT");
   }
 

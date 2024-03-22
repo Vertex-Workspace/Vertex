@@ -76,7 +76,7 @@
 }
 
 .square-chat {
-    @apply w-[10%] h-[55%] rounded-sm flex items-center justify-center;
+    @apply w-[12%] h-[55%] rounded-sm flex items-center justify-center;
     background-color: $primaryColor;
 }
 
@@ -147,6 +147,7 @@
 
 .message-bubble-left {
     max-width: 70%;
+    min-width: 70px;
     padding: 10px;
     border-radius: 5px;
     background-color: $card;
@@ -157,6 +158,7 @@
 
 .message-bubble-right {
     max-width: 70%;
+    min-width: 70px;
     padding: 10px;
     border-radius: 5px;
     background-color: $primaryColor;
