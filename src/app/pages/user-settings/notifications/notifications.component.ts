@@ -16,17 +16,15 @@ export class NotificationsComponent {
   inputEmail: boolean = false;
 
   tooglesList = [
-    {text: "Atualizações", icon: faToggleOff},
+    {text: "Receber devolutivas de tarefas", icon: faToggleOff},
     {text: "Entrada de novos membros", icon: faToggleOff},
-    {text: "Comentários", icon: faToggleOff},
+    {text: "Comentários e anexos", icon: faToggleOff},
     {text: "Mudança de permissões", icon: faToggleOff},
+    {text: "Enviar notificações por e-mail", icon: faToggleOff},
+    {text: "Atribuições de responsabilidade de projetos e tarefas", icon: faToggleOff}
   ];
 
-  generalTooglesList = [
-    {text: "Enviar notificações por e-mail", icon: faToggleOff},
-    {text: "Receber boletim de histórico diariamente", icon: faToggleOff},
-    {text: "Receber novidades do sistema", icon: faToggleOff},
-  ];
+
 
   emailsList = [
     {email: "kaique@gmail.com"}
@@ -43,16 +41,15 @@ export class NotificationsComponent {
   }
 
   toogleGeneral(item: number): void{
-    if(this.generalTooglesList[item].icon == faToggleOn){
-      this.generalTooglesList[item].icon = faToggleOff;
-    }
-    else if(this.generalTooglesList[item].icon == faToggleOff){
-      this.generalTooglesList[item].icon = faToggleOn;
-    }
+    // if(this.generalTooglesList[item].icon == faToggleOn){
+    //   this.generalTooglesList[item].icon = faToggleOff;
+    // }
+    // else if(this.generalTooglesList[item].icon == faToggleOff){
+    //   this.generalTooglesList[item].icon = faToggleOn;
+    // }
   }
 
   openInput() : void{
     this.inputEmail = !this.inputEmail;
-    console.log(this.inputEmail)
   }
 }

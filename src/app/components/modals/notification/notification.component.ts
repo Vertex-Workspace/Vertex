@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { faArrowUpRightFromSquare, faCircleUser, faClose, faEnvelope, faGear, faGraduationCap, faGripLinesVertical, faHandHoldingDroplet, faSquare, faSquareFull, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Notification } from 'src/app/models/class/notification';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-notification',
@@ -14,180 +16,38 @@ export class NotificationComponent {
   faTrash = faTrash;
   faGear = faGear;
   faSquare = faSquare;
-
+  faCircleUser = faCircleUser;
 
   @Output()
   close = new EventEmitter();
 
   //TEMPORARY LIST TEMPLATE
-  notifications:any[] =[
-    {
-      new: true,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: true,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: true,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-    {
-      new: false,
-      icon: faCircleUser,
-      isSelected: false,
-      author: "Kaique",
-      action: "atribuiu você ao",
-      team: "AKMO",
-      project: "AKMO",
-      date: new Date(2023, 10, 15),
-      moreInformations: false
-    },
-  ]
+  notifications: Notification[] = []
+
+  constructor(private userService: UserService) {
+
+  }
+
+  ngOnInit() {
+    this.userService.getNotifications(this.userService.getLogged().id!).subscribe(
+      (notifications: Notification[]) => {
+        this.notifications = notifications;
+        console.log(notifications);
+        
+      });
+  }
 
   searchBarOpen: boolean = false;
   query: string = "";
   toggleSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;
-  } 
-  
-  checkbox:boolean = false;
-  changeSelectedState(notification: any):void{
+  }
+
+  checkbox: boolean = false;
+  changeSelectedState(notification: any): void {
     notification.isSelected = !notification.isSelected;
   }
-  changeSelectedStateAll():void{
+  changeSelectedStateAll(): void {
     this.checkbox = !this.checkbox;
     this.notifications.forEach((notification) => {
       notification.isSelected = this.checkbox;
@@ -195,16 +55,40 @@ export class NotificationComponent {
   }
 
 
-  notificationDetails(notification:any):void{
+  notificationDetails(notification: any): void {
     //Logic
   }
 
-  hasChecked():boolean{
-    return this.notifications.some( (notification) => notification.isSelected);
+  hasChecked(): boolean {
+    return this.notifications.some((notification) => notification.isSelected);
   }
 
-  closeNotification(): void{
+  closeNotification(): void {
     console.log("close");
     this.close.emit();
+  }
+
+  getDate(date: Date): any {
+    return new Date(date).toLocaleString();
+  }
+
+  archiveNotifications(): void {
+    const notifications = this.notifications.filter((notification) => notification.isSelected);
+
+    this.userService.archiveNotifications(this.userService.getLogged().id!, notifications).subscribe(
+      (response) => {
+        this.notifications.forEach((notification) => {
+          if (notification.isSelected) {
+            notification.isRead = true;
+            notification.isSelected = false;
+            
+          }
+        }
+        );
+        console.log(notifications);
+      },
+      (error) => {
+        console.log(error);
+      });
   }
 }

@@ -4,10 +4,12 @@
     from {
       width: 0;
       opacity: 1;
+      overflow: hidden;
     }
     to {
       width: 25%;
       opacity: 1;
+      overflow: hidden;
     }
 }
 
@@ -88,15 +90,27 @@ overflow: hidden;
                 @apply flex flex-row items-center justify-between;
 
                 .iconUser>fa-icon {
-                    @apply flex text-5xl rounded-full pl-5;
+                    @apply flex rounded-full pl-5;
+                    font-size: 35px;
+                
                     color: $primaryColor;
                 }
 
                 .description {
                     @apply flex flex-col pl-4;
+                    
+                    p{
+                        word-wrap: break-word;
+                        @apply w-[300px];
+                    }
+                    div{
+                        word-wrap: break-word;
+                        @apply w-[300px];
+                    }
                 }
 
                 .color {
+                    font-size: 20px;
                     color: $primaryColor;
                 }
             }

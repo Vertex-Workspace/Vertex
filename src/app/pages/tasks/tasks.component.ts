@@ -57,6 +57,7 @@ export class TasksComponent implements OnInit {
     private noteService: NoteService,
     private reviewService: ReviewService
   ) {
+    this.logged = this.userService.getLogged();
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     this.projectId = id
   }
