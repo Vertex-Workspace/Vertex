@@ -125,6 +125,8 @@ export class TasksComponent implements OnInit {
     // { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
   ];
 
+  
+
   toggleSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;
   }

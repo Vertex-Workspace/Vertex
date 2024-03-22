@@ -126,7 +126,7 @@ overflow: hidden;
         }
 
         .notification:hover {
-            @apply cursor-pointer bg-white;
+            background-color: $card;
         }
 
         .openedNotification {

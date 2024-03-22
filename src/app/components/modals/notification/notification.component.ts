@@ -33,7 +33,7 @@ export class NotificationComponent {
       (notifications: Notification[]) => {
         this.notifications = notifications;
         console.log(notifications);
-        
+
       });
   }
 
@@ -72,20 +72,30 @@ export class NotificationComponent {
     return new Date(date).toLocaleString();
   }
 
-  archiveNotifications(): void {
+  readNotifications(): void {
     const notifications = this.notifications.filter((notification) => notification.isSelected);
 
-    this.userService.archiveNotifications(this.userService.getLogged().id!, notifications).subscribe(
+    this.userService.readNotifications(this.userService.getLogged().id!, notifications).subscribe(
       (response) => {
         this.notifications.forEach((notification) => {
           if (notification.isSelected) {
             notification.isRead = true;
             notification.isSelected = false;
-            
           }
         }
         );
-        console.log(notifications);
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+  deleteNotifications(): void {
+    const notifications = this.notifications.filter((notification) => notification.isSelected);
+
+    this.userService.deleteNotifications(this.userService.getLogged().id!, notifications).subscribe(
+      (response) => {
+        this.notifications = this.notifications.filter((notification) => !notification.isSelected
+        );
       },
       (error) => {
         console.log(error);

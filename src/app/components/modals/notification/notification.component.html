@@ -10,8 +10,8 @@
                 <li class="tool-icons" *ngIf="!searchBarOpen">
                     <fa-icon (click)="changeSelectedStateAll()" class="colorAllCheckbox" [icon]="faSquare"
                         [ngStyle]="{'opacity' : checkbox ? '1.0' : '0.2'}" title="Selecionar Todas"></fa-icon>
-                    <fa-icon *ngIf="hasChecked()" (click)="archiveNotifications()" [icon]="faEnvelope" title="Marcar como lida"></fa-icon>
-                    <fa-icon *ngIf="hasChecked()" [icon]="faTrash" title="Excluir"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" (click)="readNotifications()" [icon]="faEnvelope" title="Marcar como lida"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" (click)="deleteNotifications()" [icon]="faTrash" title="Excluir"></fa-icon>
                 </li>
                 <li class="search" *ngIf="searchBarOpen">
                     <input type="text" placeholder="Pesquise por uma notificação..." [(ngModel)]="query">
@@ -51,6 +51,11 @@
                     </div>
                 </div>
             </ng-container>
+
+            <div *ngIf="notifications.length == 0" class="flex w-full items-center pt-10 flex-col">
+                <p class="large-text">Nenhuma notificação no momento!</p>
+                <p class="medium-text opacity-70">Aproveite, enquanto durar...</p>
+            </div>
         </div>
     </div>
 </section>

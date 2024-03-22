@@ -78,7 +78,7 @@ export class UserService {
     this.router.navigate(['/home']);
   }
 
-  private saveLoggedUser(user: User): void {
+  public saveLoggedUser(user: User): void {
     localStorage.setItem('logged', JSON.stringify(user)); //cookies
   }
 
@@ -171,9 +171,18 @@ export class UserService {
       .get<Notification[]>(`${URL}user/${userID}/notification`);
   }
 
-  public archiveNotifications(userID: number, listID: Notification[]) {
+  public readNotifications(userID: number, listID: Notification[]) {
     return this.http
-      .patch(`${URL}user/${userID}/notification/archive`, listID);
+      .patch(`${URL}user/${userID}/notification/read`, listID);
   }
 
+  public deleteNotifications(userID: number, listID: Notification[]) {
+    return this.http
+      .patch(`${URL}user/${userID}/notification/delete`, listID);
+  }
+
+  public notificationSettings(userID: number, settingID: number) {
+    return this.http
+      .patch<User>(`${URL}user/${userID}/notification/settings/${settingID}`, {});
+  }
 }
