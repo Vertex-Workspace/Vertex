@@ -13,12 +13,11 @@ const backEnd = 'ws://localhost:7777/chat';
 })
 export class WebSocketService {
 
-  private webSocket: WebSocket;
+  private webSocket!: WebSocket;
 
   chatMessages: Message[] = [];
 
   constructor() {
-    this.webSocket = new WebSocket(backEnd);
     this.openWebSocket();
   }
 
@@ -45,7 +44,7 @@ export class WebSocketService {
 
   public openWebSocket() {
     try {
-
+      this.webSocket = new WebSocket(backEnd);
       this.webSocket.onopen = (event) => {
         console.log('WebSocket connection established.');
       };

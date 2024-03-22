@@ -1,12 +1,10 @@
-<div *ngIf="step==2" class="miniChat2">
+<div class="miniChat2">
     <div class="miniChat-header">
         <div class="miniChat-header-title">
-            <fa-icon (click)="step = 1" [icon]="faArrowLeft"></fa-icon>
             <fa-icon [icon]="faUser"></fa-icon>
-            <h6>Nome User</h6>
+            <h6>{{chat.name}}</h6>
         </div>
         <div class="miniChat-header-close">
-            <fa-icon (click)="expandChat(true)" [icon]="faExpand"></fa-icon>
             <fa-icon (click)="openMiniChat(true)" [icon]="faTimes"></fa-icon>
         </div>
     </div>
@@ -53,10 +51,10 @@
 
     <form *ngIf="chat" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm"
         class="high-input-div justify-center">
-        <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
+        <div class="flex pr-5 gap-4 shadow-md w-[85%] h-[55%] border-t-[1px] border-r-[1px] bg-white">
 
             <textarea type="text" name="message" id="input-message"
-                class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
+                class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[10px] pl-[15px] w-[90%] h-[100%]"
                 [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
             <div class="emoji-wrapper">
 

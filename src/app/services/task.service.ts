@@ -6,6 +6,7 @@ import { Team } from '../models/class/team';
 import { Task, TaskCreate, TaskEdit } from '../models/class/task';
 import { Value, ValueUpdate } from '../models/class/value';
 import { CommentSend } from '../models/class/comment';
+import { Chat } from '../models/class/chat';
 
 @Injectable({
   providedIn: 'root'
@@ -75,10 +76,12 @@ export class TaskService {
     return this.http.delete<Task>(`${URL}task/${taskID}/comment/${commentID}`);
   }
 
-  public getChatByTaskId(id: number): Observable<Task> {
-    return this.http
-      .get<Task>(`${URL}task/chat/${id}`)
-      .pipe(map((task: Task) => new Task(task)));
+  public createChatByTaskId(taskID: number): Observable<Task> {
+    return this.http.post<Task>(`${URL}task/${taskID}/chat`, {});
+  }
+
+  public getChatByTaskId(taskID: number): Observable<Chat> {
+    return this.http.get<Chat>(`${URL}task/${taskID}/chat`);
   }
 
 }

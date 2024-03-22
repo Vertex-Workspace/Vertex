@@ -59,6 +59,7 @@ export class MinichatComponent {
   }
 
   ngOnInit() {
+    this.webSocketService.openWebSocket();
     this.webSocketService.listenToServer().subscribe((change) => {
       this.chat.messages!.push(change);
       setTimeout(() => {

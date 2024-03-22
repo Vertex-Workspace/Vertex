@@ -206,6 +206,7 @@ main {
 
 .message-bubble-left {
     max-width: 70%;
+    min-width: 80px;
     padding: 10px;
     border-radius: 5px;
     background-color: $card;
@@ -215,6 +216,7 @@ main {
 }
 .message-bubble-right  {
     max-width: 70%;
+    min-width: 80px;
     padding: 10px;
     border-radius: 5px;
     background-color: $primaryColor;
@@ -223,7 +225,7 @@ main {
     @apply flex flex-col gap-3 shadow-md;
 }
 .message-bubble-right:last-child > :last-child {
-    @apply flex-row-reverse justify-between w-full
+    @apply w-full
     
 }
 

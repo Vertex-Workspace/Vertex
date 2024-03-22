@@ -81,10 +81,6 @@ export class AppComponent {
   ngOnInit(): void {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
     this.userService.getOneById(user.id!).subscribe((logged) => {
-
-
-
-
       user = logged;
 
       if (user.personalization!.theme == 0) {

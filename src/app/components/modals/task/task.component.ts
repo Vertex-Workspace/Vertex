@@ -22,10 +22,7 @@ import { Chat } from 'src/app/models/class/chat';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
-
   faClock = faClock;
-
-
 
   @Input()
   project!: Project;
@@ -68,7 +65,7 @@ export class TaskComponent implements OnInit {
         }
       }
     })
-    
+
   }
 
   selectedComponent: string = 'description';
@@ -81,10 +78,12 @@ export class TaskComponent implements OnInit {
       }
     });
 
+
+
     console.log(this.idResponsable);
-    
+
     await this.getTimeInTask();
-    
+
     if (this.timeInTask.working) {
       this.startTimer()
     }
@@ -220,24 +219,53 @@ export class TaskComponent implements OnInit {
     );
   }
 
-  chat: any;
   openMiniChat() {
-    this.miniChatOpen = !this.miniChatOpen;
+    this.taskService.getChatByTaskId(this.task.id).subscribe(
+      (chat: Chat) => {
+        this.taskChat = chat;
+        this.miniChatOpen = !this.miniChatOpen;
+        console.log(this.taskChat, "TASK CHAT");
+        
+        
+      },
+      (error: any) => {
+        this.alertService.errorAlert(error.error)
+      }
+    );
   }
   minimizeChat() {
     this.chatExpanded = !this.chatExpanded;
   }
 
 
-  cantEdit(){
-    if(!this.canEdit){
+  cantEdit() {
+    if (!this.canEdit) {
       this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
-    } 
+    }
   }
 
   ngOnDestroy() {
-    if(this.timeInTask.working){
+    if (this.timeInTask.working) {
       this.stopTimer();
     }
+  }
+
+  chatCreated:boolean = false;
+  taskChat!: Chat;
+  createChat() {
+    
+    this.taskService.createChatByTaskId(this.task.id).subscribe(
+      (task: Task) => {
+        this.chatCreated = true;
+        this.task.chatCreated = true;
+        this.miniChatOpen = true;
+        this.taskChat = task.chat!;
+        console.log(this.taskChat, "taskchat");
+        this.alertService.successAlert("Chat criado com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert(error.error)
+      }
+    );
   }
 }

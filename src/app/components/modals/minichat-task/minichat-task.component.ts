@@ -47,16 +47,9 @@ export class MinichatTASKComponent {
   logged!: User;
 
   constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
+    
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
-    this.teamService.findAllChats().subscribe((chats: Chat[]) => {
-      chats.forEach((chat: Chat) => {
-        chat.userTeams!.forEach((userTeam) => {
-          if (userTeam.user.id == this.logged.id) {
-            this.conversations.push(chat);
-          }
-        });
-      });
-    });
+    
   }
 
   showEmojiPicker: boolean = false;
@@ -65,6 +58,7 @@ export class MinichatTASKComponent {
   }
 
   ngOnInit() {
+    this.webSocketService.openWebSocket();
     this.webSocketService.listenToServer().subscribe((change) => {
       this.chat.messages!.push(change);
       setTimeout(() => {
@@ -72,6 +66,8 @@ export class MinichatTASKComponent {
         a.scrollTop = a.scrollHeight;
       }, 0);
     });
+
+    console.log(this.chat, "CHAT");
   }
 
   ngOnDestroy(): void {
@@ -230,20 +226,9 @@ export class MinichatTASKComponent {
   //   });
   // }
 
-  minimizeChat(value: boolean) {
-    this.chatExpanded.emit(value);
-  }
-
-
   @Output() miniChatOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Output() chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  step:number=1;
-
-  expandChat(value: boolean) {
-    this.chatExpanded.emit(value);
-  }
+  
 
   openMiniChat(value: boolean) {
     this.miniChatOpen.emit(value);
