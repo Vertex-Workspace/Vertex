@@ -14,6 +14,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { User } from 'src/app/models/class/user';
 import { TimeInTask } from 'src/app/models/class/timeInTask';
 import { ActivatedRoute } from '@angular/router';
+import { Chat } from 'src/app/models/class/chat';
 import { Team } from 'src/app/models/class/team';
 import { Observable } from 'rxjs';
 import { SentToReview } from 'src/app/models/class/review';
@@ -25,7 +26,6 @@ import { ReviewService } from 'src/app/services/review.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
-
   faClock = faClock;
 
   @Input()
@@ -70,7 +70,7 @@ export class TaskComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private reviewService: ReviewService) {}
+    ) {}
 
   selectedComponent: string = 'attachments';
 
@@ -265,7 +265,18 @@ export class TaskComponent implements OnInit {
   }
 
   openMiniChat() {
-    this.miniChatOpen = !this.miniChatOpen;
+    this.taskService.getChatByTaskId(this.task.id).subscribe(
+      (chat: Chat) => {
+        this.taskChat = chat;
+        this.miniChatOpen = !this.miniChatOpen;
+        console.log(this.taskChat, "TASK CHAT");
+        
+        
+      },
+      (error: any) => {
+        this.alertService.errorAlert(error.error)
+      }
+    );
   }
   minimizeChat() {
     this.chatExpanded = !this.chatExpanded;
@@ -283,10 +294,28 @@ export class TaskComponent implements OnInit {
     }
   }
 
+  chatCreated:boolean = false;
+  taskChat!: Chat;
+  createChat() {
+    
+    this.taskService.createChatByTaskId(this.task.id).subscribe(
+      (task: Task) => {
+        this.chatCreated = true;
+        this.task.chatCreated = true;
+        this.miniChatOpen = true;
+        this.taskChat = task.chat!;
+        console.log(this.taskChat, "taskchat");
+        this.alertService.successAlert("Chat criado com sucesso!");
+      },
+      (error: any) => {
+        this.alertService.errorAlert(error.error)
+      }
+    );
+  }
+
   sendTask() {
     this.isSending = true;
   }
-
 
   sentToReviewDescription: string = "";
   taskAction(bool: boolean) {
@@ -321,6 +350,5 @@ export class TaskComponent implements OnInit {
 
   isRevisable(): boolean{
     return this.taskInfoDTO.projectReviewENUM == ProjectReview.OPTIONAL;
-    ;
   }
 }

@@ -33,6 +33,13 @@ import { GroupsSelectModule } from './components/modals/groups-select/groups-sel
 import { ProjectsModule } from './pages/projects/projects.module';
 import { MinichatModule } from './components/modals/minichat/minichat.module';
 import { MinichatTASKModule } from './components/modals/minichat-task/minichat-task.module';
+import { InputValuePropertyComponent } from './components/reusable-components/input-value-property/input-value-property.component';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { NoteComponent } from './components/reusable-components/note/note.component';
+import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
+import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+
 
 @NgModule({
   declarations: [
@@ -62,6 +69,7 @@ import { MinichatTASKModule } from './components/modals/minichat-task/minichat-t
     ChartModule,
     NotificationModule,
     ChatModule,
+    PickerModule,
     MinichatModule,
     MinichatTASKModule,
     UserInformationsModule,

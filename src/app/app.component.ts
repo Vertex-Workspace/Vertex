@@ -16,6 +16,7 @@ import { User } from './models/class/user';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 
 @Component({
@@ -66,8 +67,8 @@ export class AppComponent {
     private teamService: TeamService,
   ) {
     personalization.setPersonalization();
-    
-    
+
+
 
     this.userState
       .getAuthenticationStatus()
@@ -80,10 +81,6 @@ export class AppComponent {
   ngOnInit(): void {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
     this.userService.getOneById(user.id!).subscribe((logged) => {
-
-     
-      
-
       user = logged;
 
       if (user.personalization!.theme == 0) {
