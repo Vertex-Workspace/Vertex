@@ -75,6 +75,7 @@
                         <p>Filtrar por </p>
                         <p-cascadeSelect 
                             [(ngModel)]="selectedFilter" 
+                            (ngModelChange)="updateOrderType($event)"
                             [options]="filterOptions" 
                             optionLabel="name" 
                             optionGroupLabel="name" 
@@ -102,17 +103,22 @@
                     </ng-container>
                     <ng-container *ngIf="orderOpen">
                         <p>Ordenar por </p>
-                        <select>
-                            <option *ngFor="let item of orderSettings">
-                                {{ item.label }}
-                            </option>
-                        </select>
+                        <p-cascadeSelect 
+                            [(ngModel)]="orderParams"  
+                            [options]="orderOptions" 
+                            optionLabel="name" 
+                            optionGroupLabel="name" 
+                            [optionGroupChildren]="['values']" 
+                            [style]="{ minWidth: '13rem' }" 
+                            placeholder="Selecione"
+                        ></p-cascadeSelect>
                     </ng-container>
                 </section>
                 <div class="default-size">
                     <app-list 
                         [statusFilter]="selectedFilter"
                         [queryFilter]="queryFilter" 
+                        [orderParams]="orderParams"
                         (openTaskDetails)="changeModalTaskState(true, $event)" 
                         style="padding-top: 3%;"
                     ></app-list>

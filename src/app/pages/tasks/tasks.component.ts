@@ -18,6 +18,7 @@ import { Property, PropertyKind, PropertyListKind } from 'src/app/models/class/p
 import { ReviewService } from 'src/app/services/review.service';
 import { PropertyList } from 'src/app/models/class/property';
 import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
+import { PipeParams } from 'src/app/models/interface/params';
 
 
 @Component({
@@ -47,13 +48,19 @@ export class TasksComponent implements OnInit {
   taskReview: boolean = false;
   logged !: User;
 
-  orderParams !: string;
+  orderParams !: PipeParams;
   orderOptions : any = [
     { name: 'Nome', values: [
-      { name: 'A-Z' },
-      { name: 'Z-A' }
+      { name: 'A-Z', type: 'name'  },
+      { name: 'Z-A', type: 'name' }
+    ]},
+    { name: 'Data', values: [
+      { name: 'Maior - Menor', type: 'date' },
+      { name: 'Menor - Maior', type: 'date' }
+    ] },
+    { name: 'Status', values: [
     ] }
-  ]
+  ];
 
   selectedStatusFilter !: any;
   filterOptions: any[] = [];
@@ -79,6 +86,7 @@ export class TasksComponent implements OnInit {
   projectId!: number;
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
     
   }
 
@@ -101,6 +109,7 @@ export class TasksComponent implements OnInit {
     this.renderProject.forEach((p: Project) => {      
       this.project = p;
       this.setFilters(p);
+      this.setOrderOptions(p);
       this.pageTitle = this.project.name;
       const currentView = localStorage.getItem('mode-task-view');
       if(currentView){
@@ -118,6 +127,22 @@ export class TasksComponent implements OnInit {
       }
         
     });
+  }
+
+  updateOrderType(e: PipeParams) {
+    if (e.type) {
+      this.orderParams.type = e.type;
+    }
+    
+  }
+
+  setOrderOptions(p: Project): void {
+    p.properties[0].propertyLists
+      .forEach((pl) => {
+        this.orderOptions[2]
+          .values.push({ name: pl.value, type: 'status' })
+      })
+    
   }
 
   setFilters(p: Project): void {
@@ -173,8 +198,8 @@ export class TasksComponent implements OnInit {
   }
 
   toggleOrder(): void {
+    this.orderParams = {name: '', type: ''};
     this.orderOpen = !this.orderOpen;
-    this.orderParams = '';
   }
 
   changePreviewMode(preview: string): void {

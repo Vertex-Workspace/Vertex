@@ -15,6 +15,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { taskHourService } from 'src/app/services/taskHour.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { PipeParams } from 'src/app/models/interface/params';
 
 @Component({
   selector: 'app-kanban',
@@ -50,6 +51,9 @@ export class KanbanComponent {
 
   @Input()
   statusFilter !: string;
+
+  @Input()
+  orderParams !: PipeParams;
 
   ngOnInit() {
     this.taskList = this.project.tasks;

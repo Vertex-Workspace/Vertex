@@ -74,14 +74,22 @@
                 <div *ngIf="orderOpen">
                     <p>Ordenar por </p>
                     <p-cascadeSelect 
-                            [(ngModel)]="orderParams"  
+                            [(ngModel)]="orderParams" 
                             [options]="orderOptions" 
                             optionLabel="name" 
                             optionGroupLabel="name" 
                             [optionGroupChildren]="['values']" 
                             [style]="{ minWidth: '13rem' }" 
                             placeholder="Selecione"
-                        ></p-cascadeSelect>
+                            (ngModelChange)="updateOrderType($event)"
+                        >
+                        <ng-template pTemplate="option" let-option>
+                            <div>
+                                <p>{{option.name}}</p>
+                            </div>
+                        </ng-template>
+
+                    </p-cascadeSelect>
                 </div>
                 <div *ngIf="filterOpen">
                     <p>Filtrar por </p>
@@ -93,6 +101,7 @@
                             [optionGroupChildren]="['values']" 
                             [style]="{ minWidth: '13rem' }" 
                             placeholder="Selecione"
+                            (ngModelChange)="updateOrderType($event)"
                         ></p-cascadeSelect>
                 </div>
             </ng-container>
@@ -105,6 +114,7 @@
                 [nameFilter]="query" 
                 [statusFilter]="selectedStatusFilter"
                 [permissions]="permissions"
+                [orderParams]="orderParams"
                 (openTaskDetails)="changeModalTaskState(true, $event)" 
             ></app-kanban>
 

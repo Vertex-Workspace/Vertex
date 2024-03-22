@@ -12,6 +12,7 @@ import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
 import { Permission, User } from 'src/app/models/class/user';
 import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
+import { PipeParams } from 'src/app/models/interface/params';
 
 @Component({
   selector: 'app-list',
@@ -30,7 +31,7 @@ export class ListComponent implements OnInit {
   statusFilter !: string;
 
   @Input()
-  orderParams !: string;
+  orderParams !: PipeParams;
   
   properties : PropertyCreation[] = [
     {name: 'Status', kind: PropertyKind.STATUS},

@@ -33,7 +33,6 @@ import { GroupsSelectModule } from './components/modals/groups-select/groups-sel
 import { ProjectsModule } from './pages/projects/projects.module';
 import { MinichatModule } from './components/modals/minichat/minichat.module';
 import { MinichatTASKModule } from './components/modals/minichat-task/minichat-task.module';
-import { NameSortPipe } from './pipes/sort/name-sort.pipe';
 
 @NgModule({
   declarations: [

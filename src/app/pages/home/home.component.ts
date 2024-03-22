@@ -8,6 +8,7 @@ import { User } from 'src/app/models/class/user';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Task } from 'src/app/models/class/task';
 import { PropertyListKind } from 'src/app/models/class/property';
+import { PipeParams } from 'src/app/models/interface/params';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,23 @@ export class HomeComponent implements OnInit{
   teamSearch !: string;
 
   isCreating: boolean = false;
+
+  orderParams !: PipeParams;
+  orderOptions : any = [
+    { name: 'Nome', values: [
+      { name: 'A-Z', type: 'name'  },
+      { name: 'Z-A', type: 'name' }
+    ]},
+    { name: 'Data', values: [
+      { name: 'Maior - Menor', type: 'date' },
+      { name: 'Menor - Maior', type: 'date' }
+    ] },
+    { name: 'Status', values: [
+      { name: 'Não Iniciado', type: 'status', kind: PropertyListKind.TODO },
+      { name: 'Em Andamento', type: 'status', kind: PropertyListKind.DOING },
+      { name: 'Concluído', type: 'status', kind: PropertyListKind.DONE },
+    ] }
+  ];
 
   //TASKS - FILTER AND ORDER
   selectedFilter !: any;
@@ -61,6 +79,16 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void { 
     this.subscribeToTeams();        
+  }
+
+  updateOrderType(e: PipeParams): void {
+    if (e.type) {
+      this.orderParams.type = e.type;
+    }
+
+    if (e.kind) {
+      this.orderParams.kind = e.kind;
+    }
   }
 
 
@@ -112,6 +140,7 @@ export class HomeComponent implements OnInit{
   }
 
   clickOrder(): void {
+    this.orderParams = {name: '', type: ''};
     this.orderOpen = !this.orderOpen;
   }
 
