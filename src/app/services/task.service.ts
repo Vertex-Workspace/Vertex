@@ -33,8 +33,6 @@ export class TaskService {
   }
 
   public create(taskCreate: TaskCreate): Observable<Task> {
-    console.log(taskCreate);
-    
     return this.http.post<Task>(`${URL}task`, taskCreate);
   }
 

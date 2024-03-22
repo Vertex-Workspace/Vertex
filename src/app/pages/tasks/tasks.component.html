@@ -73,11 +73,15 @@
             <ng-container *ngIf="filterOpen || orderOpen">
                 <div *ngIf="orderOpen">
                     <p>Ordenar por </p>
-                    <select>
-                        <option *ngFor="let item of filterSettings">
-                            {{ item.label }}
-                        </option>
-                    </select>
+                    <p-cascadeSelect 
+                            [(ngModel)]="orderParams"  
+                            [options]="orderOptions" 
+                            optionLabel="name" 
+                            optionGroupLabel="name" 
+                            [optionGroupChildren]="['values']" 
+                            [style]="{ minWidth: '13rem' }" 
+                            placeholder="Selecione"
+                        ></p-cascadeSelect>
                 </div>
                 <div *ngIf="filterOpen">
                     <p>Filtrar por </p>
@@ -87,7 +91,7 @@
                             optionLabel="name" 
                             optionGroupLabel="name" 
                             [optionGroupChildren]="['values']" 
-                            [style]="{ minWidth: '14rem' }" 
+                            [style]="{ minWidth: '13rem' }" 
                             placeholder="Selecione"
                         ></p-cascadeSelect>
                 </div>
@@ -109,6 +113,7 @@
                 [project]="project" 
                 [queryFilter]="query" 
                 [statusFilter]="selectedStatusFilter" 
+                [orderParams]="orderParams"
                 [permissions]="permissions"
                 (openTaskDetails)="changeModalTaskState(true, $event)"
             ></app-list> 

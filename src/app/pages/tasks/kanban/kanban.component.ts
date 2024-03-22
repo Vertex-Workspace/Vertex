@@ -62,10 +62,6 @@ export class KanbanComponent {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-  }
-
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
     if (this.canEdit) {
       const task: Task = event.item.data;
@@ -117,10 +113,7 @@ export class KanbanComponent {
         };
         //Patch the value of the status task
         this.taskService.patchValue(valueUpdate).subscribe(
-          (taskDate) => {
-            console.log("Mudou");
-            
-          },
+          () => {},
           (error) => {
             newValue.value = previousPropertyList;
             this.alertService.errorAlert(error.error);
@@ -192,7 +185,6 @@ export class KanbanComponent {
       },
       teamId: this.project.idTeam!
     }
-    console.log("Task", taskCreate);
 
     this.taskService.create(taskCreate).subscribe(
       (task: Task) => {
@@ -211,7 +203,7 @@ export class KanbanComponent {
           },
           userID: this.userService.getLogged().id!
         };
-        console.log(valueUpdate);
+
         this.taskService.patchValue(valueUpdate).subscribe(
           (taskDate) => {
             task.values = taskDate.values;
@@ -220,7 +212,7 @@ export class KanbanComponent {
             this.alertService.successAlert("Tarefa criada com sucesso!");
           },
           (error) => {
-            console.log(error);
+            console.error(error);
           }
         );
 

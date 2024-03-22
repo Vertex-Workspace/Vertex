@@ -28,7 +28,8 @@
                 *ngFor="let task of (taskList 
                     | namePipe : queryFilter 
                     | statusPipe : statusFilter : project === undefined 
-                    | statusBasicPipe : statusFilter : project === undefined)"
+                    | statusBasicPipe : statusFilter : project === undefined
+                    | nameSortPipe : orderParams)"
                 >
                 <div 
                     class="trow regular-text relative"

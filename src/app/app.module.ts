@@ -39,7 +39,6 @@ import { NameSortPipe } from './pipes/sort/name-sort.pipe';
   declarations: [
     AppComponent,
     LoadingComponent,
-    NameSortPipe
   ],
   imports: [
     BrowserModule,

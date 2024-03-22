@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NamePipe } from '../name.pipe';
 import { StatusPipe } from '../status-complete.pipe';
 import { StatusBasicPipe } from '../status-basic.pipe';
+import { NameSortPipe } from '../sort/name-sort.pipe';
 
 
 
@@ -11,6 +12,7 @@ import { StatusBasicPipe } from '../status-basic.pipe';
     NamePipe,
     StatusPipe,
     StatusBasicPipe,
+    NameSortPipe
   ],
   imports: [
     CommonModule
@@ -19,6 +21,7 @@ import { StatusBasicPipe } from '../status-basic.pipe';
     NamePipe,
     StatusPipe,
     StatusBasicPipe,
+    NameSortPipe
   ]
 })
 export class PipesModule { }

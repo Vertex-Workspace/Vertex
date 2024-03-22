@@ -47,6 +47,14 @@ export class TasksComponent implements OnInit {
   taskReview: boolean = false;
   logged !: User;
 
+  orderParams !: string;
+  orderOptions : any = [
+    { name: 'Nome', values: [
+      { name: 'A-Z' },
+      { name: 'Z-A' }
+    ] }
+  ]
+
   selectedStatusFilter !: any;
   filterOptions: any[] = [];
 
@@ -166,6 +174,7 @@ export class TasksComponent implements OnInit {
 
   toggleOrder(): void {
     this.orderOpen = !this.orderOpen;
+    this.orderParams = '';
   }
 
   changePreviewMode(preview: string): void {

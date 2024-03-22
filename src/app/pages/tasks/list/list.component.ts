@@ -28,6 +28,9 @@ export class ListComponent implements OnInit {
 
   @Input()
   statusFilter !: string;
+
+  @Input()
+  orderParams !: string;
   
   properties : PropertyCreation[] = [
     {name: 'Status', kind: PropertyKind.STATUS},
