@@ -7,6 +7,7 @@ import { Task, TaskCreate, TaskEdit, TaskWaitingToReview, UpdateResponsibles } f
 import { Value, ValueUpdate } from '../models/class/value';
 import { CommentSend } from '../models/class/comment';
 import { User } from '../models/class/user';
+import { Group } from '../models/class/groups';
 
 @Injectable({
   providedIn: 'root'
@@ -105,9 +106,12 @@ export class TaskService {
   }
 
   public updateTaskResponsables(updateResponsible: UpdateResponsibles): Observable<Task> {
-    console.log(updateResponsible);
-    
     return this.http.patch<Task>(`${URL}task/taskResponsables`, updateResponsible);
+  }
+
+  public getGroupByTask(taskId: number): Observable<Group[]> {
+    return this.http.get<Group[]>(`${URL}task/groups/${taskId}`)
+    .pipe(map((groups: Group[]) => groups.map(group => new Group(group))));
   }
 
 }

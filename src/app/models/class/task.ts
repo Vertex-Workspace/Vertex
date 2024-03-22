@@ -1,5 +1,6 @@
 
 import { Comment } from "./comment";
+import { Group } from "./groups";
 import { Property } from "./property";
 import { TaskResponsable } from "./taskResponsable";
 import { User } from "./user";
@@ -26,6 +27,7 @@ export class Task {
     step?: number;
 
     files: any[];
+    label !: string
 
     constructor(
         task: Task
@@ -39,6 +41,7 @@ export class Task {
         this.properties = task.properties;
         this.files = task.files;
         this.revisable = task.revisable;
+        this.label = task.name;
     }
 
 }
@@ -83,4 +86,5 @@ export class UpdateResponsibles {
     taskId !: number;
     teamId!: number;
     user !: User
+    group !: Group
 }

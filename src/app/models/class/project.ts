@@ -18,6 +18,7 @@ export class Project {
     properties!: Property[];
     idTeam!: number;
     listOfResponsibles ?: Group[] | User[]
+    groups?: Group[]
     projectReviewENUM!: ProjectReview; 
     
 
@@ -60,7 +61,8 @@ export class ProjectEdit {
     id ?:number;
     name?: string;
     description?: string;
-    listOfResponsibles ?: Group[] | User[]
+    listOfResponsibles ?: Group[] | User[];
+    groups ?: Group[];
 }
 export enum ProjectReview {
     MANDATORY,

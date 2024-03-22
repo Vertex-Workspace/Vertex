@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faCalendarDays, faCaretDown, faFont, faListNumeric, 
-  faPaperclip, faSpinner, faUser, faUsers, faListCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalendarDays, faCaretDown, faFont, faListNumeric,
+  faPaperclip, faSpinner, faUser, faUsers, faListCheck
+} from '@fortawesome/free-solid-svg-icons';
+import { take } from 'rxjs';
+import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { Task, UpdateResponsibles } from 'src/app/models/class/task';
@@ -23,8 +27,10 @@ export class PropertiesComponent {
   @Input() project !: Project
   @Input() permissions !: Permission[];
 
+  tasks: Task[] = []
+
   faUsers = faUsers
-  faListCheck= faListCheck
+  faListCheck = faListCheck
 
   constructor(private taskService: TaskService,
     private projectService: ProjectService,
@@ -48,13 +54,14 @@ export class PropertiesComponent {
   selectedUsers: any[] = []
 
   ngOnInit(): void {
+    this.tasks = this.project.tasks
     this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
       this.taskResponsables = users
-      
+
       for (const user of users) {
         this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
-          for(const user1 of users1){
-            if(user.id === user1.id){
+          for (const user1 of users1) {
+            if (user.id === user1.id) {
               this.selectedUsers.push(user)
             }
           }
@@ -67,6 +74,23 @@ export class PropertiesComponent {
         this.canEdit = true;
       }
     }
+
+    this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group []) => {
+      for(const group1 of groups1){
+        this.userService.getUsersByGroup(group1.id).subscribe((users: User[]) => {
+          group1.children = users
+          group1.icon = 'pi pi-users'
+        });
+        this.taskResponsables.push(group1)
+        this.taskService.getGroupByTask(this.task.id).subscribe((groups : Group[]) => {
+          for(const group of groups){
+            if(group.id == group1.id){
+              this.selectedUsers.push(group1)
+            }
+          }
+        })
+      }
+   })
   }
 
   @Output() changes = new EventEmitter();
@@ -93,22 +117,27 @@ export class PropertiesComponent {
     return "";
   }
 
-  updateResponsible(user : any): void {
-    console.log("entrei");
-    
+  updateResponsible(user: any): void {
     const taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,
       teamId: this.project.idTeam,
-      user: user
+      user: user,
+      group: user
     }
+    
+      this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
+        this.alertService.successAlert("editado")
+        
+      })
 
-    this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-       this.alertService.successAlert("editado")
-    })
   }
 
-  clickNode(node: any){
+  clickNode(node: any) {
     console.log(node);
+  }
+
+  setTaskDependencies(task: Task){
+
   }
 
 }

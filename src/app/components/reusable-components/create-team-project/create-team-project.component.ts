@@ -79,6 +79,7 @@ export class CreateTeamProjectComponent implements OnInit {
       name: [null, [Validators.required]],
       description: [null],
       listOfResponsibles: [users],
+      groups: [null]
     });
   }
 
@@ -87,18 +88,36 @@ export class CreateTeamProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectExists()
-    
+
     this.userService.getUsersByTeam(this.project.idTeam).subscribe((users: User[]) => {
       this.listOfResponsibles = users
 
-      for(const user of users){
+      for (const user of users) {
         this.projectService.getProjectCollaborators(this.project.id).subscribe((users1: User[]) => {
-          for(const user1 of users1){
-            if(user.id === user1.id){
+          for (const user1 of users1) {
+            if (user.id === user1.id) {
               this.selectedUsers.push(user)
             }
           }
         })
+        user.icon = 'pi pi-user'
+      }
+    })
+
+    this.groupService.getGroupsByTeam(this.project.idTeam).subscribe((groups: Group[]) => {
+      for (const group of groups) {
+        this.listOfResponsibles.push(group)
+        this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group[]) => {
+          for (const group1 of groups1) {
+            if (group.id === group1.id) {
+              this.selectedUsers.push(group)
+            }
+          }
+        })
+        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+          group.children = users
+          group.icon = 'pi pi-users'
+        });
       }
     })
   }
@@ -112,8 +131,6 @@ export class CreateTeamProjectComponent implements OnInit {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
-      // this.getGroups(this.project.idTeam)
-      // this.getUsers(this.project.idTeam);
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       this.getGroups(teamId);
@@ -157,30 +174,31 @@ export class CreateTeamProjectComponent implements OnInit {
             .updateImage(teamRes.id!, this.fd)
             .subscribe();
         }
-        this.sendTeam.emit(team)
+        this.sendTeam.emit(teamRes)
       })
   }
 
+
   createProject(): void {
+    if(!this.closeModal){
     let project = this.form.getRawValue() as Project;
 
     let listOfResponsibles: User[] = [];
+    let pGroups: Group[] = []
     project.listOfResponsibles?.forEach((type => {
       if (type instanceof Group) {
         let group: Group = type as Group;
         group.selected = true;
-        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-          for (const user of users) {
-            listOfResponsibles.push(user);
-          }
-        });
-      } else if (type instanceof User) {
-        let user: User = type as User;
-        user.selectedProject = true;
-        listOfResponsibles.push(user);
-      }
+        pGroups.push(group)
+      } else
+        if (type instanceof User) {
+          let user: User = type as User;
+          user.selectedProject = true;
+          listOfResponsibles.push(user);
+        }
 
       project.listOfResponsibles = listOfResponsibles;
+      project.groups = pGroups
     }));
 
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
@@ -206,7 +224,7 @@ export class CreateTeamProjectComponent implements OnInit {
         }
         this.emitCreation(projectResponse)
       });
-
+    }
   }
 
   @Output()
@@ -231,7 +249,9 @@ export class CreateTeamProjectComponent implements OnInit {
     }
   }
 
+  closeModal ?: boolean
   closeScreen(): void {
+    this.closeModal = true
     this.close.emit();
   }
 
@@ -258,7 +278,6 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   private getGroups(teamId: number): void {
-
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
       this.groups = groups;
 
@@ -281,21 +300,21 @@ export class CreateTeamProjectComponent implements OnInit {
   updateProject(): void {
     let project = this.form.getRawValue() as Project;
     let list: User[] = []
-  
+    let groups: Group[] = []
+
     const projectEdit: ProjectEdit = {
       id: this.project?.id,
       name: project.name,
       description: project.description,
-      listOfResponsibles: project.listOfResponsibles
+      listOfResponsibles: project.listOfResponsibles,
+      groups: project.groups
     }
-
-    console.log(project.listOfResponsibles);
-    
 
     projectEdit.listOfResponsibles!.forEach((type => {
       if (type instanceof Group) {
         let group: Group = type as Group;
         group.selected = true;
+        groups.push(group)
         this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
           for (const user of users) {
             list.push(user)
@@ -309,6 +328,7 @@ export class CreateTeamProjectComponent implements OnInit {
     }));
 
     projectEdit.listOfResponsibles = list
+    projectEdit.groups = groups
 
     if (projectEdit.name == null) {
       projectEdit.name = this.project?.name
@@ -320,6 +340,7 @@ export class CreateTeamProjectComponent implements OnInit {
       projectEdit.listOfResponsibles = this.project?.listOfResponsibles
     }
 
+    console.log(projectEdit);
     this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
       this.alert.successAlert("Projeto modificado com sucesso")
     })
@@ -335,10 +356,10 @@ export class CreateTeamProjectComponent implements OnInit {
 
   getPlaceholderText(): string {
     if (this.typeString === 'projectInfo') {
-        return 'Responsáveis do Projeto';
+      return 'Responsáveis do Projeto';
     } else {
-        return 'Atribua responsáveis ao projeto';
+      return 'Atribua responsáveis ao projeto';
     }
-}
+  }
 
 }

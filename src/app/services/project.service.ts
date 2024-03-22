@@ -7,6 +7,7 @@ import { Task } from '../models/class/task';
 import { Property } from '../models/class/property';
 import { Team } from '../models/class/team';
 import { User } from '../models/class/user';
+import { Group } from '../models/class/groups';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +81,14 @@ export class ProjectService {
     return this.http.get<User[]>(`${URL}project/users/${projectId}`)
     .pipe(map((users: User[]) =>
       users.map(user => new User(user))
+    )
+    ) 
+  }
+
+  public getGroupsFromProject(projectId: number): Observable<Group[]> {
+    return this.http.get<Group[]>(`${URL}project/groups/${projectId}`)
+    .pipe(map((groups: Group[]) =>
+      groups.map(group => new Group(group))
     )
     ) 
   }

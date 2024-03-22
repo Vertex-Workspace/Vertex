@@ -49,7 +49,7 @@
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
                 <ng-container *ngFor="let user of team.users">
-                    <app-card-user [width]="'370px'" [height]="'90px'" [typeString]="'permissions'"
+                    <app-card-user [width]="'370px'" [typeString]="'permissions'"
                         (deleteEmitterUserTeam)="openModalDeleteUser($event)" [team]="team" [user]="user"></app-card-user>
                 </ng-container>
             </div>

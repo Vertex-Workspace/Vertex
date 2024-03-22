@@ -7,9 +7,12 @@
                     <p>Dependências</p>
                 </div>
                 <div>
-                    <p-multiSelect 
-                
-                    placeholder="Selicone dependências"></p-multiSelect>
+                    <p-multiSelect class="w-full" containerStyleClass="w-full" 
+                    placeholder="Selecione dependências" [options]="tasks" optionLabel="name">
+                        <ng-template let-group pTemplate="group">
+                            <span click="setTaskDependencies(group)">{{group.name}}</span>
+                        </ng-template>
+                    </p-multiSelect>
                 </div>
             </td>
             <td>
@@ -18,17 +21,13 @@
                     <p>Responsáveis</p>
                 </div>
                 <div>
-                    <p-treeSelect  class="w-full md:w-20rem "
-                        [options]="taskResponsables"
-                        [(ngModel)]="selectedUsers"
-                        containerStyleClass="w-full" display="chip" 
-                        [metaKeySelection]="false" selectionMode="checkbox"
-                        placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true"
-                       >
+                    <p-treeSelect class="w-full md:w-20rem " [options]="taskResponsables" [(ngModel)]="selectedUsers"
+                        containerStyleClass="w-full" display="chip" [metaKeySelection]="false" selectionMode="checkbox"
+                        placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true">
                         <ng-template let-node pTemplate="default">
                             <span (click)="updateResponsible(node)">{{node.label}}</span>
-                          </ng-template>
-                </p-treeSelect>
+                        </ng-template>
+                    </p-treeSelect>
                 </div>
             </td>
             <td *ngFor="let value of task.values">
