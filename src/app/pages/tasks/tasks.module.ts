@@ -56,7 +56,6 @@ import { ReviewTaskComponent } from 'src/app/components/modals/review-task/revie
     InputTextModule,
     NoteModule,
     CreateTeamProjectModule,
-
     //Standalone component
     ReviewTaskComponent
   ],

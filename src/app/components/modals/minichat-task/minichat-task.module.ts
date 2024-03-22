@@ -11,10 +11,10 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
   exports: [MinichatTASKComponent],
   imports: [
     CommonModule,
+    PickerModule,
     FontAwesomeModule,
     FormsModule,
     InputModule,
-    PickerModule
   ]
 })
 export class MinichatTASKModule { }

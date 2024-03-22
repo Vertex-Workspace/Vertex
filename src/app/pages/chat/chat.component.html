@@ -87,6 +87,13 @@
                 </div>
             </div>
 
+            <!-- <div *ngIf="chat && !chat.messages">
+                <div class="flex flex-col items-center gap-5 pb-20">
+                    <img class="w-40 h-40" src="../../../assets/messageImage.png" alt="">
+                    <h6>Nenhuma mensagem enviada ainda! Seja o primeiro a enviar uma mensagem!</h6>
+                </div>
+            </div> -->
+
             <div *ngIf="chat" class="center-div">
                 <div class="min-h-[60px]" *ngIf="chat">
                     <div *ngFor="let message of chat.messages" class="message-container"
@@ -114,7 +121,7 @@
                             </div>
                             <div class="flex justify-between">
                                 <p
-                                     [ngClass]="message.user !== logged.firstName ? 'timestamp text-[#777777]' : 'timestamp text-[#fff]'">
+                                    [ngClass]="message.user !== logged.firstName ? 'timestamp text-[#777777]' : 'timestamp text-[#fff]'">
                                     {{ generateTime(message) }}
                                 </p>
                                 <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">
@@ -127,7 +134,7 @@
 
             </div>
 
-            <form *ngIf="chat" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)"
+            <form *ngIf="chat && chat.messages!=null" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)"
                 #sendForm="ngForm" class="high-input-div justify-center">
                 <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
 
@@ -137,21 +144,21 @@
                     <div class="emoji-wrapper">
 
                         <emoji-mart *ngIf="showEmojiPicker" [i18n]="{
-                            search: 'Digite o nome do emoji em inglês',
-                            categories: {
-                            search: 'Resultados da busca',
-                            recent: 'Recentes',
-                            smileys: 'Carinhas',
-                            people: 'Pessoas',
-                            nature: 'Natureza',
-                            foods: 'Comidas',
-                            activity: 'Atividade',
-                            places: 'Lugares',
-                            objects: 'Objetos',
-                            symbols: 'Símbolos',
-                            flags: 'Bandeiras'
-                            }
-                        }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
+                                search: 'Digite o nome do emoji em inglês',
+                                categories: {
+                                search: 'Resultados da busca',
+                                recent: 'Recentes',
+                                smileys: 'Carinhas',
+                                people: 'Pessoas',
+                                nature: 'Natureza',
+                                foods: 'Comidas',
+                                activity: 'Atividade',
+                                places: 'Lugares',
+                                objects: 'Objetos',
+                                symbols: 'Símbolos',
+                                flags: 'Bandeiras'
+                                }
+                            }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
                         </emoji-mart>
 
                     </div>

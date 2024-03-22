@@ -225,12 +225,13 @@ export class ChatComponent {
     return new Date(message.time!).toLocaleString();
   }
 
+  m:Message[]= new Array(0);
   openConversation(chat: Chat) {
     this.chat = chat;
     this.conversations.forEach((conversation: Chat) => {
       conversation.conversationOpen = false;
     });
-
+    
     this.chat.conversationOpen = true;
 
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {

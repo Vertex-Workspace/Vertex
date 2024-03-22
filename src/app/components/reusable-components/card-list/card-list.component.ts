@@ -6,7 +6,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
-import { faTrashCan, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
 
 @Component({
@@ -26,6 +26,7 @@ export class CardListComponent implements OnInit {
 
   faTrashCan = faTrashCan;
   faGear = faGear
+  faMessage = faMessage
   
   @Input()
   teams?: Team[]; //se estiver na home

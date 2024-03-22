@@ -94,21 +94,21 @@
             <div class="emoji-wrapper">
 
                 <emoji-mart *ngIf="showEmojiPicker" [i18n]="{
-                    search: 'Digite o nome do emoji em inglês',
-                    categories: {
-                    search: 'Resultados da busca',
-                    recent: 'Recentes',
-                    smileys: 'Carinhas',
-                    people: 'Pessoas',
-                    nature: 'Natureza',
-                    foods: 'Comidas',
-                    activity: 'Atividade',
-                    places: 'Lugares',
-                    objects: 'Objetos',
-                    symbols: 'Símbolos',
-                    flags: 'Bandeiras'
-                    }
-                }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
+                            search: 'Digite o nome do emoji em inglês',
+                            categories: {
+                            search: 'Resultados da busca',
+                            recent: 'Recentes',
+                            smileys: 'Carinhas',
+                            people: 'Pessoas',
+                            nature: 'Natureza',
+                            foods: 'Comidas',
+                            activity: 'Atividade',
+                            places: 'Lugares',
+                            objects: 'Objetos',
+                            symbols: 'Símbolos',
+                            flags: 'Bandeiras'
+                            }
+                        }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
                 </emoji-mart>
 
             </div>
