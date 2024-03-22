@@ -333,4 +333,12 @@ export class CreateTeamProjectComponent implements OnInit {
     this.senderEmitter.emit(project);
   }
 
+  getPlaceholderText(): string {
+    if (this.typeString === 'projectInfo') {
+        return 'Responsáveis do Projeto';
+    } else {
+        return 'Atribua responsáveis ao projeto';
+    }
+}
+
 }
