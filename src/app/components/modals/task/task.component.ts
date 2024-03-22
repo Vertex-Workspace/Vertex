@@ -68,6 +68,7 @@ export class TaskComponent implements OnInit {
     private alertService: AlertService,
     private taskHourService: taskHourService,
     private teamService: TeamService,
+    private reviewService: ReviewService,
     private userService: UserService,
     private route: ActivatedRoute,
     ) {}

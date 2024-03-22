@@ -4,7 +4,7 @@
 .miniChat2 {
     @apply w-[500px] h-[550px] rounded-sm flex flex-col justify-between items-center shadow-lg;
     background-color: $card;
-    animation: bottomToTop 1s;
+    animation: bottomToTop 0.2029349s;
 }
 
 @media screen and (max-width:1421px) {
