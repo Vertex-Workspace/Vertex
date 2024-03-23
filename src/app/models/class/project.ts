@@ -19,6 +19,7 @@ export class Project {
     idTeam!: number;
     listOfResponsibles ?: Group[] | User[]
     groups?: Group[]
+    users?: User[]
     projectReviewENUM!: ProjectReview; 
     
 
@@ -37,7 +38,8 @@ export class Project {
         this.projectReviewENUM = project.projectReviewENUM;
         // this.collaborators = project.collaborators
         // this.groups = project.groups
-        this.listOfResponsibles = project.listOfResponsibles
+        this.groups = project.groups
+        this.users = project.users
     }
 
 }
@@ -61,7 +63,8 @@ export class ProjectEdit {
     id ?:number;
     name?: string;
     description?: string;
-    listOfResponsibles ?: Group[] | User[];
+    groupsAndUsers ?: User[] | Group[] 
+    listOfResponsibles ?:  User[];
     groups ?: Group[];
 }
 export enum ProjectReview {

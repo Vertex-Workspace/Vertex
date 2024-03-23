@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { InputValuePropertyModule } from 'src/app/components/reusable-components/input-value-property/input-value-property.module';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -13,6 +14,6 @@ import { MultiSelectModule } from 'primeng/multiselect';
   declarations: [PropertiesComponent],
   exports: [PropertiesComponent],
   imports: [CommonModule, FontAwesomeModule, FormsModule, InputValuePropertyModule, 
-    TreeSelectModule, MultiSelectModule]
+    TreeSelectModule, DropdownModule]
 })
 export class PropertiesModule { }

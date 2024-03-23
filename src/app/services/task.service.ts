@@ -114,4 +114,8 @@ export class TaskService {
     .pipe(map((groups: Group[]) => groups.map(group => new Group(group))));
   }
 
+  public taskDependency(taskId: number, taskDependencyId: number, task: Task): Observable<Task> {
+    return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}/${taskDependencyId}`, task);
+  }
+
 }

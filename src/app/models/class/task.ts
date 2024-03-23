@@ -28,6 +28,7 @@ export class Task {
 
     files: any[];
     label !: string
+    taskDependency !: Task
 
     constructor(
         task: Task
@@ -42,6 +43,7 @@ export class Task {
         this.files = task.files;
         this.revisable = task.revisable;
         this.label = task.name;
+        this.taskDependency = task.taskDependency
     }
 
 }

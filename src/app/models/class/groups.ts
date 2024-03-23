@@ -8,12 +8,12 @@ export class Group {
     name ?: string;
     creationDate ?: Date;
     description ?: string;
-    users?: User[] = [];
+    users ?: User[];
     open?: boolean = false;
     creator?: User;
     team ?: Team
     label ?: string
-    children ?: User[]
+    children ?: User[] 
     icon ?: string
     selected ?: boolean
 

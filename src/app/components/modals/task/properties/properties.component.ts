@@ -55,42 +55,15 @@ export class PropertiesComponent {
 
   ngOnInit(): void {
     this.tasks = this.project.tasks
-    this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
-      this.taskResponsables = users
-
-      for (const user of users) {
-        this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
-          for (const user1 of users1) {
-            if (user.id === user1.id) {
-              this.selectedUsers.push(user)
-            }
-          }
-        })
-      }
-    })
 
     for (const permission of this.permissions) {
       if (permission.name === PermissionsType.EDIT && permission.enabled) {
         this.canEdit = true;
       }
     }
+    this.getGroups()
+    this.getUsers()
 
-    this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group []) => {
-      for(const group1 of groups1){
-        this.userService.getUsersByGroup(group1.id).subscribe((users: User[]) => {
-          group1.children = users
-          group1.icon = 'pi pi-users'
-        });
-        this.taskResponsables.push(group1)
-        this.taskService.getGroupByTask(this.task.id).subscribe((groups : Group[]) => {
-          for(const group of groups){
-            if(group.id == group1.id){
-              this.selectedUsers.push(group1)
-            }
-          }
-        })
-      }
-   })
   }
 
   @Output() changes = new EventEmitter();
@@ -137,7 +110,49 @@ export class PropertiesComponent {
   }
 
   setTaskDependencies(task: Task){
+    this.taskService.taskDependency(this.task.id, task.id, this.task).subscribe((task:Task) => {
+      this.alertService.successAlert("Tarefa depende dessa")
+    })
+  }
 
+  getUsers(){
+    this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
+      this.taskResponsables = users
+      console.log(this.taskResponsables);
+      
+      for (const user of users) {
+        this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
+          for (const user1 of users1) {
+            if (user.id === user1.id) {
+              this.selectedUsers.push(user)
+            }
+          }
+        })
+      }
+    })
+  }
+
+  getGroups(){
+    this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group []) => {
+      console.log(groups1);
+      
+      for(const group1 of groups1){
+        this.userService.getUsersByGroup(group1.id).subscribe((users: User[]) => {
+          group1.children = users
+          group1.icon = 'pi pi-users'
+          this.taskResponsables.push(group1)
+          console.log(this.taskResponsables);
+          
+        });
+        this.taskService.getGroupByTask(this.task.id).subscribe((groups : Group[]) => {
+          for(const group of groups){
+            if(group.id == group1.id){
+              this.selectedUsers.push(group1)
+            }
+          }
+        })
+      }
+   })
   }
 
 }

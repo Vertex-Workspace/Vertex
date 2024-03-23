@@ -7,12 +7,12 @@
                     <p>Dependências</p>
                 </div>
                 <div>
-                    <p-multiSelect class="w-full" containerStyleClass="w-full" 
+                    <p-dropdown class="w-full" containerStyleClass="w-full" 
                     placeholder="Selecione dependências" [options]="tasks" optionLabel="name">
-                        <ng-template let-group pTemplate="group">
-                            <span click="setTaskDependencies(group)">{{group.name}}</span>
+                        <ng-template let-group pTemplate="group" (click)="setTaskDependencies(group)">
+                            <span>{{group.name}}</span>
                         </ng-template>
-                    </p-multiSelect>
+                    </p-dropdown>
                 </div>
             </td>
             <td>
