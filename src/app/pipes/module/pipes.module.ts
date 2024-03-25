@@ -6,6 +6,7 @@ import { StatusBasicPipe } from '../status-basic.pipe';
 import { NameSortPipe } from '../sort/name-sort.pipe';
 import { DateSortPipe } from '../sort/date-sort.pipe';
 import { StatusSortPipe } from '../sort/status-sort.pipe';
+import { SimplePropertyPipe } from '../simple-property.pipe';
 
 
 
@@ -16,7 +17,8 @@ import { StatusSortPipe } from '../sort/status-sort.pipe';
     StatusBasicPipe,
     NameSortPipe,
     DateSortPipe,
-    StatusSortPipe
+    StatusSortPipe,
+    SimplePropertyPipe
   ],
   imports: [
     CommonModule
@@ -27,7 +29,8 @@ import { StatusSortPipe } from '../sort/status-sort.pipe';
     StatusBasicPipe,
     NameSortPipe,
     DateSortPipe,
-    StatusSortPipe
+    StatusSortPipe,
+    SimplePropertyPipe
   ]
 })
 export class PipesModule { }

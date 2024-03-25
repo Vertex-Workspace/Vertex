@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project, ProjectReview } from 'src/app/models/class/project';
@@ -13,12 +13,11 @@ import { TeamService } from 'src/app/services/team.service';
 import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/class/note';
 import { Observable } from 'rxjs';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { Property, PropertyKind, PropertyListKind } from 'src/app/models/class/property';
+import { Property, PropertyKind } from 'src/app/models/class/property';
 import { ReviewService } from 'src/app/services/review.service';
 import { PropertyList } from 'src/app/models/class/property';
-import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
 import { PipeParams } from 'src/app/models/interface/params';
+import { FilterParams } from 'src/app/models/interface/filter-params';
 
 
 @Component({
@@ -48,6 +47,8 @@ export class TasksComponent implements OnInit {
   taskReview: boolean = false;
   logged !: User;
 
+  overlayVisible !: boolean;
+
   orderParams !: PipeParams;
   orderOptions : any = [
     { name: 'Nome', values: [
@@ -63,6 +64,11 @@ export class TasksComponent implements OnInit {
   ];
 
   selectedStatusFilter !: any;
+  simplePropertyFilter : FilterParams = {
+    value: '',
+    propKind: '',
+    propId: 0
+  };
   filterOptions: any[] = [];
 
   pageTitle: string = 'Espaço de Trabalho';
@@ -157,6 +163,7 @@ export class TasksComponent implements OnInit {
         
         prop.propertyLists
           .forEach((pl: PropertyList) => {
+            
                 this.filterOptions[index].values.push({
                   name: pl.value,
                   kind: pl.propertyListKind,
@@ -164,15 +171,34 @@ export class TasksComponent implements OnInit {
                 })
               })
       } else {
+        
         this.filterOptions[index]
           .values.push({
             name: prop.kind as string,
-            index: p.properties.indexOf(prop),
-            propName: prop.name
+            kind: prop.kind as string,
+            propId: prop.id
           })
       }
     })
     
+  }
+
+  updateFilterParams(e: any, option: any): void {
+    console.log('a');
+    
+    this.simplePropertyFilter.propKind = option.kind;
+    this.simplePropertyFilter.propId = option.propId;
+    this.selectedStatusFilter = '';
+  }
+
+  reset(e: any): void {
+    console.log(e);
+    
+    this.simplePropertyFilter = {
+      value: '',
+      propKind: '',
+      propId: 0
+    }
   }
 
   menuItems = [
@@ -195,6 +221,11 @@ export class TasksComponent implements OnInit {
   toggleFilter(): void {
     this.filterOpen = !this.filterOpen;
     this.selectedStatusFilter = '';
+    this.simplePropertyFilter = {
+      propId: 0,
+      propKind: '',
+      value: ''
+    }
   }
 
   toggleOrder(): void {

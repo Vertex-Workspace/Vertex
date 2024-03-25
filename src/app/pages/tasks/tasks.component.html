@@ -93,16 +93,38 @@
                 </div>
                 <div *ngIf="filterOpen">
                     <p>Filtrar por </p>
-                    <p-cascadeSelect 
-                            [(ngModel)]="selectedStatusFilter"  
-                            [options]="filterOptions" 
-                            optionLabel="name" 
-                            optionGroupLabel="name" 
-                            [optionGroupChildren]="['values']" 
-                            [style]="{ minWidth: '13rem' }" 
-                            placeholder="Selecione"
-                            (ngModelChange)="updateOrderType($event)"
-                        ></p-cascadeSelect>
+                    <p-cascadeSelect [(ngModel)]="selectedStatusFilter"  
+                        [options]="filterOptions" 
+                        optionLabel="name" 
+                        optionGroupLabel="name" 
+                        [optionGroupChildren]="['values']" 
+                        [style]="{ minWidth: '13rem' }" 
+                        placeholder="Selecione"
+                    >
+                        <ng-template let-option pTemplate="option">
+                            <div *ngIf="option.name !== 'TEXT' && option.name !== 'DATE' && option.name !== 'NUMBER'">
+                                {{option.name}}
+                            </div>
+                            <div *ngIf="option.name === 'TEXT'">
+                                <input 
+                                    pInputText 
+                                    [(ngModel)]="simplePropertyFilter.value" 
+                                    type="text" 
+                                    placeholder="Filtre por texto" 
+                                    (click)="$event.stopPropagation()"
+                                    (ngModelChange)="updateFilterParams($event, option)"
+                                >
+                            </div>
+                            <div *ngIf="option.name === 'NUMBER'">
+                                <p-inputNumber 
+                                    [(ngModel)]="simplePropertyFilter.value" 
+                                    placeholder="Filtre por número"
+                                    (click)="$event.stopPropagation()"
+                                    (ngModelChange)="updateFilterParams($event, option)"
+                                ></p-inputNumber>
+                            </div>
+                        </ng-template>
+                    </p-cascadeSelect>
                 </div>
             </ng-container>
         </section>
@@ -124,6 +146,7 @@
                 [queryFilter]="query" 
                 [statusFilter]="selectedStatusFilter" 
                 [orderParams]="orderParams"
+                [simplePropertyFilter]="simplePropertyFilter"
                 [permissions]="permissions"
                 (openTaskDetails)="changeModalTaskState(true, $event)"
             ></app-list> 
