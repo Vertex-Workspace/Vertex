@@ -118,7 +118,6 @@ export class PropertiesComponent {
   getUsers(){
     this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
       this.taskResponsables = users
-      console.log(this.taskResponsables);
       
       for (const user of users) {
         this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
@@ -141,7 +140,6 @@ export class PropertiesComponent {
           group1.children = users
           group1.icon = 'pi pi-users'
           this.taskResponsables.push(group1)
-          console.log(this.taskResponsables);
           
         });
         this.taskService.getGroupByTask(this.task.id).subscribe((groups : Group[]) => {

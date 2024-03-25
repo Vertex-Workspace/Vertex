@@ -17,7 +17,7 @@ export class Project {
     notes : Note[] = [];
     properties!: Property[];
     idTeam!: number;
-    listOfResponsibles ?: Group[] | User[]
+    listOfResponsibles !: Group[] | User[]
     groups?: Group[]
     users?: User[]
     projectReviewENUM!: ProjectReview; 
@@ -63,8 +63,7 @@ export class ProjectEdit {
     id ?:number;
     name?: string;
     description?: string;
-    groupsAndUsers ?: User[] | Group[] 
-    listOfResponsibles ?:  User[];
+    users ?:  User[];
     groups ?: Group[];
 }
 export enum ProjectReview {

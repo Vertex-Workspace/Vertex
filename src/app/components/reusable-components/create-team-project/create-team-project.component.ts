@@ -65,22 +65,12 @@ export class CreateTeamProjectComponent implements OnInit {
     this.logged = this.userService.getLogged();
 
     // this.nodeService.getFiles().then((files) => (this.nodes = files));
-    if (this.project != null) {
-      this.projectService.getProjectCollaborators(5).subscribe((users: User[]) => {
-        this.forms(users)
-      })
-    } else {
-      this.forms(null)
-    }
-  }
-
-  forms(users: any) {
-    this.form = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      description: [null],
-      listOfResponsibles: [users],
-      groups: [null]
-    });
+      this.form = this.formBuilder.group({
+        name: [null, [Validators.required]],
+        description: [null],
+        listOfResponsibles: [null],
+        groups: [null]
+      });
   }
 
   listOfResponsibles: TreeNode[] = []
@@ -300,57 +290,43 @@ export class CreateTeamProjectComponent implements OnInit {
 
   updateProject(): void {
     let project = this.form.getRawValue() as Project;
-    let list: User[] = []
-    let groups: Group[] = []
+    let users: User[] = [];
+    let groups: Group[] = [];
+
+    project.listOfResponsibles.forEach(type => {
+        if (type instanceof Group) {
+            let group: Group = type as Group;
+            group.selected = true;
+            groups.push(group);
+        } else if (type instanceof User) {
+            let user: User = type as User;
+            user.selected = true;
+            // Verifica se o usuário já está na lista de usuários
+            if (!users.some(existingUser => existingUser.id === user.id)) {
+                users.push(user);
+            }
+        }
+    });
 
     const projectEdit: ProjectEdit = {
-      id: this.project?.id,
-      name: project.name,
-      description: project.description,
-      groupsAndUsers: project.listOfResponsibles
+        id: this.project?.id,
+        name: project.name,
+        description: project.description,
+        users: users, 
+        groups: groups 
+    };
+
+    if (!projectEdit.name) {
+        projectEdit.name = this.project?.name;
+    }
+    if (!projectEdit.description) {
+        projectEdit.description = this.project?.description;
     }
 
-    projectEdit.groupsAndUsers!.forEach((type => {
-      if (type instanceof Group) {
-        let group: Group = type as Group;
-        group.selected = true;
-        group.users = undefined
-        group.children = undefined
-        groups.push(group);
-        console.log(group);
-        
-      } else if (type instanceof User) {
-        let user: User = type as User;
-        user.selected = true
-        list.push(user)
-        console.log(user);
-        
-      }
-    }));
-
-    projectEdit.groups = groups
-    projectEdit.listOfResponsibles = list
-
-    if (projectEdit.name == null) {
-      projectEdit.name = this.project?.name
-    }
-    if (projectEdit.description == null) {
-      projectEdit.description = this.project?.description
-    }
-    if (projectEdit.listOfResponsibles == null) {
-      projectEdit.listOfResponsibles = this.project?.users
-    }
-    if (projectEdit.groups == null) {
-      projectEdit.groups = this.project?.groups
-    }
-
-    console.log(projectEdit);
     this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
-      console.log(projectEdit);
-      
-      this.alert.successAlert("Projeto modificado com sucesso")
-    })
-  }
+        this.alert.successAlert("Projeto modificado com sucesso");
+    });
+}
 
   @Output()
   senderEmitter = new EventEmitter<Project>();
@@ -367,5 +343,4 @@ export class CreateTeamProjectComponent implements OnInit {
       return 'Atribua responsáveis ao projeto';
     }
   }
-
 }
