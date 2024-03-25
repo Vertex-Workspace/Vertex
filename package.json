@@ -23,7 +23,6 @@
     "@fortawesome/angular-fontawesome": "^0.12.1",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@syncfusion/ej2-angular-grids": "^24.2.9",
     "angular-resizable-element": "^7.0.2",
     "chart.js": "^4.4.0",
     "ngx-resize": "^2.0.0",
