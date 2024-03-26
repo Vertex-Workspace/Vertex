@@ -139,7 +139,6 @@ export class ChatComponent {
     this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
       (response: any) => {
         // this.chat.messages?.push(response);
-
         let reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = () => {
@@ -162,7 +161,6 @@ export class ChatComponent {
     }
     return false;
   }
-
 
   convertDataUrlToBlob(dataUrl: string) {
     const byteString = atob(dataUrl.split(',')[1]);
@@ -245,5 +243,4 @@ export class ChatComponent {
   minimizeChat(value: boolean) {
     this.chatExpanded.emit(value);
   }
-
 }
