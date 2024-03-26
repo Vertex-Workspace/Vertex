@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NotificationComponent } from './notification.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class NotificationModule { }
