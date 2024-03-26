@@ -9,8 +9,8 @@
                 <div>
                     <p-dropdown class="w-full" containerStyleClass="w-full" 
                     placeholder="Selecione dependências" [options]="tasks" optionLabel="name">
-                        <ng-template let-group pTemplate="group" (click)="setTaskDependencies(group)">
-                            <span>{{group.name}}</span>
+                        <ng-template let-task pTemplate="task">
+                            <span (click)="setTaskDependencies(task)">{{task.name}}</span>
                         </ng-template>
                     </p-dropdown>
                 </div>

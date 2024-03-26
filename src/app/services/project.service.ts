@@ -37,9 +37,9 @@ export class ProjectService {
       .post<Project>(`${URL}project/${teamId}`, project);
   }
 
-  public delete(id: number): Observable<Project> {
+  public delete(id: number) {
     return this.http
-      .delete<Project>(`${URL}project/${id}`);
+      .delete(`${URL}project/${id}`);
   }
 
   public getAllByTeam(id: number): Observable<Project[]> {
@@ -95,6 +95,10 @@ export class ProjectService {
 
   public patchValue(project: ProjectEdit):Observable<Project>{
     return this.http.patch<Project>(`${URL}project/update`, project);
+  }
+
+  public getImage(fileId: number){
+    return this.http.get<string>(`${URL}project/image/aws/${fileId}`)
   }
 
 }

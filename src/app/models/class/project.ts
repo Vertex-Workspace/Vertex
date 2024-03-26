@@ -10,7 +10,7 @@ export class Project {
     name !: string;
     team : Team;
     description ?: string;
-    image ?: string;
+    image !: string;
     creator ?: UserTeam;
     projectDependency ?: Project;
     tasks : Task[]; 

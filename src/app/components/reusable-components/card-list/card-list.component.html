@@ -6,7 +6,7 @@
                 <div class="flex flex-col w-full">
                     <div class="image flex justify-center items-center" (click)="openTeam(item.id)">
                         <!-- <img src="../../../../assets/logo-weg.png" alt="" class="h-[70%]"> -->
-                        <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">
+                        <img src="{{item.image}}" alt="" class="rounded-full h-[70%]">
                         <h1 *ngIf="!item.image">{{getFirstLetter(item)}}</h1>
                     </div>
                     <div class="informations">
@@ -23,14 +23,16 @@
                 </div>
             </div>
 
-            <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
-                [title]="' excluir o projeto'" (confirmEvent)="emitItem($event)"></app-confirm-modal>
-            <app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
-                (confirmEvent)="emitItem($event)"></app-confirm-modal>
+
         </ng-container>
     </div>
 </div>
 
 <app-create-team-project [project]="project" *ngIf="openModal" [typeString]="'projectInfo'"
 [team]="team" (close)="close()">
-</app-create-team-project>
+</app-create-team-project>            
+
+<app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
+                [title]="' excluir o projeto'" (confirmEvent)="emitItem($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
+                (confirmEvent)="emitItem($event)"></app-confirm-modal>

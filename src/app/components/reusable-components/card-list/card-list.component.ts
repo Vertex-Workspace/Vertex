@@ -21,12 +21,15 @@ export class CardListComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private projectService: ProjectService,
-    private route: ActivatedRoute 
-  ) { }
+    private route: ActivatedRoute
+  ) { 
+    console.log(this.projects);
+    
+  }
 
   faTrashCan = faTrashCan;
   faGear = faGear
-  
+
   @Input()
   teams?: Team[]; //se estiver na home
 
@@ -34,7 +37,7 @@ export class CardListComponent implements OnInit {
   team?: Team; //se estiver na tela projetos
 
   @Input()
-  projects : Project[]=[]
+  projects: Project[] = []
 
   @Input()
   type !: string;
@@ -49,20 +52,22 @@ export class CardListComponent implements OnInit {
 
   delete: boolean = false;
 
-  
- firstLetterName?: string
 
- creatorName ?: String
+  firstLetterName?: string
 
- loggedUser ?: User
+  creatorName?: String
+
+  loggedUser?: User
+
+  image!: string
 
 
   ngOnInit(): void {
-    this.findAllTeams() 
+    this.findAllTeams()
   }
 
   getType(): any[] {
-    if (this.type === 'project') {  
+    if (this.type === 'project') {
       return this.projects
     }
     return this.teams!;
@@ -81,15 +86,21 @@ export class CardListComponent implements OnInit {
     this.itemToDelete = item
   }
 
-  close(){
+  close() {
     this.delete = !this.delete
   }
 
 
   emitItem(event: boolean) {
-    if (event) {
-      this.emitterItem.emit(this.itemToDelete)
+    if(this.teams){
+      this.deleteTeam(this.itemToDelete)
     }
+    if(this.projects){
+      this.deleteProject(this.itemToDelete)
+    }
+    // if (event) {
+    //   this.emitterItem.emit(this.itemToDelete)
+    // }
     this.delete = false;
   }
 
@@ -97,10 +108,10 @@ export class CardListComponent implements OnInit {
     this.teamService.getTeamsByUser(this.userService.getLogged()).subscribe((teams: Team[]) => {
       for (let i = 0; i < teams.length; i++) {
         this.teamService.getTeamCreator(teams[i]).subscribe((userC) => {
-          
+
           if (teams[i].name === "Equipe " + userC.firstName) {
             this.creatorName = userC.firstName
-            this.firstLetterName = userC.firstName?.substring(0, 1).toLocaleUpperCase()       
+            this.firstLetterName = userC.firstName?.substring(0, 1).toLocaleUpperCase()
           }
         })
       }
@@ -111,28 +122,56 @@ export class CardListComponent implements OnInit {
     this.loggedUser = this.userService.getLogged();
     // this.teamService.getOneById(this.team.)
     console.log(teamId, this.loggedUser);
-    
-    this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project []) => {
+
+    this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project[]) => {
       this.projects = projects
     })
-    
+
   }
 
-  getFirstLetter(item : any): string{
+  getFirstLetter(item: any): string {
     return item.name.substring(0, 1).toLocaleUpperCase();
   }
 
   openModal: boolean = false;
   project !: Project
 
-  openInformations(project: Project){
+  openInformations(project: Project) {
     this.openModal = !this.openModal;
     this.projectService.getOneById(project.id).subscribe((project: Project) => {
-      this.project = project  
-    }) 
+      this.project = project
+    })
     this.teamService.getOneById(this.project.idTeam).subscribe((team: Team) => {
       this.team = team;
     })
+  }
+
+  click() {
+      this.projectService.getImage(1).subscribe((string1: string) => {  
+      },
+        (error: any) => {
+          this.project.image = error.error.text
+        }
+      )
+  }
+
+  deleteProject(projectId: Project): void {
+    this.projectService
+      .delete(projectId.id)
+      .subscribe((project) => {
+        this.projects.splice(this.projects.indexOf(projectId), 1)
+      },
+      e => {
+      });
+  }
+
+  deleteTeam(team : Team): void { 
+    this.teamService
+      .delete(team.id)
+      .subscribe((team: Team) => {
+      },
+      e => {
+      });
   }
 
 }

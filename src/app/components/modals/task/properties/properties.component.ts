@@ -55,6 +55,8 @@ export class PropertiesComponent {
 
   ngOnInit(): void {
     this.tasks = this.project.tasks
+    this.tasks.splice(this.tasks.indexOf(this.task), 1)
+    
 
     for (const permission of this.permissions) {
       if (permission.name === PermissionsType.EDIT && permission.enabled) {
@@ -97,10 +99,8 @@ export class PropertiesComponent {
       user: user,
       group: user
     }
-    
       this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
         this.alertService.successAlert("editado")
-        
       })
 
   }
