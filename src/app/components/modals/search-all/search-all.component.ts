@@ -15,15 +15,11 @@ export class SearchAllComponent {
     "Reponsáveis"
   ];
 
-  itemsSearched: any[]=[
-    {color: "black", name: "Projeto X", date: new Date().toLocaleDateString()},
-    {color: "black", name: "Projeto X", date: new Date().toLocaleDateString()},
-    {color: "black", name: "Projeto X", date: new Date().toLocaleDateString()},
-    {color: "black", name: "Projeto X", date: new Date().toLocaleDateString()},
-    {color: "black", name: "Projeto X", date: new Date().toLocaleDateString()},
-    {color: "black", name: "Projeto X", date: new Date().toLocaleDateString()},
-    {color: "black", name: "Projeto X", date: new Date().toLocaleDateString()}
-  ]
+  search(): void {
+
+  }
+
+  itemsSearched: any[] = [];
 
   @Output()
   close = new EventEmitter();

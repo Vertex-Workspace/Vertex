@@ -83,11 +83,15 @@
                     </ng-container>
                     <ng-container *ngIf="orderOpen">
                         <p>Ordenar por </p>
-                        <select>
-                            <option *ngFor="let item of orderSettings">
-                                {{ item.label }}
-                            </option>
-                        </select>
+                        <p-cascadeSelect 
+                            [(ngModel)]="orderParams"  
+                            [options]="orderOptions" 
+                            optionLabel="name" 
+                            optionGroupLabel="name" 
+                            [optionGroupChildren]="['values']" 
+                            [style]="{ minWidth: '13rem' }" 
+                            placeholder="Selecione"
+                        ></p-cascadeSelect>
                     </ng-container>
                 </section>
 
@@ -100,6 +104,7 @@
                         [permissions]="permissionsOnTeam"
                         [queryFilter]="queryFilter"
                         [statusFilter]="selectedFilter"
+                        [orderParams]="orderParams"
                     ></app-list>
                 </div>
                 <!-- <app-quick-access style="width: 100%; height:100%;" [typeString]="'project'"></app-quick-access> -->

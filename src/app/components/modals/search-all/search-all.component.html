@@ -1,7 +1,7 @@
 <app-modal-warn [width]="'650px'" [height]="'700px'" (close)="closeModal()">
     <div class="search">
         <input type="text" placeholder="Pesquise o que deseja..." [(ngModel)]="query">
-        <i class="pi pi-search cursor-pointer" style="font-size: 20px;"></i>
+        <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="search()"></i>
     </div>
     <div class="order regular-text">
         <p>Ordenar por </p>
@@ -14,10 +14,9 @@
     <div class="div-searched">
         <ng-container *ngFor="let item of itemsSearched">
             <div class="card-searched"
-            [style.border-left]="'2px solid ' + item.color"
             >
                 <p class="medium-text">{{item.name}}</p>
-                <p class="regular-text">{{item.date}}</p>
+                <!-- <p class="regular-text">{{item.date}}</p> -->
             </div>
         </ng-container>
     </div>

@@ -7,6 +7,7 @@ import { PropertyListKind } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
 import { Team } from 'src/app/models/class/team';
 import { Permission, User } from 'src/app/models/class/user';
+import { PipeParams } from 'src/app/models/interface/params';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -38,7 +39,24 @@ export class ProjectsComponent implements OnInit {
       {name: 'Concluído', kind: PropertyListKind.DONE}
     ]},
   ];
-  orderSettings: any[] = [];
+
+  orderParams !: PipeParams;
+  orderOptions : any = [
+    { name: 'Nome', values: [
+      { name: 'A-Z', type: 'name'  },
+      { name: 'Z-A', type: 'name' }
+    ]},
+    { name: 'Data', values: [
+      { name: 'Maior - Menor', type: 'date' },
+      { name: 'Menor - Maior', type: 'date' }
+    ] },
+    { name: 'Status', values: [
+      { name: 'Não Iniciado', type: 'status', kind: PropertyListKind.TODO },
+      { name: 'Em Andamento', type: 'status', kind: PropertyListKind.DOING },
+      { name: 'Concluído', type: 'status', kind: PropertyListKind.DONE },
+    ] }
+  ];
+
 
   queryFilter !: string;
 
@@ -139,6 +157,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   clickOrder(): void {
+    this.orderParams = {name: '', type: ''};
     this.orderOpen = !this.orderOpen;
   }
 

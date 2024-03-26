@@ -88,14 +88,6 @@
                                 <span>{{ option.name }}</span>
                             </div>
                             <div *ngIf="option.name === 'date-input'" (click)="$event.stopPropagation()">
-                                <!-- <p-calendar 
-                                    appendTo="body"
-                                    [style]="{ width: '250px' }"  
-                                    dateFormat="dd.mm.yy"
-                                    [(ngModel)]="filterDate"
-                                    
-                                ></p-calendar> -->
-
                                 <input type="text" pInputText [(ngModel)]="filterDate">
                             </div>
                         </ng-template>
