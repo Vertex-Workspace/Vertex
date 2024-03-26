@@ -14,6 +14,7 @@ import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/class/user';
 import { Message } from 'src/app/models/class/message';
 import { TeamService } from '../../services/team.service';
+import { PersonalizationService } from 'src/app/services/personalization.service';
 
 
 @Component({
@@ -58,7 +59,7 @@ export class ChatComponent {
   logged!: User;
 
 
-  constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
+  constructor(public webSocketService: WebSocketService, private teamService: TeamService, private personalizationService: PersonalizationService) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
     this.teamService.findAllChats().subscribe((chats: Chat[]) => {
       chats.forEach((chat: Chat) => {
@@ -240,7 +241,7 @@ export class ChatComponent {
       a.scrollTo(a.scrollTop, a.scrollHeight);
     });
   }
-
+  
   minimizeChat(value: boolean) {
     this.chatExpanded.emit(value);
   }
