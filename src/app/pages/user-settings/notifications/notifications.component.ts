@@ -18,12 +18,11 @@ export class NotificationsComponent {
   inputEmail: boolean = false;
 
   tooglesList = [
-    {label: "reviewTask",text: "Receber envios e devolutivas de tarefas", icon: faToggleOff},
-    {label: "newMembers",text: "Entrada de novos membros", icon: faToggleOff},
-    {label: "permissionsChanged",text: "Mudança de permissões", icon: faToggleOff},
-    {label: "",text: "Atribuições de responsabilidade de projetos e tarefas", icon: faToggleOff},
-    {label: "",text: "Qualquer atualização em tarefa", icon: faToggleOff},
-    {label: "",text: "Enviar notificações por e-mail", icon: faToggleOff},
+    {text: "Receber envios e devolutivas de tarefas", icon: faToggleOff},
+    {text: "Entrada de novos membros", icon: faToggleOff},
+    {text: "Mudança de permissões", icon: faToggleOff},
+    {text: "Atribuições de responsabilidade de projetos e tarefas", icon: faToggleOff},
+    {text: "Enviar notificações por e-mail", icon: faToggleOff},
   ];
 
 
@@ -56,7 +55,7 @@ export class NotificationsComponent {
   private updateToggles(user : User):void{
     let list : any[] = [
       user.taskReview,
-      user.newMembers,
+      user.newMembersAndGroups,
       user.permissionsChanged,
       user.responsibleInProjectOrTask,
       user.anyUpdateOnTask,

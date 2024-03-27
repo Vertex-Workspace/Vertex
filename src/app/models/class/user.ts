@@ -27,11 +27,11 @@ export class User {
     selectedProject ?: boolean
 
     taskReview ?: boolean;
-    newMembers ?: boolean;
-    permissionsChanged ?: boolean;;
-    responsibleInProjectOrTask ?: boolean;;
-    anyUpdateOnTask ?: boolean;;
-    sendToEmail ?: boolean;;
+    newMembersAndGroups ?: boolean;
+    permissionsChanged ?: boolean;
+    responsibleInProjectOrTask ?: boolean;
+    anyUpdateOnTask ?: boolean;
+    sendToEmail ?: boolean;
 
 
     //brainstorming

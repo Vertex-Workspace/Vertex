@@ -32,7 +32,6 @@ export class NotificationComponent {
     this.userService.getNotifications(this.userService.getLogged().id!).subscribe(
       (notifications: Notification[]) => {
         this.notifications = notifications;
-        console.log(notifications);
 
       });
   }
@@ -64,7 +63,6 @@ export class NotificationComponent {
   }
 
   closeNotification(): void {
-    console.log("close");
     this.close.emit();
   }
 

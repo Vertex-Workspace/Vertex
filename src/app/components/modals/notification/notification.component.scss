@@ -80,11 +80,11 @@ overflow: hidden;
     }
 
     .notifications {
-        @apply flex flex-col w-full h-[85%] overflow-y-auto;
+        @apply flex flex-col w-full h-[85%] overflow-y-auto overflow-x-hidden;
 
         .notification {
-            @apply flex w-full border-b-2 items-center p-4 justify-between;
-            min-height: 90px;
+            @apply flex w-full border-b-2 items-center py-2 px-4 justify-between;
+            min-height: 130px;
 
             :first-child {
                 @apply flex flex-row items-center justify-between;
