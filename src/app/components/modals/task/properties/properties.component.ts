@@ -52,17 +52,30 @@ export class PropertiesComponent {
   canEdit: boolean = false;
   taskResponsables: any[] = []
   selectedUsers: any[] = []
+  taskDependency: Task[] = []
+  selectedDependency !: string 
 
   ngOnInit(): void {
     this.tasks = this.project.tasks
-    this.tasks.splice(this.tasks.indexOf(this.task), 1)
-    
 
     for (const permission of this.permissions) {
       if (permission.name === PermissionsType.EDIT && permission.enabled) {
         this.canEdit = true;
       }
     }
+
+    for(const task of this.project.tasks){
+      if(this.task.id != task.id){
+        this.taskDependency.push(task);
+      }
+    }
+    if(this.task.taskDependency != null){
+      this.selectedDependency = this.task.taskDependency.name;
+    }else {
+      this.selectedDependency = 'Selecione dependência'
+    }
+    
+    
     this.getGroups()
     this.getUsers()
 
@@ -109,10 +122,16 @@ export class PropertiesComponent {
     console.log(node);
   }
 
-  setTaskDependencies(task: Task){
-    this.taskService.taskDependency(this.task.id, task.id, this.task).subscribe((task:Task) => {
-      this.alertService.successAlert("Tarefa depende dessa")
+  setTaskDependencies(task: any){
+    console.log(task.value);
+     this.taskService.taskDependency(this.task.id, task.value.id, this.task).subscribe((task1:Task) => {
+       this.alertService.successAlert("Essa tarefa agora necessita da conclusão da tarefa " + task.name)
+       this.selectedDependency = task.value.name
+     }, 
+     (error) => {
+      this.alertService.errorAlert("Já existe uma tarefa que depende dessa")
     })
+    
   }
 
   getUsers(){

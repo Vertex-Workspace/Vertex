@@ -118,4 +118,8 @@ export class TaskService {
     return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}/${taskDependencyId}`, task);
   }
 
+  public setTaskDependencyNull(taskId: number, task: Task): Observable<Task>{
+    return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}`, task);
+  }
+
 }

@@ -165,10 +165,13 @@ export class CardListComponent implements OnInit {
       });
   }
 
-  deleteTeam(team : Team): void { 
+  deleteTeam(teamId : Team): void { 
+    console.log(teamId);
+    
     this.teamService
-      .delete(team.id)
-      .subscribe((team: Team) => {
+      .delete(teamId.id)
+      .subscribe((team) => {
+        this.teams?.splice(this.teams.indexOf(teamId),1)
       },
       e => {
       });

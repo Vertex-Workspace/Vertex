@@ -163,9 +163,16 @@ export class InputValuePropertyComponent {
     } else if (value.property.kind === PropertyKind.STATUS || value.property.kind === PropertyKind.LIST) {
       let propertyList: PropertyList = value.value as PropertyList;
       valueTest = propertyList.id;
+      if(propertyList.propertyListKind === PropertyListKind.DONE){
+        this.taskService.setTaskDependencyNull(this.task.id, this.task).subscribe((task: Task)=> {
+          this.task = task;
+        })
+      }
     } else {
       valueTest = value.value;
     }
+
+    
     const valueUpdate: ValueUpdate = {
       id: this.task.id,
       value: {
@@ -187,7 +194,6 @@ export class InputValuePropertyComponent {
       },
       (error) => {
         if (this.value.property.kind === PropertyKind.STATUS) {
-          console.log(this.oldValue);
           this.value = this.oldValue;
 
           this.task.values[0] = this.value;

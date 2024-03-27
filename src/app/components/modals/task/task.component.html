@@ -33,7 +33,8 @@
                 </div>
                 <div class="down relative">
                     <div class="buttons">
-                        <button (click)="openMiniChat()">Iniciar chat</button>
+                        <button (click)="openMiniChat()" [ngClass]="hasDependency ? 'opacity-20' : 'opacity-100'" 
+                        [disabled]="hasDependency">Iniciar chat</button>
                     </div>
 
                     <div *ngIf="miniChatOpen" class="absolute">
@@ -85,9 +86,8 @@
                         <fa-icon [icon]="faClock"></fa-icon>
                         <p>{{timer}}</p>
                     </span>
-                    <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar
-                        na
-                        Tarefa</button>
+                    <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()" 
+                    [ngClass]="hasDependency ? 'opacity-20' : 'opacity-100'" [disabled]="hasDependency">Trabalhar na Tarefa</button>
                     <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
                         (click)="stopTimer()">Encerrar
                         Trabalho</button>

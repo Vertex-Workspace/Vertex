@@ -7,10 +7,11 @@
                     <p>Dependências</p>
                 </div>
                 <div>
-                    <p-dropdown class="w-full" containerStyleClass="w-full" 
-                    placeholder="Selecione dependências" [options]="tasks" optionLabel="name">
+                    <p-dropdown class="w-full" containerStyleClass="w-full" [(ngModel)]="selectedDependency"
+                    placeholder="Selecione dependências" [options]="taskDependency" optionLabel="task"
+                    (onChange)="setTaskDependencies($event)" placeholder="{{selectedDependency}}">
                         <ng-template let-task pTemplate="task">
-                            <span (click)="setTaskDependencies(task)">{{task.name}}</span>
+                            <span>{{task.name}}</span>
                         </ng-template>
                     </p-dropdown>
                 </div>

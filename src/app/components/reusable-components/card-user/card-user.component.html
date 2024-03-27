@@ -33,10 +33,13 @@
             </div>
             <div class="more-infos">
                 <p class="pl-4 pt-2 font-bold" [routerLink]="'/perfil-usuario'">Ver mais informações</p>
-                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteEmitUserTeam(user)"
+                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean(user)"
                     *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
                 </fa-icon>
             </div>
         </div>
     </div>
 </div>
+
+<app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
+                (confirmEvent)="deleteUserTeam($event)"></app-confirm-modal>

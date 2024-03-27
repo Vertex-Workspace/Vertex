@@ -43,6 +43,7 @@ export class TaskComponent implements OnInit {
   taskStep!: Task;
   user!: User;
   timeInTask!: TimeInTask;
+  hasDependency: boolean = false;
 
   seconds: number = 0;
   minutes: number = 0;
@@ -115,6 +116,11 @@ export class TaskComponent implements OnInit {
     //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
     window.onbeforeunload = () => this.ngOnDestroy();
     console.log(this.task.id);
+
+    if(this.task.taskDependency != null){
+      this.hasDependency = true
+      this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
+    }
     
   }
 
