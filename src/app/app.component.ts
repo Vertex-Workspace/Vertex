@@ -16,6 +16,7 @@ import { User } from './models/class/user';
 import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
+import { NotificationWebSocketService } from './services/notification-websocket.service';
 
 
 @Component({
@@ -64,6 +65,7 @@ export class AppComponent {
     private userService: UserService,
     private userState: UserStateService,
     private teamService: TeamService,
+    private noticationWebSocket : NotificationWebSocketService
   ) {
     personalization.setPersonalization();
     
@@ -102,6 +104,12 @@ export class AppComponent {
       document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
       document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
     });
+
+    this.noticationWebSocket.listenToServer().subscribe((change) => {
+      console.log(change);
+      
+    })
+
   }
 
   getRouteAnimationData() {

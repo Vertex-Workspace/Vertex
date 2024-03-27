@@ -79,9 +79,7 @@ export class ChatComponent {
   }
 
   ngOnInit() {
-    console.log(this.chat)
     this.webSocketService.listenToServer().subscribe((change) => {
-      console.log(change, "Change")
       this.chat.messages!.push(change);
       setTimeout(() => {
         let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
