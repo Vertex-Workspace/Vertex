@@ -1,23 +1,52 @@
 <app-modal-warn [width]="'650px'" [height]="'700px'" (close)="closeModal()">
     <div class="search">
-        <input type="text" placeholder="Pesquise o que deseja..." [(ngModel)]="query">
+        <input 
+            type="text" 
+            placeholder="Pesquise o que deseja..." 
+            [(ngModel)]="query" 
+            (keyup.enter)="onSearch()"
+            #searchInput
+        >
         <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
     </div>
     <div class="order regular-text">
-        <p>Ordenar por </p>
-        <select>
-            <option *ngFor="let item of orderSettings">
-                {{ item }}
-            </option>
-        </select>
+        <p class="text-lg h-full flex items-center">Ordenar por </p>
+        <p-dropdown 
+            [options]="orderSettings" 
+            [(ngModel)]="orderParam"
+            [showClear]="true" 
+            placeholder="Selecione"
+            [style.width]="'10rem'"
+        ></p-dropdown>
     </div>
-    <div class="div-searched">
+    <div class="div-searched pt-6">
+        <ng-container *ngIf="!itemsSearched.length">
+            <h6 *ngIf="!firstSearch; else firstSearchTemplate">
+                Nenhum resultado encontrado...
+            </h6>
+            <ng-template #firstSearchTemplate>
+                <h6>
+                    Nenhuma pesquisa realizada...
+                </h6>
+            </ng-template>
+        </ng-container>
         <ng-container *ngFor="let item of itemsSearched">
             <div class="card-searched"
+                (click)="handleClick(item)"
             >
-                <p class="medium-text">{{item.name}}</p>
-                <p class="regular-text">{{item.description}}</p>
-                <p class="regular-text">{{item.kind}}</p>
+            <div class="left">
+                <div>
+                    <img *ngIf="item.image; else firstLetter" src="data:image/jpg;base64, {{item.image}}" alt="">
+                    <ng-template #firstLetter>
+                        <h3 *ngIf="!item.image">{{getFirstLetter(item)}}</h3>
+                    </ng-template>
+                </div>
+                <div>
+                    <p class="medium-text">{{item.name}}</p>
+                    <p class="regular-text">{{item.description}}</p>
+                </div>
+            </div>
+                    <p class="regular-text">{{item.kind}}</p>
             </div>
         </ng-container>
     </div>

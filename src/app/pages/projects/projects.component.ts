@@ -28,7 +28,6 @@ export class ProjectsComponent implements OnInit {
   clicked: string = 'project';
   logged !: User;
   team !: Team;
-  emptyTeamProjects !: boolean;
 
   //TASKS - FILTER AND ORDER
   selectedFilter !: string;
@@ -80,6 +79,8 @@ export class ProjectsComponent implements OnInit {
   permissionsOnTeamObservable!: Observable<Permission[]>;
 
   ngOnInit(): void {
+    console.log('entrou');
+    
     this.getTeam();
     this.validateTeamId();
   }
@@ -109,7 +110,6 @@ export class ProjectsComponent implements OnInit {
         this.permissionsOnTeam = permissions;
       });
 
-      if (team.projects) this.emptyTeamProjects = false;
     });
   }
 

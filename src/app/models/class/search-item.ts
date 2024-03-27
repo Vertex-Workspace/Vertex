@@ -3,8 +3,9 @@ export class SearchItem {
     name: string;
     description ?: string;
     image ?: string;
+    projectId ?: number; //se for uma tarefa
     kindAsString: string;
-    kind: SearchItemKind
+    kind !: SearchItemKind;
 
     constructor(item: SearchItem) {   
         this.id = item.id!;
@@ -13,6 +14,8 @@ export class SearchItem {
         this.description = item.description ? item.description : "Sem descrição";
         this.image = item.image && item.image; 
         this.kindAsString = item.kindAsString;
+
+        this.projectId = item.projectId && item.projectId;
         
         this.kind = this.getKind(item);
         
