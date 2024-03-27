@@ -25,6 +25,8 @@ export class Task {
     step?: number;
 
     files: any[];
+    
+    image ?: string; //only validation
 
     constructor(
         task: Task

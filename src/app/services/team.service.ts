@@ -124,4 +124,5 @@ export class TeamService {
   public getTeamCreator(team: Team): Observable<User> {
     return this.http.get<User>(`${URL}team/${team.id}/creator`)
   }
+
 }
