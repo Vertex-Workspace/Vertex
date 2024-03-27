@@ -4,6 +4,7 @@ import { SearchAllComponent } from './search-all.component';
 import { ModalWarnModule } from '../modal-warn/modal-warn.module';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
 
 
 
@@ -14,7 +15,8 @@ import { DropdownModule } from 'primeng/dropdown';
     CommonModule,
     ModalWarnModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    PipesModule
   ]
 })
 export class SearchAllModule { }

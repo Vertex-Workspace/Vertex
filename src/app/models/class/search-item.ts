@@ -22,15 +22,15 @@ export class SearchItem {
     }
 
     getKind(item: SearchItem): SearchItemKind {
-        if (item.kindAsString === 'Project') {
+        if (item.kindAsString === 'Projeto') {
             return SearchItemKind.PROJECT;
         }
 
-        if (item.kindAsString === 'Task') {
+        if (item.kindAsString === 'Tarefa') {
             return SearchItemKind.TASK;
         }
 
-        if (item.kindAsString === 'Team') {
+        if (item.kindAsString === 'Equipe') {
             return SearchItemKind.TEAM;
         }
         

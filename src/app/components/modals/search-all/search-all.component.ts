@@ -41,13 +41,21 @@ export class SearchAllComponent {
 
   query: string = "";
 
-  orderSettings: string[]= [
-    "Equipes",
-    "Projetos",
-    "Tarefas",
-    "Reponsáveis"
+  orderSettings: any[]= [
+    {name: 'Equipes', value: SearchItemKind.TEAM},
+    {name: 'Projetos', value: SearchItemKind.PROJECT},
+    {name: 'Tarefas', value: SearchItemKind.TASK},
+    {name: 'Responsáveis', value: SearchItemKind.USER}
   ];
+
   orderParam !: string;
+  orderKind !: SearchItemKind | null;
+
+  updateOrderParam(e: any): void {
+    if (e) this.orderKind = e.value;
+    else this.orderKind = null;
+
+  }
 
   onSearch(): void {
     this.firstSearch = false;

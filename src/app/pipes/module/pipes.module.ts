@@ -7,6 +7,7 @@ import { NameSortPipe } from '../sort/name-sort.pipe';
 import { DateSortPipe } from '../sort/date-sort.pipe';
 import { StatusSortPipe } from '../sort/status-sort.pipe';
 import { SimplePropertyPipe } from '../simple-property.pipe';
+import { SearchAllFilterPipe } from '../search-all-filter.pipe';
 
 
 
@@ -18,7 +19,8 @@ import { SimplePropertyPipe } from '../simple-property.pipe';
     NameSortPipe,
     DateSortPipe,
     StatusSortPipe,
-    SimplePropertyPipe
+    SimplePropertyPipe,
+    SearchAllFilterPipe
   ],
   imports: [
     CommonModule
@@ -30,7 +32,8 @@ import { SimplePropertyPipe } from '../simple-property.pipe';
     NameSortPipe,
     DateSortPipe,
     StatusSortPipe,
-    SimplePropertyPipe
+    SimplePropertyPipe,
+    SearchAllFilterPipe
   ]
 })
 export class PipesModule { }

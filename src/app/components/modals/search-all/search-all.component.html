@@ -10,13 +10,15 @@
         <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
     </div>
     <div class="order regular-text">
-        <p class="text-lg h-full flex items-center">Ordenar por </p>
+        <p class="text-lg h-full flex items-center">Filtrar por </p>
         <p-dropdown 
             [options]="orderSettings" 
             [(ngModel)]="orderParam"
             [showClear]="true" 
+            optionLabel="name"
             placeholder="Selecione"
             [style.width]="'10rem'"
+            (ngModelChange)="updateOrderParam($event)"
         ></p-dropdown>
     </div>
     <div class="div-searched pt-6">
@@ -30,7 +32,7 @@
                 </h6>
             </ng-template>
         </ng-container>
-        <ng-container *ngFor="let item of itemsSearched">
+        <ng-container *ngFor="let item of (itemsSearched | searchAllFilterPipe : orderKind)">
             <div class="card-searched"
                 (click)="handleClick(item)"
             >
