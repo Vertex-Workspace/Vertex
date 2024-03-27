@@ -110,7 +110,6 @@ export class CardListComponent implements OnInit {
   findProjects(teamId: number) {
     this.loggedUser = this.userService.getLogged();
     // this.teamService.getOneById(this.team.)
-    console.log(teamId, this.loggedUser);
     
     this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project []) => {
       this.projects = projects

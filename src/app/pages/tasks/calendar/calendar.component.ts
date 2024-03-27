@@ -7,6 +7,7 @@ import { PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { Task, TaskCreate } from 'src/app/models/class/task';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { ValueUpdate } from 'src/app/models/class/value';
+import { PipeParams } from 'src/app/models/interface/params';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -27,6 +28,10 @@ export class CalendarComponent {
   @Input() project!: Project;
   @Input() permissions!: Permission[];
   day: any;
+
+
+  @Input()
+  orderParams !: PipeParams;
 
   canCreate: boolean = false;
   canEdit: boolean = false
