@@ -63,7 +63,6 @@ export class SearchAllComponent {
       .getSearchedItems(this.logged.id!, this.query)
       .subscribe((items: SearchItem[]) => {
         this.itemsSearched = items;
-        console.log(items[5]);
         
       })
                 
