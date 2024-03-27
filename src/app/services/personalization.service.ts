@@ -22,19 +22,23 @@ export class PersonalizationService {
     // };
     // localStorage.setItem('personalization', JSON.stringify(defaultColors));
   }
-
   findById(id:number): Observable<Personalization> {
     return this.http.get<Personalization>(`${URL}personalization/${id}`)
     .pipe(map((personalization: Personalization) => new Personalization(personalization)));;
   }
+  getAllPersonalization(): Observable<Personalization[]> {
+    return this.http.get<Personalization[]>(`${URL}personalization`);
+  }
 
+  
+
+
+  // ========================================================================================
+  // LOCAL STORAGE 
   getPrimaryColor(): string {
     return JSON.parse(localStorage.getItem('personalization')!).primaryColorLi;
   }
 
-  getAllPersonalization(): Observable<Personalization[]> {
-    return this.http.get<Personalization[]>(`${URL}personalization`);
-  }
 
   getSecondColor(): string {
     return JSON.parse(localStorage.getItem('personalization')!).secondColor;

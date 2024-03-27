@@ -86,10 +86,18 @@ export class AppComponent {
       if (user.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
+
+        document.documentElement.style.setProperty('--emphasis', user.personalization?.primaryColorLight!);
+        document.documentElement.style.setProperty('--card', user.personalization?.secondColorLight!);
+
         document.documentElement.style.setProperty('--text', "#000000");
       } else if (user.personalization!.theme == 1) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+        
+        document.documentElement.style.setProperty('--emphasis', user.personalization?.primaryColorDark!);
+        document.documentElement.style.setProperty('--card', user.personalization?.secondColorDark!);
+
         document.documentElement.style.setProperty('--text', "#FFFFFF");
       }
 
