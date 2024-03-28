@@ -46,8 +46,9 @@ export class TasksComponent implements OnInit {
   taskReview: boolean = false;
   logged !: User;
   pageTitle: string = 'Espaço de Trabalho';
+
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
     private taskService: TaskService,
@@ -55,18 +56,18 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+
   ) {
     this.logged = this.userService.getLogged();
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.projectId = id
+
+
   }
 
   teamId?: number
-  projectId!: number;
 
   ngOnInit() {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+    const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.permissions = permissions;
@@ -79,7 +80,6 @@ export class TasksComponent implements OnInit {
 
     //Observable que é aguardado para renderizar os componentes filhos
     this.renderProject = this.projectService.getOneById(id);
-    console.log(this.renderProject);
     
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
@@ -102,6 +102,17 @@ export class TasksComponent implements OnInit {
           );
       }
         
+      this.activatedRoute.queryParamMap.subscribe((p:any) => {
+        if(p['params']){
+          let taskOptional : Task = this.project.tasks.find((t: Task) => t.id === Number(p['params'].taskID))!;
+          if(taskOptional){
+            this.changeModalTaskState(true, taskOptional);
+          } else {
+            this.router.navigate(['.'], { relativeTo: this.activatedRoute });
+          }
+        }
+      })
+
     });
     this.muralPageListener();
   }
@@ -122,7 +133,6 @@ export class TasksComponent implements OnInit {
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
-    // { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
   ];
 
   
@@ -205,8 +215,11 @@ export class TasksComponent implements OnInit {
     this.taskOpen = bool;
     if (this.taskOpen) {
       this.taskOpenObject = task;
+      this.router.navigate(['.'], { relativeTo: this.activatedRoute, queryParams: { taskID: task.id } });
     } else {
       this.taskOpenObject = {} as Task;
+      this.router.navigate(['.'], { relativeTo: this.activatedRoute});
+
     }
   }
 

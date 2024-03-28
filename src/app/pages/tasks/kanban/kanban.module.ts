@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { CardModule } from 'src/app/components/reusable-components/card/card.module';
+import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
 
 
 
@@ -18,7 +19,8 @@ import { CardModule } from 'src/app/components/reusable-components/card/card.mod
     FontAwesomeModule,
     DragDropModule,
     FormsModule,
-    CardModule
+    CardModule,
+    ConfirmModalModule
   ]
 })
 export class KanbanModule { }

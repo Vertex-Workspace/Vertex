@@ -59,7 +59,9 @@ export class CardListComponent implements OnInit {
   ngOnInit(): void {
     this.findAllTeams() 
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.findProjects(teamId); 
+    if(teamId){
+      this.findProjects(teamId); 
+    }
   }
 
   getType(): any[] {

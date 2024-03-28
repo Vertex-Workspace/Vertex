@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { faArrowUpRightFromSquare, faCircleUser, faClose, faEnvelope, faGear, faGraduationCap, faGripLinesVertical, faHandHoldingDroplet, faSquare, faSquareFull, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Notification } from 'src/app/models/class/notification';
+import { NotificationWebSocketService } from 'src/app/services/notification-websocket.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -21,20 +23,22 @@ export class NotificationComponent {
   @Output()
   close = new EventEmitter();
 
-  //TEMPORARY LIST TEMPLATE
-  notifications: Notification[] = []
 
-  constructor(private userService: UserService) {
+  @Input()
+  notifications: Notification[] = [];
+  
+
+  constructor(
+    private userService: UserService, 
+    private notificationWebSocket : NotificationWebSocketService,
+    private router : Router) {
 
   }
 
   ngOnInit() {
-    this.userService.getNotifications(this.userService.getLogged().id!).subscribe(
-      (notifications: Notification[]) => {
-        this.notifications = notifications;
 
-      });
   }
+
 
   searchBarOpen: boolean = false;
   query: string = "";
@@ -54,8 +58,18 @@ export class NotificationComponent {
   }
 
 
-  notificationDetails(notification: any): void {
-    //Logic
+  notificationDetails(notification: Notification): void {
+    console.log(notification.linkRedirect);
+    let url = notification.linkRedirect;
+
+    url = url.substring(url.indexOf('=')+1, url.length);
+    console.log(url);
+    
+    let start = notification.linkRedirect.substring(0, notification.linkRedirect.indexOf('?'));
+    
+    console.log(start);
+    
+    this.router.navigate([start], { queryParams: { taskID: url }});
   }
 
   hasChecked(): boolean {
@@ -71,21 +85,22 @@ export class NotificationComponent {
   }
 
   readNotifications(): void {
-    const notifications = this.notifications.filter((notification) => notification.isSelected);
+    //Select the notifications that are selected
+    let notifications = this.notifications.filter((notification) => notification.isSelected);
 
+    //If there is any unread notification
+    if(notifications.some((notification) => !notification.isRead)){
+      notifications = notifications.filter(notification => !notification.isRead);
+    }
+  
     this.userService.readNotifications(this.userService.getLogged().id!, notifications).subscribe(
-      (response) => {
-        this.notifications.forEach((notification) => {
-          if (notification.isSelected) {
-            notification.isRead = true;
-            notification.isSelected = false;
-          }
-        }
-        );
-      },
-      (error) => {
-        console.log(error);
+      (notifications) => {
+        this.notifications = notifications;
       });
+
+    if(this.checkbox){
+      this.checkbox = false;
+    }
   }
   deleteNotifications(): void {
     const notifications = this.notifications.filter((notification) => notification.isSelected);
@@ -94,9 +109,10 @@ export class NotificationComponent {
       (response) => {
         this.notifications = this.notifications.filter((notification) => !notification.isSelected
         );
-      },
-      (error) => {
-        console.log(error);
       });
+      if(this.checkbox){
+        this.checkbox = false;
+      }
   }
+
 }

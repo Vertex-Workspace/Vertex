@@ -12,11 +12,13 @@
             </p>
         </div>
         <div class="items-header">
-            <i class="pi pi-bell cursor-pointer" (click)="openNotifications()"></i>
+            <i class="pi pi-bell cursor-pointer" (click)="openNotifications()" pBadge value={{notificationBadge}} *ngIf="notificationBadge > 0"></i>
+            <i class="pi pi-bell cursor-pointer" (click)="openNotifications()" *ngIf="notificationBadge == 0"></i>
             <i class="pi pi-question"></i>
         </div>
     </section>
 </header>
+
 
 
 

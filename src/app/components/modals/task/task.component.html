@@ -1,5 +1,5 @@
-<div class="modal-overlay">
-    <div class="base" *ngIf="waitRequest">
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="base" *ngIf="waitRequest" (click)="$event.stopPropagation()">
         <div class="location">
             <div class="routes regular-text">
                 <p>{{taskInfoDTO.teamName}}</p>

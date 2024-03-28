@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Project } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
+import { NotificationWebSocketService } from 'src/app/services/notification-websocket.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
@@ -22,6 +23,9 @@ export class HeaderComponent implements OnInit {
   location: string = "";
 
   @Input()
+  notificationBadge!: number;
+
+  @Input()
   currentRoute !: string;
 
   constructor(
@@ -30,7 +34,8 @@ export class HeaderComponent implements OnInit {
     private teamService: TeamService,
     private projectService: ProjectService,
     private userService: UserService,
-    private _location: Location
+    private _location: Location,
+    private notificationWebSocket: NotificationWebSocketService
   ) {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
@@ -54,10 +59,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(window.history.length);
-    
+
   }
 
+  
   @Output()
   openNotification = new EventEmitter();
 

@@ -17,6 +17,7 @@ import { AppearanceComponent } from './pages/user-settings/appearance/appearance
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
 import { NotificationWebSocketService } from './services/notification-websocket.service';
+import { Notification } from './models/class/notification';
 
 
 @Component({
@@ -65,26 +66,24 @@ export class AppComponent {
     private userService: UserService,
     private userState: UserStateService,
     private teamService: TeamService,
-    private noticationWebSocket : NotificationWebSocketService
+    private notificationWebSocket: NotificationWebSocketService
   ) {
     personalization.setPersonalization();
-    
-    
+
+
 
     this.userState
       .getAuthenticationStatus()
       .subscribe((status: boolean) => {
         this.userLogged = status;
       });
+
   }
 
   // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
     this.userService.getOneById(user.id!).subscribe((logged) => {
-
-     
-      
 
       user = logged;
 
@@ -104,12 +103,29 @@ export class AppComponent {
       document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
       document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
     });
+    //Normal Notifications request
+    this.getNotificationBadge();
 
-    this.noticationWebSocket.listenToServer().subscribe((change) => {
-      console.log(change);
-      
-    })
+    //Web Socket
+    this.notificationWebSocket.listenToServer().subscribe(
+      (change) => {
+        console.log("Change");
+        
+        this.getNotificationBadge();
+      }
+    )
+  }
 
+  notificationBadge: number = 0;
+  notifications: Notification[] = [];
+  private getNotificationBadge(): void {
+    this.userService.getNotifications(this.userService.getLogged().id!).subscribe(
+      (notifications) => {
+        let notificationsUnread = notifications.filter((notification) => !notification.isRead);
+        this.notificationBadge = notificationsUnread.length;
+        this.notifications = notifications;
+      }
+    );
   }
 
   getRouteAnimationData() {

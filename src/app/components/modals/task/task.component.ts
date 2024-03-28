@@ -146,7 +146,9 @@ export class TaskComponent implements OnInit {
   }
 
   closeModal() {
-    this.close.emit();
+    if(!this.timeInTask.working){
+      this.close.emit();
+    }
   }
 
   changeTask(event: any): void {

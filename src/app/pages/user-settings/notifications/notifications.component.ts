@@ -22,6 +22,7 @@ export class NotificationsComponent {
     {text: "Entrada de novos membros", icon: faToggleOff},
     {text: "Mudança de permissões", icon: faToggleOff},
     {text: "Atribuições de responsabilidade de projetos e tarefas", icon: faToggleOff},
+    {text: "Qualquer atualização em tarefas", icon: faToggleOff},
     {text: "Enviar notificações por e-mail", icon: faToggleOff},
   ];
 

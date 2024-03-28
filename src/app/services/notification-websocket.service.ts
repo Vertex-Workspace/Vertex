@@ -4,6 +4,7 @@ import { Message } from '../models/class/message';
 import { Chat } from '../models/class/chat';
 import { User } from '../models/class/user';
 import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
+import { UserService } from './user.service';
 
 const backEnd = 'ws://localhost:7777/notifications';
 
@@ -14,22 +15,10 @@ export class NotificationWebSocketService {
 
   private webSocket: WebSocket;
 
-  private sessionID!: string;
 
-
-  chatMessages: Message[] = [];
-
-  constructor() {
+  constructor(private userService : UserService) {
     this.webSocket = new WebSocket(backEnd);
     this.openWebSocket();
-  }
-
-  setIDSession(){
-
-  }
-
-  isTheSameId(){
-    
   }
 
 
@@ -56,32 +45,14 @@ export class NotificationWebSocketService {
   public listenToServer(): Observable<any> {
     return new Observable(observer => {
       this.webSocket.onmessage = (event) => {
-        // Extracting the id and uri from the string using regular expressions
-        const idRegex = /id=([^,]*)/;
-        const uriRegex = /uri=([^,\]]*)/;
-
-        const idMatch = event.data.match(idRegex);
-        const uriMatch = event.data.match(uriRegex);
-
-        // Creating a JSON object from the extracted values
-        const jsonData = {
-            id: idMatch ? idMatch[1] : '',
-            uri: uriMatch ? uriMatch[1] : ''
-        };
-
-        if(jsonData.id || jsonData.uri){
-          //It's not a message
-          return;
+        let number : number = event.data;
+        console.log(number);
+        
+        if(number == this.userService.getLogged().id!) {
+          console.log(".next()");
+          
+          observer.next();
         }
-
-        console.log(jsonData);
-        
-        // console.log(`{${event.data}}`, "Data");
-
-        // const obj = JSON.parse(`${event.data}`)
-
-        
-        // observer.next(obj);
       };
     });
   }

@@ -171,9 +171,9 @@ export class UserService {
       .get<Notification[]>(`${URL}user/${userID}/notification`);
   }
 
-  public readNotifications(userID: number, listID: Notification[]) {
+  public readNotifications(userID: number, listID: Notification[]): Observable<Notification[]>{
     return this.http
-      .patch(`${URL}user/${userID}/notification/read`, listID);
+      .patch<Notification[]>(`${URL}user/${userID}/notification/read`, listID);
   }
 
   public deleteNotifications(userID: number, listID: Notification[]) {
