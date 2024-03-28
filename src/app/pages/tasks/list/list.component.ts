@@ -12,6 +12,8 @@ import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
 import { Permission, User } from 'src/app/models/class/user';
 import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
+import { PipeParams } from 'src/app/models/interface/params';
+import { FilterParams } from 'src/app/models/interface/filter-params';
 
 @Component({
   selector: 'app-list',
@@ -22,6 +24,18 @@ export class ListComponent implements OnInit {
 
   @Input()
   project !: Project;
+
+  @Input()
+  queryFilter !: string;
+
+  @Input()
+  statusFilter !: string;
+
+  @Input()
+  orderParams !: PipeParams;
+
+  @Input()
+  simplePropertyFilter !: FilterParams;
   
   properties : PropertyCreation[] = [
     {name: 'Status', kind: PropertyKind.STATUS},
@@ -65,15 +79,15 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnChanges(): void {
-    if (this.project) {
-      this.getProject();
-    } else if(this.router.url.includes("equipe")) {
-      this.getTeam();
-    }
+  ngOnChanges(changes: SimpleChanges): void {    
+    this.updateGlobalValues();
   }
 
   ngOnInit(): void {      
+    this.updateGlobalValues();
+  }
+
+  updateGlobalValues(): void {
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.router.url.includes("equipe")) this.getTeam(); //atribui todas as tarefas da equipe a taskList
     else this.getAllTasks(); //atribui todas as tarefas do usuário para taskList

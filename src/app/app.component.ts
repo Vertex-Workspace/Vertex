@@ -1,21 +1,17 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { ActivatedRoute, ChildrenOutletContexts, NavigationEnd, NavigationError, NavigationStart, Route, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { ChildrenOutletContexts, Router } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
-import { faMessage, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
-import { AlertService } from './services/alert.service';
-import { LoadingService } from './services/loading.service';
 import { UserStateService } from './services/user-state.service';
 import { UserService } from './services/user.service';
 import { User } from './models/class/user';
-import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { TeamService } from './services/team.service';
-import { URL } from './services/path/api_url';
 
 
 @Component({
@@ -63,7 +59,6 @@ export class AppComponent {
     public router: Router,
     private userService: UserService,
     private userState: UserStateService,
-    private teamService: TeamService,
   ) {
     personalization.setPersonalization();
 

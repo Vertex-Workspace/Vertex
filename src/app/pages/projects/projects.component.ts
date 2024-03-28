@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
+import { PropertyListKind } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
 import { Team } from 'src/app/models/class/team';
 import { Permission, User } from 'src/app/models/class/user';
+import { PipeParams } from 'src/app/models/interface/params';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -26,11 +28,38 @@ export class ProjectsComponent implements OnInit {
   clicked: string = 'project';
   logged !: User;
   team !: Team;
-  emptyTeamProjects !: boolean;
 
   //TASKS - FILTER AND ORDER
-  filterSettings: any[] = [];
-  orderSettings: any[] = [];
+  selectedFilter !: string;
+  filterOptions: any[] = [
+    {name: 'Status', values: [
+      {name: 'Não Iniciado', kind: PropertyListKind.TODO},
+      {name: 'Em Andamento', kind: PropertyListKind.DOING},
+      {name: 'Concluído', kind: PropertyListKind.DONE}
+    ]},
+  ];
+
+  orderParams !: PipeParams;
+  orderOptions : any = [
+    { name: 'Nome', values: [
+      { name: 'A-Z', type: 'name'  },
+      { name: 'Z-A', type: 'name' }
+    ]},
+    { name: 'Data', values: [
+      { name: 'Maior - Menor', type: 'date' },
+      { name: 'Menor - Maior', type: 'date' }
+    ] },
+    { name: 'Status', values: [
+      { name: 'Não Iniciado', type: 'status', kind: PropertyListKind.TODO },
+      { name: 'Em Andamento', type: 'status', kind: PropertyListKind.DOING },
+      { name: 'Concluído', type: 'status', kind: PropertyListKind.DONE },
+    ] }
+  ];
+
+
+  queryFilter !: string;
+
+  projectSearch !: string;
 
 
   constructor(
@@ -50,6 +79,8 @@ export class ProjectsComponent implements OnInit {
   permissionsOnTeamObservable!: Observable<Permission[]>;
 
   ngOnInit(): void {
+    console.log('entrou');
+    
     this.getTeam();
     this.validateTeamId();
   }
@@ -79,7 +110,6 @@ export class ProjectsComponent implements OnInit {
         this.permissionsOnTeam = permissions;
       });
 
-      if (team.projects) this.emptyTeamProjects = false;
     });
   }
 
@@ -123,9 +153,11 @@ export class ProjectsComponent implements OnInit {
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
+    this.selectedFilter = '';
   }
 
   clickOrder(): void {
+    this.orderParams = {name: '', type: ''};
     this.orderOpen = !this.orderOpen;
   }
 

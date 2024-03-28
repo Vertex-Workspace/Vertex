@@ -29,6 +29,10 @@ export class CardListComponent implements OnInit {
   faMessage = faMessage
   
   @Input()
+  filterSearch !: string;
+
+ 
+  @Input()
   teams?: Team[]; //se estiver na home
 
   @Input()
@@ -108,7 +112,6 @@ export class CardListComponent implements OnInit {
   findProjects(teamId: number) {
     this.loggedUser = this.userService.getLogged();
     // this.teamService.getOneById(this.team.)
-    console.log(teamId, this.loggedUser);
     
     this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project []) => {
       this.projects = projects

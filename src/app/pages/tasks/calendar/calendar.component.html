@@ -85,7 +85,14 @@
                 <div>
                     
                     <div class="tasks-list-in-calendar" *ngIf="toggle" cdkDropListGroup>
-                        <ng-container *ngFor="let task of getTasksByDate(day);">
+                        <ng-container 
+                            *ngFor="let task of (getTasksByDate(day) 
+                            | namePipe : nameFilter 
+                            | statusPipe : statusFilter : false
+                            | nameSortPipe : orderParams
+                            | dateSortPipe : orderParams
+                            | statusSortPipe : orderParams)"
+                        >
                             <app-card 
                             (openTaskDetails)="openCardTask(task)" 
                             [minHeight]="'60px'" 

@@ -14,10 +14,25 @@
 
                 <div class="col-items">
 
-                    <ng-container *ngFor="let task of project.tasks">
-                        <app-card [minHeight]="'150px'" [width]="'300px'" *ngIf="getTaskByProperty(task, propertyList)"
-                            [borderColor]="propertyList.color" (deleteTask)="deleteTask(task)" [task]="task"
-                            [cdkDragData]="task" cdkDrag (openTaskDetails)="openTaskModal(task)" [permissions]="permissions"/>
+                    <ng-container 
+                        *ngFor="let task of (taskList 
+                            | namePipe : nameFilter 
+                            | statusPipe : statusFilter : false
+                            | nameSortPipe : orderParams
+                            | dateSortPipe : orderParams)">
+
+                        <app-card 
+                            *ngIf="getTaskByProperty(task, propertyList)"
+                            cdkDrag 
+                            [task]="task"
+                            [borderColor]="propertyList.color" 
+                            [minHeight]="'150px'" 
+                            [width]="'300px'" 
+                            [cdkDragData]="task" 
+                            [permissions]="permissions" 
+                            (deleteTask)="deleteTask(task)" 
+                            (openTaskDetails)="openTaskModal(task)" 
+                        />
                     </ng-container>
 
                 </div>
