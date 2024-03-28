@@ -57,7 +57,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
     NoteModule,
     CreateTeamProjectModule,
     CascadeSelectModule,
-
     //Standalone component
     ReviewTaskComponent
   ],

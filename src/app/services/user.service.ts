@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Personalization } from '../models/class/personalization';
-import { Permission} from '../models/class/user';
+import { Permission } from '../models/class/user';
 import { Team } from '../models/class/team';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/class/user';
@@ -10,6 +10,7 @@ import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
 import { UserStateService } from './user-state.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,18 +19,18 @@ export class UserService {
 
   private $logged !: BehaviorSubject<User>;
   private logged !: User;
-  private defaultImg : string = defaultImage;
-  
+  private defaultImg: string = defaultImage;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private alert: AlertService,
     private userState: UserStateService,
-  ) { 
+  ) {
   }
 
   public register(form: User): void {
-    
+
     const user: User = {
       firstName: form.firstName,
       lastName: form.lastName,
@@ -37,7 +38,7 @@ export class UserService {
       image: this.defaultImg,
       password: form.password,
       passwordConf: form.passwordConf
-    }    
+    }
 
     this.create(user)
       .subscribe(
@@ -72,12 +73,12 @@ export class UserService {
   public login(user: User): void {
     this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
     this.userState.setAuthenticationStatus(true);
-    this.saveLoggedUser(user);    
+    this.saveLoggedUser(user);
     this.logged = user;
     this.router.navigate(['/home']);
   }
 
-  private saveLoggedUser(user: User): void {    
+  private saveLoggedUser(user: User): void {
     localStorage.setItem('logged', JSON.stringify(user)); //cookies
   }
 
@@ -92,76 +93,75 @@ export class UserService {
     return user;
   }
 
-  public getAll(): Observable<User[]> {    
+  public getAll(): Observable<User[]> {
     return this.http
       .get<User[]>(`${URL}user`)
       .pipe(map((users: User[]) => users.map(user => new User(user))));
   }
-
-  public getOneById(id: number): Observable<User> {
+  
+  public getOneById(id: number): Observable < User > {
     return this.http
-      .get<User>(`${URL}user/${id}`)
-      .pipe(map((user: User) => new User(user)));
+    .get<User>(`${URL}user/${id}`)
+    .pipe(map((user: User) => new User(user)));
   }
-
-  public getUsersByGroup(groupId: number): Observable<User[]> { 
+  
+  public getUsersByGroup(groupId: number): Observable < User[] > {
     return this.http
-      .get<User[]>(`${URL}user/usersByGroup/${groupId}`)
-      .pipe(map((users: User[]) => users.map(user => new User(user))));
+    .get<User[]>(`${URL}user/usersByGroup/${groupId}`)
+    .pipe(map((users: User[]) => users.map(user => new User(user))));
   }
-
-  public getUsersByTeam(teamId: any): Observable<User[]> {
+  
+  public getUsersByTeam(teamId: any): Observable < User[] > {
     return this.http
-      .get<User[]>(`${URL}team/usersByTeam/${teamId}`)
-      .pipe(map((users: User[]) => users.map(user => new User(user))));
+    .get<User[]>(`${URL}team/usersByTeam/${teamId}`)
+    .pipe(map((users: User[]) => users.map(user => new User(user))));
   }
-
-
-  public getOneByEmail(email: string): Observable<User> {
+  
+  
+  public getOneByEmail(email: string): Observable < User > {
     return this.http
-      .get<User>(`${URL}user/email/${email}`)
-      .pipe(map((user: User) => new User(user)));
+    .get<User>(`${URL}user/email/${email}`)
+    .pipe(map((user: User) => new User(user)));
   }
-
-  public create(user: User): Observable<User> {
+  
+  public create(user: User): Observable < User > {
     return this.http
-      .post<User>(`${URL}user`, user);
+    .post<User>(`${URL}user`, user);
   }
-
-  public patchPersonalization(personalization:Personalization): Observable<User> {    
+  
+  public patchPersonalization(personalization: Personalization): Observable < User > {
     return this.http
-      .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
+    .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
   }
-
-  public patchPassword(emailTo:String, password:String): Observable<User> {
-
+  
+  public patchPassword(emailTo: String, password: String): Observable < User > {
+    
     let passwordObj = {
       email: emailTo,
       password: password
     }
-
+    
     return this.http
-      .patch<any>(`${URL}user/edit-password`, passwordObj);
-  }
-
-  public delete(id: number): Observable<User> {
-    return this.http
-      .delete<User>(`${URL}user/${id}`);
-  }
-
-  public update(user: User): Observable<User> {
-    this.saveLoggedUser(user);
-    return this.http
-      .put<User>(`${URL}user`, user);
-  }
-
-  public uploadImage(file: FormData, id: number): Observable<any> {
-    return this.http
-      .patch<any>(`${URL}user/upload/${id}`, file);
+    .patch<any>(`${URL}user/edit-password`, passwordObj);
   }
   
-    public updateLoggedUser(user: User): void {
+  public delete (id: number): Observable < User > {
+    return this.http
+    .delete<User>(`${URL}user/${id}`);
+  }
+  
+  public update(user: User): Observable < User > {
+    this.saveLoggedUser(user);
+    return this.http
+    .put<User>(`${URL}user`, user);
+  }
+  
+  public uploadImage(file: FormData, id: number): Observable < any > {
+    return this.http
+    .patch<any>(`${URL}user/upload/${id}`, file);
+  }
+  
+  public updateLoggedUser(user: User): void {
     this.saveLoggedUser(user);
   }
-
 }

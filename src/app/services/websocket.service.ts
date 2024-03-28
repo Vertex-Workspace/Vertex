@@ -4,6 +4,7 @@ import { Message } from '../models/class/message';
 import { Chat } from '../models/class/chat';
 import { User } from '../models/class/user';
 import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
+import { File } from '../models/interface/file';
 
 const backEnd = 'ws://localhost:7777/chat';
 
@@ -12,12 +13,11 @@ const backEnd = 'ws://localhost:7777/chat';
 })
 export class WebSocketService {
 
-  private webSocket: WebSocket;
+  private webSocket!: WebSocket;
 
   chatMessages: Message[] = [];
 
   constructor() {
-    this.webSocket = new WebSocket(backEnd);
     this.openWebSocket();
   }
 
@@ -44,7 +44,7 @@ export class WebSocketService {
 
   public openWebSocket() {
     try {
-
+      this.webSocket = new WebSocket(backEnd);
       this.webSocket.onopen = (event) => {
         console.log('WebSocket connection established.');
       };
@@ -80,6 +80,8 @@ export class WebSocketService {
   public sendMessage(chatMessageDto: any) {
     if (this.webSocket.readyState === WebSocket.OPEN) {
       console.log("Sending message");
+      console.log(chatMessageDto, "MESSAGE");
+
       this.webSocket.send(JSON.stringify(chatMessageDto));
       console.log(chatMessageDto, "MESSAGE Sent");
     }else {

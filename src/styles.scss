@@ -2,6 +2,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+@import '@ctrl/ngx-emoji-mart/picker';
 
 @import './variables';
 
@@ -22,13 +23,14 @@ body {
     max-width: 100%;
 }
 
-fa-icon{
+fa-icon {
     @apply text-2xl;
     color: $secondColor;
     cursor: pointer;
 }
 
-button, a{
+button,
+a {
     cursor: pointer;
 }
 
@@ -52,58 +54,73 @@ input:focus {
     border-radius: 3px;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: $fontFamily;
     color: $primaryColor;
 }
 
 //TEXTS SIZES - STYLE GUIDE
-h1{
+h1 {
     font-size: 56px;
     line-height: 61.1px;
-    
+
 }
-h2{
+
+h2 {
     font-size: 48px;
     line-height: 52.8px;
 }
-h3{
+
+h3 {
     font-size: 40px;
     line-height: 44px;
 }
-h4{
+
+h4 {
     font-size: 32px;
     line-height: 35.2px;
 }
-h5{
+
+h5 {
     font-size: 24px;
     line-height: 26.4px;
 }
-h6{
+
+h6 {
     font-size: 20px;
     line-height: 22px;
 }
 
-.large-text , .medium-text , .regular-text , .small-text{
+.large-text,
+.medium-text,
+.regular-text,
+.small-text {
     font-family: $fontFamily;
     color: $text;
 }
 
-.large-text{
+.large-text {
     font-size: $largeText;
     line-height: 28px;
 }
-.medium-text{
+
+.medium-text {
     font-size: $mediumText;
     line-height: 25.2px;
 }
-.regular-text{
+
+.regular-text {
     font-size: $regularText;
     line-height: 22.4px;
     font-family: $fontFamily;
 }
 
-.small-text{
+.small-text {
     font-size: $smallText;
     line-height: 19.6px;
 }
@@ -112,7 +129,7 @@ input {
     outline: none;
 }
 
-textarea{
+textarea {
     resize: none;
     outline: none;
 }
