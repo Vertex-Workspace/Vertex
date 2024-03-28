@@ -8,7 +8,7 @@ export class Message {
     contentMessage?: String;
     time?: Date;
     viewed?: boolean;
-    file?: String;
+    file?: any;
 
     constructor(message: Message) {
         this.id = message.id;

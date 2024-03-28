@@ -29,7 +29,7 @@
             </main>
         </div>
 
-        <div  *ngIf="url !== 'chat'" (click)="openMiniChat()" class="chat-circle">
+        <div  *ngIf="url !== 'chat' && !this.router.url.includes('chat')" (click)="openMiniChat()" class="chat-circle">
             <fa-icon [icon]="faMessage"></fa-icon>
         </div>
 
