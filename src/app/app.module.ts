@@ -47,6 +47,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     LoadingComponent
   ],
   imports: [
+    PickerModule,
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,    
@@ -69,7 +70,6 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     ChartModule,
     NotificationModule,
     ChatModule,
-    PickerModule,
     MinichatModule,
     MinichatTASKModule,
     UserInformationsModule,

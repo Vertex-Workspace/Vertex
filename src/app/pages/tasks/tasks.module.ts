@@ -11,7 +11,6 @@ import { ModalPropertiesModule } from 'src/app/components/modals/properties/moda
 import { KanbanModule } from './kanban/kanban.module';
 import { ListModule } from './list/list.module';
 import { MuralComponent } from './mural/mural.component';
-import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { ChartModule } from 'primeng/chart';
 import { NoteModule } from 'src/app/components/reusable-components/note/note.module';
 import { BadgeModule } from 'primeng/badge';
@@ -26,6 +25,7 @@ import { LogComponent } from 'src/app/components/modals/task/log/log.component';
 
 import { RatingModule } from 'primeng/rating';
 import { ReviewTaskComponent } from 'src/app/components/modals/review-task/review-task.component';
+import { TaskModule } from 'src/app/components/modals/task/task.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { ReviewTaskComponent } from 'src/app/components/modals/review-task/revie
     TasksComponent
   ],
   imports: [
+    TaskModule,
     CommonModule,
     RouterModule,
     BrowserModule,
@@ -43,7 +44,6 @@ import { ReviewTaskComponent } from 'src/app/components/modals/review-task/revie
     DragDropModule,
     FormsModule,
     CalendarModule,
-    TaskModule,
     ListModule,
     KanbanModule,
     ChartModule,

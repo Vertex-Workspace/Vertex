@@ -15,8 +15,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     CommonModule,
     FontAwesomeModule,
     FormsModule,
-    PickerModule,
-    InputModule
+    InputModule,
+    PickerModule
   ]
 })
 export class MinichatModule { }
