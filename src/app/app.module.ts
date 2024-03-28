@@ -55,7 +55,6 @@ import { MinichatTASKModule } from './components/modals/minichat-task/minichat-t
     BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule,
-    TeamInformationsModule,
     TasksModule,
     UserSettingsModule,
     TeamInformationsModule,

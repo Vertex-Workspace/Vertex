@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { LogarithmicScale } from 'chart.js';
 import { TreeNode } from 'primeng/api';
 import { Group } from 'src/app/models/class/groups';
 import { Project, ProjectEdit } from 'src/app/models/class/project';
@@ -110,6 +111,9 @@ export class CreateTeamProjectComponent implements OnInit {
         });
       }
     })
+
+    console.log(this.listOfResponsibles);
+    
   }
 
   projectNull: boolean = true;
@@ -263,7 +267,9 @@ export class CreateTeamProjectComponent implements OnInit {
       this.users = users
       for (const user of users) {
         user.icon = 'pi pi-user'
-        this.listOfResponsibles.push(user);
+        if(this.logged.id != user.id){
+          this.listOfResponsibles.push(user);
+        }
       }
     });
   }
@@ -301,7 +307,6 @@ export class CreateTeamProjectComponent implements OnInit {
         } else if (type instanceof User) {
             let user: User = type as User;
             user.selected = true;
-            // Verifica se o usuário já está na lista de usuários
             if (!users.some(existingUser => existingUser.id === user.id)) {
                 users.push(user);
             }
@@ -332,7 +337,6 @@ export class CreateTeamProjectComponent implements OnInit {
   senderEmitter = new EventEmitter<Project>();
 
   emitCreation(project: Project) {
-    console.log("dei emit");
     this.senderEmitter.emit(project);
   }
 

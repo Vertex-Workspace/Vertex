@@ -6,7 +6,7 @@ import {
 import { take } from 'rxjs';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
+import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { Task, UpdateResponsibles } from 'src/app/models/class/task';
 import { Permission, PermissionsType, User } from 'src/app/models/class/user';
 import { Value, ValueUpdate } from 'src/app/models/class/value';
@@ -53,10 +53,13 @@ export class PropertiesComponent {
   taskResponsables: any[] = []
   selectedUsers: any[] = []
   taskDependency: Task[] = []
-  selectedDependency !: string 
+  selectedDependency !: string
+  differentDone !: boolean
 
   ngOnInit(): void {
     this.tasks = this.project.tasks
+    this.getGroups()
+    this.getUsers()
 
     for (const permission of this.permissions) {
       if (permission.name === PermissionsType.EDIT && permission.enabled) {
@@ -64,21 +67,16 @@ export class PropertiesComponent {
       }
     }
 
-    for(const task of this.project.tasks){
-      if(this.task.id != task.id){
-        this.taskDependency.push(task);
+    for (const task of this.project.tasks) {
+      if (this.task.id != task.id) {
+        this.taskDependency.push(task)
       }
     }
-    if(this.task.taskDependency != null){
+    if (this.task.taskDependency != null) {
       this.selectedDependency = this.task.taskDependency.name;
-    }else {
+    } else {
       this.selectedDependency = 'Selecione dependência'
     }
-    
-    
-    this.getGroups()
-    this.getUsers()
-
   }
 
   @Output() changes = new EventEmitter();
@@ -105,16 +103,17 @@ export class PropertiesComponent {
     return "";
   }
 
-  updateResponsible(user: any): void {
+  updateResponsible(user: any, event: any): void {
+    console.log(user);
     const taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,
       teamId: this.project.idTeam,
       user: user,
       group: user
     }
-      this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-        this.alertService.successAlert("editado")
-      })
+    this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
+      this.alertService.successAlert("editado")
+    })
 
   }
 
@@ -122,22 +121,22 @@ export class PropertiesComponent {
     console.log(node);
   }
 
-  setTaskDependencies(task: any){
+  setTaskDependencies(task: any) {
     console.log(task.value);
-     this.taskService.taskDependency(this.task.id, task.value.id, this.task).subscribe((task1:Task) => {
-       this.alertService.successAlert("Essa tarefa agora necessita da conclusão da tarefa " + task.name)
-       this.selectedDependency = task.value.name
-     }, 
-     (error) => {
-      this.alertService.errorAlert("Já existe uma tarefa que depende dessa")
-    })
-    
+    this.taskService.taskDependency(this.task.id, task.value.id, this.task).subscribe((task1: Task) => {
+      this.alertService.successAlert("Essa tarefa agora necessita da conclusão da tarefa " + task.name)
+      this.selectedDependency = task.value.name
+    },
+      (error) => {
+        this.alertService.errorAlert("Já existe uma tarefa que depende dessa")
+      })
+
   }
 
-  getUsers(){
+  getUsers() {
     this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
       this.taskResponsables = users
-      
+
       for (const user of users) {
         this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
           for (const user1 of users1) {
@@ -150,26 +149,41 @@ export class PropertiesComponent {
     })
   }
 
-  getGroups(){
-    this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group []) => {
+  getGroups() {
+    this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group[]) => {
       console.log(groups1);
-      
-      for(const group1 of groups1){
+
+      for (const group1 of groups1) {
         this.userService.getUsersByGroup(group1.id).subscribe((users: User[]) => {
           group1.children = users
           group1.icon = 'pi pi-users'
           this.taskResponsables.push(group1)
-          
+
         });
-        this.taskService.getGroupByTask(this.task.id).subscribe((groups : Group[]) => {
-          for(const group of groups){
-            if(group.id == group1.id){
+        this.taskService.getGroupByTask(this.task.id).subscribe((groups: Group[]) => {
+          for (const group of groups) {
+            if (group.id == group1.id) {
               this.selectedUsers.push(group1)
             }
           }
         })
       }
-   })
+    })
   }
+
+  // taskDone: Task[] = []
+  // public tasksDone() {
+  //   let propertyList: PropertyList;
+  //   for (const task of this.project.tasks) {
+  //     for (const value of task.values) {
+  //       propertyList = value.value as PropertyList
+
+  //       if(propertyList.propertyListKind === PropertyListKind.DONE){
+  //         this.taskDone.push(task)
+  //       }
+        
+  //     }
+  //   }
+  // }
 
 }

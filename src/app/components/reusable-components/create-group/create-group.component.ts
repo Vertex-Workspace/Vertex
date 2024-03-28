@@ -38,6 +38,8 @@ export class CreateGroupComponent implements OnInit {
   @Output()
   close = new EventEmitter();
 
+  usersToSelect ?: User[]
+
   constructor(private formBuilder: FormBuilder,
     private teamService: TeamService,
     private route: ActivatedRoute,
@@ -47,6 +49,7 @@ export class CreateGroupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usersToSelect = this.team.users
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       team: [this.team],
@@ -55,10 +58,6 @@ export class CreateGroupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.team);
-    console.log(this.users);
-
-
     const group = this.form.getRawValue() as Group
     group.team = this.team
     group.users = this.users
@@ -117,17 +116,17 @@ export class CreateGroupComponent implements OnInit {
     });
     group.users = this.users;
 
-    this.groupService
-      .addParticipants(group)
-      .subscribe((group: Group) => {
-        //calls addPartcipants to back to normal state of card
-        // this.addParticipants();
-        this.alertService.successAlert("adicionado")
-      },
-        e => {
-          this.alertService.errorAlert("erro")
-        });
-        this.closeGroup()
+    // this.groupService
+    //   .addParticipants(group)
+    //   .subscribe((group: Group) => {
+    //     //calls addPartcipants to back to normal state of card
+    //     // this.addParticipants();
+    //     this.alertService.successAlert("adicionado")
+    //   },
+    //     e => {
+    //       this.alertService.errorAlert("erro")
+    //     });
+    //     this.closeGroup()
   }
 
 

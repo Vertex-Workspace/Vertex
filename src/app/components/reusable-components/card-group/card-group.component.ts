@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Team } from 'src/app/models/class/team';
-import {
-  faCaretDown, faCaretUp, faTrashCan,
-  faCirclePlus, faComment
-} from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Group } from 'src/app/models/class/groups';
 import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
@@ -12,6 +9,7 @@ import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'app-card-group',
@@ -20,11 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CardGroupComponent {
 
-  faCaretDown = faCaretDown;
-  faCaretUp = faCaretUp;
   faTrashCan = faTrashCan;
-  faCirclePlus = faCirclePlus
-  faComment = faComment
 
   @Output()
   close = new EventEmitter<Event>();
@@ -54,7 +48,7 @@ export class CardGroupComponent {
 
   groupToDelete?: Group
 
-  noUsers ?: boolean
+  noUsers?: boolean
 
   constructor(
     private groupService: GroupService,
@@ -80,10 +74,9 @@ export class CardGroupComponent {
   }
 
   ngOnInit(): void {
-    this.getUsesrByGroup()
-
     this.selectMoreUsers = true
     this.team = this.getTeam();
+    this.getSize()
 
     this.form = this.formBuilder.group({
       users: [null, this.users]
@@ -129,7 +122,7 @@ export class CardGroupComponent {
   }
 
   removeUser(event: boolean): void {
-     if (event) {
+    if (event) {
       this.groupService.deleteUserFromGroup(this.userToDelete, this.team.id, this.group.id)
         .subscribe((group: Group) => {
           this.alertService.successAlert(`Usuário retirado do grupo`)
@@ -143,18 +136,47 @@ export class CardGroupComponent {
     this.deleteUser = false
   }
 
-  updateGroup(group: Group){
-    this.groupService.getGroupById(group.id).subscribe((group:Group) => {
+  updateGroup(group: Group) {
+    this.groupService.getGroupById(group.id).subscribe((group: Group) => {
       this.group = group;
     })
   }
 
-  getUsesrByGroup(){
-    for (const group of this.getGroup()) {
-      this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-        group.users = users;
+  usersTeam: User[] = []
+  selectedUsers: User[] = []
+
+  getUsersByGroup(id: number) {
+    this.usersTeam = this.team.users!
+    for (const ut of this.usersTeam) {
+      this.userService.getUsersByGroup(id).subscribe((users: User[]) => {
+        for (const ug of users) {
+          if (ug.id == ut.id) {
+            this.selectedUsers.push(ut)
+          }
+        }
       });
     }
   }
 
+  getSize() {
+    for (const group of this.getGroup()) {
+      this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+        group.size = users.length;
+      });
+    }
+  }
+
+  deleted: boolean = false
+  //user: User, teamId:number, groupId:number
+  addOrDelete(event: any, group: Group) {
+    for (const userGroup of this.selectedUsers) {
+        this.groupService.deleteUserFromGroup(event.itemValue, this.team.id, group.id).subscribe((group: Group) => {
+          this.deleted = true
+        })
+    }
+    if(!this.deleted){
+      this.groupService.addParticipants(group, event.itemValue.id).subscribe((group: Group) => {
+      })
+    }
+  }
 }

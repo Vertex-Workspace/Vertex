@@ -56,8 +56,7 @@
 
             <div *ngIf="clicked == 'groups'" class="grid-group">
                 <ng-container *ngFor="let group of team.groups">
-                    <app-card-group [team]="team" [width]="'800px'" [height]="'90px'"
-                        (emitterItem)="deleteGroup($event)" [group]="group">
+                    <app-card-group [team]="team" (emitterItem)="deleteGroup($event)" [group]="group">
                     </app-card-group>
                 </ng-container>
             </div>

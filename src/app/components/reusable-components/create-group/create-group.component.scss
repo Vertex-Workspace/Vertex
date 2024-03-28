@@ -10,7 +10,7 @@ form {
 }
 
 .div-name {
-    @apply h-[25%] w-full
+    @apply h-[20%] w-full
 }
 
 .input-name {
@@ -26,7 +26,7 @@ form {
 }
 
 .input-description {
-    @apply flex flex-col w-full h-[50%] items-center;
+    @apply flex flex-col w-full h-[60%] items-center;
     overflow-y: auto;
 
     p {
@@ -36,7 +36,7 @@ form {
 }
 
 .div-buttons {
-    @apply flex h-[15%] w-full justify-end items-end;
+    @apply flex h-[20%] w-full justify-end items-end;
 
     .buttons {
         @apply flex w-[60%] h-full justify-between items-end ;
