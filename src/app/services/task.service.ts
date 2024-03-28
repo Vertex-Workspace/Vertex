@@ -88,9 +88,9 @@ export class TaskService {
     return this.http.get(`${URL}task/${taskID}/review/performance`);
   }
 
-  public uploadFile(fd: FormData, id: number): Observable<Task> {
+  public uploadFile(fd: FormData, id: number, userID : number): Observable<Task> {
     return this.http
-      .patch<Task>(`${URL}task/${id}/upload`, fd);
+      .patch<Task>(`${URL}task/${id}/upload/${userID}`, fd);
   }
 
   public removeFile(taskId: number, fileId: number): Observable<Task> {

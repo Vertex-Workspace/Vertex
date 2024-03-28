@@ -86,7 +86,7 @@ export class AppComponent {
     this.userService.getOneById(user.id!).subscribe((logged) => {
 
       user = logged;
-
+      
       if (user.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);

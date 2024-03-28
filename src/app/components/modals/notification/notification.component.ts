@@ -59,17 +59,19 @@ export class NotificationComponent {
 
 
   notificationDetails(notification: Notification): void {
-    console.log(notification.linkRedirect);
-    let url = notification.linkRedirect;
 
-    url = url.substring(url.indexOf('=')+1, url.length);
-    console.log(url);
-    
-    let start = notification.linkRedirect.substring(0, notification.linkRedirect.indexOf('?'));
-    
-    console.log(start);
-    
-    this.router.navigate([start], { queryParams: { taskID: url }});
+    let url = notification.linkRedirect;
+    if(url.includes('taskID')){
+      url = url.substring(url.indexOf('=')+1, url.length);
+      
+      let start = notification.linkRedirect.substring(0, notification.linkRedirect.indexOf('?'));
+      
+      this.router.navigate([start], { queryParams: { taskID: url }});
+    } else {
+      console.log(url);
+      
+      this.router.navigate([url]);
+    }
   }
 
   hasChecked(): boolean {

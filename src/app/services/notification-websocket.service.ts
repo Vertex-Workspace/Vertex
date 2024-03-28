@@ -49,8 +49,6 @@ export class NotificationWebSocketService {
         console.log(number);
         
         if(number == this.userService.getLogged().id!) {
-          console.log(".next()");
-          
           observer.next();
         }
       };
