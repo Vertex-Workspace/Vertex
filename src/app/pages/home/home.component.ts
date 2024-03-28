@@ -7,7 +7,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/models/class/user';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Task } from 'src/app/models/class/task';
-import { PropertyListKind } from 'src/app/models/class/property';
+import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
 import { PipeParams } from 'src/app/models/interface/params';
 
 @Component({
@@ -49,11 +49,15 @@ export class HomeComponent implements OnInit{
   filterDate !: string;
   filterOptions: any[] = [
     {name: 'Status', values: [
-      {name: 'Não Iniciado', kind: PropertyListKind.TODO},
-      {name: 'Em Andamento', kind: PropertyListKind.DOING},
-      {name: 'Concluído', kind: PropertyListKind.DONE}
+      {name: 'Não Iniciado', kind: PropertyListKind.TODO, status: true},
+      {name: 'Em Andamento', kind: PropertyListKind.DOING, status: true},
+      {name: 'Concluído', kind: PropertyListKind.DONE, status: true}
     ]},
-    {name: 'Data', values: [{name: 'date-input'}]},
+    {name: 'Data', values: [
+      {name: "Hoje", kind: PropertyKind.DATE as string, value: 'td' },
+      { name: "Próxima semana", kind: PropertyKind.DATE as string, value: 'nw' },
+      { name: "Próximo mês", kind: PropertyKind.DATE as string, value: 'nm'}
+    ]},
   ];
   orderSettings !: any[];
   configItems = [
@@ -82,6 +86,9 @@ export class HomeComponent implements OnInit{
   }
 
   updateOrderType(e: PipeParams): void {
+    console.log(this.selectedFilter);
+    
+    
     if (e.type) {
       this.orderParams.type = e.type;
     }
