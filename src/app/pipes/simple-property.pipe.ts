@@ -18,7 +18,7 @@ export class SimplePropertyPipe implements PipeTransform {
             return v.property.id === params.propId;
           });
           
-          if (value && value.value) return value.value === params.value; 
+          if (value && value.value) return value.value.toString().toLowerCase().includes(params.value.toString().toLowerCase()); 
         })
       }
     }
