@@ -22,14 +22,16 @@
                     }
                     
                     .divOptions {
-                        @apply flex w-[100%] h-full items-center
+                        @apply flex w-[100%] h-full items-center;
+                        background: $secondColor; 
                     }
 
                     button {
                         @apply w-full;
-
+                        background: $secondColor; 
                         p{
                             @apply w-full flex items-start;
+                            background: $secondColor; 
                         }
                     }
                 }
@@ -46,17 +48,13 @@
 .icon {
     color: $primaryColor
 }
-.click {
-    background-color: $emphasis;
-    @apply rounded-r-sm;
-}
-
-.default {
-    background-color: $secondColor;
-}
+// .click {
+    
+//     @apply rounded-r-sm;
+// }
 
 .clickBlue {
-    @apply border-l-8 border-solid rounded-l-md;
+    @apply border-l-8 border-solid;
     border-color: $primaryColor;
     background-color: $emphasis;
 }

@@ -77,16 +77,19 @@ section{
         text-lg p-3 rounded font-light border-2 transition-colors;
     }
     .search {
-        @apply w-96 h-[56px] flex items-center justify-between bg-white p-3
+        @apply w-96 h-[56px] flex items-center justify-between p-3
         rounded shadow-md border-none;
+        background-color: $card;
+
+        .inputSearch{
+            @apply w-[88%] h-full outline-none flex items-center pl-2;
+            background-color: $card;
+        }
 
         i {
             @apply w-[10%];
         }
 
-        input {
-            @apply w-[90%] h-full outline-none flex items-center pl-2;
-        }
     }
 }
 

@@ -1,17 +1,17 @@
 @import '../../../../variables';
 .modal-overlay {
-    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center  transition-transform;
     z-index: 999;
 }
 
 .exitModal {
-    @apply flex font-bold h-[8%] w-full justify-between flex-row p-4;
+    @apply flex font-bold h-[12%] w-full justify-between flex-row px-4;
     color: $primaryColor;
 }
 
 .modal {
     @apply absolute rounded-sm flex flex-col 
-    items-end justify-start text-center p-8 border-t-8;
+    items-end justify-start text-center p-5 border-t-8;
     background-color: $secondColor;
     border-color: $primaryColor;
 }

@@ -29,7 +29,19 @@ section {
 
 
 .search {
-    @apply w-[40%] h-[50px] flex items-start justify-between bg-white p-3
+    @apply w-[40%] h-[50px] flex items-start justify-between p-3
     rounded shadow-md border-none;
+    background-color: $card;
+}
+
+
+#text-black{
+    @apply w-[90%];
+    color: $text;
+}
+
+input {
+    @apply w-[90] bg-transparent flex items-center;
+    color: $card;
 }
 

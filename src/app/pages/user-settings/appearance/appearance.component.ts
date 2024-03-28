@@ -65,7 +65,7 @@ export class AppearanceComponent implements OnInit {
               title: "Cor Destaque",
               iconColor: '#000000',
               colors: [
-                { 'color': '#007bff', status: 'unselected' }, // Azul
+                { 'color': '#007bff', status: 'selected' }, // Azul
                 { 'color': '#28a745', status: 'unselected' }, // Verde
                 { 'color': '#dc3545', status: 'unselected' }, // Vermelho
                 { 'color': '#ffc107', status: 'unselected' }, // Amarelo
@@ -75,7 +75,7 @@ export class AppearanceComponent implements OnInit {
                 { 'color': '#6f42c1', status: 'unselected' }, // Roxo escuro
                 { 'color': '#20c997', status: 'unselected' }, // Verde claro
                 { 'color': '#e83e8c', status: 'unselected' }, // Rosa
-                { 'color': '#ffc0cb', status: 'unselected' }, // Rosa claro
+                { 'color': '#ff8fff', status: 'unselected' }, // Rosa claro
                 { 'color': '#007b5e', status: 'unselected' }, // Verde azulado
               ]
             },
@@ -96,7 +96,7 @@ export class AppearanceComponent implements OnInit {
                 { 'color': '#fd7e14', status: 'unselected' }, // Laranja
                 { 'color': '#20c997', status: 'unselected' }, // Verde claro
                 { 'color': '#e83e8c', status: 'unselected' }, // Rosa
-                { 'color': '#ffc0cb', status: 'unselected' }, // Rosa claro
+                { 'color': '#ff8fff', status: 'unselected' }, // Rosa claro
                 { 'color': '#007b5e', status: 'unselected' }, // Verde azulado
                 { 'color': '#007bff', status: 'unselected' }, // Azul
                 { 'color': '#28a745', status: 'unselected' }, // Verde
@@ -240,9 +240,13 @@ export class AppearanceComponent implements OnInit {
       if (this.logged.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
+        document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
+        document.documentElement.style.setProperty('--card', "#FFFFFF");
       } else if (this.logged.personalization!.theme == 1) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
+        document.documentElement.style.setProperty('--emphasis', "#161616");
+        document.documentElement.style.setProperty('--card', "#161616");
       }
     });
   }
@@ -298,10 +302,14 @@ export class AppearanceComponent implements OnInit {
       if (this.logged.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
+        document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
+        document.documentElement.style.setProperty('--card', "#FFFFFF");
         document.documentElement.style.setProperty('--text', "#000000");
       } else if (this.logged.personalization!.theme == 1) {
         document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
+        document.documentElement.style.setProperty('--emphasis', "#161616");
+        document.documentElement.style.setProperty('--card', "#161616");
         document.documentElement.style.setProperty('--text', "#FFFFFF");
       }
     });

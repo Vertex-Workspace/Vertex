@@ -14,8 +14,10 @@
                     </h3>
                     <div class="divMembers">
                         <p class="medium-text">{{getMembersQtt()}} {{getMembersQtt() === 1 ? "membro" : "membros"}}</p>
-                        <fa-icon class="iconLink" [icon]="faLink" (click)="copyInviteLink()"></fa-icon>
-                        <p class="medium-text">Copiar link de convite</p>
+                        <div class="flex gap-2" (click)="copyInviteLink()">
+                            <fa-icon class="iconLink" [icon]="faLink"></fa-icon>
+                            <p class="medium-text">Copiar link de convite</p>
+                        </div>
                     </div>
 
                     <p class="medium-text">Data de Criação: 24/10/2022</p>

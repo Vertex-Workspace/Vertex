@@ -54,7 +54,7 @@
                 </div>
             </div> -->
 
-            <div class="main-section-left">
+            <div class="main-section-left gap-2">
                 <ng-container *ngFor="let chatFor of conversations">
                     <div (click)="openConversation(chatFor)"
                         [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
@@ -98,7 +98,7 @@
 
                         <div *ngIf="!message.file"
                             [ngClass]="logged.firstName!==message.user ? 'message-bubble-left' : 'message-bubble-right'">
-                            <p class="text-base whitespace-pre-wrap">{{ message.contentMessage }}</p>
+                            <p class="contentMessage whitespace-pre-wrap">{{ message.contentMessage }}</p>
                             <p [ngClass]="message.user !== logged.firstName ? 'timestamp' : 'timestamp text-right'">{{
                                 generateTime(message) }}</p>
                         </div>
@@ -128,10 +128,10 @@
 
             <form *ngIf="chat" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)"
                 #sendForm="ngForm" class="high-input-div justify-center">
-                <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
+                <div class="divWhiteInput">
 
                     <textarea type="text" name="message" id="input-message"
-                        class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
+                        class="form-control text-black focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
                         [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
                     <div class="emoji-wrapper">
 

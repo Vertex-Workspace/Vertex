@@ -17,11 +17,8 @@
                                 <div class="iconBox" *ngIf="item.id != 'description'">
                                     <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                                 </div>
-                                <textarea (input)="onChange()" type="text" 
-                                    [ngClass]="item.id"
-                                    #textBox class="regular-text"
-                                    formControlName="{{item.formControlName}}"    
-                                >
+                                <textarea (input)="onChange()" type="text" [ngClass]="item.id" #textBox
+                                    class="regular-text" formControlName="{{item.formControlName}}">
                             </textarea>
                             </div>
                         </div>
@@ -29,7 +26,7 @@
                 </section>
 
                 <div class="charts">
-                    <p class="medium-text">Visibilidade do Perfil</p>      
+                    <p class="medium-text">Visibilidade do Perfil</p>
                     <div *ngFor="let toogle of tooglesList; index as item">
                         <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
                         </fa-icon>
@@ -49,12 +46,11 @@
 
                     <div>
                         <div *ngIf="!buttonConfirm">
-                                <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
-                                    [disabled]="contentEditable ? false : true"
-                                    [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit"
-                                    (click)="onSubmit()">
-                                    Atualizar
-                                </button>
+                            <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
+                                [disabled]="contentEditable ? false : true"
+                                [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit" (click)="onSubmit()">
+                                Atualizar
+                            </button>
                         </div>
                     </div>
                 </section>

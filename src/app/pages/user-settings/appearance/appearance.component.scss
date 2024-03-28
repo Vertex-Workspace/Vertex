@@ -39,7 +39,7 @@
 
 .box-modes {
     @apply flex w-full h-[45%]  items-center pl-3 border rounded-sm;
-    border-color: $emphasis;
+    border-color: $primaryColor;
 
     .mode {
         @apply flex h-[85%] w-[20%];
@@ -76,7 +76,7 @@
 }
 
 .text-preferences {
-    @apply  w-[85%] h-[30%];
+    @apply  w-[85%] h-[30%] flex flex-col gap-7;
 
     .writing {
         @apply w-full h-[40%] flex py-3;

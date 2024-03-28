@@ -87,18 +87,18 @@ export class AppComponent {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
 
-        document.documentElement.style.setProperty('--emphasis', user.personalization?.primaryColorLight!);
-        document.documentElement.style.setProperty('--card', user.personalization?.secondColorLight!);
+        document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
+        document.documentElement.style.setProperty('--card', "#FFFFFF");
 
         document.documentElement.style.setProperty('--text', "#000000");
       } else if (user.personalization!.theme == 1) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+        document.documentElement.style.setProperty('--emphasis', "#161616");
         
-        document.documentElement.style.setProperty('--emphasis', user.personalization?.primaryColorDark!);
-        document.documentElement.style.setProperty('--card', user.personalization?.secondColorDark!);
+        document.documentElement.style.setProperty('--card', "#161616");
 
-        document.documentElement.style.setProperty('--text', "#FFFFFF");
+        document.documentElement.style.setProperty('--text', "#BABABA");
       }
 
       document.documentElement.style.setProperty('--smallText', (user.personalization?.fontSize! - 2) + 'px');

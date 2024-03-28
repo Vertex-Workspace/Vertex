@@ -18,12 +18,15 @@
     color:$primaryColor !important;
 }
 
+
 .size {
     @apply text-[18px];
 }
 
 input {
-    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[46px];
+    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[48px];
+    background-color: $card;
+    color: $text !important;
 }
 
 .iconInputBlock {

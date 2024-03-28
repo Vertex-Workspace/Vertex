@@ -40,6 +40,7 @@ p-fileUpload {
 .input-div {
     @apply w-full h-full flex justify-center items-center absolute;
     opacity: 0;
+    color: $text;
 
     .input-file {
         @apply cursor-pointer w-full h-full;
@@ -58,7 +59,7 @@ p-fileUpload {
 
 .iconInput {
     color: $primaryColor;
-    background-color:$emphasis;
+    background-color:$card;
 }
 
 .generalDiv {
@@ -70,7 +71,7 @@ p-fileUpload {
 
     .iconBox {
          @apply flex w-[6%] h-12 justify-center items-center rounded-l-sm;
-         background-color: $emphasis;
+         background-color: $card;
      }
 }
 
@@ -80,6 +81,7 @@ textarea {
     px-3 flex py-3;
     resize: none;
     background-color: $card;
+    color: $text !important;   
 }
 
 .divInputs {

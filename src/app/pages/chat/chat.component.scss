@@ -83,13 +83,15 @@ main {
 }
 
 .search-div {
-    @apply flex w-[100%] h-[100%] items-center gap-2 border-2 border-gray-300 rounded-sm;
-    background-color: $secondColor;
+    @apply flex w-[100%] h-[100%] items-center gap-2 border-2 rounded-sm;
+    border: 1px solid $emphasis;
+    background-color: $card;
 }
 
 #search {
     @apply flex w-[90%] h-[100%] items-center justify-center;
-    background-color: $secondColor;
+    color: $text;
+    background-color: $card;
 }
 
 .searchIcon {
@@ -135,22 +137,28 @@ main {
 }
 
 .card-chat {
-    @apply flex justify-start self-start items-center w-[90%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
-    border: 1px solid #D3D3D3;
+    @apply flex justify-start  items-center w-[90%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    border: 1px solid $emphasis;
+    color: $text;
     background-color: $secondColor;
     animation: leftPulse 0.3s;
 }
 
 .card-chatOpen {
-    @apply flex justify-start self-start items-center w-[98.5%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
-    background-color: #fff;
-    border: 1px solid #D3D3D3;
+    @apply flex justify-start items-center w-[95%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    background-color: $primaryColor;
+    color: $text !important;
     animation: rightPulse 0.3s;
+    .chat-icons {
+        @apply flex justify-between items-center;
+        color: $secondColor !important;
+        font-size: 70px
+    }
 }
 
 @keyframes leftPulse {
     0% {
-        width: 98.5%;
+        width: 95%;
     }
 
     100% {
@@ -164,7 +172,7 @@ main {
     }
 
     100% {
-        width: 98.5%;
+        width: 95%;
     }
 }
 
@@ -204,13 +212,17 @@ main {
     align-items: flex-end;
 }
 
+.contentMessage{
+    font-size: $largeText !important;
+}
+
 .message-bubble-left {
     max-width: 70%;
     min-width: 80px;
     padding: 10px;
     border-radius: 5px;
     background-color: $card;
-    color: $primaryColor;
+    color: $text;
     word-wrap: break-word;
     @apply flex flex-col gap-3 shadow-md;
 }
@@ -220,13 +232,12 @@ main {
     padding: 10px;
     border-radius: 5px;
     background-color: $primaryColor;
-    color: $secondColor;
+    color: $text;
     word-wrap: break-word;
     @apply flex flex-col gap-3 shadow-md;
 }
 .message-bubble-right:last-child > :last-child {
-    @apply w-full
-    
+    @apply w-full   
 }
 
 .image{
@@ -243,7 +254,20 @@ main {
 }
 
 .timestamp {
-    font-size: 12px;
+    font-size: $smallText;
+    color: $text;
+}
+
+.divWhiteInput{
+    @apply flex pr-5 gap-4  w-[80%] h-[45%] rounded-sm;
+    background-color: $card;
+}
+
+#input-message{
+    @apply w-[90%] h-[100%] rounded-sm;
+    background-color: $card;
+    border: 1px solid $emphasis;
+    
 }
 
 .high-input-div {
@@ -258,7 +282,7 @@ main {
 }
 
 .square-chat {
-    @apply w-[9%] h-[45%] flex items-center justify-center;
+    @apply w-[8%] h-[44%] flex items-center justify-center;
     background-color: $primaryColor;
     border: $borderBottom;
 

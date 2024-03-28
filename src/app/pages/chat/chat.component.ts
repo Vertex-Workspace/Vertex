@@ -235,8 +235,10 @@ export class ChatComponent {
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
       this.chat.messages = messages;
 
-      let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
-      a.scrollTo(a.scrollTop, a.scrollHeight);
+      setTimeout(() => {
+        let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
+        a.scrollTop = a.scrollHeight;
+      }, 0);
     });
   }
   
