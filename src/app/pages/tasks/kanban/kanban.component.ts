@@ -50,7 +50,7 @@ export class KanbanComponent {
   nameFilter !: string;
 
   @Input()
-  statusFilter !: string;
+  filter !: any;
 
   @Input()
   orderParams !: PipeParams;

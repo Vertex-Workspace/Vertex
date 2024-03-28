@@ -6,7 +6,8 @@ import { Task } from '../models/class/task';
 })
 export class DatePipe implements PipeTransform {
 
-  transform(value: Task[], params: any): Task[] {
+  transform(value: Task[], params: any): Task[] { 
+    
     if (!params || !params.value || !value || value.length === 0) {
       return value;
     }

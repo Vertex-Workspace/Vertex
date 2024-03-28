@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
-import { PropertyListKind } from 'src/app/models/class/property';
+import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
 import { Team } from 'src/app/models/class/team';
 import { Permission, User } from 'src/app/models/class/user';
@@ -33,9 +33,14 @@ export class ProjectsComponent implements OnInit {
   selectedFilter !: string;
   filterOptions: any[] = [
     {name: 'Status', values: [
-      {name: 'Não Iniciado', kind: PropertyListKind.TODO},
-      {name: 'Em Andamento', kind: PropertyListKind.DOING},
-      {name: 'Concluído', kind: PropertyListKind.DONE}
+      {name: 'Não Iniciado', kind: PropertyListKind.TODO, status: true},
+      {name: 'Em Andamento', kind: PropertyListKind.DOING, status: true},
+      {name: 'Concluído', kind: PropertyListKind.DONE, status: true}
+    ]},
+    {name: 'Data', values: [
+      {name: "Hoje", kind: PropertyKind.DATE as string, value: 'td' },
+      { name: "Próxima semana", kind: PropertyKind.DATE as string, value: 'nw' },
+      { name: "Próximo mês", kind: PropertyKind.DATE as string, value: 'nm'}
     ]},
   ];
 
@@ -60,7 +65,6 @@ export class ProjectsComponent implements OnInit {
   queryFilter !: string;
 
   projectSearch !: string;
-
 
   constructor(
     private projectService: ProjectService,

@@ -17,7 +17,8 @@
                     <ng-container 
                         *ngFor="let task of (taskList 
                             | namePipe : nameFilter 
-                            | statusPipe : statusFilter : false
+                            | statusPipe : filter : false
+                            | datePipe : filter
                             | nameSortPipe : orderParams
                             | dateSortPipe : orderParams)">
 

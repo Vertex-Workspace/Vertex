@@ -88,7 +88,8 @@
                         <ng-container 
                             *ngFor="let task of (getTasksByDate(day) 
                             | namePipe : nameFilter 
-                            | statusPipe : statusFilter : false
+                            | statusPipe : filter : false
+                            | datePipe : filter
                             | nameSortPipe : orderParams
                             | dateSortPipe : orderParams
                             | statusSortPipe : orderParams)"

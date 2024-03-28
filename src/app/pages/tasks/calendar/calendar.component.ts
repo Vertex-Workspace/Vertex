@@ -40,7 +40,7 @@ export class CalendarComponent {
   nameFilter !: string;
 
   @Input()
-  statusFilter !: string;
+  filter !: any;
 
   constructor(
     private taskService: TaskService,

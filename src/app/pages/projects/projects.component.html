@@ -76,9 +76,7 @@
                             [optionGroupChildren]="['values']" 
                             [style]="{ minWidth: '14rem' }" 
                             placeholder="Selecione"
-                        >
-
-                    </p-cascadeSelect>
+                        ></p-cascadeSelect>
 
                     </ng-container>
                     <ng-container *ngIf="orderOpen">
@@ -103,7 +101,7 @@
                         (openTaskDetails)="changeModalTaskState(true, $event)" 
                         [permissions]="permissionsOnTeam"
                         [queryFilter]="queryFilter"
-                        [statusFilter]="selectedFilter"
+                        [filter]="selectedFilter"
                         [orderParams]="orderParams"
                     ></app-list>
                 </div>

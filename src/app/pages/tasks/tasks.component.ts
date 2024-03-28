@@ -63,7 +63,7 @@ export class TasksComponent implements OnInit {
     ] }
   ];
 
-  selectedStatusFilter !: any;
+  selectedFilter !: any;
   simplePropertyFilter : FilterParams = {
     value: '',
     propKind: '',
@@ -91,7 +91,7 @@ export class TasksComponent implements OnInit {
   teamId?: number
   projectId!: number;
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
@@ -162,12 +162,31 @@ export class TasksComponent implements OnInit {
                 this.filterOptions[index].values.push({
                   name: pl.value,
                   kind: pl.propertyListKind,
-                  index: p.properties.indexOf(prop)
+                  index: p.properties.indexOf(prop),
+                  status: true,
                 })
               });
               
-      } else {
+      } else if (prop.kind === PropertyKind.DATE) {
         
+        this.filterOptions[index]
+          .values.push({
+            name: "Hoje",
+            kind: prop.kind as string,
+            value: 'td'
+          },
+          {
+            name: "Próxima semana",
+            kind: prop.kind as string,
+            value: 'nw'
+          },
+          {
+            name: "Próximo mês",
+            kind: prop.kind as string,
+            value: 'nm'
+          })
+
+      } else {
         this.filterOptions[index]
           .values.push({
             name: prop.kind as string,
@@ -182,7 +201,7 @@ export class TasksComponent implements OnInit {
   updateFilterParams(e: any, option: any): void {
     this.simplePropertyFilter.propKind = option.kind;
     this.simplePropertyFilter.propId = option.propId;
-    this.selectedStatusFilter = '';
+    this.selectedFilter = '';
   }
 
   reset(e: any): void {
@@ -212,7 +231,7 @@ export class TasksComponent implements OnInit {
 
   toggleFilter(): void {
     this.filterOpen = !this.filterOpen;
-    this.selectedStatusFilter = '';
+    this.selectedFilter = '';
     this.simplePropertyFilter = {
       propId: 0,
       propKind: '',

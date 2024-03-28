@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
   queryFilter !: string;
 
   @Input()
-  statusFilter !: string;
+  filter !: any;
 
   @Input()
   orderParams !: PipeParams;
