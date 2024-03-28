@@ -11,6 +11,7 @@ import { URL } from './path/api_url';
 import { UserStateService } from './user-state.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
 import { HttpClient } from '@angular/common/http';
+import { Notification } from '../models/class/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -78,7 +79,7 @@ export class UserService {
     this.router.navigate(['/home']);
   }
 
-  private saveLoggedUser(user: User): void {
+  public saveLoggedUser(user: User): void {
     localStorage.setItem('logged', JSON.stringify(user)); //cookies
   }
 
@@ -104,8 +105,8 @@ export class UserService {
     .get<User>(`${URL}user/${id}`)
     .pipe(map((user: User) => new User(user)));
   }
-  
-  public getUsersByGroup(groupId: number): Observable < User[] > {
+
+  public getUsersByGroup(groupId: number): Observable<User[]> {
     return this.http
     .get<User[]>(`${URL}user/usersByGroup/${groupId}`)
     .pipe(map((users: User[]) => users.map(user => new User(user))));
@@ -128,14 +129,14 @@ export class UserService {
     return this.http
     .post<User>(`${URL}user`, user);
   }
-  
-  public patchPersonalization(personalization: Personalization): Observable < User > {
+
+  public patchPersonalization(personalization: Personalization): Observable<User> {
     return this.http
     .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
   }
-  
-  public patchPassword(emailTo: String, password: String): Observable < User > {
-    
+
+  public patchPassword(emailTo: String, password: String): Observable<User> {
+
     let passwordObj = {
       email: emailTo,
       password: password
@@ -163,5 +164,25 @@ export class UserService {
   
   public updateLoggedUser(user: User): void {
     this.saveLoggedUser(user);
+  }
+
+  public getNotifications(userID: number): Observable<Notification[]> {
+    return this.http
+      .get<Notification[]>(`${URL}user/${userID}/notification`);
+  }
+
+  public readNotifications(userID: number, listID: Notification[]): Observable<Notification[]>{
+    return this.http
+      .patch<Notification[]>(`${URL}user/${userID}/notification/read`, listID);
+  }
+
+  public deleteNotifications(userID: number, listID: Notification[]) {
+    return this.http
+      .patch(`${URL}user/${userID}/notification/delete`, listID);
+  }
+
+  public notificationSettings(userID: number, settingID: number) {
+    return this.http
+      .patch<User>(`${URL}user/${userID}/notification/settings/${settingID}`, {});
   }
 }

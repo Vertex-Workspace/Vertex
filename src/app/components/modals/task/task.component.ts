@@ -69,7 +69,6 @@ export class TaskComponent implements OnInit {
     private taskHourService: taskHourService,
     private reviewService : ReviewService,
     private teamService: TeamService,
-    private reviewService: ReviewService,
     private userService: UserService,
     private route: ActivatedRoute,
     ) {}
@@ -148,7 +147,9 @@ export class TaskComponent implements OnInit {
   }
 
   closeModal() {
-    this.close.emit();
+    if(!this.timeInTask.working){
+      this.close.emit();
+    }
   }
 
   changeTask(event: any): void {

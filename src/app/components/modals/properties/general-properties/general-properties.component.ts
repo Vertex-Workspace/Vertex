@@ -162,19 +162,23 @@ export class GeneralPropertiesComponent {
   }
 
   changeStatus(property: Property) {
-    if (property.propertyStatus === PropertyStatus.VISIBLE) {
-      property.propertyStatus = PropertyStatus.INVISIBLE;
+    if(this.canEdit){
+      if (property.propertyStatus === PropertyStatus.VISIBLE) {
+        property.propertyStatus = PropertyStatus.INVISIBLE;
+      } else {
+        property.propertyStatus = PropertyStatus.VISIBLE;
+      }
+      this.propertyService.createOrEditProperty(this.project.id!, property).subscribe(
+        (project) => {
+          this.project = project;
+          this.separePropertiesKind();
+          this.changeProject.emit(this.project);
+        }, (error) => {
+          console.log(error);
+        });
     } else {
-      property.propertyStatus = PropertyStatus.VISIBLE;
+      this.alertService.errorAlert("Você não tem autorização para editar propriedade");
     }
-    this.propertyService.createOrEditProperty(this.project.id!, property).subscribe(
-      (project) => {
-        this.project = project;
-        this.separePropertiesKind();
-        this.changeProject.emit(this.project);
-      }, (error) => {
-        console.log(error);
-      });
   }
 
   delete(event: boolean) {

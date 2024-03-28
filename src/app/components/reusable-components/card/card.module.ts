@@ -17,7 +17,8 @@ import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.mod
     CommonModule,
     FontAwesomeModule,
     DragDropModule,
-    ConfirmModalModule
+    ConfirmModalModule,
+  
   ]
 })
 export class CardModule { }

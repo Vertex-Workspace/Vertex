@@ -40,7 +40,7 @@ import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
+// import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
@@ -49,7 +49,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     LoadingComponent
   ],
   imports: [
-    PickerModule,
+    // PickerModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -78,7 +78,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     UserInformationsModule,
     SearchAllModule,
     ToastModule,
-    GroupsSelectModule
+    GroupsSelectModule,
    ],
   providers: [
     PersonalizationService,

@@ -43,6 +43,8 @@ export class KanbanComponent {
   canCreate: boolean = false;
   canEdit: boolean = false;
 
+  modalDelete: boolean = false;
+
   ngOnInit() {
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {

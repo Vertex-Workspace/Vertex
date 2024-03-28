@@ -21,7 +21,7 @@
                             </div>
                             <div>
                                 <ng-container *ngIf="item.status != 'Fixas'">
-                                    <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(property)">
+                                    <fa-icon [icon]="item.icon" class="little-icon" (click)="changeStatus(property)" [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'">
                                     </fa-icon>
                                     <fa-icon [icon]="faGear" class="little-icon"
                                         (click)="editProperty(property, 'gear')"

@@ -26,6 +26,14 @@ export class User {
     icon ?: string
     selectedProject ?: boolean
 
+    taskReview ?: boolean;
+    newMembersAndGroups ?: boolean;
+    permissionsChanged ?: boolean;
+    responsibleInProjectOrTask ?: boolean;
+    anyUpdateOnTask ?: boolean;
+    sendToEmail ?: boolean;
+
+
     //brainstorming
     teams?: Team[] = [];
 
