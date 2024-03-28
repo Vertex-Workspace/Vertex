@@ -8,6 +8,7 @@ import { DateSortPipe } from '../sort/date-sort.pipe';
 import { StatusSortPipe } from '../sort/status-sort.pipe';
 import { SimplePropertyPipe } from '../simple-property.pipe';
 import { SearchAllFilterPipe } from '../search-all-filter.pipe';
+import { DatePipe } from '../date.pipe';
 
 
 
@@ -20,7 +21,8 @@ import { SearchAllFilterPipe } from '../search-all-filter.pipe';
     DateSortPipe,
     StatusSortPipe,
     SimplePropertyPipe,
-    SearchAllFilterPipe
+    SearchAllFilterPipe,
+    DatePipe
   ],
   imports: [
     CommonModule
@@ -33,7 +35,8 @@ import { SearchAllFilterPipe } from '../search-all-filter.pipe';
     DateSortPipe,
     StatusSortPipe,
     SimplePropertyPipe,
-    SearchAllFilterPipe
+    SearchAllFilterPipe,
+    DatePipe
   ]
 })
 export class PipesModule { }

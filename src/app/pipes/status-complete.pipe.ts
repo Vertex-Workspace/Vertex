@@ -8,7 +8,7 @@ import { Property, PropertyList } from '../models/class/property';
 export class StatusPipe implements PipeTransform {
 
   transform(value: Task[], filter: any, project: boolean): Task[] {
-    if (!project && filter) {
+    if (!project && filter && filter.status) {
         const index: number = filter.index;
         filter = filter.name;
         
