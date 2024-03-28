@@ -93,7 +93,7 @@
                 </div>
                 <div *ngIf="filterOpen">
                     <p>Filtrar por </p>
-                    <p-cascadeSelect [(ngModel)]="selectedStatusFilter"  
+                    <p-cascadeSelect [(ngModel)]="selectedFilter"  
                         [options]="filterOptions" 
                         optionLabel="name" 
                         optionGroupLabel="name" 
@@ -102,7 +102,7 @@
                         placeholder="Selecione"
                     >
                         <ng-template let-option pTemplate="option">
-                            <div *ngIf="option.name !== 'TEXT' && option.name !== 'DATE' && option.name !== 'NUMBER'">
+                            <div *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
                                 {{option.name}}
                             </div>
                             <div *ngIf="option.name === 'TEXT'">
@@ -134,7 +134,7 @@
                 *ngIf="clicked  === 'Kanban'" 
                 [project]="project" 
                 [nameFilter]="query" 
-                [statusFilter]="selectedStatusFilter"
+                [filter]="selectedFilter"
                 [permissions]="permissions"
                 [orderParams]="orderParams"
                 (openTaskDetails)="changeModalTaskState(true, $event)" 
@@ -144,9 +144,9 @@
                 *ngIf="clicked  === 'List'" 
                 [project]="project" 
                 [queryFilter]="query" 
-                [statusFilter]="selectedStatusFilter" 
-                [orderParams]="orderParams"
+                [filter]="selectedFilter" 
                 [simplePropertyFilter]="simplePropertyFilter"
+                [orderParams]="orderParams"
                 [permissions]="permissions"
                 (openTaskDetails)="changeModalTaskState(true, $event)"
             ></app-list> 
@@ -155,7 +155,7 @@
                 *ngIf="clicked  === 'Calendar'" 
                 [project]="project"
                 [nameFilter]="query" 
-                [statusFilter]="selectedStatusFilter"
+                [filter]="selectedFilter"
                 [orderParams]="orderParams"
                 [permissions]="permissions"
                 (openTaskDetails)="changeModalTaskState(true, $event)" 

@@ -108,7 +108,7 @@
                 </section>
                 <div class="default-size">
                     <app-list 
-                        [statusFilter]="selectedFilter"
+                        [filter]="selectedFilter"
                         [queryFilter]="queryFilter" 
                         [orderParams]="orderParams"
                         (openTaskDetails)="changeModalTaskState(true, $event)" 
