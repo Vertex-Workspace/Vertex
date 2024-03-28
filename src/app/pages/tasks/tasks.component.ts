@@ -91,11 +91,6 @@ export class TasksComponent implements OnInit {
   teamId?: number
   projectId!: number;
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-    
-  }
-
   ngOnInit() {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -169,7 +164,8 @@ export class TasksComponent implements OnInit {
                   kind: pl.propertyListKind,
                   index: p.properties.indexOf(prop)
                 })
-              })
+              });
+              
       } else {
         
         this.filterOptions[index]
@@ -184,16 +180,12 @@ export class TasksComponent implements OnInit {
   }
 
   updateFilterParams(e: any, option: any): void {
-    console.log('a');
-    
     this.simplePropertyFilter.propKind = option.kind;
     this.simplePropertyFilter.propId = option.propId;
     this.selectedStatusFilter = '';
   }
 
   reset(e: any): void {
-    console.log(e);
-    
     this.simplePropertyFilter = {
       value: '',
       propKind: '',
@@ -260,7 +252,6 @@ export class TasksComponent implements OnInit {
 
     this.taskService.create(taskCreate).subscribe(
       (task) => {
-        this.project.tasks.push(task);
         this.changeModalTaskState(true, task);
       },
       (error) => {
