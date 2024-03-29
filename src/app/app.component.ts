@@ -15,7 +15,7 @@ import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
 import { NotificationWebSocketService } from './services/notification-websocket.service';
 import { Notification } from './models/class/notification';
-
+import { tutorialText } from './tutorialText';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +30,7 @@ export class AppComponent {
   [x: string]: any;
 
   title = 'Vertex';
+  tutorialText = tutorialText;
 
   inputColor: string = '#FFFFFF';
   fontColor: string = '#000000';

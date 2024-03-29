@@ -13,6 +13,7 @@ import { GroupService } from 'src/app/services/group.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
+import { tutorialText } from 'src/app/tutorialText';
 
 @Component({
   selector: 'app-projects',
@@ -28,6 +29,7 @@ export class ProjectsComponent implements OnInit {
   clicked: string = 'project';
   logged !: User;
   team !: Team;
+  tutorialText = tutorialText;
 
   //TASKS - FILTER AND ORDER
   selectedFilter !: string;

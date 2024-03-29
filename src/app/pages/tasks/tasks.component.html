@@ -19,7 +19,9 @@
         </section>
 
         <section class="menu">
-            <div>
+            <div  joyrideStep="step6" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
+                [doneTemplate]="doneButton" [title]="'Modos de visualização das tarefas'" [stepContent]="customContent"
+                [stepContentParams]="{ texto: tutorialText[8] }">
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="medium-text">
                         <i class="{{ item.iconClass }}" style="font-size: 1.4rem"></i>
@@ -73,16 +75,9 @@
             <ng-container *ngIf="filterOpen || orderOpen">
                 <div *ngIf="orderOpen">
                     <p>Ordenar por </p>
-                    <p-cascadeSelect 
-                            [(ngModel)]="orderParams" 
-                            [options]="orderOptions" 
-                            optionLabel="name" 
-                            optionGroupLabel="name" 
-                            [optionGroupChildren]="['values']" 
-                            [style]="{ minWidth: '13rem' }" 
-                            placeholder="Selecione"
-                            (ngModelChange)="updateOrderType($event)"
-                        >
+                    <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
+                        optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
+                        placeholder="Selecione" (ngModelChange)="updateOrderType($event)">
                         <ng-template pTemplate="option" let-option>
                             <div>
                                 <p>{{option.name}}</p>
@@ -93,35 +88,22 @@
                 </div>
                 <div *ngIf="filterOpen">
                     <p>Filtrar por </p>
-                    <p-cascadeSelect [(ngModel)]="selectedFilter"  
-                        [options]="filterOptions" 
-                        optionLabel="name" 
-                        optionGroupLabel="name" 
-                        [optionGroupChildren]="['values']" 
-                        [style]="{ minWidth: '13rem' }" 
-                        placeholder="Selecione"
-                    >
+                    <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
+                        optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
+                        placeholder="Selecione">
                         <ng-template let-option pTemplate="option">
                             <div *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
                                 {{option.name}}
                             </div>
                             <div *ngIf="option.name === 'TEXT'">
-                                <input 
-                                    pInputText 
-                                    [(ngModel)]="simplePropertyFilter.value" 
-                                    type="text" 
-                                    placeholder="Filtre por texto" 
-                                    (click)="$event.stopPropagation()"
-                                    (ngModelChange)="updateFilterParams($event, option)"
-                                >
+                                <input pInputText [(ngModel)]="simplePropertyFilter.value" type="text"
+                                    placeholder="Filtre por texto" (click)="$event.stopPropagation()"
+                                    (ngModelChange)="updateFilterParams($event, option)">
                             </div>
                             <div *ngIf="option.name === 'NUMBER'">
-                                <p-inputNumber 
-                                    [(ngModel)]="simplePropertyFilter.value" 
-                                    placeholder="Filtre por número"
+                                <p-inputNumber [(ngModel)]="simplePropertyFilter.value" placeholder="Filtre por número"
                                     (click)="$event.stopPropagation()"
-                                    (ngModelChange)="updateFilterParams($event, option)"
-                                ></p-inputNumber>
+                                    (ngModelChange)="updateFilterParams($event, option)"></p-inputNumber>
                             </div>
                         </ng-template>
                     </p-cascadeSelect>
@@ -130,75 +112,54 @@
         </section>
 
         <section class="router" *ngIf="renderProject | async">
-            <app-kanban 
-                *ngIf="clicked  === 'Kanban'" 
-                [project]="project" 
-                [nameFilter]="query" 
-                [filter]="selectedFilter"
-                [permissions]="permissions"
-                [orderParams]="orderParams"
-                (openTaskDetails)="changeModalTaskState(true, $event)" 
-            ></app-kanban>
+            <app-kanban *ngIf="clicked  === 'Kanban'" [project]="project" [nameFilter]="query" [filter]="selectedFilter"
+                [permissions]="permissions" [orderParams]="orderParams"
+                (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
 
-            <app-list 
-                *ngIf="clicked  === 'List'" 
-                [project]="project" 
-                [queryFilter]="query" 
-                [filter]="selectedFilter" 
-                [simplePropertyFilter]="simplePropertyFilter"
-                [orderParams]="orderParams"
-                [permissions]="permissions"
-                (openTaskDetails)="changeModalTaskState(true, $event)"
-            ></app-list> 
+            <app-list *ngIf="clicked  === 'List'" [project]="project" [queryFilter]="query" [filter]="selectedFilter"
+                [simplePropertyFilter]="simplePropertyFilter" [orderParams]="orderParams" [permissions]="permissions"
+                (openTaskDetails)="changeModalTaskState(true, $event)"></app-list>
 
-            <app-calendar 
-                *ngIf="clicked  === 'Calendar'" 
-                [project]="project"
-                [nameFilter]="query" 
-                [filter]="selectedFilter"
-                [orderParams]="orderParams"
-                [permissions]="permissions"
-                (openTaskDetails)="changeModalTaskState(true, $event)" 
-            ></app-calendar>
+            <app-calendar *ngIf="clicked  === 'Calendar'" [project]="project" [nameFilter]="query"
+                [filter]="selectedFilter" [orderParams]="orderParams" [permissions]="permissions"
+                (openTaskDetails)="changeModalTaskState(true, $event)"></app-calendar>
 
-            <app-mural 
-                *ngIf="clicked  === 'Mural'" 
-                [project]="project"
-            ></app-mural>
+            <app-mural *ngIf="clicked  === 'Mural'" [project]="project"></app-mural>
         </section>
 
     </div>
 </section>
 
-<app-modal-properties 
-    *ngIf="propertiesOpen" 
-    [project]="project"
-    [height]="'600px'"
-    [width]="'450px'" 
-    (close)="openPropertiesModal()"
-    (changeProjectSettings)="changeProject($event)" 
-></app-modal-properties> 
+<app-modal-properties *ngIf="propertiesOpen" [project]="project" [height]="'600px'" [width]="'450px'"
+    (close)="openPropertiesModal()" (changeProjectSettings)="changeProject($event)"></app-modal-properties>
 
-<app-task 
-    *ngIf="taskOpen"
-    [task]="taskOpenObject" 
-    [project]="project" 
-    [permissions]="permissions"
-    (changes)="updateProjectByTaskChanges($event)" 
-    (close)="changeModalTaskState(false, taskOpenObject)" 
-></app-task>
+<app-task *ngIf="taskOpen" [task]="taskOpenObject" [project]="project" [permissions]="permissions"
+    (changes)="updateProjectByTaskChanges($event)" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
 
-<app-review-task 
-    *ngIf="taskReview" 
-    [tasksToReview]="tasksToReview" 
-    (toggleReview)="toggleReview()"
-    (closeModal)="updateTasksToReview($event)"  
-></app-review-task>
+<app-review-task *ngIf="taskReview" [tasksToReview]="tasksToReview" (toggleReview)="toggleReview()"
+    (closeModal)="updateTasksToReview($event)"></app-review-task>
 
-<app-create-team-project 
-    *ngIf="openModalProject" 
-    [project]="project" 
-    [team]="project.team"
-    [typeString]="'projectInfo'" 
-    (close)="openProjectInfos()"
-></app-create-team-project>
+<app-create-team-project *ngIf="openModalProject" [project]="project" [team]="project.team" [typeString]="'projectInfo'"
+    (close)="openProjectInfos()"></app-create-team-project>
+
+
+
+
+<ng-template #prevButton>
+    <button class="btn">
+        Voltar
+    </button>
+</ng-template>
+<ng-template #nextButton>
+    <button class="btn">
+        Próximo
+    </button>
+</ng-template>
+<ng-template #doneButton>
+    <button (click)="attUserFirstAccess()" class="btn">
+        Fim
+    </button>
+</ng-template>
+<ng-template #customContent let-texto="texto" style="border-radius: 5px">
+    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+</ng-template>

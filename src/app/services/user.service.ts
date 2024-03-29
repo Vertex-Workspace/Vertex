@@ -37,6 +37,7 @@ export class UserService {
       lastName: form.lastName,
       email: form.email,
       image: this.defaultImg,
+      firstAccess:true,
       password: form.password,
       passwordConf: form.passwordConf
     }
@@ -144,6 +145,11 @@ export class UserService {
     
     return this.http
     .patch<any>(`${URL}user/edit-password`, passwordObj);
+  }
+
+  public patchFirstAccess(user:User): Observable<User> {
+    return this.http
+    .patch<User>(`${URL}user/first-access`, user);
   }
   
   public delete (id: number): Observable < User > {

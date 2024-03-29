@@ -20,11 +20,11 @@ import { PropertiesModule } from 'src/app/components/modals/task/properties/prop
 import { InputTextModule } from 'primeng/inputtext';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
-
 import { RatingModule } from 'primeng/rating';
 import { ReviewTaskComponent } from 'src/app/components/modals/review-task/review-task.component';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     TasksComponent
   ],
   imports: [
+    JoyrideModule.forChild(),
     CommonModule,
     RouterModule,
     BrowserModule,

@@ -35,7 +35,7 @@ section{
 }
 
 .functionally-items-task {
-    @apply flex flex-row w-full pt-4 justify-between;
+    @apply flex flex-row w-full justify-between;
 
     .filter-items {
         @apply flex;
@@ -132,4 +132,21 @@ section{
 .icon-plus{
     color: $primaryColor;
     font-size: 1.75rem;
+}
+
+
+//BUTTONS TUTORIAL
+.btn {
+    @apply flex w-full  items-center justify-center 
+    border-2 transition-colors rounded p-3;
+}
+
+.btn:hover {
+    background-color: $secondColor;
+    color: $primaryColor;
+    @apply transition-colors;
+}
+
+svg {
+    display: none !important;
 }
