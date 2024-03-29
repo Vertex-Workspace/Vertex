@@ -60,10 +60,11 @@ export class ProjectEdit {
     id ?:number;
     name?: string;
     description?: string;
-    listOfResponsibles ?: Group[] | User[]
+    listOfResponsibles ?: Group[] | User[];
+    projectReviewENUM ?: ProjectReview;
 }
 export enum ProjectReview {
-    MANDATORY,
-    OPTIONAL,
-    EMPTY,
+    MANDATORY = "MANDATORY",
+    OPTIONAL = "OPTIONAL",
+    EMPTY = "EMPTY",
 }

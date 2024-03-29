@@ -1,12 +1,12 @@
-<div class="modal-overlay">
-    <div class="base" *ngIf="waitRequest">
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="base" *ngIf="waitRequest" (click)="$event.stopPropagation()">
         <div class="location">
             <div class="routes regular-text">
                 <p>{{taskInfoDTO.teamName}}</p>
                 <p>{{taskInfoDTO.projectName}}</p>
             </div>
             <div class="div-timer-closeModal">
-                <div class="flex h-[40px]" *ngIf="!soloResponsable && isRevisable() && task.revisable">
+                <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable">
                     <button (click)="sendTask()" id="red-btn" [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
                         [disabled]="timeInTask.working">
                         Entregar Tarefa
@@ -17,7 +17,9 @@
                         (click)="updateTaskRevisable()"></p-checkbox>
                     <p class="regular-text self-start">Obrigar Revisão</p>
                 </div>
-                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
+                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">
+                    <i class="pi pi-plus rotate-45 text-2xl pt-2"></i>
+                </button>
             </div>
         </div>
         <div class="informations">
@@ -33,12 +35,12 @@
                 </div>
                 <div class="down relative">
                     <div class="buttons">
-                        <button (click)="openMiniChat()">Iniciar chat</button>
+                        <button *ngIf="!task.chatCreated" (click)="createChat()">Criar Chat</button>
+                        <button *ngIf="task.chatCreated" (click)="openMiniChat()">Abrir Chat</button>
                     </div>
 
                     <div *ngIf="miniChatOpen" class="absolute">
-                        <app-minichat-task (miniChatOpen)="openMiniChat()"
-                            (chatExpanded)="minimizeChat()"></app-minichat-task>
+                        <app-minichat-task [chat]="taskChat" (miniChatOpen)="openMiniChat()"></app-minichat-task>
                     </div>
                 </div>
             </div>

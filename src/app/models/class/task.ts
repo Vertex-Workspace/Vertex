@@ -1,4 +1,5 @@
 
+import { Chat } from "./chat";
 import { Comment } from "./comment";
 import { Property } from "./property";
 import { TaskResponsable } from "./taskResponsable";
@@ -25,6 +26,12 @@ export class Task {
     step?: number;
 
     files: any[];
+    
+    image ?: string; //only validation
+
+    //Chat
+    chat?:Chat;
+    chatCreated?:boolean;
 
     constructor(
         task: Task
@@ -33,6 +40,8 @@ export class Task {
         this.name = task.name;
         this.taskResponsables = task.taskResponsables;
         this.step = task.step;
+        this.chat = task.chat;
+        this.chatCreated = task.chatCreated;
         this.description = task.description;
         this.values = task.values;
         this.properties = task.properties;

@@ -8,7 +8,6 @@
 
     <div class="my-notifications">
         <p class="regular-text">Notificações de seu Espaço de Trabalho</p>
-        <p class="small-text font-bold">Receber notificações sobre:</p>
         <div *ngFor="let toogle of tooglesList; index as item">
             <div>
                 <fa-icon class="icon" (click)="toogleCharts(item)" [icon]="toogle.icon">
@@ -17,14 +16,4 @@
             </div>
         </div>
     </div>
-
-    <section>
-        <div *ngFor="let toogle of generalTooglesList; index as item" class="list">
-            <div class="toggles-text">
-                <fa-icon class="icon" (click)="toogleGeneral(item)" [icon]="toogle.icon">
-                </fa-icon>
-                <p class="small-text">{{toogle.text}}</p>
-            </div>
-        </div>
-    </section>
 </div>

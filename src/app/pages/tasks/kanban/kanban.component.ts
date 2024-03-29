@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Task, TaskCreate } from 'src/app/models/class/task';
 import {
   CdkDragDrop,
@@ -15,6 +15,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { taskHourService } from 'src/app/services/taskHour.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { PipeParams } from 'src/app/models/interface/params';
 
 @Component({
   selector: 'app-kanban',
@@ -40,10 +41,22 @@ export class KanbanComponent {
 
   @Input() permissions!: Permission[];
 
+  taskList !: Task[];
+
   canCreate: boolean = false;
   canEdit: boolean = false;
 
+  @Input()
+  nameFilter !: string;
+
+  @Input()
+  filter !: any;
+
+  @Input()
+  orderParams !: PipeParams;
+
   ngOnInit() {
+    this.taskList = this.project.tasks;
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
         this.canEdit = true;
@@ -104,9 +117,7 @@ export class KanbanComponent {
         };
         //Patch the value of the status task
         this.taskService.patchValue(valueUpdate).subscribe(
-          (taskDate) => {
-
-          },
+          () => {},
           (error) => {
             newValue.value = previousPropertyList;
             this.alertService.errorAlert(error.error);
@@ -137,7 +148,8 @@ export class KanbanComponent {
 
 
   deleteTask(task: Task): void {
-    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+    this.taskList = this.taskList.filter(t => task.id !== t.id)  
+    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id !== task.id);
   }
 
   @Output() openTaskDetails = new EventEmitter();
@@ -177,7 +189,6 @@ export class KanbanComponent {
       },
       teamId: this.project.idTeam!
     }
-    console.log("Task", taskCreate);
 
     this.taskService.create(taskCreate).subscribe(
       (task: Task) => {
@@ -196,15 +207,15 @@ export class KanbanComponent {
           },
           userID: this.userService.getLogged().id!
         };
-        console.log(valueUpdate);
+
         this.taskService.patchValue(valueUpdate).subscribe(
           (taskDate) => {
             task.values = taskDate.values;
-            this.project.tasks.push(task);
+            this.taskList.push(task);
             this.alertService.successAlert("Tarefa criada com sucesso!");
           },
           (error) => {
-            console.log(error);
+            console.error(error);
           }
         );
 

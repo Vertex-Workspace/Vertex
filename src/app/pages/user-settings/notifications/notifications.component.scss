@@ -27,7 +27,7 @@
 }
 
 .my-notifications {
-    @apply flex flex-col h-[30%] w-[85%] items-start justify-start py-5 border-b-2;
+    @apply flex flex-col h-[35%] w-[85%] items-start justify-start py-5;
 
     p:first-child{
         @apply text-base py-3;
