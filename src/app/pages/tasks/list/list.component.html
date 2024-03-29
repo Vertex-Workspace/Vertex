@@ -8,20 +8,10 @@
                 Nome
                 </h6>
             </label>
-        <ng-container *ngIf="project">
+        <ng-container>
                 <label 
-                    *ngFor="let col of project.properties"
-                    class="min-w-[300px]"
-                >              
-                <h6>
-                    {{col.name}}
-                </h6>
-            </label>
-        </ng-container>
-        <ng-container *ngIf="!project">
-                <label 
-                    *ngFor="let col of properties"
-                    class="min-w-[245px]"
+                    *ngFor="let col of project ? project.properties : properties"
+                    [style.min-width]="project ? '300px' : '245px'"
                 >              
                 <h6>
                     {{col.name}}
@@ -34,7 +24,17 @@
             cdkDropList 
             (cdkDropListDropped)="dropCard($event)"
         >
-            <ng-container *ngFor="let task of taskList">
+            <ng-container 
+                *ngFor="let task of (taskList 
+                    | namePipe : queryFilter 
+                    | statusPipe : filter : project === undefined 
+                    | statusBasicPipe : filter : project === undefined
+                    | datePipe : filter
+                    | simplePropertyPipe : simplePropertyFilter
+                    | nameSortPipe : orderParams
+                    | dateSortPipe : orderParams
+                    | statusSortPipe : orderParams)"
+                >
                 <div 
                     class="trow regular-text relative"
                     [cdkDragData]="task"

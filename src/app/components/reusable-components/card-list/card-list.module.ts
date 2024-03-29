@@ -5,6 +5,7 @@ import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CreateTeamProjectModule } from '../create-team-project/create-team-project.module';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
 
 @NgModule({
   declarations: [CardListComponent],
@@ -13,7 +14,8 @@ import { CreateTeamProjectModule } from '../create-team-project/create-team-proj
     CommonModule,
     ConfirmModalModule,
     FontAwesomeModule,
-    CreateTeamProjectModule
+    CreateTeamProjectModule,
+    PipesModule
   ]
 })
 

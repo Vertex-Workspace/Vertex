@@ -67,10 +67,10 @@ export class TaskComponent implements OnInit {
     private projectService: ProjectService,
     private alertService: AlertService,
     private taskHourService: taskHourService,
-    private reviewService : ReviewService,
     private teamService: TeamService,
     private userService: UserService,
     private route: ActivatedRoute,
+    private reviewService : ReviewService
     ) {}
 
   selectedComponent: string = 'attachments';
@@ -86,8 +86,6 @@ export class TaskComponent implements OnInit {
     
     this.taskService.getTaskInfo(this.task.id).subscribe(
       (task: any) => {
-        console.log(task);
-        
         this.taskInfoDTO = task;
       }
     );
@@ -99,8 +97,6 @@ export class TaskComponent implements OnInit {
       }
     }
     this.user = JSON.parse(localStorage.getItem('logged')!);
-    console.log(this.task.taskResponsables!);
-    
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
@@ -138,7 +134,7 @@ export class TaskComponent implements OnInit {
         }
       },
       (e: any) => {
-        console.log(e);
+        console.error(e);
       });
   }
 
@@ -216,7 +212,6 @@ export class TaskComponent implements OnInit {
         id: this.idResponsable
       }
     }
-    console.log(taskHour);
 
     this.id = setInterval(() => {
       this.seconds++;
@@ -232,11 +227,8 @@ export class TaskComponent implements OnInit {
     }, 1000);
 
     this.taskHourService.saveTaskHour(taskHour).subscribe(
-      (taskHour: taskHour) => {
-        console.log(taskHour, "START TIMER");
-      },
+      (taskHour: taskHour) => {},
       (error: any) => {
-        console.log(error);
         this.alertService.errorAlert(error.error)
       }
     );
@@ -257,11 +249,8 @@ export class TaskComponent implements OnInit {
     clearInterval(this.id);
 
     this.taskHourService.patchTaskHour(taskHour).subscribe(
-      (taskHour: taskHour) => {
-        console.log(taskHour, "STOP TIMER");
-      },
+      (taskHour: taskHour) => {},
       (error: any) => {
-        console.log(error);
         this.alertService.errorAlert(error.error)
       }
     );

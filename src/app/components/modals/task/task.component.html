@@ -17,7 +17,9 @@
                         (click)="updateTaskRevisable()"></p-checkbox>
                     <p class="regular-text self-start">Obrigar Revisão</p>
                 </div>
-                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
+                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">
+                    <i class="pi pi-plus rotate-45 text-2xl pt-2"></i>
+                </button>
             </div>
         </div>
         <div class="informations">

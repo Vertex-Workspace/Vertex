@@ -33,11 +33,11 @@ export class AttachmentItemComponent {
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
       'application/vnd.ms-excel': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
       'text/csv': 'https://cdn-icons-png.freepik.com/512/8242/8242984.png'
-      // Adicione mais tipos de arquivo conforme necessário
+      // adicionar
     };
     const iconSrc = fileTypeIcons[this.file.type];
     if (iconSrc) return iconSrc;
-    else return `data:image/jpg;base64, ${this.file.file}`;
+    return `data:image/jpg;base64, ${this.file.file}`;
   }
 
   setUrl(): void {
@@ -50,6 +50,8 @@ export class AttachmentItemComponent {
     const blob = new Blob([byteArray], { type: 'application/pdf' });
 
     this.url = window.URL.createObjectURL(blob);
+    console.log(this.url);
+    
   }
 
   getName(): string {

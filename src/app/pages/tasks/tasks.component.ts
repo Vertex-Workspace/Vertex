@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project, ProjectReview } from 'src/app/models/class/project';
@@ -13,10 +13,11 @@ import { TeamService } from 'src/app/services/team.service';
 import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/class/note';
 import { Observable } from 'rxjs';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { PropertyList } from 'src/app/models/class/property';
-import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
+import { Property, PropertyKind } from 'src/app/models/class/property';
 import { ReviewService } from 'src/app/services/review.service';
+import { PropertyList } from 'src/app/models/class/property';
+import { PipeParams } from 'src/app/models/interface/params';
+import { FilterParams } from 'src/app/models/interface/filter-params';
 
 @Component({
   selector: 'app-tasks',
@@ -44,6 +45,31 @@ export class TasksComponent implements OnInit {
   badgeNumber: string = '0';
   taskReview: boolean = false;
   logged !: User;
+
+  overlayVisible !: boolean;
+
+  orderParams !: PipeParams;
+  orderOptions : any = [
+    { name: 'Nome', values: [
+      { name: 'A-Z', type: 'name'  },
+      { name: 'Z-A', type: 'name' }
+    ]},
+    { name: 'Data', values: [
+      { name: 'Maior - Menor', type: 'date' },
+      { name: 'Menor - Maior', type: 'date' }
+    ] },
+    { name: 'Status', values: [
+    ] }
+  ];
+
+  selectedFilter !: any;
+  simplePropertyFilter : FilterParams = {
+    value: '',
+    propKind: '',
+    propId: 0
+  };
+  filterOptions: any[] = [];
+
   pageTitle: string = 'Espaço de Trabalho';
 
   constructor(
@@ -77,12 +103,12 @@ export class TasksComponent implements OnInit {
 
     //Observable que é aguardado para renderizar os componentes filhos
     this.renderProject = this.projectService.getOneById(id);
-
+    
     //Método que atribui o valor de project vindo do observable
-    this.renderProject.forEach((p: Project) => {
-      console.log(p);
-
+    this.renderProject.forEach((p: Project) => {      
       this.project = p;
+      this.setFilters(p);
+      this.setOrderOptions(p);
       this.pageTitle = this.project.name;
       const currentView = localStorage.getItem('mode-task-view');
       if (currentView) {
@@ -111,15 +137,91 @@ export class TasksComponent implements OnInit {
       })
 
     });
-    this.muralPageListener();
+    // this.muralPageListener();
 
   }
 
-  muralPageListener(): void {
-    if (this.clicked === 'Mural') this.isMuralPage = true;
-    else this.isMuralPage = false;
+  updateOrderType(e: PipeParams) {
+    if (e.type) {
+      this.orderParams.type = e.type;
+    }
+    
   }
 
+  setOrderOptions(p: Project): void {
+    p.properties[0].propertyLists
+      .forEach((pl) => {
+        this.orderOptions[2]
+          .values.push({ name: pl.value, type: 'status' })
+      })
+    
+  }
+
+  setFilters(p: Project): void {
+    p.properties.forEach((prop: Property, index: number) => {
+      this.filterOptions.push({
+        name: prop.name,
+        values: []
+      })
+
+      if (prop.kind === PropertyKind.STATUS 
+            || prop.kind === PropertyKind.LIST) {
+        
+        prop.propertyLists
+          .forEach((pl: PropertyList) => {
+            
+                this.filterOptions[index].values.push({
+                  name: pl.value,
+                  kind: pl.propertyListKind,
+                  index: p.properties.indexOf(prop),
+                  status: true,
+                })
+              });
+              
+      } else if (prop.kind === PropertyKind.DATE) {
+        
+        this.filterOptions[index]
+          .values.push({
+            name: "Hoje",
+            kind: prop.kind as string,
+            value: 'td'
+          },
+          {
+            name: "Próxima semana",
+            kind: prop.kind as string,
+            value: 'nw'
+          },
+          {
+            name: "Próximo mês",
+            kind: prop.kind as string,
+            value: 'nm'
+          })
+
+      } else {
+        this.filterOptions[index]
+          .values.push({
+            name: prop.kind as string,
+            kind: prop.kind as string,
+            propId: prop.id
+          })
+      }
+    })
+    
+  }
+
+  updateFilterParams(e: any, option: any): void {
+    this.simplePropertyFilter.propKind = option.kind;
+    this.simplePropertyFilter.propId = option.propId;
+    this.selectedFilter = '';
+  }
+
+  reset(e: any): void {
+    this.simplePropertyFilter = {
+      value: '',
+      propKind: '',
+      propId: 0
+    }
+  }
 
   menuItems = [
     { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
@@ -141,9 +243,16 @@ export class TasksComponent implements OnInit {
 
   toggleFilter(): void {
     this.filterOpen = !this.filterOpen;
+    this.selectedFilter = '';
+    this.simplePropertyFilter = {
+      propId: 0,
+      propKind: '',
+      value: ''
+    }
   }
 
   toggleOrder(): void {
+    this.orderParams = {name: '', type: ''};
     this.orderOpen = !this.orderOpen;
   }
 
@@ -174,7 +283,6 @@ export class TasksComponent implements OnInit {
 
     this.taskService.create(taskCreate).subscribe(
       (task) => {
-        this.project.tasks.push(task);
         this.changeModalTaskState(true, task);
       },
       (error) => {
@@ -242,7 +350,6 @@ export class TasksComponent implements OnInit {
   getProject(): Project {
     return this.project;
   }
-
 
   //MODAL REVIEW TASK
   toggleReview(): void {
