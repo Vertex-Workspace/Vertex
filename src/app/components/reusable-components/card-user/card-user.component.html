@@ -5,9 +5,9 @@
             <div>
                 <fa-icon style="font-size: 2.5rem" [icon]="faCircleUser" class="icon"></fa-icon>
             </div>
-            <div>
+            <div class="emailUser">
                 <p>{{user.firstName}}</p>
-                <p>{{user.email}}</p>
+                <p >{{user.email}}</p>
                 <!-- <fa-icon [icon]="faUserMinus"></fa-icon> -->
             </div>
             <div [ngClass]="isTeamCreator ? 'icons-div' : 'more-infos-div'">

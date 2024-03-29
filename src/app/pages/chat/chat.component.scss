@@ -264,10 +264,10 @@ main {
 }
 
 #input-message{
-    @apply w-[90%] h-[100%] rounded-sm;
+    @apply w-[90%] h-[100%] rounded-sm text-lg;
     background-color: $card;
     border: 1px solid $emphasis;
-    
+    color: $text;
 }
 
 .high-input-div {

@@ -17,7 +17,9 @@ form {
     @apply flex flex-col w-full h-[80%] justify-start items-start;
 
     input {
-        @apply flex h-24 rounded-md pl-4 w-full;
+        @apply flex h-20 rounded-md pl-4 w-full;
+        background-color: $card;
+        color: $text;
     }
 
     p {
@@ -64,10 +66,10 @@ p {
 
 .confirm {
     background-color: $primaryColor;
-    color: $secondColor
+    color: $text;
 }
 
 .cancel {
     background-color: $error;
-    color: $secondColor
+    color: $text
 }

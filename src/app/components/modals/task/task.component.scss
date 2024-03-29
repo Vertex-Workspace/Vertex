@@ -28,7 +28,8 @@
 .base {
     @apply w-full flex flex-col p-5 rounded-md ;
     -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-	        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    background-color: $card;
 }
 
 .div-timer-closeModal{

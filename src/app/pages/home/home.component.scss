@@ -127,6 +127,7 @@ section{
 
     select {
         @apply w-[170px] h-[35px] text-center outline-none;
+        background-color: $card;
     }
 
 }

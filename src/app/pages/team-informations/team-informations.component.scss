@@ -143,6 +143,12 @@ section {
 .search {
     @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
     rounded shadow-md border-none;
+    background-color: $card;
+}
+
+.searchInput{
+    background-color: $card;
+    color: $text;
 }
 
 .card-user-grid{

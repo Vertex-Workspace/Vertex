@@ -8,6 +8,10 @@ section{
     @apply grid w-[90%] h-full grid-cols-2 gap-20;
 }
 
+.text{
+    color: $text;
+}
+
 //TEAMS
 .nav-tasks-teams{
     border-color: $primaryColor;
@@ -48,7 +52,6 @@ section{
 
     .filter-items {
         @apply flex gap-2;
-
         button {
             border: none;
             &:hover {
@@ -80,6 +83,7 @@ section{
         @apply w-96 h-[56px] flex items-center justify-between p-3
         rounded shadow-md border-none;
         background-color: $card;
+        color: $text;
 
         .inputSearch{
             @apply w-[88%] h-full outline-none flex items-center pl-2;
@@ -129,6 +133,8 @@ section{
 
     select {
         @apply w-[170px] h-[35px] text-center outline-none;
+        background-color: $card;
+        color: $text;
     }
 
 }

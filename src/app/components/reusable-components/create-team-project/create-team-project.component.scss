@@ -16,13 +16,14 @@ form{
 
 .input-name{
     @apply flex flex-col w-full h-[50%] justify-start items-start;
-
+    color: $text;
     p{
         @apply pt-6 pb-6;
         font-size: $mediumText
     }
     input{
         @apply flex h-52 rounded-md pl-4 w-96;
+        background-color: $card;
     }
 }
 
@@ -130,4 +131,6 @@ app-modal-warn{
 
 textarea{
     outline: none;
+    background-color: $card;
+    color: $text;
 }
