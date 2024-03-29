@@ -34,7 +34,7 @@ export class Group {
         this.label = group.name;
         this.children = group.users
         this.selected = group.selected
-        this.size = group.users.length
+        this.size = group.size
     }
 
 }

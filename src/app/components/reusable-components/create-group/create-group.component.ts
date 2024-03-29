@@ -99,36 +99,9 @@ export class CreateGroupComponent implements OnInit {
     this.closeScreen();
   }
 
-  // addParticipants(): void {
-  //   this.selectMoreUsers = !this.selectMoreUsers
-  // }
-
-  pushParticipants(user: User): void {
-    this.users.push(user)
-    console.log(user);
-
+  pushParticipants(user: any): void {
+    this.users.push(user.itemValue);
   }
-
-  onSubmit2(group: Group): void {
-    console.log("entrei");
-    this.groupService.getGroupById(group.id).subscribe((group: Group) => {
-      this.group = group;
-    });
-    group.users = this.users;
-
-    // this.groupService
-    //   .addParticipants(group)
-    //   .subscribe((group: Group) => {
-    //     //calls addPartcipants to back to normal state of card
-    //     // this.addParticipants();
-    //     this.alertService.successAlert("adicionado")
-    //   },
-    //     e => {
-    //       this.alertService.errorAlert("erro")
-    //     });
-    //     this.closeGroup()
-  }
-
 
   @Output()
   emitterNoUsers = new EventEmitter();

@@ -5,7 +5,7 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { Project } from 'src/app/models/class/project';
-import { Property, PropertyKind, PropertyList } from 'src/app/models/class/property';
+import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { TaskService } from 'src/app/services/task.service';
 import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from 'src/app/models/class/value';
 import { AlertService } from 'src/app/services/alert.service';
@@ -88,6 +88,11 @@ export class KanbanComponent {
 
       //If the value of status task is different of the previous value, then, the request is sent
       if (propertyList.id != previousPropertyList.id) {
+        if(propertyList.propertyListKind === PropertyListKind.DONE){
+          this.taskService.setTaskDependencyNull(task.id, task).subscribe((task: Task)=> {
+            task = task;
+          })
+        }
         //Object to change the value of the status task
         const valueUpdate: ValueUpdate = {
           id: task.id,

@@ -103,7 +103,9 @@ export class PropertiesComponent {
     return "";
   }
 
-  updateResponsible(user: any, event: any): void {
+  updateResponsible(event: any, user: any): void {
+    console.log('entrei');
+    
     console.log(user);
     const taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,

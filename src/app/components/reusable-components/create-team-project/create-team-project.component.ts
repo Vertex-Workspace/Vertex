@@ -78,6 +78,7 @@ export class CreateTeamProjectComponent implements OnInit {
   selectedUsers: TreeNode[] = [];
 
   ngOnInit(): void {
+    
     this.projectExists()
 
     this.userService.getUsersByTeam(this.project.idTeam).subscribe((users: User[]) => {

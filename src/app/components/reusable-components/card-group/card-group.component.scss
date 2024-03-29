@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .main-div {
-    @apply w-full bg-white h-[40%] shadow-lg;
+    @apply w-full bg-white h-[150px] shadow-lg;
 }
 
 .user-card {
@@ -24,7 +24,7 @@
 
 .members{
     font-size: $smallText;
-    @apply flex justify-end w-[92%]
+    @apply flex justify-end w-[92%] pb-10
 }
 
 

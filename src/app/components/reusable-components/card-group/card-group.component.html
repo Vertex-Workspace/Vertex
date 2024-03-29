@@ -1,6 +1,10 @@
 <div class="main-div">
     <div class="h-[40%] w-[90%] flex justify-between pt-3">
-        <p class="pl-5 title">{{group.name}}</p>
+        <div class="flex">
+            <input class="pl-5 title" type="text" value="{{group.name}}"
+                [ngClass]="input ? 'bg-[#D9D9D9] rounded-2xl' : ''" (click)="editGroupName()">
+            <i class="pi pi-check icon" *ngIf="input" (click)="edit(group)"></i>
+        </div>
         <fa-icon [icon]="faTrashCan" class="icon" (click)="openModalDelete(group)"></fa-icon>
     </div>
     <div class="h-[48%] flex items-start pl-5">

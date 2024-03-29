@@ -59,6 +59,7 @@ export class TasksComponent implements OnInit {
   ) {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     this.projectId = id
+    this.logged = userService.getLogged()
   }
 
   teamId?: number

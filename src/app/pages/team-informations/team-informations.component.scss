@@ -177,7 +177,8 @@ section {
 }
 
 .grid-group{
-    @apply grid grid-cols-2 gap-4 w-[85%] h-[42%] overflow-auto;
+    @apply grid grid-cols-2 gap-4 w-[85%] h-[42%];
+    overflow-y: scroll
 }
 
 .div-description-top-right{

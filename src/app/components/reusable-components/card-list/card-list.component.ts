@@ -87,7 +87,8 @@ export class CardListComponent implements OnInit {
   }
 
   close() {
-    this.delete = !this.delete
+    this.openModal = !this.openModal;
+    this.project = null!
   }
 
 
@@ -137,13 +138,13 @@ export class CardListComponent implements OnInit {
   project !: Project
 
   openInformations(project: Project) {
-    this.openModal = !this.openModal;
     this.projectService.getOneById(project.id).subscribe((project: Project) => {
-      this.project = project
+      this.project = project   
     })
     this.teamService.getOneById(this.project.idTeam).subscribe((team: Team) => {
       this.team = team;
     })
+    this.openModal = !this.openModal;
   }
 
   click() {

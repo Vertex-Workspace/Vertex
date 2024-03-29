@@ -171,12 +171,26 @@ export class CardGroupComponent {
   addOrDelete(event: any, group: Group) {
     for (const userGroup of this.selectedUsers) {
         this.groupService.deleteUserFromGroup(event.itemValue, this.team.id, group.id).subscribe((group: Group) => {
+          this.alertService.successAlert(event.itemValue.firstName + " removido")
           this.deleted = true
         })
     }
     if(!this.deleted){
       this.groupService.addParticipants(group, event.itemValue.id).subscribe((group: Group) => {
+        this.alertService.successAlert(event.itemValue.firstName + "adicionado")
       })
     }
+  }
+
+  input: boolean = false
+  editGroupName(){
+    this.input = !this.input
+  }
+
+  edit(group: Group){
+    this.groupService.edit(group).subscribe((group: Group) => {
+      group = group
+    })
+    this.input = !this.input
   }
 }
