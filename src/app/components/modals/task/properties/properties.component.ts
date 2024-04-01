@@ -15,6 +15,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
+import { LogComponent } from '../log/log.component';
 
 @Component({
   selector: 'app-properties',
@@ -103,25 +104,25 @@ export class PropertiesComponent {
     return "";
   }
 
-  updateResponsible(event: any, user: any): void {
-    console.log('entrei');
-    
-    console.log(user);
+  isGroup: boolean = false
+  updateResponsible(event: any, node: any): void {
+    if(node instanceof Group){
+      this.isGroup = true
+    }
+    if(node instanceof User){
+      this.isGroup = false
+    }
+
     const taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,
       teamId: this.project.idTeam,
-      user: user,
-      group: user
-    }
+      user: this.isGroup ? null : node,
+      group: this.isGroup ? node : null
+    };
     this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
       this.alertService.successAlert("editado")
-    })
-
-  }
-
-  clickNode(node: any) {
-    console.log(node);
-  }
+    });
+}
 
   setTaskDependencies(task: any) {
     console.log(task.value);

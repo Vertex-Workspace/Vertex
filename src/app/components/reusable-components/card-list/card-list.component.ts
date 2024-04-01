@@ -138,11 +138,12 @@ export class CardListComponent implements OnInit {
   project !: Project
 
   openInformations(project: Project) {
-    this.projectService.getOneById(project.id).subscribe((project: Project) => {
-      this.project = project   
-    })
+    this.project = project;
     this.teamService.getOneById(this.project.idTeam).subscribe((team: Team) => {
       this.team = team;
+      this.projectService.getOneById(project.id).subscribe((project: Project) => {
+        this.project = project
+      })
     })
     this.openModal = !this.openModal;
   }

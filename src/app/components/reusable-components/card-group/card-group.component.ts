@@ -10,6 +10,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
+import { LogarithmicScale } from 'chart.js';
 
 @Component({
   selector: 'app-card-group',
@@ -183,13 +184,15 @@ export class CardGroupComponent {
   }
 
   input: boolean = false
+  nameEdit !: string
   editGroupName(){
     this.input = !this.input
   }
 
-  edit(group: Group){
-    this.groupService.edit(group).subscribe((group: Group) => {
-      group = group
+  edit(group: Group){  
+    this.groupService.edit(group, this.team.id).subscribe((group1: Group) => {
+      group.name = group1.name
+      this.alertService.successAlert('Nome do grupo editado') 
     })
     this.input = !this.input
   }
