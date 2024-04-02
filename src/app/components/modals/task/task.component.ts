@@ -73,7 +73,7 @@ export class TaskComponent implements OnInit {
     private reviewService : ReviewService
     ) {}
 
-  selectedComponent: string = 'attachments';
+  selectedComponent: string = 'log';
 
   waitRequest: boolean = false;
   soloResponsable: boolean = false;

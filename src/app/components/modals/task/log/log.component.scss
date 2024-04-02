@@ -1,21 +1,31 @@
-.base {
-    @apply w-full h-full flex justify-center ml-2;
-}
+@import '../../../../../variables';
 
-li {
-    @apply flex gap-2 flex-col;
-    p {
-        @apply text-zinc-700 flex items-center;
+section {
+    @apply w-full h-[90%] flex flex-col gap-1;
+
+    .container {
+        @apply flex flex-col h-full w-full gap-6 overflow-y-auto overflow-x-hidden p-2;
+
+        div {
+            @apply w-full flex gap-4 items-center;
+
+            label {
+                @apply w-auto flex items-center h-[50px] gap-4;
+
+                p {
+                    @apply text-sm;
+                }
+
+                i {
+                    font-size: 1.1rem;
+                }
+            }
+
+            .date {
+                font-size: 0.8rem;
+                color: #6f6f6f;
+            }
+        }
     }
-    div:first-child {
-        @apply flex items-center gap-2;
-    }
-}
-
-ul {
-    @apply w-[65%] h-[100%] flex flex-col gap-8 items-start overflow-auto ml-10;
-}
-
-.date {
-    @apply text-sm;
+    
 }
