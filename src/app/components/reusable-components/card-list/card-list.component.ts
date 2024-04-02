@@ -22,9 +22,7 @@ export class CardListComponent implements OnInit {
     private userService: UserService,
     private projectService: ProjectService,
     private route: ActivatedRoute
-  ) { 
-    console.log(this.projects);
-    
+  ) {   
   }
 
   faTrashCan = faTrashCan;
@@ -149,12 +147,16 @@ export class CardListComponent implements OnInit {
   }
 
   click() {
-      this.projectService.getImage(1).subscribe((string1: string) => {  
-      },
-        (error: any) => {
-          this.project.image = error.error.text
-        }
-      )
+   for(const project of this.projects){
+   this.projectService.getFileId(project.id).subscribe((string1: number) => {
+      this.projectService.getImage(string1).subscribe((string2: string) => {  
+     },
+       (error: any) => {
+         project.image = error.error.text
+       }
+     )
+   })  
+ }    
   }
 
   deleteProject(projectId: Project): void {

@@ -101,4 +101,8 @@ export class ProjectService {
     return this.http.get<string>(`${URL}project/image/aws/${fileId}`)
   }
 
+  public getFileId(fileId: number){
+    return this.http.get<number>(`${URL}project/image/${fileId}`)
+  }
+
 }

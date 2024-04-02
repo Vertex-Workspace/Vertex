@@ -34,10 +34,10 @@
         [(ngModel)]="description"></textarea>
     </div>
 
-    <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] md:w-20rem pt-4" containerStyleClass="w-full"
-    display="chip" [options]="listOfResponsibles" [metaKeySelection]="true" selectionMode="checkbox"
-    [placeholder]=getPlaceholderText() *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-    [(ngModel)]=selectedUsers >
+    <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] pt-4" containerStyleClass="w-full"
+    display="chip" [options]="listOfResponsibles" selectionMode="checkbox"
+    [placeholder]="getPlaceholderText()" *ngIf="typeString === 'projectInfo' || typeString === 'project'"
+    [(ngModel)]="clicked ? selectedUsers : selectedUsers2" (click)="seeCollaborators()">
     <ng-template let-node pTemplate="default">
       <span>{{node.label}}</span>
     </ng-template>

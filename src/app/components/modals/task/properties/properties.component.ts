@@ -138,9 +138,9 @@ export class PropertiesComponent {
 
   getUsers() {
     this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
-      this.taskResponsables = users
 
       for (const user of users) {
+        this.taskResponsables.push(user)
         this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
           for (const user1 of users1) {
             if (user.id === user1.id) {
@@ -167,6 +167,9 @@ export class PropertiesComponent {
           for (const group of groups) {
             if (group.id == group1.id) {
               this.selectedUsers.push(group1)
+              for(const user of group1.children){
+                this.selectedUsers.push(user)
+              }
             }
           }
         })

@@ -66,55 +66,22 @@ export class CreateTeamProjectComponent implements OnInit {
     this.logged = this.userService.getLogged();
 
     // this.nodeService.getFiles().then((files) => (this.nodes = files));
-      this.form = this.formBuilder.group({
-        name: [null, [Validators.required]],
-        description: [null],
-        listOfResponsibles: [null],
-        groups: [null]
-      });
+    this.form = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      description: [null],
+      listOfResponsibles: [null],
+      groups: [null]
+    });
   }
 
   listOfResponsibles: TreeNode[] = []
   selectedUsers: TreeNode[] = [];
+  selectedUsers2: TreeNode[] = [];
+  selectedUsers3: TreeNode[] = [];
+  clicked: boolean = false
 
   ngOnInit(): void {
-    
     this.projectExists()
-
-    this.userService.getUsersByTeam(this.project.idTeam).subscribe((users: User[]) => {
-      this.listOfResponsibles = users
-
-      for (const user of users) {
-        this.projectService.getProjectCollaborators(this.project.id).subscribe((users1: User[]) => {
-          for (const user1 of users1) {
-            if (user.id === user1.id) {
-              this.selectedUsers.push(user)
-            }
-          }
-        })
-        user.icon = 'pi pi-user'
-      }
-    })
-
-    this.groupService.getGroupsByTeam(this.project.idTeam).subscribe((groups: Group[]) => {
-      for (const group of groups) {
-        this.listOfResponsibles.push(group)
-        this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group[]) => {
-          for (const group1 of groups1) {
-            if (group.id === group1.id) {
-              this.selectedUsers.push(group)
-            }
-          }
-        })
-        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-          group.children = users
-          group.icon = 'pi pi-users'
-        });
-      }
-    })
-
-    console.log(this.listOfResponsibles);
-    
   }
 
   projectNull: boolean = true;
@@ -126,6 +93,43 @@ export class CreateTeamProjectComponent implements OnInit {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
+
+      this.userService.getUsersByTeam(this.project.idTeam).subscribe((users: User[]) => {
+        this.listOfResponsibles = users
+  
+        for (const user of users) {
+          this.projectService.getProjectCollaborators(this.project.id).subscribe((users1: User[]) => {
+            this.selectedUsers2 = users1
+            for (const user1 of users1) {
+              if (user.id === user1.id) {
+                this.selectedUsers.push(user)
+              }
+            }
+          })
+          user.icon = 'pi pi-user'
+        }
+      })
+  
+       this.groupService.getGroupsByTeam(this.project.idTeam).subscribe((groups: Group[]) => {
+         for (const group of groups) {
+           this.listOfResponsibles.push(group)
+           this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group[]) => {
+             for (const group1 of groups1) {
+              this.selectedUsers2.push(group)
+               if (group.id === group1.id) {
+                 this.selectedUsers.push(group)
+                 for(const children of group.children){
+                  this.selectedUsers.push(children)
+                 }
+               }
+             }
+           })
+           this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+             group.children = users
+             group.icon = 'pi pi-users'
+           });
+         }
+       })
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       this.getGroups(teamId);
@@ -175,51 +179,56 @@ export class CreateTeamProjectComponent implements OnInit {
 
 
   createProject(): void {
-    if(!this.closeModal){
-    let project = this.form.getRawValue() as Project;
-
-    let users: User[] = [];
-    let groups: Group[] = []
-
-    project.listOfResponsibles?.forEach((type => {
-      if (type instanceof Group) {
-        let group: Group = type as Group;
-        group.selected = true;
-        groups.push(group)
-      } else
-        if (type instanceof User) {
-          let user: User = type as User;
-          user.selectedProject = true;
-          users.push(user);
-        }
-
-      project.users = users;
-      project.groups = groups
-    }));
-
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    project.creator = {
-      user: {
-        id: this.logged.id!
-      },
-      team: {
-        id: teamId
-      }
-    };
+    if (!this.closeModal) {
+      let project = this.form.getRawValue() as Project;
 
-    this.projectService
-      .create(project, teamId)
-      .subscribe((projectResponse: Project) => {
-        console.log(project);
+      let users: User[] = [];
+      let groups: Group[] = []
 
-        this.alert.successAlert(`Projeto criado com sucesso!`);
-        if (this.fd) {
-          this.projectService
-            .updateImage(projectResponse.id, this.fd)
-            .subscribe();
+      project.listOfResponsibles?.forEach((type => {
+        if (type instanceof Group) {
+          let group: Group = type as Group;
+          for(const user of group.children){
+            users.push(user)
+          }
+          group.selected = true;
+          groups.push(group)
+        } else
+          if (type instanceof User) {
+            let user: User = type as User;
+            user.selectedProject = true;
+            if (!users.some(existingUser => existingUser.id === user.id)) {
+              users.push(user);
+            }
+          }
+
+        project.users = users;
+        project.groups = groups
+      }));
+
+      project.creator = {
+        user: {
+          id: this.logged.id!
+        },
+        team: {
+          id: teamId
         }
-        this.emitCreation(projectResponse)
-      });
+      };
+
+      this.projectService
+        .create(project, teamId)
+        .subscribe((projectResponse: Project) => {
+          console.log(project);
+
+          this.alert.successAlert(`Projeto criado com sucesso!`);
+          if (this.fd) {
+            this.projectService
+              .updateImage(projectResponse.id, this.fd)
+              .subscribe();
+          }
+          this.emitCreation(projectResponse)
+        });
     }
   }
 
@@ -245,7 +254,7 @@ export class CreateTeamProjectComponent implements OnInit {
     }
   }
 
-  closeModal ?: boolean
+  closeModal?: boolean
   closeScreen(): void {
     this.closeModal = true
     this.close.emit();
@@ -263,12 +272,11 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   private getUsers(teamId: number): void {
-
     this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
       this.users = users
       for (const user of users) {
         user.icon = 'pi pi-user'
-        if(this.logged.id != user.id){
+        if (this.logged.id != user.id) {
           this.listOfResponsibles.push(user);
         }
       }
@@ -300,39 +308,40 @@ export class CreateTeamProjectComponent implements OnInit {
     let users: User[] = [];
     let groups: Group[] = [];
 
+
     project.listOfResponsibles.forEach(type => {
-        if (type instanceof Group) {
-            let group: Group = type as Group;
-            group.selected = true;
-            groups.push(group);
-        } else if (type instanceof User) {
-            let user: User = type as User;
-            user.selected = true;
-            if (!users.some(existingUser => existingUser.id === user.id)) {
-                users.push(user);
-            }
+      if (type instanceof Group) {
+        let group: Group = type as Group;
+        group.selected = true;
+        groups.push(group);
+      } else if (type instanceof User) {
+        let user: User = type as User;
+        user.selected = true;
+        if (!users.some(existingUser => existingUser.id === user.id)) {
+          users.push(user);
         }
+      }
     });
 
     const projectEdit: ProjectEdit = {
-        id: this.project?.id,
-        name: project.name,
-        description: project.description,
-        users: users, 
-        groups: groups 
+      id: this.project?.id,
+      name: project.name,
+      description: project.description,
+      users: users,
+      groups: groups
     };
 
     if (!projectEdit.name) {
-        projectEdit.name = this.project?.name;
+      projectEdit.name = this.project?.name;
     }
     if (!projectEdit.description) {
-        projectEdit.description = this.project?.description;
+      projectEdit.description = this.project?.description;
     }
 
     this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
-        this.alert.successAlert("Projeto modificado com sucesso");
+      this.alert.successAlert("Projeto modificado com sucesso");
     });
-}
+  }
 
   @Output()
   senderEmitter = new EventEmitter<Project>();
@@ -341,11 +350,15 @@ export class CreateTeamProjectComponent implements OnInit {
     this.senderEmitter.emit(project);
   }
 
-  getPlaceholderText(): string {
+  getPlaceholderText(): any {
     if (this.typeString === 'projectInfo') {
-      return 'Responsáveis do Projeto';
+      return ;
     } else {
       return 'Atribua responsáveis ao projeto';
     }
+  }
+
+  seeCollaborators(): void {
+    this.clicked = true
   }
 }
