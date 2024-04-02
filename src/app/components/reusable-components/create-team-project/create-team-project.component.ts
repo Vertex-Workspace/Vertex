@@ -87,6 +87,7 @@ export class CreateTeamProjectComponent implements OnInit {
   projectNull: boolean = true;
   name !: string
   description?: string
+  usersGroup !: User[];
 
   projectExists() {
     if (this.project != null) {
@@ -96,7 +97,7 @@ export class CreateTeamProjectComponent implements OnInit {
 
       this.userService.getUsersByTeam(this.project.idTeam).subscribe((users: User[]) => {
         this.listOfResponsibles = users
-  
+
         for (const user of users) {
           this.projectService.getProjectCollaborators(this.project.id).subscribe((users1: User[]) => {
             this.selectedUsers2 = users1
@@ -109,27 +110,39 @@ export class CreateTeamProjectComponent implements OnInit {
           user.icon = 'pi pi-user'
         }
       })
-  
-       this.groupService.getGroupsByTeam(this.project.idTeam).subscribe((groups: Group[]) => {
-         for (const group of groups) {
-           this.listOfResponsibles.push(group)
-           this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group[]) => {
-             for (const group1 of groups1) {
-              this.selectedUsers2.push(group)
-               if (group.id === group1.id) {
-                 this.selectedUsers.push(group)
-                 for(const children of group.children){
+
+      this.projectService.getUsersOfGroupsFromProject(this.project.id).subscribe((users: User[]) => {
+        for (const user of users) {
+          this.selectedUsers2.push(user)
+          this.usersGroup = users
+        }
+      })
+
+      this.groupService.getGroupsByTeam(this.project.idTeam).subscribe((groups: Group[]) => {
+        for (const group of groups) {
+          this.listOfResponsibles.push(group)
+          this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
+            group.children = users
+            group.icon = 'pi pi-users'
+
+            for (const children of users) {
+              for (const c2 of this.usersGroup)
+                if (children.id === c2.id) {
                   this.selectedUsers.push(children)
-                 }
-               }
-             }
-           })
-           this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-             group.children = users
-             group.icon = 'pi pi-users'
-           });
-         }
-       })
+                }
+            }
+          });
+
+          this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group[]) => {
+            for (const group1 of groups1) {
+              this.selectedUsers2.push(group)
+              if (group.id === group1.id) {
+                this.selectedUsers.push(group1)
+              }
+            }
+          })
+        }
+      })
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       this.getGroups(teamId);
@@ -184,28 +197,27 @@ export class CreateTeamProjectComponent implements OnInit {
       let project = this.form.getRawValue() as Project;
 
       let users: User[] = [];
-      let groups: Group[] = []
+      let groups: Group[] = [];
 
       project.listOfResponsibles?.forEach((type => {
         if (type instanceof Group) {
           let group: Group = type as Group;
-          for(const user of group.children){
+          for (const user of group.children) {
             users.push(user)
           }
           group.selected = true;
+          group.children = []
           groups.push(group)
-        } else
-          if (type instanceof User) {
-            let user: User = type as User;
-            user.selectedProject = true;
-            if (!users.some(existingUser => existingUser.id === user.id)) {
-              users.push(user);
-            }
+        } else if (type instanceof User) {
+          let user: User = type as User;
+          user.selectedProject = true;
+          if (!users.some(existingUser => existingUser.id === user.id)) {
+            users.push(user);
           }
-
-        project.users = users;
-        project.groups = groups
+        }
       }));
+
+      project = this.removeCircularReferences(project);
 
       project.creator = {
         user: {
@@ -230,6 +242,20 @@ export class CreateTeamProjectComponent implements OnInit {
           this.emitCreation(projectResponse)
         });
     }
+  }
+
+  removeCircularReferences(obj: any): any {
+    const seen = new WeakSet();
+    const replacer = (key: string, value: any) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+    return JSON.parse(JSON.stringify(obj, replacer));
   }
 
   @Output()
@@ -308,11 +334,11 @@ export class CreateTeamProjectComponent implements OnInit {
     let users: User[] = [];
     let groups: Group[] = [];
 
-
     project.listOfResponsibles.forEach(type => {
       if (type instanceof Group) {
         let group: Group = type as Group;
         group.selected = true;
+        group.children = []
         groups.push(group);
       } else if (type instanceof User) {
         let user: User = type as User;
@@ -322,6 +348,8 @@ export class CreateTeamProjectComponent implements OnInit {
         }
       }
     });
+
+    project = this.removeCircularReferences(project);
 
     const projectEdit: ProjectEdit = {
       id: this.project?.id,
@@ -343,6 +371,7 @@ export class CreateTeamProjectComponent implements OnInit {
     });
   }
 
+
   @Output()
   senderEmitter = new EventEmitter<Project>();
 
@@ -352,7 +381,7 @@ export class CreateTeamProjectComponent implements OnInit {
 
   getPlaceholderText(): any {
     if (this.typeString === 'projectInfo') {
-      return ;
+      return;
     } else {
       return 'Atribua responsáveis ao projeto';
     }
