@@ -29,11 +29,7 @@ export class MuralComponent implements OnInit {
     private noteService: NoteService,
     private projectService: ProjectService,
     private route: ActivatedRoute
-  ){}
-
-  teste(e: any): void {
-    
-  }
+  ){ }
 
   getNotes(): void {
     console.log(this.project);
@@ -41,11 +37,8 @@ export class MuralComponent implements OnInit {
     this.notes = this.project.notes;    
   }
 
-  //DONT FORGET TO IMPLEMENT THE PERMISSIONS AT MURAL
-  //WHEN MIGUEL FINISHES THE MURAL
   ngOnInit(): void {  
     this.getNotes();   
-    console.log(this.project)
   }
 
   deleteNote(note: Note) {    
