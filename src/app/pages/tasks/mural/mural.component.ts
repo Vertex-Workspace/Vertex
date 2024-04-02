@@ -23,6 +23,9 @@ export class MuralComponent implements OnInit {
   @Input()
   project!: Project;
 
+  @Input()
+  nameFilter !: string;
+
   notes !: Note[];
 
   constructor(
@@ -32,8 +35,6 @@ export class MuralComponent implements OnInit {
   ){ }
 
   getNotes(): void {
-    console.log(this.project);
-    
     this.notes = this.project.notes;    
   }
 
