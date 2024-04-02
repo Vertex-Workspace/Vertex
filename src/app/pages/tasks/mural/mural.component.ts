@@ -29,15 +29,7 @@ export class MuralComponent implements OnInit {
     private noteService: NoteService,
     private projectService: ProjectService,
     private route: ActivatedRoute
-  ){
-    // route.params.subscribe(params => {
-    //   if (params) {
-    //     this.projectService.getOneById(params['id'])
-    //       .subscribe(p => console.log(p))
-                
-    //   }
-    // });
-  }
+  ){}
 
   teste(e: any): void {
     
