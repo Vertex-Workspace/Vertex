@@ -44,6 +44,8 @@ export class MuralComponent implements OnInit {
   }
 
   getNotes(): void {
+    console.log(this.project);
+    
     this.notes = this.project.notes;    
   }
 

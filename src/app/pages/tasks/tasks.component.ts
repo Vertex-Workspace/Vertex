@@ -298,6 +298,7 @@ export class TasksComponent implements OnInit {
   }
 
   createNote(): void {
+    
     const note: Note = {
       title: 'Nova nota',
       description: '',
@@ -313,6 +314,8 @@ export class TasksComponent implements OnInit {
       .create(note, this.logged.id!, this.project.id!)
       .subscribe((note: Note) => {
         this.project.notes.push(note);
+        console.log(note);
+        
       });
   }
 

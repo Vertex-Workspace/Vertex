@@ -21,4 +21,5 @@ export class LogComponent {
     const date = new Date(item.date);
     return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
   }
+  
 }
