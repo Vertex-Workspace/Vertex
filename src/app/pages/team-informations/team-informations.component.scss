@@ -110,7 +110,16 @@ section {
 }
 
 .divProjectDashboardsBar {
-    @apply flex w-[40%] h-[93%] rounded-sm;
+    @apply flex w-full h-full rounded-sm flex-col justify-between items-center;
+    border-top:8px solid $primaryColor; 
+    background-color: $card;
+
+    .dashboard-bar{
+        @apply h-60 w-60 flex flex-col justify-center items-center;
+    }
+}
+.card-reviews{
+    @apply flex w-full rounded-sm flex-col justify-between pl-3;
     border-top:8px solid $primaryColor; 
     background-color: $card;
 }
@@ -193,12 +202,10 @@ section {
 }
 
 .divOf-project-dashboards-bar{
-    @apply flex justify-center gap-4 w-full h-full;
+    @apply flex gap-4 w-full h-full;
 }
 
-.dashboard-bar{
-    @apply w-full h-full flex flex-col justify-center items-center;
-}
+
 
 .high-div-dashboards-pie{
     @apply flex flex-col items-center w-full h-[40%];
@@ -215,4 +222,13 @@ section {
 button{
     @apply w-[150px] h-[50px] flex gap-2 p-4 px-4 transition-colors
     items-center justify-center rounded cursor-pointer;
+}
+table, th, td {
+    border:1px solid black;
+}
+table > tr {
+    height: 40px ;
+}
+td {
+    @apply text-center;
 }

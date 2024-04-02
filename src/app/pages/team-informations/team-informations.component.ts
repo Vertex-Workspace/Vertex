@@ -31,6 +31,8 @@ export class TeamInformationsComponent implements OnInit {
 
     groups !: Group[]
 
+    teamName !: string;
+
     invitationCode!: {
         code: string;
     };
@@ -44,10 +46,10 @@ export class TeamInformationsComponent implements OnInit {
         private groupService: GroupService,
         private userService: UserService
     ) {
-        this.team = this.getTeam();
     }
-
+    
     ngOnInit() {
+        this.team = this.getTeam();
         this.start();
     }
 
@@ -56,8 +58,23 @@ export class TeamInformationsComponent implements OnInit {
         this.teamService.getOneById(id).subscribe(
             (team: Team) => {
                 this.team = team;
-                console.log(this.team);
 
+                console.log(this.team);
+                this.teamName = team.name;
+                const documentStyle = getComputedStyle(document.documentElement);
+                const textColor = documentStyle.getPropertyValue('--text-color');
+                const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+                const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+                this.data = {
+                    labels: ['Não Iniciadas', 'Em Andamento', 'Concluídas'],
+                    datasets: [
+                        {
+                            data: this.team.tasksPerformances,
+                            backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+                            hoverBackgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"]
+                        }
+                    ]
+                };
                 return team;
             },
             (error) => {
@@ -143,16 +160,8 @@ export class TeamInformationsComponent implements OnInit {
             }
         };
 
-        this.data = {
-            labels: ['A', 'B', 'C'],
-            datasets: [
-                {
-                    data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
-                }
-            ]
-        };
+        console.log(this.team.tasksPerformances);
+    
 
         this.options = {
             plugins: {

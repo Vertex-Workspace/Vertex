@@ -7,6 +7,7 @@ import { CardGroupModule } from 'src/app/components/reusable-components/card-gro
 import { CreateGroupModule } from 'src/app/components/reusable-components/create-group/create-group.module';
 import { CardUserModule } from 'src/app/components/reusable-components/card-user/card-user.module';
 import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 
 @NgModule({
@@ -19,8 +20,8 @@ import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/conf
     CardGroupModule,
     CreateGroupModule,
     CardUserModule,
-    ConfirmModalModule
-
+    ConfirmModalModule,
+    ProgressBarModule
   ]
 })
 export class TeamInformationsModule { 

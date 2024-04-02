@@ -19,8 +19,7 @@ export class TeamService {
 
   public getOneById(id: number): Observable<Team> {
     return this.http
-      .get<Team>(`${URL}team/${id}`)
-      .pipe(map((team: Team) => new Team(team)));
+      .get<Team>(`${URL}team/${id}`);
   }
 
   public addUserOnTeam(userId: number, teamId: number): Observable<any> {

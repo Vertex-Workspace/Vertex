@@ -55,10 +55,6 @@ export class ReviewTaskComponent {
   }
 
 
-  convertTime(time: any): string {
-    return time;
-  }
-
   isTaskReviewed(taskToReview: TaskWaitingToReview): boolean {
     return taskToReview.id === this.taskBeingReviewed.id;
   }

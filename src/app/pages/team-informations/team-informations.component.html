@@ -9,9 +9,9 @@
                 </div>
 
                 <div class="divTextHead">
-                    <h3 class="font-bold">
-                        {{team.name ? team.name : "Equipe sem nome"}}
-                    </h3>
+                    <h4 class="font-bold">
+                        Equipe {{teamName}}
+                    </h4>
                     <div class="divMembers">
                         <p class="medium-text">{{getMembersQtt()}} {{getMembersQtt() === 1 ? "membro" : "membros"}}</p>
                         <fa-icon class="iconLink" [icon]="faLink" (click)="copyInviteLink()"></fa-icon>
@@ -50,7 +50,8 @@
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
                 <ng-container *ngFor="let user of team.users">
                     <app-card-user [width]="'370px'" [height]="'90px'" [typeString]="'permissions'"
-                        (deleteEmitterUserTeam)="openModalDeleteUser($event)" [team]="team" [user]="user"></app-card-user>
+                        (deleteEmitterUserTeam)="openModalDeleteUser($event)" [team]="team"
+                        [user]="user"></app-card-user>
                 </ng-container>
             </div>
 
@@ -74,46 +75,49 @@
                 <p class="regular-text w-[82%] h-[58%] text-justify overflow-auto">{{team.description}}</p>
             </div>
 
-            <div class="h-[8.5%] w-full items-end justify-center flex">
-                <div class="w-[81%]">
-                    <h5 class="h5-description h-full">Andamento dos projetos</h5>
-                </div>
-            </div>
+            <h5 class="self-start">Informações da equipe</h5>
 
-            <div class="div-project-dashboards">
-                <div class="high-div-dashboards-bar">
-
-                    <div class="divOf-project-dashboards-bar">
-                        <div class="divProjectDashboardsBar">
-                            <p-chart class="dashboard-bar" type="bar" [data]="basicData" [options]="basicOptions">
-                            </p-chart>
-
-                        </div>
-
-                        <div class="divProjectDashboardsBar">
-                            <p-chart class="dashboard-bar" type="bar" [data]="basicData" [options]="basicOptions">
-                            </p-chart>
-
-                        </div>
+            <div class="grid h-[250px]  w-full grid-cols-2 gap-12 pt-12">
+                <div class="flex flex-col w-full h-[300px]">
+                    <div class="divProjectDashboardsBar">
+                        <p class="large-text py-3">Andamento de Tarefas</p>
+                        <p-chart class="dashboard-bar" type="pie" [data]="data" [options]="options"></p-chart>
                     </div>
-
-                </div>
-
-                <div class="high-div-dashboards-pie">
-                    <div class="divOf-project-dashboards-pie">
-                        <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-                        </div>
-
-                        <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-                        </div>
-
-                        <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-                        </div>
+                    <div class="flex flex-col gap-2 bg-white mt-3 card-reviews">
+                        <p class="large-text self-center">Revisões</p>
+                        <p>Reprovadas: {{team.reprovedReviews}}</p>
+                        <p>Aprovadas: {{team.approvedReviews}}</p>
+                        <p class="self-end pr-2">Média Geral: {{team.averageReviews}} <i class="pi pi-star"></i></p>
                     </div>
                 </div>
+                <div class="flex h-[301px] overflow-y-auto overflow-x-hidden">
+                    <table class="w-full max-h-[40px]">
+                        <tr>
+                            <th>Membro</th>
+                            <th>Tempo Dedicado</th>
+                        </tr>
+                        <tr *ngFor="let responsable of team.reviewHoursDTOS">
+                            <td>{{responsable.username}}</td>
+                            <td>{{responsable.time}}</td>
+                        </tr>
+                    
+                    </table>
+                </div>
+
+                <!-- <div class="high-div-dashboards-pie">
+                        <div class="divOf-project-dashboards-pie">
+                        <div class="divProjectDashboardsPie">
+                        </div>
+
+                        <div class="divProjectDashboardsPie">
+                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
+                        </div>
+
+                        <div class="divProjectDashboardsPie">
+                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
+                        </div>
+                    </div>
+                </div> -->
 
             </div>
 
