@@ -29,9 +29,7 @@ export class MuralComponent implements OnInit {
   notes !: Note[];
 
   constructor(
-    private noteService: NoteService,
-    private projectService: ProjectService,
-    private route: ActivatedRoute
+    private noteService: NoteService
   ){ }
 
   getNotes(): void {
