@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyList } from 'src/app/models/class/property';
 import { Task, TaskEdit } from 'src/app/models/class/task';
@@ -78,6 +78,11 @@ export class TaskComponent implements OnInit {
   waitRequest: boolean = false;
   soloResponsable: boolean = false;
   checkedReview: boolean = false;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    
+  }
 
   async ngOnInit() {
     if(this.task.revisable){

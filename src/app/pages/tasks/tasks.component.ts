@@ -90,6 +90,7 @@ export class TasksComponent implements OnInit {
   teamId?: number
 
   ngOnInit() {
+    this.muralPageListener();
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
@@ -137,8 +138,13 @@ export class TasksComponent implements OnInit {
       })
 
     });
-    // this.muralPageListener();
+    
 
+  }
+
+  muralPageListener(): void {
+    this.isMuralPage = 
+          localStorage.getItem('mode-task-view') === 'Mural';
   }
 
   updateOrderType(e: PipeParams) {

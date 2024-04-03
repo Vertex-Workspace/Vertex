@@ -26,7 +26,7 @@
 }
 
 .base {
-    @apply w-full flex flex-col p-5 rounded-md ;
+    @apply w-full flex flex-col p-5 rounded-md;
     -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
@@ -73,14 +73,12 @@
 }
 
 .informations{
-    @apply grid w-full h-[95%] grid-cols-2 pt-10 px-6;
-
+    @apply grid w-full max-h-[95%] grid-cols-2 pt-10 px-6;
 
 }
 
 .side {
-    @apply w-full h-full flex flex-col justify-between;
-
+    @apply w-full flex flex-col justify-between;
 }
 
 .title {
@@ -97,7 +95,7 @@
 }
 
 .down {
-    @apply h-[20%] flex flex-row w-full items-end ;
+    @apply h-[20%] flex flex-row w-full items-end;
 }
 
 .buttons {
@@ -152,12 +150,16 @@
 }
 
 .components{
-    @apply flex w-[70%] items-center flex-col;
+    @apply flex w-[70%] max-h-[70%] items-center flex-col;
 }
 
 @media (max-width: 1420px) {
     .base {
-        @apply w-[933px] h-[566px] bg-white;
+        @apply w-[933px] h-[566px] max-w-[933px] max-h-[566px] bg-white;
+
+        .side {
+            @apply h-[460px];
+        }
     }
 
     .buttons button,
@@ -184,7 +186,11 @@
     }
 
     .base {
-        @apply w-[1300px] h-[750px] bg-white;
+        @apply w-[1300px] h-[750px] max-w-[1300px] max-h-[750px] bg-white;
+
+        .side {
+            @apply h-[630px];
+        }
     }
 
     .buttons button,
