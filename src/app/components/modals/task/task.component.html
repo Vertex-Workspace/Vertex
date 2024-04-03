@@ -75,7 +75,9 @@
                     <app-comments [task]="task" *ngIf="selectedComponent === 'comments'"
                         style="width: 100%; height: 100%;" />
 
-                    <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
+                    <app-log [task]="task" *ngIf="selectedComponent === 'log'" 
+                        style="width: 100%; height: 100%;"
+                    />
 
                     <app-attachments [task]="task" *ngIf="selectedComponent === 'attachments'" 
                         style="width: 100%; height: 100%;"
