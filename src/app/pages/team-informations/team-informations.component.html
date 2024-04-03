@@ -49,7 +49,7 @@
                     <button class="clicked" (click)="openModalCreateGroup()" *ngIf="clicked === 'groups'">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         Novo grupo</button>
-                    <div class="divMembers pr-3">
+                    <div class="divMembers pr-3" *ngIf="clicked == 'participants'">
                         <p class="medium-text">{{team.users!.length}} {{team.users!.length === 1 ? "membro" :
                             "membros"}}</p>
                         <fa-icon class="iconLink" [icon]="faLink" (click)="copyInviteLink()"></fa-icon>
