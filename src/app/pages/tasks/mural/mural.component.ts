@@ -23,35 +23,21 @@ export class MuralComponent implements OnInit {
   @Input()
   project!: Project;
 
+  @Input()
+  nameFilter !: string;
+
   notes !: Note[];
 
   constructor(
-    private noteService: NoteService,
-    private projectService: ProjectService,
-    private route: ActivatedRoute
-  ){
-    // route.params.subscribe(params => {
-    //   if (params) {
-    //     this.projectService.getOneById(params['id'])
-    //       .subscribe(p => console.log(p))
-                
-    //   }
-    // });
-  }
-
-  teste(e: any): void {
-    
-  }
+    private noteService: NoteService
+  ){ }
 
   getNotes(): void {
     this.notes = this.project.notes;    
   }
 
-  //DONT FORGET TO IMPLEMENT THE PERMISSIONS AT MURAL
-  //WHEN MIGUEL FINISHES THE MURAL
   ngOnInit(): void {  
     this.getNotes();   
-    console.log(this.project)
   }
 
   deleteNote(note: Note) {    

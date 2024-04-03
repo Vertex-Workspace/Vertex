@@ -13,7 +13,8 @@ export class NamePipe implements PipeTransform {
       filter = filter.toUpperCase();
 
       return value.filter(v => {
-        return v.name.toLocaleUpperCase().indexOf(filter) >= 0
+        if ('name' in v) return v.name.toLocaleUpperCase().indexOf(filter) >= 0
+        else return v.title.toLocaleUpperCase().indexOf(filter) >= 0
       });
     } 
     return value;

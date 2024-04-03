@@ -58,7 +58,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CreateTeamProjectModule,
     CascadeSelectModule,
     //Standalone component
-    ReviewTaskComponent
+    ReviewTaskComponent,
+    PipesModule
   ],
 })
 export class TasksModule { }
