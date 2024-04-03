@@ -13,7 +13,7 @@ section {
 }
 
 .divHead {
-    @apply flex w-[80%] h-[25%] items-center gap-10
+    @apply flex w-[80%] h-[25%] gap-10;
 }
 
 .iconUser {
@@ -22,12 +22,12 @@ section {
 }
 
 .divTextHead {
-    @apply flex flex-col w-[80%] gap-2;
+    @apply flex flex-col w-[80%] gap-4 justify-center;
 }
 
 
 .divMembers {
-    @apply flex gap-2
+    @apply flex gap-2 justify-center items-center   ;
 }
 .iconLink {
     @apply flex items-center text-[15px];
@@ -110,19 +110,27 @@ section {
 }
 
 .divProjectDashboardsBar {
-    @apply flex w-full h-full rounded-sm flex-col justify-between items-center;
+    @apply flex w-full h-[60%] rounded-sm flex-col justify-between items-center;
     border-top:8px solid $primaryColor; 
     background-color: $card;
 
     .dashboard-bar{
-        @apply h-60 w-60 flex flex-col justify-center items-center;
+        @apply h-60 w-44 flex flex-col justify-center items-center;
     }
 }
 .card-reviews{
-    @apply flex w-full rounded-sm flex-col justify-between pl-3;
-    border-top:8px solid $primaryColor; 
-    background-color: $card;
+    @apply flex w-full flex-col mt-3 h-[50%] gap-3 items-center;
+
+    div{
+        @apply flex w-1/2 flex-col rounded-sm px-3;
+        border-top:8px solid $primaryColor; 
+        background-color: $card;
+    }
 }
+
+
+
+
 
 .divProjectDashboardsPie {
     @apply flex justify-center items-center w-[40%] h-[85%]  border-t-8 rounded-sm;
@@ -190,7 +198,12 @@ section {
 }
 
 .div-description-top-right{
-    @apply h-[32%] flex flex-col items-center justify-end;
+    @apply flex flex-col;
+
+    .p-description{
+        @apply flex w-full justify-end; 
+        
+    }
 }
 
 .div-project-dashboards{
@@ -205,7 +218,20 @@ section {
     @apply flex gap-4 w-full h-full;
 }
 
-
+textarea {
+    @apply flex px-4 py-2 rounded-sm w-full;
+    resize: none;
+    opacity: 0.7;
+    min-height: 100px;
+    border: none;
+    background-color: $card;
+    color: $text;
+}
+textarea:focus{
+    @apply shadow-md rounded-sm;
+    border: 0 none;
+    outline: 0;
+}
 
 .high-div-dashboards-pie{
     @apply flex flex-col items-center w-full h-[40%];

@@ -25,6 +25,7 @@ export class Team {
     reprovedReviews : number = 0;
     approvedReviews: number = 0;
     averageReviews: number = 0;
+    percentage!: number;
     constructor(
         team: Team
     ) {

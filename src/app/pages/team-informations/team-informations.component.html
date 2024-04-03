@@ -1,5 +1,5 @@
 <section>
-    <div class="container-custom">
+    <div class="container-custom" *ngIf="teamObservable | async">
         <!-- CODIGO AQUI - COMO QUISER  -->
 
         <div class="left-side">
@@ -9,16 +9,22 @@
                 </div>
 
                 <div class="divTextHead">
-                    <h4 class="font-bold">
-                        Equipe {{teamName}}
-                    </h4>
-                    <div class="divMembers">
-                        <p class="medium-text">{{getMembersQtt()}} {{getMembersQtt() === 1 ? "membro" : "membros"}}</p>
-                        <fa-icon class="iconLink" [icon]="faLink" (click)="copyInviteLink()"></fa-icon>
-                        <p class="medium-text">Copiar link de convite</p>
+                    <span>
+                        <h4 class="font-bold">
+                            {{team.name}}
+                        </h4>
+                    </span>
+                    <div class="div-description-top-right gap-4">
+                        <span class="pt-3">
+                            <textarea [disabled]="!editDescription" [(ngModel)]="team.description"></textarea>
+                            <div class="p-description">
+                                <button *ngIf="!editDescription" (click)="changeEditDescription()">Editar
+                                    descrição</button>
+                                <button *ngIf="editDescription" (click)="changeEditDescription()">Salvar
+                                    descrição</button>
+                            </div>
+                        </span>
                     </div>
-
-                    <p class="medium-text">Data de Criação: 24/10/2022</p>
                 </div>
             </div>
 
@@ -43,6 +49,13 @@
                     <button class="clicked" (click)="openModalCreateGroup()" *ngIf="clicked === 'groups'">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         Novo grupo</button>
+                    <div class="divMembers pr-3">
+                        <p class="medium-text">{{team.users!.length}} {{team.users!.length === 1 ? "membro" :
+                            "membros"}}</p>
+                        <fa-icon class="iconLink" [icon]="faLink" (click)="copyInviteLink()"></fa-icon>
+                        <p class="medium-text underline cursor-pointer" (click)="copyInviteLink()">Copiar link de
+                            convite</p>
+                    </div>
                 </div>
             </div>
 
@@ -68,60 +81,45 @@
         <!-- =============================================================================================== -->
 
         <div class="right-side">
-            <div class="div-description-top-right">
-                <div class="flex w-[82%] items-center h-[30%]">
-                    <h5>Descrição da equipe</h5>
+            <h5 class="self-start">Desempenho da equipe</h5>
+
+            <div class="flex h-[500px] flex-row">
+                <div class="divProjectDashboardsBar">
+                    <p class="large-text self-start pl-3 py-3">Andamento de Tarefas</p>
+                    <p-chart class="dashboard-bar" type="pie" [data]="data" [options]="options"></p-chart>
                 </div>
-                <p class="regular-text w-[82%] h-[58%] text-justify overflow-auto">{{team.description}}</p>
+                <div class="card-reviews">
+                    <div class="justify-between h-[70%]">
+                        <p class="large-text">Revisões</p>
+                        <p class="text-red-500">Reprovadas: {{team.reprovedReviews}}</p>
+                        <p class="text-green-800">Aprovadas: {{team.approvedReviews}}</p>
+                        <p class="pb-2">Média Geral: {{team.averageReviews}} <i class="pi pi-star"></i></p>
+                    </div>
+                    <div class="gap-10 h-[70%]">
+                        <p class="large-text">Progresso</p>
+                        <p-progressBar [value]="team.percentage"></p-progressBar>
+                    </div>
+                </div>
             </div>
 
-            <h5 class="self-start">Informações da equipe</h5>
-
-            <div class="grid h-[250px]  w-full grid-cols-2 gap-12 pt-12">
-                <div class="flex flex-col w-full h-[300px]">
-                    <div class="divProjectDashboardsBar">
-                        <p class="large-text py-3">Andamento de Tarefas</p>
-                        <p-chart class="dashboard-bar" type="pie" [data]="data" [options]="options"></p-chart>
-                    </div>
-                    <div class="flex flex-col gap-2 bg-white mt-3 card-reviews">
-                        <p class="large-text self-center">Revisões</p>
-                        <p>Reprovadas: {{team.reprovedReviews}}</p>
-                        <p>Aprovadas: {{team.approvedReviews}}</p>
-                        <p class="self-end pr-2">Média Geral: {{team.averageReviews}} <i class="pi pi-star"></i></p>
-                    </div>
-                </div>
-                <div class="flex h-[301px] overflow-y-auto overflow-x-hidden">
-                    <table class="w-full max-h-[40px]">
-                        <tr>
-                            <th>Membro</th>
-                            <th>Tempo Dedicado</th>
-                        </tr>
-                        <tr *ngFor="let responsable of team.reviewHoursDTOS">
-                            <td>{{responsable.username}}</td>
-                            <td>{{responsable.time}}</td>
-                        </tr>
-                    
-                    </table>
-                </div>
-
-                <!-- <div class="high-div-dashboards-pie">
-                        <div class="divOf-project-dashboards-pie">
-                        <div class="divProjectDashboardsPie">
-                        </div>
-
-                        <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-                        </div>
-
-                        <div class="divProjectDashboardsPie">
-                            <p-chart class="dashboard-pie" type="pie" [data]="data" [options]="options"></p-chart>
-                        </div>
-                    </div>
-                </div> -->
-
+            <div class="flex flex-col w-full h-[401px] overflow-x-hidden overflow-y-auto">
+                <table class="w-full max-h-[40px]">
+                    <tr>
+                        <th>Membro</th>
+                        <th>Tempo Dedicado</th>
+                        <th>Tarefas Responsáveis</th>
+                        <th>Médias Gerais</th>
+                    </tr>
+                    <tr *ngFor="let responsable of team.reviewHoursDTOS">
+                        <td>{{responsable.username}}</td>
+                        <td>{{responsable.time}}</td>
+                    </tr>
+                    <tr *ngFor="let responsable of team.reviewHoursDTOS">
+                        <td>{{responsable.username}}</td>
+                        <td>{{responsable.time}}</td>
+                    </tr>
+                </table>
             </div>
-
-
         </div>
     </div>
 </section>

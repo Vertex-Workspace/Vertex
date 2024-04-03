@@ -1,8 +1,8 @@
 import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faEarthAsia, faImage, faImagePortrait, faLink } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUser, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +14,10 @@ import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { TeamService } from 'src/app/services/team.service';
-import { catchError, of, switchMap, tap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -24,18 +26,17 @@ import { UserService } from 'src/app/services/user.service';
     styleUrls: ['./team-informations.component.scss']
 })
 export class TeamInformationsComponent implements OnInit {
-
     onClipboardCopy($event: Event) {
         throw new Error('Method not implemented.');
     }
 
     groups !: Group[]
 
-    teamName !: string;
 
     invitationCode!: {
         code: string;
     };
+    teamObservable!: Observable<Team>;
     team!: Team;
     //to-do: add creation date, user social media, fix cards, -- charts
 
@@ -50,37 +51,43 @@ export class TeamInformationsComponent implements OnInit {
     
     ngOnInit() {
         this.team = this.getTeam();
-        this.start();
+        this.clicked = "participants"
     }
 
     getTeam(): Team {
         const id = Number(this.route.snapshot.paramMap.get('id'));
-        this.teamService.getOneById(id).subscribe(
-            (team: Team) => {
-                this.team = team;
+        this.teamObservable = this.teamService.getOneById(id);
 
-                console.log(this.team);
-                this.teamName = team.name;
-                const documentStyle = getComputedStyle(document.documentElement);
-                const textColor = documentStyle.getPropertyValue('--text-color');
-                const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-                const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-                this.data = {
-                    labels: ['Não Iniciadas', 'Em Andamento', 'Concluídas'],
-                    datasets: [
-                        {
-                            data: this.team.tasksPerformances,
-                            backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
-                            hoverBackgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"]
+        this.teamObservable.forEach((team) => {
+            this.team = team;
+
+            
+            //Graphics
+            const documentStyle = getComputedStyle(document.documentElement);
+            const textColor = documentStyle.getPropertyValue('--text');
+            this.data = {
+                labels: ['Não Iniciadas', 'Em Andamento', 'Concluídas'],
+                datasets: [
+                    {
+                        data: this.team.tasksPerformances,
+                        backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+                        hoverBackgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"]
+                    }
+                ]
+            };
+            this.options = {
+                plugins: {
+                    legend: {
+                        labels: {
+                            usePointStyle: false,
+                            color: textColor
                         }
-                    ]
-                };
-                return team;
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
+                    }
+                }
+            };
+            return team;
+
+        });
         return this.team;
     }
 
@@ -107,77 +114,9 @@ export class TeamInformationsComponent implements OnInit {
 
     }
 
-    start(): void {
-        this.clicked = "participants"
-
-        const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
 
-        this.basicData = {
-            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-            datasets: [
-                {
-                    label: 'Sales',
-                    data: [540, 325, 702, 620],
-                    backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-                    borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
-                    borderWidth: 1
-                }
-            ]
-        };
 
-        this.basicOptions = {
-            plugins: {
-                legend: {
-                    labels: {
-                        color: textColor
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: textColorSecondary
-                    },
-                    grid: {
-                        color: surfaceBorder,
-                        drawBorder: false
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: textColorSecondary
-                    },
-                    grid: {
-                        color: surfaceBorder,
-                        drawBorder: false
-                    }
-                }
-            }
-        };
-
-        console.log(this.team.tasksPerformances);
-    
-
-        this.options = {
-            plugins: {
-                legend: {
-                    labels: {
-                        usePointStyle: true,
-                        color: textColor
-                    }
-                }
-            }
-        };
-    }
-
-    getMembersQtt(): number | undefined {
-        return this.team.users?.length;
-    }
 
     // ICONS
     faLink = faLink;
@@ -296,6 +235,19 @@ export class TeamInformationsComponent implements OnInit {
 
     switchCreateViewGroup(): void {
         this.createGroupModal = !this.createGroupModal;
+    }
+
+
+    editDescription: boolean = false;
+    changeEditDescription(): void{
+        this.editDescription = !this.editDescription
+
+        if(!this.editDescription){
+            this.teamService.updateTeam(this.team).subscribe(
+                (team: Team) => {
+                this.alertService.successAlert("Descrição atualizada com sucesso")
+            });
+        }
     }
 
 }

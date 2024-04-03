@@ -8,6 +8,7 @@ import { CreateGroupModule } from 'src/app/components/reusable-components/create
 import { CardUserModule } from 'src/app/components/reusable-components/card-user/card-user.module';
 import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
     CreateGroupModule,
     CardUserModule,
     ConfirmModalModule,
-    ProgressBarModule
+    ProgressBarModule,
+    FormsModule
   ]
 })
 export class TeamInformationsModule { 

@@ -103,6 +103,11 @@ export class TeamService {
     return this.http
       .patch(`${URL}team/image/${teamId}`, fd)
   }
+  
+  public updateTeam(team : Team): Observable<Team>{
+    return this.http
+      .put<Team>(`${URL}team`, team);
+  }
 
   public changePermissionEnable(permission: Permission, user: User, team: Team): Observable<Permission> {
     return this.http.patch<Permission>(`${URL}team/permission/${permission.id}/${user.id}/${team.id}`, permission)      
