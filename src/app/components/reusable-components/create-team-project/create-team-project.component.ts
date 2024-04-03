@@ -338,26 +338,26 @@ export class CreateTeamProjectComponent implements OnInit {
       if (type instanceof Group) {
         let group: Group = type as Group;
         group.selected = true;
-        group.children = []
-        groups.push(group);
+        group.children = []; // Limpa a referência circular aqui
+        groups.push({...group}); // Cria uma cópia do objeto
       } else if (type instanceof User) {
         let user: User = type as User;
         user.selected = true;
         if (!users.some(existingUser => existingUser.id === user.id)) {
-          users.push(user);
+          users.push({...user}); // Cria uma cópia do objeto
         }
       }
     });
 
-    project = this.removeCircularReferences(project);
-
-    const projectEdit: ProjectEdit = {
+    let projectEdit: ProjectEdit = {
       id: this.project?.id,
       name: project.name,
       description: project.description,
       users: users,
       groups: groups
     };
+
+    projectEdit = this.removeCircularReferences(projectEdit);
 
     if (!projectEdit.name) {
       projectEdit.name = this.project?.name;

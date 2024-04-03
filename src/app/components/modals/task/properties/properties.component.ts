@@ -104,6 +104,20 @@ export class PropertiesComponent {
     return "";
   }
 
+  removeCircularReferences(obj: any): any {
+    const seen = new WeakSet();
+    const replacer = (key: string, value: any) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+    return JSON.parse(JSON.stringify(obj, replacer));
+  }
+
   isGroup: boolean = false
   updateResponsible(event: any, node: any): void {
     if(node instanceof Group){
@@ -113,12 +127,15 @@ export class PropertiesComponent {
       this.isGroup = false
     }
 
-    const taskResponsibles: UpdateResponsibles = {
+    let taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,
       teamId: this.project.idTeam,
       user: this.isGroup ? null : node,
       group: this.isGroup ? node : null
     };
+
+    taskResponsibles = this.removeCircularReferences(taskResponsibles);
+    
     this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
       this.alertService.successAlert("editado")
     });
