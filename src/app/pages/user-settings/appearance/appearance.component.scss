@@ -2,11 +2,12 @@
 
 .bg {
     @apply flex h-full w-screen flex-col items-center justify-start ;
+    color: $text;
 }
 
 .title {
     @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
-    border-color: $disabled;
+    border-color: $primaryColor;
 
         div {
             @apply flex items-center justify-start gap-7;

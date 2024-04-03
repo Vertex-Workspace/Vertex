@@ -1,7 +1,7 @@
 @import '../../../_variables.scss';
 
-section {
-    @apply w-screen h-screen flex flex-col justify-center;
+section{
+    @apply w-screen h-screen flex flex-col justify-center items-center;
     background-color: $secondColor;
 }
 
@@ -21,6 +21,10 @@ div.chat-content {
 
 .card {
     height: 100%;
+}
+
+.chatName{
+    color: $text;
 }
 
 
@@ -67,6 +71,12 @@ header {
 .userName {
     @apply text-[1.5rem];
     color: $primaryColor;
+}
+
+.pHasNoOneChat{
+    @apply text-[1.2rem];
+    color: $primaryColor;
+
 }
 
 main {
@@ -266,7 +276,6 @@ main {
 #input-message{
     @apply w-[90%] h-[100%] rounded-sm text-lg;
     background-color: $card;
-    border: 1px solid $emphasis;
     color: $text;
 }
 

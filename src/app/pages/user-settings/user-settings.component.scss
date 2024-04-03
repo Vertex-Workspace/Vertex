@@ -7,7 +7,8 @@
         @apply flex w-[90%] h-full;
 
         section {
-            @apply w-[25%] h-[90%] border-r-2 border-solid border-[#96A4B0] flex flex-col;
+            @apply w-[25%] h-[90%] border-r-2 border-solid flex flex-col;
+            border-color: $primaryColor;
 
             ul {
                 @apply 

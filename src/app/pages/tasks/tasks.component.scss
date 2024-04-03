@@ -110,6 +110,8 @@
   
         select {
           @apply h-[35px] w-[200px] outline-none text-center;
+          background-color: $card;
+          color: $text;
         }
       }
 
@@ -119,6 +121,7 @@
 
     select {
         @apply w-[170px] h-[35px] text-center outline-none;
+        background-color: $card;
     }
 
 }

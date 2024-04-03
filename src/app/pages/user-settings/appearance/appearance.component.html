@@ -32,7 +32,7 @@
                         <div class="colors-row">
                             <ng-container *ngFor="let color of type.colors; index as item;">
                                 <button [ngStyle]="{'background-color': color.color}" class="colors-circle"
-                                    (click)="selectColor(theme, type,item)">
+                                    (click)="selectColor(theme,type,item)">
                                     <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" class="icon"
                                         [ngStyle]="{'color': type.iconColor}">
                                     </fa-icon>
@@ -53,9 +53,9 @@
             <div class="h-full flex flex-col gap-2">
                 <p class="medium-text">Tamanho da letra</p>
                 <p class="small-text">Defina o tamanho da letra para o sistema</p>
-                <p-cascadeSelect [(ngModel)]="selectedFontSize" [options]="fontSizes" optionGroupLabel="name"
+                <p-cascadeSelect [(ngModel)]="newPers.fontSize" [options]="fontSizes" optionGroupLabel="name"
                     [optionGroupChildren]="[]" [style]="{ width: '120px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)'}"
-                    placeholder="{{selectedFontSize}}" (onChange)="changeFontSize()"></p-cascadeSelect>
+                    placeholder="{{newPers.fontSize}}" (onChange)="changeFontSize()"></p-cascadeSelect>
             </div>
             <div class="h-full flex flex-col gap-2">
                 <p class="medium-text">Estilo da letra</p>
@@ -63,27 +63,27 @@
                 <!-- <select [(ngModel)]="fontFamilyChoosed" (change)="changeFontFamily()">
                     <option *ngFor="let font of fontFamily" [value]="font" class="small-text">{{font}}</option>
                 </select> -->
-                <p-cascadeSelect [(ngModel)]="selectedFontFamily" [options]="fontFamily" optionGroupLabel="name"
+                <p-cascadeSelect [(ngModel)]="newPers.fontFamily" [options]="fontFamily" optionGroupLabel="name"
                     [optionGroupChildren]="[]" [style]="{ width: '180px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)' }"
-                    placeholder="{{selectedFontSize}}" (onChange)="changeFontFamily()"></p-cascadeSelect>
+                    placeholder="{{newPers.fontFamily}}" (onChange)="changeFontFamily()"></p-cascadeSelect>
             </div>
 
         </div>
         
         <div>
             <p class="medium-text">Acessibilidade</p>
-            <div [(ngModel)]="voiceCommand" (click)="toggleChangeVoice()" class="accessibility">
-                <fa-icon *ngIf="!voiceCommand" class="icon" [icon]="faToggleOff">
+            <div [(ngModel)]="newPers.voiceCommand" (click)="toggleChangeVoice()" class="accessibility">
+                <fa-icon *ngIf="!newPers.voiceCommand" class="icon" [icon]="faToggleOff">
                 </fa-icon>
-                <fa-icon *ngIf="voiceCommand" class="icon" [icon]="faToggleOn">
+                <fa-icon *ngIf="newPers.voiceCommand" class="icon" [icon]="faToggleOn">
                 </fa-icon>
                 <p class="small-text">Habilitar comando de voz</p>
             </div>
     
-            <div [(ngModel)]="listeningText" (click)="toggleChangeListening()" class="accessibility">
-                <fa-icon *ngIf="!voiceCommand" class="icon" [icon]="faToggleOff">
+            <div [(ngModel)]="newPers.listeningText" (click)="toggleChangeListening()" class="accessibility">
+                <fa-icon *ngIf="!newPers.listeningText" class="icon" [icon]="faToggleOff">
                 </fa-icon>
-                <fa-icon *ngIf="voiceCommand" class="icon" [icon]="faToggleOn">
+                <fa-icon *ngIf="newPers.listeningText" class="icon" [icon]="faToggleOn">
                 </fa-icon>
                 <p class="small-text">Habilitar leitura de texto</p>
             </div>
