@@ -90,6 +90,7 @@ export class TasksComponent implements OnInit {
   teamId?: number
 
   ngOnInit() {
+    this.muralPageListener();
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
@@ -137,8 +138,13 @@ export class TasksComponent implements OnInit {
       })
 
     });
-    // this.muralPageListener();
+    
 
+  }
+
+  muralPageListener(): void {
+    this.isMuralPage = 
+          localStorage.getItem('mode-task-view') === 'Mural';
   }
 
   updateOrderType(e: PipeParams) {
@@ -298,6 +304,7 @@ export class TasksComponent implements OnInit {
   }
 
   createNote(): void {
+    
     const note: Note = {
       title: 'Nova nota',
       description: '',
@@ -313,6 +320,8 @@ export class TasksComponent implements OnInit {
       .create(note, this.logged.id!, this.project.id!)
       .subscribe((note: Note) => {
         this.project.notes.push(note);
+        console.log(note);
+        
       });
   }
 

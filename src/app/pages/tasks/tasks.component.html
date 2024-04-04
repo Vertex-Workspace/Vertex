@@ -41,7 +41,7 @@
                 </div>
 
                 <ng-container *ngFor="let item of configItems">
-                    <button class="config-buttons" (click)="item.click()">
+                    <button class="config-buttons" (click)="item.click()" *ngIf="!isMuralPage">
                         <i [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
                             class="{{ item.iconClass }}"></i>
                     </button>
@@ -164,6 +164,7 @@
             <app-mural 
                 *ngIf="clicked  === 'Mural'" 
                 [project]="project"
+                [nameFilter]="query" 
             ></app-mural>
         </section>
 

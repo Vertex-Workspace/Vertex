@@ -82,7 +82,8 @@ export class SearchAllComponent {
     }
 
     if (item.kind === SearchItemKind.TASK) {
-      this.router.navigate([`/projeto/${item.projectId}/tarefas`]);
+      this.router.navigate([`/projeto/${item.projectId}/tarefas`], 
+        { queryParams: { taskID: item.id } });
     }
 
     this.closeModal();

@@ -1,11 +1,13 @@
-<div class="base">
-    <ul>
-       <li *ngFor="let item of task.log">
+<section>
+    <div class="container">
+        <ng-container *ngFor="let item of task.log ? task.log.slice().reverse() : task.log">
             <div>
-                <i class="pi pi-user" style="font-size: 1.3rem"></i>
-                <p>{{item.author}} {{item.action}}</p>
+                <label>
+                    <i class="pi pi-info-circle"></i>
+                    <p>{{item.description}}</p>
+                </label>
+                <p class="date">{{convertDateToString(item)}}</p>
             </div>
-            <p class="date">{{item.date}}</p>
-       </li> 
-    </ul>
-</div>
+        </ng-container>
+    </div>
+ </section>
