@@ -7,7 +7,9 @@ import { CardGroupModule } from 'src/app/components/reusable-components/card-gro
 import { CreateGroupModule } from 'src/app/components/reusable-components/create-group/create-group.module';
 import { CardUserModule } from 'src/app/components/reusable-components/card-user/card-user.module';
 import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
-
+import { ProgressBarModule } from 'primeng/progressbar';
+import { FormsModule } from '@angular/forms';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   declarations: [TeamInformationsComponent],
@@ -19,8 +21,9 @@ import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/conf
     CardGroupModule,
     CreateGroupModule,
     CardUserModule,
-    ConfirmModalModule
-
+    ConfirmModalModule,
+    ProgressBarModule,
+    FormsModule
   ]
 })
 export class TeamInformationsModule { 

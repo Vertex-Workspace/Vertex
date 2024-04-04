@@ -200,4 +200,9 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
+
+  goTeamSettings():void{
+    const route : string = 'equipe/' + this.team.id;
+    this.router.navigate([route]);
+  }
 }

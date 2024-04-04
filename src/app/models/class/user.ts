@@ -1,11 +1,13 @@
 import { Team } from "./team";
 import { Personalization } from './personalization';
+import { Task } from "./task";
 
 export class User {
 
     id ?: number ;
     firstName !: string | undefined;
     lastName !: string | undefined;
+    fullname ?: string;
     email !: string;
     password ?: string;
     passwordConf ?: string;
@@ -33,6 +35,11 @@ export class User {
     anyUpdateOnTask ?: boolean;
     sendToEmail ?: boolean;
 
+    time?: any;
+    //graphics
+    tasksPerformances ?: number[];
+
+    tasksInCommon? : any[];
 
     //brainstorming
     teams?: Team[] = [];

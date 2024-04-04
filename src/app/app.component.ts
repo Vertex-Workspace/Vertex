@@ -106,6 +106,7 @@ export class AppComponent {
     this.notificationWebSocket.listenToServer().subscribe(
       (change) => {
         this.getNotificationBadge();
+        
       }
     )
   }

@@ -5,7 +5,7 @@ section {
 }
 
 .container-custom {
-    @apply flex w-[90%] h-full;
+    @apply flex w-[90%] h-full pt-5;
 }
 
 .left-side {
@@ -13,21 +13,65 @@ section {
 }
 
 .divHead {
-    @apply flex w-[80%] h-[25%] items-center gap-10
+    @apply flex w-[80%] h-[25%] gap-10;
 }
 
-.iconUser {
-    @apply text-[180px];
-    color: $primaryColor;
-}
 
 .divTextHead {
-    @apply flex flex-col w-[80%] gap-2;
+    @apply flex flex-col w-full gap-4;
+
+    .edit-pencil{
+        @apply text-[20px] cursor-pointer;
+        color: $primaryColor;
+    
+    }
 }
+
+
+.input-div {
+    @apply cursor-pointer absolute flex w-full h-full;
+    opacity: 0;
+
+    .input-file {
+        @apply cursor-pointer flex w-full h-full justify-center;
+    }
+
+}
+
+.image {
+    @apply w-full h-full flex overflow-hidden;
+
+    img {
+        @apply flex;
+        width: auto;
+        height: 250px;
+        object-fit: contain;
+        zoom: 0.55;
+    }
+
+    .profile-photo {
+        color: $primaryColor;
+        font-size: 10rem;
+    }
+}
+
+.input-image{
+    @apply flex w-1/2;
+
+    .image-icon{
+        font-size: 200px;
+        color: $primaryColor;
+    }
+
+    .image-icon:hover{
+        opacity: 0.5;
+    }
+}
+
 
 
 .divMembers {
-    @apply flex gap-2
+    @apply flex gap-2 justify-center items-center   ;
 }
 .iconLink {
     @apply flex items-center text-[15px];
@@ -110,16 +154,26 @@ section {
 }
 
 .divProjectDashboardsBar {
-    @apply flex w-[40%] h-[93%] rounded-sm;
+    @apply flex w-full h-full rounded-sm flex-col justify-between items-center;
     border-top:8px solid $primaryColor; 
     background-color: $card;
+
+
+}
+.card-reviews{
+    @apply flex w-full flex-col h-full gap-3 items-center;
+
+    div{
+        @apply flex w-full flex-col rounded-sm px-3;
+        border-top:8px solid $primaryColor; 
+        background-color: $card;
+    }
 }
 
-.divProjectDashboardsPie {
-    @apply flex justify-center items-center w-[40%] h-[85%]  border-t-8 rounded-sm;
-    border-top:8px solid $primaryColor; 
-    background-color: $card;
+.chart-bar{
+    @apply h-full w-full flex flex-col justify-center items-center;
 }
+
 
 .high-div-members{
     @apply flex flex-col gap-3 w-[85%];
@@ -154,8 +208,13 @@ section {
     @apply w-[30%] flex items-start h-full 
 }
 
+.bg-description{
+    @apply px-4;
+    background-color: $card;
+}
+
 .iconuser{
-    @apply text-[60px] ;
+    @apply text-[150px] ;
     color: $primaryColor;
 }
 
@@ -181,7 +240,12 @@ section {
 }
 
 .div-description-top-right{
-    @apply h-[32%] flex flex-col items-center justify-end;
+    @apply flex flex-col;
+
+    .p-description{
+        @apply flex w-full justify-end; 
+        
+    }
 }
 
 .div-project-dashboards{
@@ -193,11 +257,21 @@ section {
 }
 
 .divOf-project-dashboards-bar{
-    @apply flex justify-center gap-4 w-full h-full;
+    @apply flex gap-4 w-full h-full;
 }
 
-.dashboard-bar{
-    @apply w-full h-full flex flex-col justify-center items-center;
+textarea {
+    @apply flex py-2 rounded-sm w-full;
+    resize: none;
+    opacity: 0.7;
+    min-height: 100px;
+    border: none;
+    color: $text;
+}
+textarea:focus{
+    @apply shadow-md rounded-sm;
+    border: 0 none;
+    outline: 0;
 }
 
 .high-div-dashboards-pie{
@@ -215,4 +289,13 @@ section {
 button{
     @apply w-[150px] h-[50px] flex gap-2 p-4 px-4 transition-colors
     items-center justify-center rounded cursor-pointer;
+}
+table, th, td {
+    border:1px solid black;
+}
+table > tr {
+    height: 40px ;
+}
+td {
+    @apply text-center;
 }

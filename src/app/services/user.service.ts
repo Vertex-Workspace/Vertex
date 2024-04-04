@@ -102,8 +102,12 @@ export class UserService {
   
   public getOneById(id: number): Observable < User > {
     return this.http
-    .get<User>(`${URL}user/${id}`)
-    .pipe(map((user: User) => new User(user)));
+    .get<User>(`${URL}user/${id}`);
+  }
+
+  public getInformationsById(id: number, loggedUser: number): Observable <User> {
+    return this.http
+    .get<User>(`${URL}user/${id}/informations/${loggedUser}`);
   }
 
   public getUsersByGroup(groupId: number): Observable<User[]> {

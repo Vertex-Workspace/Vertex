@@ -4,52 +4,49 @@
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
     <h4 class="title" *ngIf="typeString === 'project'">Crie um novo Projeto...</h4>
     <div class="flex justify-between flex-row w-full h-[15%]"
-    *ngIf="typeString === 'project' || typeString === 'projectInfo'">
+      *ngIf="typeString === 'project' || typeString === 'projectInfo'">
       <h4 *ngIf="typeString === 'projectInfo'">Informações do projeto</h4>
       <h4 *ngIf="typeString === 'projectInfo'" (click)="closeScreen()" class="cursor-pointer">X</h4>
     </div>
+    
     <div class="div-grid-name-image">
       <div class="input-name">
         <p class="medium-text">{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
         <input formControlName="name" type="text"
           [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
           *ngIf="projectNull">
-        <input formControlName="name" type="text" *ngIf="!projectNull"  [(ngModel)]="name">
+        <input formControlName="name" type="text" *ngIf="!projectNull" [(ngModel)]="name">
       </div>
       <div class="input-image">
         <div class="image relative">
           <img *ngIf="selectedFile" alt="">
           <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
           <form class="input-div">
-            <input type="file" class="input-file" (change)="onFileSelected($event)" >
+            <input type="file" class="input-file" (change)="onFileSelected($event)">
           </form>
         </div>
       </div>
     </div>
 
-    <div class="input-description" *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
+    <div class="input-description"
+      *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
       <p class="medium-text">{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
       <textarea formControlName="description" *ngIf="projectNull"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
-      <textarea formControlName="description" *ngIf="!projectNull"
-        [(ngModel)]="description"></textarea>
+      <textarea formControlName="description" *ngIf="!projectNull" [(ngModel)]="description"></textarea>
     </div>
 
     <p class="medium-text pt-3">Responsáveis</p>
     <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] md:w-20rem pt-4" containerStyleClass="w-full"
       display="chip" [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
-      placeholder="Atribue responsáveis ao projeto"
-      [(ngModel)]="selectedUsers" 
+      placeholder="Atribue responsáveis ao projeto" [(ngModel)]="selectedUsers"
       *ngIf="typeString === 'project' || typeString === 'projectInfo'">
     </p-treeSelect>
 
     <p class="medium-text pt-3">Revisão de Tarefas</p>
-    <p-dropdown 
-    *ngIf="typeString === 'project' || typeString === 'projectInfo'"
-    class="flex items-start justify-start w-[65%] pt-2"
-    [options]="optionsReview" 
-    formControlName="projectReviewENUM" 
-    ></p-dropdown>
+    <p-dropdown *ngIf="typeString === 'project' || typeString === 'projectInfo'"
+      class="flex items-start justify-start w-[65%] pt-2" [options]="optionsReview"
+      formControlName="projectReviewENUM"></p-dropdown>
 
     <div class="div-buttons">
       <div class="buttons" *ngIf="projectNull">

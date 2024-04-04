@@ -1,6 +1,7 @@
 import { Chat } from "./chat";
 import { Group } from "./groups";
 import { Project } from "./project";
+import { ReviewCheck } from "./review";
 import { User } from "./user";
 
 export class Team {
@@ -18,7 +19,13 @@ export class Team {
     creator?: User;
     groups: Group[] = [];
     projects: Project[] = [];
+    tasksPerformances?: number[];
+    reviewHoursDTOS? : any[];
 
+    reprovedReviews : number = 0;
+    approvedReviews: number = 0;
+    averageReviews: number = 0;
+    percentage!: number;
     constructor(
         team: Team
     ) {
@@ -34,6 +41,8 @@ export class Team {
         this.groups = team.groups;
         this.projects = team.projects;    
         this.image = team.image;   
+        this.tasksPerformances = team.tasksPerformances;
+        this.reviewHoursDTOS = team.reviewHoursDTOS;
     }
 
 

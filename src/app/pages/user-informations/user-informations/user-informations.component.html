@@ -1,91 +1,82 @@
 <section>
 
-    <div class="main-div">
+    <div class="main-div" *ngIf="userObservable | async">
 
         <div class="top-side">
             <div class="top-side-left">
                 <div class="top-side-user-img">
-                    <img src="data:image/jpg;base64, {{logged.image}}" alt="" class="rounded-full">
+                    <img src="data:image/jpg;base64, {{user.image}}" alt="" class="rounded-full">
                     <!-- <fa-icon class="user-img" [icon]="faCircleUser"></fa-icon> -->
                 </div>
 
                 <div class="top-side-user-informations">
                     <div class="userName-creationData">
-                        <h4>{{logged.firstName}}</h4>
-                        <p class="regular-text">20/11/2023</p>
-                    </div>
-
-                    <div class="realName-location">
-                        <p class="regular-text">{{logged.firstName}} {{logged.lastName}}</p>
-                        |
-                        <p class="regular-text">{{logged.location ? logged.location : "Localização não informada"}}</p>
-                    </div>
-
-                    <div class="user-description">
+                        <h4>{{user.fullname}}</h4>
+                        <p class="large-text opacity-90">{{user.email}}</p>
+                        <p class="regular-text">{{user.location ? user.location : "Localização não informada"}}</p>
                         <p class="regular-text description">
-                            {{logged.description ? logged.description : "Sem descrição"}}
+                            {{user.description ? user.description : "Sem descrição"}}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div class="top-side-right">
-                <div class="top-side-right-text">
-                    <h6>
-                        Projetos com maior desempenho
-                    </h6>
-                </div>
+                <ng-container *ngIf="showCommonTasks">
+                    <div class="top-side-right-text">
+                        <h6>
+                            Tarefas em comum com você
+                        </h6>
+                    </div>
 
-                <div class="top-side-right-projects">
-                    <ng-container *ngFor="let project of projects">
-                        <div class="card-project">
-                            <div class="indicator-color" [ngStyle]="{'background-color':project.color}">
-                            </div>
-
-                            <div class="project-informations">
-                                <div class="name-project">
-                                    <p class="medium-text">{{project.name}}</p>
-                                    <p class="small-text text-justify overflow-auto">{{project.description}}</p>
+                    <div class="top-side-right-projects">
+                        <ng-container *ngFor="let task of user.tasksInCommon">
+                            <div class="card-project" (click)="goToTask(task)">
+                                <div class="indicator-color">
                                 </div>
 
-                                <p class="small-text">{{project.date}}</p>
+                                <div class="project-informations">
+                                    <div class="name-project">
+                                        <p class="medium-text">{{task.name}}</p>
+                                        <p class="small-text text-justify overflow-auto">{{task.description}}</p>
+                                    </div>
+
+                                </div>
                             </div>
-
-                            <div class="div-dashboard">
-
-                                <div class="spinner-background">{{spinner.value}}%</div>
-                                <mat-progress-spinner #spinner mode="determinate" [value]=project.progress>
-                                </mat-progress-spinner>
-
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!showCommonTasks">
+                    <div class="flex w-full h-full justify-center items-center">
+                        <h6 class="text-center">
+                            Aqui aparecerá tarefas que você tem 
+                            <br>
+                            em comum com quem acessa o seu perfil.
+                        </h6>
+                    </div>
+                </ng-container>
             </div>
         </div>
 
         <div class="under-side">
             <div class="div-dashboards">
-                <h5>Desempenho pessoal</h5>
+                <h5>Desempenho pessoal no sistema</h5>
                 <div class="dashboards">
                     <div class="div-dashboard-pie-doughnut">
+                        <p class="large-text">Tarefas - Pizza</p>
                         <p-chart class="dashboard-pie-doughnut" type="doughnut" [data]="dataPie" [options]="optionsPie">
                         </p-chart>
                     </div>
 
                     <div class="div-dashboard-bar">
+                        <p class="large-text">Tarefas - Barras</p>
                         <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [options]="optionsBar">
                         </p-chart>
                     </div>
 
-                    <div class="div-dashboard-bar">
-                        <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [options]="optionsBar">
-                        </p-chart>
-                    </div>
-
-                    <div class="div-dashboard-pie-doughnut">
-                        <p-chart class="dashboard-pie-doughnut" type="doughnut" [data]="dataPie" [options]="optionsPie">
-                        </p-chart>
+                    <div class="div-dashboard-bar flex-col">
+                        <p class="large-text">Tempo Trabalhado em Tarefas no Vertex</p>
+                        <h4>{{user.time}}</h4>
                     </div>
                 </div>
             </div>

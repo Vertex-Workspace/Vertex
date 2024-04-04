@@ -19,8 +19,7 @@ export class TeamService {
 
   public getOneById(id: number): Observable<Team> {
     return this.http
-      .get<Team>(`${URL}team/${id}`)
-      .pipe(map((team: Team) => new Team(team)));
+      .get<Team>(`${URL}team/${id}`);
   }
 
   public addUserOnTeam(userId: number, teamId: number): Observable<any> {
@@ -102,7 +101,12 @@ export class TeamService {
 
   public updateImage(teamId: number, fd: FormData) {
     return this.http
-      .patch(`${URL}team/image/${teamId}`, fd)
+      .patch<Team>(`${URL}team/image/${teamId}`, fd)
+  }
+  
+  public updateTeam(team : Team): Observable<Team>{
+    return this.http
+      .put<Team>(`${URL}team`, team);
   }
 
   public changePermissionEnable(permission: Permission, user: User, team: Team): Observable<Permission> {

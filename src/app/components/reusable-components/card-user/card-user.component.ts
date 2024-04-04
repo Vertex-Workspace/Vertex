@@ -10,8 +10,8 @@ import { Group } from 'src/app/models/class/groups';
 import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
-import { LogComponent } from '../../modals/task/log/log.component';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-card-user',
@@ -47,8 +47,8 @@ export class CardUserComponent implements OnInit {
 
   delete: boolean = false;
 
-  isTeamCreator: boolean = false;
-
+  isTeamCreator : boolean = false;
+  isNonCreatorCard : boolean = true;
   @Input()
   user !: User
 
@@ -59,7 +59,7 @@ export class CardUserComponent implements OnInit {
     private groupService: GroupService,
     private alert: AlertService,
     private teamService: TeamService,
-    private route: ActivatedRoute) {
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -80,6 +80,9 @@ export class CardUserComponent implements OnInit {
     }
 
     this.teamService.getTeamCreator(this.team).subscribe((userC) => {
+      if(this.user.id! === userC.id){
+        this.isNonCreatorCard = false
+      }
       if (userC.id === this.userService.getLogged().id) {
         this.isTeamCreator = true
       }
@@ -134,8 +137,6 @@ export class CardUserComponent implements OnInit {
   deleteEmitterUserTeam: EventEmitter<User> = new EventEmitter<User>();
 
   deleteEmitUserTeam(user: User): void {
-    console.log(user);
-    
     this.deleteEmitterUserTeam.emit(user);
   }
 
@@ -149,5 +150,9 @@ export class CardUserComponent implements OnInit {
         this.users = users;
       });
     }
+  }
+
+  goToProfile(): void{
+    this.router.navigate(["perfil/" + this.user.id]);
   }
 }
