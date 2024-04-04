@@ -37,9 +37,9 @@
     <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] pt-4" containerStyleClass="w-full"
     display="chip" [options]="listOfResponsibles" selectionMode="checkbox"
     [placeholder]="getPlaceholderText()" *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-    [(ngModel)]="clicked ? selectedUsers : selectedUsers2" (click)="seeCollaborators()">
+    [(ngModel)]="selectedUsers" (click)="seeCollaborators()" appendTo="body">
     <ng-template let-node pTemplate="default">
-      <span>{{node.label}}</span>
+      <span (click)="checkTheResp($event, node)">{{node.label}}</span>
     </ng-template>
   </p-treeSelect>
 

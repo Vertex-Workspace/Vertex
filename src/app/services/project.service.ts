@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Project, ProjectEdit } from '../models/class/project';
+import { Project, ProjectCollaborators, ProjectEdit } from '../models/class/project';
 import { URL } from './path/api_url';
 import { Task } from '../models/class/task';
 import { Property } from '../models/class/property';
@@ -105,12 +105,11 @@ export class ProjectService {
     return this.http.get<number>(`${URL}project/image/${fileId}`)
   }
 
-  public getUsersOfGroupsFromProject(projectId: number): Observable<User[]> {
-    return this.http.get<User[]>(`${URL}project/groups/users/${projectId}`)
-    .pipe(map((users: User[]) =>
-      users.map(user => new User(user))
-    )
-    ) 
+  public returnAllCollaborators(id: number): Observable<ProjectCollaborators> {
+    return this.http
+      .get<ProjectCollaborators>(`${URL}project/getAll/${id}`);
   }
+
+  
 
 }

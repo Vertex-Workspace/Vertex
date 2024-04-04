@@ -66,6 +66,13 @@ export class ProjectEdit {
     users ?:  User[];
     groups ?: Group[];
 }
+
+export class ProjectCollaborators{
+    users !: User[];
+    groups !: Group[];
+    userInGroups !: User[];
+}
+
 export enum ProjectReview {
     MANDATORY,
     OPTIONAL,

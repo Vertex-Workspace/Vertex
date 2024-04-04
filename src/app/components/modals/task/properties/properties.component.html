@@ -24,7 +24,7 @@
                 <div>
                     <p-treeSelect [style]="{ width: '250px'}" class="w-full md:w-20rem " [options]="taskResponsables" [(ngModel)]="selectedUsers"
                         containerStyleClass="w-full" display="chip" [metaKeySelection]="false" selectionMode="checkbox"
-                        placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true">
+                        placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true" appendTo="body">
                         <ng-template let-node pTemplate="default">
                             <span (click)="updateResponsible($event, node)">{{node.label}}</span>
                         </ng-template>

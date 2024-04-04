@@ -120,10 +120,10 @@ export class PropertiesComponent {
 
   isGroup: boolean = false
   updateResponsible(event: any, node: any): void {
-    if(node instanceof Group){
+    if (node instanceof Group) {
       this.isGroup = true
     }
-    if(node instanceof User){
+    if (node instanceof User) {
       this.isGroup = false
     }
 
@@ -135,11 +135,15 @@ export class PropertiesComponent {
     };
 
     taskResponsibles = this.removeCircularReferences(taskResponsibles);
-    
-    this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-      this.alertService.successAlert("editado")
-    });
-}
+
+    if (this.task.creator?.user.id != taskResponsibles.user.id) {
+      this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
+        this.alertService.successAlert("editado")
+      });
+    } else {
+      this.alertService.errorAlert("Você não pode remover o criador da tarefa")
+    }
+  }
 
   setTaskDependencies(task: any) {
     console.log(task.value);
@@ -184,7 +188,7 @@ export class PropertiesComponent {
           for (const group of groups) {
             if (group.id == group1.id) {
               this.selectedUsers.push(group1)
-              for(const user of group1.children){
+              for (const user of group1.children) {
                 this.selectedUsers.push(user)
               }
             }
@@ -204,7 +208,7 @@ export class PropertiesComponent {
   //       if(propertyList.propertyListKind === PropertyListKind.DONE){
   //         this.taskDone.push(task)
   //       }
-        
+
   //     }
   //   }
   // }
