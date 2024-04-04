@@ -110,6 +110,7 @@ export class AppComponent {
       document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
       document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
     });
+    this.canAcessibilityBeUsed();
   }
 
   getRouteAnimationData() {
@@ -136,6 +137,21 @@ export class AppComponent {
     this.notification = !this.notification;
   }
 
+  canSignLanguage:boolean = false;
+  canTextToSpeech:boolean = false;
+  canAcessibilityBeUsed() {
+    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+    if (user.personalization!.signLanguage == true) 
+    this.canSignLanguage = true;
+    else this.canSignLanguage = false;
+    
+    if (user.personalization!.listeningText == true) 
+      this.canTextToSpeech = true;
+    else this.canTextToSpeech = false;
+
+    console.log(user.personalization!.signLanguage);
+    
+  }
 
   @HostListener('document:mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {
