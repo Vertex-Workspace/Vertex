@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,56 +17,50 @@ export class UserInformationsComponent {
 
   dataPie: any;
   optionsPie: any;
-
   dataBar: any;
   optionsBar: any;
-
-  logged !: User;
-
   imageUrl !: string;
 
+  user!: User;
+  userObservable!: Observable<User>
   constructor(
     private userService: UserService,
+    private activatedRoute : ActivatedRoute
   ) {
-    this.logged = this.userService.getLogged();
   }
 
   ngOnInit() {
-    this.start();    
-
-    this.image();
-
-  }
-
-  image(): void {
+    const id : number = Number(this.activatedRoute.snapshot.paramMap.get('id'));;
     
+    this.userObservable = this.userService.getInformationsById(id, this.userService.getLogged().id!);
+    this.userObservable.subscribe(
+      (user : User) => {
+        console.log(user);
+        this.user = user;
+        
+        this.start();
+      }
+      );
+      
+
   }
+
 
   start(): void {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
 
     this.dataPie = {
-      labels: ['A', 'B', 'C'],
+      labels: ['Não Iniciado', 'Em Andamento', 'Concluídas'],
       datasets: [
         {
-          data: [300, 50, 100],
-          backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-          hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+          label: 'Andamentos das Tarefas',
+          data: this.user.tasksPerformances,
+          backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+          borderColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+          borderWidth: 1
         }
       ]
-    };
-
-
-    this.optionsPie = {
-      cutout: '60%',
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor
-          }
-        }
-      }
     };
 
     const documentStyle1 = getComputedStyle(document.documentElement);
@@ -73,47 +69,16 @@ export class UserInformationsComponent {
     const surfaceBorder = documentStyle1.getPropertyValue('--surface-border');
 
     this.dataBar = {
-      labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+      labels: ['Não Iniciado', 'Em Andamento', 'Concluídas'],
       datasets: [
         {
-          label: 'Sales',
-          data: [540, 325, 702, 620],
-          backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-          borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
+          label: 'Andamentos das Tarefas',
+          data: this.user.tasksPerformances,
+          backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+          borderColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
           borderWidth: 1
         }
       ]
-    };
-
-    this.optionsBar = {
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor1
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            color: textColorSecondary
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false
-          }
-        },
-        x: {
-          ticks: {
-            color: textColorSecondary
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false
-          }
-        }
-      }
     };
   }
 

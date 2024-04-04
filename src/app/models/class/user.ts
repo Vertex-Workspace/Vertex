@@ -6,6 +6,7 @@ export class User {
     id ?: number ;
     firstName !: string | undefined;
     lastName !: string | undefined;
+    fullname ?: string;
     email !: string;
     password ?: string;
     passwordConf ?: string;
@@ -33,6 +34,9 @@ export class User {
     anyUpdateOnTask ?: boolean;
     sendToEmail ?: boolean;
 
+    time?: any;
+    //graphics
+    tasksPerformances ?: number[];
 
     //brainstorming
     teams?: Team[] = [];

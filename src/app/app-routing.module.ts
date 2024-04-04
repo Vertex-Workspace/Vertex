@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, UserTeamGuard] //add verificação de 
   },
   {
-    path: "perfil-usuario",
+    path: "perfil/:id",
     component: UserInformationsComponent,
     canActivate: [AuthGuard]
   },

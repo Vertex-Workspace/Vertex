@@ -101,7 +101,7 @@ export class TeamService {
 
   public updateImage(teamId: number, fd: FormData) {
     return this.http
-      .patch(`${URL}team/image/${teamId}`, fd)
+      .patch<Team>(`${URL}team/image/${teamId}`, fd)
   }
   
   public updateTeam(team : Team): Observable<Team>{

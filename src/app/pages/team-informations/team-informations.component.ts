@@ -1,7 +1,7 @@
 import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faImage, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faImage, faLink, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -47,14 +47,14 @@ export class TeamInformationsComponent implements OnInit {
         private groupService: GroupService,
         private userService: UserService
     ) {
+        this.team = this.getTeam()!;
     }
     
     ngOnInit() {
-        this.team = this.getTeam();
         this.clicked = "participants"
     }
 
-    getTeam(): Team {
+    getTeam() {
         const id = Number(this.route.snapshot.paramMap.get('id'));
         this.teamObservable = this.teamService.getOneById(id);
 
@@ -65,30 +65,43 @@ export class TeamInformationsComponent implements OnInit {
             //Graphics
             const documentStyle = getComputedStyle(document.documentElement);
             const textColor = documentStyle.getPropertyValue('--text');
-            this.data = {
+            this.basicData = {
                 labels: ['Não Iniciadas', 'Em Andamento', 'Concluídas'],
                 datasets: [
                     {
+                        label: '',
                         data: this.team.tasksPerformances,
                         backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
-                        hoverBackgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"]
+                        borderColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+                        borderWidth: 1
                     }
                 ]
             };
-            this.options = {
+            this.basicOptions = {
                 plugins: {
                     legend: {
                         labels: {
-                            usePointStyle: false,
-                            color: textColor
+                            color: "white"
                         }
                     }
-                }
+                },
             };
-            return team;
+            if(this.team.image){
+                this.selectedFile = true;
+            }
 
+            if(this.team.users!.length > 1 && this.menuItems.length < 2){
+                this.menuItems.push({
+                    id: 'groups',
+                    iconClass: 'pi pi-users',
+                    label: 'Grupos',
+                    placeholder: 'Pesquise por um grupo...',
+                    clicked: false
+                });
+            }
+            
+            return team;
         });
-        return this.team;
     }
 
 
@@ -121,20 +134,21 @@ export class TeamInformationsComponent implements OnInit {
     // ICONS
     faLink = faLink;
     faImage = faImage;
-    faCircleUser = faCircleUser;
+    faCircleUser = faImage;
     faSearch = faSearch;
     faEnvelope = faEnvelope;
     faUserMinus = faUserMinus;
     faComment = faComment;
     faChevronDown = faChevronDown;
+    faPencil = faPencil;
+    faCheck = faCheck;
 
     // VARIABLES
     clicked!: string;
     createGroupModal: boolean = false
-    @Input()
     basicData: any;
-    @Input()
     basicOptions: any;
+
     @Input()
     data: any;
     @Input()
@@ -149,13 +163,6 @@ export class TeamInformationsComponent implements OnInit {
             placeholder: 'Pesquise por um participante...',
             clicked: true
         },
-        {
-            id: 'groups',
-            iconClass: 'pi pi-users',
-            label: 'Grupos',
-            placeholder: 'Pesquise por um grupo...',
-            clicked: false
-        }
     ];
 
 
@@ -190,8 +197,6 @@ export class TeamInformationsComponent implements OnInit {
     openModalDeleteUser(event: any) {
         this.userToDelete = event
         this.deleteUser = true;
-        console.log(this.userToDelete);
-        
     }
 
     deleteUserTeam(event: any): void {
@@ -199,7 +204,8 @@ export class TeamInformationsComponent implements OnInit {
             this.teamService.getTeamCreator(this.team).subscribe((userC) => {
                 if (userC.id === this.userService.getLogged().id) {
                     this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
-                        this.alertService.successAlert("Usuário retirado da equipe")
+                        this.alertService.successAlert("Usuário retirado da equipe");
+                        this.team.users!.splice(this.team.users!.indexOf(this.userToDelete), 1);
                     })
                 } else {
                     this.alertService.errorAlert("Você não pode remover o criador da equipe")
@@ -207,7 +213,6 @@ export class TeamInformationsComponent implements OnInit {
             });
         }
         this.deleteUser = false
-        this.getTeam()
     }
 
     openModalCreateGroup() {
@@ -249,5 +254,62 @@ export class TeamInformationsComponent implements OnInit {
             });
         }
     }
+
+    inputEditName : boolean = false;
+    newName : string = "";
+    editName(): void{
+        this.inputEditName = !this.inputEditName;
+        if(this.inputEditName){
+            this.newName = this.team.name;
+        } else{
+            //Validação
+            if(this.newName.length < 3 || this.newName.length > 30){
+                this.alertService.notificationAlert("Nome deve ter entre 4 e 29 caracteres");
+                this.newName = "";
+                return;
+            }
+            this.team.name = this.newName;
+            //Caso a validação seja feita é feito o update
+            this.teamService.updateTeam(this.team).subscribe(
+                (team : Team) => {
+                    this.alertService.successAlert("Nome atualizado com sucesso");
+                }
+            );
+        }
+    }
+
+
+    selectedFile !: any;
+    base64 !: any;
+    fd !: FormData;
+    url!: any;
+    onFileSelected(e: any): void {
+        this.fd = new FormData()
+        this.selectedFile = e.target.files[0];
+        this.fd.append('file', this.selectedFile, this.selectedFile.name);
+        let reader = new FileReader();
+    
+        if (e.target.files && e.target.files.length > 0) {
+          let file = e.target.files[0];
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            const base = reader.result as string;
+            this.base64 = base.split(",").pop();
+            this.url = reader.result;
+          };
+        }
+
+        this.teamService
+        .updateImage(this.team.id, this.fd)
+        .subscribe(
+            (team : Team) => {
+                this.team = team;
+                this.alertService.successAlert(`Imagem atualizada com sucesso!`);
+            },
+            (error: any) => { 
+                this.alertService.errorAlert("Imagem inválida!");
+            }
+        );
+      }
 
 }
