@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
+import { Task } from 'src/app/models/class/task';
 import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,14 +20,19 @@ export class UserInformationsComponent {
   optionsPie: any;
   dataBar: any;
   optionsBar: any;
-  imageUrl !: string;
 
   user!: User;
   userObservable!: Observable<User>
+  loggedUser!: User;
+  showCommonTasks: boolean = true;
+  
+
   constructor(
     private userService: UserService,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private router : Router
   ) {
+    this.loggedUser = this.userService.getLogged();
   }
 
   ngOnInit() {
@@ -35,9 +41,15 @@ export class UserInformationsComponent {
     this.userObservable = this.userService.getInformationsById(id, this.userService.getLogged().id!);
     this.userObservable.subscribe(
       (user : User) => {
+        
+        if(user.id == this.loggedUser.id) {
+          this.showCommonTasks = false;
+          
+        }
         console.log(user);
         this.user = user;
         
+
         this.start();
       }
       );
@@ -49,15 +61,24 @@ export class UserInformationsComponent {
   start(): void {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
-
+  
+    let finalSum = 0;
+    this.user.tasksPerformances!.forEach((number) => finalSum += number);
+    
+    //Set Label following the percentage of each task
+    let labels : string[] = [];
+    this.user.tasksPerformances!.forEach(
+      (number) => labels.push(((number * 100) / finalSum).toFixed(2) + "%"));
+       
     this.dataPie = {
-      labels: ['Não Iniciado', 'Em Andamento', 'Concluídas'],
+      labels:  labels
+      ,
       datasets: [
         {
           label: 'Andamentos das Tarefas',
           data: this.user.tasksPerformances,
           backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
-          borderColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+          borderColor: ["#d93b3b", "#d9bf3b", "#70d93b"],
           borderWidth: 1
         }
       ]
@@ -75,70 +96,16 @@ export class UserInformationsComponent {
           label: 'Andamentos das Tarefas',
           data: this.user.tasksPerformances,
           backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
-          borderColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+          borderColor: ["#d93b3b", "#d9bf3b", "#70d93b"],
           borderWidth: 1
         }
       ]
     };
   }
 
-  projects = [
-    {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 61.00
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 30.50
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 20.50
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 20.35
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 20.35
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 20.35
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 20.35
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 20.35
-    }, {
-      name: 'Project 1',
-      description: 'Front-end do sistema de gerenciamento de projetos',
-      date: '01/01/2021',
-      color: '#092c4c',
-      progress: 20.35
-    },
-  ]
+  goToTask(task : any){
+    this.router.navigate(['projeto/' + task.projectId + '/tarefas'], {queryParams: {taskID: task.id}})
+  }
 
 }
 

@@ -1,5 +1,6 @@
 import { Team } from "./team";
 import { Personalization } from './personalization';
+import { Task } from "./task";
 
 export class User {
 
@@ -37,6 +38,8 @@ export class User {
     time?: any;
     //graphics
     tasksPerformances ?: number[];
+
+    tasksInCommon? : any[];
 
     //brainstorming
     teams?: Team[] = [];

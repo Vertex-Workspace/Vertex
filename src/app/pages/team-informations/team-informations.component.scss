@@ -33,7 +33,7 @@ section {
     opacity: 0;
 
     .input-file {
-        @apply cursor-pointer flex w-full h-full items-start;
+        @apply cursor-pointer flex w-full h-full justify-center;
     }
 
 }
@@ -45,7 +45,8 @@ section {
         @apply flex;
         width: auto;
         height: 250px;
-        object-fit: cover;
+        object-fit: contain;
+        zoom: 0.55;
     }
 
     .profile-photo {
@@ -55,7 +56,7 @@ section {
 }
 
 .input-image{
-    @apply flex w-1/2 h-full;
+    @apply flex w-1/2;
 
     .image-icon{
         font-size: 200px;

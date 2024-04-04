@@ -12,6 +12,7 @@
                 <div class="top-side-user-informations">
                     <div class="userName-creationData">
                         <h4>{{user.fullname}}</h4>
+                        <p class="large-text opacity-90">{{user.email}}</p>
                         <p class="regular-text">{{user.location ? user.location : "Localização não informada"}}</p>
                         <p class="regular-text description">
                             {{user.description ? user.description : "Sem descrição"}}
@@ -21,43 +22,43 @@
             </div>
 
             <div class="top-side-right">
-                <div class="top-side-right-text">
-                    <h6>
-                        Projetos semelhantes
-                    </h6>
-                </div>
+                <ng-container *ngIf="showCommonTasks">
+                    <div class="top-side-right-text">
+                        <h6>
+                            Tarefas em comum com você
+                        </h6>
+                    </div>
 
-                <div class="top-side-right-projects">
-                    <ng-container *ngFor="let project of projects">
-                        <div class="card-project">
-                            <div class="indicator-color" [ngStyle]="{'background-color':project.color}">
-                            </div>
-
-                            <div class="project-informations">
-                                <div class="name-project">
-                                    <p class="medium-text">{{project.name}}</p>
-                                    <p class="small-text text-justify overflow-auto">{{project.description}}</p>
+                    <div class="top-side-right-projects">
+                        <ng-container *ngFor="let task of user.tasksInCommon">
+                            <div class="card-project" (click)="goToTask(task)">
+                                <div class="indicator-color">
                                 </div>
 
-                                <p class="small-text">{{project.date}}</p>
+                                <div class="project-informations">
+                                    <div class="name-project">
+                                        <p class="medium-text">{{task.name}}</p>
+                                        <p class="small-text text-justify overflow-auto">{{task.description}}</p>
+                                    </div>
+
+                                </div>
                             </div>
-
-                            <div class="div-dashboard">
-
-                                <div class="spinner-background">{{spinner.value}}%</div>
-                                <mat-progress-spinner #spinner mode="determinate" [value]=43>
-                                </mat-progress-spinner>
-
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!showCommonTasks">
+                    <div class="flex w-full h-full justify-center items-center">
+                        <h6>
+                            Aqui aparecerá que você tem em comum com quem acessa o seu perfil.
+                        </h6>
+                    </div>
+                </ng-container>
             </div>
         </div>
 
         <div class="under-side">
             <div class="div-dashboards">
-                <h5>Desempenho pessoal</h5>
+                <h5>Desempenho pessoal no sistema</h5>
                 <div class="dashboards">
                     <div class="div-dashboard-pie-doughnut">
                         <p class="large-text">Tarefas - Pizza</p>

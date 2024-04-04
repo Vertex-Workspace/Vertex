@@ -9,7 +9,7 @@ import { CardUserModule } from 'src/app/components/reusable-components/card-user
 import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { FormsModule } from '@angular/forms';
-
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   declarations: [TeamInformationsComponent],

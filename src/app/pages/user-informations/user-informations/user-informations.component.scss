@@ -30,7 +30,7 @@ section {
 }
 
 .userName-creationData {
-    @apply flex flex-col gap-8 justify-center w-[88%] h-full;
+    @apply flex flex-col gap-4 justify-center w-[88%] h-full;
 }
 
 .realName-location {
@@ -55,16 +55,18 @@ section {
 }
 
 .top-side-right-projects {
-    @apply flex flex-col justify-start gap-2 items-start h-[69%] overflow-auto w-[90%];
+    @apply grid grid-cols-2 justify-start gap-2 items-start h-[69%] overflow-auto w-[90%];
 }
 
 .card-project {
-    @apply flex justify-between w-[90%] h-[120px] min-h-[120px] rounded-sm;
+    @apply flex gap-4 w-full h-[100px]  rounded-sm;
     background-color: $card;
+    cursor: pointer;
 }
 
 .indicator-color {
     @apply w-[2%] h-full rounded-sm;
+    background-color: $primaryColor;
 }
 
 .project-informations {
@@ -113,7 +115,7 @@ mat-progress-spinner {
 }
 
 .div-dashboards{
-    @apply flex flex-col justify-evenly pt-5 items-start w-[97%] h-[90%];
+    @apply flex flex-col justify-evenly pt-5 items-start w-full h-[90%];
 }
 
 .dashboards{
