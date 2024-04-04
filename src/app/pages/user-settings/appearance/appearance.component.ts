@@ -109,7 +109,7 @@ export class AppearanceComponent implements OnInit {
 
       this.newPers.fontSize = user.personalization?.fontSize!;
       this.newPers.fontFamily = user.personalization?.fontFamily!;
-      this.newPers.voiceCommand = user.personalization?.voiceCommand!;
+      this.newPers.signLanguage = user.personalization?.signLanguage!;
       this.newPers.listeningText = user.personalization?.listeningText!;
     });
     console.log(this.logged, "LOGGED");
@@ -148,14 +148,14 @@ export class AppearanceComponent implements OnInit {
   }
 
   toggleChangeVoice(): boolean {
-    this.newPers.voiceCommand = !this.newPers.voiceCommand;
+    this.newPers.signLanguage = !this.newPers.signLanguage;
 
     this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
       this.logged = userWithNewPersonalization;
       localStorage.setItem("logged", JSON.stringify(this.logged))
     });
 
-    return this.newPers.voiceCommand;
+    return this.newPers.signLanguage;
   }
 
   toggleChangeListening(): boolean {

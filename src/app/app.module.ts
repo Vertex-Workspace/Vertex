@@ -39,12 +39,14 @@ import { NoteComponent } from './components/reusable-components/note/note.compon
 import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { VlibrasComponent } from './pages/vlibras/vlibras.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
+    VlibrasComponent,
   ],
   imports: [
     PickerModule,

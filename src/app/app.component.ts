@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { ActivatedRoute, ChildrenOutletContexts, NavigationEnd, NavigationError, NavigationStart, Route, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
@@ -7,7 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { faPaperclip, faMicrophoneLines } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faMicrophoneLines, faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons';
 import { AlertService } from './services/alert.service';
 import { LoadingService } from './services/loading.service';
 import { UserStateService } from './services/user-state.service';
@@ -17,6 +17,7 @@ import { AppearanceComponent } from './pages/user-settings/appearance/appearance
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+import { TextSpeechService } from './services/text-speech.service';
 
 
 @Component({
@@ -37,6 +38,8 @@ export class AppComponent {
   fontColor: string = '#000000';
   buttonColor: string = '#FFFFFF';
 
+  faVolumeUp = faVolumeUp;
+  faVolumeOff = faVolumeOff;
   faMessage = faMessage;
   faTimes = faTimes;
   faUser = faUser;
@@ -64,11 +67,11 @@ export class AppComponent {
     public router: Router,
     private userService: UserService,
     private userState: UserStateService,
+    private alertService: AlertService,
     private teamService: TeamService,
+    public textSpeechService: TextSpeechService,
   ) {
     personalization.setPersonalization();
-
-
 
     this.userState
       .getAuthenticationStatus()
@@ -95,7 +98,7 @@ export class AppComponent {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
         document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
         document.documentElement.style.setProperty('--emphasis', "#161616");
-        
+
         document.documentElement.style.setProperty('--card', "#161616");
 
         document.documentElement.style.setProperty('--text', "#BABABA");
@@ -132,6 +135,32 @@ export class AppComponent {
   switchNotifications(): void {
     this.notification = !this.notification;
   }
+
+
+  @HostListener('document:mouseup', ['$event'])
+  onMouseUp(event: MouseEvent) {
+    const selectedText = window.getSelection()!.toString().trim();
+    if (selectedText) {
+      // Chame sua função para iniciar a fala aqui
+      if (this.textSpeechService.canSpeak) {
+        this.textSpeechService.speak(selectedText);
+      }
+    }
+  }
+
+  public startSpeech(): void {
+
+    this.alertService.notificationAlert('Selecione um texto para ouvi-lo!');
+    this.textSpeechService.canSpeak = true;
+
+  }
+
+  public stopSpeech(): void {
+    this.alertService.errorAlert('Parando a tradução de texto para voz!')
+    this.textSpeechService.stop();
+    this.textSpeechService.canSpeak = false;
+  }
+
 
 }
 

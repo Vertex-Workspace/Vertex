@@ -13,15 +13,12 @@
             <app-notification *ngIf="notification" style="width: 100%; height:100%" (close)="switchNotifications()">
             </app-notification>
 
-            
-            
+
+
             <header *ngIf="!this.router.url.includes('chat')" class="main-header">
                 <app-loading *ngIf="userLogged" [userLogged]="userLogged"></app-loading>
-                <app-header 
-                    style="width: 100%; height: 100%;" 
-                    (openNotification)="switchNotifications()" 
-                    [currentRoute]="'/home'"
-                />
+                <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()"
+                    [currentRoute]="'/home'" />
             </header>
 
             <main class="main-content" [@routeAnimations]="getRouteAnimationData()">
@@ -29,8 +26,21 @@
             </main>
         </div>
 
-        <div  *ngIf="url !== 'chat' && !this.router.url.includes('chat')" (click)="openMiniChat()" class="chat-circle">
+        <div *ngIf="url !== 'chat' && !this.router.url.includes('chat')" (click)="openMiniChat()" class="chat-circle">
             <fa-icon [icon]="faMessage"></fa-icon>
+        </div>
+
+        <app-vlibras class="mt-2">
+        </app-vlibras>
+        <div class="position-fixed div-principal" style="position: absolute; top: 37% ;right: 0; margin: 0!important;">
+            <div role="button" *ngIf="!textSpeechService.canSpeak" class="textSpeech mt-2"
+                style="position: relative !important;" (click)="startSpeech()">
+                <fa-icon class="text-white" [icon]="faVolumeOff"></fa-icon>
+            </div>
+            <div role="button" *ngIf="textSpeechService.canSpeak" class="textSpeech mt-2"
+                style="position: relative !important; background-color: red !important;" (click)="stopSpeech()">
+                <fa-icon class="text-white" [icon]="faVolumeUp"></fa-icon>
+            </div>
         </div>
 
         <div *ngIf="miniChatOpen">

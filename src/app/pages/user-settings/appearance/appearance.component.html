@@ -72,12 +72,12 @@
         
         <div>
             <p class="medium-text">Acessibilidade</p>
-            <div [(ngModel)]="newPers.voiceCommand" (click)="toggleChangeVoice()" class="accessibility">
-                <fa-icon *ngIf="!newPers.voiceCommand" class="icon" [icon]="faToggleOff">
+            <div [(ngModel)]="newPers.signLanguage" (click)="toggleChangeVoice()" class="accessibility">
+                <fa-icon *ngIf="!newPers.signLanguage" class="icon" [icon]="faToggleOff">
                 </fa-icon>
-                <fa-icon *ngIf="newPers.voiceCommand" class="icon" [icon]="faToggleOn">
+                <fa-icon *ngIf="newPers.signLanguage" class="icon" [icon]="faToggleOn">
                 </fa-icon>
-                <p class="small-text">Habilitar comando de voz</p>
+                <p class="small-text">Habilitar libras</p>
             </div>
     
             <div [(ngModel)]="newPers.listeningText" (click)="toggleChangeListening()" class="accessibility">

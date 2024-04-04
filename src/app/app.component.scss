@@ -1,6 +1,7 @@
 @import '../variables';
-.main-screen{
-    @apply flex w-screen h-screen ;
+
+.main-screen {
+    @apply flex w-screen h-screen;
 }
 
 .side-bar {
@@ -31,38 +32,54 @@
 }
 
 
-.main-header{
+.main-header {
     @apply flex w-full h-[8%] items-center justify-between;
 }
-.main-content{
+
+.main-content {
     @apply flex w-full h-[92%] justify-end;
 }
 
-.main-contentChat{
+.main-contentChat {
     @apply flex w-full h-[100%] justify-end;
 }
 
-.chat-circle{
-    @apply cursor-pointer absolute right-10 bottom-10 w-[70px] h-[70px] rounded-full flex 
-    justify-center items-center;
+.chat-circle {
+    @apply cursor-pointer absolute right-10 bottom-10 w-[70px] h-[70px] rounded-full flex justify-center items-center;
     background-color: $primaryColor;
 }
 
 .section-icons {
     @apply flex justify-between items-center text-lg;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
 }
 
-.square-chat{
+.square-chat {
     @apply w-[10%] h-[100%] rounded-lg flex items-center justify-center;
     background-color: $primaryColor;
 }
 
 @keyframes pulse {
     50% {
-        opacity:0;
+        opacity: 0;
     }
 }
+
 .animate-pulse {
     animation: pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.textSpeech {
+    border-radius: 10px;
+    right: 10px;
+    z-index: 2;
+    width: 40px;
+    float: right;
+    top: 2.5vw;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b82f6;
+    background-position: center;
 }

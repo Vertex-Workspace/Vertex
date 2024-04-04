@@ -11,7 +11,7 @@ export class Personalization{
     fontSize?: number;
     theme?: number;
     listeningText?: boolean;
-    voiceCommand?: boolean;
+    signLanguage?: boolean;
 
 
     constructor(
@@ -25,7 +25,7 @@ export class Personalization{
         this.fontFamily = personalization.fontFamily;
         this.fontSize = personalization.fontSize;
         this.theme = personalization.theme;
-        this.voiceCommand = personalization.voiceCommand;
+        this.signLanguage = personalization.signLanguage;
         this.listeningText = personalization.listeningText;
     }
 }
