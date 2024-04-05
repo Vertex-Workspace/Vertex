@@ -17,6 +17,7 @@ export class Group {
     icon ?: string
     selected ?: boolean
     size ?: number
+    userTeams ?: any[]
 
     //List Project - Miguel
     projects?: Project[];
@@ -35,6 +36,8 @@ export class Group {
         this.children = group.users
         this.selected = group.selected
         this.size = group.size
+        this.userTeams = group.userTeams
+
     }
 
 }

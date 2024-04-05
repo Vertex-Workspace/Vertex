@@ -7,9 +7,10 @@
                     <p>Dependências</p>
                 </div>
                 <div>
-                    <p-dropdown [style]="{ width: '250px'}" class="w-full" containerStyleClass="w-full" [(ngModel)]="selectedDependency"
-                    placeholder="Selecione dependências" [options]="taskDependency" optionLabel="task"
-                    (onChange)="setTaskDependencies($event)" placeholder="{{selectedDependency}}">
+                    <p-dropdown [style]="{ width: '250px'}" class="w-full" containerStyleClass="w-full"
+                        [(ngModel)]="selectedDependency" placeholder="Selecione dependências" [options]="taskDependency"
+                        optionLabel="task" (onChange)="setTaskDependencies($event)"
+                        placeholder="{{selectedDependency}}">
                         <ng-template let-task pTemplate="task">
                             <span>{{task.name}}</span>
                         </ng-template>
@@ -22,13 +23,12 @@
                     <p>Responsáveis</p>
                 </div>
                 <div>
-                    <p-treeSelect [style]="{ width: '250px'}" class="w-full md:w-20rem " [options]="taskResponsables" [(ngModel)]="selectedUsers"
-                        containerStyleClass="w-full" display="chip" [metaKeySelection]="false" selectionMode="checkbox"
-                        placeholder="Atribue responsáveis ao projeto" [filter]="true" [filterInputAutoFocus]="true" appendTo="body">
+                    <p-multiSelect [options]="taskResponsables" [style]="{ width: '250px'}" [(ngModel)]="selectedUsers"
+                        appendTo="body" placeholder="Responsáveis">
                         <ng-template let-node pTemplate="default">
                             <span (click)="updateResponsible($event, node)">{{node.label}}</span>
                         </ng-template>
-                    </p-treeSelect>
+                    </p-multiSelect>
                 </div>
             </td>
             <td *ngFor="let value of task.values">

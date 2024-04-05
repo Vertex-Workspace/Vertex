@@ -90,3 +90,9 @@ export class UpdateResponsibles {
     user !: User
     group !: Group
 }
+
+export class ReturnTaskResponsables {
+    users !: User [];
+    groups !: Group [];
+    usersInGroups !: User[];
+}

@@ -38,6 +38,7 @@ export class Project {
         this.projectReviewENUM = project.projectReviewENUM;
         // this.collaborators = project.collaborators
         // this.groups = project.groups
+        this.projectDependency = project.projectDependency
         this.groups = project.groups
         this.users = project.users
     }

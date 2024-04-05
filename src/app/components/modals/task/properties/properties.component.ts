@@ -5,9 +5,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { take } from 'rxjs';
 import { Group } from 'src/app/models/class/groups';
-import { Project } from 'src/app/models/class/project';
+import { Project, ProjectCollaborators } from 'src/app/models/class/project';
 import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/models/class/property';
-import { Task, UpdateResponsibles } from 'src/app/models/class/task';
+import { ReturnTaskResponsables, Task, UpdateResponsibles } from 'src/app/models/class/task';
 import { Permission, PermissionsType, User } from 'src/app/models/class/user';
 import { Value, ValueUpdate } from 'src/app/models/class/value';
 import { AlertService } from 'src/app/services/alert.service';
@@ -16,6 +16,8 @@ import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { LogComponent } from '../log/log.component';
+import { ReturnStatement } from '@angular/compiler';
+import { TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'app-properties',
@@ -51,8 +53,9 @@ export class PropertiesComponent {
 
 
   canEdit: boolean = false;
-  taskResponsables: any[] = []
-  selectedUsers: any[] = []
+  taskResponsables: TreeNode[] = []
+  selectedUsers: TreeNode[] = []
+  selectedUsers2: TreeNode[] = []
   taskDependency: Task[] = []
   selectedDependency !: string
   differentDone !: boolean
@@ -118,30 +121,36 @@ export class PropertiesComponent {
     return JSON.parse(JSON.stringify(obj, replacer));
   }
 
-  isGroup: boolean = false
   updateResponsible(event: any, node: any): void {
-    if (node instanceof Group) {
-      this.isGroup = true
-    }
-    if (node instanceof User) {
-      this.isGroup = false
+    let isGroup: boolean = false
+
+    if (event instanceof Group) {
+      isGroup = true
+    } else if (event instanceof User) {
+      isGroup = false
     }
 
     let taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,
       teamId: this.project.idTeam,
-      user: this.isGroup ? null : node,
-      group: this.isGroup ? node : null
+      user: isGroup ? null : node,
+      group: isGroup ? node : null
     };
 
     taskResponsibles = this.removeCircularReferences(taskResponsibles);
 
-    if (this.task.creator?.user.id != taskResponsibles.user.id) {
+    if (taskResponsibles.user != null) {
+      if (this.task.creator?.user.id != taskResponsibles.user.id) {
+        this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
+          this.alertService.successAlert("editado")
+        });
+      } else {
+        this.alertService.errorAlert("Você não pode remover o criador da tarefa")
+      }
+    } else {
       this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
         this.alertService.successAlert("editado")
       });
-    } else {
-      this.alertService.errorAlert("Você não pode remover o criador da tarefa")
     }
   }
 
@@ -157,13 +166,16 @@ export class PropertiesComponent {
 
   }
 
+  users1: User[] = []
   getUsers() {
-    this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
-
-      for (const user of users) {
+    this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+      for (const user of pc.users) {
+        user.label = user.firstName
         this.taskResponsables.push(user)
-        this.taskService.getTaskResponsables(this.task.id).subscribe((users1: User[]) => {
-          for (const user1 of users1) {
+        this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
+          this.selectedUsers2 = tr.users
+          for (const user1 of tr.users) {
+            user1.label = user1.firstName
             if (user.id === user1.id) {
               this.selectedUsers.push(user)
             }
@@ -174,29 +186,24 @@ export class PropertiesComponent {
   }
 
   getGroups() {
-    this.projectService.getGroupsFromProject(this.project.id).subscribe((groups1: Group[]) => {
-      console.log(groups1);
-
-      for (const group1 of groups1) {
-        this.userService.getUsersByGroup(group1.id).subscribe((users: User[]) => {
-          group1.children = users
-          group1.icon = 'pi pi-users'
-          this.taskResponsables.push(group1)
-
-        });
-        this.taskService.getGroupByTask(this.task.id).subscribe((groups: Group[]) => {
-          for (const group of groups) {
+    this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+      for (const group1 of pc.groups) {
+        let group: Group = group1 as Group
+        group.label = "Grupo " + group.name
+      
+        this.taskResponsables.push(group)
+ 
+        this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
+          for (const group of tr.groups) {
             if (group.id == group1.id) {
-              this.selectedUsers.push(group1)
-              for (const user of group1.children) {
-                this.selectedUsers.push(user)
-              }
+              this.selectedUsers.push(group1 as Group)
             }
           }
         })
       }
-    })
+    })     
   }
+
 
   // taskDone: Task[] = []
   // public tasksDone() {

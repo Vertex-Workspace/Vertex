@@ -14,6 +14,6 @@ import { DropdownModule } from 'primeng/dropdown';
   declarations: [PropertiesComponent],
   exports: [PropertiesComponent],
   imports: [CommonModule, FontAwesomeModule, FormsModule, InputValuePropertyModule, 
-    TreeSelectModule, DropdownModule]
+    TreeSelectModule, DropdownModule, MultiSelectModule]
 })
 export class PropertiesModule { }

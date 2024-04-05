@@ -21,8 +21,9 @@ export class CardListComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private projectService: ProjectService,
-    private route: ActivatedRoute
-  ) {   
+    private route: ActivatedRoute,
+    private alertService: AlertService
+  ) {
   }
 
   faTrashCan = faTrashCan;
@@ -72,6 +73,8 @@ export class CardListComponent implements OnInit {
   }
 
   openTeam(id: number) {
+    console.log(id);
+
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
@@ -91,10 +94,10 @@ export class CardListComponent implements OnInit {
 
 
   emitItem(event: boolean) {
-    if(this.teams){
+    if (this.teams) {
       this.deleteTeam(this.itemToDelete)
     }
-    if(this.projects){
+    if (this.projects) {
       this.deleteProject(this.itemToDelete)
     }
     // if (event) {
@@ -147,16 +150,16 @@ export class CardListComponent implements OnInit {
   }
 
   click() {
-   for(const project of this.projects){
-   this.projectService.getFileId(project.id).subscribe((string1: number) => {
-      this.projectService.getImage(string1).subscribe((string2: string) => {  
-     },
-       (error: any) => {
-         project.image = error.error.text
-       }
-     )
-   })  
- }    
+    for (const project of this.projects) {
+      this.projectService.getFileId(project.id).subscribe((string1: number) => {
+        this.projectService.getImage(string1).subscribe((string2: string) => {
+        },
+          (error: any) => {
+            project.image = error.error.text
+          }
+        )
+      })
+    }
   }
 
   deleteProject(projectId: Project): void {
@@ -165,20 +168,20 @@ export class CardListComponent implements OnInit {
       .subscribe((project) => {
         this.projects.splice(this.projects.indexOf(projectId), 1)
       },
-      e => {
-      });
+        e => {
+        });
   }
 
-  deleteTeam(teamId : Team): void { 
+  deleteTeam(teamId: Team): void {
     console.log(teamId);
-    
+
     this.teamService
       .delete(teamId.id)
       .subscribe((team) => {
-        this.teams?.splice(this.teams.indexOf(teamId),1)
+        this.teams?.splice(this.teams.indexOf(teamId), 1)
       },
-      e => {
-      });
+        e => {
+        });
   }
 
 }

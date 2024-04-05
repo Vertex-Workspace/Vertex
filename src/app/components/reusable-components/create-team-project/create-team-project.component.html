@@ -13,49 +13,50 @@
         <input formControlName="name" type="text"
           [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
           *ngIf="typeString != 'projectInfo'">
-        <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'"  [(ngModel)]="name">
+        <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'" [(ngModel)]="name">
       </div>
       <div class="input-image">
         <div class="image relative">
           <img *ngIf="selectedFile" alt="">
           <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
           <form class="input-div">
-            <input type="file" class="input-file" (change)="onFileSelected($event)" >
+            <input type="file" class="input-file" (change)="onFileSelected($event)">
           </form>
         </div>
       </div>
     </div>
 
-    <div class="input-description" *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
+    <div class="input-description"
+      *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
       <p>{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
       <textarea formControlName="description" *ngIf="typeString != 'projectInfo'"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
-      <textarea formControlName="description" *ngIf="typeString === 'projectInfo'"
-        [(ngModel)]="description"></textarea>
+      <textarea formControlName="description" *ngIf="typeString === 'projectInfo'" [(ngModel)]="description"></textarea>
     </div>
 
-    <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] pt-4" containerStyleClass="w-full"
-    display="chip" [options]="listOfResponsibles" selectionMode="checkbox"
-    [placeholder]="getPlaceholderText()" *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-    [(ngModel)]="selectedUsers" (click)="seeCollaborators()" appendTo="body">
-    <ng-template let-node pTemplate="default">
-      <span (click)="checkTheResp($event, node)">{{node.label}}</span>
-    </ng-template>
-  </p-treeSelect>
+    <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
+      [placeholder]="getPlaceholderText()" appendTo="body" class="flex items-start justify-start pt-4"
+      *ngIf="typeString === 'projectInfo' || typeString === 'project'" [(ngModel)]="selectedUsers"
+      [style]="{ width: '250px'}"></p-multiSelect>
 
-    <p-dropdown
-    *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-    class="flex items-start justify-start w-[65%] pt-2"
-    [options]="optionsReview" 
-    optionLabel="name" 
-    placeholder="Selecione opção de revisão"></p-dropdown>
+
+    <div class="flex flex-row w-full">
+      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
+        class="flex items-start justify-start w-[65%] pt-2" [options]="optionsReview" optionLabel="name"
+        placeholder="Selecione opção de Revisão" [style]="{ width: '250px'}"></p-dropdown>
+
+      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
+        class="pr-1 pt-2" [options]="dependencies" optionLabel="name" formControlName="projectDependency"
+        placeholder="Selecione dependência"></p-dropdown>
+    </div>
 
     <div class="div-buttons">
       <div class="buttons" *ngIf="projectNull">
         <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">Cancelar</button>
         <button class="confirm-button" type="submit" *ngIf="typeString != 'projectInfo'">Confirmar</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'" (click)="updateProject()">Editar</button>
+      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'"
+        (click)="updateProject()">Editar</button>
     </div>
   </div>
 </form>

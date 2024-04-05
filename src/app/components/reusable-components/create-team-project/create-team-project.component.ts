@@ -70,7 +70,8 @@ export class CreateTeamProjectComponent implements OnInit {
       name: [null, [Validators.required]],
       description: [null],
       listOfResponsibles: [null],
-      groups: [null]
+      groups: [null],
+      projectDependency: [null]
     });
   }
 
@@ -88,15 +89,13 @@ export class CreateTeamProjectComponent implements OnInit {
   description?: string
   usersGroup !: User[];
 
+
   projectExists() {
     if (this.project != null) {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
 
-      this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
-        console.log(pc);
-      })
       this.getGroups(this.project.idTeam)
       this.getUsers(this.project.idTeam)
 
@@ -104,6 +103,7 @@ export class CreateTeamProjectComponent implements OnInit {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       this.getGroups(teamId);
       this.getUsers(teamId);
+      this.getAllProjects(teamId);
 
     }
   }
@@ -153,7 +153,8 @@ export class CreateTeamProjectComponent implements OnInit {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     if (!this.closeModal) {
       let project = this.form.getRawValue() as Project;
-
+      console.log(project);
+      
       let users: User[] = [];
       let groups: Group[] = [];
 
@@ -258,9 +259,10 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   private getUsers(teamId: number): void {
-    this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
+    this.teamService.getUsers(teamId).subscribe((users: User[]) => {
 
       this.users = users
+      this.selectedUsers2 = users
       for (const user of users) {
         user.icon = 'pi pi-user'
         if (this.logged.id != user.id) {
@@ -282,22 +284,13 @@ export class CreateTeamProjectComponent implements OnInit {
   private getGroups(teamId: number): void {
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
       this.groups = groups;
-
+      
       for (const group of groups) {
-        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-          group.children = users
-          group.icon = 'pi pi-users'
+        group.label = "Grupo " + group.label
           this.listOfResponsibles.push(group)
 
           if (this.project != null) {
             this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
-              for (const user2 of users) {
-                for (const user of pc.userInGroups) {
-                  if (user2.id == user.id) {
-                    this.selectedUsers.push(user2)
-                  }
-                }
-              }
               for (const group2 of pc.groups) {
                 if (group2.id == group.id) {
                   this.selectedUsers.push(group);
@@ -305,9 +298,8 @@ export class CreateTeamProjectComponent implements OnInit {
               }
             })
           }
-        })
-      }
-    });
+        }
+      })
     console.log(this.selectedUsers);
   }
 
@@ -318,6 +310,7 @@ export class CreateTeamProjectComponent implements OnInit {
   ]
 
   updateProject(): void {
+    
     let project = this.form.getRawValue() as Project;
     let users: User[] = [];
     let groups: Group[] = [];
@@ -376,27 +369,14 @@ export class CreateTeamProjectComponent implements OnInit {
     }
   }
 
-  seeCollaborators(): void {
-    this.clicked = true
-  }
-
-  checkUserinGroup: User[] =[]
-
-  checkTheResp(event: any, userReceived: any) {
-    if (userReceived instanceof User) {
-      this.selectedUsers.forEach(type => {
-        if (type instanceof User) {
-          let user: User = type as User;
-          this.checkUserinGroup.push(user)
-        }
-      })
-    }
+  dependencies !: Project []
+  getAllProjects(teamId: number){
+    this.projectService.getProjectByCollaborators(teamId, this.userService.getLogged()).subscribe((projects: Project[]) => {
+      this.dependencies = projects
+      console.log(projects);
       
-      // for(const user of this.checkUserinGroup){
-      //   if(user.id === userReceived.id){
-      //     this.selectedUsers.splice(this.selectedUsers.indexOf(user),1)
-      //     this.selectedUsers.splice(this.selectedUsers.indexOf(userReceived),1)
-      //   }
-      // }
+    })
   }
+
+
 }
