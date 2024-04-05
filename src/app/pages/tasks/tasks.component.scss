@@ -138,3 +138,16 @@
 button > i {
     font-size: 1.5rem;
 }
+
+
+//BUTTONS TUTORIAL
+.btn {
+    @apply flex w-full  items-center justify-center 
+    border-2 transition-colors rounded p-3;
+}
+
+.btn:hover {
+    background-color: $secondColor;
+    color: $primaryColor;
+    @apply transition-colors;
+}

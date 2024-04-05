@@ -18,6 +18,7 @@ import { ReviewService } from 'src/app/services/review.service';
 import { PropertyList } from 'src/app/models/class/property';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
+import { tutorialText } from 'src/app/tutorialText';
 
 @Component({
   selector: 'app-tasks',
@@ -25,6 +26,7 @@ import { FilterParams } from 'src/app/models/interface/filter-params';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
+
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
@@ -46,24 +48,32 @@ export class TasksComponent implements OnInit {
   taskReview: boolean = false;
   logged !: User;
 
+  tutorialText = tutorialText;
+
   overlayVisible !: boolean;
 
   orderParams !: PipeParams;
-  orderOptions : any = [
-    { name: 'Nome', values: [
-      { name: 'A-Z', type: 'name'  },
-      { name: 'Z-A', type: 'name' }
-    ]},
-    { name: 'Data', values: [
-      { name: 'Maior - Menor', type: 'date' },
-      { name: 'Menor - Maior', type: 'date' }
-    ] },
-    { name: 'Status', values: [
-    ] }
+  orderOptions: any = [
+    {
+      name: 'Nome', values: [
+        { name: 'A-Z', type: 'name' },
+        { name: 'Z-A', type: 'name' }
+      ]
+    },
+    {
+      name: 'Data', values: [
+        { name: 'Maior - Menor', type: 'date' },
+        { name: 'Menor - Maior', type: 'date' }
+      ]
+    },
+    {
+      name: 'Status', values: [
+      ]
+    }
   ];
 
   selectedFilter !: any;
-  simplePropertyFilter : FilterParams = {
+  simplePropertyFilter: FilterParams = {
     value: '',
     propKind: '',
     propId: 0
@@ -104,9 +114,9 @@ export class TasksComponent implements OnInit {
 
     //Observable que é aguardado para renderizar os componentes filhos
     this.renderProject = this.projectService.getOneById(id);
-    
+
     //Método que atribui o valor de project vindo do observable
-    this.renderProject.forEach((p: Project) => {      
+    this.renderProject.forEach((p: Project) => {
       this.project = p;
       this.setFilters(p);
       this.setOrderOptions(p);
@@ -151,7 +161,7 @@ export class TasksComponent implements OnInit {
     if (e.type) {
       this.orderParams.type = e.type;
     }
-    
+
   }
 
   setOrderOptions(p: Project): void {
@@ -160,7 +170,7 @@ export class TasksComponent implements OnInit {
         this.orderOptions[2]
           .values.push({ name: pl.value, type: 'status' })
       })
-    
+
   }
 
   setFilters(p: Project): void {
@@ -170,38 +180,38 @@ export class TasksComponent implements OnInit {
         values: []
       })
 
-      if (prop.kind === PropertyKind.STATUS 
-            || prop.kind === PropertyKind.LIST) {
-        
+      if (prop.kind === PropertyKind.STATUS
+        || prop.kind === PropertyKind.LIST) {
+
         prop.propertyLists
           .forEach((pl: PropertyList) => {
-            
-                this.filterOptions[index].values.push({
-                  name: pl.value,
-                  kind: pl.propertyListKind,
-                  index: p.properties.indexOf(prop),
-                  status: true,
-                })
-              });
-              
+
+            this.filterOptions[index].values.push({
+              name: pl.value,
+              kind: pl.propertyListKind,
+              index: p.properties.indexOf(prop),
+              status: true,
+            })
+          });
+
       } else if (prop.kind === PropertyKind.DATE) {
-        
+
         this.filterOptions[index]
           .values.push({
             name: "Hoje",
             kind: prop.kind as string,
             value: 'td'
           },
-          {
-            name: "Próxima semana",
-            kind: prop.kind as string,
-            value: 'nw'
-          },
-          {
-            name: "Próximo mês",
-            kind: prop.kind as string,
-            value: 'nm'
-          })
+            {
+              name: "Próxima semana",
+              kind: prop.kind as string,
+              value: 'nw'
+            },
+            {
+              name: "Próximo mês",
+              kind: prop.kind as string,
+              value: 'nm'
+            })
 
       } else {
         this.filterOptions[index]
@@ -212,7 +222,7 @@ export class TasksComponent implements OnInit {
           })
       }
     })
-    
+
   }
 
   updateFilterParams(e: any, option: any): void {
@@ -258,7 +268,7 @@ export class TasksComponent implements OnInit {
   }
 
   toggleOrder(): void {
-    this.orderParams = {name: '', type: ''};
+    this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
   }
 
@@ -366,6 +376,23 @@ export class TasksComponent implements OnInit {
   }
   openProjectInfos() {
     this.openModalProject = !this.openModalProject;
+  }
+
+
+
+
+
+  attUserFirstAccess() {
+    this.userService.patchFirstAccess(this.logged).subscribe(
+      (user:any) => {
+        console.log();
+        
+        localStorage.setItem('logged', JSON.stringify(user));
+      },
+      (e:any) => {
+        console.log(e);
+      }
+    )
   }
 
 }

@@ -26,6 +26,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "angular-resizable-element": "^7.0.2",
     "chart.js": "^4.4.0",
+    "ngx-joyride": "^2.5.0",
     "ngx-resize": "^2.0.0",
     "ngx-socket-io": "^4.4.0",
     "primeicons": "^6.0.1",
