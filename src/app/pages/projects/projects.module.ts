@@ -11,6 +11,7 @@ import { CreateGroupModule } from 'src/app/components/reusable-components/create
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { FormsModule } from '@angular/forms';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { JoyrideModule } from 'ngx-joyride';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
   ],
   imports: [
     CommonModule,
+    JoyrideModule.forChild(),
     CardListModule,
     QuickAccessModule,
     CreateTeamProjectModule,

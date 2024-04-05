@@ -24,9 +24,10 @@ export class User {
     openPermission ?: boolean = false;
     openInfo ?: boolean = false;
     permissions ?: Permission[];
-    label ?: string
-    icon ?: string
-    selectedProject ?: boolean
+    label ?: string;
+    icon ?: string;
+    selectedProject ?: boolean;
+    firstAccess ?: boolean;
 
     taskReview ?: boolean;
     newMembersAndGroups ?: boolean;
@@ -58,6 +59,7 @@ export class User {
             this.passwordConf = user.passwordConf;
         }
         
+        this.firstAccess = user.firstAccess;
         this.personalization = user.personalization;
         this.description = user.description;
         this.location = user.location;

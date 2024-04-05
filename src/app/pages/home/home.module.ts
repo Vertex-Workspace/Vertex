@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
+import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CalendarModule } from 'primeng/calendar';
   exports:[HomeComponent],
   imports: [
     CommonModule,
+    JoyrideModule,
     CardListModule,
     QuickAccessModule,
     CreateTeamProjectModule,
