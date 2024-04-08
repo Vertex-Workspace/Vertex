@@ -30,16 +30,15 @@
             <fa-icon [icon]="faMessage"></fa-icon>
         </div>
 
-        <app-vlibras *ngIf="canSignLanguage" class="mt-2">
+        <app-vlibras *ngIf="logged.personalization?.signLanguage"></app-vlibras>
 
-        </app-vlibras>
-        <div *ngIf="canTextToSpeech" class="position-fixed div-principal" style="position: absolute; top: 37% ;right: 0; margin: 0!important;">
+        <div *ngIf="logged.personalization?.listeningText" class="position-fixed div-principal" style="position: absolute; top: 37% ;right: 0; margin: 0!important;">
             <div role="button" *ngIf="!textSpeechService.canSpeak" class="textSpeech mt-2"
                 style="position: relative !important;" (click)="startSpeech()">
                 <fa-icon class="text-white" [icon]="faVolumeOff"></fa-icon>
             </div>
             <div role="button" *ngIf="textSpeechService.canSpeak" class="textSpeech mt-2"
-                style="position: relative !important; background-color: red !important;" (click)="stopSpeech()">
+                style="position: relative !important; background-color: #3b82f6 !important;" (click)="stopSpeech()">
                 <fa-icon class="text-white" [icon]="faVolumeUp"></fa-icon>
             </div>
         </div>

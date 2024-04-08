@@ -72,7 +72,7 @@
         
         <div>
             <p class="medium-text">Acessibilidade</p>
-            <div [(ngModel)]="newPers.signLanguage" (click)="toggleChangeVoice()" class="accessibility">
+            <div [(ngModel)]="newPers.signLanguage" (click)="toggleChangeSignLanguage()" class="accessibility">
                 <fa-icon *ngIf="!newPers.signLanguage" class="icon" [icon]="faToggleOff">
                 </fa-icon>
                 <fa-icon *ngIf="newPers.signLanguage" class="icon" [icon]="faToggleOn">

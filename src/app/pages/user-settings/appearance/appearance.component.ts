@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { faPencil, faSun, faMoon, faToggleOff, faToggleOn, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from '../../../services/personalization.service';
 import { Personalization } from '../../../models/class/personalization';
@@ -36,8 +36,7 @@ export class AppearanceComponent implements OnInit {
   }
   // Sets the theme by default and make the persistence of the theme in this component
   ngOnInit(): void {
-    this.logged = this.userService.getLogged();
-    console.log(this.logged);
+    this.logged = JSON.parse(localStorage.getItem("logged")!);
 
     this.userService.getOneById(this.logged.id!).pipe(take(1)).subscribe((user) => {
       this.newPers.primaryColorLight = user.personalization?.primaryColorLight!;
@@ -147,12 +146,14 @@ export class AppearanceComponent implements OnInit {
     })
   }
 
-  toggleChangeVoice(): boolean {
+  toggleChangeSignLanguage(): boolean {
     this.newPers.signLanguage = !this.newPers.signLanguage;
 
     this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
       this.logged = userWithNewPersonalization;
+      console.log(this.logged.personalization, "personalizationVoice");
       localStorage.setItem("logged", JSON.stringify(this.logged))
+      window.location.reload();
     });
 
     return this.newPers.signLanguage;
@@ -164,7 +165,10 @@ export class AppearanceComponent implements OnInit {
     this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
       this.logged = userWithNewPersonalization;
       localStorage.setItem("logged", JSON.stringify(this.logged))
+      console.log(this.logged.personalization, "personalizationListen");
+      window.location.reload();      
     });
+
     return this.newPers.listeningText;
   }
 

@@ -18,6 +18,7 @@ import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { TextSpeechService } from './services/text-speech.service';
+import { Observable, of } from 'rxjs';
 
 
 @Component({
@@ -73,18 +74,21 @@ export class AppComponent {
   ) {
     personalization.setPersonalization();
 
+    this.logged = userService.getLogged();
+    
     this.userState
-      .getAuthenticationStatus()
-      .subscribe((status: boolean) => {
-        this.userLogged = status;
-      });
+    .getAuthenticationStatus()
+    .subscribe((status: boolean) => {
+      this.userLogged = status;
+    });
   }
-
+  
   // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
     this.userService.getOneById(user.id!).subscribe((logged) => {
       user = logged;
+      this.logged = logged;
 
       if (user.personalization!.theme == 0) {
         document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
@@ -110,7 +114,6 @@ export class AppComponent {
       document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
       document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
     });
-    this.canAcessibilityBeUsed();
   }
 
   getRouteAnimationData() {
@@ -137,27 +140,12 @@ export class AppComponent {
     this.notification = !this.notification;
   }
 
-  canSignLanguage:boolean = false;
-  canTextToSpeech:boolean = false;
-  canAcessibilityBeUsed() {
-    let user: User = JSON.parse(localStorage.getItem('logged') || '');
-    if (user.personalization!.signLanguage == true) 
-    this.canSignLanguage = true;
-    else this.canSignLanguage = false;
-    
-    if (user.personalization!.listeningText == true) 
-      this.canTextToSpeech = true;
-    else this.canTextToSpeech = false;
-
-    console.log(user.personalization!.signLanguage);
-    
-  }
+  
 
   @HostListener('document:mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {
     const selectedText = window.getSelection()!.toString().trim();
     if (selectedText) {
-      // Chame sua função para iniciar a fala aqui
       if (this.textSpeechService.canSpeak) {
         this.textSpeechService.speak(selectedText);
       }
