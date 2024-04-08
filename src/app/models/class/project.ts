@@ -15,7 +15,7 @@ export class Project {
     projectDependency ?: Project;
     tasks : Task[]; 
     notes : Note[] = [];
-    properties!: Property[];
+    properties !: Property[];
     idTeam!: number;
     listOfResponsibles !: Group[] | User[]
     groups?: Group[]

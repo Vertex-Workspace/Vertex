@@ -1,4 +1,5 @@
 import { Project } from "./project";
+import { Task } from "./task";
 import { Team } from "./team";
 import { User } from "./user";
 
@@ -18,6 +19,7 @@ export class Group {
     selected ?: boolean
     size ?: number
     userTeams ?: any[]
+    tasks !: Task[]
 
     //List Project - Miguel
     projects?: Project[];

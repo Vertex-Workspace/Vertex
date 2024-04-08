@@ -71,7 +71,7 @@ export class CreateTeamProjectComponent implements OnInit {
       description: [null],
       listOfResponsibles: [null],
       groups: [null],
-      projectDependency: [null]
+      projectDependency: [null],
     });
   }
 
@@ -153,8 +153,7 @@ export class CreateTeamProjectComponent implements OnInit {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     if (!this.closeModal) {
       let project = this.form.getRawValue() as Project;
-      console.log(project);
-      
+
       let users: User[] = [];
       let groups: Group[] = [];
 
@@ -168,15 +167,15 @@ export class CreateTeamProjectComponent implements OnInit {
           let user: User = type as User;
           user.selectedProject = true;
           if (!users.some(existingUser => existingUser.id === user.id)) {
-            users.push(user);
+            users.push(user); 
+            project.users = users;    
           }
         }
       }));
       project.groups = groups;
-      project.users = users;
-
-      if (project.groups.length === 0) {
-        project = this.removeCircularReferences(project);
+      if (project.projectDependency) {
+        project.projectDependency.properties = [];
+        project.projectDependency.tasks = []; 
       }
 
       project.creator = {
@@ -187,8 +186,6 @@ export class CreateTeamProjectComponent implements OnInit {
           id: teamId
         }
       };
-
-      console.log(project);
 
       this.projectService
         .create(project, teamId)

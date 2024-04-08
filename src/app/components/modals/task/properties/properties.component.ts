@@ -124,10 +124,10 @@ export class PropertiesComponent {
   updateResponsible(event: any, node: any): void {
     let isGroup: boolean = false
 
-    if (event instanceof Group) {
-      isGroup = true
-    } else if (event instanceof User) {
-      isGroup = false
+    if (node && typeof node.label === 'string' && node.label.startsWith('Grupo')) {
+      isGroup = true;
+    } else {
+      isGroup = false;
     }
 
     let taskResponsibles: UpdateResponsibles = {
@@ -137,7 +137,13 @@ export class PropertiesComponent {
       group: isGroup ? node : null
     };
 
-    taskResponsibles = this.removeCircularReferences(taskResponsibles);
+    if (taskResponsibles.group) {
+      taskResponsibles.group.tasks = []
+      taskResponsibles.group.projects =[]
+    }
+
+    console.log(taskResponsibles);
+    
 
     if (taskResponsibles.user != null) {
       if (this.task.creator?.user.id != taskResponsibles.user.id) {

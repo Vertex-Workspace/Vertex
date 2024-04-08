@@ -6,8 +6,8 @@
                 <div class="flex flex-col w-full">
                     <div class="image flex justify-center items-center" (click)="openTeam(item.id)">
                         <!-- <img src="../../../../assets/logo-weg.png" alt="" class="h-[70%]"> -->
-                        <img src="{{item.image}}" alt="" class="rounded-full h-[70%]">
-                        <h1 *ngIf="!item.image">{{getFirstLetter(item)}}</h1>
+                        <img src="data:image/jpg;base64, {{item.image}}" alt="" class="h-full">
+                        <h1 *ngIf="!item.image" >{{getFirstLetter(item)}}</h1>
                     </div>
                     <div class="informations">
                         <div class="infos-team" (click)="openTeam(item.id)">

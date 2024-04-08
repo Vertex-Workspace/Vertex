@@ -127,6 +127,8 @@ export class CardListComponent implements OnInit {
 
     this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project[]) => {
       this.projects = projects
+      console.log(projects);
+      
     })
 
   }
@@ -147,19 +149,6 @@ export class CardListComponent implements OnInit {
       })
     })
     this.openModal = !this.openModal;
-  }
-
-  click() {
-    for (const project of this.projects) {
-      this.projectService.getFileId(project.id).subscribe((string1: number) => {
-        this.projectService.getImage(string1).subscribe((string2: string) => {
-        },
-          (error: any) => {
-            project.image = error.error.text
-          }
-        )
-      })
-    }
   }
 
   deleteProject(projectId: Project): void {
