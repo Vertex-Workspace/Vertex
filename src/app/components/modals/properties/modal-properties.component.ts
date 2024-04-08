@@ -66,7 +66,7 @@ export class ModalPropertiesComponent {
     private userService: UserService) { }
 
   ngOnInit() {
-    this.teamService.hasPermission(this.project.id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
+    this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions;
 
       for (const permission of permissions) {

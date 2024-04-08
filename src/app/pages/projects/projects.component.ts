@@ -94,7 +94,7 @@ export class ProjectsComponent implements OnInit {
   validateTeamId(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
-      .existsByIdAndUserBelongs(teamId, this.logged.id!)
+      .userIsOnTeam(teamId, this.logged.id!)
       .subscribe((exists: boolean) => {
         if (!exists) {
           this.router.navigate(['/home']);
@@ -111,7 +111,7 @@ export class ProjectsComponent implements OnInit {
     .subscribe((team: Team) => {
       this.team = team;
       this.teamName = team.name!;
-      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team, this.logged);
+      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
       this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
         this.permissionsOnTeam = permissions;
       });

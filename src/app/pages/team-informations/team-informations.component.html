@@ -115,7 +115,7 @@
             <p class="regular-text pt-3">Informações essenciais para rastrear o progresso e desempenho da equipe como um todo, com foco em tarefas.</p>
             <div class="flex h-[40%] flex-row pt-6 gap-2">
                 <div class="card-reviews">
-                    <div class="justify-between h-[70%]" [style.opacity]="team.reprovedReviews == 0 || team.approvedReviews == 0 ? '0.6' : '1'">
+                    <div class="justify-between h-[70%]" [style.opacity]="team.reprovedReviews == 0 && team.approvedReviews == 0 ? '0.6' : '1'">
                         <p class="large-text">Revisões</p>
                         <p class="text-red-500">Reprovadas: {{team.reprovedReviews}}</p>
                         <p class="text-green-800">Aprovadas: {{team.approvedReviews}}</p>

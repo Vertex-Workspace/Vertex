@@ -79,14 +79,13 @@ export class CardUserComponent implements OnInit {
       });
     }
 
-    this.teamService.getTeamCreator(this.team).subscribe((userC) => {
-      if(this.user.id! === userC.id){
-        this.isNonCreatorCard = false
-      }
-      if (userC.id === this.userService.getLogged().id) {
-        this.isTeamCreator = true
-      }
-    });
+
+    if(this.user.id! === this.team.creator!.id){
+      this.isNonCreatorCard = false
+    }
+    if (this.team.creator!.id === this.userService.getLogged().id) {
+      this.isTeamCreator = true
+    }
   }
 
   faCircleUser = faCircleUser;
@@ -109,7 +108,7 @@ export class CardUserComponent implements OnInit {
   }
 
   selectPermission(user: User, permission: Permission): void {
-    this.teamService.changePermissionEnable(permission, user, this.team).subscribe(
+    this.teamService.changePermissionEnable(permission).subscribe(
       (permissionRes) => {
         permission.enabled = !permission.enabled;
         this.alert.successAlert('Autorização alterada!')
@@ -117,7 +116,7 @@ export class CardUserComponent implements OnInit {
   }
 
   getPermission(user: User): Permission[] | any {
-    this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
+    this.teamService.getPermission(this.team.id, user.id!).subscribe((permissions: Permission[]) => {
       user.permissions = permissions;
       return user.permissions 
     })
