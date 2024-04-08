@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project, ProjectReview } from 'src/app/models/class/project';
@@ -13,11 +13,12 @@ import { TeamService } from 'src/app/services/team.service';
 import { NoteService } from 'src/app/services/note.service';
 import { Note } from 'src/app/models/class/note';
 import { Observable } from 'rxjs';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { PropertyList } from 'src/app/models/class/property';
-import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
+import { Property, PropertyKind } from 'src/app/models/class/property';
 import { ReviewService } from 'src/app/services/review.service';
-
+import { PropertyList } from 'src/app/models/class/property';
+import { PipeParams } from 'src/app/models/interface/params';
+import { FilterParams } from 'src/app/models/interface/filter-params';
+import { tutorialText } from 'src/app/tutorialText';
 
 @Component({
   selector: 'app-tasks',
@@ -25,6 +26,7 @@ import { ReviewService } from 'src/app/services/review.service';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
+
 
   filterSettings: any[] = [];
   orderSettings: any[] = [];
@@ -37,7 +39,7 @@ export class TasksComponent implements OnInit {
   taskOpen: boolean = false;
   canCreate: boolean = false;
   isMuralPage !: boolean;
-  openModalProject : boolean = false;
+  openModalProject: boolean = false;
   project!: Project;
   renderProject!: Observable<Project> | undefined;
   permissions!: Permission[];
@@ -45,9 +47,43 @@ export class TasksComponent implements OnInit {
   badgeNumber: string = '0';
   taskReview: boolean = false;
   logged !: User;
+
+  tutorialText = tutorialText;
+
+  overlayVisible !: boolean;
+
+  orderParams !: PipeParams;
+  orderOptions: any = [
+    {
+      name: 'Nome', values: [
+        { name: 'A-Z', type: 'name' },
+        { name: 'Z-A', type: 'name' }
+      ]
+    },
+    {
+      name: 'Data', values: [
+        { name: 'Maior - Menor', type: 'date' },
+        { name: 'Menor - Maior', type: 'date' }
+      ]
+    },
+    {
+      name: 'Status', values: [
+      ]
+    }
+  ];
+
+  selectedFilter !: any;
+  simplePropertyFilter: FilterParams = {
+    value: '',
+    propKind: '',
+    propId: 0
+  };
+  filterOptions: any[] = [];
+
   pageTitle: string = 'Espaço de Trabalho';
+
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
     private taskService: TaskService,
@@ -57,16 +93,15 @@ export class TasksComponent implements OnInit {
     private noteService: NoteService,
     private reviewService: ReviewService
   ) {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.projectId = id
-    this.logged = userService.getLogged();
+    this.logged = this.userService.getLogged();
+
   }
 
   teamId?: number
-  projectId!: number;
 
   ngOnInit() {
-    const id: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.muralPageListener();
+    const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
     this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
       this.permissions = permissions;
@@ -79,40 +114,130 @@ export class TasksComponent implements OnInit {
 
     //Observable que é aguardado para renderizar os componentes filhos
     this.renderProject = this.projectService.getOneById(id);
-    console.log(this.renderProject);
-    
+
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
-      console.log(p);
-      
       this.project = p;
+      this.setFilters(p);
+      this.setOrderOptions(p);
       this.pageTitle = this.project.name;
       const currentView = localStorage.getItem('mode-task-view');
-      if(currentView){
+      if (currentView) {
         this.clicked = currentView;
       }
 
       //Se o projeto possuir a opção de revisão, então é feita a requisição das tarefas que estão aguardando revisão
-      if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
+      if (this.project.projectReviewENUM !== ProjectReview.EMPTY) {
         this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
-          (tasks : TaskWaitingToReview[]) => {
-            console.log(tasks);
-            
+          (tasks: TaskWaitingToReview[]) => {
             this.tasksToReview = tasks;
             this.badgeNumber = this.tasksToReview.length.toString();
           }
-          );
+        );
       }
-        
+
+      this.activatedRoute.queryParamMap.subscribe((p: any) => {
+        if (p['params']) {
+          let taskOptional: Task = this.project.tasks.find((t: Task) => t.id === Number(p['params'].taskID))!;
+          if (taskOptional) {
+            this.changeModalTaskState(true, taskOptional);
+          } else {
+            this.router.navigate(['.'], { relativeTo: this.activatedRoute });
+          }
+        }
+      })
+
     });
-    this.muralPageListener();
+    
+
   }
 
   muralPageListener(): void {
-    if (this.clicked === 'Mural') this.isMuralPage = true;
-    else this.isMuralPage = false;
+    this.isMuralPage = 
+          localStorage.getItem('mode-task-view') === 'Mural';
   }
 
+  updateOrderType(e: PipeParams) {
+    if (e.type) {
+      this.orderParams.type = e.type;
+    }
+
+  }
+
+  setOrderOptions(p: Project): void {
+    p.properties[0].propertyLists
+      .forEach((pl) => {
+        this.orderOptions[2]
+          .values.push({ name: pl.value, type: 'status' })
+      })
+
+  }
+
+  setFilters(p: Project): void {
+    p.properties.forEach((prop: Property, index: number) => {
+      this.filterOptions.push({
+        name: prop.name,
+        values: []
+      })
+
+      if (prop.kind === PropertyKind.STATUS
+        || prop.kind === PropertyKind.LIST) {
+
+        prop.propertyLists
+          .forEach((pl: PropertyList) => {
+
+            this.filterOptions[index].values.push({
+              name: pl.value,
+              kind: pl.propertyListKind,
+              index: p.properties.indexOf(prop),
+              status: true,
+            })
+          });
+
+      } else if (prop.kind === PropertyKind.DATE) {
+
+        this.filterOptions[index]
+          .values.push({
+            name: "Hoje",
+            kind: prop.kind as string,
+            value: 'td'
+          },
+            {
+              name: "Próxima semana",
+              kind: prop.kind as string,
+              value: 'nw'
+            },
+            {
+              name: "Próximo mês",
+              kind: prop.kind as string,
+              value: 'nm'
+            })
+
+      } else {
+        this.filterOptions[index]
+          .values.push({
+            name: prop.kind as string,
+            kind: prop.kind as string,
+            propId: prop.id
+          })
+      }
+    })
+
+  }
+
+  updateFilterParams(e: any, option: any): void {
+    this.simplePropertyFilter.propKind = option.kind;
+    this.simplePropertyFilter.propId = option.propId;
+    this.selectedFilter = '';
+  }
+
+  reset(e: any): void {
+    this.simplePropertyFilter = {
+      value: '',
+      propKind: '',
+      propId: 0
+    }
+  }
 
   menuItems = [
     { id: 'Kanban', iconClass: 'pi pi-th-large', label: 'Kanban' },
@@ -124,8 +249,9 @@ export class TasksComponent implements OnInit {
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
-    // { id: 'properties', iconClass: 'pi pi-tags', click: () => this.openPropertiesModal() },
   ];
+
+
 
   toggleSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;
@@ -133,9 +259,16 @@ export class TasksComponent implements OnInit {
 
   toggleFilter(): void {
     this.filterOpen = !this.filterOpen;
+    this.selectedFilter = '';
+    this.simplePropertyFilter = {
+      propId: 0,
+      propKind: '',
+      value: ''
+    }
   }
 
   toggleOrder(): void {
+    this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
   }
 
@@ -166,7 +299,6 @@ export class TasksComponent implements OnInit {
 
     this.taskService.create(taskCreate).subscribe(
       (task) => {
-        this.project.tasks.push(task);
         this.changeModalTaskState(true, task);
       },
       (error) => {
@@ -175,13 +307,14 @@ export class TasksComponent implements OnInit {
     );
   }
 
-  updateTasksToReview(tasks : TaskWaitingToReview[]) {
+  updateTasksToReview(tasks: TaskWaitingToReview[]) {
     this.tasksToReview = tasks;
     this.badgeNumber = this.tasksToReview.length.toString();
     this.toggleReview();
   }
 
   createNote(): void {
+    
     const note: Note = {
       title: 'Nova nota',
       description: '',
@@ -197,6 +330,8 @@ export class TasksComponent implements OnInit {
       .create(note, this.logged.id!, this.project.id!)
       .subscribe((note: Note) => {
         this.project.notes.push(note);
+        console.log(note);
+        
       });
   }
 
@@ -205,8 +340,11 @@ export class TasksComponent implements OnInit {
     this.taskOpen = bool;
     if (this.taskOpen) {
       this.taskOpenObject = task;
+      this.router.navigate(['.'], { relativeTo: this.activatedRoute, queryParams: { taskID: task.id } });
     } else {
       this.taskOpenObject = {} as Task;
+      this.router.navigate(['.'], { relativeTo: this.activatedRoute });
+
     }
   }
 
@@ -214,7 +352,7 @@ export class TasksComponent implements OnInit {
     this.propertiesOpen = !this.propertiesOpen;
   }
 
-  updateProjectByTaskChanges(event: any): void{
+  updateProjectByTaskChanges(event: any): void {
     const taskUpdated: Task = event;
     this.project.tasks = this.project.tasks.map(task => {
       if (task.id === taskUpdated.id) {
@@ -232,13 +370,29 @@ export class TasksComponent implements OnInit {
     return this.project;
   }
 
-
   //MODAL REVIEW TASK
-  toggleReview():void{
+  toggleReview(): void {
     this.taskReview = !this.taskReview;
   }
-  openProjectInfos(){
+  openProjectInfos() {
     this.openModalProject = !this.openModalProject;
+  }
+
+
+
+
+
+  attUserFirstAccess() {
+    this.userService.patchFirstAccess(this.logged).subscribe(
+      (user:any) => {
+        console.log();
+        
+        localStorage.setItem('logged', JSON.stringify(user));
+      },
+      (e:any) => {
+        console.log(e);
+      }
+    )
   }
 
 }

@@ -3,32 +3,39 @@
         <!-- RIGHT SIDE TASKS/TEAMS -->
         <div class="container-grid">
             <div class="flex flex-row items-end gap-3">
-                <h4>Projetos</h4>
+                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>
             </div>
+
             <div class="text small-text pt-2">
-                <p >Projetos são os diferentes espaços de trabalho de uma equipe, neles</p>
-                <p >é possível segmentar assuntos e organizar as tarefas sua e/ou do time.</p>
+                <p>Projetos são os diferentes espaços de trabalho de uma equipe, neles</p>
+                <p>é possível segmentar assuntos e organizar as tarefas sua e/ou do time.</p>
             </div>
-
-            <div class="functionally-items regular-text">
-                <div class="search">
-                    <input class="inputSearch" type="text" placeholder="Pesquisar por um projeto...">
-                    <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+            <div class="flex flex-col" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
+                [title]="'Visualizar / Criar projetos'" [stepContent]="customContent"
+                [stepContentParams]="{ texto: tutorialText[5] }">
+                <div class="functionally-items regular-text">
+                    <div class="search">
+                        <input class="inputSearch" type="text" placeholder="Pesquisar por um projeto..." [(ngModel)]="projectSearch">
+                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                    </div>
+                    <button class="create" (click)="switchCreateView()">
+                        <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                        Novo projeto
+                    </button>
                 </div>
-                <button class="create" (click)="switchCreateView()">
-                    <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                    Novo projeto
-                </button>
-            </div>
 
+                <div class="default-size" joyrideStep="goToTasks" [prevTemplate]="prevButton"
+                    [nextTemplate]="nextButton" [title]="'Ir para tarefas'"
+                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[7] }">
 
-            <div class="default-size">
-                <app-card-list style="width: 100%; height: 90%; padding-top: 3%"
-                    (emitterItem)="delete($event)" [type]="'project'" [team]="team" [teamScreen]="'project'">
-                </app-card-list>
-                <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
-                *ngIf="isCreatingProject" (close)="switchCreateView()"
-                [typeString]="'project'" ></app-create-team-project>
+                    <app-card-list style="width: 100%; height: 90%; padding-top: 3%" (emitterItem)="delete($event)"
+                        [type]="'project'" [team]="team" [teamScreen]="'project'"
+                        [filterSearch]="projectSearch"></app-card-list>
+
+                    <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
+                        *ngIf="isCreatingProject" (close)="switchCreateView()"
+                        [typeString]="'project'"></app-create-team-project>
+                </div>
             </div>
         </div>
 
@@ -38,45 +45,53 @@
                 <div class="flex flex-row items-end gap-3">
                     <h4>Tarefas de {{teamName}}</h4>
                 </div>
+
                 <div class="text small-text pt-2">
                     <p>Nessa seção é possível visualizar todas as tarefas na qual você</p>
                     <p>é um dos responsáveis dentro da equipe {{teamName}}</p>
                 </div>
-                <div class="functionally-items regular-text">
-                    <div class="search">
-                        <input class="inputSearch" type="text" placeholder="Pesquise por uma tarefa...">
-                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
-                    </div>
-                    <div class="filter-items">
-                        <div *ngFor="let item of configItems" class="icons">
-                            <button (click)="item.click()">
-                                <i class="{{ item.iconClass }}" [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"></i>
-                            </button>
+                          
+                <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
+                    [title]="'Visualizar tarefas da equipe'" [stepContent]="customContent"
+                    [stepContentParams]="{ texto: tutorialText[6] }">
+                  
+                    <div class="functionally-items regular-text">
+                        <div class="search">
+                            <input  class="inputSearch" type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="queryFilter">
+                            <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                        </div>
+                        <div class="filter-items">
+                            <div *ngFor="let item of configItems" class="icons">
+                                <button (click)="item.click()">
+                                    <i class="{{ item.iconClass }}"
+                                        [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <section class="filter-settings" *ngIf="filterOpen || orderOpen">
-                    <ng-container *ngIf="filterOpen">
-                        <p>Filtrar por </p>
-                        <select>
-                            <option *ngFor="let item of filterSettings">
-                                {{ item.label }}
-                            </option>
-                        </select>
-                    </ng-container>
-                    <ng-container *ngIf="orderOpen">
-                        <p>Ordenar por </p>
-                        <select>
-                            <option *ngFor="let item of orderSettings">
-                                {{ item.label }}
-                            </option>
-                        </select>
-                    </ng-container>
-                </section>
+                    <section class="filter-settings" *ngIf="filterOpen || orderOpen">
+                        <ng-container *ngIf="filterOpen">
+                            <p>Filtrar por </p>
+                            <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
+                                optionGroupLabel="name" [optionGroupChildren]="['values']"
+                                [style]="{ minWidth: '14rem' }" placeholder="Selecione"></p-cascadeSelect>
 
-        <!-- NG IF uses to wait the permissions request before render the component -->
-                <div class="default-size" *ngIf="permissionsOnTeamObservable | async">
-                    <app-list style="padding-top: 3%;" [team]="team" (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissionsOnTeam"></app-list>
+                        </ng-container>
+                        <ng-container *ngIf="orderOpen">
+                            <p>Ordenar por </p>
+                            <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
+                                optionGroupLabel="name" [optionGroupChildren]="['values']"
+                                [style]="{ minWidth: '13rem' }" placeholder="Selecione"></p-cascadeSelect>
+                        </ng-container>
+                    </section>
+
+                    <!-- NG IF uses to wait the permissions request before render the component -->
+                    <div class="default-size" *ngIf="permissionsOnTeamObservable | async">
+                        <app-list style="padding-top: 3%;" [team]="team"
+                            (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissionsOnTeam"
+                            [queryFilter]="queryFilter" [filter]="selectedFilter"
+                            [orderParams]="orderParams"></app-list>
+                    </div>
                 </div>
                 <!-- <app-quick-access style="width: 100%; height:100%;" [typeString]="'project'"></app-quick-access> -->
             </div>
@@ -84,5 +99,19 @@
     </div>
 </section>
 
-<app-task [task]="taskOpenObject" *ngIf="taskOpen"
-    (close)="changeModalTaskState(false, taskOpenObject)" [permissions]="permissionsOnTeam"></app-task>
+<app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"
+    [permissions]="permissionsOnTeam"></app-task>
+
+<ng-template #prevButton>
+    <button class="btn btn-outline-primary">
+        Voltar
+    </button>
+</ng-template>
+<ng-template #nextButton>
+    <button class="btn btn-primary">
+        Próximo
+    </button>
+</ng-template>
+<ng-template #customContent let-texto="texto" style="border-radius: 5px">
+    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+</ng-template>

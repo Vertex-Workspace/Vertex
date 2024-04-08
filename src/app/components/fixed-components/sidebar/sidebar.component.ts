@@ -26,7 +26,7 @@ export class SidebarComponent {
   items: any = [
     { label: "Pesquisar", icon: "pi pi-search", command: () => { this.switchSearch(); } },
     { label: "Conversas", icon: "pi pi-comment", command: () => { this.router.navigate(['chat']) } },
-    { label: "Perfil", icon: "pi pi-user", command: () => { this.router.navigate(['perfil-usuario']) } },
+    { label: "Perfil", icon: "pi pi-user", command: () => { this.router.navigate(['perfil/' + this.userService.getLogged().id!]) } },
     { label: "Configurações", icon: "pi pi-cog", command: () => { this.router.navigate(['configuracoes']) } },
     { label: "Sair", icon: "pi pi-sign-out", command: () => { this.logout(); }},
   ]
@@ -37,12 +37,14 @@ export class SidebarComponent {
   search: boolean = false;
   switchSearch():void{
     this.search = !this.search;
+    this.isSideBarExpanded = false;
   }
 
   @Output()
   openChat = new EventEmitter();
   openChatExpanded(bool: boolean){
     this.openChat.emit({ action: bool });
+    this.isSideBarExpanded = false;
   }
 
 

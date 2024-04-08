@@ -26,6 +26,9 @@ export class Task {
     step?: number;
 
     files: any[];
+    
+    image ?: string; //only validation
+    log !: any[];
 
     //Chat
     chat?:Chat;
@@ -45,6 +48,7 @@ export class Task {
         this.properties = task.properties;
         this.files = task.files;
         this.revisable = task.revisable;
+        this.log = task.log;
     }
 
 }

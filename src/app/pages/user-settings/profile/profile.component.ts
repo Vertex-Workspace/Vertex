@@ -75,6 +75,9 @@ export class ProfileComponent {
       description: [this.logged.description]
 
     })
+
+    console.log(this.logged);
+    
   }
 
   getLoggedUser(): void {

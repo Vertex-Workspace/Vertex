@@ -21,7 +21,7 @@
 }
 
 .order{
-    @apply flex flex-row w-full h-[10%] items-center gap-5;
+    @apply flex flex-row w-full h-[14%] items-center gap-5;
 
 }
 
@@ -30,11 +30,15 @@
     overflow-x: hidden;
     overflow-y: auto;
     .card-searched{
-        @apply flex w-[98%] rounded-sm flex-row items-center justify-between px-8 py-10;
-        min-height: 70px;
+        @apply flex w-[98$] rounded-sm flex-row items-center justify-between px-8 py-10;
+        min-height: 80px;
         text-align: start;
         background-color: $card;
         cursor: pointer;
+
+        .left {
+            @apply w-2/3 flex items-center gap-8;
+        }
 
         &:hover{
             background-color: $emphasis;

@@ -10,8 +10,8 @@
                 <li class="tool-icons" *ngIf="!searchBarOpen">
                     <fa-icon (click)="changeSelectedStateAll()" class="colorAllCheckbox" [icon]="faSquare"
                         [ngStyle]="{'opacity' : checkbox ? '1.0' : '0.2'}" title="Selecionar Todas"></fa-icon>
-                    <fa-icon *ngIf="hasChecked()" [icon]="faEnvelope" title="Marcar como lida"></fa-icon>
-                    <fa-icon *ngIf="hasChecked()" [icon]="faTrash" title="Excluir"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" (click)="readNotifications()" [icon]="faEnvelope" title="Marcar como lida"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" (click)="deleteNotifications()" [icon]="faTrash" title="Excluir"></fa-icon>
                 </li>
                 <li class="search" *ngIf="searchBarOpen">
                     <input type="text" placeholder="Pesquise por uma notificação..." [(ngModel)]="query">
@@ -24,7 +24,7 @@
                         </button>
                     </li>
                     <li>
-                        <fa-icon [icon]="faGear" title="Configurações"></fa-icon>
+                        <fa-icon [icon]="faGear" title="Configurações" routerLink="configuracoes/notificacoes"></fa-icon>
                     </li>
                 </div>
             </ul>
@@ -37,24 +37,25 @@
                             <fa-icon (click)="changeSelectedState(notification)" class="color" [icon]="faSquare"
                                 [ngStyle]="{'opacity' : notification.isSelected ? '1.0' : '0.2'}"></fa-icon>
                         </div>
-                        <div class="iconUser">
-                            <fa-icon [icon]="notification.icon"></fa-icon>
-                        </div>
-                        <div class="description" [ngStyle]="{'opacity' : notification.new ? '1.0' : '0.55'}">
-                            <p>{{notification.author}} {{notification.action}} {{notification.project}}</p>
-                            <p>
-                                {{notification.date.getDate()+1}} /
-                                {{notification.date.getMonth()+1}} /
-                                {{notification.date.getFullYear()}}
-                            </p>
+                        <div class="description" [ngStyle]="{'opacity' : !notification.isRead ? '1.0' : '0.55'}">
+                            <p class="small-text">{{notification.teamName}} | {{notification.projectName}}</p>
+                            <div class="medium-text pt-2">
+                                {{notification.title}}
+                                <p class="small-text pt-2">{{getDate(notification.date)}}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="barOpenClose">
-                        <fa-icon [icon]="faArrowUpRightFromSquare" *ngIf="!notification.moreInformations"
+                        <fa-icon [icon]="faArrowUpRightFromSquare"
                             (click)="notificationDetails(notification)"></fa-icon>
                     </div>
                 </div>
             </ng-container>
+
+            <div *ngIf="notifications.length == 0" class="flex w-full items-center pt-10 flex-col">
+                <p class="large-text">Nenhuma notificação no momento!</p>
+                <p class="medium-text opacity-70">Aproveite, enquanto durar...</p>
+            </div>
         </div>
     </div>
 </section>

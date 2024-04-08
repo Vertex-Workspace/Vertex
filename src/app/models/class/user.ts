@@ -1,11 +1,13 @@
 import { Team } from "./team";
 import { Personalization } from './personalization';
+import { Task } from "./task";
 
 export class User {
 
     id ?: number ;
     firstName !: string | undefined;
     lastName !: string | undefined;
+    fullname ?: string;
     email !: string;
     password ?: string;
     passwordConf ?: string;
@@ -22,9 +24,23 @@ export class User {
     openPermission ?: boolean = false;
     openInfo ?: boolean = false;
     permissions ?: Permission[];
-    label ?: string
-    icon ?: string
-    selectedProject ?: boolean
+    label ?: string;
+    icon ?: string;
+    selectedProject ?: boolean;
+    firstAccess ?: boolean;
+
+    taskReview ?: boolean;
+    newMembersAndGroups ?: boolean;
+    permissionsChanged ?: boolean;
+    responsibleInProjectOrTask ?: boolean;
+    anyUpdateOnTask ?: boolean;
+    sendToEmail ?: boolean;
+
+    time?: any;
+    //graphics
+    tasksPerformances ?: number[];
+
+    tasksInCommon? : any[];
 
     //brainstorming
     teams?: Team[] = [];
@@ -43,6 +59,7 @@ export class User {
             this.passwordConf = user.passwordConf;
         }
         
+        this.firstAccess = user.firstAccess;
         this.personalization = user.personalization;
         this.description = user.description;
         this.location = user.location;

@@ -7,24 +7,72 @@ import { TeamService } from 'src/app/services/team.service';
 import { User } from 'src/app/models/class/user';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Task } from 'src/app/models/class/task';
+import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
+import { PipeParams } from 'src/app/models/interface/params';
+import { JoyrideService } from 'ngx-joyride';
+import { tutorialText } from 'src/app/tutorialText';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
+  
 
   logged !: User;
-
+  tutorialText = tutorialText;
   recentTeams !: Team[];
 
   teams !: Team[];
 
+  teamSearch !: string;
+
   isCreating: boolean = false;
 
+  orderParams !: PipeParams;
+  orderOptions: any = [
+    {
+      name: 'Nome', values: [
+        { name: 'A-Z', type: 'name' },
+        { name: 'Z-A', type: 'name' }
+      ]
+    },
+    {
+      name: 'Data', values: [
+        { name: 'Maior - Menor', type: 'date' },
+        { name: 'Menor - Maior', type: 'date' }
+      ]
+    },
+    {
+      name: 'Status', values: [
+        { name: 'Não Iniciado', type: 'status', kind: PropertyListKind.TODO },
+        { name: 'Em Andamento', type: 'status', kind: PropertyListKind.DOING },
+        { name: 'Concluído', type: 'status', kind: PropertyListKind.DONE },
+      ]
+    }
+  ];
+
   //TASKS - FILTER AND ORDER
-  filterSettings !: any[];
+  selectedFilter !: any;
+  filterDate !: string;
+  filterOptions: any[] = [
+    {
+      name: 'Status', values: [
+        { name: 'Não Iniciado', kind: PropertyListKind.TODO, status: true },
+        { name: 'Em Andamento', kind: PropertyListKind.DOING, status: true },
+        { name: 'Concluído', kind: PropertyListKind.DONE, status: true }
+      ]
+    },
+    {
+      name: 'Data', values: [
+        { name: "Hoje", kind: PropertyKind.DATE as string, value: 'td' },
+        { name: "Próxima semana", kind: PropertyKind.DATE as string, value: 'nw' },
+        { name: "Próximo mês", kind: PropertyKind.DATE as string, value: 'nm' }
+      ]
+    },
+  ];
   orderSettings !: any[];
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
@@ -34,28 +82,68 @@ export class HomeComponent implements OnInit{
   filterOpen !: boolean;
   orderOpen !: boolean;
 
+  queryFilter !: string;
+
   faPlus = faPlusSquare;
   teamsBackup: Team[] = [];
-  
+
   constructor(
-    private userService : UserService, 
+    private userService: UserService,
     private teamService: TeamService,
-    private alert: AlertService
+    private alert: AlertService,
+    private projectService: ProjectService,
+    private readonly joyrideService: JoyrideService
   ) {
-    this.logged = this.userService.getLogged();   
+    this.logged = this.userService.getLogged();
   }
 
-  ngOnInit(): void { 
-    this.subscribeToTeams();        
+  ngOnInit(): void {
+    this.subscribeToTeams();
+    if (this.logged.firstAccess) {
+      this.teamService.getTeamsByUser(this.logged).subscribe((teams: Team[]) => {
+        this.projectService.getAllByTeam(teams[0].id).subscribe((projects: any) => {
+          console.log(projects);
+          this.joyrideService.startTour({
+            steps: [
+              'step1@home',
+              `sidebar@home`,
+              `header@home`,
+              'step2@home',
+              `step3@home`,
+              `goToTeamPage@home`,
+              `step4@equipe/${teams[0].id}/projetos`,
+              `step5@equipe/${teams[0].id}/projetos`,
+              `goToTasks@equipe/${teams[0].id}/projetos`,
+              `step6@projeto/${projects[1].id}/tarefas`,
+            ],
+          });
+        });
+      });
+
+    }
+  }
+
+
+  updateOrderType(e: PipeParams): void {
+    console.log(this.selectedFilter);
+
+
+    if (e.type) {
+      this.orderParams.type = e.type;
+    }
+
+    if (e.kind) {
+      this.orderParams.kind = e.kind;
+    }
   }
 
 
   subscribeToTeams() {
     this.teamService.getTeamsByUser(this.logged)
-    .subscribe((teams: Team[]) => {
-      this.teams = teams;  
-      this.teams.forEach(team =>  this.teamsBackup.push(new Team(team)));
-    });
+      .subscribe((teams: Team[]) => {
+        this.teams = teams;
+        this.teams.forEach(team => this.teamsBackup.push(new Team(team)));
+      });
   }
 
   switchCreateView(): void {
@@ -73,29 +161,32 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  delete(team : Team): void {
+  delete(team: Team): void {
     // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
     //   this.userCreator = user;
     //   console.log(user); 
     // })
-  
-    
+
+
     this.teamService
       .delete(team.id)
       .subscribe((team: Team) => {
         this.alert.successAlert('Equipe removida com sucesso!');
         this.teams?.splice(this.teams.indexOf(team), 1);
       },
-      e => {
-        this.alert.errorAlert('Erro ao deletar equipe!')
-      });
+        e => {
+          this.alert.errorAlert('Erro ao deletar equipe!')
+        });
   }
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
+    this.selectedFilter = '';
+    this.filterDate = '';
   }
 
   clickOrder(): void {
+    this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
   }
 
@@ -103,7 +194,7 @@ export class HomeComponent implements OnInit{
   taskOpen: boolean = false;
   taskOpenObject!: Task;
   changeModalTaskState(bool: boolean, task: Task): void {
-    if(bool == false){
+    if (bool == false) {
       this.taskOpenObject = {} as Task;
       this.taskOpen = false;
       return;

@@ -67,7 +67,8 @@
                         <img [ngClass]="messageFileIncludesImage(message) ? 'mt-[5px] image':'archive'"
                             draggable="false" [src]="getIconSrc(message)">
                         <div class="flex h-full justify-center items-center gap-5">
-                            <p class="text-center w-[80%]"  *ngIf="!messageFileIncludesImage(message)">{{ message.file.name }}</p>
+                            <p class="text-center w-[80%]" *ngIf="!messageFileIncludesImage(message)">{{
+                                message.file.name }}</p>
                         </div>
                     </div>
                     <div class="flex justify-between">
@@ -93,24 +94,24 @@
                 class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[10px] pl-[15px] w-[90%] h-[100%]"
                 [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
             <div class="emoji-wrapper">
-
+<!-- 
                 <emoji-mart *ngIf="showEmojiPicker" [i18n]="{
-                    search: 'Digite o nome do emoji em inglês',
-                    categories: {
-                    search: 'Resultados da busca',
-                    recent: 'Recentes',
-                    smileys: 'Carinhas',
-                    people: 'Pessoas',
-                    nature: 'Natureza',
-                    foods: 'Comidas',
-                    activity: 'Atividade',
-                    places: 'Lugares',
-                    objects: 'Objetos',
-                    symbols: 'Símbolos',
-                    flags: 'Bandeiras'
-                    }
-                }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
-                </emoji-mart>
+                            search: 'Digite o nome do emoji em inglês',
+                            categories: {
+                            search: 'Resultados da busca',
+                            recent: 'Recentes',
+                            smileys: 'Carinhas',
+                            people: 'Pessoas',
+                            nature: 'Natureza',
+                            foods: 'Comidas',
+                            activity: 'Atividade',
+                            places: 'Lugares',
+                            objects: 'Objetos',
+                            symbols: 'Símbolos',
+                            flags: 'Bandeiras'
+                            }
+                        }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
+                </emoji-mart> -->
 
             </div>
             <div class="flex relative">

@@ -4,12 +4,15 @@
     from {
       width: 0;
       opacity: 1;
+      overflow: hidden;
     }
     to {
       width: 25%;
       opacity: 1;
+      overflow: hidden;
     }
 }
+
 
 section {
 @apply absolute z-10 flex h-full justify-end w-[100%] max-w-[96%];
@@ -80,26 +83,37 @@ overflow: hidden;
     }
 
     .notifications {
-        @apply flex flex-col w-full h-[85%] overflow-y-auto;
+        @apply flex flex-col w-full h-[85%] overflow-y-auto overflow-x-hidden;
+
         .notification {
-            @apply flex w-full border-b-2 items-center p-4 justify-between;
-            min-height: 90px;
-            transition: 0.3s;
+            @apply flex w-full border-b-2 items-center py-2 px-4 justify-between;
+            min-height: 130px;
 
             :first-child {
                 @apply flex flex-row items-center justify-between;
 
                 .iconUser>fa-icon {
-                    @apply flex text-5xl rounded-full pl-5;
+                    @apply flex rounded-full pl-5;
+                    font-size: 35px;
+                
                     color: $primaryColor;
                 }
 
                 .description {
                     @apply flex flex-col pl-4;
                     color: $text;
+                    p{
+                        word-wrap: break-word;
+                        @apply w-[300px];
+                    }
+                    div{
+                        word-wrap: break-word;
+                        @apply w-[300px];
+                    }
                 }
 
                 .color {
+                    font-size: 20px;
                     color: $primaryColor;
                 }
             }

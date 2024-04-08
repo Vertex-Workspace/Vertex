@@ -3,11 +3,13 @@
 .card{
     @apply flex flex-col w-full shadow-lg;
     background-color: $card;
+    height: 150px;
+    color: $text;
 
     .emailUser{
         color: $text;
     }
-
+  
     .sections-in-card {
         @apply flex w-full items-center ;
         min-height: 70px;
@@ -45,6 +47,7 @@
             @apply w-[35%] flex items-end pl-6 h-full;
         }
     }
+
 }
 
 .icon {
@@ -62,9 +65,8 @@
 }
 
 .permissions {
-    @apply flex flex-row bg-white items-center justify-between px-4;
+    @apply flex flex-row items-center justify-between px-4;
     background-color: $card;
-    
 
     .single-permissions {
         @apply flex flex-row justify-center items-center;
@@ -96,5 +98,9 @@ p {
 }
 
 .more-infos {
-    @apply flex flex-row justify-between 
+    @apply flex flex-row justify-end;
+
+    p{
+        cursor: pointer;
+    }
 }

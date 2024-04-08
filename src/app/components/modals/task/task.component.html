@@ -1,5 +1,5 @@
-<div class="modal-overlay">
-    <div class="base" *ngIf="waitRequest">
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="base" *ngIf="waitRequest" (click)="$event.stopPropagation()">
         <div class="location">
             <div class="routes regular-text">
                 <p>{{taskInfoDTO.teamName}}</p>
@@ -17,7 +17,9 @@
                         (click)="updateTaskRevisable()"></p-checkbox>
                     <p class="regular-text self-start">Obrigar Revisão</p>
                 </div>
-                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">X</button>
+                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">
+                    <i class="pi pi-plus rotate-45 text-2xl pt-2"></i>
+                </button>
             </div>
         </div>
         <div class="informations">
@@ -73,7 +75,9 @@
                     <app-comments [task]="task" *ngIf="selectedComponent === 'comments'"
                         style="width: 100%; height: 100%;" />
 
-                    <app-log [task]="task" *ngIf="selectedComponent === 'log'" />
+                    <app-log [task]="task" *ngIf="selectedComponent === 'log'" 
+                        style="width: 100%; height: 100%;"
+                    />
 
                     <app-attachments [task]="task" *ngIf="selectedComponent === 'attachments'" 
                         style="width: 100%; height: 100%;"

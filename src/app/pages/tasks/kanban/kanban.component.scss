@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .screen {
-  @apply min-h-[50px] flex pt-12;
+  @apply min-h-[50px] flex pt-4;
 
   .col-container {
     @apply gap-6 max-w-full min-h-[50px] overflow-auto flex overflow-y-hidden;

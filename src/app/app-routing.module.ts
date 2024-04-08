@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, UserTeamGuard] //add verificação de 
   },
   {
-    path: "perfil-usuario",
+    path: "perfil/:id",
     component: UserInformationsComponent,
     canActivate: [AuthGuard]
   },
@@ -130,7 +130,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   exports: [
     RouterModule

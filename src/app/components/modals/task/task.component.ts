@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyList } from 'src/app/models/class/property';
 import { Task, TaskEdit } from 'src/app/models/class/task';
@@ -68,16 +68,21 @@ export class TaskComponent implements OnInit {
     private alertService: AlertService,
     private taskHourService: taskHourService,
     private teamService: TeamService,
-    private reviewService: ReviewService,
     private userService: UserService,
     private route: ActivatedRoute,
+    private reviewService : ReviewService
     ) {}
 
-  selectedComponent: string = 'attachments';
+  selectedComponent: string = 'log';
 
   waitRequest: boolean = false;
   soloResponsable: boolean = false;
   checkedReview: boolean = false;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    
+  }
 
   async ngOnInit() {
     if(this.task.revisable){
@@ -86,8 +91,6 @@ export class TaskComponent implements OnInit {
     
     this.taskService.getTaskInfo(this.task.id).subscribe(
       (task: any) => {
-        console.log(task);
-        
         this.taskInfoDTO = task;
       }
     );
@@ -99,8 +102,6 @@ export class TaskComponent implements OnInit {
       }
     }
     this.user = JSON.parse(localStorage.getItem('logged')!);
-    console.log(this.task.taskResponsables!);
-    
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
@@ -138,7 +139,7 @@ export class TaskComponent implements OnInit {
         }
       },
       (e: any) => {
-        console.log(e);
+        console.error(e);
       });
   }
 
@@ -147,7 +148,9 @@ export class TaskComponent implements OnInit {
   }
 
   closeModal() {
-    this.close.emit();
+    if(!this.timeInTask.working){
+      this.close.emit();
+    }
   }
 
   changeTask(event: any): void {
@@ -214,7 +217,6 @@ export class TaskComponent implements OnInit {
         id: this.idResponsable
       }
     }
-    console.log(taskHour);
 
     this.id = setInterval(() => {
       this.seconds++;
@@ -230,11 +232,8 @@ export class TaskComponent implements OnInit {
     }, 1000);
 
     this.taskHourService.saveTaskHour(taskHour).subscribe(
-      (taskHour: taskHour) => {
-        console.log(taskHour, "START TIMER");
-      },
+      (taskHour: taskHour) => {},
       (error: any) => {
-        console.log(error);
         this.alertService.errorAlert(error.error)
       }
     );
@@ -255,11 +254,8 @@ export class TaskComponent implements OnInit {
     clearInterval(this.id);
 
     this.taskHourService.patchTaskHour(taskHour).subscribe(
-      (taskHour: taskHour) => {
-        console.log(taskHour, "STOP TIMER");
-      },
+      (taskHour: taskHour) => {},
       (error: any) => {
-        console.log(error);
         this.alertService.errorAlert(error.error)
       }
     );

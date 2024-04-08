@@ -1,18 +1,19 @@
-<!-- <input (blur)="change(value)" type="text" *ngIf="getKind(value.property, 'TEXT')" value="{{getValue(value)}}"/> -->
-<!-- text -> verificar $event -->
+<!-- text -->
 <input *ngIf="getKind(value.property, 'TEXT')" type="text" pInputText (blur)="change(value)" [(ngModel)]="valueText"
     [disabled]="!canEdit"  [style]="{ width: '250px', 'background-color': backgroundColor  }"/>
 
-<!-- <input (blur)="change(value)" type="number" *ngIf="getKind(value.property, 'NUMBER')" value="{{getValue(value)}}"/> -->
-<!-- number -> verificar $event -->
+
+<!-- number -->
 <p-inputNumber  *ngIf="getKind(value.property, 'NUMBER')" [style]="{ width: '250px'}" (onBlur)="change(value)" [(ngModel)]="valueNumber"
+
     [disabled]="!canEdit"> </p-inputNumber>
 
 
 
 <!-- date -->
 <span class="p-float-label" *ngIf="getKind(value.property, 'DATE')">
-    <p-calendar appendTo="body" [style]="{ width: '250px'}" (onSelect)="changeDate($event)" dateFormat="dd.mm.yy"
+
+    <p-calendar appendTo="body" [style]="{ width: '250px' }" (onSelect)="changeDate($event)"
         [disabled]="!canEdit"></p-calendar>
     <label for="birth_date">{{getValue()}}</label>
 </span>

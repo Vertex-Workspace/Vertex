@@ -14,18 +14,17 @@ import { MuralComponent } from './mural/mural.component';
 import { ChartModule } from 'primeng/chart';
 import { NoteModule } from 'src/app/components/reusable-components/note/note.module';
 import { BadgeModule } from 'primeng/badge';
-import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
 import { CardModule } from 'src/app/components/reusable-components/card/card.module';
 import { PropertiesModule } from 'src/app/components/modals/task/properties/properties.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
-import { AttachmentItemComponent } from 'src/app/components/reusable-components/attachment-item/attachment-item.component';
-import { AttachmentsComponent } from 'src/app/components/modals/task/attachments/attachments.component';
-import { LogComponent } from 'src/app/components/modals/task/log/log.component';
-
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { RatingModule } from 'primeng/rating';
 import { ReviewTaskComponent } from 'src/app/components/modals/review-task/review-task.component';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   declarations: [
@@ -37,6 +36,7 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
   ],
   imports: [
     TaskModule,
+    JoyrideModule.forChild(),
     CommonModule,
     RouterModule,
     BrowserModule,
@@ -54,11 +54,13 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
     CardModule,
     PropertiesModule,
     InputTextModule,
+    InputNumberModule,
     NoteModule,
     CreateTeamProjectModule,
-
+    CascadeSelectModule,
     //Standalone component
-    ReviewTaskComponent
+    ReviewTaskComponent,
+    PipesModule
   ],
 })
 export class TasksModule { }

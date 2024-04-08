@@ -7,6 +7,11 @@ import { CreateTeamProjectModule } from 'src/app/components/reusable-components/
 import { ListModule } from '../tasks/list/list.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
+import { FormsModule } from '@angular/forms';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
 
 
 @NgModule({
@@ -14,12 +19,17 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
   exports:[HomeComponent],
   imports: [
     CommonModule,
+    JoyrideModule,
     CardListModule,
     QuickAccessModule,
     CreateTeamProjectModule,
     ListModule,
     FontAwesomeModule,
-    TaskModule
+    TaskModule,
+    FormsModule,
+    CascadeSelectModule,
+    CalendarModule,
+    InputTextModule
   ],
 })
 export class HomeModule { }

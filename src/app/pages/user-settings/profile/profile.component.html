@@ -37,8 +37,8 @@
 
             <div class="rightSide">
                 <section>
-                    <div class="image relative">
-                        <img src="data:image/jpg;base64, {{logged.image}}" alt="" class="rounded-full">
+                    <div class="circular">
+                        <img src="data:image/jpg;base64, {{logged.image}}" alt="" class=" object-cover h-full w-full">
                         <form class="input-div">
                             <input type="file" class="input-file" (change)="onFileSelected($event)">
                         </form>

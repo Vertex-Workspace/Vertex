@@ -1,24 +1,32 @@
+
 import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { ActivatedRoute, ChildrenOutletContexts, NavigationEnd, NavigationError, NavigationStart, Route, Router, RouterLink, RouterOutlet } from '@angular/router';
+
 import { slideInAnimation } from './animations';
 import { PersonalizationService } from './services/personalization.service';
-import { faMessage, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+
 import { faPaperclip, faMicrophoneLines, faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons';
 import { AlertService } from './services/alert.service';
 import { LoadingService } from './services/loading.service';
+
 import { UserStateService } from './services/user-state.service';
 import { UserService } from './services/user.service';
 import { User } from './models/class/user';
-import { AppearanceComponent } from './pages/user-settings/appearance/appearance.component';
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
+
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { TextSpeechService } from './services/text-speech.service';
 import { Observable, of } from 'rxjs';
+
+import { NotificationWebSocketService } from './services/notification-websocket.service';
+import { Notification } from './models/class/notification';
+import { tutorialText } from './tutorialText';
 
 
 @Component({
@@ -34,6 +42,7 @@ export class AppComponent {
   [x: string]: any;
 
   title = 'Vertex';
+  tutorialText = tutorialText;
 
   inputColor: string = '#FFFFFF';
   fontColor: string = '#000000';
@@ -71,16 +80,19 @@ export class AppComponent {
     private alertService: AlertService,
     private teamService: TeamService,
     public textSpeechService: TextSpeechService,
+    private notificationWebSocket: NotificationWebSocketService
   ) {
     personalization.setPersonalization();
 
     this.logged = userService.getLogged();
     
     this.userState
+
     .getAuthenticationStatus()
     .subscribe((status: boolean) => {
       this.userLogged = status;
     });
+
   }
   
   // Sets the theme by default and make the persistence of the theme in all components
@@ -88,6 +100,7 @@ export class AppComponent {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
     this.userService.getOneById(user.id!).subscribe((logged) => {
       user = logged;
+
       this.logged = logged;
 
       if (user.personalization!.theme == 0) {
@@ -114,6 +127,28 @@ export class AppComponent {
       document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
       document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
     });
+    //Normal Notifications request
+    this.getNotificationBadge();
+
+    //Web Socket
+    this.notificationWebSocket.listenToServer().subscribe(
+      (change) => {
+        this.getNotificationBadge();
+        
+      }
+    )
+  }
+
+  notificationBadge: number = 0;
+  notifications: Notification[] = [];
+  private getNotificationBadge(): void {
+    this.userService.getNotifications(this.userService.getLogged().id!).subscribe(
+      (notifications) => {
+        let notificationsUnread = notifications.filter((notification) => !notification.isRead);
+        this.notificationBadge = notificationsUnread.length;
+        this.notifications = notifications;
+      }
+    );
   }
 
   getRouteAnimationData() {
