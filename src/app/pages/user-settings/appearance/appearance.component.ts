@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { faPencil, faSun, faMoon, faToggleOff, faToggleOn, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { PersonalizationService } from '../../../services/personalization.service';
 import { Personalization } from '../../../models/class/personalization';
@@ -20,111 +20,80 @@ export class AppearanceComponent implements OnInit {
   faToggleOff = faToggleOff;
   faCheck = faCheck;
 
-  constructor(
-    private personalizationService: PersonalizationService, 
-    private userService: UserService, 
-    private zone: NgZone,
-     private cdr: ChangeDetectorRef
-  ) { }
 
   logged !: User;
-  primaryLight!: string;
-  secondLight!: string;
-  primaryDark!: string;
-  secondDark!: string;
-  theme!: number;
-  selectedFontSize !: number;
-  selectedFontFamily!: string;
-  voiceCommand!: boolean;
-  listeningText!: boolean;
+
   checked!: boolean;
   checked2!: boolean;
 
   themesList!: any[];
 
+  newPers!: Personalization;
+
+  constructor(
+    private userService: UserService,
+  ) {
+  }
   // Sets the theme by default and make the persistence of the theme in this component
   ngOnInit(): void {
-    this.logged = this.userService.getLogged();
+    this.logged = JSON.parse(localStorage.getItem("logged")!);
 
     this.userService.getOneById(this.logged.id!).pipe(take(1)).subscribe((user) => {
-
-      this.primaryLight = user.personalization?.primaryColorLight!;
-      this.secondLight = user.personalization?.secondColorLight!;
-      this.primaryDark = user.personalization?.primaryColorDark!;
-      this.secondDark = user.personalization?.secondColorDark!;
-      this.theme = user.personalization?.theme!;
+      this.newPers.primaryColorLight = user.personalization?.primaryColorLight!;
+      this.newPers.secondColorLight = user.personalization?.secondColorLight!;
+      this.newPers.primaryColorDark = user.personalization?.primaryColorDark!;
+      this.newPers.secondColorDark = user.personalization?.secondColorDark!;
+      this.newPers.theme = user.personalization?.theme!;
 
       this.themesList = [
         {
-          mode: 'Tema Claro',
-          icon: faSun,
-          status: "selected",
-          secondColor: this.secondLight,
-          primaryColor: this.primaryLight,
+          mode: 'Tema Claro', icon: faSun, status: "selected", secondColor: "#F3F3F3",
+          primaryColor: this.newPers.primaryColorLight,
           types: [
             {
-              title: "Cor de Fundo",
+              title: "Cor Destaque",
               iconColor: '#000000',
               colors: [
-                { 'color': '#FFFFFF', status: 'unselected' },
-                { 'color': '#F3F3F3', status: 'selected' },
-                { 'color': '#E5DDF5', status: 'unselected' },
-                { 'color': '#DCE8F2', status: 'unselected' },
-                { 'color': '#FAEAEA', status: 'unselected' },
-                { 'color': '#F5FCF2', status: 'unselected' },
+                { 'color': '#007bff', status: 'selected' }, // Azul
+                { 'color': '#28a745', status: 'unselected' }, // Verde
+                { 'color': '#dc3545', status: 'unselected' }, // Vermelho
+                { 'color': '#ffc107', status: 'unselected' }, // Amarelo
+                { 'color': '#6610f2', status: 'unselected' }, // Roxo
+                { 'color': '#17a2b8', status: 'unselected' }, // Azul claro
+                { 'color': '#fd7e14', status: 'unselected' }, // Laranja
+                { 'color': '#6f42c1', status: 'unselected' }, // Roxo escuro
+                { 'color': '#20c997', status: 'unselected' }, // Verde claro
+                { 'color': '#e83e8c', status: 'unselected' }, // Rosa
+                { 'color': '#ff8fff', status: 'unselected' }, // Rosa claro
+                { 'color': '#007b5e', status: 'unselected' }, // Verde azulado
               ]
             },
-            {
-              title: "Cor Primária",
-              iconColor: '#F3F3F3',
-              colors: [
-                { 'color': '#092C4C', status: 'selected' },
-                { 'color': '#F5B1B1', status: 'unselected' },
-                { 'color': '#6F57A1', status: 'unselected' },
-                { 'color': '#000000', status: 'unselected' },
-                { 'color': '#A5A973', status: 'unselected' },
-                { 'color': '#83B172', status: 'unselected' },
-              ]
-            }
           ]
         },
         {
-          mode: 'Tema Escuro',
-          icon: faMoon,
-          status: "unselected",
-          secondColor: this.secondDark,
-          primaryColor: this.primaryDark,
+          mode: 'Tema Escuro', icon: faMoon, status: "unselected", secondColor: "#1E1E1E", primaryColor: this.newPers.primaryColorDark,
           types: [
             {
-              title: "Cor de Fundo",
-              iconColor: '#F3F3F3',
+              title: "Cor Destaque", iconColor: '#F3F3F3',
               colors: [
-                { 'color': '#574444', status: 'selected' },
-                { 'color': '#5B5555', status: 'unselected' },
-                { 'color': '#0B2740', status: 'unselected' },
-                { 'color': '#464646', status: 'unselected' },
-                { 'color': '#787878', status: 'unselected' },
-                { 'color': '#322438', status: 'unselected' },
+                { 'color': '#17a2b8', status: 'selected' }, // Azul claro
+                { 'color': '#fd7e14', status: 'unselected' }, // Laranja
+                { 'color': '#20c997', status: 'unselected' }, // Verde claro
+                { 'color': '#e83e8c', status: 'unselected' }, // Rosa
+                { 'color': '#ff8fff', status: 'unselected' }, // Rosa claro
+                { 'color': '#007b5e', status: 'unselected' }, // Verde azulado
+                { 'color': '#007bff', status: 'unselected' }, // Azul
+                { 'color': '#28a745', status: 'unselected' }, // Verde
+                { 'color': '#dc3545', status: 'unselected' }, // Vermelho
+                { 'color': '#ffc107', status: 'unselected' }, // Amarelo
+                { 'color': '#ADFF2F', status: 'unselected' }, // Roxo
+                { 'color': '#6f42c1', status: 'unselected' }, // Roxo escuro
               ]
             },
-            {
-              title: "Cor Primária",
-              iconColor: '#000000',
-              colors: [
-                { 'color': '#F3F3F3', status: 'selected' },
-                { 'color': '#F5B1B1', status: 'unselected' },
-                { 'color': '#A697C6', status: 'unselected' },
-                { 'color': '#BEDFF4', status: 'unselected' },
-                { 'color': '#FFC1C9', status: 'unselected' },
-                { 'color': '#83B172', status: 'unselected' },
-              ]
-            }
           ]
         }
       ];
-
-
-      if (this.theme == 0) {
+      if (this.newPers.theme == 0) {
         this.themesList[0].status = 'selected';
         this.themesList[1].status = 'unselected';
       } else {
@@ -137,21 +106,24 @@ export class AppearanceComponent implements OnInit {
       // this.changeFont(this.fontFamily[0]);  
       console.log(this.themesList);
 
-
-      this.selectedFontSize = user.personalization?.fontSize!;
-      this.selectedFontFamily = user.personalization?.fontFamily!;
-      this.voiceCommand = user.personalization?.voiceCommand!;
-      this.listeningText = user.personalization?.listeningText!;
+      this.newPers.fontSize = user.personalization?.fontSize!;
+      this.newPers.fontFamily = user.personalization?.fontFamily!;
+      this.newPers.signLanguage = user.personalization?.signLanguage!;
+      this.newPers.listeningText = user.personalization?.listeningText!;
     });
+    console.log(this.logged, "LOGGED");
+
+    this.newPers = this.logged.personalization!;
+
+    console.log(this.newPers, "NEWPERS");
   }
 
   changeThemesListSelected() {
-
     this.themesList.forEach((themes) => {
       if (themes.mode == "Tema Claro") {
         themes.types.forEach((type: any) => {
           type.colors.forEach((color: any) => {
-            if (color.color == this.primaryLight || color.color == this.secondLight) {
+            if (color.color == this.newPers.primaryColorLight || color.color == this.newPers.secondColorLight) {
               type.colors.forEach((color: any) => {
                 color.status = 'unselected';
               })
@@ -162,7 +134,7 @@ export class AppearanceComponent implements OnInit {
       } else if (themes.mode == "Tema Escuro") {
         themes.types.forEach((type: any) => {
           type.colors.forEach((color: any) => {
-            if (color.color == this.primaryDark || color.color == this.secondDark) {
+            if (color.color == this.newPers.primaryColorDark || color.color == this.newPers.secondColorDark) {
               type.colors.forEach((color: any) => {
                 color.status = 'unselected';
               })
@@ -174,64 +146,34 @@ export class AppearanceComponent implements OnInit {
     })
   }
 
+  toggleChangeSignLanguage(): boolean {
+    this.newPers.signLanguage = !this.newPers.signLanguage;
 
-  toggleChangeVoice(): boolean {
-    this.voiceCommand = !this.voiceCommand;
-
-
-    let newPers = new Personalization({
-      id: this.logged.id!,
-      primaryColorLight: this.themesList[0].primaryColor,
-      secondColorLight: this.themesList[0].secondColor,
-      primaryColorDark: this.themesList[1].primaryColor,
-      secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.selectedFontFamily,
-      fontSize: this.selectedFontSize,
-      theme: this.theme,
-      voiceCommand: this.voiceCommand,
-      listeningText: this.listeningText
-    });
-
-    console.log(newPers, "newPers");
-
-    this.userService.patchPersonalization(newPers).subscribe((pers) => {
-      this.logged.personalization = pers.personalization;
+    this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
+      this.logged = userWithNewPersonalization;
+      console.log(this.logged.personalization, "personalizationVoice");
       localStorage.setItem("logged", JSON.stringify(this.logged))
+      window.location.reload();
     });
 
-
-    return this.voiceCommand;
-
+    return this.newPers.signLanguage;
   }
 
   toggleChangeListening(): boolean {
-    this.listeningText = !this.listeningText;
+    this.newPers.listeningText = !this.newPers.listeningText;
 
-    let newPers = new Personalization({
-      id: this.logged.id!,
-      primaryColorLight: this.themesList[0].primaryColor,
-      secondColorLight: this.themesList[0].secondColor,
-      primaryColorDark: this.themesList[1].primaryColor,
-      secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.selectedFontFamily,
-      fontSize: this.selectedFontSize,
-      theme: this.theme,
-      voiceCommand: this.voiceCommand,
-      listeningText: this.listeningText
-    });
-
-    console.log(newPers, "newPers");
-
-    this.userService.patchPersonalization(newPers).subscribe((pers) => {
-      this.logged.personalization = pers.personalization;
+    this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
+      this.logged = userWithNewPersonalization;
       localStorage.setItem("logged", JSON.stringify(this.logged))
+      console.log(this.logged.personalization, "personalizationListen");
+      window.location.reload();      
     });
 
-    return this.listeningText;
+    return this.newPers.listeningText;
   }
 
   fontSizes: number[] = [
-    12, 14, 15, 16, 18, 20, 22, 24, 26, 28, 30
+    12, 14, 15, 16, 18, 20
   ]
 
   fontFamily = [
@@ -239,156 +181,105 @@ export class AppearanceComponent implements OnInit {
   ];
 
 
-  selectColor(theme: any, type: any, item: any): void {
-    this.foreachColors(theme, type, item);
-
-    let newPers = new Personalization({
-      id: this.logged.id!,
-      primaryColorLight: this.themesList[0].primaryColor,
-      secondColorLight: this.themesList[0].secondColor,
-      primaryColorDark: this.themesList[1].primaryColor,
-      secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.selectedFontFamily,
-      fontSize: this.selectedFontSize,
-      theme: this.theme,
-      voiceCommand: true,
-      listeningText: true
+  selectColor(theme: any, type: any, item: any) {
+    type.colors.forEach((element: { status: string; }) => {
+      element.status = 'unselected';
     });
+    
+    type.colors[item].status = 'selected';
+    if (type.title === 'Cor Destaque' && this.newPers.theme === 0) {
+      this.newPers.primaryColorLight = type.colors[item].color;
+      theme.primaryColor = type.colors[item].color;
+      document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
+    }
+    if (type.title === 'Cor Destaque' && this.newPers.theme === 1) {
+      theme.primaryColor = type.colors[item].color;
+      this.newPers.primaryColorDark = type.colors[item].color;
+      document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
+    }
 
-    console.log(newPers, "newPers");
+    document.documentElement.style.transition = 'color 0.5s, background-color 0.5s';
+    console.log(this.newPers, "newPers");
 
-    this.userService.patchPersonalization(newPers).subscribe((pers) => {
-      this.logged.personalization = pers.personalization;
-      localStorage.setItem("logged", JSON.stringify(this.logged))
-      console.log(this.logged.personalization);
-      if (this.logged.personalization!.theme == 0) {
-        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
-        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
-      } else if (this.logged.personalization!.theme == 1) {
-        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
-        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
-      }
-    });
-  }
-
-  foreachColors(theme: any, type: any, item: number): void {
-    -
-      type.colors.forEach((element: { status: string; }) => {
-        element.status = 'unselected';
-
-        type.colors[item].status = 'selected';
-        if (type.title === 'Cor Primária' && theme.mode === 'Tema Claro') {
-          theme.primaryColor = type.colors[item].color;
-          document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
-
-          console.log(theme.primaryColor);
-        }
-        if (type.title === 'Cor Primária' && theme.mode === 'Tema Escuro') {
-          theme.primaryColor = type.colors[item].color;
-          document.documentElement.style.setProperty('--primaryColor', type.colors[item].color);
-        }
-        if (type.title === 'Cor de Fundo' && theme.mode === 'Tema Claro') {
-          theme.secondColor = type.colors[item].color;
-          document.documentElement.style.setProperty('--secondColor', type.colors[item].color);
-        }
-        if (type.title === 'Cor de Fundo' && theme.mode === 'Tema Escuro') {
-          theme.secondColor = type.colors[item].color;
-          document.documentElement.style.setProperty('--secondColor', type.colors[item].color);
+    setTimeout(() => {
+      this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
+        this.logged = userWithNewPersonalization;
+        this.newPers = userWithNewPersonalization.personalization!;
+        localStorage.setItem("logged", JSON.stringify(this.logged))
+        console.log(this.logged.personalization);
+        if (this.logged.personalization!.theme == 0) {
+          document.documentElement.style.setProperty('--primaryColor', this.newPers.primaryColorLight!);
+          document.documentElement.style.setProperty('--secondColor', this.newPers.secondColorLight!);
+          document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
+          document.documentElement.style.setProperty('--card', "#FFFFFF");
+          document.documentElement.style.setProperty('--text', "#000000");
+        } else if (this.logged.personalization!.theme == 1) {
+          document.documentElement.style.setProperty('--primaryColor', this.newPers.primaryColorDark!);
+          document.documentElement.style.setProperty('--secondColor', this.newPers.secondColorDark!);
+          document.documentElement.style.setProperty('--emphasis', "#161616");
+          document.documentElement.style.setProperty('--card', "#161616");
+          document.documentElement.style.setProperty('--text', "#BABABA");
         }
       });
+    }, 800); 
   }
+
 
   selectTheme(item: any) {
-
     this.themesList.forEach((theme) => {
       theme.status = 'unselected';
-    })
-    this.themesList[item].status = 'selected';
-    this.theme = item;
-    this.saveTheme();
-
-  }
-
-  saveTheme() {
-    let newPers = new Personalization({
-      id: this.logged.id!,
-      primaryColorLight: this.themesList[0].primaryColor,
-      secondColorLight: this.themesList[0].secondColor,
-      primaryColorDark: this.themesList[1].primaryColor,
-      secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.selectedFontFamily,
-      fontSize: this.selectedFontSize,
-      theme: this.theme,
-      voiceCommand: true,
-      listeningText: true
     });
-
-    this.userService.patchPersonalization(newPers).subscribe((pers) => {
-      this.logged.personalization = pers.personalization;
-
+    this.themesList[item].status = 'selected';
+    this.newPers.theme = item;
+  
+    // seleciona a cor de destaque 
+    const selectedColor = this.themesList[item].types[0].colors.find((color: any) => color.status === 'selected');
+    const selectedColorIndex = this.themesList[item].types[0].colors.indexOf(selectedColor);
+  
+    // chama selectColor para atualizar a cor de destaque
+    this.selectColor(this.themesList[item], this.themesList[item].types[0], selectedColorIndex);
+  
+    this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
+      this.logged = userWithNewPersonalization;
+  
       localStorage.setItem("logged", JSON.stringify(this.logged));
-
-
+  
       if (this.logged.personalization!.theme == 0) {
-        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
-        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
+        document.documentElement.style.setProperty('--primaryColor', this.newPers.primaryColorLight!);
+        document.documentElement.style.setProperty('--secondColor', this.newPers.secondColorLight!);
+        document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
+        document.documentElement.style.setProperty('--card', "#FFFFFF");
         document.documentElement.style.setProperty('--text', "#000000");
       } else if (this.logged.personalization!.theme == 1) {
-        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
-        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
-        document.documentElement.style.setProperty('--text', "#FFFFFF");
+        document.documentElement.style.setProperty('--primaryColor', this.newPers.primaryColorDark!);
+        document.documentElement.style.setProperty('--secondColor', this.newPers.secondColorDark!);
+        document.documentElement.style.setProperty('--emphasis', "#161616");
+        document.documentElement.style.setProperty('--card', "#161616");
+        document.documentElement.style.setProperty('--text', "#BABABA");
       }
     });
   }
 
   changeFontFamily() {
-    let newPers = new Personalization({
-      id: this.logged.id!,
-      primaryColorLight: this.themesList[0].primaryColor,
-      secondColorLight: this.themesList[0].secondColor,
-      primaryColorDark: this.themesList[1].primaryColor,
-      secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.selectedFontFamily,
-      fontSize: this.selectedFontSize,
-      theme: this.theme,
-      voiceCommand: true,
-      listeningText: true
-    });
-
-    console.log(newPers, "newPers");
-
-
-    this.userService.patchPersonalization(newPers).subscribe((pers) => {
-      this.logged.personalization = pers.personalization;
-
+    console.log(this.newPers, "newPers");
+    this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
+      
+      this.logged = userWithNewPersonalization;
       localStorage.setItem("logged", JSON.stringify(this.logged));
       document.documentElement.style.setProperty('--fontFamily', this.logged.personalization?.fontFamily!);
     })
   }
 
   changeFontSize() {
-    let newPers = new Personalization({
-      id: this.logged.id!,
-      primaryColorLight: this.themesList[0].primaryColor,
-      secondColorLight: this.themesList[0].secondColor,
-      primaryColorDark: this.themesList[1].primaryColor,
-      secondColorDark: this.themesList[1].secondColor,
-      fontFamily: this.selectedFontFamily,
-      fontSize: this.selectedFontSize,
-      theme: this.theme,
-      voiceCommand: true,
-      listeningText: true
-    });
-
-    let smallText = this.selectedFontSize - 2;
+    let smallText = this.newPers.fontSize! - 2;
     console.log(smallText);
 
-    let regularText = this.selectedFontSize;
-    let mediumText = Number(this.selectedFontSize) + 2;
-    let largeText = Number(this.selectedFontSize) + 4;
+    let regularText = this.newPers.fontSize;
+    let mediumText = Number(this.newPers.fontSize) + 2;
+    let largeText = Number(this.newPers.fontSize) + 4;
 
-    this.userService.patchPersonalization(newPers).subscribe((pers) => {
-      this.logged.personalization = pers.personalization;
+    this.userService.patchPersonalization(this.newPers).subscribe((userWithNewPersonalization) => {
+      this.logged = userWithNewPersonalization
 
       localStorage.setItem("logged", JSON.stringify(this.logged));
       document.documentElement.style.setProperty('--smallText', smallText + 'px');
@@ -400,8 +291,8 @@ export class AppearanceComponent implements OnInit {
   }
 
   getSelectedOptions(): void {
-    this.selectedFontSize = this.logged.personalization!.fontSize!;
-    this.selectedFontFamily = this.logged.personalization!.fontFamily!;
+    this.newPers.fontSize = this.logged.personalization!.fontSize!;
+    this.newPers.fontFamily = this.logged.personalization!.fontFamily!;
   }
 
 }

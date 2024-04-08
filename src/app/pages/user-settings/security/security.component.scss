@@ -7,7 +7,7 @@
 
 .title {
     @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
-    border-color: $emphasis;
+    border-color: $primaryColor;
         div {
             @apply flex w-[20%] items-center justify-start gap-5;
         }
@@ -18,12 +18,15 @@
     color:$primaryColor !important;
 }
 
+
 .size {
     @apply text-[18px];
 }
 
 input {
-    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[46px];
+    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[48px];
+    background-color: $card;
+    color: $text !important;
 }
 
 .iconInputBlock {
@@ -31,7 +34,7 @@ input {
 
     .iconBox {
          @apply flex w-[12%] h-12 justify-center items-center rounded-l-sm;
-         background-color: $emphasis;
+         background-color: $card;
      }
 }
 

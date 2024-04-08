@@ -7,7 +7,8 @@
         @apply flex w-[90%] h-full;
 
         section {
-            @apply w-[25%] h-[90%] border-r-2 border-solid border-[#96A4B0] flex flex-col;
+            @apply w-[25%] h-[90%] border-r-2 border-solid flex flex-col;
+            border-color: $primaryColor;
 
             ul {
                 @apply 
@@ -22,14 +23,16 @@
                     }
                     
                     .divOptions {
-                        @apply flex w-[100%] h-full items-center
+                        @apply flex w-[100%] h-full items-center;
+                        background: $secondColor; 
                     }
 
                     button {
                         @apply w-full;
-
+                        background: $secondColor; 
                         p{
                             @apply w-full flex items-start;
+                            background: $secondColor; 
                         }
                     }
                 }
@@ -46,17 +49,13 @@
 .icon {
     color: $primaryColor
 }
-.click {
-    background-color: $emphasis;
-    @apply rounded-r-sm;
-}
-
-.default {
-    background-color: $secondColor;
-}
+// .click {
+    
+//     @apply rounded-r-sm;
+// }
 
 .clickBlue {
-    @apply border-l-8 border-solid rounded-l-md;
+    @apply border-l-8 border-solid;
     border-color: $primaryColor;
     background-color: $emphasis;
 }

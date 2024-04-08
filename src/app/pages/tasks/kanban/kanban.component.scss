@@ -4,32 +4,34 @@
   @apply min-h-[50px] flex pt-4;
 
   .col-container {
-      @apply gap-6 max-w-full min-h-[50px] overflow-auto flex overflow-y-hidden;
-
-      .col {
-        @apply min-w-[300px] w-[300px] flex flex-col
-        gap-[12px] p-4 shadow-md mb-16;
-        
-          h6 {
-            @apply pl-3;
-          }
-
-          h4:hover{
-            @apply cursor-pointer
-          }
-          button:hover{
-            @apply cursor-pointer;
-          }
-
-          button{
-            font-size: 1.5rem;
-          }
-
-          .col-items {
-            @apply flex flex-col gap-5 items-center pt-5;
-          }
-        
+    @apply gap-6 max-w-full min-h-[50px] overflow-auto flex overflow-y-hidden;
+    color: black;
+    
+    .col {
+      @apply min-w-[300px] w-[300px] flex flex-col gap-[12px] p-4 shadow-md mb-16;
+      
+      h6 {
+        color: black;
+        @apply pl-3;
       }
+
+      h4:hover {
+        @apply cursor-pointer
+      }
+
+      button:hover {
+        @apply cursor-pointer;
+      }
+
+      button {
+        font-size: 1.5rem;
+      }
+
+      .col-items {
+        @apply flex flex-col gap-5 items-center pt-5;
+      }
+
+    }
   }
 }
 

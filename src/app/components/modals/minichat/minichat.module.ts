@@ -16,7 +16,8 @@ import { InputModule } from '../../../components/reusable-components/input/input
     // PickerModule,
     FontAwesomeModule,
     FormsModule,
-    InputModule
+    InputModule,
+    PickerModule
   ]
 })
 export class MinichatModule { }

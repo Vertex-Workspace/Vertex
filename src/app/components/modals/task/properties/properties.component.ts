@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 
+
 @Component({
   selector: 'app-properties',
   templateUrl: './properties.component.html',
@@ -73,6 +74,6 @@ export class PropertiesComponent {
         return valuePropertyList.color;
       }
     }
-    return "";
+    return document.documentElement.style.getPropertyValue('--card');
   }
 }

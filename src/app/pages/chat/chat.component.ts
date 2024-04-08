@@ -15,7 +15,7 @@ import { User } from 'src/app/models/class/user';
 import { Message } from 'src/app/models/class/message';
 import { TeamService } from '../../services/team.service';
 import { PersonalizationService } from 'src/app/services/personalization.service';
-
+import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chat',
@@ -25,6 +25,7 @@ import { PersonalizationService } from 'src/app/services/personalization.service
 })
 export class ChatComponent {
 
+  faCommentSlash = faCommentSlash;
   faSmile = faSmile;
   faSearch = faSearch;
   faCircleUser = faCircleUser;
@@ -56,6 +57,8 @@ export class ChatComponent {
 
   side: boolean = true;
 
+  hasAnyChat: boolean = false;
+
   logged!: User;
 
 
@@ -66,12 +69,20 @@ export class ChatComponent {
         chat.userTeams!.forEach((userTeam) => {
           if (userTeam.user.id == this.logged.id) {
             if (chat.userTeams!.length > 1) {
+              this.hasAnyChat = true;
               this.conversations.push(chat);
+            }
+            else {
+              this.hasAnyChat = false;
+              this.conversations=[];
             }
           }
         });
       });
     });
+
+    console.log(this.conversations);
+    
   }
 
   showEmojiPicker: boolean = false;
@@ -236,8 +247,10 @@ export class ChatComponent {
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
       this.chat.messages = messages;
 
-      let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
-      a.scrollTo(a.scrollTop, a.scrollHeight);
+      setTimeout(() => {
+        let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
+        a.scrollTop = a.scrollHeight;
+      }, 0);
     });
   }
   
