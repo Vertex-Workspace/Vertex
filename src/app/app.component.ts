@@ -82,16 +82,15 @@ export class AppComponent {
     public textSpeechService: TextSpeechService,
     private notificationWebSocket: NotificationWebSocketService
   ) {
-    personalization.setPersonalization();
-
-    this.logged = userService.getLogged();
     
     this.userState
-
     .getAuthenticationStatus()
     .subscribe((status: boolean) => {
       this.userLogged = status;
     });
+
+    console.log(this.userLogged);
+    
 
   }
   
