@@ -28,7 +28,7 @@
     }
     
     .functionally-items {
-        @apply flex flex-col w-full h-full;
+        @apply flex flex-row w-full h-full;
 
         
     }
@@ -488,7 +488,7 @@
     }
     
     .functionally-items {
-        @apply flex flex-row w-full h-full;
+        @apply flex flex-col w-full h-full;
     }
     
     .functionally-items-task {
@@ -502,7 +502,7 @@
     .functionally-items-task {
     
         .filter-items {
-            @apply flex gap-2;
+            @apply flex gap-2 hidden;
     
             button {
                 border: none;
@@ -574,7 +574,7 @@
     
     // TASK - FILTER ORDER
     .filter-settings {
-        @apply flex gap-3 h-[5%] mt-6 justify-start;
+        @apply flex gap-3 h-[5%] justify-start w-auto;
     
         p {
             color: $primaryColor;
