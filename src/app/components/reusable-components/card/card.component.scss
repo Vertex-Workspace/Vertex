@@ -4,9 +4,12 @@
     @apply p-3 rounded-sm
     shadow-md flex flex-col gap-8 border-l-[12px] cursor-pointer;
     background-color: $card;
+    
+    transition:0.3s;
 
     &:hover {
-        scale: 1.015
+        scale: 1.015;
+        transition:0.3s
     }
 }
 

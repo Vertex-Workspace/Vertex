@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="hasAnyChat">
 
     <header>
 
@@ -54,27 +54,30 @@
                 </div>
             </div> -->
 
-            <div class="main-section-left">
-                <ng-container *ngFor="let chatFor of conversations">
-                    <div (click)="openConversation(chatFor)"
-                        [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
-                        <div class="user-card-message">
-                            <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
-                            <div class="flex flex-col">
-                                <p>{{chatFor.name}}</p>
+            <div class="main-section-left gap-2">
+
+                <div class="w-full flex justify-center" *ngIf="hasAnyChat">
+                    <ng-container *ngFor="let chatFor of conversations">
+                        <div (click)="openConversation(chatFor)"
+                            [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
+                            <div class="user-card-message">
+                                <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
+                                <div class="flex flex-col">
+                                    <p class="chatName">{{chatFor.name}}</p>
+                                </div>
                             </div>
+
+                            <!-- <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
+                            <div class="div-time-message">
+    
+                                <div class="div-time">
+                                    <fa-icon class="section-icons" [icon]="faCheckDouble"></fa-icon>
+                                </div>
+                            </div> -->
                         </div>
 
-                        <!-- <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
-                        <div class="div-time-message">
-
-                            <div class="div-time">
-                                <fa-icon class="section-icons" [icon]="faCheckDouble"></fa-icon>
-                            </div>
-                        </div> -->
-                    </div>
-
-                </ng-container>
+                    </ng-container>
+                </div>
             </div>
         </div>
 
@@ -82,7 +85,7 @@
 
             <div *ngIf="!chat" class="center-div justify-center">
                 <div class="flex flex-col items-center gap-5 pb-20">
-                    <img class="w-40 h-40" src="../../../assets/messageImage.png" alt="">
+                    <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>
                     <h6>Não há nenhuma conversa aberta no momento.</h6>
                 </div>
             </div>
@@ -105,7 +108,7 @@
 
                         <div *ngIf="!message.file"
                             [ngClass]="logged.firstName!==message.user ? 'message-bubble-left' : 'message-bubble-right'">
-                            <p class="text-base whitespace-pre-wrap">{{ message.contentMessage }}</p>
+                            <p class="contentMessage whitespace-pre-wrap">{{ message.contentMessage }}</p>
                             <p [ngClass]="message.user !== logged.firstName ? 'timestamp' : 'timestamp text-right'">{{
                                 generateTime(message) }}</p>
                         </div>
@@ -135,10 +138,10 @@
 
             <form *ngIf="chat && chat.messages!=null" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)"
                 #sendForm="ngForm" class="high-input-div justify-center">
-                <div class="flex pr-5 gap-4  w-[80%] h-[45%] bg-white">
+                <div class="divWhiteInput">
 
                     <textarea type="text" name="message" id="input-message"
-                        class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
+                        class="form-control text-black focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
                         [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
                     <div class="emoji-wrapper">
 
@@ -177,4 +180,10 @@
     </main>
 
 
+</section>
+
+<section class="gap-8" *ngIf="!hasAnyChat">
+    <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>
+    <p class="pHasNoOneChat">Você ainda não possui nenhum chat cadastrado no sistema. Para criar um chat adicione
+        membros a sua equipe!</p>
 </section>

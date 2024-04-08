@@ -1,3 +1,12 @@
+@import '../../../../_variables.scss';
+
 input, p, select{
     @apply w-full flex h-full justify-center items-center px-3;
+    background-color: $card;
+}
+
+::ng-deep .p-inputtext{
+    @apply w-full flex h-full justify-center items-center px-3;
+    background-color: $card ;
+    
 }

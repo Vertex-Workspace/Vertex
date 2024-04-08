@@ -10,6 +10,13 @@
         <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
     </div>
     <div class="order regular-text">
+        <p>Ordenar por </p>
+        <select class="select">
+            <option *ngFor="let item of orderSettings">
+                {{ item }}
+            </option>
+        </select>
+  
         <p class="text-lg h-full flex items-center">Filtrar por </p>
         <p-dropdown 
             [options]="orderSettings" 

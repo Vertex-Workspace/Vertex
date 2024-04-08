@@ -197,6 +197,12 @@ section {
 .search {
     @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
     rounded shadow-md border-none;
+    background-color: $card;
+}
+
+.searchInput{
+    background-color: $card;
+    color: $text;
 }
 
 .card-user-grid{
@@ -262,6 +268,7 @@ section {
 
 textarea {
     @apply flex py-2 rounded-sm w-full;
+    background-color: $secondColor;
     resize: none;
     opacity: 0.7;
     min-height: 100px;
@@ -292,6 +299,9 @@ button{
 }
 table, th, td {
     border:1px solid black;
+}
+td{
+    color: $text;
 }
 table > tr {
     height: 40px ;

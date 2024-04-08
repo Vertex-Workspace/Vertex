@@ -1,15 +1,18 @@
 <!-- text -->
 <input *ngIf="getKind(value.property, 'TEXT')" type="text" pInputText (blur)="change(value)" [(ngModel)]="valueText"
-    [disabled]="!canEdit" />
+    [disabled]="!canEdit"  [style]="{ width: '250px', 'background-color': backgroundColor  }"/>
+
 
 <!-- number -->
-<p-inputNumber  *ngIf="getKind(value.property, 'NUMBER')" (onBlur)="change(value)" [(ngModel)]="valueNumber"
+<p-inputNumber  *ngIf="getKind(value.property, 'NUMBER')" [style]="{ width: '250px'}" (onBlur)="change(value)" [(ngModel)]="valueNumber"
+
     [disabled]="!canEdit"> </p-inputNumber>
 
 
 
 <!-- date -->
 <span class="p-float-label" *ngIf="getKind(value.property, 'DATE')">
+
     <p-calendar appendTo="body" [style]="{ width: '250px' }" (onSelect)="changeDate($event)"
         [disabled]="!canEdit"></p-calendar>
     <label for="birth_date">{{getValue()}}</label>
@@ -18,13 +21,13 @@
 <!-- status -->
 <p-cascadeSelect *ngIf="getKind(value.property, 'STATUS')" [options]="getSelectOptions(value)" [(ngModel)]="value.value"
     optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="[]"
-    [style]="{ width: '250px',  'background-color': backgroundColor }" placeholder="{{getValue()}}"
+    [style]="{ width: '250px', 'background-color': backgroundColor  }" placeholder="{{getValue()}}"
     (onChange)="changeList($event, value)" appendTo="body" [disabled]="!canEdit">
     <ng-template pTemplate="option" let-option>
         <div class="flex items-center justify-center gap-2">
             <span class="mr-2 w-[17px] h-[17px] rounded-full" [style.backgroundColor]="option.color"></span>
             <span>{{ option.value }}</span>
-        </div>
+        </div> 
     </ng-template>
 </p-cascadeSelect>
 

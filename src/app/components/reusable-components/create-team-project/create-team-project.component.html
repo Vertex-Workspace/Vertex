@@ -37,15 +37,19 @@
     </div>
 
     <p class="medium-text pt-3">Responsáveis</p>
-    <p-treeSelect formControlName="listOfResponsibles" class="w-[65%] md:w-20rem pt-4" containerStyleClass="w-full"
-      display="chip" [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
+
+    <p-treeSelect *ngIf="typeString === 'project' || typeString === 'projectInfo'" 
+      class="flex items-start justify-start w-[65%] pt-2" containerStyleClass="w-full" display="chip"
+      [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
       placeholder="Atribue responsáveis ao projeto" [(ngModel)]="selectedUsers"
-      *ngIf="typeString === 'project' || typeString === 'projectInfo'">
+      [style]="{ 'background-color': 'var(--card)', color: 'var(--text)'}"
+      formControlName="listOfResponsibles">
     </p-treeSelect>
 
     <p class="medium-text pt-3">Revisão de Tarefas</p>
     <p-dropdown *ngIf="typeString === 'project' || typeString === 'projectInfo'"
       class="flex items-start justify-start w-[65%] pt-2" [options]="optionsReview"
+      [style]="{ background: 'var(--card)', color: 'var(--text)'}"
       formControlName="projectReviewENUM"></p-dropdown>
 
     <div class="div-buttons">

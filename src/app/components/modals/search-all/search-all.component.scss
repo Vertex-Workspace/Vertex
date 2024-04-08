@@ -10,8 +10,16 @@
 
     input {
         @apply w-[90%] h-full outline-none flex items-center pl-2;
+        background-color: $card;    
+        color: $text;
     }
 }
+
+.select{
+    background-color: $card;
+    @apply p-2 rounded-sm;
+}
+
 .order{
     @apply flex flex-row w-full h-[14%] items-center gap-5;
 
@@ -22,8 +30,8 @@
     overflow-x: hidden;
     overflow-y: auto;
     .card-searched{
-        @apply flex w-full flex-row items-center justify-between px-8 py-10;
-        min-height: 110px;
+        @apply flex w-[98$] rounded-sm flex-row items-center justify-between px-8 py-10;
+        min-height: 80px;
         text-align: start;
         background-color: $card;
         cursor: pointer;

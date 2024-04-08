@@ -8,9 +8,7 @@
 
 
     <div class="w-[85%]">
-        <form action="POST" [formGroup]="form" 
-            (ngSubmit)="onSubmit()" class="w-full max-h-full"
-        >
+        <form action="POST" [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full max-h-full">
 
             <div *ngFor="let item of passwords; index as i">
                 <section>
@@ -22,7 +20,7 @@
                         <span (ngSubmit)="passwordValidation()">
                             <div class="h-full w-full p-input-icon-right">
                                 <input [type]="item.statusEye ? 'text' : 'password'"
-                                class="small-text" formControlName="{{item.formControlName}}" />
+                                    formControlName="{{item.formControlName}}" />
                                 <i (click)="passwordEye(item)" class="pi pi-eye icon" *ngIf="!item.statusEye"></i>
                                 <i (click)="passwordEye(item)" class="pi pi-eye-slash icon" *ngIf="item.statusEye"></i>
                             </div>
@@ -30,26 +28,25 @@
                     </div>
                 </section>
             </div>
-        
 
-        <div class="requires">
-            <div class="small-text">
-                <p class="medium-text">Requisitos para uma boa senha:</p>
-                <p>*8 caracteres ou mais</p>
-                <p>*Pelo menos uma letra maiúscula</p>
-                <p>*Pelo menos um caractere especial (#@!%$)</p>
-                <p>*As senhas coincidem</p>
-            </div>
 
-            <div>
-                <button type="submit" (click)="clickOption('edit')"
-                    [disabled]="!form.valid"
-                    [ngClass]="form.valid ? 'edit' : 'noEdit'">
-                    Redefinir
-                </button>
+            <div class="requires">
+                <div class="small-text">
+                    <p class="medium-text">Requisitos para uma boa senha:</p>
+                    <p>*8 caracteres ou mais</p>
+                    <p>*Pelo menos uma letra maiúscula</p>
+                    <p>*Pelo menos um caractere especial (#@!%$)</p>
+                    <p>*As senhas coincidem</p>
+                </div>
+
+                <div>
+                    <button type="submit" (click)="clickOption('edit')" [disabled]="!form.valid"
+                        [ngClass]="form.valid ? 'edit' : 'noEdit'">
+                        Redefinir
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
     </div>
 
 </div>

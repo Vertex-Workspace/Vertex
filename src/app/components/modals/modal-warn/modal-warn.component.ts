@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-modal-warn',
@@ -6,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./modal-warn.component.scss']
 })
 export class ModalWarnComponent {
+  faTimes = faTimes;
 
   @Output()
   close = new EventEmitter<Event>();

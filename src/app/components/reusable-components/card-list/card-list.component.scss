@@ -5,7 +5,7 @@
     }
 
     .card{
-        @apply flex w-full h-[400px] shadow-lg rounded-sm flex-row;
+        @apply flex w-full h-[400px] shadow-lg rounded-sm flex-row ;
         background-color: $card;
         font-family: $fontFamily;
         color: $text;
@@ -13,7 +13,7 @@
     
         &:hover{
             background-color: $secondColor;
-            @apply transition-colors duration-300;
+            @apply transition-colors duration-300 brightness-90;
         }
 
         .image {

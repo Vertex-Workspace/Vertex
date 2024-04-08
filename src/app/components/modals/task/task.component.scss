@@ -28,11 +28,17 @@
 .base {
     @apply w-full flex flex-col p-5 rounded-md;
     -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-	        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    background-color: $card !important;
 }
 
 .div-timer-closeModal{
     @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
+}
+
+a{
+    color: $text;
+    background-color: #242222b7;
 }
 
 .div-timer{
@@ -87,6 +93,7 @@
     p:first-child {
         @apply w-full;
     }
+    background-color: $card;
 
 }
 
@@ -112,8 +119,9 @@
 
 #red-btn{
     background-color: $error;
-    color: $secondColor;
+    color: white;
     @apply px-2 w-[150px];
+    border: none !important;
 }
 #red-btn:hover{
     background-color: $secondColor;
@@ -211,7 +219,7 @@
 @media (max-width: 899px) {}
 
 input:hover{
-    background-color: #f3f0f0;
+    
     cursor: pointer;
 }
 input:focus{
@@ -224,7 +232,7 @@ textarea {
     resize: none;
     min-height: 150px;
     border: none;
-    background-color: inherit;
+    background-color: $card;
 }
 textarea:focus{
     @apply shadow-md rounded-sm;

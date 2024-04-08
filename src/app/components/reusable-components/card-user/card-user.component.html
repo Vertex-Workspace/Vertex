@@ -4,6 +4,7 @@
             <div class="overflow-hidden h-20 w-20 pt-2 pl-2"(click)="goToProfile()">
                 <img src="data:image/jpg;base64, {{user.image}}" alt="" class="rounded-full object-cover h-full w-full">
             </div>
+
             <div class="pl-3">
                 <p (click)="goToProfile()">{{user.firstName}} <span *ngIf="!isNonCreatorCard">(você)</span> </p>
                 <p>{{user.email}}</p>

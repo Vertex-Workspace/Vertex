@@ -11,7 +11,6 @@ import { ModalPropertiesModule } from 'src/app/components/modals/properties/moda
 import { KanbanModule } from './kanban/kanban.module';
 import { ListModule } from './list/list.module';
 import { MuralComponent } from './mural/mural.component';
-import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { ChartModule } from 'primeng/chart';
 import { NoteModule } from 'src/app/components/reusable-components/note/note.module';
 import { BadgeModule } from 'primeng/badge';
@@ -22,6 +21,7 @@ import { CreateTeamProjectModule } from 'src/app/components/reusable-components/
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { RatingModule } from 'primeng/rating';
 import { ReviewTaskComponent } from 'src/app/components/modals/review-task/review-task.component';
+import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { JoyrideModule } from 'ngx-joyride';
@@ -35,6 +35,7 @@ import { JoyrideModule } from 'ngx-joyride';
     TasksComponent
   ],
   imports: [
+    TaskModule,
     JoyrideModule.forChild(),
     CommonModule,
     RouterModule,
@@ -43,7 +44,6 @@ import { JoyrideModule } from 'ngx-joyride';
     DragDropModule,
     FormsModule,
     CalendarModule,
-    TaskModule,
     ListModule,
     KanbanModule,
     ChartModule,

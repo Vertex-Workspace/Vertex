@@ -5,18 +5,17 @@
             <div class="flex flex-row items-end gap-3">
                 <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>
             </div>
-            <div class="pt-2">
-                <p class="small-text text-gray-600">Projetos são os diferentes espaços de trabalho de uma equipe, neles
-                </p>
-                <p class="small-text text-gray-600">é possível segmentar assuntos e organizar as tarefas sua e/ou do
-                    time.</p>
+
+            <div class="text small-text pt-2">
+                <p>Projetos são os diferentes espaços de trabalho de uma equipe, neles</p>
+                <p>é possível segmentar assuntos e organizar as tarefas sua e/ou do time.</p>
             </div>
             <div class="flex flex-col" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
                 [title]="'Visualizar / Criar projetos'" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[5] }">
                 <div class="functionally-items regular-text">
                     <div class="search">
-                        <input type="text" placeholder="Pesquisar por um projeto..." [(ngModel)]="projectSearch">
+                        <input class="inputSearch" type="text" placeholder="Pesquisar por um projeto..." [(ngModel)]="projectSearch">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
@@ -46,17 +45,19 @@
                 <div class="flex flex-row items-end gap-3">
                     <h4>Tarefas de {{teamName}}</h4>
                 </div>
-                <div class="pt-2">
-                    <p class="small-text text-gray-600">Nessa seção é possível visualizar todas as tarefas na qual você
-                    </p>
-                    <p class="small-text text-gray-600">é um dos responsáveis dentro da equipe {{teamName}}</p>
+
+                <div class="text small-text pt-2">
+                    <p>Nessa seção é possível visualizar todas as tarefas na qual você</p>
+                    <p>é um dos responsáveis dentro da equipe {{teamName}}</p>
                 </div>
+                          
                 <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
                     [title]="'Visualizar tarefas da equipe'" [stepContent]="customContent"
                     [stepContentParams]="{ texto: tutorialText[6] }">
+                  
                     <div class="functionally-items regular-text">
                         <div class="search">
-                            <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="queryFilter">
+                            <input  class="inputSearch" type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="queryFilter">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
                         <div class="filter-items">

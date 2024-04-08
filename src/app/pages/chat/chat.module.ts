@@ -4,7 +4,8 @@ import { ChatComponent } from './chat.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InputModule } from "../../components/reusable-components/input/input.module";
 import { FormsModule } from '@angular/forms';
-// import { PickerModule } from '@ctrl/ngx-emoji-mart';
+
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
         // PickerModule,
         FormsModule,
         FontAwesomeModule,
-        InputModule
+        InputModule,
+        PickerModule
     ]
 })
 export class ChatModule { }
