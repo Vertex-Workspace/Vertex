@@ -100,7 +100,7 @@ export class CardListComponent implements OnInit {
     this.loggedUser = this.userService.getLogged();
     // this.teamService.getOneById(this.team.)
     
-    this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project []) => {
+    this.projectService.getProjectByCollaborators(teamId, this.loggedUser!).subscribe((projects: Project []) => {
       this.projects = projects
     })
     

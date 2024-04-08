@@ -13,15 +13,7 @@ import { User } from '../models/class/user';
 export class PersonalizationService {
   constructor(private http: HttpClient) { }
 
-  setPersonalization(): void {
-    // const defaultColors: Personalization = {
-    //   primaryColor: 1,
-    //   secondColor: 1,
-    //   tittleFont: "'Manrope', sans-serif",
-    //   textFont: "'Inter', sans-serif",
-    // };
-    // localStorage.setItem('personalization', JSON.stringify(defaultColors));
-  }
+  
   findById(id:number): Observable<Personalization> {
     return this.http.get<Personalization>(`${URL}personalization/${id}`)
     .pipe(map((personalization: Personalization) => new Personalization(personalization)));;
