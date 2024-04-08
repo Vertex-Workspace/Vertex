@@ -88,6 +88,7 @@ export class CreateTeamProjectComponent implements OnInit {
   name !: string
   description?: string
   usersGroup !: User[];
+  dependency?: string
 
 
   projectExists() {
@@ -95,16 +96,21 @@ export class CreateTeamProjectComponent implements OnInit {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
-
+      if (this.project.projectDependency != null) {
+        this.dependency = this.project.projectDependency.name
+      }else {
+        this.dependency = "Atribue dependência"
+      }
       this.getGroups(this.project.idTeam)
       this.getUsers(this.project.idTeam)
+      this.getAllProjects(this.project.idTeam)
 
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       this.getGroups(teamId);
       this.getUsers(teamId);
       this.getAllProjects(teamId);
-
+      this.dependency = "Atribue dependência"
     }
   }
 
@@ -167,15 +173,15 @@ export class CreateTeamProjectComponent implements OnInit {
           let user: User = type as User;
           user.selectedProject = true;
           if (!users.some(existingUser => existingUser.id === user.id)) {
-            users.push(user); 
-            project.users = users;    
+            users.push(user);
+            project.users = users;
           }
         }
       }));
       project.groups = groups;
       if (project.projectDependency) {
         project.projectDependency.properties = [];
-        project.projectDependency.tasks = []; 
+        project.projectDependency.tasks = [];
       }
 
       project.creator = {
@@ -281,23 +287,22 @@ export class CreateTeamProjectComponent implements OnInit {
   private getGroups(teamId: number): void {
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
       this.groups = groups;
-      
+
       for (const group of groups) {
         group.label = "Grupo " + group.label
-          this.listOfResponsibles.push(group)
+        this.listOfResponsibles.push(group)
 
-          if (this.project != null) {
-            this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
-              for (const group2 of pc.groups) {
-                if (group2.id == group.id) {
-                  this.selectedUsers.push(group);
-                }
+        if (this.project != null) {
+          this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+            for (const group2 of pc.groups) {
+              if (group2.id == group.id) {
+                this.selectedUsers.push(group);
               }
-            })
-          }
+            }
+          })
         }
-      })
-    console.log(this.selectedUsers);
+      }
+    })
   }
 
   optionsReview = [
@@ -307,7 +312,7 @@ export class CreateTeamProjectComponent implements OnInit {
   ]
 
   updateProject(): void {
-    
+
     let project = this.form.getRawValue() as Project;
     let users: User[] = [];
     let groups: Group[] = [];
@@ -327,15 +332,19 @@ export class CreateTeamProjectComponent implements OnInit {
       }
     });
 
+    if (project.projectDependency) {
+      project.projectDependency.tasks = []
+      project.projectDependency.properties = []
+    }
+
     let projectEdit: ProjectEdit = {
       id: this.project?.id,
       name: project.name,
       description: project.description,
       users: users,
-      groups: groups
+      groups: groups,
+      projectDependency: project.projectDependency
     };
-
-    projectEdit = this.removeCircularReferences(projectEdit);
 
     if (!projectEdit.name) {
       projectEdit.name = this.project?.name;
@@ -343,9 +352,14 @@ export class CreateTeamProjectComponent implements OnInit {
     if (!projectEdit.description) {
       projectEdit.description = this.project?.description;
     }
+    if (!projectEdit.projectDependency) {
+      projectEdit.projectDependency = this.project.projectDependency
+    }
+
+    console.log(projectEdit);
+
 
     this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
-      projectEdit = project
       this.alert.successAlert("Projeto modificado com sucesso");
     });
   }
@@ -358,22 +372,16 @@ export class CreateTeamProjectComponent implements OnInit {
     this.senderEmitter.emit(project);
   }
 
-  getPlaceholderText(): any {
-    if (this.typeString === 'projectInfo') {
-      return;
-    } else {
-      return 'Atribua responsáveis ao projeto';
-    }
-  }
-
-  dependencies !: Project []
-  getAllProjects(teamId: number){
+  dependencies !: Project[]
+  getAllProjects(teamId: number) {
     this.projectService.getProjectByCollaborators(teamId, this.userService.getLogged()).subscribe((projects: Project[]) => {
       this.dependencies = projects
-      console.log(projects);
-      
+      if (!this.projectNull) {
+        this.dependencies.splice(this.dependencies.indexOf(this.project), 1)
+      }
     })
   }
+
 
 
 }

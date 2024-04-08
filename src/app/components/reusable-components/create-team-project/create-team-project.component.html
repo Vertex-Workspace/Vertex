@@ -35,19 +35,19 @@
     </div>
 
     <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
-      [placeholder]="getPlaceholderText()" appendTo="body" class="flex items-start justify-start pt-4"
+      placeholder="Responsáveis do Projeto" appendTo="body" class="flex items-start justify-start pt-4"
       *ngIf="typeString === 'projectInfo' || typeString === 'project'" [(ngModel)]="selectedUsers"
       [style]="{ width: '250px'}"></p-multiSelect>
 
 
     <div class="flex flex-row w-full">
       <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-        class="flex items-start justify-start w-[65%] pt-2" [options]="optionsReview" optionLabel="name"
+        class="flex items-start justify-start pt-2 w-1/2" [options]="optionsReview" optionLabel="name"
         placeholder="Selecione opção de Revisão" [style]="{ width: '250px'}"></p-dropdown>
 
       <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-        class="pr-1 pt-2" [options]="dependencies" optionLabel="name" formControlName="projectDependency"
-        placeholder="Selecione dependência" ></p-dropdown>
+        class="pr-1 pt-2 w-1/2" [options]="dependencies" optionLabel="name" formControlName="projectDependency"
+        placeholder={{dependency}} [style]="{ width: '250px'}"></p-dropdown>
     </div>
 
     <div class="div-buttons">

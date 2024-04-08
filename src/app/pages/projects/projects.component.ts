@@ -107,17 +107,6 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getProjectByCollaborators(this.team.id, this.logged).subscribe((projects: Project[]) => {
       this.projects = projects
       for (const project of this.projects) {
-        console.log(project);
-
-        this.projectService.getImage(project.id).subscribe((string1: string) => {
-          
-          project.image = string1
-        },
-          (error: any) => {
-            project.image = error.error.text
-            console.log(project.image);
-          }
-        )
       }
     })
   }

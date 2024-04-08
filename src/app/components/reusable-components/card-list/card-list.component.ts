@@ -8,6 +8,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { faTrashCan, faGear } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
+import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-card-list',
@@ -60,9 +61,11 @@ export class CardListComponent implements OnInit {
 
   image!: string
 
+  dependencyName !: string
+
 
   ngOnInit(): void {
-    this.findAllTeams()
+    
   }
 
   getType(): any[] {
@@ -78,7 +81,21 @@ export class CardListComponent implements OnInit {
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
-      this.router.navigate([`/projeto/${id}/tarefas`])
+      this.projectService.getOneById(id).subscribe((project: Project) => {
+        if (project.projectDependency === null) {
+          this.router.navigate([`/projeto/${id}/tarefas`])
+        } else {
+          this.projectService.getTasksDone(project.projectDependency.id, project.id).subscribe((bool: String) => { 
+            if (bool == 'true') {
+              this.router.navigate([`/projeto/${id}/tarefas`])
+            } else if(bool = 'false') {
+              this.dependencyName = project.projectDependency.name;
+              this.alertService.notificationAlert("Você precisa concluir o projeto " + this.dependencyName
+                + " primeiro!")
+            }
+          })
+        }
+      })
     }
   }
 
@@ -106,19 +123,6 @@ export class CardListComponent implements OnInit {
     this.delete = false;
   }
 
-  findAllTeams() {
-    this.teamService.getTeamsByUser(this.userService.getLogged()).subscribe((teams: Team[]) => {
-      for (let i = 0; i < teams.length; i++) {
-        this.teamService.getTeamCreator(teams[i]).subscribe((userC) => {
-
-          if (teams[i].name === "Equipe " + userC.firstName) {
-            this.creatorName = userC.firstName
-            this.firstLetterName = userC.firstName?.substring(0, 1).toLocaleUpperCase()
-          }
-        })
-      }
-    })
-  }
 
   findProjects(teamId: number) {
     this.loggedUser = this.userService.getLogged();
@@ -126,9 +130,7 @@ export class CardListComponent implements OnInit {
     console.log(teamId, this.loggedUser);
 
     this.projectService.getProjectByCollaborators(teamId, this.loggedUser).subscribe((projects: Project[]) => {
-      this.projects = projects
-      console.log(projects);
-      
+      this.projects = projects;
     })
 
   }
@@ -140,15 +142,12 @@ export class CardListComponent implements OnInit {
   openModal: boolean = false;
   project !: Project
 
-  openInformations(project: Project) {
-    this.project = project;
-    this.teamService.getOneById(this.project.idTeam).subscribe((team: Team) => {
-      this.team = team;
-      this.projectService.getOneById(project.id).subscribe((project: Project) => {
-        this.project = project
-      })
-    })
+  openInformations(project1: Project) {
     this.openModal = !this.openModal;
+    console.log(project1);
+    this.project = project1;
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.project.idTeam = teamId  
   }
 
   deleteProject(projectId: Project): void {

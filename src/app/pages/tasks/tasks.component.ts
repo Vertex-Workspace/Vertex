@@ -60,6 +60,11 @@ export class TasksComponent implements OnInit {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     this.projectId = id
     this.logged = userService.getLogged()
+    this.projectService.getOneById(id).subscribe((project : Project) => {
+      if(project.projectDependency != null){
+        this.router.navigate([`/equipe/${project.idTeam}/projetos`]);
+      }
+    })
   }
 
   teamId?: number

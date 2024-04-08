@@ -12,7 +12,7 @@ export class Project {
     description ?: string;
     image !: string;
     creator ?: UserTeam;
-    projectDependency ?: Project;
+    projectDependency !: Project;
     tasks : Task[]; 
     notes : Note[] = [];
     properties !: Property[];
@@ -36,8 +36,6 @@ export class Project {
         this.properties = project.properties;
         this.idTeam = project.idTeam;
         this.projectReviewENUM = project.projectReviewENUM;
-        // this.collaborators = project.collaborators
-        // this.groups = project.groups
         this.projectDependency = project.projectDependency
         this.groups = project.groups
         this.users = project.users
@@ -64,6 +62,7 @@ export class ProjectEdit {
     id ?:number;
     name?: string;
     description?: string;
+    projectDependency ?: Project;
     users ?:  User[];
     groups ?: Group[];
 }
