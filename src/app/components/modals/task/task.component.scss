@@ -119,8 +119,9 @@ a{
 
 #red-btn{
     background-color: $error;
-    color: $secondColor;
+    color: white;
     @apply px-2 w-[150px];
+    border: none !important;
 }
 #red-btn:hover{
     background-color: $secondColor;
