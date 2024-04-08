@@ -62,7 +62,6 @@ export class CardListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.findAllTeams() 
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     if(teamId){
       this.findProjects(teamId); 
@@ -95,20 +94,6 @@ export class CardListComponent implements OnInit {
       this.emitterItem.emit(this.itemToDelete)
     }
     this.delete = false;
-  }
-
-  findAllTeams() {
-    this.teamService.getTeamsByUser(this.userService.getLogged()).subscribe((teams: Team[]) => {
-      for (let i = 0; i < teams.length; i++) {
-        this.teamService.getTeamCreator(teams[i]).subscribe((userC) => {
-          
-          if (teams[i].name === "Equipe " + userC.firstName) {
-            this.creatorName = userC.firstName
-            this.firstLetterName = userC.firstName?.substring(0, 1).toLocaleUpperCase()       
-          }
-        })
-      }
-    })
   }
 
   findProjects(teamId: number) {

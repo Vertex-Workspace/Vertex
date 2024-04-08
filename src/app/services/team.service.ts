@@ -90,13 +90,9 @@ export class TeamService {
 
   }
 
-  public existsByIdAndUserBelongs(teamId: number, userId: number): Observable<boolean> {
-    return this.http
-      .get<boolean>(`${URL}team/exists/${teamId}/${userId}`);
-  }
 
-  public getPermission(team: Team, user: User): Observable<Permission[]> {
-    return this.http.get<Permission[]>(`${URL}team/permission/${user.id}/${team.id}`)
+  public getPermission(teamId: number, userId: number): Observable<Permission[]> {
+    return this.http.get<Permission[]>(`${URL}team/permission/${userId}/${teamId}`)
   }
 
   public updateImage(teamId: number, fd: FormData) {
@@ -109,22 +105,12 @@ export class TeamService {
       .put<Team>(`${URL}team`, team);
   }
 
-  public changePermissionEnable(permission: Permission, user: User, team: Team): Observable<Permission> {
-    return this.http.patch<Permission>(`${URL}team/permission/${permission.id}/${user.id}/${team.id}`, permission)      
-  }
-
-  public hasPermission(projectId: number, user: User): Observable<Permission[]> {
-    return this.http
-      .get<Permission[]>(`${URL}team/hasPermission/${projectId}/${user.id}`)
+  public changePermissionEnable(permission: Permission): Observable<Permission> {
+    return this.http.patch<Permission>(`${URL}team/permission/${permission.id}`, permission)      
   }
 
 
   public deleteUserTeam(team: Team, user: User): Observable<Team> {
     return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
   }
-
-  public getTeamCreator(team: Team): Observable<User> {
-    return this.http.get<User>(`${URL}team/${team.id}/creator`)
-  }
-
 }

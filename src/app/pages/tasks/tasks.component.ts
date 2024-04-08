@@ -42,6 +42,7 @@ export class TasksComponent implements OnInit {
   openModalProject: boolean = false;
   project!: Project;
   renderProject!: Observable<Project> | undefined;
+  renderPermissions!: Observable<Permission[]> | undefined;
   permissions!: Permission[];
   tasksToReview: TaskWaitingToReview[] = [];
   badgeNumber: string = '0';
@@ -103,24 +104,27 @@ export class TasksComponent implements OnInit {
     this.muralPageListener();
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
-    this.teamService.hasPermission(id, this.userService.getLogged()).subscribe((permissions: Permission[]) => {
-      this.permissions = permissions;
-      for (const permission of permissions) {
-        if ((permission.name === PermissionsType.CREATE) && permission.enabled === true) {
-          this.canCreate = true;
-        }
-      }
-    });
-
     //Observable que é aguardado para renderizar os componentes filhos
     this.renderProject = this.projectService.getOneById(id);
 
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
+      this.renderPermissions = this.teamService.getPermission(p.idTeam, this.userService.getLogged().id!)
+      
+      this.renderPermissions.forEach((permissions: Permission[]) => {
+        this.permissions = permissions;
+        for (const permission of permissions) {
+          if ((permission.name === PermissionsType.CREATE) && permission.enabled === true) {
+            this.canCreate = true;
+          }
+        }
+      });
       this.project = p;
       this.setFilters(p);
       this.setOrderOptions(p);
       this.pageTitle = this.project.name;
+
+
       const currentView = localStorage.getItem('mode-task-view');
       if (currentView) {
         this.clicked = currentView;

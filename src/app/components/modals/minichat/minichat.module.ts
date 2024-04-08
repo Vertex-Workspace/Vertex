@@ -8,6 +8,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 
+
 @NgModule({
   declarations: [MinichatComponent],
   exports: [MinichatComponent],

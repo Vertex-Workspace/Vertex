@@ -1,5 +1,5 @@
 <section class="screen">
-    <div class="container-custom">
+    <div class="container-custom" *ngIf="(renderPermissions | async) && (renderProject | async)">
         <section class="grid w-full grid-cols-2">
             <div>
                 <div class="flex flex-row gap-2">
@@ -111,7 +111,7 @@
             </ng-container>
         </section>
 
-        <section class="router" *ngIf="renderProject | async">
+        <section class="router">
             <app-kanban *ngIf="clicked  === 'Kanban'" [project]="project" [nameFilter]="query" [filter]="selectedFilter"
                 [permissions]="permissions" [orderParams]="orderParams"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
