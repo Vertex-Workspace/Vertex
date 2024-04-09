@@ -1,6 +1,6 @@
 <section class="screen">
     <div class="container-custom">
-        <section class="grid w-full grid-cols-2">
+        <section >
             <div>
                 <div class="flex flex-row gap-2">
                     <h4>
@@ -9,10 +9,8 @@
                     <i class="pi pi-pencil pt-2 cursor-pointer" (click)="openProjectInfos()"></i>
                 </div>
                 <div class="pt-2">
-                    <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você
-                        poderá
-                        filtrar,</p>
-                    <p class="small-text text-gray-600"> ordenar e criar novas tarefas. Gerenciando o seu tempo e
+                    <p class="small-text text-gray-600 w-2/4 text-justify">Aqui ficarão centralizadas todas as tarefas do projeto, você
+                        poderá filtrar, ordenar e criar novas tarefas. Gerenciando o seu tempo e
                         registrando cada etapa.</p>
                 </div>
             </div>
@@ -26,18 +24,20 @@
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="medium-text">
                         <i class="{{ item.iconClass }}" style="font-size: 1.4rem"></i>
                         <button (click)="changePreviewMode(item.id)">
-                            {{ item.label }}
+                            <p>
+                                {{ item.label }}
+                            </p>
                         </button>
                     </label>
                 </ng-container>
             </div>
 
             <div class="config-menu medium-text">
-                <button *ngIf="!searchBarOpen" (click)="toggleSearchBar()">
+                <button *ngIf="!searchBarOpen && !isMobile()" (click)="toggleSearchBar()">
                     <i class="pi pi-search"></i>
                 </button>
 
-                <div class="search " *ngIf="searchBarOpen">
+                <div class="search" *ngIf="searchBarOpen">
                     <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="query">
                     <i class="pi pi-times cursor-pointer" (click)="toggleSearchBar()"></i>
                 </div>
@@ -55,12 +55,16 @@
 
                 <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
                     <i class="pi pi-tags"></i>
-                    Propriedades
+                    <p>
+                        Propriedades
+                    </p>
                 </button>
                 <button *ngIf="!isMuralPage; else buttonMural" class="create" (click)="createTask()"
                     [disabled]="!canCreate" [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
-                    Nova tarefa
+                    <p>
+                        Nova tarefa
+                    </p>
                 </button>
                 <ng-template #buttonMural>
                     <button class="create" (click)="createNote()">

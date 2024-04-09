@@ -1,153 +1,727 @@
-@import '../../../_variables.scss';
+@import "../../../_variables.scss";
 
-@keyframes slideInRight {
+@keyframes slideInRight300 {
     from {
-      width: 0;
-      opacity: 1;
+        width: 0;
+        opacity: 1;
     }
     to {
-      width: 300px;
-      opacity: 1;
+        width: 250px;
+        opacity: 1;
     }
-  }
-
-.screen {
-    @apply h-full w-screen flex justify-center overflow-x-auto;
 }
 
-.container-custom {
-    @apply flex w-[90%] h-full flex-col;
-}
 
-.menu {
-    @apply flex justify-between pt-8 pb-4;
+@media screen and (min-width: 1480px) {
+
+    .screen {
+        @apply h-full w-screen flex justify-center overflow-x-auto;
+    }
     
-    div:first-child {
-        @apply w-[550px] h-[53px] flex gap-3 ;
-        border-bottom: 1px solid $emphasis;
-
-        label {
-            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
-            transition-colors items-center justify-center 
-            rounded-sm cursor-pointer;
-        }
-
-        label:hover {
-            background-color: $primaryColor;
-            color: $secondColor;
-            @apply transition-colors;
-        }
+    .container-custom {
+        @apply flex w-[90%] h-full flex-col;
     }
-
-    div:last-child {
-        @apply flex gap-2 h-[48px] items-center;
-
-
-        .search {
-            @apply w-[300px] h-full flex items-center justify-between 
-            bg-white p-3 rounded-sm shadow-md border-none;
-            animation: slideInRight 0.3s ease-in-out;
+    
+    .menu {
+        @apply flex justify-between pt-8 pb-4;
+        
+        div:first-child {
+            @apply w-[550px] h-[53px] flex gap-3;
+            border-bottom: 1px solid $emphasis;
             
-
-
-            i {
-                @apply w-[10%];
+            label {
+                @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
+                transition-colors items-center justify-center 
+                rounded-sm cursor-pointer;
+            }
+            
+            label:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+        }
+        
+        div:last-child {
+            @apply flex gap-2 h-[48px] items-center;
+            
+            .search {
+                @apply w-[250px] h-full flex items-center justify-between 
+                bg-white p-3 rounded-sm shadow-md border-none;
+                animation: slideInRight300 0.3s ease-in-out;
+                
+                i {
+                    @apply w-[10%];
+                    color: $primaryColor;
+                }
+                
+                input {
+                    @apply w-[90%] h-full outline-none flex items-center pl-2;
+                }
+            }
+            
+            button {
                 color: $primaryColor;
+                border-color: $secondColor;
+                @apply h-[53px] w-[53px] flex items-center justify-center 
+                border-2 transition-colors rounded-sm p-3;
             }
-
-            input {
-                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            
+            button:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+            
+            .create {
+                background-color: $primaryColor;
+                border-color: $primaryColor;
+                color: $secondColor;
+                @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+            }
+            
+            .create:hover {
+                background-color: $secondColor;
+                color: $primaryColor;
+                @apply transition-colors;
+            }
+            
+            .properties-button {
+                background-color: $emphasis;
+                color: $primaryColor;
+                border-color: $emphasis;
+                @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
             }
         }
-
-        button {
-            color: $primaryColor;
-            border-color: $secondColor;
-            @apply h-[53px] w-[53px] flex items-center justify-center 
-            border-2 transition-colors rounded-sm p-3;
-        }
-
-        button:hover {
-            background-color: $primaryColor;
-            color: $secondColor;
-            @apply transition-colors;
-        }
-
-        .create {
-            background-color: $primaryColor;
-            border-color: $primaryColor;
-            color: $secondColor;
-            @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
-            rounded-sm font-light border-2 transition-colors;
-        }
-
-        .create:hover {
-            background-color: $secondColor;
-            color: $primaryColor;
-            @apply transition-colors;
-        }
-
-        .properties-button{
-            background-color: $emphasis;
-            color: $primaryColor;
-            border-color: $emphasis;
-            @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
-            rounded-sm font-light border-2 transition-colors;
-        }
-
     }
-}
-
-
-.filter-settings {
-    @apply flex gap-6 items-center;
-
-    div{
-        @apply w-[300px] flex justify-between items-center;
-  
-  
+    
+    .filter-settings {
+        @apply flex gap-6 items-center;
+        
+        div {
+            @apply w-[300px] flex justify-between items-center;
+            
+            select {
+                @apply h-[35px] w-[200px] outline-none text-center;
+            }
+        }
+        
+        p {
+            color: $primaryColor;
+        }
+        
         select {
-          @apply h-[35px] w-[200px] outline-none text-center;
+            @apply w-[170px] h-[35px] text-center outline-none;
         }
-      }
-
-    p {
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    
+    .default {
         color: $primaryColor;
+        background-color: $secondColor;
     }
-
-    select {
-        @apply w-[170px] h-[35px] text-center outline-none;
+    
+    .router {
+        @apply min-h-[80%];
     }
-
+    
+    button > i {
+        font-size: 1.5rem;
+    }
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
 }
 
-.clicked {
-    color: $secondColor;
-    background-color: $primaryColor;
+@media screen and (min-width: 1245px) and (max-width: 1480px) {
+
+    .screen {
+        @apply h-full w-screen flex justify-center overflow-x-auto;
+    }
+    
+    .container-custom {
+        @apply flex w-[90%] h-full flex-col;
+    }
+    
+    .menu {
+        @apply flex justify-between pt-8 pb-4;
+        
+        div:first-child {
+            @apply w-[550px] h-[53px] flex gap-3;
+            border-bottom: 1px solid $emphasis;
+            
+            label {
+                @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
+                transition-colors items-center justify-center 
+                rounded-sm cursor-pointer;
+            }
+            
+            label:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+        }
+        
+        div:last-child {
+            @apply flex gap-2 h-[48px] items-center;
+            
+            .search {
+                @apply w-[250px] h-full flex items-center justify-between 
+                bg-white p-3 rounded-sm shadow-md border-none;
+                animation: slideInRight300 0.3s ease-in-out;
+                
+                i {
+                    @apply w-[10%];
+                    color: $primaryColor;
+                }
+                
+                input {
+                    @apply w-[90%] h-full outline-none flex items-center pl-2;
+                }
+            }
+            
+            button {
+                color: $primaryColor;
+                border-color: $secondColor;
+                @apply h-[53px] w-[53px] flex items-center justify-center 
+                border-2 transition-colors rounded-sm p-3;
+            }
+            
+            button:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+            
+            .create {
+                background-color: $primaryColor;
+                border-color: $primaryColor;
+                color: $secondColor;
+                @apply h-full w-[53px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+
+                p {
+                    @apply hidden;
+                }
+            }
+            
+            .create:hover {
+                background-color: $secondColor;
+                color: $primaryColor;
+                @apply transition-colors;
+            }
+            
+            .properties-button {
+                background-color: $emphasis;
+                color: $primaryColor;
+                border-color: $emphasis;
+                @apply h-full w-[53px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+
+                p {
+                    @apply hidden;
+                }
+            }
+        }
+    }
+    
+    .filter-settings {
+        @apply flex gap-6 items-center;
+        
+        div {
+            @apply w-[300px] flex justify-between items-center;
+            
+            select {
+                @apply h-[35px] w-[200px] outline-none text-center;
+            }
+        }
+        
+        p {
+            color: $primaryColor;
+        }
+        
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .router {
+        @apply min-h-[80%];
+    }
+    
+    button > i {
+        font-size: 1.5rem;
+    }
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
+
+}
+@media screen and (min-width: 970px) and (max-width: 1245px) {
+
+    .screen {
+        @apply h-full w-screen flex justify-center overflow-x-auto;
+    }
+    
+    .container-custom {
+        @apply flex w-[90%] h-full flex-col;
+    }
+    
+    .menu {
+        @apply flex justify-between pt-8 pb-4;
+        
+        div:first-child {
+            @apply w-[320px] h-[53px] flex gap-2;
+            border-bottom: 1px solid $emphasis;
+            
+            label {
+                @apply w-[70px] h-[48px] flex gap-2 p-4 px-4 
+                transition-colors items-center justify-center 
+                rounded-sm cursor-pointer;
+                
+                i {
+                    @apply pl-2;
+                }
+
+                p {
+                    @apply hidden;
+                }
+            }
+            
+            label:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+        }
+        
+        div:last-child {
+            @apply flex gap-2 h-[48px] items-center;
+            
+            .search {
+                @apply w-[250px] h-full flex items-center justify-between 
+                bg-white p-3 rounded-sm shadow-md border-none;
+                animation: slideInRight300 0.3s ease-in-out;
+                
+                i {
+                    @apply w-[10%];
+                    color: $primaryColor;
+                }
+                
+                input {
+                    @apply w-[90%] h-full outline-none flex items-center pl-2;
+                }
+            }
+            
+            button {
+                color: $primaryColor;
+                border-color: $secondColor;
+                @apply h-[53px] w-[53px] flex items-center justify-center 
+                border-2 transition-colors rounded-sm p-3;
+            }
+            
+            button:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+            
+            .create {
+                background-color: $primaryColor;
+                border-color: $primaryColor;
+                color: $secondColor;
+                @apply h-full w-[53px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+
+                p {
+                    @apply hidden;
+                }
+            }
+            
+            .create:hover {
+                background-color: $secondColor;
+                color: $primaryColor;
+                @apply transition-colors;
+            }
+            
+            .properties-button {
+                background-color: $emphasis;
+                color: $primaryColor;
+                border-color: $emphasis;
+                @apply h-full w-[53px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+
+                p {
+                    @apply hidden;
+                }
+            }
+        }
+    }
+    
+    .filter-settings {
+        @apply flex gap-6 items-center;
+        
+        div {
+            @apply w-[300px] flex justify-between items-center;
+            
+            select {
+                @apply h-[35px] w-[200px] outline-none text-center;
+            }
+        }
+        
+        p {
+            color: $primaryColor;
+        }
+        
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .router {
+        @apply min-h-[80%];
+    }
+    
+    button > i {
+        font-size: 1.5rem;
+    }
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
+}
+@media screen and (min-width: 630px) and (max-width: 970px) {
+
+    .screen {
+        @apply h-full w-screen flex justify-center overflow-x-auto;
+    }
+    
+    .container-custom {
+        @apply flex w-[90%] h-full flex-col;
+    }
+    
+    .menu {
+        @apply flex flex-col pt-8 pb-4 gap-3;
+
+        .config-menu {
+            @apply flex flex-row-reverse justify-end;
+        }
+        
+        div:first-child {
+            @apply w-[320px] h-[53px] flex gap-2;
+            border-bottom: 1px solid $emphasis;
+            
+            label {
+                @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 
+                transition-colors items-center justify-center 
+                rounded-sm cursor-pointer;
+
+            }
+            
+            label:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+        }
+        
+        div:last-child {
+            @apply flex gap-2 h-[48px] items-center;
+            
+            .search {
+                @apply w-[250px] h-full flex items-center justify-between 
+                bg-white p-3 rounded-sm shadow-md border-none;
+                animation: slideInRight300 0.3s ease-in-out;
+                
+                i {
+                    @apply w-[10%];
+                    color: $primaryColor;
+                }
+                
+                input {
+                    @apply w-[90%] h-full outline-none flex items-center pl-2;
+                }
+            }
+            
+            button {
+                color: $primaryColor;
+                border-color: $secondColor;
+                @apply h-[53px] w-[53px] flex items-center justify-center 
+                border-2 transition-colors rounded-sm p-3;
+            }
+            
+            button:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+            
+            .create {
+                background-color: $primaryColor;
+                border-color: $primaryColor;
+                color: $secondColor;
+                @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+            }
+            
+            .create:hover {
+                background-color: $secondColor;
+                color: $primaryColor;
+                @apply transition-colors;
+            }
+            
+            .properties-button {
+                background-color: $emphasis;
+                color: $primaryColor;
+                border-color: $emphasis;
+                @apply h-full w-[180px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+            }
+        }
+    }
+    
+    .filter-settings {
+        @apply flex gap-6 items-center;
+        
+        div {
+            @apply w-[300px] flex justify-between items-center;
+            
+            select {
+                @apply h-[35px] w-[200px] outline-none text-center;
+            }
+        }
+        
+        p {
+            color: $primaryColor;
+        }
+        
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .router {
+        @apply min-h-[80%];
+    }
+    
+    button > i {
+        font-size: 1.5rem;
+    }
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
 }
 
-.default {
-    color: $primaryColor;
-    background-color: $secondColor;
+@media screen and (max-width: 630px) {
+
+    .screen {
+        @apply h-full w-screen flex justify-center overflow-x-auto;
+    }
+    
+    .container-custom {
+        @apply flex w-[90%] h-full flex-col;
+    }
+    
+    .menu {
+        @apply flex flex-col pt-8 pb-4 gap-3;
+
+        .config-menu {
+            @apply flex flex-row-reverse justify-end;
+        }
+        
+        div:first-child {
+            @apply w-[320px] h-[53px] flex gap-2;
+            border-bottom: 1px solid $emphasis;
+            
+            label {
+                @apply w-[70px] h-[48px] flex gap-2 p-4 px-4 
+                transition-colors items-center justify-center 
+                rounded-sm cursor-pointer;
+                
+                i {
+                    @apply pl-2;
+                }
+
+                p {
+                    @apply hidden;
+                }
+            }
+            
+            label:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+        }
+        
+        div:last-child {
+            @apply flex gap-2 h-[48px] items-center;
+            
+            .search {
+                @apply w-[250px] h-full flex items-center justify-between 
+                bg-white p-3 rounded-sm shadow-md border-none;
+                animation: slideInRight300 0.3s ease-in-out;
+                
+                i {
+                    @apply w-[10%];
+                    color: $primaryColor;
+                }
+                
+                input {
+                    @apply w-[90%] h-full outline-none flex items-center pl-2;
+                }
+            }
+            
+            button {
+                color: $primaryColor;
+                border-color: $secondColor;
+                @apply h-[53px] w-[53px] flex items-center justify-center 
+                border-2 transition-colors rounded-sm p-3;
+            }
+            
+            button:hover {
+                background-color: $primaryColor;
+                color: $secondColor;
+                @apply transition-colors;
+            }
+            
+            .create {
+                background-color: $primaryColor;
+                border-color: $primaryColor;
+                color: $secondColor;
+                @apply h-full w-[53px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+
+                p {
+                    @apply hidden;
+                }
+            }
+            
+            .create:hover {
+                background-color: $secondColor;
+                color: $primaryColor;
+                @apply transition-colors;
+            }
+            
+            .properties-button {
+                background-color: $emphasis;
+                color: $primaryColor;
+                border-color: $emphasis;
+                @apply h-full w-[53px] flex items-center justify-center gap-4 p-3 
+                rounded-sm font-light border-2 transition-colors;
+
+                p {
+                    @apply hidden;
+                }
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .router {
+        @apply min-h-[80%];
+    }
+    
+    button > i {
+        font-size: 1.5rem;
+    }
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
 }
 
-.router {
-    @apply min-h-[80%];
-}
-
-button > i {
-    font-size: 1.5rem;
-}
-
-
-//BUTTONS TUTORIAL
-.btn {
-    @apply flex w-full  items-center justify-center 
-    border-2 transition-colors rounded p-3;
-}
-
-.btn:hover {
-    background-color: $secondColor;
-    color: $primaryColor;
-    @apply transition-colors;
-}

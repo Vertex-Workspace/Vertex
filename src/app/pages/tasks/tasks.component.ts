@@ -19,6 +19,7 @@ import { PropertyList } from 'src/app/models/class/property';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
 import { tutorialText } from 'src/app/tutorialText';
+import { DisplayService } from 'src/app/services/display.service';
 
 @Component({
   selector: 'app-tasks',
@@ -91,7 +92,8 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private display: DisplayService
   ) {
     this.logged = this.userService.getLogged();
 
@@ -311,6 +313,10 @@ export class TasksComponent implements OnInit {
     this.tasksToReview = tasks;
     this.badgeNumber = this.tasksToReview.length.toString();
     this.toggleReview();
+  }
+
+  isMobile(): boolean {
+    return this.display.isMobile();
   }
 
   createNote(): void {

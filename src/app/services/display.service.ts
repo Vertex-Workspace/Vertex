@@ -7,5 +7,8 @@ export class DisplayService {
 
   constructor() { }
 
-  
+  isMobile(): boolean {
+    return window.innerWidth <= 640;
+  }
+
 }
