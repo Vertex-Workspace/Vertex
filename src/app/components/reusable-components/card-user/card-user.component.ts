@@ -122,22 +122,29 @@ export class CardUserComponent implements OnInit {
     })
   }
 
-  deleteUserTeam(user: User): void {
-    this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
-      this.alert.successAlert("Usuário retirado da equipe")
-    })
-  }
 
-  deleteBoolean(): void {
+  userToDelete !: User
+
+  deleteBoolean(user: User): void {
     this.delete = !this.delete
+    this.userToDelete = user
   }
 
-  @Output()
-  deleteEmitterUserTeam: EventEmitter<User> = new EventEmitter<User>();
-
-  deleteEmitUserTeam(user: User): void {
-    this.deleteEmitterUserTeam.emit(user);
-  }
+  deleteUserTeam(event: any): void {
+    if (event) {
+        this.teamService.getTeamCreator(this.team).subscribe((userC) => {
+            if (userC.id === this.userService.getLogged().id) {
+                this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
+                    this.alert.successAlert("Usuário retirado da equipe")
+                    this.team.users?.splice(this.team.users.indexOf(this.user), 1)
+                })
+            } else {
+                this.alert.errorAlert("Você não pode remover o criador da equipe")
+            }
+        });
+    }
+    this.delete = false
+}
 
   deleteEmitUserGroup(user: User): void {
     this.deleteUserGroup.emit(user)

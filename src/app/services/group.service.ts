@@ -45,10 +45,12 @@ export class GroupService {
     .pipe(map((users: User[]) => users.map(user => new User(user))));
   }
 
-  public addParticipants(group: Group): Observable<Group>{
-    console.log(group);
-    
-    return this.http.patch<Group>(`${URL}team/group/${group.id}/addParticipants`, group)
+  public addParticipants(group: Group, userId: number): Observable<Group>{
+    return this.http.patch<Group>(`${URL}team/group/${group.id}/addParticipants/${userId}`, group)
+  }
+
+  public edit(group: Group, teamId: number):Observable<Group>{
+    return this.http.patch<Group>(`${URL}group/edit/${teamId}`, group)
   }
 
 }

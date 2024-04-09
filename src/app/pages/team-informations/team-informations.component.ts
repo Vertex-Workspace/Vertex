@@ -199,23 +199,6 @@ export class TeamInformationsComponent implements OnInit {
         this.deleteUser = true;
     }
 
-    deleteUserTeam(event: any): void {
-        if (event) {
-            console.log(this.team.creator);
-
-            if (this.team.creator!.id === this.userService.getLogged().id) {
-                this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
-                    this.alertService.successAlert("Usuário retirado da equipe");
-                    this.team.users!.splice(this.team.users!.indexOf(this.userToDelete), 1);
-                })
-            } else {
-                this.alertService.errorAlert("Você não pode remover o criador da equipe")
-            }
-
-        }
-        this.deleteUser = false
-    }
-
     openModalCreateGroup() {
         this.createGroupModal = true
     }

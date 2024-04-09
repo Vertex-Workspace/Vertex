@@ -8,6 +8,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { faTrashCan, faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
+// import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-card-list',
@@ -21,8 +22,10 @@ export class CardListComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private projectService: ProjectService,
-    private route: ActivatedRoute 
-  ) { }
+    private route: ActivatedRoute,
+    private alertService: AlertService
+  ) {
+  }
 
   faTrashCan = faTrashCan;
   faGear = faGear
@@ -38,7 +41,8 @@ export class CardListComponent implements OnInit {
   @Input()
   team?: Team; //se estiver na tela projetos
 
-  projects : Project [] = []
+  @Input()
+  projects: Project[] = []
 
   @Input()
   type !: string;
@@ -53,12 +57,16 @@ export class CardListComponent implements OnInit {
 
   delete: boolean = false;
 
-  
- firstLetterName?: string
 
- creatorName ?: String
+  firstLetterName?: string
 
- loggedUser ?: User
+  creatorName?: String
+
+  loggedUser?: User
+
+  image!: string
+
+  dependencyName !: string
 
 
   ngOnInit(): void {
@@ -76,10 +84,28 @@ export class CardListComponent implements OnInit {
   }
 
   openTeam(id: number) {
+    console.log(id);
+
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
-      this.router.navigate([`/projeto/${id}/tarefas`])
+      this.projectService.getOneById(id).subscribe((project: Project) => {
+        console.log(project);
+        
+        // if (project.projectDependency === null) {
+        this.router.navigate([`/projeto/${id}/tarefas`])
+        // } else {
+        //   this.projectService.getTasksDone(project.projectDependency.id, project.id).subscribe((bool: String) => { 
+        //     if (bool == 'true') {
+        //       this.router.navigate([`/projeto/${id}/tarefas`])
+        //     } else if(bool = 'false') {
+        //       this.dependencyName = project.projectDependency.name;
+        //       this.alertService.notificationAlert("Você precisa concluir o projeto " + this.dependencyName
+        //         + " primeiro!")
+        //     }
+        //   })
+        // }
+      })
     }
   }
 
@@ -88,11 +114,22 @@ export class CardListComponent implements OnInit {
     this.itemToDelete = item
   }
 
+  close() {
+    this.openModal = !this.openModal;
+    this.project = null!
+  }
+
 
   emitItem(event: boolean) {
-    if (event) {
-      this.emitterItem.emit(this.itemToDelete)
+    if (this.teams) {
+      this.deleteTeam(this.itemToDelete)
     }
+    if (this.projects) {
+      this.deleteProject(this.itemToDelete)
+    }
+    // if (event) {
+    //   this.emitterItem.emit(this.itemToDelete)
+    // }
     this.delete = false;
   }
 
@@ -106,21 +143,38 @@ export class CardListComponent implements OnInit {
     
   }
 
-  getFirstLetter(item : any): string{
+  getFirstLetter(item: any): string {
     return item.name.substring(0, 1).toLocaleUpperCase();
   }
 
   openModal: boolean = false;
   project !: Project
 
-  openInformations(project: Project){
+  openInformations(project1: Project) {
     this.openModal = !this.openModal;
-    this.projectService.getOneById(project.id).subscribe((project: Project) => {
-      this.project = project  
-    }) 
-    this.teamService.getOneById(this.project.idTeam).subscribe((team: Team) => {
-      this.team = team;
-    })
+    this.project = project1;
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+    this.project.idTeam = teamId  
+  }
+
+  deleteProject(projectId: Project): void {
+    this.projectService
+      .delete(projectId.id)
+      .subscribe((project) => {
+        this.projects.splice(this.projects.indexOf(projectId), 1)
+      },
+        e => {
+        });
+  }
+
+  deleteTeam(teamId: Team): void {
+    this.teamService
+      .delete(teamId.id)
+      .subscribe((team) => {
+        this.teams?.splice(this.teams.indexOf(teamId), 1)
+      },
+        e => {
+        });
   }
 
 }

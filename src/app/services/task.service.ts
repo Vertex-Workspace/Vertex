@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/class/team';
-import { Task, TaskCreate, TaskEdit, TaskWaitingToReview } from '../models/class/task';
+import { ReturnTaskResponsables, Task, TaskCreate, TaskEdit, TaskWaitingToReview, UpdateResponsibles } from '../models/class/task';
 import { Value, ValueUpdate } from '../models/class/value';
 import { CommentSend } from '../models/class/comment';
 import { Chat } from '../models/class/chat';
+import { User } from '../models/class/user';
+import { Group } from '../models/class/groups';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +104,28 @@ export class TaskService {
   public removeFile(taskId: number, fileId: number): Observable<Task> {
     return this.http
       .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`)
+  }
+
+  public returnAllResponsables(id: number): Observable<ReturnTaskResponsables> {
+    return this.http
+      .get<ReturnTaskResponsables>(`${URL}task/taskResponsables/${id}`);
+  }
+
+  public updateTaskResponsables(updateResponsible: UpdateResponsibles): Observable<Task> {
+    return this.http.patch<Task>(`${URL}task/taskResponsables`, updateResponsible);
+  }
+
+  public getGroupByTask(taskId: number): Observable<Group[]> {
+    return this.http.get<Group[]>(`${URL}task/groups/${taskId}`)
+    .pipe(map((groups: Group[]) => groups.map(group => new Group(group))));
+  }
+
+  public taskDependency(taskId: number, taskDependencyId: number, task: Task): Observable<Task> {
+    return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}/${taskDependencyId}`, task);
+  }
+
+  public setTaskDependencyNull(taskId: number, task: Task): Observable<Task>{
+    return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}`, task);
   }
 
 }

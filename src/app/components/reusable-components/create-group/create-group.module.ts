@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardUserModule } from '../card-user/card-user.module';
 import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 import { ButtonModule } from '../button/button.module';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -16,7 +17,8 @@ import { ButtonModule } from '../button/button.module';
     CardUserModule,
     ReactiveFormsModule,
     ModalWarnModule,
-    ButtonModule
+    ButtonModule,
+    MultiSelectModule
   ]
 })
 export class CreateGroupModule { }

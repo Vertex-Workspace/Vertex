@@ -19,6 +19,8 @@ import { PropertyList } from 'src/app/models/class/property';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
 import { tutorialText } from 'src/app/tutorialText';
+import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
+
 
 @Component({
   selector: 'app-tasks',
@@ -151,6 +153,16 @@ export class TasksComponent implements OnInit {
         }
       })
 
+      //Se o projeto possuir a opção de revisão, então é feita a requisição das tarefas que estão aguardando revisão
+      if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
+        this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
+          (tasks : TaskWaitingToReview[]) => {
+            this.tasksToReview = tasks;
+            this.badgeNumber = this.tasksToReview.length.toString();
+          }
+          );
+      }
+        
     });
     
 
@@ -302,8 +314,9 @@ export class TasksComponent implements OnInit {
     }
 
     this.taskService.create(taskCreate).subscribe(
-      (task) => {
+      (task : Task) => {
         this.changeModalTaskState(true, task);
+        this.project.tasks.push(task);
       },
       (error) => {
         console.log(error);

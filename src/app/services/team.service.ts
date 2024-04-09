@@ -113,4 +113,16 @@ export class TeamService {
   public deleteUserTeam(team: Team, user: User): Observable<Team> {
     return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
   }
+
+  public getTeamCreator(team: Team): Observable<User> {
+    return this.http.get<User>(`${URL}team/${team.id}/creator`)
+  }
+
+  public getUsers(teamId: any): Observable<User[]> {
+    return this.http
+      .get<User[]>(`${URL}team/users/${teamId}`)
+      .pipe(map((users: User[]) => users.map(user => new User(user))));
+  }
+
+
 }

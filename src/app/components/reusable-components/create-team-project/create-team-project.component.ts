@@ -3,9 +3,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { LogarithmicScale } from 'chart.js';
 import { TreeNode } from 'primeng/api';
 import { Group } from 'src/app/models/class/groups';
-import { Project, ProjectEdit, ProjectReview } from 'src/app/models/class/project';
+import { Project, ProjectCollaborators, ProjectEdit, ProjectReview } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
@@ -59,47 +60,60 @@ export class CreateTeamProjectComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private alert: AlertService,
-    private groupService: GroupService
+    private groupService: GroupService,
   ) {
     this.logged = this.userService.getLogged();
   }
   
-
+  listOfResponsibles: TreeNode[] = [];
+  selectedUsers: TreeNode[] = [];
   ngOnInit(): void {
-    
+  
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       description: [null],
       listOfResponsibles: [null],
-      projectReviewENUM: [this.convertType()]
+      projectReviewENUM: [this.convertType()],
+      groups: [null],
+      projectDependency: [null],
     });
     this.projectExists()
-    // this.markCollaboratorsAsSelected();
   }
 
   optionsReview = [
-    "Revisão opcional",
-    "Revisão obrigatória",
-    "Sem revisão"
+    'Revisão obrigatória',
+    'Revisão não obrigatória',
+    'Revisão opcional'
   ]
 
   projectNull: boolean = true;
   name !: string
   description?: string
+  usersGroup !: User[];
+  dependency?: string
 
 
   projectExists() {
+    let id = 0;
     if (this.project != null) {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
-      this.getGroups(this.project.idTeam)
-      this.getUsers(this.project.idTeam);
+      if (this.project.projectDependency != null) {
+        this.dependency = this.project.projectDependency.name
+      }else {
+        this.dependency = "Atribue dependência"
+      }
+      id = this.project.idTeam;
+
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-      this.getGroups(teamId);
-      this.getUsers(teamId);
+      id = teamId;
+      this.dependency = "Atribue dependência"
     }
+    this.getGroups(id);
+    this.getUsers(id);
+    this.getAllProjects(id);
   }
 
 
@@ -108,16 +122,21 @@ export class CreateTeamProjectComponent implements OnInit {
     // if (!this.fd.has('file')) this.setDefaultImage();
     if (this.typeString === 'team') {
       this.createTeam()
-      this.confirmCreateTeam();
     } else if (this.typeString === 'project') {
       this.createProject();
-    } 
+    } else if (this.typeString === 'projectInfo') {
+      this.updateProject();
+    }
+
+    this.confirmCreateTeam();
   }
 
   setDefaultImage(): void {
     // this.fd.append('file', this.defaultImg);
   }
 
+  @Output()
+  sendTeam = new EventEmitter<Team>()
 
   createTeam(): void {
     const team = this.form.getRawValue() as Team;
@@ -133,56 +152,71 @@ export class CreateTeamProjectComponent implements OnInit {
             .updateImage(teamRes.id!, this.fd)
             .subscribe();
         }
+        this.sendTeam.emit(teamRes)
       })
   }
 
+
   createProject(): void {
-    let project = this.form.getRawValue() as Project;
-
-    let listOfResponsibles: User[] = [];
-    project.listOfResponsibles?.forEach((type => {
-      if (type instanceof Group) {
-        let group: Group = type as Group;
-        group.selected = true;
-        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-          for (const user of users) {
-            listOfResponsibles.push(user);
-          }
-        });
-      } else if (type instanceof User) {
-        let user: User = type as User;
-        user.selectedProject = true;
-        listOfResponsibles.push(user);
-      }
-
-      project.listOfResponsibles = listOfResponsibles;
-    }));
-
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    project.creator = {
-      user: {
-        id: this.logged.id!
-      },
-      team: {
-        id: teamId
-      }
-    };
-    
-    let reviewConfig = this.form.get('projectReviewENUM')
-    project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
+    if (!this.closeModal) {
+      let project = this.form.getRawValue() as Project;
 
-    this.projectService
-      .create(project, teamId)
-      .subscribe((project: Project) => {
-        this.alert.successAlert(`Projeto criado com sucesso!`);
-        if (this.fd) {
-          this.projectService
-            .updateImage(project.id, this.fd)
-            .subscribe();
+      let users: User[] = [];
+      let groups: Group[] = [];
+
+      project.listOfResponsibles?.forEach((type => {
+        if (type instanceof Group) {
+          let group: Group = type as Group;
+          group.selected = true;
+          group.children = []
+          groups.push(group)
+        } else if (type instanceof User) {
+          let user: User = type as User;
+          user.selectedProject = true;
+          if (!users.some(existingUser => existingUser.id === user.id)) {
+            users.push(user);
+            project.users = users;
+          }
         }
-      });
-  }
+      }));
+      project.groups = groups;
+      if (project.projectDependency) {
+        project.projectDependency.properties = [];
+        project.projectDependency.tasks = [];
+      }
 
+      project.creator = {
+        user: {
+          id: this.logged.id!
+        },
+        team: {
+          id: teamId
+        }
+      };
+
+      let reviewConfig = this.form.get('projectReviewENUM')
+      console.log(reviewConfig);
+      
+      project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
+      console.log(project);
+      
+      console.log(teamId);
+      
+      this.projectService
+        .create(project, teamId)
+        .subscribe((projectResponse: Project) => {
+
+          this.alert.successAlert(`Projeto criado com sucesso!`);
+          if (this.fd) {
+            this.projectService
+              .updateImage(projectResponse.id, this.fd)
+              .subscribe();
+          }
+          this.emitCreation(projectResponse)
+        });
+    }
+  }
 
 
 
@@ -231,7 +265,9 @@ export class CreateTeamProjectComponent implements OnInit {
     }
   }
 
+  closeModal?: boolean
   closeScreen(): void {
+    this.closeModal = true
     this.close.emit();
   }
 
@@ -243,108 +279,120 @@ export class CreateTeamProjectComponent implements OnInit {
     this.closeScreen();
   }
 
-  listOfResponsibles: any[] = []
-
   private getUsers(teamId: number): void {
-
-    this.userService.getUsersByTeam(teamId).subscribe((users: User[]) => {
+    this.teamService.getUsers(teamId).subscribe((users: User[]) => {
       this.users = users
       for (const user of users) {
         user.icon = 'pi pi-user'
-        this.listOfResponsibles.push(user);
-      }
-      if (this.project != null) {
-        this.projectService.getProjectCollaborators(this.project.id).subscribe((users: User[]) => {
-          this.markCollaboratorsAsSelected(users)
-        })
+        if (this.logged.id != user.id) {
+          this.listOfResponsibles.push(user);
+        }
+        if (this.project != null) {
+          this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+            for (const user2 of pc.users) {
+              if (user2.id === user.id) {
+                this.selectedUsers.push(user)
+              }
+            }
+          })
+        }
       }
     });
   }
 
   private getGroups(teamId: number): void {
-
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
       this.groups = groups;
 
       for (const group of groups) {
-        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-          group.children = users
-          group.icon = 'pi pi-users'
-          this.listOfResponsibles.push(group)
-          if (this.project != null) {
-            this.markCollaboratorsAsSelected(groups)
-          }
-        })
+        group.label = "Grupo " + group.label
+        this.listOfResponsibles.push(group)
+
+        if (this.project != null) {
+          this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+            for (const group2 of pc.groups) {
+              if (group2.id == group.id) {
+                this.selectedUsers.push(group);
+              }
+            }
+          })
+        }
       }
-    });
-  }
-
-
-
-  selectedUsers: any[] = [];
-
-  markCollaboratorsAsSelected(usersAndGroups: any[]): void {
-    this.selectedUsers = [];
-
-    usersAndGroups.forEach(item => {
-      if (item instanceof User) {
-        let collaborator: User = item as User;
-        this.selectedUsers.push({ label: collaborator.firstName, data: collaborator });
-      } else if (item instanceof Group) {
-        let group: Group = item as Group;
-        this.selectedUsers.push({ label: group.name, data: group });
-      }
-    });
+    })
   }
 
   updateProject(): void {
-    console.log("update");
-    
+
     let project = this.form.getRawValue() as Project;
-    let list: User[] = []
+    let users: User[] = [];
+    let groups: Group[] = [];
 
-    const projectEdit: ProjectEdit = {
-      id: this.project?.id,
-      name: project.name,
-      description: project.description,
-      listOfResponsibles: project.listOfResponsibles,
-    }
-
-    projectEdit.listOfResponsibles!.forEach((type => {
+    project.listOfResponsibles.forEach(type => {
       if (type instanceof Group) {
         let group: Group = type as Group;
         group.selected = true;
-        this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-          for (const user of users) {
-            list.push(user)
-          }
-        });
+        group.children = []; // Limpa a referência circular aqui
+        groups.push({ ...group }); // Cria uma cópia do objeto
       } else if (type instanceof User) {
         let user: User = type as User;
-        user.selected = true
-        list.push(user)
+        user.selected = true;
+        if (!users.some(existingUser => existingUser.id === user.id)) {
+          users.push({ ...user }); // Cria uma cópia do objeto
+        }
       }
-    }));
+    });
 
-    projectEdit.listOfResponsibles = list
+    if (project.projectDependency) {
+      project.projectDependency.tasks = []
+      project.projectDependency.properties = []
+    }
 
-    if (projectEdit.name == null) {
-      projectEdit.name = this.project?.name
+    let projectEdit: ProjectEdit = {
+      id: this.project?.id,
+      name: project.name,
+      description: project.description,
+      users: users,
+      groups: groups,
+      projectDependency: project.projectDependency
+    };
+
+    if (!projectEdit.name) {
+      projectEdit.name = this.project?.name;
     }
-    if (projectEdit.description == null) {
-      projectEdit.description = this.project?.description
+    if (!projectEdit.description) {
+      projectEdit.description = this.project?.description;
     }
-    if (projectEdit.listOfResponsibles == null) {
-      projectEdit.listOfResponsibles = this.project?.listOfResponsibles
+    if (!projectEdit.projectDependency) {
+      projectEdit.projectDependency = this.project.projectDependency
     }
+
 
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
-    this.projectService.patchValue(projectEdit).subscribe((project: Project) => { 
-      this.project = project;
-      this.alert.successAlert("Projeto modificado com sucesso")
+    this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
+      this.alert.successAlert("Projeto modificado com sucesso");
     });
-    this.closeScreen();
   }
+
+
+  @Output()
+  senderEmitter = new EventEmitter<Project>();
+
+  emitCreation(project: Project) {
+    this.senderEmitter.emit(project);
+  }
+
+  dependencies !: Project[]
+  getAllProjects(teamId: number) {
+    this.projectService.getProjectByCollaborators(teamId, this.userService.getLogged()).subscribe((projects: Project[]) => {
+      this.dependencies = projects
+      if (!this.projectNull) {
+        this.dependencies.splice(this.dependencies.indexOf(this.project), 1)
+      }
+    })
+  }
+
+
+
 }

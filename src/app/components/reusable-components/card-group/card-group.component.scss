@@ -1,52 +1,35 @@
 @import '../../../../variables';
 
-.card{
-    @apply flex shadow-lg w-full;
-    background-color: white;
-
-    div:first-child{
-        @apply w-[85%] flex items-center pl-6 h-full;
-    };
-
-    div:nth-child(2){
-        @apply w-[10%] flex items-center justify-between h-full;
-    };
-
-}
-
-.icon {
-    color: $primaryColor;
-}
-
-.user{
-    @apply w-[800px] pl-6 ;
-    background-color: white;
-
-    button {
-        background-color: $primaryColor;
-        color: $secondColor;
-        @apply w-[100px] h-[40px]
-    };
-
-    p{
-        font-size: $regularText;
-    }
-}
-
 .main-div {
-    @apply flex w-full flex-col py-2;
+    @apply w-full bg-white h-[150px] shadow-lg;
 }
 
 .user-card {
     @apply pt-5 flex flex-col gap-4 w-full;
 }
 
-.size{
-    font-size: 1rem;
-}
 ::-webkit-scrollbar-thumb {
     background-color: $primaryColor;
     margin-left: 3px;
+}
+
+.title{
+    font-size: $largeText;
+    @apply cursor-pointer;
+}
+
+.icon {
+    color: $primaryColor;
+    font-size: 1rem;
+}
+
+.members{
+    font-size: $smallText;
+    @apply flex justify-end w-[92%] pb-10
+}
+
+.clicked {
+    @apply bg-[#D9D9D9] rounded-2xl ;
 }
 
 

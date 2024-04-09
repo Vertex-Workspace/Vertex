@@ -238,11 +238,12 @@ section {
 }
 
 .grid-permissions{
-    @apply grid grid-cols-2 gap-3 w-[85%] h-[42%] pr-3 overflow-auto;
+    @apply grid grid-cols-2 gap-3 w-[85%] pr-3 overflow-auto;
 }
 
 .grid-group{
-    @apply flex flex-col gap-3 w-[85%] h-[42%] pr-3 overflow-auto;
+    @apply grid grid-cols-2 gap-4 w-[85%] h-[42%];
+    overflow-y: scroll
 }
 
 .div-description-top-right{

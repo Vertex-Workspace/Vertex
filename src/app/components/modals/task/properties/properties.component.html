@@ -3,11 +3,32 @@
         <tr>
             <td>
                 <div>
-                    <fa-icon ></fa-icon>
+                    <fa-icon [icon]="faListCheck" class="size"></fa-icon>
+                    <p>Dependências</p>
+                </div>
+                <div>
+                    <p-dropdown [style]="{ width: '250px'}" class="w-full" containerStyleClass="w-full"
+                        [(ngModel)]="selectedDependency" placeholder="Dependências" [options]="taskDependency"
+                        optionLabel="task" (onChange)="setTaskDependencies($event)"
+                        placeholder="{{selectedDependency}}">
+                        <ng-template let-task pTemplate="task">
+                            <span>{{task.name}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <fa-icon [icon]="faUsers" class="size"></fa-icon>
                     <p>Responsáveis</p>
                 </div>
                 <div>
-                    <!-- <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property> -->
+                    <p-multiSelect [options]="taskResponsables" [style]="{ width: '250px'}" [(ngModel)]="selectedUsers"
+                        appendTo="body" placeholder="Responsáveis">
+                        <ng-template let-node pTemplate="default">
+                            <span (click)="updateResponsible($event, node)">{{node.label}}</span>
+                        </ng-template>
+                    </p-multiSelect>
                 </div>
             </td>
             <td *ngFor="let value of task.values">
@@ -16,7 +37,8 @@
                     <p>{{value.property.name}}</p>
                 </div>
                 <div>
-                    <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property>
+                    <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value"
+                        [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property>
                 </div>
             </td>
         </tr>

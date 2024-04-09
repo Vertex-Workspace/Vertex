@@ -15,7 +15,8 @@
                 [stepContentParams]="{ texto: tutorialText[5] }">
                 <div class="functionally-items regular-text">
                     <div class="search">
-                        <input class="inputSearch" type="text" placeholder="Pesquisar por um projeto..." [(ngModel)]="projectSearch">
+                        <input class="inputSearch" type="text" placeholder="Pesquisar por um projeto..."
+                            [(ngModel)]="projectSearch">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
@@ -25,17 +26,16 @@
                 </div>
 
                 <div class="default-size" joyrideStep="goToTasks" [prevTemplate]="prevButton"
-                    [nextTemplate]="nextButton" [title]="'Ir para tarefas'"
-                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[7] }">
-
-                    <app-card-list style="width: 100%; height: 90%; padding-top: 3%" (emitterItem)="delete($event)"
-                        [type]="'project'" [team]="team" [teamScreen]="'project'"
-                        [filterSearch]="projectSearch"></app-card-list>
-
+                    [nextTemplate]="nextButton" [title]="'Ir para tarefas'" [stepContent]="customContent"
+                    [stepContentParams]="{ texto: tutorialText[7] }">
+                    
+                        <app-card-list style="width: 100%; height: 90%; padding-top: 3%" [type]="'project'" [team]="team"
+                        [teamScreen]="'project'" [projects]="projects">
+                    </app-card-list>
                     <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
-                        *ngIf="isCreatingProject" (close)="switchCreateView()"
-                        [typeString]="'project'"></app-create-team-project>
-                </div>
+                    *ngIf="isCreatingProject" (senderEmitter)="updateProjects($event)"
+                    [typeString]="'project'"></app-create-team-project>
+            </div>
             </div>
         </div>
 
@@ -50,14 +50,15 @@
                     <p>Nessa seção é possível visualizar todas as tarefas na qual você</p>
                     <p>é um dos responsáveis dentro da equipe {{teamName}}</p>
                 </div>
-                          
+
                 <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
                     [title]="'Visualizar tarefas da equipe'" [stepContent]="customContent"
                     [stepContentParams]="{ texto: tutorialText[6] }">
-                  
+
                     <div class="functionally-items regular-text">
                         <div class="search">
-                            <input  class="inputSearch" type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="queryFilter">
+                            <input class="inputSearch" type="text" placeholder="Pesquise por uma tarefa..."
+                                [(ngModel)]="queryFilter">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
                         <div class="filter-items">

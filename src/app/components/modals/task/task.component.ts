@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyList } from 'src/app/models/class/property';
 import { Task, TaskEdit } from 'src/app/models/class/task';
@@ -28,8 +28,7 @@ import { ReviewService } from 'src/app/services/review.service';
 export class TaskComponent implements OnInit {
   faClock = faClock;
 
-  @Input()
-  project!: Project;
+  @Input() project!: Project;
 
   @Output() close = new EventEmitter();
 
@@ -44,6 +43,7 @@ export class TaskComponent implements OnInit {
   taskStep!: Task;
   user!: User;
   timeInTask!: TimeInTask;
+  hasDependency: boolean = false;
 
   seconds: number = 0;
   minutes: number = 0;
@@ -79,10 +79,6 @@ export class TaskComponent implements OnInit {
   soloResponsable: boolean = false;
   checkedReview: boolean = false;
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-    
-  }
 
   async ngOnInit() {
     if(this.task.revisable){
@@ -122,6 +118,14 @@ export class TaskComponent implements OnInit {
 
     //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
     window.onbeforeunload = () => this.ngOnDestroy();
+
+    console.log(this.task);
+    
+    if(this.task.taskDependency != null){
+      this.hasDependency = true
+      this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
+    }
+    
   }
 
 

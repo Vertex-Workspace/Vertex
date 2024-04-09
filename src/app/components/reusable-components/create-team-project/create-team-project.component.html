@@ -3,19 +3,17 @@
   <div class="modal">
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
     <h4 class="title" *ngIf="typeString === 'project'">Crie um novo Projeto...</h4>
-    <div class="flex justify-between flex-row w-full h-[15%]"
-      *ngIf="typeString === 'project' || typeString === 'projectInfo'">
+    <div class="flex justify-between flex-row w-full h-[15%]">
       <h4 *ngIf="typeString === 'projectInfo'">Informações do projeto</h4>
-      <h4 *ngIf="typeString === 'projectInfo'" (click)="closeScreen()" class="cursor-pointer">X</h4>
+      <h4 *ngIf="typeString === 'projectInfo'" (click)="closeScreen()">X</h4>
     </div>
-    
     <div class="div-grid-name-image">
       <div class="input-name">
         <p class="medium-text">{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
         <input formControlName="name" type="text"
           [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
-          *ngIf="projectNull">
-        <input formControlName="name" type="text" *ngIf="!projectNull" [(ngModel)]="name">
+          *ngIf="typeString != 'projectInfo'">
+        <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'" [(ngModel)]="name">
       </div>
       <div class="input-image">
         <div class="image relative">
@@ -30,45 +28,35 @@
 
     <div class="input-description"
       *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
-      <p class="medium-text">{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
-      <textarea formControlName="description" *ngIf="projectNull"
+      <p>{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
+      <textarea formControlName="description" *ngIf="typeString != 'projectInfo'"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
-      <textarea formControlName="description" *ngIf="!projectNull" [(ngModel)]="description"></textarea>
+      <textarea formControlName="description" *ngIf="typeString === 'projectInfo'" [(ngModel)]="description"></textarea>
     </div>
 
-    <p class="medium-text pt-3">Responsáveis</p>
+    <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
+      placeholder="Responsáveis do Projeto" appendTo="body" class="flex items-start justify-start pt-4"
+      *ngIf="typeString === 'projectInfo' || typeString === 'project'" [(ngModel)]="selectedUsers"
+      [style]="{ width: '250px'}"></p-multiSelect>
 
-    <p-treeSelect *ngIf="typeString === 'project' || typeString === 'projectInfo'" 
-      class="flex items-start justify-start w-[65%] pt-2" containerStyleClass="w-full" display="chip"
-      [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
-      placeholder="Atribue responsáveis ao projeto" [(ngModel)]="selectedUsers"
-      [style]="{ 'background-color': 'var(--card)', color: 'var(--text)'}"
-      formControlName="listOfResponsibles">
-    </p-treeSelect>
 
-    <p class="medium-text pt-3">Revisão de Tarefas</p>
-    <p-dropdown *ngIf="typeString === 'project' || typeString === 'projectInfo'"
-      class="flex items-start justify-start w-[65%] pt-2" [options]="optionsReview"
-      [style]="{ background: 'var(--card)', color: 'var(--text)'}"
-      formControlName="projectReviewENUM"></p-dropdown>
+    <div class="flex flex-row w-full">
+      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
+        class="flex items-start justify-start pt-2 w-1/2" [options]="optionsReview"
+        placeholder="Selecione opção de Revisão" [style]="{ width: '250px'}" formControlName="projectReviewENUM"></p-dropdown>
+
+      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
+        class="pr-1 pt-2 w-1/2" [options]="dependencies" optionLabel="name" formControlName="projectDependency"
+        placeholder={{dependency}} [style]="{ width: '250px'}"></p-dropdown>
+    </div>
 
     <div class="div-buttons">
       <div class="buttons" *ngIf="projectNull">
         <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">Cancelar</button>
-        <button class="confirm-button" type="submit" *ngIf="projectNull">Confirmar</button>
+        <button class="confirm-button" type="submit" *ngIf="typeString != 'projectInfo'">Confirmar</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="!projectNull" (click)="updateProject()">Editar</button>
+      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'"
+        (click)="updateProject()">Editar</button>
     </div>
   </div>
 </form>
-
-<!-- <app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink" >
-  <h5 *ngIf="typeString === 'team'">Equipe {{form.value.name}} criada com sucesso!</h5>
-  <h5 *ngIf="typeString === 'project'">Projeto {{form.value.name}} criado com sucesso!</h5>
-  <div class="informations-modal medium-text">
-    <p *ngIf="typeString === 'team'">Convide pessoas para {{form.value.name}}</p>
-    <p *ngIf="typeString === 'team'">através do link abaixo.</p>
-  </div>
-  <app-button [title]="'Copiar Link de Convite'" *ngIf="typeString === 'team'" [icon]="'pi-link'" [width]="'250px'"
-    [height]="'50px'" (clickEvent)="copyLink()" />
-</app-modal-warn> -->

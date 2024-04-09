@@ -73,7 +73,6 @@ import { JoyrideModule } from 'ngx-joyride';
     BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule,
-    TeamInformationsModule,
     TasksModule,
     UserSettingsModule,
     TeamInformationsModule,

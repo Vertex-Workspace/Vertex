@@ -7,8 +7,10 @@
             </div>
             <div class="div-timer-closeModal">
                 <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable">
-                    <button (click)="sendTask()" id="red-btn" [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
-                        [disabled]="timeInTask.working">
+                    <button (click)="sendTask()" id="red-btn" 
+                    [ngClass]="hasDependency ? 'opacity-20' : 'opacity-100'"
+                    [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
+                        [disabled]="timeInTask.working || hasDependency">
                         Entregar Tarefa
                     </button>
                 </div>
@@ -30,7 +32,7 @@
                             value="{{task.name}}"></h4>
                 </div>
                 <div class="properties">
-                    <app-properties [task]="task" style="width: 100%; height: 100%;" (changes)="changeTask($event)"
+                    <app-properties [task]="task" [project]="project" style="width: 100%; height: 100%;" (changes)="changeTask($event)"
                         [permissions]="permissions" />
                 </div>
                 <div class="down relative">
@@ -89,7 +91,10 @@
                         <fa-icon [icon]="faClock"></fa-icon>
                         <p>{{timer}}</p>
                     </span>
-                    <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()">Trabalhar
+                    <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()"
+                    [disabled]="hasDependency"
+                    [ngStyle]="{'opacity' : hasDependency ? '0.2' : '1'}"
+                    >Trabalhar
                         na
                         Tarefa</button>
                     <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
