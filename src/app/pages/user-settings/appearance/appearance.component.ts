@@ -177,7 +177,7 @@ export class AppearanceComponent implements OnInit {
   ]
 
   fontFamily = [
-    'Inter', 'Helvetica', 'Courier New', 'Arial', 'system-ui', 'Times New Roman'
+    'Inter', 'Helvetica', 'Arial', 'system-ui', 'Times New Roman'
   ];
 
 

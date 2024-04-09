@@ -85,8 +85,7 @@ export class ProjectsComponent implements OnInit {
   permissionsOnTeamObservable!: Observable<Permission[]>;
 
   ngOnInit(): void {
-    console.log('entrou');
-    
+  
     this.getTeam();
     this.validateTeamId();
   }
@@ -94,7 +93,7 @@ export class ProjectsComponent implements OnInit {
   validateTeamId(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
-      .userIsOnTeam(teamId, this.logged.id!)
+      .userIsOnTeam(this.logged.id!,teamId)
       .subscribe((exists: boolean) => {
         if (!exists) {
           this.router.navigate(['/home']);

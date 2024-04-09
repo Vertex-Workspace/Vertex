@@ -125,9 +125,6 @@ export class HomeComponent implements OnInit {
 
 
   updateOrderType(e: PipeParams): void {
-    console.log(this.selectedFilter);
-
-
     if (e.type) {
       this.orderParams.type = e.type;
     }
@@ -142,6 +139,8 @@ export class HomeComponent implements OnInit {
     this.teamService.getTeamsByUser(this.logged)
       .subscribe((teams: Team[]) => {
         this.teams = teams;
+        console.log(this.teams);
+        
         this.teams.forEach(team => this.teamsBackup.push(new Team(team)));
       });
   }
