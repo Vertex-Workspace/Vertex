@@ -18,9 +18,10 @@ import { locations, LocationItem } from 'src/assets/data/locations';
 })
 export class HeaderComponent implements OnInit {
 
-  notifications : boolean = true;
+  notifications: boolean = true;
   locations: LocationItem[] = locations;
   location: string = "";
+
 
   @Input()
   notificationBadge!: number;
@@ -39,7 +40,7 @@ export class HeaderComponent implements OnInit {
   ) {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        const activeRoute: string = val.url as string;  
+        const activeRoute: string = val.url as string;
 
         let r = this.route;
         while (r.firstChild) {
@@ -49,24 +50,50 @@ export class HeaderComponent implements OnInit {
 
         r.params.subscribe(params => {
           if (params) {
-            const id: number = params['id'];            
+            const id: number = params['id'];
             this.incrementUrlById(activeRoute, id);
           }
         });
       }
-    }); 
+    });
 
   }
 
-  ngOnInit(): void {
+  countries!: any[];
 
+  selectedCity: any;
+
+  ngOnInit() {
+    this.countries = [
+      {
+        name: 'Brasil',
+        code: 'PT-BR',
+        flag: 'https://cdn-icons-png.flaticon.com/512/206/206597.png'
+      },
+      {
+        name: 'Estados Unidos',
+        code: 'EN-US',
+        flag: "https://cdn-icons-png.flaticon.com/512/206/206626.png"
+      },
+      {
+        name: 'Espanha',
+        code: 'ES-ES',
+        flag: 'https://cdn-icons-png.flaticon.com/512/330/330557.png'
+      }
+    ];
   }
 
-  
+  changeSelected(option:any){
+    this.selectedCity = option;
+    console.log(this.selectedCity);
+    
+  }
+
+
   @Output()
   openNotification = new EventEmitter();
 
-  openNotifications():void{
+  openNotifications(): void {
     this.openNotification.emit();
   }
 
@@ -74,21 +101,21 @@ export class HeaderComponent implements OnInit {
 
     this.locations
       .find((loc: LocationItem) => {
-        if (activeRoute.includes(loc.url)) {      
-          this.location = loc.name;       
+        if (activeRoute.includes(loc.url)) {
+          this.location = loc.name;
         }
-      })          
+      })
 
   }
 
   back(): void {
     console.log(window.history.length);
-    
+
     if (window.history.length > 2) this._location.back();
     else this.router.navigate(['/']);
   }
 
-  incrementUrlById(activeRoute: string, id: number): void {     
+  incrementUrlById(activeRoute: string, id: number): void {
     if (activeRoute.includes('projetos')) this.getTeam(id);
     if (activeRoute.includes('tarefas')) this.getProject(id);
     if (activeRoute.includes('usuario/perfil')) this.getUser(id);
@@ -98,7 +125,7 @@ export class HeaderComponent implements OnInit {
     this.teamService
       .getOneById(id)
       .subscribe((team: Team) => {
-        this.location = team.name;      
+        this.location = team.name;
       })
   }
 

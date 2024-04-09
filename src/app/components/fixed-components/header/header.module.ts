@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { NotificationModule } from '../../modals/notification/notification.module';
 import { BadgeModule } from 'primeng/badge';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,6 +14,8 @@ import { BadgeModule } from 'primeng/badge';
   imports: [
     CommonModule,
     NotificationModule,
+    CascadeSelectModule,
+    FormsModule,
     BadgeModule
   ]
 })

@@ -16,7 +16,7 @@
     }
 }
 .items-header{
-    @apply flex w-[5%] h-full justify-between items-center;
+    @apply flex w-[15%] h-full justify-around items-center;
 }
 i{
     @apply text-xl;

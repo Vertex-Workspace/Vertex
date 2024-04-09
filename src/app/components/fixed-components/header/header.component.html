@@ -2,24 +2,27 @@
     <section>
         <div class="current-location medium-text">
 
-            <i 
-                (click)="back()" 
-                class="pi pi-angle-double-left back"
-                *ngIf="location !== 'Home' || location.includes('aceitar-convite')"
-            ></i>
+            <i (click)="back()" class="pi pi-angle-double-left back"
+                *ngIf="location !== 'Home' || location.includes('aceitar-convite')"></i>
             <p>
                 {{location}}
             </p>
         </div>
         <div class="items-header">
-            <i class="pi pi-bell cursor-pointer" (click)="openNotifications()" pBadge value={{notificationBadge}} *ngIf="notificationBadge > 0"></i>
+            <div class="card flex justify-content-center">
+                <p-cascadeSelect [(ngModel)]="selectedCity" [options]="countries" optionLabel="cname" optionGroupLabel="name"  [optionGroupChildren]="[countries]" [style]="{ minWidth: '10rem' }" placeholder="Tradutor">
+                <ng-template pTemplate="option" (click)="changeSelected(option)" let-option>
+                        <div class="flex items-center align-items-center gap-2">
+                            <img class="w-10 h-10" [src]="option.flag"/>
+                            <span>{{option.code}}</span>
+                        </div>
+                    </ng-template>
+                </p-cascadeSelect>
+            </div>            
+            <i class="pi pi-bell cursor-pointer" (click)="openNotifications()" pBadge value={{notificationBadge}}
+                *ngIf="notificationBadge > 0"></i>
             <i class="pi pi-bell cursor-pointer" (click)="openNotifications()" *ngIf="notificationBadge == 0"></i>
             <i class="pi pi-question"></i>
         </div>
     </section>
 </header>
-
-
-
-
-
