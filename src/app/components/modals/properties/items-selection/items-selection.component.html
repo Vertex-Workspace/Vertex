@@ -37,6 +37,6 @@
     <fa-icon [icon]="faInfoCircle" class="color-text text-sm"></fa-icon>
     <p class="regular-text">Clique no texto e você poderá editar o nome do item</p>
 </div>
-<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'a propridade'"
+<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'excluir a propridade'"
     (confirmEvent)="delete($event)">
 </app-confirm-modal>

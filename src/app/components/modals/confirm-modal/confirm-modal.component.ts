@@ -66,7 +66,7 @@ export class ConfirmModalComponent {
 
     ngOnInit(): void {
       if(this.buttonText === undefined){
-        this.buttonText = "Sim"
+        this.buttonText = "Confirmar"
       }
     }
 }
