@@ -52,6 +52,7 @@ export class CreateTeamProjectComponent implements OnInit {
   base64 !: any;
   fd !: FormData;
 
+
   constructor(
     private personalization: PersonalizationService,
     private teamService: TeamService,
@@ -78,7 +79,13 @@ export class CreateTeamProjectComponent implements OnInit {
       projectDependency: [null],
     });
     this.base64 = this.defaultImg;
-    this.projectExists()
+    if(this.team){ 
+      this.projectExists();
+
+      if(this.team.users!.length > 1){
+        this.showResponsibles = true;
+      }
+    }
   }
 
   optionsReview = [
@@ -93,6 +100,7 @@ export class CreateTeamProjectComponent implements OnInit {
   usersGroup !: User[];
   dependency?: string
 
+  showResponsibles : boolean = false;
 
   projectExists() {
     let id = 0;
@@ -100,7 +108,6 @@ export class CreateTeamProjectComponent implements OnInit {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
-      console.log(this.project);
       if(this.project.file != null){
        this.base64 = this.project.file!.file;
       }
@@ -110,7 +117,7 @@ export class CreateTeamProjectComponent implements OnInit {
         this.dependency = "Atribue dependência"
       }
       id = this.project.idTeam;
-
+      
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       id = teamId;
@@ -131,11 +138,6 @@ export class CreateTeamProjectComponent implements OnInit {
     } else if (this.typeString === 'projectInfo') {
       this.updateProject();
     }
-
-    this.confirmCreateTeam();
-  }
-
-  setDefaultImage(): void {
   }
 
   @Output()
@@ -165,7 +167,6 @@ export class CreateTeamProjectComponent implements OnInit {
 
   createProject(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    if (!this.closeModal) {
       let project = this.form.getRawValue() as Project;
 
       let users: User[] = [];
@@ -200,28 +201,25 @@ export class CreateTeamProjectComponent implements OnInit {
           id: teamId
         }
       };
+      
+      project.projectReviewENUM = this.convertTypeString(this.form.get('projectReviewENUM')?.value)!;
 
-      let reviewConfig = this.form.get('projectReviewENUM')
-      console.log(reviewConfig);
-      
-      project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
-      console.log(project);
-      
-      console.log(teamId);
-      
       this.projectService
         .create(project, teamId)
         .subscribe((projectResponse: Project) => {
 
-          this.alert.successAlert(`Projeto criado com sucesso!`);
           if (this.fd) {
             this.projectService
-              .updateImage(projectResponse.id, this.fd)
-              .subscribe();
+            .updateImage(projectResponse.id, this.fd)
+            .subscribe((projectResImage : Project) => {
+              this.emitCreation(projectResImage);
+              
+            });
+          } else {
+            this.emitCreation(projectResponse)
           }
-          this.emitCreation(projectResponse)
+          this.alert.successAlert(`Projeto criado com sucesso!`);
         });
-    }
   }
 
 
@@ -270,18 +268,8 @@ export class CreateTeamProjectComponent implements OnInit {
     }
   }
 
-  closeModal?: boolean
   closeScreen(): void {
-    this.closeModal = true
     this.close.emit();
-  }
-
-  confirmCreateTeam(): void {
-    this.modalCopyLink = true;
-  }
-
-  copyLink(): void {
-    this.closeScreen();
   }
 
   private getUsers(teamId: number): void {
@@ -375,7 +363,16 @@ export class CreateTeamProjectComponent implements OnInit {
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
-    this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
+    this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
+      if (this.fd) {
+        this.projectService
+        .updateImage(projectRes.id, this.fd)
+        .subscribe((projectResImage : Project) => {
+          this.emitCreation(projectResImage);
+        });
+      } else {
+        this.emitCreation(projectRes);
+      }
       this.alert.successAlert("Projeto modificado com sucesso");
     });
   }
@@ -385,6 +382,7 @@ export class CreateTeamProjectComponent implements OnInit {
   senderEmitter = new EventEmitter<Project>();
 
   emitCreation(project: Project) {
+    console.log(project);  
     this.senderEmitter.emit(project);
   }
 

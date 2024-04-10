@@ -25,16 +25,17 @@ export class CardListComponent implements OnInit {
     private route: ActivatedRoute,
     private alertService: AlertService
   ) {
+    this.loggedUser = this.userService.getLogged();
   }
 
   faTrashCan = faTrashCan;
   faGear = faGear
   faMessage = faMessage
-  
+
   @Input()
   filterSearch !: string;
 
- 
+
   @Input()
   teams?: Team[]; //se estiver na home
 
@@ -62,34 +63,46 @@ export class CardListComponent implements OnInit {
 
   creatorName?: String
 
-  loggedUser?: User
+  loggedUser!: User
 
   image!: string
 
   dependencyName !: string
+  renderList: any[] = [];
 
-  ngOnChanges(){
-    this.renderList = this.getType();
-  }
 
   ngOnInit(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    if(teamId){
+    if (teamId) {
       this.findProjects(teamId); 
-      this.renderList = this.getType();
-
-    }else { 
-      this.renderList = this.getType();
+    } else{
+      this.setRenderList();
     }
   }
-  renderList : any[] = [];
 
-  getType(): any[] {
+
+  setRenderList() {
     if (this.type === 'project') {
-      return this.projects
+      this.projects.forEach((project) => {
+         project.isCreator = (project.creator?.user.id == this.loggedUser.id)
+      });
+      this.renderList = this.projects
+    } else if(this.type === 'team') {
+      console.log(this.teams);
+      this.renderList = this.teams!;
     }
+  }
 
-    return this.teams!;
+  updateProject(project : Project){
+    const projectTest: Project | undefined = this.projects.find((p) => p.id == project.id);
+    if (projectTest !== undefined) {
+      const index = this.projects.indexOf(projectTest);
+      if (index !== -1) {
+        this.projects.splice(index, 1, project); // Replace the old project with the updated one
+        this.setRenderList();
+      }
+    }
+    this.close();
   }
 
   openTeam(id: number) {
@@ -97,20 +110,7 @@ export class CardListComponent implements OnInit {
       this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
       this.projectService.getOneById(id).subscribe((project: Project) => {
-        
-        // if (project.projectDependency === null) {
         this.router.navigate([`/projeto/${id}/tarefas`])
-        // } else {
-        //   this.projectService.getTasksDone(project.projectDependency.id, project.id).subscribe((bool: String) => { 
-        //     if (bool == 'true') {
-        //       this.router.navigate([`/projeto/${id}/tarefas`])
-        //     } else if(bool = 'false') {
-        //       this.dependencyName = project.projectDependency.name;
-        //       this.alertService.notificationAlert("Você precisa concluir o projeto " + this.dependencyName
-        //         + " primeiro!")
-        //     }
-        //   })
-        // }
       })
     }
   }
@@ -125,18 +125,29 @@ export class CardListComponent implements OnInit {
     this.project = null!
   }
 
-  getImage(item : any) {
-    let file : any;
-    if(this.type === 'team') {
+  hasImage(item: any) {
+    if (this.type === 'team') {
+      if (item.image != null) {
+        return item.image != null
+      }
+    } else if (this.type === 'project') {
+      if (item.file != null) {
+        return item.file.file != null
+      }
+    }
+    return false;
+  }
+
+  getImage(item: any) {
+    if (!this.hasImage(item)) {
+      return "";
+    }
+    let file: any;
+    if (this.type === 'team') {
       file = item.image
     } else {
       file = item.file.file
     }
-    console.log(file);
-    if(file == null){
-      return "";
-    }
-    
     return file;
   }
 
@@ -148,24 +159,22 @@ export class CardListComponent implements OnInit {
     if (this.projects) {
       this.deleteProject(this.itemToDelete)
     }
-    // if (event) {
-    //   this.emitterItem.emit(this.itemToDelete)
-    // }
     this.delete = false;
   }
 
   findProjects(teamId: number) {
-    this.loggedUser = this.userService.getLogged();
-    // this.teamService.getOneById(this.team.)
-    
-    this.projectService.getProjectByCollaborators(teamId, this.loggedUser!).subscribe((projects: Project []) => {
+    this.projectService.getProjectByCollaborators(teamId, this.loggedUser!).subscribe((projects: Project[]) => {
       this.projects = projects
+      this.setRenderList();
     })
-    
+
   }
 
   getFirstLetter(item: any): string {
-    return item.name.substring(0, 1).toLocaleUpperCase();
+    if(item.name != null){
+      return item.name.substring(0, 1).toLocaleUpperCase();
+    }
+    return "E";
   }
 
   openModal: boolean = false;
@@ -175,7 +184,7 @@ export class CardListComponent implements OnInit {
     this.openModal = !this.openModal;
     this.project = project1;
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.project.idTeam = teamId  
+    this.project.idTeam = teamId
   }
 
   deleteProject(projectId: Project): void {
@@ -193,7 +202,7 @@ export class CardListComponent implements OnInit {
         this.teams?.splice(this.teams.indexOf(teamId), 1)
       });
   }
-  openTeamInformations(teamId : number) {
+  openTeamInformations(teamId: number) {
     this.router.navigate([`/equipe/${teamId}`])
   }
 

@@ -52,9 +52,9 @@ export class ProjectService {
       )
   }
 
-  public updateImage(teamId: number, fd: FormData) {
+  public updateImage(teamId: number, fd: FormData): Observable<Project>{
     return this.http
-      .patch(`${URL}project/image/${teamId}`, fd)
+      .patch<Project>(`${URL}project/image/${teamId}`, fd)
   }
 
   public getProjectByCollaborators(team: number, user: User): Observable<Project[]> {

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CardListComponent } from 'src/app/components/reusable-components/card-list/card-list.component';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
@@ -22,8 +23,6 @@ import { tutorialText } from 'src/app/tutorialText';
 })
 export class ProjectsComponent implements OnInit {
   isCreatingProject: boolean = false;
-  isCreatingGroup: boolean = false;
-  isCreating: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   clicked: string = 'project';
@@ -153,7 +152,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProjects(project: Project) {
-    this.projects.push(project)
+    this.projects.push(project);
+    this.isCreatingProject = true;
   }
 
   configItems = [

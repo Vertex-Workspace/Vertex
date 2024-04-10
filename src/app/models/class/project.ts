@@ -23,6 +23,8 @@ export class Project {
     groups?: Group[]
     users?: User[]
     projectReviewENUM!: ProjectReview; 
+
+    isCreator: boolean = false;
     
 
     constructor(

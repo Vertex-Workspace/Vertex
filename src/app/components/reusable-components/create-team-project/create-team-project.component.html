@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="!modalCopyLink">
+<form [formGroup]="form" class="modal-overlay">
 
   <div class="modal">
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
@@ -33,30 +33,34 @@
 
     <ng-container *ngIf="typeString === 'projectInfo' || typeString === 'project'">
 
-      <div class="flex flex-row w-full">
-        <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
-          placeholder="Responsáveis do Projeto" appendTo="body" class="flex items-start justify-start pt-4"
-          [(ngModel)]="selectedUsers" [style]="{ width: '250px'}"></p-multiSelect>
+      <div class="flex flex-row w-full pt-3 gap-5">
+        <div class="flex w-1/2 flex-col" *ngIf="showResponsibles">
+          <p class="large-text self-start"> Responsáveis</p>
+          <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
+            placeholder="Responsáveis do Projeto" appendTo="body" class="flex items-start justify-start pt-2"
+            [(ngModel)]="selectedUsers" [style]="{ width: '255px'}"></p-multiSelect>
+        </div>
+        <div class="flex w-1/2 flex-col">
+          <p class="large-text self-start">Revisões</p>
+          <p-dropdown class="flex items-start justify-start pt-2" [options]="optionsReview"
+            placeholder="Revisão opcional" [style]="{ width: '255px'}" formControlName="projectReviewENUM"></p-dropdown>
+        </div>
       </div>
 
 
-      <div class="flex flex-row w-full">
-        <p-dropdown class="flex items-start justify-start pt-2 w-1/2" [options]="optionsReview"
-          placeholder="Revisão opcional" [style]="{ width: '250px'}" formControlName="projectReviewENUM"></p-dropdown>
-      </div>
-      <div class="flex flex-row w-full">
-        <p-dropdown class="pr-1 pt-2" [options]="dependencies" optionLabel="name" formControlName="projectDependency"
-          placeholder={{dependency}} [style]="{ width: '250px'}"></p-dropdown>
+      <div class="flex flex-col w-full pt-3">
+        <p class="large-text self-start">Dependências</p>
+        <p-dropdown class="flex items-start justify-start pr-1 pt-2" [options]="dependencies" optionLabel="name"
+          formControlName="projectDependency" placeholder={{dependency}} [style]="{ width: '250px'}"></p-dropdown>
       </div>
     </ng-container>
 
     <div class="div-buttons">
       <div class="buttons" *ngIf="projectNull">
         <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">Cancelar</button>
-        <button class="confirm-button" type="submit" *ngIf="typeString != 'projectInfo'">Confirmar</button>
+        <button class="confirm-button" (click)="onSubmit()" *ngIf="typeString != 'projectInfo'">Confirmar</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'"
-        (click)="updateProject()">Editar</button>
+      <button class="confirm-button" (click)="onSubmit()" *ngIf="typeString === 'projectInfo'">Editar</button>
     </div>
   </div>
 </form>
