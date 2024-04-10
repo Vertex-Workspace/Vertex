@@ -1,35 +1,74 @@
 @import '../../../../variables.scss';
 @import '../../../../styles.scss';
 
-.bg {
-    @apply flex h-full w-screen flex-col items-center justify-start ;
-}
+@media screen and (min-width: 1324px) {
 
-.title {
-    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
-    border-color: $emphasis;
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start ;
+    }
+    
+    .title {
+        @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+        border-color: $emphasis;
         div {
             @apply flex w-[15%] items-center justify-start gap-7;
         }
-
+        
         p{
             @apply text-xl font-medium
         }
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+        @apply text-[18px];
+    }
+    
+    
+    section {
+        @apply h-full w-[100%] flex flex-col pt-10 items-center;
+    }
+    
+    
+    .search {
+        @apply w-[40%] h-[50px] flex items-start justify-between bg-white p-3
+        rounded shadow-md border-none;
+    }
 }
 
-.icon {
-    color:$primaryColor !important;
-    @apply text-[18px];
+@media screen and (max-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start ;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[15%] items-center justify-start gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium
+        }
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+        @apply text-[18px];
+    }
+    
+    
+    section {
+        @apply h-full w-[100%] flex flex-col pt-4 items-center;
+    }
+    
+    
+    .search {
+        @apply w-[40%] h-[50px] flex items-start justify-between bg-white p-3
+        rounded shadow-md border-none;
+    }
 }
-
-
-section {
-    @apply h-full w-[100%] flex flex-col pt-10 items-center;
-}
-
-
-.search {
-    @apply w-[40%] h-[50px] flex items-start justify-between bg-white p-3
-    rounded shadow-md border-none;
-}
-
+    
+    

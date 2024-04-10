@@ -1,90 +1,185 @@
 @import '../../../../variables.scss';
 @import '../../../../styles.scss';
 
-.bg {
-    @apply flex h-full w-screen flex-col items-center justify-start;
-}
+@media screen and (min-width: 1324px) {
 
-.title {
-    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
-    border-color: $emphasis;
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+        border-color: $emphasis;
         div {
             @apply flex w-[20%] items-center justify-start gap-5;
         }
-
-}
-
-.icon {
-    color:$primaryColor !important;
-}
-
-.size {
-    @apply text-[18px];
-}
-
-input {
-    @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[46px];
-}
-
-.iconInputBlock {
-    @apply flex py-3 w-full h-full;
-
-    .iconBox {
-         @apply flex w-[12%] h-12 justify-center items-center rounded-l-sm;
-         background-color: $emphasis;
-     }
-}
-
-section {
-    @apply h-full w-[45%] pt-6 flex flex-col;
-
-    .forgot-password{
-        @apply flex justify-end;
-    };
+        
+    }
     
-}
-
-.requires{
-    @apply w-[45%] h-[27%] flex flex-row pt-6;
+    .icon {
+        color:$primaryColor !important;
+    }
     
-    p:first-child{
-        @apply font-bold
+    .size {
+        @apply text-[18px];
     }
-
-    p {
-        @apply pt-[4px];
+    
+    input {
+        @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[46px];
     }
-
-    div:first-child {
-        @apply w-[65%]
+    
+    .iconInputBlock {
+        @apply flex py-3 w-full h-full;
+        
+        .iconBox {
+            @apply flex w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
     }
-
-    div:last-child {
-        @apply w-[35%] flex items-end justify-end 
+    
+    section {
+        @apply h-full w-[45%] pt-6 flex flex-col;
+        
+        .forgot-password{
+            @apply flex justify-end;
+        };
+        
     }
-
-    button {
-        color: $secondColor;
-        @apply h-[32px] w-[110px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
+    
+    .requires{
+        @apply w-[45%] h-[27%] flex flex-row pt-6;
+        
+        p:first-child{
+            @apply font-bold
+        }
+        
+        p {
+            @apply pt-[4px];
+        }
+        
+        div:first-child {
+            @apply w-[65%]
+        }
+        
+        div:last-child {
+            @apply w-[35%] flex items-end justify-end 
+        }
+        
+        button {
+            color: $secondColor;
+            @apply h-[32px] w-[110px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
+        }
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    span {
+        @apply h-full w-[92%];
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
     }
 }
 
-.noEdit {
-    background-color: $disabled;
-}
+@media screen and (max-width: 1324px) {
 
-.edit {
-    background-color: $primaryColor;
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[20%] items-center justify-start gap-5;
+        }
+        
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    input {
+        @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-full h-[50px];
+    }
+    
+    .iconInputBlock {
+        @apply flex py-3 w-full h-full;
+        
+        .iconBox {
+            @apply flex w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    section {
+        @apply h-full w-[45%] pt-6 flex flex-col;
+        
+        .forgot-password{
+            @apply flex justify-end;
+        };
+        
+    }
+    
+    .requires{
+        @apply w-[45%] h-[27%] flex flex-row pt-6;
+        
+        p:first-child{
+            @apply font-bold
+        }
+        
+        p {
+            @apply pt-[4px];
+        }
+        
+        div:first-child {
+            @apply w-[65%]
+        }
+        
+        div:last-child {
+            @apply w-[35%] flex items-end justify-end 
+        }
+        
+        button {
+            color: $secondColor;
+            @apply h-[32px] w-[110px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
+        }
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    span {
+        @apply h-full w-[92%];
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
 }
-
-span {
-    @apply h-full w-[92%];
-}
-
-h2 {
-    @apply text-xl font-bold;
-}
-
-.modal {
-    @apply flex items-center justify-center w-full h-full pb-16;
-}
+    

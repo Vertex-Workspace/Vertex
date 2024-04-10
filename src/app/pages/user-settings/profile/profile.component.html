@@ -1,7 +1,7 @@
 <div class="bg">
     <div class="title">
         <div>
-            <h5>Perfil</h5>
+            <h5>Meu Perfil</h5>
             <fa-icon [icon]="faUser" class="iconProfile size"></fa-icon>
         </div>
     </div>
@@ -25,17 +25,24 @@
                             </textarea>
                             </div>
                         </div>
+                        <button class="confirm-mobile justify-end medium-text" (click)="clickOption('edit')"
+                        [disabled]="contentEditable ? false : true"
+                        [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit"
+                        (click)="onSubmit()">
+                        Atualizar
+                    </button>
                     </form>
+                    <div class="charts">
+                        <p class="medium-text">Visibilidade do Perfil</p>      
+                        <div *ngFor="let toogle of tooglesList; index as item">
+                            <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
+                            </fa-icon>
+                            <p class="small-text px-3">{{toogle.text}}</p>
+                        </div>
+                    </div>
                 </section>
 
-                <div class="charts">
-                    <p class="medium-text">Visibilidade do Perfil</p>      
-                    <div *ngFor="let toogle of tooglesList; index as item">
-                        <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
-                        </fa-icon>
-                        <p class="small-text px-3">{{toogle.text}}</p>
-                    </div>
-                </div>
+                
             </div>
 
             <div class="rightSide">
