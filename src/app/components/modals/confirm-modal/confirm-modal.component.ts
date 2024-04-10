@@ -38,30 +38,9 @@ export class ConfirmModalComponent {
 
     @Output() confirmEvent = new EventEmitter<boolean>();
 
-    sendTrueEvent() {
-      this.confirmEvent.emit(true);
-    }
-
-    sendFalseEvent() {
-      this.confirmEvent.emit(false);
-    }
-
-    constructor(
-      private route: ActivatedRoute,
-      private teamService: TeamService
-    ) {}
-
-    closeModal(){
-      this.close.emit();
-    }
 
     deleteConfirm(answer : boolean): void {
-      if(answer === true){
-        this.sendTrueEvent()
-      }else {
-        this.sendFalseEvent()
-      }
-      this.close.emit(answer);
+      this.confirmEvent.emit(answer);
     }
 
     ngOnInit(): void {

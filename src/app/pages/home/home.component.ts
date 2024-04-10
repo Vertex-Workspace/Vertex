@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/models/class/team';
 import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -23,9 +23,9 @@ export class HomeComponent implements OnInit {
 
   logged !: User;
   tutorialText = tutorialText;
-  recentTeams !: Team[];
 
   teams !: Team[];
+  teamsRender!: Observable<Team[]>;
 
   teamSearch !: string;
 
@@ -85,7 +85,6 @@ export class HomeComponent implements OnInit {
   queryFilter !: string;
 
   faPlus = faPlusSquare;
-  teamsBackup: Team[] = [];
 
   constructor(
     private userService: UserService,
@@ -136,48 +135,12 @@ export class HomeComponent implements OnInit {
 
 
   subscribeToTeams() {
-    this.teamService.getTeamsByUser(this.logged)
-      .subscribe((teams: Team[]) => {
-        this.teams = teams;
-        console.log(this.teams);
-        
-        this.teams.forEach(team => this.teamsBackup.push(new Team(team)));
-      });
+    this.teamsRender = this.teamService.getTeamsByUser(this.logged);
+    this.teamsRender.forEach(teams => this.teams = teams);
   }
 
   switchCreateView(): void {
     this.isCreating = !this.isCreating;
-    this.updateList();
-  }
-
-  updateList(): void {
-    if (!this.isCreating) {
-      this.teamService
-        .getTeamsByUser(this.logged)
-        .subscribe((teams: Team[]) => {
-          this.teams = teams;
-          console.log(teams);
-          
-        });
-    }
-  }
-
-  delete(team: Team): void {
-    // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
-    //   this.userCreator = user;
-    //   console.log(user); 
-    // })
-
-
-    this.teamService
-      .delete(team.id)
-      .subscribe((team: Team) => {
-        this.alert.successAlert('Equipe removida com sucesso!');
-        this.teams?.splice(this.teams.indexOf(team), 1);
-      },
-        e => {
-          this.alert.errorAlert('Erro ao deletar equipe!')
-        });
   }
 
   clickFilter(): void {
@@ -206,7 +169,8 @@ export class HomeComponent implements OnInit {
   }
 
   updateTeams(team : Team){
-    this.teams.push(team)
+    this.teams.push(team);
+    this.switchCreateView();
   }
 
 

@@ -52,17 +52,13 @@ export class ProjectService {
       )
   }
 
-  public updateImage(teamId: number, fd: FormData) {
+  public updateImage(teamId: number, fd: FormData): Observable<Project>{
     return this.http
-      .patch(`${URL}project/image/${teamId}`, fd)
+      .patch<Project>(`${URL}project/image/${teamId}`, fd)
   }
 
   public getProjectByCollaborators(team: number, user: User): Observable<Project[]> {
     return this.http.get<Project[]>(`${URL}project/${team}/${user.id}`)
-      .pipe(map((projects: Project[]) =>
-        projects.map(project => new Project(project))
-      )
-      )
   }
 
   public getProjectCollaborators(projectId: number): Observable<User[]> {

@@ -1,13 +1,15 @@
 <div class="main-div">
     <div class="center-div">
-        <img class="w-72 h-72" src="https://cdn-icons-png.flaticon.com/512/17/17004.png"
-            alt="">
+        <div class="square">
+            <img src="data:image/jpg;base64, {{team.image}}" alt="" class="h-full w-full">
+            <h1 *ngIf="!team.image">{{getFirstLetter(team.name)}}</h1>
+        </div>
         <div class="flex flex-col justify-center items-center gap-5">
-            <div class="text-invitation">A equipe AKMO, te convidou para fazer parte do time!</div>
+            <div class="text-invitation">{{team.name}}, te convidou para fazer parte do time!</div>
             <div class="submit gap-3">
-                <button (click)="addUserOnTeam()">Entrar na equipe</button>
+                <button (click)="join()">Entrar na equipe</button>
                 <div class="deny-invite">
-                    Recusar convite
+                    <p (click)="deny()">Recusar convite</p>
                 </div>
             </div>
         </div>

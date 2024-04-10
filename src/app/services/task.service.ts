@@ -7,7 +7,7 @@ import { ReturnTaskResponsables, Task, TaskCreate, TaskEdit, TaskWaitingToReview
 import { Value, ValueUpdate } from '../models/class/value';
 import { CommentSend } from '../models/class/comment';
 import { Chat } from '../models/class/chat';
-import { User } from '../models/class/user';
+import { Permission, User } from '../models/class/user';
 import { Group } from '../models/class/groups';
 
 @Injectable({
@@ -36,6 +36,8 @@ export class TaskService {
   }
 
   public create(taskCreate: TaskCreate): Observable<Task> {
+    console.log(taskCreate);
+    
     return this.http.post<Task>(`${URL}task`, taskCreate);
   }
 
@@ -57,15 +59,16 @@ export class TaskService {
   public getAllByTeam(id: number):Observable<Task[]> {
     return this.http
       .get<Task[]>(`${URL}team/tasks/${id}`)
-      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 
   public getAllByUser(id: number): Observable<Task[]> {
     return this.http
       .get<Task[]>(`${URL}task/user/${id}`)
-      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 
+  public getTaskPermissions(taskID: number, userID: number): Observable<Permission[]> {
+    return this.http.get<Permission[]>(`${URL}task/${taskID}/task-permission/${userID}`);
+  }
 
 
   public saveComment(comment: CommentSend): Observable<Task> {

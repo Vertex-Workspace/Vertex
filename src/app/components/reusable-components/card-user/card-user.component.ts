@@ -71,7 +71,6 @@ export class CardUserComponent implements OnInit {
     } else if (this.typeString === 'addingParticipants') {
       this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
         this.users = users;
-
         if(this.users.length === 0){
           this.noMoreParticipants.emit();
         }

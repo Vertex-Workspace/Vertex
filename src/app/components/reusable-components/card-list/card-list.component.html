@@ -1,23 +1,23 @@
 <div class="list">
     <div class="grid grid-cols-2 h-[300px] gap-[20px]">
 
-        <ng-container *ngFor="let item of (getType() | namePipe : filterSearch)">
+        <ng-container *ngFor="let item of (renderList | namePipe : filterSearch)">
             <div class="card">
                 <div class="flex flex-col w-full">
                     <div class="image flex justify-center items-center" (click)="openTeam(item.id)">
-                        <img src="data:image/jpg;base64, {{item.image}}" alt="" class="h-full">
-                        <h1 *ngIf="!item.image">{{getFirstLetter(item)}}</h1>
+                        <img src="data:image/jpg;base64, {{getImage(item)}}" alt="" class="h-full">
+                        <h1 *ngIf="!hasImage(item)">{{getFirstLetter(item)}}</h1>
                     </div>
                     <div class="informations">
                         <div class="infos-team" (click)="openTeam(item.id)">
-                            <p class="large-text" [ngClass]="teamScreen === 'project' ? 'pt-12' : ''">{{item.name}}</p>
-                            <p class="regular-text" *ngIf="teamScreen != 'project'">Visualizar Informações</p>
+                            <p class="large-text">{{item.name}}</p>
+                            <p class="regular-text underline" *ngIf="teamScreen != 'project'" (click)="openTeamInformations(item.id)">Visualizar Informações</p>
                         </div>
 
-                        <div *ngIf="teamScreen === 'settings' || teamScreen === 'project'" class="icon">
+                        <div *ngIf="(teamScreen === 'settings' || teamScreen === 'project') && item.isCreator" class="icon">
                             
-                            <fa-icon [icon]="faTrashCan" class="trash-icon pr-4" (click)="openModalDelete(item)"></fa-icon>
-                            <fa-icon [icon]="faGear" class="trash-icon" (click)="openInformations(item)"></fa-icon>
+                            <fa-icon [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
+                            <fa-icon [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
                         </div>
                     </div>
                 </div>
@@ -27,8 +27,12 @@
     </div>
 </div>
 
-<app-create-team-project [project]="project" *ngIf="openModal" [typeString]="'projectInfo'"
-[team]="team" (close)="close()">
+<app-create-team-project 
+[project]="project" 
+*ngIf="openModal" 
+[typeString]="'projectInfo'"
+[team]="team"
+(senderEmitter)="updateProject($event)" (close)="close()">
 </app-create-team-project>            
 
 <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"

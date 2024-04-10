@@ -30,28 +30,17 @@ export class UserService {
   ) {
   }
 
-  public register(form: User): void {
+  public register(form: User) {
 
-    const user: User = {
-      firstName: form.firstName,
-      lastName: form.lastName,
-      email: form.email,
-      image: this.defaultImg,
-      firstAccess:true,
-      password: form.password,
-      passwordConf: form.passwordConf
-    }
+    form.image = this.defaultImg;
+    form.firstAccess = true;
 
-    this.create(user)
-      .subscribe(
-        (user: User) => {
-          this.login(user);
-        },
-        e => {
-          this.alert
-            .errorAlert(e.error);
-        }
-      )
+    this.http.post<User>(`${URL}user`, form).subscribe(
+      (userRes: User) => {
+        console.log(userRes);
+        this.login(userRes);
+    });
+    
   }
 
   public findByfirstName(firstName: string): Observable<User> {
@@ -130,10 +119,6 @@ export class UserService {
     .pipe(map((user: User) => new User(user)));
   }
   
-  public create(user: User): Observable < User > {
-    return this.http
-    .post<User>(`${URL}user`, user);
-  }
 
   public patchPersonalization(personalization: Personalization): Observable<User> {
     return this.http
@@ -151,9 +136,11 @@ export class UserService {
     .patch<any>(`${URL}user/edit-password`, passwordObj);
   }
 
-  public patchFirstAccess(user:User): Observable<User> {
-    return this.http
-    .patch<User>(`${URL}user/first-access`, user);
+  public patchFirstAccess(user:User): any {
+    this.http
+    .patch<User>(`${URL}user/first-access`, user).subscribe((user: User) => {
+      this.saveLoggedUser(user);
+    });
   }
   
   public delete (id: number): Observable < User > {

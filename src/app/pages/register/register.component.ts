@@ -70,20 +70,7 @@ export class RegisterComponent {
   passwordToggle2():void{
     this.invisibleEye2 = !this.invisibleEye2;
   }
-
-  // register(): void {
-  //   this.userService.create(this.user)
-  //     .subscribe((user: User) => {
-  //       if (user !== null 
-  //             && user !== undefined) {
-  //         this.userService.login(user);
-  //       }
-  //     });
-  // }
-
   onSubmit(): void {
-    console.log(this.form.value);
-
     this.userService
         .register(this.form.value);
         

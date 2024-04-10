@@ -10,7 +10,9 @@ export class Project {
     name !: string;
     team : Team;
     description ?: string;
-    image ?: string;
+    file ?:{
+        file:string;
+    }
     creator ?: UserTeam;
     projectDependency !: Project;
     tasks : Task[]; 
@@ -21,18 +23,17 @@ export class Project {
     groups?: Group[]
     users?: User[]
     projectReviewENUM!: ProjectReview; 
+
+    isCreator: boolean = false;
     
 
     constructor(
         project: Project,
     ) {
-        console.log(project);
-        
         this.id = project.id;
         this.name = project.name;
         this.team = project.team;
         this.description = project.description;
-        this.image = project.image;
         this.tasks = project.tasks;
         this.notes = project.notes;
         this.properties = project.properties;

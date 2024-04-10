@@ -1,12 +1,12 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="!modalCopyLink">
+<form [formGroup]="form" class="modal-overlay">
 
   <div class="modal">
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
     <h4 class="title" *ngIf="typeString === 'project'">Crie um novo Projeto...</h4>
-    <div class="flex justify-between flex-row w-full h-[15%]">
-      <h4 *ngIf="typeString === 'projectInfo'">Informações do projeto</h4>
-      <h4 *ngIf="typeString === 'projectInfo'" (click)="closeScreen()">X</h4>
-    </div>
+    <span class="flex w-full justify-between" *ngIf="typeString === 'projectInfo'">
+      <h4 class="title">Editar Projeto...</h4>
+      <fa-icon [icon]="faX" (click)="closeScreen()"></fa-icon>
+    </span>
     <div class="div-grid-name-image">
       <div class="input-name">
         <p class="medium-text">{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
@@ -15,48 +15,52 @@
           *ngIf="typeString != 'projectInfo'">
         <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'" [(ngModel)]="name">
       </div>
-      <div class="input-image">
-        <div class="image relative">
-          <img *ngIf="selectedFile" alt="">
-          <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
-          <form class="input-div">
-            <input type="file" class="input-file" (change)="onFileSelected($event)">
-          </form>
-        </div>
+      <div class="circular">
+        <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover h-full w-full">
+        <form class="input-div">
+          <input type="file" class="input-file" (change)="onFileSelected($event)">
+        </form>
       </div>
     </div>
 
     <div class="input-description"
       *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
-      <p>{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
+      <p class="medium-text">{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
       <textarea formControlName="description" *ngIf="typeString != 'projectInfo'"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
       <textarea formControlName="description" *ngIf="typeString === 'projectInfo'" [(ngModel)]="description"></textarea>
     </div>
 
-    <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
-      placeholder="Responsáveis do Projeto" appendTo="body" class="flex items-start justify-start pt-4"
-      *ngIf="typeString === 'projectInfo' || typeString === 'project'" [(ngModel)]="selectedUsers"
-      [style]="{ width: '250px'}"></p-multiSelect>
+    <ng-container *ngIf="typeString === 'projectInfo' || typeString === 'project'">
+
+      <div class="flex flex-row w-full pt-3 gap-5">
+        <div class="flex w-1/2 flex-col" *ngIf="showResponsibles">
+          <p class="large-text self-start"> Responsáveis</p>
+          <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
+            placeholder="Responsáveis do Projeto" appendTo="body" class="flex items-start justify-start pt-2"
+            [(ngModel)]="selectedUsers" [style]="{ width: '255px'}"></p-multiSelect>
+        </div>
+        <div class="flex w-1/2 flex-col">
+          <p class="large-text self-start">Revisões</p>
+          <p-dropdown class="flex items-start justify-start pt-2" [options]="optionsReview"
+            placeholder="Revisão opcional" [style]="{ width: '255px'}" formControlName="projectReviewENUM"></p-dropdown>
+        </div>
+      </div>
 
 
-    <div class="flex flex-row w-full">
-      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-        class="flex items-start justify-start pt-2 w-1/2" [options]="optionsReview"
-        placeholder="Selecione opção de Revisão" [style]="{ width: '250px'}" formControlName="projectReviewENUM"></p-dropdown>
-
-      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
-        class="pr-1 pt-2 w-1/2" [options]="dependencies" optionLabel="name" formControlName="projectDependency"
-        placeholder={{dependency}} [style]="{ width: '250px'}"></p-dropdown>
-    </div>
+      <div class="flex flex-col w-full pt-3">
+        <p class="large-text self-start">Dependências</p>
+        <p-dropdown class="flex items-start justify-start pr-1 pt-2" [options]="dependencies" optionLabel="name"
+          formControlName="projectDependency" placeholder={{dependency}} [style]="{ width: '250px'}"></p-dropdown>
+      </div>
+    </ng-container>
 
     <div class="div-buttons">
       <div class="buttons" *ngIf="projectNull">
         <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">Cancelar</button>
-        <button class="confirm-button" type="submit" *ngIf="typeString != 'projectInfo'">Confirmar</button>
+        <button class="confirm-button" (click)="onSubmit()" *ngIf="typeString != 'projectInfo'">Confirmar</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'"
-        (click)="updateProject()">Editar</button>
+      <button class="confirm-button" (click)="onSubmit()" *ngIf="typeString === 'projectInfo'">Editar</button>
     </div>
   </div>
 </form>

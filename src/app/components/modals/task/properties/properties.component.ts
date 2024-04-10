@@ -28,7 +28,6 @@ export class PropertiesComponent {
 
   @Input() task!: Task;
   @Input() project !: Project
-  @Input() permissions !: Permission[];
 
   tasks: Task[] = []
 
@@ -52,7 +51,7 @@ export class PropertiesComponent {
   ]
 
 
-  canEdit: boolean = false;
+  @Input() canEdit: boolean = false;
   taskResponsables: TreeNode[] = []
   selectedUsers: TreeNode[] = []
   selectedUsers2: TreeNode[] = []
@@ -64,12 +63,6 @@ export class PropertiesComponent {
     this.tasks = this.project.tasks
     this.getGroups()
     this.getUsers()
-
-    for (const permission of this.permissions) {
-      if (permission.name === PermissionsType.EDIT && permission.enabled) {
-        this.canEdit = true;
-      }
-    }
 
     for (const task of this.project.tasks) {
       if (this.task.id != task.id) {
