@@ -2,7 +2,7 @@ import { identifierName } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faX } from '@fortawesome/free-solid-svg-icons';
 import { LogarithmicScale } from 'chart.js';
 import { TreeNode } from 'primeng/api';
 import { Group } from 'src/app/models/class/groups';
@@ -15,7 +15,7 @@ import { PersonalizationService } from 'src/app/services/personalization.service
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
-import { defaultImage } from 'src/assets/data/defaultImg';
+import { defaultImage, defaultTeamImage } from 'src/assets/data/defaultImg';
 
 @Component({
   selector: 'app-create-team-project',
@@ -24,9 +24,9 @@ import { defaultImage } from 'src/assets/data/defaultImg';
 })
 export class CreateTeamProjectComponent implements OnInit {
   faImage = faImage;
-
+  faX = faX;
   modalCopyLink: boolean = false;
-  defaultImg: string = defaultImage;
+  defaultImg: string = defaultTeamImage;
 
   form !: FormGroup;
 
@@ -77,6 +77,7 @@ export class CreateTeamProjectComponent implements OnInit {
       groups: [null],
       projectDependency: [null],
     });
+    this.base64 = this.defaultImg;
     this.projectExists()
   }
 
@@ -99,6 +100,10 @@ export class CreateTeamProjectComponent implements OnInit {
       this.projectNull = false;
       this.name = this.project.name;
       this.description = this.project.description;
+      console.log(this.project);
+      if(this.project.file != null){
+       this.base64 = this.project.file!.file;
+      }
       if (this.project.projectDependency != null) {
         this.dependency = this.project.projectDependency.name
       }else {
@@ -119,7 +124,6 @@ export class CreateTeamProjectComponent implements OnInit {
 
 
   onSubmit(): void {
-    // if (!this.fd.has('file')) this.setDefaultImage();
     if (this.typeString === 'team') {
       this.createTeam()
     } else if (this.typeString === 'project') {
@@ -132,7 +136,6 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   setDefaultImage(): void {
-    // this.fd.append('file', this.defaultImg);
   }
 
   @Output()
@@ -150,9 +153,12 @@ export class CreateTeamProjectComponent implements OnInit {
         if (this.fd) {
           this.teamService
             .updateImage(teamRes.id!, this.fd)
-            .subscribe();
+            .subscribe((teamImage : Team) => {
+              this.sendTeam.emit(teamImage);
+            });
+        } else {
+          this.sendTeam.emit(teamRes);
         }
-        this.sendTeam.emit(teamRes)
       })
   }
 
@@ -239,7 +245,6 @@ export class CreateTeamProjectComponent implements OnInit {
       case ProjectReview.EMPTY:
         return 'Sem revisão';
     }
-    return this.project?.projectReviewENUM!
   }
 
 

@@ -26,12 +26,6 @@
                     <p>{{permission.name}}</p>
                 </div>
             </div>
-            <div class="more-infos">
-                <p class="pl-4 pt-2 font-bold" [routerLink]="'/perfil-usuario'">Ver mais informações</p>
-                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean(user)"
-                    *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
-                </fa-icon>
-            </div>
         </div>
     </div>
 </div>

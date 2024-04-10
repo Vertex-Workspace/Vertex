@@ -68,29 +68,35 @@ export class CardListComponent implements OnInit {
 
   dependencyName !: string
 
+  ngOnChanges(){
+    this.renderList = this.getType();
+  }
 
   ngOnInit(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     if(teamId){
       this.findProjects(teamId); 
+      this.renderList = this.getType();
+
+    }else { 
+      this.renderList = this.getType();
     }
   }
+  renderList : any[] = [];
 
   getType(): any[] {
     if (this.type === 'project') {
       return this.projects
     }
+
     return this.teams!;
   }
 
   openTeam(id: number) {
-    console.log(id);
-
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
       this.projectService.getOneById(id).subscribe((project: Project) => {
-        console.log(project);
         
         // if (project.projectDependency === null) {
         this.router.navigate([`/projeto/${id}/tarefas`])
@@ -117,6 +123,21 @@ export class CardListComponent implements OnInit {
   close() {
     this.openModal = !this.openModal;
     this.project = null!
+  }
+
+  getImage(item : any) {
+    let file : any;
+    if(this.type === 'team') {
+      file = item.image
+    } else {
+      file = item.file.file
+    }
+    console.log(file);
+    if(file == null){
+      return "";
+    }
+    
+    return file;
   }
 
 
@@ -162,9 +183,7 @@ export class CardListComponent implements OnInit {
       .delete(projectId.id)
       .subscribe((project) => {
         this.projects.splice(this.projects.indexOf(projectId), 1)
-      },
-        e => {
-        });
+      });
   }
 
   deleteTeam(teamId: Team): void {
@@ -172,9 +191,10 @@ export class CardListComponent implements OnInit {
       .delete(teamId.id)
       .subscribe((team) => {
         this.teams?.splice(this.teams.indexOf(teamId), 1)
-      },
-        e => {
-        });
+      });
+  }
+  openTeamInformations(teamId : number) {
+    this.router.navigate([`/equipe/${teamId}`])
   }
 
 }
