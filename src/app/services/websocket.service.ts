@@ -71,7 +71,7 @@ export class WebSocketService {
 
         const obj = JSON.parse(`${event.data}`)
 
-        
+
         observer.next(obj);
       };
     });
@@ -84,7 +84,7 @@ export class WebSocketService {
 
       this.webSocket.send(JSON.stringify(chatMessageDto));
       console.log(chatMessageDto, "MESSAGE Sent");
-    }else {
+    } else {
       console.error('WebSocket is not open. Unable to send message.');
     }
   }

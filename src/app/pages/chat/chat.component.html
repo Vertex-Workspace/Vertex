@@ -1,4 +1,4 @@
-<section *ngIf="hasAnyChat">
+<section *ngIf="conversations">
 
     <header>
 
@@ -56,7 +56,7 @@
 
             <div class="main-section-left gap-2">
 
-                <div class="w-full flex justify-center" *ngIf="hasAnyChat">
+                <div class="w-full flex justify-center">
                     <ng-container *ngFor="let chatFor of conversations">
                         <div (click)="openConversation(chatFor)"
                             [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
@@ -115,16 +115,24 @@
 
                         <div *ngIf="message.file"
                             [ngClass]="message.user !== logged.firstName ? 'message-bubble-left with-photo' : 'message-bubble-right with-photo items-end'">
-                            <div class="w-full h-full flex justify-center items-center gap-3">
-                                <img [ngClass]="messageFileIncludesImage(message) ? 'ml-[10px] mt-[5px] image':'archive'"
-                                    draggable="false" [src]="getIconSrc(message)">
-                                <div class="flex h-full items-center gap-5">
-                                    <p *ngIf="!messageFileIncludesImage(message)">{{ message.file.name }}</p>
+                            <div class="w-full h-full flex justify-center items-center gap-3 relative">
+                                <div class="relative left-[5px] top-1 flex justify-center items-center" style="max-width: 300px;">
+                                    <img [ngClass]="messageFileIncludesImage(message) ? 'image':'archive'"
+                                        draggable="false" [src]="getIconSrc(message)"
+                                        style="max-width: 100%; height: auto;">
+                                    <p-image *ngIf="messageFileIncludesImage(message)" [src]="getIconSrc(message)"
+                                        alt="Image" height="auto" width="300" [preview]="true"
+                                        class="absolute inset-0">
+                                    </p-image>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <p *ngIf="!messageFileIncludesImage(message)" class="text-center">{{
+                                        message.file.name }}</p>
                                 </div>
                             </div>
                             <div class="flex justify-between">
                                 <p
-                                    [ngClass]="message.user !== logged.firstName ? 'timestamp text-[#777777]' : 'timestamp text-[#fff]'">
+                                    [ngClass]="message.user !== logged.firstName ? 'timestampBlack' : 'timestamp text-[#fff]'">
                                     {{ generateTime(message) }}
                                 </p>
                                 <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">
@@ -132,12 +140,15 @@
                                 </a>
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
 
-            <form *ngIf="chat && chat.messages!=null" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)"
-                #sendForm="ngForm" class="high-input-div justify-center">
+            <form *ngIf="chat && chat.messages!=null" (ngSubmit)="sendMessage(sendForm)"
+                (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm" class="high-input-div justify-center">
                 <div class="divWhiteInput">
 
                     <textarea type="text" name="message" id="input-message"
@@ -182,7 +193,7 @@
 
 </section>
 
-<section class="gap-8" *ngIf="!hasAnyChat">
+<section class="gap-8" *ngIf="!conversations">
     <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>
     <p class="pHasNoOneChat">Você ainda não possui nenhum chat cadastrado no sistema. Para criar um chat adicione
         membros a sua equipe!</p>

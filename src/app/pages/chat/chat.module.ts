@@ -6,6 +6,7 @@ import { InputModule } from "../../components/reusable-components/input/input.mo
 import { FormsModule } from '@angular/forms';
 
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { ImageModule } from 'primeng/image';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
         // PickerModule,
         FormsModule,
         FontAwesomeModule,
+        ImageModule,
         InputModule,
         PickerModule
     ]

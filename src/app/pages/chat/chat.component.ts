@@ -15,16 +15,18 @@ import { User } from 'src/app/models/class/user';
 import { Message } from 'src/app/models/class/message';
 import { TeamService } from '../../services/team.service';
 import { PersonalizationService } from 'src/app/services/personalization.service';
+import { UserService } from 'src/app/services/user.service';
+
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
-
+  
 })
 export class ChatComponent {
-
+  
   faCommentSlash = faCommentSlash;
   faSmile = faSmile;
   faSearch = faSearch;
@@ -40,50 +42,36 @@ export class ChatComponent {
   faChevronRight = faChevronRight;
   faPaperPlane = faPaperPlane;
   faTimes = faTimes;
-
+  
   messageUser: any = "";
   @Output()
   chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+  
   conversationOpen: boolean = false;
-
+  
   conversations: Chat[] = []
-
+  
   messages: Message[] = [];
-
+  
   chat!: Chat;
-
+  
   cardChat: number = 0;
-
+  
   side: boolean = true;
-
+  
   hasAnyChat: boolean = false;
-
+  
   logged!: User;
-
-
+  
+  
   constructor(public webSocketService: WebSocketService, private teamService: TeamService, private personalizationService: PersonalizationService) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
-    this.teamService.findAllChats().subscribe((chats: Chat[]) => {
-      chats.forEach((chat: Chat) => {
-        chat.userTeams!.forEach((userTeam) => {
-          if (userTeam.user.id == this.logged.id) {
-            if (chat.userTeams!.length > 1) {
-              this.hasAnyChat = true;
-              this.conversations.push(chat);
-            }
-            else {
-              this.hasAnyChat = false;
-              this.conversations=[];
-            }
-          }
-        });
-      });
+    this.teamService.findAllChatsByUser(this.logged.id!).subscribe((chats: Chat[]) => {
+      console.log(chats);
+      this.conversations = chats;
     });
-
-    console.log(this.conversations);
-    
   }
+ 
 
   showEmojiPicker: boolean = false;
   showEmoji(): void {

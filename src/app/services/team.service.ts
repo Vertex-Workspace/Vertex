@@ -38,8 +38,8 @@ export class TeamService {
       
   }
 
-  public findAllChats():Observable<Chat[]>{
-    return this.http.get<Chat[]>(`${URL}chatController`);
+  public findAllChatsByUser(id:number):Observable<Chat[]>{
+    return this.http.get<Chat[]>(`${URL}chatController/allChatsOfUser/${id}`);
   }
 
   public findAllMessagesByChatId(idChat:number):Observable<Message[]>{

@@ -42,7 +42,7 @@ export class MinichatComponent {
 
   constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
-    this.teamService.findAllChats().subscribe((chats: Chat[]) => {
+    this.teamService.findAllChatsByUser(1).subscribe((chats: Chat[]) => {
       chats.forEach((chat: Chat) => {
         chat.userTeams!.forEach((userTeam) => {
           if (userTeam.user.id == this.logged.id) {
