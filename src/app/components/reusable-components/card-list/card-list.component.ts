@@ -84,27 +84,11 @@ export class CardListComponent implements OnInit {
   }
 
   openTeam(id: number) {
-    console.log(id);
-
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
       this.projectService.getOneById(id).subscribe((project: Project) => {
-        console.log(project);
-        
-         if (project.projectDependency === null) {
         this.router.navigate([`/projeto/${id}/tarefas`])
-         } else {
-           this.projectService.getTasksDone(project.projectDependency.id, project.id).subscribe((bool: String) => { 
-             if (bool == 'true') {
-               this.router.navigate([`/projeto/${id}/tarefas`])
-             } else if(bool = 'false') {
-               this.dependencyName = project.projectDependency.name;
-               this.alertService.notificationAlert("Você precisa concluir o projeto " + this.dependencyName
-                 + " primeiro!")
-             }
-           })
-         }
       })
     }
   }
@@ -171,5 +155,8 @@ export class CardListComponent implements OnInit {
         e => {
         });
   }
+
+  
+
 
 }

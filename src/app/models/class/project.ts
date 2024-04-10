@@ -26,8 +26,7 @@ export class Project {
     constructor(
         project: Project,
     ) {
-        console.log(project);
-        
+    
         this.id = project.id;
         this.name = project.name;
         this.team = project.team;

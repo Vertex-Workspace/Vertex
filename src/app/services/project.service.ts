@@ -75,9 +75,4 @@ export class ProjectService {
       .get<ProjectCollaborators>(`${URL}project/getAll/${id}`);
   }
 
-  public getTasksDone(id: number, projectId: number): Observable<String> {
-    return this.http
-      .get<String>(`${URL}project/doneTask/${id}/${projectId}`);
-  }
-
 }

@@ -62,7 +62,8 @@ export class CreateTeamProjectComponent implements OnInit {
   ) {
     this.logged = this.userService.getLogged();
   }
-  
+
+  pDep !: Project
   listOfResponsibles: TreeNode[] = [];
   selectedUsers: TreeNode[] = [];
   ngOnInit(): void {
@@ -87,10 +88,12 @@ export class CreateTeamProjectComponent implements OnInit {
     let id = 0;
     if (this.project != null) {
       this.projectNull = false;
-      
+
       if (this.project.projectDependency != null) {
         this.dependency = this.project.projectDependency.name
-      }else {
+        this.pDep = this.project.projectDependency
+        // this.form.controls['projectDependency'].setValue(this.pDep)
+      } else {
         this.dependency = "Atribue dependência"
       }
       id = this.project.idTeam;
@@ -158,10 +161,13 @@ export class CreateTeamProjectComponent implements OnInit {
 
       let reviewConfig = this.form.get('projectReviewENUM')
       project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
+      console.log(project);
       
+
       this.projectService
         .create(project, teamId)
         .subscribe((projectResponse: Project) => {
+          console.log(project);
 
           this.alert.successAlert(`Projeto criado com sucesso!`);
           if (this.fd) {
@@ -176,15 +182,15 @@ export class CreateTeamProjectComponent implements OnInit {
 
   convertTypeString(reviewConfig: string): ProjectReview | undefined {
     switch (reviewConfig) {
-      case 'Revisão opcional' :
+      case 'Revisão opcional':
         return ProjectReview.OPTIONAL;
-      case 'Revisão obrigatória' :
+      case 'Revisão obrigatória':
         return ProjectReview.MANDATORY;
-      case 'Sem revisão' :
+      case 'Sem revisão':
         return ProjectReview.EMPTY;
     }
   }
-  convertType(): string{
+  convertType(): string {
     switch (this.project?.projectReviewENUM!) {
       case ProjectReview.OPTIONAL:
         return 'Revisão opcional';
@@ -240,10 +246,20 @@ export class CreateTeamProjectComponent implements OnInit {
           this.listOfResponsibles.push(user);
         }
         if (this.project != null) {
-          this.returnAllCollaborators(user, null!)
+          this.returnAllUsers(user)
         }
       }
     });
+  }
+
+  private returnAllUsers(user: User) {
+    this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+      for (const user2 of pc.users) {
+        if (user2.id === user.id) {
+          this.selectedUsers.push(user)
+        }
+      }
+    })
   }
 
   private getGroups(teamId: number): void {
@@ -252,22 +268,17 @@ export class CreateTeamProjectComponent implements OnInit {
         group.label = "Grupo " + group.label
         this.listOfResponsibles.push(group)
         if (this.project != null) {
-          this.returnAllCollaborators(null!, group)
+          this.returnAllGroups(group)
         }
       }
     })
   }
 
-  returnAllCollaborators(user: User, group: Group){
+  returnAllGroups(group: Group) {
     this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
       for (const group2 of pc.groups) {
         if (group2.id == group.id) {
           this.selectedUsers.push(group);
-        }
-      }
-      for (const user2 of pc.users) {
-        if (user2.id === user.id) {
-          this.selectedUsers.push(user)
         }
       }
     })
@@ -299,6 +310,7 @@ export class CreateTeamProjectComponent implements OnInit {
 
     if (project.projectDependency) {
       project.projectDependency.properties = [];
+      project.projectDependency.tasks = []
     }
 
     project.listOfResponsibles.forEach(type => {
@@ -314,7 +326,7 @@ export class CreateTeamProjectComponent implements OnInit {
       }
     });
 
-    if(projectEdit != null){
+    if (projectEdit != null) {
       projectEdit.users = users;
       projectEdit.groups = groups;
     } else {
@@ -340,4 +352,5 @@ export class CreateTeamProjectComponent implements OnInit {
       }
     })
   }
+
 }

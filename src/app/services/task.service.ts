@@ -115,17 +115,17 @@ export class TaskService {
     return this.http.patch<Task>(`${URL}task/taskResponsables`, updateResponsible);
   }
 
-  public getGroupByTask(taskId: number): Observable<Group[]> {
-    return this.http.get<Group[]>(`${URL}task/groups/${taskId}`)
-    .pipe(map((groups: Group[]) => groups.map(group => new Group(group))));
-  }
-
   public taskDependency(taskId: number, taskDependencyId: number, task: Task): Observable<Task> {
     return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}/${taskDependencyId}`, task);
   }
 
   public setTaskDependencyNull(taskId: number, task: Task): Observable<Task>{
     return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}`, task);
+  }
+
+  public getTasksDone(id: number): Observable<Boolean> {
+    return this.http
+      .get<Boolean>(`${URL}task/doneTask/${id}`);
   }
 
 }

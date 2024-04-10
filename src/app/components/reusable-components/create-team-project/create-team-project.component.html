@@ -45,9 +45,10 @@
         class="flex items-start justify-start pt-2 w-1/2" [options]="optionsReview"
         placeholder="Selecione opção de Revisão" [style]="{ width: '250px'}" formControlName="projectReviewENUM"></p-dropdown>
 
-      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'"
+      <p-dropdown *ngIf="typeString === 'projectInfo' || typeString === 'project'" [(ngModel)]="pDep"
         class="pr-1 pt-2 w-1/2" [options]="dependencies" optionLabel="name" formControlName="projectDependency"
-        placeholder={{dependency}} [style]="{ width: '250px'}"></p-dropdown>
+        placeholder={{dependency}} [style]="{ width: '250px'}" [showClear]="true">
+      </p-dropdown>
     </div>
 
     <div class="div-buttons">
@@ -55,8 +56,7 @@
         <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">Cancelar</button>
         <button class="confirm-button" type="submit" *ngIf="typeString != 'projectInfo'">Confirmar</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'"
-        (click)="updateProject()">Editar</button>
+      <button class="confirm-button" type="submit" *ngIf="typeString === 'projectInfo'">Editar</button>
     </div>
   </div>
 </form>
