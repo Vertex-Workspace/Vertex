@@ -585,11 +585,11 @@
     }
     
     .title {
-        @apply pl-1 w-full min-h-[50px] flex flex-col items-start justify-start;
+        @apply pl-1 w-full min-h-[50px] flex flex-col items-start justify-start pr-10;
         border-color: $emphasis;
 
         div {
-            @apply flex w-[50%] items-center justify-start gap-7;
+            @apply flex w-full items-center justify-center gap-7;
 
             .iconProfile {
                 @apply hidden;
@@ -716,10 +716,10 @@
     }
     
     .rightSide{
-        @apply flex w-full h-[250px] justify-center mb-4;
+        @apply flex w-full h-[250px] justify-center mb-4 pr-10;
         
         section {
-            @apply h-[85%] w-[90%] flex justify-center mr-20;
+            @apply h-[85%] w-[90%] flex justify-center;
 
             .circular {
                 width: 250px;
@@ -775,7 +775,7 @@
 
     .confirm-mobile {
         color: $secondColor;
-        @apply mt-2 mb-2 h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;;
+        @apply mt-2 mb-2 h-full w-[350px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;;
     }
 }
     

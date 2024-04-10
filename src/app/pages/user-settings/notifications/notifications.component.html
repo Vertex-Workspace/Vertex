@@ -9,7 +9,7 @@
     <div class="my-notifications">
         <p class="regular-text">Notificações de seu Espaço de Trabalho</p>
         <div *ngFor="let toogle of tooglesList; index as item">
-            <div>
+            <div class="item">
                 <fa-icon class="icon" (click)="toogleCharts(item)" [icon]="toogle.icon">
                 </fa-icon>
                 <p class="small-text">{{toogle.text}}</p>
