@@ -13,7 +13,7 @@
         <input formControlName="name" type="text"
           [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
           *ngIf="typeString != 'projectInfo'">
-        <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'" [(ngModel)]="name">
+        <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'" [(ngModel)]="project.name">
       </div>
       <div class="circular">
         <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover h-full w-full">
@@ -28,7 +28,7 @@
       <p class="medium-text">{{ typeString === 'team' ? 'Descrição da Equipe' : 'Descrição do Projeto' }}</p>
       <textarea formControlName="description" *ngIf="typeString != 'projectInfo'"
         [placeholder]="typeString === 'team' ? 'Insira uma descrição à equipe...' : 'Insira uma descrição ao projeto...'"></textarea>
-      <textarea formControlName="description" *ngIf="typeString === 'projectInfo'" [(ngModel)]="description"></textarea>
+      <textarea formControlName="description" *ngIf="typeString === 'projectInfo'" [(ngModel)]="project.description"></textarea>
     </div>
 
     <ng-container *ngIf="typeString === 'projectInfo' || typeString === 'project'">
@@ -46,7 +46,6 @@
             placeholder="Revisão opcional" [style]="{ width: '255px'}" formControlName="projectReviewENUM"></p-dropdown>
         </div>
       </div>
-
 
       <div class="flex flex-col w-full pt-3">
         <p class="large-text self-start">Dependências</p>

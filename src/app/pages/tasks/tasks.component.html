@@ -140,13 +140,11 @@
     <app-review-task *ngIf="taskReview" [tasksToReview]="tasksToReview" (toggleReview)="toggleReview()"
         (closeModal)="updateTasksToReview($event)"></app-review-task>
 
-    <app-create-team-project *ngIf="openModalProject" [project]="project" [team]="project.team"
+    <app-create-team-project *ngIf="openModalProject" [project]="project"
         [typeString]="'projectInfo'" (close)="openProjectInfos()"></app-create-team-project>
 
-
-
-
 </ng-container>
+
     <ng-template #prevButton>
         <button class="btn">
             Voltar

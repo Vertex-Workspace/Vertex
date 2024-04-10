@@ -43,13 +43,10 @@ export class ProjectService {
     return this.http
       .get<boolean>(`${URL}project/exists/${id}`)
   }
+
   public getTasksByProject(id: number): Observable<Task[]> {
     return this.http
       .get<Task[]>(`${URL}project/${id}/tasks`)
-      .pipe(map((tasks: Task[]) =>
-        tasks.map(task => new Task(task))
-      )
-      )
   }
 
   public updateImage(teamId: number, fd: FormData): Observable<Project>{
@@ -58,47 +55,16 @@ export class ProjectService {
   }
 
   public getProjectByCollaborators(team: number, user: User): Observable<Project[]> {
-    return this.http.get<Project[]>(`${URL}project/${team}/${user.id}`)
-  }
-
-  public getProjectCollaborators(projectId: number): Observable<User[]> {
-    return this.http.get<User[]>(`${URL}project/users/${projectId}`)
-    .pipe(map((users: User[]) =>
-      users.map(user => new User(user))
-    )
-    ) 
-  }
-
-  public getGroupsFromProject(projectId: number): Observable<Group[]> {
-    return this.http.get<Group[]>(`${URL}project/groups/${projectId}`)
-    .pipe(map((groups: Group[]) =>
-      groups.map(group => new Group(group))
-    )
-    ) 
+    return this.http.get<Project[]>(`${URL}project/${team}/${user.id}`);
   }
 
   public patchValue(project: ProjectEdit):Observable<Project>{
     return this.http.patch<Project>(`${URL}project/update`, project);
   }
 
-  public getImage(fileId: number){
-    return this.http.get<string>(`${URL}project/image/aws/${fileId}`)
-  }
-
-  public getFileId(fileId: number){
-    return this.http.get<number>(`${URL}project/image/${fileId}`)
-  }
-
   public returnAllCollaborators(id: number): Observable<ProjectCollaborators> {
     return this.http
       .get<ProjectCollaborators>(`${URL}project/getAll/${id}`);
   }
-
-  public getTasksDone(id: number, projectId: number): Observable<String> {
-    return this.http
-      .get<String>(`${URL}project/doneTask/${id}/${projectId}`);
-  }
-
-  
 
 }

@@ -8,7 +8,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { faTrashCan, faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
-// import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
+//  import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-card-list',
@@ -209,5 +209,8 @@ export class CardListComponent implements OnInit {
   openTeamInformations(teamId: number) {
     this.router.navigate([`/equipe/${teamId}`])
   }
+
+  
+
 
 }

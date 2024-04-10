@@ -20,6 +20,7 @@ import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
 import { tutorialText } from 'src/app/tutorialText';
 import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
+import { LogComponent } from 'src/app/components/modals/task/log/log.component';
 
 
 @Component({
@@ -125,7 +126,8 @@ export class TasksComponent implements OnInit {
       this.setFilters(p);
       this.setOrderOptions(p);
       this.pageTitle = this.project.name;
-
+      
+      this.verifyIfAllTasksAreDone(p);
 
       const currentView = localStorage.getItem('mode-task-view');
       if (currentView) {
@@ -164,8 +166,18 @@ export class TasksComponent implements OnInit {
       }
         
     });
-    
+  }
 
+  verifyIfAllTasksAreDone(project: Project): void {
+    if(project.projectDependency === null) return
+    this.taskService.getTasksDone(project.projectDependency.id).subscribe((bool: Boolean) => {
+      console.log(bool)
+      if(!bool){
+        this.router.navigate([`/equipe/${project.idTeam}/projetos`])
+        this.alertService.notificationAlert("Esse projeto necessita a conclusão do projeto " +
+        project.projectDependency.name)
+      } 
+    })
   }
 
   muralPageListener(): void {

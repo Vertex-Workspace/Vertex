@@ -100,20 +100,6 @@ export class PropertiesComponent {
     return "";
   }
 
-  removeCircularReferences(obj: any): any {
-    const seen = new WeakSet();
-    const replacer = (key: string, value: any) => {
-      if (typeof value === 'object' && value !== null) {
-        if (seen.has(value)) {
-          return;
-        }
-        seen.add(value);
-      }
-      return value;
-    };
-    return JSON.parse(JSON.stringify(obj, replacer));
-  }
-
   updateResponsible(event: any, node: any): void {
     let isGroup: boolean = false
 
@@ -135,22 +121,13 @@ export class PropertiesComponent {
       taskResponsibles.group.projects =[]
     }
 
-    console.log(taskResponsibles);
-    
-
-    if (taskResponsibles.user != null) {
-      if (this.task.creator?.user.id != taskResponsibles.user.id) {
+    if ((taskResponsibles.user != null) && (this.task.creator?.user.id != taskResponsibles.user.id)) {
         this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-          this.alertService.successAlert("editado")
+          this.alertService.successAlert("Adicionado como repsonsável da tarefa")
         });
       } else {
         this.alertService.errorAlert("Você não pode remover o criador da tarefa")
       }
-    } else {
-      this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-        this.alertService.successAlert("editado")
-      });
-    }
   }
 
   setTaskDependencies(task: any) {
@@ -164,21 +141,22 @@ export class PropertiesComponent {
 
   }
 
-  users1: User[] = []
   getUsers() {
     this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
       for (const user of pc.users) {
         user.label = user.firstName
         this.taskResponsables.push(user)
-        this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
-          this.selectedUsers2 = tr.users
-          for (const user1 of tr.users) {
-            user1.label = user1.firstName
-            if (user.id === user1.id) {
-              this.selectedUsers.push(user)
-            }
-          }
-        })
+        this.returnAllUsers(user)
+      }
+    })
+  }
+
+  returnAllUsers(user : User){
+    this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
+      for (const user1 of tr.users) {
+        if (user.id === user1.id) {
+          this.selectedUsers.push(user)
+        }
       }
     })
   }
@@ -188,34 +166,21 @@ export class PropertiesComponent {
       for (const group1 of pc.groups) {
         let group: Group = group1 as Group
         group.label = "Grupo " + group.name
-      
         this.taskResponsables.push(group)
+        this.returnAllGroups(group)
  
-        this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
-          for (const group of tr.groups) {
-            if (group.id == group1.id) {
-              this.selectedUsers.push(group1 as Group)
-            }
-          }
-        })
+
       }
     })     
   }
 
-
-  // taskDone: Task[] = []
-  // public tasksDone() {
-  //   let propertyList: PropertyList;
-  //   for (const task of this.project.tasks) {
-  //     for (const value of task.values) {
-  //       propertyList = value.value as PropertyList
-
-  //       if(propertyList.propertyListKind === PropertyListKind.DONE){
-  //         this.taskDone.push(task)
-  //       }
-
-  //     }
-  //   }
-  // }
-
+  returnAllGroups(group1: Group){
+    this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
+      for (const group of tr.groups) {
+        if (group.id == group1.id) {
+          this.selectedUsers.push(group1)
+        }
+      }
+    })
+  }
 }
