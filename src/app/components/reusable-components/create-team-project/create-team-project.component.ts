@@ -253,7 +253,6 @@ export class CreateTeamProjectComponent implements OnInit {
           this.returnAllUsers(user)
         }
       }
-      console.log(this.listOfResponsibles);
       if (this.listOfResponsibles!.length > 0) {
         this.showResponsibles = true;
       }
