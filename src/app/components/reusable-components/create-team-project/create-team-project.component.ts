@@ -86,8 +86,8 @@ export class CreateTeamProjectComponent implements OnInit {
   }
 
   optionsReview = [
+    'Sem revisão',
     'Revisão obrigatória',
-    'Revisão não obrigatória',
     'Revisão opcional'
   ]
 
@@ -172,9 +172,10 @@ export class CreateTeamProjectComponent implements OnInit {
       };
 
       let reviewConfig = this.form.get('projectReviewENUM')
+
       project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
-    
+      
 
       this.projectService
       .create(project, teamId)
@@ -213,6 +214,8 @@ export class CreateTeamProjectComponent implements OnInit {
         return 'Revisão obrigatória';
       case ProjectReview.EMPTY:
         return 'Sem revisão';
+      default:
+        return "Sem revisão";
     }
   }
 
