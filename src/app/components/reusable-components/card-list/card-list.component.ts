@@ -71,6 +71,11 @@ export class CardListComponent implements OnInit {
   renderList: any[] = [];
 
 
+  ngOnChanges(){
+    this.setRenderList();
+
+  }
+
   ngOnInit(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     if (teamId) {
@@ -88,7 +93,6 @@ export class CardListComponent implements OnInit {
       });
       this.renderList = this.projects
     } else if(this.type === 'team') {
-      console.log(this.teams);
       this.renderList = this.teams!;
     }
   }

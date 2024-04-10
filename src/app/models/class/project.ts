@@ -35,6 +35,7 @@ export class Project {
         this.team = project.team;
         this.description = project.description;
         this.tasks = project.tasks;
+        this.listOfResponsibles = project.listOfResponsibles;
         this.notes = project.notes;
         this.properties = project.properties;
         this.idTeam = project.idTeam;

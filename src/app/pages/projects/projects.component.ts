@@ -153,7 +153,7 @@ export class ProjectsComponent implements OnInit {
 
   updateProjects(project: Project) {
     this.projects.push(project);
-    this.isCreatingProject = true;
+    this.switchCreateView();
   }
 
   configItems = [
