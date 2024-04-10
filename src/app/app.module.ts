@@ -35,8 +35,6 @@ import { InputValuePropertyComponent } from './components/reusable-components/in
 import { NoteComponent } from './components/reusable-components/note/note.component';
 import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
-
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { VlibrasComponent } from './pages/vlibras/vlibras.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -45,6 +43,7 @@ import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { JoyrideModule } from 'ngx-joyride';
+import { MobileSidebarComponent } from './components/fixed-components/mobile-sidebar/mobile-sidebar.component';
 
 
 
@@ -53,10 +52,10 @@ import { JoyrideModule } from 'ngx-joyride';
     AppComponent,
     LoadingComponent,
     VlibrasComponent,
+    MobileSidebarComponent,
   ],
   imports: [
     JoyrideModule.forRoot(),
-    PickerModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import {
   faChevronRight, faPaperPlane,
   faMicrophoneLines, faPaperclip,
@@ -14,19 +14,17 @@ import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/class/user';
 import { Message } from 'src/app/models/class/message';
 import { TeamService } from '../../services/team.service';
-import { PersonalizationService } from 'src/app/services/personalization.service';
-import { UserService } from 'src/app/services/user.service';
-
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
+import { ResizeEvent } from 'angular-resizable-element';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
-  
+
 })
 export class ChatComponent {
-  
+
   faCommentSlash = faCommentSlash;
   faSmile = faSmile;
   faSearch = faSearch;
@@ -42,40 +40,47 @@ export class ChatComponent {
   faChevronRight = faChevronRight;
   faPaperPlane = faPaperPlane;
   faTimes = faTimes;
-  
+
   messageUser: any = "";
   @Output()
   chatExpanded: EventEmitter<boolean> = new EventEmitter<boolean>();
-  
+
   conversationOpen: boolean = false;
-  
+
   conversations: Chat[] = []
-  
+
   messages: Message[] = [];
-  
+
   chat!: Chat;
-  
+
   cardChat: number = 0;
-  
+
   side: boolean = true;
-  
+
   hasAnyChat: boolean = false;
-  
+
   logged!: User;
-  
-  
-  constructor(public webSocketService: WebSocketService, private teamService: TeamService, private personalizationService: PersonalizationService) {
+
+  showRightChat = false;
+
+  toggleRightChat() {
+    if (window.innerWidth < 1024) {
+      this.route.navigate(['/home']);
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: ResizeEvent) {
+    // Chama toggleRightChat() sempre que o tamanho da tela for alterado
+    this.toggleRightChat();
+  }
+
+  constructor(public webSocketService: WebSocketService, private teamService: TeamService, private route: Router) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
     this.teamService.findAllChatsByUser(this.logged.id!).subscribe((chats: Chat[]) => {
       console.log(chats);
       this.conversations = chats;
     });
-  }
- 
-
-  showEmojiPicker: boolean = false;
-  showEmoji(): void {
-    this.showEmojiPicker = !this.showEmojiPicker;
   }
 
   ngOnInit() {
@@ -86,6 +91,7 @@ export class ChatComponent {
         a.scrollTop = a.scrollHeight;
       }, 0);
     });
+    this.toggleRightChat();
   }
 
   ngOnDestroy(): void {
@@ -107,12 +113,9 @@ export class ChatComponent {
     };
     console.log(messageDto);
 
-    this.showEmojiPicker = false;
-
     if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
       this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
         (response: any) => {
-          this.chat = response;
           console.log(response, "Message sentALLL");
           sendForm.controls['message'].reset();
         });
@@ -223,13 +226,14 @@ export class ChatComponent {
     return new Date(message.time!).toLocaleString();
   }
 
-  m:Message[]= new Array(0);
+  m: Message[] = new Array(0);
   openConversation(chat: Chat) {
     this.chat = chat;
+    this.showRightChat = true;
     this.conversations.forEach((conversation: Chat) => {
       conversation.conversationOpen = false;
     });
-    
+
     this.chat.conversationOpen = true;
 
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
@@ -241,7 +245,7 @@ export class ChatComponent {
       }, 0);
     });
   }
-  
+
   minimizeChat(value: boolean) {
     this.chatExpanded.emit(value);
   }

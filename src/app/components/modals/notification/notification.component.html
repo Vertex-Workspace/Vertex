@@ -1,6 +1,5 @@
-<section>
-    <div (click)="closeNotification()" class="clickOut"></div>
-    <div class="modal">
+<section (click)="closeNotification()">
+    <div class="modal" (click)="$event.stopPropagation()">
         <div class="header">
             <div class="header-title">
                 <h5>Notificações</h5>
@@ -24,7 +23,7 @@
                         </button>
                     </li>
                     <li>
-                        <fa-icon [icon]="faGear" title="Configurações" routerLink="configuracoes/notificacoes"></fa-icon>
+                        <fa-icon [fixedWidth]="true" [icon]="faGear" title="Configurações" routerLink="configuracoes/notificacoes"></fa-icon>
                     </li>
                 </div>
             </ul>

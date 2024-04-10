@@ -9,14 +9,14 @@
 }
 
 .current-location{
-    @apply flex w-[50%] h-full justify-start items-center;
+    @apply flex w-[60%] h-full justify-start items-center;
 
     p {
         @apply pl-2;
     }
 }
 .items-header{
-    @apply flex w-[5%] h-full justify-between items-center;
+    @apply flex w-[80px] h-full justify-between items-center;
 }
 i{
     @apply text-xl;

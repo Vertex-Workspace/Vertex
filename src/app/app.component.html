@@ -1,24 +1,22 @@
+<div class="mobileSideBar">
+    <app-mobile-sidebar (isMiniChatOpen)="openMiniChat()" style="width: 100%; height: 100%;"></app-mobile-sidebar>
+</div>
+<aside (mouseenter)="openSideBar()" (mouseleave)="openSideBar()"
+    [ngClass]="isSideBarExpanded ? 'side-barOpen': 'side-bar'">
+    <app-sidebar [isSideBarExpanded]="isSideBarExpanded" style="width: 100%; height: 100%;"
+        (openChat)="expandChat($event)" joyrideStep="sidebar" [prevTemplate]="prevButton"
+        [nextTemplate]="nextButton" [title]="'Barra de navegação lateral'" [stepContent]="customContent"
+        [stepContentParams]="{ texto: tutorialText[0] }" />
+</aside>
 <section class="main-screen" *ngIf="userLogged">
 
-    <aside (mouseenter)="openSideBar()" (mouseleave)="openSideBar()"
-        [ngClass]="isSideBarExpanded ? 'side-barOpen': 'side-bar'">
-        <app-sidebar [isSideBarExpanded]="isSideBarExpanded" style="width: 100%; height: 100%;"
-            (openChat)="expandChat($event)"
-            
-            joyrideStep="sidebar" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'Barra de navegação lateral'" [stepContent]="customContent"
-                [stepContentParams]="{ texto: tutorialText[0] }"
-            />
-    </aside>
 
-    <div [ngClass]="isSideBarExpanded ? 'main-divOpen': 'main-div'"
+    <div [ngClass]="isSideBarExpanded ? 'main-divOpen flex justify-center': 'main-div flex justify-center'"
         [ngStyle]="{'overflow-y' : notification ? 'hidden' : 'auto'}">
-        <div class="h-full w-[96%]">
+        <div class="centerDiv">
 
-            <app-notification *ngIf="notification" 
-            style="width: 100%; height:100%" 
-            (close)="switchNotifications()"
-            [notifications]="notifications">
+            <app-notification *ngIf="notification" style="width: 100%; height:100%" (close)="switchNotifications()"
+                [notifications]="notifications">
             </app-notification>
 
 
@@ -26,18 +24,12 @@
             <header *ngIf="!this.router.url.includes('chat')" class="main-header">
                 <app-loading *ngIf="userLogged" [userLogged]="userLogged"></app-loading>
 
-                <app-header 
-                style="width: 100%; height: 100%;" 
-                (openNotification)="switchNotifications()" 
-                [currentRoute]="'/home'"
-                [notificationBadge]="notificationBadge"
-
-                joyrideStep="header" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'Cabeçalho do site'" [stepContent]="customContent"
-                [stepContentParams]="{ texto: tutorialText[1] }"
-                />
+                <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()"
+                    [currentRoute]="'/home'" [notificationBadge]="notificationBadge" joyrideStep="header"
+                    [prevTemplate]="prevButton" [nextTemplate]="nextButton" [title]="'Cabeçalho do site'"
+                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[1] }" />
             </header>
-            
+
             <main class="main-content" [@routeAnimations]="getRouteAnimationData()">
                 <router-outlet></router-outlet>
             </main>
@@ -50,7 +42,8 @@
 
         <app-vlibras *ngIf="logged.personalization?.signLanguage"></app-vlibras>
 
-        <div *ngIf="logged.personalization?.listeningText" class="position-fixed div-principal" style="position: absolute; top: 37% ;right: 0; margin: 0!important;">
+        <div *ngIf="logged.personalization?.listeningText" class="position-fixed div-principal"
+            style="position: absolute; top: 37% ;right: 0; margin: 0!important;">
             <div role="button" *ngIf="!textSpeechService.canSpeak" class="textSpeech mt-2"
                 style="position: relative !important;" (click)="startSpeech()">
                 <fa-icon class="text-white" [icon]="faVolumeOff"></fa-icon>
@@ -64,7 +57,7 @@
             <app-minichat (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat>
         </div>
     </div>
-    
+
     <app-loading *ngIf="userLogged" [userLogged]="userLogged"></app-loading>
 
 </section>

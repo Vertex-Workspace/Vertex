@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent {
+
   //ICONS
   faClose = faClose;
   faArrowUpRightFromSquare = faArrowUpRightFromSquare;
@@ -26,12 +27,12 @@ export class NotificationComponent {
 
   @Input()
   notifications: Notification[] = [];
-  
+
 
   constructor(
-    private userService: UserService, 
-    private notificationWebSocket : NotificationWebSocketService,
-    private router : Router) {
+    private userService: UserService,
+    private notificationWebSocket: NotificationWebSocketService,
+    private router: Router) {
 
   }
 
@@ -61,17 +62,21 @@ export class NotificationComponent {
   notificationDetails(notification: Notification): void {
 
     let url = notification.linkRedirect;
-    if(url.includes('taskID')){
-      url = url.substring(url.indexOf('=')+1, url.length);
-      
+    if (url.includes('taskID')) {
+      url = url.substring(url.indexOf('=') + 1, url.length);
+
       let start = notification.linkRedirect.substring(0, notification.linkRedirect.indexOf('?'));
-      
-      this.router.navigate([start], { queryParams: { taskID: url }});
+
+      this.router.navigate([start], { queryParams: { taskID: url } });
     } else {
       console.log(url);
-      
+
       this.router.navigate([url]);
     }
+  }
+
+  handleSectionClick(event: MouseEvent) {
+    event.stopPropagation();
   }
 
   hasChecked(): boolean {
@@ -91,16 +96,16 @@ export class NotificationComponent {
     let notifications = this.notifications.filter((notification) => notification.isSelected);
 
     //If there is any unread notification
-    if(notifications.some((notification) => !notification.isRead)){
+    if (notifications.some((notification) => !notification.isRead)) {
       notifications = notifications.filter(notification => !notification.isRead);
     }
-  
+
     this.userService.readNotifications(this.userService.getLogged().id!, notifications).subscribe(
       (notifications) => {
         this.notifications = notifications;
       });
 
-    if(this.checkbox){
+    if (this.checkbox) {
       this.checkbox = false;
     }
   }
@@ -112,9 +117,9 @@ export class NotificationComponent {
         this.notifications = this.notifications.filter((notification) => !notification.isSelected
         );
       });
-      if(this.checkbox){
-        this.checkbox = false;
-      }
+    if (this.checkbox) {
+      this.checkbox = false;
+    }
   }
 
 }

@@ -25,7 +25,7 @@ overflow: hidden;
 }
 
 .modal {
-    @apply w-[25%] flex h-full rounded-sm flex-col shadow-xl;
+    @apply w-[470px] flex h-full rounded-sm flex-col shadow-xl;
     z-index: 999;
     background-color: $secondColor;
     animation: slideInLeft 0.2s ease-in-out;
@@ -75,7 +75,8 @@ overflow: hidden;
             }
 
             .search-settings {
-                @apply flex flex-row items-end justify-between w-[15%];
+                @apply flex flex-row items-end justify-between w-[80px];
+                font-size: 20px;
             }
         }
 
@@ -95,7 +96,7 @@ overflow: hidden;
                 .iconUser>fa-icon {
                     @apply flex rounded-full pl-5;
                     font-size: 35px;
-                
+                    
                     color: $primaryColor;
                 }
 
@@ -146,7 +147,8 @@ overflow: hidden;
 
 fa-icon,
 i {
-    @apply text-xl;
+    min-width: 35px;
+    font-size: 20px; // Defina o tamanho fixo para os ícones
     color: $secondColor;
 }
 
@@ -154,4 +156,74 @@ input[type=checkbox] {
     width: 18px;
     height: 20px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    section{
+        @apply w-full min-w-full;
+    }
+
+    .modal {
+        @apply w-full min-w-full;
+    }
+
+    @keyframes slideInLeft {
+        from {
+          width: 0;
+          opacity: 1;
+          overflow: hidden;
+        }
+        to {
+          width: 100%;
+          opacity: 1;
+          overflow: hidden;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px){
+    section{
+        @apply w-[100%] fixed right-0 bottom-0;
+    }
+
+    .modal {
+        @apply w-[470px];
+
+        .header {
+            ul {
+                .tool-icons {
+                    .colorAllCheckbox {
+                        font-size: 20px;
+                    }
+                }
+
+                .search {
+                    i {
+                        font-size: 20px;
+                    }
+
+                    input {
+                        font-size: 20px;
+                    }
+                }
+
+                .search-settings {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+          width: 0;
+          opacity: 1;
+          overflow: hidden;
+        }
+        to {
+          width: 50%;
+          opacity: 1;
+          overflow: hidden;
+        }
+    }
 }

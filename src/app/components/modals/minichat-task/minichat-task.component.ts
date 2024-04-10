@@ -5,8 +5,10 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { faPaperclip, faMicrophoneLines,
-        faCircleUser, faCheckDouble, faStar,faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPaperclip, faMicrophoneLines,
+  faCircleUser, faCheckDouble, faStar, faArrowLeft
+} from '@fortawesome/free-solid-svg-icons';
 import { Message } from 'src/app/models/class/message';
 import { Chat } from 'src/app/models/class/chat';
 import { User } from 'src/app/models/class/user';
@@ -55,7 +57,7 @@ export class MinichatTASKComponent {
     this.showEmojiPicker = !this.showEmojiPicker;
   }
 
-  scrollToBottom(){
+  scrollToBottom() {
     setTimeout(() => {
       let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
       a.scrollTop = a.scrollHeight;
@@ -69,7 +71,7 @@ export class MinichatTASKComponent {
       this.scrollToBottom();
     });
     this.scrollToBottom();
-    
+
     console.log(this.chat, "CHAT");
   }
 
@@ -230,9 +232,6 @@ export class MinichatTASKComponent {
   // }
 
   @Output() miniChatOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  
-
   openMiniChat(value: boolean) {
     this.miniChatOpen.emit(value);
   }
