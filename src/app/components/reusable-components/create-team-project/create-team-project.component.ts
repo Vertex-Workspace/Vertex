@@ -36,10 +36,6 @@ export class CreateTeamProjectComponent implements OnInit {
   @Input()
   team?: Team;
 
-  users !: User[];
-
-  groups !: Group[]
-
   @Input()
   typeString!: String;
 
@@ -47,6 +43,8 @@ export class CreateTeamProjectComponent implements OnInit {
   project!: Project
 
   logged !: User;
+  projectNull: boolean = true;
+  dependency?: string
 
   selectedFile !: any;
   base64 !: any;
@@ -68,7 +66,6 @@ export class CreateTeamProjectComponent implements OnInit {
   listOfResponsibles: TreeNode[] = [];
   selectedUsers: TreeNode[] = [];
   ngOnInit(): void {
-  
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],
       description: [null],
@@ -86,19 +83,11 @@ export class CreateTeamProjectComponent implements OnInit {
     'Revisão opcional'
   ]
 
-  projectNull: boolean = true;
-  name !: string
-  description?: string
-  usersGroup !: User[];
-  dependency?: string
-
-
   projectExists() {
     let id = 0;
     if (this.project != null) {
       this.projectNull = false;
-      this.name = this.project.name;
-      this.description = this.project.description;
+      
       if (this.project.projectDependency != null) {
         this.dependency = this.project.projectDependency.name
       }else {
@@ -119,7 +108,6 @@ export class CreateTeamProjectComponent implements OnInit {
 
 
   onSubmit(): void {
-    // if (!this.fd.has('file')) this.setDefaultImage();
     if (this.typeString === 'team') {
       this.createTeam()
     } else if (this.typeString === 'project') {
@@ -129,10 +117,6 @@ export class CreateTeamProjectComponent implements OnInit {
     }
 
     this.confirmCreateTeam();
-  }
-
-  setDefaultImage(): void {
-    // this.fd.append('file', this.defaultImg);
   }
 
   @Output()
@@ -161,30 +145,7 @@ export class CreateTeamProjectComponent implements OnInit {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     if (!this.closeModal) {
       let project = this.form.getRawValue() as Project;
-
-      let users: User[] = [];
-      let groups: Group[] = [];
-
-      project.listOfResponsibles?.forEach((type => {
-        if (type instanceof Group) {
-          let group: Group = type as Group;
-          group.selected = true;
-          group.children = []
-          groups.push(group)
-        } else if (type instanceof User) {
-          let user: User = type as User;
-          user.selectedProject = true;
-          if (!users.some(existingUser => existingUser.id === user.id)) {
-            users.push(user);
-            project.users = users;
-          }
-        }
-      }));
-      project.groups = groups;
-      if (project.projectDependency) {
-        project.projectDependency.properties = [];
-        project.projectDependency.tasks = [];
-      }
+      this.verifyTypeAndDependencies(project, null!);
 
       project.creator = {
         user: {
@@ -196,12 +157,7 @@ export class CreateTeamProjectComponent implements OnInit {
       };
 
       let reviewConfig = this.form.get('projectReviewENUM')
-      console.log(reviewConfig);
-      
       project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
-      console.log(project);
-      
-      console.log(teamId);
       
       this.projectService
         .create(project, teamId)
@@ -217,8 +173,6 @@ export class CreateTeamProjectComponent implements OnInit {
         });
     }
   }
-
-
 
   convertTypeString(reviewConfig: string): ProjectReview | undefined {
     switch (reviewConfig) {
@@ -281,20 +235,12 @@ export class CreateTeamProjectComponent implements OnInit {
 
   private getUsers(teamId: number): void {
     this.teamService.getUsers(teamId).subscribe((users: User[]) => {
-      this.users = users
       for (const user of users) {
-        user.icon = 'pi pi-user'
         if (this.logged.id != user.id) {
           this.listOfResponsibles.push(user);
         }
         if (this.project != null) {
-          this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
-            for (const user2 of pc.users) {
-              if (user2.id === user.id) {
-                this.selectedUsers.push(user)
-              }
-            }
-          })
+          this.returnAllCollaborators(user, null!)
         }
       }
     });
@@ -302,70 +248,42 @@ export class CreateTeamProjectComponent implements OnInit {
 
   private getGroups(teamId: number): void {
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
-      this.groups = groups;
-
       for (const group of groups) {
         group.label = "Grupo " + group.label
         this.listOfResponsibles.push(group)
-
         if (this.project != null) {
-          this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
-            for (const group2 of pc.groups) {
-              if (group2.id == group.id) {
-                this.selectedUsers.push(group);
-              }
-            }
-          })
+          this.returnAllCollaborators(null!, group)
+        }
+      }
+    })
+  }
+
+  returnAllCollaborators(user: User, group: Group){
+    this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+      for (const group2 of pc.groups) {
+        if (group2.id == group.id) {
+          this.selectedUsers.push(group);
+        }
+      }
+      for (const user2 of pc.users) {
+        if (user2.id === user.id) {
+          this.selectedUsers.push(user)
         }
       }
     })
   }
 
   updateProject(): void {
-
     let project = this.form.getRawValue() as Project;
-    let users: User[] = [];
-    let groups: Group[] = [];
-
-    project.listOfResponsibles.forEach(type => {
-      if (type instanceof Group) {
-        let group: Group = type as Group;
-        group.selected = true;
-        group.children = []; // Limpa a referência circular aqui
-        groups.push({ ...group }); // Cria uma cópia do objeto
-      } else if (type instanceof User) {
-        let user: User = type as User;
-        user.selected = true;
-        if (!users.some(existingUser => existingUser.id === user.id)) {
-          users.push({ ...user }); // Cria uma cópia do objeto
-        }
-      }
-    });
-
-    if (project.projectDependency) {
-      project.projectDependency.tasks = []
-      project.projectDependency.properties = []
-    }
 
     let projectEdit: ProjectEdit = {
       id: this.project?.id,
       name: project.name,
       description: project.description,
-      users: users,
-      groups: groups,
       projectDependency: project.projectDependency
     };
 
-    if (!projectEdit.name) {
-      projectEdit.name = this.project?.name;
-    }
-    if (!projectEdit.description) {
-      projectEdit.description = this.project?.description;
-    }
-    if (!projectEdit.projectDependency) {
-      projectEdit.projectDependency = this.project.projectDependency
-    }
-
+    this.verifyTypeAndDependencies(project, projectEdit);
 
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
@@ -373,6 +291,36 @@ export class CreateTeamProjectComponent implements OnInit {
     this.projectService.patchValue(projectEdit).subscribe((project: Project) => {
       this.alert.successAlert("Projeto modificado com sucesso");
     });
+  }
+
+  verifyTypeAndDependencies(project: Project, projectEdit: ProjectEdit) {
+    let users: User[] = [];
+    let groups: Group[] = [];
+
+    if (project.projectDependency) {
+      project.projectDependency.properties = [];
+    }
+
+    project.listOfResponsibles.forEach(type => {
+      if (type instanceof Group) {
+        let group: Group = type as Group;
+        group.children = [];
+        groups.push({ ...group });
+      } else if (type instanceof User) {
+        let user: User = type as User;
+        if (!users.some(existingUser => existingUser.id === user.id)) {
+          users.push({ ...user });
+        }
+      }
+    });
+
+    if(projectEdit != null){
+      projectEdit.users = users;
+      projectEdit.groups = groups;
+    } else {
+      project.users = users
+      project.groups = groups;
+    }
   }
 
 
@@ -392,7 +340,4 @@ export class CreateTeamProjectComponent implements OnInit {
       }
     })
   }
-
-
-
 }

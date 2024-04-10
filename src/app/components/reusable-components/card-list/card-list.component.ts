@@ -8,7 +8,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { faTrashCan, faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
-// import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
+//  import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'app-card-list',
@@ -92,19 +92,19 @@ export class CardListComponent implements OnInit {
       this.projectService.getOneById(id).subscribe((project: Project) => {
         console.log(project);
         
-        // if (project.projectDependency === null) {
+         if (project.projectDependency === null) {
         this.router.navigate([`/projeto/${id}/tarefas`])
-        // } else {
-        //   this.projectService.getTasksDone(project.projectDependency.id, project.id).subscribe((bool: String) => { 
-        //     if (bool == 'true') {
-        //       this.router.navigate([`/projeto/${id}/tarefas`])
-        //     } else if(bool = 'false') {
-        //       this.dependencyName = project.projectDependency.name;
-        //       this.alertService.notificationAlert("Você precisa concluir o projeto " + this.dependencyName
-        //         + " primeiro!")
-        //     }
-        //   })
-        // }
+         } else {
+           this.projectService.getTasksDone(project.projectDependency.id, project.id).subscribe((bool: String) => { 
+             if (bool == 'true') {
+               this.router.navigate([`/projeto/${id}/tarefas`])
+             } else if(bool = 'false') {
+               this.dependencyName = project.projectDependency.name;
+               this.alertService.notificationAlert("Você precisa concluir o projeto " + this.dependencyName
+                 + " primeiro!")
+             }
+           })
+         }
       })
     }
   }
@@ -127,16 +127,11 @@ export class CardListComponent implements OnInit {
     if (this.projects) {
       this.deleteProject(this.itemToDelete)
     }
-    // if (event) {
-    //   this.emitterItem.emit(this.itemToDelete)
-    // }
     this.delete = false;
   }
 
   findProjects(teamId: number) {
     this.loggedUser = this.userService.getLogged();
-    // this.teamService.getOneById(this.team.)
-    
     this.projectService.getProjectByCollaborators(teamId, this.loggedUser!).subscribe((projects: Project []) => {
       this.projects = projects
     })

@@ -162,9 +162,12 @@ export class TasksComponent implements OnInit {
           }
           );
       }
+
+      if(this.project.projectDependency != null){
+        this.router.navigate([`/equipe/${this.project.id}/projetos`]);
+      }
         
     });
-    
 
   }
 
