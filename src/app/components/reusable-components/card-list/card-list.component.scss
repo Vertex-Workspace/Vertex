@@ -1,39 +1,46 @@
 @import '../../../../variables';
+
+@media screen and (min-width: 1430px) {
+
     .list{
         @apply flex w-full h-[620px] flex-col gap-[16px];
         overflow-y: auto;
-    }
 
+        .container-custom {
+           @apply flex flex-wrap h-[300px] gap-[20px]
+        }
+    }
+    
     .card{
-        @apply flex w-full h-[400px] shadow-lg rounded-sm flex-row ;
+        @apply flex min-w-[380px] h-[380px] shadow-lg rounded-sm;
         background-color: $card;
         font-family: $fontFamily;
         color: $text;
         cursor: pointer;
-    
+        
         &:hover{
             background-color: $secondColor;
             @apply transition-colors duration-300 brightness-90;
         }
-
+        
         .image {
             @apply flex h-4/6 w-full rounded-lg;
             object-fit: cover;
         }
-    
-    
+        
+        
         .informations{
             @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
-
+            
             .infos-team {
                 @apply w-full flex flex-col justify-evenly
             };
-
+            
             .icon {
                 @apply flex items-center justify-end;
             };
         }
-    
+        
         .informations-text{
             @apply flex w-full h-5/6 flex-row pt-2 justify-between;
         }
@@ -45,61 +52,299 @@
         }
         .informations-input > div{
             @apply flex w-[15%] h-full flex-row justify-between;
-    
+            
             i{
                 @apply flex text-xl;
                 color: $primaryColor;
             }
         }
     }
-
+    
     .modal {
         @apply flex flex-col items-center justify-center w-full h-full pb-16;
-
+        
         div{
             @apply flex flex-row;
         }
     }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1430px) {
+
+    .list{
+        @apply flex w-full h-[620px] flex-col gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-col gap-4;
+        }
+    }
     
-// @media screen and (max-width: 1599px){
-//     .list{
-//         @apply flex w-full h-[500px] flex-col gap-[16px];
-//         overflow-y: scroll;
-//     }
-//     .card{
-//         @apply flex w-[98%] min-h-[150px] bg-white shadow-lg rounded-lg flex-row;
-//         font-family: $fontFamily;
-//         color: $primaryColor;
+    .card{
+        @apply flex min-w-[300px] h-[300px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+        
+        &:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text > div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input > div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
     
-//         .image {
-//             @apply flex h-full w-2/6 rounded-lg;
-//             object-fit: cover;
-//         }
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+}
+
+}
+
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    .list{
+        @apply flex w-full flex-wrap gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-wrap gap-4;
+        }
+    }
+
+    .card {
+        @apply flex w-[320px] h-[320px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+
+        &:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text > div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input > div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
     
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+    }
+}
+
+@media screen and (min-width: 460px) and (max-width: 749px) {
+
+    .list{
+        @apply flex w-full h-[620px] flex-wrap gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-wrap gap-4 w-full;
+        }
+    }
     
-//         .informations{
-//             @apply flex h-full w-4/6 flex-col pl-4 pr-4;
-//         }
+    .card{
+        @apply flex min-w-full h-[300px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+        
+        &:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text > div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input > div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
     
-//         .informations-text{
-//             @apply flex w-full h-5/6 flex-row pt-2 justify-between;
-//         }
-//         .informations-text > div{
-//             @apply flex flex-col items-end;
-//         }
-//         .informations-input{
-//             @apply flex w-full h-1/6 flex-row justify-between;
-//         }
-//         .informations-input > div{
-//             @apply flex w-[15%] h-full flex-row justify-between pb-3;
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+}
+}
+
+@media screen and (max-width: 460px) {
+
+    .list{
+        @apply flex w-full h-[620px] flex-wrap gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-wrap gap-4 w-full;
+        }
+    }
     
-//             i{
-//                 @apply flex text-lg;
-//                 color: $primaryColor;
-//             }
-//         }
-//     }
-// }
+    .card{
+        @apply flex min-w-full h-[300px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+        
+        &:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text > div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input > div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
+    
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+}
+}
+    
 
 .trash-icon {
     color: $primaryColor;

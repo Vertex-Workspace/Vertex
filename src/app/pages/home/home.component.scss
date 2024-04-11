@@ -1,156 +1,613 @@
 @import '../../../variables';
 
-section{
-    @apply flex w-screen h-full justify-center items-center ;
-}
-
-.container-custom{
-    @apply grid w-[90%] h-full grid-cols-2 gap-20;
-}
-
-// .app-card-list:hover{
-//     scale: 1.05;
-// }
-
-//TEAMS
-.nav-tasks-teams{
-    border-color: $primaryColor;
-    @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
-    border-bottom: $borderBottom;
-
-    label {
-        @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
-        items-center justify-center rounded cursor-pointer;
+@media screen and (min-width: 1430px) {
+    section{
+        @apply flex w-screen h-full justify-center items-center ;
     }
-
-    label:hover {
-        background-color: $primaryColor;
-        color: $secondColor;
-        @apply transition-colors;
+    
+    .container-custom{
+        @apply grid w-[90%] h-full grid-cols-2 gap-20;
     }
-}
-
-.functionally-items {
-    @apply flex flex-row w-full h-full justify-between;
-}
-
-.functionally-items-task {
-    @apply flex flex-row w-full justify-between;
-
-    .filter-items {
-        @apply flex;
+    
+    //TEAMS
+    .nav-tasks-teams{
+        border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: $borderBottom;
+    
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+        }
+    
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
     }
+    
+    .functionally-items {
+        @apply flex flex-row w-full h-full;
 
-}
-.functionally-items-task {
-
-    .filter-items {
-        @apply flex gap-2;
-
+        
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-row w-full justify-between;
+    
+        
+    
+    }
+    .functionally-items-task {
+    
+        .filter-items {
+            @apply flex gap-2;
+    
+            button {
+                border: none;
+                &:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
         button {
-            border: none;
-            &:hover {
-                background-color: $primaryColor;
-                color: $secondColor;
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-full w-[180px] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
+        }
+        .search {
+            @apply w-96 h-14 flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+    
+            i {
+                @apply w-[10%];
+            }
+    
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
             }
         }
     }
-    //BUTTONS
-    button {
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .container-grid{
+        @apply flex flex-col h-[90%] w-full pt-4 ;
+    }
+    .default-size{
+        @apply flex w-full  flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] mt-6 justify-start;
+    
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+    
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+    
+    }
+    
+    
+    .icon-plus{
+        color: $primaryColor;
+        font-size: 1.75rem;
+    }
+    
+    
+    //BUTTONS TUTORIAL
+    .btn {
         @apply flex w-full  items-center justify-center 
         border-2 transition-colors rounded p-3;
     }
     
-    button:hover {
+    .btn:hover {
         background-color: $secondColor;
         color: $primaryColor;
         @apply transition-colors;
     }
     
-    .create {
-        background-color: $primaryColor;
+    svg {
+        display: none !important;
+    }
+    
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1430px) {
+    section{
+        @apply flex w-screen h-full justify-center items-center;
+    }
+    
+    .container-custom{
+        @apply grid w-[90%] h-full grid-cols-2 gap-20;
+    }
+    
+    //TEAMS
+    .nav-tasks-teams{
         border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: $borderBottom;
+    
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+        }
+    
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+    
+    .functionally-items {
+        @apply flex flex-row w-full h-full justify-between;
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-row w-full justify-between;
+    
+        .filter-items {
+            @apply flex;
+        }
+    
+    }
+    .functionally-items-task {
+    
+        .filter-items {
+            @apply flex gap-2;
+    
+            button {
+                border: none;
+                &:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
+        button {
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-full w-[80px] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
+
+            p {
+                @apply hidden;
+            }
+
+        }
+        .search {
+            @apply w-[300px] h-14 flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+    
+            i {
+                @apply w-[10%];
+            }
+    
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+    }
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
         color: $secondColor;
-        @apply h-full w-[180px] flex items-center justify-center gap-4
-        text-lg p-3 rounded font-light border-2 transition-colors;
+        background-color: $primaryColor;
     }
-    .search {
-        @apply w-96 h-14 flex items-center justify-between p-3
-        rounded shadow-md border-none;
-        background-color: $card;
-
-        i {
-            @apply w-[10%];
-        }
-
-        input {
-            @apply w-[90%] h-full outline-none flex items-center pl-2;
-            background-color: $card;
-            color: $text;
-        }
-    }
-}
-
-.icons {
-    button {
-        i {
-            font-size: 1.5rem;
-        }
-    }
-}
-
-.clicked {
-    color: $secondColor;
-    background-color: $primaryColor;
-}
-.default {
-    color: $primaryColor;
-    background-color: $secondColor;
-}
-
-.container-grid{
-    @apply flex flex-col h-[90%] w-full pt-4 ;
-}
-.default-size{
-    @apply flex w-full  flex-col;
-}
-
-
-// TASK - FILTER ORDER
-.filter-settings {
-    @apply flex gap-3 h-[5%] mt-6 justify-start;
-
-    p {
+    .default {
         color: $primaryColor;
-        @apply text-lg;
+        background-color: $secondColor;
     }
-
-    select {
-        @apply w-[170px] h-[35px] text-center outline-none;
-        background-color: $card;
+    
+    .container-grid{
+        @apply flex flex-col h-[90%] w-full pt-4 ;
     }
-
+    .default-size{
+        @apply flex w-full  flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] mt-6 justify-start;
+    
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+    
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+    
+    }
+    
+    
+    .icon-plus{
+        color: $primaryColor;
+        font-size: 1.75rem;
+    }
+    
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
+    svg {
+        display: none !important;
+    }
+    
 }
 
+@media screen and (min-width: 460px) and (max-width: 1024px) {
+    section{
+        @apply flex flex-col w-screen h-full justify-center items-center;
+    }
+    
+    .container-custom{
+        @apply w-[90%] h-full flex flex-col gap-10;
+    }
+    
+    //TEAMS
+    .nav-tasks-teams{
+        border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: $borderBottom;
+    
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+        }
+    
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+    
+    .functionally-items {
+        @apply flex flex-row w-full h-full justify-between;
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-row w-full justify-between;
+    
+        .filter-items {
+            @apply flex;
+        }
+    
+    }
+    .functionally-items-task {
+    
+        .filter-items {
+            @apply flex gap-2;
+    
+            button {
+                border: none;
+                &:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
+        button {
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-full w-[80px] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
 
-.icon-plus{
-    color: $primaryColor;
-    font-size: 1.75rem;
+            p {
+                @apply hidden;
+            }
+
+        }
+        .search {
+            @apply w-[300px] h-14 flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+    
+            i {
+                @apply w-[10%];
+            }
+    
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+    }
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .container-grid{
+        @apply flex flex-col h-auto w-full pt-4;
+    }
+    .default-size{
+        @apply flex w-full  flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] mt-6 justify-start;
+    
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+    
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+    
+    }
+    
+    
+    .icon-plus{
+        color: $primaryColor;
+        font-size: 1.75rem;
+    }
+    
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
+    svg {
+        display: none !important;
+    }
+    
 }
 
+@media screen and (max-width: 460px) {
+    section{
+        @apply flex flex-col w-screen h-full justify-center items-center;
+    }
+    
+    .container-custom{
+        @apply w-[90%] h-full flex flex-col gap-10;
+    }
+    
+    //TEAMS
+    .nav-tasks-teams{
+        border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: $borderBottom;
+    
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+        }
+    
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+    
+    .functionally-items {
+        @apply flex flex-col w-full h-full;
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-col gap-2 items-center;
 
-//BUTTONS TUTORIAL
-.btn {
-    @apply flex w-full  items-center justify-center 
-    border-2 transition-colors rounded p-3;
-}
+        .filter-items {
+            @apply flex;
+        }
+    
+    }
+    .functionally-items-task {
+    
+        .filter-items {
+            @apply flex gap-2 hidden;
+    
+            button {
+                border: none;
+                &:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
+        button {
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-[53px] w-[99%] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
 
-.btn:hover {
-    background-color: $secondColor;
-    color: $primaryColor;
-    @apply transition-colors;
-}
 
-svg {
-    display: none !important;
+        }
+        .search {
+            @apply w-full h-14 flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+    
+            i {
+                @apply w-[10%];
+            }
+    
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+    }
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .container-grid{
+        @apply flex flex-col h-auto w-full pt-4;
+    }
+    .default-size{
+        @apply flex w-full  flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] justify-start w-auto;
+    
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+    
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+    
+    }
+    
+    
+    .icon-plus{
+        color: $primaryColor;
+        font-size: 1.75rem;
+    }
+    
+    
+    //BUTTONS TUTORIAL
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+    
+    svg {
+        display: none !important;
+    }
+    
 }
