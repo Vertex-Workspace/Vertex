@@ -80,16 +80,11 @@ export class AppComponent {
     public textSpeechService: TextSpeechService,
     private notificationWebSocket: NotificationWebSocketService
   ) {
-    
     this.userState
-    .getAuthenticationStatus()
-    .subscribe((status: boolean) => {
-      this.userLogged = status;
-    });
-
-    console.log(this.userLogged);
-    
-
+      .getAuthenticationStatus()
+      .subscribe((status: boolean) => {
+        this.userLogged = status;
+      });
   }
   
   // Sets the theme by default and make the persistence of the theme in all components

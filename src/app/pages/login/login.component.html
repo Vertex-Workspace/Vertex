@@ -14,12 +14,14 @@
 
     <!-- Div da direita da tela - Responsável pelos inputs de usuario e senha -->
     <div id="right-div-login">
-        <h1 id="h1-access-account">Acesse sua Conta</h1>
 
-        <form class="space-y-7 w-1/2" action="#" 
-                method="POST" [formGroup]="form"
-                (ngSubmit)="onSubmit()"
-        >
+        <div class="flex flex-col items-center gap-5">
+            <img *ngIf="isMobileTablet()" class="w-20 h-20" src="../../../assets/vertex-logo.png" alt="">
+
+            <h1 id="h1-access-account">Acesse sua Conta</h1>
+        </div>
+
+        <form class="space-y-7 w-1/2 max-w-md" action="#" method="POST" [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <!-- Div Input Endereço de Email -->
             <div class="w-full">
@@ -40,7 +42,8 @@
                     <div class="divRegisterIcons">
                         <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
                     </div>
-                    <input class="inputs" formControlName="password" placeholder="Digite sua senha" [type]="invisibleEye ? 'password' : 'text'" required>
+                    <input class="inputs" formControlName="password" placeholder="Digite sua senha"
+                        [type]="invisibleEye ? 'password' : 'text'" required>
                     <div class="eyesDiv">
                         <fa-icon *ngIf="!invisibleEye" (click)="passwordToggle()" class="eyeIcon" [icon]="faEye">
                         </fa-icon>
@@ -72,6 +75,6 @@
     </div>
 
 
-<app-forgot-password [forgotPassword]="forgotPassword" [step]="step"></app-forgot-password>
+    <app-forgot-password [forgotPassword]="forgotPassword" [step]="step"></app-forgot-password>
 
 </div>

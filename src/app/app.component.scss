@@ -2,7 +2,7 @@
 
 @media screen and (min-width: 1024px) {
     .main-screen {
-        @apply  w-screen h-screen flex justify-end;
+        @apply  w-screen h-screen flex justify-start;
     }
 
     .side-bar {
