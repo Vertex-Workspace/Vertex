@@ -20,7 +20,7 @@
         
         &:hover{
             background-color: $secondColor;
-            @apply transition-colors duration-300;
+            @apply transition-colors duration-300 brightness-90;
         }
         
         .image {
@@ -37,7 +37,7 @@
             };
             
             .icon {
-                @apply flex items-end justify-end pb-6;
+                @apply flex items-center justify-end;
             };
         }
         
@@ -348,6 +348,6 @@
 
 .trash-icon {
     color: $primaryColor;
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 

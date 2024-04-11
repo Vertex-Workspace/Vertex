@@ -59,8 +59,8 @@ overflow: hidden;
             }
 
             .search {
-                @apply flex w-full h-3/4 items-center justify-between bg-white p-3 rounded shadow-md border-none;
-                color: $primaryColor;
+                @apply flex w-full h-3/4 items-center justify-between p-3 rounded shadow-md border-none;
+                background-color: $card;
 
                 i {
                     @apply w-[10%];
@@ -69,6 +69,8 @@ overflow: hidden;
 
                 input {
                     @apply w-[90%] h-full outline-none flex items-center pl-2;
+                    color: $text;
+                    background-color: $card;
                 }
             }
 
@@ -99,7 +101,7 @@ overflow: hidden;
 
                 .description {
                     @apply flex flex-col pl-4;
-                    
+                    color: $text;
                     p{
                         word-wrap: break-word;
                         @apply w-[300px];
@@ -127,7 +129,9 @@ overflow: hidden;
         }
 
         .notification:hover {
-            background-color: $card;
+            @apply cursor-pointer;
+            scale: 1.03;
+            transition: 0.3s;
         }
 
         .openedNotification {

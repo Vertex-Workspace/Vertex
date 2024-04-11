@@ -28,7 +28,7 @@
                         <fa-icon [icon]="faPaintBrush" (click)="clickPencil(propertyList)" class="little-icon"
                             [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'"></fa-icon>
                         <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(propertyList)"
-                            [ngClass]="propertyList.isFixed ? 'disabled-trash' : ''"></fa-icon>
+                            [ngClass]="propertyList.isFixed ? 'disabled-trash' : canDelete ? 'opacity-100' : 'disabled-trash'"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -40,6 +40,6 @@
     </div>
 </div>
 
-<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'o status'"
+<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'excluir o status'"
     (confirmEvent)="delete($event)">
 </app-confirm-modal>

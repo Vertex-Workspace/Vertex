@@ -71,7 +71,6 @@ export class CardUserComponent implements OnInit {
     } else if (this.typeString === 'addingParticipants') {
       this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
         this.users = users;
-
         if(this.users.length === 0){
           this.noMoreParticipants.emit();
         }
@@ -79,14 +78,13 @@ export class CardUserComponent implements OnInit {
       });
     }
 
-    this.teamService.getTeamCreator(this.team).subscribe((userC) => {
-      if(this.user.id! === userC.id){
-        this.isNonCreatorCard = false
-      }
-      if (userC.id === this.userService.getLogged().id) {
-        this.isTeamCreator = true
-      }
-    });
+
+    if(this.user.id! === this.team.creator!.id){
+      this.isNonCreatorCard = false
+    }
+    if (this.team.creator!.id === this.userService.getLogged().id) {
+      this.isTeamCreator = true
+    }
   }
 
   faCircleUser = faCircleUser;
@@ -109,7 +107,7 @@ export class CardUserComponent implements OnInit {
   }
 
   selectPermission(user: User, permission: Permission): void {
-    this.teamService.changePermissionEnable(permission, user, this.team).subscribe(
+    this.teamService.changePermissionEnable(permission).subscribe(
       (permissionRes) => {
         permission.enabled = !permission.enabled;
         this.alert.successAlert('Autorização alterada!')
@@ -117,28 +115,35 @@ export class CardUserComponent implements OnInit {
   }
 
   getPermission(user: User): Permission[] | any {
-    this.teamService.getPermission(this.team, user).subscribe((permissions: Permission[]) => {
+    this.teamService.getPermission(this.team.id, user.id!).subscribe((permissions: Permission[]) => {
       user.permissions = permissions;
       return user.permissions 
     })
   }
 
-  deleteUserTeam(user: User): void {
-    this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
-      this.alert.successAlert("Usuário retirado da equipe")
-    })
-  }
 
-  deleteBoolean(): void {
+  userToDelete !: User
+
+  deleteBoolean(user: User): void {
     this.delete = !this.delete
+    this.userToDelete = user
   }
 
-  @Output()
-  deleteEmitterUserTeam: EventEmitter<User> = new EventEmitter<User>();
-
-  deleteEmitUserTeam(user: User): void {
-    this.deleteEmitterUserTeam.emit(user);
-  }
+  deleteUserTeam(event: any): void {
+    if (event) {
+        this.teamService.getTeamCreator(this.team).subscribe((userC) => {
+            if (userC.id === this.userService.getLogged().id) {
+                this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
+                    this.alert.successAlert("Usuário retirado da equipe")
+                    this.team.users?.splice(this.team.users.indexOf(this.user), 1)
+                })
+            } else {
+                this.alert.errorAlert("Você não pode remover o criador da equipe")
+            }
+        });
+    }
+    this.delete = false
+}
 
   deleteEmitUserGroup(user: User): void {
     this.deleteUserGroup.emit(user)

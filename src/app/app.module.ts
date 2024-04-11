@@ -35,23 +35,28 @@ import { InputValuePropertyComponent } from './components/reusable-components/in
 import { NoteComponent } from './components/reusable-components/note/note.component';
 import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
+
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { VlibrasComponent } from './pages/vlibras/vlibras.component';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { JoyrideModule } from 'ngx-joyride';
-// import { PickerModule } from '@ctrl/ngx-emoji-mart';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
+    VlibrasComponent,
   ],
   imports: [
     JoyrideModule.forRoot(),
-    // PickerModule,
+    PickerModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -68,7 +73,6 @@ import { JoyrideModule } from 'ngx-joyride';
     BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule,
-    TeamInformationsModule,
     TasksModule,
     UserSettingsModule,
     TeamInformationsModule,

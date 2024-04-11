@@ -1,8 +1,10 @@
 
 import { Chat } from "./chat";
 import { Comment } from "./comment";
+import { Group } from "./groups";
 import { Property } from "./property";
 import { TaskResponsable } from "./taskResponsable";
+import { User } from "./user";
 import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from "./value";
 
 export class Task {
@@ -33,6 +35,8 @@ export class Task {
     //Chat
     chat?:Chat;
     chatCreated?:boolean;
+    label !: string
+    taskDependency !: Task
 
     constructor(
         task: Task
@@ -49,6 +53,8 @@ export class Task {
         this.files = task.files;
         this.revisable = task.revisable;
         this.log = task.log;
+        this.label = task.name;
+        this.taskDependency = task.taskDependency
     }
 
 }
@@ -87,4 +93,17 @@ export class TaskWaitingToReview {
         email: string;
         date: Date;
     }
+}
+
+export class UpdateResponsibles {
+    taskId !: number;
+    teamId!: number;
+    user !: User
+    group !: Group
+}
+
+export class ReturnTaskResponsables {
+    users !: User [];
+    groups !: Group [];
+    usersInGroups !: User[];
 }

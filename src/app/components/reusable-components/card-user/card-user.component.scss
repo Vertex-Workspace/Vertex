@@ -2,10 +2,14 @@
 
 .card{
     @apply flex flex-col w-full shadow-lg;
-    height: 150px;
     background-color: $card;
+    height: 150px;
     color: $text;
 
+    .emailUser{
+        color: $text;
+    }
+  
     .sections-in-card {
         @apply flex w-full items-center ;
         min-height: 70px;
@@ -52,7 +56,8 @@
 }
 
 .icon-not-selected {
-    color: #d9d9d9;
+    color: $text;
+    opacity: 0.3;
     font-size: 1rem;
 }
 
@@ -65,11 +70,12 @@
     background-color: $card;
 
     .single-permissions {
-        @apply flex flex-row justify-center items-center
+        @apply flex flex-row justify-center items-center;
+        color: $text;
     }
 
     p {
-        color: $primaryColor;
+        color: $text;
         @apply pl-2;
     }
 }
@@ -83,7 +89,7 @@ p {
 }
 
 .default-grid {
-    @apply w-full h-full grid grid-cols-2 gap-2;
+    @apply w-full h-full gap-2;
 }
 
 

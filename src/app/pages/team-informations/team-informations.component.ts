@@ -49,9 +49,10 @@ export class TeamInformationsComponent implements OnInit {
     ) {
         this.team = this.getTeam()!;
     }
-    
+
     ngOnInit() {
         this.clicked = "participants"
+
     }
 
     getTeam() {
@@ -61,7 +62,7 @@ export class TeamInformationsComponent implements OnInit {
         this.teamObservable.forEach((team) => {
             this.team = team;
 
-            
+            console.log(this.team);
             //Graphics
             const documentStyle = getComputedStyle(document.documentElement);
             const textColor = documentStyle.getPropertyValue('--text');
@@ -86,11 +87,11 @@ export class TeamInformationsComponent implements OnInit {
                     }
                 },
             };
-            if(this.team.image){
+            if (this.team.image) {
                 this.selectedFile = true;
             }
 
-            if(this.team.users!.length > 1 && this.menuItems.length < 2){
+            if (this.team.users!.length > 1 && this.menuItems.length < 2) {
                 this.menuItems.push({
                     id: 'groups',
                     iconClass: 'pi pi-users',
@@ -99,7 +100,7 @@ export class TeamInformationsComponent implements OnInit {
                     clicked: false
                 });
             }
-            
+
             return team;
         });
     }
@@ -181,12 +182,11 @@ export class TeamInformationsComponent implements OnInit {
     }
 
     deleteGroup(groupId: Group): void {
-        console.log(groupId);
         this.groupService.delete(groupId.id).subscribe((group: Group) => {
             this.alertService.successAlert('Grupo deletado com sucesso')
             this.getTeam()
         },
-            e => {
+            (e) => {
                 this.alertService.errorAlert("Não foi possível deletar");
             })
     }
@@ -197,22 +197,6 @@ export class TeamInformationsComponent implements OnInit {
     openModalDeleteUser(event: any) {
         this.userToDelete = event
         this.deleteUser = true;
-    }
-
-    deleteUserTeam(event: any): void {
-        if (event) {
-            this.teamService.getTeamCreator(this.team).subscribe((userC) => {
-                if (userC.id === this.userService.getLogged().id) {
-                    this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
-                        this.alertService.successAlert("Usuário retirado da equipe");
-                        this.team.users!.splice(this.team.users!.indexOf(this.userToDelete), 1);
-                    })
-                } else {
-                    this.alertService.errorAlert("Você não pode remover o criador da equipe")
-                }
-            });
-        }
-        this.deleteUser = false
     }
 
     openModalCreateGroup() {
@@ -244,26 +228,26 @@ export class TeamInformationsComponent implements OnInit {
 
 
     editDescription: boolean = false;
-    changeEditDescription(): void{
+    changeEditDescription(): void {
         this.editDescription = !this.editDescription
 
-        if(!this.editDescription){
+        if (!this.editDescription) {
             this.teamService.updateTeam(this.team).subscribe(
                 (team: Team) => {
-                this.alertService.successAlert("Descrição atualizada com sucesso")
-            });
+                    this.alertService.successAlert("Descrição atualizada com sucesso")
+                });
         }
     }
 
-    inputEditName : boolean = false;
-    newName : string = "";
-    editName(): void{
+    inputEditName: boolean = false;
+    newName: string = "";
+    editName(): void {
         this.inputEditName = !this.inputEditName;
-        if(this.inputEditName){
+        if (this.inputEditName) {
             this.newName = this.team.name;
-        } else{
+        } else {
             //Validação
-            if(this.newName.length < 3 || this.newName.length > 30){
+            if (this.newName.length < 3 || this.newName.length > 30) {
                 this.alertService.notificationAlert("Nome deve ter entre 4 e 29 caracteres");
                 this.newName = "";
                 return;
@@ -271,7 +255,7 @@ export class TeamInformationsComponent implements OnInit {
             this.team.name = this.newName;
             //Caso a validação seja feita é feito o update
             this.teamService.updateTeam(this.team).subscribe(
-                (team : Team) => {
+                (team: Team) => {
                     this.alertService.successAlert("Nome atualizado com sucesso");
                 }
             );
@@ -288,28 +272,28 @@ export class TeamInformationsComponent implements OnInit {
         this.selectedFile = e.target.files[0];
         this.fd.append('file', this.selectedFile, this.selectedFile.name);
         let reader = new FileReader();
-    
+
         if (e.target.files && e.target.files.length > 0) {
-          let file = e.target.files[0];
-          reader.readAsDataURL(file);
-          reader.onload = () => {
-            const base = reader.result as string;
-            this.base64 = base.split(",").pop();
-            this.url = reader.result;
-          };
+            let file = e.target.files[0];
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                const base = reader.result as string;
+                this.base64 = base.split(",").pop();
+                this.url = reader.result;
+            };
         }
 
         this.teamService
-        .updateImage(this.team.id, this.fd)
-        .subscribe(
-            (team : Team) => {
-                this.team = team;
-                this.alertService.successAlert(`Imagem atualizada com sucesso!`);
-            },
-            (error: any) => { 
-                this.alertService.errorAlert("Imagem inválida!");
-            }
-        );
-      }
+            .updateImage(this.team.id, this.fd)
+            .subscribe(
+                (team: Team) => {
+                    this.team = team;
+                    this.alertService.successAlert(`Imagem atualizada com sucesso!`);
+                },
+                (error: any) => {
+                    this.alertService.errorAlert("Imagem inválida!");
+                }
+            );
+    }
 
 }

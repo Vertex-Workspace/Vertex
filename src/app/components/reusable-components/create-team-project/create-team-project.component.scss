@@ -5,6 +5,12 @@ form{
     color: $primaryColor;
 }
 
+fa-icon{
+    @apply text-2xl;
+    color: $primaryColor;
+
+}
+
 .title{
     @apply flex h-[15%];
 }
@@ -15,64 +21,66 @@ form{
 }
 
 .input-name{
-    @apply flex flex-col w-full h-[50%] justify-start items-start;
-
+    @apply flex flex-col w-[90%] h-[50%] justify-start items-start;
+    color: $text;
     p{
         @apply pt-6 pb-6;
         font-size: $mediumText
     }
     input{
         @apply flex h-52 rounded-md pl-4 w-96;
+        background-color: $card;
     }
 }
 
-.image {
-    @apply w-full h-full flex justify-end items-end;
-
-
-    img {
-        @apply flex w-full justify-end items-end;
-    }
-
-    .profile-photo {
-        color: $primaryColor;
-        font-size: 10rem;
-        padding-left: 27%; 
-    }
+.circular {
+    width: 200px;
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+  }
+.circular img {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
-
 .input-div {
-    @apply w-full h-full flex justify-end items-end absolute;
+    @apply w-full h-full flex justify-center items-center absolute;
     opacity: 0;
+    color: $text;
 
     .input-file {
         @apply cursor-pointer w-full h-full;
     }
 
 }
+// .image-icon{
+//     font-size: 8rem;
+//     color: $primaryColor;
+// }
+// .image-icon:hover{
+//     opacity: 0.5;
+// }
 
-.input-image{
-    @apply flex w-full h-[50%] justify-end items-end;
 
-    .image-icon{
-        font-size: 8rem;
-        color: $primaryColor;
-    }
-
-    .image-icon:hover{
-        opacity: 0.5;
-    }
-}
 
 .input-description{
-    @apply flex flex-col w-[90%] h-[60%] w-full items-start;
+    @apply flex flex-col h-[60%] w-full items-start;
 
     p{
         @apply pb-6;
         font-size: $mediumText
     }
     textarea{
-        @apply pl-4 pt-4 rounded-md h-full w-[99%];
+        @apply pl-4 pt-4 rounded-md h-[70%] w-full;
         resize: none;
     }
 }
@@ -118,7 +126,7 @@ app-modal-warn{
 }
 
 .modal {
-    @apply absolute rounded-md flex flex-col w-[550px] h-[650px]
+    @apply absolute rounded-md flex flex-col w-[600px] h-[650px]
     items-start justify-start text-center p-8 border-t-8;
     border-color: $primaryColor;
     background-color: $secondColor;
@@ -130,4 +138,6 @@ app-modal-warn{
 
 textarea{
     outline: none;
+    background-color: $card;
+    color: $text;
 }

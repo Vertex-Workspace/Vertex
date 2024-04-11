@@ -4,13 +4,14 @@
             <div class="overflow-hidden h-20 w-20 pt-2 pl-2"(click)="goToProfile()">
                 <img src="data:image/jpg;base64, {{user.image}}" alt="" class="rounded-full object-cover h-full w-full">
             </div>
+
             <div class="pl-3">
                 <p (click)="goToProfile()">{{user.firstName}} <span *ngIf="!isNonCreatorCard">(você)</span> </p>
                 <p>{{user.email}}</p>
                 <!-- <fa-icon [icon]="faUserMinus"></fa-icon> -->
             </div>
             <div class="more-infos" *ngIf="isTeamCreator && isNonCreatorCard">
-                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteEmitUserTeam(user)"
+                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteUserTeam(user)"
                     *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
                 </fa-icon>
             </div>
@@ -25,7 +26,9 @@
                     <p>{{permission.name}}</p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
+<app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
+                (confirmEvent)="deleteUserTeam($event)"></app-confirm-modal>

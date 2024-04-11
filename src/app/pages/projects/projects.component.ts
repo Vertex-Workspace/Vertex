@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CardListComponent } from 'src/app/components/reusable-components/card-list/card-list.component';
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
@@ -22,8 +23,6 @@ import { tutorialText } from 'src/app/tutorialText';
 })
 export class ProjectsComponent implements OnInit {
   isCreatingProject: boolean = false;
-  isCreatingGroup: boolean = false;
-  isCreating: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
   clicked: string = 'project';
@@ -79,14 +78,13 @@ export class ProjectsComponent implements OnInit {
   ) {
     this.logged = this.userService.getLogged();
   }
-  
-  
+
+
   permissionsOnTeam!: Permission[];
   permissionsOnTeamObservable!: Observable<Permission[]>;
 
   ngOnInit(): void {
-    console.log('entrou');
-    
+  
     this.getTeam();
     this.validateTeamId();
   }
@@ -94,7 +92,7 @@ export class ProjectsComponent implements OnInit {
   validateTeamId(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
-      .existsByIdAndUserBelongs(teamId, this.logged.id!)
+      .userIsOnTeam(this.logged.id!,teamId)
       .subscribe((exists: boolean) => {
         if (!exists) {
           this.router.navigate(['/home']);
@@ -111,9 +109,11 @@ export class ProjectsComponent implements OnInit {
     .subscribe((team: Team) => {
       this.team = team;
       this.teamName = team.name!;
-      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team, this.logged);
+      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
       this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
         this.permissionsOnTeam = permissions;
+        this.getProjects();
+  
       });
 
     });
@@ -121,35 +121,39 @@ export class ProjectsComponent implements OnInit {
 
 
 
-  delete(projectId: Project): void {
+  delete(project: Project): void {
     this.projectService
-      .delete(projectId.id)
-      .subscribe((project: Project) => {
+      .delete(project.id)
+      .subscribe(() => {
         this.alert.successAlert(`Projeto deletado com sucesso!`);
-        this.team.projects?.splice(this.team.projects.indexOf(projectId),1)
+        this.team.projects?.splice(this.team.projects.indexOf(project),1)
       },
-        e => {
-          this.alert.errorAlert('Erro ao deletar projeto!');
-        });
-  }
-
-  deleteGroup(groupId: Group): void {
-    this.groupService.delete(groupId.id).subscribe((group: Group) => {
-      this.alert.successAlert('Grupo deletado com sucesso')
-      this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
-    },
-    e=> {
-      this.alert.errorAlert("Não foi possível deletar");
-    })
+       e => {
+         this.alert.errorAlert('Erro ao deletar projeto!');
+       });
   }
 
   changePreviewMode(preview: string): void {
     this.clicked = preview;
   }
 
+  projects: Project[] = []
+
+  getProjects() {
+    this.projectService.getProjectByCollaborators(this.team.id, this.logged).subscribe((projects: Project[]) => {
+      this.projects = projects
+      for (const project of this.projects) {
+      }
+    })
+  }
+
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;
-    this.getTeam();
+  }
+
+  updateProjects(project: Project) {
+    this.projects.push(project);
+    this.switchCreateView();
   }
 
   configItems = [
@@ -167,32 +171,10 @@ export class ProjectsComponent implements OnInit {
     this.orderOpen = !this.orderOpen;
   }
 
-  createGroup(group: Group): void {
-    this.groupService
-      .create(group)
-      .subscribe((group: Group) => {
-        this.alert.successAlert(`Grupo ${group.name} criado com sucesso!`);
-        this.team.groups?.splice(this.team.groups.push(group))
-        this.switchCreateViewGroup();
-      },
-        e => {
-          if (group.name == null) {
-            this.alert.errorAlert(`Você precisa adicionar um nome`)
-          }else {
-            this.alert.errorAlert(`Erro ao criar grupo`)            
-          }
-        });
-  }
-
-  switchCreateViewGroup(): void {
-    this.isCreatingGroup = !this.isCreatingGroup;
-  }
-
-
   taskOpen: boolean = false;
   taskOpenObject!: Task;
   changeModalTaskState(bool: boolean, task: Task): void {
-    if(bool == false){
+    if (bool == false) {
       this.taskOpenObject = {} as Task;
       this.taskOpen = false;
       return;

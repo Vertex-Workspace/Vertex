@@ -22,7 +22,6 @@ export class UserStateService {
   }
 
   validateLoggedToken(): boolean {
-    //////////////
     return false;
   }
 

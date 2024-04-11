@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { URL } from './path/api_url';
 import { Team } from '../models/class/team';
-import { Task, TaskCreate, TaskEdit, TaskWaitingToReview } from '../models/class/task';
+import { ReturnTaskResponsables, Task, TaskCreate, TaskEdit, TaskWaitingToReview, UpdateResponsibles } from '../models/class/task';
 import { Value, ValueUpdate } from '../models/class/value';
 import { CommentSend } from '../models/class/comment';
 import { Chat } from '../models/class/chat';
+import { Permission, User } from '../models/class/user';
+import { Group } from '../models/class/groups';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,8 @@ export class TaskService {
   }
 
   public create(taskCreate: TaskCreate): Observable<Task> {
+    console.log(taskCreate);
+    
     return this.http.post<Task>(`${URL}task`, taskCreate);
   }
 
@@ -55,15 +59,16 @@ export class TaskService {
   public getAllByTeam(id: number):Observable<Task[]> {
     return this.http
       .get<Task[]>(`${URL}team/tasks/${id}`)
-      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 
   public getAllByUser(id: number): Observable<Task[]> {
     return this.http
       .get<Task[]>(`${URL}task/user/${id}`)
-      .pipe(map((tasks: Task[]) => tasks.map(task => new Task(task))));
   }
 
+  public getTaskPermissions(taskID: number, userID: number): Observable<Permission[]> {
+    return this.http.get<Permission[]>(`${URL}task/${taskID}/task-permission/${userID}`);
+  }
 
 
   public saveComment(comment: CommentSend): Observable<Task> {
@@ -102,6 +107,28 @@ export class TaskService {
   public removeFile(taskId: number, fileId: number): Observable<Task> {
     return this.http
       .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`)
+  }
+
+  public returnAllResponsables(id: number): Observable<ReturnTaskResponsables> {
+    return this.http
+      .get<ReturnTaskResponsables>(`${URL}task/taskResponsables/${id}`);
+  }
+
+  public updateTaskResponsables(updateResponsible: UpdateResponsibles): Observable<Task> {
+    return this.http.patch<Task>(`${URL}task/taskResponsables`, updateResponsible);
+  }
+
+  public taskDependency(taskId: number, taskDependencyId: number, task: Task): Observable<Task> {
+    return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}/${taskDependencyId}`, task);
+  }
+
+  public setTaskDependencyNull(taskId: number, task: Task): Observable<Task>{
+    return this.http.patch<Task>(`${URL}task/taskDependency/${taskId}`, task);
+  }
+
+  public getTasksDone(id: number): Observable<Boolean> {
+    return this.http
+      .get<Boolean>(`${URL}task/doneTask/${id}`);
   }
 
 }

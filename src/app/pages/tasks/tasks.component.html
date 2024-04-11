@@ -1,6 +1,6 @@
 <section class="screen">
-    <div class="container-custom">
-        <section >
+    <div class="container-custom" *ngIf="(renderPermissions | async) && (renderProject | async)">
+        <section class="grid w-full grid-cols-2">
             <div>
                 <div class="flex flex-row gap-2">
                     <h4>
@@ -17,8 +17,8 @@
         </section>
 
         <section class="menu">
-            <div  joyrideStep="step6" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [doneTemplate]="doneButton" [title]="'Modos de visualização das tarefas'" [stepContent]="customContent"
+            <div joyrideStep="step6" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
+                [title]="'Modos de visualização das tarefas'" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[8] }">
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="medium-text">
@@ -115,7 +115,7 @@
             </ng-container>
         </section>
 
-        <section class="router" *ngIf="renderProject | async">
+        <section class="router">
             <app-kanban *ngIf="clicked  === 'Kanban'" [project]="project" [nameFilter]="query" [filter]="selectedFilter"
                 [permissions]="permissions" [orderParams]="orderParams"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
@@ -128,46 +128,43 @@
                 [filter]="selectedFilter" [orderParams]="orderParams" [permissions]="permissions"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-calendar>
 
-            <app-mural 
-                *ngIf="clicked  === 'Mural'" 
-                [project]="project"
-                [nameFilter]="query" 
-            ></app-mural>
+            <app-mural *ngIf="clicked  === 'Mural'" [project]="project" [nameFilter]="query"></app-mural>
         </section>
 
     </div>
 </section>
 
-<app-modal-properties *ngIf="propertiesOpen" [project]="project" [height]="'600px'" [width]="'450px'"
-    (close)="openPropertiesModal()" (changeProjectSettings)="changeProject($event)"></app-modal-properties>
+<ng-container *ngIf="(renderPermissions | async) && (renderProject | async)">
+    <app-modal-properties *ngIf="propertiesOpen" [project]="project" [height]="'600px'" [width]="'450px'"
+        (close)="openPropertiesModal()" (changeProjectSettings)="changeProject($event)"></app-modal-properties>
 
-<app-task *ngIf="taskOpen" [task]="taskOpenObject" [project]="project" [permissions]="permissions"
-    (changes)="updateProjectByTaskChanges($event)" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
+    <app-task *ngIf="taskOpen" [task]="taskOpenObject" [project]="project" [permissions]="permissions"
+        (changes)="updateProjectByTaskChanges($event)" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
 
-<app-review-task *ngIf="taskReview" [tasksToReview]="tasksToReview" (toggleReview)="toggleReview()"
-    (closeModal)="updateTasksToReview($event)"></app-review-task>
+    <app-review-task *ngIf="taskReview" [tasksToReview]="tasksToReview" (toggleReview)="toggleReview()"
+        (closeModal)="updateTasksToReview($event)"></app-review-task>
 
-<app-create-team-project *ngIf="openModalProject" [project]="project" [team]="project.team" [typeString]="'projectInfo'"
-    (close)="openProjectInfos()"></app-create-team-project>
+    <app-create-team-project *ngIf="openModalProject" [project]="project"
+        [typeString]="'projectInfo'" (close)="openProjectInfos()"></app-create-team-project>
 
+</ng-container>
 
+    <ng-template #prevButton>
+        <button class="btn">
+            Voltar
+        </button>
+    </ng-template>
+    <ng-template #nextButton>
+        <button class="btn">
+            Próximo
+        </button>
+    </ng-template>
+    <ng-template #doneButton>
+        <button (click)="attUserFirstAccess()" class="btn">
+            Fim
+        </button>
+    </ng-template>
+    <ng-template #customContent let-texto="texto" style="border-radius: 5px">
+        <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+    </ng-template>
 
-
-<ng-template #prevButton>
-    <button class="btn">
-        Voltar
-    </button>
-</ng-template>
-<ng-template #nextButton>
-    <button class="btn">
-        Próximo
-    </button>
-</ng-template>
-<ng-template #doneButton>
-    <button (click)="attUserFirstAccess()" class="btn">
-        Fim
-    </button>
-</ng-template>
-<ng-template #customContent let-texto="texto" style="border-radius: 5px">
-    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
-</ng-template>

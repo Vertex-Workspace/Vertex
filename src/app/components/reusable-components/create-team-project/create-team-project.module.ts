@@ -9,6 +9,7 @@ import { CardUserModule } from '../card-user/card-user.module';
 import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelect, MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -23,7 +24,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ReactiveFormsModule,
     CardUserModule,
     TreeSelectModule,
-    DropdownModule
+    DropdownModule,
+    MultiSelectModule
   ]
 })
 export class CreateTeamProjectModule { }

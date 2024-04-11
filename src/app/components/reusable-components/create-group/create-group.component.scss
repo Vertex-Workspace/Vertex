@@ -10,14 +10,16 @@ form {
 }
 
 .div-name {
-    @apply h-[25%] w-full
+    @apply w-full
 }
 
 .input-name {
-    @apply flex flex-col w-full h-[80%] justify-start items-start;
+    @apply flex flex-col w-full h-[80%] justify-start items-start pt-4;
 
     input {
-        @apply flex h-24 rounded-md pl-4 w-full;
+        @apply flex h-20 rounded-md pl-4 w-full;
+        background-color: $card;
+        color: $text;
     }
 
     p {
@@ -26,7 +28,7 @@ form {
 }
 
 .input-description {
-    @apply flex flex-col w-full h-[50%] items-center;
+    @apply flex flex-col w-full items-start;
     overflow-y: auto;
 
     p {
@@ -36,10 +38,10 @@ form {
 }
 
 .div-buttons {
-    @apply flex h-[15%] w-full justify-end items-end;
+    @apply flex w-full justify-end items-end pt-10;
 
     .buttons {
-        @apply flex w-[60%] h-full justify-between items-end ;
+        @apply flex w-[65%] h-full justify-between items-end;
     }
 }
 
@@ -53,7 +55,7 @@ p {
 }
 
 .modal {
-    @apply absolute rounded-md flex flex-col w-[30%] h-[70%] items-start justify-start text-center p-8 border-t-8;
+    @apply absolute rounded-md flex flex-col w-[25%] h-[45%] items-start justify-start text-center p-8 border-t-8;
     border-color: $primaryColor;
     background-color: $secondColor;
 }
@@ -64,10 +66,10 @@ p {
 
 .confirm {
     background-color: $primaryColor;
-    color: $secondColor
+    color: $text;
 }
 
 .cancel {
     background-color: $error;
-    color: $secondColor
+    color: $text
 }

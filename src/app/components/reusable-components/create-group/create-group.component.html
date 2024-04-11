@@ -11,37 +11,19 @@
     </div>
 
     <p class="pb-4">Selecionar participantes</p>
-    <div class="input-description">
-      <ng-container *ngFor="let user of team.users">
-        <app-card-user [typeString]="'creating'" [width]="'600px'" [height]="'70px'" (userEmitter)="selectUsers($event)"
-          [team]="team" class="pt-2" [user]="user"></app-card-user>
-      </ng-container>
+    <div>
+      <p-multiSelect [options]="usersToSelect!" optionLabel="name" (onChange)="pushParticipants($event)"
+            [style]="{ width: '300px', height: '55px'}" placeholder="Membros do grupo">
+            <ng-template let-user pTemplate="user">
+                <span>{{user.firstName}}</span>
+            </ng-template>
+        </p-multiSelect>
     </div>
 
     <div class="div-buttons">
       <div class="buttons">
         <button class="button cancel" (click)="closeGroup()">Cancelar</button>
         <button class="button confirm" type="submit">Criar grupo</button>
-      </div>
-    </div>
-  </div>
-</form>
-
-
-<form [formGroup]="form" (ngSubmit)="onSubmit2(group)" class="modal-overlay"
-  *ngIf="typeString === 'addingParticipants'">
-  <div class="modal">
-    <p>Adicionar mais participantes</p>
-    <ng-container *ngFor="let user of team.users">
-      <app-card-user [group]="group" [typeString]="'addingParticipants'" [width]="'600px'" [height]="'70px'"
-        (userEmitter)="pushParticipants($event)" [team]="team" class="pt-4" (noMoreParticipants)="noUsers($event)"
-        [user]="user">
-      </app-card-user>
-    </ng-container>
-    <div class="div-buttons">
-      <div class="buttons">
-        <button class="button cancel" (click)="closeGroup()">Cancelar</button>
-        <button class="button confirm" type="submit">Adicionar</button>
       </div>
     </div>
   </div>

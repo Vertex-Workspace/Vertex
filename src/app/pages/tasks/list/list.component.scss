@@ -14,7 +14,7 @@ section {
               @apply w-full h-[60px] flex items-center pl-4;
               background-color: $emphasis;
               color: $primaryColor;
-              border: 1px solid $emphasis;
+              border: 1px solid $card;
               cursor: pointer;
               transition: all 0.3s ease;
               position: static;
@@ -45,9 +45,6 @@ section {
 .cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;
-    box-shadow: 0 5px 5px -3px $emphasis,
-                0 8px 10px 1px $emphasis,
-                0 3px 14px 2px $emphasis;
     overflow-x: hidden;
     color: $primaryColor;
   }

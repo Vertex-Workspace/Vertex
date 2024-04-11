@@ -17,11 +17,8 @@
                                 <div class="iconBox" *ngIf="item.id != 'description'">
                                     <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
                                 </div>
-                                <textarea (input)="onChange()" type="text" 
-                                    [ngClass]="item.id"
-                                    #textBox class="regular-text"
-                                    formControlName="{{item.formControlName}}"    
-                                >
+                                <textarea (input)="onChange()" type="text" [ngClass]="item.id" #textBox
+                                    class="regular-text" formControlName="{{item.formControlName}}">
                             </textarea>
                             </div>
                         </div>
@@ -41,8 +38,6 @@
                         </div>
                     </div>
                 </section>
-
-                
             </div>
 
             <div class="rightSide">
@@ -56,12 +51,11 @@
 
                     <div>
                         <div *ngIf="!buttonConfirm">
-                                <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
-                                    [disabled]="contentEditable ? false : true"
-                                    [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit"
-                                    (click)="onSubmit()">
-                                    Atualizar
-                                </button>
+                            <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
+                                [disabled]="contentEditable ? false : true"
+                                [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit" (click)="onSubmit()">
+                                Atualizar
+                            </button>
                         </div>
                     </div>
                 </section>

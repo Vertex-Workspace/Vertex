@@ -30,7 +30,7 @@ export class TeamsSettingsComponent implements OnInit{
     private alert: AlertService
   ) {
     this.logged = this.userService.getLogged();  
-    this.getRecentsTeams();
+    this.getAllTeams();
   }
 
   logged !: User;
@@ -41,31 +41,11 @@ export class TeamsSettingsComponent implements OnInit{
     
   }
 
-  getRecentsTeams(): void {
+  getAllTeams(): void {
     this.teamService
       .getTeamsByUser(this.logged)
       .subscribe((teams) => {        
         this.teams = teams;
       });
   }
-
-  delete(team : Team): void {
-    // this.userService.getOneByEmail(team.creator.email).subscribe((user: User) => {
-    //   this.userCreator = user;
-    //   console.log(user); 
-    // })
-  
-    
-    this.teamService
-      .delete(team.id)
-      .subscribe((team: Team) => {
-        this.alert.successAlert('Equipe removida com sucesso!');
-        this.teams?.splice(this.teams.indexOf(team), 1);
-      },
-      e => {
-        this.alert.errorAlert('Erro ao deletar equipe!')
-      });
-  }
-
-
 }

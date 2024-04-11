@@ -26,7 +26,7 @@
     @apply flex flex-row h-[10%] items-end justify-center pt-4 opacity-60 gap-2;
 
     p{
-        color: $primaryColor;
+        color: $text;
     }
 }
 
@@ -53,6 +53,7 @@
 
         p{
             @apply px-2 rounded-xl; 
+            color: $text;
             width: auto;
         }
     }

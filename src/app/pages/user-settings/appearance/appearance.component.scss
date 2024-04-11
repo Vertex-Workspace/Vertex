@@ -1,84 +1,21 @@
 @import '../../../../variables.scss';
 
-.bg {
-    @apply flex h-full w-screen flex-col items-center justify-start ;
-}
-
-.title {
-    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
-    border-color: $disabled;
-
-        div {
-            @apply flex items-center justify-start gap-7;
-        }
-        
-        p{
-            @apply text-xl font-medium;
-        }
-}
-
-.icon {
-    color: $primaryColor;
-}
-
-.size {
-    @apply text-[18px];
-}
-
-.icon-dark {
-    color: $secondColor;
-}
-
-.themes {
-    @apply w-[85%] h-[60%] flex flex-col justify-between items-start;  
-
-    p:first-child{
-     @apply pt-2;
+@media screen and (min-width: 1324px) {
+    .title {
+        @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
+        border-color: $primaryColor;
+    
+            div {
+                @apply flex items-center justify-start gap-7;
+            }
+            
+            p{
+                @apply text-xl font-medium;
+            }
     }
 }
 
-.box-modes {
-    @apply flex w-full h-[45%]  items-center pl-3 border rounded-sm;
-    background-color: $emphasis;
-    border-color: $primaryColor;
-
-    .mode {
-        @apply flex h-[85%] w-[20%];
-
-        p{
-            @apply text-sm py-3
-        }
-    }
-}
-
-.colors-circle {
-    @apply rounded-full w-[60px] h-[60px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
-}
-
-.colors {
-    @apply flex flex-col w-[70%] h-full justify-evenly pb-2;
-
-    p {
-        @apply pl-14;
-    };
-
-    div:first-child {
-        @apply flex h-full flex-col place-content-evenly;
-    };
-
-    .colors-row {
-        @apply flex flex-row justify-evenly;
-    }
-
-}
-
-.icon-themes {
-    @apply px-3 py-3;
-}
-
-.text-preferences {
-    @apply  w-[85%] h-[30%];
-
+@media screen and (min-width: 1024px) {
     .writing {
         @apply w-full h-[40%] flex py-3;
 
@@ -102,6 +39,281 @@
             }
         }
     }
+
+    .colors-circle {
+        @apply rounded-full w-[60px] h-[60px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+    }
+
+    .colors {
+        @apply flex flex-col w-[70%] h-full  pb-2;
+    
+        p {
+            @apply pl-10;
+        };
+    
+        div:first-child {
+            @apply flex h-full flex-col place-content-evenly;
+        };
+    
+        .colors-row {
+            @apply pl-10 flex flex-row flex-wrap justify-start gap-5;
+        }
+    
+    }
+
+    .box-modes {
+        @apply flex w-full min-h-[180px]  items-center pl-3 border rounded-sm;
+        border-color: $primaryColor;
+    
+        .mode {
+            @apply flex min-h-[150px] w-[20%];
+    
+            p{
+                @apply text-sm py-3
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1324px) {
+    .writing {
+        @apply w-full h-[40%] flex py-3;
+
+        p:nth-child(2){
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[30%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-sm h-[30%];
+
+            option{
+                @apply rounded-full;
+                color: $secondColor;
+
+            }
+        }
+    }
+
+    .colors-circle {
+        @apply rounded-full w-[60px] h-[60px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+    }
+
+    .title {
+        @apply hidden;
+        border-color: $primaryColor;
+    
+            div {
+                @apply flex items-center justify-start gap-7;
+            }
+            
+            p{
+                @apply text-xl font-medium;
+            }
+    }
+
+    .desc {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .t-mode {
+        @apply hidden;
+    }
+
+    .box-modes {
+        @apply flex w-full h-[45%]  items-center pl-3 border rounded-sm pr-3;
+        border-color: $primaryColor;
+    
+        .mode {
+            @apply hidden;
+    
+            p{
+                @apply text-sm py-3
+            }
+        }
+    }
+
+    .colors {
+        @apply flex flex-col w-full h-full  pb-2;
+    
+        p {
+            @apply pl-10;
+        };
+    
+        div:first-child {
+            @apply flex h-full flex-col place-content-evenly;
+        };
+    
+        .colors-row {
+            @apply pl-10 flex flex-row flex-wrap justify-start gap-5;
+        }
+    
+    }
+}
+
+@media screen and (min-width: 450px) and (max-width: 760px) {
+
+    .writing {
+        @apply w-full h-[40%] flex py-3;
+
+        p:nth-child(2){
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[70%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-sm h-[30%];
+
+            option{
+                @apply rounded-full;
+                color: $secondColor;
+
+            }
+        }
+    }
+
+    .colors-circle {
+        @apply rounded-full w-[40px] h-[40px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+    }
+
+    .title {
+        @apply w-full min-h-[30px] flex flex-col items-start justify-start pt-12 px-10;
+        border-color: $primaryColor;
+    
+            div {
+                @apply flex w-full items-center justify-center gap-7;
+            }
+            
+            p{
+                @apply text-xl font-medium;
+            }
+
+            .icon {
+                @apply hidden;
+            }
+    }
+
+    .desc {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .writing {
+        @apply w-full h-[70%] flex flex-col py-3 gap-2;
+
+        p:nth-child(2){
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[70%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-sm h-[30%];
+
+            option{
+                @apply rounded-full;
+                color: $secondColor;
+
+            }
+        }
+    }
+
+    .colors-circle {
+        @apply rounded-full w-[40px] h-[40px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+    }
+
+    .title {
+        @apply w-full min-h-[30px] flex flex-col items-start justify-start pt-12 px-10;
+        border-color: $primaryColor;
+    
+            div {
+                @apply flex w-full items-center justify-center gap-7;
+
+                h5 {
+                    @apply min-w-[300px] text-center;
+                }
+            }
+            
+            p{
+                @apply text-xl font-medium;
+            }
+
+            .icon {
+                @apply hidden;
+            }
+    }
+
+    .box-modes {
+        @apply flex w-full min-h-[55%] items-center p-3 border rounded-sm;
+        border-color: $primaryColor;
+    
+        .mode {
+            @apply hidden;
+    
+            p{
+                @apply text-sm py-3
+            }
+        }
+    }
+
+    .desc {
+        @apply hidden;
+    }
+}
+
+.bg {
+    @apply flex min-h-full w-screen flex-col items-center justify-start pb-16;
+    color: $text;
+}
+
+.icon {
+    color: $primaryColor;
+}
+
+.size {
+    @apply text-[18px];
+}
+
+.icon-dark {
+    color: $secondColor;
+}
+
+.themes {
+    @apply w-[85%] min-h-[60%] flex flex-col justify-between items-start gap-2;  
+
+    p:first-child{
+     @apply pt-2;
+    }
+}
+
+
+.icon-themes {
+    @apply px-3 py-3;
+}
+
+.text-preferences {
+    @apply  w-[85%] h-[30%] flex flex-col gap-7;
+
+
 }
 
 .accessibility {

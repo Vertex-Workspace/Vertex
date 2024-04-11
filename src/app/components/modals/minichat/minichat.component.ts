@@ -46,7 +46,9 @@ export class MinichatComponent {
       chats.forEach((chat: Chat) => {
         chat.userTeams!.forEach((userTeam) => {
           if (userTeam.user.id == this.logged.id) {
-            this.conversations.push(chat);
+            if (chat.userTeams!.length > 1) {
+              this.conversations.push(chat);
+            }
           }
         });
       });
@@ -95,9 +97,9 @@ export class MinichatComponent {
           this.chat = response;
           console.log(response, "Message sentALLL");
           sendForm.controls['message'].reset();
+          this.webSocketService.sendMessage(messageDto);
         });
 
-      this.webSocketService.sendMessage(messageDto);
 
       sendForm.reset();
     }

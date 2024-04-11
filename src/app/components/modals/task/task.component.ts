@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyList } from 'src/app/models/class/property';
 import { Task, TaskEdit } from 'src/app/models/class/task';
@@ -28,8 +28,7 @@ import { ReviewService } from 'src/app/services/review.service';
 export class TaskComponent implements OnInit {
   faClock = faClock;
 
-  @Input()
-  project!: Project;
+  @Input() project!: Project;
 
   @Output() close = new EventEmitter();
 
@@ -44,6 +43,7 @@ export class TaskComponent implements OnInit {
   taskStep!: Task;
   user!: User;
   timeInTask!: TimeInTask;
+  hasDependency: boolean = false;
 
   seconds: number = 0;
   minutes: number = 0;
@@ -70,62 +70,77 @@ export class TaskComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private reviewService : ReviewService
-    ) {}
+    private reviewService: ReviewService
+  ) {
+    this.user = userService.getLogged();
+  }
 
   selectedComponent: string = 'log';
 
-  waitRequest: boolean = false;
   soloResponsable: boolean = false;
   checkedReview: boolean = false;
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-    
-  }
+  permissionsRender!: Observable<Permission[]>;
 
-  async ngOnInit() {
-    if(this.task.revisable){
+
+  ngOnInit() {
+    if (this.task.revisable) {
       this.checkedReview = true;
     }
-    
     this.taskService.getTaskInfo(this.task.id).subscribe(
       (task: any) => {
         this.taskInfoDTO = task;
       }
     );
-    if (this.permissions) {
-      for (const permission of this.permissions) {
-        if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
-          this.canEdit = true;
-        }
-      }
-    }
-    this.user = JSON.parse(localStorage.getItem('logged')!);
+
+
     this.task.taskResponsables!.forEach((taskResponsable) => {
       if (taskResponsable.userTeam.user.id == this.user.id) {
         this.idResponsable = taskResponsable.id;
 
         //Validates if the user is the creator of the task
-        if(this.task.creator?.user.id == taskResponsable.userTeam.user.id){
+        if (this.task.creator?.user.id == taskResponsable.userTeam.user.id) {
           //The creator doesn't send the task
           this.soloResponsable = true;
         }
       }
     });
-    
-    if(this.task.taskResponsables!.length == 1){
+
+    if (this.task.taskResponsables!.length == 1) {
       this.soloResponsable = true;
     }
 
     this.getTimeInTask();
 
+    this.permissionsRender = this.taskService.getTaskPermissions(this.task.id, this.user.id!);
+      
+    this.permissionsRender.forEach(
+      (permissions: Permission[]) => {
+        this.permissions = permissions;
+        this.setEditPermission(permissions);
+      }
+    );
+
     //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
     window.onbeforeunload = () => this.ngOnDestroy();
+
+    if (this.task.taskDependency != null) {
+      this.hasDependency = true
+      this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
+    }
+
+
   }
 
+  private setEditPermission(permissions: Permission[]) {
+    for (const permission of permissions) {
+      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+        this.canEdit = true;
+      }
+    }
+  }
 
-  async getTimeInTask() {
+  getTimeInTask() {
     this.taskHourService.getTimeInTask(this.idResponsable).subscribe(
       (time: TimeInTask) => {
         this.timer = time.timeInTask;
@@ -133,13 +148,9 @@ export class TaskComponent implements OnInit {
         this.minutes = parseInt(time.timeInTask.substring(3, 5));
         this.hours = parseInt(time.timeInTask.substring(0, 2));
         this.timeInTask = time;
-        this.waitRequest = true;
         if (this.timeInTask.working) {
           this.startTimer()
         }
-      },
-      (e: any) => {
-        console.error(e);
       });
   }
 
@@ -148,7 +159,7 @@ export class TaskComponent implements OnInit {
   }
 
   closeModal() {
-    if(!this.timeInTask.working){
+    if (!this.timeInTask.working) {
       this.close.emit();
     }
   }
@@ -183,7 +194,8 @@ export class TaskComponent implements OnInit {
 
   updateTaskRevisable(): void {
     this.reviewService.setRevisable(this.task.id, this.checkedReview).subscribe(
-      (response) => {;
+      (response) => {
+        ;
       },
       (error: any) => {
         this.task.revisable = !this.task.revisable;
@@ -232,7 +244,7 @@ export class TaskComponent implements OnInit {
     }, 1000);
 
     this.taskHourService.saveTaskHour(taskHour).subscribe(
-      (taskHour: taskHour) => {},
+      (taskHour: taskHour) => { },
       (error: any) => {
         this.alertService.errorAlert(error.error)
       }
@@ -254,7 +266,7 @@ export class TaskComponent implements OnInit {
     clearInterval(this.id);
 
     this.taskHourService.patchTaskHour(taskHour).subscribe(
-      (taskHour: taskHour) => {},
+      (taskHour: taskHour) => { },
       (error: any) => {
         this.alertService.errorAlert(error.error)
       }
@@ -267,8 +279,8 @@ export class TaskComponent implements OnInit {
         this.taskChat = chat;
         this.miniChatOpen = !this.miniChatOpen;
         console.log(this.taskChat, "TASK CHAT");
-        
-        
+
+
       },
       (error: any) => {
         this.alertService.errorAlert(error.error)
@@ -291,10 +303,10 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  chatCreated:boolean = false;
+  chatCreated: boolean = false;
   taskChat!: Chat;
   createChat() {
-    
+
     this.taskService.createChatByTaskId(this.task.id).subscribe(
       (task: Task) => {
         this.chatCreated = true;
@@ -345,7 +357,7 @@ export class TaskComponent implements OnInit {
     return this.task.creator?.user.id == this.user.id;
   }
 
-  isRevisable(): boolean{
+  isRevisable(): boolean {
     return this.taskInfoDTO.projectReviewENUM == ProjectReview.OPTIONAL;
   }
 }

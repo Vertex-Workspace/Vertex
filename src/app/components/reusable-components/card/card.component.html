@@ -1,7 +1,7 @@
 <div class="card"
     [style.width]="width"
     [style.min-height]="minHeight"
-    [style.borderColor]="borderColor"
+    [style.borderColor]="'var(--primaryColor)'"
     (click)="openTask()"
     (click)="takeCurrentTime()"
     >
@@ -25,4 +25,4 @@
     <p class="medium-text">{{task.name}}</p>
 </div>
 
-<app-confirm-modal *ngIf="modalDelete" [height]="'300px'" [width]="'400px'" [title]="'a Tarefa'" (close)="delete($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="modalDelete" [width]="'400px'" [height]="'250px'" [title]="'excluir a Tarefa'" (close)="delete($event)"></app-confirm-modal>

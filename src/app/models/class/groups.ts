@@ -1,4 +1,5 @@
 import { Project } from "./project";
+import { Task } from "./task";
 import { Team } from "./team";
 import { User } from "./user";
 
@@ -8,14 +9,17 @@ export class Group {
     name ?: string;
     creationDate ?: Date;
     description ?: string;
-    users?: User[] = [];
+    users !: User[];
     open?: boolean = false;
     creator?: User;
     team ?: Team
     label ?: string
-    children ?: User[]
+    children !: User[] 
     icon ?: string
     selected ?: boolean
+    size ?: number
+    userTeams ?: any[]
+    tasks !: Task[]
 
     //List Project - Miguel
     projects?: Project[];
@@ -33,6 +37,9 @@ export class Group {
         this.label = group.name;
         this.children = group.users
         this.selected = group.selected
+        this.size = group.size
+        this.userTeams = group.userTeams
+
     }
 
 }

@@ -10,35 +10,39 @@ export class Project {
     name !: string;
     team : Team;
     description ?: string;
-    image ?: string;
+    file ?:{
+        file:string;
+    }
     creator ?: UserTeam;
-    projectDependency ?: Project;
+    projectDependency !: Project;
     tasks : Task[]; 
-    notes !: Note[];
-    properties!: Property[];
+    notes : Note[] = [];
+    properties !: Property[];
     idTeam!: number;
-    listOfResponsibles ?: Group[] | User[]
+    listOfResponsibles !: Group[] | User[]
+    groups?: Group[]
+    users?: User[]
     projectReviewENUM!: ProjectReview; 
+
+    isCreator: boolean = false;
     
 
     constructor(
         project: Project,
     ) {
-        console.log(project);
-        
         this.id = project.id;
         this.name = project.name;
         this.team = project.team;
         this.description = project.description;
-        this.image = project.image;
         this.tasks = project.tasks;
+        this.listOfResponsibles = project.listOfResponsibles;
         this.notes = project.notes;
         this.properties = project.properties;
         this.idTeam = project.idTeam;
         this.projectReviewENUM = project.projectReviewENUM;
-        // this.collaborators = project.collaborators
-        // this.groups = project.groups
-        this.listOfResponsibles = project.listOfResponsibles
+        this.projectDependency = project.projectDependency
+        this.groups = project.groups
+        this.users = project.users
     }
 
 }
@@ -62,11 +66,20 @@ export class ProjectEdit {
     id ?:number;
     name?: string;
     description?: string;
-    listOfResponsibles ?: Group[] | User[];
+    projectDependency ?: Project;
+    users ?:  User[];
+    groups ?: Group[];
     projectReviewENUM ?: ProjectReview;
 }
+
+export class ProjectCollaborators{
+    users !: User[];
+    groups !: Group[];
+    userInGroups !: User[];
+}
+
 export enum ProjectReview {
-    MANDATORY = "MANDATORY",
-    OPTIONAL = "OPTIONAL",
-    EMPTY = "EMPTY",
+    MANDATORY,
+    OPTIONAL,
+    EMPTY,
 }
