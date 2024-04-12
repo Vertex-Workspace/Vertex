@@ -55,7 +55,7 @@
 
     <!-- ICONS AND TEXT OPENED -->
     <ul *ngIf="isSideBarExpanded" class="footer-items2">
-        <div class="w-[100%] h-full flex flex-col items-center justify-evenly">
+        <div class="w-[100%] h-full flex flex-col items-center gap-10">
             <ng-container *ngFor="let item of items">
                 <li class="liOpen" (click)="item.command()">
                     <div class="w-[14%]">

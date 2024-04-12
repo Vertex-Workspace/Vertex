@@ -16,13 +16,19 @@ export class UserSettingsComponent {
 
   click: string = 'perfil';
 
+  ngOnInit(): void {
+    const item = localStorage.getItem('settings-option');
+    
+    if (item) this.click = localStorage.getItem('settings-option')!
+  }
+
   clickOption(id: string): void{
     this.click = id;
-    console.log(this.click)
+    localStorage.setItem('settings-option', id);
   }
 
   itemsList = [
-    { id: 'perfil', icon: faUser, option: 'Perfil'},
+    { id: 'perfil', icon: faUser, option: 'Meu Perfil'},
     { id: 'seguranca', icon: faLock, option: 'Segurança'},
     { id: 'aparencia', icon: faPaintBrush, option: 'Aparência'},
     { id: 'equipes', icon: faUsers, option: 'Equipes'},

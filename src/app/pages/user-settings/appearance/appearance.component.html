@@ -18,7 +18,7 @@
                         [style.background]="'linear-gradient(315deg, ' + theme.secondColor + ' 50%,' + theme.primaryColor + ' 50%)'">
                         <fa-icon [icon]="theme.icon" class="icon-themes"
                             [ngClass]="theme.mode === 'Tema Claro' ? 'icon-dark' : 'icon-dark'"></fa-icon>
-                        <p class="small-text" [ngClass]="theme.mode === 'Tema Claro' ? 'icon-dark' : 'icon-dark'">
+                        <p class="small-text t-mode" [ngClass]="theme.mode === 'Tema Claro' ? 'icon-dark' : 'icon-dark'">
                             {{theme.mode}}
                         </p>
                     </div>
@@ -52,14 +52,12 @@
         <div class="writing">
             <div class="h-full flex flex-col gap-2">
                 <p class="medium-text">Tamanho da letra</p>
-                <p class="small-text">Defina o tamanho da letra para o sistema</p>
                 <p-cascadeSelect [(ngModel)]="newPers.fontSize" [options]="fontSizes" optionGroupLabel="name"
                     [optionGroupChildren]="[]" [style]="{ width: '120px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)'}"
                     placeholder="{{newPers.fontSize}}" (onChange)="changeFontSize()"></p-cascadeSelect>
             </div>
             <div class="h-full flex flex-col gap-2">
                 <p class="medium-text">Estilo da letra</p>
-                <p class="small-text">Defina o estilo da letra</p>
                 <!-- <select [(ngModel)]="fontFamilyChoosed" (change)="changeFontFamily()">
                     <option *ngFor="let font of fontFamily" [value]="font" class="small-text">{{font}}</option>
                 </select> -->

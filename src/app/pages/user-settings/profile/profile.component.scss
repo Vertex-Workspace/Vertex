@@ -1,193 +1,784 @@
 @import '../../../../variables.scss';
 @import '../../../../styles.scss';
 
-.bg {
-    @apply flex h-full w-screen flex-col items-center justify-start;
-}
 
-.title {
-    @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
-    border-color: $primaryColor;
+@media screen and (min-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+        border-color: $emphasis;
         div {
             @apply flex w-[25%] items-center justify-start gap-7;
         }
         
-}
-
-.image {
-    @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
-
-
-    .profile-photo {
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
+    }
+    
+    .circular {
+        width: 200px;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+    }
+    .circular img {
+        height: 80%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
         color: $primaryColor;
-        font-size: 10rem;
-        padding-left: 27%; 
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .confirm-mobile {
+        @apply hidden;
+    }
+
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px]
+        px-3 flex py-3;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex w-[95%]
+    }
+    
+    .divLeftSide {
+        @apply w-[70%];
+        
+        section {
+            @apply flex h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[500px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit, .confirm, .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-[25%] ;
+        
+        section {
+            @apply h-[85%] w-full flex flex-col justify-between items-end border-b-2 py-3 pb-4;
+        }
+    }
+    
+    .email, .name {
+        @apply w-[450px] h-[50px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[50px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
     }
 }
 
-.circular {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
-  }
-  .circular img {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-
-.size {
-    @apply text-[18px];
-}
-
-p-fileUpload {
-    @apply absolute bottom-0 mx-auto w-[150px];
-}
-
-.input-div {
-    @apply w-full h-full flex justify-center items-center absolute;
-    opacity: 0;
-    color: $text;
-
-    .input-file {
-        @apply cursor-pointer w-full h-full;
+@media screen and (min-width: 980px) and (max-width: 1324px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[25%] items-center justify-start gap-7;
+        }
+        
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
+    }
+    
+    .circular {
+        width: 200px;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+    }
+    .circular img {
+        height: 80%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
     }
 
+    .confirm-mobile {
+        @apply hidden;
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
+        color: $primaryColor;
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px]
+        px-3 flex py-3;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex w-[95%]
+    }
+    
+    .divLeftSide {
+        @apply w-[70%];
+        
+        section {
+            @apply flex h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[500px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit, .confirm, .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-[25%];
+        
+        section {
+            @apply h-[85%] w-full flex flex-col justify-between items-end border-b-2 py-3 pb-4;
+        }
+    }
+    
+    .email, .name {
+        @apply w-[450px] h-[50px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[50px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
 }
 
-.iconProfile {
-    color: $primaryColor;
-}
+@media screen and (min-width: 760px) and (max-width: 980px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start pt-6;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
 
-.hover {
-    color: $primaryColor;
-    @apply hover:opacity-50 pt-4;
-}
+        div {
+            @apply flex w-[50%] items-center justify-start gap-7;
 
-.iconInput {
-    color: $primaryColor;
-    background-color:$card;
-}
-
-.generalDiv {
-    @apply flex w-[95%] justify-end;
-}
-
-.iconInputBlock {
-    @apply flex justify-start;
-
-    .iconBox {
-         @apply flex w-[6%] h-12 justify-center items-center rounded-l-sm;
-         background-color: $card;
-     }
-}
-
-textarea {
-    @apply
-    rounded-r-sm
-    px-3 flex py-3;
-    resize: none;
-    background-color: $card;
-    color: $text !important;   
-}
-
-.divInputs {
-    @apply flex w-[95%]
-}
-
-.divLeftSide {
-    @apply w-[70%];
-
-    section {
-       @apply flex h-[85%] flex-col border-b-2 justify-evenly;
+            .iconProfile {
+                @apply hidden;
+            }
+        }
+        
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
     }
 
-    p {
-        @apply py-3;
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
+        color: $primaryColor;
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex min-w-[70px] h-[70px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px] w-[400px]  pt-[1.35rem]
+        px-3 flex py-3 items-center;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex flex-col-reverse w-[95%];
+    }
+    
+    .divLeftSide {
+        @apply w-full flex justify-center pb-32;
+        
+        section {
+            @apply flex w-[90%] mr-20 h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[620px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+
+    .confirm {
+        @apply hidden;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-full h-[250px] justify-center mb-4;
+        
+        section {
+            @apply h-[85%] w-[90%] flex justify-center mr-20;
+
+            .circular {
+                width: 250px;
+                height: 250px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .circular img {
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    
+    .email, .name {
+        @apply w-[600px] h-[70px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[70px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+
+    .confirm-mobile {
+        color: $secondColor;
+        @apply mt-2 mb-2 h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;;
     }
 }
 
-.divEachInput {
-    @apply flex flex-col w-full py-2;
+@media screen and (max-width: 760px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start pt-6;
+    }
+    
+    .title {
+        @apply pl-1 w-full min-h-[50px] flex flex-col items-start justify-start pr-10;
+        border-color: $emphasis;
 
-    label {
-        @apply text-sm;
+        div {
+            @apply flex w-full items-center justify-center gap-7;
+
+            .iconProfile {
+                @apply hidden;
+            }
+        }
+        
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
+    }
+
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
+        color: $primaryColor;
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex min-w-[70px] h-[70px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px] w-[400px]  pt-[1.35rem]
+        px-3 flex py-3 items-center;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex flex-col-reverse w-[95%];
+    }
+    
+    .divLeftSide {
+        @apply w-full flex justify-center pb-32;
+        
+        section {
+            @apply flex w-[90%] mr-20 h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[620px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+
+    .confirm {
+        @apply hidden;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-full h-[250px] justify-center mb-4 pr-10;
+        
+        section {
+            @apply h-[85%] w-[90%] flex justify-center;
+
+            .circular {
+                width: 250px;
+                height: 250px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .circular img {
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    
+    .email, .name {
+        @apply w-[600px] h-[70px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[70px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+
+    .confirm-mobile {
+        color: $secondColor;
+        @apply mt-2 mb-2 h-full w-[350px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;;
     }
 }
-
-.divInputIcon {
-    @apply flex w-12 h-[6%] justify-center items-center rounded-l-sm;
-    background-color: $emphasis;
-}
-
-.angleDownIcon {
-    @apply flex justify-center items-center w-[10%];
-    background-color:$card;
-}
-
-
-.edit, .confirm, .cancel {
-    color: $secondColor;
-    @apply h-full w-[180px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
-}
-
-.noEdit {
-    background-color: $disabled;
-}
-
-.edit {
-    background-color: $primaryColor;
-}
-
-.rightSide{
-    @apply flex w-[25%];
-
-    section {
-        @apply h-[85%] w-full flex flex-col justify-between items-end border-b-2 py-3 pb-4;
-     }
-}
-
-.email, .name {
-    @apply w-[70%] h-12;
-}
-
-.location {
-    @apply w-[40%] h-12;
-}
-
-.description {
-    @apply w-[76%] h-32;
-}
-
-.charts {
-    @apply h-[20%] w-full pt-4 items-center;
-
-    div {
-        @apply flex items-center pt-2;
-    }
-}
-
-form {
-    @apply h-full w-full flex flex-col justify-evenly;
-}
-
-h2 {
-    @apply text-xl font-bold;
-}
-
-.modal {
-    @apply flex items-center justify-center w-full h-full pb-16;
-}
-
-
-
+    
+    
+    
+    
