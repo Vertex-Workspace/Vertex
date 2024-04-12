@@ -32,8 +32,8 @@ export class GroupService {
     return this.http.get<Group>(`${URL}group/${groupId}`);
   }
 
-  public delete(groupId: number):Observable<Group> {
-    return this.http.delete<Group>(`${URL}team/group/${groupId}`)
+  public delete(group: Group):Observable<Group> {
+    return this.http.delete<Group>(`${URL}team/group/${group.id}`)
   }
 
   public deleteUserFromGroup(user: User, teamId:number, groupId:number):Observable<Group>{

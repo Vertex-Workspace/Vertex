@@ -14,7 +14,6 @@ export class TaskResponsable {
 
         this.id = responsable.id;
         this.userTeam = responsable.userTeam;
-
     }
 
 }

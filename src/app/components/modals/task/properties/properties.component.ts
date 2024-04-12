@@ -118,16 +118,16 @@ export class PropertiesComponent {
 
     if (taskResponsibles.group) {
       taskResponsibles.group.tasks = []
-      taskResponsibles.group.projects =[]
+      taskResponsibles.group.projects = []
     }
 
     if ((taskResponsibles.user != null) && (this.task.creator?.user.id != taskResponsibles.user.id)) {
-        this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-          this.alertService.successAlert("Adicionado como repsonsável da tarefa")
-        });
-      } else {
-        this.alertService.errorAlert("Você não pode remover o criador da tarefa")
-      }
+      this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
+        this.alertService.successAlert("Adicionado como repsonsável da tarefa")
+      });
+    } else {
+      this.alertService.errorAlert("Você não pode remover o criador da tarefa")
+    }
   }
 
   setTaskDependencies(task: any) {
@@ -145,13 +145,15 @@ export class PropertiesComponent {
     this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
       for (const user of pc.users) {
         user.label = user.firstName
-        this.taskResponsables.push(user)
-        this.returnAllUsers(user)
+        if (this.task.creator?.user.id != user.id) {
+          this.taskResponsables.push(user)
+          this.returnAllUsers(user)
+        }
       }
     })
   }
 
-  returnAllUsers(user : User){
+  returnAllUsers(user: User) {
     this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
       for (const user1 of tr.users) {
         if (user.id === user1.id) {
@@ -168,13 +170,13 @@ export class PropertiesComponent {
         group.label = "Grupo " + group.name
         this.taskResponsables.push(group)
         this.returnAllGroups(group)
- 
+
 
       }
-    })     
+    })
   }
 
-  returnAllGroups(group1: Group){
+  returnAllGroups(group1: Group) {
     this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
       for (const group of tr.groups) {
         if (group.id == group1.id) {

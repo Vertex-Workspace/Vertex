@@ -315,6 +315,9 @@ export class CreateTeamProjectComponent implements OnInit {
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
+    console.log(project);
+    
+
     this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
       if (this.fd) {
         this.projectService
