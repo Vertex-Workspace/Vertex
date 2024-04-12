@@ -365,7 +365,6 @@ export class CreateTeamProjectComponent implements OnInit {
   senderEmitter = new EventEmitter<Project>();
 
   emitCreation(project: Project) {
-    console.log(project);
     this.senderEmitter.emit(project);
   }
 

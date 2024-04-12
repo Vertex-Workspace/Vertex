@@ -19,9 +19,9 @@ export class ProjectService {
   ) { }
 
 
-  public getOneById(id: number): Observable<Project> {
+  public getOneById(id: number, userID: number): Observable<Project> {
     return this.http
-      .get<Project>(`${URL}project/${id}`);
+      .get<Project>(`${URL}project/${id}/user/${userID}`);
   }
 
   public create(project: Project, teamId: number): Observable<Project> {

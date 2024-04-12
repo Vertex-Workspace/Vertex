@@ -113,7 +113,7 @@ export class CardListComponent implements OnInit {
     if (this.type === 'team') {
       this.router.navigate([`/equipe/${id}/projetos`]);
     } else {
-      this.projectService.getOneById(id).subscribe((project: Project) => {
+      this.projectService.getOneById(id, this.loggedUser.id!).subscribe((project: Project) => {
         this.router.navigate([`/projeto/${id}/tarefas`])
       })
     }

@@ -11,11 +11,9 @@
 
 
 <!-- date -->
-<span class="p-float-label" *ngIf="getKind(value.property, 'DATE')">
-
-    <p-calendar appendTo="body" [style]="{ width: '250px' }" (onSelect)="changeDate($event)"
-        [disabled]="!canEdit"></p-calendar>
-    <label for="birth_date">{{getValue()}}</label>
+<span *ngIf="getKind(value.property, 'DATE')">
+    <p-calendar #calendarLabel appendTo="body" [style]="{ width: '250px' }" (onSelect)="changeDate($event)"
+        [disabled]="!canEdit" [(ngModel)]="calendarClicked" inputId="label-calendar" [(ngModel)]="date"></p-calendar>
 </span>
 
 <!-- status -->

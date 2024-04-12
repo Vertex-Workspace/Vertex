@@ -6,7 +6,7 @@
                     <h4>
                         {{pageTitle}}
                     </h4>
-                    <i class="pi pi-pencil pt-2 cursor-pointer" (click)="openProjectInfos()"></i>
+                    <i class="pi pi-pencil pt-2 cursor-pointer" *ngIf="isCreator" (click)="openProjectInfos()"></i>
                 </div>
                 <div class="pt-2">
                     <p class="small-text text-gray-600">Aqui ficarão centralizadas todas as tarefas do projeto, você
@@ -141,7 +141,7 @@
         (closeModal)="updateTasksToReview($event)"></app-review-task>
 
     <app-create-team-project *ngIf="openModalProject" [project]="project"
-        [typeString]="'projectInfo'" (close)="openProjectInfos()"></app-create-team-project>
+        [typeString]="'projectInfo'" (close)="openProjectInfos()" (senderEmitter)="updateProject($event)"></app-create-team-project>
 
 </ng-container>
 

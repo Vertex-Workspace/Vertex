@@ -103,8 +103,10 @@ export class HeaderComponent implements OnInit {
   }
 
   getProject(id: number): void {
+    console.log(this.userService.getLogged().id!);
+    
     this.projectService
-      .getOneById(id)
+      .getOneById(id, this.userService.getLogged().id!)
       .subscribe((project: Project) => {
         this.location = project.name;
       })

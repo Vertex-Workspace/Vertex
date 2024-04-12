@@ -26,28 +26,19 @@ export class NotificationWebSocketService {
   public openWebSocket() {
     try {
 
-      this.webSocket.onopen = (event) => {
-        console.log('WebSocket connection established.');
-      };
+      this.webSocket.onopen = (event) => {};
 
-      this.webSocket.onclose = (event) => {
-        console.log('WebSocket connection closed.');
-      };
+      this.webSocket.onclose = (event) => {};
 
-      this.webSocket.onerror = (error) => {
-        console.error('WebSocket error:', error);
-      };
-    } catch (error) {
-      console.error('Error while opening WebSocket:', error);
-    }
+      this.webSocket.onerror = (error) => {};
+    } catch (error) {}
   }
 
   public listenToServer(): Observable<any> {
     return new Observable(observer => {
       this.webSocket.onmessage = (event) => {
         let number : number = event.data;
-        console.log(number);
-        
+
         if(number == this.userService.getLogged().id!) {
           observer.next();
         }
@@ -58,16 +49,12 @@ export class NotificationWebSocketService {
   public sendMessage(message: any) {
     if (this.webSocket.readyState === WebSocket.OPEN) {
       this.webSocket.send(JSON.stringify(message));
-    }else {
-      console.error('WebSocket is not open. Unable to send message.');
     }
   }
 
   public closeWebSocket() {
     try {
       this.webSocket.close();
-    } catch (error) {
-      console.error('Error while closing WebSocket:', error);
-    }
+    } catch (error) {}
   }
 }
