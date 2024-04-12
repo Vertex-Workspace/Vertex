@@ -12,7 +12,7 @@
     }
     
     .card{
-        @apply flex min-w-[380px] h-[380px] shadow-lg rounded-sm;
+        @apply flex w-[380px] h-[380px] shadow-lg rounded-sm;
         background-color: $card;
         font-family: $fontFamily;
         color: $text;
@@ -350,4 +350,3 @@
     color: $primaryColor;
     font-size: 1.25rem;
 }
-
