@@ -6,7 +6,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-
+import { TooltipModule } from 'primeng/tooltip';
+import { AutoFocusModule } from 'primeng/autofocus';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -17,6 +18,8 @@ import { MessageService } from 'primeng/api';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    TooltipModule,
+    AutoFocusModule
   ],
   providers: [
   ]

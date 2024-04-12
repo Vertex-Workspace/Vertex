@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ForgotPasswordModule } from 'src/app/components/modals/forgot-password/forgot-password.module';
 import { ButtonModule } from 'src/app/components/reusable-components/button/button.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AutoFocusModule } from 'primeng/autofocus';
 
 
 
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ForgotPasswordModule,
     FontAwesomeModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AutoFocusModule
   ],
 })
 export class LoginModule { 

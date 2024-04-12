@@ -111,6 +111,8 @@
     .bg-login {
         background-image: none;
         background-color: #f3f3f3;
+        border-top: #092c4c 15px solid;
+        
     }
 
     #left-div-login {
@@ -121,17 +123,22 @@
         @apply w-full;
     }
 
+    .inputs {
+        @apply text-xs w-full;
+    }
+
     form {
         @apply w-[60%];
     }
 
-    @media screen and (max-width: 400px) {
-        .inputs {
-            @apply text-xs w-full;
-        }
 
-        .form {
-            @apply w-[800px];
-        }
+}
+@media screen and (max-width: 400px) {
+    .inputs {
+        @apply text-xs w-full;
+    }
+
+    form {
+        @apply w-[300px];
     }
 }

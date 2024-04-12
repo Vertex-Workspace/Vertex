@@ -165,6 +165,11 @@ input[type=checkbox] {
 
     .modal {
         @apply w-full min-w-full;
+        animation: slideInLeft 0.5s ease-out;
+    }
+
+    .description{
+        @apply w-[250px];
     }
 
     @keyframes slideInLeft {
@@ -175,6 +180,7 @@ input[type=checkbox] {
         }
         to {
           width: 100%;
+          min-width: 100%;
           opacity: 1;
           overflow: hidden;
         }
