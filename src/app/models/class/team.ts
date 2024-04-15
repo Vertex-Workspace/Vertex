@@ -16,7 +16,7 @@ export class Team {
     chat?: Chat;
     image ?: string;
     users?: User[];
-    creator?: User;
+    creator !: User;
     groups: Group[] = [];
     projects: Project[] = [];
     tasksPerformances?: number[];
@@ -26,6 +26,7 @@ export class Team {
     approvedReviews: number = 0;
     averageReviews: number = 0;
     percentage!: number;
+    isCreator: boolean = false;
     constructor(
         team: Team
     ) {
