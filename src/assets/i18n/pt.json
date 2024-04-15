@@ -1,0 +1,27 @@
+{
+    "pages": {
+        "home": {
+            "equipes": {
+                "titulo": "Equipes",
+                "descricao1": "As equipes são locais de trabalhos onde é possível gerenciar projetos, convidar membros,",
+                "descricao2": "iniciar chats de conversa e ter o seu tempo e do seu time na palma da sua mão.",
+                "botaoNovaEquipe": "Nova equipe"
+            },
+            "todasTarefas": {
+                "titulo": "Todas as Tarefas",
+                "descricao1": "Nessa seção é possível visualizar todas as tarefas na qual você é um dos responsáveis",
+                "descricao2": "dentro de todo sistema, tarefas de todas equipes e projetos.",
+                "placeholderPesquisarTarefa": "Pesquise por uma tarefa...",
+                "placeholderFiltrarPor": "Selecione",
+                "placeholderOrdenarPor": "Selecione"
+            },
+            "botaoVoltar": "Voltar",
+            "botaoProximo": "Próximo",
+            "bemVindo": "Seja bem vindo, {{nome}}!",
+            "textoBemVindo": "Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!"
+        },
+        "chat":{
+            
+        }
+    }
+}

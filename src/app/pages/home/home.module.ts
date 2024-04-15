@@ -12,6 +12,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
     FormsModule,
     CascadeSelectModule,
     CalendarModule,
-    InputTextModule
+    InputTextModule,
+    TranslateModule
   ],
 })
 export class HomeModule { }

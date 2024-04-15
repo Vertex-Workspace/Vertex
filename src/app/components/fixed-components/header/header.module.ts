@@ -5,6 +5,8 @@ import { NotificationModule } from '../../modals/notification/notification.modul
 import { BadgeModule } from 'primeng/badge';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { FormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -16,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     NotificationModule,
     CascadeSelectModule,
     FormsModule,
-    BadgeModule
+    BadgeModule,
+    MatMenuModule
   ]
 })
 export class HeaderModule { }

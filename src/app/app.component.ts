@@ -18,9 +18,6 @@ import { UserStateService } from './services/user-state.service';
 import { UserService } from './services/user.service';
 import { User } from './models/class/user';
 import { TeamService } from './services/team.service';
-import { URL } from './services/path/api_url';
-
-import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { TextSpeechService } from './services/text-speech.service';
 import { Observable, of } from 'rxjs';
 

@@ -35,32 +35,32 @@ import { InputValuePropertyComponent } from './components/reusable-components/in
 import { NoteComponent } from './components/reusable-components/note/note.component';
 import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
-
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { VlibrasComponent } from './pages/vlibras/vlibras.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { JoyrideModule } from 'ngx-joyride';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } from '@ngx-translate/core';
 
-
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
-    VlibrasComponent,
+    VlibrasComponent
   ],
   imports: [
     JoyrideModule.forRoot(),
-    PickerModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CommonModule,    
+    CommonModule,
     LoginModule,
     RegisterModule,
     HomeModule,
@@ -85,15 +85,28 @@ import { JoyrideModule } from 'ngx-joyride';
     UserInformationsModule,
     SearchAllModule,
     ToastModule,
+    
     GroupsSelectModule,
-   ],
+    TranslateModule.forRoot({
+      defaultLanguage:'pt',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
+  ],
   providers: [
     PersonalizationService,
     MessageService,
     AlertService,
-    { provide: HTTP_INTERCEPTORS,
+    TranslateService,
+    TranslateStore,
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
-      multi: true },
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

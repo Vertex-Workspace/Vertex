@@ -1,0 +1,24 @@
+{
+    "pages": {
+        "home": {
+            "equipes": {
+                "titulo": "Teams",
+                "descricao1": "Teams are workspaces where you can manage projects, invite members,",
+                "descricao2": "start chat conversations, and have your time and your team's time at your fingertips.",
+                "botaoNovaEquipe": "New team"
+            },
+            "todasTarefas": {
+                "titulo": "All Tasks",
+                "descricao1": "In this section, you can view all tasks for which you are responsible",
+                "descricao2": "across the entire system, tasks from all teams and projects.",
+                "placeholderPesquisarTarefa": "Search for a task...",
+                "placeholderFiltrarPor": "Filter by",
+                "placeholderOrdenarPor": "Sort by"
+            },
+            "botaoVoltar": "Back",
+            "botaoProximo": "Next",
+            "bemVindo": "Welcome, {{name}}!",
+            "textoBemVindo": "Explore Vertex and discover how to manage your time from end to end!"
+        }
+    }
+}

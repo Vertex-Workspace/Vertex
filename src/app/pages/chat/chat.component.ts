@@ -18,6 +18,7 @@ import { PersonalizationService } from 'src/app/services/personalization.service
 import { UserService } from 'src/app/services/user.service';
 
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chat',
@@ -66,8 +67,7 @@ export class ChatComponent {
 
   constructor(
     public webSocketService: WebSocketService, 
-    private teamService: TeamService, 
-    private personalizationService: PersonalizationService,
+    private teamService: TeamService,
     private userService : UserService) {
     this.logged = userService.getLogged();
     this.teamService.findAllChats().subscribe((chats: Chat[]) => {

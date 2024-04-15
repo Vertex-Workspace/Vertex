@@ -1,45 +1,39 @@
 <section>
     <div class="container-custom">
-
         <!-- LEFT SIDE TASKS/TEAMS -->
         <div class="container-grid">
-
             <!-- UTILITY NAV BAR TEAM -->
             <div class="flex flex-row items-end gap-3">
-                <h4>Equipes</h4>
+                <h4>{{ 'pages.home.equipes.titulo' | translate }}</h4>
             </div>
-
-            <div stepPosition="center" joyrideStep="step1" title="Seja bem vindo, {{logged.firstName}}!"
-                text="Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!"
-                [stepContentParams]="{'name': logged.firstName}">
+            <div stepPosition="center" joyrideStep="step1" [title]="'pages.home.bemVindo' | translate"
+                [text]="'pages.home.textoBemVindo' | translate" [stepContentParams]="{ 'nome': logged.firstName }">
             </div>
-
             <div class="pt-2 pb-4">
-                <p class="small-text text-gray-600">As equipes são locais de trabalhos onde é possível gerenciar
-                    projetos, convidar membros,</p>
-                <p class="small-text text-gray-600"> iniciar chats de conversa e ter o seu tempo e do seu time na
-                    palma da sua mão.</p>
+                <p class="small-text text-gray-600">{{ 'pages.home.equipes.descricao1' | translate }}</p>
+                <p class="small-text text-gray-600">{{ 'pages.home.equipes.descricao2' | translate }}</p>
             </div>
             <div class="flex flex-col" joyrideStep="step2" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'Vizualizar / Criar equipes'" [stepContent]="customContent"
+                [title]="'pages.home.botaoNovaEquipe' | translate" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[2] }">
                 <div class="functionally-items-task">
                     <div class="search">
-                        <input type="text" placeholder="Pesquise por uma equipe..." [(ngModel)]="teamSearch">
+                        <input type="text"
+                            [placeholder]="'pages.home.todasTarefas.placeholderPesquisarTarefa' | translate"
+                            [(ngModel)]="teamSearch">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        Nova equipe
+                        {{ 'pages.home.equipes.botaoNovaEquipe' | translate }}
                     </button>
                 </div>
 
                 <div class="default-size">
-
                     <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" [teams]="teams" [type]="'team'"
                         [filterSearch]="teamSearch" joyrideStep="goToTeamPage" [prevTemplate]="prevButton"
-                        [nextTemplate]="nextButton" [title]="'Ir para tela da equipe'"
-                        [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[4] }"></app-card-list>
+                        [nextTemplate]="nextButton" [title]="'Ir para tela da equipe'" [stepContent]="customContent"
+                        [stepContentParams]="{ texto: tutorialText[4] }"></app-card-list>
 
                     <app-create-team-project *ngIf="isCreating" style="width: 100%; height: 90%; padding-top: 3%;"
                         (close)="switchCreateView()" [typeString]="'team'"></app-create-team-project>
@@ -47,26 +41,25 @@
             </div>
         </div>
 
-
         <!-- RIGHT SIDE - QUICK ACCESS -->
         <div class="container-grid">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
-                    <h4>Todas as Tarefas</h4>
+                    <h4>{{ 'pages.home.todasTarefas.titulo' | translate }}</h4>
                 </div>
                 <div class="pt-2 pb-4">
-                    <p class="small-text text-gray-600">Nessa seção é possível visualizar todas as tarefas na qual você
-                        é um dos responsáveis</p>
-                    <p class="small-text text-gray-600">dentro de todo sistema, tarefas de todas equipes e projetos.</p>
+                    <p class="small-text text-gray-600">{{ 'pages.home.todasTarefas.descricao1' | translate }}</p>
+                    <p class="small-text text-gray-600">{{ 'pages.home.todasTarefas.descricao2' | translate }}</p>
                 </div>
-
                 <div class="flex flex-col" joyrideStep="step3" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                    [title]="'Visualizar todas as tarefas'" [stepContent]="customContent"
+                    [title]="'pages.home.todasTarefas.titulo' | translate" [stepContent]="customContent"
                     [stepContentParams]="{ texto: tutorialText[3] }">
                     <!-- UTILITY NAV BAR TASK -->
                     <div class="functionally-items-task">
                         <div class="search">
-                            <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="queryFilter">
+                            <input type="text"
+                                [placeholder]="'pages.home.todasTarefas.placeholderPesquisarTarefa' | translate"
+                                [(ngModel)]="queryFilter">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
                         <div class="filter-items">
@@ -79,20 +72,21 @@
                         </div>
                     </div>
                     <section class="filter-settings" *ngIf="filterOpen || orderOpen">
-                        <!-- <p *ngIf="orderOpen">Ordenar por </p> -->
                         <ng-container *ngIf="filterOpen">
-                            <p>Filtrar por </p>
+                            <p>{{ 'pages.home.todasTarefas.placeholderFiltrarPor' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="selectedFilter" (ngModelChange)="updateOrderType($event)"
                                 [options]="filterOptions" optionLabel="name" optionGroupLabel="name"
                                 [optionGroupChildren]="['values']" [style]="{ minWidth: '14rem' }"
-                                placeholder="{{ selectedFilter ? selectedFilter : filterDate ? filterDate : 'Selecione' }}">
+                                [placeholder]="'pages.home.todasTarefas.placeholderFiltrarPor' | translate">
                             </p-cascadeSelect>
                         </ng-container>
                         <ng-container *ngIf="orderOpen">
-                            <p>Ordenar por </p>
+                            <p>{{ 'pages.home.todasTarefas.placeholderOrdenarPor' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
-                                [style]="{ minWidth: '13rem' }" placeholder="Selecione"></p-cascadeSelect>
+                                [style]="{ minWidth: '13rem' }"
+                                [placeholder]="'pages.home.todasTarefas.placeholderOrdenarPor' | translate">
+                            </p-cascadeSelect>
                         </ng-container>
                     </section>
                     <div class="default-size">
@@ -104,18 +98,17 @@
         </div>
     </div>
 </section>
+
 <app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
 
 <ng-template #prevButton>
-    <button class="btn">
-        Voltar
-    </button>
+    <button class="btn">{{ 'pages.home.botaoVoltar' | translate }}</button>
 </ng-template>
+
 <ng-template #nextButton>
-    <button class="btn">
-        Próximo
-    </button>
+    <button class="btn">{{ 'pages.home.botaoProximo' | translate }}</button>
 </ng-template>
+
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">
     <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
 </ng-template>

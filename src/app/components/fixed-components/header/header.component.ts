@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from 'src/app/models/class/project';
@@ -10,6 +10,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { locations, LocationItem } from 'src/assets/data/locations';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -36,7 +37,8 @@ export class HeaderComponent implements OnInit {
     private projectService: ProjectService,
     private userService: UserService,
     private _location: Location,
-    private notificationWebSocket: NotificationWebSocketService
+    private notificationWebSocket: NotificationWebSocketService,
+    private translate: TranslateService
   ) {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
@@ -59,34 +61,16 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  countries!: any[];
-
-  selectedCity: any;
-
-  ngOnInit() {
-    this.countries = [
-      {
-        name: 'Brasil',
-        code: 'PT-BR',
-        flag: 'https://cdn-icons-png.flaticon.com/512/206/206597.png'
-      },
-      {
-        name: 'Estados Unidos',
-        code: 'EN-US',
-        flag: "https://cdn-icons-png.flaticon.com/512/206/206626.png"
-      },
-      {
-        name: 'Espanha',
-        code: 'ES-ES',
-        flag: 'https://cdn-icons-png.flaticon.com/512/330/330557.png'
-      }
-    ];
+  linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
+  mudarIdioma(sigla: string, link: string) {
+    this.linkImagemPais = link
+    this.translate.use(sigla);
   }
 
-  changeSelected(option:any){
-    this.selectedCity = option;
-    console.log(this.selectedCity);
-    
+  
+
+  ngOnInit() {
+   
   }
 
 
