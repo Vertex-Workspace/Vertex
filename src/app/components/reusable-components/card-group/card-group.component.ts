@@ -47,7 +47,7 @@ export class CardGroupComponent {
 
   delete?: boolean
 
-  groupToDelete?: Group
+  groupToDelete!: Group
 
   noUsers?: boolean
 
@@ -115,8 +115,8 @@ export class CardGroupComponent {
     this.deleteUser = true
   }
 
-  emitItem(event: boolean) {
-    if (event) {
+  emitItem(event: any) {
+    if (event) {  
       this.emitterItem.emit(this.groupToDelete)
     }
     this.delete = false;

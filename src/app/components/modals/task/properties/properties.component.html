@@ -10,7 +10,7 @@
                     <p-dropdown [style]="{ width: '250px'}" class="w-full" containerStyleClass="w-full"
                         [(ngModel)]="selectedDependency" placeholder="Dependências" [options]="taskDependency"
                         optionLabel="task" (onChange)="setTaskDependencies($event)"
-                        placeholder="{{selectedDependency}}"  [showClear]="true">
+                        placeholder="{{selectedDependency}}"  emptyMessage="Não há outras tarefas">
                         <ng-template let-task pTemplate="task">
                             <span>{{task.name}}</span>
                         </ng-template>
@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <p-multiSelect [options]="taskResponsables" [style]="{ width: '250px'}" [(ngModel)]="selectedUsers"
-                        appendTo="body" placeholder="Responsáveis">
+                        appendTo="body" placeholder="Responsáveis" emptyMessage="Não há outros responsáveis na tarefa">
                         <ng-template let-node pTemplate="default">
                             <span (click)="updateResponsible($event, node)">{{node.label}}</span>
                         </ng-template>

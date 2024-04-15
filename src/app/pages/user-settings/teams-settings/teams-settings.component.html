@@ -13,6 +13,9 @@
                 <i class="pi pi-search cursor-pointer " style="font-size: 1.4rem;"></i>
             </div>
         </div>
+        <div class="w-[40%] absolute" *ngIf="teams.length === 0">
+            <h6 class="pt-16 flex justify-center items-center">Nenhuma equipe disponível...</h6>
+        </div>
         <app-card-list style="width: 85%; height: 90%; padding-top: 3%;" 
         [type]="'team'"
         [teams]="teams" 

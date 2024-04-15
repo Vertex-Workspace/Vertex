@@ -21,6 +21,7 @@ import { GroupsSelectComponent } from './components/modals/groups-select/groups-
 import { UserTeamGuard } from './services/guards/user-team.guard';
 import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { DeniedAccessComponent } from './pages/denied-access/denied-access.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,11 @@ const routes: Routes = [
   {
     path: "aceitar-convite/:idTeam/:token",
     component: InvitationPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "acesso-negado",
+    component: DeniedAccessComponent,
     canActivate: [AuthGuard]
   },
   {

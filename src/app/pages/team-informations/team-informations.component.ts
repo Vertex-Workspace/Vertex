@@ -181,16 +181,6 @@ export class TeamInformationsComponent implements OnInit {
 
     }
 
-    deleteGroup(groupId: Group): void {
-        this.groupService.delete(groupId.id).subscribe((group: Group) => {
-            this.alertService.successAlert('Grupo deletado com sucesso')
-            this.getTeam()
-        },
-            (e) => {
-                this.alertService.errorAlert("Não foi possível deletar");
-            })
-    }
-
     deleteUser !: boolean
     userToDelete !: User
 
@@ -226,6 +216,17 @@ export class TeamInformationsComponent implements OnInit {
         this.createGroupModal = !this.createGroupModal;
     }
 
+    deleteGroup(event : Group){
+        console.log(event);
+        
+        this.groupService.delete(event).subscribe((group: Group) => {
+            this.alertService.successAlert('Grupo deletado com sucesso')
+            this.team.groups.splice(this.team.groups.indexOf(event),1)
+        },
+            (e) => {
+                this.alertService.errorAlert("Não foi possível deletar");
+        })
+    }
 
     editDescription: boolean = false;
     changeEditDescription(): void {

@@ -38,15 +38,6 @@ export class RegisterComponent {
 
   ngOnInit(): void {
 
-    // this.form = new FormGroup({
-
-    //   firstName: new FormControl(null),
-    //   lastName: new FormControl(null),
-    //   email: new FormControl(null),
-    //   password: new FormControl(null)
-
-    // });
-
     this.form = this.formBuilder.group({
 
       firstName: [null, [Validators.required]],

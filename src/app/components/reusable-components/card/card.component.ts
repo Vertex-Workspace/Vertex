@@ -69,6 +69,8 @@ export class CardComponent implements OnInit {
 
   openModalDelete(): void {
     if (this.canDelete) {
+      console.log('entrei');
+      
       this.modalDelete = true;
     } else {
       this.modalDelete2 = true;
@@ -80,7 +82,6 @@ export class CardComponent implements OnInit {
   }
 
   delete(event: any): void {
-    this.modalDelete = false;
     if (event) {
       
         this.taskService.delete(this.task.id).subscribe(
@@ -94,6 +95,7 @@ export class CardComponent implements OnInit {
           }
         );
   }
+  this.modalDelete = false;
   }
 
   clock(): void {

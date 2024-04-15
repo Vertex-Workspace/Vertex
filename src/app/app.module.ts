@@ -45,6 +45,7 @@ import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { JoyrideModule } from 'ngx-joyride';
+import { DeniedAccessComponent } from './pages/denied-access/denied-access.component';
 
 
 
@@ -53,6 +54,7 @@ import { JoyrideModule } from 'ngx-joyride';
     AppComponent,
     LoadingComponent,
     VlibrasComponent,
+    DeniedAccessComponent,
   ],
   imports: [
     JoyrideModule.forRoot(),
