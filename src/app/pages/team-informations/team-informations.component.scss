@@ -1,29 +1,181 @@
 @import '../../../_variables.scss';
 
-section {
-    @apply flex w-screen h-full justify-center items-center;
-}
-
-.container-custom {
-    @apply flex w-[90%] h-full pt-5;
-}
-
-.left-side {
-    @apply flex flex-col w-[50%] h-full gap-8;
-}
-
-.divHead {
-    @apply flex w-[80%] h-[25%] gap-10;
-}
-
-
-.divTextHead {
-    @apply flex flex-col w-full gap-4;
-
-    .edit-pencil{
-        @apply text-[20px] cursor-pointer;
-        color: $primaryColor;
+@media screen and (min-width: 1560px) {
     
+    .divHead {
+        @apply flex w-[80%] h-[25%] gap-10;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4;
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex justify-between;
+
+        .search {
+            @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply flex w-full justify-end; 
+            
+        }
+    }
+    .grid-permissions{
+        @apply grid grid-cols-2 gap-3 w-[85%] pr-3 overflow-auto;
+    }
+    
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1560px) {
+    .divHead {
+        @apply flex w-[80%] h-[25%] gap-10;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4;
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex flex-col items-start gap-3;
+
+        .search {
+            @apply w-full h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply flex w-full justify-end; 
+            
+        }
+    }
+
+    .grid-permissions{
+        @apply flex flex-wrap gap-3 w-[85%] pr-3 overflow-auto;
+    }
+
+}
+
+
+@media screen and (min-width: 524px) and (max-width: 1024px) {
+    section {
+        @apply flex w-screen h-full justify-center items-center;
+    }
+    .divHead {
+        @apply flex w-[80%] h-[25%] gap-10;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4;
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    .container-custom {
+        @apply flex flex-col w-full h-full pt-5;
+    }
+
+    .right-side {
+        @apply flex flex-col w-[90%] h-full;
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply hidden; 
+            
+        }
+    }
+
+    .left-side {
+        @apply flex flex-col w-full h-full gap-8;
+    }
+
+    .table {
+        @apply flex flex-col w-full h-[100px] overflow-x-hidden overflow-y-auto mt-4;
+    }
+
+    .grid-permissions{
+        @apply flex flex-wrap gap-3 w-[85%] pr-3 overflow-auto;
+    }
+}
+
+@media screen and (max-width: 524px) {
+
+    .divHead {
+        @apply flex flex-col w-[80%] h-[50%] gap-2 justify-center items-center;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4 items-center max-h-[140px];
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    section {
+        @apply pl-6 flex w-screen h-full justify-center items-center;
+    }
+
+    .container-custom {
+        @apply flex flex-col w-full h-full pt-5 gap-4;
+    }
+
+    .right-side {
+        @apply flex flex-col w-[90%] h-full;
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply hidden; 
+            
+        }
+    }
+
+    .left-side {
+        @apply flex flex-col w-full h-full gap-8;
+    }
+
+    .table {
+        @apply flex flex-col w-full h-[100px] overflow-x-hidden overflow-y-auto mt-4;
+    }
+
+    .grid-permissions{
+        @apply flex flex-wrap gap-3 w-[85%] pr-3 overflow-auto;
     }
 }
 
@@ -38,22 +190,6 @@ section {
 
 }
 
-.image {
-    @apply w-full h-full flex overflow-hidden;
-
-    img {
-        @apply flex;
-        width: auto;
-        height: 250px;
-        object-fit: contain;
-        zoom: 0.55;
-    }
-
-    .profile-photo {
-        color: $primaryColor;
-        font-size: 10rem;
-    }
-}
 
 .input-image{
     @apply flex w-1/2;
@@ -87,6 +223,23 @@ section {
     @apply  rounded-sm w-full h-full flex flex-col justify-center;
     animation: animate 0.3s ease-in-out;
     background-color: $card;
+}
+
+.image {
+    @apply w-full h-full flex overflow-hidden;
+
+    img {
+        @apply flex;
+        width: auto;
+        min-height: 250px;
+        object-fit: contain;
+        zoom: 0.55;
+    }
+
+    .profile-photo {
+        color: $primaryColor;
+        font-size: 10rem;
+    }
 }
 
 @keyframes animate{
@@ -149,9 +302,6 @@ section {
 
 // ============================================================================================================================================================================
 
-.right-side {
-    @apply flex flex-col w-[50%] h-full;
-}
 
 .divProjectDashboardsBar {
     @apply flex w-full h-full rounded-sm flex-col justify-between items-center;
@@ -188,16 +338,6 @@ section {
     @apply flex w-full gap-7 pb-2;
     border-bottom: 5px;
     border-color: $emphasis
-}
-
-.high-listDiv-members{
-    @apply w-[100%] h-full flex justify-between;
-}
-
-.search {
-    @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
-    rounded shadow-md border-none;
-    background-color: $card;
 }
 
 .searchInput{
@@ -237,22 +377,9 @@ section {
     color: $primaryColor;
 }
 
-.grid-permissions{
-    @apply grid grid-cols-2 gap-3 w-[85%] pr-3 overflow-auto;
-}
-
 .grid-group{
     @apply grid grid-cols-2 gap-4 w-[85%] h-[42%];
     overflow-y: scroll
-}
-
-.div-description-top-right{
-    @apply flex flex-col;
-
-    .p-description{
-        @apply flex w-full justify-end; 
-        
-    }
 }
 
 .div-project-dashboards{
@@ -309,4 +436,72 @@ table > tr {
 }
 td {
     @apply text-center;
+}
+
+@media screen and (min-width: 732px) and (max-width: 1024px) {
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex justify-between items-center gap-3;
+
+        .search {
+            @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+}
+
+@media screen and (min-width: 512px) and (max-width: 732px) {
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex flex-col justify-between items-start gap-3;
+
+        .search {
+            @apply w-2/3 h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+}
+
+@media screen and (max-width: 512px) {
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex flex-col justify-between items-start gap-3;
+
+        .search {
+            @apply w-full h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    section {
+        @apply flex w-screen h-full justify-center items-center;
+    }
+
+    .container-custom {
+        @apply flex w-[90%] h-full pt-5;
+    }
+
+    .right-side {
+        @apply flex flex-col w-[50%] h-full;
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply flex w-full justify-end; 
+            
+        }
+    }
+
+    .table {
+        @apply flex flex-col w-full h-[170px] overflow-x-hidden overflow-y-auto mt-4;
+    }
+
+    .left-side {
+        @apply flex flex-col w-[50%] h-full gap-8;
+    }
 }

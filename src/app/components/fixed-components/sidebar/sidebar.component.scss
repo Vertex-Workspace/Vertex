@@ -85,7 +85,7 @@
 @media screen and (max-width: 1023px) {
 
     .section-aside {
-        @apply flex h-full w-full justify-center items-center overflow-hidden relative;
+        @apply flex h-full w-full justify-center items-center overflow-hidden relative z-[99];
     }
     
     .start-mid-items {
