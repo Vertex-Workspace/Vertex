@@ -89,30 +89,28 @@ export class AppComponent {
       this.userLogged = status;
     });
 
-    console.log(this.userLogged);
-    
-
+    this.logged = this.userService.getLogged();
   }
   
+  renderPersonalization: boolean = false;
+
   // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
-    let user: User = JSON.parse(localStorage.getItem('logged') || '');
-    this.userService.getOneById(user.id!).subscribe((logged) => {
-      user = logged;
+    this.userService.getOneById(this.logged.id!).subscribe((logged) => {
 
       this.logged = logged;
 
-      if (user.personalization!.theme == 0) {
-        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorLight!);
-        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorLight!);
+      if (this.logged.personalization!.theme == 0) {
+        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
+        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
 
         document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
         document.documentElement.style.setProperty('--card', "#FFFFFF");
 
         document.documentElement.style.setProperty('--text', "#000000");
-      } else if (user.personalization!.theme == 1) {
-        document.documentElement.style.setProperty('--primaryColor', user.personalization?.primaryColorDark!);
-        document.documentElement.style.setProperty('--secondColor', user.personalization?.secondColorDark!);
+      } else if (this.logged.personalization!.theme == 1) {
+        document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
+        document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
         document.documentElement.style.setProperty('--emphasis', "#161616");
 
         document.documentElement.style.setProperty('--card', "#161616");
@@ -120,11 +118,13 @@ export class AppComponent {
         document.documentElement.style.setProperty('--text', "#BABABA");
       }
 
-      document.documentElement.style.setProperty('--smallText', (user.personalization?.fontSize! - 2) + 'px');
-      document.documentElement.style.setProperty('--regularText', (user.personalization?.fontSize!) + 'px');
-      document.documentElement.style.setProperty('--mediumText', (user.personalization?.fontSize! + 2) + 'px');
-      document.documentElement.style.setProperty('--largeText', (user.personalization?.fontSize! + 4) + 'px');
-      document.documentElement.style.setProperty('--fontFamily', user.personalization?.fontFamily!);
+      document.documentElement.style.setProperty('--smallText', (this.logged.personalization?.fontSize! - 2) + 'px');
+      document.documentElement.style.setProperty('--regularText', (this.logged.personalization?.fontSize!) + 'px');
+      document.documentElement.style.setProperty('--mediumText', (this.logged.personalization?.fontSize! + 2) + 'px');
+      document.documentElement.style.setProperty('--largeText', (this.logged.personalization?.fontSize! + 4) + 'px');
+      document.documentElement.style.setProperty('--fontFamily', this.logged.personalization?.fontFamily!);
+
+      this.renderPersonalization = true;
     });
     //Normal Notifications request
     this.getNotificationBadge();

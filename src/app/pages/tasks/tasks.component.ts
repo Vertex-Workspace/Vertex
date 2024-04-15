@@ -19,9 +19,7 @@ import { PropertyList } from 'src/app/models/class/property';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
 import { tutorialText } from 'src/app/tutorialText';
-import { ApproveStatus, ReviewCheck } from 'src/app/models/class/review';
-import { LogComponent } from 'src/app/components/modals/task/log/log.component';
-
+import { DisplayService } from 'src/app/services/display.service';
 
 @Component({
   selector: 'app-tasks',
@@ -95,25 +93,26 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private display: DisplayService
   ) {
     this.logged = this.userService.getLogged();
 
   }
 
   teamId?: number
-
+  isCreator:boolean = false;
   ngOnInit() {
     this.muralPageListener();
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
     //Observable que é aguardado para renderizar os componentes filhos
-    this.renderProject = this.projectService.getOneById(id);
+    this.renderProject = this.projectService.getOneById(id, this.logged.id!);
 
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
-      this.renderPermissions = this.teamService.getPermission(p.idTeam, this.userService.getLogged().id!)
-      
+      this.renderPermissions = this.teamService.getPermission(p.idTeam, this.logged.id!)
+
       this.renderPermissions.forEach((permissions: Permission[]) => {
         this.permissions = permissions;
         for (const permission of permissions) {
@@ -122,6 +121,8 @@ export class TasksComponent implements OnInit {
           }
         }
       });
+      if(p.creator!.user.id === this.logged.id) this.isCreator = true;
+
       this.project = p;
       this.setFilters(p);
       this.setOrderOptions(p);
@@ -342,6 +343,10 @@ export class TasksComponent implements OnInit {
     this.toggleReview();
   }
 
+  isMobile(): boolean {
+    return this.display.isMobile();
+  }
+
   createNote(): void {
     
     const note: Note = {
@@ -408,9 +413,6 @@ export class TasksComponent implements OnInit {
   }
 
 
-
-
-
   attUserFirstAccess() {
     this.userService.patchFirstAccess(this.logged).subscribe(
       (user:any) => {
@@ -422,6 +424,12 @@ export class TasksComponent implements OnInit {
         console.log(e);
       }
     )
+  }
+
+  updateProject(project : Project) {
+    this.project = project;
+    this.pageTitle = project.name;
+    this.openProjectInfos();
   }
 
 }

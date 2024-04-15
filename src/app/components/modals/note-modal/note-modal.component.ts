@@ -5,6 +5,7 @@ import { Note } from 'src/app/models/class/note';
 import { Project } from 'src/app/models/class/project';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { UserService } from 'src/app/services/user.service';
 
 interface Color {
   color: string,
@@ -81,7 +82,8 @@ export class NoteModalComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private alert: AlertService
+    private alert: AlertService,
+    private userService: UserService
   ) {
     route.params.subscribe(params => {
       if (params) {
@@ -96,7 +98,7 @@ export class NoteModalComponent implements OnInit {
 
   getProject(id: number): void {
     this.projectService
-      .getOneById(id)
+      .getOneById(id, this.userService.getLogged().id!)
       .subscribe((project: Project) => {
         this.project = project;
       })

@@ -10,6 +10,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 //teste pra ver se foi
 @Component({
@@ -41,7 +42,8 @@ export class InputValuePropertyComponent {
     private userService: UserService,
     private alertService: AlertService,
     private taskService: TaskService,
-    private router: Router) { }
+    private router: Router,
+    private primeNGCOnfig : PrimeNGConfig) { }
 
 
   oldValue!: Value;
@@ -54,6 +56,8 @@ export class InputValuePropertyComponent {
       }
     }
   }
+  calendarClicked: boolean = false;
+  portugueseDate: any;
 
   ngOnInit(): void {
     this.oldValue = new Value(this.value);
@@ -68,11 +72,30 @@ export class InputValuePropertyComponent {
     if (this.value.property.kind === PropertyKind.TEXT && this.value.value != null) {
       this.valueText = this.value.value as string;
     }
-  }
 
+    this.portugueseDate = {
+      firstDayOfWeek: 0,
+      dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+      dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+      dayNamesMin: ["Do","Se","Te","Qu","Qu","Se","Sa"],
+      monthNames: [ "Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" ],
+      monthNamesShort: [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun","Jul", "Ago", "Set", "Out", "Nov", "Dez" ],
+      today: 'Hoje',
+      clear: 'Limpar',
+      dateFormat: 'dd/mm/yy',
+      weekHeader: 'Sem'
+    };
+    this.primeNGCOnfig.setTranslation(this.portugueseDate);
+
+    if (this.value.property.kind === PropertyKind.DATE) {
+      this.date = new Date(this.value.value as string);
+    }
+  }
+  date!: Date;
   valueNumber: number = 0;
   valueText: string = "Vazio";
 
+ 
   getValue(): string | number {
     if (this.value.property.kind === PropertyKind.STATUS || this.value.property.kind === PropertyKind.LIST) {
       let valueProperty = this.value.value as PropertyList;
@@ -91,7 +114,7 @@ export class InputValuePropertyComponent {
     if (this.value.property.kind === PropertyKind.DATE) {
       let date = new Date(this.value.value as string);
       //to format the date to yyyy-mm-dd
-      return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+      return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
     }
     return this.value.value as string;
   }

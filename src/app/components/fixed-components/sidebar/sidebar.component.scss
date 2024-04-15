@@ -4,77 +4,158 @@
     --secondColor: $secondColor;
 }
 
-.section-aside {
-    @apply flex h-full w-full justify-between items-center flex-col overflow-hidden;
-}
+@media screen and (min-width: 1024px) {
 
-.start-mid-items {
-    @apply flex w-full h-[10%] flex-col items-center;
-}
-
-.top-logo {
-    @apply flex h-full flex-col justify-center;
-}
-
-.center-items {
-    @apply flex h-[75%] flex-col justify-evenly;
-}
-
-.center-items2 {
-    @apply flex w-full h-[75%] flex-col items-start;
-}
-
-.footer-items {
-    @apply flex h-[40%] flex-col items-end justify-around;
-}
-
-.footer-items2 {
-    @apply flex h-[60%] w-full flex-col items-start justify-around;
-}
-
-ul>li {
-    @apply h-[80px] flex w-full justify-center items-center;
-
-    fa-icon, i, mat-icon {
-        font-size: 22   px !important;
+    .section-aside {
+        @apply flex h-full w-full justify-between items-center flex-col overflow-hidden;
+    }
+    
+    .start-mid-items {
+        @apply flex w-full h-[10%] flex-col items-center;
+    }
+    
+    .top-logo {
+        @apply flex h-full flex-col justify-center;
+    }
+    
+    .center-items {
+        @apply flex h-[75%] flex-col justify-evenly;
+    }
+    
+    .center-items2 {
+        @apply flex w-full h-[75%] flex-col items-start;
+    }
+    
+    .footer-items {
+        @apply flex h-[40%] flex-col items-end justify-around;
+    }
+    
+    .footer-items2 {
+        @apply flex h-[60%] w-full flex-col items-start justify-around;
+    }
+    
+    ul>li {
+        @apply h-[80px] flex w-full justify-center items-center;
+        
+        fa-icon, i, mat-icon {
+            font-size: 22   px !important;
+            color: $secondColor;
+        }
+    }
+    
+    .logo {
+        display: flex;
+        width: 55px;
+        height: auto;
+        cursor: pointer;
+    }
+    
+    .div-logo {
+        @apply flex justify-center;
+    }
+    
+    .liOpen {
+        @apply w-full h-[80px] flex gap-5 items-center justify-start pl-8;
+        transition: all 0.3s ease-in-out;
+        color: $secondColor;
+        
+    }
+    
+    .liOpen:hover {
+        @apply w-[95%] scale-[1.05] pl-8 rounded-l-sm text-black;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        background-color: $secondColor;
+        color: $primaryColor;
+        
+        fa-icon, i {
+            color: $primaryColor;
+        }
+        
+        .pOpen {
+            color: $primaryColor;
+        }
+    }
+    
+    .pOpen {
         color: $secondColor;
     }
 }
 
-.logo {
-    display: flex;
-    width: 55px;
-    height: auto;
-    cursor: pointer;
-}
+@media screen and (max-width: 1023px) {
 
-.div-logo {
-    @apply flex justify-center;
-}
-
-.liOpen {
-    @apply w-full h-[80px] flex gap-5 items-center justify-start pl-8;
-    transition: all 0.3s ease-in-out;
-    color: $secondColor;
-
-}
-
-.liOpen:hover {
-    @apply w-[95%] scale-[1.05] pl-8 rounded-l-sm text-black;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    background-color: $secondColor;
-    color: $primaryColor;
-
-    fa-icon, i {
-        color: $primaryColor;
+    .section-aside {
+        @apply flex h-full w-full justify-center items-center overflow-hidden relative;
     }
-
+    
+    .start-mid-items {
+        @apply flex items-center ;
+    }
+    
+    .top-logo {
+        @apply flex h-full justify-center items-center absolute left-0;
+    }
+    
+    .center-items {
+        @apply flex h-full w-[75%] justify-center;
+    }
+    
+    .center-items2 {
+        @apply flex h-full w-[75%] items-start justify-center;
+    }
+    
+    .footer-items {
+        @apply flex w-[40%] items-end gap-10 ;
+    }
+    
+    .footer-items2 {
+        @apply flex w-[60%] h-full items-start justify-center;
+    }
+    
+    ul>li {
+        @apply h-[80px] flex w-full justify-center items-center;
+        
+        fa-icon, i, mat-icon {
+            font-size: 22   px !important;
+            color: $secondColor;
+        }
+    }
+    
+    .logo {
+        display: flex;
+        width: 40px;
+        height: auto;
+        cursor: pointer;
+    }
+    
+    .div-logo {
+        @apply flex justify-center;
+    }
+    
+    .liOpen {
+        @apply w-full h-[80px] flex gap-5 items-center justify-start pl-8;
+        transition: all 0.3s ease-in-out;
+        color: $secondColor;
+        
+    }
+    
+    .liOpen:hover {
+        @apply w-[95%] scale-[1.05] pl-8 rounded-l-sm text-black;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        background-color: $secondColor;
+        color: $primaryColor;
+        
+        fa-icon, i {
+            color: $primaryColor;
+        }
+        
+        .pOpen {
+            color: $primaryColor;
+        }
+    }
+    
     .pOpen {
-        color: $primaryColor;
+        color: $secondColor;
     }
-}
-
-.pOpen {
-    color: $secondColor;
 }

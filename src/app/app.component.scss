@@ -4,24 +4,53 @@
     @apply flex w-screen h-screen;
 }
 
-.side-bar {
-    @apply flex w-[4%] h-full flex-col items-center z-[999];
-    background-color: $primaryColor;
-    transition: width 0.32s ease-out;
-    z-index: 10;
-    position: fixed;
+@media screen and (min-width: 1024px) {
+
+    
+    .side-bar {
+        @apply flex w-[60px] h-full flex-col items-center z-[999];
+        background-color: $primaryColor;
+        transition: width 0.32s ease-out;
+        z-index: 10;
+        position: fixed;
+    }
+    
+    .side-barOpen {
+        @apply flex w-[300px] h-full flex-col items-center z-[999];
+        transition: width 0.32s ease-in-out;
+        background-color: $primaryColor;
+        position: fixed;
+        z-index: 10;
+    }
+    
 }
 
-.side-barOpen {
-    @apply flex w-[20%] h-full flex-col items-center z-[999];
-    transition: width 0.32s ease-in-out;
-    background-color: $primaryColor;
-    position: fixed;
-    z-index: 10;
-}
+@media screen and (max-width: 1023px) {
 
-.main-div {
-    @apply flex w-[100%] h-screen flex-col items-end;
+    .side-bar {
+        @apply flex w-full h-[60px] items-center z-[999];
+        background-color: $primaryColor;
+        transition: width 0.32s ease-out;
+        z-index: 10;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .side-barOpen {
+        @apply flex w-full h-[60px] items-center z-[999];
+        background-color: $primaryColor;
+        transition: width 0.32s ease-out;
+        z-index: 10;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+
+}
+    
+    .main-div {
+    @apply flex w-[100%] h-full flex-col items-end;
     background-color: $secondColor;
     transition: width 0.32s ease-in-out;
 }
@@ -44,10 +73,14 @@
     @apply flex w-full h-[100%] justify-end;
 }
 
-.chat-circle {
-    @apply cursor-pointer absolute right-10 bottom-10 w-[70px] h-[70px] rounded-full flex justify-center items-center;
-    background-color: $primaryColor;
+@media screen and (min-width: 1024px) {
+    .chat-circle{
+        @apply cursor-pointer absolute right-10 bottom-10 w-[70px] h-[70px] rounded-full flex 
+        justify-center items-center;
+        background-color: $primaryColor;
+    }
 }
+
 
 .section-icons {
     @apply flex justify-between items-center text-lg;

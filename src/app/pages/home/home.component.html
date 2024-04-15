@@ -15,9 +15,9 @@
             </div>
 
             <div class="pt-2 pb-4">
-                <p class="small-text text-gray-600">As equipes são locais de trabalhos onde é possível gerenciar
-                    projetos, convidar membros,</p>
-                <p class="small-text text-gray-600"> iniciar chats de conversa e ter o seu tempo e do seu time na
+                <p class="small-text text-gray-600 text-justify w-2/3">As equipes são locais de trabalhos onde é possível gerenciar
+                    projetos, convidar membros,
+               iniciar chats de conversa e ter o seu tempo e do seu time na
                     palma da sua mão.</p>
             </div>
             <div class="flex flex-col" joyrideStep="step2" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
@@ -30,7 +30,7 @@
                     </div>
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        Nova equipe
+                        <p>Nova equipe</p>
                     </button>
                 </div>
 
@@ -54,15 +54,14 @@
 
 
         <!-- RIGHT SIDE - QUICK ACCESS -->
-        <div class="container-grid">
+        <div class="container-grid pb-10">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
                     <h4>Todas as Tarefas</h4>
                 </div>
                 <div class="pt-2 pb-4">
-                    <p class="small-text text-gray-600">Nessa seção é possível visualizar todas as tarefas na qual você
-                        é um dos responsáveis</p>
-                    <p class="small-text text-gray-600">dentro de todo sistema, tarefas de todas equipes e projetos.</p>
+                    <p class="small-text text-gray-600 text-justify w-2/3">Nessa seção é possível visualizar todas as tarefas na qual você
+                        é um dos responsáveis dentro de todo sistema, tarefas de todas equipes e projetos.</p>
                 </div>
 
                 <div class="flex flex-col" joyrideStep="step3" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
@@ -101,8 +100,13 @@
                         </ng-container>
                     </section>
                     <div class="default-size">
-                        <app-list [filter]="selectedFilter" [queryFilter]="queryFilter" [orderParams]="orderParams"
-                            (openTaskDetails)="changeModalTaskState(true, $event)" style="padding-top: 3%;"></app-list>
+                        <app-list 
+                            [filter]="selectedFilter" 
+                            [queryFilter]="queryFilter" 
+                            [orderParams]="orderParams"
+                            (openTaskDetails)="changeModalTaskState(true, $event)" 
+                            style="padding-top: 3%;"
+                        ></app-list>
                     </div>
                 </div>
             </div>

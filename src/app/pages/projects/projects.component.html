@@ -5,10 +5,10 @@
             <div class="flex flex-row items-end gap-3">
                 <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>
             </div>
-
-            <div class="text small-text pt-2">
-                <p>Projetos são os diferentes espaços de trabalho de uma equipe, neles</p>
-                <p>é possível segmentar assuntos e organizar as tarefas sua e/ou do time.</p>
+            <div class="pt-2 mb-3">
+                <p class="small-text text-gray-600 text-justify w-2/3">Projetos são os diferentes espaços de trabalho de uma equipe, neles
+                é possível segmentar assuntos e organizar as tarefas sua e/ou do
+                    time.</p>
             </div>
             <div class="flex flex-col" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
                 [title]="'Visualizar / Criar projetos'" [stepContent]="customContent"
@@ -21,7 +21,9 @@
                     </div>
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        Novo projeto
+                        <p>
+                            Novo projeto
+                        </p>
                     </button>
                 </div>
 
@@ -43,15 +45,15 @@
         </div>
 
         <!-- RIGHT SIDE - QUICK ACCESS -->
-        <div class="container-grid">
+        <div class="container-grid pb-10">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
                     <h4>Tarefas de {{teamName}}</h4>
                 </div>
 
-                <div class="text small-text pt-2">
-                    <p>Nessa seção é possível visualizar todas as tarefas na qual você</p>
-                    <p>é um dos responsáveis dentro da equipe {{teamName}}</p>
+                <div class="pt-2">
+                    <p class="small-text text-gray-600 text-justify w-2/3 mb-3">Nessa seção é possível visualizar todas as tarefas na qual você
+                    é um dos responsáveis dentro da equipe {{teamName}}</p>
                 </div>
 
                 <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
