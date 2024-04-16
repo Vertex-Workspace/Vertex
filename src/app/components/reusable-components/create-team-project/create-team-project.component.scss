@@ -1,5 +1,32 @@
 @import "../../../../variables";
 
+@media screen and (min-width: 660px) {
+    .modal {
+        @apply absolute rounded-md flex flex-col w-[600px] h-[650px]
+        items-start justify-start text-center p-8 border-t-8;
+        border-color: $primaryColor;
+        background-color: $secondColor;
+    }
+
+    .div-grid-name-image{
+        @apply grid w-full h-[30%];
+        grid-template-columns: 65% 35%;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .modal {
+        @apply absolute flex flex-col w-full h-full
+        items-start justify-start text-center p-8;
+        background-color: $secondColor;
+    }
+
+    .div-grid-name-image{
+        @apply grid w-full h-[20%];
+        grid-template-columns: 65% 35%;
+    }
+}
+
 form{
     @apply w-full h-full flex flex-col justify-between;
     color: $primaryColor;
@@ -13,11 +40,6 @@ fa-icon{
 
 .title{
     @apply flex h-[15%];
-}
-
-.div-grid-name-image{
-    @apply grid w-full h-[30%];
-    grid-template-columns: 65% 35%;
 }
 
 .input-name{
@@ -40,8 +62,7 @@ fa-icon{
     overflow: hidden;
   }
 .circular img {
-    min-width: 100%;
-    min-height: 100%;
+    max-height: 120px;
     width: auto;
     height: auto;
     position: absolute;
@@ -125,12 +146,6 @@ app-modal-warn{
     z-index: 999;
 }
 
-.modal {
-    @apply absolute rounded-md flex flex-col w-[600px] h-[650px]
-    items-start justify-start text-center p-8 border-t-8;
-    border-color: $primaryColor;
-    background-color: $secondColor;
-}
 
 .size {
     font-size: $largeText;

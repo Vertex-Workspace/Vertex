@@ -85,21 +85,31 @@ export class NoteModalComponent implements OnInit {
     private alert: AlertService,
     private userService: UserService
   ) {
-    route.params.subscribe(params => {
-      if (params) {
-        this.getProject(params['id']);        
-      }
-    });
+
   }
 
   ngOnInit(): void {
+    
+    this.route.params.subscribe(params => {
+      if (params) {
+        console.log(params);
+        this.getProject(params['id']);        
+      }
+    });
+    
     this.descriptionTextarea.nativeElement.focus();
   }
 
   getProject(id: number): void {
+    console.log(this.userService.getLogged().id!);
+    
     this.projectService
       .getOneById(id, this.userService.getLogged().id!)
       .subscribe((project: Project) => {
+        console.log(project);
+        
+        
+        
         this.project = project;
       })
   }

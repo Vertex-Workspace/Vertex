@@ -1,7 +1,25 @@
 @import '../../../../variables';
+
 .modal-overlay {
     @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center  transition-transform;
     z-index: 999;
+}
+
+@media screen and (min-width: 800px) {
+    .modal {
+        @apply absolute rounded-sm flex flex-col w-[650px] h-[700px]
+        items-end justify-start text-center p-5 border-t-8;
+        background-color: $secondColor;
+        border-color: $primaryColor;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .modal {
+        @apply absolute flex flex-col w-full h-full 
+        items-end justify-start text-center p-5;
+        background-color: $secondColor;
+    }
 }
 
 .exitModal {
@@ -9,12 +27,6 @@
     color: $primaryColor;
 }
 
-.modal {
-    @apply absolute rounded-sm flex flex-col 
-    items-end justify-start text-center p-5 border-t-8;
-    background-color: $secondColor;
-    border-color: $primaryColor;
-}
 
 .ng-contentDiv{
     @apply w-full h-[92%] flex flex-col items-center;

@@ -1,5 +1,4 @@
 <form [formGroup]="form" class="modal-overlay">
-
   <div class="modal">
     <h4 class="title" *ngIf="typeString === 'team'">Crie uma nova equipe...</h4>
     <h4 class="title" *ngIf="typeString === 'project'">Crie um novo Projeto...</h4>
@@ -11,12 +10,12 @@
       <div class="input-name">
         <p class="medium-text">{{ typeString === 'team' ? 'Nome da Equipe' : 'Nome do Projeto' }}</p>
         <input formControlName="name" type="text"
-          [placeholder]="typeString === 'team' ? 'Adicione um nome à equipe' : 'Adicione um nome ao projeto'"
+          [placeholder]="'Insira um nome...'"
           *ngIf="typeString != 'projectInfo'">
         <input formControlName="name" type="text" *ngIf="typeString === 'projectInfo'" [(ngModel)]="project.name">
       </div>
       <div class="circular">
-        <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover h-full w-full">
+        <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover max-h-[150px]">
         <form class="input-div">
           <input type="file" class="input-file" (change)="onFileSelected($event)">
         </form>

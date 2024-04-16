@@ -210,7 +210,7 @@
 @media screen and (min-width: 460px) and (max-width: 749px) {
 
     .list{
-        @apply flex w-full h-[620px] flex-wrap gap-[16px];
+        @apply flex w-full min-h-[10px] max-h-[650px] flex-wrap gap-[16px];
         overflow-y: auto;
 
         .container-custom {
@@ -279,7 +279,7 @@
 @media screen and (max-width: 460px) {
 
     .list{
-        @apply flex w-full h-[620px] flex-wrap gap-[16px];
+        @apply flex w-full min-h-[10px] max-h-[650px] flex-wrap gap-[16px];
         overflow-y: auto;
 
         .container-custom {

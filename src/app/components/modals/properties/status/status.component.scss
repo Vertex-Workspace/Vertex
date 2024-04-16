@@ -105,3 +105,9 @@
         cursor: grab !important;
     }
 }
+
+@media screen and (max-width: 390px) {
+    .text-status {
+        @apply hidden;
+    }
+}
