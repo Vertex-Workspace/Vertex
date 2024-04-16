@@ -24,6 +24,11 @@
         color: $secondColor;
         @apply p-2;
     }
+
+    .buttons button,
+    .submit button {
+        @apply w-[220px] h-[50px];
+    }
     
     .base {
         @apply w-full flex flex-col p-5 rounded-md;
@@ -150,7 +155,7 @@
     }
     
     .submit {
-        @apply w-full flex justify-between;
+        @apply w-full flex justify-end gap-2;
     }
     
     .submit-btn-red{
@@ -175,7 +180,10 @@
     
     .buttons button,
     .submit button {
-        @apply w-[100px] h-[50px];
+        border: 1px solid $primaryColor;
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply p-2;
     }
     
     .properties{
@@ -492,12 +500,12 @@
     }
     
     .informations{
-        @apply w-full h-full flex flex-col pt-10 px-6 overflow-auto;
+        @apply w-full h-full flex flex-col pt-10 px-6 overflow-x-auto overflow-y-hidden;
     
     }
     
     .side {
-        @apply w-full flex flex-col justify-between;
+        @apply w-full flex flex-col justify-between max-h-[60%];
     }
     
     .title {
@@ -515,11 +523,11 @@
     }
     
     .down {
-        @apply h-[20%] flex flex-row w-full items-end;
+        @apply hidden;
     }
     
     .buttons {
-        @apply flex w-full gap-2;
+        @apply hidden;
     }
     
     .buttons button:hover,
@@ -550,7 +558,7 @@
             @apply flex w-full m-1;
     
             ul{
-                @apply flex w-full justify-center gap-3;
+                @apply flex w-full justify-center gap-1;
             }
             a {
                 @apply hover:bg-zinc-200 p-1 rounded-md;
@@ -571,7 +579,7 @@
     }
     
     .components{
-        @apply flex w-[70%] max-h-[70%] items-center flex-col;
+        @apply flex w-full max-h-[70%] items-center flex-col;
     }
     
     .title p {
@@ -585,7 +593,7 @@
     }
     
     .properties{
-        @apply flex w-full h-[60%] justify-center;
+        @apply flex w-full h-[80%] justify-center pb-6;
         max-height: 400px;
     }
     
@@ -627,6 +635,7 @@
         color: $text;
     }
 }
+
 @media screen and (max-width: 760px) {
     .buttons button,
     .submit button {
@@ -637,7 +646,7 @@
     }
     
     .base {
-        @apply flex flex-col p-5 rounded-md w-full h-full bg-white;
+        @apply flex flex-col p-5 w-full h-full bg-white;
         -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
         animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
         background-color: $card !important;
@@ -694,12 +703,12 @@
     }
     
     .informations{
-        @apply w-full h-full flex flex-col px-6 overflow-auto;
+        @apply w-full h-full flex flex-col px-6 overflow-x-auto overflow-y-hidden;
     
     }
     
     .side {
-        @apply w-full min-h-[80%] flex flex-col justify-between;
+        @apply w-full min-h-[50%] flex flex-col justify-between;
     }
     
     .title {
@@ -752,7 +761,7 @@
             @apply flex w-full m-1;
     
             ul{
-                @apply flex w-full justify-center gap-3;
+                @apply flex w-full justify-center gap-1;
             }
             a {
                 @apply hover:bg-zinc-200 p-1 rounded-md;
@@ -773,11 +782,15 @@
     }
     
     .components{
-        @apply flex w-[70%] max-h-[70%] items-center flex-col;
+        @apply flex w-full min-h-[70%] items-center flex-col;
     }
     
     .title p {
         @apply text-xl;
+    }
+
+    h4 {
+        @apply pt-2;
     }
 
     
@@ -787,7 +800,7 @@
     }
     
     .properties{
-        @apply flex w-full h-[60%] justify-center;
+        @apply flex w-full h-[80%] pt-4 justify-center;
         max-height: 400px;
     }
     
