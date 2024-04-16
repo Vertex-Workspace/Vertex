@@ -2,11 +2,16 @@ import { Component } from '@angular/core';
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Team } from 'src/app/models/class/team';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-invitation-page',
   templateUrl: './invitation-page.component.html',
-  styleUrls: ['./invitation-page.component.scss']
+  styleUrls: ['./invitation-page.component.scss'],
+  standalone: true,
+  imports: [
+    TranslateModule
+  ]
 })
 export class InvitationPageComponent {
 
@@ -60,7 +65,7 @@ export class InvitationPageComponent {
       }
     )
 
-    
+
   }
 
 }

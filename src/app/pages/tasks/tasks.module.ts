@@ -25,6 +25,7 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { JoyrideModule } from 'ngx-joyride';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { JoyrideModule } from 'ngx-joyride';
     NoteModule,
     CreateTeamProjectModule,
     CascadeSelectModule,
-    //Standalone component
+    TranslateModule,
     ReviewTaskComponent,
     PipesModule
   ],

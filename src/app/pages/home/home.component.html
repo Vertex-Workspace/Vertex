@@ -4,28 +4,27 @@
         <div class="container-grid">
             <!-- UTILITY NAV BAR TEAM -->
             <div class="flex flex-row items-end gap-3">
-                <h4>{{ 'pages.home.equipes.titulo' | translate }}</h4>
+                <h4>{{ 'pages.home.teams.title' | translate }}</h4>
             </div>
-            <div stepPosition="center" joyrideStep="step1" [title]="'pages.home.bemVindo' | translate"
-                [text]="'pages.home.textoBemVindo' | translate" [stepContentParams]="{ 'nome': logged.firstName }">
+            <div stepPosition="center" joyrideStep="step1" [title]="'pages.home.welcome' | translate"
+                [text]="'pages.home.textWelcome' | translate" [stepContentParams]="{ 'nome': logged.firstName }">
             </div>
             <div class="pt-2 pb-4">
-                <p class="small-text text-gray-600">{{ 'pages.home.equipes.descricao1' | translate }}</p>
-                <p class="small-text text-gray-600">{{ 'pages.home.equipes.descricao2' | translate }}</p>
+                <p class="small-text text-gray-600">{{ 'pages.home.teams.description1' | translate }}</p>
+                <p class="small-text text-gray-600">{{ 'pages.home.teams.description2' | translate }}</p>
             </div>
             <div class="flex flex-col" joyrideStep="step2" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'pages.home.botaoNovaEquipe' | translate" [stepContent]="customContent"
+                [title]="'pages.home.newTeamBtn' | translate" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[2] }">
                 <div class="functionally-items-task">
                     <div class="search">
-                        <input type="text"
-                            [placeholder]="'pages.home.todasTarefas.placeholderPesquisarTarefa' | translate"
+                        <input type="text" [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
                             [(ngModel)]="teamSearch">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        {{ 'pages.home.equipes.botaoNovaEquipe' | translate }}
+                        {{ 'pages.home.teams.newTeamBtn' | translate }}
                     </button>
                 </div>
 
@@ -45,20 +44,19 @@
         <div class="container-grid">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
-                    <h4>{{ 'pages.home.todasTarefas.titulo' | translate }}</h4>
+                    <h4>{{ 'pages.home.allTasks.title' | translate }}</h4>
                 </div>
                 <div class="pt-2 pb-4">
-                    <p class="small-text text-gray-600">{{ 'pages.home.todasTarefas.descricao1' | translate }}</p>
-                    <p class="small-text text-gray-600">{{ 'pages.home.todasTarefas.descricao2' | translate }}</p>
+                    <p class="small-text text-gray-600">{{ 'pages.home.allTasks.description1' | translate }}</p>
+                    <p class="small-text text-gray-600">{{ 'pages.home.allTasks.description2' | translate }}</p>
                 </div>
                 <div class="flex flex-col" joyrideStep="step3" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                    [title]="'pages.home.todasTarefas.titulo' | translate" [stepContent]="customContent"
+                    [title]="'pages.home.allTasks.title' | translate" [stepContent]="customContent"
                     [stepContentParams]="{ texto: tutorialText[3] }">
                     <!-- UTILITY NAV BAR TASK -->
                     <div class="functionally-items-task">
                         <div class="search">
-                            <input type="text"
-                                [placeholder]="'pages.home.todasTarefas.placeholderPesquisarTarefa' | translate"
+                            <input type="text" [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
                                 [(ngModel)]="queryFilter">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
@@ -73,19 +71,19 @@
                     </div>
                     <section class="filter-settings" *ngIf="filterOpen || orderOpen">
                         <ng-container *ngIf="filterOpen">
-                            <p>{{ 'pages.home.todasTarefas.placeholderFiltrarPor' | translate }}</p>
+                            <p>{{ 'pages.home.allTasks.placeholderFilterBy' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="selectedFilter" (ngModelChange)="updateOrderType($event)"
                                 [options]="filterOptions" optionLabel="name" optionGroupLabel="name"
                                 [optionGroupChildren]="['values']" [style]="{ minWidth: '14rem' }"
-                                [placeholder]="'pages.home.todasTarefas.placeholderFiltrarPor' | translate">
+                                [placeholder]="'pages.home.allTasks.placeholderFilterBy' | translate">
                             </p-cascadeSelect>
                         </ng-container>
                         <ng-container *ngIf="orderOpen">
-                            <p>{{ 'pages.home.todasTarefas.placeholderOrdenarPor' | translate }}</p>
+                            <p>{{ 'pages.home.allTasks.placeholderOrdenarPor' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
                                 [style]="{ minWidth: '13rem' }"
-                                [placeholder]="'pages.home.todasTarefas.placeholderOrdenarPor' | translate">
+                                [placeholder]="'pages.home.allTasks.placeholderOrderBy' | translate">
                             </p-cascadeSelect>
                         </ng-container>
                     </section>
@@ -102,11 +100,14 @@
 <app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
 
 <ng-template #prevButton>
-    <button class="btn">{{ 'pages.home.botaoVoltar' | translate }}</button>
+    <button class="btn">{{ 'pages.home.backBtn' | translate }}</button>
 </ng-template>
 
 <ng-template #nextButton>
-    <button class="btn">{{ 'pages.home.botaoProximo' | translate }}</button>
+    <button class="btn">{{ 'pages.home.nextBtn' | translate }}</button>
+</ng-template>
+<ng-template #nextButton>
+    <button class="btn">{{ 'pages.home.endBtn' | translate }}</button>
 </ng-template>
 
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">

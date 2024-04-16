@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RowCardModule } from 'src/app/components/reusable-components/row-task/row-card.module';
 import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
 import { PipesModule } from "../../../pipes/module/pipes.module";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -23,7 +24,8 @@ import { PipesModule } from "../../../pipes/module/pipes.module";
         DragDropModule,
         RowCardModule,
         ConfirmModalModule,
-        PipesModule
+        PipesModule,
+        TranslateModule
     ]
 })
 export class ListModule { }

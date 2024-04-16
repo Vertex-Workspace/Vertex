@@ -12,6 +12,7 @@ import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { FormsModule } from '@angular/forms';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { JoyrideModule } from 'ngx-joyride';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { JoyrideModule } from 'ngx-joyride';
     CardGroupModule,
     CreateGroupModule,
     TaskModule,
+    TranslateModule,
     FormsModule,
     CascadeSelectModule
   ],

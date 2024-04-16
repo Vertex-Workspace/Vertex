@@ -1,27 +1,113 @@
 {
     "pages": {
         "home": {
-            "equipes": {
-                "titulo": "Equipes",
-                "descricao1": "As equipes são locais de trabalhos onde é possível gerenciar projetos, convidar membros,",
-                "descricao2": "iniciar chats de conversa e ter o seu tempo e do seu time na palma da sua mão.",
-                "botaoNovaEquipe": "Nova equipe"
+            "teams": {
+                "title": "Equipes",
+                "description1": "As equipes são locais de trabalho onde é possível gerenciar projetos, convidar membros,",
+                "description2": "iniciar chats de conversa e ter o seu tempo e o tempo da sua equipe na palma da sua mão.",
+                "newTeamBtn": "Nova equipe"
             },
-            "todasTarefas": {
-                "titulo": "Todas as Tarefas",
-                "descricao1": "Nessa seção é possível visualizar todas as tarefas na qual você é um dos responsáveis",
-                "descricao2": "dentro de todo sistema, tarefas de todas equipes e projetos.",
-                "placeholderPesquisarTarefa": "Pesquise por uma tarefa...",
-                "placeholderFiltrarPor": "Selecione",
-                "placeholderOrdenarPor": "Selecione"
+            "allTasks": {
+                "title": "Todas as Tarefas",
+                "description1": "Nesta seção, é possível visualizar todas as tarefas das quais você é responsável",
+                "description2": "em todo o sistema, tarefas de todas as equipes e projetos.",
+                "placeholderSearchTask": "Pesquise por uma tarefa...",
+                "placeholderFilterBy": "Selecione",
+                "placeholderOrderBy": "Selecione"
             },
-            "botaoVoltar": "Voltar",
-            "botaoProximo": "Próximo",
-            "bemVindo": "Seja bem vindo, {{nome}}!",
-            "textoBemVindo": "Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!"
+            "backBtn": "Voltar",
+            "nextBtn": "Próximo",
+            "welcome": "Seja bem-vindo, {{nome}}!",
+            "textWelcome": "Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!"
         },
-        "chat":{
-            
+        "chat": {
+            "header": {
+                "conversas": "Conversas"
+            },
+            "placeholderPesquisarConversa": "Pesquise por uma conversa...",
+            "mensagemNenhumaConversa": "Não há nenhuma conversa aberta no momento.",
+            "mensagemNenhumaMensagem": "Nenhuma mensagem enviada ainda! Seja o primeiro a enviar uma mensagem!",
+            "inputPlaceholder": "Digite aqui..."
+        },
+        "invitation-page": {
+            "text": "A equipe AKMO convidou você para fazer parte do time!",
+            "enterTeam": "Entrar na equipe",
+            "declineInvite": "Recusar convite"
+        },
+        "projects": {
+            "titleTeam": "Equipe {{team}}",
+            "titleTask": "Tarefas de {{team}}",
+            "description1": "Projetos são os diferentes espaços de trabalho de uma equipe, neles",
+            "description2": "é possível segmentar assuntos e organizar as tarefas sua e/ou do time.",
+            "description3": "Nessa seção é possível visualizar todas as tarefas na qual você",
+            "description4": "é um dos responsáveis dentro da equipe {{team}}",
+            "searchPlaceholder": "Pesquise por um projeto...",
+            "newProjectBtn": "Novo projeto",
+            "title": "Visualizar / Criar projetos",
+            "filterBy": "Filtrar por",
+            "orderBy": "Ordenar por",
+            "select": "Selecione",
+            "backBtn": "Voltar",
+            "nextBtn": "Próximo"
+        },
+        "tasks": {
+            "title": "Projeto {{projectName}}",
+            "description1": "Aqui ficarão centralizadas todas as tarefas do projeto, você poderá filtrar,",
+            "description2": "ordenar e criar novas tarefas. Gerenciando o seu tempo e registrando cada etapa.",
+            "viewModesTitle": "Modos de visualização das tarefas",
+            "searchTask": "Pesquise por uma tarefa...",
+            "properties": "Propriedades",
+            "newTask": "Nova Tarefa",
+            "newNote": "Nova Nota",
+            "filterBy": "Filtrar por",
+            "filterByText": "Filtrar por texto",
+            "filterByNumber": "Filtrar por número",
+            "orderBy": "Ordenar por",
+            "select": "Selecione",
+            "backBtn": "Voltar",
+            "nextBtn": "Próximo",
+            "endBtn": "Fim",
+            "viewModeLabels": {
+                "Kanban": "Kanban",
+                "List": "Lista",
+                "Calendar": "Calendário",
+                "Mural": "Mural"
+            },
+            "list": {
+                "table":{
+                    "name": "Nome",
+                    "Status": "Status",
+                    "Data": "Data",
+                    "Dificuldade": "Dificuldade",
+                    "Número": "Número",
+                    "Palavra-Chave":"Palavra-Chave"
+                }
+            },
+            "calendar":{
+                "months": {
+                    "0": "Janeiro",
+                    "1": "Fevereiro",
+                    "2": "Março",
+                    "3": "Abril",
+                    "4": "Maio",
+                    "5": "Junho",
+                    "6": "Julho",
+                    "7": "Agosto",
+                    "8": "Setembro",
+                    "9": "Outubro",
+                    "10": "Novembro",
+                    "11": "Dezembro"
+                },
+                "days": {
+                    "0": "DOM",
+                    "1": "SEG",
+                    "2": "TER",
+                    "3": "QUA",
+                    "4": "QUI",
+                    "5": "SEX",
+                    "6": "SAB"
+                }
+            }
         }
     }
 }

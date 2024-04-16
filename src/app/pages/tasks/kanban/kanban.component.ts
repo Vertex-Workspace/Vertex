@@ -16,6 +16,7 @@ import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { taskHourService } from 'src/app/services/taskHour.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PipeParams } from 'src/app/models/interface/params';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-kanban',
@@ -31,7 +32,8 @@ export class KanbanComponent {
     private userService: UserService,
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private teamService: TeamService) {
+    private teamService: TeamService, private translate: TranslateService) {
+
   }
 
   @Input()
@@ -117,7 +119,7 @@ export class KanbanComponent {
         };
         //Patch the value of the status task
         this.taskService.patchValue(valueUpdate).subscribe(
-          () => {},
+          () => { },
           (error) => {
             newValue.value = previousPropertyList;
             this.alertService.errorAlert(error.error);
@@ -148,7 +150,7 @@ export class KanbanComponent {
 
 
   deleteTask(task: Task): void {
-    this.taskList = this.taskList.filter(t => task.id !== t.id)  
+    this.taskList = this.taskList.filter(t => task.id !== t.id)
     this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id !== task.id);
   }
 

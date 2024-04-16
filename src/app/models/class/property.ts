@@ -75,5 +75,5 @@ export enum PropertyListKind {
     DOING = "DOING",
     DONE = "DONE",
     VISIBLE = "VISIBLE",
-    INVISIBLE = "INVISIBLE"
+    INVISIBLE = "INVISIBLE",
 }

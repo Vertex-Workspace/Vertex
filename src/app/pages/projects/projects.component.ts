@@ -109,7 +109,8 @@ export class ProjectsComponent implements OnInit {
     .getOneById(teamId)
     .subscribe((team: Team) => {
       this.team = team;
-      this.teamName = team.name!;
+      this.teamName = team.name!.split("Equipe ")[1];
+
       this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
       this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
         this.permissionsOnTeam = permissions;

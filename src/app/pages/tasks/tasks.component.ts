@@ -122,7 +122,7 @@ export class TasksComponent implements OnInit {
       this.project = p;
       this.setFilters(p);
       this.setOrderOptions(p);
-      this.pageTitle = this.project.name;
+      this.pageTitle = this.project.name.split('Projeto ')[1];
 
 
       const currentView = localStorage.getItem('mode-task-view');

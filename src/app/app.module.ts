@@ -44,7 +44,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { JoyrideModule } from 'ngx-joyride';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService, TranslateStore, TranslatePipe } from '@ngx-translate/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     LoadingComponent,
-    VlibrasComponent
+    VlibrasComponent,
   ],
   imports: [
     JoyrideModule.forRoot(),

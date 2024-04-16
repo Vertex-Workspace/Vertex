@@ -2,6 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faCircleUser, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { Project } from 'src/app/models/class/project';
 import { PropertyKind, PropertyList } from 'src/app/models/class/property';
 import { Task, TaskCreate } from 'src/app/models/class/task';
@@ -48,6 +49,7 @@ export class CalendarComponent {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private teamService: TeamService,
+    private translate : TranslateService,
     private alert: AlertService) {
   }
 
@@ -156,24 +158,13 @@ export class CalendarComponent {
   }
 
   translateMonth(index: number): string {
-    const monthNames = [
-      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-    ];
-    if (index == 12) {
-      return monthNames[0];
-    }
-    if (index == -1) {
-      return monthNames[11];
-    }
-    return monthNames[index];
+    
+    const monthKey = 'pages.tasks.calendar.months.' + index; // A chave de tradução será 'months.index'
+    return this.translate.instant(monthKey);
   }
   translateDayOfWeek(index: number): string {
-    const dayNames = [
-      "DOM", "SEG", "TER", "QUA",
-      "QUI", "SEX", "SAB"
-    ];
-    return dayNames[index];
+    const dayKey = 'pages.tasks.calendar.days.' + index; // A chave de tradução será 'months.index'
+    return this.translate.instant(dayKey);
   }
 
   today(day: Date): boolean {

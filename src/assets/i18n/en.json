@@ -1,24 +1,71 @@
 {
     "pages": {
         "home": {
-            "equipes": {
-                "titulo": "Teams",
-                "descricao1": "Teams are workspaces where you can manage projects, invite members,",
-                "descricao2": "start chat conversations, and have your time and your team's time at your fingertips.",
-                "botaoNovaEquipe": "New team"
+            "teams": {
+                "title": "Teams",
+                "description1": "Teams are workspaces where you can manage projects, invite members,",
+                "description2": "start conversation chats, and have your time and your team's at your fingertips.",
+                "newTeamBtn": "New team"
             },
-            "todasTarefas": {
-                "titulo": "All Tasks",
-                "descricao1": "In this section, you can view all tasks for which you are responsible",
-                "descricao2": "across the entire system, tasks from all teams and projects.",
-                "placeholderPesquisarTarefa": "Search for a task...",
-                "placeholderFiltrarPor": "Filter by",
-                "placeholderOrdenarPor": "Sort by"
+            "allTasks": {
+                "title": "All Tasks",
+                "description1": "In this section, you can view all tasks for which you are responsible",
+                "description2": "within the entire system, tasks from all teams and projects.",
+                "placeholderSearchTask": "Search for a task...",
+                "placeholderFilterBy": "Select",
+                "placeholderOrderBy": "Select"
             },
-            "botaoVoltar": "Back",
-            "botaoProximo": "Next",
-            "bemVindo": "Welcome, {{name}}!",
-            "textoBemVindo": "Explore Vertex and discover how to manage your time from end to end!"
+            "backBtn": "Back",
+            "nextBtn": "Next",
+            "welcome": "Welcome, {{name}}!",
+            "textWelcome": "Explore Vertex and discover how to manage your time from end to end!"
+        },
+        "chat": {
+            "header": {
+                "conversas": "Conversations"
+            },
+            "placeholderPesquisarConversa": "Search for a conversation...",
+            "mensagemNenhumaConversa": "There are no open conversations at the moment.",
+            "mensagemNenhumaMensagem": "No messages sent yet! Be the first to send a message!",
+            "inputPlaceholder": "Type here..."
+        },
+        "projects": {
+            "titleTeam": "{{team}} Team",
+            "description1": "Projects are the different workspaces of a team, where you can segment subjects and organize your and/or your team's tasks.",
+            "description2": "It's possible to manage projects, invite members, start conversation chats, and have your and your team's time at your fingertips.",
+            "searchPlaceholder": "Search for a project...",
+            "newProject": "New project",
+            "title": "View / Create projects"
+        },
+        "tasks": {
+            "title": "Project {{projectName}}",
+            "description1": "Here will be centralized all the project tasks, you will be able to filter,",
+            "description2": "sort and create new tasks. Managing your time and recording each step.",
+            "viewModesTitle": "Task Viewing Modes",
+            "searchTask": "Search for a task...",
+            "properties": "Properties",
+            "newTask": "New Task",
+            "newNote": "New Note",
+            "filterBy": "Filter by",
+            "filterByText": "Filter by text",
+            "filterByNumber": "Filter by number",
+            "orderBy": "Order by",
+            "select": "Select",
+            "backBtn": "Back",
+            "nextBtn": "Next",
+            "endBtn": "End",
+            "viewModeLabels": {
+                "Kanban": "Kanban",
+                "List": "List",
+                "Calendar": "Calendar",
+                "Mural": "Board"
+            },
+            "kanban": {
+                "pages.tasks.kanban.key.Não Iniciado": "A fazer",
+                "pages.tasks.kanban.key.Em Andamento": "Fazendo",
+                "pages.tasks.kanban.key.Pausado": "Feito",
+                "pages.tasks.kanban.key.Concluido": "Concluido"
+            }
         }
     }
 }

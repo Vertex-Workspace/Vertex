@@ -9,6 +9,7 @@ import { CardModule } from 'src/app/components/reusable-components/card/card.mod
 import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
 import { NamePipe } from 'src/app/pipes/name.pipe';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -23,7 +24,8 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     FormsModule,
     CardModule,
     ConfirmModalModule,
-    PipesModule
+    PipesModule,
+    TranslateModule
   ]
 })
 export class KanbanModule { }

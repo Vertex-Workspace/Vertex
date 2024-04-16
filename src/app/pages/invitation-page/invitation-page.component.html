@@ -1,13 +1,12 @@
 <div class="main-div">
     <div class="center-div">
-        <img class="w-72 h-72" src="https://cdn-icons-png.flaticon.com/512/17/17004.png"
-            alt="">
+        <img class="w-72 h-72" src="https://cdn-icons-png.flaticon.com/512/17/17004.png" alt="">
         <div class="flex flex-col justify-center items-center gap-5">
-            <div class="text-invitation">A equipe AKMO, te convidou para fazer parte do time!</div>
+            <div class="text-invitation">{{ 'pages.home.invitation-page.text' | translate }}</div>
             <div class="submit gap-3">
-                <button (click)="addUserOnTeam()">Entrar na equipe</button>
+                <button (click)="addUserOnTeam()">{{ 'pages.home.invitation-page.enterTeam' | translate }}</button>
                 <div class="deny-invite">
-                    Recusar convite
+                    {{ 'pages.home.invitation-page.declineInvite' | translate }}
                 </div>
             </div>
         </div>
