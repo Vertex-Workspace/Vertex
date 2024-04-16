@@ -246,7 +246,7 @@
         background-color: $card !important;
 
         .side {
-            @apply h-full;
+            @apply min-h-[580px] max-h-[580px];
         }
     }
     
@@ -505,7 +505,7 @@
     }
     
     .side {
-        @apply w-full flex flex-col justify-between max-h-[60%];
+        @apply w-full flex flex-col justify-between max-h-[45%];
     }
     
     .title {
@@ -652,7 +652,7 @@
         background-color: $card !important;
 
         .side {
-            @apply h-full flex justify-center w-full;
+            @apply h-full flex justify-center w-full overflow-x-hidden;
         }
     }
     
@@ -703,12 +703,12 @@
     }
     
     .informations{
-        @apply w-full h-full flex flex-col px-6 overflow-x-auto overflow-y-hidden;
+        @apply w-full h-full flex flex-col px-6 overflow-y-auto overflow-x-hidden;
     
     }
     
     .side {
-        @apply w-full min-h-[50%] flex flex-col justify-between;
+        @apply w-full min-h-[50%] flex flex-col justify-between overflow-y-auto;
     }
     
     .title {

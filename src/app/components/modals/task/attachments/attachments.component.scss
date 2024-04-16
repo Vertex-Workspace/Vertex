@@ -19,7 +19,7 @@ section {
     }
 
     .container {
-        @apply flex flex-col h-full w-full gap-2;
+        @apply flex flex-col max-h-[80%] w-full gap-2;
 
         div {
             @apply flex overflow-y-auto gap-4 flex-col h-[300px] max-h-full overflow-x-hidden;

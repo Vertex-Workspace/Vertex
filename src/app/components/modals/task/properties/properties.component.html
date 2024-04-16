@@ -7,7 +7,7 @@
                     <p>Dependências</p>
                 </div>
                 <div>
-                    <p-dropdown [style]="{ width: '250px'}" class="w-full" containerStyleClass="w-full"
+                    <p-dropdown [style]="{ minWidth: '200px'}" class="w-full" containerStyleClass="w-full"
                         [(ngModel)]="selectedDependency" placeholder="Dependências" [options]="taskDependency"
                         optionLabel="task" (onChange)="setTaskDependencies($event)"
                         placeholder="{{selectedDependency}}"  [showClear]="true">
@@ -23,7 +23,7 @@
                     <p>Responsáveis</p>
                 </div>
                 <div>
-                    <p-multiSelect [options]="taskResponsables" [style]="{ width: '250px'}" [(ngModel)]="selectedUsers"
+                    <p-multiSelect [options]="taskResponsables" [style]="{ minWidth: '200px'}" [(ngModel)]="selectedUsers"
                         appendTo="body" placeholder="Responsáveis">
                         <ng-template let-node pTemplate="default">
                             <span (click)="updateResponsible($event, node)">{{node.label}}</span>
