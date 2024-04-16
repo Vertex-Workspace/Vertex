@@ -40,7 +40,7 @@ export class ConfirmModalComponent {
 
 
     deleteConfirm(answer : boolean): void {
-      this.confirmEvent.emit(answer);
+      this.close.emit(answer);
     }
 
     ngOnInit(): void {

@@ -21,8 +21,8 @@
     </div>
 </div>
 
-<app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'o grupo'"
-    (confirmEvent)="emitItem($event)">
+<app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'excluir o grupo'"
+    (close)="emitItem($event)">
 </app-confirm-modal>
 
 <app-confirm-modal *ngIf="deleteUser" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo?'"

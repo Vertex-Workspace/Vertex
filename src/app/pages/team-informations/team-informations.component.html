@@ -23,7 +23,7 @@
                         </ng-container>
                         <ng-container *ngIf="inputEditName">
                             <h4><input [(ngModel)]="newName"></h4>
-                            <fa-icon [icon]="faCheck" class="edit-pencil" (click)="editName()"></fa-icon>
+                            <fa-icon class="pi pi-check edit-pencil" (click)="editName()"></fa-icon>
                         </ng-container>
                     </span>
                     <div class="div-description-top-right">
@@ -84,8 +84,11 @@
             </div>
 
             <div *ngIf="clicked == 'groups'" class="grid-group">
+                <div class="w-[40%] absolute" *ngIf="team.groups.length === 0">
+                    <h6 class="pt-10 flex justify-center items-center">Nenhum grupo disponível...</h6>
+                </div>
                 <ng-container *ngFor="let group of team.groups">
-                    <app-card-group [team]="team" (emitterItem)="deleteGroup($event)" [group]="group">
+                    <app-card-group [team]="team" [group]="group" (emitterItem)="deleteGroup($event)">
                     </app-card-group>
                 </ng-container>
             </div>

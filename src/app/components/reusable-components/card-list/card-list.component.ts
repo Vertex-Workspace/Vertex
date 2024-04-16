@@ -71,7 +71,7 @@ export class CardListComponent implements OnInit {
   renderList: any[] = [];
 
 
-  ngOnChanges(){
+  ngOnChanges() {
     this.setRenderList();
 
   }
@@ -79,8 +79,8 @@ export class CardListComponent implements OnInit {
   ngOnInit(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     if (teamId) {
-      this.findProjects(teamId); 
-    } else{
+      this.findProjects(teamId);
+    } else {
       this.setRenderList();
     }
   }
@@ -89,15 +89,22 @@ export class CardListComponent implements OnInit {
   setRenderList() {
     if (this.type === 'project') {
       this.projects.forEach((project) => {
-         project.isCreator = (project.creator?.user.id == this.loggedUser.id)
+        project.isCreator = (project.creator?.user.id == this.loggedUser.id)
       });
       this.renderList = this.projects
-    } else if(this.type === 'team') {
-      this.renderList = this.teams!;
+    } else if (this.type === 'team') {  
+      for(const team of this.teams!){
+        this.teamService.getOneById(team.id).subscribe((team1: Team) => {
+          team.isCreator = true
+        })
+      }
+      this.renderList = this.teams!;  
     }
+    console.log(this.renderList);
+    
   }
 
-  updateProject(project : Project){
+  updateProject(project: Project) {
     const projectTest: Project | undefined = this.projects.find((p) => p.id == project.id);
     if (projectTest !== undefined) {
       const index = this.projects.indexOf(projectTest);
@@ -161,7 +168,9 @@ export class CardListComponent implements OnInit {
       this.deleteTeam(this.itemToDelete)
     }
     if (this.projects) {
-      this.deleteProject(this.itemToDelete)
+      if (event) {
+        this.deleteProject(this.itemToDelete)
+      }
     }
     this.delete = false;
   }
@@ -175,7 +184,7 @@ export class CardListComponent implements OnInit {
   }
 
   getFirstLetter(item: any): string {
-    if(item.name != null){
+    if (item.name != null) {
       return item.name.substring(0, 1).toLocaleUpperCase();
     }
     return "E";
@@ -210,7 +219,7 @@ export class CardListComponent implements OnInit {
     this.router.navigate([`/equipe/${teamId}`])
   }
 
-  
+
 
 
 }

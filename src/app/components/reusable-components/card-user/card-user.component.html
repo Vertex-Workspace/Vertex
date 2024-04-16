@@ -11,7 +11,7 @@
                 <!-- <fa-icon [icon]="faUserMinus"></fa-icon> -->
             </div>
             <div class="more-infos" *ngIf="isTeamCreator && isNonCreatorCard">
-                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteUserTeam(user)"
+                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean(user)"
                     *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
                 </fa-icon>
             </div>
@@ -31,4 +31,4 @@
 </div>
 
 <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'a equipe'"
-                (confirmEvent)="deleteUserTeam($event)"></app-confirm-modal>
+                (close)="deleteUserTeam($event)"></app-confirm-modal>

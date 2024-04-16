@@ -40,7 +40,6 @@ export class UserService {
         console.log(userRes);
         this.login(userRes);
     });
-    
   }
 
   public findByfirstName(firstName: string): Observable<User> {

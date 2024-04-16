@@ -55,9 +55,10 @@ export class InvitationPageComponent {
   async addUserOnTeam() {
     let userLogged = JSON.parse(localStorage.getItem('logged') || '{}');
     const id = Number(this.route.snapshot.paramMap.get('idTeam'));
-
+    
     this.teamService.addUserOnTeam(userLogged.id, id).subscribe(
       (res) => {
+        console.log('aqui'); 
         this.router.navigate(['home']);
         this.teamService.getOneById(id).subscribe(
           (team: Team) => {
