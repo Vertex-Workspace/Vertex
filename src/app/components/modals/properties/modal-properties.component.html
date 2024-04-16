@@ -1,4 +1,4 @@
-<div class="modal-overlay" >
+<div class="modal-overlay z-[999]" >
     <div class="modal" [style.height]="height" [style.width]="width">
 
         <!-- Properties and X button -->
@@ -13,7 +13,7 @@
             </div>
         </div>
         
-        <div class="flex w-full h-full items-center">
+        <div class="flex w-full h-full items-center z-[999]">
 
             <app-general-properties (select)="editTask('items-selection', $event)" (edit)="editTask('edit', $event)"
                 class="pattern-style" *ngIf="currentModal === 'general'" [project]="project"

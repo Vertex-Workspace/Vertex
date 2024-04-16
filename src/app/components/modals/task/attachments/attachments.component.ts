@@ -22,6 +22,11 @@ export class AttachmentsComponent {
     private userService : UserService
   ) {}
 
+  ngOnInit(): void {
+    console.log(this.task);
+    
+  }
+
   onFileSelected(e: any): void {
     const selectedFile = e.target.files[0];
     const fd: FormData = new FormData();

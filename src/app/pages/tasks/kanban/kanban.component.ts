@@ -56,6 +56,8 @@ export class KanbanComponent {
   orderParams !: PipeParams;
 
   ngOnInit() {
+    console.log(this.project);
+    
     this.taskList = this.project.tasks;
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {

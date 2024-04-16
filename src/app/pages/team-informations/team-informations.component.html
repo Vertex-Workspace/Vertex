@@ -26,7 +26,7 @@
                             <fa-icon class="pi pi-check edit-pencil" (click)="editName()"></fa-icon>
                         </ng-container>
                     </span>
-                    <div class="div-description-top-right gap-4">
+                    <div class="div-description-top-right">
                         <span>
                             <textarea [disabled]="!editDescription" [(ngModel)]="team.description"
                                 [ngClass]="!editDescription ? '' : 'bg-description'"></textarea>
@@ -100,7 +100,7 @@
         <div class="right-side">
             <h5 class="pt-4">Desempenho individual</h5>
             <p class="regular-text pt-3">Lista o tempo dedicado dentro de todas as tarefas, de todos os projetos de {{team.name}}</p>
-            <div class="flex flex-col w-full h-[201px] overflow-x-hidden overflow-y-auto mt-4">
+            <div class="table">
                 <table class="w-full max-h-[40px]">
                     <tr>
                         <th>Membro</th>

@@ -80,7 +80,7 @@ export class UserService {
 
   getLogged(): any {
     let user: User = JSON.parse(localStorage.getItem('logged') || '');
-    return user
+    return user;
   }
 
   public getAll(): Observable<User[]> {

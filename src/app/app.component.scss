@@ -8,7 +8,7 @@
 
     
     .side-bar {
-        @apply flex w-[60px] h-full flex-col items-center z-[999];
+        @apply flex w-[60px] h-full flex-col items-center z-[998];
         background-color: $primaryColor;
         transition: width 0.32s ease-out;
         z-index: 10;
@@ -16,7 +16,7 @@
     }
     
     .side-barOpen {
-        @apply flex w-[300px] h-full flex-col items-center z-[999];
+        @apply flex w-[300px] h-full flex-col items-center z-[998];
         transition: width 0.32s ease-in-out;
         background-color: $primaryColor;
         position: fixed;
@@ -28,7 +28,7 @@
 @media screen and (max-width: 1023px) {
 
     .side-bar {
-        @apply flex w-full h-[60px] items-center z-[999];
+        @apply flex w-full h-[60px] items-center z-[998];
         background-color: $primaryColor;
         transition: width 0.32s ease-out;
         z-index: 10;
@@ -38,7 +38,7 @@
     }
     
     .side-barOpen {
-        @apply flex w-full h-[60px] items-center z-[999];
+        @apply flex w-full h-[60px] items-center z-[998];
         background-color: $primaryColor;
         transition: width 0.32s ease-out;
         z-index: 10;

@@ -1,62 +1,126 @@
 @import '../../../../variables';
-.modal-overlay {
-    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
 
-}
+@media screen and (min-width: 524px) {
 
-.exitModal {
-    @apply flex w-full h-[60px] justify-between items-center px-4;
-    color: $primaryColor;
-    border-bottom: 2px solid $emphasis;
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
 
-    div:first-child {
-        @apply w-[60%] flex items-center;
+    }
+    
+    .exitModal {
+        @apply flex w-full h-[60px] justify-between items-center px-4;
+        color: $primaryColor;
+        border-bottom: 2px solid $emphasis;
+        
+        div:first-child {
+            @apply w-[60%] flex items-center;
+        }
+    }
+    
+    p{
+        @apply pl-3;
+    }
+    
+    .modal {
+        @apply absolute w-1/4 h-2/5 rounded-md flex flex-col 
+        items-center justify-start text-center pt-6 border-t-8;
+        background-color: $secondColor;
+        border-color: $primaryColor;
+    }
+    
+    .icon {
+        color: $primaryColor;
+        font-size: 1rem;
+    }
+    p{
+        @apply flex justify-start items-start;
+        color:$primaryColor;
+    }
+    
+    .new-property {
+        @apply flex w-full items-center pt-3;
+        
+        p{
+            @apply pl-3 flex items-center;
+        }
+    }
+    
+    .footer-border {
+        @apply border-[#092C4C] border-t
+    }
+    
+    .iconX {
+        color:$primaryColor;
+        font-size: 1.5rem;
+    }
+    
+    .pattern-style {
+        width: 100%; 
+        height: 100%;
     }
 }
 
-p{
-    @apply pl-3;
+@media screen and (max-width: 524px) {
+
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+
+    }
+    
+    .exitModal {
+        @apply flex w-full h-[60px] justify-between items-center px-4;
+        color: $primaryColor;
+        border-bottom: 2px solid $emphasis;
+        
+        div:first-child {
+            @apply w-[60%] flex items-center;
+        }
+    }
+    
+    p{
+        @apply pl-3;
+    }
+    
+    .modal {
+        @apply absolute min-w-full min-h-full flex flex-col 
+        items-center justify-start text-center pt-6 z-[999];
+        background-color: $secondColor;
+    }
+    
+    .icon {
+        color: $primaryColor;
+        font-size: 1rem;
+    }
+    p{
+        @apply flex justify-start items-start;
+        color:$primaryColor;
+    }
+    
+    .new-property {
+        @apply flex w-full items-center pt-3;
+        
+        p{
+            @apply pl-3 flex items-center;
+        }
+    }
+    
+    .footer-border {
+        @apply border-[#092C4C] border-t
+    }
+    
+    .iconX {
+        color:$primaryColor;
+        font-size: 1.5rem;
+    }
+    
+    .pattern-style {
+        width: 100%; 
+        height: 100%;
+    }
 }
-
-.modal {
-    @apply absolute w-1/4 h-2/5 rounded-md flex flex-col 
-    items-center justify-start text-center pt-6 border-t-8;
-    background-color: $secondColor;
-    border-color: $primaryColor;
-}
-
-.icon {
-    color: $primaryColor;
-    font-size: 1rem;
-}
-p{
-    @apply flex justify-start items-start;
-    color:$primaryColor;
-}
-
-.new-property {
-   @apply flex w-full items-center pt-3;
-
-   p{
-    @apply pl-3 flex items-center;
-   }
-}
-
-.footer-border {
-    @apply border-[#092C4C] border-t
-}
-
-.iconX {
-    color:$primaryColor;
-    font-size: 1.5rem;
- }
-
- .pattern-style {
-    width: 100%; 
-    height: 100%;
- }
-
-
-
-
-
+    
+    
+    
+    
+    
+    

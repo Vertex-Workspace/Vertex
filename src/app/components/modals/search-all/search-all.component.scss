@@ -30,7 +30,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     .card-searched{
-        @apply flex w-[98$] rounded-sm flex-row items-center justify-between px-8 py-10;
+        @apply flex w-[98%] rounded-sm flex-row items-center justify-between px-8 py-10;
         min-height: 80px;
         text-align: start;
         background-color: $card;

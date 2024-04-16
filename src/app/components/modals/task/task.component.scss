@@ -16,196 +16,176 @@
     z-index: 999;
 }
 
-
-.buttons button,
-.submit button {
-    border: 1px solid $primaryColor;
-    background-color: $primaryColor;
-    color: $secondColor;
-    @apply p-2;
-}
-
-.base {
-    @apply w-full flex flex-col p-5 rounded-md;
-    -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    background-color: $card !important;
-}
-
-.div-timer-closeModal{
-    @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
-}
-
-a{
-    color: $text;
-    background-color: #242222b7;
-}
-
-.div-timer{
-    @apply flex w-[150px] h-[50px] justify-evenly items-center rounded-sm;
-    background-color: $emphasis;
-    color: $primaryColor;
-
-    fa-icon{
-        color: $primaryColor;
-        cursor: default !important
-    }
-}
-
-.location {
-    @apply flex w-[100%] h-[5%] justify-between px-6;
-
-    .routes{
-        @apply flex gap-5 divide-x-2;
-    }
-    p {
-        @apply flex items-center justify-center ;
-    }
-    p:last-child {
-        @apply px-5;
-    }
-}
-.work-task-button{
-    @apply flex w-40 h-[40px] items-center justify-center rounded-sm;
-    background-color: $primaryColor;
-
-    &:hover{
-        background-color: $secondColor;
-        color: $primaryColor;
-        border: 1px solid $primaryColor;
-        transition: 0.1s;
-    
-    }
-}
-
-.informations{
-    @apply grid w-full max-h-[95%] grid-cols-2 pt-10 px-6;
-
-}
-
-.side {
-    @apply w-full flex flex-col justify-between;
-}
-
-.title {
-    @apply w-[70%] h-[5%] text-justify flex flex-col gap-6;
-
-    p:first-child {
-        @apply w-full;
-    }
-    background-color: $card;
-
-}
-
-.button {
-    @apply w-full flex justify-end;
-}
-
-.down {
-    @apply h-[20%] flex flex-row w-full items-end;
-}
-
-.buttons {
-    @apply flex w-full gap-2;
-}
-
-.buttons button:hover,
-.submit button:hover {
-    background-color: $secondColor;
-    color: $primaryColor;
-    border: 1px solid $primaryColor;
-    transition: 0.1s;
-}
-
-#red-btn{
-    background-color: $error;
-    color: white;
-    @apply px-2 w-[150px];
-    border: none !important;
-}
-#red-btn:hover{
-    background-color: $secondColor;
-    color: $primaryColor;
-    border: 1px solid $primaryColor;
-    transition: 0.1s;
-}
-
-.right {
-    @apply flex flex-col items-center justify-between;
-
-    nav{
-        @apply flex w-full m-1;
-
-        ul{
-            @apply flex w-full justify-center gap-3;
-        }
-        a {
-            @apply hover:bg-zinc-200 p-1 rounded-md;
-        }
-    }
-
-    div:first-child {
-        @apply w-full flex justify-end;
-    }
-}
-
-.submit {
-    @apply w-full flex justify-end;
-}
-
-.submit-btn-red{
-    background-color: $error;
-}
-
-.components{
-    @apply flex w-[70%] max-h-[70%] items-center flex-col;
-}
-
-@media (max-width: 1420px) {
-    .base {
-        @apply w-[933px] h-[566px] max-w-[933px] max-h-[566px] bg-white;
-
-        .side {
-            @apply h-[460px];
-        }
-    }
-
+@media screen and (min-width: 1450px) {
     .buttons button,
     .submit button {
-        @apply w-[160px] rounded-sm;
-    }
-
-    .title p {
-        @apply text-base;
-    }
-    .properties{
-        @apply flex w-full h-[50%];
-    }
-    
-
-    .components {
-        @apply h-[55%];
-    }
-}
-
-@media (min-width: 1421px) {
-    .title p {
-        @apply text-xl;
-    }
-
-    .base {
-        @apply w-[1300px] h-[750px] max-w-[1300px] max-h-[750px] bg-white;
-
-        .side {
-            @apply h-[630px];
-        }
+        border: 1px solid $primaryColor;
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply p-2;
     }
 
     .buttons button,
     .submit button {
         @apply w-[220px] h-[50px];
     }
-
+    
+    .base {
+        @apply w-full flex flex-col p-5 rounded-md;
+        -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        background-color: $card !important;
+    }
+    
+    .div-timer-closeModal{
+        @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
+    }
+    
+    a{
+        color: $text;
+        background-color: #242222b7;
+    }
+    
+    .div-timer{
+        @apply flex w-[150px] h-[50px] justify-evenly items-center rounded-sm;
+        background-color: $emphasis;
+        color: $primaryColor;
+    
+        fa-icon{
+            color: $primaryColor;
+            cursor: default !important
+        }
+    }
+    
+    .location {
+        @apply flex w-[100%] h-[5%] justify-between px-6;
+    
+        .routes{
+            @apply flex gap-5 divide-x-2;
+        }
+        p {
+            @apply flex items-center justify-center ;
+        }
+        p:last-child {
+            @apply px-5;
+        }
+    }
+    .work-task-button{
+        @apply flex w-40 h-[40px] items-center justify-center rounded-sm;
+        background-color: $primaryColor;
+    
+        &:hover{
+            background-color: $secondColor;
+            color: $primaryColor;
+            border: 1px solid $primaryColor;
+            transition: 0.1s;
+        
+        }
+    }
+    
+    .informations{
+        @apply grid w-full max-h-[95%] grid-cols-2 pt-10 px-6;
+    
+    }
+    
+    .side {
+        @apply w-full flex flex-col justify-between;
+    }
+    
+    .title {
+        @apply w-[70%] h-[5%] text-justify flex flex-col gap-6;
+    
+        p:first-child {
+            @apply w-full;
+        }
+        background-color: $card;
+    
+    }
+    
+    .button {
+        @apply w-full flex justify-end;
+    }
+    
+    .down {
+        @apply h-[20%] flex flex-row w-full items-end;
+    }
+    
+    .buttons {
+        @apply flex w-full gap-2;
+    }
+    
+    .buttons button:hover,
+    .submit button:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    #red-btn{
+        background-color: $error;
+        color: white;
+        @apply px-2 w-[150px];
+        border: none !important;
+    }
+    #red-btn:hover{
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    .right {
+        @apply flex flex-col items-center justify-between;
+    
+        nav{
+            @apply flex w-full m-1;
+    
+            ul{
+                @apply flex w-full justify-center gap-3;
+            }
+            a {
+                @apply hover:bg-zinc-200 p-1 rounded-md;
+            }
+        }
+    
+        div:first-child {
+            @apply w-full flex justify-end;
+        }
+    }
+    
+    .submit {
+        @apply w-full flex justify-end gap-2;
+    }
+    
+    .submit-btn-red{
+        background-color: $error;
+    }
+    
+    .components{
+        @apply flex w-[70%] max-h-[70%] items-center flex-col;
+    }
+    
+    .title p {
+        @apply text-xl;
+    }
+    
+    .base {
+        @apply w-[1300px] h-[750px] max-w-[1300px] max-h-[750px] bg-white;
+    
+        .side {
+            @apply h-[630px];
+        }
+    }
+    
+    .buttons button,
+    .submit button {
+        border: 1px solid $primaryColor;
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply p-2;
+    }
+    
     .properties{
         @apply flex w-full h-[60%];
         max-height: 400px;
@@ -214,40 +194,652 @@ a{
     .components {
         @apply h-[65%];
     }
-}
-
-@media (max-width: 899px) {}
-
-input:hover{
     
-    cursor: pointer;
-}
-input:focus{
-    cursor: text;
-    border-bottom: 1px solid $primaryColor;
+    input:hover{
+        
+        cursor: pointer;
+    }
+    input:focus{
+        cursor: text;
+        border-bottom: 1px solid $primaryColor;
+    }
+    
+    textarea {
+        @apply flex px-4 py-2 rounded-sm;
+        resize: none;
+        min-height: 150px;
+        border: none;
+        background-color: $card;
+    }
+    textarea:focus{
+        @apply shadow-md rounded-sm;
+        border: 0 none;
+        outline: 0;
+    }
+    
+    .task-description{
+        background-color: $secondColor;
+    }
+    
+    button{
+        @apply rounded-sm;
+    }
+    #description{
+        background-color: $card;
+        color: $text;
+    }
 }
 
-textarea {
-    @apply flex px-4 py-2 rounded-sm;
-    resize: none;
-    min-height: 150px;
-    border: none;
-    background-color: $card;
-}
-textarea:focus{
-    @apply shadow-md rounded-sm;
-    border: 0 none;
-    outline: 0;
+@media screen and (min-width: 1032px) and (max-width: 1450px) {
+    .buttons button,
+    .submit button {
+        border: 1px solid $primaryColor;
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply p-2;
+    }
+    
+    .base {
+        @apply flex flex-col p-5 rounded-md w-[1000px] h-[700px] max-w-[1000px] max-h-[700px] bg-white;
+        -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        background-color: $card !important;
+
+        .side {
+            @apply min-h-[580px] max-h-[580px];
+        }
+    }
+    
+    .div-timer-closeModal{
+        @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
+    }
+    
+    a{
+        color: $text;
+        background-color: #242222b7;
+    }
+    
+    .div-timer{
+        @apply flex w-[150px] h-[50px] justify-evenly items-center rounded-sm;
+        background-color: $emphasis;
+        color: $primaryColor;
+    
+        fa-icon{
+            color: $primaryColor;
+            cursor: default !important
+        }
+    }
+    
+    .location {
+        @apply flex w-[100%] h-[5%] justify-between px-6;
+    
+        .routes{
+            @apply flex gap-5 divide-x-2;
+        }
+        p {
+            @apply flex items-center justify-center ;
+        }
+        p:last-child {
+            @apply px-5;
+        }
+    }
+    .work-task-button{
+        @apply flex w-40 h-[40px] items-center justify-center rounded-sm;
+        background-color: $primaryColor;
+    
+        &:hover{
+            background-color: $secondColor;
+            color: $primaryColor;
+            border: 1px solid $primaryColor;
+            transition: 0.1s;
+        
+        }
+    }
+    
+    .informations{
+        @apply grid w-full h-full grid-cols-2 pt-10 px-6;
+    
+    }
+    
+    .side {
+        @apply w-full flex flex-col justify-between;
+    }
+    
+    .title {
+        @apply w-[70%] h-[5%] text-justify flex flex-col gap-6;
+    
+        p:first-child {
+            @apply w-full;
+        }
+        background-color: $card;
+    
+    }
+    
+    .button {
+        @apply w-full flex justify-end;
+    }
+    
+    .down {
+        @apply h-[20%] flex flex-row w-full items-end;
+    }
+    
+    .buttons {
+        @apply flex gap-2;
+    }
+    
+    .buttons button:hover,
+    .submit button:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    #red-btn{
+        background-color: $error;
+        color: white;
+        @apply px-2 w-[150px];
+        border: none !important;
+    }
+    #red-btn:hover{
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    .right {
+        @apply flex flex-col items-center justify-between;
+    
+        nav{
+            @apply flex w-full m-1;
+    
+            ul{
+                @apply flex w-full justify-center gap-3;
+            }
+            a {
+                @apply hover:bg-zinc-200 p-1 rounded-md;
+            }
+        }
+    
+        div:first-child {
+            @apply w-full flex justify-end;
+        }
+    }
+    
+    .submit {
+        @apply w-full flex justify-end;
+    }
+    
+    .submit-btn-red{
+        background-color: $error;
+    }
+    
+    .components{
+        @apply flex w-[70%] max-h-[70%] items-center flex-col;
+    }
+    
+    .title p {
+        @apply text-xl;
+    }
+
+    
+    .buttons button,
+    .submit button {
+        @apply w-[220px] h-[50px];
+    }
+    
+    .properties{
+        @apply flex w-full h-[60%];
+        max-height: 400px;
+    }
+    
+    .components {
+        @apply h-[65%];
+    }
+    
+    input:hover{
+        
+        cursor: pointer;
+    }
+    input:focus{
+        cursor: text;
+        border-bottom: 1px solid $primaryColor;
+    }
+    
+    textarea {
+        @apply flex px-4 py-2 rounded-sm;
+        resize: none;
+        min-height: 150px;
+        border: none;
+        background-color: $card;
+    }
+    textarea:focus{
+        @apply shadow-md rounded-sm;
+        border: 0 none;
+        outline: 0;
+    }
+    
+    .task-description{
+        background-color: $secondColor;
+    }
+    
+    button{
+        @apply rounded-sm;
+    }
+    #description{
+        background-color: $card;
+        color: $text;
+    }
 }
 
-.task-description{
-    background-color: $secondColor;
+@media screen and (min-width: 760px) and (max-width: 1032px) {
+    .buttons button,
+    .submit button {
+        border: 1px solid $primaryColor;
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply p-2;
+    }
+    
+    .base {
+        @apply flex flex-col p-5 rounded-md w-[700px] h-[800px] bg-white;
+        -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        background-color: $card !important;
+
+        .side {
+            @apply h-full flex justify-center w-full;
+        }
+    }
+    
+    .div-timer-closeModal{
+        @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
+    }
+    
+    a{
+        color: $text;
+        background-color: #242222b7;
+    }
+    
+    .div-timer{
+        @apply flex w-[150px] h-[50px] justify-evenly items-center rounded-sm;
+        background-color: $emphasis;
+        color: $primaryColor;
+    
+        fa-icon{
+            color: $primaryColor;
+            cursor: default !important
+        }
+    }
+    
+    .location {
+        @apply flex w-[100%] h-[5%] justify-between px-6;
+    
+        .routes{
+            @apply flex gap-5 divide-x-2;
+        }
+        p {
+            @apply flex items-center justify-center ;
+        }
+        p:last-child {
+            @apply px-5;
+        }
+    }
+    .work-task-button{
+        @apply flex w-40 h-[40px] items-center justify-center rounded-sm;
+        background-color: $primaryColor;
+    
+        &:hover{
+            background-color: $secondColor;
+            color: $primaryColor;
+            border: 1px solid $primaryColor;
+            transition: 0.1s;
+        
+        }
+    }
+    
+    .informations{
+        @apply w-full h-full flex flex-col pt-10 px-6 overflow-x-auto overflow-y-hidden;
+    
+    }
+    
+    .side {
+        @apply w-full flex flex-col justify-between max-h-[45%];
+    }
+    
+    .title {
+        @apply w-[70%] h-[5%] text-justify flex flex-col gap-6;
+    
+        p:first-child {
+            @apply w-full;
+        }
+        background-color: $card;
+    
+    }
+    
+    .button {
+        @apply w-full flex justify-end;
+    }
+    
+    .down {
+        @apply hidden;
+    }
+    
+    .buttons {
+        @apply hidden;
+    }
+    
+    .buttons button:hover,
+    .submit button:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    #red-btn{
+        background-color: $error;
+        color: white;
+        @apply px-2 w-[150px];
+        border: none !important;
+    }
+    #red-btn:hover{
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    .right {
+        @apply flex flex-col items-center justify-between;
+    
+        nav{
+            @apply flex w-full m-1;
+    
+            ul{
+                @apply flex w-full justify-center gap-1;
+            }
+            a {
+                @apply hover:bg-zinc-200 p-1 rounded-md;
+            }
+        }
+    
+        div:first-child {
+            @apply w-full flex justify-end;
+        }
+    }
+    
+    .submit {
+        @apply w-full flex justify-end;
+    }
+    
+    .submit-btn-red{
+        background-color: $error;
+    }
+    
+    .components{
+        @apply flex w-full max-h-[70%] items-center flex-col;
+    }
+    
+    .title p {
+        @apply text-xl;
+    }
+
+    
+    .buttons button,
+    .submit button {
+        @apply w-[220px] h-[50px];
+    }
+    
+    .properties{
+        @apply flex w-full h-[80%] justify-center pb-6;
+        max-height: 400px;
+    }
+    
+    .components {
+        @apply h-[65%];
+    }
+    
+    input:hover{
+        
+        cursor: pointer;
+    }
+    input:focus{
+        cursor: text;
+        border-bottom: 1px solid $primaryColor;
+    }
+    
+    textarea {
+        @apply flex px-4 py-2 rounded-sm;
+        resize: none;
+        min-height: 150px;
+        border: none;
+        background-color: $card;
+    }
+    textarea:focus{
+        @apply shadow-md rounded-sm;
+        border: 0 none;
+        outline: 0;
+    }
+    
+    .task-description{
+        background-color: $secondColor;
+    }
+    
+    button{
+        @apply rounded-sm;
+    }
+    #description{
+        background-color: $card;
+        color: $text;
+    }
 }
 
-button{
-    @apply rounded-sm;
+@media screen and (max-width: 760px) {
+    .buttons button,
+    .submit button {
+        border: 1px solid $primaryColor;
+        background-color: $primaryColor;
+        color: $secondColor;
+        @apply p-2;
+    }
+    
+    .base {
+        @apply flex flex-col p-5 w-full h-full bg-white;
+        -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        background-color: $card !important;
+
+        .side {
+            @apply h-full flex justify-center w-full overflow-x-hidden;
+        }
+    }
+    
+    .div-timer-closeModal{
+        @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
+    }
+    
+    a{
+        color: $text;
+        background-color: #242222b7;
+    }
+    
+    .div-timer{
+        @apply flex w-[150px] h-[50px] justify-evenly items-center rounded-sm;
+        background-color: $emphasis;
+        color: $primaryColor;
+    
+        fa-icon{
+            color: $primaryColor;
+            cursor: default !important
+        }
+    }
+    
+    .location {
+        @apply flex w-[100%] h-[5%] justify-between px-6;
+    
+        .routes{
+            @apply flex gap-5 divide-x-2;
+        }
+        p {
+            @apply flex items-center justify-center ;
+        }
+        p:last-child {
+            @apply px-5;
+        }
+    }
+    .work-task-button{
+        @apply flex w-40 h-[40px] items-center justify-center rounded-sm;
+        background-color: $primaryColor;
+    
+        &:hover{
+            background-color: $secondColor;
+            color: $primaryColor;
+            border: 1px solid $primaryColor;
+            transition: 0.1s;
+        
+        }
+    }
+    
+    .informations{
+        @apply w-full h-full flex flex-col px-6 overflow-y-auto overflow-x-hidden;
+    
+    }
+    
+    .side {
+        @apply w-full min-h-[50%] flex flex-col justify-between overflow-y-auto;
+    }
+    
+    .title {
+        @apply w-[70%] h-[5%] text-justify flex flex-col gap-6;
+    
+        p:first-child {
+            @apply w-full;
+        }
+        background-color: $card;
+    
+    }
+    
+    .button {
+        @apply w-full flex justify-end;
+    }
+    
+    .down {
+        @apply hidden;
+    }
+    
+    .buttons {
+        @apply hidden;
+    }
+    
+    .buttons button:hover,
+    .submit button:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    #red-btn{
+        background-color: $error;
+        color: white;
+        @apply px-2 w-[150px];
+        border: none !important;
+    }
+    #red-btn:hover{
+        background-color: $secondColor;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+        transition: 0.1s;
+    }
+    
+    .right {
+        @apply flex flex-col items-center justify-between;
+    
+        nav{
+            @apply flex w-full m-1;
+    
+            ul{
+                @apply flex w-full justify-center gap-1;
+            }
+            a {
+                @apply hover:bg-zinc-200 p-1 rounded-md;
+            }
+        }
+    
+        div:first-child {
+            @apply w-full flex justify-end;
+        }
+    }
+    
+    .submit {
+        @apply w-full flex justify-end;
+    }
+    
+    .submit-btn-red{
+        background-color: $error;
+    }
+    
+    .components{
+        @apply flex w-full min-h-[70%] items-center flex-col;
+    }
+    
+    .title p {
+        @apply text-xl;
+    }
+
+    h4 {
+        @apply pt-2;
+    }
+
+    
+    .buttons button,
+    .submit button {
+        @apply w-[220px] h-[50px];
+    }
+    
+    .properties{
+        @apply flex w-full h-[80%] pt-4 justify-center;
+        max-height: 400px;
+    }
+    
+    .components {
+        @apply h-[65%];
+    }
+    
+    input:hover{
+        
+        cursor: pointer;
+    }
+    input:focus{
+        cursor: text;
+        border-bottom: 1px solid $primaryColor;
+    }
+    
+    textarea {
+        @apply flex px-4 py-2 rounded-sm;
+        resize: none;
+        min-height: 150px;
+        border: none;
+        background-color: $card;
+    }
+    textarea:focus{
+        @apply shadow-md rounded-sm;
+        border: 0 none;
+        outline: 0;
+    }
+    
+    .task-description{
+        background-color: $secondColor;
+    }
+    
+    button{
+        @apply rounded-sm;
+    }
+    #description{
+        background-color: $card;
+        color: $text;
+    }
 }
-#description{
-    background-color: $card;
-    color: $text;
-}
+

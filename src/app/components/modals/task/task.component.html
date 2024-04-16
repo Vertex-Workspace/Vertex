@@ -62,7 +62,7 @@
                             [style.background]="'attachments' === selectedComponent ? '#D6D6D687' : 'inherit'">Anexos</a>
                     </ul>
                 </nav>
-                <div class="components overflow-auto">
+                <div class="components">
                     <div *ngIf="selectedComponent === 'description'" class="flex flex-col">
                         <textarea [disabled]="!descriptionEditable" class="task-description"
                             [(ngModel)]="task.description">{{task.description}}</textarea>
@@ -122,5 +122,4 @@
         </div>
     </ng-container>
 </app-confirm-modal>
-
 
