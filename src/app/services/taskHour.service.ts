@@ -18,19 +18,19 @@ export class taskHourService {
         
 
         return this.http
-        .post<taskHour>(`${URL}task-hours/${taskHour.task.id}/${taskHour.taskResponsable.id}`, null);
+        .post<taskHour>(`${URL}task-hours/${taskHour.task.id}/${taskHour.taskResponsable.id}`, null, {withCredentials: true});
     }
 
     public patchTaskHour(taskHour: taskHour): Observable<taskHour> {
         
         
         return this.http
-        .patch<taskHour>(`${URL}task-hours/edit`, taskHour);
+        .patch<taskHour>(`${URL}task-hours/edit`, taskHour, {withCredentials: true});
     }
 
     public getTimeInTask(id:number): Observable<any> {
         return this.http
-        .get<any>("http://localhost:7777/task-hours/time-in-task/"+id);
+        .get<any>(`${URL}task-hours/time-in-task/${id}`, {withCredentials: true});
     }
 
 

@@ -19,7 +19,7 @@ export class TeamService {
 
   public getOneById(id: number): Observable<Team> {
     return this.http
-      .get<Team>(`${URL}team/${id}`);
+      .get<Team>(`${URL}team/${id}`, {withCredentials: true});
   }
 
   public addUserOnTeam(userId: number, teamId: number): Observable<any> {
@@ -34,94 +34,88 @@ export class TeamService {
     }
 
     return this.http
-      .patch<Team>(`${URL}team/user`, userTeam);
+      .patch<Team>(`${URL}team/user`, userTeam, {withCredentials: true});
       
   }
 
   public findAllChats():Observable<Chat[]>{
-    return this.http.get<Chat[]>(`${URL}chatController`);
+    return this.http.get<Chat[]>(`${URL}chatController`, {withCredentials: true});
   }
 
   public findAllMessagesByChatId(idChat:number):Observable<Message[]>{
-    return this.http.get<Message[]>(`${URL}chatController/messagesByChatId/${idChat}`);
+    return this.http.get<Message[]>(`${URL}chatController/messagesByChatId/${idChat}`, {withCredentials: true});
   }
 
   public patchMessagesOnChat(idChat:number,idUser:number, message:Message):Observable<any>{
-    console.log(idChat)
-    console.log(idUser);
-    return this.http.patch<any>(`${URL}chatController/messagePatch/${idChat}/${idUser}`, message);
+    return this.http.patch<any>(`${URL}chatController/messagePatch/${idChat}/${idUser}`, message, {withCredentials: true});
   }
   
   public patchArchiveOnChat(idChat:number, file:FormData):Observable<any>{
-    console.log(idChat)
-    return this.http.patch<any>(`${URL}chatController/patchFile/${idChat}`, file);
+    return this.http.patch<any>(`${URL}chatController/patchFile/${idChat}`, file, {withCredentials: true});
   }
 
   public patchChat(idChat:number, teamId: number, userId:number):Observable<any>{
-    console.log(idChat)
-    let userTeam = {team: {id: teamId},user:{id: userId}}
-    return this.http.patch<any>(`${URL}chatController/chat/${idChat}`, userTeam);
+    const userTeam = {team: {id: teamId},user:{id: userId}}
+    return this.http.patch<any>(`${URL}chatController/chat/${idChat}`, userTeam, {withCredentials: true});
   }
 
   public userIsOnTeam(userId: number, teamId: number): Observable<boolean> {
     return this.http
-      .get<boolean>(`${URL}team/userIsOnTeam/${userId}/${teamId}`);
+      .get<boolean>(`${URL}team/userIsOnTeam/${userId}/${teamId}`, {withCredentials: true});
   }
 
   public getInvitationCodeById(id: number) {
     return this.http
-      .get<string>(`${URL}team/invitation/${id}`);
+      .get<string>(`${URL}team/invitation/${id}`, {withCredentials: true});
   }
 
   public create(team: Team): Observable<Team> {
     return this.http
-      .post<Team>(`${URL}team`, team);
+      .post<Team>(`${URL}team`, team, {withCredentials: true});
   }
 
   public delete(id: number): Observable<Team> {
     return this.http
-      .delete<Team>(`${URL}team/${id}`);
+      .delete<Team>(`${URL}team/${id}`, {withCredentials: true});
   }
 
   public getTeamsByUser(user: User): Observable<Team[]> {
     return this.http
-      .get<Team[]>(`${URL}user-team/teams/${user.id}`)
-      .pipe(map((teams: Team[]) => teams.map(team => new Team(team))));
+      .get<Team[]>(`${URL}user-team/teams/${user.id}`, {withCredentials: true});
 
   }
 
 
   public getPermission(teamId: number, userId: number): Observable<Permission[]> {
-    return this.http.get<Permission[]>(`${URL}team/permission/${userId}/${teamId}`)
+    return this.http.get<Permission[]>(`${URL}team/permission/${userId}/${teamId}`, {withCredentials: true})
   }
 
   public updateImage(teamId: number, fd: FormData) {
     return this.http
-      .patch<Team>(`${URL}team/image/${teamId}`, fd)
+      .patch<Team>(`${URL}team/image/${teamId}`, fd, {withCredentials: true})
   }
   
   public updateTeam(team : Team): Observable<Team>{
     return this.http
-      .put<Team>(`${URL}team`, team);
+      .put<Team>(`${URL}team`, team, {withCredentials: true});
   }
 
   public changePermissionEnable(permission: Permission): Observable<Permission> {
-    return this.http.patch<Permission>(`${URL}team/permission/${permission.id}`, permission)      
+    return this.http.patch<Permission>(`${URL}team/permission/${permission.id}`, permission , {withCredentials: true})      
   }
 
 
   public deleteUserTeam(team: Team, user: User): Observable<Team> {
-    return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`)
+    return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`, {withCredentials: true})
   }
 
   public getTeamCreator(team: Team): Observable<User> {
-    return this.http.get<User>(`${URL}team/${team.id}/creator`)
+    return this.http.get<User>(`${URL}team/${team.id}/creator`, {withCredentials: true})
   }
 
   public getUsers(teamId: any): Observable<User[]> {
     return this.http
-      .get<User[]>(`${URL}team/users/${teamId}`)
-      .pipe(map((users: User[]) => users.map(user => new User(user))));
+      .get<User[]>(`${URL}team/users/${teamId}`, {withCredentials: true});
   }
 
 

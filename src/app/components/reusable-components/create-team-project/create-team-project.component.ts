@@ -140,7 +140,6 @@ export class CreateTeamProjectComponent implements OnInit {
       .create(team)
       .subscribe((teamRes: Team) => {
         this.alert.successAlert(`Equipe ${teamRes.name} criada com sucesso!`);
-
         if (this.fd) {
           this.teamService
             .updateImage(teamRes.id!, this.fd)

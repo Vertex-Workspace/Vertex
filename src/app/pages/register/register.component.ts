@@ -28,8 +28,8 @@ export class RegisterComponent {
     private userState: UserStateService
   ) {
     this.userState
-      .getAuthenticationStatus()
-      .subscribe((status: boolean) => {
+      .getAuthenticatedUser()
+      .then((status: boolean) => {
         if (status) {
           this.router.navigate(['/home']);
         }

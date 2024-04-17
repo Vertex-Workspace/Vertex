@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.userState
-      .getAuthenticationStatus()
-      .subscribe((status: boolean) => {
+      .getAuthenticatedUser()
+      .then((status: boolean) => {
         if (status) {
           this.router.navigate(['/home']);
         }
@@ -59,15 +59,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.userService
-      .authenticate(this.form.value)
-      .subscribe(user => {
-        this.userService.login(user);
-      },
-      e => {
-        return this.alert.errorAlert(e.error);
-      });
-
+    this.userService.login(this.form.value);
   }
   
   passwordToggle():void{
