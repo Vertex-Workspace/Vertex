@@ -181,4 +181,9 @@ export class UserService {
     return this.http
       .patch<User>(`${URL}user/${userID}/notification/settings/${settingID}`, {});
   }
+
+  public setFirstAccessNull(user: User){
+    return this.http
+    .patch<User>(`${URL}user/first-access/${user.id}`, user);
+  }
 }

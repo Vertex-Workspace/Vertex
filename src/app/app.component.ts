@@ -88,15 +88,14 @@ export class AppComponent {
     .subscribe((status: boolean) => {
       this.userLogged = status;
     });
-
-    this.logged = this.userService.getLogged();
   }
   
   renderPersonalization: boolean = false;
 
   // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
-    this.userService.getOneById(this.logged.id!).subscribe((logged) => {
+    let user: User = this.userService.getLogged();
+    this.userService.getOneById(user.id!).subscribe((logged) => {
 
       this.logged = logged;
 

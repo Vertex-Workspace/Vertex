@@ -64,6 +64,7 @@ export class KanbanComponent {
         this.canCreate = true;
       }
     }
+    
   }
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {

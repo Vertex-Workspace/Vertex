@@ -124,6 +124,8 @@ export class TasksComponent implements OnInit {
       if(p.creator!.user.id === this.logged.id) this.isCreator = true;
 
       this.project = p;
+      console.log(this.project);
+      
       this.setFilters(p);
       this.setOrderOptions(p);
       this.pageTitle = this.project.name;

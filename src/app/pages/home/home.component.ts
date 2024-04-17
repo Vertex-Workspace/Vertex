@@ -19,7 +19,7 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
 
   logged !: User;
   tutorialText = tutorialText;
@@ -99,9 +99,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToTeams();
     if (this.logged.firstAccess) {
+      //the problem is in this two requests
       this.teamService.getTeamsByUser(this.logged).subscribe((teams: Team[]) => {
+        console.log(teams);
+
         this.projectService.getAllByTeam(teams[0].id).subscribe((projects: any) => {
-          console.log(projects);
+          console.log(teams[0].id);
+
           this.joyrideService.startTour({
             steps: [
               'step1@home',
@@ -113,9 +117,12 @@ export class HomeComponent implements OnInit {
               `step4@equipe/${teams[0].id}/projetos`,
               `step5@equipe/${teams[0].id}/projetos`,
               `goToTasks@equipe/${teams[0].id}/projetos`,
-              `step6@projeto/${projects[1].id}/tarefas`,
+              `step6@projeto/${projects[0].id}/tarefas`,
             ],
           });
+          this.userService.setFirstAccessNull(this.logged).subscribe((user: User) => {
+            
+          })
         });
       });
 
@@ -168,7 +175,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  updateTeams(team : Team){
+  updateTeams(team: Team) {
     this.teams.push(team);
     this.switchCreateView();
   }
