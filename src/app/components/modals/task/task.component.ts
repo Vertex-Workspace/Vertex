@@ -75,7 +75,7 @@ export class TaskComponent implements OnInit {
     this.user = userService.getLogged();
   }
 
-  selectedComponent: string = 'log';
+  selectedComponent: string = 'attachments';
 
   soloResponsable: boolean = false;
   checkedReview: boolean = false;

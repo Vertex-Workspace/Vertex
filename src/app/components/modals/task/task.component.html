@@ -107,7 +107,7 @@
 </div>
 
 <app-confirm-modal *ngIf="isSending" [title]="' entregar a tarefa para análise'" [height]="'450px'" [width]="'400px'"
-    (confirmEvent)="taskAction($event)" [buttonText]="'Enviar Tarefa'">
+    (close)="taskAction($event)" [buttonText]="'Enviar Tarefa'">
     <ng-container #content>
         <div class="flex flex-col w-full justify-start items-start pt-5">
             <p class="regular-text">Revisador(a):</p>

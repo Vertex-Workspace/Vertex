@@ -238,7 +238,7 @@
         color: $secondColor;
         @apply p-2;
     }
-    
+
     .base {
         @apply flex flex-col p-5 rounded-md w-[1000px] h-[700px] max-w-[1000px] max-h-[700px] bg-white;
         -webkit-animation: scale-in 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -742,16 +742,7 @@
     }
     
     #red-btn{
-        background-color: $error;
-        color: white;
-        @apply px-2 w-[150px];
-        border: none !important;
-    }
-    #red-btn:hover{
-        background-color: $secondColor;
-        color: $primaryColor;
-        border: 1px solid $primaryColor;
-        transition: 0.1s;
+        @apply hidden;
     }
     
     .right {
@@ -841,5 +832,7 @@
         background-color: $card;
         color: $text;
     }
+
+    
 }
 

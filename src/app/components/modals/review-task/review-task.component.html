@@ -1,8 +1,8 @@
 <app-modal-warn [height]="'650px'" [width]="'900px'" (close)="closeReview()">
-    <section class="grid w-full h-[500px] pt-6" style="grid-template-columns: 35% 65%;">
-        <div class="flex flex-col h-full w-full">
+    <section>
+        <div class="s1">
             <p class="large-text self-start">Tarefas para serem Revisadas</p>
-            <div class="flex flex-col w-full h-[470px] overflow-y-auto overflow-x-hidden">
+            <div class="s2">
                 <ng-container *ngFor="let taskToReview of tasksToReview">
                     <div 
                     class="card-task-review" 
@@ -16,8 +16,8 @@
                 </ng-container>
             </div>
         </div>
-        <div class="pl-4 border-l-4">
-            <div class="flex flex-col w-full">
+        <div class="ns1">
+            <div class="ns2">
                 <h6 class="self-start">Responsável pelo Envio - {{taskBeingReviewed.name}}</h6>
                 <p class="medium-text self-start pt-4 pl-6">{{taskBeingReviewed.sender.username}} -
                     {{taskBeingReviewed.sender.email}}</p>
@@ -25,7 +25,7 @@
                 <p class="small-text self-start pl-6 h-[50px]">{{taskBeingReviewed.sender.finalDescription}}</p>
             </div>
 
-            <div class="flex w-full max-h-[161px] overflow-x-hidden overflow-y-auto mt-5">
+            <div class="fs1">
                 <table class="w-full">
                     <tr>
                         <th>Responsável</th>
@@ -38,10 +38,10 @@
                 </table>
             </div>
 
-            <div class="flex flex-col pt-3">
+            <div class="ts1">
                 <p class="medium-text self-start">Devolutiva</p>
-                <div class="grid grid-cols-2 pt-2">
-                    <textarea name="" id="" class="flex w-full h-[120px] outline-none px-3 py-1"
+                <div class="ts2">
+                    <textarea
                         placeholder="Insira uma descrição devolutiva..." [(ngModel)]="finalReviewResult.finalDescription"></textarea>
                         <div class="review-grade">
                             <p-rating [(ngModel)]="value" [cancel]="false"></p-rating>
