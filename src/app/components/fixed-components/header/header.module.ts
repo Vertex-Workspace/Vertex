@@ -19,7 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CascadeSelectModule,
     FormsModule,
     BadgeModule,
-    MatMenuModule
+    MatMenuModule,
+    TranslateModule
   ]
 })
 export class HeaderModule { }

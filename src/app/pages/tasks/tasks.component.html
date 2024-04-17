@@ -4,7 +4,7 @@
             <div>
                 <div class="flex flex-row gap-2">
                     <h4>
-                        {{'pages.tasks.title' | translate:{projectName:pageTitle} }}
+                        {{pageTitle}}
                     </h4>
                     <i class="pi pi-pencil pt-2 cursor-pointer" (click)="openProjectInfos()"></i>
                 </div>
@@ -71,42 +71,42 @@
 
         <section class="filter-settings regular-text mb-2">
             <ng-container *ngIf="filterOpen || orderOpen">
-                <div *ngIf="orderOpen">
-                    <p>{{'pages.tasks.orderBy' | translate}}</p>
-                    <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
-                        optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
-                        placeholder="Selecione" (ngModelChange)="updateOrderType($event)">
-                        <ng-template pTemplate="option" let-option>
-                            <div>
-                                <p>{{option.name}}</p>
-                            </div>
-                        </ng-template>
-
-                    </p-cascadeSelect>
-                </div>
                 <div *ngIf="filterOpen">
                     <p>{{'pages.tasks.filterBy' | translate}}</p>
                     <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
-                        optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
-                        placeholder="{{'pages.tasks.select' | translate}}">
-                        <ng-template let-option pTemplate="option">
-                            <div *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
-                                {{option.name}}
-                            </div>
-                            <div *ngIf="option.name === 'TEXT'">
-                                <input pInputText [(ngModel)]="simplePropertyFilter.value" type="text"
-                                    placeholder="{{'pages.tasks.filterByText' | translate}}" (click)="$event.stopPropagation()"
-                                    (ngModelChange)="updateFilterParams($event, option)">
-                            </div>
-                            <div *ngIf="option.name === 'NUMBER'">
-                                <p-inputNumber [(ngModel)]="simplePropertyFilter.value" placeholder="{{'pages.tasks.filterByNumber' | translate}}"
-                                    (click)="$event.stopPropagation()"
-                                    (ngModelChange)="updateFilterParams($event, option)"></p-inputNumber>
-                            </div>
-                        </ng-template>
-                    </p-cascadeSelect>
-                </div>
-            </ng-container>
+                    optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
+                    placeholder="{{'pages.tasks.select' | translate}}">
+                    <ng-template let-option pTemplate="option">
+                        <div *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
+                            {{option.name}}
+                        </div>
+                        <div *ngIf="option.name === 'TEXT'">
+                            <input pInputText [(ngModel)]="simplePropertyFilter.value" type="text"
+                            placeholder="{{'pages.tasks.filterByText' | translate}}" (click)="$event.stopPropagation()"
+                            (ngModelChange)="updateFilterParams($event, option)">
+                        </div>
+                        <div *ngIf="option.name === 'NUMBER'">
+                            <p-inputNumber [(ngModel)]="simplePropertyFilter.value" placeholder="{{'pages.tasks.filterByNumber' | translate}}"
+                            (click)="$event.stopPropagation()"
+                            (ngModelChange)="updateFilterParams($event, option)"></p-inputNumber>
+                        </div>
+                    </ng-template>
+                </p-cascadeSelect>
+            </div>
+            <div *ngIf="orderOpen">
+                <p>{{'pages.tasks.orderBy' | translate}}</p>
+                <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
+                    optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
+                    placeholder="Selecione" (ngModelChange)="updateOrderType($event)">
+                    <ng-template pTemplate="option" let-option>
+                        <div>
+                            <p>{{option.name}}</p>
+                        </div>
+                    </ng-template>
+    
+                </p-cascadeSelect>
+            </div>
+        </ng-container>
         </section>
 
         <section class="router">

@@ -13,7 +13,9 @@
                 "description2": "em todo o sistema, tarefas de todas as equipes e projetos.",
                 "placeholderSearchTask": "Pesquise por uma tarefa...",
                 "placeholderFilterBy": "Selecione",
-                "placeholderOrderBy": "Selecione"
+                "placeholderOrderBy": "Selecione",
+                "filterBy": "Filtrar por",
+                "orderBy": "Ordenar por"
             },
             "backBtn": "Voltar",
             "nextBtn": "Próximo",
@@ -35,7 +37,6 @@
             "declineInvite": "Recusar convite"
         },
         "projects": {
-            "titleTeam": "Equipe {{team}}",
             "titleTask": "Tarefas de {{team}}",
             "description1": "Projetos são os diferentes espaços de trabalho de uma equipe, neles",
             "description2": "é possível segmentar assuntos e organizar as tarefas sua e/ou do time.",
@@ -51,7 +52,6 @@
             "nextBtn": "Próximo"
         },
         "tasks": {
-            "title": "Projeto {{projectName}}",
             "description1": "Aqui ficarão centralizadas todas as tarefas do projeto, você poderá filtrar,",
             "description2": "ordenar e criar novas tarefas. Gerenciando o seu tempo e registrando cada etapa.",
             "viewModesTitle": "Modos de visualização das tarefas",
@@ -74,16 +74,16 @@
                 "Mural": "Mural"
             },
             "list": {
-                "table":{
+                "table": {
                     "name": "Nome",
                     "Status": "Status",
                     "Data": "Data",
                     "Dificuldade": "Dificuldade",
                     "Número": "Número",
-                    "Palavra-Chave":"Palavra-Chave"
+                    "Palavra-Chave": "Palavra-Chave"
                 }
             },
-            "calendar":{
+            "calendar": {
                 "months": {
                     "0": "Janeiro",
                     "1": "Fevereiro",
@@ -106,7 +106,115 @@
                     "4": "QUI",
                     "5": "SEX",
                     "6": "SAB"
+                },
+                "showTasks": "Mostrar tarefas",
+                "attTasks": "Atribuir tarefas",
+                "tasksAttFor": "Tarefas atribuídas para"
+            }
+        },
+        "team-informations": {
+            "editDesc": "Editar descrição",
+            "saveDesc": "Salvar descrição",
+            "Participantes": "Participantes",
+            "Grupos": "Grupos",
+            "participants": "Pesquise por um participante...",
+            "groups": "Pesquise por um grupo...",
+            "createNewGroup": "Novo grupo",
+            "copyInviteLink": "Copiar link de convite",
+            "memberSingle": "Membro",
+            "member": "{{number}} membro",
+            "members": "{{number}} membros",
+            "individualPerformance": "Desempenho individual",
+            "individualPerformanceDescription": "Lista o tempo dedicado dentro de todas as tarefas, de todos os projetos de {{teamName}}",
+            "teamPerformance": "Desempenho da equipe",
+            "teamPerformanceDescription": "Informações essenciais para rastrear o progresso e desempenho da equipe como um todo, com foco em tarefas.",
+            "reviews": "Revisões",
+            "reviewsReproved": "Reprovadas",
+            "reviewsApproved": "Aprovadas",
+            "generalAverage": "Média Geral",
+            "progress": "Progresso",
+            "taskProgress": "Andamento de Tarefas",
+            "timeDedicated": "Tempo Dedicado"
+        },
+        "user-informations": {
+            "locationNotProvided": "Localização não informada",
+            "noDescription": "Sem descrição",
+            "commonTasks": "Tarefas em comum com você",
+            "commonTasksPlaceholder": "Aqui aparecerá tarefas que você tem em comum com quem acessa o seu perfil.",
+            "personalPerformance": "Desempenho pessoal no sistema",
+            "tasksPie": "Tarefas - Pizza",
+            "tasksBar": "Tarefas - Barras",
+            "timeWorked": "Tempo Trabalhado em Tarefas no Vertex"
+        },
+        "user-settings": {
+            "Perfil": "Perfil",
+            "Segurança": "Segurança",
+            "Aparência": "Aparência",
+            "Equipes": "Equipes",
+            "Notificações": "Notificações",
+            "appearance": {
+                "title": "Aparência do Sistema",
+                "themePreference": "Preferência de tema",
+                "highlightColor": "Cor Destaque",
+                "lightTheme": "Tema Claro",
+                "fontSize": "Tamanho da letra",
+                "fontSizeDescription": "Defina o tamanho da letra para o sistema",
+                "fontStyle": "Estilo da letra",
+                "fontStyleDescription": "Defina o estilo da letra",
+                "accessibility": "Acessibilidade",
+                "enableSignLanguage": "Habilitar libras",
+                "enableTextReading": "Habilitar leitura de texto",
+                "Tema Claro": "Tema Claro",
+                "Tema Escuro": "Tema Escuro"
+            },
+            "notifications": {
+                "Notification": "Notificações",
+                "workspace": "Notificações de seu Espaço de Trabalho",
+                "options": {
+                    "1": "Receber envios e devolutivas de tarefas",
+                    "2": "Entrada de novos membros",
+                    "3": "Mudança de permissões",
+                    "4": "Atribuições de responsabilidade de projetos e tarefas",
+                    "5": "Qualquer atualização em tarefas",
+                    "6": "Enviar notificações por e-mail"
                 }
+            },
+            "profile": {
+                "title": "Perfil",
+                "email": "E-mail",
+                "name": "Nome",
+                "location": "Localização",
+                "description": "Descrição",
+                "visibilityProfile": "Visibilidade do Perfil",
+                "update": "Atualizar",
+                "1": "Mostrar gráficos de desempenho para equipe",
+                "2": "Deixar meu perfil visível a membros da equipe"
+            },
+            "security": {
+                "title": "Segurança",
+                "oldPassword": "Confirme sua senha antiga",
+                "newPassword": "Digite uma nova senha",
+                "newPasswordConf": "Confirme sua nova senha",
+                "requirements": "Requisitos para uma boa senha:",
+                "lengthRequirement": "*8 caracteres ou mais",
+                "uppercaseRequirement": "*Pelo menos uma letra maiúscula",
+                "specialCharRequirement": "*Pelo menos um caractere especial (#@!%$)",
+                "passwordMatchRequirement": "*As senhas coincidem",
+                "reset": "Redefinir"
+            },
+            "teams-settings": {
+                "title": "Equipes",
+                "searchPlaceholder": "Pesquise por uma equipe"
+            }
+        }
+    },
+    "components": {
+        "fixed-components": {
+            "header": {
+                "home": "Início"
+            },
+            "sidebar": {
+                
             }
         }
     }

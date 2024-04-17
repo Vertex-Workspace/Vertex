@@ -13,6 +13,7 @@ import { SecurityModule } from './security/security.module';
 import { FormsModule } from '@angular/forms';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -35,7 +36,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     SecurityModule,
     FormsModule,
     CascadeSelectModule,
-    InputSwitchModule
+    InputSwitchModule,
+    TranslateModule
   ]
 })
 export class UserSettingsModule { }

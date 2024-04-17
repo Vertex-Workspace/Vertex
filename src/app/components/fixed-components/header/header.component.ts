@@ -67,10 +67,13 @@ export class HeaderComponent implements OnInit {
     this.translate.use(sigla);
   }
 
-  
 
+
+  locationTranslation: string = "";
   ngOnInit() {
-   
+    this.translate.get('pages.' + this.location.toLowerCase()).subscribe((res: string) => {
+      this.locationTranslation = res || this.location;
+    });
   }
 
 

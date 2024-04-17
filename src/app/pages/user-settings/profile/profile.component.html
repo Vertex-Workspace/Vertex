@@ -1,7 +1,7 @@
 <div class="bg">
     <div class="title">
         <div>
-            <h5>Perfil</h5>
+            <h5>{{ 'pages.user-settings.profile.title' | translate }}</h5>
             <fa-icon [icon]="faUser" class="iconProfile size"></fa-icon>
         </div>
     </div>
@@ -12,7 +12,7 @@
                 <section>
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="divEachInput" *ngFor="let item of itemsList">
-                            <p class="medium-text">{{item.option}}</p>
+                            <p class="medium-text">{{ 'pages.user-settings.profile.' + item.id | translate }}</p>
                             <div class="iconInputBlock">
                                 <div class="iconBox" *ngIf="item.id != 'description'">
                                     <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
@@ -26,11 +26,11 @@
                 </section>
 
                 <div class="charts">
-                    <p class="medium-text">Visibilidade do Perfil</p>
-                    <div *ngFor="let toogle of tooglesList; index as item">
-                        <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
+                    <p class="medium-text">{{ 'pages.user-settings.profile.visibilityProfile' | translate }}</p>
+                    <div *ngFor="let toggle of tooglesList; index as item">
+                        <fa-icon (click)="toogleCharts(item)" [icon]="toggle.icon" class="iconProfile">
                         </fa-icon>
-                        <p class="small-text px-3">{{toogle.text}}</p>
+                        <p class="small-text px-3">{{ 'pages.user-settings.profile.' + toggle.id | translate }}</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                             <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
                                 [disabled]="contentEditable ? false : true"
                                 [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit" (click)="onSubmit()">
-                                Atualizar
+                                {{ 'pages.user-settings.profile.update' | translate }}
                             </button>
                         </div>
                     </div>

@@ -71,7 +71,7 @@
                     </div>
                     <section class="filter-settings" *ngIf="filterOpen || orderOpen">
                         <ng-container *ngIf="filterOpen">
-                            <p>{{ 'pages.home.allTasks.placeholderFilterBy' | translate }}</p>
+                            <p>{{ 'pages.home.allTasks.filterBy' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="selectedFilter" (ngModelChange)="updateOrderType($event)"
                                 [options]="filterOptions" optionLabel="name" optionGroupLabel="name"
                                 [optionGroupChildren]="['values']" [style]="{ minWidth: '14rem' }"
@@ -79,7 +79,7 @@
                             </p-cascadeSelect>
                         </ng-container>
                         <ng-container *ngIf="orderOpen">
-                            <p>{{ 'pages.home.allTasks.placeholderOrdenarPor' | translate }}</p>
+                            <p>{{ 'pages.home.allTasks.orderBy' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
                                 [style]="{ minWidth: '13rem' }"

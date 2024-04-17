@@ -181,6 +181,14 @@ export class TeamInformationsComponent implements OnInit {
 
     }
 
+    returnMemberOrMembers(): string {
+        if (this.team.users!.length > 1) {
+            return "members"
+        } else {
+            return "member"
+        }
+    }
+
     deleteGroup(groupId: Group): void {
         this.groupService.delete(groupId.id).subscribe((group: Group) => {
             this.alertService.successAlert('Grupo deletado com sucesso')

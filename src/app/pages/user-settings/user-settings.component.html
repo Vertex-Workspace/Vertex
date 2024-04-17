@@ -14,7 +14,7 @@
                         <!-- Take each option inside the itemsList -->
                         <button class="divOptions" [ngClass]="click === item.id ? 'click' : 'default'"
                             (click)="clickOption(item.id)">
-                            <p class="medium-text" [ngClass]="click === item.id ? 'click' : 'default'">{{item.option}}</p>
+                            <p class="medium-text" [ngClass]="click === item.id ? 'click' : 'default'">{{'pages.user-settings.'+item.option | translate}}</p>
                         </button>
                     </li>
                 </ul>

@@ -3,8 +3,7 @@
         <!-- RIGHT SIDE TASKS/TEAMS -->
         <div class="container-grid">
             <div class="flex flex-row items-end gap-3">
-                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{'pages.projects.titleTeam' |
-                    translate:{team:teamName} }}</h4>
+                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName }}</h4>
             </div>
 
             <div class="text small-text pt-2">
@@ -46,7 +45,7 @@
         <div class="container-grid">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
-                    <h4>{{'pages.projects.titleTask' | translate:{team:teamName} }}</h4>
+                    <h4>{{teamName }}</h4>
                 </div>
 
                 <div class="text small-text pt-2">

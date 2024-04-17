@@ -10,6 +10,7 @@ import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/conf
 import { ProgressBarModule } from 'primeng/progressbar';
 import { FormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [TeamInformationsComponent],
@@ -23,7 +24,8 @@ import { ImageModule } from 'primeng/image';
     CardUserModule,
     ConfirmModalModule,
     ProgressBarModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class TeamInformationsModule { 

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { faUser, faEnvelope,
-    faEarthAmericas, faKey, faAngleDown, faToggleOff,
-     faPencil, faToggleOn, faCircleUser,
-    faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUser, faEnvelope,
+  faEarthAmericas, faKey, faAngleDown, faToggleOff,
+  faPencil, faToggleOn, faCircleUser,
+  faPenToSquare
+} from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
@@ -46,22 +48,22 @@ export class ProfileComponent {
   selectedFile !: any;
 
   itemsList = [
-    { id: 'email', icon: faEnvelope, option: 'E-mail', formControlName: 'email'},
-    { id: 'name', icon: faUser, option: 'Nome', formControlName: 'name'},
-    { id: 'location', icon: faEarthAmericas, option: 'Localização', formControlName: 'location'},
-    { id: 'description', icon: faEarthAmericas, option: 'Descrição', formControlName: 'description'}
+    { id: 'email', icon: faEnvelope, option: 'E-mail', formControlName: 'email' },
+    { id: 'name', icon: faUser, option: 'Nome', formControlName: 'name' },
+    { id: 'location', icon: faEarthAmericas, option: 'Localização', formControlName: 'location' },
+    { id: 'description', icon: faEarthAmericas, option: 'Descrição', formControlName: 'description' }
   ];
 
   tooglesList = [
-    {text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff},
-    {text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff}
+    { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff },
+    { id: 2, text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff }
   ];
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alert: AlertService,
-  ){
+  ) {
     this.getLoggedUser();
   }
 
@@ -77,34 +79,34 @@ export class ProfileComponent {
     })
 
     console.log(this.logged);
-    
+
   }
 
   getLoggedUser(): void {
-      this.logged = this.userService.getLogged();
+    this.logged = this.userService.getLogged();
   }
 
   // Alter the status of toggle
-  toogleCharts(item :number): void{
-    if(this.tooglesList[item].icon == faToggleOff){
+  toogleCharts(item: number): void {
+    if (this.tooglesList[item].icon == faToggleOff) {
       this.tooglesList[item].icon = faToggleOn;
-    }else {
+    } else {
       this.tooglesList[item].icon = faToggleOff;
     }
   }
 
-  clickOption(id: string): void{
+  clickOption(id: string): void {
     this.click = id;
     this.contentEditable = !this.contentEditable
   }
 
   onChange(): void {
-    if(!this.contentEditable){
+    if (!this.contentEditable) {
       this.contentEditable = !this.contentEditable;
     }
   }
 
-  closeModal():void {
+  closeModal(): void {
     this.validInput = true;
   }
 
@@ -117,7 +119,7 @@ export class ProfileComponent {
       .subscribe(() => {
         this.alert.successAlert('Informações atualizadas com sucesso!')
       })
-    
+
   }
 
   organizeValues(): void {
@@ -136,10 +138,10 @@ export class ProfileComponent {
 
   }
 
-  onFileSelected(e: any): void {    
+  onFileSelected(e: any): void {
     this.selectedFile = e.target.files[0]
     const fd: FormData = new FormData();
-    fd.append('file', this.selectedFile, this.selectedFile.name);    
+    fd.append('file', this.selectedFile, this.selectedFile.name);
 
     console.log(fd);
 
@@ -159,6 +161,6 @@ export class ProfileComponent {
         this.userService.updateLoggedUser(user);
       })
   }
-  
+
 
 }

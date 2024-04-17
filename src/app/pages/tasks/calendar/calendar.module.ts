@@ -7,6 +7,7 @@ import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn
 import { CardModule } from 'src/app/components/reusable-components/card/card.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -25,7 +26,8 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     DragDropModule,
     CardModule,
     DragDropModule,
-    PipesModule
+    PipesModule,
+    TranslateModule
   ]
 })
 export class CalendarModule { }

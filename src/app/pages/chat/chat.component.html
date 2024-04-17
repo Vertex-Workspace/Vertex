@@ -48,7 +48,42 @@
                 </div>
             </div>
             <div *ngIf="chat" class="center-div">
-                <!-- Chat messages section -->
+                <div class="min-h-[60px]" *ngIf="chat">
+                    <div *ngFor="let message of chat.messages" class="message-container"
+                        [ngClass]="message.user !== logged.firstName ? 'left' : 'right'">
+                        <div class="flex items-center gap-2">
+                            <p *ngIf="(logged.firstName != message.user)" class="username">{{ message.user }}</p>
+                            <p *ngIf="(logged.firstName == message.user)" class="username">Eu</p>
+                        </div>
+
+                        <div *ngIf="!message.file"
+                            [ngClass]="logged.firstName!==message.user ? 'message-bubble-left' : 'message-bubble-right'">
+                            <p class="contentMessage whitespace-pre-wrap">{{ message.contentMessage }}</p>
+                            <p [ngClass]="message.user !== logged.firstName ? 'timestamp' : 'timestamp text-right'">{{
+                                generateTime(message) }}</p>
+                        </div>
+
+                        <div *ngIf="message.file"
+                            [ngClass]="message.user !== logged.firstName ? 'message-bubble-left with-photo' : 'message-bubble-right with-photo items-end'">
+                            <div class="w-full h-full flex justify-center items-center gap-3">
+                                <img [ngClass]="messageFileIncludesImage(message) ? 'ml-[10px] mt-[5px] image':'archive'"
+                                    draggable="false" [src]="getIconSrc(message)">
+                                <div class="flex h-full items-center gap-5">
+                                    <p *ngIf="!messageFileIncludesImage(message)">{{ message.file.name }}</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between">
+                                <p
+                                    [ngClass]="message.user !== logged.firstName ? 'timestamp text-[#777777]' : 'timestamp text-[#fff]'">
+                                    {{ generateTime(message) }}
+                                </p>
+                                <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">
+                                    <i class="pi pi-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <form *ngIf="chat && chat.messages!=null" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)"
                 #sendForm="ngForm" class="high-input-div justify-center">
