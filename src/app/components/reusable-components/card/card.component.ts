@@ -59,8 +59,6 @@ export class CardComponent implements OnInit {
   modalDelete2: boolean = false;
 
   settings = [
-    { id: 'clock', icon: this.faClock, onclick: () => this.clock(), disabled: false},
-    { id: 'chat', icon: this.faEnvelope, onclick: () => this.openChat(), disabled: false},
     { id: 'delete', icon: this.faTrashCan, onclick: () => this.openModalDelete(), disabled: true }
   ];
 

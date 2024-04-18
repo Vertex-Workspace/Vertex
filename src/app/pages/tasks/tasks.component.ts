@@ -175,7 +175,7 @@ export class TasksComponent implements OnInit {
     if(project.projectDependency === null) return
     this.taskService.getTasksDone(project.projectDependency.id).subscribe((bool: Boolean) => {
       console.log(bool)
-      if(!bool){
+      if(bool){
         this.router.navigate([`/equipe/${project.idTeam}/projetos`])
         this.alertService.notificationAlert("Esse projeto necessita a conclusão do projeto " +
         project.projectDependency.name)
