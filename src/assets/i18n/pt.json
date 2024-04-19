@@ -198,6 +198,7 @@
                 "requirements": "Requisitos para uma boa senha:",
                 "lengthRequirement": "*8 caracteres ou mais",
                 "uppercaseRequirement": "*Pelo menos uma letra maiúscula",
+                "lowercaseRequirement": "*Pelo menos uma letra minúscula",
                 "specialCharRequirement": "*Pelo menos um caractere especial (#@!%$)",
                 "passwordMatchRequirement": "*As senhas coincidem",
                 "reset": "Redefinir"
@@ -211,10 +212,27 @@
     "components": {
         "fixed-components": {
             "header": {
-                "home": "Início"
+                "home": "Página Inicial",
+                "perfil de": "Perfil de",
+                "seu perfil": "Seu perfil",
+                "configurações e preferências": "Configurações e Preferências"
             },
             "sidebar": {
-                
+                "Pesquisar": "Pesquisar",
+                "Conversas": "Conversas",
+                "Perfil": "Perfil",
+                "Configurações": "Configurações",
+                "Sair": "Sair"
+            }
+        },
+        "modals": {
+            "confirm-modal": {
+                "confirm_message": "Tem certeza que deseja {{out}}",
+                "cancel_button": "Cancelar",
+                "confirm_button": "Confirmar"
+            },
+            "groups": {
+                "title": "Grupos"
             }
         }
     }

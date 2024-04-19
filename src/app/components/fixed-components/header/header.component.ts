@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit {
     this.locations
       .find((loc: LocationItem) => {
         if (activeRoute.includes(loc.url)) {
-          this.location = loc.name;
+          this.location = this.translate.instant('components.fixed-components.header.' + loc.name.toLowerCase());
         }
       })
 

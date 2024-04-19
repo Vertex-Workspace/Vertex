@@ -3,7 +3,7 @@
     <div class="current-location medium-text">
       <i (click)="back()" class="pi pi-angle-double-left back"
         *ngIf="location !== 'Home' || location.includes('aceitar-convite')"></i>
-      <p>{{ location }}</p>
+      <p>{{ location | translate }}</p>
     </div>
     <div class="items-header">
       <div class="menu-container">

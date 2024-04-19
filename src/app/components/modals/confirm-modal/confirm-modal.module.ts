@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ConfirmModalComponent } from './confirm-modal.component';
 import { DeletedModule } from '../deleted/deleted.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   imports: [
     CommonModule,
     DeletedModule,
-    DragDropModule
+    DragDropModule,
+    TranslateModule
   ]
 })
 export class ConfirmModalModule { }
