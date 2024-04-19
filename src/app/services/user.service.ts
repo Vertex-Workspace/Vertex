@@ -18,8 +18,6 @@ import { Notification } from '../models/class/notification';
 })
 export class UserService {
 
-  private $logged !: BehaviorSubject<User>;
-  private logged !: User;
   private defaultImg: string = defaultImage;
 
   constructor(
@@ -66,12 +64,8 @@ export class UserService {
     this.http
     .post<User>(`${URL}login`, user, {withCredentials: true}).subscribe(
       (user: User) => {
-        console.log(user);
         this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
-        this.logged = user;
-        this.userState.setAuthenticationStatus(true);
         this.saveLoggedUser(user);
-        this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
         this.router.navigate(['/home']);
     }, (e) => {
       this.alert.errorAlert(e.error);
@@ -83,14 +77,22 @@ export class UserService {
   }
 
   public logout(): void {
+    this.http.post(`${URL}logout`, {}, {withCredentials: true})
+    .subscribe(() => this.logoutFrontEnd());
+  }
+
+  private logoutFrontEnd(){
     this.userState.setAuthenticationStatus(false);
     localStorage.removeItem('logged'); //cookies
     this.router.navigate(['/login']);
   }
 
   getLogged(): any {
-    let user: User = JSON.parse(localStorage.getItem('logged') || '');
-    return user
+    const loggedIntoLocalStorage = JSON.parse(localStorage.getItem('logged')!);
+    if(loggedIntoLocalStorage == null || loggedIntoLocalStorage == ''){
+      this.logoutFrontEnd();
+    }
+    return loggedIntoLocalStorage
   }
   
   public getOneById(id: number): Observable < User > {
@@ -117,7 +119,7 @@ export class UserService {
 
   public patchPersonalization(personalization: Personalization): Observable<User> {
     return this.http
-    .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization, {withCredentials: true});
+    .patch<any>(`${URL}user/${this.getLogged().id}/personalization`, personalization, {withCredentials: true});
   }
 
   public patchPassword(emailTo: String, password: String): Observable<User> {

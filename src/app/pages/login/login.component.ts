@@ -54,8 +54,6 @@ export class LoginComponent implements OnInit {
 
     })
 
-    this.userState
-      .getAuthenticationStatus();
   }
 
   onSubmit(): void {

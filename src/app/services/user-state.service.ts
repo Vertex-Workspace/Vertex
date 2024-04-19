@@ -33,20 +33,30 @@ export class UserStateService {
   async getAuthenticatedUser(): Promise<boolean> {
     try{
       if(!document.cookie.includes('JWT')){
+        this.notLogged();
         return false;
       }
+      console.log("Cookie Existe");
+      
       const user : User | undefined = await this.http.get<User>(`${URL}authenticate-user`, { withCredentials: true }).toPromise();
       if(user != undefined){
-        this.setAuthenticationStatus(true);
         this.saveLoggedUser(user!);
+        this.setAuthenticationStatus(true);
+        return true;
+      } else {
+        this.notLogged();
+        return false;
       }
-      return true;
     } catch(error){
-      this.setAuthenticationStatus(false);
-      this.router.navigate(['/login']);
-      localStorage.removeItem('logged');
+      this.notLogged();
       return false;
     }
+  }
+
+  public notLogged(){
+    this.setAuthenticationStatus(false);
+    localStorage.removeItem('logged');
+    this.router.navigate(['/login']);
   }
 
   public saveLoggedUser(user: User): void {

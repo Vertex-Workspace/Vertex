@@ -58,7 +58,7 @@ export class AppComponent {
   faPaperclip = faPaperclip;
   faMicrophoneLines = faMicrophoneLines;
 
-  userLogged: boolean = true;
+  userLogged: boolean = false;
   logged!: User;
 
   miniChatOpen: boolean = false;
@@ -72,65 +72,79 @@ export class AppComponent {
   url: string = '';
 
   constructor(
-    private personalization: PersonalizationService,
     private contexts: ChildrenOutletContexts,
     public router: Router,
     private userService: UserService,
     private userState: UserStateService,
     private alertService: AlertService,
-    private teamService: TeamService,
     public textSpeechService: TextSpeechService,
     private notificationWebSocket: NotificationWebSocketService
   ) {
-    this.userState.getAuthenticatedUser().then((user) => { this.userLogged = user; });
+    this.userState.getAuthenticationStatus().subscribe((userLogged) => {
+      this.userLogged = userLogged;
+      if(userLogged && this.renderPersonalization == false){
+        this.settingsRequest();
+      }
+    }
+    );
   }
 
+
+
+  private userBasicData() {
+    this.userState.getAuthenticatedUser().then((user) => {
+      if(user){
+        this.userLogged = true;
+        this.logged = this.userService.getLogged()!;
+        this.settingsRequest();
+        } else {
+          this.router.navigate(['/login']);
+        }
+  });
+  }
   renderPersonalization: boolean = false;
+
+  private settingsRequest(){
+    if (this.logged.personalization!.theme == 0) {
+      document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
+      document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
+      
+      document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
+      document.documentElement.style.setProperty('--card', "#FFFFFF");
+      
+      document.documentElement.style.setProperty('--text', "#000000");
+    } else if (this.logged.personalization!.theme == 1) {
+      document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
+      document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
+      document.documentElement.style.setProperty('--emphasis', "#161616");
+      
+      document.documentElement.style.setProperty('--card', "#161616");
+      
+      document.documentElement.style.setProperty('--text', "#BABABA");
+    }
+    
+    document.documentElement.style.setProperty('--smallText', (this.logged.personalization?.fontSize! - 2) + 'px');
+    document.documentElement.style.setProperty('--regularText', (this.logged.personalization?.fontSize!) + 'px');
+    document.documentElement.style.setProperty('--mediumText', (this.logged.personalization?.fontSize! + 2) + 'px');
+    document.documentElement.style.setProperty('--largeText', (this.logged.personalization?.fontSize! + 4) + 'px');
+    document.documentElement.style.setProperty('--fontFamily', this.logged.personalization?.fontFamily!);
+    
+    this.renderPersonalization = true;
+    //Normal Notifications request
+    this.getNotificationBadge();
+    
+    //Web Socket
+    this.notificationWebSocket.listenToServer().subscribe(
+      (change) => {
+        this.getNotificationBadge();
+        
+      }
+      );
+  }
 
   // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
-    if (this.userLogged) {
-      this.userService.getOneById(this.userService.getLogged().id).subscribe((user: User) => {
-        this.logged = user;
-        if (this.logged.personalization!.theme == 0) {
-          document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
-          document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
-
-          document.documentElement.style.setProperty('--emphasis', "#D9D9D9");
-          document.documentElement.style.setProperty('--card', "#FFFFFF");
-
-          document.documentElement.style.setProperty('--text', "#000000");
-        } else if (this.logged.personalization!.theme == 1) {
-          document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorDark!);
-          document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorDark!);
-          document.documentElement.style.setProperty('--emphasis', "#161616");
-
-          document.documentElement.style.setProperty('--card', "#161616");
-
-          document.documentElement.style.setProperty('--text', "#BABABA");
-        }
-
-        document.documentElement.style.setProperty('--smallText', (this.logged.personalization?.fontSize! - 2) + 'px');
-        document.documentElement.style.setProperty('--regularText', (this.logged.personalization?.fontSize!) + 'px');
-        document.documentElement.style.setProperty('--mediumText', (this.logged.personalization?.fontSize! + 2) + 'px');
-        document.documentElement.style.setProperty('--largeText', (this.logged.personalization?.fontSize! + 4) + 'px');
-        document.documentElement.style.setProperty('--fontFamily', this.logged.personalization?.fontFamily!);
-
-        this.renderPersonalization = true;
-        //Normal Notifications request
-        this.getNotificationBadge();
-
-        //Web Socket
-        this.notificationWebSocket.listenToServer().subscribe(
-          (change) => {
-            this.getNotificationBadge();
-
-          }
-        );
-      });
-
-    }
-
+    this.userBasicData();
   }
 
   notificationBadge: number = 0;
