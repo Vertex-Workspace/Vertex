@@ -16,35 +16,32 @@ export class NoteService {
 
   public create(note: Note, userId: number, projectId: number): Observable<Note> {
     return this.http
-      .post<Note>(`${URL}note/${projectId}/${userId}`, note);
+      .post<Note>(`${URL}note/${projectId}/${userId}`, note, {withCredentials: true});
   }
 
   public getAllByProject(projectId: number): Observable<Note[]> {
     return this.http 
-      .get<Note[]>(`${URL}note/${projectId}`)
-      .pipe(map((notes: Note[]) => 
-        notes.map((note: Note) => new Note(note))
-      ));
+      .get<Note[]>(`${URL}note/${projectId}`, {withCredentials: true});
   }
 
   public patchAttribute(note: Note): Observable<Note> {
     return this.http
-      .patch<Note>(`${URL}note`, note)
+      .patch<Note>(`${URL}note`, note, {withCredentials: true})
   }
 
   public delete(id: number): Observable<Note> {    
     return this.http
-      .delete<Note>(`${URL}note/${id}`);
+      .delete<Note>(`${URL}note/${id}`, {withCredentials: true});
   }
 
   public uploadImage(id: number, fd: FormData) {
     return this.http
-      .patch<Note>(`${URL}note/upload/${id}`, fd);
+      .patch<Note>(`${URL}note/upload/${id}`, fd, {withCredentials: true});
   }
 
   public removeImage(noteId: number, fileId: number): Observable<Note> {
     return this.http
-      .delete<Note>(`${URL}note/remove/${noteId}/${fileId}`);
+      .delete<Note>(`${URL}note/remove/${noteId}/${fileId}`, {withCredentials: true});
   }
 
 }

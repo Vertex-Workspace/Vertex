@@ -46,9 +46,6 @@
                         [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[4] }"></app-card-list>
 
                 </div>
-                <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
-                (close)="switchCreateView()" 
-                *ngIf="isCreating" [typeString]="'team'" (sendTeam)="updateTeams($event)"></app-create-team-project>
             </div>
         </div>
 
@@ -114,6 +111,10 @@
     </div>
 </section>
 <app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
+
+<app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
+(close)="switchCreateView()" 
+*ngIf="isCreating" [typeString]="'team'" (sendTeam)="updateTeams($event)"></app-create-team-project>
 
 <ng-template #prevButton>
     <button class="btn">

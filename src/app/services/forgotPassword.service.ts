@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { URL } from './path/api_url';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ForgotPasswordService {
   } 
 
   public sendMessageToEmail(emailTo:String): Observable<any> {
-    return this.http.get("http://localhost:7777/forgotPassword/"+emailTo);
+    return this.http.get(`${URL}forgotPassword/"${emailTo}`, {withCredentials: true});
   }
 
 }

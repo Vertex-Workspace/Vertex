@@ -10,7 +10,7 @@ import { AlertService } from './alert.service';
 import { URL } from './path/api_url';
 import { UserStateService } from './user-state.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Notification } from '../models/class/notification';
 
 @Injectable({
@@ -18,8 +18,6 @@ import { Notification } from '../models/class/notification';
 })
 export class UserService {
 
-  private $logged !: BehaviorSubject<User>;
-  private logged !: User;
   private defaultImg: string = defaultImage;
 
   constructor(
@@ -35,10 +33,12 @@ export class UserService {
     form.image = this.defaultImg;
     form.firstAccess = true;
 
-    this.http.post<User>(`${URL}user`, form).subscribe(
+    this.http.post<User>(`${URL}user/register`, form).subscribe(
       (userRes: User) => {
-        console.log(userRes);
         this.login(userRes);
+    }, (e) => {
+      this.alert.errorAlert(e.error);
+  
     });
   }
 
@@ -57,15 +57,19 @@ export class UserService {
     };
 
     return this.http
-      .post<User>(`${URL}user/authenticate`, user);
+      .post<User>(`${URL}authenticate-user`, user, {withCredentials: true});
   }
 
   public login(user: User): void {
-    this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
-    this.userState.setAuthenticationStatus(true);
-    this.saveLoggedUser(user);
-    this.logged = user;
-    this.router.navigate(['/home']);
+    this.http
+    .post<User>(`${URL}login`, user, {withCredentials: true}).subscribe(
+      (user: User) => {
+        this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
+        this.saveLoggedUser(user);
+        this.router.navigate(['/home']);
+    }, (e) => {
+      this.alert.errorAlert(e.error);
+    });
   }
 
   public saveLoggedUser(user: User): void {
@@ -73,55 +77,49 @@ export class UserService {
   }
 
   public logout(): void {
+    this.http.post(`${URL}logout`, {}, {withCredentials: true})
+    .subscribe(() => this.logoutFrontEnd());
+  }
+
+  private logoutFrontEnd(){
     this.userState.setAuthenticationStatus(false);
     localStorage.removeItem('logged'); //cookies
     this.router.navigate(['/login']);
   }
 
   getLogged(): any {
-    let user: User = JSON.parse(localStorage.getItem('logged') || '');
-    return user;
-  }
-
-  public getAll(): Observable<User[]> {
-    return this.http
-      .get<User[]>(`${URL}user`)
-      .pipe(map((users: User[]) => users.map(user => new User(user))));
+    const loggedIntoLocalStorage = JSON.parse(localStorage.getItem('logged')!);
+    if(loggedIntoLocalStorage == null || loggedIntoLocalStorage == ''){
+      this.logoutFrontEnd();
+    }
+    return loggedIntoLocalStorage
   }
   
   public getOneById(id: number): Observable < User > {
     return this.http
-    .get<User>(`${URL}user/${id}`);
+    .get<User>(`${URL}user/${id}`, {withCredentials: true});
   }
 
   public getInformationsById(id: number, loggedUser: number): Observable <User> {
     return this.http
-    .get<User>(`${URL}user/${id}/informations/${loggedUser}`);
+    .get<User>(`${URL}user/${id}/informations/${loggedUser}`, {withCredentials: true});
   }
 
   public getUsersByGroup(groupId: number): Observable<User[]> {
     return this.http
-    .get<User[]>(`${URL}user/usersByGroup/${groupId}`)
-    .pipe(map((users: User[]) => users.map(user => new User(user))));
+    .get<User[]>(`${URL}user/usersByGroup/${groupId}`, {withCredentials: true});
   }
   
   public getUsersByTeam(teamId: any): Observable < User[] > {
     return this.http
-    .get<User[]>(`${URL}team/usersByTeam/${teamId}`)
-    .pipe(map((users: User[]) => users.map(user => new User(user))));
-  }
-  
-  
-  public getOneByEmail(email: string): Observable < User > {
-    return this.http
-    .get<User>(`${URL}user/email/${email}`)
-    .pipe(map((user: User) => new User(user)));
+    .get<User[]>(`${URL}team/usersByTeam/${teamId}`, {withCredentials: true});
   }
   
 
+
   public patchPersonalization(personalization: Personalization): Observable<User> {
     return this.http
-    .patch<any>(`${URL}user/${personalization.id}/personalization`, personalization);
+    .patch<any>(`${URL}user/${this.getLogged().id}/personalization`, personalization, {withCredentials: true});
   }
 
   public patchPassword(emailTo: String, password: String): Observable<User> {
@@ -132,30 +130,26 @@ export class UserService {
     }
     
     return this.http
-    .patch<any>(`${URL}user/edit-password`, passwordObj);
+    .patch<any>(`${URL}user/edit-password`, passwordObj, {withCredentials: true});
   }
 
   public patchFirstAccess(user:User): any {
     this.http
-    .patch<User>(`${URL}user/first-access`, user).subscribe((user: User) => {
+    .patch<User>(`${URL}user/first-access`, user, {withCredentials: true}).subscribe((user: User) => {
       this.saveLoggedUser(user);
     });
   }
   
-  public delete (id: number): Observable < User > {
-    return this.http
-    .delete<User>(`${URL}user/${id}`);
-  }
-  
+
   public update(user: User): Observable < User > {
     this.saveLoggedUser(user);
     return this.http
-    .put<User>(`${URL}user`, user);
+    .put<User>(`${URL}user`, user, {withCredentials: true});
   }
   
   public uploadImage(file: FormData, id: number): Observable < any > {
     return this.http
-    .patch<any>(`${URL}user/upload/${id}`, file);
+    .patch<any>(`${URL}user/upload/${id}`, file, {withCredentials: true});
   }
   
   public updateLoggedUser(user: User): void {
@@ -164,21 +158,21 @@ export class UserService {
 
   public getNotifications(userID: number): Observable<Notification[]> {
     return this.http
-      .get<Notification[]>(`${URL}user/${userID}/notification`);
+      .get<Notification[]>(`${URL}user/${userID}/notification`, {withCredentials: true});
   }
 
   public readNotifications(userID: number, listID: Notification[]): Observable<Notification[]>{
     return this.http
-      .patch<Notification[]>(`${URL}user/${userID}/notification/read`, listID);
+      .patch<Notification[]>(`${URL}user/${userID}/notification/read`, listID, {withCredentials: true});
   }
 
   public deleteNotifications(userID: number, listID: Notification[]) {
     return this.http
-      .patch(`${URL}user/${userID}/notification/delete`, listID);
+      .patch(`${URL}user/${userID}/notification/delete`, listID, {withCredentials: true});
   }
 
   public notificationSettings(userID: number, settingID: number) {
     return this.http
-      .patch<User>(`${URL}user/${userID}/notification/settings/${settingID}`, {});
+      .patch<User>(`${URL}user/${userID}/notification/settings/${settingID}`, {}, {withCredentials: true});
   }
 }

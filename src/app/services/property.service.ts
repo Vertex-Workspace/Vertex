@@ -16,18 +16,18 @@ export class PropertyService {
   ) { }
 
   public createOrEditProperty(projectID:number, property : Property): Observable<Project> {
-    return this.http.post<Project>(`${URL}property/project/${projectID}`, property);
+    return this.http.post<Project>(`${URL}property/project/${projectID}`, property, {withCredentials: true});
   }
 
   public deleteProperty(projectID:number, propertyId : number): Observable<Project> {
-    return this.http.delete<Project>(`${URL}property/${propertyId}/project/${projectID}`, {});
+    return this.http.delete<Project>(`${URL}property/${propertyId}/project/${projectID}`, {withCredentials: true});
   }
 
   public deletePropertyList(propertyID:number, propertyListId : number): Observable<Project> {
-    return this.http.delete<Project>(`${URL}property/${propertyID}/property-list/${propertyListId}`, {});
+    return this.http.delete<Project>(`${URL}property/${propertyID}/property-list/${propertyListId}`, {withCredentials: true});
   }
 
   public changeColor(propertyList : PropertyList): Observable<Property> {
-    return this.http.patch<Property>(`${URL}property/property-list-color`, propertyList);
+    return this.http.patch<Property>(`${URL}property/property-list-color`, propertyList, {withCredentials: true});
   }
 }

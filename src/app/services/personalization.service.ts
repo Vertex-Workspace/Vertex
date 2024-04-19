@@ -15,11 +15,10 @@ export class PersonalizationService {
 
   
   findById(id:number): Observable<Personalization> {
-    return this.http.get<Personalization>(`${URL}personalization/${id}`)
-    .pipe(map((personalization: Personalization) => new Personalization(personalization)));;
+    return this.http.get<Personalization>(`${URL}personalization/${id}`, {withCredentials: true});
   }
   getAllPersonalization(): Observable<Personalization[]> {
-    return this.http.get<Personalization[]>(`${URL}personalization`);
+    return this.http.get<Personalization[]>(`${URL}personalization`, {withCredentials: true});
   }
 
   

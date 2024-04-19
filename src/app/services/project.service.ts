@@ -21,50 +21,50 @@ export class ProjectService {
 
   public getOneById(id: number, userID: number): Observable<Project> {
     return this.http
-      .get<Project>(`${URL}project/${id}/user/${userID}`);
+      .get<Project>(`${URL}project/${id}/user/${userID}`, {withCredentials: true});
   }
 
   public create(project: Project, teamId: number): Observable<Project> {
     return this.http
-      .post<Project>(`${URL}project/${teamId}`, project);
+      .post<Project>(`${URL}project/${teamId}`, project, {withCredentials: true});
   }
 
   public delete(id: number) {
     return this.http
-      .delete(`${URL}project/${id}`);
+      .delete(`${URL}project/${id}`, {withCredentials: true});
   }
 
   public getAllByTeam(id: number): Observable<Project[]> {
     return this.http
-      .get<Project[]>(`${URL}project/team/${id}`)
+      .get<Project[]>(`${URL}project/team/${id}`, {withCredentials: true})
   }
 
   public existsById(id: number): Observable<boolean> {
     return this.http
-      .get<boolean>(`${URL}project/exists/${id}`)
+      .get<boolean>(`${URL}project/exists/${id}`, {withCredentials: true})
   }
 
   public getTasksByProject(id: number): Observable<Task[]> {
     return this.http
-      .get<Task[]>(`${URL}project/${id}/tasks`)
+      .get<Task[]>(`${URL}project/${id}/tasks`, {withCredentials: true})
   }
 
   public updateImage(teamId: number, fd: FormData): Observable<Project>{
     return this.http
-      .patch<Project>(`${URL}project/image/${teamId}`, fd)
+      .patch<Project>(`${URL}project/image/${teamId}`, fd, {withCredentials: true})
   }
 
   public getProjectByCollaborators(team: number, user: User): Observable<Project[]> {
-    return this.http.get<Project[]>(`${URL}project/${team}/${user.id}`);
+    return this.http.get<Project[]>(`${URL}project/${team}/${user.id}`, {withCredentials: true});
   }
 
   public patchValue(project: ProjectEdit):Observable<Project>{
-    return this.http.patch<Project>(`${URL}project/update`, project);
+    return this.http.patch<Project>(`${URL}project/update`, project, {withCredentials: true});
   }
 
   public returnAllCollaborators(id: number): Observable<ProjectCollaborators> {
     return this.http
-      .get<ProjectCollaborators>(`${URL}project/getAll/${id}`);
+      .get<ProjectCollaborators>(`${URL}project/getAll/${id}`, {withCredentials: true});
   }
 
 }
