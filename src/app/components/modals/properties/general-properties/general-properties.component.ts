@@ -66,8 +66,11 @@ export class GeneralPropertiesComponent {
 
   propertyToDelete !: Property
 
+  @Input()
   canCreate: boolean = false;
+  @Input()
   canDelete: boolean = false;
+  @Input()
   canEdit: boolean = false;
 
   propertiesList: any[] = [
@@ -88,25 +91,10 @@ export class GeneralPropertiesComponent {
   ]
 
   constructor(private propertyService: PropertyService,
-    private alertService: AlertService,
-    private teamService: TeamService,
-    private userService: UserService) { }
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.separePropertiesKind();
-    this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-
-      for (const permission of permissions) {
-        if (permission.name === PermissionsType.CREATE && permission.enabled) {
-          this.canCreate = true;
-        } else if (permission.name === PermissionsType.DELETE && permission.enabled) {
-          this.canDelete = true;
-        } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
-          this.canEdit = true;
-        }
-      }
-    })
   }
 
   private separePropertiesKind() {

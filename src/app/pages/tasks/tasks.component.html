@@ -1,5 +1,5 @@
 <section class="screen">
-    <div class="container-custom" *ngIf="(renderPermissions | async) && (renderProject | async)">
+    <div class="container-custom" *ngIf="render">
         <section class="grid w-full">
             <div>
                 <div class="flex flex-row gap-2">
@@ -134,7 +134,7 @@
     </div>
 </section>
 
-<ng-container *ngIf="(renderPermissions | async) && (renderProject | async)">
+<ng-container *ngIf="render">
     <app-modal-properties *ngIf="propertiesOpen" [project]="project" [height]="'600px'" [width]="'450px'"
         (close)="openPropertiesModal()" (changeProjectSettings)="changeProject($event)"></app-modal-properties>
 

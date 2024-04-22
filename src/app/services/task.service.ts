@@ -20,9 +20,9 @@ export class TaskService {
   ) { }
 
 
-  public getOneById(id: number): Observable<Team> {
+  public getOneById(id: number): Observable<Task> {
     return this.http
-      .get<Team>(`${URL}team/${id}`, {withCredentials: true});
+      .get<Task>(`${URL}task/${id}`, {withCredentials: true});
   }
 
   public edit(taskEdit: TaskEdit): Observable<Task> {

@@ -28,10 +28,7 @@ export class KanbanComponent {
   constructor(
     private taskService: TaskService,
     private alertService: AlertService,
-    private userService: UserService,
-    private route: ActivatedRoute,
-    private projectService: ProjectService,
-    private teamService: TeamService) {
+    private userService: UserService) {
   }
 
   @Input()
@@ -56,8 +53,6 @@ export class KanbanComponent {
   orderParams !: PipeParams;
 
   ngOnInit() {
-    console.log(this.project);
-    
     this.taskList = this.project.tasks;
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {

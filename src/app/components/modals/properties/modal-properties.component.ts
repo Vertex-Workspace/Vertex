@@ -51,7 +51,8 @@ export class ModalPropertiesComponent {
   changeProjectSettings = new EventEmitter<Project>();
 
   canCreate : boolean = false;
-
+  canEdit: boolean = false;
+  canDelete: boolean = false;
   delete: boolean = false;
 
   closeModal() {
@@ -67,12 +68,13 @@ export class ModalPropertiesComponent {
 
   ngOnInit() {
     this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-
       for (const permission of permissions) {
-        if (permission.name === PermissionsType.CREATE && permission.enabled) {
+        if (permission.name === PermissionsType.DELETE && permission.enabled) {
+          this.canDelete = true;
+        } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
+          this.canEdit = true;
+        } else if (permission.name === PermissionsType.CREATE && permission.enabled) {
           this.canCreate = true;
-          console.log(this.canCreate);
         }
       }
     })

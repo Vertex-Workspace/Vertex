@@ -13,7 +13,7 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'src/app/services/project.service';
 import { User } from 'src/app/models/class/user';
 import { TimeInTask } from 'src/app/models/class/timeInTask';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Chat } from 'src/app/models/class/chat';
 import { Team } from 'src/app/models/class/team';
 import { Observable } from 'rxjs';
@@ -69,7 +69,7 @@ export class TaskComponent implements OnInit {
     private taskHourService: taskHourService,
     private teamService: TeamService,
     private userService: UserService,
-    private route: ActivatedRoute,
+    private router: Router,
     private reviewService: ReviewService
   ) {
     this.user = userService.getLogged();
@@ -82,52 +82,59 @@ export class TaskComponent implements OnInit {
 
   permissionsRender!: Observable<Permission[]>;
 
-
+  render : boolean = false;
   ngOnInit() {
-    if (this.task.revisable) {
-      this.checkedReview = true;
-    }
-    this.taskService.getTaskInfo(this.task.id).subscribe(
-      (task: any) => {
-        this.taskInfoDTO = task;
-      }
-    );
 
+    this.taskService.getOneById(this.task.id).subscribe(
+      (task: Task) => {
+        this.task = task;
 
-    this.task.taskResponsables!.forEach((taskResponsable) => {
-      if (taskResponsable.userTeam.user.id == this.user.id) {
-        this.idResponsable = taskResponsable.id;
-
-        //Validates if the user is the creator of the task
-        if (this.task.creator?.user.id == taskResponsable.userTeam.user.id) {
-          //The creator doesn't send the task
+        if (this.task.revisable) {
+          this.checkedReview = true;
+        }
+        this.taskService.getTaskInfo(this.task.id).subscribe(
+          (task: any) => {
+            this.taskInfoDTO = task;
+          }
+        );
+        this.task.taskResponsables!.forEach((taskResponsable) => {
+          if (taskResponsable.userTeam.user.id == this.user.id) {
+            this.idResponsable = taskResponsable.id;
+    
+            //Validates if the user is the creator of the task
+            if (this.task.creator?.user.id == taskResponsable.userTeam.user.id) {
+              //The creator doesn't send the task
+              this.soloResponsable = true;
+            }
+          }
+        });
+        if (this.task.taskResponsables!.length == 1) {
           this.soloResponsable = true;
         }
+    
+        this.getTimeInTask();
+    
+          
+        this.taskService.getTaskPermissions(this.task.id, this.user.id!).subscribe(
+          (permissions: Permission[]) => {
+            this.permissions = permissions;
+            this.setEditPermission(permissions);
+          }
+        );
+    
+        //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
+        window.onbeforeunload = () => this.ngOnDestroy();
+    
+        if (this.task.taskDependency != null) {
+          this.hasDependency = true
+          this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
+        }
+        this.render = true;
       }
+    , (error) => {
+      this.router.navigate(['projeto/' + this.project.id + '/tarefas']);
     });
 
-    if (this.task.taskResponsables!.length == 1) {
-      this.soloResponsable = true;
-    }
-
-    this.getTimeInTask();
-
-    this.permissionsRender = this.taskService.getTaskPermissions(this.task.id, this.user.id!);
-      
-    this.permissionsRender.forEach(
-      (permissions: Permission[]) => {
-        this.permissions = permissions;
-        this.setEditPermission(permissions);
-      }
-    );
-
-    //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
-    window.onbeforeunload = () => this.ngOnDestroy();
-
-    if (this.task.taskDependency != null) {
-      this.hasDependency = true
-      this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
-    }
 
 
   }

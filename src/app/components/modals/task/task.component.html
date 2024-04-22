@@ -1,5 +1,5 @@
 <div class="modal-overlay" (click)="closeModal()">
-    <div class="base" *ngIf="permissionsRender | async" (click)="$event.stopPropagation()">
+    <div class="base" *ngIf="render" (click)="$event.stopPropagation()">
         <div class="location">
             <div class="routes regular-text">
                 <p>{{taskInfoDTO.teamName}}</p>

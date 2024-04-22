@@ -42,6 +42,7 @@ export class TasksComponent implements OnInit {
   isMuralPage !: boolean;
   openModalProject: boolean = false;
   project!: Project;
+  render : boolean = false;
   renderProject!: Observable<Project> | undefined;
   renderPermissions!: Observable<Permission[]> | undefined;
   permissions!: Permission[];
@@ -93,7 +94,6 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService,
-    private reviewService: ReviewService,
     private display: DisplayService
   ) {
     this.logged = this.userService.getLogged();
@@ -107,14 +107,14 @@ export class TasksComponent implements OnInit {
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
     //Observable que é aguardado para renderizar os componentes filhos
-    this.renderProject = this.projectService.getOneById(id);
-
+    
     //Método que atribui o valor de project vindo do observable
-    this.renderProject.forEach((p: Project) => {
-      this.renderPermissions = this.teamService.getPermission(p.idTeam, this.logged.id!)
+    this.projectService.getOneById(id).subscribe((p: Project) => {
+      this.project = p;
 
-      this.renderPermissions.forEach((permissions: Permission[]) => {
+      this.teamService.getPermission(p.idTeam, this.logged.id!).subscribe((permissions: Permission[]) => {
         this.permissions = permissions;
+        this.render = true;
         for (const permission of permissions) {
           if ((permission.name === PermissionsType.CREATE) && permission.enabled === true) {
             this.canCreate = true;
@@ -123,7 +123,6 @@ export class TasksComponent implements OnInit {
       });
       if(p.creator!.user.id === this.logged.id) this.isCreator = true;
 
-      this.project = p;
       this.setFilters(p);
       this.setOrderOptions(p);
       this.pageTitle = this.project.name;
@@ -172,7 +171,6 @@ export class TasksComponent implements OnInit {
   verifyIfAllTasksAreDone(project: Project): void {
     if(project.projectDependency === null) return
     this.taskService.getTasksDone(project.projectDependency.id).subscribe((bool: Boolean) => {
-      console.log(bool)
       if(!bool){
         this.router.navigate([`/equipe/${project.idTeam}/projetos`])
         this.alertService.notificationAlert("Esse projeto necessita a conclusão do projeto " +

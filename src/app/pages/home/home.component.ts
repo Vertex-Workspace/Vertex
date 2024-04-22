@@ -98,28 +98,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeToTeams();
-    if (this.logged.firstAccess) {
-      this.teamService.getTeamsByUser(this.logged).subscribe((teams: Team[]) => {
-        this.projectService.getAllByTeam(teams[0].id).subscribe((projects: any) => {
-          console.log(projects);
-          this.joyrideService.startTour({
-            steps: [
-              'step1@home',
-              `sidebar@home`,
-              `header@home`,
-              'step2@home',
-              `step3@home`,
-              `goToTeamPage@home`,
-              `step4@equipe/${teams[0].id}/projetos`,
-              `step5@equipe/${teams[0].id}/projetos`,
-              `goToTasks@equipe/${teams[0].id}/projetos`,
-              `step6@projeto/${projects[1].id}/tarefas`,
-            ],
-          });
-        });
-      });
-
-    }
   }
 
 
@@ -136,7 +114,23 @@ export class HomeComponent implements OnInit {
 
   subscribeToTeams() {
     this.teamsRender = this.teamService.getTeamsByUser(this.logged);
-    this.teamsRender.forEach(teams => this.teams = teams);
+    this.teamsRender.forEach(teams => {
+      this.teams = teams
+      this.joyrideService.startTour({
+        steps: [
+          'step1@home',
+          `sidebar@home`,
+          `header@home`,
+          'step2@home',
+          `step3@home`,
+          `goToTeamPage@home`,
+          `step4@equipe/${this.teams[0].id}/projetos`,
+          `step5@equipe/${this.teams[0].id}/projetos`,
+          `goToTasks@equipe/${this.teams[0].id}/projetos`,
+          `step6@projeto/${this.teams[1].projects[0].id}/tarefas`,
+        ],
+      });
+    });
   }
 
   switchCreateView(): void {

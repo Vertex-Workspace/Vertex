@@ -44,8 +44,11 @@ export class ItemsSelectionComponent {
   faPlus = faPlus;
 
   faInfoCircle = faInfoCircle;
+  @Input()
   canDelete: boolean = false;
+  @Input()
   canEdit: boolean = false;
+  @Input()
   canCreate: boolean = false;
 
   sections: any[] = [
@@ -54,26 +57,9 @@ export class ItemsSelectionComponent {
   ]
 
   constructor(private propertyService: PropertyService, 
-    private alertService: AlertService, 
-    private projectService: ProjectService,
-    private teamService: TeamService,
-    private userService: UserService) { }
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
-    this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-
-      for (const permission of permissions) {
-        if (permission.name === PermissionsType.DELETE && permission.enabled) {
-          this.canDelete = true;
-        } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
-          this.canEdit = true;
-        } else if (permission.name === PermissionsType.CREATE && permission.enabled) {
-          this.canCreate = true;
-        }
-      }
-    })
-
     this.orderPropertyListsOnSection();
   }
 

@@ -79,9 +79,9 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {    
-    this.updateGlobalValues();
-  }
+  // ngOnChanges(changes: SimpleChanges): void {    
+  //   this.updateGlobalValues();
+  // }
 
   ngOnInit(): void {      
     this.updateGlobalValues();

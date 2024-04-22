@@ -82,11 +82,8 @@ export class AppComponent {
   ) {
     this.userState.getAuthenticationStatus()
     .subscribe((userLogged) => {
-      console.log("Change Status " + userLogged);
-    
       this.userLogged = userLogged;
       if(userLogged && this.renderPersonalization == false){
-        console.log("Render Home");
         this.settingsRequest();
       }
     }

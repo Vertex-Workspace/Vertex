@@ -77,12 +77,7 @@ export class CardListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    if (teamId) {
-      this.findProjects(teamId);
-    } else {
-      this.setRenderList();
-    }
+    this.setRenderList();
   }
 
 
@@ -94,9 +89,9 @@ export class CardListComponent implements OnInit {
       this.renderList = this.projects
     } else if (this.type === 'team') {  
       for(const team of this.teams!){
-        this.teamService.getOneById(team.id).subscribe((team1: Team) => {
-          team.isCreator = true
-        })
+        // this.teamService.getOneById(team.id).subscribe((team1: Team) => {
+        //   team.isCreator = true
+        // })
       }
       this.renderList = this.teams!;  
     }
@@ -175,13 +170,6 @@ export class CardListComponent implements OnInit {
     this.delete = false;
   }
 
-  findProjects(teamId: number) {
-    this.projectService.getProjectByCollaborators(teamId, this.loggedUser!).subscribe((projects: Project[]) => {
-      this.projects = projects
-      this.setRenderList();
-    })
-
-  }
 
   getFirstLetter(item: any): string {
     if (item.name != null) {

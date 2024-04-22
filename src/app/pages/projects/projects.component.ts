@@ -73,7 +73,6 @@ export class ProjectsComponent implements OnInit {
     private alert: AlertService,
     private userService: UserService,
     private teamService: TeamService,
-    private groupService: GroupService,
     private router: Router,
   ) {
     this.logged = this.userService.getLogged();
@@ -84,22 +83,9 @@ export class ProjectsComponent implements OnInit {
   permissionsOnTeamObservable!: Observable<Permission[]>;
 
   ngOnInit(): void {
-  
     this.getTeam();
-    this.validateTeamId();
   }
 
-  validateTeamId(): void {
-    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.teamService
-      .userIsOnTeam(this.logged.id!,teamId)
-      .subscribe((exists: boolean) => {
-        if (!exists) {
-          this.router.navigate(['/home']);
-          this.alert.errorAlert('Equipe inexistente!')
-        }
-      });
-  }
 
   teamName: string = '';
   getTeam() {
@@ -110,12 +96,14 @@ export class ProjectsComponent implements OnInit {
       this.team = team;
       this.teamName = team.name!;
       this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
-      this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
+      this.permissionsOnTeamObservable.subscribe((permissions: Permission[]) => {
         this.permissionsOnTeam = permissions;
-        this.getProjects();
-  
+        
       });
-
+      this.getProjects();
+    }, (error) => {
+      this.router.navigate(['/home']);
+      this.alert.errorAlert('Equipe inexistente!')
     });
   }
 
@@ -142,8 +130,6 @@ export class ProjectsComponent implements OnInit {
   getProjects() {
     this.projectService.getProjectByCollaborators(this.team.id, this.logged).subscribe((projects: Project[]) => {
       this.projects = projects
-      for (const project of this.projects) {
-      }
     })
   }
 

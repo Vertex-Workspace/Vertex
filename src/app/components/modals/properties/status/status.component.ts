@@ -43,8 +43,11 @@ export class StatusComponent {
   @Input()
   property!: Property;
 
+  @Input()
   canDelete: boolean = false;
+  @Input()
   canEdit: boolean = false;
+  @Input()
   canCreate: boolean = false;
 
   deleteBoolean: boolean = false;
@@ -89,20 +92,6 @@ export class StatusComponent {
       propertyStatus: this.property.propertyStatus,
       kind: this.property.kind
     };
-
-    this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) => {
-      this.userService.getLogged().permissions = permissions;
-
-      for (const permission of permissions) {
-        if (permission.name === PermissionsType.DELETE && permission.enabled) {
-          this.canDelete = true;
-        } else if (permission.name === PermissionsType.EDIT && permission.enabled) {
-          this.canEdit = true;
-        } else if (permission.name === PermissionsType.CREATE && permission.enabled) {
-          this.canCreate = true;
-        }
-      }
-    })
 
     this.getPropertiesKind();
   }
