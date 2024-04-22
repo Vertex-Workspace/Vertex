@@ -19,9 +19,9 @@ export class ProjectService {
   ) { }
 
 
-  public getOneById(id: number, userID: number): Observable<Project> {
+  public getOneById(id: number): Observable<Project> {
     return this.http
-      .get<Project>(`${URL}project/${id}/user/${userID}`, {withCredentials: true});
+      .get<Project>(`${URL}project/${id}`, {withCredentials: true});
   }
 
   public create(project: Project, teamId: number): Observable<Project> {
@@ -37,11 +37,6 @@ export class ProjectService {
   public getAllByTeam(id: number): Observable<Project[]> {
     return this.http
       .get<Project[]>(`${URL}project/team/${id}`, {withCredentials: true})
-  }
-
-  public existsById(id: number): Observable<boolean> {
-    return this.http
-      .get<boolean>(`${URL}project/exists/${id}`, {withCredentials: true})
   }
 
   public getTasksByProject(id: number): Observable<Task[]> {

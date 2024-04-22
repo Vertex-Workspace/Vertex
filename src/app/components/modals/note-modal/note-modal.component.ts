@@ -101,10 +101,8 @@ export class NoteModalComponent implements OnInit {
   }
 
   getProject(id: number): void {
-    console.log(this.userService.getLogged().id!);
-    
     this.projectService
-      .getOneById(id, this.userService.getLogged().id!)
+      .getOneById(id)
       .subscribe((project: Project) => {
         console.log(project);
         

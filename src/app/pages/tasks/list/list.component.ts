@@ -114,7 +114,7 @@ export class ListComponent implements OnInit {
   getTeam(): void {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     this.taskService
-      .getAllByTeam(id, this.logged.id!)
+      .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
         if (tl.length > 0) {
           this.isNull = false;

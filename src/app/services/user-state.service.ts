@@ -26,19 +26,15 @@ export class UserStateService {
     return this.isAuthenticated.asObservable();
   }
 
-  validateLoggedToken(): boolean {
-    return false;
-  }
-
   async getAuthenticatedUser(): Promise<boolean> {
     try{
       if(!document.cookie.includes('JWT')){
         this.notLogged();
         return false;
       }
-      console.log("Cookie Existe");
-      
+
       const user : User | undefined = await this.http.get<User>(`${URL}authenticate-user`, { withCredentials: true }).toPromise();
+
       if(user != undefined){
         this.saveLoggedUser(user!);
         this.setAuthenticationStatus(true);

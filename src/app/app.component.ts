@@ -80,19 +80,25 @@ export class AppComponent {
     public textSpeechService: TextSpeechService,
     private notificationWebSocket: NotificationWebSocketService
   ) {
-    this.userState.getAuthenticationStatus().subscribe((userLogged) => {
+    this.userState.getAuthenticationStatus()
+    .subscribe((userLogged) => {
+      console.log("Change Status " + userLogged);
+    
       this.userLogged = userLogged;
       if(userLogged && this.renderPersonalization == false){
+        console.log("Render Home");
         this.settingsRequest();
       }
     }
     );
   }
-
-
+    ngOnInit(): void {
+      this.userBasicData();
+    }
 
   private userBasicData() {
-    this.userState.getAuthenticatedUser().then((user) => {
+    this.userState.getAuthenticatedUser().then(
+      (user : boolean) => {
       if(user){
         this.userLogged = true;
         this.logged = this.userService.getLogged()!;
@@ -140,11 +146,6 @@ export class AppComponent {
         
       }
       );
-  }
-
-  // Sets the theme by default and make the persistence of the theme in all components
-  ngOnInit(): void {
-    this.userBasicData();
   }
 
   notificationBadge: number = 0;

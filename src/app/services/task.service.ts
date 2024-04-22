@@ -43,9 +43,9 @@ export class TaskService {
   }
 
 
-  public getAllByTeam(id: number, userID: number):Observable<Task[]> {
+  public getAllByTeam(id: number):Observable<Task[]> {
     return this.http
-      .get<Task[]>(`${URL}team/tasks/${id}/user/${userID}`, {withCredentials: true})
+      .get<Task[]>(`${URL}team/tasks/${id}`, {withCredentials: true})
   }
 
   public getAllByUser(id: number): Observable<Task[]> {

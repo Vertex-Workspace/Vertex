@@ -107,7 +107,7 @@ export class TasksComponent implements OnInit {
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
     //Observable que é aguardado para renderizar os componentes filhos
-    this.renderProject = this.projectService.getOneById(id, this.logged.id!);
+    this.renderProject = this.projectService.getOneById(id);
 
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
