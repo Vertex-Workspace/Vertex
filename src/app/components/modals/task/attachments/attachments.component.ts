@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { Task } from 'src/app/models/class/task';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -7,7 +8,8 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-attachments',
   templateUrl: './attachments.component.html',
-  styleUrls: ['./attachments.component.scss']
+  styleUrls: ['./attachments.component.scss'],
+
 })
 export class AttachmentsComponent {
 

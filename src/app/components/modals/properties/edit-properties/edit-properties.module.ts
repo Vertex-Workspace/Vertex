@@ -4,6 +4,7 @@ import { EditPropertiesComponent } from './edit-properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { ItemsSelectionModule } from '../items-selection/items-selection.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -14,7 +15,8 @@ import { ItemsSelectionModule } from '../items-selection/items-selection.module'
     CommonModule,
     FontAwesomeModule,
     FormsModule,
-    ItemsSelectionModule
+    ItemsSelectionModule,
+    TranslateModule
   ]
 })
 export class EditPropertiesModule { }

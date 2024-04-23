@@ -10,13 +10,14 @@ import { ReviewService } from 'src/app/services/review.service';
 import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-review-task',
   templateUrl: './review-task.component.html',
   styleUrls: ['./review-task.component.scss'],
   standalone: true,
-  imports: [BrowserModule, CommonModule, ModalWarnModule, RatingModule, FormsModule]
+  imports: [BrowserModule, CommonModule, ModalWarnModule, RatingModule, FormsModule,TranslateModule]
 })
 export class ReviewTaskComponent {
 

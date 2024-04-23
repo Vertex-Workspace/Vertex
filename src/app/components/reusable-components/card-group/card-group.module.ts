@@ -7,6 +7,7 @@ import { CardUserModule } from '../card-user/card-user.module';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
 import { CreateGroupModule } from '../create-group/create-group.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CardGroupComponent],
@@ -20,7 +21,8 @@ import { CreateGroupModule } from '../create-group/create-group.module';
     ReactiveFormsModule,
     ConfirmModalModule,
     AccordionModule,
-    CreateGroupModule
+    CreateGroupModule,
+    TranslateModule
   ]
 })
 

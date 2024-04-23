@@ -3,28 +3,28 @@
     <div class="modal">
         <div class="header">
             <div class="header-title">
-                <h5>Notificações</h5>
+                <h5>{{'components.modals.notification.notificações' | translate}}</h5>
                 <fa-icon [icon]="faClose" (click)="closeNotification()"></fa-icon>
             </div>
             <ul>
                 <li class="tool-icons" *ngIf="!searchBarOpen">
                     <fa-icon (click)="changeSelectedStateAll()" class="colorAllCheckbox" [icon]="faSquare"
-                        [ngStyle]="{'opacity' : checkbox ? '1.0' : '0.2'}" title="Selecionar Todas"></fa-icon>
-                    <fa-icon *ngIf="hasChecked()" (click)="readNotifications()" [icon]="faEnvelope" title="Marcar como lida"></fa-icon>
-                    <fa-icon *ngIf="hasChecked()" (click)="deleteNotifications()" [icon]="faTrash" title="Excluir"></fa-icon>
+                        [ngStyle]="{'opacity' : checkbox ? '1.0' : '0.2'}" title="{{'components.modals.notification.selectAll' | translate}}"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" (click)="readNotifications()" [icon]="faEnvelope" title="{{'components.modals.notification.markAsRead' | translate}}"></fa-icon>
+                    <fa-icon *ngIf="hasChecked()" (click)="deleteNotifications()" [icon]="faTrash" title="{{'components.modals.notification.exclude' | translate}}"></fa-icon>
                 </li>
                 <li class="search" *ngIf="searchBarOpen">
-                    <input type="text" placeholder="Pesquise por uma notificação..." [(ngModel)]="query">
+                    <input type="text" placeholder="{{'components.modals.notification.searchByANotification' | translate}}" [(ngModel)]="query">
                     <i class="pi pi-times cursor-pointer" style="font-size: 20px;" (click)="toggleSearchBar()"></i>
                 </li>
                 <div class="search-settings" *ngIf="!searchBarOpen">
                     <li>
-                        <button (click)="toggleSearchBar()" title="Pesquisar">
+                        <button (click)="toggleSearchBar()" title="{{'components.modals.notification.search' | translate}}">
                             <i class="pi pi-search"></i>
                         </button>
                     </li>
                     <li>
-                        <fa-icon [icon]="faGear" title="Configurações" routerLink="configuracoes/notificacoes"></fa-icon>
+                        <fa-icon [icon]="faGear" title="{{'components.modals.notification.config' | translate}}" routerLink="configuracoes/notificacoes"></fa-icon>
                     </li>
                 </div>
             </ul>
@@ -53,8 +53,8 @@
             </ng-container>
 
             <div *ngIf="notifications.length == 0" class="flex w-full items-center pt-10 flex-col">
-                <p class="large-text">Nenhuma notificação no momento!</p>
-                <p class="medium-text opacity-70">Aproveite, enquanto durar...</p>
+                <p class="large-text">{{'components.modals.notification.noOneNotificationAtMoment' | translate}}"</p>
+                <p class="medium-text opacity-70">{{'components.modals.notification.enjoyWhilePossible' | translate}}"</p>
             </div>
         </div>
     </div>

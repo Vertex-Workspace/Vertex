@@ -6,6 +6,7 @@ import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.mod
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CreateTeamProjectModule } from '../create-team-project/create-team-project.module';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CardListComponent],
@@ -15,7 +16,8 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     ConfirmModalModule,
     FontAwesomeModule,
     CreateTeamProjectModule,
-    PipesModule
+    PipesModule,
+    TranslateModule
   ]
 })
 

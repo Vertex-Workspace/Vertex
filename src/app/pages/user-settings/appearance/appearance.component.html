@@ -15,7 +15,7 @@
             <ng-container *ngFor="let type of theme.types">
                 <ng-container *ngFor="let color of type.colors">
                     <div class="mode shadow-md"
-                        *ngIf="color.status === 'selected' && type.title === ('pages.user-settings.appearance.highlightColor' | translate)"
+                        *ngIf="color.status === 'selected'"
                         [style.background]="'linear-gradient(315deg, ' + theme.secondColor + ' 50%,' + theme.primaryColor + ' 50%)'">
                         <fa-icon [icon]="theme.icon" class="icon-themes"
                             [ngClass]="theme.mode === ('theme.mode') ? 'icon-dark' : 'icon-dark'"></fa-icon>
@@ -29,7 +29,7 @@
             <div class="colors">
                 <div>
                     <ng-container *ngFor="let type of theme.types;">
-                        <p class="small-text">{{ type.title | translate }}</p>
+                        <p class="small-text">{{"pages.user-settings.appearance.corDestaque"| translate }}</p>
                         <div class="colors-row">
                             <ng-container *ngFor="let color of type.colors; index as item;">
                                 <button [ngStyle]="{'background-color': color.color}" class="colors-circle"

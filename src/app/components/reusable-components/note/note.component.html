@@ -1,4 +1,3 @@
-
 <div 
   #resizeBox 
   class="card" 
@@ -16,7 +15,7 @@
   <span class="full" style="width: 100%;">
 
     <div class="left">
-      <h6>{{ note.title }}</h6>
+      <h6>{{ 'components.reusable-components.note.title' | translate }}</h6>
       
       <div class="text relative" >
         <p #description>
@@ -35,7 +34,7 @@
       [style.backgroundColor]="note.color"
     >
         <button *ngIf="isOverflowing(description)">
-          Visualizar tudo
+          {{ 'components.reusable-components.note.view-all-button' | translate }}
         </button>
 
       </div>

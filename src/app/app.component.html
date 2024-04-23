@@ -62,7 +62,7 @@
                 <fa-icon class="text-white" [icon]="faVolumeUp"></fa-icon>
             </div>
         </div>
-        <div *ngIf="miniChatOpen">
+        <div style="z-index: 2147483648 !important;" *ngIf="miniChatOpen">
             <app-minichat (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat>
         </div>
     </div>

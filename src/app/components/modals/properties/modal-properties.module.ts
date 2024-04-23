@@ -14,6 +14,7 @@ import { ItemsSelectionModule } from './items-selection/items-selection.module';
 import { ColorsModule } from './colors/colors.module';
 import { StatusModule } from './status/status.module';
 import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -33,7 +34,8 @@ import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
     FontAwesomeModule,
     ColorsModule,
     DragDropModule,
-    ConfirmModalModule
+    ConfirmModalModule,
+    TranslateModule
   ]
 })
 export class ModalPropertiesModule { }

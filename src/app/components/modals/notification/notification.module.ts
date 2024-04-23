@@ -4,6 +4,7 @@ import { NotificationComponent } from './notification.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -18,7 +19,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FontAwesomeModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ]
 })
 export class NotificationModule { }

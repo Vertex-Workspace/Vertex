@@ -1,61 +1,48 @@
 <app-modal-warn [width]="'650px'" [height]="'700px'" (close)="closeModal()">
     <div class="search">
-        <input 
-            type="text" 
-            placeholder="Pesquise o que deseja..." 
-            [(ngModel)]="query" 
-            (keyup.enter)="onSearch()"
-            #searchInput
-        >
+        <input type="text" placeholder="{{ 'components.modals.search-all.search_placeholder' | translate }}"
+            [(ngModel)]="query" (keyup.enter)="onSearch()" #searchInput>
         <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
     </div>
     <div class="order regular-text">
-        <p>Ordenar por </p>
+        <p>{{ 'components.modals.search-all.order_by' | translate }}</p>
         <select class="select">
             <option *ngFor="let item of orderSettings">
-                {{ item }}
+                {{ item.name }}
             </option>
         </select>
-  
-        <p class="text-lg h-full flex items-center">Filtrar por </p>
-        <p-dropdown 
-            [options]="orderSettings" 
-            [(ngModel)]="orderParam"
-            [showClear]="true" 
-            optionLabel="name"
-            placeholder="Selecione"
-            [style.width]="'10rem'"
-            (ngModelChange)="updateOrderParam($event)"
-        ></p-dropdown>
+
+        <p class="text-lg h-full flex items-center">{{ 'components.modals.search-all.filter_by' | translate }}</p>
+        <p-dropdown [options]="orderSettings" [(ngModel)]="orderParam" [showClear]="true" optionLabel="name"
+            placeholder="{{ 'components.modals.search-all.select_placeholder' | translate }}" [style.width]="'10rem'"
+            (ngModelChange)="updateOrderParam($event)"></p-dropdown>
     </div>
     <div class="div-searched pt-6">
         <ng-container *ngIf="!itemsSearched.length">
             <h6 *ngIf="!firstSearch; else firstSearchTemplate">
-                Nenhum resultado encontrado...
+                {{ 'components.modals.search-all.no_results' | translate }}
             </h6>
             <ng-template #firstSearchTemplate>
                 <h6>
-                    Nenhuma pesquisa realizada...
+                    {{ 'components.modals.search-all.no_search' | translate }}
                 </h6>
             </ng-template>
         </ng-container>
         <ng-container *ngFor="let item of (itemsSearched | searchAllFilterPipe : orderKind)">
-            <div class="card-searched"
-                (click)="handleClick(item)"
-            >
-            <div class="left">
-                <div>
-                    <img *ngIf="item.image; else firstLetter" src="data:image/jpg;base64, {{item.image}}" alt="">
-                    <ng-template #firstLetter>
-                        <h3 *ngIf="!item.image">{{getFirstLetter(item)}}</h3>
-                    </ng-template>
+            <div class="card-searched" (click)="handleClick(item)">
+                <div class="left">
+                    <div>
+                        <img *ngIf="item.image; else firstLetter" src="data:image/jpg;base64, {{item.image}}" alt="">
+                        <ng-template #firstLetter>
+                            <h3 *ngIf="!item.image">{{ getFirstLetter(item) }}</h3>
+                        </ng-template>
+                    </div>
+                    <div>
+                        <p class="medium-text">{{ item.name }}</p>
+                        <p class="regular-text">{{ item.description }}</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="medium-text">{{item.name}}</p>
-                    <p class="regular-text">{{item.description}}</p>
-                </div>
-            </div>
-                    <p class="regular-text">{{item.kind}}</p>
+                <p class="regular-text">{{ item.kind }}</p>
             </div>
         </ng-container>
     </div>

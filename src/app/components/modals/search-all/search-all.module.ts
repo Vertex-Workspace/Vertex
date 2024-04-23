@@ -5,6 +5,7 @@ import { ModalWarnModule } from '../modal-warn/modal-warn.module';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -16,7 +17,8 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     ModalWarnModule,
     FormsModule,
     DropdownModule,
-    PipesModule
+    PipesModule,
+    TranslateModule
   ]
 })
 export class SearchAllModule { }

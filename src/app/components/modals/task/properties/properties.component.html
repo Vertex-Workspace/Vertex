@@ -4,7 +4,7 @@
             <td>
                 <div>
                     <fa-icon ></fa-icon>
-                    <p>Responsáveis</p>
+                    <p>{{ 'components.modals.task.properties.responsible' | translate }}</p>
                 </div>
                 <div>
                     <!-- <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property> -->
@@ -13,7 +13,7 @@
             <td *ngFor="let value of task.values">
                 <div>
                     <fa-icon [icon]="getIcon(value)"></fa-icon>
-                    <p>{{value.property.name}}</p>
+                    <p>{{ value.property.name }}</p>
                 </div>
                 <div>
                     <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value" [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property>

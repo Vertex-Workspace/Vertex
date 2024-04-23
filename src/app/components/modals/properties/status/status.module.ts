@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { ConfirmModalModule } from '../../confirm-modal/confirm-modal.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [StatusComponent],
@@ -17,7 +18,8 @@ import { ConfirmModalModule } from '../../confirm-modal/confirm-modal.module';
     FontAwesomeModule,
     DragDropModule,
     FormsModule,
-    ConfirmModalModule
+    ConfirmModalModule,
+    TranslateModule
   ]
 })
 export class StatusModule { }

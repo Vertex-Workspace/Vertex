@@ -1,12 +1,11 @@
 <div class="modal-overlay" >
     <div class="modal" [style.height]="height" [style.width]="width">
 
-        <!-- Properties and X button -->
         <div class="exitModal">
             <div>
                 <fa-icon [icon]="faArrowLeft" class="icon" (click)="arrowLeft()"
                     *ngIf="currentModal != 'general'"></fa-icon>
-                <p class="large-text">{{text}}</p>
+                <p class="large-text">{{ 'components.modals.properties.modal-properties.' + text | translate }}</p>
             </div>
             <div>
                 <fa-icon [icon]="faXmark" class="iconX" (click)="closeModal()"></fa-icon>
@@ -25,14 +24,11 @@
                 (confirmChanges)="editTask('general', $event)" class="pattern-style" *ngIf="currentModal === 'edit'"
                 (from)="defineItemsSelectionPathBack($event)" (changeProject)="updateProject($event)" />
 
-            <!-- REQUIREMENTS -->
-
             <app-colors class="pattern-style" *ngIf="currentModal === 'colors'" [propertyList]="propertyListColor"
                 (changeColor)="changePropertyListColor($event)"></app-colors>
 
             <app-status (pencil)="openColors('status', $event)" [property]="property" [project]="project"
                 class="pattern-style" *ngIf="currentModal === 'status'" (changeProject)="updateProject($event)"/>
-
 
             <app-items-selection (pencil)="openColors('items-selection', $event)" class="pattern-style"
                 *ngIf="currentModal === 'items-selection'" [property]="property"

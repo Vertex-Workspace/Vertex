@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,7 +21,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CommonModule,
     FormsModule,
     FontAwesomeModule,
-    TextFieldModule
+    TextFieldModule,
+    TranslateModule
   ]
 })
 export class NoteModalModule { }

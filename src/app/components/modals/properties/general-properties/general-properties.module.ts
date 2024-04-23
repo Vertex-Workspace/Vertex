@@ -4,6 +4,7 @@ import { GeneralPropertiesComponent } from './general-properties.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ConfirmModalModule } from '../../confirm-modal/confirm-modal.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [GeneralPropertiesComponent],
@@ -12,7 +13,8 @@ import { ConfirmModalModule } from '../../confirm-modal/confirm-modal.module';
     CommonModule,
     FontAwesomeModule,
     DragDropModule,
-    ConfirmModalModule
+    ConfirmModalModule,
+    TranslateModule
   ]
 })
 export class GeneralPropertiesModule { 

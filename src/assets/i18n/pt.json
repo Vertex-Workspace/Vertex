@@ -155,7 +155,7 @@
             "appearance": {
                 "title": "Aparência do Sistema",
                 "themePreference": "Preferência de tema",
-                "highlightColor": "Cor Destaque",
+                "corDestaque": "Cor Destaque",
                 "lightTheme": "Tema Claro",
                 "fontSize": "Tamanho da letra",
                 "fontSizeDescription": "Defina o tamanho da letra para o sistema",
@@ -227,12 +227,191 @@
         },
         "modals": {
             "confirm-modal": {
-                "confirm_message": "Tem certeza que deseja {{out}}",
+                "confirm_message": "Tem certeza que deseja {{out}}?",
                 "cancel_button": "Cancelar",
                 "confirm_button": "Confirmar"
             },
             "groups": {
                 "title": "Grupos"
+            },
+            "minichat": {
+                "header": {
+                    "conversations": "Conversas"
+                },
+                "placeholderSearchConversation": "Pesquise por uma conversa...",
+                "noConversationMessage": "Não há nenhuma conversa aberta no momento.",
+                "noMessageMessage": "Nenhuma mensagem enviada ainda! Seja o primeiro a enviar uma mensagem!",
+                "inputPlaceholder": "Digite aqui...",
+                "digitHere": "Digite aqui...",
+                "me": "Eu"
+            },
+            "note-modal": {
+                "editDescription": "Editar descrição",
+                "confirm": "Confirmar"
+            },
+            "notification": {
+                "notificações": "Notificações",
+                "selectAll": "Selecionar tudo",
+                "markAsRead": "Marcar como lido",
+                "exclude": "Excluir",
+                "searchByANotification": "Pesquisar por uma notificação...",
+                "search": "Pesquisar",
+                "config": "Configurações",
+                "noOneNotificationAtMoment": "Não há nenhuma notificação no momento.",
+                "enjoyWhilePossible": "Aproveite enquanto durar..."
+            },
+            "properties": {
+                "chooseColor": "Escolha a cor e veja o resultado em tempo real",
+                "edit-properties": {
+                    "name": "Nome",
+                    "name-placeholder": "Digite o nome que deseja para propriedade...",
+                    "data-type": "Tipo de dado",
+                    "data-type-info": "Tipo de informação que a propriedade armazenará",
+                    "default-value-placeholder": "Valor padrão",
+                    "confirm-changes": "Confirmar Alterações"
+                },
+                "general-properties": {
+                    "Visíveis": "Visível",
+                    "Não visíveis": "Não visíveis",
+                    "Fixas": "Fixas",
+                    "manage-status": "Gerenciar Status",
+                    "delete-property": "Deletar propriedade"
+                },
+                "items-selection": {
+                    "Visíveis": "Visíveis",
+                    "Não Visíveis": "Não Visíveis",
+                    "info-message": "Clique no texto e você poderá editar o nome do item",
+                    "delete-property": "Excluir a propriedade"
+                },
+                "status": {
+                    "Não iniciado": "Não iniciado",
+                    "Em andamento": "Em andamento",
+                    "Concluída": "Concluída",
+                    "info-message": "Clique no texto e você poderá editar o nome do status",
+                    "delete-status": "Excluir o status"
+                },
+                "modal-properties": {
+                    "Propriedades": "Propriedades",
+                    "Edite a Propriedade": "Edite a Propriedade",
+                    "Itens de Seleção": "Itens de Seleção",
+                    "Status": "Status"
+                }
+            },
+            "review-task": {
+                "tasks_to_review": "Tarefas para serem Revisadas",
+                "sender": "Responsável pelo Envio",
+                "final_description": "Descrição Final",
+                "responsible": "Responsável",
+                "time": "Tempo",
+                "feedback": "Devolutiva",
+                "insert_feedback": "Insira uma descrição devolutiva...",
+                "grade_note": "Nota será concedida para todos os responsáveis da tarefa.",
+                "reject": "Reprovar",
+                "approve": "Aprovar"
+            },
+            "search-all": {
+                "search_placeholder": "Pesquise o que deseja...",
+                "order_by": "Ordenar por",
+                "filter_by": "Filtrar por",
+                "select_placeholder": "Selecione",
+                "no_results": "Nenhum resultado encontrado...",
+                "no_search": "Nenhuma pesquisa realizada..."
+            },
+            "task":{
+                "attachments":{
+                    "add_attachment": "Adicionar anexo"
+                },
+                "comments": {
+                    "no_comments": "Nenhum comentário feito na tarefa!",
+                    "be_first": "Seja você o primeiro!",
+                    "placeholder": "Faça algum comentário...",
+                    "send_button": "Enviar"
+                },
+                "properties": {
+                    "responsible": "Responsáveis"
+                },
+                "deliverTask": "Entregar Tarefa",
+                "forceReview": "Obrigar Revisão",
+                "createChat": "Criar Chat",
+                "openChat": "Abrir Chat",
+                "description": "Descrição",
+                "commentsS": "Comentários",
+                "log": "Histórico",
+                "analysis":"entregar a tarefa para análise",
+                "sendTask": "Enviar Tarefa",
+                "attachmentsS": "Anexos",
+                "editDescription": "Editar descrição",
+                "saveDescription": "Salvar descrição",
+                "workTask": "Trabalhar na Tarefa",
+                "endWork": "Encerrar Trabalho",
+                "reviewer": "Revisor(a)",
+                "taskDescriptionPlaceholder": "Descrição da tarefa finalizada..."
+            }
+        },
+        "reusable-components":{
+            "card":{
+                "excludeTask":"excluir a Tarefa"
+            },
+            "card-group": {
+                "participants": "Participantes",
+                "deleteGroup": "Excluir grupo",
+                "confirmDeleteGroup": "excluir o grupo",
+                "confirmDeleteUser": "excluir o usuário do grupo"
+            },
+            "card-list": {
+                "viewInformation": "Visualizar Informações",
+                "confirmDeleteProject": "excluir o projeto",
+                "confirmDeleteTeam": "excluir a equipe"
+            },
+            "card-user": {
+                "you": "(você)"
+            },
+            "create-group": {
+                "new-group": "Crie um novo grupo",
+                "group-name": "Nome do grupo",
+                "add-name": "Adicione um nome para o grupo",
+                "select-participants": "Selecionar participantes",
+                "cancel": "Cancelar",
+                "create-group": "Criar grupo",
+                "add-participants": "Adicionar mais participantes",
+                "add": "Adicionar",
+                "team-created": "Equipe criada com sucesso!",
+                "invite-people": "Convide pessoas para",
+                "invite-link": "através do link abaixo.",
+                "copy-link": "Copiar Link de Convite"
+            },
+            "create-team-project": {
+                "new-team": "Crie uma nova equipe...",
+                "new-project": "Crie um novo Projeto...",
+                "project-info": "Informações do projeto",
+                "team-name": "Nome da Equipe",
+                "project-name": "Nome do Projeto",
+                "add-team-name": "Adicione um nome à equipe",
+                "add-project-name": "Adicione um nome ao projeto",
+                "team-description": "Descrição da Equipe",
+                "project-description": "Descrição do Projeto",
+                "add-team-description": "Insira uma descrição à equipe...",
+                "add-project-description": "Insira uma descrição ao projeto...",
+                "responsibles": "Responsáveis",
+                "assign-responsibles": "Atribua responsáveis ao projeto",
+                "task-review": "Revisão de Tarefas",
+                "cancel": "Cancelar",
+                "confirm": "Confirmar",
+                "edit": "Editar"
+            },
+            "input-value-property": {
+                "date-label": "Data",
+                "text-placeholder": "Adicione um texto",
+                "status-placeholder": "Selecione o status",
+                "list-placeholder": "Selecione da lista"
+            },
+            "note": {
+                "title": "Título",
+                "view-all-button": "Visualizar tudo"
+            },
+            "row-task": {
+                "task-name": "Nome da Tarefa",
+                "delete-task": "Excluir a Tarefa"
             }
         }
     }
