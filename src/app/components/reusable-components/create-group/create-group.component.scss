@@ -62,14 +62,15 @@ p {
 
 .button {
     @apply w-[130px] h-[40px] flex gap-2 p-4 px-4 transition-colors items-center justify-center rounded cursor-pointer;
+    color: $secondColor
 }
 
 .confirm {
     background-color: $primaryColor;
-    color: $text;
+    color: $secondColor
 }
 
 .cancel {
     background-color: $error;
-    color: $text
+    color: $secondColor
 }

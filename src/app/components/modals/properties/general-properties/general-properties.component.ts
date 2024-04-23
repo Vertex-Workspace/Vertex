@@ -94,9 +94,13 @@ export class GeneralPropertiesComponent {
 
   ngOnInit(): void {
     this.separePropertiesKind();
+    console.log(this.project);
+    console.log(this.userService.getLogged().id!);
+    
     this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) => {
       this.userService.getLogged().permissions = permissions;
-
+      console.log(permissions);
+      
       for (const permission of permissions) {
         if (permission.name === PermissionsType.CREATE && permission.enabled) {
           this.canCreate = true;
@@ -136,7 +140,6 @@ export class GeneralPropertiesComponent {
         kind: PropertyKind.TEXT,
         propertyStatus: PropertyStatus.VISIBLE,
         propertyLists: [],
-
       });
       this.openNewProperty.emit(genericProperty);
     } else {
@@ -186,7 +189,7 @@ export class GeneralPropertiesComponent {
       if (this.canDelete) {
         this.propertyService.deleteProperty(this.project.id!, this.propertyToDelete.id).subscribe(
           (project) => {
-            this.project = project;
+            this.project = project
             this.separePropertiesKind();
             this.changeProject.emit(this.project);
           }, (error) => {

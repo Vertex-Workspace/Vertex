@@ -189,7 +189,6 @@ export class CardGroupComponent {
 
   edit(group: Group){  
     this.groupService.edit(group, this.team.id).subscribe((group1: Group) => {
-      group.name = group1.name
       this.alertService.successAlert('Nome do grupo editado') 
     })
     this.input = !this.input

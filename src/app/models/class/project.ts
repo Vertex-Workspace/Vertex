@@ -15,6 +15,7 @@ export class Project {
     }
     creator ?: UserTeam;
     projectDependency !: Project;
+    dependencyName !: String
     tasks : Task[]; 
     notes : Note[] = [];
     properties !: Property[];

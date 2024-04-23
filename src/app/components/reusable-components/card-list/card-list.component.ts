@@ -199,6 +199,7 @@ export class CardListComponent implements OnInit {
   openInformations(project1: Project) {
     this.openModal = !this.openModal;
     this.project = project1;
+    console.log(this.project);
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.project.idTeam = teamId
   }
@@ -218,6 +219,7 @@ export class CardListComponent implements OnInit {
         this.teams?.splice(this.teams.indexOf(teamId), 1)
       });
   }
+
   openTeamInformations(teamId: number) {
     this.router.navigate([`/equipe/${teamId}`])
   }

@@ -113,9 +113,7 @@ export class ProjectsComponent implements OnInit {
       this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
         this.permissionsOnTeam = permissions;
         this.getProjects();
-  
       });
-
     });
   }
 
@@ -142,8 +140,6 @@ export class ProjectsComponent implements OnInit {
   getProjects() {
     this.projectService.getProjectByCollaborators(this.team.id, this.logged).subscribe((projects: Project[]) => {
       this.projects = projects
-      for (const project of this.projects) {
-      }
     })
   }
 

@@ -157,25 +157,13 @@ export class TasksComponent implements OnInit {
           }
         }
       })
-
-      //Se o projeto possuir a opção de revisão, então é feita a requisição das tarefas que estão aguardando revisão
-      if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
-        this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
-          (tasks : TaskWaitingToReview[]) => {
-            this.tasksToReview = tasks;
-            this.badgeNumber = this.tasksToReview.length.toString();
-          }
-          );
-      }
-        
     });
   }
 
   verifyIfAllTasksAreDone(project: Project): void {
     if(project.projectDependency === null) return
     this.taskService.getTasksDone(project.projectDependency.id).subscribe((bool: Boolean) => {
-      console.log(bool)
-      if(bool){
+      if(!bool){
         this.router.navigate([`/equipe/${project.idTeam}/projetos`])
         this.alertService.notificationAlert("Esse projeto necessita a conclusão do projeto " +
         project.projectDependency.name)

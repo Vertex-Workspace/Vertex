@@ -118,6 +118,10 @@ export class EditPropertiesComponent {
       if (this.property.kind === PropertyKind.LIST && this.property.propertyLists.length === 0) {
         this.openEditList();
       } else {
+        console.log(this.project.id!);
+        console.log(this.property);
+        
+        
         this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
           (project) => {
             this.project = project;

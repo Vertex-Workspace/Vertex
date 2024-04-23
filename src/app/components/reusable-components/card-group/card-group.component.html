@@ -24,11 +24,3 @@
 <app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'excluir o grupo'"
     (close)="emitItem($event)">
 </app-confirm-modal>
-
-<app-confirm-modal *ngIf="deleteUser" [width]="'450px'" [height]="'250px'" [title]="'o usuário do grupo?'"
-    [type]="'userTeam'" (confirmEvent)="removeUser($event)">
-</app-confirm-modal>
-
-<app-create-group [group]="group" [team]="team" *ngIf="!selectMoreUsers" [typeString]="'addingParticipants'"
-    (close)="addParticipants()">
-</app-create-group>

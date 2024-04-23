@@ -101,11 +101,9 @@ export class HomeComponent implements OnInit {
     if (this.logged.firstAccess) {
       //the problem is in this two requests
       this.teamService.getTeamsByUser(this.logged).subscribe((teams: Team[]) => {
-        console.log(teams);
-
         this.projectService.getAllByTeam(teams[0].id).subscribe((projects: any) => {
-          console.log(teams[0].id);
-
+          this.userService.setFirstAccessNull(this.logged).subscribe((user: User) => { 
+          })
           this.joyrideService.startTour({
             steps: [
               'step1@home',
@@ -118,11 +116,9 @@ export class HomeComponent implements OnInit {
               `step5@equipe/${teams[0].id}/projetos`,
               `goToTasks@equipe/${teams[0].id}/projetos`,
               `step6@projeto/${projects[0].id}/tarefas`,
+              `step7@projeto/${projects[0].id}/tarefas`
             ],
           });
-          this.userService.setFirstAccessNull(this.logged).subscribe((user: User) => {
-            
-          })
         });
       });
 

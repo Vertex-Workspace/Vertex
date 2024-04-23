@@ -32,11 +32,15 @@
     @apply flex flex-row pt-6 justify-center w-full gap-4;
 }
 
-.yes-button {
-    background-color: $primaryColor;
+.cancel-button{
+    @apply flex items-center justify-center w-24 h-8 rounded-sm mr-4;
+    background-color: $error;
+    color: white;
 }
-.no-button {
-    background-color: $disabled;
+.confirm-button{
+    @apply flex items-center justify-center w-24 h-8 rounded-sm;
+    background-color: $primaryColor;
+    color: white;
 }
 .deleted {
     @apply flex items-center justify-center w-full h-full pb-16;

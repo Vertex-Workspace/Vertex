@@ -41,5 +41,5 @@
 </div>
 
 <app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'excluir o status'"
-    (confirmEvent)="delete($event)">
+    (close)="delete($event)">
 </app-confirm-modal>
