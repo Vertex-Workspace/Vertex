@@ -38,7 +38,7 @@
 
             <div class="main-section-left gap-2">
 
-                <div class="w-full flex justify-center">
+                <div class="w-[90%] flex justify-center flex-col">
                     <ng-container *ngFor="let chatFor of conversations">
                         <div (click)="openConversation(chatFor)"
                             [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
@@ -80,7 +80,7 @@
             </div> -->
 
             <div *ngIf="chat" class="center-div">
-                <div class="min-h-[60px]" *ngIf="chat">
+                <div class="min-h-[60px]">
                     <div *ngFor="let message of chat.messages" class="message-container"
                         [ngClass]="message.user !== logged.firstName ? 'left' : 'right'">
                         <div class="flex items-center gap-2">
@@ -91,7 +91,7 @@
                         <div *ngIf="!message.file"
                             [ngClass]="logged.firstName!==message.user ? 'message-bubble-left' : 'message-bubble-right'">
                             <p class="contentMessage whitespace-pre-wrap">{{ message.contentMessage }}</p>
-                            <p [ngClass]="message.user !== logged.firstName ? 'timestamp' : 'timestamp text-right'">{{
+                            <p [ngClass]="message.user !== logged.firstName ? 'timestampBlack' : 'timestamp text-right'">{{
                                 generateTime(message) }}</p>
                         </div>
 

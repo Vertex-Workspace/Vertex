@@ -83,6 +83,7 @@ export class ChatComponent {
       this.conversations = chats;
       
     });
+    this.logged = this.userService.getLogged();
   }
 
   ngOnInit() {
@@ -113,12 +114,10 @@ export class ChatComponent {
       time: new Date(),
       viewed: false,
     };
-    console.log(messageDto);
 
     if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
       this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
         (response: any) => {
-          console.log(response, "Message sentALLL");
           sendForm.controls['message'].reset();
         });
 
@@ -231,6 +230,7 @@ export class ChatComponent {
   m: Message[] = new Array(0);
   openConversation(chat: Chat) {
     this.chat = chat;
+    
     this.showRightChat = true;
     this.conversations.forEach((conversation: Chat) => {
       conversation.conversationOpen = false;
@@ -247,6 +247,7 @@ export class ChatComponent {
       }, 0);
     });
   }
+
 
   minimizeChat(value: boolean) {
     this.chatExpanded.emit(value);

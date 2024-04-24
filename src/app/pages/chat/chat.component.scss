@@ -142,7 +142,7 @@ main {
 }
 
 .card-chat {
-    @apply flex justify-start  items-center w-[90%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-start  items-center w-full pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     border: 1px solid $emphasis;
     color: $text;
     background-color: $secondColor;
@@ -150,7 +150,7 @@ main {
 }
 
 .card-chatOpen {
-    @apply flex justify-start items-center w-[95%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-start items-center w-[105%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     background-color: $primaryColor;
     color: $secondColor !important;
     animation: rightPulse 0.3s;
