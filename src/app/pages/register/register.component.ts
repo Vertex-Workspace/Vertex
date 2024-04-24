@@ -36,8 +36,8 @@ export class RegisterComponent {
       })
   }
 
+  
   ngOnInit(): void {
-
     this.form = this.formBuilder.group({
 
       firstName: [null, [Validators.required]],

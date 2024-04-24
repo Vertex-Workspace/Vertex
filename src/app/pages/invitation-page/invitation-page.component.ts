@@ -16,54 +16,36 @@ export class InvitationPageComponent {
 
   userLogged!: User;
   team!: Team;
-  
   constructor(
     private teamService: TeamService, 
     private route: ActivatedRoute, 
     private router: Router,
     private userService : UserService) {
-
-    this.userLogged = userService.getLogged();
-    const id = Number(this.route.snapshot.paramMap.get('idTeam'));
-    this.teamService.userIsOnTeam(this.userLogged.id!, id).subscribe(
-      (res) => {
-        if (res) {
-          this.router.navigate(['home']);
-        }
-    });
-
-
   }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('idTeam'));
+    this.userLogged = this.userService.getLogged();
     this.teamService.getOneById(id).subscribe((team : Team) => {
       this.team = team
-      console.log(this.team);
-    });
-    
-   
-  }
-
-  join(){
-
+    }, (error) => this.router.navigate(['home']));
   }
   deny(){
     this.router.navigate(['home']);
   }
 
   async addUserOnTeam() {
-    let userLogged = JSON.parse(localStorage.getItem('logged') || '{}');
+
     const id = Number(this.route.snapshot.paramMap.get('idTeam'));
     
-    this.teamService.addUserOnTeam(userLogged.id, id).subscribe(
+    this.teamService.addUserOnTeam(this.userService.getLogged().id, id).subscribe(
       (res) => {
         console.log('aqui'); 
         this.router.navigate(['home']);
         this.teamService.getOneById(id).subscribe(
           (team: Team) => {
             console.log(team);
-            this.teamService.patchChat(team.chat!.id!, id, userLogged.id).subscribe(
+            this.teamService.patchChat(team.chat!.id!, id, this.userService.getLogged().id).subscribe(
               (res) => {
                 console.log(res);
               },

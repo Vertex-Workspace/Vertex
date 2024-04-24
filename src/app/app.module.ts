@@ -46,6 +46,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { JoyrideModule } from 'ngx-joyride';
 import { DeniedAccessComponent } from './pages/denied-access/denied-access.component';
+import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
 
 
 
@@ -55,6 +56,7 @@ import { DeniedAccessComponent } from './pages/denied-access/denied-access.compo
     LoadingComponent,
     VlibrasComponent,
     DeniedAccessComponent,
+    InvitationPageComponent
   ],
   imports: [
     JoyrideModule.forRoot(),

@@ -35,7 +35,7 @@ export class UserService {
 
     this.http.post<User>(`${URL}user/register`, form).subscribe(
       (userRes: User) => {
-        this.login(userRes);
+        this.login(form);
     }, (e) => {
       this.alert.errorAlert(e.error);
   
@@ -62,7 +62,7 @@ export class UserService {
 
   public login(user: User): void {
     this.http
-    .post<User>(`${URL}login`, user, {withCredentials: true}).subscribe(
+    .post<User>(`${URL}login`, {email: user.email, password: user.password}, {withCredentials: true}).subscribe(
       (user: User) => {
         this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
         this.saveLoggedUser(user);
