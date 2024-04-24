@@ -1,0 +1,11 @@
+<section class="navbar">
+
+
+    <div *ngFor="let icon of items">
+        <i (click)="icon.command()" class="{{icon.icon}} icon"></i>
+    </div>
+
+    <app-search-all *ngIf="search" (close)="switchSearch()"></app-search-all>
+
+
+</section>

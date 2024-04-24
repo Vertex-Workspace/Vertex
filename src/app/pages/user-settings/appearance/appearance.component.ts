@@ -54,7 +54,7 @@ export class AppearanceComponent implements OnInit {
               title: "Cor Destaque",
               iconColor: '#000000',
               colors: [
-                { 'color': '#007bff', status: 'selected' }, // Azul
+                { 'color': '#092C4C', status: 'selected' }, // Azul
                 { 'color': '#28a745', status: 'unselected' }, // Verde
                 { 'color': '#dc3545', status: 'unselected' }, // Vermelho
                 { 'color': '#ffc107', status: 'unselected' }, // Amarelo

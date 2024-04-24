@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import {
   faChevronRight, faPaperPlane,
   faMicrophoneLines, faPaperclip,
@@ -18,6 +18,7 @@ import { PersonalizationService } from 'src/app/services/personalization.service
 import { UserService } from 'src/app/services/user.service';
 
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
+import { ResizeEvent } from 'angular-resizable-element';
 
 @Component({
   selector: 'app-chat',
@@ -63,39 +64,25 @@ export class ChatComponent {
 
   logged!: User;
 
+  showRightChat = false;
 
-  constructor(
-    public webSocketService: WebSocketService, 
-    private teamService: TeamService, 
-    private personalizationService: PersonalizationService,
-    private userService : UserService) {
-    this.logged = userService.getLogged();
-    this.teamService.findAllChats().subscribe((chats: Chat[]) => {
-      chats.forEach((chat: Chat) => {
-        console.log(chat);
-        
-        chat.userTeams!.forEach((userTeam) => {
-          if (userTeam.user.id == this.logged.id) {
-            if (chat.userTeams!.length > 1) {
-              this.hasAnyChat = true;
-              this.conversations.push(chat);
-            }
-            else {
-              this.hasAnyChat = false;
-              this.conversations=[];
-            }
-          }
-        });
-      });
-    });
-
-    console.log(this.conversations);
-    
+  toggleRightChat() {
+    if (window.innerWidth < 1024) {
+      this.route.navigate(['/home']);
+    }
   }
 
-  showEmojiPicker: boolean = false;
-  showEmoji(): void {
-    this.showEmojiPicker = !this.showEmojiPicker;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: ResizeEvent) {
+    // Chama toggleRightChat() sempre que o tamanho da tela for alterado
+    this.toggleRightChat();
+  }
+
+  constructor(public webSocketService: WebSocketService, private teamService: TeamService, private route: Router, private userService : UserService) {
+    this.teamService.findAllChatsByUser(this.userService.getLogged().id!).subscribe((chats: Chat[]) => {
+      this.conversations = chats;
+      
+    });
   }
 
   ngOnInit() {
@@ -106,6 +93,7 @@ export class ChatComponent {
         a.scrollTop = a.scrollHeight;
       }, 0);
     });
+    this.toggleRightChat();
   }
 
   ngOnDestroy(): void {
@@ -127,12 +115,9 @@ export class ChatComponent {
     };
     console.log(messageDto);
 
-    this.showEmojiPicker = false;
-
     if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
       this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
         (response: any) => {
-          this.chat = response;
           console.log(response, "Message sentALLL");
           sendForm.controls['message'].reset();
         });
@@ -243,13 +228,14 @@ export class ChatComponent {
     return new Date(message.time!).toLocaleString();
   }
 
-  m:Message[]= new Array(0);
+  m: Message[] = new Array(0);
   openConversation(chat: Chat) {
     this.chat = chat;
+    this.showRightChat = true;
     this.conversations.forEach((conversation: Chat) => {
       conversation.conversationOpen = false;
     });
-    
+
     this.chat.conversationOpen = true;
 
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
@@ -261,7 +247,7 @@ export class ChatComponent {
       }, 0);
     });
   }
-  
+
   minimizeChat(value: boolean) {
     this.chatExpanded.emit(value);
   }

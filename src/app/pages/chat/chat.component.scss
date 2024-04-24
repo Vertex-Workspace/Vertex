@@ -23,11 +23,6 @@ div.chat-content {
     height: 100%;
 }
 
-.chatName{
-    color: $text;
-}
-
-
 .container-custom {
     @apply flex w-[90%] h-full;
 }
@@ -157,12 +152,12 @@ main {
 .card-chatOpen {
     @apply flex justify-start items-center w-[95%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     background-color: $primaryColor;
-    color: $text !important;
+    color: $secondColor !important;
     animation: rightPulse 0.3s;
     .chat-icons {
         @apply flex justify-between items-center;
         color: $secondColor !important;
-        font-size: 70px
+        font-size: 70px;
     }
 }
 
@@ -232,7 +227,7 @@ main {
     padding: 10px;
     border-radius: 5px;
     background-color: $card;
-    color: $text;
+    color: black !important;
     word-wrap: break-word;
     @apply flex flex-col gap-3 shadow-md;
 }
@@ -242,7 +237,7 @@ main {
     padding: 10px;
     border-radius: 5px;
     background-color: $primaryColor;
-    color: $text;
+    color: white;
     word-wrap: break-word;
     @apply flex flex-col gap-3 shadow-md;
 }
@@ -265,7 +260,12 @@ main {
 
 .timestamp {
     font-size: $smallText;
-    color: $text;
+    color: rgb(241, 241, 241);
+}
+
+.timestampBlack {
+    font-size: $smallText;
+    color: black;
 }
 
 .divWhiteInput{

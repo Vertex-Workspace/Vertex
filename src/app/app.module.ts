@@ -35,8 +35,6 @@ import { InputValuePropertyComponent } from './components/reusable-components/in
 import { NoteComponent } from './components/reusable-components/note/note.component';
 import { NoteModalComponent } from './components/modals/note-modal/note-modal.component';
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
-
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { VlibrasComponent } from './pages/vlibras/vlibras.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -47,6 +45,7 @@ import { MessageService } from 'primeng/api';
 import { JoyrideModule } from 'ngx-joyride';
 import { DeniedAccessComponent } from './pages/denied-access/denied-access.component';
 import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
+import { MobileSidebarComponent } from './components/fixed-components/mobile-sidebar/mobile-sidebar.component';
 
 
 
@@ -56,11 +55,11 @@ import { InvitationPageComponent } from './pages/invitation-page/invitation-page
     LoadingComponent,
     VlibrasComponent,
     DeniedAccessComponent,
-    InvitationPageComponent
+    InvitationPageComponent,
+    MobileSidebarComponent
   ],
   imports: [
     JoyrideModule.forRoot(),
-    PickerModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,

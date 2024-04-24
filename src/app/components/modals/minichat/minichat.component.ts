@@ -42,22 +42,10 @@ export class MinichatComponent {
 
   constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
-    this.teamService.findAllChats().subscribe((chats: Chat[]) => {
-      chats.forEach((chat: Chat) => {
-        chat.userTeams!.forEach((userTeam) => {
-          if (userTeam.user.id == this.logged.id) {
-            if (chat.userTeams!.length > 1) {
-              this.conversations.push(chat);
-            }
-          }
-        });
-      });
+    this.teamService.findAllChatsByUser(this.logged.id!).subscribe((chats: Chat[]) => {
+      console.log(chats);
+      this.conversations = chats;
     });
-  }
-
-  showEmojiPicker: boolean = false;
-  showEmoji(): void {
-    this.showEmojiPicker = !this.showEmojiPicker;
   }
 
   ngOnInit() {
@@ -89,12 +77,9 @@ export class MinichatComponent {
     };
     console.log(messageDto);
 
-    this.showEmojiPicker = false;
-
     if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
       this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
         (response: any) => {
-          this.chat = response;
           console.log(response, "Message sentALLL");
           sendForm.controls['message'].reset();
           this.webSocketService.sendMessage(messageDto);

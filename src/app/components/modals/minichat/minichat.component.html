@@ -97,8 +97,8 @@
 
                 <div *ngIf="message.file"
                     [ngClass]="message.user !== logged.firstName ? 'message-bubble-left with-photo' : 'message-bubble-right with-photo items-end'">
-                    <div class="w-full h-full flex-wrap flex justify-center items-center gap-3">
-                        <img [ngClass]="messageFileIncludesImage(message) ? 'mt-[5px] image':'archive'"
+                    <div class="w-full h-full flex justify-center items-center gap-3">
+                        <img [ngClass]="messageFileIncludesImage(message) ? 'object-contain pl-2 pt-1':'archive'"
                             draggable="false" [src]="getIconSrc(message)">
                         <div class="flex h-full justify-center items-center gap-5">
                             <p class="text-center w-[80%]" *ngIf="!messageFileIncludesImage(message)">{{
@@ -126,34 +126,11 @@
             <textarea type="text" name="message" id="input-message"
                 class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[10px] pl-[15px] w-[90%] h-[100%]"
                 [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
-            <div class="emoji-wrapper">
-
-                <!-- <emoji-mart *ngIf="showEmojiPicker" [i18n]="{
-                            search: 'Digite o nome do emoji em inglês',
-                            categories: {
-                            search: 'Resultados da busca',
-                            recent: 'Recentes',
-                            smileys: 'Carinhas',
-                            people: 'Pessoas',
-                            nature: 'Natureza',
-                            foods: 'Comidas',
-                            activity: 'Atividade',
-                            places: 'Lugares',
-                            objects: 'Objetos',
-                            symbols: 'Símbolos',
-                            flags: 'Bandeiras'
-                            }
-                        }" [isNative]="true" [set]="'google'" color="#092c4c" (emojiClick)="addEmoji($event)">
-                </emoji-mart> -->
-
-            </div>
             <div class="flex relative">
                 <input type="file" id="fileInput" class="hidden absolute left-1/2 top-1/2"
                     (change)="onFileChange($event)">
                 <fa-icon (click)="openFile()" class="section-icons" [icon]="faPaperclip"></fa-icon>
             </div>
-            <!-- <fa-icon class="section-icons" [icon]="faMicrophoneLines"></fa-icon> -->
-            <fa-icon (click)="showEmoji()" class="section-icons" [icon]="faSmile"></fa-icon>
         </div>
         <button type="submit" class="square-chat rounded-sm">
             <fa-icon class="text-lg pr-1" [icon]="faPapperPlane"></fa-icon>
