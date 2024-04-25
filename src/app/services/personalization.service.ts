@@ -18,12 +18,15 @@ export class PersonalizationService {
     return this.http.get<Personalization>(`${URL}personalization/${id}`)
       .pipe(map((personalization: Personalization) => new Personalization(personalization)));;
   }
+
+  findByUserId(userId: number): Observable<Personalization> {
+    return this.http.get<Personalization>(`${URL}api/personalization/${userId}`);
+  }
   getAllPersonalization(): Observable<Personalization[]> {
     return this.http.get<Personalization[]>(`${URL}personalization`);
   }
 
   public changeLanguage(language: any, userId: number): Observable<User> {
-    // Remova a linha que salva o idioma no localStorage, isso não é necessário aqui
     return this.http.patch<any>(`${URL}user/${userId}/personalization/changeLanguage`, language);
   }
 

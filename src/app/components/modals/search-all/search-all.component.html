@@ -5,12 +5,7 @@
         <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
     </div>
     <div class="order regular-text">
-        <p>{{ 'components.modals.search-all.order_by' | translate }}</p>
-        <select class="select">
-            <option *ngFor="let item of orderSettings">
-                {{ item.name }}
-            </option>
-        </select>
+        
 
         <p class="text-lg h-full flex items-center">{{ 'components.modals.search-all.filter_by' | translate }}</p>
         <p-dropdown [options]="orderSettings" [(ngModel)]="orderParam" [showClear]="true" optionLabel="name"

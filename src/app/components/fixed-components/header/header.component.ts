@@ -64,13 +64,15 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
+  @Input()
+  linkImage!:string;
   changeLanguage(sigla: string, link: string) {
-    this.linkImagemPais = link;
+    this.linkImage = link;
     this.translate.use(sigla);
-  
-    this.personalizationService.changeLanguage(sigla, this.userService.getLogged().id).subscribe(
+    
+    this.personalizationService.changeLanguage({language:sigla,linkLanguageImage:link}, this.userService.getLogged().id).subscribe(
       (res: any) => {
+        
         console.log("Idioma alterado com sucesso!");
       },
       (error: any) => {

@@ -25,6 +25,7 @@ import { NotificationWebSocketService } from './services/notification-websocket.
 import { Notification } from './models/class/notification';
 import { tutorialText } from './tutorialText';
 import { TranslateService } from '@ngx-translate/core';
+import { Personalization } from './models/class/personalization';
 
 
 @Component({
@@ -65,6 +66,8 @@ export class AppComponent {
 
   notification: boolean = false;
 
+  linkImage!:string;
+
   isSideBarExpanded: boolean = false;
 
   url: string = '';
@@ -82,26 +85,33 @@ export class AppComponent {
     private translate: TranslateService,
     private personalizationService: PersonalizationService
   ) {
-    translate.setDefaultLang('pt');
-
-    // Verifique se há um idioma salvo no armazenamento local e use-o, se disponível
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage) {
-      translate.use(savedLanguage);
-    }
     this.userState
-      .getAuthenticationStatus()
-      .subscribe((status: boolean) => {
-        this.userLogged = status;
-      });
-
+    .getAuthenticationStatus()
+    .subscribe((status: boolean) => {
+      this.userLogged = status;
+    });
+    
     console.log(this.userLogged);
-
+    
+    
   }
-
+  
   // Sets the theme by default and make the persistence of the theme in all components
-  ngOnInit(): void {
+  ngOnInit() {
     let user: User = this.userService.getLogged()!;
+    this.translate.setDefaultLang(user.personalization!.language!);
+    console.log(user.id!);
+
+    this.personalizationService.findByUserId(user.id!).subscribe(
+      (res: Personalization) => {
+        this.linkImage = res.linkLanguageImage!;
+        this.translate.setDefaultLang(res.language!);
+      },
+      (error) => {
+        this.translate.setDefaultLang('pt');
+        console.error("Erro ao buscar personalização do usuário", error);
+      }
+    );
     this.userService.getOneById(user.id!).subscribe((logged) => {
 
       this.logged = logged;
@@ -140,6 +150,7 @@ export class AppComponent {
 
       }
     )
+
 
   }
 

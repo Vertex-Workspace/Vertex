@@ -13,6 +13,7 @@ export class Personalization{
     listeningText?: boolean;
     signLanguage?: boolean;
     language?: string;
+    linkLanguageImage?: string;
 
 
     constructor(

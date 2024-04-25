@@ -34,35 +34,10 @@ export class ProjectsComponent implements OnInit {
 
   //TASKS - FILTER AND ORDER
   selectedFilter !: string;
-  filterOptions: any[] = [
-    { name: this.translate.instant('pages.filterAndOrder.Status'), values: [
-      { name: this.translate.instant('pages.filterAndOrder.NotStarted'), kind: PropertyListKind.TODO, status: true },
-      { name: this.translate.instant('pages.filterAndOrder.InProgress'), kind: PropertyListKind.DOING, status: true },
-      { name: this.translate.instant('pages.filterAndOrder.Completed'), kind: PropertyListKind.DONE, status: true }
-    ]},
-    { name: this.translate.instant('pages.filterAndOrder.Date'), values: [
-      { name: this.translate.instant('pages.filterAndOrder.Today'), kind: PropertyKind.DATE as string, value: 'td' },
-      { name: this.translate.instant('pages.filterAndOrder.NextWeek'), kind: PropertyKind.DATE as string, value: 'nw' },
-      { name: this.translate.instant('pages.filterAndOrder.NextMonth'), kind: PropertyKind.DATE as string, value: 'nm' }
-    ]},
-  ];
+  filterOptions: any[] = [];
 
   orderParams !: PipeParams;
-  orderOptions: any = [
-    { name: this.translate.instant('pages.filterAndOrder.Name'), values: [
-      { name: this.translate.instant('pages.filterAndOrder.AtoZ'), type: 'name' },
-      { name: this.translate.instant('pages.filterAndOrder.ZtoA'), type: 'name' }
-    ]},
-    { name: this.translate.instant('pages.filterAndOrder.Date'), values: [
-      { name: this.translate.instant('pages.filterAndOrder.HigherToLower'), type: 'date' },
-      { name: this.translate.instant('pages.filterAndOrder.LowerToHigher'), type: 'date' }
-    ] },
-    { name: this.translate.instant('pages.filterAndOrder.Status'), values: [
-      { name: this.translate.instant('pages.filterAndOrder.NotStarted'), type: 'status', kind: PropertyListKind.TODO },
-      { name: this.translate.instant('pages.filterAndOrder.InProgress'), type: 'status', kind: PropertyListKind.DOING },
-      { name: this.translate.instant('pages.filterAndOrder.Completed'), type: 'status', kind: PropertyListKind.DONE },
-    ] }
-  ];
+  orderOptions: any = [];
 
 
   queryFilter !: string;

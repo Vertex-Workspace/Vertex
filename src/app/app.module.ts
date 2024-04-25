@@ -86,7 +86,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserInformationsModule,
     SearchAllModule,
     ToastModule,
-    
     GroupsSelectModule,
     TranslateModule.forRoot({
       loader: {
