@@ -460,13 +460,13 @@
     }
     
     .calendar {
-        @apply flex w-full h-full pt-8;
+        @apply flex w-full h-full pt-8 max-h-[612px];
         display: grid;
         grid-template-rows: repeat(5, 1fr);
         
         
         .days-of-week {
-            @apply pb-4 max-w-[125px];
+            @apply pb-4 max-w-[125px] max-h-[100px];
             border: 1px solid $emphasis;
             border-top: none;
             text-align: center;
