@@ -56,7 +56,9 @@ export class KanbanComponent {
 
   ngOnChanges(){
     this.status = this.project.properties[0].propertyLists;
-
+    this.taskList = this.project.tasks;
+    console.log(this.project);
+    
   }
 
   ngOnInit() {

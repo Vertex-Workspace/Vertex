@@ -16,7 +16,14 @@ export class PropertyService {
   ) { }
 
   public createOrEditProperty(projectID:number, property : Property): Observable<Project> {
-    return this.http.post<Project>(`${URL}property/project/${projectID}`, property, {withCredentials: true});
+    //Create
+    if(property.id){
+      return this.http.put<Project>(`${URL}property/project/${projectID}`, property, {withCredentials: true});
+    } 
+    //Edit
+    else{
+      return this.http.post<Project>(`${URL}property/project/${projectID}`, property, {withCredentials: true});
+    }
   }
 
   public deleteProperty(projectID:number, propertyId : number): Observable<Project> {

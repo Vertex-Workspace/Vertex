@@ -27,7 +27,7 @@ export class PropertyCreation {
     name!: string;
     kind!: PropertyKind;
     defaultValue?: string;
-    
+    propertyStatus?: PropertyStatus;
     constructor(
         name: string, kind: PropertyKind, defaultValue: string
     ) {

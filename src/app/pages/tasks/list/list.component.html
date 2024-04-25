@@ -8,10 +8,10 @@
                 Nome
                 </h6>
             </label>
-        <ng-container>
+        <ng-container *ngFor="let col of project ? project.properties : properties">
                 <label 
-                    *ngFor="let col of project ? project.properties : properties"
                     [style.min-width]="project ? '300px' : '245px'"
+                    *ngIf="col.propertyStatus != 'INVISIBLE'"
                 >              
                 <h6>
                     {{col.name}}

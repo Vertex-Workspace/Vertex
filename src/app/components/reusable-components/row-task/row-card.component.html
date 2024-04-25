@@ -22,6 +22,7 @@
                 class="properties" 
                 [ngStyle]="{'min-width' : project ? '300px' : '245px'}"
                 (click)="alertNotPermission()"
+                *ngIf="col.propertyStatus != 'INVISIBLE'"
             >
                 <app-input-value-property 
                     style="width: 100%; height: 100%;" 

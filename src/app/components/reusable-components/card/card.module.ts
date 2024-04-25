@@ -4,6 +4,7 @@ import { CardComponent } from './card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.mod
   imports: [
     CommonModule,
     FontAwesomeModule,
+    FormsModule,
     DragDropModule,
     ConfirmModalModule,
   

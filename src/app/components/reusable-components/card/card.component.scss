@@ -40,7 +40,9 @@
 
 }
 
-p {
-    @apply ml-2 overflow-hidden max-h-[24px];
+p, input{
+    @apply  flex items-center pl-2 h-[35px] overflow-hidden max-h-[35px];
 }
-
+.name-task:hover{
+    background-color: $emphasis;
+}

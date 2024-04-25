@@ -4,7 +4,7 @@ import { faCircleUser,
           faEnvelope, 
           faClockRotateLeft 
         } from '@fortawesome/free-solid-svg-icons';
-import { Task } from 'src/app/models/class/task';
+import { Task, TaskEdit } from 'src/app/models/class/task';
 import { Project } from 'src/app/models/class/project';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
@@ -27,8 +27,6 @@ export class CardComponent implements OnInit {
   faClock = faClockRotateLeft;
 
   constructor(private taskService: TaskService,
-    private teamService: TeamService,
-    private userService: UserService,
     private alertService: AlertService,
     private route: ActivatedRoute,
     private projectService: ProjectService) {
@@ -67,8 +65,6 @@ export class CardComponent implements OnInit {
 
   openModalDelete(): void {
     if (this.canDelete) {
-      console.log('entrei');
-      
       this.modalDelete = true;
     } else {
       this.modalDelete2 = true;
@@ -77,6 +73,34 @@ export class CardComponent implements OnInit {
         this.modalDelete2 = false; 
       }, 1000);
     }
+  }
+
+  openInputName: boolean = false;
+  saveLastName: string = "";
+  openModalEdit() {
+    this.openInputName = !this.openInputName;
+    this.saveLastName = this.task.name;
+  }
+
+  editName(): void{
+    if(this.task.name.length < 4){
+      this.alertService.errorAlert("O nome da tarefa deve ter no mínimo 4 caracteres!");
+      this.task.name = this.saveLastName;
+      return;
+    }
+    const taskEdit : TaskEdit = {
+      id: this.task.id,
+      name: this.task.name,
+      description: this.task.description
+    }
+    this.taskService.edit(taskEdit).subscribe(
+      (task) => {
+        this.openInputName = false;
+      },
+      (error) => {
+        this.alertService.errorAlert("Erro ao editar a tarefa!");
+      }
+    );
   }
 
   delete(event: any): void {
@@ -95,10 +119,6 @@ export class CardComponent implements OnInit {
   this.modalDelete = false;
   }
 
-  clock(): void {
-    console.log('clock');
-  }
-
   @Output() openTaskDetails = new EventEmitter();
   openTask(): void {
     if (!this.modalDelete && !this.modalDelete2) {
@@ -107,11 +127,5 @@ export class CardComponent implements OnInit {
       this.openTaskDetails.emit();
     }
   }
-  }
-
-  @Output() current = new EventEmitter();
-
-  takeCurrentTime(): void {
-    
   }
 }
