@@ -66,12 +66,9 @@ export class RegisterComponent {
   invisibleEye2:boolean = true;
   
 
-  passwordToggle1():void{
+  passwordToggle():void{
     this.invisibleEye1 = !this.invisibleEye1;
-  }
-
-  passwordToggle2():void{
-    this.invisibleEye2 = !this.invisibleEye2;
+    this.invisibleEye2 = this.invisibleEye1;
   }
   onSubmit(): void {
     this.userService

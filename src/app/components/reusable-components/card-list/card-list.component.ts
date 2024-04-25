@@ -6,7 +6,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
-import { faTrashCan, faGear, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faGear, faMessage, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
 //  import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
 
@@ -30,7 +30,8 @@ export class CardListComponent implements OnInit {
 
   faTrashCan = faTrashCan;
   faGear = faGear
-  faMessage = faMessage
+  faMessage = faMessage;
+  faDoorOpen = faDoorOpen;
 
   @Input()
   filterSearch !: string;
@@ -87,16 +88,12 @@ export class CardListComponent implements OnInit {
         project.isCreator = (project.creator?.user.id == this.loggedUser.id)
       });
       this.renderList = this.projects
-    } else if (this.type === 'team') {  
-      for(const team of this.teams!){
-        // this.teamService.getOneById(team.id).subscribe((team1: Team) => {
-        //   team.isCreator = true
-        // })
+    } else if (this.type === 'team') {
+      for (const team of this.teams!) {
+        team.isCreator = (team.creator?.id == this.loggedUser.id)
       }
-      this.renderList = this.teams!;  
+      this.renderList = this.teams!;
     }
-    console.log(this.renderList);
-    
   }
 
   updateProject(project: Project) {
@@ -160,7 +157,9 @@ export class CardListComponent implements OnInit {
 
   emitItem(event: boolean) {
     if (this.teams) {
-      this.deleteTeam(this.itemToDelete)
+      if (event) {
+        this.deleteTeam(this.itemToDelete)
+      }
     }
     if (this.projects) {
       if (event) {
@@ -207,7 +206,22 @@ export class CardListComponent implements OnInit {
     this.router.navigate([`/equipe/${teamId}`])
   }
 
+  leaveBool: boolean = false;
+  itemTodelete !: Team
 
+  openModalLeave(item: Team) {
+    this.leaveBool = !this.leaveBool
+    this.itemToDelete = item
+  }
 
+  leaveTeam(event: any) {
+    if (event) {
+      this.teamService.deleteUserTeam(this.itemToDelete, this.userService.getLogged()).subscribe((team: Team) => {
+        this.team = team
+        this.teams?.splice(this.teams.indexOf(team), 1)
+      })
+    }
+    this.openModalLeave(null!)
+  }
 
 }

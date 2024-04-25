@@ -94,16 +94,20 @@ export class CreateTeamProjectComponent implements OnInit {
 
   projectExists() {
     let id = 0;
-    if (this.project != null) {
+    if (this.project != null) { 
+      
       this.projectNull = false;
       if (this.project.file != null) {
         this.base64 = this.project.file!.file;
       }
-      if (this.project.projectDependency != null) {
-        this.dependency = this.project.projectDependency.name;
-      } else {
-        this.dependency = "Atribue dependência"
-      }
+      this.projectService.getOneById(this.project.id).subscribe((project: Project) => {
+        if (project.projectDependency != null) {
+          this.dependency = project.projectDependency.name;
+        } else {
+          this.dependency = "Atribue dependência"
+        } 
+      })  
+    
       id = this.project.idTeam;
 
     } else {
@@ -299,6 +303,8 @@ export class CreateTeamProjectComponent implements OnInit {
 
   updateProject(): void {
     let project = this.form.getRawValue() as Project;
+    console.log(project);
+    
 
     let projectEdit: ProjectEdit = {
       id: this.project?.id,
@@ -314,7 +320,7 @@ export class CreateTeamProjectComponent implements OnInit {
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
-    console.log(project);
+    console.log(projectEdit.projectDependency);
     
 
     this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
@@ -322,10 +328,10 @@ export class CreateTeamProjectComponent implements OnInit {
         this.projectService
           .updateImage(projectRes.id, this.fd)
           .subscribe((projectResImage: Project) => {
-            this.emitCreation(projectResImage);
+            // this.emitCreation(projectResImage);
           });
       } else {
-        this.emitCreation(projectRes);
+        // this.emitCreation(projectRes);
       }
       this.alert.successAlert("Projeto modificado com sucesso");
     });
@@ -375,6 +381,7 @@ export class CreateTeamProjectComponent implements OnInit {
     this.projectService.getProjectByCollaborators(teamId, this.userService.getLogged()).subscribe((projects: Project[]) => {
       this.dependencies = projects
       if (!this.projectNull) {
+        console.log(this.project);
         this.dependencies.splice(this.dependencies.indexOf(this.project), 1)
       }
     })

@@ -19,7 +19,7 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
 
   logged !: User;
   tutorialText = tutorialText;
@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  updateTeams(team : Team){
+  updateTeams(team: Team) {
     this.teams.push(team);
     this.switchCreateView();
   }

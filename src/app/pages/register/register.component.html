@@ -68,10 +68,10 @@
                                 • Mínimo de 1 caractere especial (@#!$%)" [type]="invisibleEye1 ? 'password' : 'text'"
                                     required placeholder="Senha" formControlName="password" class="inputs">
                                 <div class="eyesDiv">
-                                    <fa-icon *ngIf="!invisibleEye1" (click)="passwordToggle1()" class="eyeIcon"
+                                    <fa-icon *ngIf="!invisibleEye1" (click)="passwordToggle()" class="eyeIcon"
                                         [icon]="faEye">
                                     </fa-icon>
-                                    <fa-icon *ngIf="invisibleEye1" (click)="passwordToggle1()" class="eyeIcon"
+                                    <fa-icon *ngIf="invisibleEye1" (click)="passwordToggle()" class="eyeIcon"
                                         [icon]="faEyeSlash"></fa-icon>
                                 </div>
                             </div>
@@ -92,10 +92,10 @@
                                     required placeholder="Confirme sua Senha" formControlName="passwordConf"
                                     class="inputs">
                                 <div class="eyesDiv">
-                                    <fa-icon *ngIf="!invisibleEye2" (click)="passwordToggle2()" class="eyeIcon"
+                                    <fa-icon *ngIf="!invisibleEye2" (click)="passwordToggle()" class="eyeIcon"
                                         [icon]="faEye">
                                     </fa-icon>
-                                    <fa-icon *ngIf="invisibleEye2" (click)="passwordToggle2()" class="eyeIcon"
+                                    <fa-icon *ngIf="invisibleEye2" (click)="passwordToggle()" class="eyeIcon"
                                         [icon]="faEyeSlash"></fa-icon>
                                 </div>
                             </div>

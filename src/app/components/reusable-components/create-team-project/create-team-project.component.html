@@ -41,14 +41,15 @@
         </div>
         <div class="flex w-1/2 flex-col">
           <p class="large-text self-start">Revisões</p>
-          <p-dropdown class="flex items-start justify-start pt-2" [options]="optionsReview" [style]="{ width: '255px'}" formControlName="projectReviewENUM"></p-dropdown>
+          <p-dropdown class="flex items-start justify-start pt-2" [options]="optionsReview" 
+          [style]="{ width: '255px'}" formControlName="projectReviewENUM" placeholder="aaaa"></p-dropdown>
         </div>
       </div>
 
       <div class="flex flex-col w-full pt-3">
         <p class="large-text self-start">Dependências</p>
         <p-dropdown class="flex items-start justify-start pr-1 pt-2" [options]="dependencies" optionLabel="name"
-          formControlName="projectDependency" placeholder={{dependency}} [style]="{ width: '250px'}" 
+          formControlName="projectDependency" placeholder={{dependency}} [style]="{ width: '250px'}"
           emptyMessage="Não há outros projetos"></p-dropdown>
       </div>
     </ng-container>

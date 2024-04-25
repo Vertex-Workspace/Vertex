@@ -50,7 +50,7 @@ export class CardComponent implements OnInit {
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
         this.canDelete = true;
-        this.settings[2].disabled = false;
+        this.settings[0].disabled = false;
       }
     }
   }
@@ -59,9 +59,7 @@ export class CardComponent implements OnInit {
   modalDelete2: boolean = false;
 
   settings = [
-    { id: 'clock', icon: this.faClock, onclick: () => this.clock(), disabled: false},
-    { id: 'chat', icon: this.faEnvelope, onclick: () => this.openChat(), disabled: false},
-    { id: 'delete', icon: this.faTrashCan, onclick: () => this.openModalDelete(), disabled: true }
+    { id: 'delete', icon: this.faTrashCan, onclick: () => this.openModalDelete(), disabled: false }
   ];
 
   openChat(): void {

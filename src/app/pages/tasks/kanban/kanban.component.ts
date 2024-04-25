@@ -54,6 +54,8 @@ export class KanbanComponent {
 
   ngOnInit() {
     this.taskList = this.project.tasks;
+    console.log(this.project.properties);
+    
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
         this.canEdit = true;
@@ -61,6 +63,7 @@ export class KanbanComponent {
         this.canCreate = true;
       }
     }
+    
   }
 
   dropCard(event: CdkDragDrop<Task[]>, propertyList: PropertyList): void {
