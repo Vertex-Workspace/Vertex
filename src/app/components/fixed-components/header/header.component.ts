@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+  import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Observable } from 'rxjs';
