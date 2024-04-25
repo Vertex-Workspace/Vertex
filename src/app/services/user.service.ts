@@ -45,6 +45,7 @@ export class UserService {
     this.create(user)
       .subscribe(
         (user: User) => {
+          window.localStorage.setItem('logged', JSON.stringify(user));
           this.login(user);
         },
         e => {

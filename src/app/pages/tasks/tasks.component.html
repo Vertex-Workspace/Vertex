@@ -77,7 +77,7 @@
                     optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
                     placeholder="{{'pages.tasks.select' | translate}}">
                     <ng-template let-option pTemplate="option">
-                        <div *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
+                        <div style="color:var(--text)" *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
                             {{option.name}}
                         </div>
                         <div *ngIf="option.name === 'TEXT'">
@@ -97,10 +97,10 @@
                 <p>{{'pages.tasks.orderBy' | translate}}</p>
                 <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                     optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
-                    placeholder="Selecione" (ngModelChange)="updateOrderType($event)">
+                    placeholder="{{'pages.tasks.select' | translate}}" (ngModelChange)="updateOrderType($event)">
                     <ng-template pTemplate="option" let-option>
                         <div>
-                            <p>{{option.name}}</p>
+                            <p style="color:var(--text)">{{option.name}}</p>
                         </div>
                     </ng-template>
     

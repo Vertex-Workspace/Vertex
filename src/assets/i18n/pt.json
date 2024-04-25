@@ -1,6 +1,21 @@
 {
     "pages": {
         "home": {
+            "filterandorder": {
+                "Name": "Nome",
+                "AtoZ": "A-Z",
+                "ZtoA": "Z-A",
+                "Date": "Data",
+                "HigherToLower": "Maior - Menor",
+                "LowerToHigher": "Menor - Maior",
+                "Status": "Status",
+                "NotStarted": "Não Iniciado",
+                "InProgress": "Em Andamento",
+                "Completed": "Concluído",
+                "Today": "Hoje",
+                "NextWeek": "Próxima semana",
+                "NextMonth": "Próximo mês"
+            },
             "teams": {
                 "title": "Equipes",
                 "description1": "As equipes são locais de trabalho onde é possível gerenciar projetos, convidar membros,",
@@ -264,11 +279,29 @@
                 "chooseColor": "Escolha a cor e veja o resultado em tempo real",
                 "edit-properties": {
                     "name": "Nome",
-                    "name-placeholder": "Digite o nome que deseja para propriedade...",
+                    "name-placeholder": "Digite o nome que deseja para a propriedade...",
                     "data-type": "Tipo de dado",
                     "data-type-info": "Tipo de informação que a propriedade armazenará",
                     "default-value-placeholder": "Valor padrão",
-                    "confirm-changes": "Confirmar Alterações"
+                    "confirm-changes": "Confirmar Alterações",
+                    "propertytypes": {
+                        "text": "Texto",
+                        "number": "Número",
+                        "list": "Lista"
+                    },
+                    "checkboxlist": {
+                        "defaultvalue": "Definir um valor padrão"
+                    },
+                    "errorcannotchangepropertytype": "Não é possível alterar o tipo de uma propriedade já criada!",
+                    "notification": {
+                        "invalidpropertyname": "O nome da propriedade deve ter entre 3 e 25 caracteres!"
+                    },
+                    "propertylists": {
+                        "high": "Alta",
+                        "medium": "Média",
+                        "low": "Baixa",
+                        "nonessential": "Não essencial"
+                    }
                 },
                 "general-properties": {
                     "Visíveis": "Visível",
@@ -317,8 +350,8 @@
                 "no_results": "Nenhum resultado encontrado...",
                 "no_search": "Nenhuma pesquisa realizada..."
             },
-            "task":{
-                "attachments":{
+            "task": {
+                "attachments": {
                     "add_attachment": "Adicionar anexo"
                 },
                 "comments": {
@@ -337,7 +370,7 @@
                 "description": "Descrição",
                 "commentsS": "Comentários",
                 "log": "Histórico",
-                "analysis":"entregar a tarefa para análise",
+                "analysis": "entregar a tarefa para análise",
                 "sendTask": "Enviar Tarefa",
                 "attachmentsS": "Anexos",
                 "editDescription": "Editar descrição",
@@ -348,9 +381,9 @@
                 "taskDescriptionPlaceholder": "Descrição da tarefa finalizada..."
             }
         },
-        "reusable-components":{
-            "card":{
-                "excludeTask":"excluir a Tarefa"
+        "reusable-components": {
+            "card": {
+                "excludeTask": "excluir a Tarefa"
             },
             "card-group": {
                 "participants": "Participantes",

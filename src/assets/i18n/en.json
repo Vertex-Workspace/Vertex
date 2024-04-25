@@ -1,6 +1,21 @@
 {
     "pages": {
         "home": {
+            "filterandorder": {
+                "Name": "Name",
+                "AtoZ": "A-Z",
+                "ZtoA": "Z-A",
+                "Date": "Date",
+                "HigherToLower": "Higher to Lower",
+                "LowerToHigher": "Lower to Higher",
+                "Status": "Status",
+                "NotStarted": "Not Started",
+                "InProgress": "In Progress",
+                "Completed": "Completed",
+                "Today": "Today",
+                "NextWeek": "Next Week",
+                "NextMonth": "Next Month"
+            },
             "teams": {
                 "title": "Teams",
                 "description1": "Teams are workspaces where you can manage projects, invite members,",
@@ -265,10 +280,28 @@
                 "edit-properties": {
                     "name": "Name",
                     "name-placeholder": "Enter the name you want for the property...",
-                    "data-type": "Data type",
+                    "data-type": "Data Type",
                     "data-type-info": "Type of information the property will store",
-                    "default-value-placeholder": "Default value",
-                    "confirm-changes": "Confirm Changes"
+                    "default-value-placeholder": "Default Value",
+                    "confirm-changes": "Confirm Changes",
+                    "propertytypes": {
+                        "text": "Text",
+                        "number": "Number",
+                        "list": "List"
+                    },
+                    "checkboxlist": {
+                        "defaultvalue": "Set a default value"
+                    },
+                    "errorcannotchangepropertytype": "Cannot change the type of a property already created!",
+                    "notification": {
+                        "invalidpropertyname": "The property name must have between 3 and 25 characters!"
+                    },
+                    "propertylists": {
+                        "high": "High",
+                        "medium": "Medium",
+                        "low": "Low",
+                        "nonessential": "Non-Essential"
+                    }
                 },
                 "general-properties": {
                     "Visíveis": "Visible",
@@ -317,8 +350,8 @@
                 "no_results": "No results found...",
                 "no_search": "No search performed..."
             },
-            "task":{
-                "attachments":{
+            "task": {
+                "attachments": {
                     "add_attachment": "Add attachment"
                 },
                 "comments": {
@@ -337,7 +370,7 @@
                 "description": "Description",
                 "commentsS": "Comments",
                 "log": "Log",
-                "analysis":"deliver task for analysis",
+                "analysis": "deliver task for analysis",
                 "sendTask": "Send Task",
                 "attachmentsS": "Attachments",
                 "editDescription": "Edit description",
@@ -348,9 +381,9 @@
                 "taskDescriptionPlaceholder": "Description of the finished task..."
             }
         },
-        "reusable-components":{
-            "card":{
-                "excludeTask":"exclude Task"
+        "reusable-components": {
+            "card": {
+                "excludeTask": "exclude Task"
             },
             "card-group": {
                 "participants": "Participants",

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
@@ -34,32 +35,32 @@ export class ProjectsComponent implements OnInit {
   //TASKS - FILTER AND ORDER
   selectedFilter !: string;
   filterOptions: any[] = [
-    {name: 'Status', values: [
-      {name: 'Não Iniciado', kind: PropertyListKind.TODO, status: true},
-      {name: 'Em Andamento', kind: PropertyListKind.DOING, status: true},
-      {name: 'Concluído', kind: PropertyListKind.DONE, status: true}
+    { name: this.translate.instant('pages.filterAndOrder.Status'), values: [
+      { name: this.translate.instant('pages.filterAndOrder.NotStarted'), kind: PropertyListKind.TODO, status: true },
+      { name: this.translate.instant('pages.filterAndOrder.InProgress'), kind: PropertyListKind.DOING, status: true },
+      { name: this.translate.instant('pages.filterAndOrder.Completed'), kind: PropertyListKind.DONE, status: true }
     ]},
-    {name: 'Data', values: [
-      {name: "Hoje", kind: PropertyKind.DATE as string, value: 'td' },
-      { name: "Próxima semana", kind: PropertyKind.DATE as string, value: 'nw' },
-      { name: "Próximo mês", kind: PropertyKind.DATE as string, value: 'nm'}
+    { name: this.translate.instant('pages.filterAndOrder.Date'), values: [
+      { name: this.translate.instant('pages.filterAndOrder.Today'), kind: PropertyKind.DATE as string, value: 'td' },
+      { name: this.translate.instant('pages.filterAndOrder.NextWeek'), kind: PropertyKind.DATE as string, value: 'nw' },
+      { name: this.translate.instant('pages.filterAndOrder.NextMonth'), kind: PropertyKind.DATE as string, value: 'nm' }
     ]},
   ];
 
   orderParams !: PipeParams;
-  orderOptions : any = [
-    { name: 'Nome', values: [
-      { name: 'A-Z', type: 'name'  },
-      { name: 'Z-A', type: 'name' }
+  orderOptions: any = [
+    { name: this.translate.instant('pages.filterAndOrder.Name'), values: [
+      { name: this.translate.instant('pages.filterAndOrder.AtoZ'), type: 'name' },
+      { name: this.translate.instant('pages.filterAndOrder.ZtoA'), type: 'name' }
     ]},
-    { name: 'Data', values: [
-      { name: 'Maior - Menor', type: 'date' },
-      { name: 'Menor - Maior', type: 'date' }
+    { name: this.translate.instant('pages.filterAndOrder.Date'), values: [
+      { name: this.translate.instant('pages.filterAndOrder.HigherToLower'), type: 'date' },
+      { name: this.translate.instant('pages.filterAndOrder.LowerToHigher'), type: 'date' }
     ] },
-    { name: 'Status', values: [
-      { name: 'Não Iniciado', type: 'status', kind: PropertyListKind.TODO },
-      { name: 'Em Andamento', type: 'status', kind: PropertyListKind.DOING },
-      { name: 'Concluído', type: 'status', kind: PropertyListKind.DONE },
+    { name: this.translate.instant('pages.filterAndOrder.Status'), values: [
+      { name: this.translate.instant('pages.filterAndOrder.NotStarted'), type: 'status', kind: PropertyListKind.TODO },
+      { name: this.translate.instant('pages.filterAndOrder.InProgress'), type: 'status', kind: PropertyListKind.DOING },
+      { name: this.translate.instant('pages.filterAndOrder.Completed'), type: 'status', kind: PropertyListKind.DONE },
     ] }
   ];
 
@@ -76,6 +77,7 @@ export class ProjectsComponent implements OnInit {
     private teamService: TeamService,
     private groupService: GroupService,
     private router: Router,
+    private translate: TranslateService // Inject TranslateService
   ) {
     this.logged = this.userService.getLogged();
   }
@@ -163,7 +165,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   clickOrder(): void {
-    this.orderParams = {name: '', type: ''};
+    this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
   }
 

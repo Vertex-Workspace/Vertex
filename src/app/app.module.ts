@@ -49,6 +49,7 @@ import { TranslateModule, TranslateLoader, TranslateService, TranslateStore, Tra
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +89,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     
     GroupsSelectModule,
     TranslateModule.forRoot({
-      defaultLanguage:'pt',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

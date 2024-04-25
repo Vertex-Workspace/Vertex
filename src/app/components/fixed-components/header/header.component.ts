@@ -11,6 +11,8 @@ import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { locations, LocationItem } from 'src/assets/data/locations';
 import { TranslateService } from '@ngx-translate/core';
+import { Personalization } from 'src/app/models/class/personalization';
+import { PersonalizationService } from 'src/app/services/personalization.service';
 
 @Component({
   selector: 'app-header',
@@ -38,6 +40,7 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private _location: Location,
     private notificationWebSocket: NotificationWebSocketService,
+    private personalizationService : PersonalizationService,
     private translate: TranslateService
   ) {
     this.router.events.subscribe(val => {
@@ -62,9 +65,18 @@ export class HeaderComponent implements OnInit {
   }
 
   linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
-  mudarIdioma(sigla: string, link: string) {
-    this.linkImagemPais = link
+  changeLanguage(sigla: string, link: string) {
+    this.linkImagemPais = link;
     this.translate.use(sigla);
+  
+    this.personalizationService.changeLanguage(sigla, this.userService.getLogged().id).subscribe(
+      (res: any) => {
+        console.log("Idioma alterado com sucesso!");
+      },
+      (error: any) => {
+        console.error("Erro ao alterar idioma:", error);
+      }
+    );
   }
 
 
@@ -74,6 +86,7 @@ export class HeaderComponent implements OnInit {
     this.translate.get('pages.' + this.location.toLowerCase()).subscribe((res: string) => {
       this.locationTranslation = res || this.location;
     });
+
   }
 
 

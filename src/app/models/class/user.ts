@@ -3,6 +3,7 @@ import { Personalization } from './personalization';
 import { Task } from "./task";
 
 export class User {
+    
 
     id ?: number ;
     firstName !: string | undefined;

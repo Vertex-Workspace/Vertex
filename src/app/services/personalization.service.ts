@@ -13,16 +13,20 @@ import { User } from '../models/class/user';
 export class PersonalizationService {
   constructor(private http: HttpClient) { }
 
-  
-  findById(id:number): Observable<Personalization> {
+
+  findById(id: number): Observable<Personalization> {
     return this.http.get<Personalization>(`${URL}personalization/${id}`)
-    .pipe(map((personalization: Personalization) => new Personalization(personalization)));;
+      .pipe(map((personalization: Personalization) => new Personalization(personalization)));;
   }
   getAllPersonalization(): Observable<Personalization[]> {
     return this.http.get<Personalization[]>(`${URL}personalization`);
   }
 
-  
+  public changeLanguage(language: any, userId: number): Observable<User> {
+    // Remova a linha que salva o idioma no localStorage, isso não é necessário aqui
+    return this.http.patch<any>(`${URL}user/${userId}/personalization/changeLanguage`, language);
+  }
+
 
 
   // ========================================================================================

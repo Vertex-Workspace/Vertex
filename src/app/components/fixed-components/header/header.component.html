@@ -13,7 +13,7 @@
         </button>
         <mat-menu #idiomaMenu="matMenu" class="custom-menu">
           <button mat-menu-item (click)="
-                      mudarIdioma(
+                      changeLanguage(
                         'pt',
                         'https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png'
                       )
@@ -21,19 +21,29 @@
             <img style="width: 34px;" src="https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png" />
           </button>
           <button mat-menu-item
-            (click)="mudarIdioma('es', 'https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg')">
+            (click)="changeLanguage('es', 'https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg')">
             <img style="width: 34px;"
               src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg" />
           </button>
 
           <button mat-menu-item (click)="
-                      mudarIdioma(
+                      changeLanguage(
                         'en',
                         'https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg'
                       )
                     ">
             <img style="width: 34px;"
               src="https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg" />
+
+          </button>
+          <button mat-menu-item (click)="
+                      changeLanguage(
+                        'zh',
+                        'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png'
+                      )
+                    ">
+            <img style="width: 34px;"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png" />
 
           </button>
           <!-- Outros botões de mudança de idioma -->

@@ -24,6 +24,7 @@ import { Observable, of } from 'rxjs';
 import { NotificationWebSocketService } from './services/notification-websocket.service';
 import { Notification } from './models/class/notification';
 import { tutorialText } from './tutorialText';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -77,24 +78,31 @@ export class AppComponent {
     private alertService: AlertService,
     private teamService: TeamService,
     public textSpeechService: TextSpeechService,
-    private notificationWebSocket: NotificationWebSocketService
+    private notificationWebSocket: NotificationWebSocketService,
+    private translate: TranslateService,
+    private personalizationService: PersonalizationService
   ) {
-    
+    translate.setDefaultLang('pt');
+
+    // Verifique se há um idioma salvo no armazenamento local e use-o, se disponível
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage) {
+      translate.use(savedLanguage);
+    }
     this.userState
-    .getAuthenticationStatus()
-    .subscribe((status: boolean) => {
-      this.userLogged = status;
-    });
+      .getAuthenticationStatus()
+      .subscribe((status: boolean) => {
+        this.userLogged = status;
+      });
 
     console.log(this.userLogged);
 
   }
-  
+
   // Sets the theme by default and make the persistence of the theme in all components
   ngOnInit(): void {
-    let user: User = JSON.parse(localStorage.getItem('logged') || '');
+    let user: User = this.userService.getLogged()!;
     this.userService.getOneById(user.id!).subscribe((logged) => {
-      user = logged;
 
       this.logged = logged;
 
@@ -129,9 +137,10 @@ export class AppComponent {
     this.notificationWebSocket.listenToServer().subscribe(
       (change) => {
         this.getNotificationBadge();
-        
+
       }
     )
+
   }
 
   notificationBadge: number = 0;
@@ -170,7 +179,7 @@ export class AppComponent {
     this.notification = !this.notification;
   }
 
-  
+
 
   @HostListener('document:mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {

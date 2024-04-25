@@ -9,6 +9,7 @@ import { Property, PropertyKind, PropertyList, PropertyListKind } from 'src/app/
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
+import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
 
 @Component({
   selector: 'app-edit-properties',
@@ -41,14 +42,15 @@ export class EditPropertiesComponent {
   openInput: boolean = false;
 
   propertyTypes = [
-    { icon: faFont, value: false, type: PropertyKind.TEXT, label: 'Texto' },
-    { icon: fa1, value: false, type: PropertyKind.NUMBER, label: 'Número' },
-    { icon: faList, value: false, type: PropertyKind.LIST, label: 'Lista' },
-  ]
+    { icon: faFont, value: false, type: PropertyKind.TEXT, label: this.translateService.instant('components.modals.properties.edit-properties.propertytypes.text') },
+    { icon: fa1, value: false, type: PropertyKind.NUMBER, label: this.translateService.instant('components.modals.properties.edit-properties.propertytypes.number') },
+    { icon: faList, value: false, type: PropertyKind.LIST, label: this.translateService.instant('components.modals.properties.edit-properties.propertytypes.list') },
+  ];
 
   checkboxList = [
     {
-      p: 'Definir um valor padrão', value: false,
+      p: this.translateService.instant('components.modals.properties.edit-properties.checkboxlist.defaultvalue'),
+      value: false,
       kinds: [
         PropertyKind.TEXT
       ]
@@ -56,9 +58,10 @@ export class EditPropertiesComponent {
   ];
   
 
-  constructor(private propertyService: PropertyService, private alertService: AlertService, private projectService : ProjectService) {
-
-  }
+  constructor(private propertyService: PropertyService, 
+              private alertService: AlertService, 
+              private projectService : ProjectService,
+              private translateService: TranslateService) { } // Inject TranslateService
 
   defaultProperty!: Property
   ngOnInit(): void {
@@ -82,7 +85,7 @@ export class EditPropertiesComponent {
         this.property.propertyLists = [];
       }
     } else{
-      this.alertService.errorAlert("Não é possível alterar o tipo de uma propriedade já criada!");
+      this.alertService.errorAlert(this.translateService.instant('components.modals.properties.edit-properties.errorcannotchangepropertytype'));
     }
   }
 
@@ -111,7 +114,7 @@ export class EditPropertiesComponent {
   saveProperty(): void {
     if(this.hasChange()){  
       if(this.property.name.length < 3 || this.property.name.length > 25){
-        this.alertService.notificationAlert("O nome da propriedade deve ter entre 3 e 25 caracteres!");
+        this.alertService.notificationAlert(this.translateService.instant('components.modals.properties.edit-properties.notification.invalidpropertyname'));
         return;
       }
 
@@ -144,11 +147,11 @@ export class EditPropertiesComponent {
   private openEditList(): void {
     if (this.property.propertyLists.length === 0) {
       this.property.propertyLists = [
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Alta", color: "#ffe2dd" , isFixed: false},
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Média", color: "#fdecc8" , isFixed: false},
-        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: "Baixa", color: "#dbeddb" , isFixed: false},
-        { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: "Não essencial", color: "#d3e5ef" , isFixed: false},
-      ]
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: this.translateService.instant('components.modals.properties.edit-properties.propertylists.high'), color: "#ffe2dd" , isFixed: false},
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: this.translateService.instant('components.modals.properties.edit-properties.propertylists.medium'), color: "#fdecc8" , isFixed: false},
+        { id: 0, propertyListKind: PropertyListKind.VISIBLE, value: this.translateService.instant('components.modals.properties.edit-properties.propertylists.low'), color: "#dbeddb" , isFixed: false},
+        { id: 0, propertyListKind: PropertyListKind.INVISIBLE, value: this.translateService.instant('components.modals.properties.edit-properties.propertylists.nonessential'), color: "#d3e5ef" , isFixed: false},
+      ];
       this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
         (project) => {  
           this.property = project.properties[project.properties.length - 1];
