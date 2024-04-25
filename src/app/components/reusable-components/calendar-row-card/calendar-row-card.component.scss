@@ -1,0 +1,7 @@
+@import '../../../../variables';
+
+.task-card {
+    @apply min-w-[85%] max-w-[85%] h-[65px] flex items-center shadow-md rounded-sm justify-between px-4;
+    border-left: solid 14px;
+    background-color: $card;
+}

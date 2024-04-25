@@ -50,8 +50,6 @@ export class AttachmentItemComponent {
     const blob = new Blob([byteArray], { type: 'application/pdf' });
 
     this.url = window.URL.createObjectURL(blob);
-    console.log(this.url);
-    
   }
 
   getName(): string {

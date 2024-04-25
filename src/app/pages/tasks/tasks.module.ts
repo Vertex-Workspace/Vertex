@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalendarModule } from './calendar/calendar.module';
+import { CalendarScreenModule } from './calendar/calendar.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ModalPropertiesModule } from 'src/app/components/modals/properties/modal-properties.module';
 import { KanbanModule } from './kanban/kanban.module';
@@ -47,7 +47,7 @@ import { JoyrideModule } from 'ngx-joyride';
     FontAwesomeModule,
     DragDropModule,
     FormsModule,
-    CalendarModule,
+    CalendarScreenModule,
     ListModule,
     KanbanModule,
     ChartModule,

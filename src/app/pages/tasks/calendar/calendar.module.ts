@@ -6,13 +6,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn.module';
 import { CardModule } from 'src/app/components/reusable-components/card/card.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CalendarModule } from 'primeng/calendar';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { FormsModule } from '@angular/forms';
+import { CalendarRowCardComponent } from 'src/app/components/reusable-components/calendar-row-card/calendar-row-card.component';
 
 
 
 @NgModule({
   declarations: [
-    CalendarComponent
+    CalendarComponent,
+    CalendarRowCardComponent
   ],
   exports: [
     CalendarComponent
@@ -25,7 +29,11 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     DragDropModule,
     CardModule,
     DragDropModule,
-    PipesModule
+    PipesModule,
+    CalendarModule,
+    FormsModule
   ]
 })
-export class CalendarModule { }
+export class CalendarScreenModule { }
+export { CalendarModule };
+

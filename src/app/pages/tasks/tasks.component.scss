@@ -476,7 +476,7 @@
 @media screen and (min-width: 630px) and (max-width: 970px) {
 
     .screen {
-        @apply h-full w-screen flex justify-center overflow-x-auto;
+        @apply h-full w-screen flex justify-center;
     }
     
     .container-custom {
@@ -636,7 +636,7 @@
 @media screen and (max-width: 630px) {
 
     .screen {
-        @apply h-full w-screen flex justify-center overflow-x-auto;
+        @apply h-full w-screen flex justify-center;
     }
     
     .container-custom {
@@ -736,6 +736,7 @@
                 }
             }
             
+        
             .create:hover {
                 background-color: $secondColor;
                 color: $primaryColor;

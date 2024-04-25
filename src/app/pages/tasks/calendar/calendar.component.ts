@@ -29,6 +29,8 @@ export class CalendarComponent {
   @Input() permissions!: Permission[];
   day: any;
 
+  date: any;
+
 
   @Input()
   orderParams !: PipeParams;
@@ -66,13 +68,10 @@ export class CalendarComponent {
 
   modalTasks: boolean = false;
 
-
-
   @Output() openTaskDetails = new EventEmitter();
   openCardTask(task: Task): void {
     this.openTaskDetails.emit(task);
   }
-
 
   //FUTURE 
   buttonDay!: Date;
@@ -94,6 +93,7 @@ export class CalendarComponent {
   tasks !: Task[];
 
   getTasksByDate(date: Date | undefined): Task[] {
+  
     let tasks: Task[] = [];
     if (date != undefined) {
       this.project.tasks.forEach((task) => {
@@ -113,6 +113,11 @@ export class CalendarComponent {
     return tasks;
   }
 
+  delete(task: Task) {
+    this.taskService
+      .delete(task.id!)
+      .subscribe();
+  }
 
   formatDate(day: Date | undefined): string {
     if (day != undefined) {
@@ -203,7 +208,7 @@ export class CalendarComponent {
 
 
   //it will be a request of user option
-  toggle: boolean = true;
+  toggle: boolean = false;
   toggleCharts(): void {
     this.toggle = !this.toggle;
   }
