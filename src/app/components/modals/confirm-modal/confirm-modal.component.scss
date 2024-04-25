@@ -12,7 +12,7 @@
     }
     
     .modal {
-        @apply absolute rounded-md flex flex-col w-[400px] h-[450px]
+        @apply absolute rounded-md flex flex-col w-[350px] h-[220px]
         items-end justify-center text-center p-8 border-t-8;
         border-color: $primaryColor;
         background-color: $secondColor;
@@ -91,4 +91,17 @@
         @apply flex items-center justify-center w-full h-full pb-16;
     }
     
+}
+.cancel-button{
+    @apply flex items-center justify-center w-24 h-8 rounded-sm mr-4;
+    background-color: $error;
+    color: white;
+}
+.confirm-button{
+    @apply flex items-center justify-center w-24 h-8 rounded-sm;
+    background-color: $primaryColor;
+    color: white;
+}
+.deleted {
+    @apply flex items-center justify-center w-full h-full pb-16;
 }

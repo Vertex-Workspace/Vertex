@@ -7,8 +7,8 @@
                 <ng-content #content></ng-content>
             </div>
             <div class="button-div">
-                <button  (click)="deleteConfirm(false)" class="no-button regular-text">Cancelar</button>
-                <button (click)="deleteConfirm(true)" class="yes-button regular-text">{{buttonText}}</button>
+                <button  (click)="deleteConfirm(false)" class="cancel-button regular-text">Cancelar</button>
+                <button (click)="deleteConfirm(true)" class="confirm-button regular-text">{{buttonText}}</button>
             </div>
     </div>
 </div>

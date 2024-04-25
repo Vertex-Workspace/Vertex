@@ -44,7 +44,8 @@ export class CreateTeamProjectComponent implements OnInit {
 
   logged !: User;
   projectNull: boolean = true;
-  dependency?: string
+  dependency !: string
+  review !: string
   showResponsibles: boolean = false;
   selectedFile !: any;
   base64 !: any;
@@ -73,7 +74,7 @@ export class CreateTeamProjectComponent implements OnInit {
       name: [null, [Validators.required]],
       description: [null],
       listOfResponsibles: [null],
-      projectReviewENUM: [this.convertType()],
+      projectReviewENUM: [null],
       groups: [null],
       projectDependency: [null],
     });
@@ -92,6 +93,7 @@ export class CreateTeamProjectComponent implements OnInit {
   ]
 
 
+  project2 !: Project
   projectExists() {
     let id = 0;
     if (this.project != null) { 
@@ -105,15 +107,16 @@ export class CreateTeamProjectComponent implements OnInit {
           this.dependency = project.projectDependency.name;
         } else {
           this.dependency = "Atribue dependência"
-        } 
+        }
+        this.convertType(project);
       })  
-    
       id = this.project.idTeam;
 
     } else {
       const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
       id = teamId;
       this.dependency = "Atribue dependência"
+      this.review = "Selecione revisão"
     }
     this.getGroups(id);
     this.getUsers(id);
@@ -175,11 +178,7 @@ export class CreateTeamProjectComponent implements OnInit {
       };
 
       let reviewConfig = this.form.get('projectReviewENUM')
-
       project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
-
-      
-
       this.projectService
       .create(project, teamId)
       .subscribe((projectResponse: Project) => {
@@ -209,16 +208,13 @@ export class CreateTeamProjectComponent implements OnInit {
         return ProjectReview.EMPTY;
     }
   }
-  convertType(): string {
-    switch (this.project?.projectReviewENUM!) {
-      case ProjectReview.OPTIONAL:
-        return 'Revisão opcional';
-      case ProjectReview.MANDATORY:
-        return 'Revisão obrigatória';
-      case ProjectReview.EMPTY:
-        return 'Sem revisão';
-      default:
-        return "Sem revisão";
+  convertType(project: Project): void {   
+    if(project.projectReviewENUM.toString() === 'MANDATORY'){
+      this.review = 'Revisão obrigatória'
+    }else if(project.projectReviewENUM.toString() === 'OPTIONAL'){
+      this.review = 'Revisão opcional'
+    }else if(project.projectReviewENUM.toString() === 'EMPTY'){
+      this.review = 'Sem revisão'
     }
   }
 
@@ -316,22 +312,22 @@ export class CreateTeamProjectComponent implements OnInit {
     if(project.listOfResponsibles != null){
       this.verifyTypeAndDependencies(project, projectEdit);
     }
+    if(projectEdit.projectDependency != null){
+      projectEdit.projectDependency.properties = [];
+      projectEdit.projectDependency.tasks = []
+    }
 
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
-    console.log(projectEdit.projectDependency);
-    
 
     this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
       if (this.fd) {
         this.projectService
           .updateImage(projectRes.id, this.fd)
           .subscribe((projectResImage: Project) => {
-            // this.emitCreation(projectResImage);
           });
       } else {
-        // this.emitCreation(projectRes);
       }
       this.alert.successAlert("Projeto modificado com sucesso");
     });
@@ -341,7 +337,7 @@ export class CreateTeamProjectComponent implements OnInit {
     let users: User[] = [];
     let groups: Group[] = [];
 
-    if (project.projectDependency) {
+    if (project.projectDependency != null) {
       project.projectDependency.properties = [];
       project.projectDependency.tasks = []
     }

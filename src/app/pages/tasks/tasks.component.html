@@ -9,7 +9,8 @@
                     <i class="pi pi-pencil pt-2 cursor-pointer" *ngIf="isCreator" (click)="openProjectInfos()"></i>
                 </div>
                 <div class="pt-2">
-                    <p class="small-text text-gray-600 texttt text-justify">Aqui ficarão centralizadas todas as tarefas do projeto, você
+                    <p class="small-text text-gray-600 texttt text-justify">Aqui ficarão centralizadas todas as tarefas
+                        do projeto, você
                         poderá filtrar, ordenar e criar novas tarefas. Gerenciando o seu tempo e
                         registrando cada etapa.</p>
                 </div>
@@ -53,12 +54,16 @@
                     <i class="pi pi-check-square" pBadge value={{badgeNumber}}></i>
                 </button>
 
-                <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
-                    <i class="pi pi-tags"></i>
-                    <p>
-                        Propriedades
-                    </p>
-                </button>
+                <div joyrideStep="step7" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
+                    [doneTemplate]="doneButton" [title]="'Modos de visualização das tarefas'"
+                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[8] }">
+                    <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
+                        <i class="pi pi-tags"></i>
+                        <p>
+                            Propriedades
+                        </p>
+                    </button>
+                </div>
                 <button *ngIf="!isMuralPage; else buttonMural" class="create" (click)="createTask()"
                     [disabled]="!canCreate" [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
@@ -144,27 +149,26 @@
     <app-review-task *ngIf="taskReview" [tasksToReview]="tasksToReview" (toggleReview)="toggleReview()"
         (closeModal)="updateTasksToReview($event)"></app-review-task>
 
-    <app-create-team-project *ngIf="openModalProject" [project]="project"
-        [typeString]="'projectInfo'" (close)="openProjectInfos()" (senderEmitter)="updateProject($event)"></app-create-team-project>
+    <app-create-team-project *ngIf="openModalProject" [project]="project" [typeString]="'projectInfo'"
+        (close)="openProjectInfos()" (senderEmitter)="updateProject($event)"></app-create-team-project>
 
 </ng-container>
 
-    <ng-template #prevButton>
-        <button class="btn">
-            Voltar
-        </button>
-    </ng-template>
-    <ng-template #nextButton>
-        <button class="btn">
-            Próximo
-        </button>
-    </ng-template>
-    <ng-template #doneButton>
-        <button (click)="attUserFirstAccess()" class="btn">
-            Fim
-        </button>
-    </ng-template>
-    <ng-template #customContent let-texto="texto" style="border-radius: 5px">
-        <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
-    </ng-template>
-
+<ng-template #prevButton>
+    <button class="btn">
+        Voltar
+    </button>
+</ng-template>
+<ng-template #nextButton>
+    <button class="btn">
+        Próximo
+    </button>
+</ng-template>
+<ng-template #doneButton>
+    <button (click)="attUserFirstAccess()" class="btn">
+        Fim
+    </button>
+</ng-template>
+<ng-template #customContent let-texto="texto" style="border-radius: 5px">
+    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+</ng-template>

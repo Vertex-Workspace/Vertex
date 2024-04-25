@@ -52,9 +52,17 @@ export class KanbanComponent {
   @Input()
   orderParams !: PipeParams;
 
+  status : PropertyList[] = [];
+
+  ngOnChanges(){
+    this.status = this.project.properties[0].propertyLists;
+
+  }
+
   ngOnInit() {
     this.taskList = this.project.tasks;
-    console.log(this.project.properties);
+    this.status = this.project.properties[0].propertyLists;
+
     
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.EDIT) && permission.enabled) {

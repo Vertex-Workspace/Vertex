@@ -8,7 +8,7 @@ export const tutorialText: string[] = [
     `Acesso rápido para visualizar APENAS as tarefas daquela equipe, podendo pesquisar e filtrar por status e data.`,
     `Ao clicar no cartão do projeto, você será redirecionado para página do projeto e terá acesso as tarefas do projeto.`,
     `Aqui você terá opções de visualização de tarefas, podendo escolher por mural, lista, calendário ou kanban.`,
-    ``,
+    `Aqui você poderá criar propriedades que serão utilizadas em tarefas e projetos, bem como editá-las e gerenciar status`,
 
 
 ]

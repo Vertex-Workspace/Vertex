@@ -154,17 +154,6 @@ export class TasksComponent implements OnInit {
           }
         }
       })
-
-      //Se o projeto possuir a opção de revisão, então é feita a requisição das tarefas que estão aguardando revisão
-      if(this.project.projectReviewENUM !== ProjectReview.EMPTY){
-        this.taskService.getTasksToReview(this.logged.id!, id).subscribe(
-          (tasks : TaskWaitingToReview[]) => {
-            this.tasksToReview = tasks;
-            this.badgeNumber = this.tasksToReview.length.toString();
-          }
-          );
-      }
-        
     });
   }
 

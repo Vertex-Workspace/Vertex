@@ -124,7 +124,6 @@ export class GeneralPropertiesComponent {
         kind: PropertyKind.TEXT,
         propertyStatus: PropertyStatus.VISIBLE,
         propertyLists: [],
-
       });
       this.openNewProperty.emit(genericProperty);
     } else {
@@ -174,7 +173,7 @@ export class GeneralPropertiesComponent {
       if (this.canDelete) {
         this.propertyService.deleteProperty(this.project.id!, this.propertyToDelete.id).subscribe(
           (project) => {
-            this.project = project;
+            this.project = project
             this.separePropertiesKind();
             this.changeProject.emit(this.project);
           }, (error) => {

@@ -3,7 +3,7 @@
     <ng-container cdkDropListGroup>
 
         <div class="col-container">
-            <div class="col" *ngFor="let propertyList of project.properties[0].propertyLists"
+            <div class="col" *ngFor="let propertyList of status"
                 [style.backgroundColor]="propertyList.color" [style.height]="getHeight(propertyList)"
                 cdkDropList [cdkDropListData]="project.tasks" (cdkDropListDropped)="dropCard($event, propertyList)">
                 <div class="flex flex-row justify-between w-full items-center">

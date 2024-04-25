@@ -81,7 +81,6 @@ export class CardComponent implements OnInit {
 
   delete(event: any): void {
     if (event) {
-      
         this.taskService.delete(this.task.id).subscribe(
           (task) => {
             // Alert
