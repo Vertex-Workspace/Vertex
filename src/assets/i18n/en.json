@@ -34,7 +34,7 @@
             },
             "backBtn": "Back",
             "nextBtn": "Next",
-            "welcome": "Welcome, {{name}}!",
+            "welcome": "Be Welcome, {{nome}}!",
             "textWelcome": "Explore Vertex and discover how to manage your time from end to end!"
         },
         "chat": {
@@ -47,7 +47,7 @@
             "inputPlaceholder": "Type here..."
         },
         "invitation-page": {
-            "text": "Team AKMO has invited you to join the team!",
+            "text": "Team {{teamName}} has invited you to join the team!",
             "enterTeam": "Join the team",
             "declineInvite": "Decline invitation"
         },
@@ -363,7 +363,11 @@
                 "filter_by": "Filter by",
                 "select_placeholder": "Select",
                 "no_results": "No results found...",
-                "no_search": "No search performed..."
+                "no_search": "No search performed...",
+                "Equipes": "Teams",
+                "Projetos": "Projects",
+                "Tarefas": "Tasks",
+                "Responsaveis": "Responsibles"
             },
             "task": {
                 "attachments": {

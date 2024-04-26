@@ -60,13 +60,13 @@ export class ProjectsComponent implements OnInit {
       this.updateTranslate();
     });
   }
-  
-  
+
+
   permissionsOnTeam!: Permission[];
   permissionsOnTeamObservable!: Observable<Permission[]>;
 
   ngOnInit(): void {
-  
+
     this.getTeam();
     this.validateTeamId();
     this.updateTranslate();
@@ -75,11 +75,11 @@ export class ProjectsComponent implements OnInit {
   validateTeamId(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
-      .userIsOnTeam(this.logged.id!,teamId)
+      .userIsOnTeam(this.logged.id!, teamId)
       .subscribe((exists: boolean) => {
         if (!exists) {
           this.router.navigate(['/home']);
-          this.alert.errorAlert('Equipe inexistente!')
+          this.alert.errorAlert(this.translate.instant('alerts.error.inexistent_team'));
         }
       });
   }
@@ -88,75 +88,89 @@ export class ProjectsComponent implements OnInit {
   getTeam() {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
-    .getOneById(teamId)
-    .subscribe((team: Team) => {
-      this.team = team;
-      this.teamName = team.name!;
+      .getOneById(teamId)
+      .subscribe((team: Team) => {
+        this.team = team;
+        this.teamName = team.name!;
 
-      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
-      this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
-        this.permissionsOnTeam = permissions;
+        this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
+        this.permissionsOnTeamObservable.forEach((permissions: Permission[]) => {
+          this.permissionsOnTeam = permissions;
+        });
+
       });
-
-    });
   }
 
-  updateTranslate(){
+  updateTranslate() {
     this.filterOptions = [
-      { name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
-        { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), kind: PropertyListKind.TODO, status: true },
-        { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), kind: PropertyListKind.DOING, status: true },
-        { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), kind: PropertyListKind.DONE, status: true }
-      ]},
-      { name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
-        { name: this.translate.instant('pages.projects.filterAndOrder.Today'), kind: PropertyKind.DATE as string, value: 'td' },
-        { name: this.translate.instant('pages.projects.filterAndOrder.NextWeek'), kind: PropertyKind.DATE as string, value: 'nw' },
-        { name: this.translate.instant('pages.projects.filterAndOrder.NextMonth'), kind: PropertyKind.DATE as string, value: 'nm' }
-      ]},
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), kind: PropertyListKind.TODO, status: true },
+          { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), kind: PropertyListKind.DOING, status: true },
+          { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), kind: PropertyListKind.DONE, status: true }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.Today'), kind: PropertyKind.DATE as string, value: 'td' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.NextWeek'), kind: PropertyKind.DATE as string, value: 'nw' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.NextMonth'), kind: PropertyKind.DATE as string, value: 'nm' }
+        ]
+      },
     ];
-  
+
     this.orderOptions = [
-      { name: this.translate.instant('pages.projects.filterAndOrder.Name'), values: [
-        { name: this.translate.instant('pages.projects.filterAndOrder.AtoZ'), type: 'name' },
-        { name: this.translate.instant('pages.projects.filterAndOrder.ZtoA'), type: 'name' }
-      ]},
-      { name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
-        { name: this.translate.instant('pages.projects.filterAndOrder.HigherToLower'), type: 'date' },
-        { name: this.translate.instant('pages.projects.filterAndOrder.LowerToHigher'), type: 'date' }
-      ] },
-      { name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
-        { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), type: 'status', kind: PropertyListKind.TODO },
-        { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), type: 'status', kind: PropertyListKind.DOING },
-        { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), type: 'status', kind: PropertyListKind.DONE },
-      ] }
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Name'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.AtoZ'), type: 'name' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.ZtoA'), type: 'name' }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.HigherToLower'), type: 'date' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.LowerToHigher'), type: 'date' }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), type: 'status', kind: PropertyListKind.TODO },
+          { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), type: 'status', kind: PropertyListKind.DOING },
+          { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), type: 'status', kind: PropertyListKind.DONE },
+        ]
+      }
     ];
     this.detectChanges();
   }
 
-  detectChanges(){
+  detectChanges() {
     this.cd.detectChanges();
   }
 
   delete(projectId: Project): void {
     this.projectService
       .delete(projectId.id)
-      .subscribe((project: Project) => {
-        this.alert.successAlert(`Projeto deletado com sucesso!`);
-        this.team.projects?.splice(this.team.projects.indexOf(projectId),1)
-      },
+      .subscribe(
+        (project: Project) => {
+          this.alert.successAlert(this.translate.instant('alerts.success.project_deleted'));
+          this.team.projects?.splice(this.team.projects.indexOf(projectId), 1);
+        },
         e => {
-          this.alert.errorAlert('Erro ao deletar projeto!');
-        });
+          this.alert.errorAlert(this.translate.instant('alerts.error.delete_project'));
+        }
+      );
   }
 
   deleteGroup(groupId: Group): void {
-    this.groupService.delete(groupId.id).subscribe((group: Group) => {
-      this.alert.successAlert('Grupo deletado com sucesso')
-      this.team.groups?.splice(this.team.groups.indexOf(groupId), 1)
-    },
-    e=> {
-      this.alert.errorAlert("Não foi possível deletar");
-    })
+    this.groupService.delete(groupId.id).subscribe(
+      (group: Group) => {
+        this.alert.successAlert(this.translate.instant('alerts.success.group_deleted'));
+        this.team.groups?.splice(this.team.groups.indexOf(groupId), 1);
+      },
+      e => {
+        this.alert.errorAlert(this.translate.instant('alerts.error.delete_group'));
+      }
+    );
   }
 
   changePreviewMode(preview: string): void {
@@ -194,8 +208,8 @@ export class ProjectsComponent implements OnInit {
         e => {
           if (group.name == null) {
             this.alert.errorAlert(`Você precisa adicionar um nome`)
-          }else {
-            this.alert.errorAlert(`Erro ao criar grupo`)            
+          } else {
+            this.alert.errorAlert(`Erro ao criar grupo`)
           }
         });
   }
@@ -208,7 +222,7 @@ export class ProjectsComponent implements OnInit {
   taskOpen: boolean = false;
   taskOpenObject!: Task;
   changeModalTaskState(bool: boolean, task: Task): void {
-    if(bool == false){
+    if (bool == false) {
       this.taskOpenObject = {} as Task;
       this.taskOpen = false;
       return;
@@ -219,8 +233,8 @@ export class ProjectsComponent implements OnInit {
   }
 
 
-  goTeamSettings():void{
-    const route : string = 'equipe/' + this.team.id;
+  goTeamSettings(): void {
+    const route: string = 'equipe/' + this.team.id;
     this.router.navigate([route]);
   }
 }

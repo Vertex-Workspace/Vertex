@@ -34,7 +34,7 @@
             },
             "backBtn": "返回",
             "nextBtn": "下一个",
-            "welcome": "欢迎，{{name}}！",
+            "welcome": "欢迎，{{nome}}！",
             "textWelcome": "探索Vertex，发现如何从头到尾管理您的时间！"
         },
         "chat": {
@@ -47,7 +47,7 @@
             "inputPlaceholder": "在这里输入..."
         },
         "invitation-page": {
-            "text": "AKMO团队邀请您加入团队！",
+            "text": "{{teamName}}团队邀请您加入团队！",
             "enterTeam": "加入团队",
             "declineInvite": "拒绝邀请"
         },
@@ -363,7 +363,11 @@
                 "filter_by": "筛选方式",
                 "select_placeholder": "选择",
                 "no_results": "未找到结果...",
-                "no_search": "未进行搜索..."
+                "no_search": "未进行搜索...",
+                "Equipes": "团队",
+                "Projetos": "项目",
+                "Tarefas": "任务",
+                "Responsaveis": "负责人"
             },
             "task": {
                 "attachments": {

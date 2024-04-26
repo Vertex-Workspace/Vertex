@@ -6,15 +6,15 @@
             <div class="flex flex-row items-end gap-3">
                 <h4>{{ 'pages.home.teams.title' | translate }}</h4>
             </div>
-            <div stepPosition="center" joyrideStep="step1" [title]="'pages.home.welcome' | translate"
-                [text]="'pages.home.textWelcome' | translate" [stepContentParams]="{ 'nome': logged.firstName }">
+            <div stepPosition="center" joyrideStep="step1" [title]="'Seja bem vindo, ' + logged.firstName + '!'"
+                [text]="'Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!'" [stepContentParams]="{ 'nome': logged.firstName }">
             </div>
             <div class="pt-2 pb-4">
                 <p class="small-text text-gray-600">{{ 'pages.home.teams.description1' | translate }}</p>
                 <p class="small-text text-gray-600">{{ 'pages.home.teams.description2' | translate }}</p>
             </div>
             <div class="flex flex-col" joyrideStep="step2" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'pages.home.newTeamBtn' | translate" [stepContent]="customContent"
+                [title]="'Visualizar / Criar Equipes'" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[2] }">
                 <div class="functionally-items-task">
                     <div class="search">
@@ -100,14 +100,11 @@
 <app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
 
 <ng-template #prevButton>
-    <button class="btn">{{ 'pages.home.backBtn' | translate }}</button>
+    <button class="btn">Voltar</button>
 </ng-template>
 
 <ng-template #nextButton>
-    <button class="btn">{{ 'pages.home.nextBtn' | translate }}</button>
-</ng-template>
-<ng-template #nextButton>
-    <button class="btn">{{ 'pages.home.endBtn' | translate }}</button>
+    <button class="btn">Próximo</button>
 </ng-template>
 
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">

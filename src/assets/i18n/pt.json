@@ -34,8 +34,7 @@
             },
             "backBtn": "Voltar",
             "nextBtn": "Próximo",
-            "welcome": "Seja bem-vindo, {{nome}}!",
-            "textWelcome": "Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!"
+            "textWelcome": ""
         },
         "chat": {
             "header": {
@@ -47,7 +46,7 @@
             "inputPlaceholder": "Digite aqui..."
         },
         "invitation-page": {
-            "text": "A equipe AKMO convidou você para fazer parte do time!",
+            "text": "A equipe {{teamName}} convidou você para fazer parte do time!",
             "enterTeam": "Entrar na equipe",
             "declineInvite": "Recusar convite"
         },
@@ -363,7 +362,11 @@
                 "filter_by": "Filtrar por",
                 "select_placeholder": "Selecione",
                 "no_results": "Nenhum resultado encontrado...",
-                "no_search": "Nenhuma pesquisa realizada..."
+                "no_search": "Nenhuma pesquisa realizada...",
+                "Equipes": "Equipes",
+                "Projetos": "Projetos",
+                "Tarefas": "Tarefas",
+                "Responsaveis": "Responsáveis"
             },
             "task": {
                 "attachments": {
@@ -461,6 +464,20 @@
                 "task-name": "Nome da Tarefa",
                 "delete-task": "Excluir a Tarefa"
             }
+        }
+    },
+    "alerts": {
+        "success": {
+            "addToTeam": "Você foi adicionado ao time ",
+            "project_deleted": "Projeto deletado com sucesso!",
+            "group_deleted": "Grupo deletado com sucesso!"
+        },
+        "error": {
+            "delete_project": "Erro ao deletar projeto!",
+            "delete_group": "Não foi possível deletar o grupo!",
+            "inexistent_team": "Equipe inexistente!"
+        },
+        "notification": {
         }
     }
 }

@@ -1,19 +1,27 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="!modalCopyLink">
 
   <div class="modal">
-    <h4 class="title" *ngIf="typeString === 'team'">{{ 'components.reusable-components.create-team-project.new-team' | translate }}</h4>
-    <h4 class="title" *ngIf="typeString === 'project'">{{ 'components.reusable-components.create-team-project.new-project' | translate }}</h4>
-    
-    <h4 class="title" *ngIf="typeString === 'projectInfo'">{{ 'components.reusable-components.create-team-project.project-info' | translate }}</h4>
+    <h4 class="title" *ngIf="typeString === 'team'">{{ 'components.reusable-components.create-team-project.new-team' |
+      translate }}</h4>
+    <h4 class="title" *ngIf="typeString === 'project'">{{
+      'components.reusable-components.create-team-project.new-project' | translate }}</h4>
+
+    <h4 class="title" *ngIf="typeString === 'projectInfo'">{{
+      'components.reusable-components.create-team-project.project-info' | translate }}</h4>
     <h4 class="title" *ngIf="typeString === 'projectInfo'" (click)="closeScreen()" class="cursor-pointer">X</h4>
-    
+
     <div class="div-grid-name-image">
       <div class="input-name">
-        <p class="medium-text" *ngIf="typeString === 'team'">{{ 'components.reusable-components.create-team-project.team-name' | translate }}</p>
-        <p class="medium-text" *ngIf="typeString === 'project'">{{ 'components.reusable-components.create-team-project.project-name' | translate }}</p>
+        <p class="medium-text" *ngIf="typeString === 'team'">{{
+          'components.reusable-components.create-team-project.team-name' | translate }}</p>
+        <p class="medium-text" *ngIf="typeString === 'project'">{{
+          'components.reusable-components.create-team-project.project-name' | translate }}</p>
         <input formControlName="name" type="text"
-          [placeholder]="typeString == 'team' ? 'components.reusable-components.create-team-project.add-team-name' : 'components.reusable-components.create-team-project.add-project-name' | translate"
-          *ngIf="projectNull">
+          [placeholder]="'components.reusable-components.create-team-project.add-team-name' | translate"
+          *ngIf="projectNull && typeString == 'team'">
+        <input formControlName="name" type="text"
+          [placeholder]="'components.reusable-components.create-team-project.add-project-name' | translate"
+          *ngIf="projectNull && typeString == 'project'">
         <input formControlName="name" type="text" *ngIf="!projectNull" [(ngModel)]="name">
       </div>
       <div class="input-image">
@@ -28,26 +36,40 @@
     </div>
 
     <div class="input-description">
-      <p class="medium-text" *ngIf="typeString === 'team' || typeString === 'project'">{{ 'components.reusable-components.create-team-project.team-description' | translate }}</p>
-      <p class="medium-text" *ngIf="typeString === 'project' || typeString === 'project'">{{ 'components.reusable-components.create-team-project.project-description' | translate }}</p>
-      <textarea formControlName="description" *ngIf="projectNull"
-        [placeholder]="typeString === 'team' ? 'components.reusable-components.create-team-project.add-team-description' : 'components.reusable-components.create-team-project.add-project-description' | translate"></textarea>
+      <p class="medium-text" *ngIf="typeString === 'team' || typeString === 'project'">{{
+        'components.reusable-components.create-team-project.team-description' | translate }}</p>
+      <p class="medium-text" *ngIf="typeString === 'project' || typeString === 'project'">{{
+        'components.reusable-components.create-team-project.project-description' | translate }}</p>
+      <textarea formControlName="description" *ngIf="projectNull && typeString === 'team'"
+        [placeholder]="'components.reusable-components.create-team-project.add-team-description' | translate"></textarea>
+      <textarea formControlName="description" *ngIf="projectNull && typeString === 'project'"
+        [placeholder]="'components.reusable-components.create-team-project.add-project-description' | translate"></textarea>
       <textarea formControlName="description" *ngIf="!projectNull" [(ngModel)]="description"></textarea>
     </div>
 
-    <p class="medium-text pt-3">{{ 'components.reusable-components.create-team-project.responsibles' | translate }}</p>
+    <p class="medium-text pt-3" *ngIf="typeString === 'project' || typeString === 'projectInfo'">{{ 'components.reusable-components.create-team-project.responsibles' | translate }}</p>
 
-    <p-treeSelect *ngIf="typeString === 'project' || typeString === 'projectInfo'" class="flex items-start justify-start w-[65%] pt-2" containerStyleClass="w-full" display="chip" [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox" placeholder="{{ 'components.reusable-components.create-team-project.assign-responsibles' | translate }}" [(ngModel)]="selectedUsers" [style]="{ 'background-color': 'var(--card)', color: 'var(--text)'}" formControlName="listOfResponsibles"></p-treeSelect>
+    <p-treeSelect *ngIf="typeString === 'project' || typeString === 'projectInfo'"
+      class="flex items-start justify-start w-[65%] pt-2" containerStyleClass="w-full" display="chip"
+      [options]="listOfResponsibles" [metaKeySelection]="false" selectionMode="checkbox"
+      placeholder="{{ 'components.reusable-components.create-team-project.assign-responsibles' | translate }}"
+      [(ngModel)]="selectedUsers" [style]="{ 'background-color': 'var(--card)', color: 'var(--text)'}"
+      formControlName="listOfResponsibles"></p-treeSelect>
 
-    <p class="medium-text pt-3">{{ 'components.reusable-components.create-team-project.task-review' | translate }}</p>
-    <p-dropdown *ngIf="typeString === 'project' || typeString === 'projectInfo'" class="flex items-start justify-start w-[65%] pt-2" [options]="optionsReview" [style]="{ background: 'var(--card)', color: 'var(--text)'}" formControlName="projectReviewENUM"></p-dropdown>
+    <p class="medium-text pt-3" *ngIf="typeString === 'project' || typeString === 'projectInfo'">{{ 'components.reusable-components.create-team-project.task-review' | translate }}</p>
+    <p-dropdown *ngIf="typeString === 'project' || typeString === 'projectInfo'"
+      class="flex items-start justify-start w-[65%] pt-2" [options]="optionsReview"
+      [style]="{ background: 'var(--card)', color: 'var(--text)'}" formControlName="projectReviewENUM"></p-dropdown>
 
     <div class="div-buttons">
       <div class="buttons" *ngIf="projectNull">
-        <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">{{ 'components.reusable-components.create-team-project.cancel' | translate }}</button>
-        <button class="confirm-button" type="submit" *ngIf="projectNull">{{ 'components.reusable-components.create-team-project.confirm' | translate }}</button>
+        <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">{{
+          'components.reusable-components.create-team-project.cancel' | translate }}</button>
+        <button class="confirm-button" type="submit" *ngIf="projectNull">{{
+          'components.reusable-components.create-team-project.confirm' | translate }}</button>
       </div>
-      <button class="confirm-button" type="submit" *ngIf="!projectNull" (click)="updateProject()">{{ 'components.reusable-components.create-team-project.edit' | translate }}</button>
+      <button class="confirm-button" type="submit" *ngIf="!projectNull" (click)="updateProject()">{{
+        'components.reusable-components.create-team-project.edit' | translate }}</button>
     </div>
   </div>
 </form>

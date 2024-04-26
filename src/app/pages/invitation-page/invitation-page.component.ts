@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { TeamService } from 'src/app/services/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Team } from 'src/app/models/class/team';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-invitation-page',
@@ -15,8 +16,9 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class InvitationPageComponent {
 
+  team!: Team;
 
-  constructor(private teamService: TeamService, private route: ActivatedRoute, private router: Router) {
+  constructor(private teamService: TeamService, private route: ActivatedRoute, private router: Router,private alertService: AlertService,private translate : TranslateService) {
 
     let userLogged = JSON.parse(localStorage.getItem('logged') || '{}');
     const id = Number(this.route.snapshot.paramMap.get('idTeam'));
@@ -44,9 +46,11 @@ export class InvitationPageComponent {
       (res) => {
         this.router.navigate(['home']);
         this.teamService.getOneById(id).subscribe(
-          (team: Team) => {
-            console.log(team);
-            this.teamService.patchChat(team.chat!.id!, id, userLogged.id).subscribe(
+          (res: Team) => {
+            this.team = res;
+            console.log(res);
+            this.alertService.successAlert(this.translate.instant('Você foi adicionado ao time ') + res.name);
+            this.teamService.patchChat(res.chat!.id!, id, userLogged.id).subscribe(
               (res) => {
                 console.log(res);
               },
