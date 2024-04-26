@@ -40,6 +40,8 @@ export class TeamInformationsComponent implements OnInit {
     team!: Team;
     //to-do: add creation date, user social media, fix cards, -- charts
 
+    query !: string;
+
     constructor(
         private route: ActivatedRoute,
         private teamService: TeamService,

@@ -58,7 +58,7 @@
 
                 <div class="high-listDiv-members">
                     <div class="search">
-                        <input class="searchInput" type="text" placeholder={{placeholder}}>
+                    <input class="searchInput" type="text" placeholder={{placeholder}} [(ngModel)]="query">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="clicked" (click)="openModalCreateGroup()" *ngIf="clicked === 'groups'">
@@ -76,7 +76,7 @@
 
 
             <div *ngIf="clicked == 'participants'" class="grid-permissions">
-                <ng-container *ngFor="let user of team.users">
+                <ng-container *ngFor="let user of (team.users! | usernamePipe : query)">
                     <app-card-user [width]="'370px'" [height]="'90px'" [typeString]="'permissions'"
                         (deleteEmitterUserTeam)="openModalDeleteUser($event)" [team]="team"
                         [user]="user"></app-card-user>

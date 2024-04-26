@@ -43,6 +43,7 @@ export class NotificationComponent {
 
   searchBarOpen: boolean = false;
   query: string = "";
+  
   toggleSearchBar(): void {
     this.searchBarOpen = !this.searchBarOpen;
   }
