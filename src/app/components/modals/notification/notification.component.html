@@ -29,7 +29,7 @@
             </ul>
         </div>
         <div class="notifications">
-            <ng-container *ngFor="let notification of notifications;">
+            <ng-container *ngFor="let notification of (notifications | namePipe : query);">
                 <div class="notification">
                     <div>
                         <div class="checkbox-div">

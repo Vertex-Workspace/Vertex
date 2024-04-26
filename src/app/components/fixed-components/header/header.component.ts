@@ -1,7 +1,6 @@
-  import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Project } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
@@ -16,11 +15,12 @@ import { locations, LocationItem } from 'src/assets/data/locations';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   notifications : boolean = true;
   locations: LocationItem[] = locations;
   location: string = "";
+  id !: number;
 
   @Input()
   notificationBadge!: number;
@@ -49,20 +49,14 @@ export class HeaderComponent implements OnInit {
 
         r.params.subscribe(params => {
           if (params) {
-            const id: number = params['id'];            
-            this.incrementUrlById(activeRoute, id);
+            this.id = params['id'];           
+            this.incrementUrlById(activeRoute, this.id);
           }
         });
       }
     }); 
-
   }
 
-  ngOnInit(): void {
-
-  }
-
-  
   @Output()
   openNotification = new EventEmitter();
 
@@ -71,21 +65,52 @@ export class HeaderComponent implements OnInit {
   }
 
   updateLocation(activeRoute: string): void {
-
     this.locations
       .find((loc: LocationItem) => {
         if (activeRoute.includes(loc.url)) {      
           this.location = loc.name;       
         }
       })          
-
   }
 
   back(): void {
-    console.log(window.history.length);
+    this.backLocationHandler(this.router.url);
+  }
+
+  backLocationHandler(currentLocation: string): void {
+    const previousLocation: Record<string, () => void> = {
+      '/projeto/' : () => this.backToTeam(true),
+      '/projetos' : () => this.backToHome(),
+      '/perfil/' : () => this.backToHome(),
+      '/equipe/' : () => this.backToTeam(false),
+      '/chat/' : () => this.backToHome(),
+      '/configuracoes/' : () => this.backToHome()
+    }
+
+    for (const location in previousLocation) {
+      if (currentLocation.includes(location)) {
+        previousLocation[location]();
+        return;
+      }
+    }
+  }
+
+  backToHome(): void {
+    console.log('aa');
     
-    if (window.history.length > 2) this._location.back();
-    else this.router.navigate(['/']);
+    this.router.navigate(['/']);
+  }
+
+  backToTeam(hasProjectId: boolean): void {
+    if (hasProjectId) {
+      this.projectService
+      .getOneById(this.id)
+      .subscribe(team => {
+        this.router.navigate([`equipe/${team.id}/projetos`])
+      });
+    } else {
+      this.router.navigate([`equipe/${this.id}/projetos`])
+    }
   }
 
   incrementUrlById(activeRoute: string, id: number): void {     
