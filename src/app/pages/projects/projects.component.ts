@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
@@ -52,9 +52,13 @@ export class ProjectsComponent implements OnInit {
     private teamService: TeamService,
     private groupService: GroupService,
     private router: Router,
-    private translate: TranslateService // Inject TranslateService
+    private translate: TranslateService, // Inject TranslateService
+    private cd: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
+    this.translate.onLangChange.subscribe(() => {
+      this.updateTranslate();
+    });
   }
   
   
@@ -65,6 +69,7 @@ export class ProjectsComponent implements OnInit {
   
     this.getTeam();
     this.validateTeamId();
+    this.updateTranslate();
   }
 
   validateTeamId(): void {
@@ -96,7 +101,41 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  updateTranslate(){
+    this.filterOptions = [
+      { name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
+        { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), kind: PropertyListKind.TODO, status: true },
+        { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), kind: PropertyListKind.DOING, status: true },
+        { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), kind: PropertyListKind.DONE, status: true }
+      ]},
+      { name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
+        { name: this.translate.instant('pages.projects.filterAndOrder.Today'), kind: PropertyKind.DATE as string, value: 'td' },
+        { name: this.translate.instant('pages.projects.filterAndOrder.NextWeek'), kind: PropertyKind.DATE as string, value: 'nw' },
+        { name: this.translate.instant('pages.projects.filterAndOrder.NextMonth'), kind: PropertyKind.DATE as string, value: 'nm' }
+      ]},
+    ];
+  
+    this.orderOptions = [
+      { name: this.translate.instant('pages.projects.filterAndOrder.Name'), values: [
+        { name: this.translate.instant('pages.projects.filterAndOrder.AtoZ'), type: 'name' },
+        { name: this.translate.instant('pages.projects.filterAndOrder.ZtoA'), type: 'name' }
+      ]},
+      { name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
+        { name: this.translate.instant('pages.projects.filterAndOrder.HigherToLower'), type: 'date' },
+        { name: this.translate.instant('pages.projects.filterAndOrder.LowerToHigher'), type: 'date' }
+      ] },
+      { name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
+        { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), type: 'status', kind: PropertyListKind.TODO },
+        { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), type: 'status', kind: PropertyListKind.DOING },
+        { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), type: 'status', kind: PropertyListKind.DONE },
+      ] }
+    ];
+    this.detectChanges();
+  }
 
+  detectChanges(){
+    this.cd.detectChanges();
+  }
 
   delete(projectId: Project): void {
     this.projectService

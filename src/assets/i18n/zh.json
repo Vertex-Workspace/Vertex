@@ -64,7 +64,22 @@
             "orderBy": "按...排序",
             "select": "选择",
             "backBtn": "返回",
-            "nextBtn": "下一个"
+            "nextBtn": "下一个",
+            "filterAndOrder": {
+                "Status": "状态",
+                "NotStarted": "未开始",
+                "InProgress": "进行中",
+                "Completed": "已完成",
+                "Date": "日期",
+                "Today": "今天",
+                "NextWeek": "下周",
+                "NextMonth": "下个月",
+                "Name": "名称",
+                "AtoZ": "A到Z",
+                "ZtoA": "Z到A",
+                "HigherToLower": "由高到低",
+                "LowerToHigher": "由低到高"
+            }
         },
         "tasks": {
             "description1": "此处将集中显示项目的所有任务，您可以进行筛选、",

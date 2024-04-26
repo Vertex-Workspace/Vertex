@@ -58,13 +58,28 @@
       "description3": "En esta sección puedes ver todas las tareas en las que",
       "description4": "eres uno de los responsables dentro del equipo {{team}}",
       "searchPlaceholder": "Buscar un proyecto...",
-      "newProjectBtn": "Nuevo proyecto",
+      "newProjectBtn": "Crear proyecto",
       "title": "Ver / Crear proyectos",
       "filterBy": "Filtrar por",
       "orderBy": "Ordenar por",
       "select": "Seleccionar",
       "backBtn": "Volver",
-      "nextBtn": "Siguiente"
+      "nextBtn": "Siguiente",
+      "filterAndOrder": {
+        "Status": "Estado",
+        "NotStarted": "No Iniciado",
+        "InProgress": "En Progreso",
+        "Completed": "Completado",
+        "Date": "Fecha",
+        "Today": "Hoy",
+        "NextWeek": "Próxima Semana",
+        "NextMonth": "Próximo Mes",
+        "Name": "Nombre",
+        "AtoZ": "De la A a la Z",
+        "ZtoA": "De la Z a la A",
+        "HigherToLower": "De Mayor a Menor",
+        "LowerToHigher": "De Menor a Mayor"
+      }
     },
     "tasks": {
       "description1": "Aquí se centralizarán todas las tareas del proyecto, puedes filtrar,",

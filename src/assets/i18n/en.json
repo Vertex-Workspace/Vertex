@@ -64,7 +64,22 @@
             "orderBy": "Order by",
             "select": "Select",
             "backBtn": "Back",
-            "nextBtn": "Next"
+            "nextBtn": "Next",
+            "filterAndOrder": {
+                "Status": "Status",
+                "NotStarted": "Not Started",
+                "InProgress": "In Progress",
+                "Completed": "Completed",
+                "Date": "Date",
+                "Today": "Today",
+                "NextWeek": "Next Week",
+                "NextMonth": "Next Month",
+                "Name": "Name",
+                "AtoZ": "A to Z",
+                "ZtoA": "Z to A",
+                "HigherToLower": "Higher to Lower",
+                "LowerToHigher": "Lower to Higher"
+            }
         },
         "tasks": {
             "description1": "Here all project tasks will be centralized, you can filter,",

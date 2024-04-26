@@ -64,7 +64,22 @@
             "orderBy": "Ordenar por",
             "select": "Selecione",
             "backBtn": "Voltar",
-            "nextBtn": "Próximo"
+            "nextBtn": "Próximo",
+            "filterAndOrder": {
+                "Status": "Estado",
+                "NotStarted": "Não Iniciado",
+                "InProgress": "Em Progresso",
+                "Completed": "Concluído",
+                "Date": "Data",
+                "Today": "Hoje",
+                "NextWeek": "Próxima Semana",
+                "NextMonth": "Próximo Mês",
+                "Name": "Nome",
+                "AtoZ": "A para Z",
+                "ZtoA": "Z para A",
+                "HigherToLower": "Maior para Menor",
+                "LowerToHigher": "Menor para Maior"
+            }
         },
         "tasks": {
             "description1": "Aqui ficarão centralizadas todas as tarefas do projeto, você poderá filtrar,",
