@@ -89,8 +89,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private teamService: TeamService,
-    private alert: AlertService,
-    private projectService: ProjectService,
     private readonly joyrideService: JoyrideService
   ) {
     this.logged = this.userService.getLogged();
@@ -114,7 +112,9 @@ export class HomeComponent implements OnInit {
 
   subscribeToTeams() {
     this.teamsRender = this.teamService.getTeamsByUser(this.logged);
-    this.teamsRender.forEach(teams => {
+    this.teamsRender.subscribe(teams => {
+      console.log(teams);
+      
       this.teams = teams
       this.joyrideService.startTour({
         steps: [
@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
           `step4@equipe/${this.teams[0].id}/projetos`,
           `step5@equipe/${this.teams[0].id}/projetos`,
           `goToTasks@equipe/${this.teams[0].id}/projetos`,
-          `step6@projeto/${this.teams[1].projects[0].id}/tarefas`,
+          `step6@projeto/${this.teams[0].projects[0].id}/tarefas`,
         ],
       });
     });

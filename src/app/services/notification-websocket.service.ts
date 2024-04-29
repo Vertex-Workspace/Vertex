@@ -26,7 +26,9 @@ export class NotificationWebSocketService {
   public openWebSocket() {
     try {
 
-      this.webSocket.onopen = (event) => {};
+      this.webSocket.onopen = (event) => {
+        
+      };
 
       this.webSocket.onclose = (event) => {};
 
@@ -55,6 +57,9 @@ export class NotificationWebSocketService {
   public closeWebSocket() {
     try {
       this.webSocket.close();
-    } catch (error) {}
+    } catch (error) {
+
+
+    }
   }
 }

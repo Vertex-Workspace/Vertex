@@ -70,6 +70,7 @@ export class TaskComponent implements OnInit {
     private teamService: TeamService,
     private userService: UserService,
     private router: Router,
+    private activatedRoute : ActivatedRoute,
     private reviewService: ReviewService
   ) {
     this.user = userService.getLogged();
@@ -84,17 +85,25 @@ export class TaskComponent implements OnInit {
 
   render : boolean = false;
   ngOnInit() {
+    let idTask = 0;
+    this.activatedRoute.queryParamMap.subscribe((p: any) => {idTask = p['params'].taskID});
+    if(!idTask || idTask == 0){
+      idTask = this.task.id;
+    }
 
-    this.taskService.getOneById(this.task.id).subscribe(
+    this.taskService.getOneById(idTask).subscribe(
       (task: Task) => {
+        
         this.task = task;
-
+        console.log(this.task);
+        
         if (this.task.revisable) {
           this.checkedReview = true;
         }
-        this.taskService.getTaskInfo(this.task.id).subscribe(
-          (task: any) => {
-            this.taskInfoDTO = task;
+        this.taskService.getTaskInfo(idTask).subscribe(
+          (taskInfo: any) => {
+      
+            this.taskInfoDTO = taskInfo;
           }
         );
         this.task.taskResponsables!.forEach((taskResponsable) => {
@@ -115,7 +124,7 @@ export class TaskComponent implements OnInit {
         this.getTimeInTask();
     
           
-        this.taskService.getTaskPermissions(this.task.id, this.user.id!).subscribe(
+        this.taskService.getTaskPermissions(idTask, this.user.id!).subscribe(
           (permissions: Permission[]) => {
             this.permissions = permissions;
             this.setEditPermission(permissions);
@@ -360,11 +369,11 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  isCreator(): boolean {
+  isCreator(): boolean { 
     return this.task.creator?.user.id == this.user.id;
   }
 
   isRevisable(): boolean {
-    return this.taskInfoDTO.projectReviewENUM == ProjectReview.OPTIONAL;
+    return this.taskInfoDTO.projectReviewENUM == "OPTIONAL";
   }
 }

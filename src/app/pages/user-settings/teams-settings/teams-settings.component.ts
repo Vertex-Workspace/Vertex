@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './teams-settings.component.html',
   styleUrls: ['./teams-settings.component.scss']
 })
-export class TeamsSettingsComponent implements OnInit{
+export class TeamsSettingsComponent{
 
   faUsers = faUsers;
   faSearch = faSearch;
@@ -29,22 +29,17 @@ export class TeamsSettingsComponent implements OnInit{
     private router: Router,
     private alert: AlertService
   ) {
-    this.logged = this.userService.getLogged();  
     this.getAllTeams();
   }
 
-  logged !: User;
-
   teams !: Team[];
-
-  ngOnInit(): void {
-    
-  }
+  teamLength: boolean = false;
 
   getAllTeams(): void {
     this.teamService
-      .getTeamsByUser(this.logged)
-      .subscribe((teams) => {        
+      .getTeamsByUser(this.userService.getLogged())
+      .subscribe((teams) => {   
+        this.teamLength = teams.length ==  0;
         this.teams = teams;
       });
   }

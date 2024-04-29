@@ -93,14 +93,16 @@ export class ProjectsComponent implements OnInit {
     this.teamService
     .getOneById(teamId)
     .subscribe((team: Team) => {
+      console.log(team);
+      
       this.team = team;
       this.teamName = team.name!;
+      this.projects = this.team.projects;
       this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
       this.permissionsOnTeamObservable.subscribe((permissions: Permission[]) => {
         this.permissionsOnTeam = permissions;
         
       });
-      this.getProjects();
     }, (error) => {
       this.router.navigate(['/home']);
       this.alert.errorAlert('Equipe inexistente!')
@@ -126,12 +128,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   projects: Project[] = []
-
-  getProjects() {
-    this.projectService.getProjectByCollaborators(this.team.id, this.logged).subscribe((projects: Project[]) => {
-      this.projects = projects
-    })
-  }
 
   switchCreateView(): void {
     this.isCreatingProject = !this.isCreatingProject;

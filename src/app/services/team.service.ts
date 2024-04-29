@@ -38,6 +38,12 @@ export class TeamService {
       
   }
 
+  public findInformationInvitationPage(id: number) : Observable<Team>{
+    return this.http
+      .get<Team>(`${URL}team/invitation-page-info/${id}`, {withCredentials: true});
+    
+  }
+
   public findAllChatsByUser(id:number):Observable<Chat[]>{
     return this.http.get<Chat[]>(`${URL}chatController/allChatsOfUser/${id}`, {withCredentials: true});
   }

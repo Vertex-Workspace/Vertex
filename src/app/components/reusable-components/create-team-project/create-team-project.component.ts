@@ -249,6 +249,7 @@ export class CreateTeamProjectComponent implements OnInit {
     this.teamService.getUsers(teamId).subscribe((users: User[]) => {
       for (const user of users) {
         if (this.logged.id != user.id) {
+          user.label = user.firstName + " " + user.lastName;
           this.listOfResponsibles.push(user);
         }
         if (this.project != null) {
@@ -268,6 +269,7 @@ export class CreateTeamProjectComponent implements OnInit {
           this.selectedUsers.push(user)
         }
       }
+      
     })
   }
 
@@ -280,7 +282,6 @@ export class CreateTeamProjectComponent implements OnInit {
           this.returnAllGroups(group)
         }
       }
-      console.log(this.listOfResponsibles);
       if (this.listOfResponsibles!.length > 0) {
         this.showResponsibles = true;
       }
@@ -299,8 +300,6 @@ export class CreateTeamProjectComponent implements OnInit {
 
   updateProject(): void {
     let project = this.form.getRawValue() as Project;
-    console.log(project);
-    
 
     let projectEdit: ProjectEdit = {
       id: this.project?.id,
@@ -308,8 +307,10 @@ export class CreateTeamProjectComponent implements OnInit {
       description: project.description,
       projectDependency: project.projectDependency
     };
+    console.log(project.listOfResponsibles);
+    
 
-    if(project.listOfResponsibles != null){
+    if(project.listOfResponsibles.length > 0){
       this.verifyTypeAndDependencies(project, projectEdit);
     }
     if(projectEdit.projectDependency != null){
@@ -320,7 +321,8 @@ export class CreateTeamProjectComponent implements OnInit {
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
-
+    console.log(projectEdit);
+    
     this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
       if (this.fd) {
         this.projectService
@@ -342,18 +344,22 @@ export class CreateTeamProjectComponent implements OnInit {
       project.projectDependency.tasks = []
     }
 
+    console.log(project.listOfResponsibles);
+    
     project.listOfResponsibles.forEach(type => {
       if (type instanceof Group) {
         let group: Group = type as Group;
         group.children = [];
         groups.push({ ...group });
-      } else if (type instanceof User) {
+      } else {
         let user: User = type as User;
         if (!users.some(existingUser => existingUser.id === user.id)) {
+    
           users.push({ ...user });
         }
       }
-    });
+    }); 
+    
 
     if (projectEdit != null) {
       projectEdit.users = users;
@@ -377,7 +383,6 @@ export class CreateTeamProjectComponent implements OnInit {
     this.projectService.getProjectByCollaborators(teamId, this.userService.getLogged()).subscribe((projects: Project[]) => {
       this.dependencies = projects
       if (!this.projectNull) {
-        console.log(this.project);
         this.dependencies.splice(this.dependencies.indexOf(this.project), 1)
       }
     })
