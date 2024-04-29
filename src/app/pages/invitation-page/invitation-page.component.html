@@ -1,5 +1,5 @@
 <div class="main-div">
-    <div class="center-div">
+    <div class="center-div" *ngIf="render">
         <div class="square">
             <img src="data:image/jpg;base64, {{team.image}}" alt="" class="h-full w-full">
             <h1 *ngIf="!team.image">{{getFirstLetter(team.name)}}</h1>

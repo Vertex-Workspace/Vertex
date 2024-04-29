@@ -84,7 +84,7 @@ export class TasksComponent implements OnInit {
   filterOptions: any[] = [];
 
   pageTitle: string = 'Espaço de Trabalho';
-
+  pageDescription: string = 'Descrição';
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -103,6 +103,8 @@ export class TasksComponent implements OnInit {
   teamId?: number
   isCreator:boolean = false;
   ngOnInit() {
+    console.log("On init");
+    
     this.muralPageListener();
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
@@ -126,6 +128,7 @@ export class TasksComponent implements OnInit {
       this.setFilters(p);
       this.setOrderOptions(p);
       this.pageTitle = this.project.name;
+      this.pageDescription = this.project.description!;
       
       this.verifyIfAllTasksAreDone(p);
 
@@ -154,6 +157,8 @@ export class TasksComponent implements OnInit {
           }
         }
       })
+    }, (error) => {
+      this.router.navigate(['/acesso-negado']);
     });
   }
 

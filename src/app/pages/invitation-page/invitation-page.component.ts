@@ -14,33 +14,29 @@ import { Observable } from 'rxjs';
 export class InvitationPageComponent {
 
 
-  userLogged!: User;
   team!: Team;
+  render: boolean = false;
   constructor(
     private teamService: TeamService, 
     private route: ActivatedRoute, 
     private router: Router,
     private userService : UserService) {
+      const id = Number(this.route.snapshot.paramMap.get('idTeam'));
+      this.teamService.findInformationInvitationPage(id).subscribe((team : Team) => {
+        this.team = team
+        this.render = true;
+      }, (error) => this.router.navigate(['home']));
   }
 
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('idTeam'));
-    this.userLogged = this.userService.getLogged();
-    this.teamService.getOneById(id).subscribe((team : Team) => {
-      this.team = team
-    }, (error) => this.router.navigate(['home']));
-  }
   deny(){
     this.router.navigate(['home']);
   }
 
-  async addUserOnTeam() {
-
+  addUserOnTeam() {
     const id = Number(this.route.snapshot.paramMap.get('idTeam'));
-    
+  
     this.teamService.addUserOnTeam(this.userService.getLogged().id, id).subscribe(
       (res) => {
-        console.log('aqui'); 
         this.router.navigate(['home']);
         this.teamService.getOneById(id).subscribe(
           (team: Team) => {

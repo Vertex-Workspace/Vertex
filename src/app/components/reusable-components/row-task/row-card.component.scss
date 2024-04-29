@@ -23,7 +23,7 @@
     }
 
     .properties {
-        @apply h-[55px] flex items-center justify-start px-4;
+        @apply h-[55px] flex items-center justify-center px-4;
         border: 1px solid $emphasis;
         background-color: inherit;
 
@@ -38,7 +38,7 @@
         color: $text;
         
         .icon {
-            color: $text !important;
+            color: $primaryColor !important;
             font-size: 1.1rem;
 
             &:hover {

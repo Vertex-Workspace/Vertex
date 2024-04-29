@@ -1,5 +1,5 @@
 <div class="modal-overlay" *ngIf="!secondModal">
-    <div class="modal">
+    <div class="modal" [style.height]="height" [style.width]="width">
             <div class="text-align">
                 <h6 *ngIf="!secondModal">Tem certeza que deseja {{title}}?</h6>
             </div>

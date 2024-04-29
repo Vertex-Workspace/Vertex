@@ -13,17 +13,17 @@ export class ReviewService {
 
   public sentToReview(initialReview: SentToReview): Observable<Boolean> {  
     return this.http
-      .post<Boolean>(`${URL}task/review/send`, initialReview);
+      .post<Boolean>(`${URL}task/review/send`, initialReview, {withCredentials:true});
   }
 
   public finalReview(finalReview: ReviewCheck){
     return this.http
-      .patch(`${URL}task/review/final`, finalReview);
+      .patch(`${URL}task/review/final`, finalReview, {withCredentials:true});
   }
 
   public setRevisable(taskID: number, boolean : boolean){
     return this.http
-      .patch(`${URL}task/${taskID}/review/change-state/${boolean}`, null);
+      .patch(`${URL}task/${taskID}/review/change-state/${boolean}`, null, {withCredentials:true});
   }
 
 }

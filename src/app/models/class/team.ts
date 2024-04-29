@@ -26,7 +26,7 @@ export class Team {
     approvedReviews: number = 0;
     averageReviews: number = 0;
     percentage!: number;
-    isCreator: boolean = false;
+    isCreator!: boolean;
     constructor(
         team: Team
     ) {

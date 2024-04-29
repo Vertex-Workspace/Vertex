@@ -25,7 +25,8 @@ export class Project {
     users?: User[]
     projectReviewENUM!: ProjectReview; 
 
-    isCreator: boolean = false;
+    isCreator!: boolean;
+
     
 
     constructor(

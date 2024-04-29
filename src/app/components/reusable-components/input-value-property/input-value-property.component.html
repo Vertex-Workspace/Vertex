@@ -1,3 +1,4 @@
+<section class="flex w-full h-full justify-center items-center">
 <!-- text -->
 <input *ngIf="getKind(value.property, 'TEXT')" type="text" pInputText (blur)="change(value)" [(ngModel)]="valueText"
     [disabled]="!canEdit"  [style]="{ minWidth: '200px', 'background-color': backgroundColor  }"/>
@@ -40,3 +41,4 @@
         </div>
     </ng-template>
 </p-cascadeSelect>
+</section>

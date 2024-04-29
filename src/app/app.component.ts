@@ -87,9 +87,9 @@ export class AppComponent {
     }
     );
   }
-    ngOnInit(): void {
-      this.userBasicData();
-    }
+  ngOnInit(): void {
+    this.userBasicData();
+  }
 
   private userBasicData() {
     this.userState.getAuthenticatedUser().then(
@@ -98,10 +98,8 @@ export class AppComponent {
         this.userLogged = true;
         this.logged = this.userService.getLogged()!;
         this.settingsRequest();
-        } else {
-          this.router.navigate(['/login']);
         }
-  });
+  }, (error) => this.router.navigate(['/login']));
   }
   renderPersonalization: boolean = false;
 

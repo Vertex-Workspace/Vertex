@@ -84,14 +84,8 @@ export class CardListComponent implements OnInit {
 
   setRenderList() {
     if (this.type === 'project') {
-      this.projects.forEach((project) => {
-        project.isCreator = (project.creator?.user.id == this.loggedUser.id)
-      });
       this.renderList = this.projects
     } else if (this.type === 'team') {
-      for (const team of this.teams!) {
-        team.isCreator = (team.creator?.id == this.loggedUser.id)
-      }
       this.renderList = this.teams!;
     }
   }
@@ -156,15 +150,11 @@ export class CardListComponent implements OnInit {
 
 
   emitItem(event: boolean) {
-    if (this.teams) {
-      if (event) {
-        this.deleteTeam(this.itemToDelete)
-      }
+    if (this.teams && event) {
+      this.deleteTeam(this.itemToDelete)
     }
-    if (this.projects) {
-      if (event) {
-        this.deleteProject(this.itemToDelete)
-      }
+    if (this.projects && event) {
+      this.deleteProject(this.itemToDelete)
     }
     this.delete = false;
   }
