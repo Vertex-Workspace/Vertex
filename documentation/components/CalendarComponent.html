@@ -1,0 +1,3626 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CalendarComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/tasks/calendar/calendar.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-calendar</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./calendar.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./calendar.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#buttonDay" >buttonDay</a>
+                            </li>
+                            <li>
+                                <a href="#calendarDays" >calendarDays</a>
+                            </li>
+                            <li>
+                                <a href="#canCreate" >canCreate</a>
+                            </li>
+                            <li>
+                                <a href="#canEdit" >canEdit</a>
+                            </li>
+                            <li>
+                                <a href="#currentDate" >currentDate</a>
+                            </li>
+                            <li>
+                                <a href="#date" >date</a>
+                            </li>
+                            <li>
+                                <a href="#day" >day</a>
+                            </li>
+                            <li>
+                                <a href="#faCircleUser" >faCircleUser</a>
+                            </li>
+                            <li>
+                                <a href="#faToggleOff" >faToggleOff</a>
+                            </li>
+                            <li>
+                                <a href="#faToggleOn" >faToggleOn</a>
+                            </li>
+                            <li>
+                                <a href="#hoveringDay" >hoveringDay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#modalDate" >modalDate</a>
+                            </li>
+                            <li>
+                                <a href="#modalTasks" >modalTasks</a>
+                            </li>
+                            <li>
+                                <a href="#plus" >plus</a>
+                            </li>
+                            <li>
+                                <a href="#tasks" >tasks</a>
+                            </li>
+                            <li>
+                                <a href="#toggle" >toggle</a>
+                            </li>
+                            <li>
+                                <a href="#weeks" >weeks</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#buildCalendar" >buildCalendar</a>
+                            </li>
+                            <li>
+                                <a href="#changeMonth" >changeMonth</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                <a href="#deleteTask" >deleteTask</a>
+                            </li>
+                            <li>
+                                <a href="#drag" >drag</a>
+                            </li>
+                            <li>
+                                <a href="#drop" >drop</a>
+                            </li>
+                            <li>
+                                <a href="#formatDate" >formatDate</a>
+                            </li>
+                            <li>
+                                <a href="#getColor" >getColor</a>
+                            </li>
+                            <li>
+                                <a href="#getTasksByDate" >getTasksByDate</a>
+                            </li>
+                            <li>
+                                <a href="#groupCalendarDays" >groupCalendarDays</a>
+                            </li>
+                            <li>
+                                <a href="#hover" >hover</a>
+                            </li>
+                            <li>
+                                <a href="#newTaskOnDay" >newTaskOnDay</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openCardTask" >openCardTask</a>
+                            </li>
+                            <li>
+                                <a href="#openModalTasks" >openModalTasks</a>
+                            </li>
+                            <li>
+                                <a href="#patchValue" >patchValue</a>
+                            </li>
+                            <li>
+                                <a href="#showAdd" >showAdd</a>
+                            </li>
+                            <li>
+                                <a href="#today" >today</a>
+                            </li>
+                            <li>
+                                <a href="#toggleCharts" >toggleCharts</a>
+                            </li>
+                            <li>
+                                <a href="#translateDayOfWeek" >translateDayOfWeek</a>
+                            </li>
+                            <li>
+                                <a href="#translateMonth" >translateMonth</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#filter" >filter</a>
+                            </li>
+                            <li>
+                                <a href="#nameFilter" >nameFilter</a>
+                            </li>
+                            <li>
+                                <a href="#orderParams" >orderParams</a>
+                            </li>
+                            <li>
+                                <a href="#permissions" >permissions</a>
+                            </li>
+                            <li>
+                                <a href="#project" >project</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#openTaskDetails" >openTaskDetails</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, route: ActivatedRoute, projectService: <a href="../injectables/ProjectService.html" target="_self">ProjectService</a>, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, alert: <a href="../injectables/AlertService.html" target="_self">AlertService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:45</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>taskService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>projectService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alert</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filter"></a>
+                        <b>filter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:45</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nameFilter"></a>
+                        <b>nameFilter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:42</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="orderParams"></a>
+                        <b>orderParams</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PipeParams.html" target="_self" >PipeParams</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:36</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="permissions"></a>
+                        <b>permissions</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Permission.html" target="_self" >Permission[]</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:29</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="project"></a>
+                        <b>project</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openTaskDetails"></a>
+                        <b>openTaskDetails</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:71</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildCalendar"></a>
+                    <span class="name">
+                        <span ><b>buildCalendar</b></span>
+                        <a href="#buildCalendar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>buildCalendar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeMonth"></a>
+                    <span class="name">
+                        <span ><b>changeMonth</b></span>
+                        <a href="#changeMonth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeMonth(offsetMes: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offsetMes</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete(task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteTask"></a>
+                    <span class="name">
+                        <span ><b>deleteTask</b></span>
+                        <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteTask(task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:263</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="drag"></a>
+                    <span class="name">
+                        <span ><b>drag</b></span>
+                        <a href="#drag"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>drag(task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="288"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:288</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="drop"></a>
+                    <span class="name">
+                        <span ><b>drop</b></span>
+                        <a href="#drop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>drop(e: CdkDragDrop<any>, day: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="267"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:267</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                        <code>CdkDragDrop&lt;any&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>day</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDate"></a>
+                    <span class="name">
+                        <span ><b>formatDate</b></span>
+                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatDate(day: Date | undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>day</td>
+                                            <td>
+                                                        <code>Date | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getColor"></a>
+                    <span class="name">
+                        <span ><b>getColor</b></span>
+                        <a href="#getColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getColor(task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="217"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:217</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTasksByDate"></a>
+                    <span class="name">
+                        <span ><b>getTasksByDate</b></span>
+                        <a href="#getTasksByDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTasksByDate(date: Date | undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                        <code>Date | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Task.html" target="_self" >Task[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="groupCalendarDays"></a>
+                    <span class="name">
+                        <span ><b>groupCalendarDays</b></span>
+                        <a href="#groupCalendarDays"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>groupCalendarDays()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hover"></a>
+                    <span class="name">
+                        <span ><b>hover</b></span>
+                        <a href="#hover"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hover(day: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="327"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:327</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>day</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newTaskOnDay"></a>
+                    <span class="name">
+                        <span ><b>newTaskOnDay</b></span>
+                        <a href="#newTaskOnDay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>newTaskOnDay(day: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:232</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>day</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openCardTask"></a>
+                    <span class="name">
+                        <span ><b>openCardTask</b></span>
+                        <a href="#openCardTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openCardTask(task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openModalTasks"></a>
+                    <span class="name">
+                        <span ><b>openModalTasks</b></span>
+                        <a href="#openModalTasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openModalTasks(date: Date | null)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                        <code>Date | null</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patchValue"></a>
+                    <span class="name">
+                        <span ><b>patchValue</b></span>
+                        <a href="#patchValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>patchValue(task: <a href="../classes/Task.html" target="_self">Task</a>, day: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="293"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:293</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>day</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showAdd"></a>
+                    <span class="name">
+                        <span ><b>showAdd</b></span>
+                        <a href="#showAdd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showAdd(day: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>day</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="today"></a>
+                    <span class="name">
+                        <span ><b>today</b></span>
+                        <a href="#today"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>today(day: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>day</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleCharts"></a>
+                    <span class="name">
+                        <span ><b>toggleCharts</b></span>
+                        <a href="#toggleCharts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleCharts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translateDayOfWeek"></a>
+                    <span class="name">
+                        <span ><b>translateDayOfWeek</b></span>
+                        <a href="#translateDayOfWeek"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>translateDayOfWeek(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translateMonth"></a>
+                    <span class="name">
+                        <span ><b>translateMonth</b></span>
+                        <a href="#translateMonth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>translateMonth(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buttonDay"></a>
+                    <span class="name">
+                        <span ><b>buttonDay</b></span>
+                        <a href="#buttonDay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calendarDays"></a>
+                    <span class="name">
+                        <span ><b>calendarDays</b></span>
+                        <a href="#calendarDays"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Date[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canCreate"></a>
+                    <span class="name">
+                        <span ><b>canCreate</b></span>
+                        <a href="#canCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canEdit"></a>
+                    <span class="name">
+                        <span ><b>canEdit</b></span>
+                        <a href="#canEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentDate"></a>
+                    <span class="name">
+                        <span ><b>currentDate</b></span>
+                        <a href="#currentDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Date()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="date"></a>
+                    <span class="name">
+                        <span ><b>date</b></span>
+                        <a href="#date"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="day"></a>
+                    <span class="name">
+                        <span ><b>day</b></span>
+                        <a href="#day"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCircleUser"></a>
+                    <span class="name">
+                        <span ><b>faCircleUser</b></span>
+                        <a href="#faCircleUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCircleUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faToggleOff"></a>
+                    <span class="name">
+                        <span ><b>faToggleOff</b></span>
+                        <a href="#faToggleOff"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faToggleOff</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faToggleOn"></a>
+                    <span class="name">
+                        <span ><b>faToggleOn</b></span>
+                        <a href="#faToggleOn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faToggleOn</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hoveringDay"></a>
+                    <span class="name">
+                        <span ><b>hoveringDay</b></span>
+                        <a href="#hoveringDay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Date | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="325" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:325</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modalDate"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>modalDate</b></span>
+                        <a href="#modalDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modalTasks"></a>
+                    <span class="name">
+                        <span ><b>modalTasks</b></span>
+                        <a href="#modalTasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="plus"></a>
+                    <span class="name">
+                        <span ><b>plus</b></span>
+                        <a href="#plus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tasks"></a>
+                    <span class="name">
+                        <span ><b>tasks</b></span>
+                        <a href="#tasks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Task.html" target="_self" >Task[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggle"></a>
+                    <span class="name">
+                        <span ><b>toggle</b></span>
+                        <a href="#toggle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="211" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:211</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="weeks"></a>
+                    <span class="name">
+                        <span ><b>weeks</b></span>
+                        <a href="#weeks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Date[][]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/pages/tasks/calendar/calendar.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CdkDragDrop, moveItemInArray } from &#x27;@angular/cdk/drag-drop&#x27;;
+import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { faCircleUser, faToggleOff, faToggleOn } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { PropertyKind, PropertyList } from &#x27;src/app/models/class/property&#x27;;
+import { Task, TaskCreate } from &#x27;src/app/models/class/task&#x27;;
+import { Permission, PermissionsType } from &#x27;src/app/models/class/user&#x27;;
+import { ValueUpdate } from &#x27;src/app/models/class/value&#x27;;
+import { PipeParams } from &#x27;src/app/models/interface/params&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { ProjectService } from &#x27;src/app/services/project.service&#x27;;
+import { TaskService } from &#x27;src/app/services/task.service&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+
+@Component({
+  selector: &#x27;app-calendar&#x27;,
+  templateUrl: &#x27;./calendar.component.html&#x27;,
+  styleUrls: [&#x27;./calendar.component.scss&#x27;],
+})
+export class CalendarComponent {
+
+  faToggleOn &#x3D; faToggleOn;
+  faToggleOff &#x3D; faToggleOff;
+  faCircleUser &#x3D; faCircleUser;
+
+  @Input() project!: Project;
+  @Input() permissions!: Permission[];
+  day: any;
+
+  date: any;
+
+
+  @Input()
+  orderParams !: PipeParams;
+
+  canCreate: boolean &#x3D; false;
+  canEdit: boolean &#x3D; false
+
+  @Input()
+  nameFilter !: string;
+
+  @Input()
+  filter !: any;
+
+  constructor(
+    private taskService: TaskService,
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private projectService: ProjectService,
+    private teamService: TeamService,
+    private alert: AlertService) {
+  }
+
+  ngOnInit() {  
+    for (const permission of this.permissions) {
+      if ((permission.name &#x3D;&#x3D;&#x3D; PermissionsType.EDIT) &amp;&amp; permission.enabled) {
+        this.canEdit &#x3D; true;
+      }else if ((permission.name &#x3D;&#x3D;&#x3D; PermissionsType.CREATE) &amp;&amp; permission.enabled) {
+        this.canCreate &#x3D; true;
+      }
+    }
+    this.buildCalendar();
+  }
+
+  plus: boolean &#x3D; false;
+
+  modalTasks: boolean &#x3D; false;
+
+  @Output() openTaskDetails &#x3D; new EventEmitter();
+  openCardTask(task: Task): void {
+    this.openTaskDetails.emit(task);
+  }
+
+  //FUTURE 
+  buttonDay!: Date;
+  showAdd(day: Date): void {
+    this.buttonDay &#x3D; day;
+    console.log(this.buttonDay);
+  }
+
+  modalDate?: Date;
+  openModalTasks(date: Date | null): void {
+    if (date !&#x3D; null) {
+      this.modalDate &#x3D; date;
+    } else {
+      this.modalDate &#x3D; undefined;
+    }
+    this.modalTasks &#x3D; !this.modalTasks;
+  }
+
+  tasks !: Task[];
+
+  getTasksByDate(date: Date | undefined): Task[] {
+  
+    let tasks: Task[] &#x3D; [];
+    if (date !&#x3D; undefined) {
+      this.project.tasks.forEach((task) &#x3D;&gt; {
+        task.values.forEach((value) &#x3D;&gt; {
+          if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.DATE) {
+
+            let valuePropertyDate: Date &#x3D; new Date(value.value as string);
+            if (valuePropertyDate.getDate() &#x3D;&#x3D; date.getDate()
+              &amp;&amp; valuePropertyDate.getMonth() &#x3D;&#x3D; date.getMonth()
+              &amp;&amp; valuePropertyDate.getFullYear() &#x3D;&#x3D; date.getFullYear()) {
+              tasks.push(task);
+            }
+          }
+        });
+      });
+    }
+    return tasks;
+  }
+
+  delete(task: Task) {
+    this.taskService
+      .delete(task.id!)
+      .subscribe();
+  }
+
+  formatDate(day: Date | undefined): string {
+    if (day !&#x3D; undefined) {
+      const options: Intl.DateTimeFormatOptions &#x3D; { day: &#x27;2-digit&#x27;, month: &#x27;2-digit&#x27;, year: &#x27;numeric&#x27; };
+      return day.toLocaleDateString(&#x27;pt-BR&#x27;, options);
+    }
+    return &quot;&quot;;
+  }
+
+
+  //CALENDAR
+  currentDate: Date &#x3D; new Date();
+  calendarDays: Date[] &#x3D; [];
+  buildCalendar() {
+    const year &#x3D; this.currentDate.getFullYear();
+    const month &#x3D; this.currentDate.getMonth();
+
+    const initialDate &#x3D; new Date(year, month, 1);
+    while (initialDate.getDay() !&#x3D;&#x3D; 0) {
+      initialDate.setDate(initialDate.getDate() - 1);
+    }
+    const finalDate &#x3D; new Date(year, month + 1, 0);
+    while (finalDate.getDay() !&#x3D;&#x3D; 6) {
+      finalDate.setDate(finalDate.getDate() + 1);
+    }
+    this.calendarDays &#x3D; [];
+    for (
+      let date &#x3D; new Date(initialDate.getTime());
+      date &lt;&#x3D; finalDate;
+      date.setDate(date.getDate() + 1)
+    ) {
+      this.calendarDays.push(new Date(date.getTime()));
+    }
+    this.groupCalendarDays();
+  }
+
+  changeMonth(offsetMes: number) {
+    this.currentDate.setMonth(this.currentDate.getMonth() + offsetMes);
+    this.currentDate &#x3D; new Date(this.currentDate.getTime());
+    this.buildCalendar();
+  }
+
+  translateMonth(index: number): string {
+    const monthNames &#x3D; [
+      &quot;Janeiro&quot;, &quot;Fevereiro&quot;, &quot;Março&quot;, &quot;Abril&quot;, &quot;Maio&quot;, &quot;Junho&quot;,
+      &quot;Julho&quot;, &quot;Agosto&quot;, &quot;Setembro&quot;, &quot;Outubro&quot;, &quot;Novembro&quot;, &quot;Dezembro&quot;
+    ];
+    if (index &#x3D;&#x3D; 12) {
+      return monthNames[0];
+    }
+    if (index &#x3D;&#x3D; -1) {
+      return monthNames[11];
+    }
+    return monthNames[index];
+  }
+  translateDayOfWeek(index: number): string {
+    const dayNames &#x3D; [
+      &quot;DOM&quot;, &quot;SEG&quot;, &quot;TER&quot;, &quot;QUA&quot;,
+      &quot;QUI&quot;, &quot;SEX&quot;, &quot;SAB&quot;
+    ];
+    return dayNames[index];
+  }
+
+  today(day: Date): boolean {
+    let date: Date &#x3D; new Date();
+    return date.getDate() &#x3D;&#x3D; day.getDate() &amp;&amp;
+      date.getMonth() &#x3D;&#x3D; day.getMonth()
+      &amp;&amp; date.getFullYear() &#x3D;&#x3D; day.getFullYear();
+  }
+
+  weeks!: Date[][];
+
+  groupCalendarDays() {
+    const weeks: Date[][] &#x3D; [];
+    let currentWeek: Date[] &#x3D; [];
+
+    this.calendarDays.forEach((day, index) &#x3D;&gt; {
+      currentWeek.push(day);
+
+      if (currentWeek.length &#x3D;&#x3D;&#x3D; 7 || index &#x3D;&#x3D;&#x3D; this.calendarDays.length - 1) {
+        weeks.push([...currentWeek]); &#x27;&#x27;
+        currentWeek &#x3D; [];
+      }
+    });
+
+    this.weeks &#x3D; weeks;
+  }
+
+
+  //it will be a request of user option
+  toggle: boolean &#x3D; false;
+  toggleCharts(): void {
+    this.toggle &#x3D; !this.toggle;
+  }
+
+  //Temporary
+  getColor(task: Task): string {
+    let color: string;
+    task.values.forEach(
+      (value) &#x3D;&gt; {
+        if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.STATUS) {
+            let valuePropertyList: PropertyList &#x3D; value.value as PropertyList;
+            color &#x3D; valuePropertyList.color;
+        }
+      }
+    );
+    return color!;
+  }
+
+
+  //Create a new task in the project according the day was clicked
+  newTaskOnDay(day: Date) {
+    if (this.canCreate) {
+      let taskCreate: TaskCreate &#x3D; {
+        name: &quot;Nova Tarefa&quot;,
+        description: &quot;Descreva um pouco sobre sua Tarefa Aqui&quot;,
+        project: {
+          id: this.project.id!
+        },
+        values: [],
+        creator: {
+          id: this.userService.getLogged().id!
+        },
+        teamId: this.project.idTeam!
+      }
+
+      this.taskService.create(taskCreate).subscribe(
+        (task) &#x3D;&gt; {
+          this.project.tasks.push(task);
+          this.patchValue(task, day);
+          this.openCardTask(task);
+        },
+        (error) &#x3D;&gt; {
+          console.log(error);
+        }
+      );
+    } else {
+      this.alert.errorAlert(&quot;Você não tem permissão para criar tarefas&quot;);
+    }
+
+  }
+
+  deleteTask(task: Task): void {
+    this.project.tasks &#x3D; this.project.tasks.filter(taskdaje &#x3D;&gt; taskdaje.id !&#x3D; task.id);
+  }
+
+  drop(e: CdkDragDrop&lt;any&gt;, day: Date): void {
+    const task: Task &#x3D; e.item.data;
+    let property: any;
+    if (this.canEdit) {
+
+      task.values
+        .forEach((prop) &#x3D;&gt; {
+          if (prop.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.DATE) {
+            prop.value &#x3D; day;
+            property &#x3D; prop;
+          }
+        })
+
+      this.patchValue(task, day)
+    } else {
+      this.alert.errorAlert(&quot;Você não tem permissão para alterar as propriedades&quot;)
+    }
+
+  }
+
+  //DRAG AND DROP
+  drag(task: Task): void {
+    console.log(task);
+  }
+
+
+  patchValue(task: Task, day: Date): void {
+    if (this.canEdit) {
+      task.values.forEach((value) &#x3D;&gt; {
+        if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.DATE) {
+          const valueUpdate: ValueUpdate &#x3D; {
+            id: task.id,
+            value: {
+              property: {
+                id: value.property.id
+              },
+              value: {
+                id: value.id,
+                //SLICE RETIRAR O &quot;Z&quot; NO FINAL
+                value: day.toISOString().slice(0, -1)
+              }
+            },
+            userID: this.userService.getLogged().id!
+          };
+
+          this.taskService.patchValue(valueUpdate).subscribe(
+            (taskDate) &#x3D;&gt; {
+              task.values &#x3D; taskDate.values;
+            },
+            (error) &#x3D;&gt; {
+              console.log(error);
+            }
+          );
+        }
+      });
+    }
+  }
+
+  hoveringDay: Date | null &#x3D; null;
+
+  hover(day: Date) {
+    this.hoveringDay &#x3D; day;
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;desktop&quot;&gt;
+    &lt;!-- 
+        HEADER CALENDAR
+        JUST INFORMATIONS ABOUT THE MONTH AND THE YEAR
+    --&gt;
+    &lt;div class&#x3D;&quot;header-calendar&quot;&gt;
+        &lt;div&gt;
+            &lt;button (click)&#x3D;&quot;changeMonth(-1)&quot; class&#x3D;&quot;regular-text&quot;&gt;
+                &lt;i class&#x3D;&quot;pi pi-angle-left&quot;&gt;&lt;/i&gt;
+                {{translateMonth(currentDate.getMonth()-1)}}
+            &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;title&quot;&gt;
+            &lt;h5&gt;{{translateMonth(currentDate.getMonth())}} - {{currentDate.getFullYear()}}&lt;/h5&gt;
+            &lt;div&gt;
+                &lt;fa-icon (click)&#x3D;&quot;toggleCharts()&quot; [icon]&#x3D;&quot;faToggleOn&quot; *ngIf&#x3D;&quot;toggle&quot;&gt;&lt;/fa-icon&gt;
+                &lt;fa-icon (click)&#x3D;&quot;toggleCharts()&quot; [icon]&#x3D;&quot;faToggleOff&quot; *ngIf&#x3D;&quot;!toggle&quot;&gt;&lt;/fa-icon&gt;
+                &lt;p class&#x3D;&quot;medium-text&quot;&gt;Mostrar Tarefas&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex justify-end regular-text&quot;&gt;
+            &lt;button (click)&#x3D;&quot;changeMonth(+1)&quot;&gt;
+                {{translateMonth(currentDate.getMonth()+1)}}
+                &lt;i class&#x3D;&quot;pi pi-angle-right&quot;&gt;&lt;/i&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;calendar&quot;&gt;
+
+        &lt;!-- 
+            WRITTEN DAYS OF THE WEEK
+        --&gt;
+        &lt;div class&#x3D;&quot;calendar-rows&quot;&gt;
+            &lt;ng-container *ngFor&#x3D;&quot;let day of calendarDays; index as index&quot;&gt;
+                &lt;div *ngIf&#x3D;&quot;index &lt; 7&quot; class&#x3D;&quot;days-of-week large-text&quot;&gt;
+                    {{translateDayOfWeek(day.getDay())}}
+                &lt;/div&gt;
+            &lt;/ng-container&gt;
+        &lt;/div&gt;
+
+
+        &lt;div cdkDropListGroup&gt;
+
+            &lt;div class&#x3D;&quot;calendar-rows&quot; *ngFor&#x3D;&quot;let week of weeks&quot; &gt;
+                
+                &lt;div *ngFor&#x3D;&quot;let day of week; index as index&quot; 
+                    class&#x3D;&quot;calendar-day&quot;
+                    (mouseenter)&#x3D;&quot;hover(day)&quot;
+                    [class.day-not-month]&#x3D;&quot;currentDate.getMonth() !&#x3D;&#x3D; day.getMonth()&quot;   
+                    cdkDropList
+                    [cdkDropListData]&#x3D;&quot;day&quot;
+                    (cdkDropListDropped)&#x3D;&quot;drop($event, day)&quot; 
+                &gt;
+                &lt;!-- 
+                    DAYS OF THE MONTH (NUMBER)
+                --&gt;
+                
+                &lt;div class&#x3D;&quot;day-informations&quot;&gt;
+                    
+                    &lt;!-- FUTURE --&gt;
+                    &lt;div class&#x3D;&quot;add-button&quot;&gt;
+                    &lt;i 
+                        (click)&#x3D;&quot;newTaskOnDay(day)&quot; 
+                        *ngIf&#x3D;&quot;hoveringDay &#x3D;&#x3D;&#x3D; day&quot; 
+                        class&#x3D;&quot;pi pi-plus-circle&quot;
+                        [ngClass]&#x3D;&quot;canCreate ? &#x27;opacity-100&#x27; : &#x27;opacity-20&#x27;&quot;
+                    &gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div [class.today]&#x3D;&quot;today(day)&quot;&gt;
+                        {{day | date : &#x27;dd&#x27;}}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                
+                
+                &lt;div class&#x3D;&quot;tasks-informations&quot; *ngIf&#x3D;&quot;getTasksByDate(day).length &gt; 0 &amp;&amp; !toggle&quot;&gt;
+                    &lt;div class&#x3D;&quot;tasks-link-informations regular-text&quot; (click)&#x3D;&quot;openModalTasks(day)&quot;&gt;
+                        &lt;p&gt;{{getTasksByDate(day).length}} tarefas &lt;span&gt;atribuídas&lt;/span&gt;&lt;/p&gt;
+                        &lt;i class&#x3D;&quot;pi pi-external-link&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                
+                &lt;div&gt;
+                    
+                    &lt;div class&#x3D;&quot;tasks-list-in-calendar&quot; *ngIf&#x3D;&quot;toggle&quot; cdkDropListGroup&gt;
+                        &lt;ng-container 
+                            *ngFor&#x3D;&quot;let task of (getTasksByDate(day) 
+                            | namePipe : nameFilter 
+                            | statusPipe : filter : false
+                            | datePipe : filter
+                            | nameSortPipe : orderParams
+                            | dateSortPipe : orderParams
+                            | statusSortPipe : orderParams)&quot;
+                        &gt;
+                            &lt;app-card 
+                            (openTaskDetails)&#x3D;&quot;openCardTask(task)&quot; 
+                            [minHeight]&#x3D;&quot;&#x27;60px&#x27;&quot; 
+                            [width]&#x3D;&quot;&#x27;210px&#x27;&quot; 
+                            [task]&#x3D;&quot;task&quot;
+                            [borderColor]&#x3D;&quot;getColor(task)&quot; 
+                            (deleteTask)&#x3D;&quot;deleteTask(task)&quot;
+                            [cdkDragData]&#x3D;&quot;task&quot;
+                            cdkDrag
+                            [permissions]&#x3D;&quot;permissions&quot;
+                            &gt;&lt;/app-card&gt;
+                        &lt;/ng-container&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class&#x3D;&quot;mobile w-full h-full flex-col items-center&quot;&gt;
+    &lt;p-calendar class&#x3D;&quot;w-full&quot; [(ngModel)]&#x3D;&quot;date&quot; [style]&#x3D;&quot;{ minWidth: &#x27;85%&#x27; }&quot; [inline]&#x3D;&quot;true&quot; [showWeek]&#x3D;&quot;false&quot;&gt;&lt;/p-calendar&gt;
+
+    &lt;div class&#x3D;&quot;day-tasks pt-4 pl-1 flex flex-col gap-3 w-full&quot;&gt;
+        &lt;button *ngIf&#x3D;&quot;date&quot; class&#x3D;&quot;create&quot; (click)&#x3D;&quot;newTaskOnDay(date)&quot;
+                    [disabled]&#x3D;&quot;!canCreate&quot; [ngClass]&#x3D;&quot;canCreate ? &#x27;opacity-100&#x27; : &#x27;opacity-20&#x27;&quot;&gt;
+                    &lt;i class&#x3D;&quot;pi pi-plus-circle&quot;&gt;&lt;/i&gt;
+                    &lt;p&gt;
+                        Nova tarefa
+                    &lt;/p&gt;
+        &lt;/button&gt;
+        &lt;ng-container *ngFor&#x3D;&quot;let task of (getTasksByDate(date) 
+            | namePipe : nameFilter 
+            | statusPipe : filter : false
+            | datePipe : filter
+            | nameSortPipe : orderParams
+            | dateSortPipe : orderParams
+            | statusSortPipe : orderParams)&quot; 
+        &gt;
+            &lt;app-calendar-row-card
+                [task]&#x3D;&quot;task&quot;
+                (openTask)&#x3D;&quot;openCardTask(task)&quot;
+                (deleteEmt)&#x3D;&quot;deleteTask($event)&quot;
+            &gt;&lt;/app-calendar-row-card&gt;
+        &lt;/ng-container&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;app-modal-warn *ngIf&#x3D;&quot;modalTasks&quot; [height]&#x3D;&quot;&#x27;650px&#x27;&quot; [width]&#x3D;&quot;&#x27;800px&#x27;&quot; (close)&#x3D;&quot;openModalTasks(null)&quot;&gt;
+    &lt;h6&gt;Tarefas Atribuídas para {{formatDate(modalDate)}}&lt;/h6&gt;
+    &lt;div class&#x3D;&quot;div-tasks&quot;&gt;
+        &lt;ng-container *ngFor&#x3D;&quot;let task of getTasksByDate(modalDate)&quot;&gt;
+            &lt;div class&#x3D;&quot;card-task&quot;&gt;
+                &lt;p class&#x3D;&quot;medium-text&quot;&gt;{{task.name}}&lt;/p&gt;
+                &lt;i class&#x3D;&quot;pi pi-external-link&quot;&gt;&lt;/i&gt;
+            &lt;/div&gt;
+        &lt;/ng-container&gt;
+    &lt;/div&gt;
+&lt;/app-modal-warn&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./calendar.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &quot;../../../../variables&quot;;
+@media screen and (min-width: 1500px) {
+
+    .desktop {
+        @apply flex w-full h-full flex-col;
+        color: $primaryColor;
+    }
+    
+    .header-calendar {
+        display: grid;
+        grid-template-columns: 1fr 5fr 1fr;
+        text-align: center;
+        
+        .title {
+            @apply flex flex-col;
+            div {
+                @apply flex flex-row justify-center pt-2 items-center;
+                
+                fa-icon {
+                    color: $primaryColor;
+                }
+                
+                p {
+                    @apply pl-4;
+                }
+            }
+        }
+        
+        button {
+            @apply flex h-full w-24 justify-between items-center;
+        }
+    }
+    
+    .calendar {
+        @apply flex w-full h-full pt-8;
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        
+        
+        .days-of-week {
+            @apply pb-4;
+            border: 1px solid $emphasis;
+            border-top: none;
+            text-align: center;
+        }
+        
+        .calendar-rows{
+            display: grid;
+            grid-template-columns: repeat(7, 235px);
+        }
+        
+        .calendar-day {
+            @apply flex p-2 flex-col h-full;
+            min-height: 150px;
+            border: 1px solid $emphasis;
+            
+            .day-informations {
+                @apply flex min-h-[30px] w-full justify-between;
+                
+                .pi {
+                    @apply text-[1.1rem] cursor-pointer font-light flex items-center justify-center;
+                    
+                    &amp;:hover {
+                        @apply text-[1.2rem];
+                    }
+                }
+                
+                div{
+                    @apply w-8 h-8 rounded-full justify-center flex items-center;
+                }
+                
+                .today {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+            
+            .tasks-informations {
+                @apply flex w-full h-[80%] items-center;
+                
+                .tasks-link-informations{
+                    @apply flex w-full h-1/2 rounded-sm items-center justify-evenly;
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+                .tasks-link-informations:hover{
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+            }
+            .tasks-list-in-calendar{
+                @apply flex flex-col gap-2 pt-2 items-center;
+                color: $primaryColor;
+            }
+            
+        }
+        
+        .day-not-month {
+            color: #aaa;
+        }
+        
+        
+    }
+    
+    
+    
+    .div-tasks{
+        @apply w-full h-[80%] flex flex-col gap-4;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .card-task{
+            @apply flex w-full flex-row items-center justify-between px-8 py-10;
+            min-height: 70px;
+            text-align: start;
+            border-bottom: $borderBottom;
+        }
+    }
+    
+    
+    
+    
+    
+    .cdk-drop-list-dragging .cdk-drag {
+        transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-animating {
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-placeholder {
+        opacity: 50%;
+    }
+
+    .mobile {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 1300px) {
+
+    .desktop {
+        @apply flex w-full h-full flex-col;
+        color: $primaryColor;
+    }
+    
+    .header-calendar {
+        display: grid;
+        grid-template-columns: 1fr 5fr 1fr;
+        text-align: center;
+        
+        .title {
+            @apply flex flex-col;
+            div {
+                @apply flex flex-row justify-center pt-2 items-center;
+                
+                fa-icon {
+                    @apply hidden;;
+                }
+                
+                p {
+                    @apply hidden;
+                }
+            }
+        }
+        
+        button {
+            @apply flex h-full w-24 justify-between items-center;
+        }
+    }
+    
+    .calendar {
+        @apply flex w-full h-full pt-8;
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        
+        
+        .days-of-week {
+            @apply pb-4 max-w-[175px];
+            border: 1px solid $emphasis;
+            border-top: none;
+            text-align: center;
+        }
+        
+        .calendar-rows{
+            @apply max-w-full;
+            display: grid;
+            grid-template-columns: repeat(7, 175px);
+        }
+        
+        .calendar-day {
+            @apply flex p-2 flex-col max-w-[175px];
+            min-height: 150px;
+            border: 1px solid $emphasis;
+            
+            .day-informations {
+                @apply flex min-h-[30px] w-full justify-between;
+                
+                .pi {
+                    @apply text-[1.1rem] cursor-pointer font-light flex items-center justify-center;
+                    
+                    &amp;:hover {
+                        @apply text-[1.2rem];
+                    }
+                }
+                
+                div{
+                    @apply w-8 h-8 rounded-full justify-center flex items-center;
+                }
+                
+                .today {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+            
+            .tasks-informations {
+                @apply flex w-full h-[80%] items-center;
+                
+                .tasks-link-informations{
+                    @apply flex w-full h-1/2 rounded-sm items-center justify-evenly;
+                    background-color: $primaryColor;
+                    color: $secondColor;
+
+                    p {
+                        span {
+                            @apply hidden;
+                        }
+                    }
+                }
+                .tasks-link-informations:hover{
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+            }
+            .tasks-list-in-calendar{
+                @apply flex flex-col gap-2 pt-2 items-center;
+                color: $primaryColor;
+            }
+            
+        }
+        
+        .day-not-month {
+            color: #aaa;
+        }
+        
+        
+    }
+    
+    
+    
+    .div-tasks{
+        @apply w-full h-[80%] flex flex-col gap-4;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .card-task{
+            @apply flex w-full flex-row items-center justify-between px-8 py-10;
+            min-height: 70px;
+            text-align: start;
+            border-bottom: $borderBottom;
+        }
+    }
+    
+    
+    
+    
+    
+    .cdk-drop-list-dragging .cdk-drag {
+        transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-animating {
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-placeholder {
+        opacity: 50%;
+    }
+
+    .mobile {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1150px) {
+
+    .desktop {
+        @apply flex w-full h-full flex-col;
+        color: $primaryColor;
+    }
+    
+    .header-calendar {
+        display: grid;
+        grid-template-columns: 1fr 5fr 1fr;
+        text-align: center;
+        
+        .title {
+            @apply flex flex-col;
+            div {
+                @apply flex flex-row justify-center pt-2 items-center;
+                
+                fa-icon {
+                    @apply hidden;;
+                }
+                
+                p {
+                    @apply hidden;
+                }
+            }
+        }
+        
+        button {
+            @apply flex h-full w-24 justify-between items-center;
+        }
+    }
+    
+    .calendar {
+        @apply flex w-full h-full pt-8;
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        
+        
+        .days-of-week {
+            @apply pb-4 max-w-[175px];
+            border: 1px solid $emphasis;
+            border-top: none;
+            text-align: center;
+        }
+        
+        .calendar-rows{
+            @apply max-w-full;
+            display: grid;
+            grid-template-columns: repeat(7, 160px);
+        }
+        
+        .calendar-day {
+            @apply flex p-2 flex-col max-w-[160px];
+            min-height: 150px;
+            border: 1px solid $emphasis;
+            
+            .day-informations {
+                @apply flex min-h-[30px] w-full justify-between;
+                
+                .pi {
+                    @apply text-[1.1rem] cursor-pointer font-light flex items-center justify-center;
+                    
+                    &amp;:hover {
+                        @apply text-[1.2rem];
+                    }
+                }
+                
+                div{
+                    @apply w-8 h-8 rounded-full justify-center flex items-center;
+                }
+                
+                .today {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+            
+            .tasks-informations {
+                @apply flex w-full h-[80%] items-center;
+                
+                .tasks-link-informations{
+                    @apply flex w-full h-1/2 rounded-sm items-center justify-evenly;
+                    background-color: $primaryColor;
+                    color: $secondColor;
+
+                    p {
+                        span {
+                            @apply hidden;
+                        }
+                    }
+                }
+                .tasks-link-informations:hover{
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+            }
+            .tasks-list-in-calendar{
+                @apply flex flex-col gap-2 pt-2 items-center;
+                color: $primaryColor;
+            }
+            
+        }
+        
+        .day-not-month {
+            color: #aaa;
+        }
+        
+        
+    }
+    
+    
+    
+    .div-tasks{
+        @apply w-full h-[80%] flex flex-col gap-4;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .card-task{
+            @apply flex w-full flex-row items-center justify-between px-8 py-10;
+            min-height: 70px;
+            text-align: start;
+            border-bottom: $borderBottom;
+        }
+    }
+    
+    
+    
+    
+    
+    .cdk-drop-list-dragging .cdk-drag {
+        transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-animating {
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-placeholder {
+        opacity: 50%;
+    }
+
+    .mobile {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 1150px) and (min-width: 800px) {
+
+    .desktop {
+        @apply flex w-full h-full flex-col;
+        color: $primaryColor;
+    }
+    
+    .header-calendar {
+        display: grid;
+        grid-template-columns: 1fr 5fr 1fr;
+        text-align: center;
+        
+        .title {
+            @apply flex flex-col;
+            div {
+                @apply flex flex-row justify-center pt-2 items-center;
+                
+                fa-icon {
+                    @apply hidden;;
+                }
+                
+                p {
+                    @apply hidden;
+                }
+            }
+        }
+        
+        button {
+            @apply flex h-full w-24 justify-between items-center;
+        }
+    }
+    
+    .calendar {
+        @apply flex w-full h-full pt-8 max-h-[612px];
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        
+        
+        .days-of-week {
+            @apply pb-4 max-w-[125px] max-h-[100px];
+            border: 1px solid $emphasis;
+            border-top: none;
+            text-align: center;
+        }
+        
+        .calendar-rows{
+            @apply max-w-full;
+            display: grid;
+            grid-template-columns: repeat(7, 125px);
+        }
+        
+        .calendar-day {
+            @apply flex p-2 flex-col max-w-[125px] h-[105px];
+            border: 1px solid $emphasis;
+            
+            .day-informations {
+                @apply flex min-h-[30px] w-full justify-between;
+                
+                .pi {
+                    @apply text-[1.1rem] cursor-pointer font-light flex items-center justify-center;
+                    
+                    &amp;:hover {
+                        @apply text-[1.2rem];
+                    }
+                }
+                
+                div{
+                    @apply w-8 h-8 rounded-full justify-center flex items-center;
+                }
+                
+                .today {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+            
+            .tasks-informations {
+                @apply flex w-full h-[80%] items-center;
+                
+                .tasks-link-informations{
+                    @apply flex w-full h-1/2 rounded-sm items-center justify-evenly;
+                    background-color: $primaryColor;
+                    color: $secondColor;
+
+                    p {
+                        span {
+                            @apply hidden;
+                        }
+                    }
+                }
+                .tasks-link-informations:hover{
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+            }
+            .tasks-list-in-calendar{
+                @apply flex flex-col gap-2 pt-2 items-center;
+                color: $primaryColor;
+            }
+            
+        }
+        
+        .day-not-month {
+            color: #aaa;
+        }
+        
+        
+    }
+    
+    
+    
+    .div-tasks{
+        @apply w-full h-[80%] flex flex-col gap-4;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .card-task{
+            @apply flex w-full flex-row items-center justify-between px-8 py-10;
+            min-height: 70px;
+            text-align: start;
+            border-bottom: $borderBottom;
+        }
+    }
+    
+    
+    .pi-external-link {
+        @apply hidden;
+    }
+    
+    
+    .cdk-drop-list-dragging .cdk-drag {
+        transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-animating {
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .cdk-drag-placeholder {
+        opacity: 50%;
+    }
+
+    .mobile {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .desktop {
+        @apply hidden;
+    }
+
+    .create {
+        background-color: $primaryColor;
+        border-color: $primaryColor;
+        color: $secondColor;
+        @apply h-[50px] w-[85%] flex items-center justify-center gap-4 p-3 
+        rounded-sm font-light border-2 transition-colors;
+    }
+    .create:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section class="desktop">    <!--         HEADER CALENDAR        JUST INFORMATIONS ABOUT THE MONTH AND THE YEAR    -->    <div class="header-calendar">        <div>            <button (click)="changeMonth(-1)" class="regular-text">                <i class="pi pi-angle-left"></i>                {{translateMonth(currentDate.getMonth()-1)}}            </button>        </div>        <div class="title">            <h5>{{translateMonth(currentDate.getMonth())}} - {{currentDate.getFullYear()}}</h5>            <div>                <fa-icon (click)="toggleCharts()" [icon]="faToggleOn" *ngIf="toggle"></fa-icon>                <fa-icon (click)="toggleCharts()" [icon]="faToggleOff" *ngIf="!toggle"></fa-icon>                <p class="medium-text">Mostrar Tarefas</p>            </div>        </div>        <div class="flex justify-end regular-text">            <button (click)="changeMonth(+1)">                {{translateMonth(currentDate.getMonth()+1)}}                <i class="pi pi-angle-right"></i>            </button>        </div>    </div>    <div class="calendar">        <!--             WRITTEN DAYS OF THE WEEK        -->        <div class="calendar-rows">            <ng-container *ngFor="let day of calendarDays; index as index">                <div *ngIf="index < 7" class="days-of-week large-text">                    {{translateDayOfWeek(day.getDay())}}                </div>            </ng-container>        </div>        <div cdkDropListGroup>            <div class="calendar-rows" *ngFor="let week of weeks" >                                <div *ngFor="let day of week; index as index"                     class="calendar-day"                    (mouseenter)="hover(day)"                    [class.day-not-month]="currentDate.getMonth() !== day.getMonth()"                       cdkDropList                    [cdkDropListData]="day"                    (cdkDropListDropped)="drop($event, day)"                 >                <!--                     DAYS OF THE MONTH (NUMBER)                -->                                <div class="day-informations">                                        <!-- FUTURE -->                    <div class="add-button">                    <i                         (click)="newTaskOnDay(day)"                         *ngIf="hoveringDay === day"                         class="pi pi-plus-circle"                        [ngClass]="canCreate ? \'opacity-100\' : \'opacity-20\'"                    ></i>                    </div>                                        <div [class.today]="today(day)">                        {{day | date : \'dd\'}}                    </div>                </div>                                                <div class="tasks-informations" *ngIf="getTasksByDate(day).length > 0 && !toggle">                    <div class="tasks-link-informations regular-text" (click)="openModalTasks(day)">                        <p>{{getTasksByDate(day).length}} tarefas <span>atribuídas</span></p>                        <i class="pi pi-external-link"></i>                    </div>                </div>                                <div>                                        <div class="tasks-list-in-calendar" *ngIf="toggle" cdkDropListGroup>                        <ng-container                             *ngFor="let task of (getTasksByDate(day)                             | namePipe : nameFilter                             | statusPipe : filter : false                            | datePipe : filter                            | nameSortPipe : orderParams                            | dateSortPipe : orderParams                            | statusSortPipe : orderParams)"                        >                            <app-card                             (openTaskDetails)="openCardTask(task)"                             [minHeight]="\'60px\'"                             [width]="\'210px\'"                             [task]="task"                            [borderColor]="getColor(task)"                             (deleteTask)="deleteTask(task)"                            [cdkDragData]="task"                            cdkDrag                            [permissions]="permissions"                            ></app-card>                        </ng-container>                    </div>                </div>            </div>        </div>    </div>    </div></section><section class="mobile w-full h-full flex-col items-center">    <p-calendar class="w-full" [(ngModel)]="date" [style]="{ minWidth: \'85%\' }" [inline]="true" [showWeek]="false"></p-calendar>    <div class="day-tasks pt-4 pl-1 flex flex-col gap-3 w-full">        <button *ngIf="date" class="create" (click)="newTaskOnDay(date)"                    [disabled]="!canCreate" [ngClass]="canCreate ? \'opacity-100\' : \'opacity-20\'">                    <i class="pi pi-plus-circle"></i>                    <p>                        Nova tarefa                    </p>        </button>        <ng-container *ngFor="let task of (getTasksByDate(date)             | namePipe : nameFilter             | statusPipe : filter : false            | datePipe : filter            | nameSortPipe : orderParams            | dateSortPipe : orderParams            | statusSortPipe : orderParams)"         >            <app-calendar-row-card                [task]="task"                (openTask)="openCardTask(task)"                (deleteEmt)="deleteTask($event)"            ></app-calendar-row-card>        </ng-container>    </div></section><app-modal-warn *ngIf="modalTasks" [height]="\'650px\'" [width]="\'800px\'" (close)="openModalTasks(null)">    <h6>Tarefas Atribuídas para {{formatDate(modalDate)}}</h6>    <div class="div-tasks">        <ng-container *ngFor="let task of getTasksByDate(modalDate)">            <div class="card-task">                <p class="medium-text">{{task.name}}</p>                <i class="pi pi-external-link"></i>            </div>        </ng-container>    </div></app-modal-warn></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CalendarComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CalendarComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

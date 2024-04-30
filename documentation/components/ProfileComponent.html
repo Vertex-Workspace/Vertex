@@ -1,0 +1,2585 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProfileComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/user-settings/profile/profile.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-profile</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./profile.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./profile.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#buttonConfirm" >buttonConfirm</a>
+                            </li>
+                            <li>
+                                <a href="#buttonEdit" >buttonEdit</a>
+                            </li>
+                            <li>
+                                <a href="#click" >click</a>
+                            </li>
+                            <li>
+                                <a href="#contentEditable" >contentEditable</a>
+                            </li>
+                            <li>
+                                <a href="#faAngleDown" >faAngleDown</a>
+                            </li>
+                            <li>
+                                <a href="#faCircleUser" >faCircleUser</a>
+                            </li>
+                            <li>
+                                <a href="#faEarthAmericas" >faEarthAmericas</a>
+                            </li>
+                            <li>
+                                <a href="#faEnvelope" >faEnvelope</a>
+                            </li>
+                            <li>
+                                <a href="#faKey" >faKey</a>
+                            </li>
+                            <li>
+                                <a href="#faPencil" >faPencil</a>
+                            </li>
+                            <li>
+                                <a href="#faPenToSquare" >faPenToSquare</a>
+                            </li>
+                            <li>
+                                <a href="#faToggleOff" >faToggleOff</a>
+                            </li>
+                            <li>
+                                <a href="#faToggleOn" >faToggleOn</a>
+                            </li>
+                            <li>
+                                <a href="#faUser" >faUser</a>
+                            </li>
+                            <li>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <a href="#itemsList" >itemsList</a>
+                            </li>
+                            <li>
+                                <a href="#logged" >logged</a>
+                            </li>
+                            <li>
+                                <a href="#selectedFile" >selectedFile</a>
+                            </li>
+                            <li>
+                                <a href="#toogleOn" >toogleOn</a>
+                            </li>
+                            <li>
+                                <a href="#tooglesList" >tooglesList</a>
+                            </li>
+                            <li>
+                                <a href="#validInput" >validInput</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#clickOption" >clickOption</a>
+                            </li>
+                            <li>
+                                <a href="#closeModal" >closeModal</a>
+                            </li>
+                            <li>
+                                <a href="#getLoggedUser" >getLoggedUser</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onChange" >onChange</a>
+                            </li>
+                            <li>
+                                <a href="#onFileSelected" >onFileSelected</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#organizeValues" >organizeValues</a>
+                            </li>
+                            <li>
+                                <a href="#toogleCharts" >toogleCharts</a>
+                            </li>
+                            <li>
+                                <a href="#updateLoggedUser" >updateLoggedUser</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(formBuilder: FormBuilder, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, alert: <a href="../injectables/AlertService.html" target="_self">AlertService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alert</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clickOption"></a>
+                    <span class="name">
+                        <span ><b>clickOption</b></span>
+                        <a href="#clickOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clickOption(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModal"></a>
+                    <span class="name">
+                        <span ><b>closeModal</b></span>
+                        <a href="#closeModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLoggedUser"></a>
+                    <span class="name">
+                        <span ><b>getLoggedUser</b></span>
+                        <a href="#getLoggedUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getLoggedUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onChange"></a>
+                    <span class="name">
+                        <span ><b>onChange</b></span>
+                        <a href="#onChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileSelected"></a>
+                    <span class="name">
+                        <span ><b>onFileSelected</b></span>
+                        <a href="#onFileSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFileSelected(e: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="organizeValues"></a>
+                    <span class="name">
+                        <span ><b>organizeValues</b></span>
+                        <a href="#organizeValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>organizeValues()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toogleCharts"></a>
+                    <span class="name">
+                        <span ><b>toogleCharts</b></span>
+                        <a href="#toogleCharts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toogleCharts(item: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateLoggedUser"></a>
+                    <span class="name">
+                        <span ><b>updateLoggedUser</b></span>
+                        <a href="#updateLoggedUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateLoggedUser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buttonConfirm"></a>
+                    <span class="name">
+                        <span ><b>buttonConfirm</b></span>
+                        <a href="#buttonConfirm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buttonEdit"></a>
+                    <span class="name">
+                        <span ><b>buttonEdit</b></span>
+                        <a href="#buttonEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="click"></a>
+                    <span class="name">
+                        <span ><b>click</b></span>
+                        <a href="#click"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;initial&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contentEditable"></a>
+                    <span class="name">
+                        <span ><b>contentEditable</b></span>
+                        <a href="#contentEditable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faAngleDown"></a>
+                    <span class="name">
+                        <span ><b>faAngleDown</b></span>
+                        <a href="#faAngleDown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faAngleDown</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCircleUser"></a>
+                    <span class="name">
+                        <span ><b>faCircleUser</b></span>
+                        <a href="#faCircleUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCircleUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faEarthAmericas"></a>
+                    <span class="name">
+                        <span ><b>faEarthAmericas</b></span>
+                        <a href="#faEarthAmericas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faEarthAmericas</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faEnvelope"></a>
+                    <span class="name">
+                        <span ><b>faEnvelope</b></span>
+                        <a href="#faEnvelope"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faEnvelope</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faKey"></a>
+                    <span class="name">
+                        <span ><b>faKey</b></span>
+                        <a href="#faKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faKey</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPencil"></a>
+                    <span class="name">
+                        <span ><b>faPencil</b></span>
+                        <a href="#faPencil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPencil</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPenToSquare"></a>
+                    <span class="name">
+                        <span ><b>faPenToSquare</b></span>
+                        <a href="#faPenToSquare"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPenToSquare</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faToggleOff"></a>
+                    <span class="name">
+                        <span ><b>faToggleOff</b></span>
+                        <a href="#faToggleOff"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faToggleOff</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faToggleOn"></a>
+                    <span class="name">
+                        <span ><b>faToggleOn</b></span>
+                        <a href="#faToggleOn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faToggleOn</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faUser"></a>
+                    <span class="name">
+                        <span ><b>faUser</b></span>
+                        <a href="#faUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="itemsList"></a>
+                    <span class="name">
+                        <span ><b>itemsList</b></span>
+                        <a href="#itemsList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { id: &#x27;email&#x27;, icon: faEnvelope, option: &#x27;E-mail&#x27;, formControlName: &#x27;email&#x27; },
+    { id: &#x27;name&#x27;, icon: faUser, option: &#x27;Nome&#x27;, formControlName: &#x27;name&#x27; },
+    { id: &#x27;location&#x27;, icon: faEarthAmericas, option: &#x27;Localização&#x27;, formControlName: &#x27;location&#x27; },
+    { id: &#x27;description&#x27;, icon: faEarthAmericas, option: &#x27;Descrição&#x27;, formControlName: &#x27;description&#x27; }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logged"></a>
+                    <span class="name">
+                        <span ><b>logged</b></span>
+                        <a href="#logged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFile"></a>
+                    <span class="name">
+                        <span ><b>selectedFile</b></span>
+                        <a href="#selectedFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toogleOn"></a>
+                    <span class="name">
+                        <span ><b>toogleOn</b></span>
+                        <a href="#toogleOn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tooglesList"></a>
+                    <span class="name">
+                        <span ><b>tooglesList</b></span>
+                        <a href="#tooglesList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { text: &quot;Mostrar gráficos de desempenho para equipe&quot;, icon: faToggleOff },
+    { text: &quot;Deixar meu perfil visível a membros da equipe&quot;, icon: faToggleOff }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validInput"></a>
+                    <span class="name">
+                        <span ><b>validInput</b></span>
+                        <a href="#validInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/user-settings/profile/profile.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import {
+  faUser, faEnvelope,
+  faEarthAmericas, faKey, faAngleDown, faToggleOff,
+  faPencil, faToggleOn, faCircleUser,
+  faPenToSquare
+} from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { FormBuilder, FormGroup } from &#x27;@angular/forms&#x27;;
+import { User } from &#x27;src/app/models/class/user&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { Message } from &#x27;src/app/models/class/message&#x27;;
+
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
+
+@Component({
+  selector: &#x27;app-profile&#x27;,
+  templateUrl: &#x27;./profile.component.html&#x27;,
+  styleUrls: [&#x27;./profile.component.scss&#x27;]
+})
+export class ProfileComponent {
+
+  logged !: User;
+
+  faUser &#x3D; faUser;
+  faEnvelope &#x3D; faEnvelope;
+  faEarthAmericas &#x3D; faEarthAmericas;
+  faKey &#x3D; faKey;
+  faAngleDown &#x3D; faAngleDown;
+  faToggleOff &#x3D; faToggleOff;
+  faToggleOn &#x3D; faToggleOn;
+  faPencil &#x3D; faPencil;
+  faCircleUser &#x3D; faCircleUser;
+  faPenToSquare &#x3D; faPenToSquare;
+
+  toogleOn: boolean &#x3D; true;
+  buttonEdit: boolean &#x3D; true;
+  buttonConfirm: boolean &#x3D; false;
+  contentEditable: boolean &#x3D; false;
+  click: string &#x3D; &#x27;initial&#x27;;
+  validInput: boolean &#x3D; true;
+
+  form !: FormGroup;
+
+  selectedFile !: any;
+
+  itemsList &#x3D; [
+    { id: &#x27;email&#x27;, icon: faEnvelope, option: &#x27;E-mail&#x27;, formControlName: &#x27;email&#x27; },
+    { id: &#x27;name&#x27;, icon: faUser, option: &#x27;Nome&#x27;, formControlName: &#x27;name&#x27; },
+    { id: &#x27;location&#x27;, icon: faEarthAmericas, option: &#x27;Localização&#x27;, formControlName: &#x27;location&#x27; },
+    { id: &#x27;description&#x27;, icon: faEarthAmericas, option: &#x27;Descrição&#x27;, formControlName: &#x27;description&#x27; }
+  ];
+
+  tooglesList &#x3D; [
+    { text: &quot;Mostrar gráficos de desempenho para equipe&quot;, icon: faToggleOff },
+    { text: &quot;Deixar meu perfil visível a membros da equipe&quot;, icon: faToggleOff }
+  ];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private alert: AlertService,
+  ) {
+    this.getLoggedUser();
+  }
+
+  ngOnInit(): void {
+
+    this.form &#x3D; this.formBuilder.group({
+
+      email: [this.logged.email],
+      name: [&#x60;${this.logged.firstName} ${this.logged.lastName}&#x60;],
+      location: [this.logged.location],
+      description: [this.logged.description]
+
+    })
+
+    console.log(this.logged);
+
+  }
+
+  getLoggedUser(): void {
+    this.logged &#x3D; this.userService.getLogged();
+  }
+
+  // Alter the status of toggle
+  toogleCharts(item: number): void {
+    if (this.tooglesList[item].icon &#x3D;&#x3D; faToggleOff) {
+      this.tooglesList[item].icon &#x3D; faToggleOn;
+    } else {
+      this.tooglesList[item].icon &#x3D; faToggleOff;
+    }
+  }
+
+  clickOption(id: string): void {
+    this.click &#x3D; id;
+    this.contentEditable &#x3D; !this.contentEditable
+  }
+
+  onChange(): void {
+    if (!this.contentEditable) {
+      this.contentEditable &#x3D; !this.contentEditable;
+    }
+  }
+
+  closeModal(): void {
+    this.validInput &#x3D; true;
+  }
+
+  onSubmit(): void {
+
+    this.organizeValues();
+
+    this.userService
+      .update(this.logged)
+      .subscribe(() &#x3D;&gt; {
+        this.alert.successAlert(&#x27;Informações atualizadas com sucesso!&#x27;)
+      },
+        e &#x3D;&gt; {
+          this.alert.errorAlert(&quot;O e-mail não atende aos requisitos necessários&quot;)
+        }
+      )
+
+  }
+
+  organizeValues(): void {
+    const formValue &#x3D; this.form.value;
+    const firstName &#x3D; formValue.name.split(&#x27; &#x27;)[0];
+    const lastName &#x3D; formValue.name.slice(firstName.length + 1);
+
+    this.logged &#x3D; {
+      ...this.logged,
+      email: formValue.email,
+      firstName: firstName,
+      lastName: lastName,
+      description: formValue.description,
+      location: formValue.location,
+    };
+
+  }
+
+  onFileSelected(e: any): void {
+    this.selectedFile &#x3D; e.target.files[0]
+    const fd: FormData &#x3D; new FormData();
+    fd.append(&#x27;file&#x27;, this.selectedFile, this.selectedFile.name);
+
+    console.log(fd);
+
+    this.userService
+      .uploadImage(fd, this.logged.id!)
+      .subscribe(() &#x3D;&gt; {
+        this.alert.successAlert(&#x27;Imagem atualizada com sucesso!&#x27;);
+        this.updateLoggedUser();
+      });
+  }
+
+  updateLoggedUser(): void {
+    this.userService
+      .getOneById(this.logged.id!)
+      .subscribe((user: User) &#x3D;&gt; {
+        this.logged &#x3D; user;
+        this.userService.updateLoggedUser(user);
+      })
+  }
+
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg&quot;&gt;
+    &lt;div class&#x3D;&quot;title&quot;&gt;
+        &lt;div&gt;
+            &lt;h5&gt;Meu Perfil&lt;/h5&gt;
+            &lt;fa-icon [icon]&#x3D;&quot;faUser&quot; class&#x3D;&quot;iconProfile size&quot;&gt;&lt;/fa-icon&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;generalDiv&quot;&gt;
+        &lt;div class&#x3D;&quot;divInputs&quot;&gt;
+            &lt;div class&#x3D;&quot;divLeftSide&quot;&gt;
+                &lt;!-- E-mail --&gt;
+                &lt;section&gt;
+                    &lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+                        &lt;div class&#x3D;&quot;divEachInput&quot; *ngFor&#x3D;&quot;let item of itemsList&quot;&gt;
+                            &lt;p class&#x3D;&quot;medium-text&quot;&gt;{{item.option}}&lt;/p&gt;
+                            &lt;div class&#x3D;&quot;iconInputBlock&quot;&gt;
+                                &lt;div class&#x3D;&quot;iconBox&quot; *ngIf&#x3D;&quot;item.id !&#x3D; &#x27;description&#x27;&quot;&gt;
+                                    &lt;fa-icon [icon]&#x3D;&quot;item.icon&quot; class&#x3D;&quot;iconInput&quot;&gt;&lt;/fa-icon&gt;
+                                &lt;/div&gt;
+                                &lt;textarea (input)&#x3D;&quot;onChange()&quot; type&#x3D;&quot;text&quot; [ngClass]&#x3D;&quot;item.id&quot; #textBox
+                                    class&#x3D;&quot;regular-text&quot; formControlName&#x3D;&quot;{{item.formControlName}}&quot;&gt;
+                            &lt;/textarea&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/form&gt;
+                    &lt;div class&#x3D;&quot;charts&quot;&gt;
+                        &lt;p class&#x3D;&quot;medium-text&quot;&gt;Visibilidade do Perfil&lt;/p&gt;      
+                        &lt;div *ngFor&#x3D;&quot;let toogle of tooglesList; index as item&quot;&gt;
+                            &lt;fa-icon (click)&#x3D;&quot;toogleCharts(item)&quot; [icon]&#x3D;&quot;toogle.icon&quot; class&#x3D;&quot;iconProfile&quot;&gt;
+                            &lt;/fa-icon&gt;
+                            &lt;p class&#x3D;&quot;small-text px-3&quot;&gt;{{toogle.text}}&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;rightSide&quot;&gt;
+                &lt;section&gt;
+                    &lt;div class&#x3D;&quot;circular&quot;&gt;
+                        &lt;img src&#x3D;&quot;data:image/jpg;base64, {{logged.image}}&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot; object-cover h-full w-full&quot;&gt;
+                        &lt;form class&#x3D;&quot;input-div&quot;&gt;
+                            &lt;input type&#x3D;&quot;file&quot; class&#x3D;&quot;input-file&quot; (change)&#x3D;&quot;onFileSelected($event)&quot;&gt;
+                        &lt;/form&gt;
+                    &lt;/div&gt;
+
+                    &lt;div&gt;
+                        &lt;div *ngIf&#x3D;&quot;!buttonConfirm&quot;&gt;
+                            &lt;button class&#x3D;&quot;confirm justify-end medium-text&quot; (click)&#x3D;&quot;clickOption(&#x27;edit&#x27;)&quot;
+                                [disabled]&#x3D;&quot;contentEditable ? false : true&quot;
+                                [ngClass]&#x3D;&quot;contentEditable ? &#x27;edit&#x27; : &#x27;noEdit&#x27;&quot; type&#x3D;&quot;submit&quot; (click)&#x3D;&quot;onSubmit()&quot;&gt;
+                                Atualizar
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./profile.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../variables.scss&#x27;;
+@import &#x27;../../../../styles.scss&#x27;;
+
+
+@media screen and (min-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[25%] items-center justify-start gap-7;
+        }
+        
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
+    }
+    
+    .circular {
+        width: 200px;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+    }
+    .circular img {
+        height: 80%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
+        color: $primaryColor;
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .confirm-mobile {
+        @apply hidden;
+    }
+
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px]
+        px-3 flex py-3;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex w-[95%]
+    }
+    
+    .divLeftSide {
+        @apply w-[70%];
+        
+        section {
+            @apply flex h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[500px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit, .confirm, .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-[25%] ;
+        
+        section {
+            @apply h-[85%] w-full flex flex-col justify-between items-end border-b-2 py-3 pb-4;
+        }
+    }
+    
+    .email, .name {
+        @apply w-[450px] h-[50px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[50px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+}
+
+@media screen and (min-width: 980px) and (max-width: 1324px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[25%] items-center justify-start gap-7;
+        }
+        
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
+    }
+    
+    .circular {
+        width: 200px;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+    }
+    .circular img {
+        height: 80%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
+    }
+
+    .confirm-mobile {
+        @apply hidden;
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
+        color: $primaryColor;
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px]
+        px-3 flex py-3;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex w-[95%]
+    }
+    
+    .divLeftSide {
+        @apply w-[70%];
+        
+        section {
+            @apply flex h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[500px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit, .confirm, .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-[25%];
+        
+        section {
+            @apply h-[85%] w-full flex flex-col justify-between items-end border-b-2 py-3 pb-4;
+        }
+    }
+    
+    .email, .name {
+        @apply w-[450px] h-[50px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[50px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 980px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start pt-6;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+
+        div {
+            @apply flex w-[50%] items-center justify-start gap-7;
+
+            .iconProfile {
+                @apply hidden;
+            }
+        }
+        
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
+    }
+
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
+        color: $primaryColor;
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex min-w-[70px] h-[70px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px] w-[400px]  pt-[1.35rem]
+        px-3 flex py-3 items-center;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex flex-col-reverse w-[95%];
+    }
+    
+    .divLeftSide {
+        @apply w-full flex justify-center pb-32;
+        
+        section {
+            @apply flex w-[90%] mr-20 h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[620px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+
+    .confirm {
+        @apply hidden;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-full h-[250px] justify-center mb-4;
+        
+        section {
+            @apply h-[85%] w-[90%] flex justify-center mr-20;
+
+            .circular {
+                width: 250px;
+                height: 250px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .circular img {
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    
+    .email, .name {
+        @apply w-[600px] h-[70px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[70px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+
+    .confirm-mobile {
+        color: $secondColor;
+        @apply mt-2 mb-2 h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start pt-6;
+    }
+    
+    .title {
+        @apply pl-1 w-full min-h-[50px] flex flex-col items-start justify-start pr-10;
+        border-color: $emphasis;
+
+        div {
+            @apply flex w-full items-center justify-center gap-7;
+
+            .iconProfile {
+                @apply hidden;
+            }
+        }
+        
+    }
+    
+    .image {
+        @apply w-full h-1/2 p-2 rounded-full flex flex-col justify-center items-center;
+        
+        
+        .profile-photo {
+            color: $primaryColor;
+            font-size: 10rem;
+            padding-left: 27%; 
+        }
+    }
+
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    p-fileUpload {
+        @apply absolute bottom-0 mx-auto w-[150px];
+    }
+    
+    .input-div {
+        @apply w-full h-full flex justify-center items-center absolute;
+        opacity: 0;
+        
+        .input-file {
+            @apply cursor-pointer w-full h-full;
+        }
+        
+    }
+    
+    .iconProfile {
+        color: $primaryColor;
+    }
+    
+    .hover {
+        color: $primaryColor;
+        @apply hover:opacity-50 pt-4;
+    }
+    
+    .iconInput {
+        color: $primaryColor;
+        background-color:$emphasis;
+    }
+    
+    .generalDiv {
+        @apply flex w-[95%] justify-end;
+    }
+    
+    .iconInputBlock {
+        @apply flex justify-start;
+        
+        .iconBox {
+            @apply flex min-w-[70px] h-[70px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    textarea {
+        @apply
+        rounded-r-sm h-[50px] w-[400px]  pt-[1.35rem]
+        px-3 flex py-3 items-center;
+        resize: none;
+        background-color: $card;
+    }
+    
+    .divInputs {
+        @apply flex flex-col-reverse w-[95%];
+    }
+    
+    .divLeftSide {
+        @apply w-full flex justify-center pb-32;
+        
+        section {
+            @apply flex w-[90%] mr-20 h-[85%] flex-col border-b-2 justify-evenly;
+        }
+        
+        p {
+            @apply py-3;
+        }
+    }
+    
+    .divEachInput {
+        @apply flex flex-col w-[620px] py-2;
+        
+        label {
+            @apply text-sm;
+        }
+    }
+    
+    .divInputIcon {
+        @apply flex h-[6%] justify-center items-center rounded-l-sm;
+        background-color: $emphasis;
+    }
+    
+    .angleDownIcon {
+        @apply flex justify-center items-center w-[10%];
+        background-color:$card;
+    }
+    
+    
+    .edit .cancel {
+        color: $secondColor;
+        @apply h-full w-[210px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;
+    }
+
+    .confirm {
+        @apply hidden;
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    .rightSide{
+        @apply flex w-full h-[250px] justify-center mb-4 pr-10;
+        
+        section {
+            @apply h-[85%] w-[90%] flex justify-center;
+
+            .circular {
+                width: 250px;
+                height: 250px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .circular img {
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    
+    .email, .name {
+        @apply w-[600px] h-[70px];
+    }
+    
+    .location {
+        @apply w-[250px] h-[70px];
+    }
+    
+    .description {
+        @apply w-[500px] h-[130px];
+    }
+    
+    .charts {
+        @apply h-[120px] w-full pt-3;
+        
+        div {
+            @apply flex items-center;
+        }
+    }
+    
+    form {
+        @apply h-full w-full flex flex-col justify-evenly;
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+
+    .confirm-mobile {
+        color: $secondColor;
+        @apply mt-2 mb-2 h-full w-[350px] flex items-center justify-center gap-4 text-base p-3 rounded font-bold border-2 transition-colors;;
+    }
+}
+    
+    
+    
+    </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg">    <div class="title">        <div>            <h5>Meu Perfil</h5>            <fa-icon [icon]="faUser" class="iconProfile size"></fa-icon>        </div>    </div>    <div class="generalDiv">        <div class="divInputs">            <div class="divLeftSide">                <!-- E-mail -->                <section>                    <form [formGroup]="form" (ngSubmit)="onSubmit()">                        <div class="divEachInput" *ngFor="let item of itemsList">                            <p class="medium-text">{{item.option}}</p>                            <div class="iconInputBlock">                                <div class="iconBox" *ngIf="item.id != \'description\'">                                    <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>                                </div>                                <textarea (input)="onChange()" type="text" [ngClass]="item.id" #textBox                                    class="regular-text" formControlName="{{item.formControlName}}">                            </textarea>                            </div>                        </div>                    </form>                    <div class="charts">                        <p class="medium-text">Visibilidade do Perfil</p>                              <div *ngFor="let toogle of tooglesList; index as item">                            <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">                            </fa-icon>                            <p class="small-text px-3">{{toogle.text}}</p>                        </div>                    </div>                </section>            </div>            <div class="rightSide">                <section>                    <div class="circular">                        <img src="data:image/jpg;base64, {{logged.image}}" alt="" class=" object-cover h-full w-full">                        <form class="input-div">                            <input type="file" class="input-file" (change)="onFileSelected($event)">                        </form>                    </div>                    <div>                        <div *ngIf="!buttonConfirm">                            <button class="confirm justify-end medium-text" (click)="clickOption(\'edit\')"                                [disabled]="contentEditable ? false : true"                                [ngClass]="contentEditable ? \'edit\' : \'noEdit\'" type="submit" (click)="onSubmit()">                                Atualizar                            </button>                        </div>                    </div>                </section>            </div>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProfileComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProfileComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

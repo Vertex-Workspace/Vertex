@@ -1,0 +1,1840 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  KanbanComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/tasks/kanban/kanban.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-kanban</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./kanban.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./kanban.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#canCreate" >canCreate</a>
+                            </li>
+                            <li>
+                                <a href="#canEdit" >canEdit</a>
+                            </li>
+                            <li>
+                                <a href="#status" >status</a>
+                            </li>
+                            <li>
+                                <a href="#taskList" >taskList</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#createTask" >createTask</a>
+                            </li>
+                            <li>
+                                <a href="#deleteTask" >deleteTask</a>
+                            </li>
+                            <li>
+                                <a href="#dropCard" >dropCard</a>
+                            </li>
+                            <li>
+                                <a href="#getHeight" >getHeight</a>
+                            </li>
+                            <li>
+                                <a href="#getStrongerColor" >getStrongerColor</a>
+                            </li>
+                            <li>
+                                <a href="#getTaskByProperty" >getTaskByProperty</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openTaskModal" >openTaskModal</a>
+                            </li>
+                            <li>
+                                <a href="#specificPropertyArray" >specificPropertyArray</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#canDeleteVerification" >canDeleteVerification</a>
+                            </li>
+                            <li>
+                                <a href="#filter" >filter</a>
+                            </li>
+                            <li>
+                                <a href="#nameFilter" >nameFilter</a>
+                            </li>
+                            <li>
+                                <a href="#orderParams" >orderParams</a>
+                            </li>
+                            <li>
+                                <a href="#permissions" >permissions</a>
+                            </li>
+                            <li>
+                                <a href="#project" >project</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#openTaskDetails" >openTaskDetails</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, alertService: <a href="../injectables/AlertService.html" target="_self">AlertService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>taskService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canDeleteVerification"></a>
+                        <b>canDeleteVerification</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:38</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filter"></a>
+                        <b>filter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:51</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nameFilter"></a>
+                        <b>nameFilter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:48</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="orderParams"></a>
+                        <b>orderParams</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PipeParams.html" target="_self" >PipeParams</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:54</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="permissions"></a>
+                        <b>permissions</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Permission.html" target="_self" >Permission[]</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:40</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="project"></a>
+                        <b>project</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:36</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openTaskDetails"></a>
+                        <b>openTaskDetails</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:171</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createTask"></a>
+                    <span class="name">
+                        <span ><b>createTask</b></span>
+                        <a href="#createTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createTask(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteTask"></a>
+                    <span class="name">
+                        <span ><b>deleteTask</b></span>
+                        <a href="#deleteTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteTask(task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:166</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dropCard"></a>
+                    <span class="name">
+                        <span ><b>dropCard</b></span>
+                        <a href="#dropCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>dropCard(event: <a href="../classes/Task.html" target="_self">CdkDragDrop&lt;Task[]&gt;</a>, propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >CdkDragDrop&lt;Task[]&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getHeight"></a>
+                    <span class="name">
+                        <span ><b>getHeight</b></span>
+                        <a href="#getHeight"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getHeight(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStrongerColor"></a>
+                    <span class="name">
+                        <span ><b>getStrongerColor</b></span>
+                        <a href="#getStrongerColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStrongerColor(colorReceived: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>colorReceived</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTaskByProperty"></a>
+                    <span class="name">
+                        <span ><b>getTaskByProperty</b></span>
+                        <a href="#getTaskByProperty"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTaskByProperty(task: <a href="../classes/Task.html" target="_self">Task</a>, propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTaskModal"></a>
+                    <span class="name">
+                        <span ><b>openTaskModal</b></span>
+                        <a href="#openTaskModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openTaskModal(task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="specificPropertyArray"></a>
+                    <span class="name">
+                        <span ><b>specificPropertyArray</b></span>
+                        <a href="#specificPropertyArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>specificPropertyArray(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Task.html" target="_self" >Task[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canCreate"></a>
+                    <span class="name">
+                        <span ><b>canCreate</b></span>
+                        <a href="#canCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canEdit"></a>
+                    <span class="name">
+                        <span ><b>canEdit</b></span>
+                        <a href="#canEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="status"></a>
+                    <span class="name">
+                        <span ><b>status</b></span>
+                        <a href="#status"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>PropertyList[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskList"></a>
+                    <span class="name">
+                        <span ><b>taskList</b></span>
+                        <a href="#taskList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Task.html" target="_self" >Task[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/tasks/kanban/kanban.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { Task, TaskCreate } from &#x27;src/app/models/class/task&#x27;;
+import {
+  CdkDragDrop,
+  moveItemInArray,
+} from &#x27;@angular/cdk/drag-drop&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { Property, PropertyKind, PropertyList, PropertyListKind } from &#x27;src/app/models/class/property&#x27;;
+import { TaskService } from &#x27;src/app/services/task.service&#x27;;
+import { Value, ValueCreatedWhenTaskCreated, ValueUpdate } from &#x27;src/app/models/class/value&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { Permission, PermissionsType } from &#x27;src/app/models/class/user&#x27;;
+import { taskHourService } from &#x27;src/app/services/taskHour.service&#x27;;
+import { ProjectService } from &#x27;src/app/services/project.service&#x27;;
+import { PipeParams } from &#x27;src/app/models/interface/params&#x27;;
+import { colors } from &#x27;src/app/models/colors&#x27;;
+
+@Component({
+  selector: &#x27;app-kanban&#x27;,
+  templateUrl: &#x27;./kanban.component.html&#x27;,
+  styleUrls: [&#x27;./kanban.component.scss&#x27;]
+})
+export class KanbanComponent {
+
+
+  constructor(
+    private taskService: TaskService,
+    private alertService: AlertService,
+    private userService: UserService) {
+  }
+
+  @Input()
+  project!: Project;
+
+  @Input() canDeleteVerification?: boolean
+
+  @Input() permissions!: Permission[];
+
+  taskList !: Task[];
+
+  canCreate: boolean &#x3D; false;
+  canEdit: boolean &#x3D; false;
+
+  @Input()
+  nameFilter !: string;
+
+  @Input()
+  filter !: any;
+
+  @Input()
+  orderParams !: PipeParams;
+
+  status : PropertyList[] &#x3D; [];
+
+  ngOnChanges(){
+    this.status &#x3D; this.project.properties[0].propertyLists;
+    this.taskList &#x3D; this.project.tasks;
+    console.log(this.project);
+    
+  }
+
+  ngOnInit() {
+    this.taskList &#x3D; this.project.tasks;
+    this.status &#x3D; this.project.properties[0].propertyLists;
+
+    
+    for (const permission of this.permissions) {
+      if ((permission.name &#x3D;&#x3D;&#x3D; PermissionsType.EDIT) &amp;&amp; permission.enabled) {
+        this.canEdit &#x3D; true;
+      } else if ((permission.name &#x3D;&#x3D;&#x3D; PermissionsType.CREATE) &amp;&amp; permission.enabled) {
+        this.canCreate &#x3D; true;
+      }
+    }
+    
+  }
+
+  dropCard(event: CdkDragDrop&lt;Task[]&gt;, propertyList: PropertyList): void {
+    if (this.canEdit) {
+      const task: Task &#x3D; event.item.data;
+
+      let previousPropertyList!: PropertyList;
+      let newValue!: Value;
+
+      const oldProject: Project &#x3D; new Project(this.project);
+
+      //For each to find the value of current and future property List
+      this.project.properties.forEach((property) &#x3D;&gt; {
+        if (property.kind &#x3D;&#x3D; PropertyKind.STATUS) {
+          task.values.forEach((value) &#x3D;&gt; {
+            if (value.property.id &#x3D;&#x3D; property.id) {
+              //Save the old value
+              previousPropertyList &#x3D; value.value as PropertyList;
+
+              //Save the new value
+              value.value &#x3D; propertyList;
+
+              //Save on a local variable the value of the task
+              newValue &#x3D; value;
+            }
+          });
+        }
+      });
+
+      //It points out that the previousValue is incorrect
+      if (previousPropertyList &#x3D;&#x3D; null) {
+        return;
+      }
+
+
+      //If the value of status task is different of the previous value, then, the request is sent
+      if (propertyList.id !&#x3D; previousPropertyList.id) {
+        if(propertyList.propertyListKind &#x3D;&#x3D;&#x3D; PropertyListKind.DONE){
+          this.taskService.setTaskDependencyNull(task.id, task).subscribe((task: Task)&#x3D;&gt; {
+            task &#x3D; task;
+          })
+        }
+        //Object to change the value of the status task
+        const valueUpdate: ValueUpdate &#x3D; {
+          id: task.id,
+          value: {
+            property: {
+              id: newValue.property.id
+            },
+            value: {
+              id: newValue.id,
+              value: propertyList.id
+            }
+          },
+          userID: this.userService.getLogged().id!
+        };
+        //Patch the value of the status task
+        this.taskService.patchValue(valueUpdate).subscribe(
+          () &#x3D;&gt; {},
+          (error) &#x3D;&gt; {
+            newValue.value &#x3D; previousPropertyList;
+            this.alertService.errorAlert(error.error);
+          }
+        );
+      }
+    } else {
+      this.alertService.errorAlert(&quot;Você não tem permissão para alterar o status da tarefa!&quot;)
+    }
+  };
+
+  getHeight(propertyList: PropertyList): string {
+    return ((this.specificPropertyArray(propertyList).length * 174) + 70) + &quot;px&quot;;
+  }
+
+  specificPropertyArray(propertyList: PropertyList): Task[] {
+    return this.project.tasks.filter(task &#x3D;&gt; {
+      let valueIntoPropertyList: PropertyList &#x3D; task.values[0].value as PropertyList;
+      return valueIntoPropertyList.id &#x3D;&#x3D; propertyList.id;
+    });
+  }
+
+
+  getTaskByProperty(task: Task, propertyList: PropertyList): boolean {
+    let valueIntoPropertyList: PropertyList &#x3D; task.values[0].value as PropertyList;
+    return valueIntoPropertyList.id &#x3D;&#x3D; propertyList.id;
+  }
+
+
+  deleteTask(task: Task): void {
+    this.taskList &#x3D; this.taskList.filter(t &#x3D;&gt; task.id !&#x3D;&#x3D; t.id)  
+    this.project.tasks &#x3D; this.project.tasks.filter(taskdaje &#x3D;&gt; taskdaje.id !&#x3D;&#x3D; task.id);
+  }
+
+  @Output() openTaskDetails &#x3D; new EventEmitter();
+  openTaskModal(task: Task): void {
+    this.openTaskDetails.emit(task);
+  }
+
+  createTask(propertyList: PropertyList) {
+    let propertyUsed!: Property;
+    //For each to find the property of the clicked Property List
+    this.project.properties.forEach((property) &#x3D;&gt; {
+
+      if (property.kind &#x3D;&#x3D; PropertyKind.STATUS) {
+
+        property.propertyLists.forEach((propertyListForEach) &#x3D;&gt; {
+
+          if (propertyListForEach.id &#x3D;&#x3D; propertyList.id) {
+            propertyUsed &#x3D; property;
+          }
+        });
+      }
+    });
+
+    if (propertyUsed &#x3D;&#x3D; null) {
+      return;
+    }
+    
+    let taskCreate: TaskCreate &#x3D; {
+      name: &quot;Nova Tarefa&quot;,
+      description: &quot;Descreva um pouco sobre sua Tarefa Aqui&quot;,
+      project: {
+        id: this.project.id!
+      },
+      values: [],
+      creator: {
+        id: this.userService.getLogged().id!
+      },
+      teamId: this.project.idTeam!
+    }
+    console.log(taskCreate);
+    
+    this.taskService.create(taskCreate).subscribe(
+      (task: Task) &#x3D;&gt; {
+
+        const valueUpdate: ValueUpdate &#x3D; {
+          id: task.id,
+          value: {
+            property: {
+              id: propertyUsed.id
+            },
+            value: {
+              //It always gonna be the status
+              id: task.values[0].id,
+              value: propertyList.id as number
+            }
+          },
+          userID: this.userService.getLogged().id!
+        };
+
+        this.taskService.patchValue(valueUpdate).subscribe(
+          (taskDate) &#x3D;&gt; {
+            task.values &#x3D; taskDate.values;
+            this.taskList.push(task);
+            this.alertService.successAlert(&quot;Tarefa criada com sucesso!&quot;);
+          },
+          (error) &#x3D;&gt; {
+            console.error(error);
+          }
+        );
+
+      },
+      (error: any) &#x3D;&gt; {
+        this.alertService.errorAlert(&quot;Erro ao criar tarefa!&quot;);
+      }
+    );
+  }
+  getStrongerColor(colorReceived: string): string | undefined {
+    const matchingColor &#x3D; colors.find(color &#x3D;&gt; color.weak &#x3D;&#x3D;&#x3D; colorReceived);
+    return matchingColor ? matchingColor.strong : undefined;
+}
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;screen&quot;&gt;
+    
+    &lt;ng-container cdkDropListGroup&gt;
+
+        &lt;div class&#x3D;&quot;col-container&quot;&gt;
+            &lt;div class&#x3D;&quot;col&quot; *ngFor&#x3D;&quot;let propertyList of status&quot;
+                [style.backgroundColor]&#x3D;&quot;propertyList.color&quot; [style.height]&#x3D;&quot;getHeight(propertyList)&quot;
+                cdkDropList [cdkDropListData]&#x3D;&quot;project.tasks&quot; (cdkDropListDropped)&#x3D;&quot;dropCard($event, propertyList)&quot;&gt;
+                &lt;div class&#x3D;&quot;flex flex-row justify-between w-full items-center&quot;&gt;
+                    &lt;p class&#x3D;&quot;large-text&quot; [style.color]&#x3D;&quot;getStrongerColor(propertyList.color)&quot;&gt;{{ propertyList.value }}&lt;/p&gt;
+                    &lt;button (click)&#x3D;&quot;createTask(propertyList)&quot;
+                    [ngClass]&#x3D;&quot;canCreate ? &#x27;opacity-100&#x27; : &#x27;opacity-20&#x27;&quot; [style.color]&#x3D;&quot;getStrongerColor(propertyList.color)&quot; [disabled]&#x3D;&quot;!canCreate&quot;&gt;+&lt;/button&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;col-items&quot;&gt;
+
+                    &lt;ng-container 
+                        *ngFor&#x3D;&quot;let task of (taskList 
+                            | namePipe : nameFilter 
+                            | statusPipe : filter : false
+                            | datePipe : filter
+                            | nameSortPipe : orderParams
+                            | dateSortPipe : orderParams)&quot;&gt;
+
+                        &lt;app-card 
+                            *ngIf&#x3D;&quot;getTaskByProperty(task, propertyList)&quot;
+                            cdkDrag 
+                            [task]&#x3D;&quot;task&quot;
+                            [borderColor]&#x3D;&quot;propertyList.color&quot; 
+                            [minHeight]&#x3D;&quot;&#x27;140px&#x27;&quot; 
+                            [width]&#x3D;&quot;&#x27;300px&#x27;&quot; 
+                            [cdkDragData]&#x3D;&quot;task&quot; 
+                            [permissions]&#x3D;&quot;permissions&quot; 
+                            (deleteTask)&#x3D;&quot;deleteTask(task)&quot; 
+                            (openTaskDetails)&#x3D;&quot;openTaskModal(task)&quot; 
+                        /&gt;
+                    &lt;/ng-container&gt;
+
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/ng-container&gt;
+&lt;/section&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./kanban.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../variables&#x27;;
+
+@media screen and (min-width: 970px) {
+
+  .screen {
+    @apply min-h-[50px] flex pt-4;
+    
+    .col-container {
+      @apply gap-6 max-w-full min-h-[50px] overflow-auto flex overflow-y-hidden;
+      
+      .col {
+        @apply min-w-[300px] w-[300px] flex flex-col
+        gap-[12px] p-4 shadow-md mb-16;
+        
+        h6 {
+          @apply pl-3;
+        }
+        
+        h4:hover{
+          @apply cursor-pointer
+        }
+        button:hover{
+          @apply cursor-pointer;
+        }
+        
+        button{
+          font-size: 1.5rem;
+        }
+        
+        .col-items {
+          @apply flex flex-col gap-5 items-center pt-5;
+        }
+        
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 430px) and (max-width: 970px) {
+
+  .screen {
+    @apply min-h-[50px] flex pt-4 flex-wrap;
+    
+    .col-container {
+      @apply gap-6 max-w-full min-h-[50px] flex flex-wrap pb-16;
+      
+      .col {
+        @apply min-w-[300px] w-[300px] flex flex-col
+        gap-[12px] p-4 shadow-md;
+        
+        h6 {
+          @apply pl-3;
+        }
+        
+        h4:hover{
+          @apply cursor-pointer
+        }
+        button:hover{
+          @apply cursor-pointer;
+        }
+        
+        button{
+          font-size: 1.5rem;
+        }
+        
+        .col-items {
+          @apply flex flex-col gap-5 items-center pt-5;
+        }
+        
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+
+  .screen {
+    @apply min-h-[50px] flex pt-4 flex-wrap justify-center;
+    
+    .col-container {
+      @apply gap-6 max-w-full min-h-[50px] flex flex-wrap pb-16;
+      
+      .col {
+        @apply min-w-[300px] w-[300px] flex flex-col
+        gap-[12px] p-4 shadow-md;
+        
+        h6 {
+          @apply pl-3;
+        }
+        
+        h4:hover{
+          @apply cursor-pointer
+        }
+        button:hover{
+          @apply cursor-pointer;
+        }
+        
+        button{
+          font-size: 1.5rem;
+        }
+        
+        .col-items {
+          @apply flex flex-col gap-5 items-center pt-5;
+        }
+        
+      }
+    }
+  }
+}
+
+
+
+  
+  .cdk-drop-list-dragging .cdk-drag {
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 50%;
+  }</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section class="screen">        <ng-container cdkDropListGroup>        <div class="col-container">            <div class="col" *ngFor="let propertyList of status"                [style.backgroundColor]="propertyList.color" [style.height]="getHeight(propertyList)"                cdkDropList [cdkDropListData]="project.tasks" (cdkDropListDropped)="dropCard($event, propertyList)">                <div class="flex flex-row justify-between w-full items-center">                    <p class="large-text" [style.color]="getStrongerColor(propertyList.color)">{{ propertyList.value }}</p>                    <button (click)="createTask(propertyList)"                    [ngClass]="canCreate ? \'opacity-100\' : \'opacity-20\'" [style.color]="getStrongerColor(propertyList.color)" [disabled]="!canCreate">+</button>                </div>                <div class="col-items">                    <ng-container                         *ngFor="let task of (taskList                             | namePipe : nameFilter                             | statusPipe : filter : false                            | datePipe : filter                            | nameSortPipe : orderParams                            | dateSortPipe : orderParams)">                        <app-card                             *ngIf="getTaskByProperty(task, propertyList)"                            cdkDrag                             [task]="task"                            [borderColor]="propertyList.color"                             [minHeight]="\'140px\'"                             [width]="\'300px\'"                             [cdkDragData]="task"                             [permissions]="permissions"                             (deleteTask)="deleteTask(task)"                             (openTaskDetails)="openTaskModal(task)"                         />                    </ng-container>                </div>            </div>        </div>    </ng-container></section></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'KanbanComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'KanbanComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

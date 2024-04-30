@@ -1,0 +1,2986 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MinichatComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/modals/minichat/minichat.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-minichat</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./minichat.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./minichat.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cardChat" >cardChat</a>
+                            </li>
+                            <li>
+                                <a href="#chat" >chat</a>
+                            </li>
+                            <li>
+                                <a href="#conversationOpen" >conversationOpen</a>
+                            </li>
+                            <li>
+                                <a href="#conversations" >conversations</a>
+                            </li>
+                            <li>
+                                <a href="#faArrowLeft" >faArrowLeft</a>
+                            </li>
+                            <li>
+                                <a href="#faCheckDouble" >faCheckDouble</a>
+                            </li>
+                            <li>
+                                <a href="#faChevronRight" >faChevronRight</a>
+                            </li>
+                            <li>
+                                <a href="#faCircleUser" >faCircleUser</a>
+                            </li>
+                            <li>
+                                <a href="#faExpand" >faExpand</a>
+                            </li>
+                            <li>
+                                <a href="#faGlobe" >faGlobe</a>
+                            </li>
+                            <li>
+                                <a href="#faMicrophoneLines" >faMicrophoneLines</a>
+                            </li>
+                            <li>
+                                <a href="#faMinimize" >faMinimize</a>
+                            </li>
+                            <li>
+                                <a href="#faPaperclip" >faPaperclip</a>
+                            </li>
+                            <li>
+                                <a href="#faPapperclip" >faPapperclip</a>
+                            </li>
+                            <li>
+                                <a href="#faPapperPlane" >faPapperPlane</a>
+                            </li>
+                            <li>
+                                <a href="#faSearch" >faSearch</a>
+                            </li>
+                            <li>
+                                <a href="#faSmile" >faSmile</a>
+                            </li>
+                            <li>
+                                <a href="#faStar" >faStar</a>
+                            </li>
+                            <li>
+                                <a href="#faTimes" >faTimes</a>
+                            </li>
+                            <li>
+                                <a href="#faUser" >faUser</a>
+                            </li>
+                            <li>
+                                <a href="#faUsers" >faUsers</a>
+                            </li>
+                            <li>
+                                <a href="#logged" >logged</a>
+                            </li>
+                            <li>
+                                <a href="#messageUser" >messageUser</a>
+                            </li>
+                            <li>
+                                <a href="#selectedFile" >selectedFile</a>
+                            </li>
+                            <li>
+                                <a href="#side" >side</a>
+                            </li>
+                            <li>
+                                <a href="#step" >step</a>
+                            </li>
+                            <li>
+                                <a href="#url" >url</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#webSocketService" >webSocketService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addEmoji" >addEmoji</a>
+                            </li>
+                            <li>
+                                <a href="#changeUrlOfArchive" >changeUrlOfArchive</a>
+                            </li>
+                            <li>
+                                <a href="#convertBlobToFile" >convertBlobToFile</a>
+                            </li>
+                            <li>
+                                <a href="#convertDataUrlToBlob" >convertDataUrlToBlob</a>
+                            </li>
+                            <li>
+                                <a href="#expandChat" >expandChat</a>
+                            </li>
+                            <li>
+                                <a href="#generateTime" >generateTime</a>
+                            </li>
+                            <li>
+                                <a href="#getIconSrc" >getIconSrc</a>
+                            </li>
+                            <li>
+                                <a href="#messageFileIncludesImage" >messageFileIncludesImage</a>
+                            </li>
+                            <li>
+                                <a href="#minimizeChat" >minimizeChat</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onFileChange" >onFileChange</a>
+                            </li>
+                            <li>
+                                <a href="#openConversation" >openConversation</a>
+                            </li>
+                            <li>
+                                <a href="#openFile" >openFile</a>
+                            </li>
+                            <li>
+                                <a href="#openMiniChat" >openMiniChat</a>
+                            </li>
+                            <li>
+                                <a href="#sendMessage" >sendMessage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#chatExpanded" >chatExpanded</a>
+                            </li>
+                            <li>
+                                <a href="#miniChatOpen" >miniChatOpen</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(webSocketService: <a href="../injectables/WebSocketService.html" target="_self">WebSocketService</a>, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>webSocketService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WebSocketService.html" target="_self" >WebSocketService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chatExpanded"></a>
+                        <b>chatExpanded</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="222" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:222</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="miniChatOpen"></a>
+                        <b>miniChatOpen</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="220" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:220</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addEmoji"></a>
+                    <span class="name">
+                        <span ><b>addEmoji</b></span>
+                        <a href="#addEmoji"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addEmoji(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeUrlOfArchive"></a>
+                    <span class="name">
+                        <span ><b>changeUrlOfArchive</b></span>
+                        <a href="#changeUrlOfArchive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeUrlOfArchive(response: <a href="../classes/Message.html" target="_self">Message</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertBlobToFile"></a>
+                    <span class="name">
+                        <span ><b>convertBlobToFile</b></span>
+                        <a href="#convertBlobToFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>convertBlobToFile(blob: Blob, fileName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>blob</td>
+                                            <td>
+                                                        <code>Blob</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>fileName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/File.html" target="_self" >File</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertDataUrlToBlob"></a>
+                    <span class="name">
+                        <span ><b>convertDataUrlToBlob</b></span>
+                        <a href="#convertDataUrlToBlob"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>convertDataUrlToBlob(dataUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>dataUrl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="expandChat"></a>
+                    <span class="name">
+                        <span ><b>expandChat</b></span>
+                        <a href="#expandChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>expandChat(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="226"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateTime"></a>
+                    <span class="name">
+                        <span ><b>generateTime</b></span>
+                        <a href="#generateTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>generateTime(message: <a href="../classes/Message.html" target="_self">Message</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getIconSrc"></a>
+                    <span class="name">
+                        <span ><b>getIconSrc</b></span>
+                        <a href="#getIconSrc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getIconSrc(message: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="144"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:144</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageFileIncludesImage"></a>
+                    <span class="name">
+                        <span ><b>messageFileIncludesImage</b></span>
+                        <a href="#messageFileIncludesImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>messageFileIncludesImage(message: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="minimizeChat"></a>
+                    <span class="name">
+                        <span ><b>minimizeChat</b></span>
+                        <a href="#minimizeChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>minimizeChat(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileChange"></a>
+                    <span class="name">
+                        <span ><b>onFileChange</b></span>
+                        <a href="#onFileChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFileChange(e: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openConversation"></a>
+                    <span class="name">
+                        <span ><b>openConversation</b></span>
+                        <a href="#openConversation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openConversation(chat: <a href="../classes/Chat.html" target="_self">Chat</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>chat</td>
+                                            <td>
+                                                            <code><a href="../classes/Chat.html" target="_self" >Chat</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openFile"></a>
+                    <span class="name">
+                        <span ><b>openFile</b></span>
+                        <a href="#openFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openFile()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openMiniChat"></a>
+                    <span class="name">
+                        <span ><b>openMiniChat</b></span>
+                        <a href="#openMiniChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openMiniChat(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendMessage"></a>
+                    <span class="name">
+                        <span ><b>sendMessage</b></span>
+                        <a href="#sendMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sendMessage(sendForm: NgForm)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sendForm</td>
+                                            <td>
+                                                        <code>NgForm</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cardChat"></a>
+                    <span class="name">
+                        <span ><b>cardChat</b></span>
+                        <a href="#cardChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chat"></a>
+                    <span class="name">
+                        <span ><b>chat</b></span>
+                        <a href="#chat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Chat.html" target="_self" >Chat</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="conversationOpen"></a>
+                    <span class="name">
+                        <span ><b>conversationOpen</b></span>
+                        <a href="#conversationOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="conversations"></a>
+                    <span class="name">
+                        <span ><b>conversations</b></span>
+                        <a href="#conversations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Chat.html" target="_self" >Chat[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faArrowLeft"></a>
+                    <span class="name">
+                        <span ><b>faArrowLeft</b></span>
+                        <a href="#faArrowLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faArrowLeft</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCheckDouble"></a>
+                    <span class="name">
+                        <span ><b>faCheckDouble</b></span>
+                        <a href="#faCheckDouble"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCheckDouble</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faChevronRight"></a>
+                    <span class="name">
+                        <span ><b>faChevronRight</b></span>
+                        <a href="#faChevronRight"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faChevronRight</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCircleUser"></a>
+                    <span class="name">
+                        <span ><b>faCircleUser</b></span>
+                        <a href="#faCircleUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCircleUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faExpand"></a>
+                    <span class="name">
+                        <span ><b>faExpand</b></span>
+                        <a href="#faExpand"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faExpand</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faGlobe"></a>
+                    <span class="name">
+                        <span ><b>faGlobe</b></span>
+                        <a href="#faGlobe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faGlobe</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faMicrophoneLines"></a>
+                    <span class="name">
+                        <span ><b>faMicrophoneLines</b></span>
+                        <a href="#faMicrophoneLines"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faMicrophoneLines</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faMinimize"></a>
+                    <span class="name">
+                        <span ><b>faMinimize</b></span>
+                        <a href="#faMinimize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faMinimize</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPaperclip"></a>
+                    <span class="name">
+                        <span ><b>faPaperclip</b></span>
+                        <a href="#faPaperclip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPaperclip</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPapperclip"></a>
+                    <span class="name">
+                        <span ><b>faPapperclip</b></span>
+                        <a href="#faPapperclip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPaperclip</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPapperPlane"></a>
+                    <span class="name">
+                        <span ><b>faPapperPlane</b></span>
+                        <a href="#faPapperPlane"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPaperPlane</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faSearch"></a>
+                    <span class="name">
+                        <span ><b>faSearch</b></span>
+                        <a href="#faSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faSearch</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faSmile"></a>
+                    <span class="name">
+                        <span ><b>faSmile</b></span>
+                        <a href="#faSmile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faSmile</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faStar"></a>
+                    <span class="name">
+                        <span ><b>faStar</b></span>
+                        <a href="#faStar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faStar</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTimes"></a>
+                    <span class="name">
+                        <span ><b>faTimes</b></span>
+                        <a href="#faTimes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faTimes</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faUser"></a>
+                    <span class="name">
+                        <span ><b>faUser</b></span>
+                        <a href="#faUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faUsers"></a>
+                    <span class="name">
+                        <span ><b>faUsers</b></span>
+                        <a href="#faUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faUsers</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logged"></a>
+                    <span class="name">
+                        <span ><b>logged</b></span>
+                        <a href="#logged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageUser"></a>
+                    <span class="name">
+                        <span ><b>messageUser</b></span>
+                        <a href="#messageUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFile"></a>
+                    <span class="name">
+                        <span ><b>selectedFile</b></span>
+                        <a href="#selectedFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="side"></a>
+                    <span class="name">
+                        <span ><b>side</b></span>
+                        <a href="#side"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="step"></a>
+                    <span class="name">
+                        <span ><b>step</b></span>
+                        <a href="#step"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="224" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="url"></a>
+                    <span class="name">
+                        <span ><b>url</b></span>
+                        <a href="#url"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="webSocketService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>webSocketService</b></span>
+                        <a href="#webSocketService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/WebSocketService.html" target="_self" >WebSocketService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/modals/minichat/minichat.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Output, EventEmitter } from &quot;@angular/core&quot;;
+import { NgForm } from &quot;@angular/forms&quot;;
+import { faSmile, faSearch, faCircleUser, faStar, faMinimize, faGlobe, faUser, faUsers, faCheckDouble, faPaperclip, faMicrophoneLines, faChevronRight, faPaperPlane, faTimes, faArrowLeft, faExpand } from &quot;@fortawesome/free-solid-svg-icons&quot;;
+import { Message } from &quot;src/app/models/class/message&quot;;
+import { Chat } from &quot;src/app/models/class/chat&quot;;
+import { User } from &quot;src/app/models/class/user&quot;;
+import { TeamService } from &quot;src/app/services/team.service&quot;;
+import { WebSocketService } from &quot;src/app/services/websocket.service&quot;;
+
+
+@Component({
+  selector: &#x27;app-minichat&#x27;,
+  templateUrl: &#x27;./minichat.component.html&#x27;,
+  styleUrls: [&#x27;./minichat.component.scss&#x27;]
+})
+export class MinichatComponent {
+  faSmile &#x3D; faSmile;
+  faSearch &#x3D; faSearch;
+  faCircleUser &#x3D; faCircleUser;
+  faStar &#x3D; faStar;
+  faMinimize &#x3D; faMinimize;
+  faGlobe &#x3D; faGlobe;
+  faUser &#x3D; faUser;
+  faUsers &#x3D; faUsers;
+  faCheckDouble &#x3D; faCheckDouble;
+  faPaperclip &#x3D; faPaperclip;
+  faMicrophoneLines &#x3D; faMicrophoneLines;
+  faChevronRight &#x3D; faChevronRight;
+  faPapperclip &#x3D; faPaperclip;
+  faPapperPlane &#x3D; faPaperPlane
+  faTimes &#x3D; faTimes;
+  faArrowLeft &#x3D; faArrowLeft;
+  faExpand &#x3D; faExpand;
+
+  messageUser: any &#x3D; &quot;&quot;;
+  conversationOpen: boolean &#x3D; false;
+  conversations: Chat[] &#x3D; []
+  chat!: Chat;
+  cardChat: number &#x3D; 0;
+  side: boolean &#x3D; true;
+  logged!: User;
+
+  constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
+    this.logged &#x3D; JSON.parse(localStorage.getItem(&#x27;logged&#x27;) || &#x27;{}&#x27;);
+    this.teamService.findAllChatsByUser(this.logged.id!).subscribe((chats: Chat[]) &#x3D;&gt; {
+      console.log(chats);
+      this.conversations &#x3D; chats;
+    });
+  }
+
+  ngOnInit() {
+    this.webSocketService.openWebSocket();
+    this.webSocketService.listenToServer().subscribe((change) &#x3D;&gt; {
+      this.chat.messages!.push(change);
+      setTimeout(() &#x3D;&gt; {
+        let a &#x3D; document.getElementsByClassName(&quot;center-div&quot;)[0] as HTMLElement;
+        a.scrollTop &#x3D; a.scrollHeight;
+      }, 0);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.webSocketService.closeWebSocket();
+  }
+
+  addEmoji(event: any) {
+    this.messageUser +&#x3D; event.emoji.native;
+  }
+
+  sendMessage(sendForm: NgForm) {
+    this.logged &#x3D; JSON.parse(localStorage.getItem(&#x27;logged&#x27;) || &#x27;{}&#x27;);
+    const messageDto: Message &#x3D; {
+      user: this.logged.firstName,
+      contentMessage: this.messageUser,
+      time: new Date(),
+      viewed: false,
+    };
+    console.log(messageDto);
+
+    if (messageDto.contentMessage !&#x3D; null &amp;&amp; messageDto.contentMessage.trim() !&#x3D; &quot;&quot;) {
+      this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
+        (response: any) &#x3D;&gt; {
+          console.log(response, &quot;Message sentALLL&quot;);
+          sendForm.controls[&#x27;message&#x27;].reset();
+          this.webSocketService.sendMessage(messageDto);
+        });
+
+
+      sendForm.reset();
+    }
+  }
+
+  openFile() {
+    let a &#x3D; document.getElementById(&#x27;fileInput&#x27;) as HTMLElement;
+    a.click();
+  }
+  selectedFile!: any;
+  url !: any;
+  onFileChange(e: any) {
+    this.selectedFile &#x3D; e.target.files[0];
+    const fd: FormData &#x3D; new FormData();
+    fd.append(&#x27;file&#x27;, this.selectedFile, this.selectedFile.name);
+    fd.append(&#x27;user&#x27;, this.logged.firstName!);
+
+    this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
+      (response: any) &#x3D;&gt; {
+        // this.chat.messages?.push(response);
+
+        let reader &#x3D; new FileReader();
+        reader.readAsDataURL(this.selectedFile);
+        reader.onload &#x3D; () &#x3D;&gt; {
+          let message: Message &#x3D; {
+            user: this.logged.firstName,
+            contentMessage: this.selectedFile.name,
+            time: new Date(),
+            file: reader.result,
+            viewed: false,
+          };
+          this.webSocketService.sendMessage(message);
+        };
+      }
+    );
+  }
+
+  messageFileIncludesImage(message: any): boolean {
+    if (message.file &amp;&amp; message.file.type &amp;&amp; typeof message.file.type &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+      return message.file.type.includes(&#x27;image&#x27;);
+    }
+    return false;
+  }
+
+
+  convertDataUrlToBlob(dataUrl: string) {
+    const byteString &#x3D; atob(dataUrl.split(&#x27;,&#x27;)[1]);
+    const mimeString &#x3D; dataUrl.split(&#x27;,&#x27;)[0].split(&#x27;:&#x27;)[1].split(&#x27;;&#x27;)[0];
+    const ab &#x3D; new ArrayBuffer(byteString.length);
+    const ia &#x3D; new Uint8Array(ab);
+    for (let i &#x3D; 0; i &lt; byteString.length; i++) {
+      ia[i] &#x3D; byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
+
+  getIconSrc(message: any): string {
+    const fileTypeIcons: Record&lt;string, string&gt; &#x3D; {
+      &#x27;application/pdf&#x27;: &#x27;https://cdn-icons-png.flaticon.com/512/337/337946.png&#x27;,
+      &#x27;text/plain&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8243/8243060.png&#x27;,
+      &#x27;application/vnd.openxmlformats-officedocument.wordprocessingml.document&#x27;: &#x27;https://cdn-icons-png.freepik.com/256/8361/8361174.png?uid&#x3D;R112263958&amp;ga&#x3D;GA1.1.310772085.1710953572&amp;&#x27;,
+      &#x27;video/mp4&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8243/8243015.png&#x27;,
+      &#x27;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8361/8361467.png&#x27;,
+      &#x27;application/vnd.ms-excel&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8361/8361467.png&#x27;,
+      &#x27;text/csv&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8242/8242984.png&#x27;
+    };
+    if (typeof message.file &#x3D;&#x3D; &quot;string&quot;) {
+      message.file &#x3D; this.convertDataUrlToBlob(message.file);
+    }
+
+    const iconSrc &#x3D; fileTypeIcons[message.file.type];
+    if (iconSrc) {
+      return iconSrc;
+    }
+    else {
+      if (message.file instanceof Blob) {
+        return URL.createObjectURL(message.file);
+      }
+      return &#x60;data:image/jpg;base64,${message.file.file}&#x60;
+    };
+  }
+
+  convertBlobToFile(blob: Blob, fileName: string): File {
+    const file &#x3D; new File([blob], fileName, { type: blob.type });
+    return file;
+  }
+
+  changeUrlOfArchive(response: Message) {
+    if (response.file instanceof Blob) {
+      response.file &#x3D; this.convertBlobToFile(response.file, response.contentMessage! as string);
+      return window.URL.createObjectURL(response.file);
+    } else {
+      const byteCharacters &#x3D; atob(response.file.file);
+      const byteNumbers &#x3D; new Array(byteCharacters.length);
+      for (let i &#x3D; 0; i &lt; byteCharacters.length; i++) {
+        byteNumbers[i] &#x3D; byteCharacters.charCodeAt(i);
+      }
+      const byteArray &#x3D; new Uint8Array(byteNumbers);
+      const blob &#x3D; new Blob([byteArray], { type: &#x27;application/pdf&#x27; });
+      return window.URL.createObjectURL(blob);
+    }
+  }
+
+  generateTime(message: Message) {
+    let minutes &#x3D; new Date(message.time!).getMinutes();
+    if (minutes &lt; 10) {
+      return new Date(message.time!).getHours() + &quot;:0&quot; + new Date(message.time!).getMinutes();
+    } else return new Date(message.time!).getHours() + &quot;:&quot; + new Date(message.time!).getMinutes();
+  }
+
+  openConversation(chat: Chat) {
+    this.step&#x3D;2;
+    this.chat &#x3D; chat;
+    this.conversations.forEach((conversation: Chat) &#x3D;&gt; {
+      conversation.conversationOpen &#x3D; false;
+    });
+
+    this.chat.conversationOpen &#x3D; true;
+
+    this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) &#x3D;&gt; {
+      this.chat.messages &#x3D; messages;
+
+      let a &#x3D; document.getElementsByClassName(&quot;center-div&quot;)[0] as HTMLElement;
+      a.scrollTo(a.scrollTop, a.scrollHeight);
+    });
+  }
+
+  minimizeChat(value: boolean) {
+    this.chatExpanded.emit(value);
+  }
+
+
+  @Output() miniChatOpen: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  @Output() chatExpanded: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  step:number&#x3D;1;
+
+  expandChat(value: boolean) {
+    this.chatExpanded.emit(value);
+  }
+
+  openMiniChat(value: boolean) {
+    this.miniChatOpen.emit(value);
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;step &#x3D;&#x3D; 1&quot; class&#x3D;&quot;miniChatStep1&quot;&gt;
+
+    &lt;div class&#x3D;&quot;miniChat-header&quot;&gt;
+        &lt;div class&#x3D;&quot;miniChat-header-title&quot;&gt;
+            &lt;svg class&#x3D;&quot;imgLogo&quot; width&#x3D;&quot;381&quot; height&#x3D;&quot;396&quot; viewBox&#x3D;&quot;0 0 381 396&quot; fill&#x3D;&quot;var(--secondColor)&quot;
+                    xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+                    &lt;rect x&#x3D;&quot;196.442&quot; y&#x3D;&quot;362.704&quot; width&#x3D;&quot;22.504&quot; height&#x3D;&quot;286.758&quot; rx&#x3D;&quot;11.252&quot;
+                        transform&#x3D;&quot;rotate(-150.794 196.442 362.704)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;166.35&quot; y&#x3D;&quot;344.859&quot; width&#x3D;&quot;22.504&quot; height&#x3D;&quot;290.467&quot; rx&#x3D;&quot;11.252&quot;
+                        transform&#x3D;&quot;rotate(-150.794 166.35 344.859)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;225.535&quot; y&#x3D;&quot;380.683&quot; width&#x3D;&quot;22.504&quot; height&#x3D;&quot;292.651&quot; rx&#x3D;&quot;11.252&quot;
+                        transform&#x3D;&quot;rotate(-150.794 225.535 380.683)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;336.976&quot; y&#x3D;&quot;156.115&quot; width&#x3D;&quot;109.185&quot; height&#x3D;&quot;23.4992&quot; rx&#x3D;&quot;11.7496&quot;
+                        transform&#x3D;&quot;rotate(-128.514 336.976 156.115)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;132.055&quot; y&#x3D;&quot;317.379&quot; width&#x3D;&quot;19.6211&quot; height&#x3D;&quot;265.043&quot; rx&#x3D;&quot;9.81053&quot;
+                        transform&#x3D;&quot;rotate(163.521 132.055 317.379)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;233.237&quot; y&#x3D;&quot;362.677&quot; width&#x3D;&quot;19.6211&quot; height&#x3D;&quot;132.615&quot; rx&#x3D;&quot;9.81053&quot;
+                        transform&#x3D;&quot;rotate(119.164 233.237 362.677)&quot; /&gt;
+                    &lt;path
+                        d&#x3D;&quot;M178.234 223.717C179.106 226.176 177.819 228.877 175.359 229.749C172.9 230.62 170.199 229.334 169.328 226.874L141.914 149.546C141.042 147.087 142.329 144.386 144.789 143.514C147.248 142.643 149.949 143.93 150.82 146.389L178.234 223.717Z&quot; /&gt;
+                    &lt;path
+                        d&#x3D;&quot;M149.435 146.462C151.442 148.129 151.719 151.107 150.052 153.115C148.385 155.123 145.406 155.399 143.399 153.732L53.8543 79.3861C51.8467 77.7193 51.5705 74.7405 53.2374 72.733C54.9042 70.7254 57.8829 70.4491 59.8905 72.116L149.435 146.462Z&quot; /&gt;
+                    &lt;path
+                        d&#x3D;&quot;M217.126 137.762C219.727 137.554 222.005 139.493 222.213 142.094C222.422 144.695 220.482 146.973 217.881 147.181L148.786 152.72C146.185 152.929 143.908 150.989 143.699 148.388C143.491 145.787 145.43 143.51 148.031 143.301L217.126 137.762Z&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;139.797&quot; y&#x3D;&quot;320.617&quot; width&#x3D;&quot;19.6211&quot; height&#x3D;&quot;317.658&quot; rx&#x3D;&quot;9.81053&quot;
+                        transform&#x3D;&quot;rotate(-150.632 139.797 320.617)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;369.021&quot; y&#x3D;&quot;129.692&quot; width&#x3D;&quot;19.6211&quot; height&#x3D;&quot;129.168&quot; rx&#x3D;&quot;9.81053&quot;
+                        transform&#x3D;&quot;rotate(139.098 369.021 129.692)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;289.673&quot; y&#x3D;&quot;34.5586&quot; width&#x3D;&quot;13.9146&quot; height&#x3D;&quot;253.46&quot; rx&#x3D;&quot;6.95728&quot;
+                        transform&#x3D;&quot;rotate(82.5857 289.673 34.5586)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;135.306&quot; y&#x3D;&quot;146.915&quot; width&#x3D;&quot;28.3895&quot; height&#x3D;&quot;102.965&quot; rx&#x3D;&quot;14.1948&quot;
+                        transform&#x3D;&quot;rotate(-95.4749 135.306 146.915)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;67.96&quot; y&#x3D;&quot;91.5942&quot; width&#x3D;&quot;27.153&quot; height&#x3D;&quot;213.615&quot; rx&#x3D;&quot;13.5765&quot;
+                        transform&#x3D;&quot;rotate(-95.1798 67.96 91.5942)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;81.3804&quot; y&#x3D;&quot;107.595&quot; width&#x3D;&quot;27.153&quot; height&#x3D;&quot;178.149&quot; rx&#x3D;&quot;13.5765&quot;
+                        transform&#x3D;&quot;rotate(-95.1798 81.3804 107.595)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;100.38&quot; y&#x3D;&quot;120.595&quot; width&#x3D;&quot;27.153&quot; height&#x3D;&quot;154.08&quot; rx&#x3D;&quot;13.5765&quot;
+                        transform&#x3D;&quot;rotate(-95.1798 100.38 120.595)&quot; /&gt;
+                    &lt;rect x&#x3D;&quot;118.105&quot; y&#x3D;&quot;137.783&quot; width&#x3D;&quot;35.1793&quot; height&#x3D;&quot;127.165&quot; rx&#x3D;&quot;15&quot;
+                        transform&#x3D;&quot;rotate(-95.1798 118.105 137.783)&quot; /&gt;
+                &lt;/svg&gt;
+            &lt;h6&gt;Conversas&lt;/h6&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;miniChat-header-close&quot;&gt;
+            &lt;fa-icon (click)&#x3D;&quot;openMiniChat(true)&quot; [icon]&#x3D;&quot;faTimes&quot;&gt;&lt;/fa-icon&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;miniChat-main-input&quot;&gt;
+        &lt;div class&#x3D;&quot;div-searchStep1&quot;&gt;
+            &lt;input class&#x3D;&quot;input-searchStep1 regular-text&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Pesquisar conversa&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;minichatStep1-main&quot;&gt;
+
+
+        &lt;ng-container *ngFor&#x3D;&quot;let chatFor of conversations,let i &#x3D; index&quot;&gt;
+            &lt;div (click)&#x3D;&quot;openConversation(chatFor)&quot; class&#x3D;&quot;card-chat regular-text&quot;&gt;
+                &lt;div class&#x3D;&quot;user-card-message&quot;&gt;
+                    &lt;div class&#x3D;&quot;flex gap-3 items-center&quot;&gt;
+                        &lt;fa-icon class&#x3D;&quot;chat-icons&quot; [icon]&#x3D;&quot;faCircleUser&quot;&gt;&lt;/fa-icon&gt;
+                        &lt;p class&#x3D;&quot;chatName&quot;&gt;{{chatFor.name}}&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/ng-container&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div *ngIf&#x3D;&quot;step&#x3D;&#x3D;2&quot; class&#x3D;&quot;miniChat2&quot;&gt;
+    &lt;div class&#x3D;&quot;miniChat-header&quot;&gt;
+        &lt;div class&#x3D;&quot;miniChat-header-title&quot;&gt;
+            &lt;fa-icon (click)&#x3D;&quot;step &#x3D; 1&quot; [icon]&#x3D;&quot;faArrowLeft&quot;&gt;&lt;/fa-icon&gt;
+            &lt;h6&gt;{{chat.name}}&lt;/h6&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;miniChat-header-close&quot;&gt;
+            &lt;fa-icon (click)&#x3D;&quot;openMiniChat(true)&quot; [icon]&#x3D;&quot;faTimes&quot;&gt;&lt;/fa-icon&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div *ngIf&#x3D;&quot;chat&quot; class&#x3D;&quot;center-div&quot;&gt;
+        &lt;div class&#x3D;&quot;min-h-[60px]&quot; *ngIf&#x3D;&quot;chat&quot;&gt;
+            &lt;div *ngFor&#x3D;&quot;let message of chat.messages&quot; class&#x3D;&quot;message-container&quot;
+                [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;left&#x27; : &#x27;right&#x27;&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                    &lt;p *ngIf&#x3D;&quot;(logged.firstName !&#x3D; message.user)&quot; class&#x3D;&quot;username&quot;&gt;{{ message.user }}&lt;/p&gt;
+                    &lt;p *ngIf&#x3D;&quot;(logged.firstName &#x3D;&#x3D; message.user)&quot; class&#x3D;&quot;username&quot;&gt;Eu&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;div *ngIf&#x3D;&quot;!message.file&quot;
+                    [ngClass]&#x3D;&quot;logged.firstName!&#x3D;&#x3D;message.user ? &#x27;message-bubble-left&#x27; : &#x27;message-bubble-right&#x27;&quot;&gt;
+                    &lt;p class&#x3D;&quot;text-base whitespace-pre-wrap&quot;&gt;{{ message.contentMessage }}&lt;/p&gt;
+                    &lt;p [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;timestamp&#x27; : &#x27;timestamp text-right&#x27;&quot;&gt;{{
+                        generateTime(message) }}&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;div *ngIf&#x3D;&quot;message.file&quot;
+                    [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;message-bubble-left with-photo&#x27; : &#x27;message-bubble-right with-photo items-end&#x27;&quot;&gt;
+                    &lt;div class&#x3D;&quot;w-full h-full flex justify-center items-center gap-3&quot;&gt;
+                        &lt;img [ngClass]&#x3D;&quot;messageFileIncludesImage(message) ? &#x27;object-contain pl-2 pt-1&#x27;:&#x27;archive&#x27;&quot;
+                            draggable&#x3D;&quot;false&quot; [src]&#x3D;&quot;getIconSrc(message)&quot;&gt;
+                        &lt;div class&#x3D;&quot;flex h-full justify-center items-center gap-5&quot;&gt;
+                            &lt;p class&#x3D;&quot;text-center w-[80%]&quot; *ngIf&#x3D;&quot;!messageFileIncludesImage(message)&quot;&gt;{{
+                                message.file.name }}&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+                        &lt;p
+                            [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;timestamp  text-[#777777]&#x27; : &#x27;timestamp text-[#fff]&#x27;&quot;&gt;
+                            {{ generateTime(message) }}
+                        &lt;/p&gt;
+                        &lt;a [href]&#x3D;&quot;changeUrlOfArchive(message)&quot; download&#x3D;&quot;{{ message.file.name }}&quot;&gt;
+                            &lt;i class&#x3D;&quot;pi pi-download&quot;&gt;&lt;/i&gt;
+                        &lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+    &lt;form *ngIf&#x3D;&quot;chat&quot; (ngSubmit)&#x3D;&quot;sendMessage(sendForm)&quot; (keydown.enter)&#x3D;&quot;sendMessage(sendForm)&quot; #sendForm&#x3D;&quot;ngForm&quot;
+        class&#x3D;&quot;high-input-div justify-center&quot;&gt;
+        &lt;div class&#x3D;&quot;search-div-high&quot;&gt;
+
+            &lt;textarea type&#x3D;&quot;text&quot; name&#x3D;&quot;message&quot; id&#x3D;&quot;input-message&quot;
+                class&#x3D;&quot;form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[10px] pl-[15px] w-[90%] h-[100%]&quot;
+                [(ngModel)]&#x3D;&quot;messageUser&quot; placeholder&#x3D;&quot;Digite aqui...&quot;&gt;&lt;/textarea&gt;
+            &lt;div class&#x3D;&quot;flex relative&quot;&gt;
+                &lt;input type&#x3D;&quot;file&quot; id&#x3D;&quot;fileInput&quot; class&#x3D;&quot;hidden absolute left-1/2 top-1/2&quot;
+                    (change)&#x3D;&quot;onFileChange($event)&quot;&gt;
+                &lt;fa-icon (click)&#x3D;&quot;openFile()&quot; class&#x3D;&quot;section-icons&quot; [icon]&#x3D;&quot;faPaperclip&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;square-chat rounded-sm&quot;&gt;
+            &lt;fa-icon class&#x3D;&quot;text-lg pr-1&quot; [icon]&#x3D;&quot;faPapperPlane&quot;&gt;&lt;/fa-icon&gt;
+        &lt;/button&gt;
+    &lt;/form&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./minichat.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../_variables.scss&#x27;;
+
+.miniChat2 {
+    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col justify-between items-center shadow-lg;
+    background-color: $card;
+
+}
+
+@keyframes bottomToTop {
+    0% {
+        height: 0px;
+        overflow: hidden
+    }
+
+    100% {
+        height: 500px;
+    }
+}
+
+.miniChat-header {
+    @apply flex w-full h-[12%] items-start justify-around;
+    background-color: $primaryColor;
+}
+
+.miniChat-header-title {
+    @apply flex w-[75%] h-full items-center justify-start gap-5;
+    color: $card;
+
+    h6 {
+        color: $secondColor;
+    }
+}
+
+.miniChat-header-close {
+    @apply flex w-[5%] h-full items-center justify-end gap-5;
+    color: $card;
+}
+
+.miniChat-main {
+    @apply flex w-full h-[88%] items-end pb-5 justify-center;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 20px;
+}
+
+.message-container.right {
+    align-items: flex-end;
+}
+
+.message-bubble-left {
+    max-width: 70%;
+    min-width: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $card;
+    color: $primaryColor;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+
+.message-bubble-right {
+    max-width: 70%;
+    min-width: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $primaryColor;
+    color: $secondColor;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+
+.message-bubble-right:last-child&gt; :last-child {
+    @apply flex-row-reverse justify-between w-full
+}
+
+.image {
+    @apply w-72 h-40;
+}
+
+.archive {
+    @apply w-16 h-16;
+
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.timestamp {
+    font-size: 12px;
+}
+
+
+.miniChat-main-input {
+    @apply flex w-full h-[10%] items-center justify-evenly;
+}
+
+.div-search {
+    @apply flex border-2 w-[80%] h-full rounded-sm;
+    border: 1px solid $emphasis;
+}
+
+.input-search {
+    @apply pl-[10px] w-[84%] h-[100%];
+    color: $text;
+}
+
+.div-icons {
+    @apply flex gap-2 w-[16%];
+}
+
+.icons {
+    @apply flex justify-between items-center text-lg;
+    color: $primaryColor !important;
+}
+
+.paperplane {
+    @apply text-base pr-1;
+}
+
+.square-chat {
+    @apply w-[13%] h-[50%] rounded-sm flex items-center justify-center;
+    background-color: $primaryColor;
+
+    .section-icons {
+        @apply flex justify-between items-center;
+        color: $card !important;
+    }
+}
+
+.section-icons {
+    @apply text-lg flex justify-center items-center;
+    color: $primaryColor !important;
+}
+
+.high-input-div {
+    @apply w-[80%] h-[20%] flex items-center gap-3;
+}
+
+.search-div-high {
+    @apply flex pr-5 gap-4 shadow-md w-[85%] h-[50%];
+    background-color: $card;
+    color: $text;
+}
+
+textarea {
+    background-color: $card;
+    color: $text;
+
+}
+
+.emoji-wrapper {
+    position: absolute;
+    right: 40px;
+    bottom: 85px;
+    z-index: 5;
+}
+
+
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+.imgLogo {
+    @apply w-[40px] h-[40px];
+}
+
+.div-searchStep1 {
+    @apply flex border-2 w-[93%] h-full rounded-sm;
+    border: 1px solid $emphasis;
+}
+
+.miniChatStep1 {
+    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col justify-between items-start shadow-lg;
+    background-color: $card;
+    animation: bottomToTop 0.5s;
+}
+
+.minichatStep1-main {
+    @apply flex flex-col w-full h-[75%] p-4 items-center gap-4 justify-start overflow-auto;
+}
+
+.input-searchStep1 {
+    @apply pl-[10px] w-[100%] h-[100%];
+    background-color: $card !important;
+    border: 1px solid #777777;
+}
+
+.card-chat {
+    @apply flex justify-between items-center w-[100%] pl-[10px] h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    border: 1px solid #777777;
+    animation: leftPulse 0.3s;
+}
+
+.chatName {
+    @apply w-full;
+}
+
+.center-div {
+    @apply pr-[7%] pl-[7%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
+}
+
+.user-card-message {
+    @apply flex gap-6 items-center w-[70%];
+    border: 1px solid $card;
+}
+
+.chat-icons {
+    @apply flex justify-between items-center;
+    color: $primaryColor !important;
+    font-size: 70px
+}
+
+.div-time-message {
+    @apply flex items-center justify-center w-[20%];
+}
+
+.div-time {
+    @apply flex flex-col gap-2 items-center;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .miniChatStep1 {
+        @apply w-full h-[100%] fixed bottom-0 left-0;
+        animation: bottomToTop2 0.5s ease-in-out;
+    }
+
+    .high-input-div {
+        @apply w-[80%] h-[20%] flex items-center gap-3;
+        padding-bottom: 60px;
+    }
+
+    .search-div-high {
+        @apply flex pr-5 gap-4 shadow-md w-[85%] h-[50%];
+        background-color: $card;
+        color: $text;
+    }
+
+    .miniChat2 {
+        @apply w-full h-[100%] fixed bottom-0 left-0;
+    }
+
+
+}
+
+@keyframes bottomToTop2 {
+    0% {
+        height: 0px;
+        overflow: hidden
+    }
+
+    100% {
+        height: 100%;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="step == 1" class="miniChatStep1">    <div class="miniChat-header">        <div class="miniChat-header-title">            <svg class="imgLogo" width="381" height="396" viewBox="0 0 381 396" fill="var(--secondColor)"                    xmlns="http://www.w3.org/2000/svg">                    <rect x="196.442" y="362.704" width="22.504" height="286.758" rx="11.252"                        transform="rotate(-150.794 196.442 362.704)" />                    <rect x="166.35" y="344.859" width="22.504" height="290.467" rx="11.252"                        transform="rotate(-150.794 166.35 344.859)" />                    <rect x="225.535" y="380.683" width="22.504" height="292.651" rx="11.252"                        transform="rotate(-150.794 225.535 380.683)" />                    <rect x="336.976" y="156.115" width="109.185" height="23.4992" rx="11.7496"                        transform="rotate(-128.514 336.976 156.115)" />                    <rect x="132.055" y="317.379" width="19.6211" height="265.043" rx="9.81053"                        transform="rotate(163.521 132.055 317.379)" />                    <rect x="233.237" y="362.677" width="19.6211" height="132.615" rx="9.81053"                        transform="rotate(119.164 233.237 362.677)" />                    <path                        d="M178.234 223.717C179.106 226.176 177.819 228.877 175.359 229.749C172.9 230.62 170.199 229.334 169.328 226.874L141.914 149.546C141.042 147.087 142.329 144.386 144.789 143.514C147.248 142.643 149.949 143.93 150.82 146.389L178.234 223.717Z" />                    <path                        d="M149.435 146.462C151.442 148.129 151.719 151.107 150.052 153.115C148.385 155.123 145.406 155.399 143.399 153.732L53.8543 79.3861C51.8467 77.7193 51.5705 74.7405 53.2374 72.733C54.9042 70.7254 57.8829 70.4491 59.8905 72.116L149.435 146.462Z" />                    <path                        d="M217.126 137.762C219.727 137.554 222.005 139.493 222.213 142.094C222.422 144.695 220.482 146.973 217.881 147.181L148.786 152.72C146.185 152.929 143.908 150.989 143.699 148.388C143.491 145.787 145.43 143.51 148.031 143.301L217.126 137.762Z" />                    <rect x="139.797" y="320.617" width="19.6211" height="317.658" rx="9.81053"                        transform="rotate(-150.632 139.797 320.617)" />                    <rect x="369.021" y="129.692" width="19.6211" height="129.168" rx="9.81053"                        transform="rotate(139.098 369.021 129.692)" />                    <rect x="289.673" y="34.5586" width="13.9146" height="253.46" rx="6.95728"                        transform="rotate(82.5857 289.673 34.5586)" />                    <rect x="135.306" y="146.915" width="28.3895" height="102.965" rx="14.1948"                        transform="rotate(-95.4749 135.306 146.915)" />                    <rect x="67.96" y="91.5942" width="27.153" height="213.615" rx="13.5765"                        transform="rotate(-95.1798 67.96 91.5942)" />                    <rect x="81.3804" y="107.595" width="27.153" height="178.149" rx="13.5765"                        transform="rotate(-95.1798 81.3804 107.595)" />                    <rect x="100.38" y="120.595" width="27.153" height="154.08" rx="13.5765"                        transform="rotate(-95.1798 100.38 120.595)" />                    <rect x="118.105" y="137.783" width="35.1793" height="127.165" rx="15"                        transform="rotate(-95.1798 118.105 137.783)" />                </svg>            <h6>Conversas</h6>        </div>        <div class="miniChat-header-close">            <fa-icon (click)="openMiniChat(true)" [icon]="faTimes"></fa-icon>        </div>    </div>    <div class="miniChat-main-input">        <div class="div-searchStep1">            <input class="input-searchStep1 regular-text" type="text" placeholder="Pesquisar conversa" />        </div>    </div>    <div class="minichatStep1-main">        <ng-container *ngFor="let chatFor of conversations,let i = index">            <div (click)="openConversation(chatFor)" class="card-chat regular-text">                <div class="user-card-message">                    <div class="flex gap-3 items-center">                        <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>                        <p class="chatName">{{chatFor.name}}</p>                    </div>                </div>            </div>        </ng-container>    </div></div><div *ngIf="step==2" class="miniChat2">    <div class="miniChat-header">        <div class="miniChat-header-title">            <fa-icon (click)="step = 1" [icon]="faArrowLeft"></fa-icon>            <h6>{{chat.name}}</h6>        </div>        <div class="miniChat-header-close">            <fa-icon (click)="openMiniChat(true)" [icon]="faTimes"></fa-icon>        </div>    </div>    <div *ngIf="chat" class="center-div">        <div class="min-h-[60px]" *ngIf="chat">            <div *ngFor="let message of chat.messages" class="message-container"                [ngClass]="message.user !== logged.firstName ? \'left\' : \'right\'">                <div class="flex items-center gap-2">                    <p *ngIf="(logged.firstName != message.user)" class="username">{{ message.user }}</p>                    <p *ngIf="(logged.firstName == message.user)" class="username">Eu</p>                </div>                <div *ngIf="!message.file"                    [ngClass]="logged.firstName!==message.user ? \'message-bubble-left\' : \'message-bubble-right\'">                    <p class="text-base whitespace-pre-wrap">{{ message.contentMessage }}</p>                    <p [ngClass]="message.user !== logged.firstName ? \'timestamp\' : \'timestamp text-right\'">{{                        generateTime(message) }}</p>                </div>                <div *ngIf="message.file"                    [ngClass]="message.user !== logged.firstName ? \'message-bubble-left with-photo\' : \'message-bubble-right with-photo items-end\'">                    <div class="w-full h-full flex justify-center items-center gap-3">                        <img [ngClass]="messageFileIncludesImage(message) ? \'object-contain pl-2 pt-1\':\'archive\'"                            draggable="false" [src]="getIconSrc(message)">                        <div class="flex h-full justify-center items-center gap-5">                            <p class="text-center w-[80%]" *ngIf="!messageFileIncludesImage(message)">{{                                message.file.name }}</p>                        </div>                    </div>                    <div class="flex justify-between">                        <p                            [ngClass]="message.user !== logged.firstName ? \'timestamp  text-[#777777]\' : \'timestamp text-[#fff]\'">                            {{ generateTime(message) }}                        </p>                        <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">                            <i class="pi pi-download"></i>                        </a>                    </div>                </div>            </div>        </div>    </div>    <form *ngIf="chat" (ngSubmit)="sendMessage(sendForm)" (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm"        class="high-input-div justify-center">        <div class="search-div-high">            <textarea type="text" name="message" id="input-message"                class="form-control focus:outline-none resize-none rounded-sm border-l-4 pt-[10px] pl-[15px] w-[90%] h-[100%]"                [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>            <div class="flex relative">                <input type="file" id="fileInput" class="hidden absolute left-1/2 top-1/2"                    (change)="onFileChange($event)">                <fa-icon (click)="openFile()" class="section-icons" [icon]="faPaperclip"></fa-icon>            </div>        </div>        <button type="submit" class="square-chat rounded-sm">            <fa-icon class="text-lg pr-1" [icon]="faPapperPlane"></fa-icon>        </button>    </form></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MinichatComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MinichatComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1159 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  QuickAccessComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/reusable-components/quick-access/quick-access.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-quick-access</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./quick-access.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./quick-access.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#basicData" >basicData</a>
+                            </li>
+                            <li>
+                                <a href="#workSpace" >workSpace</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openTeam" >openTeam</a>
+                            </li>
+                            <li>
+                                <a href="#redirectToProfile" >redirectToProfile</a>
+                            </li>
+                            <li>
+                                <a href="#redirectToTeam" >redirectToTeam</a>
+                            </li>
+                            <li>
+                                <a href="#redirectToWorkspace" >redirectToWorkspace</a>
+                            </li>
+                            <li>
+                                <a href="#start" >start</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#recentItems" >recentItems</a>
+                            </li>
+                            <li>
+                                <a href="#typeString" >typeString</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: Router, route: ActivatedRoute)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="recentItems"></a>
+                        <b>recentItems</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:22</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="typeString"></a>
+                        <b>typeString</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:19</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTeam"></a>
+                    <span class="name">
+                        <span ><b>openTeam</b></span>
+                        <a href="#openTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openTeam(team: <a href="../classes/Team.html" target="_self">Team</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>team</td>
+                                            <td>
+                                                            <code><a href="../classes/Team.html" target="_self" >Team</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectToProfile"></a>
+                    <span class="name">
+                        <span ><b>redirectToProfile</b></span>
+                        <a href="#redirectToProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>redirectToProfile()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectToTeam"></a>
+                    <span class="name">
+                        <span ><b>redirectToTeam</b></span>
+                        <a href="#redirectToTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>redirectToTeam(team: <a href="../classes/Team.html" target="_self">Team</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>team</td>
+                                            <td>
+                                                            <code><a href="../classes/Team.html" target="_self" >Team</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectToWorkspace"></a>
+                    <span class="name">
+                        <span ><b>redirectToWorkspace</b></span>
+                        <a href="#redirectToWorkspace"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>redirectToWorkspace(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="start"></a>
+                    <span class="name">
+                        <span ><b>start</b></span>
+                        <a href="#start"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>start()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="basicData"></a>
+                    <span class="name">
+                        <span ><b>basicData</b></span>
+                        <a href="#basicData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="workSpace"></a>
+                    <span class="name">
+                        <span ><b>workSpace</b></span>
+                        <a href="#workSpace"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {id: &#x27;kanban&#x27;, icon: &quot;pi pi-th-large&quot;, label: &quot;Kanban&quot;},
+    {id: &#x27;calendario&#x27;, icon: &quot;pi pi-calendar&quot;, label: &quot;Calendário&quot;},
+    {id: &#x27;lista&#x27;, icon: &quot;pi pi-list&quot;, label: &quot;Linhas&quot;},
+    {id: &#x27;mural&#x27;, icon: &quot;pi pi-chart-bar&quot;, label: &quot;Mural&quot;},
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/reusable-components/quick-access/quick-access.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { Team } from &#x27;src/app/models/class/team&#x27;;
+import { User } from &#x27;src/app/models/class/user&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+
+@Component({
+  selector: &#x27;app-quick-access&#x27;,
+  templateUrl: &#x27;./quick-access.component.html&#x27;,
+  styleUrls: [&#x27;./quick-access.component.scss&#x27;]
+})
+export class QuickAccessComponent implements OnInit {
+  basicData: any;
+
+  @Input()
+  typeString!: String;
+
+  @Input()
+  recentItems !: any[];
+
+  constructor(
+    private teamService: TeamService,
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+      this.start();
+  }
+
+  openTeam(team: Team): void {
+    this.router.navigate([&#x27;/equipe/&#x27;, team.id]);
+  }
+
+  start(): void {
+    const documentStyle &#x3D; getComputedStyle(document.documentElement);
+    const textColor &#x3D; documentStyle.getPropertyValue(&#x27;--text-color&#x27;);
+    const textColorSecondary &#x3D; documentStyle.getPropertyValue(&#x27;--text-color-secondary&#x27;);
+    const surfaceBorder &#x3D; documentStyle.getPropertyValue(&#x27;--surface-border&#x27;);
+
+    this.basicData &#x3D; {
+      labels: [&#x27;Q1&#x27;, &#x27;Q2&#x27;, &#x27;Q3&#x27;, &#x27;Q4&#x27;],
+      datasets: [
+        {
+          label: &#x27;Tarefas&#x27;,
+          data: [540, 325, 702, 620],
+          backgroundColor: [&#x27;rgba(255, 159, 64, 0.2)&#x27;, &#x27;rgba(75, 192, 192, 0.2)&#x27;, &#x27;rgba(54, 162, 235, 0.2)&#x27;, &#x27;rgba(153, 102, 255, 0.2)&#x27;],
+          borderColor: [&#x27;rgb(255, 159, 64)&#x27;, &#x27;rgb(75, 192, 192)&#x27;, &#x27;rgb(54, 162, 235)&#x27;, &#x27;rgb(153, 102, 255)&#x27;],
+          borderWidth: 1
+        }
+      ]
+    };
+  }
+
+  workSpace: any[] &#x3D; [
+    {id: &#x27;kanban&#x27;, icon: &quot;pi pi-th-large&quot;, label: &quot;Kanban&quot;},
+    {id: &#x27;calendario&#x27;, icon: &quot;pi pi-calendar&quot;, label: &quot;Calendário&quot;},
+    {id: &#x27;lista&#x27;, icon: &quot;pi pi-list&quot;, label: &quot;Linhas&quot;},
+    {id: &#x27;mural&#x27;, icon: &quot;pi pi-chart-bar&quot;, label: &quot;Mural&quot;},
+  ]
+
+  redirectToWorkspace(id: string): void {
+    this.router.navigate([&#x60;tarefas/${id}&#x60;])
+  }
+
+  redirectToTeam(team: Team): void {
+    const id: number &#x3D; Number(team.id);
+
+    this.router.navigate([&#x60;equipe/${id}/projetos&#x60;])
+  }
+
+  redirectToProfile(): void {
+    if (this.typeString &#x3D;&#x3D;&#x3D; &#x27;home&#x27;) {
+      this.router.navigate([&#x27;/perfil/&#x27;])
+    } else {
+      const id: number &#x3D; Number(this.route.snapshot.paramMap.get(&#x27;id&#x27;));
+
+      this.router.navigate([&#x60;equipe/${id}&#x60;]);
+    }
+  }
+
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- QUICK ACCESS COMPONENT --&gt;
+&lt;section [ngStyle]&#x3D;&quot;{&#x27;align-items&#x27;: typeString &#x3D;&#x3D;&#x3D; &#x27;project&#x27; ? &#x27;flex-start&#x27; : &#x27;flex-end&#x27;}&quot; class&#x3D;&quot;pt-2&quot;&gt;
+
+    &lt;!-- WORKSPACE TITLE --&gt;
+    &lt;div class&#x3D;&quot;card-workspace&quot;&gt;
+        &lt;div class&#x3D;&quot;workspace-title&quot;&gt;
+            &lt;h5 *ngIf&#x3D;&quot;typeString &#x3D;&#x3D;&#x3D; &#x27;home&#x27;&quot;&gt;Meu espaço de trabalho&lt;/h5&gt;
+            &lt;h5 *ngIf&#x3D;&quot;typeString &#x3D;&#x3D;&#x3D; &#x27;project&#x27;&quot;&gt;Espaço de trabalho de&lt;/h5&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;workspace-options&quot;&gt;
+            &lt;div class&#x3D;&quot;grid-card-workspace&quot; *ngFor&#x3D;&quot;let section of workSpace&quot;&gt;
+                &lt;div&gt;
+                    &lt;div class&#x3D;&quot;card-workspace-label&quot; (click)&#x3D;&quot;redirectToWorkspace(section.id)&quot;&gt;
+                        &lt;i class&#x3D;&quot;{{section.icon}}&quot;&gt;&lt;/i&gt;
+                        &lt;a class&#x3D;&quot;large-text&quot;&gt;{{section.label}}&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- CHARTS --&gt;
+    &lt;div class&#x3D;&quot;charts&quot;&gt;
+        &lt;div class&#x3D;&quot;card-spaces pt-6&quot; *ngFor&#x3D;&quot;let chart of [&#x27;Seu Desempenho&#x27;, &#x27;Tarefas por Equipe&#x27;]&quot;&gt;
+            &lt;h6&gt;{{chart}}&lt;/h6&gt;
+            &lt;div&gt;
+                &lt;div class&#x3D;&quot;card-chart&quot;&gt;
+                    &lt;p-chart type&#x3D;&quot;pie&quot; [data]&#x3D;&quot;basicData&quot; style&#x3D;&quot;width:70%&quot;&gt;&lt;/p-chart&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;a class&#x3D;&quot;regular-text&quot; *ngIf&#x3D;&quot;chart &#x3D;&#x3D;&#x3D; &#x27;Tarefas em Cada Equipe&#x27;&quot;
+            (click)&#x3D;&quot;redirectToProfile()&quot;&gt;Visualizar tudo&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- RECENTLY TEAMS --&gt;
+    &lt;div class&#x3D;&quot;recently-teams&quot;&gt;
+    &lt;h6 class&#x3D;&quot;title&quot; *ngIf&#x3D;&quot;typeString &#x3D;&#x3D;&#x3D; &#x27;home&#x27;&quot;&gt;Equipes Recentes&lt;/h6&gt;
+        &lt;h6 class&#x3D;&quot;title&quot; *ngIf&#x3D;&quot;typeString &#x3D;&#x3D;&#x3D; &#x27;project&#x27;&quot;&gt;Projetos Recentes de ...&lt;/h6&gt;
+
+        &lt;div class&#x3D;&quot;div-recently-teams&quot;&gt;
+            &lt;div class&#x3D;&quot;recently-teams-team&quot; *ngFor&#x3D;&quot;let item of recentItems | slice:0:3;&quot; (click)&#x3D;&quot;redirectToTeam(item)&quot;&gt;
+                &lt;div class&#x3D;&quot;recently-team-image&quot;&gt;
+                    &lt;img src&#x3D;&quot;data:image/jpg;base64, {{item.image}}&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot;rounded-full h-[70%]&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;recently-team-info&quot;&gt;
+                    &lt;p class&#x3D;&quot;large-text&quot;&gt;{{item.name}}&lt;/p&gt;
+                    &lt;p class&#x3D;&quot;regular-text&quot;&gt;{{item.creationDate}}&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;/div&gt;
+    &lt;/section&gt;
+    </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./quick-access.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../variables&#x27;;
+
+section {
+    @apply flex w-full h-full gap-6 flex-col;
+}
+
+    
+//CARDS
+.card-workspace{
+    @apply flex w-2/3 h-[25%] bg-white flex-col items-center rounded-md shadow-md;
+    color: $primaryColor;
+}
+.card-workspace &gt; :first-child{
+    @apply flex w-full h-[30%] bg-white flex-col items-center justify-center text-xl;
+    
+        h5 {
+            @apply flex h-full items-center;
+            border-bottom: $borderBottom;
+        }
+    }
+
+    .workspace-options {
+        @apply grid w-full h-[70%] flex-col items-center justify-center grid-cols-2;
+
+        .grid-card-workspace {
+            @apply flex flex-col w-full h-full items-center justify-evenly;
+        }
+
+        .grid-card-workspace&gt;div {
+            @apply flex w-2/4 text-lg;
+
+            .card-workspace-label {
+                @apply flex w-full justify-between items-center cursor-pointer;
+
+                i {
+                    @apply flex w-[30%];
+                    color: $text;
+                }
+
+                a {
+                    @apply flex w-[70%];
+                }
+
+            }
+        }
+    }
+
+//CHARTS
+.charts {
+    @apply flex w-2/3 h-[35%] justify-between;
+
+    .card-spaces {
+        @apply flex w-[48%] h-full flex-col gap-2;
+
+        a {
+            @apply flex self-end pt-2;
+        }
+
+        .card-chart {
+            @apply flex w-full h-full
+            rounded-sm items-center justify-center p-3;
+            border-top: 10px solid $primaryColor;
+            background-color: $card;
+        }
+    }
+}
+
+//
+
+
+//RECENTLY TEAMS
+.recently-teams {
+    @apply flex w-2/3 h-[25.5%] justify-between items-center flex-col pt-8;
+
+    .title {
+        @apply flex w-full h-[10%];
+    }
+
+    .div-recently-teams {
+        @apply flex w-full flex-row h-[80%] gap-4 mt-8;
+        color: $primaryColor;
+    }
+
+    .recently-teams-team {
+        @apply flex w-[32%] h-full rounded-sm flex-col;
+        cursor: pointer
+    }
+
+    .recently-team-image {
+        @apply flex w-full h-1/2 items-center rounded-sm;
+
+        img {
+            @apply flex w-full h-full rounded-sm;
+            object-fit: cover;
+        }
+    }
+
+    .recently-team-info {
+        @apply flex w-full h-1/2 rounded-sm justify-between p-2 flex-col;
+        color: $primaryColor;
+        background-color: $card;
+    }
+}
+//</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- QUICK ACCESS COMPONENT --><section [ngStyle]="{\'align-items\': typeString === \'project\' ? \'flex-start\' : \'flex-end\'}" class="pt-2">    <!-- WORKSPACE TITLE -->    <div class="card-workspace">        <div class="workspace-title">            <h5 *ngIf="typeString === \'home\'">Meu espaço de trabalho</h5>            <h5 *ngIf="typeString === \'project\'">Espaço de trabalho de</h5>        </div>        <div class="workspace-options">            <div class="grid-card-workspace" *ngFor="let section of workSpace">                <div>                    <div class="card-workspace-label" (click)="redirectToWorkspace(section.id)">                        <i class="{{section.icon}}"></i>                        <a class="large-text">{{section.label}}</a>                    </div>                </div>            </div>        </div>    </div>    <!-- CHARTS -->    <div class="charts">        <div class="card-spaces pt-6" *ngFor="let chart of [\'Seu Desempenho\', \'Tarefas por Equipe\']">            <h6>{{chart}}</h6>            <div>                <div class="card-chart">                    <p-chart type="pie" [data]="basicData" style="width:70%"></p-chart>                </div>            </div>            <a class="regular-text" *ngIf="chart === \'Tarefas em Cada Equipe\'"            (click)="redirectToProfile()">Visualizar tudo</a>        </div>    </div>    <!-- RECENTLY TEAMS -->    <div class="recently-teams">    <h6 class="title" *ngIf="typeString === \'home\'">Equipes Recentes</h6>        <h6 class="title" *ngIf="typeString === \'project\'">Projetos Recentes de ...</h6>        <div class="div-recently-teams">            <div class="recently-teams-team" *ngFor="let item of recentItems | slice:0:3;" (click)="redirectToTeam(item)">                <div class="recently-team-image">                    <img src="data:image/jpg;base64, {{item.image}}" alt="" class="rounded-full h-[70%]">                </div>                <div class="recently-team-info">                    <p class="large-text">{{item.name}}</p>                    <p class="regular-text">{{item.creationDate}}</p>                </div>            </div>        </div>                </div>    </section>    </div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'QuickAccessComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'QuickAccessComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
