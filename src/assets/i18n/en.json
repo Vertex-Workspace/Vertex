@@ -13,19 +13,19 @@
                 "InProgress": "In Progress",
                 "Completed": "Completed",
                 "Today": "Today",
-                "NextWeek": "Next Week",
-                "NextMonth": "Next Month"
+                "NextWeek": "Next week",
+                "NextMonth": "Next month"
             },
             "teams": {
                 "title": "Teams",
                 "description1": "Teams are workspaces where you can manage projects, invite members,",
-                "description2": "start chat conversations, and have your time and your team's time at your fingertips.",
+                "description2": "start chat conversations, and have your and your team's time at your fingertips.",
                 "newTeamBtn": "New team"
             },
             "allTasks": {
                 "title": "All Tasks",
                 "description1": "In this section, you can view all tasks for which you are responsible",
-                "description2": "across the entire system, tasks from all teams and projects.",
+                "description2": "across the system, tasks from all teams and projects.",
                 "placeholderSearchTask": "Search for a task...",
                 "placeholderFilterBy": "Select",
                 "placeholderOrderBy": "Select",
@@ -34,8 +34,7 @@
             },
             "backBtn": "Back",
             "nextBtn": "Next",
-            "welcome": "Be Welcome, {{nome}}!",
-            "textWelcome": "Explore Vertex and discover how to manage your time from end to end!"
+            "textWelcome": ""
         },
         "chat": {
             "header": {
@@ -48,15 +47,15 @@
         },
         "invitation-page": {
             "text": "Team {{teamName}} has invited you to join the team!",
-            "enterTeam": "Join the team",
+            "enterTeam": "Enter the team",
             "declineInvite": "Decline invitation"
         },
         "projects": {
             "titleTask": "Tasks of {{team}}",
             "description1": "Projects are the different workspaces of a team, where",
-            "description2": "you can segment topics and organize your own and/or team tasks.",
+            "description2": "you can segment topics and organize your and/or your team's tasks.",
             "description3": "In this section, you can view all tasks for which you",
-            "description4": "are responsible within team {{team}}",
+            "description4": "are one of the responsible within team {{team}}",
             "searchPlaceholder": "Search for a project...",
             "newProjectBtn": "New project",
             "title": "View / Create projects",
@@ -82,7 +81,7 @@
             }
         },
         "tasks": {
-            "description1": "Here all project tasks will be centralized, you can filter,",
+            "description1": "Here all the project's tasks will be centralized, you can filter,",
             "description2": "sort and create new tasks. Managing your time and recording each step.",
             "viewModesTitle": "Task viewing modes",
             "searchTask": "Search for a task...",
@@ -97,6 +96,9 @@
             "backBtn": "Back",
             "nextBtn": "Next",
             "endBtn": "End",
+            "new_task": "New task",
+            "new_task_description": "Describe a bit about your Task Here",
+            "new_note": "New note",
             "viewModeLabels": {
                 "Kanban": "Kanban",
                 "List": "List",
@@ -107,10 +109,10 @@
                 "table": {
                     "name": "Name",
                     "Status": "Status",
-                    "Data": "Date",
-                    "Dificuldade": "Difficulty",
-                    "Número": "Number",
-                    "Palavra-Chave": "Keyword"
+                    "Date": "Date",
+                    "Difficulty": "Difficulty",
+                    "Number": "Number",
+                    "Keyword": "Keyword"
                 }
             },
             "calendar": {
@@ -129,17 +131,17 @@
                     "11": "December"
                 },
                 "days": {
-                    "0": "Sun",
-                    "1": "Mon",
-                    "2": "Tue",
-                    "3": "Wed",
-                    "4": "Thu",
-                    "5": "Fri",
-                    "6": "Sat"
+                    "0": "SUN",
+                    "1": "MON",
+                    "2": "TUE",
+                    "3": "WED",
+                    "4": "THU",
+                    "5": "FRI",
+                    "6": "SAT"
                 },
                 "showTasks": "Show tasks",
                 "attTasks": "Assign tasks",
-                "tasksAttFor": "Tasks assigned to"
+                "tasksAttFor": "Tasks assigned for"
             }
         },
         "team-informations": {
@@ -150,31 +152,35 @@
             "participants": "Search for a participant...",
             "groups": "Search for a group...",
             "createNewGroup": "New group",
-            "copyInviteLink": "Copy invite link",
+            "copyInviteLink": "Copy invitation link",
             "memberSingle": "Member",
             "member": "{{number}} member",
             "members": "{{number}} members",
             "individualPerformance": "Individual performance",
-            "individualPerformanceDescription": "Lists the time spent within all tasks, across all projects of {{teamName}}",
+            "individualPerformanceDescription": "Lists the time spent within all tasks, from all projects of {{teamName}}",
             "teamPerformance": "Team performance",
-            "teamPerformanceDescription": "Essential information to track team progress and performance as a whole, focusing on tasks.",
+            "teamPerformanceDescription": "Essential information to track progress and performance of the team as a whole, focusing on tasks.",
             "reviews": "Reviews",
             "reviewsReproved": "Reproved",
             "reviewsApproved": "Approved",
             "generalAverage": "General Average",
             "progress": "Progress",
             "taskProgress": "Task Progress",
-            "timeDedicated": "Time Dedicated"
+            "timeDedicated": "Time Dedicated",
+            "NotStarted": "Not Started",
+            "InProgress": "In Progress",
+            "Completed": "Completed"
         },
         "user-informations": {
             "locationNotProvided": "Location not provided",
             "noDescription": "No description",
             "commonTasks": "Common tasks with you",
-            "commonTasksPlaceholder": "Here will appear tasks that you have in common with those who access your profile.",
+            "commonTasksPlaceholder": "Here will appear tasks you have in common with those who access your profile.",
             "personalPerformance": "Personal performance in the system",
             "tasksPie": "Tasks - Pie",
             "tasksBar": "Tasks - Bars",
-            "timeWorked": "Time Worked on Tasks in Vertex"
+            "timeWorked": "Time Worked on Tasks in Vertex",
+            "tasksPerformance": "Task Performances"
         },
         "user-settings": {
             "Perfil": "Profile",
@@ -194,17 +200,17 @@
                 "accessibility": "Accessibility",
                 "enableSignLanguage": "Enable sign language",
                 "enableTextReading": "Enable text reading",
-                "Tema Claro": "Light Theme",
-                "Tema Escuro": "Dark Theme"
+                "Light Theme": "Light Theme",
+                "Dark Theme": "Dark Theme"
             },
             "notifications": {
                 "Notification": "Notifications",
-                "workspace": "Workspace notifications",
+                "workspace": "Workspace Notifications",
                 "options": {
                     "1": "Receive task submissions and feedback",
-                    "2": "New member entry",
+                    "2": "New members joining",
                     "3": "Permission changes",
-                    "4": "Project and task responsibility assignments",
+                    "4": "Assignments of project and task responsibilities",
                     "5": "Any updates on tasks",
                     "6": "Send email notifications"
                 }
@@ -225,7 +231,7 @@
                 "oldPassword": "Confirm your old password",
                 "newPassword": "Enter a new password",
                 "newPasswordConf": "Confirm your new password",
-                "requirements": "Requirements for a good password:",
+                "requirements": "Requirements for a strong password:",
                 "lengthRequirement": "*8 characters or more",
                 "uppercaseRequirement": "*At least one uppercase letter",
                 "lowercaseRequirement": "*At least one lowercase letter",
@@ -252,7 +258,7 @@
                 "Conversas": "Conversations",
                 "Perfil": "Profile",
                 "Configurações": "Settings",
-                "Sair": "Sign out"
+                "Sair": "Logout"
             }
         },
         "modals": {
@@ -294,10 +300,10 @@
                 "chooseColor": "Choose the color and see the result in real time",
                 "edit-properties": {
                     "name": "Name",
-                    "name-placeholder": "Enter the name you want for the property...",
-                    "data-type": "Data Type",
+                    "name-placeholder": "Type the name you want for the property...",
+                    "data-type": "Data type",
                     "data-type-info": "Type of information the property will store",
-                    "default-value-placeholder": "Default Value",
+                    "default-value-placeholder": "Default value",
                     "confirm-changes": "Confirm Changes",
                     "propertytypes": {
                         "text": "Text",
@@ -309,13 +315,13 @@
                     },
                     "errorcannotchangepropertytype": "Cannot change the type of a property already created!",
                     "notification": {
-                        "invalidpropertyname": "The property name must have between 3 and 25 characters!"
+                        "invalidpropertyname": "The property name must be between 3 and 25 characters!"
                     },
                     "propertylists": {
                         "high": "High",
                         "medium": "Medium",
                         "low": "Low",
-                        "nonessential": "Non-Essential"
+                        "nonessential": "Non-essential"
                     }
                 },
                 "general-properties": {
@@ -336,29 +342,38 @@
                     "Em andamento": "In progress",
                     "Concluída": "Completed",
                     "info-message": "Click on the text and you can edit the status name",
-                    "delete-status": "Delete status"
+                    "delete-status": "Delete the status"
                 },
                 "modal-properties": {
                     "Propriedades": "Properties",
                     "Edite a Propriedade": "Edit Property",
                     "Itens de Seleção": "Selection Items",
-                    "Status": "Status"
+                    "Status": "Status",
+                    "Cores": "Colors",
+                    "Azul": "Blue",
+                    "Vermelho": "Red",
+                    "Verde": "Green",
+                    "Amarelo": "Yellow",
+                    "Roxo": "Purple",
+                    "Laranja": "Orange",
+                    "Cinza": "Gray",
+                    "Rosa": "Pink"
                 }
             },
             "review-task": {
                 "tasks_to_review": "Tasks to Review",
-                "sender": "Submitter",
+                "sender": "Sender",
                 "final_description": "Final Description",
                 "responsible": "Responsible",
                 "time": "Time",
                 "feedback": "Feedback",
-                "insert_feedback": "Enter feedback description...",
+                "insert_feedback": "Insert feedback description...",
                 "grade_note": "Grade will be given to all task responsibles.",
                 "reject": "Reject",
                 "approve": "Approve"
             },
             "search-all": {
-                "search_placeholder": "Search for what you want...",
+                "search_placeholder": "Search what you want...",
                 "order_by": "Order by",
                 "filter_by": "Filter by",
                 "select_placeholder": "Select",
@@ -389,7 +404,7 @@
                 "description": "Description",
                 "commentsS": "Comments",
                 "log": "Log",
-                "analysis": "deliver task for analysis",
+                "analysis": "submit the task for analysis",
                 "sendTask": "Send Task",
                 "attachmentsS": "Attachments",
                 "editDescription": "Edit description",
@@ -397,7 +412,7 @@
                 "workTask": "Work on Task",
                 "endWork": "End Work",
                 "reviewer": "Reviewer",
-                "taskDescriptionPlaceholder": "Description of the finished task..."
+                "taskDescriptionPlaceholder": "Description of the completed task..."
             }
         },
         "reusable-components": {
@@ -420,8 +435,8 @@
             },
             "create-group": {
                 "new-group": "Create a new group",
-                "group-name": "Group name",
-                "add-name": "Add a name for the group",
+                "group-name": "Group Name",
+                "add-name": "Add a name to the group",
                 "select-participants": "Select participants",
                 "cancel": "Cancel",
                 "create-group": "Create group",
@@ -435,15 +450,15 @@
             "create-team-project": {
                 "new-team": "Create a new team...",
                 "new-project": "Create a new Project...",
-                "project-info": "Project information",
+                "project-info": "Project Information",
                 "team-name": "Team Name",
                 "project-name": "Project Name",
                 "add-team-name": "Add a name to the team",
                 "add-project-name": "Add a name to the project",
                 "team-description": "Team Description",
                 "project-description": "Project Description",
-                "add-team-description": "Enter a description for the team...",
-                "add-project-description": "Enter a description for the project...",
+                "add-team-description": "Insert a description for the team...",
+                "add-project-description": "Insert a description for the project...",
                 "responsibles": "Responsibles",
                 "assign-responsibles": "Assign responsibles to the project",
                 "task-review": "Task Review",
@@ -466,5 +481,68 @@
                 "delete-task": "Delete the Task"
             }
         }
-    }
+    },
+    "alerts": {
+        "success": {
+            "addToTeam": "You have been added to the team ",
+            "project_deleted": "Project deleted successfully!",
+            "group_deleted": "Group deleted successfully!",
+            "task_deleted": "Task deleted successfully!",
+            "date_updated": "Date updated successfully!",
+            "task_created": "Task created successfully!",
+            "invitationCodeCopied": "Link copied successfully!",
+            "userRemovedOfTeam": "User removed from the team",
+            "update_success": "Information updated successfully!",
+            "image_update_success": "Image updated successfully!",
+            "passwordUpdated": "Password changed successfully!",
+            "teamDeleted": "Team removed successfully!",
+            "codeSent": "Code sent successfully!",
+            "reviewAllTasks":"All tasks have been reviewed!",
+            "reviewDone":"Review completed successfully!",
+            "uploadFile":"File attached to ",
+            "taskUpdated":"Task updated successfully!",
+            "chatCreated":"Chat created successfully!",
+            "taskSentToReview":"Task sent for review successfully!",
+            "removeUserFromGroup":"User removed from group!",
+            "permissionChanged":"Permission changed!",
+            "participantsAddedToGroup":"Added to group successfully!",
+            "createdWithSuccess":"created successfully!",
+            "projectCreatedWithSuccess":"Project created successfully!",
+            "projectModifyWithSuccess":"Project modified successfully!",
+            "alterated":" altered successfully!",
+            "uploadImage":"Image added!"
+        },
+        "error": {
+            "participantsNotAddedToGroup":"Error adding user to group!",
+            "cantRemoveUserFromGroup":"Could not remove user from group!",
+            "task_not_created": "Error creating task!",
+            "codeNotSent": "Error sending code!",
+            "teamErrorDeleted": "Error deleting team!",
+            "passwordIncompatible": "Passwords are incompatible!",
+            "delete_project": "Error deleting project!",
+            "creatorNotRemovedOfTeam": "You cannot remove the creator of the team",
+            "delete_group": "Could not delete the group!",
+            "inexistent_team": "Team does not exist!",
+            "nopermission_to_create_task": "You do not have permission to create tasks",
+            "permission_to_edit_properties": "You do not have permission to edit properties",
+            "update_date": "Error updating date!",
+            "permission_to_edit_propertiesK": "You do not have permission to change task status!",
+            "errorPasswordUpdated": "Error changing password!",
+            "permissionDeniedPropertyCreation": "You do not have permission to create properties",
+            "permission_to_remove_properties":"You do not have permission to remove this property",
+            "cantCreate":"You do not have permission to create!",
+            "cantEdit":"You do not have permission to edit!",
+            "cantEditTask":"You do not have permission to edit the task!",
+            "cantEditStatus":"You do not have permission to edit the Status!",
+            "cantCreateMoreStatus":"You do not have permission to create more status!",
+            "cantDeleteStatus":"You do not have permission to remove the status!",
+            "cantDeleteTask":"You do not have permission to remove the task!",
+            "notPermissionEditTask":"For security reasons, you cannot change tasks from the home, click on the task or access the team!"
+        },
+        "notification": {
+            "nameLength":"The status name must be between 3 and 20 characters",
+            "descriptionLimit":"The maximum number of characters allowed is 1000, reduce the size of your description!"
+        }
+    },
+    "equipe": "Team "
 }

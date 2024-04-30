@@ -16,6 +16,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { TaskService } from 'src/app/services/task.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -32,13 +33,10 @@ export class RowCardComponent {
 
 
   constructor(private teamService: TeamService,
-    private projectService: ProjectService,
+    private translate : TranslateService,
     private router: Router,
-    private route: ActivatedRoute,
-    private userService: UserService,
     private taskService: TaskService,
     private alertService: AlertService,
-    private changeDetection: ChangeDetectorRef
   ) {
   }
 
@@ -118,9 +116,9 @@ export class RowCardComponent {
   alertNotPermission(): void {
     if(!this.canEdit){
       if (this.router.url.includes("home")) {
-        this.alertService.errorAlert("Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!")
+        this.alertService.errorAlert(this.translate.instant("alerts.error.notPermissionEditTask"))
       } else {
-        this.alertService.errorAlert("Você não tem permissão para alterar a tarefa!");
+        this.alertService.errorAlert(this.translate.instant("alerts.error.cantEditTask"));
       }
     }
   }

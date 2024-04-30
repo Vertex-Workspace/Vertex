@@ -10,7 +10,7 @@ import { ReviewService } from 'src/app/services/review.service';
 import { User } from 'src/app/models/class/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-review-task',
@@ -24,7 +24,8 @@ export class ReviewTaskComponent {
   constructor(
     private userService: UserService,
     private alertService: AlertService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private translate : TranslateService
   ) {
 
   }
@@ -50,7 +51,7 @@ export class ReviewTaskComponent {
 
   closeReview() {
     if (this.tasksToReview.length == 0) {
-      this.alertService.successAlert("Todas tarefas foram revisadas!");
+      this.alertService.successAlert(this.translate.instant("alerts.success.reviewAllTasks"));
     }
     this.closeModal.emit(this.tasksToReview);
   }
@@ -76,7 +77,7 @@ export class ReviewTaskComponent {
 
     this.reviewService.finalReview(this.finalReviewResult).subscribe(
       (response) => {
-        this.alertService.successAlert("Revisão finalizada com sucesso!");
+        this.alertService.successAlert(this.translate.instant("alerts.success.reviewDone"));
         this.tasksToReview = this.tasksToReview.filter(task => task.id !== this.taskBeingReviewed.id);
         this.badgeNumber = this.tasksToReview.length.toString();
 

@@ -1,5 +1,6 @@
 import { CdkDragMove } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Colors, Point } from 'chart.js';
 import { Note } from 'src/app/models/class/note';
 import { AlertService } from 'src/app/services/alert.service';
@@ -31,7 +32,8 @@ export class NoteComponent implements OnInit, AfterViewInit {
   constructor(
     private ngZone: NgZone, 
     private noteService: NoteService,
-    private alert: AlertService
+    private alert: AlertService,
+    private translate : TranslateService
   ) {}
 
   basicData: any;
@@ -84,7 +86,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
       .uploadImage(this.note.id!, fd)
       .subscribe((note: Note) => {
         this.note = note;
-        this.alert.successAlert('Imagem adicionada!')
+        this.alert.successAlert(this.translate.instant("alerts.success.uploadImage"))
       });
   }
 

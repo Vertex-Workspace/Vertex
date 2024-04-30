@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { TreeNode } from 'primeng/api';
 import { Group } from 'src/app/models/class/groups';
 import { Project, ProjectEdit, ProjectReview } from 'src/app/models/class/project';
@@ -59,7 +60,8 @@ export class CreateTeamProjectComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private alert: AlertService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private translate : TranslateService
   ) {
     this.logged = this.userService.getLogged();
   }
@@ -126,7 +128,7 @@ export class CreateTeamProjectComponent implements OnInit {
     this.teamService
       .create(team)
       .subscribe((teamRes: Team) => {
-        this.alert.successAlert(`Equipe ${teamRes.name} criada com sucesso!`);
+        this.alert.successAlert(this.translate.instant("equipe") + teamRes.name + this.translate.instant("alerts.success.createdWithSuccess"));
 
         if (this.fd) {
           this.teamService
@@ -174,7 +176,7 @@ export class CreateTeamProjectComponent implements OnInit {
     this.projectService
       .create(project, teamId)
       .subscribe((project: Project) => {
-        this.alert.successAlert(`Projeto criado com sucesso!`);
+        this.alert.successAlert(this.translate.instant("alerts.success.projectCreatedWithSuccess"));
         if (this.fd) {
           this.projectService
             .updateImage(project.id, this.fd)
@@ -343,7 +345,7 @@ export class CreateTeamProjectComponent implements OnInit {
 
     this.projectService.patchValue(projectEdit).subscribe((project: Project) => { 
       this.project = project;
-      this.alert.successAlert("Projeto modificado com sucesso")
+      this.alert.successAlert(this.translate.instant("alerts.success.projectModifyWithSuccess"))
     });
     this.closeScreen();
   }

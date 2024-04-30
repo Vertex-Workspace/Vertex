@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { taskHourService } from 'src/app/services/taskHour.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-group',
@@ -42,7 +43,8 @@ export class CreateGroupComponent implements OnInit {
     private teamService: TeamService,
     private route: ActivatedRoute,
     private alertService: AlertService,
-    private groupService: GroupService) {
+    private groupService: GroupService,
+    private translate : TranslateService,) {
     this.getTeam();
   }
 
@@ -122,10 +124,10 @@ export class CreateGroupComponent implements OnInit {
       .subscribe((group: Group) => {
         //calls addPartcipants to back to normal state of card
         // this.addParticipants();
-        this.alertService.successAlert("adicionado")
+        this.alertService.successAlert(this.translate.instant("alerts.success.participantsAddedToGroup"))
       },
         e => {
-          this.alertService.errorAlert("erro")
+          this.alertService.errorAlert(this.translate.instant("alerts.error.participantsNotAddedToGroup"))
         });
         this.closeGroup()
   }

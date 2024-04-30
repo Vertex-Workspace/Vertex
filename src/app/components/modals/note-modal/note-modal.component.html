@@ -28,9 +28,14 @@
                         {{note.description}}
                     </textarea>
 
-                    <a (click)="toggleEditDescription()">
-                        {{!descriptionEditable ? "{{'components.modals.note-modal.editDescription' | translate}}" : "{{'components.modals.note-modal.confirm'}}" }}
+                    <a *ngIf="!descriptionEditable" (click)="toggleEditDescription()">
+                        {{ 'components.modals.note-modal.editDescription' | translate }}
                     </a>
+                    
+                    <a *ngIf="descriptionEditable" (click)="toggleEditDescription()">
+                        {{ 'components.modals.note-modal.confirm' | translate }}
+                    </a>
+                    
                 </div>
                 <div class="image-container">
                     <ng-container *ngFor="let file of note.files">

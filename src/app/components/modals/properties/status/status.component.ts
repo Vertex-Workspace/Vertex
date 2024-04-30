@@ -5,6 +5,7 @@ import {
   faPlus,
   faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
@@ -55,7 +56,8 @@ export class StatusComponent {
     private alertService: AlertService,
     private projectService: ProjectService,
     private userService: UserService,
-    private teamService: TeamService) { }
+    private teamService: TeamService,
+    private translate : TranslateService) { }
 
 
   statusList: any[] = [
@@ -136,7 +138,7 @@ export class StatusComponent {
 
       this.saveProperty();
     } else {
-      this.alertService.errorAlert("Você não tem permissão para criar mais status!")
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantCreateMoreStatus"))
     }
   }
 
@@ -163,7 +165,7 @@ export class StatusComponent {
             })
         }
       } else {
-        this.alertService.errorAlert("Você não tem permissão para remover o status!");
+        this.alertService.errorAlert(this.translate.instant("alerts.error.cantDeleteStatus"));
       }
     }
     this.deleteBoolean = false;
@@ -192,7 +194,7 @@ export class StatusComponent {
       this.propertyListNameEditId = -1;
       this.nameEdit = '';
     } else {
-      this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
+      this.alertService.notificationAlert(this.translate.instant("alerts.notification.nameLength"));
       return;
     }
   }
@@ -203,7 +205,7 @@ export class StatusComponent {
     this.propertyListNameEditId = propertyList.id!;
     this.nameEdit = propertyList.value;
     }else {
-      this.alertService.errorAlert('Você não tem permissão para editar');
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEdit"));
     }
   }
 
@@ -211,7 +213,7 @@ export class StatusComponent {
     if (this.canEdit) {
       this.pencil.emit(propertyList);
     } else {
-      this.alertService.errorAlert("Você não tem permissão para editar o status!")
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEditStatus"))
     }
   }
 

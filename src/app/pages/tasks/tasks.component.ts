@@ -19,6 +19,7 @@ import { PropertyList } from 'src/app/models/class/property';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
 import { tutorialText } from 'src/app/tutorialText';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tasks',
@@ -92,7 +93,8 @@ export class TasksComponent implements OnInit {
     private teamService: TeamService,
     private alertService: AlertService,
     private noteService: NoteService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private translate: TranslateService
   ) {
     this.logged = this.userService.getLogged();
 
@@ -110,7 +112,7 @@ export class TasksComponent implements OnInit {
     //Método que atribui o valor de project vindo do observable
     this.renderProject.forEach((p: Project) => {
       this.renderPermissions = this.teamService.getPermission(p.idTeam, this.userService.getLogged().id!)
-      
+
       this.renderPermissions.forEach((permissions: Permission[]) => {
         this.permissions = permissions;
         for (const permission of permissions) {
@@ -152,13 +154,13 @@ export class TasksComponent implements OnInit {
       })
 
     });
-    
+
 
   }
 
   muralPageListener(): void {
-    this.isMuralPage = 
-          localStorage.getItem('mode-task-view') === 'Mural';
+    this.isMuralPage =
+      localStorage.getItem('mode-task-view') === 'Mural';
   }
 
   updateOrderType(e: PipeParams) {
@@ -289,8 +291,8 @@ export class TasksComponent implements OnInit {
 
   createTask(): void {
     const taskCreate: TaskCreate = {
-      name: "Nova Tarefa",
-      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      name: this.translate.instant('pages.tasks.new_task'),
+      description: this.translate.instant('pages.tasks.new_task_description'),
       project: {
         id: this.project.id!
       },
@@ -318,9 +320,9 @@ export class TasksComponent implements OnInit {
   }
 
   createNote(): void {
-    
+
     const note: Note = {
-      title: 'Nova nota',
+      title: this.translate.instant('pages.tasks.new_note'),
       description: '',
       width: 300,
       height: 300,
@@ -335,7 +337,7 @@ export class TasksComponent implements OnInit {
       .subscribe((note: Note) => {
         this.project.notes.push(note);
         console.log(note);
-        
+
       });
   }
 
@@ -388,12 +390,12 @@ export class TasksComponent implements OnInit {
 
   attUserFirstAccess() {
     this.userService.patchFirstAccess(this.logged).subscribe(
-      (user:any) => {
+      (user: any) => {
         console.log();
-        
+
         localStorage.setItem('logged', JSON.stringify(user));
       },
-      (e:any) => {
+      (e: any) => {
         console.log(e);
       }
     )

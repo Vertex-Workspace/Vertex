@@ -10,6 +10,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
+import { TranslateService } from '@ngx-translate/core';
 
 //teste pra ver se foi
 @Component({
@@ -41,7 +42,8 @@ export class InputValuePropertyComponent {
     private userService: UserService,
     private alertService: AlertService,
     private taskService: TaskService,
-    private router: Router) { }
+    private router: Router,
+    private translate : TranslateService) { }
 
 
   oldValue!: Value;
@@ -132,9 +134,9 @@ export class InputValuePropertyComponent {
     console.log("NOT PERMISSION");
     if (this.router.url.includes("home")) {
       console.log("home");
-      this.alertService.errorAlert("Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!")
+      this.alertService.errorAlert(this.translate.instant("alerts.error.notPermissionEditTask"))
     } else {
-      this.alertService.errorAlert("Você não tem permissão para editar!");
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEdit"));
     }
 
   }
@@ -183,7 +185,7 @@ export class InputValuePropertyComponent {
     this.taskService.patchValue(valueUpdate).subscribe(
       (task) => {
         this.task = task;
-        this.alertService.successAlert(value.property.name + " alterado com sucesso!");
+        this.alertService.successAlert(value.property.name + this.translate.instant("alerts.success.alterated"));
         this.changes.emit(task);
       },
       (error) => {

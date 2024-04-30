@@ -13,6 +13,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card',
@@ -31,7 +32,8 @@ export class CardComponent implements OnInit {
     private userService: UserService,
     private alertService: AlertService,
     private route: ActivatedRoute,
-    private projectService: ProjectService) {
+    private projectService: ProjectService,
+    private translate: TranslateService) {
   }
   @Input() task!: Task;
   @Input() width!: string;
@@ -72,7 +74,7 @@ export class CardComponent implements OnInit {
       this.modalDelete = true;
     } else {
       this.modalDelete2 = true;
-      this.alertService.errorAlert("Você não tem permissão para remover a tarefa!");
+      this.alertService.errorAlert(this.translate.instant('alert.error.cantDeleteTask'));
       setTimeout(() => {
         this.modalDelete2 = false; 
       }, 1000);

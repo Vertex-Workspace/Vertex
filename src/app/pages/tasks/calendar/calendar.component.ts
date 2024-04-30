@@ -159,11 +159,11 @@ export class CalendarComponent {
 
   translateMonth(index: number): string {
     
-    const monthKey = 'pages.tasks.calendar.months.' + index; // A chave de tradução será 'months.index'
+    const monthKey = 'pages.tasks.calendar.months.' + index;
     return this.translate.instant(monthKey);
   }
   translateDayOfWeek(index: number): string {
-    const dayKey = 'pages.tasks.calendar.days.' + index; // A chave de tradução será 'months.index'
+    const dayKey = 'pages.tasks.calendar.days.' + index;
     return this.translate.instant(dayKey);
   }
 
@@ -218,8 +218,8 @@ export class CalendarComponent {
   newTaskOnDay(day: Date) {
     if (this.canCreate) {
       let taskCreate: TaskCreate = {
-        name: "Nova Tarefa",
-        description: "Descreva um pouco sobre sua Tarefa Aqui",
+        name: this.translate.instant('pages.tasks.new_task'),
+        description: this.translate.instant('pages.tasks.new_task_description'),
         project: {
           id: this.project.id!
         },
@@ -241,41 +241,32 @@ export class CalendarComponent {
         }
       );
     } else {
-      this.alert.errorAlert("Você não tem permissão para criar tarefas");
+      this.alert.errorAlert(this.translate.instant('alerts.error.nopermission_to_create_task'));
     }
 
   }
 
   deleteTask(task: Task): void {
-    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id != task.id);
+    this.project.tasks = this.project.tasks.filter(taskToDelete => taskToDelete.id !== task.id);
+    this.alert.successAlert(this.translate.instant('alerts.success.task_deleted'));
   }
-
+  
   drop(e: CdkDragDrop<any>, day: Date): void {
     const task: Task = e.item.data;
     let property: any;
     if (this.canEdit) {
-
-      task.values
-        .forEach((prop) => {
-          if (prop.property.kind === PropertyKind.DATE) {
-            prop.value = day;
-            property = prop;
-          }
-        })
-
-      this.patchValue(task, day)
+      task.values.forEach((prop) => {
+        if (prop.property.kind === PropertyKind.DATE) {
+          prop.value = day;
+          property = prop;
+        }
+      });
+      this.patchValue(task, day);
     } else {
-      this.alert.errorAlert("Você não tem permissão para alterar as propriedades")
+      this.alert.errorAlert(this.translate.instant('alerts.error.permission_to_edit_properties'));
     }
-
   }
-
-  //DRAG AND DROP
-  drag(task: Task): void {
-    console.log(task);
-  }
-
-
+  
   patchValue(task: Task, day: Date): void {
     if (this.canEdit) {
       task.values.forEach((value) => {
@@ -288,24 +279,30 @@ export class CalendarComponent {
               },
               value: {
                 id: value.id,
-                //SLICE RETIRAR O "Z" NO FINAL
                 value: day.toISOString().slice(0, -1)
               }
             },
             userID: this.userService.getLogged().id!
           };
-
+  
           this.taskService.patchValue(valueUpdate).subscribe(
             (taskDate) => {
               task.values = taskDate.values;
+              this.alert.successAlert(this.translate.instant('alerts.success.date_updated'));
             },
             (error) => {
               console.log(error);
+              this.alert.errorAlert(this.translate.instant('alerts.error.update_date'));
             }
           );
         }
       });
     }
+  }
+
+  //DRAG AND DROP
+  drag(task: Task): void {
+    console.log(task);
   }
 
   hoveringDay: Date | null = null;

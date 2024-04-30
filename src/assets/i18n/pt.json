@@ -96,6 +96,9 @@
             "backBtn": "Voltar",
             "nextBtn": "Próximo",
             "endBtn": "Fim",
+            "new_task": "Nova tarefa",
+            "new_task_description": "Descreva um pouco sobre sua Tarefa Aqui",
+            "new_note": "Nova nota",
             "viewModeLabels": {
                 "Kanban": "Kanban",
                 "List": "Lista",
@@ -163,7 +166,10 @@
             "generalAverage": "Média Geral",
             "progress": "Progresso",
             "taskProgress": "Andamento de Tarefas",
-            "timeDedicated": "Tempo Dedicado"
+            "timeDedicated": "Tempo Dedicado",
+            "NaoIniciadas": "Não Iniciadas",
+            "EmAndamento": "Em Andamento",
+            "Concluidas": "Concluídas"
         },
         "user-informations": {
             "locationNotProvided": "Localização não informada",
@@ -173,7 +179,8 @@
             "personalPerformance": "Desempenho pessoal no sistema",
             "tasksPie": "Tarefas - Pizza",
             "tasksBar": "Tarefas - Barras",
-            "timeWorked": "Tempo Trabalhado em Tarefas no Vertex"
+            "timeWorked": "Tempo Trabalhado em Tarefas no Vertex",
+            "tasksPerformance": "Andamentos das Tarefas"
         },
         "user-settings": {
             "Perfil": "Perfil",
@@ -341,7 +348,16 @@
                     "Propriedades": "Propriedades",
                     "Edite a Propriedade": "Edite a Propriedade",
                     "Itens de Seleção": "Itens de Seleção",
-                    "Status": "Status"
+                    "Status": "Status",
+                    "Cores": "Cores",
+                    "Azul": "Azul",
+                    "Vermelho": "Vermelho",
+                    "Verde": "Verde",
+                    "Amarelo": "Amarelo",
+                    "Roxo": "Roxo",
+                    "Laranja": "Laranja",
+                    "Cinza": "Cinza",
+                    "Rosa": "Rosa"
                 }
             },
             "review-task": {
@@ -470,14 +486,63 @@
         "success": {
             "addToTeam": "Você foi adicionado ao time ",
             "project_deleted": "Projeto deletado com sucesso!",
-            "group_deleted": "Grupo deletado com sucesso!"
+            "group_deleted": "Grupo deletado com sucesso!",
+            "task_deleted": "Tarefa deletada com sucesso!",
+            "date_updated": "Data atualizada com sucesso!",
+            "task_created": "Tarefa criada com sucesso!",
+            "invitationCodeCopied": "Link copiado com sucesso!",
+            "userRemovedOfTeam": "Usuário retirado da equipe",
+            "update_success": "Informações atualizadas com sucesso!",
+            "image_update_success": "Imagem atualizada com sucesso!",
+            "passwordUpdated": "Senha alterada com sucesso!",
+            "teamDeleted": "Equipe removida com sucesso!",
+            "codeSent": "Código enviado com sucesso!",
+            "reviewAllTasks":"Todas tarefas foram revisadas!",
+            "reviewDone":"Revisão finalizada com sucesso!",
+            "uploadFile":"Arquivo anexado em ",
+            "taskUpdated":"Tarefa atualizada com sucesso!",
+            "chatCreated":"Chat criado com sucesso!",
+            "taskSentToReview":"Tarefa enviada para revisão com sucesso!",
+            "removeUserFromGroup":"Usuário removido do grupo!",
+            "permissionChanged":"Autorização alterada!",
+            "participantsAddedToGroup":"Adicionado ao grupo com sucesso!",
+            "createdWithSuccess":"criada com sucesso!",
+            "projectCreatedWithSuccess":"Projeto criado com sucesso!",
+            "projectModifyWithSuccess":"Projeto modificado com sucesso!",
+            "alterated":" alterado com sucesso!",
+            "uploadImage":"Imagem adicionada!"
         },
         "error": {
+            "participantsNotAddedToGroup":"Erro ao adicionar usuário ao grupo!",
+            "cantRemoveUserFromGroup":"Não foi possível retirar o usuário do grupo!",
+            "task_not_created": "Erro ao criar tarefa!",
+            "codeNotSent": "Erro ao enviar código!",
+            "teamErrorDeleted": "Erro ao deletar equipe!",
+            "passwordIncompatible": "Senhas incompatíveis!",
             "delete_project": "Erro ao deletar projeto!",
+            "creatorNotRemovedOfTeam": "Você não pode remover o criador da equipe",
             "delete_group": "Não foi possível deletar o grupo!",
-            "inexistent_team": "Equipe inexistente!"
+            "inexistent_team": "Equipe inexistente!",
+            "nopermission_to_create_task": "Você não tem permissão para criar tarefas",
+            "permission_to_edit_properties": "Você não tem autorização para editar propriedades",
+            "update_date": "Erro ao atualizar data!",
+            "permission_to_edit_propertiesK": "Você não tem permissão para alterar o status da tarefa!",
+            "errorPasswordUpdated": "Erro ao alterar senha!",
+            "permissionDeniedPropertyCreation": "Você não tem autorização para criar propriedades",
+            "permission_to_remove_properties":"Você não tem permissão para remover essa propriedade",
+            "cantCreate":"Você não tem permissão para criar!",
+            "cantEdit":"Você não tem permissão para editar!",
+            "cantEditTask":"Você não tem permissão para editar a tarefa!",
+            "cantEditStatus":"Você não tem permissão para editar o Status!",
+            "cantCreateMoreStatus":"Você não tem permissão para criar mais status!",
+            "cantDeleteStatus":"Você não tem permissão para remover o status!",
+            "cantDeleteTask":"Você não tem permissão para remover a tarefa!",
+            "notPermissionEditTask":"Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!"
         },
         "notification": {
+            "nameLength":"O nome do status deve ter entre 3 e 20 caracteres",
+            "descriptionLimit":"O número máximo de caracteres permitido é 1000, reduza o tamanho da sua descrição!"
         }
-    }
+    },
+    "equipe": "Equipe "
 }

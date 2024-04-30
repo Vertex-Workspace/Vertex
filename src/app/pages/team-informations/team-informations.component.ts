@@ -18,6 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class TeamInformationsComponent implements OnInit {
         private teamService: TeamService,
         private alertService: AlertService,
         private groupService: GroupService,
-        private userService: UserService
+        private userService: UserService,
+        private translate : TranslateService
     ) {
         this.team = this.getTeam()!;
     }
@@ -67,7 +69,7 @@ export class TeamInformationsComponent implements OnInit {
             const documentStyle = getComputedStyle(document.documentElement);
             const textColor = documentStyle.getPropertyValue('--text');
             this.basicData = {
-                labels: ['Não Iniciadas', 'Em Andamento', 'Concluídas'],
+                labels: [this.translate.instant("pages.team-informations.NaoIniciadas"), this.translate.instant("pages.team-informations.EmAndamento"), this.translate.instant("pages.team-informations.Concluidas")],
                 datasets: [
                     {
                         label: '',
@@ -123,7 +125,7 @@ export class TeamInformationsComponent implements OnInit {
             }
         )
 
-        this.alertService.successAlert("Link copiado com sucesso!");
+        this.alertService.successAlert(this.translate.instant("alerts.success.invitationCodeCopied"));
 
 
     }
@@ -213,11 +215,11 @@ export class TeamInformationsComponent implements OnInit {
 
             if (this.team.creator!.id === this.userService.getLogged().id) {
                 this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
-                    this.alertService.successAlert("Usuário retirado da equipe");
+                    this.alertService.successAlert(this.translate.instant("alerts.success.userRemovedOfTeam"));
                     this.team.users!.splice(this.team.users!.indexOf(this.userToDelete), 1);
                 })
             } else {
-                this.alertService.errorAlert("Você não pode remover o criador da equipe")
+                this.alertService.errorAlert(this.translate.instant("alerts.error.creatorNotRemovedOfTeam"))
             }
 
         }

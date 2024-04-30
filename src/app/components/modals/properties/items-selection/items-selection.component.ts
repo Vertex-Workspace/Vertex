@@ -4,6 +4,7 @@ import {
   faEllipsisVertical, faPaintBrush, faEye, faEyeSlash,
   faTrashCan, faPlus, faInfoCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
@@ -57,7 +58,8 @@ export class ItemsSelectionComponent {
     private alertService: AlertService, 
     private projectService: ProjectService,
     private teamService: TeamService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private translate : TranslateService) { }
 
   ngOnInit(): void {
     this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) => {
@@ -135,7 +137,7 @@ export class ItemsSelectionComponent {
     this.property.propertyLists.push(newPropertyList);
     this.saveProperty();
     }else {
-      this.alertService.errorAlert('Você não tem permissão para criar');
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantCreate"));
     }
   }
 
@@ -161,7 +163,7 @@ export class ItemsSelectionComponent {
       this.propertyListNameEditId = -1;
       this.nameEdit = '';
     } else {
-      this.alertService.notificationAlert('O nome do status deve ter entre 3 e 20 caracteres');
+      this.alertService.notificationAlert(this.translate.instant("alerts.notification.nameLength"));
       return;
     }
   }
@@ -173,7 +175,7 @@ export class ItemsSelectionComponent {
     this.propertyListNameEditId = propertyList.id!;
     this.nameEdit = propertyList.value;
     }else {
-      this.alertService.errorAlert('Você não tem permissão para editar');
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEdit"));
     }
   }
 

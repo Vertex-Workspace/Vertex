@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Task } from 'src/app/models/class/task';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -21,7 +21,8 @@ export class AttachmentsComponent {
   constructor(
     private alert: AlertService,
     private taskService: TaskService,
-    private userService : UserService
+    private userService : UserService,
+    private translate : TranslateService
   ) {}
 
   onFileSelected(e: any): void {
@@ -33,7 +34,7 @@ export class AttachmentsComponent {
       .uploadFile(fd, this.task.id!, this.userService.getLogged().id!)
       .subscribe((task: Task) => {
         this.task = task;
-        this.alert.successAlert(`Arquivo anexado em ${task.name}!`);
+        this.alert.successAlert(this.translate.instant("alerts.success.uploadFile") + task.name + "!");
       });
   }
 

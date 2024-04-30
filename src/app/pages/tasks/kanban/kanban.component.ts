@@ -127,7 +127,7 @@ export class KanbanComponent {
         );
       }
     } else {
-      this.alertService.errorAlert("Você não tem permissão para alterar o status da tarefa!")
+      this.alertService.errorAlert(this.translate.instant("alerts.error.permission_to_edit_propertiesK"));
     }
   };
 
@@ -180,8 +180,8 @@ export class KanbanComponent {
     }
 
     let taskCreate: TaskCreate = {
-      name: "Nova Tarefa",
-      description: "Descreva um pouco sobre sua Tarefa Aqui",
+      name: this.translate.instant("pages.tasks.new_task"),
+      description: this.translate.instant("pages.tasks.new_task_description"),
       project: {
         id: this.project.id!
       },
@@ -214,7 +214,7 @@ export class KanbanComponent {
           (taskDate) => {
             task.values = taskDate.values;
             this.taskList.push(task);
-            this.alertService.successAlert("Tarefa criada com sucesso!");
+            this.alertService.successAlert(this.translate.instant("alerts.success.task_created"));
           },
           (error) => {
             console.error(error);
@@ -223,7 +223,7 @@ export class KanbanComponent {
 
       },
       (error: any) => {
-        this.alertService.errorAlert("Erro ao criar tarefa!");
+        this.alertService.errorAlert(this.translate.instant("alerts.error.task_not_created"));
       }
     );
   }

@@ -13,6 +13,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-general-properties',
@@ -90,7 +91,8 @@ export class GeneralPropertiesComponent {
   constructor(private propertyService: PropertyService,
     private alertService: AlertService,
     private teamService: TeamService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private translate : TranslateService) { }
 
   ngOnInit(): void {
     this.separePropertiesKind();
@@ -140,7 +142,7 @@ export class GeneralPropertiesComponent {
       });
       this.openNewProperty.emit(genericProperty);
     } else {
-      this.alertService.errorAlert("Você não tem autorização para criar propriedade")
+      this.alertService.errorAlert(this.translate.instant("alerts.error.permissionDeniedPropertyCreation"));
     }
   }
 
@@ -156,7 +158,7 @@ export class GeneralPropertiesComponent {
       if (this.canEdit) {
         this.edit.emit(property);
       } else {
-        this.alertService.errorAlert("Você não tem autorização para editar propriedade")
+        this.alertService.errorAlert(this.translate.instant("alerts.error.permission_to_edit_properties"))
       }
     }
   }
@@ -177,7 +179,7 @@ export class GeneralPropertiesComponent {
           console.log(error);
         });
     } else {
-      this.alertService.errorAlert("Você não tem autorização para editar propriedade");
+      this.alertService.errorAlert(this.translate.instant("alerts.error.permission_to_edit_properties"));
     }
   }
 
@@ -193,7 +195,7 @@ export class GeneralPropertiesComponent {
             console.log(error);
           });
       } else {
-        this.alertService.errorAlert("Você não tem autorização para remover essa propriedade")
+        this.alertService.errorAlert(this.translate.instant("alerts.error.permission_to_remove_properties"))
       }
     }
     this.deleteBoolean = false

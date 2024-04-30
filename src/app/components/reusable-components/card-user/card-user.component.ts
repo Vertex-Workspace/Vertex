@@ -11,6 +11,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -59,7 +60,8 @@ export class CardUserComponent implements OnInit {
     private groupService: GroupService,
     private alert: AlertService,
     private teamService: TeamService,
-    private router: Router) {
+    private router: Router,
+    private translate : TranslateService) {
   }
 
   ngOnInit(): void {
@@ -111,7 +113,7 @@ export class CardUserComponent implements OnInit {
     this.teamService.changePermissionEnable(permission).subscribe(
       (permissionRes) => {
         permission.enabled = !permission.enabled;
-        this.alert.successAlert('Autorização alterada!')
+        this.alert.successAlert(this.translate.instant("alerts.success.permissionChanged"))
       })
   }
 
@@ -124,7 +126,7 @@ export class CardUserComponent implements OnInit {
 
   deleteUserTeam(user: User): void {
     this.teamService.deleteUserTeam(this.team, user).subscribe((team: Team) => {
-      this.alert.successAlert("Usuário retirado da equipe")
+      this.alert.successAlert(this.translate.instant('alerts.success.userRemovedOfTeam'))
     })
   }
 

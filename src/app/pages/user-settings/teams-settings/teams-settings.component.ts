@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faUsers, faSearch, faCircleUser, faDoorOpen,
         faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { LogarithmicScale } from 'chart.js';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
@@ -27,7 +28,8 @@ export class TeamsSettingsComponent implements OnInit{
     private route: ActivatedRoute,
     private teamService: TeamService,
     private router: Router,
-    private alert: AlertService
+    private alert: AlertService,
+    private translate : TranslateService
   ) {
     this.logged = this.userService.getLogged();  
     this.getRecentsTeams();
@@ -59,11 +61,11 @@ export class TeamsSettingsComponent implements OnInit{
     this.teamService
       .delete(team.id)
       .subscribe((team: Team) => {
-        this.alert.successAlert('Equipe removida com sucesso!');
+        this.alert.successAlert(this.translate.instant("alerts.success.teamDeleted"));
         this.teams?.splice(this.teams.indexOf(team), 1);
       },
       e => {
-        this.alert.errorAlert('Erro ao deletar equipe!')
+        this.alert.errorAlert(this.translate.instant("alerts.error.teamErrorDeleted"));
       });
   }
 
