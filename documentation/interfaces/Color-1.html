@@ -1,0 +1,496 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  Color</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/components/reusable-components/note/note.component.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#color" 
+>
+                                            color
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#imgBackgroundColor" 
+>
+                                            imgBackgroundColor
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="color"></a>
+                                        <span class="name "><b>color</b>
+                                            <a href="#color">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>color:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="imgBackgroundColor"></a>
+                                        <span class="name "><b>imgBackgroundColor</b>
+                                            <a href="#imgBackgroundColor">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>imgBackgroundColor:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CdkDragMove } from &#x27;@angular/cdk/drag-drop&#x27;;
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from &#x27;@angular/core&#x27;;
+import { Colors, Point } from &#x27;chart.js&#x27;;
+import { Note } from &#x27;src/app/models/class/note&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { NoteService } from &#x27;src/app/services/note.service&#x27;;
+
+interface Color {
+  color: string,
+  imgBackgroundColor: string
+}
+
+@Component({
+  selector: &#x27;app-note&#x27;,
+  templateUrl: &#x27;./note.component.html&#x27;,
+  styleUrls: [&#x27;./note.component.scss&#x27;]
+})
+export class NoteComponent implements OnInit, AfterViewInit {
+
+  @Input() 
+  note !: Note;
+
+  @Output()
+  deleteNoteEmitter: EventEmitter&lt;any&gt; &#x3D; new EventEmitter();
+
+  @ViewChild(&#x27;resizeBox&#x27;) resizeBox!: ElementRef;
+  @ViewChild(&#x27;dragHandleCorner&#x27;) dragHandleCorner!: ElementRef;
+  @ViewChild(&#x27;dragHandleRight&#x27;) dragHandleRight!: ElementRef;
+  @ViewChild(&#x27;dragHandleBottom&#x27;) dragHandleBottom!: ElementRef;
+
+  constructor(
+    private ngZone: NgZone, 
+    private noteService: NoteService,
+    private alert: AlertService
+  ) {}
+
+  basicData: any;
+  modalOpen: boolean &#x3D; false;
+
+  ngOnInit(): void { 
+  }
+
+  getBgColor(): string {
+    const noteColor: string &#x3D; this.note.color;
+    return noteColor;
+  }
+
+  getNotePosition(): Point {
+    return {
+      x: this.note.posX,
+      y: this.note.posY
+    }
+  }
+
+  ngAfterViewInit() {
+    this.setAllHandleTransform();
+  }
+
+  dragEnd(e: any): void {
+    this.note.posX &#x3D; e.dropPoint.x - 320;
+    this.note.posY &#x3D; e.dropPoint.y - 320;
+    
+    this.edit();
+    
+  }
+
+  toggleModalOpen(): void {
+    this.modalOpen &#x3D; !this.modalOpen
+  }
+
+  isOverflowing(element: any): boolean {    
+    return element.offsetHeight &lt; element.scrollHeight ||
+           element.offsetWidth &lt; element.scrollWidth;
+
+  }
+
+  configItems &#x3D; [
+    { id: &#x27;edit&#x27;, iconClass: &#x27;pi pi-pencil&#x27;, onClick: () &#x3D;&gt; this.toggleModalOpen() },
+    { id: &#x27;trash&#x27;, iconClass: &#x27;pi pi-trash&#x27;, onClick: () &#x3D;&gt; this.deleteNote() },
+  ];
+
+  uploadImage(fd: FormData): void {
+    this.noteService
+      .uploadImage(this.note.id!, fd)
+      .subscribe((note: Note) &#x3D;&gt; {
+        this.note &#x3D; note;
+        this.alert.successAlert(&#x27;Imagem adicionada!&#x27;)
+      });
+  }
+
+  get resizeBoxElement(): HTMLElement {
+    return this.resizeBox.nativeElement;
+  }
+
+  get dragHandleCornerElement(): HTMLElement {
+    return this.dragHandleCorner.nativeElement;
+  }
+
+  get dragHandleRightElement(): HTMLElement {
+    return this.dragHandleRight.nativeElement;
+  }
+
+  get dragHandleBottomElement(): HTMLElement {
+    return this.dragHandleBottom.nativeElement;
+  }
+
+  setAllHandleTransform() {
+    const rect &#x3D; this.resizeBoxElement.getBoundingClientRect();
+    this.setHandleTransform(this.dragHandleCornerElement, rect, &#x27;both&#x27;);
+    this.setHandleTransform(this.dragHandleRightElement, rect, &#x27;x&#x27;);
+    this.setHandleTransform(this.dragHandleBottomElement, rect, &#x27;y&#x27;);
+  }
+
+  setHandleTransform(
+    dragHandle: HTMLElement,
+    targetRect: ClientRect | DOMRect,
+    position: &#x27;x&#x27; | &#x27;y&#x27; | &#x27;both&#x27;
+  ) {
+    const dragRect &#x3D; dragHandle.getBoundingClientRect();
+    const translateX &#x3D; targetRect.width - dragRect.width;
+    const translateY &#x3D; targetRect.height - dragRect.height;
+
+    if (position &#x3D;&#x3D;&#x3D; &#x27;x&#x27;) {
+      dragHandle.style.transform &#x3D; &#x60;translate(${translateX}px, 0)&#x60;;
+    }
+
+    if (position &#x3D;&#x3D;&#x3D; &#x27;y&#x27;) {
+      dragHandle.style.transform &#x3D; &#x60;translate(0, ${translateY}px)&#x60;;
+    }
+
+    if (position &#x3D;&#x3D;&#x3D; &#x27;both&#x27;) {
+      dragHandle.style.transform &#x3D; &#x60;translate(${translateX}px, ${translateY}px)&#x60;;
+    }
+  }
+
+  dragMove(dragHandle: HTMLElement, $event: any) {
+    this.ngZone.runOutsideAngular(() &#x3D;&gt; {
+      this.resize(dragHandle, this.resizeBoxElement);
+    });
+  }
+
+  resize(dragHandle: HTMLElement, target: HTMLElement) {
+    const dragRect &#x3D; dragHandle.getBoundingClientRect();
+    const targetRect &#x3D; target.getBoundingClientRect();
+
+    const width &#x3D; dragRect.left - targetRect.left + dragRect.width;
+    const height &#x3D; dragRect.top - targetRect.top + dragRect.height;
+
+    target.style.width &#x3D; width + &#x27;px&#x27;;
+    target.style.height &#x3D; height + &#x27;px&#x27;;
+    this.note.width &#x3D; width;
+    this.note.height &#x3D; height;
+
+    this.setAllHandleTransform();
+    this.edit();
+  }
+
+  deleteNote(): void {
+    this.deleteNoteEmitter.emit();
+  }
+
+  removeImage(fileId: number): void {
+    this.noteService
+      .removeImage(this.note.id!, fileId)
+      .subscribe((note: Note) &#x3D;&gt; {
+        this.note &#x3D; note;
+      })
+  }
+
+  edit(): void {
+    
+    this.noteService
+      .patchAttribute(this.note)
+      .subscribe((note: Note) &#x3D;&gt; {        
+        this.note &#x3D; note;
+      });
+  }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Color-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

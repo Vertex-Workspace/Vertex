@@ -1,0 +1,2847 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CardListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/reusable-components/card-list/card-list.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-card-list</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./card-list.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./card-list.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#creatorName" >creatorName</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                <a href="#dependencyName" >dependencyName</a>
+                            </li>
+                            <li>
+                                <a href="#faDoorOpen" >faDoorOpen</a>
+                            </li>
+                            <li>
+                                <a href="#faGear" >faGear</a>
+                            </li>
+                            <li>
+                                <a href="#faMessage" >faMessage</a>
+                            </li>
+                            <li>
+                                <a href="#faTrashCan" >faTrashCan</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#firstLetterName" >firstLetterName</a>
+                            </li>
+                            <li>
+                                <a href="#image" >image</a>
+                            </li>
+                            <li>
+                                <a href="#itemTodelete" >itemTodelete</a>
+                            </li>
+                            <li>
+                                <a href="#itemToDelete" >itemToDelete</a>
+                            </li>
+                            <li>
+                                <a href="#leaveBool" >leaveBool</a>
+                            </li>
+                            <li>
+                                <a href="#loggedUser" >loggedUser</a>
+                            </li>
+                            <li>
+                                <a href="#openModal" >openModal</a>
+                            </li>
+                            <li>
+                                <a href="#project" >project</a>
+                            </li>
+                            <li>
+                                <a href="#renderList" >renderList</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#close" >close</a>
+                            </li>
+                            <li>
+                                <a href="#deleteProject" >deleteProject</a>
+                            </li>
+                            <li>
+                                <a href="#deleteTeam" >deleteTeam</a>
+                            </li>
+                            <li>
+                                <a href="#emitItem" >emitItem</a>
+                            </li>
+                            <li>
+                                <a href="#getFirstLetter" >getFirstLetter</a>
+                            </li>
+                            <li>
+                                <a href="#getImage" >getImage</a>
+                            </li>
+                            <li>
+                                <a href="#hasImage" >hasImage</a>
+                            </li>
+                            <li>
+                                <a href="#leaveTeam" >leaveTeam</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openInformations" >openInformations</a>
+                            </li>
+                            <li>
+                                <a href="#openModalDelete" >openModalDelete</a>
+                            </li>
+                            <li>
+                                <a href="#openModalLeave" >openModalLeave</a>
+                            </li>
+                            <li>
+                                <a href="#openTeam" >openTeam</a>
+                            </li>
+                            <li>
+                                <a href="#openTeamInformations" >openTeamInformations</a>
+                            </li>
+                            <li>
+                                <a href="#setRenderList" >setRenderList</a>
+                            </li>
+                            <li>
+                                <a href="#updateProject" >updateProject</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#filterSearch" >filterSearch</a>
+                            </li>
+                            <li>
+                                <a href="#projects" >projects</a>
+                            </li>
+                            <li>
+                                <a href="#team" >team</a>
+                            </li>
+                            <li>
+                                <a href="#teams" >teams</a>
+                            </li>
+                            <li>
+                                <a href="#teamScreen" >teamScreen</a>
+                            </li>
+                            <li>
+                                <a href="#type" >type</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#emitterItem" >emitterItem</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, projectService: <a href="../injectables/ProjectService.html" target="_self">ProjectService</a>, route: ActivatedRoute, alertService: <a href="../injectables/AlertService.html" target="_self">AlertService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>projectService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterSearch"></a>
+                        <b>filterSearch</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:37</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="projects"></a>
+                        <b>projects</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:47</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="team"></a>
+                        <b>team</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Team.html" target="_self" >Team</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="teams"></a>
+                        <b>teams</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Team.html" target="_self" >Team[]</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:41</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="teamScreen"></a>
+                        <b>teamScreen</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:53</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <b>type</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:50</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emitterItem"></a>
+                        <b>emitterItem</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:56</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="close"></a>
+                    <span class="name">
+                        <span ><b>close</b></span>
+                        <a href="#close"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>close()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteProject"></a>
+                    <span class="name">
+                        <span ><b>deleteProject</b></span>
+                        <a href="#deleteProject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteProject(projectId: <a href="../classes/Project.html" target="_self">Project</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:181</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>projectId</td>
+                                            <td>
+                                                            <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteTeam"></a>
+                    <span class="name">
+                        <span ><b>deleteTeam</b></span>
+                        <a href="#deleteTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteTeam(teamId: <a href="../classes/Team.html" target="_self">Team</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>teamId</td>
+                                            <td>
+                                                            <code><a href="../classes/Team.html" target="_self" >Team</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emitItem"></a>
+                    <span class="name">
+                        <span ><b>emitItem</b></span>
+                        <a href="#emitItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>emitItem(event: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFirstLetter"></a>
+                    <span class="name">
+                        <span ><b>getFirstLetter</b></span>
+                        <a href="#getFirstLetter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFirstLetter(item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImage"></a>
+                    <span class="name">
+                        <span ><b>getImage</b></span>
+                        <a href="#getImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImage(item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasImage"></a>
+                    <span class="name">
+                        <span ><b>hasImage</b></span>
+                        <a href="#hasImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasImage(item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="leaveTeam"></a>
+                    <span class="name">
+                        <span ><b>leaveTeam</b></span>
+                        <a href="#leaveTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>leaveTeam(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="209"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:209</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openInformations"></a>
+                    <span class="name">
+                        <span ><b>openInformations</b></span>
+                        <a href="#openInformations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openInformations(project1: <a href="../classes/Project.html" target="_self">Project</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>project1</td>
+                                            <td>
+                                                            <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openModalDelete"></a>
+                    <span class="name">
+                        <span ><b>openModalDelete</b></span>
+                        <a href="#openModalDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openModalDelete(item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openModalLeave"></a>
+                    <span class="name">
+                        <span ><b>openModalLeave</b></span>
+                        <a href="#openModalLeave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openModalLeave(item: <a href="../classes/Team.html" target="_self">Team</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="204"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:204</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../classes/Team.html" target="_self" >Team</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTeam"></a>
+                    <span class="name">
+                        <span ><b>openTeam</b></span>
+                        <a href="#openTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openTeam(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTeamInformations"></a>
+                    <span class="name">
+                        <span ><b>openTeamInformations</b></span>
+                        <a href="#openTeamInformations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openTeamInformations(teamId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:197</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>teamId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setRenderList"></a>
+                    <span class="name">
+                        <span ><b>setRenderList</b></span>
+                        <a href="#setRenderList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setRenderList()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProject"></a>
+                    <span class="name">
+                        <span ><b>updateProject</b></span>
+                        <a href="#updateProject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateProject(project: <a href="../classes/Project.html" target="_self">Project</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>project</td>
+                                            <td>
+                                                            <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="creatorName"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>creatorName</b></span>
+                        <a href="#creatorName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dependencyName"></a>
+                    <span class="name">
+                        <span ><b>dependencyName</b></span>
+                        <a href="#dependencyName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faDoorOpen"></a>
+                    <span class="name">
+                        <span ><b>faDoorOpen</b></span>
+                        <a href="#faDoorOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faDoorOpen</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faGear"></a>
+                    <span class="name">
+                        <span ><b>faGear</b></span>
+                        <a href="#faGear"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faGear</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faMessage"></a>
+                    <span class="name">
+                        <span ><b>faMessage</b></span>
+                        <a href="#faMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faMessage</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTrashCan"></a>
+                    <span class="name">
+                        <span ><b>faTrashCan</b></span>
+                        <a href="#faTrashCan"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faTrashCan</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firstLetterName"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>firstLetterName</b></span>
+                        <a href="#firstLetterName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="image"></a>
+                    <span class="name">
+                        <span ><b>image</b></span>
+                        <a href="#image"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="itemTodelete"></a>
+                    <span class="name">
+                        <span ><b>itemTodelete</b></span>
+                        <a href="#itemTodelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Team.html" target="_self" >Team</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="202" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="itemToDelete"></a>
+                    <span class="name">
+                        <span ><b>itemToDelete</b></span>
+                        <a href="#itemToDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="leaveBool"></a>
+                    <span class="name">
+                        <span ><b>leaveBool</b></span>
+                        <a href="#leaveBool"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:201</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loggedUser"></a>
+                    <span class="name">
+                        <span ><b>loggedUser</b></span>
+                        <a href="#loggedUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openModal"></a>
+                    <span class="name">
+                        <span ><b>openModal</b></span>
+                        <a href="#openModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="project"></a>
+                    <span class="name">
+                        <span ><b>project</b></span>
+                        <a href="#project"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="renderList"></a>
+                    <span class="name">
+                        <span ><b>renderList</b></span>
+                        <a href="#renderList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/reusable-components/card-list/card-list.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, OnInit, Output } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { Team } from &#x27;src/app/models/class/team&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { ProjectService } from &#x27;src/app/services/project.service&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+import { faTrashCan, faGear, faMessage, faDoorOpen } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { User } from &#x27;src/app/models/class/user&#x27;;
+//  import { StringFilterUI } from &#x27;@syncfusion/ej2-angular-grids&#x27;;
+
+@Component({
+  selector: &#x27;app-card-list&#x27;,
+  templateUrl: &#x27;./card-list.component.html&#x27;,
+  styleUrls: [&#x27;./card-list.component.scss&#x27;]
+})
+export class CardListComponent implements OnInit {
+
+  constructor(
+    private router: Router,
+    private teamService: TeamService,
+    private userService: UserService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private alertService: AlertService
+  ) {
+    this.loggedUser &#x3D; this.userService.getLogged();
+  }
+
+  faTrashCan &#x3D; faTrashCan;
+  faGear &#x3D; faGear
+  faMessage &#x3D; faMessage;
+  faDoorOpen &#x3D; faDoorOpen;
+
+  @Input()
+  filterSearch !: string;
+
+
+  @Input()
+  teams?: Team[]; //se estiver na home
+
+  @Input()
+  team?: Team; //se estiver na tela projetos
+
+  @Input()
+  projects: Project[] &#x3D; []
+
+  @Input()
+  type !: string;
+
+  @Input()
+  teamScreen !: string;
+
+  @Output()
+  emitterItem &#x3D; new EventEmitter();
+
+  itemToDelete: any
+
+  delete: boolean &#x3D; false;
+
+
+  firstLetterName?: string
+
+  creatorName?: String
+
+  loggedUser!: User
+
+  image!: string
+
+  dependencyName !: string
+  renderList: any[] &#x3D; [];
+
+
+  ngOnChanges() {
+    this.setRenderList();
+
+  }
+
+  ngOnInit(): void {
+    this.setRenderList();
+  }
+
+
+  setRenderList() {
+    if (this.type &#x3D;&#x3D;&#x3D; &#x27;project&#x27;) {
+      this.renderList &#x3D; this.projects
+    } else if (this.type &#x3D;&#x3D;&#x3D; &#x27;team&#x27;) {
+      this.renderList &#x3D; this.teams!;
+    }
+  }
+
+  updateProject(project: Project) {
+    const projectTest: Project | undefined &#x3D; this.projects.find((p) &#x3D;&gt; p.id &#x3D;&#x3D; project.id);
+    if (projectTest !&#x3D;&#x3D; undefined) {
+      const index &#x3D; this.projects.indexOf(projectTest);
+      if (index !&#x3D;&#x3D; -1) {
+        this.projects.splice(index, 1, project); // Replace the old project with the updated one
+        this.setRenderList();
+      }
+    }
+    this.close();
+  }
+
+  openTeam(id: number) {
+    if (this.type &#x3D;&#x3D;&#x3D; &#x27;team&#x27;) {
+      this.router.navigate([&#x60;/equipe/${id}/projetos&#x60;]);
+    } else {
+      this.projectService.getOneById(id).subscribe((project: Project) &#x3D;&gt; {
+        this.router.navigate([&#x60;/projeto/${id}/tarefas&#x60;])
+      })
+    }
+  }
+
+  openModalDelete(item: any) {
+    this.delete &#x3D; !this.delete
+    this.itemToDelete &#x3D; item
+  }
+
+  close() {
+    this.openModal &#x3D; !this.openModal;
+    this.project &#x3D; null!
+  }
+
+  hasImage(item: any) {
+    if (this.type &#x3D;&#x3D;&#x3D; &#x27;team&#x27;) {
+      if (item.image !&#x3D; null) {
+        return item.image !&#x3D; null
+      }
+    } else if (this.type &#x3D;&#x3D;&#x3D; &#x27;project&#x27;) {
+      if (item.file !&#x3D; null) {
+        return item.file.file !&#x3D; null
+      }
+    }
+    return false;
+  }
+
+  getImage(item: any) {
+    if (!this.hasImage(item)) {
+      return &quot;&quot;;
+    }
+    let file: any;
+    if (this.type &#x3D;&#x3D;&#x3D; &#x27;team&#x27;) {
+      file &#x3D; item.image
+    } else {
+      file &#x3D; item.file.file
+    }
+    return file;
+  }
+
+
+  emitItem(event: boolean) {
+    if (this.teams &amp;&amp; event) {
+      this.deleteTeam(this.itemToDelete)
+    }
+    if (this.projects &amp;&amp; event) {
+      this.deleteProject(this.itemToDelete)
+    }
+    this.delete &#x3D; false;
+  }
+
+
+  getFirstLetter(item: any): string {
+    if (item.name !&#x3D; null) {
+      return item.name.substring(0, 1).toLocaleUpperCase();
+    }
+    return &quot;E&quot;;
+  }
+
+  openModal: boolean &#x3D; false;
+  project !: Project
+
+  openInformations(project1: Project) {
+    this.openModal &#x3D; !this.openModal;
+    this.project &#x3D; project1;
+    console.log(this.project);
+    const teamId: number &#x3D; Number(this.route.snapshot.paramMap.get(&#x27;id&#x27;));
+    this.project.idTeam &#x3D; teamId
+  }
+
+  deleteProject(projectId: Project): void {
+    this.projectService
+      .delete(projectId.id)
+      .subscribe((project) &#x3D;&gt; {
+        this.projects.splice(this.projects.indexOf(projectId), 1)
+      });
+  }
+
+  deleteTeam(teamId: Team): void {
+    this.teamService
+      .delete(teamId.id)
+      .subscribe((team) &#x3D;&gt; {
+        this.teams?.splice(this.teams.indexOf(teamId), 1)
+      });
+  }
+
+  openTeamInformations(teamId: number) {
+    this.router.navigate([&#x60;/equipe/${teamId}&#x60;])
+  }
+
+  leaveBool: boolean &#x3D; false;
+  itemTodelete !: Team
+
+  openModalLeave(item: Team) {
+    this.leaveBool &#x3D; !this.leaveBool
+    this.itemToDelete &#x3D; item
+  }
+
+  leaveTeam(event: any) {
+    if (event) {
+      this.teamService.deleteUserTeam(this.itemToDelete, this.userService.getLogged()).subscribe((team: Team) &#x3D;&gt; {
+        this.team &#x3D; team
+        this.teams?.splice(this.teams.indexOf(team), 1)
+      })
+    }
+    this.openModalLeave(null!)
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;list&quot;&gt;
+    &lt;div class&#x3D;&quot;container-custom&quot;&gt;
+
+        &lt;ng-container *ngFor&#x3D;&quot;let item of (renderList | namePipe : filterSearch)&quot;&gt;
+            &lt;div class&#x3D;&quot;card&quot;&gt;
+                &lt;div class&#x3D;&quot;flex flex-col w-full&quot;&gt;
+                    &lt;div class&#x3D;&quot;image flex justify-center items-center&quot; (click)&#x3D;&quot;openTeam(item.id)&quot;&gt;
+                        &lt;img src&#x3D;&quot;data:image/jpg;base64, {{getImage(item)}}&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot;h-full&quot;&gt;
+                        &lt;h1 *ngIf&#x3D;&quot;!hasImage(item)&quot;&gt;{{getFirstLetter(item)}}&lt;/h1&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;informations&quot;&gt;
+                        &lt;div class&#x3D;&quot;infos-team&quot; (click)&#x3D;&quot;openTeam(item.id)&quot;&gt;
+                            &lt;p class&#x3D;&quot;large-text&quot;&gt;{{item.name}}&lt;/p&gt;
+                            &lt;p class&#x3D;&quot;regular-text underline&quot; *ngIf&#x3D;&quot;teamScreen !&#x3D; &#x27;project&#x27;&quot; (click)&#x3D;&quot;openTeamInformations(item.id)&quot;&gt;Visualizar Informações&lt;/p&gt;
+                        &lt;/div&gt;
+
+                        &lt;div *ngIf&#x3D;&quot;(teamScreen &#x3D;&#x3D;&#x3D; &#x27;settings&#x27; || teamScreen &#x3D;&#x3D;&#x3D; &#x27;project&#x27;) &amp;&amp; item.isCreator&quot; class&#x3D;&quot;icon&quot;&gt;
+                            
+                            &lt;fa-icon [icon]&#x3D;&quot;faGear&quot; class&#x3D;&quot;trash-icon pr-4&quot; (click)&#x3D;&quot;openInformations(item)&quot;&gt;&lt;/fa-icon&gt;
+                            &lt;fa-icon [ngClass]&#x3D;&quot;teamScreen &#x3D;&#x3D;&#x3D; &#x27;settings&#x27; ? &#x27;pr-3&#x27; : &#x27;&#x27;&quot; [icon]&#x3D;&quot;faTrashCan&quot; class&#x3D;&quot;trash-icon&quot; (click)&#x3D;&quot;openModalDelete(item)&quot;&gt;&lt;/fa-icon&gt;
+                            &lt;fa-icon *ngIf&#x3D;&quot;teamScreen &#x3D;&#x3D;&#x3D; &#x27;settings&#x27;&quot; [icon]&#x3D;&quot;faDoorOpen&quot; class&#x3D;&quot;trash-icon&quot; (click)&#x3D;&quot;openModalLeave(item)&quot;&gt;&lt;/fa-icon&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/ng-container&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;app-create-team-project 
+[project]&#x3D;&quot;project&quot; 
+*ngIf&#x3D;&quot;openModal&quot; 
+[typeString]&#x3D;&quot;&#x27;projectInfo&#x27;&quot;
+[team]&#x3D;&quot;team&quot;
+(senderEmitter)&#x3D;&quot;updateProject($event)&quot; (close)&#x3D;&quot;close()&quot;&gt;
+&lt;/app-create-team-project&gt;            
+
+&lt;app-confirm-modal *ngIf&#x3D;&quot;delete &amp;&amp; type&#x3D;&#x3D;&#x3D;&#x27;project&#x27;&quot; [width]&#x3D;&quot;&#x27;450px&#x27;&quot; [height]&#x3D;&quot;&#x27;250px&#x27;&quot;
+                [title]&#x3D;&quot;&#x27; excluir o projeto&#x27;&quot; (close)&#x3D;&quot;emitItem($event)&quot;&gt;&lt;/app-confirm-modal&gt;
+&lt;app-confirm-modal *ngIf&#x3D;&quot;delete &amp;&amp; type&#x3D;&#x3D;&#x3D;&#x27;team&#x27;&quot; [width]&#x3D;&quot;&#x27;450px&#x27;&quot; [height]&#x3D;&quot;&#x27;250px&#x27;&quot; [title]&#x3D;&quot;&#x27;excluir a equipe&#x27;&quot;
+                (close)&#x3D;&quot;emitItem($event)&quot;&gt;&lt;/app-confirm-modal&gt;
+&lt;app-confirm-modal *ngIf&#x3D;&quot;leaveBool &amp;&amp; type&#x3D;&#x3D;&#x3D;&#x27;team&#x27;&quot; [width]&#x3D;&quot;&#x27;450px&#x27;&quot; [height]&#x3D;&quot;&#x27;250px&#x27;&quot; [title]&#x3D;&quot;&#x27;sair da equipe&#x27;&quot;
+                (close)&#x3D;&quot;leaveTeam($event)&quot;&gt;&lt;/app-confirm-modal&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./card-list.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../variables&#x27;;
+
+@media screen and (min-width: 1430px) {
+
+    .list{
+        @apply flex w-full h-[620px] flex-col gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+           @apply flex flex-wrap h-[300px] gap-[20px]
+        }
+    }
+    
+    .card{
+        @apply flex w-[380px] h-[380px] shadow-lg rounded-sm;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+        
+        &amp;:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300 brightness-90;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly
+            };
+            
+            .icon {
+                @apply flex items-center;
+            };
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text &gt; div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input &gt; div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
+    }
+    
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1430px) {
+
+    .list{
+        @apply flex w-full h-[620px] flex-col gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-col gap-4;
+        }
+    }
+    
+    .card{
+        @apply flex min-w-[300px] h-[300px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+        
+        &amp;:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text &gt; div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input &gt; div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
+    
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+}
+
+}
+
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    .list{
+        @apply flex w-full flex-wrap gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-wrap gap-4;
+        }
+    }
+
+    .card {
+        @apply flex w-[320px] h-[320px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+
+        &amp;:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text &gt; div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input &gt; div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
+    
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+    }
+}
+
+@media screen and (min-width: 460px) and (max-width: 749px) {
+
+    .list{
+        @apply flex w-full min-h-[10px] max-h-[650px] flex-wrap gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-wrap gap-4 w-full;
+        }
+    }
+    
+    .card{
+        @apply flex min-w-full h-[300px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+        
+        &amp;:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text &gt; div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input &gt; div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
+    
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+}
+}
+
+@media screen and (max-width: 460px) {
+
+    .list{
+        @apply flex w-full min-h-[10px] max-h-[650px] flex-wrap gap-[16px];
+        overflow-y: auto;
+
+        .container-custom {
+            @apply flex flex-wrap gap-4 w-full;
+        }
+    }
+    
+    .card{
+        @apply flex min-w-full h-[300px] shadow-lg rounded-sm flex-row;
+        background-color: $card;
+        font-family: $fontFamily;
+        color: $text;
+        cursor: pointer;
+        
+        &amp;:hover{
+            background-color: $secondColor;
+            @apply transition-colors duration-300;
+        }
+        
+        .image {
+            @apply flex h-4/6 w-full rounded-lg;
+            object-fit: cover;
+        }
+        
+        
+        .informations{
+            @apply flex h-2/6 w-full flex-row px-4 justify-evenly;
+            
+            .infos-team {
+                @apply w-full flex flex-col justify-evenly;
+            }
+            
+            .icon {
+                @apply flex items-end justify-end pb-6;
+            }
+        }
+        
+        .informations-text{
+            @apply flex w-full h-5/6 flex-row pt-2 justify-between;
+        }
+        .informations-text &gt; div{
+            @apply flex flex-col items-end;
+        }
+        .informations-input{
+            @apply flex w-full h-1/6 flex-row justify-between;
+        }
+        .informations-input &gt; div{
+            @apply flex w-[15%] h-full flex-row justify-between;
+            
+            i{
+                @apply flex text-xl;
+                color: $primaryColor;
+            }
+        }
+    
+    .modal {
+        @apply flex flex-col items-center justify-center w-full h-full pb-16;
+        
+        div{
+            @apply flex flex-row;
+        }
+    }
+}
+}
+    
+
+.trash-icon {
+    color: $primaryColor;
+    font-size: 1.25rem;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="list">    <div class="container-custom">        <ng-container *ngFor="let item of (renderList | namePipe : filterSearch)">            <div class="card">                <div class="flex flex-col w-full">                    <div class="image flex justify-center items-center" (click)="openTeam(item.id)">                        <img src="data:image/jpg;base64, {{getImage(item)}}" alt="" class="h-full">                        <h1 *ngIf="!hasImage(item)">{{getFirstLetter(item)}}</h1>                    </div>                    <div class="informations">                        <div class="infos-team" (click)="openTeam(item.id)">                            <p class="large-text">{{item.name}}</p>                            <p class="regular-text underline" *ngIf="teamScreen != \'project\'" (click)="openTeamInformations(item.id)">Visualizar Informações</p>                        </div>                        <div *ngIf="(teamScreen === \'settings\' || teamScreen === \'project\') && item.isCreator" class="icon">                                                        <fa-icon [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>                            <fa-icon [ngClass]="teamScreen === \'settings\' ? \'pr-3\' : \'\'" [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>                            <fa-icon *ngIf="teamScreen === \'settings\'" [icon]="faDoorOpen" class="trash-icon" (click)="openModalLeave(item)"></fa-icon>                        </div>                    </div>                </div>            </div>        </ng-container>    </div></div><app-create-team-project [project]="project" *ngIf="openModal" [typeString]="\'projectInfo\'"[team]="team"(senderEmitter)="updateProject($event)" (close)="close()"></app-create-team-project>            <app-confirm-modal *ngIf="delete && type===\'project\'" [width]="\'450px\'" [height]="\'250px\'"                [title]="\' excluir o projeto\'" (close)="emitItem($event)"></app-confirm-modal><app-confirm-modal *ngIf="delete && type===\'team\'" [width]="\'450px\'" [height]="\'250px\'" [title]="\'excluir a equipe\'"                (close)="emitItem($event)"></app-confirm-modal><app-confirm-modal *ngIf="leaveBool && type===\'team\'" [width]="\'450px\'" [height]="\'250px\'" [title]="\'sair da equipe\'"                (close)="leaveTeam($event)"></app-confirm-modal></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CardListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CardListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

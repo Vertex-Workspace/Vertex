@@ -1,0 +1,2132 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ModalPropertiesComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/modals/properties/modal-properties.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-modal-properties</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./modal-properties.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./modal-properties.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#canCreate" >canCreate</a>
+                            </li>
+                            <li>
+                                <a href="#canDelete" >canDelete</a>
+                            </li>
+                            <li>
+                                <a href="#canEdit" >canEdit</a>
+                            </li>
+                            <li>
+                                <a href="#currentModal" >currentModal</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                <a href="#faArrowLeft" >faArrowLeft</a>
+                            </li>
+                            <li>
+                                <a href="#faCalendarDays" >faCalendarDays</a>
+                            </li>
+                            <li>
+                                <a href="#faCaretDown" >faCaretDown</a>
+                            </li>
+                            <li>
+                                <a href="#faEye" >faEye</a>
+                            </li>
+                            <li>
+                                <a href="#faEyeSlash" >faEyeSlash</a>
+                            </li>
+                            <li>
+                                <a href="#faFont" >faFont</a>
+                            </li>
+                            <li>
+                                <a href="#faPlus" >faPlus</a>
+                            </li>
+                            <li>
+                                <a href="#faSpinner" >faSpinner</a>
+                            </li>
+                            <li>
+                                <a href="#faTrashCan" >faTrashCan</a>
+                            </li>
+                            <li>
+                                <a href="#faXmark" >faXmark</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#footerText" >footerText</a>
+                            </li>
+                            <li>
+                                <a href="#from" >from</a>
+                            </li>
+                            <li>
+                                <a href="#propertiesType" >propertiesType</a>
+                            </li>
+                            <li>
+                                <a href="#property" >property</a>
+                            </li>
+                            <li>
+                                <a href="#propertyListColor" >propertyListColor</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#text" >text</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#arrowLeft" >arrowLeft</a>
+                            </li>
+                            <li>
+                                <a href="#changePropertyListColor" >changePropertyListColor</a>
+                            </li>
+                            <li>
+                                <a href="#closeModal" >closeModal</a>
+                            </li>
+                            <li>
+                                <a href="#defineItemsSelectionPathBack" >defineItemsSelectionPathBack</a>
+                            </li>
+                            <li>
+                                <a href="#editTask" >editTask</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openColors" >openColors</a>
+                            </li>
+                            <li>
+                                <a href="#openStatus" >openStatus</a>
+                            </li>
+                            <li>
+                                <a href="#updateProject" >updateProject</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#height" >height</a>
+                            </li>
+                            <li>
+                                <a href="#project" >project</a>
+                            </li>
+                            <li>
+                                <a href="#width" >width</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeProjectSettings" >changeProjectSettings</a>
+                            </li>
+                            <li>
+                                <a href="#close" >close</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(propertyService: <a href="../injectables/PropertyService.html" target="_self">PropertyService</a>, alertService: <a href="../injectables/AlertService.html" target="_self">AlertService</a>, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:62</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>propertyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PropertyService.html" target="_self" >PropertyService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="height"></a>
+                        <b>height</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:45</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="project"></a>
+                        <b>project</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:42</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="width"></a>
+                        <b>width</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:48</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changeProjectSettings"></a>
+                        <b>changeProjectSettings</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:51</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="close"></a>
+                        <b>close</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:39</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="arrowLeft"></a>
+                    <span class="name">
+                        <span ><b>arrowLeft</b></span>
+                        <a href="#arrowLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>arrowLeft()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changePropertyListColor"></a>
+                    <span class="name">
+                        <span ><b>changePropertyListColor</b></span>
+                        <a href="#changePropertyListColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changePropertyListColor(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModal"></a>
+                    <span class="name">
+                        <span ><b>closeModal</b></span>
+                        <a href="#closeModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defineItemsSelectionPathBack"></a>
+                    <span class="name">
+                        <span ><b>defineItemsSelectionPathBack</b></span>
+                        <a href="#defineItemsSelectionPathBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>defineItemsSelectionPathBack(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editTask"></a>
+                    <span class="name">
+                        <span ><b>editTask</b></span>
+                        <a href="#editTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editTask(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openColors"></a>
+                    <span class="name">
+                        <span ><b>openColors</b></span>
+                        <a href="#openColors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openColors(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openStatus"></a>
+                    <span class="name">
+                        <span ><b>openStatus</b></span>
+                        <a href="#openStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openStatus(property: <a href="../classes/Property.html" target="_self">Property</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>property</td>
+                                            <td>
+                                                            <code><a href="../classes/Property.html" target="_self" >Property</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProject"></a>
+                    <span class="name">
+                        <span ><b>updateProject</b></span>
+                        <a href="#updateProject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateProject(project: <a href="../classes/Project.html" target="_self">Project</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>project</td>
+                                            <td>
+                                                            <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canCreate"></a>
+                    <span class="name">
+                        <span ><b>canCreate</b></span>
+                        <a href="#canCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canDelete"></a>
+                    <span class="name">
+                        <span ><b>canDelete</b></span>
+                        <a href="#canDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canEdit"></a>
+                    <span class="name">
+                        <span ><b>canEdit</b></span>
+                        <a href="#canEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentModal"></a>
+                    <span class="name">
+                        <span ><b>currentModal</b></span>
+                        <a href="#currentModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;general&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faArrowLeft"></a>
+                    <span class="name">
+                        <span ><b>faArrowLeft</b></span>
+                        <a href="#faArrowLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faArrowLeft</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCalendarDays"></a>
+                    <span class="name">
+                        <span ><b>faCalendarDays</b></span>
+                        <a href="#faCalendarDays"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCalendarDays</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCaretDown"></a>
+                    <span class="name">
+                        <span ><b>faCaretDown</b></span>
+                        <a href="#faCaretDown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCaretDown</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faEye"></a>
+                    <span class="name">
+                        <span ><b>faEye</b></span>
+                        <a href="#faEye"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faEye</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faEyeSlash"></a>
+                    <span class="name">
+                        <span ><b>faEyeSlash</b></span>
+                        <a href="#faEyeSlash"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faEyeSlash</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faFont"></a>
+                    <span class="name">
+                        <span ><b>faFont</b></span>
+                        <a href="#faFont"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faFont</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPlus"></a>
+                    <span class="name">
+                        <span ><b>faPlus</b></span>
+                        <a href="#faPlus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPlus</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faSpinner"></a>
+                    <span class="name">
+                        <span ><b>faSpinner</b></span>
+                        <a href="#faSpinner"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faSpinner</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTrashCan"></a>
+                    <span class="name">
+                        <span ><b>faTrashCan</b></span>
+                        <a href="#faTrashCan"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faTrashCan</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faXmark"></a>
+                    <span class="name">
+                        <span ><b>faXmark</b></span>
+                        <a href="#faXmark"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faXmark</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="footerText"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>footerText</b></span>
+                        <a href="#footerText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Adicionar Propriedade&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="from"></a>
+                    <span class="name">
+                        <span ><b>from</b></span>
+                        <a href="#from"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="propertiesType"></a>
+                    <span class="name">
+                        <span ><b>propertiesType</b></span>
+                        <a href="#propertiesType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="property"></a>
+                    <span class="name">
+                        <span ><b>property</b></span>
+                        <a href="#property"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Property.html" target="_self" >Property</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="propertyListColor"></a>
+                    <span class="name">
+                        <span ><b>propertyListColor</b></span>
+                        <a href="#propertyListColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="text"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>text</b></span>
+                        <a href="#text"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Propriedades&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/modals/properties/modal-properties.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import {
+  faArrowLeft, faXmark, faPlus, faTrashCan, faEye, faEyeSlash,
+  faFont, faCalendarDays, faSpinner, faCaretDown
+} from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { elements } from &#x27;chart.js&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { Property, PropertyList } from &#x27;src/app/models/class/property&#x27;;
+import { Permission, PermissionsType } from &#x27;src/app/models/class/user&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { ProjectService } from &#x27;src/app/services/project.service&#x27;;
+import { PropertyService } from &#x27;src/app/services/property.service&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+
+@Component({
+  selector: &#x27;app-modal-properties&#x27;,
+  templateUrl: &#x27;./modal-properties.component.html&#x27;,
+  styleUrls: [&#x27;./modal-properties.component.scss&#x27;]
+})
+export class ModalPropertiesComponent {
+
+  faArrowLeft &#x3D; faArrowLeft;
+  faXmark &#x3D; faXmark;
+  faPlus &#x3D; faPlus;
+  faTrashCan &#x3D; faTrashCan;
+  faEye &#x3D; faEye;
+  faEyeSlash &#x3D; faEyeSlash;
+  faFont &#x3D; faFont;
+  faCalendarDays &#x3D; faCalendarDays;
+  faSpinner &#x3D; faSpinner;
+  faCaretDown &#x3D; faCaretDown;
+  currentModal: string &#x3D; &#x27;general&#x27;;
+  text?: string &#x3D; &#x27;Propriedades&#x27;;
+  footerText?: string &#x3D; &#x27;Adicionar Propriedade&#x27;;
+  propertiesType: any;
+
+  @Output()
+  close &#x3D; new EventEmitter&lt;Event&gt;();
+
+  @Input()
+  project!: Project;
+
+  @Input()
+  height?: String;
+
+  @Input()
+  width?: String;
+
+  @Output()
+  changeProjectSettings &#x3D; new EventEmitter&lt;Project&gt;();
+
+  canCreate : boolean &#x3D; false;
+  canEdit: boolean &#x3D; false;
+  canDelete: boolean &#x3D; false;
+  delete: boolean &#x3D; false;
+
+  closeModal() {
+    this.close.emit();
+  }
+
+  property!: Property;
+
+  constructor(private propertyService: PropertyService,
+    private alertService: AlertService,
+    private teamService: TeamService,
+    private userService: UserService) { }
+
+  ngOnInit() {
+    this.teamService.getPermission(this.project.idTeam, this.userService.getLogged().id!).subscribe((permissions: Permission[]) &#x3D;&gt; {
+      for (const permission of permissions) {
+        if (permission.name &#x3D;&#x3D;&#x3D; PermissionsType.DELETE &amp;&amp; permission.enabled) {
+          this.canDelete &#x3D; true;
+        } else if (permission.name &#x3D;&#x3D;&#x3D; PermissionsType.EDIT &amp;&amp; permission.enabled) {
+          this.canEdit &#x3D; true;
+        } else if (permission.name &#x3D;&#x3D;&#x3D; PermissionsType.CREATE &amp;&amp; permission.enabled) {
+          this.canCreate &#x3D; true;
+        }
+      }
+    })
+    
+  }
+
+
+  editTask(type: string, event: any) {
+    this.property &#x3D; event;
+    this.currentModal &#x3D; type;
+    if (type &#x3D;&#x3D;&#x3D; &#x27;items-selection&#x27;) {
+      this.text &#x3D; &#x27;Itens de Seleção&#x27;
+    } else if (type &#x3D;&#x3D;&#x3D; &#x27;edit&#x27;) {
+      this.text &#x3D; &#x27;Edite a Propriedade&#x27;
+    }
+  }
+
+  propertyListColor!: PropertyList;
+  openColors(type: string, propertyList: PropertyList) {
+    if (type &#x3D;&#x3D; &#x27;items-selection&#x27;) {
+      this.from &#x3D; &#x27;items-selection&#x27;;
+    } else if (type &#x3D;&#x3D; &#x27;status&#x27;) {
+      this.from &#x3D; &#x27;status&#x27;;
+    }
+    this.propertyListColor &#x3D; propertyList;
+    this.currentModal &#x3D; &#x27;colors&#x27;
+    this.text &#x3D; &quot;Cores&quot;
+  }
+
+  //Determines the arrow back behavior
+  from!: String;
+  arrowLeft() {
+    if (this.currentModal &#x3D;&#x3D;&#x3D; &#x27;edit&#x27; || this.currentModal &#x3D;&#x3D;&#x3D; &#x27;status&#x27; || (this.currentModal &#x3D;&#x3D;&#x3D; &#x27;items-selection&#x27; &amp;&amp; this.from !&#x3D; &#x27;edit&#x27;)) {
+      this.currentModal &#x3D; &#x27;general&#x27;;
+      this.text &#x3D; &#x27;Propriedades&#x27;
+    } else if (this.currentModal &#x3D;&#x3D;&#x3D; &#x27;items-selection&#x27; &amp;&amp; this.from &#x3D;&#x3D; &#x27;edit&#x27;) {
+      this.currentModal &#x3D; &#x27;edit&#x27;;
+      this.text &#x3D; &#x27;Edite a Propriedade&#x27;
+    } else if (this.currentModal &#x3D;&#x3D;&#x3D; &#x27;colors&#x27; &amp;&amp; this.from &#x3D;&#x3D; &#x27;items-selection&#x27;) {
+      this.currentModal &#x3D; &#x27;items-selection&#x27;;
+      this.text &#x3D; &#x27;Itens de Seleção&#x27;
+    } else if (this.currentModal &#x3D;&#x3D;&#x3D; &#x27;colors&#x27; &amp;&amp; this.from &#x3D;&#x3D; &#x27;status&#x27;) {
+      this.currentModal &#x3D; &#x27;status&#x27;;
+      this.text &#x3D; &#x27;Status&#x27;
+    }
+
+
+  }
+
+  defineItemsSelectionPathBack(event: any) {
+    if (event &#x3D;&#x3D; undefined) {
+      this.from &#x3D; &#x27;general&#x27;;
+    } else {
+      this.currentModal &#x3D; &#x27;items-selection&#x27;;
+      this.text &#x3D; &#x27;Edite a Propriedade&#x27;
+      this.from &#x3D; &#x27;edit&#x27;;
+      this.property &#x3D; event;
+    }
+  }
+
+  changePropertyListColor(propertyList: PropertyList): void {
+    this.propertyService.changeColor(propertyList).subscribe(
+      (propertyResponse) &#x3D;&gt; {
+        this.project.properties!.forEach((property: Property) &#x3D;&gt; {
+          if (property.id &#x3D;&#x3D;&#x3D; propertyResponse.id) {
+            property &#x3D; propertyResponse;
+            this.property &#x3D; propertyResponse;
+          }
+        });
+      }
+    );
+  }
+  updateProject(project: Project) {
+    this.project &#x3D; project;
+    this.changeProjectSettings.emit(project);
+  }
+
+
+  openStatus(property: Property) {
+    this.currentModal &#x3D; &#x27;status&#x27;;
+    this.text &#x3D; &#x27;Status&#x27;;
+    this.from &#x3D; &#x27;general&#x27;;
+    this.property &#x3D; property;
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;modal-overlay z-[999]&quot; &gt;
+    &lt;div class&#x3D;&quot;modal&quot; [style.height]&#x3D;&quot;height&quot; [style.width]&#x3D;&quot;width&quot;&gt;
+
+        &lt;!-- Properties and X button --&gt;
+        &lt;div class&#x3D;&quot;exitModal&quot;&gt;
+            &lt;div&gt;
+                &lt;fa-icon [icon]&#x3D;&quot;faArrowLeft&quot; class&#x3D;&quot;icon&quot; (click)&#x3D;&quot;arrowLeft()&quot;
+                    *ngIf&#x3D;&quot;currentModal !&#x3D; &#x27;general&#x27;&quot;&gt;&lt;/fa-icon&gt;
+                &lt;p class&#x3D;&quot;large-text&quot;&gt;{{text}}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+                &lt;fa-icon [icon]&#x3D;&quot;faXmark&quot; class&#x3D;&quot;iconX&quot; (click)&#x3D;&quot;closeModal()&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;flex w-full h-full items-center z-[999]&quot;&gt;
+
+            &lt;app-general-properties (select)&#x3D;&quot;editTask(&#x27;items-selection&#x27;, $event)&quot; (edit)&#x3D;&quot;editTask(&#x27;edit&#x27;, $event)&quot;
+                class&#x3D;&quot;pattern-style&quot; *ngIf&#x3D;&quot;currentModal &#x3D;&#x3D;&#x3D; &#x27;general&#x27;&quot; [project]&#x3D;&quot;project&quot;
+                style&#x3D;&quot;width: 100%; height: 100%;&quot; (status)&#x3D;&quot;openStatus($event)&quot; (changeProject)&#x3D;&quot;updateProject($event)&quot;
+                (openNewProperty)&#x3D;&quot;editTask(&#x27;edit&#x27;, $event)&quot;
+                [canCreate]&#x3D;&quot;canCreate&quot; [canEdit]&#x3D;&quot;canEdit&quot; [canDelete]&#x3D;&quot;canDelete&quot;
+                &gt;
+            &lt;/app-general-properties&gt;
+
+            &lt;app-edit-properties [project]&#x3D;&quot;project&quot; [property]&#x3D;&quot;property&quot;
+                (confirmChanges)&#x3D;&quot;editTask(&#x27;general&#x27;, $event)&quot; class&#x3D;&quot;pattern-style&quot; *ngIf&#x3D;&quot;currentModal &#x3D;&#x3D;&#x3D; &#x27;edit&#x27;&quot;
+                (from)&#x3D;&quot;defineItemsSelectionPathBack($event)&quot; (changeProject)&#x3D;&quot;updateProject($event)&quot; /&gt;
+
+            &lt;!-- REQUIREMENTS --&gt;
+
+            &lt;app-colors class&#x3D;&quot;pattern-style&quot; *ngIf&#x3D;&quot;currentModal &#x3D;&#x3D;&#x3D; &#x27;colors&#x27;&quot; [propertyList]&#x3D;&quot;propertyListColor&quot;
+                (changeColor)&#x3D;&quot;changePropertyListColor($event)&quot;&gt;&lt;/app-colors&gt;
+
+            &lt;app-status (pencil)&#x3D;&quot;openColors(&#x27;status&#x27;, $event)&quot; [property]&#x3D;&quot;property&quot; [project]&#x3D;&quot;project&quot;
+                [canCreate]&#x3D;&quot;canCreate&quot; [canEdit]&#x3D;&quot;canEdit&quot; [canDelete]&#x3D;&quot;canDelete&quot;
+                class&#x3D;&quot;pattern-style&quot; *ngIf&#x3D;&quot;currentModal &#x3D;&#x3D;&#x3D; &#x27;status&#x27;&quot; (changeProject)&#x3D;&quot;updateProject($event)&quot;/&gt;
+
+
+            &lt;app-items-selection (pencil)&#x3D;&quot;openColors(&#x27;items-selection&#x27;, $event)&quot; class&#x3D;&quot;pattern-style&quot;
+            [canCreate]&#x3D;&quot;canCreate&quot; [canEdit]&#x3D;&quot;canEdit&quot; [canDelete]&#x3D;&quot;canDelete&quot;
+                *ngIf&#x3D;&quot;currentModal &#x3D;&#x3D;&#x3D; &#x27;items-selection&#x27;&quot; [property]&#x3D;&quot;property&quot;
+                [project]&#x3D;&quot;project&quot; (changeProject)&#x3D;&quot;updateProject($event)&quot;&gt;&lt;/app-items-selection&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./modal-properties.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../variables&#x27;;
+
+@media screen and (min-width: 524px) {
+
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+
+    }
+    
+    .exitModal {
+        @apply flex w-full h-[60px] justify-between items-center px-4;
+        color: $primaryColor;
+        border-bottom: 2px solid $emphasis;
+        
+        div:first-child {
+            @apply w-[60%] flex items-center;
+        }
+    }
+    
+    p{
+        @apply pl-3;
+    }
+    
+    .modal {
+        @apply absolute w-1/4 h-2/5 rounded-md flex flex-col 
+        items-center justify-start text-center pt-6 border-t-8;
+        background-color: $secondColor;
+        border-color: $primaryColor;
+    }
+    
+    .icon {
+        color: $primaryColor;
+        font-size: 1rem;
+    }
+    p{
+        @apply flex justify-start items-start;
+        color:$primaryColor;
+    }
+    
+    .new-property {
+        @apply flex w-full items-center pt-3;
+        
+        p{
+            @apply pl-3 flex items-center;
+        }
+    }
+    
+    .footer-border {
+        @apply border-[#092C4C] border-t
+    }
+    
+    .iconX {
+        color:$primaryColor;
+        font-size: 1.5rem;
+    }
+    
+    .pattern-style {
+        width: 100%; 
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 524px) {
+
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+
+    }
+    
+    .exitModal {
+        @apply flex w-full h-[60px] justify-between items-center px-4;
+        color: $primaryColor;
+        border-bottom: 2px solid $emphasis;
+        
+        div:first-child {
+            @apply w-[60%] flex items-center;
+        }
+    }
+    
+    p{
+        @apply pl-3;
+    }
+    
+    .modal {
+        @apply absolute min-w-full min-h-full flex flex-col 
+        items-center justify-start text-center pt-6 z-[999];
+        background-color: $secondColor;
+    }
+    
+    .icon {
+        color: $primaryColor;
+        font-size: 1rem;
+    }
+    p{
+        @apply flex justify-start items-start;
+        color:$primaryColor;
+    }
+    
+    .new-property {
+        @apply flex w-full items-center pt-3;
+        
+        p{
+            @apply pl-3 flex items-center;
+        }
+    }
+    
+    .footer-border {
+        @apply border-[#092C4C] border-t
+    }
+    
+    .iconX {
+        color:$primaryColor;
+        font-size: 1.5rem;
+    }
+    
+    .pattern-style {
+        width: 100%; 
+        height: 100%;
+    }
+}
+    
+    
+    
+    
+    
+    </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="modal-overlay z-[999]" >    <div class="modal" [style.height]="height" [style.width]="width">        <!-- Properties and X button -->        <div class="exitModal">            <div>                <fa-icon [icon]="faArrowLeft" class="icon" (click)="arrowLeft()"                    *ngIf="currentModal != \'general\'"></fa-icon>                <p class="large-text">{{text}}</p>            </div>            <div>                <fa-icon [icon]="faXmark" class="iconX" (click)="closeModal()"></fa-icon>            </div>        </div>                <div class="flex w-full h-full items-center z-[999]">            <app-general-properties (select)="editTask(\'items-selection\', $event)" (edit)="editTask(\'edit\', $event)"                class="pattern-style" *ngIf="currentModal === \'general\'" [project]="project"                style="width: 100%; height: 100%;" (status)="openStatus($event)" (changeProject)="updateProject($event)"                (openNewProperty)="editTask(\'edit\', $event)"                [canCreate]="canCreate" [canEdit]="canEdit" [canDelete]="canDelete"                >            </app-general-properties>            <app-edit-properties [project]="project" [property]="property"                (confirmChanges)="editTask(\'general\', $event)" class="pattern-style" *ngIf="currentModal === \'edit\'"                (from)="defineItemsSelectionPathBack($event)" (changeProject)="updateProject($event)" />            <!-- REQUIREMENTS -->            <app-colors class="pattern-style" *ngIf="currentModal === \'colors\'" [propertyList]="propertyListColor"                (changeColor)="changePropertyListColor($event)"></app-colors>            <app-status (pencil)="openColors(\'status\', $event)" [property]="property" [project]="project"                [canCreate]="canCreate" [canEdit]="canEdit" [canDelete]="canDelete"                class="pattern-style" *ngIf="currentModal === \'status\'" (changeProject)="updateProject($event)"/>            <app-items-selection (pencil)="openColors(\'items-selection\', $event)" class="pattern-style"            [canCreate]="canCreate" [canEdit]="canEdit" [canDelete]="canDelete"                *ngIf="currentModal === \'items-selection\'" [property]="property"                [project]="project" (changeProject)="updateProject($event)"></app-items-selection>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ModalPropertiesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ModalPropertiesComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

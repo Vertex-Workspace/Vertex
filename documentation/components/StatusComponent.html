@@ -1,0 +1,2070 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StatusComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/modals/properties/status/status.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-status</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./status.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./status.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#colorModal" >colorModal</a>
+                            </li>
+                            <li>
+                                <a href="#deleteBoolean" >deleteBoolean</a>
+                            </li>
+                            <li>
+                                <a href="#faArrowLeft" >faArrowLeft</a>
+                            </li>
+                            <li>
+                                <a href="#faEllipsisVertical" >faEllipsisVertical</a>
+                            </li>
+                            <li>
+                                <a href="#faInfoCircle" >faInfoCircle</a>
+                            </li>
+                            <li>
+                                <a href="#faPaintBrush" >faPaintBrush</a>
+                            </li>
+                            <li>
+                                <a href="#faPlus" >faPlus</a>
+                            </li>
+                            <li>
+                                <a href="#faTrashCan" >faTrashCan</a>
+                            </li>
+                            <li>
+                                <a href="#initialProperty" >initialProperty</a>
+                            </li>
+                            <li>
+                                <a href="#nameEdit" >nameEdit</a>
+                            </li>
+                            <li>
+                                <a href="#propertyListNameEditId" >propertyListNameEditId</a>
+                            </li>
+                            <li>
+                                <a href="#propertyListToDelete" >propertyListToDelete</a>
+                            </li>
+                            <li>
+                                <a href="#statusList" >statusList</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#add" >add</a>
+                            </li>
+                            <li>
+                                <a href="#clickPencil" >clickPencil</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                <a href="#drop" >drop</a>
+                            </li>
+                            <li>
+                                <a href="#editName" >editName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getPropertiesKind" >getPropertiesKind</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openModalDelete" >openModalDelete</a>
+                            </li>
+                            <li>
+                                <a href="#saveName" >saveName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#saveProperty" >saveProperty</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#canCreate" >canCreate</a>
+                            </li>
+                            <li>
+                                <a href="#canDelete" >canDelete</a>
+                            </li>
+                            <li>
+                                <a href="#canEdit" >canEdit</a>
+                            </li>
+                            <li>
+                                <a href="#project" >project</a>
+                            </li>
+                            <li>
+                                <a href="#property" >property</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeProject" >changeProject</a>
+                            </li>
+                            <li>
+                                <a href="#pencil" >pencil</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(propertyService: <a href="../injectables/PropertyService.html" target="_self">PropertyService</a>, alertService: <a href="../injectables/AlertService.html" target="_self">AlertService</a>, projectService: <a href="../injectables/ProjectService.html" target="_self">ProjectService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:55</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>propertyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PropertyService.html" target="_self" >PropertyService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>projectService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canCreate"></a>
+                        <b>canCreate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:51</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canDelete"></a>
+                        <b>canDelete</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:47</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canEdit"></a>
+                        <b>canEdit</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="project"></a>
+                        <b>project</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:41</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="property"></a>
+                        <b>property</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Property.html" target="_self" >Property</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changeProject"></a>
+                        <b>changeProject</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:37</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pencil"></a>
+                        <b>pencil</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:34</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="add"></a>
+                    <span class="name">
+                        <span ><b>add</b></span>
+                        <a href="#add"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>add(status: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clickPencil"></a>
+                    <span class="name">
+                        <span ><b>clickPencil</b></span>
+                        <a href="#clickPencil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clickPencil(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="drop"></a>
+                    <span class="name">
+                        <span ><b>drop</b></span>
+                        <a href="#drop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>drop(event: CdkDragDrop<any[]>, status: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>CdkDragDrop&lt;any[]&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editName"></a>
+                    <span class="name">
+                        <span ><b>editName</b></span>
+                        <a href="#editName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editName(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPropertiesKind"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getPropertiesKind</b></span>
+                        <a href="#getPropertiesKind"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPropertiesKind()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openModalDelete"></a>
+                    <span class="name">
+                        <span ><b>openModalDelete</b></span>
+                        <a href="#openModalDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openModalDelete(property: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:207</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>property</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveName"></a>
+                    <span class="name">
+                        <span ><b>saveName</b></span>
+                        <a href="#saveName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveName(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveProperty"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>saveProperty</b></span>
+                        <a href="#saveProperty"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveProperty()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="colorModal"></a>
+                    <span class="name">
+                        <span ><b>colorModal</b></span>
+                        <a href="#colorModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteBoolean"></a>
+                    <span class="name">
+                        <span ><b>deleteBoolean</b></span>
+                        <a href="#deleteBoolean"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faArrowLeft"></a>
+                    <span class="name">
+                        <span ><b>faArrowLeft</b></span>
+                        <a href="#faArrowLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faArrowLeft</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faEllipsisVertical"></a>
+                    <span class="name">
+                        <span ><b>faEllipsisVertical</b></span>
+                        <a href="#faEllipsisVertical"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faEllipsisVertical</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faInfoCircle"></a>
+                    <span class="name">
+                        <span ><b>faInfoCircle</b></span>
+                        <a href="#faInfoCircle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faInfoCircle</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPaintBrush"></a>
+                    <span class="name">
+                        <span ><b>faPaintBrush</b></span>
+                        <a href="#faPaintBrush"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPaintBrush</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPlus"></a>
+                    <span class="name">
+                        <span ><b>faPlus</b></span>
+                        <a href="#faPlus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPlus</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTrashCan"></a>
+                    <span class="name">
+                        <span ><b>faTrashCan</b></span>
+                        <a href="#faTrashCan"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faTrashCan</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialProperty"></a>
+                    <span class="name">
+                        <span ><b>initialProperty</b></span>
+                        <a href="#initialProperty"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Property.html" target="_self" >Property</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nameEdit"></a>
+                    <span class="name">
+                        <span ><b>nameEdit</b></span>
+                        <a href="#nameEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:161</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="propertyListNameEditId"></a>
+                    <span class="name">
+                        <span ><b>propertyListNameEditId</b></span>
+                        <a href="#propertyListNameEditId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="propertyListToDelete"></a>
+                    <span class="name">
+                        <span ><b>propertyListToDelete</b></span>
+                        <a href="#propertyListToDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statusList"></a>
+                    <span class="name">
+                        <span ><b>statusList</b></span>
+                        <a href="#statusList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      kind: PropertyListKind.TODO,
+      name: &#x27;Não iniciado&#x27;,
+      color: &quot;#ffe2dd&quot;,
+      properties: []
+    },
+    {
+      kind: PropertyListKind.DOING,
+      name: &#x27;Em andamento&#x27;,
+      color: &quot;#fdecc8&quot;,
+      properties: []
+    },
+    {
+      kind: PropertyListKind.DONE,
+      name: &#x27;Concluída&#x27;,
+      color: &quot;#dbeddb&quot;,
+      properties: []
+    }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/modals/properties/status/status.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CdkDragDrop, moveItemInArray, transferArrayItem } from &#x27;@angular/cdk/drag-drop&#x27;;
+import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import {
+  faArrowLeft, faPaintBrush, faTrashCan, faEllipsisVertical,
+  faPlus,
+  faInfoCircle
+} from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { Property, PropertyList, PropertyListKind } from &#x27;src/app/models/class/property&#x27;;
+import { Permission, PermissionsType } from &#x27;src/app/models/class/user&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { ProjectService } from &#x27;src/app/services/project.service&#x27;;
+import { PropertyService } from &#x27;src/app/services/property.service&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+
+@Component({
+  selector: &#x27;app-status&#x27;,
+  templateUrl: &#x27;./status.component.html&#x27;,
+  styleUrls: [&#x27;./status.component.scss&#x27;]
+})
+export class StatusComponent {
+
+  faArrowLeft &#x3D; faArrowLeft;
+  faPaintBrush &#x3D; faPaintBrush;
+  faTrashCan &#x3D; faTrashCan;
+  faEllipsisVertical &#x3D; faEllipsisVertical;
+  faPlus &#x3D; faPlus;
+  colorModal: boolean &#x3D; false
+
+  faInfoCircle &#x3D; faInfoCircle;
+
+  @Output()
+  pencil &#x3D; new EventEmitter&lt;PropertyList&gt;();
+
+  @Output()
+  changeProject &#x3D; new EventEmitter&lt;Project&gt;();
+
+
+  @Input()
+  project!: Project;
+
+  @Input()
+  property!: Property;
+
+  @Input()
+  canDelete: boolean &#x3D; false;
+  @Input()
+  canEdit: boolean &#x3D; false;
+  @Input()
+  canCreate: boolean &#x3D; false;
+
+  deleteBoolean: boolean &#x3D; false;
+
+  propertyListToDelete !: PropertyList
+
+  constructor(private propertyService: PropertyService,
+    private alertService: AlertService,
+    private projectService: ProjectService,
+    private userService: UserService,
+    private teamService: TeamService) { }
+
+
+  statusList: any[] &#x3D; [
+    {
+      kind: PropertyListKind.TODO,
+      name: &#x27;Não iniciado&#x27;,
+      color: &quot;#ffe2dd&quot;,
+      properties: []
+    },
+    {
+      kind: PropertyListKind.DOING,
+      name: &#x27;Em andamento&#x27;,
+      color: &quot;#fdecc8&quot;,
+      properties: []
+    },
+    {
+      kind: PropertyListKind.DONE,
+      name: &#x27;Concluída&#x27;,
+      color: &quot;#dbeddb&quot;,
+      properties: []
+    }
+  ]
+
+  initialProperty!: Property;
+  ngOnInit(): void {
+    //Manually copy the object
+    this.initialProperty &#x3D; {
+      id: this.property.id,
+      name: this.property.name,
+      propertyLists: this.property.propertyLists,
+      propertyStatus: this.property.propertyStatus,
+      kind: this.property.kind
+    };
+
+    this.getPropertiesKind();
+  }
+
+  private getPropertiesKind() {
+    this.statusList[0].properties &#x3D; [];
+    this.statusList[1].properties &#x3D; [];
+    this.statusList[2].properties &#x3D; [];
+    this.property.propertyLists.forEach((propertyList: { propertyListKind: any; }) &#x3D;&gt; {
+      if (propertyList.propertyListKind &#x3D;&#x3D; PropertyListKind.TODO) {
+        this.statusList[0].properties.push(propertyList);
+      } else if (propertyList.propertyListKind &#x3D;&#x3D; PropertyListKind.DOING) {
+        this.statusList[1].properties.push(propertyList);
+      } else if (propertyList.propertyListKind &#x3D;&#x3D; PropertyListKind.DONE) {
+        this.statusList[2].properties.push(propertyList);
+      }
+    });
+  }
+
+  add(status: any) {
+    if (this.canEdit) {
+      let newPropertyList: PropertyList &#x3D; {
+        id: 0,
+        value: status.name,
+        color: status.color,
+        propertyListKind: status.kind,
+        isFixed: false
+      };
+      this.property.propertyLists.push(newPropertyList);
+      status.properties.push(newPropertyList);
+
+      this.saveProperty();
+    } else {
+      this.alertService.errorAlert(&quot;Você não tem permissão para criar mais status!&quot;)
+    }
+  }
+
+  drop(event: CdkDragDrop&lt;any[]&gt;, status: any) {
+    this.property.propertyLists.forEach((propertyList: { id: any; propertyListKind: any; }) &#x3D;&gt; {
+      if (propertyList.id &#x3D;&#x3D; event.item.data.id) {
+        propertyList.propertyListKind &#x3D; status.kind;
+      }
+    });
+    this.saveProperty();
+  }
+
+
+  delete(event: any) {
+    if (event) {
+      if (this.canDelete) {
+        if (!this.propertyListToDelete.isFixed) {
+          this.propertyService.deletePropertyList(this.property.id!, this.propertyListToDelete.id).subscribe(
+            (project) &#x3D;&gt; {
+              this.project &#x3D; project;
+              this.property &#x3D; project.properties.find((property) &#x3D;&gt; property.id &#x3D;&#x3D; this.property.id)!;
+              this.getPropertiesKind();
+              this.changeProject.emit(this.project);
+            })
+        }
+      } else {
+        this.alertService.errorAlert(&quot;Você não tem permissão para remover o status!&quot;);
+      }
+    }
+    this.deleteBoolean &#x3D; false;
+  }
+
+  nameEdit!: string;
+  propertyListNameEditId!: number;
+
+  private saveProperty() {
+    this.propertyService.createOrEditProperty(this.project.id!, this.property).subscribe(
+      (project) &#x3D;&gt; {
+        this.project &#x3D; project;
+        this.property &#x3D; project.properties.find((property) &#x3D;&gt; property.id &#x3D;&#x3D; this.property.id)!;
+        this.getPropertiesKind();
+        this.changeProject.emit(this.project);
+      },
+      (error) &#x3D;&gt; {
+
+      }
+    );
+  }
+  saveName(propertyList: PropertyList) {
+    if (this.nameEdit.length &gt; 2 &amp;&amp; this.nameEdit.length &lt;&#x3D; 20) {
+      propertyList!.value &#x3D; this.nameEdit;
+      this.saveProperty();
+      this.propertyListNameEditId &#x3D; -1;
+      this.nameEdit &#x3D; &#x27;&#x27;;
+    } else {
+      this.alertService.notificationAlert(&#x27;O nome do status deve ter entre 3 e 20 caracteres&#x27;);
+      return;
+    }
+  }
+
+
+  editName(propertyList: PropertyList) {
+    if(this.canEdit){
+    this.propertyListNameEditId &#x3D; propertyList.id!;
+    this.nameEdit &#x3D; propertyList.value;
+    }else {
+      this.alertService.errorAlert(&#x27;Você não tem permissão para editar&#x27;);
+    }
+  }
+
+  clickPencil(propertyList: PropertyList) {
+    if (this.canEdit) {
+      this.pencil.emit(propertyList);
+    } else {
+      this.alertService.errorAlert(&quot;Você não tem permissão para editar o status!&quot;)
+    }
+  }
+
+  openModalDelete(property: PropertyList): void {
+    this.deleteBoolean &#x3D; !this.deleteBoolean
+    this.propertyListToDelete &#x3D; property
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex flex-col w-full h-full items-center&quot;&gt;
+    &lt;div class&#x3D;&quot;properties&quot; cdkDropListGroup&gt;
+        &lt;div *ngFor&#x3D;&quot;let status of statusList; index as item&quot; class&#x3D;&quot;status-space&quot;
+            [ngStyle]&#x3D;&quot;{&#x27;border&#x27;: status.kind &#x3D;&#x3D; &#x27;TODO&#x27; ? &#x27;none&#x27; : &#x27;&#x27;}&quot; cdkDropList
+            (cdkDropListDropped)&#x3D;&quot;drop($event, status)&quot; [cdkDropListData]&#x3D;&quot;status.properties&quot;&gt;
+            &lt;div class&#x3D;&quot;main-property&quot;&gt;
+                &lt;p class&#x3D;&quot;medium-text color-text&quot;&gt;{{status.name}}&lt;/p&gt;
+                &lt;fa-icon [icon]&#x3D;&quot;faPlus&quot; class&#x3D;&quot;little-icon&quot; (click)&#x3D;&quot;add(status)&quot;
+                [ngClass]&#x3D;&quot;canCreate ? &#x27;opacity-100&#x27; : &#x27;opacity-20&#x27;&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+            &lt;div *ngFor&#x3D;&quot;let propertyList of status.properties; index as i2&quot; class&#x3D;&quot;flex w-full justify-center&quot; cdkDrag
+                [cdkDragDisabled]&#x3D;&quot;propertyList.isFixed&quot; [cdkDragData]&#x3D;&quot;propertyList&quot; cdkDragBoundary&#x3D;&quot;.properties&quot;&gt;
+                &lt;div class&#x3D;&quot;specific-properties&quot;&gt;
+                    &lt;div cdkDragHandle [ngClass]&#x3D;&quot;propertyList.isFixed ? &#x27;isFixedDrag&#x27; : &#x27;isDraggable&#x27;&quot;&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;faEllipsisVertical&quot; class&#x3D;&quot;bigger-icon opacity-icon&quot;&gt;&lt;/fa-icon&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;faEllipsisVertical&quot; class&#x3D;&quot;bigger-icon opacity-icon&quot;&gt;&lt;/fa-icon&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                        &lt;p *ngIf&#x3D;&quot;propertyList.id !&#x3D; propertyListNameEditId&quot; (click)&#x3D;&quot;editName(propertyList)&quot;
+                            class&#x3D;&quot;regular-text cursor-pointer&quot; [ngStyle]&#x3D;&quot;{&#x27;background-color&#x27;: propertyList.color}&quot;&gt;
+                            {{propertyList.value}}&lt;/p&gt;
+                        &lt;input *ngIf&#x3D;&quot;propertyList.id &#x3D;&#x3D; propertyListNameEditId&quot; type&#x3D;&quot;text&quot; class&#x3D;&quot;regular-text&quot;
+                            [(ngModel)]&#x3D;&quot;nameEdit&quot; [ngStyle]&#x3D;&quot;{&#x27;background-color&#x27;: propertyList.color}&quot;&gt;
+                        &lt;p *ngIf&#x3D;&quot;propertyList.id &#x3D;&#x3D; propertyListNameEditId&quot; (click)&#x3D;&quot;saveName(propertyList)&quot;
+                            class&#x3D;&quot;cursor-pointer&quot;&gt;✔&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;faPaintBrush&quot; (click)&#x3D;&quot;clickPencil(propertyList)&quot; class&#x3D;&quot;little-icon&quot;
+                            [ngClass]&#x3D;&quot;canEdit ? &#x27;opacity-100&#x27; : &#x27;opacity-20&#x27;&quot;&gt;&lt;/fa-icon&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;faTrashCan&quot; class&#x3D;&quot;little-icon&quot; (click)&#x3D;&quot;openModalDelete(propertyList)&quot;
+                            [ngClass]&#x3D;&quot;propertyList.isFixed ? &#x27;disabled-trash&#x27; : canDelete ? &#x27;opacity-100&#x27; : &#x27;disabled-trash&#x27;&quot;&gt;&lt;/fa-icon&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;info-status&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;faInfoCircle&quot; class&#x3D;&quot;color-text text-sm&quot;&gt;&lt;/fa-icon&gt;
+        &lt;p class&#x3D;&quot;regular-text text-status&quot;&gt;Clique no texto e você poderá editar o nome do status&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;app-confirm-modal *ngIf&#x3D;&quot;deleteBoolean&quot; [width]&#x3D;&quot;&#x27;450px&#x27;&quot; [height]&#x3D;&quot;&#x27;250px&#x27;&quot; [title]&#x3D;&quot;&#x27;excluir o status&#x27;&quot;
+    (close)&#x3D;&quot;delete($event)&quot;&gt;
+&lt;/app-confirm-modal&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./status.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../../variables&#x27;;
+
+.little-icon {
+    color: $text;
+    font-size:1rem;
+}
+
+.main-property {
+    @apply flex justify-between items-center w-[90%] h-full py-3;
+}
+
+.properties {
+    @apply flex flex-col h-[445px] w-full  gap-3 items-center;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .status-space{
+        @apply flex flex-col w-full items-center;
+        border-top: 1px solid $emphasis;
+
+    }
+
+    
+}
+.info-status{
+    @apply flex flex-row h-[10%] items-end justify-center pt-4 opacity-60 gap-2;
+
+    p{
+        color: $text;
+    }
+}
+
+
+.specific-properties {
+    @apply flex flex-row items-center justify-start min-h-[40px] rounded-sm w-[90%];
+
+
+    div:first-child{
+        @apply flex w-[6%] h-full justify-evenly;
+        
+        fa-icon{
+            color: $text;
+        }
+    }
+
+    div:nth-child(2){
+        @apply flex w-[80%] h-full justify-start pl-2 items-center;
+    
+        input {
+            @apply flex rounded-lg px-2;
+            outline: none;
+          }
+
+        p{
+            @apply px-2 rounded-xl; 
+            color: $text;
+            width: auto;
+        }
+    }
+
+    div:last-child {
+        @apply w-[14%] flex justify-between items-center;
+    }
+}
+
+.bigger-icon {
+    color: $primaryColor;
+    font-size:1.5rem;
+}
+
+.new-property {
+    @apply flex w-full items-center pt-3;
+ 
+    p{
+     @apply pl-3 items-center;
+    }
+ }
+
+ .icon {
+    color:$text;
+ }
+
+ .opacity-icon{
+    @apply opacity-75;
+}
+.color-text{
+    color: $text;
+}
+
+
+.disabled-trash{
+    @apply opacity-50;
+    cursor: not-allowed;
+}
+.isFixedDrag{
+    @apply opacity-50 justify-center items-center;
+    
+    fa-icon{
+        cursor: default !important;
+    }
+}
+.isDraggable{
+    @apply justify-center items-center;
+    fa-icon{
+        cursor: grab !important;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .text-status {
+        @apply hidden;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex flex-col w-full h-full items-center">    <div class="properties" cdkDropListGroup>        <div *ngFor="let status of statusList; index as item" class="status-space"            [ngStyle]="{\'border\': status.kind == \'TODO\' ? \'none\' : \'\'}" cdkDropList            (cdkDropListDropped)="drop($event, status)" [cdkDropListData]="status.properties">            <div class="main-property">                <p class="medium-text color-text">{{status.name}}</p>                <fa-icon [icon]="faPlus" class="little-icon" (click)="add(status)"                [ngClass]="canCreate ? \'opacity-100\' : \'opacity-20\'"></fa-icon>            </div>            <div *ngFor="let propertyList of status.properties; index as i2" class="flex w-full justify-center" cdkDrag                [cdkDragDisabled]="propertyList.isFixed" [cdkDragData]="propertyList" cdkDragBoundary=".properties">                <div class="specific-properties">                    <div cdkDragHandle [ngClass]="propertyList.isFixed ? \'isFixedDrag\' : \'isDraggable\'">                        <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>                        <fa-icon [icon]="faEllipsisVertical" class="bigger-icon opacity-icon"></fa-icon>                    </div>                    <div>                        <p *ngIf="propertyList.id != propertyListNameEditId" (click)="editName(propertyList)"                            class="regular-text cursor-pointer" [ngStyle]="{\'background-color\': propertyList.color}">                            {{propertyList.value}}</p>                        <input *ngIf="propertyList.id == propertyListNameEditId" type="text" class="regular-text"                            [(ngModel)]="nameEdit" [ngStyle]="{\'background-color\': propertyList.color}">                        <p *ngIf="propertyList.id == propertyListNameEditId" (click)="saveName(propertyList)"                            class="cursor-pointer">✔</p>                    </div>                    <div>                        <fa-icon [icon]="faPaintBrush" (click)="clickPencil(propertyList)" class="little-icon"                            [ngClass]="canEdit ? \'opacity-100\' : \'opacity-20\'"></fa-icon>                        <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(propertyList)"                            [ngClass]="propertyList.isFixed ? \'disabled-trash\' : canDelete ? \'opacity-100\' : \'disabled-trash\'"></fa-icon>                    </div>                </div>            </div>        </div>    </div>    <div class="info-status">        <fa-icon [icon]="faInfoCircle" class="color-text text-sm"></fa-icon>        <p class="regular-text text-status">Clique no texto e você poderá editar o nome do status</p>    </div></div><app-confirm-modal *ngIf="deleteBoolean" [width]="\'450px\'" [height]="\'250px\'" [title]="\'excluir o status\'"    (close)="delete($event)"></app-confirm-modal></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StatusComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StatusComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
