@@ -13,6 +13,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { colors } from 'src/app/models/colors';
 
 @Component({
   selector: 'app-card',
@@ -44,7 +45,13 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
     //Opacity
-    this.borderColor.concat("50");
+    colors.forEach(color => {
+      if (color.weak === this.borderColor) {
+        console.log(color);
+        
+        this.borderColor = color.strong;
+      }
+    });
     for (const permission of this.permissions) {
       if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
         this.canDelete = true;

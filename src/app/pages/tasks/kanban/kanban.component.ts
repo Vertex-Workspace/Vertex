@@ -16,6 +16,7 @@ import { Permission, PermissionsType } from 'src/app/models/class/user';
 import { taskHourService } from 'src/app/services/taskHour.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PipeParams } from 'src/app/models/interface/params';
+import { colors } from 'src/app/models/colors';
 
 @Component({
   selector: 'app-kanban',
@@ -241,4 +242,8 @@ export class KanbanComponent {
       }
     );
   }
+  getStrongerColor(colorReceived: string): string | undefined {
+    const matchingColor = colors.find(color => color.weak === colorReceived);
+    return matchingColor ? matchingColor.strong : undefined;
+}
 }
