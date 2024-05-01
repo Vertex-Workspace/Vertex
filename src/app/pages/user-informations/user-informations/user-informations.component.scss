@@ -9,6 +9,7 @@
     .top-side {
         @apply flex h-[38%] w-full;
     }
+    
 
     .top-side-left {
         @apply flex items-center h-full w-1/2;
@@ -334,4 +335,21 @@ mat-progress-spinner {
 
 .dashboard-bar{
     @apply flex justify-center items-center w-full h-[100%];
+}
+
+.circular {
+    width: 200px;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+.circular img {
+    height: 80%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }

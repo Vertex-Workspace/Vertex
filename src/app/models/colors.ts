@@ -25,7 +25,7 @@ export const colors = [
     },
     {
         weak: "#fdecc8",
-        strong: "#c0b217"
+        strong: "#FFCF68"
     },
     {
         weak: "#dbeddb",

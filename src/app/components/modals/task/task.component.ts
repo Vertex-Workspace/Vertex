@@ -25,7 +25,7 @@ import { ReviewService } from 'src/app/services/review.service';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   faClock = faClock;
 
   @Input() project!: Project;
@@ -74,6 +74,7 @@ export class TaskComponent implements OnInit {
     private reviewService: ReviewService
   ) {
     this.user = userService.getLogged();
+    this.test();
   }
 
   selectedComponent: string = 'attachments';
@@ -84,7 +85,7 @@ export class TaskComponent implements OnInit {
   permissionsRender!: Observable<Permission[]>;
 
   render : boolean = false;
-  ngOnInit() {
+  test() {
     let idTask = 0;
     this.activatedRoute.queryParamMap.subscribe((p: any) => {idTask = p['params'].taskID});
     if(!idTask || idTask == 0){
@@ -95,7 +96,6 @@ export class TaskComponent implements OnInit {
       (task: Task) => {
         
         this.task = task;
-        console.log(this.task);
         
         if (this.task.revisable) {
           this.checkedReview = true;

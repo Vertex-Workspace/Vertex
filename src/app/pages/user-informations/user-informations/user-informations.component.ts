@@ -38,8 +38,7 @@ export class UserInformationsComponent {
   ngOnInit() {
     const id : number = Number(this.activatedRoute.snapshot.paramMap.get('id'));;
     
-    this.userObservable = this.userService.getInformationsById(id, this.userService.getLogged().id!);
-    this.userObservable.subscribe(
+    this.userService.getInformationsById(id, this.userService.getLogged().id!).subscribe(
       (user : User) => {
         
         if(user.id == this.loggedUser.id) {
