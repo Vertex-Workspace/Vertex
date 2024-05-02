@@ -49,8 +49,6 @@ export class CardComponent implements OnInit {
     //Opacity
     colors.forEach(color => {
       if (color.weak === this.borderColor) {
-        console.log(color);
-        
         this.borderColor = color.strong;
       }
     });

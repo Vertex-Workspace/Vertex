@@ -22,6 +22,8 @@ export class Team {
     tasksPerformances?: number[];
     reviewHoursDTOS? : any[];
 
+    permissions!: any[];
+
     reprovedReviews : number = 0;
     approvedReviews: number = 0;
     averageReviews: number = 0;

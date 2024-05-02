@@ -27,15 +27,15 @@
     }
     
     .footer-items {
-        @apply flex h-[40%] flex-col items-end justify-around;
+        @apply flex h-[80%] flex-col items-end justify-around;
     }
     
     .footer-items2 {
-        @apply flex h-[60%] w-full flex-col items-start justify-around;
+        @apply flex h-[80%] w-full flex-col justify-around;
     }
     
     ul>li {
-        @apply h-[80px] flex w-full justify-center items-center;
+        @apply flex w-full h-full justify-around items-center;
         
         fa-icon, i, mat-icon {
             font-size: 22   px !important;

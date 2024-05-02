@@ -45,18 +45,15 @@
     }
 
     .colors {
-        @apply flex flex-col w-[70%] h-full  pb-2;
-    
-        p {
-            @apply pl-10;
-        };
+        @apply flex flex-col w-full h-full  pb-2;
+
     
         div:first-child {
             @apply flex h-full flex-col place-content-evenly;
         };
     
         .colors-row {
-            @apply pl-10 flex flex-row flex-wrap justify-start gap-5;
+            @apply pt-4 w-full flex flex-row flex-wrap justify-start gap-5;
         }
     
     }
@@ -143,17 +140,14 @@
 
     .colors {
         @apply flex flex-col w-full h-full  pb-2;
-    
-        p {
-            @apply pl-10;
-        };
+
     
         div:first-child {
             @apply flex h-full flex-col place-content-evenly;
         };
     
         .colors-row {
-            @apply pl-10 flex flex-row flex-wrap justify-start gap-5;
+            @apply pt-4 w-full flex flex-row flex-wrap justify-start gap-5;
         }
     
     }
@@ -334,4 +328,17 @@
 
 .unselected {
     @apply opacity-25;
+}
+
+.theme-color{
+    @apply flex w-[45%] justify-center items-center rounded-sm h-36;
+    background-color: $primaryColor;
+
+    fa-icon{
+        @apply text-3xl;
+    }
+
+    &:hover{
+        @apply cursor-pointer;
+    }
 }

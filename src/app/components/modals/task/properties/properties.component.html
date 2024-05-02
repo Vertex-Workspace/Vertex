@@ -1,37 +1,42 @@
 <div class="base">
     <table>
         <tr>
-            <td>
-                <div>
-                    <fa-icon [icon]="faListCheck" class="size"></fa-icon>
-                    <p>{{ 'components.modals.task.properties.dependency' | translate }}</p>
-                </div>
-                <div>
-                    <p-dropdown [style]="{ minWidth: '200px'}" class="w-full" containerStyleClass="w-full"
-                        [(ngModel)]="selectedDependency" placeholder="{{ 'components.modals.task.properties.dependency' | translate }}" [options]="taskDependency"
-                        optionLabel="task" (onChange)="setTaskDependencies($event)" placeholder="{{selectedDependency}}"
-                        emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherTasks' | translate }}">
-                        <ng-template let-task pTemplate="task">
-                            <span>{{task.name}}</span>
-                        </ng-template>
-                    </p-dropdown>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <fa-icon [icon]="faUsers" class="size"></fa-icon>
-                    <p>{{ 'components.modals.task.properties.responsible' | translate }}</p>
-                </div>
-                <div>
-                    <p-multiSelect [options]="taskResponsables" [style]="{ minWidth: '200px'}"
-                        [(ngModel)]="selectedUsers" appendTo="body" placeholder="{{ 'components.modals.task.properties.responsible' | translate }}"
-                        emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherResponsiblesInTask' | translate }}">
-                        <ng-template let-node pTemplate="default">
-                            <span (click)="updateResponsible($event, node)">{{node.label}}</span>
-                        </ng-template>
-                    </p-multiSelect>
-                </div>
-            </td>
+            <ng-container *ngIf="isCreator">
+                <td>
+                    <div>
+                        <fa-icon [icon]="faListCheck" class="size"></fa-icon>
+                        <p>{{ 'components.modals.task.properties.dependency' | translate }}</p>
+                    </div>
+                    <div>
+                        <p-dropdown [style]="{ minWidth: '200px'}" class="w-full" containerStyleClass="w-full"
+                            [(ngModel)]="selectedDependency"
+                            placeholder="{{ 'components.modals.task.properties.dependency' | translate }}"
+                            [options]="taskDependency" optionLabel="task" (onChange)="setTaskDependencies($event)"
+                            placeholder="{{selectedDependency}}"
+                            emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherTasks' | translate }}">
+                            <ng-template let-task pTemplate="task">
+                                <span>{{task.name}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <fa-icon [icon]="faUsers" class="size"></fa-icon>
+                        <p>{{ 'components.modals.task.properties.responsible' | translate }}</p>
+                    </div>
+                    <div>
+                        <p-multiSelect [options]="taskResponsables" [style]="{ minWidth: '200px'}"
+                            [(ngModel)]="selectedUsers" appendTo="body"
+                            placeholder="{{ 'components.modals.task.properties.responsible' | translate }}"
+                            emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherResponsiblesInTask' | translate }}">
+                            <ng-template let-node pTemplate="default">
+                                <span (click)="updateResponsible($event, node)">{{node.label}}</span>
+                            </ng-template>
+                        </p-multiSelect>
+                    </div>
+                </td>
+            </ng-container>
             <ng-container *ngFor="let value of task.values">
                 <td *ngIf="value.property.propertyStatus != 'INVISIBLE'">
 

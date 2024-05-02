@@ -20,6 +20,7 @@ import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
 import { tutorialText } from 'src/app/tutorialText';
 import { DisplayService } from 'src/app/services/display.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -93,6 +94,7 @@ export class TasksComponent implements OnInit {
     private taskService: TaskService,
     private userService: UserService,
     private teamService: TeamService,
+    private loadingService: LoadingService,
     private alertService: AlertService,
     private noteService: NoteService,
     private display: DisplayService,
@@ -116,6 +118,7 @@ export class TasksComponent implements OnInit {
     //Método que atribui o valor de project vindo do observable
     this.projectService.getOneById(id).subscribe((p: Project) => {
       this.project = p;
+      this.loadingService.hide();
 
       this.teamService.getPermission(p.idTeam, this.logged.id!).subscribe((permissions: Permission[]) => {
         this.permissions = permissions;

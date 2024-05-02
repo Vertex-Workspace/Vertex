@@ -93,7 +93,7 @@
                     </section>
 
                     <!-- NG IF uses to wait the permissions request before render the component -->
-                    <div class="default-size" *ngIf="permissionsOnTeamObservable | async">
+                    <div class="default-size">
                         <app-list style="padding-top: 3%;" [team]="team"
                             (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissionsOnTeam"
                             [queryFilter]="queryFilter" [filter]="selectedFilter"
@@ -106,10 +106,9 @@
     </div>
 </section>
 
-<ng-container *ngIf="permissionsOnTeamObservable | async">
-    <app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"
+<ng-container *ngIf="taskOpen">
+    <app-task [task]="taskOpenObject" (close)="changeModalTaskState(false, taskOpenObject)"
         [permissions]="permissionsOnTeam"></app-task>
-
 </ng-container>
 
 <ng-template #prevButton>

@@ -130,8 +130,6 @@ export class HeaderComponent {
   }
 
   backToHome(): void {
-    console.log('aa');
-    
     this.router.navigate(['/']);
   }
 
@@ -139,12 +137,10 @@ export class HeaderComponent {
     if (hasProjectId) {
       this.projectService
       .getOneById(this.id)
-      .subscribe(team => {
-        this.router.navigate([`equipe/${team.id}/projetos`])
+      .subscribe(project => {
+        this.router.navigate([`equipe/${project.idTeam}/projetos`])
       });
-    } else {
-      this.router.navigate([`equipe/${this.id}/projetos`])
-    }
+    } 
   }
 
   incrementUrlById(activeRoute: string, id: number): void {
@@ -155,17 +151,17 @@ export class HeaderComponent {
 
   getTeam(id: number): void {
     this.teamService
-      .getOneById(id)
-      .subscribe((team: Team) => {
-        this.location = team.name;
-      })
+      .getTeamName(id)
+      .subscribe((team: any) => {
+        this.location = team.text;      
+      }, (error) => this.location = error.error.text);
   }
 
   getProject(id: number): void {
     this.projectService
-      .getOneById(id)
-      .subscribe((project: Project) => {
-        this.location = project.name;
+      .getProjectName(id)
+      .subscribe((projectName: string) => {
+        this.location = projectName;
       })
   }
 

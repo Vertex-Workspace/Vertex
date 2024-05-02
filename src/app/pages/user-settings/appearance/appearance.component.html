@@ -8,42 +8,35 @@
     </div>
     <!-- CONTENT -->
     <div class="themes">
-        <p class="medium-text">{{ 'pages.user-settings.appearance.themePreference' | translate }}</p>
-
-        <div class="box-modes" *ngFor="let theme of themesList; index as item;" (click)="selectTheme(item)"
-            [ngClass]="theme.status === 'selected' ? '' : 'unselected'">
-            <ng-container *ngFor="let type of theme.types">
-                <ng-container *ngFor="let color of type.colors">
-                    <div class="mode shadow-md"
-                        *ngIf="color.status === 'selected'"
-                        [style.background]="'linear-gradient(315deg, ' + theme.secondColor + ' 50%,' + theme.primaryColor + ' 50%)'">
-                        <fa-icon [icon]="theme.icon" class="icon-themes"
-                            [ngClass]="theme.mode === 'Tema Claro' ? 'icon-dark' : 'icon-dark'"></fa-icon>
-                        <p class="small-text" [ngClass]="theme.mode === 'Tema Claro' ? 'icon-dark' : 'icon-dark'">
-                            {{theme.mode}}
-                        </p>
-                    </div>
-                </ng-container>
+        <p class="medium-text">Preferência de tema</p>
+        <div class="flex w-full flex-row justify-between">
+            <ng-container *ngFor="let theme of themes">
+                <div 
+                class="theme-color" 
+                (click)="changeTheme(theme.name)"
+                [style.opacity]="theme.value == newPers.theme ? '1' : '0.5'"
+                >
+                    <fa-icon [icon]="theme.icon"></fa-icon>
+                </div>
             </ng-container>
-
-            <div class="colors">
-                <div>
-                    <ng-container *ngFor="let type of theme.types;">
-                        <p class="small-text">{{"pages.user-settings.appearance.corDestaque"| translate }}</p>
-                        <div class="colors-row">
-                            <ng-container *ngFor="let color of type.colors; index as item;">
-                                <button [ngStyle]="{'background-color': color.color}" class="colors-circle"
-                                    (click)="selectColor(theme,type,item)">
-                                    <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" class="icon"
-                                        [ngStyle]="{'color': type.iconColor}">
-                                    </fa-icon>
-                                </button>
-                            </ng-container>
-                        </div>
+        </div>
+        <div class="colors">
+            <div>
+                <p class="small-text">Cor Destaque</p>
+                <div class="colors-row">
+                    <ng-container *ngFor="let color of colors;">
+                        <button 
+                        *ngIf="(newPers.theme == 1 && color.colorDark != '') || newPers.theme == 0"
+                        [ngStyle]="{'background-color': this.newPers.theme == 0 ? color.colorLight : color.colorDark}" 
+                        class="colors-circle"
+                            (click)="selectColor(color)">
+                            <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" class="icon"
+                                [ngStyle]="{'color': this.newPers.theme == 0 ? '#F3F3F3' : '#1E1E1E'}">
+                            </fa-icon>
+                        </button>
                     </ng-container>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -59,10 +52,6 @@
             </div>
             <div class="h-full flex flex-col gap-2">
                 <p class="medium-text">Estilo da letra</p>
-                <p class="small-text">Defina o estilo da letra</p>
-                <!-- <select [(ngModel)]="fontFamilyChoosed" (change)="changeFontFamily()">
-                    <option *ngFor="let font of fontFamily" [value]="font" class="small-text">{{font}}</option>
-                </select> -->
                 <p-cascadeSelect [(ngModel)]="newPers.fontFamily" [options]="fontFamily" optionGroupLabel="name"
                     [optionGroupChildren]="[]"
                     [style]="{ width: '180px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)' }"
@@ -71,16 +60,16 @@
         </div>
 
         <div>
-            <p class="medium-text">{{ 'pages.user-settings.appearance.accessibility' | translate }}</p>
-            <div [(ngModel)]="newPers.signLanguage" (click)="toggleChangeSignLanguage()" class="accessibility">
+            <p class="medium-text">Acessibilidade</p>
+            <div [(ngModel)]="newPers.signLanguage" (click)="toggleChange('libras')" class="accessibility">
                 <fa-icon *ngIf="!newPers.signLanguage" class="icon" [icon]="faToggleOff">
                 </fa-icon>
                 <fa-icon *ngIf="newPers.signLanguage" class="icon" [icon]="faToggleOn">
                 </fa-icon>
                 <p class="small-text">{{ 'pages.user-settings.appearance.enableSignLanguage' | translate }}</p>
             </div>
-
-            <div [(ngModel)]="newPers.listeningText" (click)="toggleChangeListening()" class="accessibility">
+    
+            <div [(ngModel)]="newPers.listeningText" (click)="toggleChange('listening')" class="accessibility">
                 <fa-icon *ngIf="!newPers.listeningText" class="icon" [icon]="faToggleOff">
                 </fa-icon>
                 <fa-icon *ngIf="newPers.listeningText" class="icon" [icon]="faToggleOn">

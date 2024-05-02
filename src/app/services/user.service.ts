@@ -66,7 +66,7 @@ export class UserService {
       (user: User) => {
         this.alert.successAlert(`Bem-vindo, ${user.firstName}!`);
         this.saveLoggedUser(user);
-        this.router.navigate(['/home']);
+        window.location.reload();
     }, (e) => {
       this.alert.errorAlert(e.error);
     });

@@ -19,6 +19,7 @@ import { Team } from 'src/app/models/class/team';
 import { Observable } from 'rxjs';
 import { SentToReview } from 'src/app/models/class/review';
 import { ReviewService } from 'src/app/services/review.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -26,7 +27,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   faClock = faClock;
 
   @Input() project!: Project;
@@ -76,6 +77,7 @@ export class TaskComponent implements OnInit {
     private translate : TranslateService
   ) {
     this.user = userService.getLogged();
+    this.test();
   }
 
   selectedComponent: string = 'attachments';
@@ -86,7 +88,7 @@ export class TaskComponent implements OnInit {
   permissionsRender!: Observable<Permission[]>;
 
   render : boolean = false;
-  ngOnInit() {
+  test() {
     let idTask = 0;
     this.activatedRoute.queryParamMap.subscribe((p: any) => {idTask = p['params'].taskID});
     if(!idTask || idTask == 0){
@@ -97,7 +99,6 @@ export class TaskComponent implements OnInit {
       (task: Task) => {
         
         this.task = task;
-        console.log(this.task);
         
         if (this.task.revisable) {
           this.checkedReview = true;

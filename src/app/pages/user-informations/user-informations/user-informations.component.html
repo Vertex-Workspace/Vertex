@@ -1,12 +1,11 @@
 <section>
 
-    <div class="main-div" *ngIf="userObservable | async">
+    <div class="main-div">
 
         <div class="top-side">
             <div class="top-side-left">
-                <div class="top-side-user-img">
-                    <img src="data:image/jpg;base64, {{user.image}}" alt="" class="rounded-full">
-                    <!-- <fa-icon class="user-img" [icon]="faCircleUser"></fa-icon> -->
+                <div class="circular">
+                    <img src="data:image/jpg;base64, {{user.image}}" alt="" class="object-cover h-full w-full">
                 </div>
 
                 <div class="top-side-user-informations">

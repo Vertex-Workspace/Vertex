@@ -137,10 +137,7 @@ export class HomeComponent implements OnInit {
 
 
   subscribeToTeams() {
-    this.teamsRender = this.teamService.getTeamsByUser(this.logged);
-    this.teamsRender.subscribe(teams => {
-      console.log(teams);
-      
+    this.teamService.getTeamsByUser(this.logged).subscribe(teams => {
       this.teams = teams
       this.joyrideService.startTour({
         steps: [

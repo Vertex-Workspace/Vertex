@@ -38,7 +38,8 @@ export class PropertiesComponent {
     private projectService: ProjectService,
     private alertService: AlertService,
     private teamService: TeamService,
-    private userService: UserService) { }
+    private userService: UserService) {
+    }
 
   icons: any = [
     { name: 'TEXT', icon: faFont },
@@ -58,21 +59,30 @@ export class PropertiesComponent {
   taskDependency: Task[] = []
   selectedDependency !: string
   differentDone !: boolean
+  isCreator: boolean = false;
+
 
   ngOnInit(): void {
-    this.tasks = this.project.tasks
-    this.getGroups()
-    this.getUsers()
-
-    for (const task of this.project.tasks) {
-      if (this.task.id != task.id) {
-        this.taskDependency.push(task)
+    if(this.task){
+      if(this.task.creator?.user.id == this.userService.getLogged().id) {
+        this.isCreator = true;
       }
     }
-    if (this.task.taskDependency != null) {
-      this.selectedDependency = this.task.taskDependency.name;
-    } else {
-      this.selectedDependency = 'Dependência'
+    if(this.isCreator){
+      this.tasks = this.project.tasks
+      this.getGroups()
+      this.getUsers()
+      
+      for (const task of this.project.tasks) {
+        if (this.task.id != task.id) {
+          this.taskDependency.push(task)
+        }
+      }
+      if (this.task.taskDependency != null) {
+        this.selectedDependency = this.task.taskDependency.name;
+      } else {
+        this.selectedDependency = 'Dependência'
+      }
     }
   }
 
