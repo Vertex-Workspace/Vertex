@@ -14,6 +14,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { colors } from 'src/app/models/colors';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card',
@@ -30,7 +31,8 @@ export class CardComponent implements OnInit {
   constructor(private taskService: TaskService,
     private alertService: AlertService,
     private route: ActivatedRoute,
-    private projectService: ProjectService) {
+    private projectService: ProjectService,
+    private translate: TranslateService) {
   }
   @Input() task!: Task;
   @Input() width!: string;
@@ -75,7 +77,7 @@ export class CardComponent implements OnInit {
       this.modalDelete = true;
     } else {
       this.modalDelete2 = true;
-      this.alertService.errorAlert("Você não tem permissão para remover a tarefa!");
+      this.alertService.errorAlert(this.translate.instant('alert.error.cantDeleteTask'));
       setTimeout(() => {
         this.modalDelete2 = false; 
       }, 1000);
@@ -91,7 +93,7 @@ export class CardComponent implements OnInit {
 
   editName(): void{
     if(this.task.name.length < 4){
-      this.alertService.errorAlert("O nome da tarefa deve ter no mínimo 4 caracteres!");
+      this.alertService.errorAlert(this.translate.instant('alerts.error.minTaskLengthName'));
       this.task.name = this.saveLastName;
       return;
     }
@@ -105,7 +107,7 @@ export class CardComponent implements OnInit {
         this.openInputName = false;
       },
       (error) => {
-        this.alertService.errorAlert("Erro ao editar a tarefa!");
+        this.alertService.errorAlert(this.translate.instant('alerts.error.errorEditingTask'));
       }
     );
   }
@@ -115,7 +117,7 @@ export class CardComponent implements OnInit {
         this.taskService.delete(this.task.id).subscribe(
           (task) => {
             // Alert
-
+            this.alertService.successAlert(this.translate.instant('alerts.success.task_deleted'));
             this.deleteTask.emit();
           },
           (error) => {

@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faImage, faX } from '@fortawesome/free-solid-svg-icons';
-import { LogarithmicScale } from 'chart.js';
+import { TranslateService } from '@ngx-translate/core';
 import { TreeNode } from 'primeng/api';
 import { Group } from 'src/app/models/class/groups';
 import { Project, ProjectCollaborators, ProjectEdit, ProjectReview } from 'src/app/models/class/project';
@@ -61,6 +61,7 @@ export class CreateTeamProjectComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alert: AlertService,
     private groupService: GroupService,
+    private translate : TranslateService
   ) {
     this.logged = this.userService.getLogged();
   }
@@ -146,7 +147,8 @@ export class CreateTeamProjectComponent implements OnInit {
     this.teamService
       .create(team)
       .subscribe((teamRes: Team) => {
-        this.alert.successAlert(`Equipe ${teamRes.name} criada com sucesso!`);
+        this.alert.successAlert(this.translate.instant("equipe") + teamRes.name + this.translate.instant("alerts.success.createdWithSuccess"));
+
         if (this.fd) {
           this.teamService
             .updateImage(teamRes.id!, this.fd)
@@ -181,19 +183,18 @@ export class CreateTeamProjectComponent implements OnInit {
       project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
       this.projectService
       .create(project, teamId)
-      .subscribe((projectResponse: Project) => {
-
+      .subscribe((project: Project) => {
         if (this.fd) {
           this.projectService
-            .updateImage(projectResponse.id, this.fd)
-            .subscribe((projectResImage: Project) => {
-              this.emitCreation(projectResImage);
-
-            });
+          .updateImage(project.id, this.fd)
+          .subscribe((projectResImage: Project) => {
+            this.emitCreation(projectResImage);
+            
+          });
         } else {
-          this.emitCreation(projectResponse)
+          this.emitCreation(project)
         }
-        this.alert.successAlert(`Projeto criado com sucesso!`);
+        this.alert.successAlert(this.translate.instant("alerts.success.projectCreatedWithSuccess"));
       });
   
   }
@@ -331,7 +332,7 @@ export class CreateTeamProjectComponent implements OnInit {
           });
       } else {
       }
-      this.alert.successAlert("Projeto modificado com sucesso");
+      this.alert.successAlert(this.translate.instant("alerts.success.projectModifyWithSuccess"))
     });
   }
 

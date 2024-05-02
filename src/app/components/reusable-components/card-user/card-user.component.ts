@@ -11,6 +11,7 @@ import { TeamService } from 'src/app/services/team.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -47,8 +48,8 @@ export class CardUserComponent implements OnInit {
 
   delete: boolean = false;
 
-  isTeamCreator : boolean = false;
-  isNonCreatorCard : boolean = true;
+  isTeamCreator: boolean = false;
+  isNonCreatorCard: boolean = true;
   @Input()
   user !: User
 
@@ -59,27 +60,28 @@ export class CardUserComponent implements OnInit {
     private groupService: GroupService,
     private alert: AlertService,
     private teamService: TeamService,
-    private router: Router) {
+    private router: Router,
+    private translate: TranslateService) {
   }
 
   ngOnInit(): void {
-    
+
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
-      this.user.permissions = this.getPermission(this.user); 
+      this.user.permissions = this.getPermission(this.user);
     } else if (this.typeString === 'addingParticipants') {
       this.groupService.getUsersOutOfGroup(this.team, this.group).subscribe((users: User[]) => {
         this.users = users;
-        if(this.users.length === 0){
+        if (this.users.length === 0) {
           this.noMoreParticipants.emit();
         }
-        
+
       });
     }
 
 
-    if(this.user.id! === this.team.creator!.id){
+    if (this.user.id! === this.team.creator!.id) {
       this.isNonCreatorCard = false
     }
     if (this.team.creator!.id === this.userService.getLogged().id) {
@@ -110,14 +112,14 @@ export class CardUserComponent implements OnInit {
     this.teamService.changePermissionEnable(permission).subscribe(
       (permissionRes) => {
         permission.enabled = !permission.enabled;
-        this.alert.successAlert('Autorização alterada!')
+        this.alert.successAlert(this.translate.instant("alerts.success.permissionChanged"))
       })
   }
 
   getPermission(user: User): Permission[] | any {
     this.teamService.getPermission(this.team.id, user.id!).subscribe((permissions: Permission[]) => {
       user.permissions = permissions;
-      return user.permissions 
+      return user.permissions
     })
   }
 
@@ -131,10 +133,10 @@ export class CardUserComponent implements OnInit {
 
   deleteUserTeam(event: any): void {
     if (event) {
-     this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
-         this.alert.successAlert("Usuário retirado da equipe")
-         this.team.users?.splice(this.team.users.indexOf(this.userToDelete), 1)
-     })
+      this.teamService.deleteUserTeam(this.team, this.userToDelete).subscribe((team: Team) => {
+        this.alert.successAlert(this.translate.instant('alerts.success.userRemovedOfTeam'))
+        this.team.users?.splice(this.team.users.indexOf(this.userToDelete), 1)
+      })
     }
     this.delete = false
   }
@@ -151,7 +153,7 @@ export class CardUserComponent implements OnInit {
     }
   }
 
-  goToProfile(): void{
+  goToProfile(): void {
     this.router.navigate(["perfil/" + this.user.id]);
   }
 }

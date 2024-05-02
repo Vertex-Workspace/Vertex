@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/models/class/team';
@@ -12,6 +12,7 @@ import { PipeParams } from 'src/app/models/interface/params';
 import { JoyrideService } from 'ngx-joyride';
 import { tutorialText } from 'src/app/tutorialText';
 import { ProjectService } from 'src/app/services/project.service';
+import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
 
 @Component({
   selector: 'app-home',
@@ -32,48 +33,15 @@ export class HomeComponent implements OnInit {
   isCreating: boolean = false;
 
   orderParams !: PipeParams;
-  orderOptions: any = [
-    {
-      name: 'Nome', values: [
-        { name: 'A-Z', type: 'name' },
-        { name: 'Z-A', type: 'name' }
-      ]
-    },
-    {
-      name: 'Data', values: [
-        { name: 'Maior - Menor', type: 'date' },
-        { name: 'Menor - Maior', type: 'date' }
-      ]
-    },
-    {
-      name: 'Status', values: [
-        { name: 'Não Iniciado', type: 'status', kind: PropertyListKind.TODO },
-        { name: 'Em Andamento', type: 'status', kind: PropertyListKind.DOING },
-        { name: 'Concluído', type: 'status', kind: PropertyListKind.DONE },
-      ]
-    }
-  ];
-
+  
   //TASKS - FILTER AND ORDER
   selectedFilter !: any;
   filterDate !: string;
-  filterOptions: any[] = [
-    {
-      name: 'Status', values: [
-        { name: 'Não Iniciado', kind: PropertyListKind.TODO, status: true },
-        { name: 'Em Andamento', kind: PropertyListKind.DOING, status: true },
-        { name: 'Concluído', kind: PropertyListKind.DONE, status: true }
-      ]
-    },
-    {
-      name: 'Data', values: [
-        { name: "Hoje", kind: PropertyKind.DATE as string, value: 'td' },
-        { name: "Próxima semana", kind: PropertyKind.DATE as string, value: 'nw' },
-        { name: "Próximo mês", kind: PropertyKind.DATE as string, value: 'nm' }
-      ]
-    },
-  ];
-  orderSettings !: any[];
+  
+  filterOptions: any[] = [];
+  orderOptions: any =[];
+
+  orderSettings: any[] =[];
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
@@ -89,15 +57,73 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private teamService: TeamService,
-    private readonly joyrideService: JoyrideService
+    private alert: AlertService,
+    private projectService: ProjectService,
+    private readonly joyrideService: JoyrideService,
+    private translate: TranslateService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
+
+    this.translate.onLangChange.subscribe(() => {
+      this.loadTranslatedOptions();
+    });
   }
 
   ngOnInit(): void {
     this.subscribeToTeams();
+    this.loadTranslatedOptions();
   }
 
+  
+  loadTranslatedOptions() {
+    // Translate filter and order options
+    this.filterOptions = [
+      {
+        name: this.translate.instant('pages.home.filterandorder.Status'), values: [
+          { name: this.translate.instant('pages.home.filterandorder.NotStarted'), kind: PropertyListKind.TODO, status: true },
+          { name: this.translate.instant('pages.home.filterandorder.InProgress'), kind: PropertyListKind.DOING, status: true },
+          { name: this.translate.instant('pages.home.filterandorder.Completed'), kind: PropertyListKind.DONE, status: true }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.home.filterandorder.Date'), values: [
+          { name: this.translate.instant('pages.home.filterandorder.Today'), kind: PropertyKind.DATE as string, value: 'td' },
+          { name: this.translate.instant('pages.home.filterandorder.NextWeek'), kind: PropertyKind.DATE as string, value: 'nw' },
+          { name: this.translate.instant('pages.home.filterandorder.NextMonth'), kind: PropertyKind.DATE as string, value: 'nm' }
+        ]
+      },
+    ];
+
+    this.orderOptions = [
+      {
+        name: this.translate.instant('pages.home.filterandorder.Name'), values: [
+          { name: this.translate.instant('pages.home.filterandorder.AtoZ'), type: 'name' },
+          { name: this.translate.instant('pages.home.filterandorder.ZtoA'), type: 'name' }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.home.filterandorder.Date'), values: [
+          { name: this.translate.instant('pages.home.filterandorder.HigherToLower'), type: 'date' },
+          { name: this.translate.instant('pages.home.filterandorder.LowerToHigher'), type: 'date' }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.home.filterandorder.Status'), values: [
+          { name: this.translate.instant('pages.home.filterandorder.NotStarted'), type: 'status', kind: PropertyListKind.TODO },
+          { name: this.translate.instant('pages.home.filterandorder.InProgress'), type: 'status', kind: PropertyListKind.DOING },
+          { name: this.translate.instant('pages.home.filterandorder.Completed'), type: 'status', kind: PropertyListKind.DONE },
+        ]
+      }
+    ];
+
+    // Detect changes after loading translations
+    this.detectChanges();
+  }
+
+  detectChanges() {
+    this.changeDetectorRef.detectChanges();
+  }
 
   updateOrderType(e: PipeParams): void {
     if (e.type) {

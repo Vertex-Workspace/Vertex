@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { NotificationModule } from '../../modals/notification/notification.module';
 import { BadgeModule } from 'primeng/badge';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { FormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -12,7 +16,11 @@ import { BadgeModule } from 'primeng/badge';
   imports: [
     CommonModule,
     NotificationModule,
-    BadgeModule
+    CascadeSelectModule,
+    FormsModule,
+    BadgeModule,
+    MatMenuModule,
+    TranslateModule
   ]
 })
 export class HeaderModule { }

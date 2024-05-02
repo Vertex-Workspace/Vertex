@@ -1,34 +1,76 @@
-@import '../../../../variables';
+@import "../../../../variables";
 
-.header{
-    @apply flex w-full h-full items-center justify-center;
+.header {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
-.header > section {
-    @apply flex w-[90%] h-full justify-between items-center;
+.header-section {
+    display: flex;
+    width: 90%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.current-location{
-    @apply flex w-[60%] h-full justify-start items-center;
+.current-location {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1rem;
+}
 
-    p {
-        @apply pl-2;
-    }
+.current-location p {
+    margin-left: 0.5rem;
 }
-.items-header{
-    @apply flex w-[80px] h-full justify-between items-center;
-}
-i{
-    @apply text-xl;
-    color: $primaryColor;
+
+.items-header {
+    display: flex;
+    width: 20%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .back {
-    @apply p-1 transition-colors rounded-md cursor-pointer;
+    padding: 0.25rem;
+    transition: color 0.3s;
+    cursor: pointer;
+}
 
-    &:hover {
-        @apply transition-colors;
-        background-color: $primaryColor;
-        color: $secondColor;
+.back:hover {
+    background-color: $primaryColor;
+    color: $secondColor;
+}
+
+.nav-item {
+    padding: 0.25rem;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.menu-container {
+    position: relative;
+}
+
+::ng-deep {
+    .mat-mdc-menu-panel {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background-color: $card !important;
+    }
+
+    .mat-mdc-menu-content {
+        width: 70px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 }

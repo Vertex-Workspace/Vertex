@@ -1,7 +1,8 @@
 @import '../../../../_variables.scss';
 
 .miniChat2 {
-    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col justify-between items-center shadow-lg;
+    @apply absolute right-0 bottom-0 w-[450px] h-[500px] rounded-sm flex flex-col justify-between items-center shadow-lg;
+    
     background-color: $card;
 
 }
@@ -173,7 +174,7 @@ textarea {
 }
 
 .miniChatStep1 {
-    @apply absolute right-0 bottom-0 w-[400px] h-[500px] rounded-sm flex flex-col justify-between items-start shadow-lg;
+    @apply absolute right-0 bottom-0 w-[450px] h-[500px] rounded-sm flex flex-col justify-between items-start shadow-lg;
     background-color: $card;
     animation: bottomToTop 0.5s;
 }

@@ -11,6 +11,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { FormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [TeamInformationsComponent],
@@ -25,7 +26,8 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     ConfirmModalModule,
     ProgressBarModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+    TranslateModule
   ]
 })
 export class TeamInformationsModule { 

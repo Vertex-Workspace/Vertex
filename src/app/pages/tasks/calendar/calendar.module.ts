@@ -10,6 +10,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
 import { FormsModule } from '@angular/forms';
 import { CalendarRowCardComponent } from 'src/app/components/reusable-components/calendar-row-card/calendar-row-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -31,7 +32,8 @@ import { CalendarRowCardComponent } from 'src/app/components/reusable-components
     DragDropModule,
     PipesModule,
     CalendarModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class CalendarScreenModule { }

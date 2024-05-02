@@ -1,7 +1,7 @@
 <app-modal-warn [height]="'650px'" [width]="'900px'" (close)="closeReview()">
     <section>
         <div class="s1">
-            <p class="large-text self-start">Tarefas para serem Revisadas</p>
+            <p class="large-text self-start">{{ 'components.modals.review-task.tasks_to_review' | translate }}</p>
             <div class="s2">
                 <ng-container *ngFor="let taskToReview of tasksToReview">
                     <div 
@@ -18,18 +18,18 @@
         </div>
         <div class="ns1">
             <div class="ns2">
-                <h6 class="self-start">Responsável pelo Envio - {{taskBeingReviewed.name}}</h6>
+                <h6 class="self-start">{{ 'components.modals.review-task.sender' | translate }} - {{taskBeingReviewed.name}}</h6>
                 <p class="medium-text self-start pt-4 pl-6">{{taskBeingReviewed.sender.username}} -
                     {{taskBeingReviewed.sender.email}}</p>
-                <p class="medium-text self-start pt-3">Descrição Final</p>
+                <p class="medium-text self-start pt-3">{{ 'components.modals.review-task.final_description' | translate }}</p>
                 <p class="small-text self-start pl-6 h-[50px]">{{taskBeingReviewed.sender.finalDescription}}</p>
             </div>
 
             <div class="fs1">
                 <table class="w-full">
                     <tr>
-                        <th>Responsável</th>
-                        <th>Tempo</th>
+                        <th>{{ 'components.modals.review-task.responsible' | translate }}</th>
+                        <th>{{ 'components.modals.review-task.time' | translate }}</th>
                     </tr>
                     <tr *ngFor="let responsable of taskBeingReviewed.reviewHours">
                         <td>{{responsable.username}}</td>
@@ -39,16 +39,16 @@
             </div>
 
             <div class="ts1">
-                <p class="medium-text self-start">Devolutiva</p>
+                <p class="medium-text self-start">{{ 'components.modals.review-task.feedback' | translate }}</p>
                 <div class="ts2">
                     <textarea
-                        placeholder="Insira uma descrição devolutiva..." [(ngModel)]="finalReviewResult.finalDescription"></textarea>
+                    placeholder="{{ 'components.modals.review-task.insert_feedback' | translate }}" [(ngModel)]="finalReviewResult.finalDescription"></textarea>
                         <div class="review-grade">
                             <p-rating [(ngModel)]="value" [cancel]="false"></p-rating>
-                            <p class="small-text">Nota será concedida para todos os responsáveis da tarefa.</p>
+                            <p class="small-text">{{ 'components.modals.review-task.grade_note' | translate }}</p>
                             <div class="flex w-full justify-evenly pt-5">
-                                <button id="red-btn" (click)="finalReview(false)">Reprovar</button>
-                                <button id="primary-btn" (click)="finalReview(true)">Aprovar</button>
+                                <button id="red-btn" (click)="finalReview(false)">{{ 'components.modals.review-task.reject' | translate }}</button>
+                                <button id="primary-btn" (click)="finalReview(true)">{{ 'components.modals.review-task.approve' | translate }}</button>
                             </div>
                         </div>
                 </div>
@@ -56,3 +56,4 @@
         </div>
     </section>
 </app-modal-warn>
+

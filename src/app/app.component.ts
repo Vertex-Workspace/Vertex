@@ -19,12 +19,16 @@ import { UserService } from './services/user.service';
 import { User } from './models/class/user';
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
+
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { TextSpeechService } from './services/text-speech.service';
 import { Observable, of } from 'rxjs';
 
 import { NotificationWebSocketService } from './services/notification-websocket.service';
 import { Notification } from './models/class/notification';
 import { tutorialText } from './tutorialText';
+import { TranslateService } from '@ngx-translate/core';
+import { Personalization } from './models/class/personalization';
 
 
 @Component({
@@ -65,6 +69,8 @@ export class AppComponent {
 
   notification: boolean = false;
 
+  linkImage!:string;
+
   isSideBarExpanded: boolean = false;
 
   url: string = '';
@@ -76,7 +82,9 @@ export class AppComponent {
     private userState: UserStateService,
     private alertService: AlertService,
     public textSpeechService: TextSpeechService,
-    private notificationWebSocket: NotificationWebSocketService
+    private notificationWebSocket: NotificationWebSocketService,
+    private translate: TranslateService,
+    private personalizationService: PersonalizationService
   ) {
     this.userState.getAuthenticationStatus()
     .subscribe((userLogged) => {
@@ -104,6 +112,20 @@ export class AppComponent {
   renderPersonalization: boolean = false;
 
   private settingsRequest(){
+    let user: User = this.userService.getLogged()!;
+    this.translate.setDefaultLang(user.personalization!.language!);
+    console.log(user.id!);
+
+    this.personalizationService.findByUserId(user.id!).subscribe(
+      (res: Personalization) => {
+        this.linkImage = res.linkLanguageImage!;
+        this.translate.setDefaultLang(res.language!);
+      },
+      (error) => {
+        this.translate.setDefaultLang('pt');
+        console.error("Erro ao buscar personalização do usuário", error);
+      }
+    );
     if (this.logged.personalization!.theme == 0) {
       document.documentElement.style.setProperty('--primaryColor', this.logged.personalization?.primaryColorLight!);
       document.documentElement.style.setProperty('--secondColor', this.logged.personalization?.secondColorLight!);
@@ -136,9 +158,9 @@ export class AppComponent {
     this.notificationWebSocket.listenToServer().subscribe(
       (change) => {
         this.getNotificationBadge();
-        
+
       }
-      );
+    )
   }
 
   notificationBadge: number = 0;

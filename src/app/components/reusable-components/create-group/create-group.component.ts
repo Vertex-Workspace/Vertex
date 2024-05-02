@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
 import { taskHourService } from 'src/app/services/taskHour.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-group',
@@ -44,7 +45,8 @@ export class CreateGroupComponent implements OnInit {
     private teamService: TeamService,
     private route: ActivatedRoute,
     private alertService: AlertService,
-    private groupService: GroupService) {
+    private groupService: GroupService,
+    private translate : TranslateService,) {
     this.getTeam();
   }
 

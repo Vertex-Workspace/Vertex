@@ -3,15 +3,17 @@
 export class Personalization{
 
     id !: number;
-    primaryColorLight!: string ;
-    secondColorLight!: string;
-    primaryColorDark!: string ;
-    secondColorDark!: string;
+    primaryColorLight?: string ;
+    secondColorLight?: string;
+    primaryColorDark?: string ;
+    secondColorDark?: string;
     fontFamily?: string;
     fontSize?: number;
     theme?: number;
     listeningText?: boolean;
     signLanguage?: boolean;
+    language?: string;
+    linkLanguageImage?: string;
 
 
     constructor(
@@ -27,5 +29,6 @@ export class Personalization{
         this.theme = personalization.theme;
         this.signLanguage = personalization.signLanguage;
         this.listeningText = personalization.listeningText;
+        this.language = personalization.language;
     }
 }

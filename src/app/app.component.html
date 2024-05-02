@@ -29,7 +29,7 @@
                 <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()"
                     [currentRoute]="'/home'" [notificationBadge]="notificationBadge" joyrideStep="header"
                     [prevTemplate]="prevButton" [nextTemplate]="nextButton" [title]="'Cabeçalho do site'"
-                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[1] }" />
+                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[1] }" [linkImage]="linkImage" />
 
             </header>
 
@@ -55,7 +55,7 @@
                 <fa-icon class="text-white" [icon]="faVolumeUp"></fa-icon>
             </div>
         </div>
-        <div *ngIf="miniChatOpen">
+        <div style="z-index: 2147483648 !important;" *ngIf="miniChatOpen">
             <app-minichat (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat>
         </div>
     </div>

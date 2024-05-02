@@ -1,13 +1,15 @@
 <div class="flex w-full h-full flex-col items-center">
     <div class="flex w-[90%] flex-col h-full">
         <div class="task-name">
-            <p class="large-text">Nome</p>
+            <!-- Translate the label dynamically -->
+            <p class="large-text">{{ 'components.modals.properties.edit-properties.name' | translate }}</p>
             <input [(ngModel)]="property.name" class="regular-text"
-                placeholder="Digite o nome que deseja para propriedade..." required />
+                [placeholder]="'components.modals.properties.edit-properties.name-placeholder' | translate" required />
         </div>
 
         <section>
-            <p class="medium-text">Tipo de dado</p>
+            <!-- Translate the label dynamically -->
+            <p class="medium-text">{{ 'components.modals.properties.edit-properties.data-type' | translate }}</p>
             <div class="properties-types">
                 <ng-container *ngFor="let type of propertyTypes;">
                     <div class="flex w-full h-full flex-col">
@@ -15,15 +17,15 @@
                             (click)="selectValue(type)">
                             <fa-icon [icon]="type.icon" class="icon"></fa-icon>
                         </div>
+                        <!-- Translate the label dynamically -->
                         <p class="regular-text pt-4">{{type.label}}</p>
                     </div>
                 </ng-container>
             </div>
             <div class="info">
                 <fa-icon [icon]="circleInfo"></fa-icon>
-                <p class="small-text pl-2">
-                    tipo de informação que a propriedade armazenará
-                </p>
+                <!-- Translate the label dynamically -->
+                <p class="small-text pl-2">{{ 'components.modals.properties.edit-properties.data-type-info' | translate }}</p>
             </div>
             <div class="properties-answers">
                 <ng-container *ngFor="let check of checkboxList;">
@@ -31,17 +33,16 @@
                         <fa-icon [icon]="faSquare" (click)="checkBox(check)"
                             [ngClass]="check.value ? 'checkBox-unselected' : 'checkBox-selected'">
                         </fa-icon>
-                        <!-- VALIDATIONS -->
-                        <p class="small-text" *ngIf="!openInput">
-                            {{check.p}}</p>
-                        <input placeholder="Valor padrão" [(ngModel)]="property.defaultValue" *ngIf="openInput">
+                        <!-- Translate the label dynamically -->
+                        <p class="small-text" *ngIf="!openInput">{{check.p}}</p>
+                        <input [placeholder]="'components.modals.properties.edit-properties.default-value-placeholder' | translate" [(ngModel)]="property.defaultValue" *ngIf="openInput">
                     </div>
                 </ng-container>
             </div>
             <div class="flex w-full h-[50px] flex-row justify-end">
+                <!-- Translate the button label dynamically -->
                 <button class="save-button" (click)="saveProperty()"
-                    [style.opacity]="hasChange() ? '1' : '0.5'">Confirmar
-                    Alterações</button>
+                    [style.opacity]="hasChange() ? '1' : '0.5'">{{ 'components.modals.properties.edit-properties.confirm-changes' | translate }}</button>
             </div>
         </section>
     </div>

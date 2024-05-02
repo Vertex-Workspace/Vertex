@@ -13,9 +13,9 @@
                     <div class="userName-creationData">
                         <h4>{{user.fullname}}</h4>
                         <p class="large-text opacity-90">{{user.email}}</p>
-                        <p class="regular-text">{{user.location ? user.location : "Localização não informada"}}</p>
+                        <p class="regular-text">{{user.location ? user.location : 'pages.user-informations.locationNotProvided' | translate}}</p>
                         <p class="regular-text description">
-                            {{user.description ? user.description : "Sem descrição"}}
+                            {{user.description ? user.description : 'pages.user-informations.noDescription' | translate}}
                         </p>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <ng-container *ngIf="showCommonTasks">
                     <div class="top-side-right-text">
                         <h6>
-                            Tarefas em comum com você
+                            {{ 'pages.user-informations.commonTasks' | translate }}
                         </h6>
                     </div>
 
@@ -49,9 +49,7 @@
                 <ng-container *ngIf="!showCommonTasks">
                     <div class="flex w-full h-full justify-center items-center">
                         <h6 class="text-center">
-                            Nesta seção aparecerão tarefas que você tem 
-                            <br>
-                            em comum com quem acessa seu perfil.
+                            {{ 'pages.user-informations.commonTasksPlaceholder' | translate }}
                         </h6>
                     </div>
                 </ng-container>
@@ -60,22 +58,22 @@
 
         <div class="under-side">
             <div class="div-dashboards">
-                <h5>Desempenho pessoal <p>no sistema</p></h5>
+                <h5>{{ 'pages.user-informations.personalPerformance' | translate }}</h5>
                 <div class="dashboards">
                     <div class="div-dashboard-pie-doughnut">
-                        <p class="large-text">Tarefas - Pizza</p>
+                        <p class="large-text">{{ 'pages.user-informations.tasksPie' | translate }}</p>
                         <p-chart class="dashboard-pie-doughnut" type="doughnut" [data]="dataPie" [options]="optionsPie">
                         </p-chart>
                     </div>
 
                     <div class="div-dashboard-bar">
-                        <p class="large-text">Tarefas - Barras</p>
+                        <p class="large-text">{{ 'pages.user-informations.tasksBar' | translate }}</p>
                         <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [options]="optionsBar">
                         </p-chart>
                     </div>
 
                     <div class="div-dashboard-bar flex-col">
-                        <p class="large-text">Tempo Trabalhado em Tarefas no Vertex</p>
+                        <p class="large-text">{{ 'pages.user-informations.timeWorked' | translate }}</p>
                         <h4>{{user.time}}</h4>
                     </div>
                 </div>

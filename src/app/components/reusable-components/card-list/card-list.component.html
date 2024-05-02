@@ -11,7 +11,8 @@
                     <div class="informations">
                         <div class="infos-team" (click)="openTeam(item.id)">
                             <p class="large-text">{{item.name}}</p>
-                            <p class="regular-text underline" *ngIf="teamScreen != 'project'" (click)="openTeamInformations(item.id)">Visualizar Informações</p>
+                            <p class="regular-text underline" *ngIf="teamScreen != 'project'" (click)="openTeamInformations(item.id)">
+                                {{'components.reusable-components.card-list.viewInformation' | translate }}</p>
                         </div>
 
                         <div *ngIf="(teamScreen === 'settings' || teamScreen === 'project') && item.isCreator" class="icon">
@@ -23,7 +24,6 @@
                     </div>
                 </div>
             </div>
-
         </ng-container>
     </div>
 </div>
@@ -37,8 +37,8 @@
 </app-create-team-project>            
 
 <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
-                [title]="' excluir o projeto'" (close)="emitItem($event)"></app-confirm-modal>
-<app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'excluir a equipe'"
+                [title]="' {{deleteProject}}' | translate" (close)="emitItem($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'{{deleteTeam}}' | translate"
                 (close)="emitItem($event)"></app-confirm-modal>
-<app-confirm-modal *ngIf="leaveBool && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'sair da equipe'"
+<app-confirm-modal *ngIf="leaveBool && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'{{exitTeam}}' | translate"
                 (close)="leaveTeam($event)"></app-confirm-modal>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faUsers, faSearch, faCircleUser, faDoorOpen,
         faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { LogarithmicScale } from 'chart.js';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
@@ -27,7 +28,8 @@ export class TeamsSettingsComponent{
     private route: ActivatedRoute,
     private teamService: TeamService,
     private router: Router,
-    private alert: AlertService
+    private alert: AlertService,
+    private translate : TranslateService
   ) {
     this.getAllTeams();
   }

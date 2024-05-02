@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { SearchItem, SearchItemKind } from 'src/app/models/class/search-item';
 import { Team } from 'src/app/models/class/team';
 import { User } from 'src/app/models/class/user';
@@ -26,7 +27,8 @@ export class SearchAllComponent {
   constructor(
     private search: SearchService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private translate : TranslateService
   ) {
     this.logged = userService.getLogged();
   }
@@ -42,10 +44,10 @@ export class SearchAllComponent {
   query: string = "";
 
   orderSettings: any[]= [
-    {name: 'Equipes', value: SearchItemKind.TEAM},
-    {name: 'Projetos', value: SearchItemKind.PROJECT},
-    {name: 'Tarefas', value: SearchItemKind.TASK},
-    {name: 'Responsáveis', value: SearchItemKind.USER}
+    {name: this.translate.instant('components.modals.search-all.Equipes'), value: SearchItemKind.TEAM},
+    {name: this.translate.instant('components.modals.search-all.Projetos'), value: SearchItemKind.PROJECT},
+    {name: this.translate.instant('components.modals.search-all.Tarefas'), value: SearchItemKind.TASK},
+    {name: this.translate.instant('components.modals.search-all.Responsaveis'), value: SearchItemKind.USER}
   ];
 
   orderParam !: string;

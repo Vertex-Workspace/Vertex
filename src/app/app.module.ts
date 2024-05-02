@@ -37,7 +37,7 @@ import { NoteModalComponent } from './components/modals/note-modal/note-modal.co
 import { NoteModalModule } from './components/modals/note-modal/note-modal.module';
 import { VlibrasComponent } from './pages/vlibras/vlibras.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
 import { ToastModule } from 'primeng/toast';
@@ -46,8 +46,12 @@ import { JoyrideModule } from 'ngx-joyride';
 import { DeniedAccessComponent } from './pages/denied-access/denied-access.component';
 import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
 import { MobileSidebarComponent } from './components/fixed-components/mobile-sidebar/mobile-sidebar.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader, TranslateService, TranslateStore, TranslatePipe } from '@ngx-translate/core';
 
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -55,7 +59,6 @@ import { MobileSidebarComponent } from './components/fixed-components/mobile-sid
     LoadingComponent,
     VlibrasComponent,
     DeniedAccessComponent,
-    InvitationPageComponent,
     MobileSidebarComponent
   ],
   imports: [
@@ -63,7 +66,8 @@ import { MobileSidebarComponent } from './components/fixed-components/mobile-sid
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CommonModule,    
+    InvitationPageComponent,
+    CommonModule,
     LoginModule,
     RegisterModule,
     HomeModule,
@@ -88,14 +92,25 @@ import { MobileSidebarComponent } from './components/fixed-components/mobile-sid
     SearchAllModule,
     ToastModule,
     GroupsSelectModule,
-   ],
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
+  ],
   providers: [
     PersonalizationService,
     MessageService,
     AlertService,
-    { provide: HTTP_INTERCEPTORS,
+    TranslateService,
+    TranslateStore,
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
-      multi: true },
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

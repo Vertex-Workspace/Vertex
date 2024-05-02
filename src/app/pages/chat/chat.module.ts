@@ -6,6 +6,7 @@ import { InputModule } from "../../components/reusable-components/input/input.mo
 import { FormsModule } from '@angular/forms';
 
 import { ImageModule } from 'primeng/image';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -15,11 +16,11 @@ import { ImageModule } from 'primeng/image';
     exports: [ChatComponent],
     imports: [
         CommonModule,
+        TranslateModule,
         FormsModule,
         FontAwesomeModule,
         ImageModule,
         InputModule,
-
     ]
 })
 export class ChatModule { }

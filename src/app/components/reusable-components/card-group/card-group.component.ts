@@ -9,8 +9,7 @@ import { GroupService } from 'src/app/services/group.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TreeNode } from 'primeng/api';
-import { LogarithmicScale } from 'chart.js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-card-group',
@@ -57,7 +56,8 @@ export class CardGroupComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private teamService: TeamService,
-    private userService: UserService
+    private userService: UserService,
+    private translate : TranslateService
   ) {
     this.getTeam()
   }
@@ -126,11 +126,11 @@ export class CardGroupComponent {
     if (event) {
       this.groupService.deleteUserFromGroup(this.userToDelete, this.team.id, this.group.id)
         .subscribe((group: Group) => {
-          this.alertService.successAlert(`Usuário retirado do grupo`)
+          this.alertService.successAlert(this.translate.instant('alert.success.removeUserFromGroup'))
           this.updateGroup(group)
         },
           e => {
-            this.alertService.errorAlert('Não foi possível retirar o usuário do grupo ')
+            this.alertService.errorAlert(this.translate.instant('alert.error.cantRemoveUserFromGroup'))
           }
         )
     }
@@ -189,7 +189,7 @@ export class CardGroupComponent {
 
   edit(group: Group){  
     this.groupService.edit(group, this.team.id).subscribe((group1: Group) => {
-      this.alertService.successAlert('Nome do grupo editado') 
+      this.alertService.successAlert(this.translate.instant('alert.success.editedGroup')) 
     })
     this.input = !this.input
   }

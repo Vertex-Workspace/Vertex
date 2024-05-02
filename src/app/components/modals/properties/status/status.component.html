@@ -4,7 +4,7 @@
             [ngStyle]="{'border': status.kind == 'TODO' ? 'none' : ''}" cdkDropList
             (cdkDropListDropped)="drop($event, status)" [cdkDropListData]="status.properties">
             <div class="main-property">
-                <p class="medium-text color-text">{{status.name}}</p>
+                <p class="medium-text color-text">{{ 'components.modals.properties.status.' + status.name | translate }}</p>
                 <fa-icon [icon]="faPlus" class="little-icon" (click)="add(status)"
                 [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'"></fa-icon>
             </div>
@@ -18,7 +18,7 @@
                     <div>
                         <p *ngIf="propertyList.id != propertyListNameEditId" (click)="editName(propertyList)"
                             class="regular-text cursor-pointer" [ngStyle]="{'background-color': propertyList.color}">
-                            {{propertyList.value}}</p>
+                            {{ propertyList.value }}</p>
                         <input *ngIf="propertyList.id == propertyListNameEditId" type="text" class="regular-text"
                             [(ngModel)]="nameEdit" [ngStyle]="{'background-color': propertyList.color}">
                         <p *ngIf="propertyList.id == propertyListNameEditId" (click)="saveName(propertyList)"
@@ -36,10 +36,10 @@
     </div>
     <div class="info-status">
         <fa-icon [icon]="faInfoCircle" class="color-text text-sm"></fa-icon>
-        <p class="regular-text text-status">Clique no texto e você poderá editar o nome do status</p>
+        <p class="regular-text text-status">{{ 'components.modals.properties.status.info-message' | translate }}</p>
     </div>
 </div>
 
-<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'excluir o status'"
-    (close)="delete($event)">
+<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'components.modals.properties.status.delete-status'"
+(close)="delete($event)">
 </app-confirm-modal>

@@ -18,6 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class TeamInformationsComponent implements OnInit {
         private teamService: TeamService,
         private alertService: AlertService,
         private groupService: GroupService,
-        private userService: UserService
+        private userService: UserService,
+        private translate : TranslateService
     ) {
         this.team = this.getTeam()!;
     }
@@ -69,7 +71,7 @@ export class TeamInformationsComponent implements OnInit {
             const documentStyle = getComputedStyle(document.documentElement);
             const textColor = documentStyle.getPropertyValue('--text');
             this.basicData = {
-                labels: ['Não Iniciadas', 'Em Andamento', 'Concluídas'],
+                labels: [this.translate.instant("pages.team-informations.NaoIniciadas"), this.translate.instant("pages.team-informations.EmAndamento"), this.translate.instant("pages.team-informations.Concluidas")],
                 datasets: [
                     {
                         label: '',
@@ -125,7 +127,7 @@ export class TeamInformationsComponent implements OnInit {
             }
         )
 
-        this.alertService.successAlert("Link copiado com sucesso!");
+        this.alertService.successAlert(this.translate.instant("alerts.success.invitationCodeCopied"));
 
 
     }
@@ -199,7 +201,7 @@ export class TeamInformationsComponent implements OnInit {
         this.groupService
             .create(group)
             .subscribe((group: Group) => {
-                this.alertService.successAlert(`Grupo criado com sucesso!`);
+                this.alertService.successAlert(this.translate.instant("alerts.success.groupCreated"));
                 console.log(group.name);
 
                 this.switchCreateViewGroup();
@@ -207,9 +209,9 @@ export class TeamInformationsComponent implements OnInit {
             },
                 e => {
                     if (group.name == null) {
-                        this.alertService.errorAlert(`Você precisa adicionar um nome`)
+                        this.alertService.errorAlert(this.translate.instant("alerts.error.needGroupName"))
                     } else {
-                        this.alertService.errorAlert(`Erro ao criar grupo`)
+                        this.alertService.errorAlert(this.translate.instant("alerts.error.creategroup"))
                     }
                 });
     }
@@ -222,11 +224,11 @@ export class TeamInformationsComponent implements OnInit {
         console.log(event);
         
         this.groupService.delete(event).subscribe((group: Group) => {
-            this.alertService.successAlert('Grupo deletado com sucesso')
+            this.alertService.successAlert(this.translate.instant("alerts.success.group_deleted"));
             this.team.groups.splice(this.team.groups.indexOf(event),1)
         },
             (e) => {
-                this.alertService.errorAlert("Não foi possível deletar");
+                this.alertService.errorAlert(this.translate.instant("alerts.error.delete_group"));
         })
     }
 
@@ -237,7 +239,7 @@ export class TeamInformationsComponent implements OnInit {
         if (!this.editDescription) {
             this.teamService.updateTeam(this.team).subscribe(
                 (team: Team) => {
-                    this.alertService.successAlert("Descrição atualizada com sucesso")
+                    this.alertService.successAlert(this.translate.instant("alerts.success.descriptionUpdated"));
                 });
         }
     }
@@ -251,7 +253,7 @@ export class TeamInformationsComponent implements OnInit {
         } else {
             //Validação
             if (this.newName.length < 3 || this.newName.length > 30) {
-                this.alertService.notificationAlert("Nome deve ter entre 4 e 29 caracteres");
+                this.alertService.notificationAlert(this.translate.instant("alerts.notification.invalidName"));
                 this.newName = "";
                 return;
             }
@@ -259,12 +261,19 @@ export class TeamInformationsComponent implements OnInit {
             //Caso a validação seja feita é feito o update
             this.teamService.updateTeam(this.team).subscribe(
                 (team: Team) => {
-                    this.alertService.successAlert("Nome atualizado com sucesso");
+                    this.alertService.successAlert(this.translate.instant("alerts.success.nameUpdated"));
                 }
             );
         }
     }
 
+    returnMemberOrMembers(): string {
+        if (this.team.users!.length > 1) {
+            return "members"
+        } else {
+            return "member"
+        }
+    }
 
     selectedFile !: any;
     base64 !: any;
@@ -291,10 +300,10 @@ export class TeamInformationsComponent implements OnInit {
             .subscribe(
                 (team: Team) => {
                     this.team = team;
-                    this.alertService.successAlert(`Imagem atualizada com sucesso!`);
+                    this.alertService.successAlert(this.translate.instant("alerts.success.image_update_success"));
                 },
                 (error: any) => {
-                    this.alertService.errorAlert("Imagem inválida!");
+                    this.alertService.errorAlert(this.translate.instant("alerts.error.invalidImage_update"));
                 }
             );
     }

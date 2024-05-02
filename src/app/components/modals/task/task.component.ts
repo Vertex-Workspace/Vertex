@@ -19,6 +19,7 @@ import { Team } from 'src/app/models/class/team';
 import { Observable } from 'rxjs';
 import { SentToReview } from 'src/app/models/class/review';
 import { ReviewService } from 'src/app/services/review.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task',
@@ -71,7 +72,8 @@ export class TaskComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private activatedRoute : ActivatedRoute,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private translate : TranslateService
   ) {
     this.user = userService.getLogged();
   }
@@ -186,13 +188,13 @@ export class TaskComponent implements OnInit {
 
   updateTaskNameAndDescription(): void {
     if (this.task.name === "") {
-      this.task.name = "Nova tarefa";
+      this.task.name = this.translate.instant('pages.tasks.new_task');
     }
     if (this.task.description === "") {
-      this.task.name = "Insira uma breve descrição sobre a tarefa aqui...";
+      this.task.description = this.translate.instant('pages.tasks.new_task_description');
     }
     if (this.task.description.length > 1000) {
-      this.alertService.notificationAlert("O número máximo de caracteres permitido é 1000, reduza o tamanho da sua");
+      this.alertService.notificationAlert(this.translate.instant('alerts.notification.descriptionLimit'));
       return;
     }
     let taskEdit: TaskEdit = {
@@ -203,7 +205,7 @@ export class TaskComponent implements OnInit {
     this.taskService.edit(taskEdit).subscribe(
       (task: Task) => {
         this.task = task;
-        this.alertService.successAlert("Tarefa alterada com sucesso!");
+        this.alertService.successAlert(this.translate.instant("alerts.success.taskUpdated"));
       }
     );
   }
@@ -228,7 +230,7 @@ export class TaskComponent implements OnInit {
       }
       this.descriptionEditable = !this.descriptionEditable;
     } else {
-      this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEditTask"))
     }
   }
 
@@ -309,7 +311,7 @@ export class TaskComponent implements OnInit {
 
   cantEdit() {
     if (!this.canEdit) {
-      this.alertService.errorAlert("Você não tem permissão para editar a tarefa!")
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEditTask"))
     }
   }
 
@@ -330,7 +332,7 @@ export class TaskComponent implements OnInit {
         this.miniChatOpen = true;
         this.taskChat = task.chat!;
         console.log(this.taskChat, "taskchat");
-        this.alertService.successAlert("Chat criado com sucesso!");
+        this.alertService.successAlert(this.translate.instant("alerts.success.chatCreated"));
       },
       (error: any) => {
         this.alertService.errorAlert(error.error)
@@ -358,7 +360,7 @@ export class TaskComponent implements OnInit {
       this.reviewService.sentToReview(taskSentToReview).subscribe(
         (task: Boolean) => {
           this.project.tasks = this.project.tasks.filter((task) => task.id != this.task.id);
-          this.alertService.successAlert("Tarefa enviada para revisão com sucesso!")
+          this.alertService.successAlert(this.translate.instant("alerts.success.taskSentToReview"));
           this.closeModal();
         },
         (error: any) => {

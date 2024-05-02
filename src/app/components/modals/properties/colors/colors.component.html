@@ -2,7 +2,7 @@
     <ng-container *ngFor="let color of colorsList;">
         <li (click)="selectColor(color)" [ngClass]="color.status === 'selected' ? 'emphasis' : ''">
             <div [ngStyle]="{'background-color': color.color , 'border' : color.color}">
-                <p class="regular-text color">{{color.name}}</p>
+                <p class="regular-text color">{{'components.modals.properties.modal-properties.' + color.name | translate}}</p>
                 <fa-icon *ngIf="color.status == 'selected'" class="regular-text color" [icon]="faCheck"></fa-icon>
             </div>
         </li>
@@ -12,7 +12,7 @@
     <div class="flex flex-row w-full h-[50%] justify-center items-center">
         <fa-icon [icon]="circleInfo"></fa-icon>
         <p class="small-text pl-2">
-            Escolha a cor e veja o resultado em tempo real
+            {{'components.modals.properties.chooseColor' | translate}}
         </p>
     </div>
 

@@ -16,27 +16,28 @@
 
         <section class="menu">
             <div joyrideStep="step6" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
-                [title]="'Modos de visualização das tarefas'" [stepContent]="customContent"
-                [stepContentParams]="{ texto: tutorialText[8] }">
+                [title]="'pages.tasks.viewModesTitle' | translate" [stepContent]="customContent"
+                [stepContentParams]="{ texto: tutorialText[8] | translate }">
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="medium-text">
                         <i class="{{ item.iconClass }}" style="font-size: 1.4rem"></i>
                         <button (click)="changePreviewMode(item.id)">
                             <p>
-                                {{ item.label }}
+                                {{ 'pages.tasks.viewModeLabels.' + item.id | translate }}
                             </p>
                         </button>
                     </label>
                 </ng-container>
             </div>
 
+
             <div class="config-menu medium-text">
                 <button *ngIf="!searchBarOpen && !isMobile()" (click)="toggleSearchBar()">
                     <i class="pi pi-search"></i>
                 </button>
 
-                <div class="search" *ngIf="searchBarOpen">
-                    <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="query">
+                <div class="search " *ngIf="searchBarOpen">
+                    <input type="text" placeholder="{{'pages.tasks.searchTask' | translate}}" [(ngModel)]="query">
                     <i class="pi pi-times cursor-pointer" (click)="toggleSearchBar()"></i>
                 </div>
 
@@ -57,7 +58,7 @@
                     <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
                         <i class="pi pi-tags"></i>
                         <p>
-                            Propriedades
+                            {{'pages.tasks.properties' | translate}}
                         </p>
                     </button>
                 </div>
@@ -65,13 +66,13 @@
                     [disabled]="!canCreate" [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
                     <i class="pi pi-plus-circle"></i>
                     <p>
-                        Nova tarefa
+                        {{'pages.tasks.newTask' | translate}}
                     </p>
                 </button>
                 <ng-template #buttonMural>
                     <button class="create-note" (click)="createNote()">
                         <i class="pi pi-plus-circle"></i>
-                        <p>Nova nota</p>
+                        <p>{{'pages.tasks.newNote' | translate}}</p>
                     </button>
                 </ng-template>
             </div>
@@ -79,42 +80,42 @@
 
         <section class="filter-settings regular-text mb-2">
             <ng-container *ngIf="filterOpen || orderOpen">
-                <div *ngIf="orderOpen">
-                    <p>Ordenar por </p>
-                    <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
-                        optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
-                        placeholder="Selecione" (ngModelChange)="updateOrderType($event)">
-                        <ng-template pTemplate="option" let-option>
-                            <div>
-                                <p>{{option.name}}</p>
-                            </div>
-                        </ng-template>
-
-                    </p-cascadeSelect>
-                </div>
                 <div *ngIf="filterOpen">
-                    <p>Filtrar por </p>
+                    <p>{{'pages.tasks.filterBy' | translate}}</p>
                     <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
-                        optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
-                        placeholder="Selecione">
-                        <ng-template let-option pTemplate="option">
-                            <div *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
-                                {{option.name}}
-                            </div>
-                            <div *ngIf="option.name === 'TEXT'">
-                                <input pInputText [(ngModel)]="simplePropertyFilter.value" type="text"
-                                    placeholder="Filtre por texto" (click)="$event.stopPropagation()"
-                                    (ngModelChange)="updateFilterParams($event, option)">
-                            </div>
-                            <div *ngIf="option.name === 'NUMBER'">
-                                <p-inputNumber [(ngModel)]="simplePropertyFilter.value" placeholder="Filtre por número"
-                                    (click)="$event.stopPropagation()"
-                                    (ngModelChange)="updateFilterParams($event, option)"></p-inputNumber>
-                            </div>
-                        </ng-template>
-                    </p-cascadeSelect>
-                </div>
-            </ng-container>
+                    optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
+                    placeholder="{{'pages.tasks.select' | translate}}">
+                    <ng-template let-option pTemplate="option">
+                        <div style="color:var(--text)" *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
+                            {{option.name}}
+                        </div>
+                        <div *ngIf="option.name === 'TEXT'">
+                            <input pInputText [(ngModel)]="simplePropertyFilter.value" type="text"
+                            placeholder="{{'pages.tasks.filterByText' | translate}}" (click)="$event.stopPropagation()"
+                            (ngModelChange)="updateFilterParams($event, option)">
+                        </div>
+                        <div *ngIf="option.name === 'NUMBER'">
+                            <p-inputNumber [(ngModel)]="simplePropertyFilter.value" placeholder="{{'pages.tasks.filterByNumber' | translate}}"
+                            (click)="$event.stopPropagation()"
+                            (ngModelChange)="updateFilterParams($event, option)"></p-inputNumber>
+                        </div>
+                    </ng-template>
+                </p-cascadeSelect>
+            </div>
+            <div *ngIf="orderOpen">
+                <p>{{'pages.tasks.orderBy' | translate}}</p>
+                <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
+                    optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
+                    placeholder="{{'pages.tasks.select' | translate}}" (ngModelChange)="updateOrderType($event)">
+                    <ng-template pTemplate="option" let-option>
+                        <div>
+                            <p style="color:var(--text)">{{option.name}}</p>
+                        </div>
+                    </ng-template>
+    
+                </p-cascadeSelect>
+            </div>
+        </ng-container>
         </section>
 
         <section class="router">

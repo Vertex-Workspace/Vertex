@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TeamsSettingsComponent } from './teams-settings.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -17,7 +18,8 @@ import { CardListModule } from 'src/app/components/reusable-components/card-list
   imports: [
     CommonModule,
     CardListModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TranslateModule
   ]
 })
 export class TeamsSettingsModule { }

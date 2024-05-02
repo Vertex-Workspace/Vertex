@@ -6,6 +6,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CascadeSelectModule, 
     CalendarModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    TranslateModule
   ],
 })
 export class InputValuePropertyModule { }

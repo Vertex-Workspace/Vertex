@@ -7,6 +7,7 @@ import { InputValuePropertyModule } from 'src/app/components/reusable-components
 import { TreeSelectModule } from 'primeng/treeselect';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -14,6 +15,6 @@ import { DropdownModule } from 'primeng/dropdown';
   declarations: [PropertiesComponent],
   exports: [PropertiesComponent],
   imports: [CommonModule, FontAwesomeModule, FormsModule, InputValuePropertyModule, 
-    TreeSelectModule, DropdownModule, MultiSelectModule]
+    TreeSelectModule, DropdownModule, MultiSelectModule,TranslateModule]
 })
 export class PropertiesModule { }

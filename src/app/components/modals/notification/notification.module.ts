@@ -4,6 +4,7 @@ import { NotificationComponent } from './notification.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { PipesModule } from 'src/app/pipes/module/pipes.module';
 
 
@@ -20,7 +21,8 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
     FontAwesomeModule,
     FormsModule,
     RouterModule,
-    PipesModule
+    PipesModule,
+    TranslateModule
   ]
 })
 export class NotificationModule { }

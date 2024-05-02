@@ -68,7 +68,7 @@
             background-color: $primaryColor;
             border-color: $primaryColor;
             color: $secondColor;
-            @apply h-full w-[180px] flex items-center justify-center gap-4
+            @apply h-full w-[210px] flex items-center justify-center gap-4
             text-lg p-3 rounded font-light border-2 transition-colors;
         }
         .search {

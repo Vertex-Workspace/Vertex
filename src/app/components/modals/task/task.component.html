@@ -2,8 +2,8 @@
     <div class="base" *ngIf="render" (click)="$event.stopPropagation()">
         <div class="location">
             <div class="routes regular-text">
-                <p>{{taskInfoDTO.teamName}}</p>
-                <p>{{taskInfoDTO.projectName}}</p>
+                <p>{{ taskInfoDTO.teamName }}</p>
+                <p>{{ taskInfoDTO.projectName }}</p>
             </div>
             <div class="div-timer-closeModal">
                 <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable">
@@ -11,13 +11,13 @@
                     [ngClass]="hasDependency ? 'opacity-20' : 'opacity-100'"
                     [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
                         [disabled]="timeInTask.working || hasDependency">
-                        Entregar Tarefa
+                        {{ 'components.modals.task.deliverTask' | translate }}
                     </button>
                 </div>
                 <div class="flex flex-row gap-2" *ngIf="isCreator() && isRevisable()">
                     <p-checkbox [(ngModel)]="checkedReview" [binary]="true" inputId="binary"
                         (click)="updateTaskRevisable()"></p-checkbox>
-                    <p class="regular-text self-start">Obrigar Revisão</p>
+                    <p class="regular-text self-start">{{ 'components.modals.task.forceReview' | translate }}</p>
                 </div>
                 <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">
                     <i class="pi pi-plus rotate-45 text-2xl pt-2"></i>
@@ -29,7 +29,7 @@
                 <div>
                     <h4 (click)="cantEdit()"><input (blur)="updateTaskNameAndDescription()" [disabled]="!canEdit"
                             [(ngModel)]="task.name" type="text" class="title" name="name" id="name"
-                            value="{{task.name}}"></h4>
+                            value="{{ task.name }}"></h4>
                 </div>
                 <div class="properties">
                     <app-properties [task]="task" [project]="project" style="width: 100%; height: 100%;" (changes)="changeTask($event)"
@@ -37,8 +37,8 @@
                 </div>
                 <div class="down relative">
                     <div class="buttons">
-                        <button *ngIf="!task.chatCreated" (click)="createChat()">Criar Chat</button>
-                        <button *ngIf="task.chatCreated" (click)="openMiniChat()">Abrir Chat</button>
+                        <button *ngIf="!task.chatCreated" (click)="createChat()">{{ 'components.modals.task.createChat' | translate }}</button>
+                        <button *ngIf="task.chatCreated" (click)="openMiniChat()">{{ 'components.modals.task.openChat' | translate }}</button>
                     </div>
 
                     <div *ngIf="miniChatOpen" class="absolute">
@@ -50,27 +50,25 @@
                 <nav>
                     <ul>
                         <a (click)="navigate('description')"
-                            [style.background]="'description' === selectedComponent ? '#D6D6D687' : 'inherit'">Descrição</a>
+                            [style.background]="'description' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.description' | translate }}</a>
                         <span>|</span>
                         <a (click)="navigate('comments')"
-                            [style.background]="'comments' === selectedComponent ? '#D6D6D687' : 'inherit'">Comentários</a>
+                            [style.background]="'comments' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.commentsS' | translate }}</a>
                         <span>|</span>
                         <a (click)="navigate('log')"
-                            [style.background]="'log' === selectedComponent ? '#D6D6D687' : 'inherit'">Histórico</a>
+                            [style.background]="'log' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.log' | translate }}</a>
                         <span>|</span>
                         <a (click)="navigate('attachments')"
-                            [style.background]="'attachments' === selectedComponent ? '#D6D6D687' : 'inherit'">Anexos</a>
+                            [style.background]="'attachments' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.attachmentsS' | translate }}</a>
                     </ul>
                 </nav>
                 <div class="components">
                     <div *ngIf="selectedComponent === 'description'" class="flex flex-col">
                         <textarea [disabled]="!descriptionEditable" class="task-description"
-                            [(ngModel)]="task.description">{{task.description}}</textarea>
+                            [(ngModel)]="task.description">{{ task.description }}</textarea>
                         <div class="button">
-                            <button *ngIf="!descriptionEditable" (click)="changeEditDescription()">Editar
-                                descrição</button>
-                            <button *ngIf="descriptionEditable" (click)="changeEditDescription()">Salvar
-                                descrição</button>
+                            <button *ngIf="!descriptionEditable" (click)="changeEditDescription()">{{ 'components.modals.task.editDescription' | translate }}</button>
+                            <button *ngIf="descriptionEditable" (click)="changeEditDescription()">{{ 'components.modals.task.saveDescription' | translate }}</button>
                         </div>
                     </div>
 
@@ -86,40 +84,35 @@
                     />
                 </div>
                 <div class="submit gap-3 rounded-sm">
-                    <!-- IF THE TASK HAS ONLY ONE RESPONSIBLE, THE BUTTON OF WORK WILL BE ON SOUTH -->
                     <span class="div-timer">
                         <fa-icon [icon]="faClock"></fa-icon>
-                        <p>{{timer}}</p>
+                        <p>{{ timer }}</p>
                     </span>
                     <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()"
                     [disabled]="hasDependency"
                     [ngStyle]="{'opacity' : hasDependency ? '0.2' : '1'}"
-                    >Trabalhar
-                        na
-                        Tarefa</button>
+                    >{{ 'components.modals.task.workTask' | translate }}</button>
                     <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
-                        (click)="stopTimer()">Encerrar
-                        Trabalho</button>
+                        (click)="stopTimer()">{{ 'components.modals.task.endWork' | translate }}</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<app-confirm-modal *ngIf="isSending" [title]="' entregar a tarefa para análise'" [height]="'450px'" [width]="'400px'"
-    (close)="taskAction($event)" [buttonText]="'Enviar Tarefa'">
+<app-confirm-modal *ngIf="isSending" [title]="'components.modals.task.analysis' | translate" [height]="'450px'" [width]="'400px'"
+(close)="taskAction($event)" [buttonText]="'components.modals.task.sendTask' | translate">
     <ng-container #content>
         <div class="flex flex-col w-full justify-start items-start pt-5">
-            <p class="regular-text">Revisador(a):</p>
+            <p class="regular-text">{{ 'components.modals.task.reviewer' | translate }}</p>
             <div class="regular-text">
-                <p class="text-start">{{taskInfoDTO.creatorFullName}}</p>
-                <p class="text-start">{{taskInfoDTO.email}}</p>
+                <p class="text-start">{{ taskInfoDTO.creatorFullName }}</p>
+                <p class="text-start">{{ taskInfoDTO.email }}</p>
             </div>
             <div class="flex w-full h-24 pt-5">
-                <textarea name="description" placeholder="Descrição da tarefa finalizada..." id="description"
+                <textarea name="description" placeholder="{{ 'components.modals.task.taskDescriptionPlaceholder' | translate }}" id="description"
                     class="flex w-full h-full text-area-send-task" [(ngModel)]="sentToReviewDescription"></textarea>
             </div>
         </div>
     </ng-container>
 </app-confirm-modal>
-

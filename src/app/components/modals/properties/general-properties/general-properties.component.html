@@ -4,7 +4,7 @@
             <div class="visible-unvisible" [ngStyle]="{'border': item.kind == 'VISIBLE' ? 'none' : ''}">
                 <div class="flex w-[90%] flex-col">
                     <div class="flex w-full justify-between items-center">
-                        <p class="pl-3 pt-4 medium-text pb-4">{{item.status}}</p>
+                        <p class="pl-3 pt-4 medium-text pb-4">{{ 'components.modals.properties.general-properties.' + item.status | translate }}</p>
                         <button class="cursor-pointer" *ngIf="item.status == 'Visíveis'" (click)="createProperty()"
                             [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">+</button>
                     </div>
@@ -15,7 +15,7 @@
                                     <fa-icon [icon]="getIconProperty(property.kind)"
                                         [ngClass]="property.kind == 'NUMBER' ? 'number-type-icon' : ''"></fa-icon>
                                     <div class="flex w-[90%] h-full">
-                                        <p class="regular-text">{{property.name}}</p>
+                                        <p class="regular-text">{{ property.name }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -39,11 +39,11 @@
     <div class="fixed-properties">
         <div (click)="editProperty(project.properties[0], 'row')" class="min-w-[170px]">
             <fa-icon [icon]="faSpinner"></fa-icon>
-            <p class="medium-text">Gerenciar Status</p>
+            <p class="medium-text">{{ 'components.modals.properties.general-properties.manage-status' | translate }}</p>
         </div>
     </div>
 </div>
 
-<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'excluir a propridade'"
-    (close)="delete($event)">
+<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'components.modals.properties.general-properties.delete-property'"
+(close)="delete($event)">
 </app-confirm-modal>

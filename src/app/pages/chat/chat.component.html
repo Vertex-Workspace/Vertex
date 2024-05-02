@@ -1,37 +1,27 @@
 <section *ngIf="conversations">
 
     <header>
-
         <div class="conversations-div">
-            <h3 class="conversations">Conversas</h3>
+            <h3 class="conversations">{{ 'pages.chat.header.conversas' | translate }}</h3>
         </div>
-
         <div class="header-right">
-
             <div class="header-right-informations">
                 <div class="leftChatPerson">
                     <fa-icon *ngIf="chat" class="section-icons-7xl" [icon]="faCircleUser"></fa-icon>
                 </div>
-
                 <div class="gap-3 flex flex-col">
                     <div class="divNamesPerson">
                         <p *ngIf="chat" class="userName large-text">{{chat.name}}</p>
                     </div>
-
-                    <!-- <div class="divNamesPerson regular-text">
-                        <p>Nome equipe</p>
-                    </div> -->
                 </div>
             </div>
         </div>
     </header>
-
-
     <main>
         <div class="section-left-chat">
             <div class="header-section-left">
                 <div class="search-div">
-                    <input id="search" type="text" placeholder="Pesquise por uma conversa...">
+                    <input id="search" type="text" placeholder="{{ 'pages.chat.placeholderPesquisarConversa' | translate }}">
                     <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>
                 </div>
             </div>
@@ -45,40 +35,21 @@
                             <div class="user-card-message">
                                 <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>
                                 <div class="flex flex-col">
-                                    <p class="chatName">{{chatFor.name}}</p>
+                                    <p class="chatName">{{ chatFor.name }}</p>
                                 </div>
                             </div>
-
-                            <!-- <fa-icon class="section-icons" [icon]="faStar"></fa-icon>
-                            <div class="div-time-message">
-    
-                                <div class="div-time">
-                                    <fa-icon class="section-icons" [icon]="faCheckDouble"></fa-icon>
-                                </div>
-                            </div> -->
                         </div>
-
                     </ng-container>
                 </div>
             </div>
         </div>
-
         <div class="section-right-chat">
-
             <div *ngIf="!chat" class="center-div justify-center">
                 <div class="flex flex-col items-center gap-5 pb-20">
                     <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>
-                    <h6>Não há nenhuma conversa aberta no momento.</h6>
+                    <h6>{{ 'pages.chat.mensagemNenhumaConversa' | translate }}</h6>
                 </div>
             </div>
-
-            <!-- <div *ngIf="chat && !chat.messages">
-                <div class="flex flex-col items-center gap-5 pb-20">
-                    <img class="w-40 h-40" src="../../../assets/messageImage.png" alt="">
-                    <h6>Nenhuma mensagem enviada ainda! Seja o primeiro a enviar uma mensagem!</h6>
-                </div>
-            </div> -->
-
             <div *ngIf="chat" class="center-div">
                 <div class="min-h-[60px]">
                     <div *ngFor="let message of chat.messages" class="message-container"
@@ -132,11 +103,9 @@
             <form *ngIf="chat && chat.messages!=null" (ngSubmit)="sendMessage(sendForm)"
                 (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm" class="high-input-div justify-center">
                 <div class="divWhiteInput">
-
                     <textarea type="text" name="message" id="input-message"
                         class="form-control text-black focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"
-                        [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>
-                    
+                        [(ngModel)]="messageUser" placeholder="{{ 'pages.chat.inputPlaceholder' | translate }}"></textarea>
                     <div class="flex relative">
                         <input type="file" id="fileInput" class="hidden absolute left-1/2 top-1/2"
                             (change)="onFileChange($event)">
@@ -149,12 +118,9 @@
             </form>
         </div>
     </main>
-
-
 </section>
 
 <section class="gap-8" *ngIf="!conversations">
     <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>
-    <p class="pHasNoOneChat">Você ainda não possui nenhum chat cadastrado no sistema. Para criar um chat adicione
-        membros a sua equipe!</p>
+    <p class="pHasNoOneChat">{{"pages.chat.noChats"}}</p>
 </section>

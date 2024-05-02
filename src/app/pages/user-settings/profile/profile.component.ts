@@ -10,6 +10,7 @@ import { User } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Message } from 'src/app/models/class/message';
+import { TranslateService } from '@ngx-translate/core';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -55,14 +56,15 @@ export class ProfileComponent {
   ];
 
   tooglesList = [
-    { text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff },
-    { text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff }
+    { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff },
+    { id: 2, text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff }
   ];
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alert: AlertService,
+    private translate: TranslateService
   ) {
     this.getLoggedUser();
   }
@@ -117,10 +119,10 @@ export class ProfileComponent {
     this.userService
       .update(this.logged)
       .subscribe(() => {
-        this.alert.successAlert('Informações atualizadas com sucesso!')
+        this.alert.successAlert(this.translate.instant('alerts.success.update_success'))
       },
         e => {
-          this.alert.errorAlert("O e-mail não atende aos requisitos necessários")
+          this.alert.errorAlert(this.translate.instant('alerts.success.update_error'))
         }
       )
 
@@ -152,7 +154,7 @@ export class ProfileComponent {
     this.userService
       .uploadImage(fd, this.logged.id!)
       .subscribe(() => {
-        this.alert.successAlert('Imagem atualizada com sucesso!');
+        this.alert.successAlert(this.translate.instant('alerts.success.image_update_success'));
         this.updateLoggedUser();
       });
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/models/class/project';
 import { Team } from 'src/app/models/class/team';
 import { TeamService } from 'src/app/services/team.service';
+import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
 
 @Component({
   selector: 'app-confirm-modal',
@@ -11,7 +12,7 @@ import { TeamService } from 'src/app/services/team.service';
 })
 export class ConfirmModalComponent {
 
-  secondModal: boolean = false;
+    secondModal: boolean = false;
 
     @Output()
     close = new EventEmitter();
@@ -38,6 +39,9 @@ export class ConfirmModalComponent {
 
     @Output() confirmEvent = new EventEmitter<boolean>();
 
+    constructor(
+      private translate: TranslateService
+    ) {}
 
     deleteConfirm(answer : boolean): void {
       this.close.emit(answer);
@@ -45,7 +49,7 @@ export class ConfirmModalComponent {
 
     ngOnInit(): void {
       if(this.buttonText === undefined){
-        this.buttonText = "Confirmar"
+        this.buttonText = this.translate.instant('components.modals.confirm-modal.confirm_button');
       }
     }
 }

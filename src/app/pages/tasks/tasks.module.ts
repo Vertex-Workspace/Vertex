@@ -29,6 +29,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { TaskModule } from 'src/app/components/modals/task/task.module';
 import { JoyrideModule } from 'ngx-joyride';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { JoyrideModule } from 'ngx-joyride';
     NoteModule,
     CreateTeamProjectModule,
     CascadeSelectModule,
-    //Standalone component
+    TranslateModule,
     ReviewTaskComponent,
     PipesModule
   ],

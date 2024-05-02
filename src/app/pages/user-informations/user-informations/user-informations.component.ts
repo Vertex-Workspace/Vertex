@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models/class/task';
 import { User } from 'src/app/models/class/user';
@@ -30,7 +31,8 @@ export class UserInformationsComponent {
   constructor(
     private userService: UserService,
     private activatedRoute : ActivatedRoute,
-    private router : Router
+    private router : Router,
+    private translate : TranslateService
   ) {
     this.loggedUser = this.userService.getLogged();
   }
@@ -75,7 +77,7 @@ export class UserInformationsComponent {
       ,
       datasets: [
         {
-          label: 'Andamentos das Tarefas',
+          label: this.translate.instant('pages.user-informations.tasksPerformance'),
           data: this.user.tasksPerformances,
           backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
           borderColor: ["#d93b3b", "#d9bf3b", "#70d93b"],
@@ -90,10 +92,10 @@ export class UserInformationsComponent {
     const surfaceBorder = documentStyle1.getPropertyValue('--surface-border');
 
     this.dataBar = {
-      labels: ['Não Iniciado', 'Em Andamento', 'Concluídas'],
+      labels: [this.translate.instant("pages.team-informations.NaoIniciadas"), this.translate.instant("pages.team-informations.EmAndamento"), this.translate.instant("pages.team-informations.Concluidas")],
       datasets: [
         {
-          label: 'Andamentos das Tarefas',
+          label: this.translate.instant('pages.user-informations.tasksPerformance'),
           data: this.user.tasksPerformances,
           backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
           borderColor: ["#d93b3b", "#d9bf3b", "#70d93b"],

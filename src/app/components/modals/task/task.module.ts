@@ -13,6 +13,7 @@ import { ConfirmModalModule } from '../confirm-modal/confirm-modal.module';
 import { AttachmentsComponent } from 'src/app/components/modals/task/attachments/attachments.component';
 import { AttachmentItemComponent } from '../../reusable-components/attachment-item/attachment-item.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,6 @@ import { CheckboxModule } from 'primeng/checkbox';
     LogComponent,
     AttachmentsComponent,
     AttachmentItemComponent
-    
   ],
   exports: [TaskComponent],
   imports: [
@@ -32,7 +32,8 @@ import { CheckboxModule } from 'primeng/checkbox';
      PropertiesModule,
      MenuModule,
      ConfirmModalModule,
-     CheckboxModule
+     CheckboxModule,
+     TranslateModule
     ],
 })
 export class TaskModule { }

@@ -1,73 +1,64 @@
 <section>
     <div class="container-custom">
-
         <!-- LEFT SIDE TASKS/TEAMS -->
         <div class="container-grid">
-
             <!-- UTILITY NAV BAR TEAM -->
             <div class="flex flex-row items-end gap-3">
-                <h4>Equipes</h4>
+                <h4>{{ 'pages.home.teams.title' | translate }}</h4>
             </div>
-
-            <div stepPosition="center" joyrideStep="step1" title="Seja bem vindo, {{logged.firstName}}!"
-                text="Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!"
-                [stepContentParams]="{'name': logged.firstName}">
+            <div stepPosition="center" joyrideStep="step1" [title]="'Seja bem vindo, ' + logged.firstName + '!'"
+                [text]="'Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!'" [stepContentParams]="{ 'nome': logged.firstName }">
             </div>
-
             <div class="pt-2 pb-4">
-                <p class="small-text text-gray-600 text-justify w-2/3">As equipes são locais de trabalhos onde é possível gerenciar
-                    projetos, convidar membros,
-               iniciar chats de conversa e ter o seu tempo e do seu time na
-                    palma da sua mão.</p>
+                <p class="small-text text-gray-600 text-justify w-2/3">{{ 'pages.home.teams.description' | translate }}</p>
             </div>
             <div class="flex flex-col" joyrideStep="step2" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'Vizualizar / Criar equipes'" [stepContent]="customContent"
+                [title]="'Visualizar / Criar Equipes'" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[2] }">
                 <div class="functionally-items-task">
                     <div class="search">
-                        <input type="text" placeholder="Pesquise por uma equipe..." [(ngModel)]="teamSearch">
+                        <input type="text" [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
+                            [(ngModel)]="teamSearch">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        <p>Nova equipe</p>
+                        <p>{{ 'pages.home.teams.newTeamBtn' | translate }}</p>
                     </button>
                 </div>
 
                 <div class="default-size" *ngIf="teamsRender | async">
 
                     <div class="w-[40%] absolute" *ngIf="teams.length === 0">
-                        <h6 class="pt-12 flex justify-center items-center">Nenhuma equipe disponível...</h6>
+                        <h6 class="pt-12 flex justify-center items-center">{{ 'pages.home.teams.noTeam' | translate }}</h6>
                     </div>
 
                     <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" [teams]="teams" [type]="'team'"
                         [filterSearch]="teamSearch" joyrideStep="goToTeamPage" [prevTemplate]="prevButton"
-                        [nextTemplate]="nextButton" [title]="'Ir para tela da equipe'"
-                        [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[4] }"></app-card-list>
+                        [nextTemplate]="nextButton" [title]="'Ir para tela da equipe'" [stepContent]="customContent"
+                        [stepContentParams]="{ texto: tutorialText[4] }"></app-card-list>
 
                 </div>
             </div>
         </div>
 
-
         <!-- RIGHT SIDE - QUICK ACCESS -->
         <div class="container-grid pb-10">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
-                    <h4>Todas as Tarefas</h4>
+                    <h4>{{ 'pages.home.allTasks.title' | translate }}</h4>
                 </div>
                 <div class="pt-2 pb-4">
-                    <p class="small-text text-gray-600 text-justify w-2/3">Nessa seção é possível visualizar todas as tarefas na qual você
-                        é um dos responsáveis dentro de todo sistema, tarefas de todas equipes e projetos.</p>
+                    <p class="small-text text-gray-600 text-justify w-2/3">{{ 'pages.home.allTasks.description' | translate }}</p>
                 </div>
-
                 <div class="flex flex-col" joyrideStep="step3" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                    [title]="'Visualizar todas as tarefas'" [stepContent]="customContent"
+                    [title]="'pages.home.allTasks.title' | translate" [stepContent]="customContent"
                     [stepContentParams]="{ texto: tutorialText[3] }">
                     <!-- UTILITY NAV BAR TASK -->
                     <div class="functionally-items-task">
                         <div class="search">
-                            <input type="text" placeholder="Pesquise por uma tarefa..." [(ngModel)]="queryFilter">
+                            <input type="text" [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
+                                [(ngModel)]="queryFilter">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
                         <div class="filter-items">
@@ -80,20 +71,21 @@
                         </div>
                     </div>
                     <section class="filter-settings" *ngIf="filterOpen || orderOpen">
-                        <!-- <p *ngIf="orderOpen">Ordenar por </p> -->
                         <ng-container *ngIf="filterOpen">
-                            <p>Filtrar por </p>
+                            <p>{{ 'pages.home.allTasks.filterBy' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="selectedFilter" (ngModelChange)="updateOrderType($event)"
                                 [options]="filterOptions" optionLabel="name" optionGroupLabel="name"
                                 [optionGroupChildren]="['values']" [style]="{ minWidth: '14rem' }"
-                                placeholder="{{ selectedFilter ? selectedFilter : filterDate ? filterDate : 'Selecione' }}">
+                                [placeholder]="'pages.home.allTasks.placeholderFilterBy' | translate">
                             </p-cascadeSelect>
                         </ng-container>
                         <ng-container *ngIf="orderOpen">
-                            <p>Ordenar por </p>
+                            <p>{{ 'pages.home.allTasks.orderBy' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
-                                [style]="{ minWidth: '13rem' }" placeholder="Selecione"></p-cascadeSelect>
+                                [style]="{ minWidth: '13rem' }"
+                                [placeholder]="'pages.home.allTasks.placeholderOrderBy' | translate">
+                            </p-cascadeSelect>
                         </ng-container>
                     </section>
                     <div class="default-size">
@@ -117,15 +109,13 @@
 *ngIf="isCreating" [typeString]="'team'" (sendTeam)="updateTeams($event)"></app-create-team-project>
 
 <ng-template #prevButton>
-    <button class="btn">
-        Voltar
-    </button>
+    <button class="btn">Voltar</button>
 </ng-template>
+
 <ng-template #nextButton>
-    <button class="btn">
-        Próximo
-    </button>
+    <button class="btn">Próximo</button>
 </ng-template>
+
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">
     <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
 </ng-template>

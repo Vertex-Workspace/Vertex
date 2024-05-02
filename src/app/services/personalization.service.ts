@@ -17,11 +17,19 @@ export class PersonalizationService {
   findById(id:number): Observable<Personalization> {
     return this.http.get<Personalization>(`${URL}personalization/${id}`, {withCredentials: true});
   }
+
+  findByUserId(userId: number): Observable<Personalization> {
+    return this.http.get<Personalization>(`${URL}api/personalization/${userId}`, {withCredentials: true});
+  }
+
   getAllPersonalization(): Observable<Personalization[]> {
     return this.http.get<Personalization[]>(`${URL}personalization`, {withCredentials: true});
   }
 
-  
+  public changeLanguage(language: any, userId: number): Observable<User> {
+    return this.http.patch<any>(`${URL}user/${userId}/personalization/changeLanguage`, language, {withCredentials: true});
+  }
+
 
 
   // ========================================================================================

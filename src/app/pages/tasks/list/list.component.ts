@@ -87,6 +87,10 @@ export class ListComponent implements OnInit {
     this.updateGlobalValues();
   }
 
+  translatePropertyListKey(value: string): string {
+    return 'pages.tasks.kanban.key.' + value;
+  }
+
   updateGlobalValues(): void {
     if (this.project) this.getProject(); //atribui todas as tarefas do projeto a taskList
     else if (this.router.url.includes("equipe")) this.getTeam(); //atribui todas as tarefas da equipe a taskList

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FontAwesomeModule,
     FormsModule,
+    TranslateModule
   ]
 })
 export class ForgotPasswordModule {

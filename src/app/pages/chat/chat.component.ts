@@ -19,6 +19,7 @@ import { UserService } from 'src/app/services/user.service';
 
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 import { ResizeEvent } from 'angular-resizable-element';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chat',

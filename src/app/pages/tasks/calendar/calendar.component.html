@@ -16,7 +16,7 @@
             <div>
                 <fa-icon (click)="toggleCharts()" [icon]="faToggleOn" *ngIf="toggle"></fa-icon>
                 <fa-icon (click)="toggleCharts()" [icon]="faToggleOff" *ngIf="!toggle"></fa-icon>
-                <p class="medium-text">Mostrar Tarefas</p>
+                <p class="medium-text">{{'pages.tasks.calendar.showTasks' | translate}}</p>
             </div>
         </div>
         <div class="flex justify-end regular-text">
@@ -77,7 +77,7 @@
                 
                 <div class="tasks-informations" *ngIf="getTasksByDate(day).length > 0 && !toggle">
                     <div class="tasks-link-informations regular-text" (click)="openModalTasks(day)">
-                        <p>{{getTasksByDate(day).length}} tarefas <span>atribuídas</span></p>
+                        <p>{{getTasksByDate(day).length}} {{'pages.tasks.calendar.attTasks' | translate}}</p>
                         <i class="pi pi-external-link"></i>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
 </section>
 
 <app-modal-warn *ngIf="modalTasks" [height]="'650px'" [width]="'800px'" (close)="openModalTasks(null)">
-    <h6>Tarefas Atribuídas para {{formatDate(modalDate)}}</h6>
+    <h6>{{'pages.tasks.calendar.tasksAttFor' | translate}} {{formatDate(modalDate)}}</h6>
     <div class="div-tasks">
         <ng-container *ngFor="let task of getTasksByDate(modalDate)">
             <div class="card-task">

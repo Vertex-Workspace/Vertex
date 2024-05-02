@@ -9,7 +9,8 @@ import { CardUserModule } from '../card-user/card-user.module';
 import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { DropdownModule } from 'primeng/dropdown';
-import { MultiSelect, MultiSelectModule } from 'primeng/multiselect';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -25,7 +26,8 @@ import { MultiSelect, MultiSelectModule } from 'primeng/multiselect';
     CardUserModule,
     TreeSelectModule,
     DropdownModule,
-    MultiSelectModule
+    MultiSelectModule,
+    TranslateModule
   ]
 })
 export class CreateTeamProjectModule { }

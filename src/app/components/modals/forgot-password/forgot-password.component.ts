@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { ForgotPasswordService } from 'src/app/services/forgotPassword.service';
 import { UserService } from 'src/app/services/user.service';
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ForgotPasswordComponent {
 
   faEnvelope = faEnvelope;
-  constructor(private forgotService: ForgotPasswordService, private userService: UserService, private alertService: AlertService) { }
+  constructor(private forgotService: ForgotPasswordService, private userService: UserService, private alertService: AlertService,private translate : TranslateService) { }
 
   emailTo: String = "";
 
@@ -56,11 +57,11 @@ export class ForgotPasswordComponent {
     this.forgotService.sendMessageToEmail(this.emailTo).subscribe(
       (data) => {
         this.codeGeneratedByJava = data;
-        this.alertService.successAlert("Código enviado com sucesso!");
+        this.alertService.successAlert(this.translate.instant("alerts.success.codeSent"));
         console.log(this.codeGeneratedByJava);
       },
       (error) => {
-        this.alertService.errorAlert("Erro ao enviar código!");
+        this.alertService.errorAlert(this.translate.instant("alerts.success.codeNotSent"));
         console.log(error);
       }
     );
@@ -83,11 +84,11 @@ export class ForgotPasswordComponent {
       this.userService.patchPassword(this.emailTo, this.password).subscribe(
         (data) => {
           console.log(data);
-          this.alertService.successAlert("Senha alterada com sucesso!");
+          this.alertService.successAlert(this.translate.instant("alerts.success.passwordUpdated"));
           this.toForgotPassword();
         },
         (error) => {
-          this.alertService.errorAlert("Erro ao alterar senha!");
+          this.alertService.errorAlert(this.translate.instant("alerts.success.errorPasswordUpdated"));
           console.log(error);
         }
       );

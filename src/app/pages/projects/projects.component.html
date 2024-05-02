@@ -3,26 +3,25 @@
         <!-- RIGHT SIDE TASKS/TEAMS -->
         <div class="container-grid">
             <div class="flex flex-row items-end gap-3">
-                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>
+                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName }}</h4>
             </div>
             <div class="pt-2 mb-3">
-                <p class="small-text text-gray-600 text-justify w-2/3">Projetos são os diferentes espaços de trabalho de uma equipe, neles
-                é possível segmentar assuntos e organizar as tarefas sua e/ou do
-                    time.</p>
+                <p class="small-text text-gray-600 text-justify w-2/3">{{'pages.projects.description1' | translate}}</p>
             </div>
             <div class="flex flex-col" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
                 [title]="'Visualizar / Criar projetos'" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[5] }">
                 <div class="functionally-items regular-text">
                     <div class="search">
-                        <input class="inputSearch" type="text" placeholder="Pesquisar por um projeto..."
+                        <input class="inputSearch" type="text"
+                            placeholder="{{'pages.projects.searchPlaceholder' | translate}}"
                             [(ngModel)]="projectSearch">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                         <p>
-                            Novo projeto
+                            {{'pages.projects.newProjectBtn' | translate}}
                         </p>
                     </button>
                 </div>
@@ -32,7 +31,7 @@
                     [stepContentParams]="{ texto: tutorialText[7] }">
 
                     <div class="w-[40%] absolute" *ngIf="projects.length === 0">
-                        <h6 class="pt-16 flex justify-center items-center">Nenhum projeto disponível...</h6>
+                        <h6 class="pt-16 flex justify-center items-center">{{"pages.projects.noProjects" | translate }}</h6>
                     </div>
                     <app-card-list style="width: 100%; height: 90%; padding-top: 3%" [type]="'project'" [team]="team"
                         [teamScreen]="'project'" [projects]="projects">
@@ -48,12 +47,11 @@
         <div class="container-grid pb-10">
             <div class="default-size">
                 <div class="flex flex-row items-end gap-3">
-                    <h4>Tarefas de {{teamName}}</h4>
+                    <h4>{{teamName }}</h4>
                 </div>
 
                 <div class="pt-2">
-                    <p class="small-text text-gray-600 text-justify w-2/3 mb-3">Nessa seção é possível visualizar todas as tarefas na qual você
-                    é um dos responsáveis dentro da equipe {{teamName}}</p>
+                    <p class="small-text text-gray-600 text-justify w-2/3 mb-3">{{'pages.projects.description4' | translate:{team:teamName} }}</p>
                 </div>
 
                 <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
@@ -62,7 +60,8 @@
 
                     <div class="functionally-items regular-text">
                         <div class="search">
-                            <input class="inputSearch" type="text" placeholder="Pesquise por uma tarefa..."
+                            <input class="inputSearch" type="text"
+                                placeholder="{{'pages.projects.searchPlaceholder' | translate}}"
                                 [(ngModel)]="queryFilter">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
@@ -77,17 +76,19 @@
                     </div>
                     <section class="filter-settings" *ngIf="filterOpen || orderOpen">
                         <ng-container *ngIf="filterOpen">
-                            <p>Filtrar por </p>
+                            <p>{{'pages.projects.filterBy' | translate}}</p>
                             <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
-                                [style]="{ minWidth: '14rem' }" placeholder="Selecione"></p-cascadeSelect>
+                                [style]="{ minWidth: '14rem' }"
+                                placeholder="{{'pages.projects.select' | translate}}"></p-cascadeSelect>
 
                         </ng-container>
                         <ng-container *ngIf="orderOpen">
-                            <p>Ordenar por </p>
+                            <p>{{'pages.projects.orderBy' | translate}}</p>
                             <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
-                                [style]="{ minWidth: '13rem' }" placeholder="Selecione"></p-cascadeSelect>
+                                [style]="{ minWidth: '13rem' }"
+                                placeholder="{{'pages.projects.select' | translate}}"></p-cascadeSelect>
                         </ng-container>
                     </section>
 
@@ -112,15 +113,13 @@
 </ng-container>
 
 <ng-template #prevButton>
-    <button class="btn btn-outline-primary">
-        Voltar
-    </button>
+    <button class="btn">{{ 'pages.projects.backBtn' | translate }}</button>
 </ng-template>
+
 <ng-template #nextButton>
-    <button class="btn btn-primary">
-        Próximo
-    </button>
+    <button class="btn">{{ 'pages.projects.nextBtn' | translate }}</button>
 </ng-template>
+
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">
     <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
 </ng-template>

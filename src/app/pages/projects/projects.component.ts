@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { CardListComponent } from 'src/app/components/reusable-components/card-list/card-list.component';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CardListComponent } from 'src/app/components/reusable-components/card-list/card-list.component';
+import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
 import { Group } from 'src/app/models/class/groups';
 import { Project } from 'src/app/models/class/project';
 import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
@@ -32,35 +33,10 @@ export class ProjectsComponent implements OnInit {
 
   //TASKS - FILTER AND ORDER
   selectedFilter !: string;
-  filterOptions: any[] = [
-    {name: 'Status', values: [
-      {name: 'Não Iniciado', kind: PropertyListKind.TODO, status: true},
-      {name: 'Em Andamento', kind: PropertyListKind.DOING, status: true},
-      {name: 'Concluído', kind: PropertyListKind.DONE, status: true}
-    ]},
-    {name: 'Data', values: [
-      {name: "Hoje", kind: PropertyKind.DATE as string, value: 'td' },
-      { name: "Próxima semana", kind: PropertyKind.DATE as string, value: 'nw' },
-      { name: "Próximo mês", kind: PropertyKind.DATE as string, value: 'nm'}
-    ]},
-  ];
+  filterOptions: any[] = [];
 
   orderParams !: PipeParams;
-  orderOptions : any = [
-    { name: 'Nome', values: [
-      { name: 'A-Z', type: 'name'  },
-      { name: 'Z-A', type: 'name' }
-    ]},
-    { name: 'Data', values: [
-      { name: 'Maior - Menor', type: 'date' },
-      { name: 'Menor - Maior', type: 'date' }
-    ] },
-    { name: 'Status', values: [
-      { name: 'Não Iniciado', type: 'status', kind: PropertyListKind.TODO },
-      { name: 'Em Andamento', type: 'status', kind: PropertyListKind.DOING },
-      { name: 'Concluído', type: 'status', kind: PropertyListKind.DONE },
-    ] }
-  ];
+  orderOptions: any = [];
 
 
   queryFilter !: string;
@@ -74,8 +50,13 @@ export class ProjectsComponent implements OnInit {
     private userService: UserService,
     private teamService: TeamService,
     private router: Router,
+    private translate: TranslateService,
+    private cd: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
+    this.translate.onLangChange.subscribe(() => {
+      this.updateTranslate();
+    });
   }
 
 
@@ -84,6 +65,7 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeam();
+    this.updateTranslate();
   }
 
 
@@ -91,36 +73,82 @@ export class ProjectsComponent implements OnInit {
   getTeam() {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
-    .getOneById(teamId)
-    .subscribe((team: Team) => {
-      console.log(team);
-      
-      this.team = team;
-      this.teamName = team.name!;
-      this.projects = this.team.projects;
-      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
-      this.permissionsOnTeamObservable.subscribe((permissions: Permission[]) => {
-        this.permissionsOnTeam = permissions;
-        
+      .getOneById(teamId)
+      .subscribe((team: Team) => {
+        console.log(team);
+
+        this.team = team;
+        this.teamName = team.name!;
+        this.projects = this.team.projects;
+        this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
+        this.permissionsOnTeamObservable.subscribe((permissions: Permission[]) => {
+          this.permissionsOnTeam = permissions;
+
+        });
+      }, (error) => {
+        this.router.navigate(['/home']);
+        this.alert.errorAlert('alerts.error.inexistent_team');
       });
-    }, (error) => {
-      this.router.navigate(['/home']);
-      this.alert.errorAlert('Equipe inexistente!')
-    });
   }
 
+  updateTranslate() {
+    this.filterOptions = [
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), kind: PropertyListKind.TODO, status: true },
+          { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), kind: PropertyListKind.DOING, status: true },
+          { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), kind: PropertyListKind.DONE, status: true }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.Today'), kind: PropertyKind.DATE as string, value: 'td' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.NextWeek'), kind: PropertyKind.DATE as string, value: 'nw' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.NextMonth'), kind: PropertyKind.DATE as string, value: 'nm' }
+        ]
+      },
+    ];
 
+    this.orderOptions = [
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Name'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.AtoZ'), type: 'name' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.ZtoA'), type: 'name' }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Date'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.HigherToLower'), type: 'date' },
+          { name: this.translate.instant('pages.projects.filterAndOrder.LowerToHigher'), type: 'date' }
+        ]
+      },
+      {
+        name: this.translate.instant('pages.projects.filterAndOrder.Status'), values: [
+          { name: this.translate.instant('pages.projects.filterAndOrder.NotStarted'), type: 'status', kind: PropertyListKind.TODO },
+          { name: this.translate.instant('pages.projects.filterAndOrder.InProgress'), type: 'status', kind: PropertyListKind.DOING },
+          { name: this.translate.instant('pages.projects.filterAndOrder.Completed'), type: 'status', kind: PropertyListKind.DONE },
+        ]
+      }
+    ];
+    this.detectChanges();
+  }
+
+  detectChanges() {
+    this.cd.detectChanges();
+  }
 
   delete(project: Project): void {
     this.projectService
       .delete(project.id)
-      .subscribe(() => {
-        this.alert.successAlert(`Projeto deletado com sucesso!`);
-        this.team.projects?.splice(this.team.projects.indexOf(project),1)
-      },
-       e => {
-         this.alert.errorAlert('Erro ao deletar projeto!');
-       });
+      .subscribe(
+        () => {
+          this.alert.successAlert(this.translate.instant('alerts.success.project_deleted'));
+          this.team.projects?.splice(this.team.projects.indexOf(project), 1);
+        },
+        e => {
+          this.alert.errorAlert(this.translate.instant('alerts.error.delete_project'));
+        }
+      );
   }
 
   changePreviewMode(preview: string): void {
@@ -149,7 +177,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   clickOrder(): void {
-    this.orderParams = {name: '', type: ''};
+    this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
   }
 
@@ -167,8 +195,8 @@ export class ProjectsComponent implements OnInit {
   }
 
 
-  goTeamSettings():void{
-    const route : string = 'equipe/' + this.team.id;
+  goTeamSettings(): void {
+    const route: string = 'equipe/' + this.team.id;
     this.router.navigate([route]);
   }
 }

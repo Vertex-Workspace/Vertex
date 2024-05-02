@@ -7,6 +7,7 @@ import { ModalWarnModule } from 'src/app/components/modals/modal-warn/modal-warn
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -25,7 +26,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     ModalWarnModule,
     ReactiveFormsModule,
     ToastModule,
-    FileUploadModule
+    FileUploadModule,
+    TranslateModule
   ]
 })
 export class ProfileModule { }

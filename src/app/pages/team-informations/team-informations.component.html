@@ -6,13 +6,13 @@
             <div class="divHead">
                 <div class="input-image">
                     <div class="image relative">
-                      <img *ngIf="selectedFile" src="data:image/jpg;base64, {{team.image}}" alt="">
-                      <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
-                      <form class="input-div">
-                        <input type="file" class="input-file" (change)="onFileSelected($event)">
-                      </form>
+                        <img *ngIf="selectedFile" src="data:image/jpg;base64, {{team.image}}" alt="">
+                        <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
+                        <form class="input-div">
+                            <input type="file" class="input-file" (change)="onFileSelected($event)">
+                        </form>
                     </div>
-                  </div>
+                </div>
                 <div class="divTextHead pt-4">
                     <span class="flex flex-row gap-2 items-center">
                         <ng-container *ngIf="!inputEditName">
@@ -31,10 +31,12 @@
                             <textarea [disabled]="!editDescription" [(ngModel)]="team.description"
                                 [ngClass]="!editDescription ? '' : 'bg-description'"></textarea>
                             <div class="p-description">
-                                <button *ngIf="!editDescription" (click)="changeEditDescription()">Editar
-                                    descrição</button>
-                                <button *ngIf="editDescription" (click)="changeEditDescription()">Salvar
-                                    descrição</button>
+                                <button *ngIf="!editDescription"
+                                    (click)="changeEditDescription()">{{'pages.team-informations.editDesc' |
+                                    translate}}</button>
+                                <button *ngIf="editDescription"
+                                    (click)="changeEditDescription()">{{'pages.team-informations.saveDesc' |
+                                    translate}}</button>
                             </div>
                         </span>
                     </div>
@@ -45,12 +47,10 @@
                 <div class="div-members">
                     <div class="members">
                         <ng-container *ngFor="let item of menuItems">
-                            <button 
-                            [ngClass]="item.clicked === true ? 'clicked' : 'default'" 
-                            (click)="changePreviewMode(item.id)"
-                            >
+                            <button [ngClass]="item.clicked === true ? 'clicked' : 'default'"
+                                (click)="changePreviewMode(item.id)">
                                 <i class="{{ item.iconClass }}" style="font-size: 1.25rem"></i>
-                                {{ item.label }}
+                                {{ 'pages.team-informations.'+item.label | translate }}
                             </button>
                         </ng-container>
                     </div>
@@ -58,18 +58,21 @@
 
                 <div class="high-listDiv-members">
                     <div class="search">
-                    <input class="searchInput" type="text" placeholder={{placeholder}} [(ngModel)]="query">
+                        <input *ngIf="clicked === 'participants'" class="searchInput" type="text"
+                            placeholder="{{ 'pages.team-informations.' + clicked| translate }}" [(ngModel)]="query">
+                        <input *ngIf="clicked === 'groups'" class="searchInput" type="text"
+                            placeholder="{{ 'pages.team-informations.' + clicked| translate }}" [(ngModel)]="query">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="clicked" (click)="openModalCreateGroup()" *ngIf="clicked === 'groups'">
                         <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        Novo grupo</button>
+                        {{'pages.team-informations.createNewGroup' | translate}}</button>
                     <div class="divMembers pr-3" *ngIf="clicked == 'participants'">
-                        <p class="medium-text">{{team.users!.length}} {{team.users!.length === 1 ? "membro" :
-                            "membros"}}</p>
+                        <p class="medium-text">{{'pages.team-informations.'+ returnMemberOrMembers() |
+                            translate:{number:team.users!.length} }}</p>
                         <fa-icon class="iconLink" [icon]="faLink" (click)="copyInviteLink()"></fa-icon>
-                        <p class="medium-text underline cursor-pointer" (click)="copyInviteLink()">Copiar link de
-                            convite</p>
+                        <p class="medium-text underline cursor-pointer" (click)="copyInviteLink()">
+                            {{'pages.team-informations.copyInviteLink' | translate}}</p>
                     </div>
                 </div>
             </div>
@@ -98,46 +101,51 @@
         <!-- =============================================================================================== -->
 
         <div class="right-side">
-            <h5 class="pt-4">Desempenho individual</h5>
-            <p class="regular-text pt-3">Lista o tempo dedicado dentro de todas as tarefas, de todos os projetos de {{team.name}}</p>
-            <div class="table">
+            <h5 class="pt-4">{{ 'pages.team-informations.individualPerformance' | translate }}</h5>
+            <p class="regular-text pt-3">{{ 'pages.team-informations.individualPerformanceDescription' | translate: {
+                teamName: team.name } }}</p>
+                <div class="table">
                 <table class="w-full max-h-[40px]">
                     <tr>
-                        <th>Membro</th>
-                        <th>Tempo Dedicado</th>
+                        <th>{{ 'pages.team-informations.memberSingle' | translate }}</th>
+                        <th>{{ 'pages.team-informations.timeDedicated' | translate }}</th>
                     </tr>
                     <tr *ngFor="let responsable of team.reviewHoursDTOS">
-                        <td>{{responsable.username}}</td>
-                        <td>{{responsable.time}}</td>
+                        <td>{{ responsable.username }}</td>
+                        <td>{{ responsable.time }}</td>
                     </tr>
                 </table>
             </div>
 
-            <h5 class="self-start pt-7">Desempenho da equipe</h5>
-            <p class="regular-text pt-3">Informações essenciais para rastrear o progresso e desempenho da equipe como um todo, com foco em tarefas.</p>
+            <h5 class="self-start pt-7">{{ 'pages.team-informations.teamPerformance' | translate }}</h5>
+            <p class="regular-text pt-3">{{ 'pages.team-informations.teamPerformanceDescription' | translate }}</p>
             <div class="flex h-[40%] flex-row pt-6 gap-2">
                 <div class="card-reviews">
-                    <div class="justify-between h-[70%]" [style.opacity]="team.reprovedReviews == 0 && team.approvedReviews == 0 ? '0.6' : '1'">
-                        <p class="large-text">Revisões</p>
-                        <p class="text-red-500">Reprovadas: {{team.reprovedReviews}}</p>
-                        <p class="text-green-800">Aprovadas: {{team.approvedReviews}}</p>
-                        <p class="pb-2">Média Geral: {{team.averageReviews}} <i class="pi pi-star"></i></p>
+                    <div class="justify-between h-[70%]"
+                        [style.opacity]="team.reprovedReviews == 0 && team.approvedReviews == 0 ? '0.6' : '1'">
+                        <p class="large-text">{{ 'pages.team-informations.reviews' | translate }}</p>
+                        <p class="text-red-500">{{ 'pages.team-informations.reviewsReproved' | translate }}: {{
+                            team.reprovedReviews }}</p>
+                        <p class="text-green-800">{{ 'pages.team-informations.reviewsApproved' | translate }}: {{
+                            team.approvedReviews }}</p>
+                        <p class="pb-2">{{ 'pages.team-informations.generalAverage' | translate }}: {{
+                            team.averageReviews }} <i class="pi pi-star"></i></p>
                     </div>
                     <div class="gap-6 h-[70%]" [style.opacity]="team.percentage == 0 ? '0.6' : '1'">
-                        <p class="large-text">Progresso</p>
+                        <p class="large-text">{{ 'pages.team-informations.progress' | translate }}</p>
                         <p-progressBar [value]="team.percentage"></p-progressBar>
                     </div>
                 </div>
                 <div class="divProjectDashboardsBar">
-                    <p class="large-text self-start pl-3 py-3">Andamento de Tarefas</p>
+                    <p class="large-text self-start pl-3 py-3">{{ 'pages.team-informations.taskProgress' | translate }}
+                    </p>
                     <!-- <p-chart class="dashboard-bar" type="pie" [data]="data" [options]="options"></p-chart> -->
                     <p-chart class="chart-bar" [responsive]="true" type="bar" [options]="basicOptions"
                         [data]="basicData"></p-chart>
                 </div>
             </div>
-
-
         </div>
+
     </div>
 </section>
 

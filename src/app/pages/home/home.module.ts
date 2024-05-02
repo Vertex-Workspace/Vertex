@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
-import { QuickAccessModule } from 'src/app/components/reusable-components/quick-access/quick-access.module';
 import { CreateTeamProjectModule } from 'src/app/components/reusable-components/create-team-project/create-team-project.module';
 import { ListModule } from '../tasks/list/list.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -12,6 +11,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -21,7 +21,6 @@ import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
     CommonModule,
     JoyrideModule,
     CardListModule,
-    QuickAccessModule,
     CreateTeamProjectModule,
     ListModule,
     FontAwesomeModule,
@@ -29,7 +28,8 @@ import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
     FormsModule,
     CascadeSelectModule,
     CalendarModule,
-    InputTextModule
+    InputTextModule,
+    TranslateModule
   ],
 })
 export class HomeModule { }

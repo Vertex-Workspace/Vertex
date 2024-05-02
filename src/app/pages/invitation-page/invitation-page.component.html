@@ -5,11 +5,11 @@
             <h1 *ngIf="!team.image">{{getFirstLetter(team.name)}}</h1>
         </div>
         <div class="flex flex-col justify-center items-center gap-5">
-            <div class="text-invitation">{{team.name}}, te convidou para fazer parte do time!</div>
+            <div class="text-invitation">{{ 'pages.home.invitation-page.text' | translate:{teamName:team.name} }}</div>
             <div class="submit gap-3">
-                <button (click)="addUserOnTeam()">Entrar na equipe</button>
+                <button (click)="addUserOnTeam()">{{ 'pages.home.invitation-page.enterTeam' | translate }}</button>
                 <div class="deny-invite">
-                    <p (click)="deny()">Recusar convite</p>
+                    <p (click)="deny()">{{ 'pages.home.invitation-page.declineInvite' | translate }}</p>
                 </div>
             </div>
         </div>

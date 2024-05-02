@@ -6,6 +6,7 @@ import { InputValuePropertyComponent } from '../input-value-property/input-value
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InputValuePropertyModule } from '../input-value-property/input-value-property.module';
 import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -13,7 +14,7 @@ import { ConfirmModalModule } from '../../modals/confirm-modal/confirm-modal.mod
   declarations: [RowCardComponent],
   exports: [RowCardComponent],
   imports: [
-    CommonModule, FormsModule, FontAwesomeModule, InputValuePropertyModule, ConfirmModalModule
+    CommonModule, FormsModule, FontAwesomeModule, InputValuePropertyModule, ConfirmModalModule,TranslateModule
   ]
 })
 export class RowCardModule { }

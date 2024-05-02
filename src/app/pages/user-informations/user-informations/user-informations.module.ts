@@ -4,6 +4,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserInformationsComponent } from './user-informations.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartModule } from 'primeng/chart';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -14,7 +15,8 @@ import { ChartModule } from 'primeng/chart';
     CommonModule,
     MatProgressSpinnerModule,
     FontAwesomeModule,
-    ChartModule
+    ChartModule,
+    TranslateModule
   ],
   exports: [
     UserInformationsComponent

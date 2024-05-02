@@ -18,12 +18,12 @@ export class NotificationsComponent {
   inputEmail: boolean = false;
 
   tooglesList = [
-    {text: "Receber envios e devolutivas de tarefas", icon: faToggleOff},
-    {text: "Entrada de novos membros", icon: faToggleOff},
-    {text: "Mudança de permissões", icon: faToggleOff},
-    {text: "Atribuições de responsabilidade de projetos e tarefas", icon: faToggleOff},
-    {text: "Qualquer atualização em tarefas", icon: faToggleOff},
-    {text: "Enviar notificações por e-mail", icon: faToggleOff},
+    {id: 1, text: "Receber envios e devolutivas de tarefas", icon: faToggleOff},
+    {id: 2, text: "Entrada de novos membros", icon: faToggleOff},
+    {id: 3, text: "Mudança de permissões", icon: faToggleOff},
+    {id: 4, text: "Atribuições de responsabilidade de projetos e tarefas", icon: faToggleOff},
+    {id: 5, text: "Qualquer atualização em tarefas", icon: faToggleOff},
+    {id: 6, text: "Enviar notificações por e-mail", icon: faToggleOff},
   ];
 
 
