@@ -79,7 +79,7 @@ export class HeaderComponent {
     
     this.personalizationService.changeLanguage({language:sigla,linkLanguageImage:link}, this.userService.getLogged().id).subscribe(
       (res: any) => {
-        
+        this.updateLocation(this.router.url);
         console.log("Idioma alterado com sucesso!");
       },
       (error: any) => {

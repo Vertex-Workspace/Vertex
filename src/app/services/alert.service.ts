@@ -15,7 +15,7 @@ export class AlertService {
     this.messageService.add(
       { 
         severity: 'success', 
-        summary: 'Successo', 
+        summary: 'Sucesso', 
         detail: message 
       }
     );

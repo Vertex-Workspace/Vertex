@@ -56,7 +56,7 @@
                         [ngClass]="message.user !== logged.firstName ? 'left' : 'right'">
                         <div class="flex items-center gap-2">
                             <p *ngIf="(logged.firstName != message.user)" class="username">{{ message.user }}</p>
-                            <p *ngIf="(logged.firstName == message.user)" class="username">Eu</p>
+                            <p *ngIf="(logged.firstName == message.user)" class="username">{{"components.modals.minichat.me" | translate}}</p>
                         </div>
 
                         <div *ngIf="!message.file"

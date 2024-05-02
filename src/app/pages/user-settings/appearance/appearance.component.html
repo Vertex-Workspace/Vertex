@@ -8,7 +8,7 @@
     </div>
     <!-- CONTENT -->
     <div class="themes">
-        <p class="medium-text">Preferência de tema</p>
+        <p class="medium-text">{{ 'pages.user-settings.appearance.themePreference' | translate }}</p>
         <div class="flex w-full flex-row justify-between">
             <ng-container *ngFor="let theme of themes">
                 <div 
@@ -22,7 +22,7 @@
         </div>
         <div class="colors">
             <div>
-                <p class="small-text">Cor Destaque</p>
+                <p class="medium-text">{{ 'pages.user-settings.appearance.corDestaque' | translate }}</p>
                 <div class="colors-row">
                     <ng-container *ngFor="let color of colors;">
                         <button 
@@ -43,15 +43,14 @@
     <div class="text-preferences ">
         <div class="writing">
             <div class="h-full flex flex-col gap-2">
-                <p class="medium-text">Tamanho da letra</p>
-                <p class="small-text">Defina o tamanho da letra para o sistema</p>
+                <p class="medium-text">{{ 'pages.user-settings.appearance.fontSize' | translate }}</p>
                 <p-cascadeSelect [(ngModel)]="newPers.fontSize" [options]="fontSizes" optionGroupLabel="name"
                     [optionGroupChildren]="[]"
                     [style]="{ width: '120px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)'}"
                     placeholder="{{ newPers.fontSize }}" (onChange)="changeFontSize()"></p-cascadeSelect>
             </div>
             <div class="h-full flex flex-col gap-2">
-                <p class="medium-text">Estilo da letra</p>
+                <p class="medium-text">{{ 'pages.user-settings.appearance.fontStyle' | translate }}</p>
                 <p-cascadeSelect [(ngModel)]="newPers.fontFamily" [options]="fontFamily" optionGroupLabel="name"
                     [optionGroupChildren]="[]"
                     [style]="{ width: '180px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)' }"
@@ -60,7 +59,7 @@
         </div>
 
         <div>
-            <p class="medium-text">Acessibilidade</p>
+            <p class="medium-text">{{ 'pages.user-settings.appearance.accessibility' | translate }}</p>
             <div [(ngModel)]="newPers.signLanguage" (click)="toggleChange('libras')" class="accessibility">
                 <fa-icon *ngIf="!newPers.signLanguage" class="icon" [icon]="faToggleOff">
                 </fa-icon>

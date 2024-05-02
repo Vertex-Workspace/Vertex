@@ -283,8 +283,9 @@
         "confirm": "Confirmar"
       },
       "notification": {
-        "notificaciones": "Notificaciones",
+        "notificações" : "Notificaciones",
         "selectAll": "Seleccionar todo",
+        
         "markAsRead": "Marcar como leído",
         "exclude": "Excluir",
         "searchByANotification": "Buscar una notificación...",
