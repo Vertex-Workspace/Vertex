@@ -11,6 +11,7 @@ import { Permission, User } from 'src/app/models/class/user';
 import { PipeParams } from 'src/app/models/interface/params';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
@@ -80,29 +81,22 @@ export class ProjectsComponent implements OnInit {
 
 
   permissionsOnTeam!: Permission[];
-  permissionsOnTeamObservable!: Observable<Permission[]>;
 
   ngOnInit(): void {
     this.getTeam();
   }
 
-
   teamName: string = '';
   getTeam() {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
-    .getOneById(teamId)
+    .getScreenInformationsById(teamId)
     .subscribe((team: Team) => {
-      console.log(team);
-      
       this.team = team;
       this.teamName = team.name!;
       this.projects = this.team.projects;
-      this.permissionsOnTeamObservable = this.teamService.getPermission(this.team.id, this.logged.id!);
-      this.permissionsOnTeamObservable.subscribe((permissions: Permission[]) => {
-        this.permissionsOnTeam = permissions;
-        
-      });
+      this.permissionsOnTeam = team.permissions;   
+
     }, (error) => {
       this.router.navigate(['/home']);
       this.alert.errorAlert('Equipe inexistente!')

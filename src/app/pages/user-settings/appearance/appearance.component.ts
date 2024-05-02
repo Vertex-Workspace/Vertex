@@ -23,25 +23,35 @@ export class AppearanceComponent implements OnInit {
 
   logged !: User;
 
-  checked!: boolean;
-  checked2!: boolean;
+  themes: any = [
+    { name: 'light', icon: faSun, value: 0 },
+    { name: 'dark', icon: faMoon, value: 1 }
+  ]
+
+  fontSizes: number[] = [
+    12, 14, 15, 16, 18, 20
+  ]
+
+  fontFamily = [
+    'Inter', 'Helvetica', 'Arial', 'system-ui', 'Times New Roman'
+  ];
 
   newPers!: Personalization;
 
   colors: any = [
-    { colorLight: '#092C4C', colorDark: '#05141f', status: 'unselected' }, // Azul
-    { colorLight: '#28a745', colorDark: '#104e29', status: 'unselected' }, // Verde
-    { colorLight: '#dc3545', colorDark: '#6e181e', status: 'unselected' }, // Vermelho
-    { colorLight: '#17a2b8', colorDark: '#0b4450', status: 'unselected' }, // Azul claro
-    { colorLight: '#6f42c1', colorDark: '#341f38', status: 'unselected' }, // Roxo escuro
-    { colorLight: '#20c997', colorDark: '#0d5b47', status: 'unselected' }, // Verde claro
-    { colorLight: '#e83e8c', colorDark: '#8e1746', status: 'unselected' }, // Rosa
-    { colorLight: '#ff8fff', colorDark: '#ab2d77', status: 'unselected' }, // Rosa claro
-    { colorLight: '#007b5e', colorDark: '#003f33', status: 'unselected' }, // Verde azulado
-    { colorLight: '#FF6347', colorDark: '#802e1f', status: 'unselected' }, // Tomato
-    { colorLight: '#4682B4', colorDark: '#23426a', status: 'unselected' }, // Steel Blue
-    { colorLight: '#20B2AA', colorDark: '#0e6553', status: 'unselected' }, // Light Sea Green
-    { colorLight: '#8B008B', colorDark: '#460046', status: 'unselected' },
+    { colorDark: '', colorLight: '#092C4C', status: 'unselected' }, // Azul
+    { colorDark: '#28a745', colorLight: '#104e29', status: 'unselected' }, // Verde
+    { colorDark: '#dc3545', colorLight: '#6e181e', status: 'unselected' }, // Vermelho
+    { colorDark: '#17a2b8', colorLight: '#0b4450', status: 'unselected' }, // Azul claro
+    { colorDark: '#6f42c1', colorLight: '#341f38', status: 'unselected' }, // Roxo escuro
+    { colorDark: '#20c997', colorLight: '#0d5b47', status: 'unselected' }, // Verde claro
+    { colorDark: '#e83e8c', colorLight: '#8e1746', status: 'unselected' }, // Rosa
+    { colorDark: '#ff8fff', colorLight: '#ab2d77', status: 'unselected' }, // Rosa claro
+    { colorDark: '#007b5e', colorLight: '#003f33', status: 'unselected' }, // Verde azulado
+    { colorDark: '#FF6347', colorLight: '#802e1f', status: 'unselected' }, // Tomato
+    { colorDark: '', colorLight: '#23426a', status: 'unselected' }, // Steel Blue
+    { colorDark: '', colorLight: '#0e6553', status: 'unselected' }, // Light Sea Green
+    { colorDark: '', colorLight: '#460046', status: 'unselected' },
   ];
 
   constructor(
@@ -51,7 +61,6 @@ export class AppearanceComponent implements OnInit {
   }
   // Sets the theme by default and make the persistence of the theme in this component
   ngOnInit(): void {
-    this.logged = this.userService.getLogged();
     this.newPers = this.userService.getLogged().personalization!;
     this.colors.forEach((element : any) => {
       if(element.colorLight == this.newPers.primaryColor){
@@ -72,15 +81,6 @@ export class AppearanceComponent implements OnInit {
     this.savePersonalization();
     window.location.reload();      
   }
-
-  fontSizes: number[] = [
-    12, 14, 15, 16, 18, 20
-  ]
-
-  fontFamily = [
-    'Inter', 'Helvetica', 'Arial', 'system-ui', 'Times New Roman'
-  ];
-
 
   selectColor(color: any) {
     this.colors.forEach((element : any) => {
@@ -111,10 +111,5 @@ export class AppearanceComponent implements OnInit {
       this.userService.saveLoggedUser(userWithNewPersonalization);
       this.personalizationService.setTextVariables(userWithNewPersonalization.personalization!);
     })
-  }
-
-  getSelectedOptions(): void {
-    this.newPers.fontSize = this.logged.personalization!.fontSize!;
-    this.newPers.fontFamily = this.logged.personalization!.fontFamily!;
   }
 }

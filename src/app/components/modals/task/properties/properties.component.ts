@@ -61,9 +61,6 @@ export class PropertiesComponent {
   differentDone !: boolean
   isCreator: boolean = false;
 
-  ngOnChanges(): void {
-    this.ngOnInit();
-  }
 
   ngOnInit(): void {
     if(this.task){

@@ -10,19 +10,25 @@
     <div class="themes">
         <p class="medium-text">Preferência de tema</p>
         <div class="flex w-full flex-row justify-between">
-            <div class="flex w-[45%] justify-center items-center rounded-sm h-40 bg-black" (click)="changeTheme('dark')">
-                <h4>Tema Escuro</h4>
-            </div>
-            <div class="flex w-[45%] justify-center items-center rounded-sm h-40 bg-red-700" (click)="changeTheme('light')">
-                <h4>Tema </h4>
-            </div>
+            <ng-container *ngFor="let theme of themes">
+                <div 
+                class="theme-color" 
+                (click)="changeTheme(theme.name)"
+                [style.opacity]="theme.value == newPers.theme ? '1' : '0.5'"
+                >
+                    <fa-icon [icon]="theme.icon"></fa-icon>
+                </div>
+            </ng-container>
         </div>
         <div class="colors">
             <div>
                 <p class="small-text">Cor Destaque</p>
                 <div class="colors-row">
                     <ng-container *ngFor="let color of colors;">
-                        <button [ngStyle]="{'background-color': this.newPers.theme == 0 ? color.colorLight : color.colorDark}" class="colors-circle"
+                        <button 
+                        *ngIf="(newPers.theme == 1 && color.colorDark != '') || newPers.theme == 0"
+                        [ngStyle]="{'background-color': this.newPers.theme == 0 ? color.colorLight : color.colorDark}" 
+                        class="colors-circle"
                             (click)="selectColor(color)">
                             <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" class="icon"
                                 [ngStyle]="{'color': this.newPers.theme == 0 ? '#F3F3F3' : '#1E1E1E'}">

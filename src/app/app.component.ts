@@ -80,14 +80,17 @@ export class AppComponent {
     private personalizationService : PersonalizationService
   ) {
     this.userState.getAuthenticationStatus()
-    .subscribe((userLogged) => {
+    .subscribe((userLogged) => {   
       this.userLogged = userLogged;
-      if(userLogged && this.renderPersonalization == false){
+      if(userLogged){
+        this.logged = this.userService.getLogged()!;
         this.settingsRequest();
       }
     }
     );
   }
+
+
   ngOnInit(): void {
     this.userBasicData();
   }
@@ -99,7 +102,7 @@ export class AppComponent {
         this.userLogged = true;
         this.logged = this.userService.getLogged()!;
         this.settingsRequest();
-        }
+      }
   }, (error) => this.router.navigate(['/login']));
   }
   renderPersonalization: boolean = false;

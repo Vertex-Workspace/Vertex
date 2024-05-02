@@ -22,6 +22,16 @@ export class TeamService {
       .get<Team>(`${URL}team/${id}`, {withCredentials: true});
   }
 
+  public getScreenInformationsById(id: number): Observable<Team> {
+    return this.http
+      .get<Team>(`${URL}team/screen/${id}`, {withCredentials: true});
+  }
+
+  public getTeamName(id: number): Observable<any> {
+    return this.http
+      .get<any>(`${URL}team/name/${id}`, {withCredentials: true});
+  }
+
   public addUserOnTeam(userId: number, teamId: number): Observable<any> {
 
     let userTeam = {

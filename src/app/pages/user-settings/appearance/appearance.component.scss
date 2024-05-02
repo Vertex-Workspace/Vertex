@@ -329,3 +329,16 @@
 .unselected {
     @apply opacity-25;
 }
+
+.theme-color{
+    @apply flex w-[45%] justify-center items-center rounded-sm h-36;
+    background-color: $primaryColor;
+
+    fa-icon{
+        @apply text-3xl;
+    }
+
+    &:hover{
+        @apply cursor-pointer;
+    }
+}

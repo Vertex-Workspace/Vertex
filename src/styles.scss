@@ -38,6 +38,11 @@ input:focus {
     outline: none;
 }
 
+.p-badge{
+    background-color: $primaryColor !important;
+    color: $secondColor !important;
+    padding: 0 !important;
+}
 /* width */
 
 ::-webkit-scrollbar {

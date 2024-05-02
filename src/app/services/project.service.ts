@@ -24,6 +24,11 @@ export class ProjectService {
       .get<Project>(`${URL}project/${id}`, {withCredentials: true});
   }
 
+  public getProjectName(id:number): Observable<string> {
+    return this.http
+      .get<string>(`${URL}project/name/${id}`, {withCredentials: true});
+  }
+
   public create(project: Project, teamId: number): Observable<Project> {
     console.log(project);
     

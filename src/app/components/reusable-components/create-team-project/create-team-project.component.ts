@@ -276,7 +276,7 @@ export class CreateTeamProjectComponent implements OnInit {
   private getGroups(teamId: number): void {
     this.groupService.getGroupsByTeam(teamId).subscribe((groups: Group[]) => {
       for (const group of groups) {
-        group.label = "Grupo " + group.label
+        group.label = "Grupo " + group.name
         this.listOfResponsibles.push(group)
         if (this.project != null) {
           this.returnAllGroups(group)
