@@ -30,9 +30,10 @@
 
     <div class="input-description"
       *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
-      <p class="medium-text" *ngIf="typeString === 'team' || typeString === 'project'">{{
+
+      <p class="medium-text" *ngIf="typeString === 'team'">{{
         'components.reusable-components.create-team-project.team-description' | translate }}</p>
-      <p class="medium-text" *ngIf="typeString === 'project' || typeString === 'project'">{{
+      <p class="medium-text" *ngIf="typeString === 'project'">{{
         'components.reusable-components.create-team-project.project-description' | translate }}</p>
         <textarea formControlName="description" *ngIf="projectNull && typeString === 'team'"
         [placeholder]="'components.reusable-components.create-team-project.add-team-description' | translate"></textarea>
@@ -51,7 +52,7 @@
             [(ngModel)]="selectedUsers" [style]="{ width: '255px'}"></p-multiSelect>
         </div>
         <div class="flex w-1/2 flex-col">
-          <p class="large-text self-start">{{ 'components.reusable-components.create-team-project.responsibles' | translate }}</p>
+          <p class="large-text self-start">{{ 'components.reusable-components.create-team-project.task-review' | translate }}</p>
           <p-dropdown class="flex items-start justify-start pt-2" [options]="optionsReview" 
           [style]="{ width: '255px'}" formControlName="projectReviewENUM" placeholder="{{review}} "></p-dropdown>
         </div>

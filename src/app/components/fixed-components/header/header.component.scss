@@ -20,7 +20,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 1rem;
 }
 
 .current-location p {
@@ -29,10 +28,14 @@
 
 .items-header {
     display: flex;
-    width: 20%;
+    width: 250px;
     height: 100%;
-    justify-content: space-around;
+    @apply justify-between;
     align-items: center;
+    
+    fa-icon{
+        @apply text-3xl;
+    }
 }
 
 .back {
