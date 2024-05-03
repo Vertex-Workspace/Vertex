@@ -57,6 +57,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+  loginGoogle() {
+    window.location.href = 'http://localhost:7777';
+  }
+
   onSubmit(): void {
     this.userService.login(this.form.value);
   }

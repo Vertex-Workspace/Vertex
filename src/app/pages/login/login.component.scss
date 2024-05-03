@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .bg-login {
     @apply bg-cover bg-center w-screen h-screen flex;
 
@@ -17,6 +19,17 @@
 
 #left-div-login {
     @apply w-1/2 h-screen flex items-center;
+}
+
+.google {
+    @apply flex w-[200px] h-[50px] bg-white p-3 rounded-sm 
+    items-center justify-center gap-3;
+    border: solid $emphasis 1px;
+
+    &:hover {
+        background-color: $emphasis;
+        @apply transition-colors;
+    }
 }
 
 
@@ -83,7 +96,7 @@
 }
 
 #enter-btn {
-    @apply flex w-44 h-10 items-center justify-center rounded-md bg-[#092C4C] text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#20478b] transition-all;
+    @apply flex w-[190px] h-[47px] items-center justify-center rounded-md bg-[#092C4C] text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#20478b] transition-all;
 }
 
 #p-haveNot-account {
