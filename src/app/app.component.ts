@@ -20,7 +20,6 @@ import { User } from './models/class/user';
 import { TeamService } from './services/team.service';
 import { URL } from './services/path/api_url';
 
-import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { TextSpeechService } from './services/text-speech.service';
 import { Observable, of } from 'rxjs';
 
@@ -69,7 +68,6 @@ export class AppComponent {
 
   notification: boolean = false;
 
-  linkImage!:string;
 
   isSideBarExpanded: boolean = false;
 
@@ -117,7 +115,6 @@ export class AppComponent {
   private settingsRequest(){
     this.personalizationService.findByUserId(this.userService.getLogged().id!).subscribe(
       (res: Personalization) => {
-        this.linkImage = res.linkLanguageImage!;
         this.translate.setDefaultLang(res.language!);
       },
       (error) => {

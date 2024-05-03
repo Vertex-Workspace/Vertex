@@ -26,7 +26,7 @@ export class HeaderComponent {
   location: string = "";
   id !: number;
 
-  translates: any = [
+  translates: any[] = [
     { sigla: 'pt', image: 'https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png'},
     { sigla: 'es', image: 'https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg'},
     { sigla: 'en', image: 'https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg'},
@@ -71,27 +71,26 @@ export class HeaderComponent {
     }); 
   }
 
-  @Input()
   linkImage!:string;
   changeLanguage(sigla: string, link: string) {
-    this.linkImage = link;
     this.translate.use(sigla);
-    
-    this.personalizationService.changeLanguage({language:sigla,linkLanguageImage:link}, this.userService.getLogged().id).subscribe(
-      (res: any) => {
+    this.linkImage = link;
+    this.personalizationService.changeLanguage({language:sigla}, this.userService.getLogged().id).subscribe(
+      (res: User) => {
+        this.userService.saveLoggedUser(res);
         this.updateLocation(this.router.url);
-        console.log("Idioma alterado com sucesso!");
-      },
-      (error: any) => {
-        console.error("Erro ao alterar idioma:", error);
-      }
-    );
+    });
   }
 
 
 
   locationTranslation: string = "";
   ngOnInit() {
+    this.translates.forEach((language) => {
+      if(language.sigla == this.userService.getLogged().personalization.language){
+        this.linkImage = language.image;
+      }
+    });
     this.translate.get('pages.' + this.location.toLowerCase()).subscribe((res: string) => {
       this.locationTranslation = res || this.location;
     });
@@ -169,7 +168,7 @@ export class HeaderComponent {
       .getProjectName(id)
       .subscribe((projectName: string) => {
         this.location = projectName;
-      })
+      }, (error) => this.location = error.error.text)
   }
 
   getUser(id: number): void {

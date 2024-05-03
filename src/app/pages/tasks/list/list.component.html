@@ -9,7 +9,8 @@
                     [style.min-width]="project ? '300px' : '245px'"
                     *ngIf="col.propertyStatus != 'INVISIBLE'"
                 >              
-                <h6>{{ 'pages.tasks.list.table.' + col.name | translate }}</h6>
+                <h6 *ngIf="col.name == 'Data' || col.name == 'Status'">{{ 'pages.tasks.list.table.' + col.name | translate }}</h6>
+                <h6 *ngIf="col.name != 'Data' && col.name != 'Status'">{{ col.name }}</h6>
             </label>
         </ng-container>
         </div>

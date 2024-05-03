@@ -139,7 +139,7 @@
                     "6": "SAT"
                 },
                 "showTasks": "Show tasks",
-                "attTasks": "tasks <span>attributed</span>",
+                "attTasks": "tasks attributed",
                 "tasksAttFor": "Tasks attributed for"
             }
         },

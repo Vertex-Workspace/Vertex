@@ -12,7 +12,7 @@
       <div class="input-name">
         <p class="medium-text" *ngIf="typeString === 'team'">{{
           'components.reusable-components.create-team-project.team-name' | translate }}</p>
-        <p class="medium-text" *ngIf="typeString === 'project'">{{
+        <p class="medium-text" *ngIf="typeString === 'project' || typeString === 'projectInfo'">{{
           'components.reusable-components.create-team-project.project-name' | translate }}</p>
         <input formControlName="name" type="text"
         [placeholder]="'components.reusable-components.create-team-project.add-team-name' | translate"
@@ -21,7 +21,7 @@
          *ngIf="typeString === 'projectInfo'" [(ngModel)]="project.name">
       </div>
       <div class="circular">
-        <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover max-h-[150px]">
+        <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover">
         <form class="input-div">
           <input type="file" class="input-file" (change)="onFileSelected($event)">
         </form>
@@ -33,7 +33,7 @@
 
       <p class="medium-text" *ngIf="typeString === 'team'">{{
         'components.reusable-components.create-team-project.team-description' | translate }}</p>
-      <p class="medium-text" *ngIf="typeString === 'project'">{{
+      <p class="medium-text" *ngIf="typeString === 'project' || typeString === 'projectInfo'">{{
         'components.reusable-components.create-team-project.project-description' | translate }}</p>
         <textarea formControlName="description" *ngIf="projectNull && typeString === 'team'"
         [placeholder]="'components.reusable-components.create-team-project.add-team-description' | translate"></textarea>

@@ -189,7 +189,6 @@ export class CreateTeamProjectComponent implements OnInit {
           .updateImage(project.id, this.fd)
           .subscribe((projectResImage: Project) => {
             this.emitCreation(projectResImage);
-            
           });
         } else {
           this.emitCreation(project)
@@ -308,9 +307,8 @@ export class CreateTeamProjectComponent implements OnInit {
       description: project.description,
       projectDependency: project.projectDependency
     };
-    console.log(project.listOfResponsibles);
-    
-
+ 
+  
     if(project.listOfResponsibles.length > 0){
       this.verifyTypeAndDependencies(project, projectEdit);
     }
@@ -322,19 +320,20 @@ export class CreateTeamProjectComponent implements OnInit {
     let reviewConfig = this.form.get('projectReviewENUM');
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
 
-    console.log(projectEdit);
-    
     this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
       if (this.fd) {
         this.projectService
-          .updateImage(projectRes.id, this.fd)
-          .subscribe((projectResImage: Project) => {
-          });
+        .updateImage(project.id, this.fd)
+        .subscribe((projectResImage: Project) => {
+          this.emitCreation(projectResImage);
+        });
       } else {
+        this.emitCreation(project)
       }
       this.alert.successAlert(this.translate.instant("alerts.success.projectModifyWithSuccess"))
     });
   }
+  
 
   verifyTypeAndDependencies(project: Project, projectEdit: ProjectEdit) {
     let users: User[] = [];
