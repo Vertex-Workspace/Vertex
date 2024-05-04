@@ -28,13 +28,9 @@ export class RegisterComponent {
     private router: Router,
     private userState: UserStateService
   ) {
-    this.userState
-      .getAuthenticationStatus()
-      .subscribe((status: boolean) => {
-        if (status) {
-          this.router.navigate(['/home']);
-        }
-      })
+    if (document.cookie.includes("JWT")) {
+      this.router.navigate(['/home']);          
+    }
   }
 
   

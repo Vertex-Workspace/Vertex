@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="default-size">
-                    <div class="w-[40%] absolute" *ngIf="teams.length === 0">
+                    <div class="w-[40%] absolute" *ngIf="!teams.length">
                         <h6 class="pt-12 flex justify-center items-center">{{ 'pages.home.teams.noTeam' | translate }}</h6>
                     </div>
 
