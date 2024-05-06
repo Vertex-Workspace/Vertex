@@ -16,7 +16,7 @@ export class SearchService {
 
   public findTeams(loggedId: number, query: string): Observable<SearchItem[]> {
     return this.http
-      .get<SearchItem[]>(`${URL}team/query/${query}/${loggedId}`)
+      .get<SearchItem[]>(`${URL}team/query/${query}/${loggedId}` , {withCredentials: true})
       .pipe(map((items: SearchItem[]) => 
         items.map((item: SearchItem) => new SearchItem(item))
       ));
@@ -24,7 +24,7 @@ export class SearchService {
 
   public findUsers(loggedId: number, query: string): Observable<SearchItem[]> {
     return this.http
-      .get<SearchItem[]>(`${URL}user/query/${query}/${loggedId}`)
+      .get<SearchItem[]>(`${URL}user/query/${query}/${loggedId}` , {withCredentials: true})
       .pipe(map((items: SearchItem[]) => 
         items.map((item: SearchItem) => new SearchItem(item))
       ));
@@ -32,7 +32,7 @@ export class SearchService {
 
   public findProjects(loggedId: number, query: string): Observable<SearchItem[]> {
     return this.http
-      .get<SearchItem[]>(`${URL}project/query/${query}/${loggedId}`)
+      .get<SearchItem[]>(`${URL}project/query/${query}/${loggedId}` , {withCredentials: true})
       .pipe(map((items: SearchItem[]) => 
         items.map((item: SearchItem) => new SearchItem(item))
       ));
@@ -40,7 +40,7 @@ export class SearchService {
 
   public findTasks(loggedId: number, query: string): Observable<SearchItem[]> {
     return this.http
-      .get<SearchItem[]>(`${URL}task/query/${query}/${loggedId}`)
+      .get<SearchItem[]>(`${URL}task/query/${query}/${loggedId}` , {withCredentials: true})
       .pipe(map((items: SearchItem[]) => 
         items.map((item: SearchItem) => new SearchItem(item))
       ));

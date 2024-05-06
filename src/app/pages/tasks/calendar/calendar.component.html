@@ -43,87 +43,69 @@
 
         <div cdkDropListGroup>
 
-            <div class="calendar-rows" *ngFor="let week of weeks" >
-                
-                <div *ngFor="let day of week; index as index" 
-                    class="calendar-day"
-                    (mouseenter)="hover(day)"
-                    [class.day-not-month]="currentDate.getMonth() !== day.getMonth()"   
-                    cdkDropList
-                    [cdkDropListData]="day"
-                    (cdkDropListDropped)="drop($event, day)" 
-                >
-                <!-- 
+            <div class="calendar-rows" *ngFor="let week of weeks">
+
+                <div *ngFor="let day of week; index as index" class="calendar-day" (mouseenter)="hover(day)"
+                    [class.day-not-month]="currentDate.getMonth() !== day.getMonth()" cdkDropList
+                    [cdkDropListData]="day" (cdkDropListDropped)="drop($event, day)">
+                    <!-- 
                     DAYS OF THE MONTH (NUMBER)
                 -->
-                
-                <div class="day-informations">
-                    
-                    <!-- FUTURE -->
-                    <div class="add-button">
-                    <i 
-                        (click)="newTaskOnDay(day)" 
-                        *ngIf="hoveringDay === day" 
-                        class="pi pi-plus-circle"
-                        [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'"
-                    ></i>
+
+                    <div class="day-informations">
+
+                        <!-- FUTURE -->
+                        <div class="add-button">
+                            <i (click)="newTaskOnDay(day)" *ngIf="hoveringDay === day" class="pi pi-plus-circle"
+                                [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'"></i>
+                        </div>
+
+                        <div [class.today]="today(day)">
+                            {{day | date : 'dd'}}
+                        </div>
                     </div>
-                    
-                    <div [class.today]="today(day)">
-                        {{day | date : 'dd'}}
+
+
+                    <div class="tasks-informations" *ngIf="getTasksByDate(day).length > 0 && !toggle">
+                        <div class="tasks-link-informations regular-text" (click)="openModalTasks(day)">
+                            <p>{{getTasksByDate(day).length}} {{'pages.tasks.calendar.attTasks' | translate}}</p>
+                            <i class="pi pi-external-link"></i>
+                        </div>
                     </div>
-                </div>
-                
-                
-                <div class="tasks-informations" *ngIf="getTasksByDate(day).length > 0 && !toggle">
-                    <div class="tasks-link-informations regular-text" (click)="openModalTasks(day)">
-                        <p>{{getTasksByDate(day).length}} {{'pages.tasks.calendar.attTasks' | translate}}</p>
-                        <i class="pi pi-external-link"></i>
-                    </div>
-                </div>
-                
-                <div>
-                    
-                    <div class="tasks-list-in-calendar" *ngIf="toggle" cdkDropListGroup>
-                        <ng-container 
-                            *ngFor="let task of (getTasksByDate(day) 
+
+                    <div>
+
+                        <div class="tasks-list-in-calendar" *ngIf="toggle" cdkDropListGroup>
+                            <ng-container *ngFor="let task of (getTasksByDate(day) 
                             | namePipe : nameFilter 
                             | statusPipe : filter : false
                             | datePipe : filter
                             | nameSortPipe : orderParams
                             | dateSortPipe : orderParams
-                            | statusSortPipe : orderParams)"
-                        >
-                            <app-card 
-                            (openTaskDetails)="openCardTask(task)" 
-                            [minHeight]="'60px'" 
-                            [width]="'210px'" 
-                            [task]="task"
-                            [borderColor]="getColor(task)" 
-                            (deleteTask)="deleteTask(task)"
-                            [cdkDragData]="task"
-                            cdkDrag
-                            [permissions]="permissions"
-                            ></app-card>
-                        </ng-container>
+                            | statusSortPipe : orderParams)">
+                                <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'"
+                                    [task]="task" [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)"
+                                    [cdkDragData]="task" cdkDrag [permissions]="permissions"></app-card>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </section>
 
 <section class="mobile w-full h-full flex-col items-center">
-    <p-calendar class="w-full" [(ngModel)]="date" [style]="{ minWidth: '85%' }" [inline]="true" [showWeek]="false"></p-calendar>
+    <p-calendar class="w-full" [(ngModel)]="date" [style]="{ minWidth: '85%' }" [inline]="true"
+        [showWeek]="false"></p-calendar>
 
     <div class="day-tasks pt-4 pl-1 flex flex-col gap-3 w-full">
-        <button *ngIf="date" class="create" (click)="newTaskOnDay(date)"
-                    [disabled]="!canCreate" [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
-                    <i class="pi pi-plus-circle"></i>
-                    <p>
-                        Nova tarefa
-                    </p>
+        <button *ngIf="date" class="create" (click)="newTaskOnDay(date)" [disabled]="!canCreate"
+            [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'">
+            <i class="pi pi-plus-circle"></i>
+            <p>
+                Nova tarefa
+            </p>
         </button>
         <ng-container *ngFor="let task of (getTasksByDate(date) 
             | namePipe : nameFilter 
@@ -131,13 +113,9 @@
             | datePipe : filter
             | nameSortPipe : orderParams
             | dateSortPipe : orderParams
-            | statusSortPipe : orderParams)" 
-        >
-            <app-calendar-row-card
-                [task]="task"
-                (openTask)="openCardTask(task)"
-                (deleteEmt)="deleteTask($event)"
-            ></app-calendar-row-card>
+            | statusSortPipe : orderParams)">
+            <app-calendar-row-card [task]="task" (openTask)="openCardTask(task)"
+                (deleteEmt)="deleteTask($event)"></app-calendar-row-card>
         </ng-container>
     </div>
 </section>
@@ -145,11 +123,14 @@
 <app-modal-warn *ngIf="modalTasks" [height]="'650px'" [width]="'800px'" (close)="openModalTasks(null)">
     <h6>{{'pages.tasks.calendar.tasksAttFor' | translate}} {{formatDate(modalDate)}}</h6>
     <div class="div-tasks">
-        <ng-container *ngFor="let task of getTasksByDate(modalDate)">
-            <div class="card-task">
-                <p class="medium-text">{{task.name}}</p>
-                <i class="pi pi-external-link"></i>
-            </div>
-        </ng-container>
+        <div class="grid w-full h-full grid-cols-2 pt-4">
+            <ng-container *ngFor="let task of getTasksByDate(modalDate)">
+                <div class="flex w-full h-full justify-center">
+                    <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'" [task]="task"
+                    [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)" [cdkDragData]="task" cdkDrag
+                    [permissions]="permissions"></app-card>
+                </div>
+            </ng-container>
+        </div>
     </div>
 </app-modal-warn>

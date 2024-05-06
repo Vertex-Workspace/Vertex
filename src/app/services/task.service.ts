@@ -92,7 +92,7 @@ export class TaskService {
 
   public removeFile(taskId: number, fileId: number): Observable<Task> {
     return this.http
-      .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`)
+      .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`, {withCredentials: true})
   }
 
   public returnAllResponsables(id: number): Observable<ReturnTaskResponsables> {
