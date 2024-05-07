@@ -48,6 +48,7 @@ import { InvitationPageComponent } from './pages/invitation-page/invitation-page
 import { MobileSidebarComponent } from './components/fixed-components/mobile-sidebar/mobile-sidebar.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader, TranslateService, TranslateStore, TranslatePipe } from '@ngx-translate/core';
+import { LandingPageModule } from './pages/landing-page/landing-page.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,7 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoadingComponent,
     VlibrasComponent,
     DeniedAccessComponent,
-    MobileSidebarComponent
+    MobileSidebarComponent,
   ],
   imports: [
     JoyrideModule.forRoot(),
@@ -77,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     SidebarModule,
     HeaderModule,
+    LandingPageModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
     TaskModule,

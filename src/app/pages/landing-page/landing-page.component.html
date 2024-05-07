@@ -1,0 +1,60 @@
+<header>
+    <div class="head-navigation">
+        <div class="container-logo">
+            <img class="head-logo" src="../../../assets/vertex-logo.png" alt="Vertex Logo">
+            <h4 class="name-vertex">VERTEX</h4>
+        </div>
+
+        <div class="header-container-options">
+            <a class="header-option" href="#">Início</a>
+            <a class="header-option" (click)="scroll(aboutUs)">Sobre nós</a>
+            <a class="header-option" href="#">Tutorial</a>
+            <a class="header-option" href="#">Destaques</a>
+            <a class="header-option" href="#">Princípios</a>
+            <div class="menu-container">
+                <button mat-button [matMenuTriggerFor]="idiomaMenu" class="nav-item">
+                    <img style="width: 35px;" [src]="linkImage" />
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+                <mat-menu #idiomaMenu="matMenu" class="custom-menu">
+                    <ng-container *ngFor="let tr of translates">
+                        <button mat-menu-item (click)="changeLanguage(tr.sigla,tr.image)">
+                            <img style="width: 34px;" src="{{tr.image}}" />
+                        </button>
+                    </ng-container>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-header">
+        <div class="header-content">
+            <p class="header-titleG">
+                Gerencie cada<br><span class="header-title">Vertex</span> da sua história
+            </p>
+            <button class="header-button">Começar</button>
+        </div>
+        <div class="header-image">
+            <img class="header-img" src="../../../assets/vertex-logo.png" alt="Vertex Logo">
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <section #aboutUs class="section-aboutUs">
+        <p class="section-title-vertex">Vertex</p>
+        <p class="section-subtitle">O Vertex é uma plataforma inovadora de gerenciamento de tarefas e projetos projetada para otimizar a<br>
+            produtividade e a colaboração em equipes de todos os tamanhos. Com uma interface intuitiva e recursos <br>
+            abrangentes, o Vertex permite que você organize, acompanhe e conclua seus projetos de forma eficiente e br
+            eficaz.</p>
+        
+
+
+    </section>
+
+    <section #aboutUs class="section-tutorial">
+        aaaa
+    </section>
+
+</main>

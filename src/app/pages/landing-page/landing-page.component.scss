@@ -1,0 +1,85 @@
+header {
+    @apply w-[100vw] h-[105vh] bg-[#f3f3f3] flex flex-col items-center;
+
+    .head-navigation {
+        @apply w-[95%] h-[10%] flex justify-between items-center;
+
+
+        .container-logo {
+            @apply w-[40%] flex items-center gap-5;
+
+            .head-logo {
+                @apply w-[60px] h-[60px];
+            }
+
+            .name-vertex {
+                @apply pr-10 border-r-2 border-r-2 border-[#092c4c42];
+            }
+        }
+
+        .header-container-options {
+            @apply w-[60%] flex items-center justify-end gap-5;
+
+            .header-option {
+                @apply text-[#092c4c] font-semibold text-lg font-['Inter'] cursor-pointer;
+            }
+
+
+            .menu-container {
+                @apply relative w-10 h-10;
+
+                .nav-item {
+                    @apply p-2 transition-colors cursor-pointer w-10 h-10;
+                }
+            }
+
+        }
+    }
+
+    .main-header {
+        @apply w-[95%] h-[90%] flex items-center justify-center;
+
+        .header-content {
+            @apply w-[60%] h-[100%] flex flex-col items-start justify-center gap-10;
+
+            .header-titleG {
+                @apply text-black font-light font-['Inter'];
+                font-size: 68px;
+            }
+
+            .header-title {
+                @apply text-[#092c4c] font-extrabold font-['Inter'];
+                font-size: 70px;
+            }
+
+            .header-button {
+                @apply w-[200px] h-[50px] bg-[#092c4c] text-white font-semibold text-lg font-['Inter'] rounded-md flex items-center justify-center cursor-pointer;
+            }
+        }
+    }
+    border-bottom: 20px solid #092c4c;
+}
+
+main{
+    @apply w-[100vw] h-[300vh] bg-[#f3f3f3] flex flex-col items-center;
+
+    
+
+    .section-aboutUs{
+        @apply w-[100%] h-[120vh] mt-4 mb-4 bg-[#092c4c]  flex flex-col items-center justify-start pt-10 gap-10 text-white;
+        
+        .section-title-vertex{
+            @apply text-5xl font-semibold font-['Inter'];
+        }
+
+        .section-subtitle{
+            @apply text-lg font-light font-['Inter'] text-center;
+        
+        }
+    }
+
+    .section-tutorial{
+        @apply w-[100%] h-[120vh] flex items-center justify-center gap-10;
+        border-top: 20px solid #092c4c;
+    }
+}
