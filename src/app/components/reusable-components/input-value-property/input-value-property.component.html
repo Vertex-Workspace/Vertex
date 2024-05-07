@@ -1,4 +1,5 @@
 <section class="flex w-full h-full justify-center items-center">
+
 <!-- text -->
 <input *ngIf="getKind(value.property, 'TEXT')" type="text" pInputText (blur)="change(value)" [(ngModel)]="valueText"
     [disabled]="!canEdit"  [style]="{ minWidth: '200px', maxWidth: '200px', 'background-color': backgroundColor}"
@@ -6,12 +7,16 @@
 
 
 <!-- number -->
-<p-inputNumber  *ngIf="getKind(value.property, 'NUMBER')" [style]="{ minWidth: '200px', maxWidth: '200px'}" (onBlur)="change(value)" [(ngModel)]="valueNumber"
-    [disabled]="!canEdit"> </p-inputNumber>
+<p-inputNumber 
+    *ngIf="getKind(value.property, 'NUMBER')" 
+    [style]="{ minWidth: '200px', maxWidth: '200px', 'background-color': backgroundColor}" 
+    (onBlur)="change(value)" [(ngModel)]="valueNumber"
+    [disabled]="!canEdit"
+></p-inputNumber>
 
 <!-- date -->
 <span *ngIf="getKind(value.property, 'DATE')">
-    <p-calendar #calendarLabel appendTo="body" [style]="{ minWidth: '200px', maxWidth: '200px' }" (onSelect)="changeDate($event)"
+    <p-calendar #calendarLabel appendTo="body" [style]="{ minWidth: '200px', maxWidth: '200px', 'background-color': backgroundColor }" (onSelect)="changeDate($event)"
         [disabled]="!canEdit" [(ngModel)]="calendarClicked" inputId="label-calendar" [(ngModel)]="date"></p-calendar>
 </span>
 
@@ -28,10 +33,18 @@
     </ng-template>
 </p-cascadeSelect>
 
-<p-cascadeSelect *ngIf="getKind(value.property, 'LIST')" [(ngModel)]="value.value" [options]="getSelectOptions(value)"
-    optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="[]"
-    [style]="{ minWidth: '200px', maxWidth: '200px',  'background-color': backgroundColor }" placeholder="{{getValue()}}"
-    (onChange)="changeList($event, value)" appendTo="body" [disabled]="!canEdit">
+<p-cascadeSelect 
+    *ngIf="getKind(value.property, 'LIST')" 
+    [(ngModel)]="value.value" 
+    [options]="getSelectOptions(value)"
+    optionLabel="value" optionGroupLabel="name" 
+    [optionGroupChildren]="[]"
+    [style]="{ minWidth: '200px', maxWidth: '200px',  'background-color': 'var(--card)' }" 
+    placeholder="{{getValue()}}"
+    (onChange)="changeList($event, value)" 
+    appendTo="body" 
+    [disabled]="!canEdit"
+>
     <ng-template pTemplate="option" let-option>
         <div class="flex items-center justify-center gap-2">
             <span class="mr-2 w-[17px] h-[17px] rounded-full shadow-md" [style.backgroundColor]="option.color"></span>

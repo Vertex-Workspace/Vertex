@@ -36,8 +36,8 @@
                     <i class="pi pi-search"></i>
                 </button>
 
-                <div class="search " *ngIf="searchBarOpen">
-                    <input type="text" placeholder="{{'pages.tasks.searchTask' | translate}}" [(ngModel)]="query">
+                <div class="search " *ngIf="searchBarOpen" [style.backgroundColor]="'var(--card)'">
+                    <input type="text" placeholder="{{'pages.tasks.searchTask' | translate}}" [(ngModel)]="query" [style.backgroundColor]="'var(--card)'">
                     <i class="pi pi-times cursor-pointer" (click)="toggleSearchBar()"></i>
                 </div>
 
@@ -83,7 +83,7 @@
                 <div *ngIf="filterOpen">
                     <p>{{'pages.tasks.filterBy' | translate}}</p>
                     <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
-                    optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
+                    optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem', backgroundColor: 'var(--card)' }"
                     placeholder="{{'pages.tasks.select' | translate}}">
                     <ng-template let-option pTemplate="option">
                         <div style="color:var(--text)" *ngIf="option.name !== 'TEXT' && option.name !== 'NUMBER'">
@@ -104,9 +104,13 @@
             </div>
             <div *ngIf="orderOpen">
                 <p>{{'pages.tasks.orderBy' | translate}}</p>
-                <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
-                    optionGroupLabel="name" [optionGroupChildren]="['values']" [style]="{ minWidth: '13rem' }"
-                    placeholder="{{'pages.tasks.select' | translate}}" (ngModelChange)="updateOrderType($event)">
+                <p-cascadeSelect [(ngModel)]="orderParams" 
+                    [options]="orderOptions" optionLabel="name"
+                    optionGroupLabel="name" [optionGroupChildren]="['values']" 
+                    [style]="{ minWidth: '13rem', backgroundColor: 'var(--card)' }"
+                    placeholder="{{'pages.tasks.select' | translate}}" 
+                    (ngModelChange)="updateOrderType($event)"
+                >
                     <ng-template pTemplate="option" let-option>
                         <div>
                             <p style="color:var(--text)">{{option.name}}</p>
