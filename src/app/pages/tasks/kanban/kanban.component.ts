@@ -60,11 +60,15 @@ export class KanbanComponent {
   status : PropertyList[] = [];
 
   ngOnChanges(){
-    this.status = this.project.properties[0].propertyLists;
-    this.taskList = this.project.tasks;
+    if(this.lastIndexSize != this.project.tasks.length){
+      this.status = this.project.properties[0].propertyLists;
+      this.taskList = this.project.tasks;
+    }
   }
 
+  lastIndexSize: number = 0;
   ngOnInit() {
+    this.lastIndexSize = this.project.tasks.length;
     this.taskList = this.project.tasks;
     this.status = this.project.properties[0].propertyLists;
 

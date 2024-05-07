@@ -123,11 +123,11 @@
 <app-modal-warn *ngIf="modalTasks" [height]="'650px'" [width]="'800px'" (close)="openModalTasks(null)">
     <h6>{{'pages.tasks.calendar.tasksAttFor' | translate}} {{formatDate(modalDate)}}</h6>
     <div class="div-tasks">
-        <div class="grid w-full h-full grid-cols-2 pt-4">
+        <div class="grid w-full h-full grid-cols-2 pt-8 gap-5">
             <ng-container *ngFor="let task of getTasksByDate(modalDate)">
                 <div class="flex w-full h-full justify-center">
                     <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'" [task]="task"
-                    [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)" [cdkDragData]="task" cdkDrag
+                    [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)"
                     [permissions]="permissions"></app-card>
                 </div>
             </ng-container>

@@ -2,13 +2,13 @@
 
 section {
     color: $primaryColor;
-    @apply flex h-full justify-center overflow-x-auto overflow-y-hidden;
+    @apply flex h-full justify-center overflow-hidden;
     
-    .table {
-        @apply  flex max-h-[500px] flex-col overflow-y-hidden rounded-sm mb-12;
+    .table-vertex {
+        @apply  flex max-h-[500px] flex-col rounded-sm mb-12;
         
         .tbody {
-            @apply w-full h-full;
+            @apply flex w-full h-full flex-col;
 
             .newTaskButton {
               @apply w-full h-[60px] flex items-center pl-4;
