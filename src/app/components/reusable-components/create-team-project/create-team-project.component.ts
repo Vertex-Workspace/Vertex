@@ -183,15 +183,15 @@ export class CreateTeamProjectComponent implements OnInit {
       project.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
       this.projectService
       .create(project, teamId)
-      .subscribe((project: Project) => {
+      .subscribe((projectRes: Project) => {
         if (this.fd) {
           this.projectService
-          .updateImage(project.id, this.fd)
+          .updateImage(projectRes.id, this.fd)
           .subscribe((projectResImage: Project) => {
             this.emitCreation(projectResImage);
           });
         } else {
-          this.emitCreation(project)
+          this.emitCreation(projectRes)
         }
         this.alert.successAlert(this.translate.instant("alerts.success.projectCreatedWithSuccess"));
       });
@@ -308,9 +308,13 @@ export class CreateTeamProjectComponent implements OnInit {
       projectDependency: project.projectDependency
     };
  
-  
-    if(project.listOfResponsibles.length > 0){
-      this.verifyTypeAndDependencies(project, projectEdit);
+    if(project.listOfResponsibles != null){
+      if(project.listOfResponsibles.length > 0){
+        this.verifyTypeAndDependencies(project, projectEdit);
+      }
+    } else {
+      projectEdit.users = [];
+      projectEdit.groups = [];
     }
     if(projectEdit.projectDependency != null){
       projectEdit.projectDependency.properties = [];
@@ -318,17 +322,22 @@ export class CreateTeamProjectComponent implements OnInit {
     }
 
     let reviewConfig = this.form.get('projectReviewENUM');
+    console.log(this.convertTypeString(reviewConfig?.value)!);
+    
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
+    console.log(projectEdit.projectReviewENUM);
+    
 
+    
     this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
       if (this.fd) {
         this.projectService
-        .updateImage(project.id, this.fd)
+        .updateImage(projectRes.id, this.fd)
         .subscribe((projectResImage: Project) => {
           this.emitCreation(projectResImage);
         });
       } else {
-        this.emitCreation(project)
+        this.emitCreation(projectRes)
       }
       this.alert.successAlert(this.translate.instant("alerts.success.projectModifyWithSuccess"))
     });

@@ -81,7 +81,7 @@ export class ProjectCollaborators{
 }
 
 export enum ProjectReview {
-    MANDATORY,
-    OPTIONAL,
-    EMPTY,
+    MANDATORY="MANDATORY",
+    OPTIONAL="OPTIONAL",
+    EMPTY="EMPTY",
 }

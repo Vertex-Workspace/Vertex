@@ -53,6 +53,11 @@ export class TaskService {
       .get<Task[]>(`${URL}task/user/${id}`, {withCredentials: true})
   }
 
+  public getPDF(id: number): Observable<ArrayBuffer> {
+    return this.http
+      .get<ArrayBuffer>(`${URL}task/${id}/pdf`, { responseType: "json", withCredentials: true})
+  }
+
   public getTaskPermissions(taskID: number, userID: number): Observable<Permission[]> {
     return this.http.get<Permission[]>(`${URL}task/${taskID}/task-permission/${userID}`, {withCredentials: true});
   }
@@ -92,7 +97,7 @@ export class TaskService {
 
   public removeFile(taskId: number, fileId: number): Observable<Task> {
     return this.http
-      .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`)
+      .delete<Task>(`${URL}task/${taskId}/remove-file/${fileId}`, {withCredentials: true})
   }
 
   public returnAllResponsables(id: number): Observable<ReturnTaskResponsables> {
