@@ -21,6 +21,7 @@ import { SentToReview } from 'src/app/models/class/review';
 import { ReviewService } from 'src/app/services/review.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-task',
@@ -141,6 +142,15 @@ export class TaskComponent {
           this.hasDependency = true
           this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
         }
+        this.taskService.getPDF(this.task.id).subscribe(
+          (pdf: any) => {
+            this.data = "data:application/pdf;base64,"+pdf; 
+          },
+          error => {
+            console.error('Error downloading PDF:', error);
+            this.data = "data:application/pdf;base64,"+error.error.text; 
+          }
+        );
         this.render = true;
       }
     , (error) => {
@@ -149,6 +159,10 @@ export class TaskComponent {
 
 
 
+  }
+
+  data : string = "";
+  public downloadPDF() {
   }
 
   private setEditPermission(permissions: Permission[]) {

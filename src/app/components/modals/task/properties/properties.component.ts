@@ -133,7 +133,7 @@ export class PropertiesComponent {
 
     if ((taskResponsibles.user != null) && (this.task.creator?.user.id != taskResponsibles.user.id)) {
       this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-        this.alertService.successAlert("Adicionado como repsonsável da tarefa")
+        this.alertService.successAlert("Adicionado como responsável da tarefa")
       });
     } else {
       this.alertService.errorAlert("Você não pode remover o criador da tarefa")
