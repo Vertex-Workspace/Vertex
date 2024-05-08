@@ -34,6 +34,11 @@
     .search {
         @apply w-[400px] h-[50px] flex items-start justify-between bg-white p-3
         rounded shadow-md border-none;
+        background-color: $card;
+
+        input {
+            background-color: $card;
+        }
     }
 }
 
@@ -69,6 +74,11 @@
     .search {
         @apply w-[400px] h-[50px] flex items-start justify-between bg-white p-3
         rounded shadow-md border-none;
+        background-color: $card;
+
+        input {
+            background-color: $card;
+        }
     }
 }
 
@@ -108,6 +118,11 @@
     .search {
         @apply w-[400px] h-[50px] flex items-start justify-between bg-white p-3
         rounded shadow-md border-none;
+        background-color: $card;
+
+        input {
+            background-color: $card;
+        }
     }
     
 }

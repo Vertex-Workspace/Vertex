@@ -180,7 +180,7 @@
     }
 
     .userName-creationData {
-        @apply pr-6;
+        @apply pr-6 ml-4;
     }
 
     .top-side-right {
@@ -338,12 +338,14 @@ mat-progress-spinner {
 }
 
 .circular {
-    width: 200px;
-    height: 250px;
+    width: 160px;
+    height: 200px;
     position: relative;
     overflow: hidden;
+    @apply rounded-sm;
 }
 .circular img {
+    @apply rounded-sm;
     height: 80%;
     position: absolute;
     left: 50%;

@@ -15,6 +15,7 @@ export class User {
     description ?: string | undefined;
     location ?: string | undefined;
     image ?: string | undefined;
+    imgUrl ?: string;
     personalization?:Personalization;
     theme ?: number | undefined;
     publicProfile ?: boolean = true;
@@ -49,7 +50,6 @@ export class User {
     constructor(
         user: User
     ) {
-
         this.id = user.id;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
@@ -64,7 +64,8 @@ export class User {
         this.personalization = user.personalization;
         this.description = user.description;
         this.location = user.location;
-        this.image = user.image;
+        if (user.image) this.image = user.image;
+        if (user.imgUrl) this.imgUrl = user.imgUrl;
         this.theme = user.theme;
         this.publicProfile = user.publicProfile;
         this.showCharts = user.showCharts;

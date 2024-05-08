@@ -33,6 +33,8 @@ export class HeaderComponent {
     { sigla: 'zh', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png'},
   ]
 
+  isHome !: boolean;
+
 
   @Input()
   notificationBadge!: number;
@@ -105,6 +107,7 @@ export class HeaderComponent {
   }
 
   updateLocation(activeRoute: string): void {
+    this.isHome = activeRoute.includes('home');
     this.locations
       .find((loc: LocationItem) => {
         if (activeRoute.includes(loc.url)) {

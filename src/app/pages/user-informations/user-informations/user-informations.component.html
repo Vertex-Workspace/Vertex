@@ -5,7 +5,8 @@
         <div class="top-side">
             <div class="top-side-left">
                 <div class="circular">
-                    <img src="data:image/jpg;base64, {{user.image}}" alt="" class="object-cover h-full w-full">
+                    <img src="data:image/jpg;base64, {{user.image}}" alt="" class="object-cover h-full w-full" *ngIf="user.image">
+                    <img src="{{user.imgUrl}}" alt="" class="object-cover h-full w-full" *ngIf="user.imgUrl">
                 </div>
 
                 <div class="top-side-user-informations">
