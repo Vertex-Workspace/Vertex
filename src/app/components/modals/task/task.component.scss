@@ -38,7 +38,13 @@
     }
     
     .div-timer-closeModal{
-        @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
+        @apply w-[30%] gap-[10%] flex justify-end items-center text-white;
+
+        a{
+            font-size: 24px !important;
+            color: $primaryColor !important;
+            background-color: $card !important;
+        }
     }
     
     a{
@@ -251,7 +257,7 @@
     }
     
     .div-timer-closeModal{
-        @apply w-[20%] gap-[10%] flex justify-end items-center text-white;
+        @apply w-[30%] gap-2 flex justify-end items-center text-white;
     }
     
     a{
@@ -834,5 +840,13 @@
     }
 
     
+}
+
+.div-timer-closeModal{
+    a{
+        font-size: 24px !important;
+        color: $primaryColor !important;
+        background-color: $card !important;
+    }
 }
 

@@ -26,7 +26,7 @@
         <ng-container *ngFor="let item of (itemsSearched | searchAllFilterPipe : orderKind)">
             <div class="card-searched" (click)="handleClick(item)">
                 <div class="left">
-                    <div>
+                    <div class="circular">
                         <img *ngIf="item.image; else firstLetter" src="data:image/jpg;base64, {{item.image}}" alt="">
                         <ng-template #firstLetter>
                             <h3 *ngIf="!item.image">{{ getFirstLetter(item) }}</h3>

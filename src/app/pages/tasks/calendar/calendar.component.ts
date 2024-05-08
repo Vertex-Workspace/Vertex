@@ -48,9 +48,6 @@ export class CalendarComponent {
   constructor(
     private taskService: TaskService,
     private userService: UserService,
-    private route: ActivatedRoute,
-    private projectService: ProjectService,
-    private teamService: TeamService,
     private translate : TranslateService,
     private alert: AlertService) {
   }
