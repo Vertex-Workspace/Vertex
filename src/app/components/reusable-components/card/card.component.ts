@@ -40,6 +40,7 @@ export class CardComponent implements OnInit {
   @Input() borderColor!: string;
   @Input() project!: Project;
   @Input() permissions!: Permission[];
+  @Input() hasTrash: boolean=true;
 
   @Output() deleteTask = new EventEmitter();
 
@@ -52,10 +53,12 @@ export class CardComponent implements OnInit {
         this.borderColor = color.strong;
       }
     });
-    for (const permission of this.permissions) {
-      if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
-        this.canDelete = true;
-        this.settings[0].disabled = false;
+    if (this.permissions) {
+      for (const permission of this.permissions) {
+        if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
+          this.canDelete = true;
+          this.settings[0].disabled = false;
+        }
       }
     }
   }

@@ -8,14 +8,14 @@
 
         <div class="right">
             <ng-container *ngFor="let item of settings">
-                <fa-icon [icon]="item.icon" (click)="item.onclick()" class="icon" [style.color]="borderColor"
+                <fa-icon *ngIf="hasTrash" [icon]="item.icon" (click)="item.onclick()" class="icon" [style.color]="borderColor"
                     [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'">
                 </fa-icon>
             </ng-container>
         </div>
     </div>
     <span (click)="$event.stopPropagation()">
-        <input class="medium-text name-task" *ngIf="openInputName" [(ngModel)]="task.name" (blur)="editName()"/>
+        <input class="medium-text name-task" *ngIf="openInputName && !hasTrash" [(ngModel)]="task.name" (blur)="editName()"/>
         <p class="medium-text name-task truncate" *ngIf="!openInputName" (click)="openModalEdit()">{{task.name}}</p>
     </span>
 </div>

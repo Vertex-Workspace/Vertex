@@ -53,7 +53,7 @@ export class UserStateService {
     this.setAuthenticationStatus(false);
     localStorage.removeItem('logged');
     document.cookie = "JWT" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    this.router.navigate(['/login']);
+    this.router.navigate(['/landing-page']);
   }
 
   public saveLoggedUser(user: User): void {

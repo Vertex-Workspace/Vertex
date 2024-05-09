@@ -21,7 +21,6 @@ import { SentToReview } from 'src/app/models/class/review';
 import { ReviewService } from 'src/app/services/review.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
-import { error } from 'jquery';
 
 @Component({
   selector: 'app-task',

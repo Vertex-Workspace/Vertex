@@ -84,7 +84,7 @@ export class UserService {
   private logoutFrontEnd(){
     this.userState.setAuthenticationStatus(false);
     localStorage.removeItem('logged'); //cookies
-    this.router.navigate(['/login']);
+    window.location.reload();
   }
 
   getLogged(): any {

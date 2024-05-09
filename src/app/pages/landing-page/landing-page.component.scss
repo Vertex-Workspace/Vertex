@@ -57,29 +57,152 @@ header {
             }
         }
     }
+
     border-bottom: 20px solid #092c4c;
 }
 
-main{
+main {
     @apply w-[100vw] h-[300vh] bg-[#f3f3f3] flex flex-col items-center;
 
-    
 
-    .section-aboutUs{
-        @apply w-[100%] h-[120vh] mt-4 mb-4 bg-[#092c4c]  flex flex-col items-center justify-start pt-10 gap-10 text-white;
-        
-        .section-title-vertex{
+
+    .section-aboutUs {
+        @apply w-[100%] h-[120vh] mt-4 mb-4 bg-[#092c4c] flex flex-col items-center justify-start pt-10  text-white;
+
+        .title-aboutUs {
+            @apply text-center gap-10 flex flex-col;
+        }
+
+        .section-title-vertex {
             @apply text-5xl font-semibold font-['Inter'];
         }
 
-        .section-subtitle{
-            @apply text-lg font-light font-['Inter'] text-center;
+        .section-title {
+            @apply text-4xl text-[#092c4c] text-center pt-8 font-semibold font-['Inter'];
+        }
+
+    }
+    
+    .section-tutorial {
+        @apply w-[100%] h-[70vh] flex items-start justify-center gap-10;
+        border-top: 20px solid #092c4c;
+        
+        .section-title {
+            @apply text-4xl text-[#092c4c] text-center pt-8 font-semibold font-['Inter'];
+        }
+        .section-subtitle {
+            @apply text-lg font-light font-['Inter'] text-justify;
+        }
+
+        .card-tutorial{
+            @apply w-[900px] h-[500px] bg-white shadow-md rounded-md flex justify-center items-center p-4;
         
         }
     }
 
-    .section-tutorial{
-        @apply w-[100%] h-[120vh] flex items-center justify-center gap-10;
-        border-top: 20px solid #092c4c;
+    .section-features{
+        @apply w-[100%] h-[90vh] flex items-start justify-center gap-10;
+
+        .section-title {
+            @apply text-4xl text-[#092c4c] text-start pt-8 font-semibold font-['Inter'];
+        }
+
+        .section-subtitle {
+            @apply text-lg font-light font-['Inter'] text-justify;
+        }
+
+        .card-features{
+            @apply w-[1720px] h-[800px] bg-white shadow-md rounded-md flex justify-center pt-16;
+            border-top: #092c4c 20px solid;
+        }
     }
+}
+
+
+.screen {
+    @apply min-h-[50px] flex pt-4 justify-center;
+
+    .col-container {
+        @apply gap-6 max-w-full min-h-[50px] overflow-auto flex overflow-y-auto;
+
+        .col {
+            @apply min-w-[250px] w-[250px] flex flex-col gap-[12px] p-4 shadow-md mb-16;
+
+            h6 {
+                @apply pl-3;
+            }
+
+            h4:hover {
+                @apply cursor-pointer
+            }
+
+            button:hover {
+                @apply cursor-pointer;
+            }
+
+            button {
+                font-size: 1.5rem;
+            }
+
+            .col-items {
+                @apply flex flex-col gap-5 items-center pt-5;
+            }
+
+        }
+    }
+}
+
+section {
+    color: #092c4c;
+    @apply flex h-full justify-center overflow-hidden;
+
+    .table-vertex {
+        @apply flex max-h-[500px] flex-col rounded-sm mb-12;
+
+        .tbody {
+            @apply flex w-full h-full flex-col;
+
+            .newTaskButton {
+                @apply w-full h-[60px] flex items-center pl-4;
+                background-color: #d9d9d9;
+                color: #092c4c;
+                border: 1px solid #ffffff;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: static;
+
+                &:hover {
+                    background-color: #092c4c;
+                    color: #d9d9d9;
+                }
+            }
+        }
+
+        .thead {
+            @apply w-[full] min-h-[50px] flex sticky top-0;
+            background-color: #f3f3f3;
+
+            label {
+                @apply flex items-center justify-center;
+                background-color: #f3f3f3;
+                border: 1px solid #d9d9d9;
+            }
+        }
+
+        .trow {
+            @apply w-full h-[55px] flex flex-col;
+        }
+    }
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-placeholder {
+    opacity: 50%;
 }

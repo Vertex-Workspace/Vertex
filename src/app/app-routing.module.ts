@@ -33,12 +33,11 @@ const routes: Routes = [
   {
     path: "landing-page",
     component: LandingPageComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
-    data: { animation: 'loginPage' }
+    data: { animation: 'loginPage' },
   },
   {
     path: 'cadastro',
@@ -131,11 +130,11 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "login",
+    redirectTo: "landing-page",
   },
   {
     path: "**",
-    redirectTo: "login",
+    redirectTo: "landing-page",
   },
 ]
 
