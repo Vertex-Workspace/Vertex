@@ -65,7 +65,6 @@ export class CardUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
@@ -118,7 +117,9 @@ export class CardUserComponent implements OnInit {
 
   getPermission(user: User): Permission[] | any {
     this.teamService.getPermission(this.team.id, user.id!).subscribe((permissions: Permission[]) => {
+      console.log(permissions);
       user.permissions = permissions;
+      
       return user.permissions
     })
   }

@@ -3,7 +3,10 @@
 
     <div class="top">
         <div class="left">
-            <fa-icon [icon]="faCircleUser" class="icon" [style.color]="borderColor"></fa-icon>
+            <fa-icon class="icon" [icon]="faCircleUser" *ngIf="!task.image"></fa-icon>
+            <div class="overflow-hidden h-10 w-10 icon" *ngIf="task.image">
+                <img src="data:image/jpg;base64, {{task.image}}" alt="" class="rounded-full object-cover h-full w-full">
+            </div>
         </div>
 
         <div class="right">
@@ -20,4 +23,5 @@
     </span>
 </div>
 
-<app-confirm-modal *ngIf="modalDelete" [width]="'400px'" [height]="'250px'" [title]="'components.reusable-components.card.excludeTask'" (close)="delete($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="modalDelete" [width]="'400px'" [height]="'250px'" 
+[title]="'components.reusable-components.card.excludeTask' | translate" (close)="delete($event)"></app-confirm-modal>

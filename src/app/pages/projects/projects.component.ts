@@ -78,9 +78,6 @@ export class ProjectsComponent implements OnInit {
       this.teamName = team.name!;
       this.projects = this.team.projects;
       this.permissionsOnTeam = team.permissions;   
-    }, (error) => {
-      this.router.navigate(['/home']);
-      this.alert.errorAlert('Equipe inexistente!')
     });
   }
 

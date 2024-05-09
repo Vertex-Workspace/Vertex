@@ -101,7 +101,7 @@
         </div>
     </div>
 </section>
-<app-task *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
+<app-task *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)" [task]="taskOpenObject"></app-task>
 
 <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
 (close)="switchCreateView()" 

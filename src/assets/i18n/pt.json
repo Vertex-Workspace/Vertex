@@ -260,7 +260,7 @@
         },
         "modals": {
             "confirm-modal": {
-                "confirm_message": "Tem certeza que deseja {{out}}?",
+                "confirm_message": "Tem certeza que deseja ",
                 "cancel_button": "Cancelar",
                 "confirm_button": "Confirmar"
             },
@@ -326,20 +326,20 @@
                     "Não visíveis": "Não visíveis",
                     "Fixas": "Fixas",
                     "manage-status": "Gerenciar Status",
-                    "delete-property": "Deletar propriedade"
+                    "delete-property": "deletar propriedade?"
                 },
                 "items-selection": {
                     "Visíveis": "Visíveis",
                     "Não Visíveis": "Não Visíveis",
                     "info-message": "Clique no texto e você poderá editar o nome do item",
-                    "delete-property": "Excluir a propriedade"
+                    "delete-property": "excluir a propriedade?"
                 },
                 "status": {
                     "Não iniciado": "Não iniciado",
                     "Em andamento": "Em andamento",
                     "Concluída": "Concluída",
                     "info-message": "Clique no texto e você poderá editar o nome do status",
-                    "delete-status": "Excluir o status"
+                    "delete-status": "excluir o status?"
                 },
                 "modal-properties": {
                     "Propriedades": "Propriedades",

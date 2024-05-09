@@ -56,7 +56,7 @@ export class TeamInformationsComponent implements OnInit {
 
     ngOnInit() {
         this.clicked = "participants"
-
+    
     }
 
     getTeam() {
@@ -67,6 +67,7 @@ export class TeamInformationsComponent implements OnInit {
             this.team = team;
 
             console.log(this.team);
+            
             //Graphics
             const documentStyle = getComputedStyle(document.documentElement);
             const textColor = documentStyle.getPropertyValue('--text');

@@ -35,10 +35,15 @@
     }
     
     .yes-button {
+        @apply flex w-28 h-10 items-center justify-center;
         background-color: $primaryColor;
+        color: $card;
     }
     .no-button {
+        @apply flex w-28 h-10 items-center justify-center;
         background-color: $disabled;
+        color: $card;
+
     }
     .deleted {
         @apply flex items-center justify-center w-full h-full pb-16;

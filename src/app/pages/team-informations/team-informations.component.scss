@@ -189,7 +189,22 @@
     }
 
 }
-
+.circular {
+    width: 200px;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+.circular img {
+    height: 80%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 
 .input-image{
     @apply flex w-1/2;

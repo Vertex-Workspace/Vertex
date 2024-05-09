@@ -15,10 +15,13 @@ export class Chat {
         }
     }[];
 
+    image?: string;
+
     constructor(chat: Chat) {
         this.name = chat.name;
         this.id = chat.id;
         this.messages = chat.messages;
         this.userTeams = chat.userTeams;
+        this.image = chat.image
     }
 }

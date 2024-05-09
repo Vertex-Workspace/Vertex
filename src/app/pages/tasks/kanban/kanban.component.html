@@ -1,11 +1,10 @@
 <section class="screen">
     
-    <ng-container cdkDropListGroup>
-
-        <div class="col-container">
+    <ng-container >
+        <div class="col-container" cdkDropListGroup>
             <div class="col" *ngFor="let propertyList of status"
                 [style.backgroundColor]="propertyList.color" [style.height]="getHeight(propertyList)"
-                cdkDropList [cdkDropListData]="project.tasks" (cdkDropListDropped)="dropCard($event, propertyList)">
+                cdkDropList [cdkDropListData]="taskList" (cdkDropListDropped)="dropCard($event, propertyList)">
                 <div class="flex flex-row justify-between w-full items-center">
                     <p class="large-text" [style.color]="getStrongerColor(propertyList.color)">{{ propertyList.value }}</p>
                     <button (click)="createTask(propertyList)"

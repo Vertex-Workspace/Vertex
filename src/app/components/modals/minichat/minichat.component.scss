@@ -196,7 +196,7 @@ textarea {
 }
 
 .chatName {
-    @apply w-full;
+    @apply w-[60%] truncate;
 }
 
 .center-div {
@@ -204,7 +204,7 @@ textarea {
 }
 
 .user-card-message {
-    @apply flex gap-6 items-center w-[70%];
+    @apply flex gap-4 items-center w-[90%];
     border: 1px solid $card;
 }
 

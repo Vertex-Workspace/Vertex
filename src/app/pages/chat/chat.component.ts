@@ -82,6 +82,7 @@ export class ChatComponent {
   constructor(public webSocketService: WebSocketService, private teamService: TeamService, private route: Router, private userService : UserService) {
     this.teamService.findAllChatsByUser(this.userService.getLogged().id!).subscribe((chats: Chat[]) => {
       this.conversations = chats;
+      console.log(chats);
       
     });
     this.logged = this.userService.getLogged();

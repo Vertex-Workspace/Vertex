@@ -7,7 +7,7 @@
 @media screen and (min-width: 1024px) {
 
     .section-aside {
-        @apply flex h-full w-full justify-start items-center flex-col overflow-hidden;
+        @apply flex h-full w-full justify-between items-center flex-col overflow-hidden;
     }
     
     .start-mid-items {

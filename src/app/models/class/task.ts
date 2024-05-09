@@ -32,6 +32,8 @@ export class Task {
     image ?: string; //only validation
     log !: any[];
 
+    
+
     //Chat
     chat?:Chat;
     chatCreated?:boolean;

@@ -112,14 +112,19 @@ export class CardComponent implements OnInit {
 
   delete(event: any): void {
     if (event) {
+      console.log("Delete");
+      
         this.taskService.delete(this.task.id).subscribe(
           (task) => {
+            console.log(task);
+            
             // Alert
             this.alertService.successAlert(this.translate.instant('alerts.success.task_deleted'));
             this.deleteTask.emit();
           },
           (error) => {
-
+            console.log(error);
+            
           }
         );
   }

@@ -90,7 +90,8 @@ export class KanbanComponent {
       let previousPropertyList!: PropertyList;
       let newValue!: Value;
 
-      const oldProject: Project = new Project(this.project);
+      let previousList : Task[] = [];
+
 
       //For each to find the value of current and future property List
       this.project.properties.forEach((property) => {
@@ -99,10 +100,10 @@ export class KanbanComponent {
             if (value.property.id == property.id) {
               //Save the old value
               previousPropertyList = value.value as PropertyList;
-
+              previousList = this.specificPropertyArray(previousPropertyList);
               //Save the new value
               value.value = propertyList;
-
+              
               //Save on a local variable the value of the task
               newValue = value;
             }
@@ -110,11 +111,28 @@ export class KanbanComponent {
         }
       });
 
+      if(propertyList.id == previousPropertyList.id){
+        const currentList : Task[] = this.specificPropertyArray(propertyList);    
+        moveItemInArray(
+          this.taskList, 
+          this.taskList.indexOf(currentList[event.previousIndex]), 
+          this.taskList.indexOf(currentList[event.currentIndex])
+        );
+      } else {
+        const currentList : Task[] = this.specificPropertyArray(propertyList);      
+        moveItemInArray(
+          this.taskList, 
+          this.taskList.indexOf(previousList[event.previousIndex]), 
+          this.taskList.indexOf(currentList[event.currentIndex])
+        );
+
+      }
+
       //It points out that the previousValue is incorrect
       if (previousPropertyList == null) {
         return;
       }
-
+    
 
       //If the value of status task is different of the previous value, then, the request is sent
       if (propertyList.id != previousPropertyList.id) {
@@ -211,7 +229,6 @@ export class KanbanComponent {
       },
       teamId: this.project.idTeam!
     }
-    console.log(taskCreate);
     
     this.taskService.create(taskCreate).subscribe(
       (task: Task) => {

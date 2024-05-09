@@ -124,7 +124,8 @@ export class HeaderComponent {
       '/perfil/' : () => this.backToHome(),
       '/equipe/' : () => this.backToTeam(false),
       '/chat/' : () => this.backToHome(),
-      '/configuracoes/' : () => this.backToHome()
+      '/configuracoes/' : () => this.backToHome(),
+      '/acesso-negado' : () => this.backToHome()
     }
 
     for (const location in previousLocation) {

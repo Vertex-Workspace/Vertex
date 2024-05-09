@@ -44,6 +44,6 @@
     </div>
 </div>
 
-<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'components.modals.properties.general-properties.delete-property'"
+<app-confirm-modal *ngIf="deleteBoolean" [width]="'450px'" [height]="'250px'" [title]="'components.modals.properties.general-properties.delete-property' | translate"
 (close)="delete($event)">
 </app-confirm-modal>
