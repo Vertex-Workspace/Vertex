@@ -10,3 +10,7 @@ input, p, select{
     background-color: $card ;
     
 }
+
+.p-cascadeselect-panel {
+    @apply bg-blue-500;
+}

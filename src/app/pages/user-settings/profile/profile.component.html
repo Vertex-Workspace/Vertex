@@ -36,8 +36,9 @@
 
             <div class="rightSide">
                 <section>
-                    <div class="circular">
-                        <img src="data:image/jpg;base64, {{logged.image}}" alt="" class=" object-cover h-full w-full">
+                    <div class="circular rounded-sm">
+                        <img src="data:image/jpg;base64, {{logged.image}}" *ngIf="logged.image" class="object-cover h-full w-full rounded-sm">
+                        <img src="{{logged.imgUrl}}" *ngIf="logged.imgUrl" class="object-cover h-full w-full rounded-sm">
                         <form class="input-div">
                             <input type="file" class="input-file" (change)="onFileSelected($event)">
                         </form>

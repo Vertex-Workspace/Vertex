@@ -6,9 +6,17 @@
                 [style.backgroundColor]="propertyList.color" [style.height]="getHeight(propertyList)"
                 cdkDropList [cdkDropListData]="taskList" (cdkDropListDropped)="dropCard($event, propertyList)">
                 <div class="flex flex-row justify-between w-full items-center">
-                    <p class="large-text" [style.color]="getStrongerColor(propertyList.color)">{{ propertyList.value }}</p>
+                    <p class="large-text" 
+                        [style.color]="getStrongerColor(propertyList.color)">
+                            {{ propertyList.value }}
+                    </p>
                     <button (click)="createTask(propertyList)"
-                    [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'" [style.color]="getStrongerColor(propertyList.color)" [disabled]="!canCreate">+</button>
+                        [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'" 
+                        [style.color]="getStrongerColor(propertyList.color)" 
+                        [disabled]="!canCreate"
+                    >
+                        +
+                    </button>
                 </div>
 
                 <div class="col-items">

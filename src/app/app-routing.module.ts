@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: "equipe/:id",
     component: TeamInformationsComponent,
-    canActivate: [AuthGuard, UserTeamGuard] //add verificação de 
+    canActivate: [AuthGuard, UserTeamGuard]
   },
   {
     path: "perfil/:id",

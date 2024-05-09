@@ -12,10 +12,12 @@
                 [title]="'Visualizar / Criar projetos'" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[5] }">
                 <div class="functionally-items regular-text">
-                    <div class="search">
+                    <div class="search" [style.backgroundColor]="'var(--card)'">
                         <input class="inputSearch" type="text"
                             placeholder="{{'pages.projects.searchPlaceholder' | translate}}"
-                            [(ngModel)]="projectSearch">
+                            [(ngModel)]="projectSearch"
+                            [style.backgroundColor]="'var(--card)'"
+                        >
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
@@ -59,17 +61,20 @@
                     [stepContentParams]="{ texto: tutorialText[6] }">
 
                     <div class="functionally-items regular-text">
-                        <div class="search">
+                        <div class="search" [style.backgroundColor]="'var(--card)'">
                             <input class="inputSearch" type="text"
                                 placeholder="{{'pages.projects.searchPlaceholder' | translate}}"
-                                [(ngModel)]="queryFilter">
+                                [(ngModel)]="queryFilter"
+                                [style.backgroundColor]="'var(--card)'"
+                            >
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
                         <div class="filter-items">
                             <div *ngFor="let item of configItems" class="icons">
                                 <button (click)="item.click()">
                                     <i class="{{ item.iconClass }}"
-                                        [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"></i>
+                                        [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
+                                    ></i>
                                 </button>
                             </div>
                         </div>
@@ -79,7 +84,7 @@
                             <p>{{'pages.projects.filterBy' | translate}}</p>
                             <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
-                                [style]="{ minWidth: '14rem' }"
+                                [style]="{ minWidth: '14rem', backgroundColor: 'var(--card)' }"
                                 placeholder="{{'pages.projects.select' | translate}}"></p-cascadeSelect>
 
                         </ng-container>
@@ -87,7 +92,7 @@
                             <p>{{'pages.projects.orderBy' | translate}}</p>
                             <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
-                                [style]="{ minWidth: '13rem' }"
+                                [style]="{ minWidth: '13rem', backgroundColor: 'var(--card)' }"
                                 placeholder="{{'pages.projects.select' | translate}}"></p-cascadeSelect>
                         </ng-container>
                     </section>

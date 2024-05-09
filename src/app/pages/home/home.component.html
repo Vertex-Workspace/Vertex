@@ -16,9 +16,14 @@
                 [title]="'Visualizar / Criar Equipes'" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[2] }">
                 <div class="functionally-items-task">
-                    <div class="search">
-                        <input type="text" [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
-                            [(ngModel)]="teamSearch">
+                    <div class="search" 
+                        [style.backgroundColor]="'var(--card)'"
+                    >
+                        <input type="text" 
+                            [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
+                            [(ngModel)]="teamSearch" 
+                            [style.backgroundColor]="'var(--card)'"
+                        >
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <button class="create" (click)="switchCreateView()">
@@ -55,9 +60,12 @@
                     [stepContentParams]="{ texto: tutorialText[3] }">
                     <!-- UTILITY NAV BAR TASK -->
                     <div class="functionally-items-task">
-                        <div class="search">
-                            <input type="text" [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
-                                [(ngModel)]="queryFilter">
+                        <div class="search" [style.backgroundColor]="'var(--card)'">
+                            <input type="text" 
+                                [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
+                                [(ngModel)]="queryFilter"
+                                [style.backgroundColor]="'var(--card)'"
+                            >
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
                         <div class="filter-items">
@@ -74,7 +82,8 @@
                             <p>{{ 'pages.home.allTasks.filterBy' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="selectedFilter" (ngModelChange)="updateOrderType($event)"
                                 [options]="filterOptions" optionLabel="name" optionGroupLabel="name"
-                                [optionGroupChildren]="['values']" [style]="{ minWidth: '14rem' }"
+                                [optionGroupChildren]="['values']" 
+                                [style]="{ minWidth: '14rem', backgroundColor: 'var(--card)' }"
                                 [placeholder]="'pages.home.allTasks.placeholderFilterBy' | translate">
                             </p-cascadeSelect>
                         </ng-container>
@@ -82,7 +91,7 @@
                             <p>{{ 'pages.home.allTasks.orderBy' | translate }}</p>
                             <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
                                 optionGroupLabel="name" [optionGroupChildren]="['values']"
-                                [style]="{ minWidth: '13rem' }"
+                                [style]="{ minWidth: '13rem', backgroundColor: 'var(--card)' }"
                                 [placeholder]="'pages.home.allTasks.placeholderOrderBy' | translate">
                             </p-cascadeSelect>
                         </ng-container>
