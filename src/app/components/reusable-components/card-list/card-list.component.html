@@ -15,11 +15,14 @@
                                 {{'components.reusable-components.card-list.viewInformation' | translate }}</p>
                         </div>
 
-                        <div *ngIf="(teamScreen === 'settings' || teamScreen === 'project') && item.isCreator" class="icon">
-                            
-                            <fa-icon [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
-                            <fa-icon [ngClass]="teamScreen === 'settings' ? 'pr-3' : ''" [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
-                            <fa-icon *ngIf="teamScreen === 'settings'" [icon]="faDoorOpen" class="trash-icon" (click)="openModalLeave(item)"></fa-icon>
+                        <div *ngIf="(teamScreen === 'settings' || teamScreen === 'project')" class="icon">
+                            <ng-container *ngIf="item.isCreator else isMember">
+                                <fa-icon [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
+                                <fa-icon [ngClass]="teamScreen === 'settings' ? 'pr-3' : ''" [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
+                            </ng-container>
+                            <ng-template #isMember>
+                                <fa-icon *ngIf="teamScreen === 'settings'" [icon]="faDoorOpen" class="trash-icon" (click)="openModalLeave(item)"></fa-icon>
+                            </ng-template>
                         </div>
                     </div>
                 </div>

@@ -4,14 +4,17 @@
         <div class="conversations-div">
             <h3 class="conversations">{{ 'pages.chat.header.conversas' | translate }}</h3>
         </div>
-        <div class="header-right">
+        <div class="header-right" *ngIf="chat">
             <div class="header-right-informations">
                 <div class="leftChatPerson">
-                    <fa-icon *ngIf="chat" class="section-icons-7xl" [icon]="faCircleUser"></fa-icon>
+                    <div class="overflow-hidden h-20 w-20 icon" *ngIf="chat.image">
+                        <img src="data:image/jpg;base64, {{chat.image}}" alt="" class="rounded-full object-cover h-full w-full">
+                    </div>
+                    <fa-icon class="chat-icons" [icon]="faCircleUser" *ngIf="!chat.image"></fa-icon>
                 </div>
                 <div class="gap-3 flex flex-col">
                     <div class="divNamesPerson">
-                        <p *ngIf="chat" class="userName large-text">{{chat.name}}</p>
+                        <p class="userName large-text">{{chat.name}}</p>
                     </div>
                 </div>
             </div>
@@ -21,7 +24,7 @@
         <div class="section-left-chat">
             <div class="header-section-left">
                 <div class="search-div">
-                    <input id="search" type="text" placeholder="{{ 'pages.chat.placeholderPesquisarConversa' | translate }}">
+                    <input id="search" type="text" [(ngModel)]="query" placeholder="{{ 'pages.chat.placeholderPesquisarConversa' | translate }}">
                     <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>
                 </div>
             </div>
@@ -29,7 +32,7 @@
             <div class="main-section-left gap-2">
 
                 <div class="w-[90%] flex justify-center flex-col">
-                    <ng-container *ngFor="let chatFor of conversations">
+                    <ng-container *ngFor="let chatFor of (conversations | namePipe : query)">
                         <div (click)="openConversation(chatFor)"
                             [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
                             <div class="user-card-message">

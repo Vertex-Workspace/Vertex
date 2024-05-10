@@ -108,8 +108,6 @@ export class TasksComponent implements OnInit {
   teamId?: number
   isCreator:boolean = false;
   ngOnInit() {
-    console.log("On init");
-    
     this.muralPageListener();
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
@@ -118,6 +116,8 @@ export class TasksComponent implements OnInit {
     //Método que atribui o valor de project vindo do observable
     this.projectService.getOneById(id).subscribe((p: Project) => {
       this.project = p;
+      console.log(this.project);
+      
       this.loadingService.hide();
 
       this.teamService.getPermission(p.idTeam, this.logged.id!).subscribe((permissions: Permission[]) => {
@@ -327,7 +327,7 @@ export class TasksComponent implements OnInit {
     this.taskService.create(taskCreate).subscribe(
       (task : Task) => {
         this.changeModalTaskState(true, task);
-        this.project.tasks.push(task);
+        this.project.tasks.unshift(task);
       },
       (error) => {
         console.log(error);

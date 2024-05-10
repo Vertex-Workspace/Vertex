@@ -134,6 +134,7 @@ export class ProjectsComponent implements OnInit {
         () => {
           this.alert.successAlert(this.translate.instant('alerts.success.project_deleted'));
           this.team.projects?.splice(this.team.projects.indexOf(project), 1);
+          window.location.reload();
         },
         e => {
           this.alert.errorAlert(this.translate.instant('alerts.error.delete_project'));

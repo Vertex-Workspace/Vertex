@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ImageModule } from 'primeng/image';
 import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
         FormsModule,
         FontAwesomeModule,
         ImageModule,
-        InputModule,
+        PipesModule,
+        InputModule
     ]
 })
 export class ChatModule { }

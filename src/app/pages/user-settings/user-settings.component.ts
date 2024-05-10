@@ -17,9 +17,6 @@ export class UserSettingsComponent {
   click: string = 'perfil';
 
   ngOnInit(): void {
-    const item = localStorage.getItem('settings-option');
-    
-    if (item) this.click = localStorage.getItem('settings-option')!
   }
 
   clickOption(id: string): void{

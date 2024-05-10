@@ -36,7 +36,7 @@ export class TeamsSettingsComponent{
 
   teams !: Team[];
   teamLength: boolean = false;
-
+  query: string = "";
   getAllTeams(): void {
     this.teamService
       .getTeamsByUser(this.userService.getLogged())

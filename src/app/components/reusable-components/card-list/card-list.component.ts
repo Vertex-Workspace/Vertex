@@ -8,6 +8,8 @@ import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
 import { faTrashCan, faGear, faMessage, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/models/class/user';
+import { TranslateService } from '@ngx-translate/core';
+import { error } from 'jquery';
 //  import { StringFilterUI } from '@syncfusion/ej2-angular-grids';
 
 @Component({
@@ -23,7 +25,8 @@ export class CardListComponent implements OnInit {
     private userService: UserService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private alertService: AlertService
+    private alert: AlertService,
+    private translate: TranslateService,
   ) {
     this.loggedUser = this.userService.getLogged();
   }
@@ -182,7 +185,8 @@ export class CardListComponent implements OnInit {
     this.projectService
       .delete(projectId.id)
       .subscribe((project) => {
-        this.projects.splice(this.projects.indexOf(projectId), 1)
+        this.alert.successAlert(this.translate.instant('alerts.success.project_deleted'));
+        this.projects.splice(this.projects.indexOf(projectId), 1);
       });
   }
 
@@ -208,10 +212,11 @@ export class CardListComponent implements OnInit {
 
   leaveTeam(event: any) {
     if (event) {
-      this.teamService.deleteUserTeam(this.itemToDelete, this.userService.getLogged()).subscribe((team: Team) => {
+      this.teamService.deleteUserTeam(this.itemToDelete, this.userService.getLogged()).subscribe(
+        (team: Team) => {
         this.team = team
         this.teams?.splice(this.teams.indexOf(team), 1)
-      })
+      });
     }
     this.openModalLeave(null!)
   }

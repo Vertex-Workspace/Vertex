@@ -30,35 +30,32 @@
     overflow-x: hidden;
     overflow-y: auto;
     .card-searched{
-        @apply flex w-[98%] rounded-sm flex-row items-center justify-between px-8 py-10;
+        @apply flex w-[98%] rounded-sm flex-row items-center justify-between px-4 py-10;
         min-height: 80px;
         text-align: start;
         background-color: $card;
         cursor: pointer;
 
-        .left {
-            @apply w-2/3 flex items-center gap-8;
-        }
 
         &:hover{
             background-color: $emphasis;
         }
-
-        .circular {
-            width: 70px;
-            height: 70px;
-            position: relative;
-            overflow: hidden;
-        }
-        .circular img {
-            height: 80%;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
     }
+}
+
+.circular {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+}
+.circular img {
+    height: 80%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }

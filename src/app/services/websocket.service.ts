@@ -64,10 +64,6 @@ export class WebSocketService {
   public listenToServer(): Observable<any> {
     return new Observable(observer => {
       this.webSocket.onmessage = (event) => {
-        // console.log(event, "Event");
-        // console.log(chat, "ChatONMESSAGE");
-
-        console.log(`{${event.data}}`, "Data");
 
         const obj = JSON.parse(`${event.data}`)
 
@@ -79,11 +75,8 @@ export class WebSocketService {
 
   public sendMessage(chatMessageDto: any) {
     if (this.webSocket.readyState === WebSocket.OPEN) {
-      console.log("Sending message");
       console.log(chatMessageDto, "MESSAGE");
-
       this.webSocket.send(JSON.stringify(chatMessageDto));
-      console.log(chatMessageDto, "MESSAGE Sent");
     } else {
       console.error('WebSocket is not open. Unable to send message.');
     }

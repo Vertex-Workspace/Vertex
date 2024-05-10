@@ -5,7 +5,7 @@
         <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
     </div>
     <div class="order regular-text">
-        
+
 
         <p class="text-lg h-full flex items-center">{{ 'components.modals.search-all.filter_by' | translate }}</p>
         <p-dropdown [options]="orderSettings" [(ngModel)]="orderParam" [showClear]="true" optionLabel="name"
@@ -25,14 +25,16 @@
         </ng-container>
         <ng-container *ngFor="let item of (itemsSearched | searchAllFilterPipe : orderKind)">
             <div class="card-searched" (click)="handleClick(item)">
-                <div class="left">
-                    <div class="circular">
+                <div class="flex flex-row gap-4">
+                    <div class="circular rleative">
                         <img *ngIf="item.image; else firstLetter" src="data:image/jpg;base64, {{item.image}}" alt="">
                         <ng-template #firstLetter>
-                            <h3 *ngIf="!item.image">{{ getFirstLetter(item) }}</h3>
+                            <div class="flex w-full h-full justify-center items-center">
+                                <h2 *ngIf="!item.image">{{ getFirstLetter(item) }}</h2>
+                            </div>
                         </ng-template>
                     </div>
-                    <div>
+                    <div class="flex max-w-[50%] flex-col">
                         <p class="medium-text">{{ item.name }}</p>
                         <p class="regular-text">{{ item.description }}</p>
                     </div>

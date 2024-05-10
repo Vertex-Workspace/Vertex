@@ -206,17 +206,20 @@
     transform: translate(-50%, -50%);
 }
 
-.input-image{
-    @apply flex w-1/2;
 
-    .image-icon{
-        font-size: 200px;
-        color: $primaryColor;
-    }
-
-    .image-icon:hover{
-        opacity: 0.5;
-    }
+.image-icon{
+    font-size: 250px;
+    color: $primaryColor;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.image-icon:hover{
+    opacity: 0.5;
 }
 
 

@@ -19,7 +19,7 @@
                         <span (ngSubmit)="passwordValidation()">
                             <div class="h-full w-full p-input-icon-right">
                                 <input [type]="item.statusEye ? 'text' : 'password'"
-                                    formControlName="{{item.formControlName}}" />
+                                    formControlName="{{item.formControlName}}" class="px-4"/>
                                 <i (click)="passwordEye(item)" class="pi pi-eye icon" *ngIf="!item.statusEye"></i>
                                 <i (click)="passwordEye(item)" class="pi pi-eye-slash icon" *ngIf="item.statusEye"></i>
                             </div>

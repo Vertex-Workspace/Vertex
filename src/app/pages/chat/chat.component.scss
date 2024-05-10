@@ -227,7 +227,8 @@ main {
     padding: 10px;
     border-radius: 5px;
     background-color: $card;
-    color: black !important;
+    color: $text !important;
+    background-color: $card;
     word-wrap: break-word;
     @apply flex flex-col gap-3 shadow-md;
 }
@@ -265,7 +266,7 @@ main {
 
 .timestampBlack {
     font-size: $smallText;
-    color: black;
+    color: $text;
 }
 
 .divWhiteInput{

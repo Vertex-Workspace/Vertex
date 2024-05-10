@@ -5,11 +5,11 @@
         <div class="left-side">
             <div class="divHead">
                 <div class="input-image">
-                    <div class="circular relative">
+                    <div class="circular relative" >
                         <img *ngIf="selectedFile" src="data:image/jpg;base64, {{team.image}}" alt="" class="object-cover">
-                        <fa-icon [icon]="faImage" class="image-icon" *ngIf="!selectedFile"></fa-icon>
+                        <img *ngIf="!selectedFile" src="../../../assets/image.png" alt="" class="object-cover">
                         <form class="input-div">
-                            <input type="file" class="input-file" (change)="onFileSelected($event)">
+                            <input type="file" class="input-file" (change)="onFileSelected($event)" [disabled]="notCreator">
                         </form>
                     </div>
                 </div>

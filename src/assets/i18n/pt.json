@@ -519,6 +519,7 @@
         },
         "error": {
             "participantsNotAddedToGroup": "Erro ao adicionar usuário ao grupo!",
+            "leaveTeamException": "Você não pode sair da equipe, pois é o criador dela.",
             "invalidImage_update": "Imagem inválida!",
             "needGroupName":"Você precisa adicionar um nome!",
             "creategroup":"Erro ao criar grupo!",

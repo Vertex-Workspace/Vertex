@@ -42,7 +42,8 @@ export class TeamInformationsComponent implements OnInit {
     //to-do: add creation date, user social media, fix cards, -- charts
 
     query !: string;
-
+    notCreator: boolean = true;
+    
     constructor(
         private route: ActivatedRoute,
         private teamService: TeamService,
@@ -55,8 +56,7 @@ export class TeamInformationsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.clicked = "participants"
-    
+        this.clicked = "participants"  
     }
 
     getTeam() {
@@ -66,7 +66,7 @@ export class TeamInformationsComponent implements OnInit {
         this.teamObservable.forEach((team) => {
             this.team = team;
 
-            console.log(this.team);
+            this.notCreator = !(this.team.creator.id === this.userService.getLogged().id);
             
             //Graphics
             const documentStyle = getComputedStyle(document.documentElement);
@@ -295,7 +295,7 @@ export class TeamInformationsComponent implements OnInit {
                 this.url = reader.result;
             };
         }
-
+        
         this.teamService
             .updateImage(this.team.id, this.fd)
             .subscribe(

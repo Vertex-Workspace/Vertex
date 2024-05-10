@@ -6,19 +6,19 @@
         </div>
     </div>
 
-    <section>
+    <section class="flex flex-col justify-center">
         <div class="w-[85%]">
             <div class="search">
-                <input id="text-black" type="text" placeholder="{{ 'pages.user-settings.teams-settings.searchPlaceholder' | translate }}">
+                <input id="text-black" type="text" [(ngModel)]="query" placeholder="{{ 'pages.user-settings.teams-settings.searchPlaceholder' | translate }}">
                 <i class="pi pi-search cursor-pointer " style="font-size: 1.4rem;"></i>
             </div>
         </div>
         <div class="w-[40%] absolute pt-10" *ngIf="teamLength">
             <h6 class="pt-16 flex justify-center items-center">Nenhuma equipe disponível...</h6>
         </div>
-        <app-card-list style="width: 85%; height: 90%; padding-top: 3%;" 
+        <app-card-list style="width: 65%; height: 90%; padding-top: 3%;" 
         [type]="'team'"
-        [teams]="teams" 
+        [teams]="(teams | namePipe: query)" 
         [teamScreen]="'settings'">
         </app-card-list>
     </section>

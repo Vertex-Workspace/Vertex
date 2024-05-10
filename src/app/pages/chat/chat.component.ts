@@ -64,7 +64,7 @@ export class ChatComponent {
   hasAnyChat: boolean = false;
 
   logged!: User;
-
+  query: string = "";
   showRightChat = false;
 
   toggleRightChat() {
@@ -239,6 +239,7 @@ export class ChatComponent {
     });
 
     this.chat.conversationOpen = true;
+    this.chat.image = chat.image;
 
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
       this.chat.messages = messages;

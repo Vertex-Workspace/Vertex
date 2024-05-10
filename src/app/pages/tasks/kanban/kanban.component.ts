@@ -251,7 +251,7 @@ export class KanbanComponent {
         this.taskService.patchValue(valueUpdate).subscribe(
           (taskDate) => {
             task.values = taskDate.values;
-            this.taskList.push(task);
+            this.taskList.unshift(task);
             this.alertService.successAlert(this.translate.instant("alerts.success.task_created"));
           },
           (error) => {

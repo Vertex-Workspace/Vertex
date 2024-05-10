@@ -4,6 +4,8 @@ import { TeamsSettingsComponent } from './teams-settings.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardListModule } from 'src/app/components/reusable-components/card-list/card-list.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +21,9 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     CardListModule,
     FontAwesomeModule,
-    TranslateModule
+    TranslateModule,
+    FormsModule,
+    PipesModule
   ]
 })
 export class TeamsSettingsModule { }

@@ -122,7 +122,7 @@ export class TeamService {
 
 
   public deleteUserTeam(team: Team, user: User): Observable<Team> {
-    return this.http.delete<Team>(`${URL}team/user-team/${team.id}/${user.id}`, {withCredentials: true})
+    return this.http.delete<Team>(`${URL}team/${team.id}/${user.id}`, {withCredentials: true})
   }
 
   public getTeamCreator(team: Team): Observable<User> {
