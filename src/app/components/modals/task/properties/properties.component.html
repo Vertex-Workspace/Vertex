@@ -30,7 +30,7 @@
                             [(ngModel)]="selectedUsers" appendTo="body"
                             placeholder="{{ 'components.modals.task.properties.responsible' | translate }}"
                             emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherResponsiblesInTask' | translate }}">
-                            <ng-template let-node pTemplate="default">
+                            <ng-template let-node pTemplate="default" display="chip">
                                 <span (click)="updateResponsible($event, node)">{{node.label}}</span>
                             </ng-template>
                         </p-multiSelect>

@@ -260,7 +260,7 @@
     },
     "modals": {
       "confirm-modal": {
-        "confirm_message": "¿Estás seguro de que deseas {{out}}?",
+        "confirm_message": "¿Estás seguro de que deseas ",
         "cancel_button": "Cancelar",
         "confirm_button": "Confirmar"
       },
@@ -432,7 +432,8 @@
         "confirmDeleteTeam": "eliminar el equipo"
       },
       "card-user": {
-        "you": "(tú)"
+        "you": "(tú)",
+        "confirmDeleteUser": "¿eliminar usuario del equipo?"
       },
       "create-group": {
         "new-group": "Crea un nuevo grupo",

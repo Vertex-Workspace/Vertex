@@ -55,10 +55,9 @@ export class ProfileComponent {
     { id: 'description', icon: faEarthAmericas, option: 'Descrição', formControlName: 'description' }
   ];
 
-  tooglesList = [
-    { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff },
-    { id: 2, text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff }
-  ];
+  publicProfile = 
+    { text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff }
+  ;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,10 +65,12 @@ export class ProfileComponent {
     private alert: AlertService,
     private translate: TranslateService
   ) {
-    this.getLoggedUser();
+    this.logged = this.userService.getLogged();
+
   }
 
   ngOnInit(): void {
+
 
     this.form = this.formBuilder.group({
 
@@ -80,21 +81,13 @@ export class ProfileComponent {
 
     })
 
-    console.log(this.logged);
 
   }
 
-  getLoggedUser(): void {
-    this.logged = this.userService.getLogged();
-  }
 
   // Alter the status of toggle
-  toogleCharts(item: number): void {
-    if (this.tooglesList[item].icon == faToggleOff) {
-      this.tooglesList[item].icon = faToggleOn;
-    } else {
-      this.tooglesList[item].icon = faToggleOff;
-    }
+  toogleCharts(): void {
+    this.publicProfile.icon = this.publicProfile.icon === faToggleOff ? faToggleOn : faToggleOff;
   }
 
   clickOption(id: string): void {

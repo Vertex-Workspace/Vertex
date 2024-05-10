@@ -260,7 +260,7 @@
         },
         "modals": {
             "confirm-modal": {
-                "confirm_message": "您确定要{{out}}吗？",
+                "confirm_message": "您确定要吗",
                 "cancel_button": "取消",
                 "confirm_button": "确认"
             },
@@ -431,7 +431,8 @@
                 "confirmDeleteTeam": "删除团队"
             },
             "card-user": {
-                "you": "(您)"
+                "you": "(您)",
+                "confirmDeleteUser": "从团队中删除用户？"
             },
             "create-group": {
                 "new-group": "创建新群组",

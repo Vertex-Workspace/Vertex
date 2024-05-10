@@ -8,9 +8,9 @@
         <fa-icon [icon]="faTrashCan" class="icon" (click)="openModalDelete(group)"></fa-icon>
     </div>
     <div class="h-[48%] flex items-start pl-5">
-        <p-multiSelect (click)="getUsersByGroup(group.id)" [options]="usersTeam" optionLabel="name"
-            [style]="{ width: '300px', height: '50px'}" placeholder="Membros do grupo" [(ngModel)]=selectedUsers
-            (onChange)="addOrDelete($event, group)">
+        <p-multiSelect [options]="usersTeam" optionLabel="name"
+            [style]="{ width: '300px', height: '50px'}" placeholder="Membros do grupo" [(ngModel)]="selectedUsers"
+            (onChange)="addOrDelete($event, group)" [showToggleAll]="false">
             <ng-template let-user pTemplate="user">
                 <span>{{user.firstName}}</span>
             </ng-template>

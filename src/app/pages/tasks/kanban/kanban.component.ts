@@ -169,9 +169,6 @@ export class KanbanComponent {
     }
   };
 
-  getHeight(propertyList: PropertyList): string {
-    return ((this.specificPropertyArray(propertyList).length * 174) + 70) + "px";
-  }
 
   specificPropertyArray(propertyList: PropertyList): Task[] {
     return this.project.tasks.filter(task => {

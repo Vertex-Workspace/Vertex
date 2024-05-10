@@ -2,8 +2,9 @@
     
     <ng-container >
         <div class="col-container" cdkDropListGroup>
-            <div class="col" *ngFor="let propertyList of status"
-                [style.backgroundColor]="propertyList.color" [style.height]="getHeight(propertyList)"
+            <ng-container *ngFor="let propertyList of status">
+            <div class="col" 
+                [style.backgroundColor]="propertyList.color"
                 cdkDropList [cdkDropListData]="taskList" (cdkDropListDropped)="dropCard($event, propertyList)">
                 <div class="flex flex-row justify-between w-full items-center">
                     <p class="large-text" 
@@ -45,6 +46,7 @@
 
                 </div>
             </div>
+        </ng-container>
         </div>
     </ng-container>
 </section>

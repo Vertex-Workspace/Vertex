@@ -431,7 +431,8 @@
                 "confirmDeleteTeam": "excluir a equipe"
             },
             "card-user": {
-                "you": "(você)"
+                "you": "(você)",
+                "confirmDeleteUser": "excluir o usuário da equipe?"
             },
             "create-group": {
                 "new-group": "Crie um novo grupo",

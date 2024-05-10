@@ -125,7 +125,7 @@ export class HeaderComponent {
       '/projeto/' : () => this.backToTeam(true),
       '/projetos' : () => this.backToHome(),
       '/perfil/' : () => this.backToHome(),
-      '/equipe/' : () => this.backToTeam(false),
+      '/equipe/' : () => this.backToTeam(true),
       '/chat/' : () => this.backToHome(),
       '/configuracoes/' : () => this.backToHome(),
       '/acesso-negado' : () => this.backToHome()

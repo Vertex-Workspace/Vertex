@@ -32,6 +32,7 @@ export class CardComponent implements OnInit {
     private alertService: AlertService,
     private route: ActivatedRoute,
     private projectService: ProjectService,
+    private userService: UserService,
     private translate: TranslateService) {
   }
   @Input() task!: Task;
@@ -75,7 +76,7 @@ export class CardComponent implements OnInit {
       this.modalDelete = true;
     } else {
       this.modalDelete2 = true;
-      this.alertService.errorAlert(this.translate.instant('alert.error.cantDeleteTask'));
+      this.alertService.errorAlert(this.translate.instant('alerts.error.cantDeleteTask'));
       setTimeout(() => {
         this.modalDelete2 = false; 
       }, 1000);

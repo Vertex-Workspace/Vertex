@@ -36,7 +36,10 @@ export class InvitationPageComponent {
       this.teamService.findInformationInvitationPage(id).subscribe((team : Team) => {
         this.team = team
         this.render = true;
-      }, (error) => this.router.navigate(['home']));
+      }, (error) => {
+        this.router.navigate(['home'])
+      }
+    );
   }
 
   deny(){

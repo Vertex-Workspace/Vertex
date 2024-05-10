@@ -82,6 +82,7 @@ export class CardGroupComponent {
     this.form = this.formBuilder.group({
       users: [null, this.users]
     })
+    this.getUsersByGroup(this.group.id);
   }
 
   getTeam(): Team {
