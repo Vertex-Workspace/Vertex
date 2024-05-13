@@ -18,7 +18,7 @@
         </div>
     </div>
     <span (click)="$event.stopPropagation()">
-        <input class="medium-text name-task" *ngIf="openInputName" [(ngModel)]="task.name" (blur)="editName()"/>
+        <input class="medium-text name-task" *ngIf="openInputName" [(ngModel)]="task.name" (blur)="editName()" [disabled]="!canEdit"/>
         <p class="medium-text name-task truncate" *ngIf="!openInputName" (click)="openModalEdit()">{{task.name}}</p>
     </span>
 </div>

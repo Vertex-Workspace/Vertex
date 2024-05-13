@@ -148,7 +148,8 @@
                     }
                     
                     .color {
-                        @apply cursor-pointer w-[50px] h-[50px] rounded-full flex items-center justify-center;
+                        @apply cursor-pointer w-[50px] h-[50px] rounded-full flex items-center justify-center shadow-md;
+                        border: 1px solid;
                         .icon {
                             color: $primaryColor;
                         }
@@ -220,6 +221,7 @@
                         textarea {
                             @apply text-lg overflow-y-hidden text-justify cursor-text mt-4 mb-2 pr-32;
                             resize: none;
+                            border: none;
                             
                             &:focus {
                                 border: none;

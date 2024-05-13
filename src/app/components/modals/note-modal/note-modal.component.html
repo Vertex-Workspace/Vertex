@@ -25,7 +25,6 @@
                         [style.border]="descriptionEditable ? 'solid black 1px' : 'none'"
                         #description
                     >
-                        {{note.description}}
                     </textarea>
 
                     <a *ngIf="!descriptionEditable" (click)="toggleEditDescription()">

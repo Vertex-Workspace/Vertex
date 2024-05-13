@@ -10,6 +10,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-card-group',
@@ -40,16 +41,14 @@ export class CardGroupComponent {
 
   users: User[] = [];
 
-  selectMoreUsers: boolean = false
-
   form !: FormGroup
 
   delete?: boolean
 
   groupToDelete!: Group
-
+  render : boolean = false;
   noUsers?: boolean
-
+  placeholder: string = "Membros do grupo";
   constructor(
     private groupService: GroupService,
     private alertService: AlertService,
@@ -59,7 +58,21 @@ export class CardGroupComponent {
     private userService: UserService,
     private translate : TranslateService
   ) {
-    this.getTeam()
+    const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.teamService
+      .getOneById(teamId)
+      .subscribe((team: Team) => {
+        this.team = team;
+        this.usersTeam = this.team.users!
+        for (const ug of this.group.userTeams!) {
+          if(this.selectedUsers.length === 0){
+            this.placeholder = ug.user!.firstName;
+          }
+          this.selectedUsers.push(ug.user!)
+        }
+        this.render = true;
+      })
   }
 
   getGroup(): any[] {
@@ -75,17 +88,9 @@ export class CardGroupComponent {
   }
 
   ngOnInit(): void {
-    this.selectMoreUsers = true
-    this.team = this.getTeam();
-    this.getSize()
-
-    this.form = this.formBuilder.group({
-      users: [null, this.users]
-    })
-    this.getUsersByGroup(this.group.id);
   }
 
-  getTeam(): Team {
+  getTeam(): void {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
 
     this.teamService
@@ -93,12 +98,8 @@ export class CardGroupComponent {
       .subscribe((team: Team) => {
         this.team = team;
       })
-    return this.team
   }
 
-  addParticipants(): void {
-    this.selectMoreUsers = !this.selectMoreUsers
-  }
 
   @Output()
   emitterItem = new EventEmitter<Group>();
@@ -127,11 +128,10 @@ export class CardGroupComponent {
     if (event) {
       this.groupService.deleteUserFromGroup(this.userToDelete, this.team.id, this.group.id)
         .subscribe((group: Group) => {
-          this.alertService.successAlert(this.translate.instant('alert.success.removeUserFromGroup'))
           this.updateGroup(group)
         },
           e => {
-            this.alertService.errorAlert(this.translate.instant('alert.error.cantRemoveUserFromGroup'))
+            this.alertService.errorAlert(this.translate.instant('alerts.error.cantRemoveUserFromGroup'))
           }
         )
     }
@@ -147,38 +147,22 @@ export class CardGroupComponent {
   usersTeam: User[] = []
   selectedUsers: User[] = []
 
-  getUsersByGroup(id: number) {
-    this.usersTeam = this.team.users!
-    for (const ut of this.usersTeam) {
-      this.userService.getUsersByGroup(id).subscribe((users: User[]) => {
-        for (const ug of users) {
-          if (ug.id == ut.id) {
-            this.selectedUsers.push(ut)
-          }
-        }
-      });
-    }
-  }
 
-  getSize() {
-    for (const group of this.getGroup()) {
-      this.userService.getUsersByGroup(group.id).subscribe((users: User[]) => {
-        group.size = users.length;
-      });
-    }
-  }
 
   deleted: boolean = false
   //user: User, teamId:number, groupId:number
   addOrDelete(event: any, group: Group) {
-    for (const userGroup of this.selectedUsers) {
-        this.groupService.deleteUserFromGroup(event.itemValue, this.team.id, group.id).subscribe((group: Group) => {
-          this.deleted = true
-        })
-    }
-    if(!this.deleted){
-      this.groupService.addParticipants(group, event.itemValue.id).subscribe((group: Group) => {
+    console.log(group);
+    console.log(event.value);
+    
+    if(group.userTeams!.find(u => u.user.id === event.itemValue.id)) {
+      this.groupService.deleteUserFromGroup(event.itemValue, this.team.id, group.id).subscribe((group: Group) => {
+        this.group.userTeams = event.value;
       })
+    } else {
+      this.groupService.addParticipants(group, event.itemValue.id).subscribe((group: Group) => {
+        this.group.userTeams = event.value;
+      });
     }
   }
 
@@ -190,7 +174,7 @@ export class CardGroupComponent {
 
   edit(group: Group){  
     this.groupService.edit(group, this.team.id).subscribe((group1: Group) => {
-      this.alertService.successAlert(this.translate.instant('alert.success.editedGroup')) 
+      this.alertService.successAlert(this.translate.instant('alerts.success.editedGroup')) 
     })
     this.input = !this.input
   }

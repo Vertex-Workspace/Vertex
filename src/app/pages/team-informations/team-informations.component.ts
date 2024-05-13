@@ -96,7 +96,7 @@ export class TeamInformationsComponent implements OnInit {
                 this.selectedFile = true;
             }
 
-            if (this.team.users!.length > 1 && this.menuItems.length < 2) {
+            if (this.team.users!.length > 1 && this.menuItems.length < 2 && !this.notCreator) {
                 this.menuItems.push({
                     id: 'groups',
                     iconClass: 'pi pi-users',
@@ -307,6 +307,10 @@ export class TeamInformationsComponent implements OnInit {
                     this.alertService.errorAlert(this.translate.instant("alerts.error.invalidImage_update"));
                 }
             );
+    }
+
+    isCreator(): boolean {
+        return this.team.creator.id === this.userService.getLogged().id;
     }
 
 }

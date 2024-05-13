@@ -142,6 +142,7 @@ export class ModalPropertiesComponent {
           if (property.id === propertyResponse.id) {
             property = propertyResponse;
             this.property = propertyResponse;
+            this.updateProject(this.project);
           }
         });
       }

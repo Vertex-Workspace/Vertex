@@ -100,9 +100,9 @@ export class UserService {
     .get<User>(`${URL}user/${id}`, {withCredentials: true});
   }
 
-  public getInformationsById(id: number, loggedUser: number): Observable <User> {
+  public getInformationsById(id: number): Observable <User> {
     return this.http
-    .get<User>(`${URL}user/${id}/informations/${loggedUser}`, {withCredentials: true});
+    .get<User>(`${URL}user/${id}/informations`, {withCredentials: true});
   }
 
   public getUsersByGroup(groupId: number): Observable<User[]> {
@@ -138,6 +138,10 @@ export class UserService {
     .patch<User>(`${URL}user/first-access`, user, {withCredentials: true}).subscribe((user: User) => {
       this.saveLoggedUser(user);
     });
+  }
+  public patchShowCharts(userID: number){
+    return this.http
+    .patch<User>(`${URL}user/${userID}/show-charts`, {}, {withCredentials: true});
   }
   
 

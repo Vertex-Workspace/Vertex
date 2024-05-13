@@ -125,7 +125,7 @@ export class HeaderComponent {
       '/projeto/' : () => this.backToTeam(true),
       '/projetos' : () => this.backToHome(),
       '/perfil/' : () => this.backToHome(),
-      '/equipe/' : () => this.backToTeam(true),
+      '/equipe/' : () => this.backToTeam(false),
       '/chat/' : () => this.backToHome(),
       '/configuracoes/' : () => this.backToHome(),
       '/acesso-negado' : () => this.backToHome()
@@ -150,13 +150,15 @@ export class HeaderComponent {
       .subscribe(project => {
         this.router.navigate([`equipe/${project.idTeam}/projetos`])
       });
-    } 
+    } else {
+      this.router.navigate([`equipe/${this.id}/projetos`]);
+    }
   }
 
   incrementUrlById(activeRoute: string, id: number): void {
-    if (activeRoute.includes('projetos')) this.getTeam(id);
+    if (activeRoute.includes('projetos') || activeRoute.includes("equipe")) this.getTeam(id);
     if (activeRoute.includes('tarefas')) this.getProject(id);
-    if (activeRoute.includes('usuario/perfil')) this.getUser(id);
+    if (activeRoute.includes('perfil')) this.getUser(id);
   }
 
   getTeam(id: number): void {
@@ -177,9 +179,9 @@ export class HeaderComponent {
 
   getUser(id: number): void {
     this.userService
-      .getOneById(id)
+      .getInformationsById(id)
       .subscribe((user: User) => {
-        this.location += " " + user.firstName!;
+        this.location = user.fullname!;
       })
   }
 

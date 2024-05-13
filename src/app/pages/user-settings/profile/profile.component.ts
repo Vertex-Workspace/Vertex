@@ -70,7 +70,9 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
-
+    if(this.logged.showCharts){
+      this.publicProfile.icon = faToggleOn;
+    }
 
     this.form = this.formBuilder.group({
 
@@ -87,7 +89,11 @@ export class ProfileComponent {
 
   // Alter the status of toggle
   toogleCharts(): void {
-    this.publicProfile.icon = this.publicProfile.icon === faToggleOff ? faToggleOn : faToggleOff;
+    this.userService.patchShowCharts(this.logged.id!).subscribe((user : User) => {
+      this.alert.successAlert(this.translate.instant('alerts.success.update_success'))
+      this.logged = user;
+      this.publicProfile.icon = this.publicProfile.icon === faToggleOff ? faToggleOn : faToggleOff;
+    });
   }
 
   clickOption(id: string): void {

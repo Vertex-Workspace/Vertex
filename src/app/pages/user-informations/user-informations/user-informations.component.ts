@@ -34,27 +34,24 @@ export class UserInformationsComponent {
     private router : Router,
     private translate : TranslateService
   ) {
-    this.loggedUser = this.userService.getLogged();
-  }
-
-  ngOnInit() {
     const id : number = Number(this.activatedRoute.snapshot.paramMap.get('id'));;
-    
-    this.userService.getInformationsById(id, this.userService.getLogged().id!).subscribe(
+    this.userObservable = this.userService.getInformationsById(id);
+    this.userObservable.forEach(
       (user : User) => {
+        console.log(user);
         
-        if(user.id == this.loggedUser.id) {
+        if(user.id == this.userService.getLogged().id) {
           this.showCommonTasks = false;
           
         }
-        console.log(user);
         this.user = user;
         
 
         this.start();
-      }
-      );
-      
+      });
+  }
+
+  ngOnInit() {
 
   }
 
@@ -71,6 +68,7 @@ export class UserInformationsComponent {
     this.user.tasksPerformances!.forEach(
       (number) => labels.push(((number * 100) / finalSum).toFixed(2) + "%"));
        
+      
     this.dataPie = {
       labels:  labels
       ,
@@ -84,14 +82,13 @@ export class UserInformationsComponent {
         }
       ]
     };
-
     const documentStyle1 = getComputedStyle(document.documentElement);
     const textColor1 = documentStyle1.getPropertyValue('--text-color');
     const textColorSecondary = documentStyle1.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle1.getPropertyValue('--surface-border');
 
     this.dataBar = {
-      labels: [this.translate.instant("pages.team-informations.NaoIniciadas"), this.translate.instant("pages.team-informations.EmAndamento"), this.translate.instant("pages.team-informations.Concluidas")],
+      labels: labels,
       datasets: [
         {
           label: this.translate.instant('pages.user-informations.tasksPerformance'),
@@ -106,6 +103,11 @@ export class UserInformationsComponent {
 
   goToTask(task : any){
     this.router.navigate(['projeto/' + task.projectId + '/tarefas'], {queryParams: {taskID: task.id}})
+  }
+
+  getPermission(): any{
+    return !(this.user.id != this.userService.getLogged().id && !this.user.showCharts);
+    
   }
 
 }

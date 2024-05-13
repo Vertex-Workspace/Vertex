@@ -264,6 +264,6 @@ export class KanbanComponent {
   }
   getStrongerColor(colorReceived: string): string | undefined {
     const matchingColor = colors.find(color => color.weak === colorReceived);
-    return matchingColor ? matchingColor.strong : undefined;
-}
+    return matchingColor ? matchingColor.text : undefined;
+  } 
 }

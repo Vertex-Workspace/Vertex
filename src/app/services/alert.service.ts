@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 
 @Injectable({
@@ -7,7 +8,8 @@ import { MessageService } from 'primeng/api';
 export class AlertService {
 
   constructor(
-    private messageService: MessageService
+    private messageService: MessageService,
+    private translateService: TranslateService
   ) { }
 
   successAlert(message: string): void {
@@ -15,7 +17,7 @@ export class AlertService {
     this.messageService.add(
       { 
         severity: 'success', 
-        summary: 'Sucesso', 
+        summary: this.translateService.instant('success_alert'), 
         detail: message 
       }
     );
@@ -25,7 +27,7 @@ export class AlertService {
     this.messageService.add(
       {
         severity: 'error',
-        summary: 'Erro',
+        summary: this.translateService.instant('error_alert'), 
         detail: message
       }
     );
@@ -35,7 +37,7 @@ export class AlertService {
     this.messageService.add(
       {
         severity: 'info',
-        summary: 'Notificação',
+        summary: this.translateService.instant('notification_alert'), 
         detail: message
       }
     )

@@ -1,4 +1,4 @@
-{
+{   
     "pages": {
         "home": {
             "filterandorder": {
@@ -562,5 +562,8 @@
     "deleteProject": "delete the project?",
     "deleteTeam": "delete team?",
     "exitTeam": "leave the team?",
-    "addedToTeam": "You have been added to the team "
+    "addedToTeam": "You have been added to the team ",
+    "success_alert": "Success",
+    "error_alert": "Error",
+    "notification_alert": "Be Careful"
 }

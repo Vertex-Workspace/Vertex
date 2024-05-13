@@ -43,6 +43,10 @@
 p, input{
     @apply  flex items-center pl-2 h-[35px] overflow-hidden max-h-[35px];
 }
+.name-task{
+    background-color: $card;
+}
+
 .name-task:hover{
-    background-color: $emphasis;
+    border-bottom: 1px solid $text;
 }

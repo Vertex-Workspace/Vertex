@@ -1,7 +1,8 @@
 @import '../../../../variables';
 
 .main-div {
-    @apply w-full bg-white h-[150px] shadow-lg;
+    @apply w-full h-[150px] shadow-lg;
+    background-color: $card;
 }
 
 .user-card {
@@ -29,7 +30,15 @@
 }
 
 .clicked {
-    @apply bg-[#D9D9D9] rounded-2xl ;
+    border-bottom: 1px solid $primaryColor;
+}
+
+input{
+    @apply  h-[30px];
+    background-color: $card;
+    color: $primaryColor;
+    padding-left: 10px;
+    font-size: $smallText;
 }
 
 

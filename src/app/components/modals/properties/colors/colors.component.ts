@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faArrowLeft, faCheck, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import {  PropertyList } from 'src/app/models/class/property';
+import { colors } from 'src/app/models/colors';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -57,4 +58,9 @@ export class ColorsComponent {
         });
         this.changeColor.emit(this.propertyList);
     }
+
+    getStrongerColor(colorReceived: string): string | undefined {
+        const matchingColor = colors.find(color => color.weak === colorReceived);
+        return matchingColor ? matchingColor.text : undefined;
+      } 
 }

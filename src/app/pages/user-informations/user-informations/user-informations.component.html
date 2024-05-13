@@ -1,6 +1,6 @@
 <section>
 
-    <div class="main-div">
+    <div class="main-div" *ngIf="userObservable | async">
 
         <div class="top-side">
             <div class="top-side-left">
@@ -56,8 +56,8 @@
             </div>
         </div>
 
-        <div class="under-side">
-            <div class="div-dashboards">
+        <div class="under-side" >
+            <div class="div-dashboards" *ngIf="getPermission() ; else message"> 
                 <h5>{{ 'pages.user-informations.personalPerformance' | translate }}</h5>
                 <div class="dashboards">
                     <div class="div-dashboard-pie-doughnut">
@@ -78,8 +78,11 @@
                     </div>
                 </div>
             </div>
-
+            <ng-template #message>
+                <h5 class="truncate">{{user.fullname}} privou seu desempenho no sistema.</h5>
+            </ng-template>
         </div>
+
 
     </div>
 

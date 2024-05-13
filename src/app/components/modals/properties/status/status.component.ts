@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Project } from 'src/app/models/class/project';
 import { Property, PropertyList, PropertyListKind } from 'src/app/models/class/property';
 import { Permission, PermissionsType } from 'src/app/models/class/user';
+import { colors } from 'src/app/models/colors';
 import { AlertService } from 'src/app/services/alert.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
@@ -187,6 +188,11 @@ export class StatusComponent {
       return;
     }
   }
+
+  getStrongerColor(colorReceived: string): string | undefined {
+    const matchingColor = colors.find(color => color.weak === colorReceived);
+    return matchingColor ? matchingColor.text : undefined;
+  } 
 
 
   editName(propertyList: PropertyList) {

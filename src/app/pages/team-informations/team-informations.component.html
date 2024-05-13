@@ -48,7 +48,7 @@
                     <div class="members">
                         <ng-container *ngFor="let item of menuItems">
                             <button [ngClass]="item.clicked === true ? 'clicked' : 'default'"
-                                (click)="changePreviewMode(item.id)">
+                                (click)="changePreviewMode(item.id)" *ngIf="clicked == 'participants' || clicked == 'groups' && isCreator()">
                                 <i class="{{ item.iconClass }}" style="font-size: 1.25rem"></i>
                                 {{ 'pages.team-informations.'+item.label | translate }}
                             </button>
@@ -86,7 +86,7 @@
                 </ng-container>
             </div>
 
-            <div *ngIf="clicked == 'groups'" class="grid-group">
+            <div *ngIf="clicked == 'groups' && isCreator()" class="grid-group">
                 <div class="w-[40%] absolute" *ngIf="team.groups.length === 0">
                     <h6 class="pt-10 flex justify-center items-center">Nenhum grupo disponível...</h6>
                 </div>

@@ -563,5 +563,8 @@
   "deleteProject": "¿eliminar el proyecto?",
   "deleteTeam": "¿eliminar equipo?",
   "exitTeam": "¿salir del equipo?",
-  "addedToTeam": "Has sido agregado al equipo "
+  "addedToTeam": "Has sido agregado al equipo ",
+  "success_alert": "Éxito",
+  "error_alert": "Erro",
+  "notification_alert": "Atención"
 }

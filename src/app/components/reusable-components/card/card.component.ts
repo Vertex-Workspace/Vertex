@@ -45,6 +45,14 @@ export class CardComponent implements OnInit {
   @Output() deleteTask = new EventEmitter();
 
   canDelete?: boolean = false;
+  canEdit?: boolean = false;
+  ngOnChanges(): void {
+    colors.forEach(color => {
+      if (color.weak === this.borderColor) {
+        this.borderColor = color.strong;
+      }
+    });
+  }
 
   ngOnInit(): void {
     //Opacity
@@ -58,6 +66,9 @@ export class CardComponent implements OnInit {
         this.canDelete = true;
         this.settings[0].disabled = false;
       }
+      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+        this.canEdit = true;
+      }
     }
   }
 
@@ -65,7 +76,7 @@ export class CardComponent implements OnInit {
   modalDelete2: boolean = false;
 
   settings = [
-    { id: 'delete', icon: this.faTrashCan, onclick: () => this.openModalDelete(), disabled: false }
+    { id: 'delete', icon: this.faTrashCan, onclick: () => this.openModalDelete(), disabled: true }
   ];
 
   openChat(): void {

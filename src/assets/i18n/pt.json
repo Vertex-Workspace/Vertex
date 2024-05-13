@@ -422,7 +422,7 @@
             "card-group": {
                 "participants": "Participantes",
                 "deleteGroup": "Excluir grupo",
-                "confirmDeleteGroup": "excluir o grupo",
+                "confirmDeleteGroup": "excluir o grupo?",
                 "confirmDeleteUser": "excluir o usuário do grupo"
             },
             "card-list": {
@@ -563,5 +563,8 @@
     "deleteProject": "excluir o projeto?",
     "deleteTeam": "excluir equipe?",
     "exitTeam": "sair da equipe?",
-    "addedToTeam": "Você foi adicionado ao time "
+    "addedToTeam": "Você foi adicionado ao time ",
+    "success_alert": "Successo",
+    "error_alert": "Erro",
+    "notification_alert": "Atenção"
 }

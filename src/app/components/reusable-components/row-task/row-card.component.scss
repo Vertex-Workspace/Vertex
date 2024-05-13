@@ -54,7 +54,7 @@
 // }
 
 .drag-handle {
-    @apply h-full flex items-center pl-[0.8rem] absolute left-0 my-auto cursor-move gap-[0.2rem] z-[500];
+    @apply h-full flex items-center pl-[0.8rem] absolute left-0 my-auto cursor-move gap-[0.2rem];
   
     fa-icon {
       font-size: 1.7rem;

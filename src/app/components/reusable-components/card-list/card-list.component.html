@@ -40,8 +40,9 @@
 </app-create-team-project>            
 
 <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
-                [title]="' {{deleteProject}}' | translate" (close)="emitItem($event)"></app-confirm-modal>
-<app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'{{deleteTeam}}' | translate"
+                [title]="itemToDelete.name" (close)="emitItem($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="itemToDelete.name"
                 (close)="emitItem($event)"></app-confirm-modal>
-<app-confirm-modal *ngIf="leaveBool && type==='team'" [width]="'450px'" [height]="'250px'" [title]="'{{exitTeam}}' | translate"
+
+<app-confirm-modal *ngIf="leaveBool && type==='team'" [width]="'450px'" [height]="'250px'" [title]="itemToDelete.name"
                 (close)="leaveTeam($event)"></app-confirm-modal>

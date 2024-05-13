@@ -86,8 +86,7 @@ overflow: hidden;
         @apply flex flex-col w-full h-[85%] overflow-y-auto overflow-x-hidden;
 
         .notification {
-            @apply flex w-full border-b-2 items-center py-2 px-4 justify-between;
-            min-height: 130px;
+            @apply flex w-full max-h-fit border-b-2 items-center py-2 px-4 justify-between;
 
             :first-child {
                 @apply flex flex-row items-center justify-between;
