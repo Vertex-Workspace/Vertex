@@ -412,16 +412,7 @@ export class TasksComponent implements OnInit {
 
 
   attUserFirstAccess() {
-    this.userService.patchFirstAccess(this.logged).subscribe(
-      (user: any) => {
-        console.log();
-
-        localStorage.setItem('logged', JSON.stringify(user));
-      },
-      (e: any) => {
-        console.log(e);
-      }
-    )
+    this.userService.patchFirstAccess(this.logged);
   }
 
   updateProject(project : Project) {

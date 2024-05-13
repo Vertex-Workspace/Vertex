@@ -133,11 +133,12 @@ export class UserService {
     .patch<any>(`${URL}user/edit-password`, passwordObj, {withCredentials: true});
   }
 
-  public patchFirstAccess(user:User): any {
+  public patchFirstAccess(user:User) {
     this.http
-    .patch<User>(`${URL}user/first-access`, user, {withCredentials: true}).subscribe((user: User) => {
+    .patch<User>(`${URL}user/first-access/${user.id}`, {}, {withCredentials: true}).subscribe((user: User) => {
       this.saveLoggedUser(user);
-    });
+    }, error => console.log(error)
+    );
   }
   public patchShowCharts(userID: number){
     return this.http
