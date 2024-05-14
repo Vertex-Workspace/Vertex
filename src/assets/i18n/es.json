@@ -221,7 +221,9 @@
         "visibilityProfile": "Visibilidad del perfil",
         "update": "Actualizar",
         "1": "Mostrar gráficos de rendimiento para el equipo",
-        "2": "Hacer mi perfil visible para los miembros del equipo"
+        "2": "Hacer mi perfil visible para los miembros del equipo",
+        "3": "Sincronizar con Google Calendar",
+        "4": "Sincronizar con Google Drive"
       },
       "security": {
         "title": "Seguridad",

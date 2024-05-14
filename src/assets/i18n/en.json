@@ -221,7 +221,9 @@
                 "visibilityProfile": "Profile visibility",
                 "update": "Update",
                 "1": "Show performance charts for team",
-                "2": "Make my profile visible to team members"
+                "2": "Make my profile visible to team members",
+                "3": "Synchronize with Google Calendar",
+                "4": "Synchronize with Google Drive"
             },
             "security": {
                 "title": "Security",

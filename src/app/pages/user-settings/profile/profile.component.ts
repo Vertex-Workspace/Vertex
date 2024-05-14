@@ -6,7 +6,7 @@ import {
   faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { User } from 'src/app/models/class/user';
+import { User, UserKind } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Message } from 'src/app/models/class/message';
@@ -55,11 +55,9 @@ export class ProfileComponent {
     { id: 'description', icon: faEarthAmericas, option: 'Descrição', formControlName: 'description' }
   ];
 
-  tooglesList = [
-    { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff },
-    { id: 2, text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff }
-  ];
-
+  tooglesList !: any[];
+  // visible: this.logged.userKind === UserKind.GOOGLE
+  // visible: this.logged.userKind === UserKind.GOOGLE
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -70,6 +68,15 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
+    console.log(this.logged);
+
+    this.tooglesList = [
+      { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff, event: () => this.a(), visible: true },
+      { id: 2, text: "Deixar meu perfil visível a membros da equipe", icon: faToggleOff, event: () => this.a(), visible: true },
+      { id: 3, text: "Sincronizar com Google Agenda", icon: faToggleOff, event: () => this.syncCalendar(), visible: this.logged.userKind === UserKind.GOOGLE },
+      { id: 4, text: "Sincronizar com Google Drive", icon: faToggleOff, event: () => this.syncDrive(), visible: this.logged.userKind === UserKind.GOOGLE }
+    ]
+    
 
     this.form = this.formBuilder.group({
 
@@ -82,6 +89,20 @@ export class ProfileComponent {
 
     console.log(this.logged);
 
+  }
+
+  a(): void {
+    console.log('a');
+  }
+
+  syncCalendar(): void {
+    console.log('aoisjd9iasjdfi');
+    
+    this.userService.a(this.logged.id!).subscribe();    
+  }
+
+  syncDrive(): void {
+    
   }
 
   getLoggedUser(): void {

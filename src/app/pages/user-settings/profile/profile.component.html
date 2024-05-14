@@ -25,11 +25,13 @@
                     </form>
                     <div class="charts">
                         <p class="medium-text">{{ 'pages.user-settings.profile.visibilityProfile' | translate }}</p>  
-                        <div *ngFor="let toogle of tooglesList; index as item">
-                            <fa-icon (click)="toogleCharts(item)" [icon]="toogle.icon" class="iconProfile">
-                            </fa-icon>
-                            <p class="small-text px-3">{{ 'pages.user-settings.profile.' + toogle.id | translate }}</p>
-                        </div>
+                        <ng-container *ngFor="let toogle of tooglesList; index as item">
+                            <div>
+                                <fa-icon (click)="toogle.event()" [icon]="toogle.icon" class="iconProfile">
+                                </fa-icon>
+                                <p class="small-text px-3">{{ 'pages.user-settings.profile.' + toogle.id | translate }}</p>
+                            </div>
+                        </ng-container>
                     </div>
                 </section>
             </div>

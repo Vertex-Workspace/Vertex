@@ -122,6 +122,14 @@ export class UserService {
     .patch<any>(`${URL}user/${this.getLogged().id}/personalization`, personalization, {withCredentials: true});
   }
 
+  public a(userId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:7777/authorize/google/${userId}`, { withCredentials: true })
+  }
+
+  public b(userId: number, projectId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:7777/authorize/google/${userId}/${projectId}`, { withCredentials: true })
+  }
+
   public patchPassword(emailTo: String, password: String): Observable<User> {
 
     let passwordObj = {
