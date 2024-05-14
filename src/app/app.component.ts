@@ -68,7 +68,6 @@ export class AppComponent {
 
   notification: boolean = false;
 
-
   isSideBarExpanded: boolean = false;
 
   url: string = '';

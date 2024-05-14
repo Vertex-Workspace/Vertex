@@ -23,6 +23,10 @@
         position: fixed;
         z-index: 10;
     }
+
+    .page-content {
+        @apply h-full w-[96%];
+    }
     
 }
 
@@ -147,6 +151,10 @@
         @apply w-full;
     }
 
+    .page-content {
+        @apply h-full w-[100%];
+    }
+
 }
 
 .textSpeech {
@@ -162,4 +170,9 @@
     justify-content: center;
     background-color: #3b82f6;
     background-position: center;
+}
+
+.tutorial-div{
+    background-color: $card;
+    color: $text;
 }

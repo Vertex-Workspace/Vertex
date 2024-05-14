@@ -6,6 +6,7 @@ import { CardUserModule } from '../card-user/card-user.module';
 import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 import { ButtonModule } from '../button/button.module';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -18,7 +19,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     ReactiveFormsModule,
     ModalWarnModule,
     ButtonModule,
-    MultiSelectModule
+    MultiSelectModule,
+    TranslateModule
   ]
 })
 export class CreateGroupModule { }

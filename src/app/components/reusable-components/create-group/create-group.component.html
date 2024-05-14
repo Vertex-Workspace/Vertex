@@ -1,19 +1,19 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="typeString != 'addingParticipants'">
 
   <div class="modal">
-    <h4 class="title">Crie um novo grupo</h4>
+    <h4 class="title">{{'components.modals.create-groups.title' | translate}}</h4>
 
     <div class="div-name">
       <div class="input-name">
-        <p>Nome do grupo</p>
-        <input formControlName="name" [placeholder]="'Adicione um nome para o grupo'" type="text">
+        <p>{{'components.modals.create-groups.name' | translate}}</p>
+        <input formControlName="name" [placeholder]="'components.modals.create-groups.name_placeholder' | translate" type="text">
       </div>
     </div>
 
-    <p class="pb-4">Selecionar participantes</p>
+    <p class="pb-4">{{'components.modals.create-groups.participants' | translate}}</p>
     <div>
       <p-multiSelect [options]="usersToSelect!" optionLabel="name" (onChange)="pushParticipants($event)"
-            [style]="{ width: '300px', height: '55px'}" placeholder="Membros do grupo">
+            [style]="{ width: '300px', height: '55px', backgroundColor: 'var(--secondColor)'}" [placeholder]="'components.modals.create-groups.multi_select' | translate">
             <ng-template let-user pTemplate="user">
                 <span>{{user.firstName}}</span>
             </ng-template>
@@ -22,8 +22,8 @@
 
     <div class="div-buttons">
       <div class="buttons">
-        <button class="button cancel" (click)="closeGroup()">Cancelar</button>
-        <button class="button confirm" type="submit">Criar grupo</button>
+        <button class="button cancel" (click)="closeGroup()">{{'components.modals.create-groups.cancel_button' | translate}}</button>
+        <button class="button confirm" type="submit">{{'components.modals.create-groups.confirm_button' | translate}}</button>
       </div>
     </div>
   </div>

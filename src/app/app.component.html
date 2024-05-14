@@ -13,7 +13,7 @@
 
     <div [ngClass]="isSideBarExpanded ? 'main-divOpen': 'main-div'"
         [ngStyle]="{'overflow-y' : notification ? 'hidden' : 'auto'}">
-        <div class="h-full w-[96%]">
+        <div class="page-content">
 
             <app-notification *ngIf="notification" style="width: 100%; height:100%" (close)="switchNotifications()"
                 [notifications]="notifications">
@@ -85,5 +85,5 @@
     </button>
 </ng-template>
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">
-    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px" class="tutorial-div"></div>
 </ng-template>

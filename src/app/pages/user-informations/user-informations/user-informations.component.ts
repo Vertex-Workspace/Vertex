@@ -44,18 +44,14 @@ export class UserInformationsComponent {
       (user : User) => {
         
         if(user.id == this.loggedUser.id) {
-          this.showCommonTasks = false;
-          
+          this.showCommonTasks = false;   
         }
         console.log(user);
         this.user = user;
-        
 
         this.start();
       }
       );
-      
-
   }
 
 

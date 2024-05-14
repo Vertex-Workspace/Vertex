@@ -1,4 +1,4 @@
-<app-modal-warn [height]="'650px'" [width]="'900px'" (close)="closeReview()">
+<app-modal-warn [height]="'650px'" [width]="'1200px'" (close)="closeReview()">
     <section>
         <div class="s1">
             <p class="large-text self-start">{{ 'components.modals.review-task.tasks_to_review' | translate }}</p>
@@ -8,10 +8,9 @@
                     class="card-task-review" 
                     (click)="selectedReviewTask(taskToReview)"
                     [ngClass]="isTaskReviewed(taskToReview) ? 'task-reviewed-focus' : ''"
-                    
                     >
-                        <p class="medium-text">{{ taskBeingReviewed.name }}</p>
-                        <p class="small-text">{{ taskBeingReviewed.description }}</p>
+                        <p class="medium-text">{{ taskToReview.name }}</p>
+                        <p class="small-text text-left">{{ taskToReview.description }}</p>
                     </div>
                 </ng-container>
             </div>
@@ -22,7 +21,7 @@
                 <p class="medium-text self-start pt-4 pl-6">{{taskBeingReviewed.sender.username}} -
                     {{taskBeingReviewed.sender.email}}</p>
                 <p class="medium-text self-start pt-3">{{ 'components.modals.review-task.final_description' | translate }}</p>
-                <p class="small-text self-start pl-6 h-[50px]">{{taskBeingReviewed.sender.finalDescription}}</p>
+                <p class="small-text self-start pl-6 h-[50px] text-left">{{taskBeingReviewed.sender.finalDescription}}</p>
             </div>
 
             <div class="fs1">

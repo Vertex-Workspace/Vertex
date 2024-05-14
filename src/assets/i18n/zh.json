@@ -264,9 +264,20 @@
                 "cancel_button": "取消",
                 "confirm_button": "确认"
             },
-            "groups": {
-                "title": "群组"
+            "create-groups": {
+                "title": "创建新群组",
+                "name": "群组名称",
+                "participants": "选择参与者",
+                "name_placeholder": "为群组添加名称",
+                "multi_select":"群组成员",
+                "members":"成员",
+                "confirm_button":"创建群组",
+                "cancel_button": "取消"
             },
+            "groups": {
+                "multi_select": "群组成员",
+                "members": "成员"
+            },            
             "minichat": {
                 "header": {
                     "conversations": "对话"

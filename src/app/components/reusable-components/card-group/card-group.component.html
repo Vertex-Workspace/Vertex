@@ -9,7 +9,7 @@
     </div>
     <div class="h-[48%] flex items-start pl-5">
         <p-multiSelect (click)="getUsersByGroup(group.id)" [options]="usersTeam" optionLabel="name"
-            [style]="{ width: '300px', height: '50px'}" placeholder="Membros do grupo" [(ngModel)]=selectedUsers
+            [style]="{ width: '300px', height: '50px', backgroundColor: 'var(--secondColor)'}" [placeholder]="'components.modals.groups.multi_select' | translate" [(ngModel)]=selectedUsers
             (onChange)="addOrDelete($event, group)">
             <ng-template let-user pTemplate="user">
                 <span>{{user.firstName}}</span>
@@ -17,7 +17,7 @@
         </p-multiSelect>
     </div>
     <div class="h-[12%] members">
-        <p>{{group.size}} membros</p>
+        <p>{{group.size}} {{'components.modals.groups.members' | translate}}</p>
     </div>
 </div>
 
