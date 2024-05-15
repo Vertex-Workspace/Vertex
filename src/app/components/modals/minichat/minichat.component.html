@@ -48,14 +48,14 @@
 
     <div class="miniChat-main-input">
         <div class="div-searchStep1">
-            <input class="input-searchStep1 regular-text" type="text" placeholder="{{ 'components.modals.minichat.placeholderSearchConversation' | translate }}" />
+            <input class="input-searchStep1 regular-text" type="text" [(ngModel)]="query"  placeholder="{{ 'components.modals.minichat.placeholderSearchConversation' | translate }}" />
         </div>
     </div>
 
     <div class="minichatStep1-main">
 
 
-        <ng-container *ngFor="let chatFor of conversations,let i = index">
+        <ng-container *ngFor="let chatFor of (conversations | namePipe: query),let i = index">
             <div (click)="openConversation(chatFor)" class="card-chat regular-text">
                 <div class="user-card-message">
                     <div class="flex gap-3 w-full items-center">

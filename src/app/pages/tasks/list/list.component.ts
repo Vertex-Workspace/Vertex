@@ -88,6 +88,10 @@ export class ListComponent implements OnInit {
     this.updateGlobalValues();
   }
 
+  isTaskPage(): boolean {
+    return this.router.url.includes("tarefas");
+  }
+
   translatePropertyListKey(value: string): string {
     return 'pages.tasks.kanban.key.' + value;
   }

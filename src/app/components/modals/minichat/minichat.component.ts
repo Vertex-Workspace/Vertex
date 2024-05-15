@@ -47,7 +47,7 @@ export class MinichatComponent {
       this.conversations = chats;
     });
   }
-
+  query: string = "";
   ngOnInit() {
     this.webSocketService.openWebSocket();
     this.webSocketService.listenToServer().subscribe((change) => {

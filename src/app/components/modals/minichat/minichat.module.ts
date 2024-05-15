@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { InputModule } from '../../../components/reusable-components/input/input.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
 
 
 
@@ -16,7 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FontAwesomeModule,
     FormsModule,
     InputModule,
-    TranslateModule
+    TranslateModule,
+    PipesModule
   ]
 })
 export class MinichatModule { }

@@ -1,6 +1,6 @@
 <div class="card min-h-[40px]">
     <div class="name test-name min-w-[300px]" (click)="openModalTask()">
-        <span class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">
+        <span class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()" *ngIf="isTaskPage()">
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
         </span>
