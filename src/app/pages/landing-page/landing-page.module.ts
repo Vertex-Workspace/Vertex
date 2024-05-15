@@ -10,6 +10,9 @@ import { CardModule } from "../../components/reusable-components/card/card.modul
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RowCardModule } from "../../components/reusable-components/row-task/row-card.module";
 import { GalleriaModule } from 'primeng/galleria';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AvatarModule } from 'primeng/avatar';
+
 
 
 @NgModule({
@@ -20,6 +23,7 @@ import { GalleriaModule } from 'primeng/galleria';
         LandingPageComponent
     ],
     imports: [
+        BrowserAnimationsModule,    
         CommonModule,
         MatMenuModule,
         TranslateModule,
@@ -29,7 +33,8 @@ import { GalleriaModule } from 'primeng/galleria';
         CardModule,
         DragDropModule,
         RowCardModule,
-        GalleriaModule
+        GalleriaModule,
+        AvatarModule
     ]
 })
 export class LandingPageModule { }
