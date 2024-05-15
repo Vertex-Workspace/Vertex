@@ -13,6 +13,7 @@ import { JoyrideService } from 'ngx-joyride';
 import { tutorialText } from 'src/app/tutorialText';
 import { ProjectService } from 'src/app/services/project.service';
 import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -33,15 +34,15 @@ export class HomeComponent implements OnInit {
   isCreating: boolean = false;
 
   orderParams !: PipeParams;
-  
+
   //TASKS - FILTER AND ORDER
   selectedFilter !: any;
   filterDate !: string;
-  
-  filterOptions: any[] = [];
-  orderOptions: any =[];
 
-  orderSettings: any[] =[];
+  filterOptions: any[] = [];
+  orderOptions: any = [];
+
+  orderSettings: any[] = [];
   configItems = [
     { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
     { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
@@ -53,6 +54,8 @@ export class HomeComponent implements OnInit {
   queryFilter !: string;
 
   faPlus = faPlusSquare;
+
+  openChangePassword: boolean = false
 
   constructor(
     private userService: UserService,
@@ -71,11 +74,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkChangePassword();
     this.subscribeToTeams();
     this.loadTranslatedOptions();
   }
 
-  
+
   loadTranslatedOptions() {
     // Translate filter and order options
     this.filterOptions = [
@@ -190,5 +194,21 @@ export class HomeComponent implements OnInit {
     this.switchCreateView();
   }
 
+
+  checkChangePassword(): void {
+    const date: Date = new Date(this.logged.registerDay!);
+    date.setMonth(date.getMonth() + 3);
+    const today: Date = new Date();
+    if (
+      date.getDate() == today.getDate()
+      && date.getMonth() == today.getMonth()
+      && date.getFullYear() == today.getFullYear()) {
+      this.openChangePassword = true;
+    }
+  }
+
+  closeModal(): void {
+    this.openChangePassword = false;
+  }
 
 }

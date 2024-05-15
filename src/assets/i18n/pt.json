@@ -264,6 +264,12 @@
                 "cancel_button": "Cancelar",
                 "confirm_button": "Confirmar"
             },
+            "change-password" : {
+                "title": "Troca periódica de senha",
+                "subtitle": "Para sua segurança, insira uma nova senha",
+                "placeholder": "Digite sua nova senha",
+                "button": "Enviar"
+            },
             "groups": {
                 "title": "Grupos"
             },
@@ -516,7 +522,8 @@
             "editedGroup": "Nome do grupo editado com sucesso!",
             "groupCreated":"Grupo criado com sucesso!",
             "descriptionUpdated":"Descrição atualizada com sucesso!",
-            "nameUpdated":"Nome atualizado com sucesso!"
+            "nameUpdated":"Nome atualizado com sucesso!",
+            "new-password" : "Sua senha foi modificada com sucesso!"
         },
         "error": {
             "participantsNotAddedToGroup": "Erro ao adicionar usuário ao grupo!",
@@ -550,7 +557,8 @@
             "notPermissionEditTask": "Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!",
             "minTaskLengthName": "O nome da tarefa deve ter no mínimo 4 caracteres!",
             "errorEditingTask": "Erro ao editar a tarefa!",
-            "update_error":"O e-mail não atende aos requisitos necessários"
+            "update_error":"O e-mail não atende aos requisitos necessários",
+            "new-password" : "A senha não atende aos requisitos necessários"
         },
         "notification": {
             "nameLength": "O nome do status deve ter entre 3 e 20 caracteres",

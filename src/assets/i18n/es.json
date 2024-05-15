@@ -267,6 +267,12 @@
       "groups": {
         "title": "Grupos"
       },
+      "change-password" : {
+        "title": "Cambio Periódico de Contraseña",
+        "subtitle": "Para su seguridad, ingrese una nueva contraseña",
+        "placeholder": "Ingrese su nueva contraseña",
+        "button": "Enviar"
+    },
       "minichat": {
         "header": {
           "conversations": "Conversaciones"
@@ -517,7 +523,8 @@
       "editedGroup": "¡Nombre del grupo editado con éxito!",
       "groupCreated": "¡Grupo creado con éxito!",
       "descriptionUpdated": "¡Descripción actualizada con éxito!",
-      "nameUpdated": "¡Nombre actualizado con éxito!"
+      "nameUpdated": "¡Nombre actualizado con éxito!",
+      "new-password": "Contraseña modificada con éxito"
     },
     "error": {
       "participantsNotAddedToGroup": "¡Error al agregar usuario al grupo!",
@@ -550,7 +557,8 @@
       "notPermissionEditTask": "¡Por seguridad, no puedes editar tareas desde la página principal, haz clic en la tarea o accede al equipo!",
       "minTaskLengthName": "¡El nombre de la tarea debe tener al menos 4 caracteres!",
       "errorEditingTask": "¡Error al editar la tarea!",
-      "update_error": "El correo electrónico no cumple con los requisitos necesarios"
+      "update_error": "El correo electrónico no cumple con los requisitos necesarios",
+      "new-password": "Su contraseña no cumple con los requisitos"
     },
     "notification": {
       "nameLength": "El nombre del estado debe tener entre 3 y 20 caracteres",

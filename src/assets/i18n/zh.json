@@ -267,6 +267,12 @@
             "groups": {
                 "title": "群组"
             },
+            "change-password" : {
+                "title": "定期更改密码",
+                "subtitle": "为了您的安全，请输入新密码",
+                "placeholder": "输入新密码",
+                "button": "提交"
+            },
             "minichat": {
                 "header": {
                     "conversations": "对话"
@@ -516,7 +522,8 @@
             "editedGroup": "群组名称已成功编辑！",
             "groupCreated":"群组已成功创建！",
             "descriptionUpdated":"描述已成功更新！",
-            "nameUpdated":"名称已成功更新！"
+            "nameUpdated":"名称已成功更新！",
+            "new-password": "密码修改成功"
         },
         "error": {
             "participantsNotAddedToGroup": "无法将用户添加到群组！",
@@ -549,7 +556,8 @@
             "notPermissionEditTask": "为了安全起见，您无法通过首页更改任务，请单击任务或访问团队！",
             "minTaskLengthName": "任务名称必须至少有4个字符！",
             "errorEditingTask": "编辑任务时出错！",
-            "update_error":"电子邮件不符合要求"
+            "update_error":"电子邮件不符合要求",
+            "new-password": "您的密码不符合要求"
         },
         "notification": {
             "nameLength": "状态名称必须在3到20个字符之间",

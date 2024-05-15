@@ -49,6 +49,7 @@ import { MobileSidebarComponent } from './components/fixed-components/mobile-sid
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader, TranslateService, TranslateStore, TranslatePipe } from '@ngx-translate/core';
 
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

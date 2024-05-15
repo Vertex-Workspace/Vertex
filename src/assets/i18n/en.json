@@ -267,6 +267,12 @@
             "groups": {
                 "title": "Groups"
             },
+            "change-password" : {
+                "title": "Periodic Password Change",
+                "subtitle": "For your security, please enter a new password",
+                "placeholder": "Enter your new password",
+                "button": "Submit"
+            },
             "minichat": {
                 "header": {
                     "conversations": "Conversations"
@@ -516,7 +522,8 @@
             "editedGroup": "Group name edited successfully!",
             "groupCreated": "Group created successfully!",
             "descriptionUpdated": "Description updated successfully!",
-            "nameUpdated": "Name updated successfully!"
+            "nameUpdated": "Name updated successfully!",
+            "new-password": "Password modified successfully"
         },
         "error": {
             "participantsNotAddedToGroup": "Error adding user to group!",
@@ -549,7 +556,8 @@
             "notPermissionEditTask": "For security reasons, you cannot change tasks from the home, click on the task or access the team!",
             "minTaskLengthName": "Task name must be at least 4 characters long!",
             "errorEditingTask": "Error editing the task!",
-            "update_error": "The email does not meet the necessary requirements"
+            "update_error": "The email does not meet the necessary requirements",
+            "new-password": "You password does not match the requirements"
         },
         "notification": {
             "nameLength": "Status name must be between 3 and 20 characters",
