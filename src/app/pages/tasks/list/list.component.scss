@@ -5,7 +5,7 @@ section {
     @apply flex h-full justify-start overflow-hidden;
     
     .table-vertex {
-        @apply  flex max-h-[500px] flex-col rounded-sm mb-12;
+        @apply  flex flex-col rounded-sm mb-12;
         
         .tbody {
             @apply flex w-full h-full flex-col;
