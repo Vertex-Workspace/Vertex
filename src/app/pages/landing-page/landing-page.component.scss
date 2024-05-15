@@ -106,7 +106,7 @@ main {
         @apply w-[100%] h-[90vh] flex items-start justify-center gap-10;
 
         .section-title {
-            @apply text-4xl text-[#092c4c] text-start pt-8 font-semibold font-['Inter'];
+            @apply text-4xl text-[#092c4c] text-start font-semibold font-['Inter'];
         }
 
         .section-subtitle {
@@ -460,7 +460,7 @@ section {
     }
 
     .footer-logo {
-        @apply w-[60px] h-1/2;
+        height: 4git 0% !important;
     }
 
     .links-div {
