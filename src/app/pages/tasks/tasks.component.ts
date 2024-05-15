@@ -22,6 +22,9 @@ import { tutorialText } from 'src/app/tutorialText';
 import { DisplayService } from 'src/app/services/display.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { TranslateService } from '@ngx-translate/core';
+import { KanbanComponent } from './kanban/kanban.component';
+import { ListComponent } from './list/list.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @Component({
   selector: 'app-tasks',
@@ -116,8 +119,8 @@ export class TasksComponent implements OnInit {
     //Método que atribui o valor de project vindo do observable
     this.projectService.getOneById(id).subscribe((p: Project) => {
       this.project = p;
-      console.log(this.project);
       
+  
       this.loadingService.hide();
 
       this.teamService.getPermission(p.idTeam, this.logged.id!).subscribe((permissions: Permission[]) => {
@@ -384,14 +387,26 @@ export class TasksComponent implements OnInit {
     this.propertiesOpen = !this.propertiesOpen;
   }
 
+
   updateProjectByTaskChanges(event: any): void {
-    const taskUpdated: Task = event;
-    this.project.tasks = this.project.tasks.map(task => {
-      if (task.id === taskUpdated.id) {
+    const taskUpdated : any = {
+      id: event.id,
+      name: event.name,
+      indexTask: event.indexTask,
+      values: event.values,
+      image: event.image,
+    };
+    
+    this.project.tasks = this.project.tasks.map((task) => {
+      if (task.id == taskUpdated.id) {
         return taskUpdated;
       }
       return task;
     });
+
+    this.project = {...this.project};
+    console.log("Change");
+    
   }
 
   changeProject(project: Project) {

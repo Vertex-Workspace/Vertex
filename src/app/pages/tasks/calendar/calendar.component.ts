@@ -49,7 +49,8 @@ export class CalendarComponent {
     private taskService: TaskService,
     private userService: UserService,
     private translate : TranslateService,
-    private alert: AlertService) {
+    private alert: AlertService,
+  private projectService: ProjectService) {
   }
 
   ngOnInit() {  
@@ -196,7 +197,7 @@ export class CalendarComponent {
 
 
   //it will be a request of user option
-  toggle: boolean = false;
+  toggle: boolean = true;
   toggleCharts(): void {
     this.toggle = !this.toggle;
   }
@@ -259,14 +260,38 @@ export class CalendarComponent {
     if (this.canEdit) {
       task.values.forEach((prop) => {
         if (prop.property.kind === PropertyKind.DATE) {
+          this.changeIndex(new Date(prop.value as Date), day, e.previousIndex, e.currentIndex);
           prop.value = day;
           property = prop;
         }
       });
       this.patchValue(task, day);
+      this.projectService.updateIndex(this.project.id!, this.project.tasks).subscribe(
+        (task: Task[]) => {
+          this.project.tasks = task;
+        }, error => {
+        }
+      );
     } else {
       this.alert.errorAlert(this.translate.instant('alerts.error.permission_to_edit_properties'));
     }
+  }
+
+  private changeIndex(oldDate: Date, newDate: Date, previousIndex : number, currentIndex: number){
+    let initialIndex;
+    let finalIndex;
+    console.log(oldDate);
+    
+    if(oldDate.getDate() == newDate.getDate() 
+      && oldDate.getMonth() == newDate.getMonth() 
+    && oldDate.getFullYear() == newDate.getFullYear()){
+      initialIndex = this.project.tasks.indexOf(this.getTasksByDate(newDate)[previousIndex]);
+      finalIndex = this.project.tasks.indexOf(this.getTasksByDate(newDate)[currentIndex]);
+    } else {
+      initialIndex = this.project.tasks.indexOf(this.getTasksByDate(oldDate)[previousIndex]);
+      finalIndex = this.project.tasks.indexOf(this.getTasksByDate(newDate)[currentIndex]);
+    }
+    moveItemInArray(this.project.tasks, initialIndex, finalIndex);
   }
   
   patchValue(task: Task, day: Date): void {

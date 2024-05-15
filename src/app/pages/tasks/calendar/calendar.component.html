@@ -85,7 +85,7 @@
                             | statusSortPipe : orderParams)">
                                 <app-card (openTaskDetails)="openCardTask(task)" [minHeight]="'60px'" [width]="'210px'"
                                     [task]="task" [borderColor]="getColor(task)" (deleteTask)="deleteTask(task)"
-                                    [cdkDragData]="task" cdkDrag [permissions]="permissions"></app-card>
+                                    [cdkDragData]="task" cdkDrag [permissions]="permissions" cdkDragBoundary=".desktop"></app-card>
                             </ng-container>
                         </div>
                     </div>

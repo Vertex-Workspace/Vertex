@@ -14,6 +14,7 @@ import { Permission, User } from 'src/app/models/class/user';
 import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-list',
@@ -80,6 +81,9 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
+  ngOnChanges(){
+    this.updateGlobalValues();
+  }
   ngOnInit(): void {      
     this.updateGlobalValues();
   }
@@ -97,23 +101,17 @@ export class ListComponent implements OnInit {
 
   @Output() openTaskDetails = new EventEmitter();
   openTaskModal(task: Task): void {
-    console.log(task);
-    
     this.openTaskDetails.emit(task);
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
-    console.log(event);
-    
-    console.log(event.item.data, event.currentIndex);
-    
-    this.projectService.updateIndexList(this.taskList).subscribe(
-      (task: Task[]) => {}
-    );
-
-    this.projectService.updateIndex(this.project.id, event.item.data, event.currentIndex).subscribe(
+    moveItemInArray(this.taskList, event.previousIndex, event.currentIndex);
+    this.projectService.updateIndex(this.project.id, this.taskList).subscribe(
       (task: Task[]) => {
-
+        this.taskList = task;
+      }, error => {
+        console.log(error);
+        moveItemInArray(this.taskList, event.currentIndex, event.previousIndex);
       }
     );
   }

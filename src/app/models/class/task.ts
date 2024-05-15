@@ -17,6 +17,7 @@ export class Task {
     creator?: {
         user: {
             id: number;
+            image?: string;
         }
     }
     comments!: Comment[];

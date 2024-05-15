@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Project, ProjectCollaborators, ProjectEdit } from '../models/class/project';
@@ -67,16 +67,17 @@ export class ProjectService {
       .get<ProjectCollaborators>(`${URL}project/getAll/${id}`, {withCredentials: true});
   }
 
-  public updateIndex(projectId :number, task: Task, finalIndex : number): Observable<Task[]> {
-    const taskIndex = {
-      taskID: task.id,
-      finalIndex: finalIndex
-    }
-    return this.http.patch<any>(`${URL}project/${projectId}/task`, taskIndex, { headers: { 'X-Context': 'some-context-value' } , responseType: "json" , withCredentials: true});
+  public updateIndex(projectId :number, tasks: Task[]): Observable<Task[]> {
+    const tasksBody: Task[] = tasks.map(task => ({ ...task })).reverse();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+
+    });
+    tasksBody.forEach((task) => {
+      task.image = "";
+      task.values = [];
+    });
+    return this.http.patch<Task[]>(`${URL}project/${projectId}/task/index`, tasksBody, { headers , withCredentials: true});
   }
-  public updateIndexList(tasks: Task[]): Observable<Task[]> {
-    return this.http.patch<any>(`${URL}project/task-teste`, tasks, { headers: { 'X-Context': 'some-context-value' } , withCredentials: true});
-  }
-  
 
 }

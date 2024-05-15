@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Task, TaskCreate } from 'src/app/models/class/task';
 import {
   CdkDragDrop,
@@ -60,10 +60,8 @@ export class KanbanComponent {
   status : PropertyList[] = [];
 
   ngOnChanges(){
-    if(this.lastIndexSize != this.project.tasks.length){
-      this.status = this.project.properties[0].propertyLists;
-      this.taskList = this.project.tasks;
-    }
+    this.status = this.project.properties[0].propertyLists;
+    this.taskList = this.project.tasks; 
   }
 
   lastIndexSize: number = 0;
@@ -113,28 +111,30 @@ export class KanbanComponent {
 
       if(propertyList.id == previousPropertyList.id){
         const currentList : Task[] = this.specificPropertyArray(propertyList); 
-        console.log(this.taskList.indexOf(currentList[event.previousIndex]), 
-        this.taskList.indexOf(currentList[event.currentIndex]));
         moveItemInArray(
           this.taskList, 
           this.taskList.indexOf(currentList[event.previousIndex]), 
           this.taskList.indexOf(currentList[event.currentIndex])
         );
       } else {
-        const currentList : Task[] = this.specificPropertyArray(propertyList); 
-        console.log(currentList);
-           
-        console.log(this.taskList.indexOf(previousList[event.previousIndex]), 
-        this.taskList.indexOf(currentList[event.currentIndex]));  
+        const currentList : Task[] = this.specificPropertyArray(propertyList);  
         moveItemInArray(
           this.taskList, 
           this.taskList.indexOf(previousList[event.previousIndex]), 
           this.taskList.indexOf(currentList[event.currentIndex])
         );
-
       }
 
-      console.log(this.taskList);
+    
+      this.projectService.updateIndex(this.project.id!, this.taskList).subscribe(
+        (task: Task[]) => {
+          this.taskList = task;
+        }, error => {
+          console.log(error);
+          moveItemInArray(this.taskList, event.currentIndex, event.previousIndex);
+        }
+      );
+
       
 
       //It points out that the previousValue is incorrect

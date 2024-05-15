@@ -19,7 +19,7 @@
             <ng-container
                 *ngFor="let task of (taskList | namePipe : queryFilter | statusPipe : filter : project === undefined | statusBasicPipe : filter : project === undefined | datePipe : filter | simplePropertyPipe : simplePropertyFilter | nameSortPipe : orderParams | dateSortPipe : orderParams | statusSortPipe : orderParams)">
                 <div class="trow regular-text relative" [cdkDragData]="task" cdkDrag cdkDragLockAxis="y"
-                    cdkDragBoundary=".table">
+                    cdkDragBoundary=".tbody">
                     <app-row-card *ngIf="!project" (modalTask)="openTaskModal($event)" [task]="task"
                         [properties]="properties" [permissions]="permissions"
                         (deleteTask)="updateTaskList($event)"></app-row-card>
