@@ -73,7 +73,8 @@ export class ListComponent implements OnInit {
     private userService: UserService, 
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private projectService: ProjectService
 
   ) {
     this.logged = userService.getLogged();
@@ -96,14 +97,24 @@ export class ListComponent implements OnInit {
 
   @Output() openTaskDetails = new EventEmitter();
   openTaskModal(task: Task): void {
+    console.log(task);
+    
     this.openTaskDetails.emit(task);
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
-    moveItemInArray(
-      this.taskList, 
-      event.previousIndex, 
-      event.currentIndex
+    console.log(event);
+    
+    console.log(event.item.data, event.currentIndex);
+    
+    this.projectService.updateIndexList(this.taskList).subscribe(
+      (task: Task[]) => {}
+    );
+
+    this.projectService.updateIndex(this.project.id, event.item.data, event.currentIndex).subscribe(
+      (task: Task[]) => {
+
+      }
     );
   }
 
@@ -118,8 +129,8 @@ export class ListComponent implements OnInit {
       .subscribe((tl: Task[]) => {
         if (tl.length > 0) {
           this.isNull = false;
-          this.taskList = tl;  
           
+          this.taskList = tl;  
         }
         else this.isNull = true;
       }); //busca a equipe com base no id da url

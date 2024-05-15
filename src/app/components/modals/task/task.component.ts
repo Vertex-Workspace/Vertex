@@ -78,9 +78,19 @@ export class TaskComponent {
     private translate : TranslateService
   ) {
     this.user = userService.getLogged();
-    this.test();
+    this.requests();
   }
 
+  changed: boolean = false;
+  ngOnChanges() {
+    let idTask = 0;
+    this.activatedRoute.queryParamMap.subscribe((p: any) => {idTask = p['params'].taskID});
+    if(!idTask){
+      this.changed = true;
+      this.requests();
+    }
+    
+  }
   selectedComponent: string = 'attachments';
 
   soloResponsable: boolean = false;
@@ -89,9 +99,14 @@ export class TaskComponent {
   permissionsRender!: Observable<Permission[]>;
 
   render : boolean = false;
-  test() {
+  requests() {
     let idTask = 0;
+    
     this.activatedRoute.queryParamMap.subscribe((p: any) => {idTask = p['params'].taskID});
+    
+    if(!idTask && !this.changed){
+      return;
+    }
     if(!idTask || idTask == 0){
       idTask = this.task.id;
     }
@@ -205,11 +220,16 @@ export class TaskComponent {
     if (this.task.name === "") {
       this.task.name = this.translate.instant('pages.tasks.new_task');
     }
+  
     if (this.task.description === "") {
       this.task.description = this.translate.instant('pages.tasks.new_task_description');
     }
     if (this.task.description.length > 1000) {
       this.alertService.notificationAlert(this.translate.instant('alerts.notification.descriptionLimit'));
+      return;
+    }
+    if(this.task.name.length < 4){
+      this.alertService.errorAlert(this.translate.instant('alerts.error.minTaskLengthName'));
       return;
     }
     let taskEdit: TaskEdit = {

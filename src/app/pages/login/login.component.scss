@@ -27,7 +27,7 @@
     border: solid $emphasis 1px;
     color: black;
     &:hover {
-        background-color: $emphasis;
+        background-color: #f3f3f3;
         @apply transition-colors;
     }
 }

@@ -175,13 +175,17 @@ export class ProjectsComponent implements OnInit {
   taskOpen: boolean = false;
   taskOpenObject!: Task;
   changeModalTaskState(bool: boolean, task: Task): void {
+    console.log(task);
+    
     if (bool == false) {
       this.taskOpenObject = {} as Task;
       this.taskOpen = false;
       return;
     } else {
-      this.taskOpen = true;
       this.taskOpenObject = task;
+      console.log(this.taskOpenObject);
+      
+      this.taskOpen = true;
     }
   }
 

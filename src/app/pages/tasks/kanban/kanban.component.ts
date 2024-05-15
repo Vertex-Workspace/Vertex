@@ -112,14 +112,20 @@ export class KanbanComponent {
       });
 
       if(propertyList.id == previousPropertyList.id){
-        const currentList : Task[] = this.specificPropertyArray(propertyList);    
+        const currentList : Task[] = this.specificPropertyArray(propertyList); 
+        console.log(this.taskList.indexOf(currentList[event.previousIndex]), 
+        this.taskList.indexOf(currentList[event.currentIndex]));
         moveItemInArray(
           this.taskList, 
           this.taskList.indexOf(currentList[event.previousIndex]), 
           this.taskList.indexOf(currentList[event.currentIndex])
         );
       } else {
-        const currentList : Task[] = this.specificPropertyArray(propertyList);      
+        const currentList : Task[] = this.specificPropertyArray(propertyList); 
+        console.log(currentList);
+           
+        console.log(this.taskList.indexOf(previousList[event.previousIndex]), 
+        this.taskList.indexOf(currentList[event.currentIndex]));  
         moveItemInArray(
           this.taskList, 
           this.taskList.indexOf(previousList[event.previousIndex]), 
@@ -127,6 +133,9 @@ export class KanbanComponent {
         );
 
       }
+
+      console.log(this.taskList);
+      
 
       //It points out that the previousValue is incorrect
       if (previousPropertyList == null) {

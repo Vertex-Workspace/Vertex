@@ -67,4 +67,16 @@ export class ProjectService {
       .get<ProjectCollaborators>(`${URL}project/getAll/${id}`, {withCredentials: true});
   }
 
+  public updateIndex(projectId :number, task: Task, finalIndex : number): Observable<Task[]> {
+    const taskIndex = {
+      taskID: task.id,
+      finalIndex: finalIndex
+    }
+    return this.http.patch<any>(`${URL}project/${projectId}/task`, taskIndex, { headers: { 'X-Context': 'some-context-value' } , responseType: "json" , withCredentials: true});
+  }
+  public updateIndexList(tasks: Task[]): Observable<Task[]> {
+    return this.http.patch<any>(`${URL}project/task-teste`, tasks, { headers: { 'X-Context': 'some-context-value' } , withCredentials: true});
+  }
+  
+
 }
