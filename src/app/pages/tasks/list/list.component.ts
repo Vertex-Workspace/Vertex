@@ -154,5 +154,18 @@ export class ListComponent implements OnInit {
     this.taskList.splice(this.taskList.indexOf(task), 1);
   }
 
+  @Input() shouldApplyZIndex : boolean = false
+  getStyles() {
+    return {
+      'width': 'full',
+      'min-height': '50px',
+      'display': 'flex',
+      'position': 'sticky',
+      'top': '0',
+      'background-color': '$secondColor',
+      'z-index': this.shouldApplyZIndex ? '98' : 'auto'
+    };
+  }
+
 
 }

@@ -1,7 +1,7 @@
 <section *ngIf="!isNull">
     <!-- [ngStyle]="{'overflow-x' : project ? 'auto' : 'hidden'}" -->
     <div class="table-vertex overflow-y-auto overflow-x-auto"  [ngClass]="isTaskPage() ? '' : 'max-h-[500px]'">
-        <div class="thead">
+        <div [ngStyle]="getStyles()">
             <label class="min-w-[300px]">
                 <h6>{{ 'pages.tasks.list.table.name' | translate }}</h6>
             </label>

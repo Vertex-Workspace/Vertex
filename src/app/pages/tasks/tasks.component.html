@@ -127,7 +127,7 @@
                 [permissions]="permissions" [orderParams]="orderParams"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-kanban>
 
-            <app-list *ngIf="clicked  === 'List'" [project]="project" [queryFilter]="query" [filter]="selectedFilter"
+            <app-list  [shouldApplyZIndex]="true" *ngIf="clicked  === 'List'" [project]="project" [queryFilter]="query" [filter]="selectedFilter"
                 [simplePropertyFilter]="simplePropertyFilter" [orderParams]="orderParams" [permissions]="permissions"
                 (openTaskDetails)="changeModalTaskState(true, $event)"></app-list>
 

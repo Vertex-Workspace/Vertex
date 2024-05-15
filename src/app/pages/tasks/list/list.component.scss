@@ -10,18 +10,13 @@ section {
         .tbody {
             @apply flex w-full h-full flex-col;
         }
-        
-        .thead {
-            @apply w-[full] min-h-[50px] flex sticky top-0 ;
-            z-index: 200;
-            background-color: $secondColor;
-            
-            label {
-                @apply flex items-center justify-center;
-                background-color: $secondColor;
-                border: 1px solid $emphasis;
-            }
-        }
+         
+          label {
+              @apply flex items-center justify-center;
+              background-color: $secondColor;
+              border: 1px solid $emphasis;
+          }
+          
         .trow {
             @apply w-full h-[55px] flex flex-col;
         }
