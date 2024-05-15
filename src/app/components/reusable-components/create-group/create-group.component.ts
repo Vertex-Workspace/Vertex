@@ -46,8 +46,11 @@ export class CreateGroupComponent implements OnInit {
     private route: ActivatedRoute,
     private alertService: AlertService,
     private groupService: GroupService,
-    private translate : TranslateService,) {
+    private translate : TranslateService) {
     this.getTeam();
+    this.translate.onLangChange.subscribe(() => {
+      
+    })
   }
 
   ngOnInit(): void {

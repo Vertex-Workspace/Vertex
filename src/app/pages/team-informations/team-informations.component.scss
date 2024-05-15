@@ -132,7 +132,7 @@
 @media screen and (max-width: 524px) {
 
     .divHead {
-        @apply flex flex-col w-[80%] h-[50%] gap-2 justify-center items-center;
+        @apply flex flex-col w-full h-[50%] gap-2 justify-center items-center;
     }
 
     .divTextHead {
@@ -158,11 +158,10 @@
     }
 
     .div-description-top-right{
-        @apply flex flex-col;
+        display: none;
     
         .p-description{
             @apply hidden; 
-            
         }
     }
 
@@ -344,7 +343,7 @@
 
 
 .high-div-members{
-    @apply flex flex-col gap-3 w-[85%];
+    @apply flex flex-col gap-3 w-[93%];
 }
 
 .div-members{
@@ -523,4 +522,10 @@ td {
     .left-side {
         @apply flex flex-col w-[50%] h-full gap-8;
     }
+}
+
+::ng-deep .p-progressbar .p-progressbar-value {
+    border: 0 none;
+    margin: 0;
+    background: $primaryColor !important;
 }

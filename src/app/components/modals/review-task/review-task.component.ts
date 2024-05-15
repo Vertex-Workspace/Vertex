@@ -46,6 +46,7 @@ export class ReviewTaskComponent {
 
   performanceTable: any[] = [];
   selectedReviewTask(taskReview: TaskWaitingToReview) {
+    console.log(taskReview);  
     this.taskBeingReviewed = taskReview;
   }
 

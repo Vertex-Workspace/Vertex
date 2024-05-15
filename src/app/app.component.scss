@@ -23,6 +23,10 @@
         position: fixed;
         z-index: 10;
     }
+
+    .page-content {
+        @apply h-full w-[96%];
+    }
     
 }
 
@@ -145,6 +149,10 @@
 
     .centerDiv{
         @apply w-full;
+    }
+
+    .page-content {
+        @apply h-full w-[100%];
     }
 
 }

@@ -12,7 +12,7 @@
             @apply flex flex-col h-full w-full;
 
             .s2 {
-                @apply flex flex-col w-full h-[470px] overflow-y-auto overflow-x-hidden;
+                @apply flex flex-col w-full h-[470px] overflow-y-auto overflow-x-hidden justify-start items-start;
             }
         }
 
@@ -20,12 +20,12 @@
             @apply pl-4 border-l-4;
 
             .ns2 {
-                @apply flex flex-col w-full h-[15%];
+                @apply flex flex-col w-full h-[25%];
             }
         }
 
         .fs1 {
-            @apply flex w-full max-h-[161px] overflow-x-hidden overflow-y-auto mt-5;
+            @apply flex w-full max-h-[161px] overflow-x-hidden overflow-y-auto;
         }
 
         .ts1 {

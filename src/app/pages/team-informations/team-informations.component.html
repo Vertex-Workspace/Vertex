@@ -86,10 +86,10 @@
                 </ng-container>
             </div>
 
+            <div class="w-[40%] flex justify-center" *ngIf="team.groups.length === 0 && clicked == 'groups'">
+                <h6 class="pt-10 flex justify-center items-center">Nenhum grupo disponível...</h6>
+            </div>
             <div *ngIf="clicked == 'groups' && isCreator()" class="grid-group">
-                <div class="w-[40%] absolute" *ngIf="team.groups.length === 0">
-                    <h6 class="pt-10 flex justify-center items-center">Nenhum grupo disponível...</h6>
-                </div>
                 <ng-container *ngFor="let group of (team.groups | namePipe: query)">
                     <app-card-group [team]="team" [group]="group" (emitterItem)="deleteGroup($event)">
                     </app-card-group>

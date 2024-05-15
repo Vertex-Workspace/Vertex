@@ -45,7 +45,6 @@ export class UserInformationsComponent {
           
         }
         this.user = user;
-        
 
         this.start();
       });

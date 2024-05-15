@@ -264,9 +264,20 @@
                 "cancel_button": "Cancel",
                 "confirm_button": "Confirm"
             },
-            "groups": {
-                "title": "Groups"
+            "create-groups": {
+                "title": "Create a new group",
+                "name": "Group Name",
+                "participants": "Select Participants",
+                "name_placeholder": "Add a name for the group",
+                "multi_select":"Group Members",
+                "members":"Members",
+                "confirm_button":"Create Group",
+                "cancel_button": "Cancel"
             },
+            "groups": {
+                "multi_select": "Group Members",
+                "members": "members"
+            },            
             "minichat": {
                 "header": {
                     "conversations": "Conversations"
