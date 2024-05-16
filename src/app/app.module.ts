@@ -51,6 +51,7 @@ import { TranslateModule, TranslateLoader, TranslateService, TranslateStore, Tra
 import { LandingPageModule } from './pages/landing-page/landing-page.module';
 
 
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

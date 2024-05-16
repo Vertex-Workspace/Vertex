@@ -83,7 +83,7 @@
 
 @media screen and (min-width: 524px) and (max-width: 1024px) {
     section {
-        @apply flex w-screen h-full justify-center items-center;
+        @apply flex w-full h-full justify-center items-center;
     }
     .divHead {
         @apply flex w-[80%] h-[25%] gap-10;
@@ -100,11 +100,11 @@
     }
 
     .container-custom {
-        @apply flex flex-col w-full h-full pt-5;
+        @apply flex flex-col w-[90%] h-full pt-5;
     }
 
     .right-side {
-        @apply flex flex-col w-[90%] h-full;
+        @apply flex flex-col w-full h-full;
     }
 
     .div-description-top-right{

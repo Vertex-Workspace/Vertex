@@ -113,6 +113,8 @@
 </section>
 <app-task *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)" [task]="taskOpenObject"></app-task>
 
+<app-set-new-password *ngIf="openChangePassword" (close)="closeModal()"></app-set-new-password>
+
 <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
 (close)="switchCreateView()" 
 *ngIf="isCreating" [typeString]="'team'" (sendTeam)="updateTeams($event)"></app-create-team-project>

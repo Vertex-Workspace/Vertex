@@ -37,6 +37,7 @@ export class User {
     responsibleInProjectOrTask ?: boolean;
     anyUpdateOnTask ?: boolean;
     sendToEmail ?: boolean;
+    registerDay ?: string
 
     time?: any;
     //graphics
@@ -107,4 +108,9 @@ export class HasPermission {
     projectId ?: number
     userId ?: number
     permission ?: Permission 
+}
+
+export class ChangePassword {
+    id ?: number
+    password ?: string
 }

@@ -579,9 +579,12 @@
             "alterated": " alterado com sucesso!",
             "uploadImage": "Imagem adicionada!",
             "editedGroup": "Nome do grupo editado com sucesso!",
-            "groupCreated": "Grupo criado com sucesso!",
-            "descriptionUpdated": "Descrição atualizada com sucesso!",
-            "nameUpdated": "Nome atualizado com sucesso!"
+            "groupCreated":"Grupo criado com sucesso!",
+            "descriptionUpdated":"Descrição atualizada com sucesso!",
+            "nameUpdated":"Nome atualizado com sucesso!",
+            "task-responsibles":"Responsáveis da tarefa atualizados com sucesso",
+            "dependency": "Esta tarefa necessita da realização de "
+            
         },
         "error": {
             "participantsNotAddedToGroup": "Erro ao adicionar usuário ao grupo!",
