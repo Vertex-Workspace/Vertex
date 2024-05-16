@@ -22,6 +22,7 @@ import { UserTeamGuard } from './services/guards/user-team.guard';
 import { InvitationPageComponent } from './pages/invitation-page/invitation-page.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { DeniedAccessComponent } from './pages/denied-access/denied-access.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 const routes: Routes = [
   {
@@ -30,9 +31,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: "landing-page",
+    component: LandingPageComponent,
+  },
+  {
     path: 'login',
     component: LoginComponent,
-    data: { animation: 'loginPage' }
+    data: { animation: 'loginPage' },
   },
   {
     path: 'cadastro',
@@ -125,11 +130,11 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "login",
+    redirectTo: "landing-page",
   },
   {
     path: "**",
-    redirectTo: "login",
+    redirectTo: "landing-page",
   },
 ]
 

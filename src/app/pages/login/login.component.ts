@@ -33,18 +33,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private alert: AlertService,
-    private userState: UserStateService,
-    private forgotPasswordService: ForgotPasswordService,
     private router: Router
   ) {
-    this.userState
-      .getAuthenticatedUser()
-      .then((status: boolean) => {
-        if (status) {
-          this.router.navigate(['/home']);
-        }
-      })
+    if (document.cookie.includes("JWT")) {
+      this.router.navigate(['/home']);          
+    }
   }
 
   ngOnInit(): void {
