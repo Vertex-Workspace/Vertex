@@ -67,4 +67,11 @@ export class ProjectService {
       .get<ProjectCollaborators>(`${URL}project/getAll/${id}`, {withCredentials: true});
   }
 
+  public createFromCalendar(project: Project, teamId: number, loggedId: number): Observable<Project> {
+    console.log(project);
+    
+    return this.http
+      .post<Project>(`${URL}google/calendar/${loggedId}/${teamId}`, project, {withCredentials: true});
+  }
+
 }

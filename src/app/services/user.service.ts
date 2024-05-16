@@ -12,11 +12,16 @@ import { UserStateService } from './user-state.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Notification } from '../models/class/notification';
+import { Project } from '../models/class/project';
+import { Task } from '../models/class/task';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  public testeDoDrive(id: number, projectId: number): Observable<Task> {
+    return this.http.post<Task>(`${URL}google/calendar/${id}`, projectId, { withCredentials: true });
+  }
 
   private defaultImg: string = defaultImage;
 
@@ -126,8 +131,8 @@ export class UserService {
     return this.http.get<any>(`http://localhost:7777/authorize/google/${userId}`, { withCredentials: true })
   }
 
-  public b(userId: number, projectId: number): Observable<any> {
-    return this.http.get<any>(`http://localhost:7777/authorize/google/${userId}/${projectId}`, { withCredentials: true })
+  public b(userId: number, projectId: number): Observable<Project> {
+    return this.http.get<Project>(`${URL}google/calendar/${userId}/${projectId}`, { withCredentials: true })
   }
 
   public patchPassword(emailTo: String, password: String): Observable<User> {

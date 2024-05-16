@@ -20,12 +20,17 @@
                         >
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
-                    <button class="create" (click)="switchCreateView()">
-                        <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
-                        <p>
-                            {{'pages.projects.newProjectBtn' | translate}}
-                        </p>
-                    </button>
+                    <div class="flex gap-2">
+                        <div *ngIf="isCreator && !calendarAlreadyImported()" class="import" (click)="createCalendarProject()">
+                            <img src="../../../assets/calendar-logo.png" class="w-[60%]">
+                        </div>
+                        <button class="create" (click)="switchCreateView()">
+                            <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                            <p>
+                                {{'pages.projects.newProjectBtn' | translate}}
+                            </p>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="default-size" joyrideStep="goToTasks" [prevTemplate]="prevButton"

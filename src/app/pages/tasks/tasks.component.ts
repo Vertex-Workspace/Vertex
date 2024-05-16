@@ -2,7 +2,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project, ProjectReview } from 'src/app/models/class/project';
+import { CreationOrigin, Project, ProjectReview } from 'src/app/models/class/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate, TaskWaitingToReview } from 'src/app/models/class/task';
@@ -29,9 +29,12 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
+  teste() {
+    this.userService.testeDoDrive(this.logged.id!, this.project.id!).subscribe();
+  }
 
-  drive() {
-    this.userService.b(this.logged.id!, this.project.id!).subscribe();
+  update() {
+    this.userService.b(this.logged.id!, this.project.id!).subscribe(p => console.log(p));
   }
 
 
@@ -112,7 +115,6 @@ export class TasksComponent implements OnInit {
   teamId?: number
   isCreator:boolean = false;
   ngOnInit() {
-    console.log("On init");
     
     this.muralPageListener();
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -121,6 +123,7 @@ export class TasksComponent implements OnInit {
     
     //Método que atribui o valor de project vindo do observable
     this.projectService.getOneById(id).subscribe((p: Project) => {
+      console.log(p)
       this.project = p;
       this.loadingService.hide();
 
