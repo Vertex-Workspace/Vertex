@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Personalization } from '../models/class/personalization';
-import { Permission } from '../models/class/user';
+import { ChangePassword, Permission } from '../models/class/user';
 import { Team } from '../models/class/team';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/class/user';
@@ -184,5 +184,10 @@ export class UserService {
   public setFirstAccessNull(user: User){
     return this.http
     .patch<User>(`${URL}user/first-access/${user.id}`, user);
+  }
+
+  public changePassword(changePassword : ChangePassword){
+    return this.http
+    .patch(`${URL}user/password`, changePassword, {withCredentials: true});
   }
 }

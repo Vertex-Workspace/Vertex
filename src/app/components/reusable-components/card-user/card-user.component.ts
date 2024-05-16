@@ -78,8 +78,6 @@ export class CardUserComponent implements OnInit {
 
       });
     }
-
-
     if (this.user.id! === this.team.creator!.id) {
       this.isNonCreatorCard = false
     }
@@ -100,8 +98,6 @@ export class CardUserComponent implements OnInit {
       this.userEmitter.emit(user);
     }
   }
-
-
 
   removeUser(user: User): void {
     this.deleteUserGroup.emit(user);

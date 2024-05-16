@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { JoyrideModule, JoyrideStepComponent } from 'ngx-joyride';
 import { TranslateModule } from '@ngx-translate/core';
+import { SetNewPasswordModule } from 'src/app/components/modals/set-new-password/set-new-password.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CascadeSelectModule,
     CalendarModule,
     InputTextModule,
-    TranslateModule
+    TranslateModule,
+    SetNewPasswordModule
   ],
 })
 export class HomeModule { }

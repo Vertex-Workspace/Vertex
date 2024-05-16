@@ -18,6 +18,7 @@ import { UserService } from 'src/app/services/user.service';
 import { LogComponent } from '../log/log.component';
 import { ReturnStatement } from '@angular/compiler';
 import { TreeNode } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-properties',
@@ -38,7 +39,8 @@ export class PropertiesComponent {
     private projectService: ProjectService,
     private alertService: AlertService,
     private teamService: TeamService,
-    private userService: UserService) {
+    private userService: UserService, 
+    private translate: TranslateService) {
     }
 
   icons: any = [
@@ -133,8 +135,8 @@ export class PropertiesComponent {
 
     if ((taskResponsibles.user != null) && (this.task.creator?.user.id != taskResponsibles.user.id)) {
       this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
-        this.alertService.successAlert("Adicionado como responsável da tarefa")
-      });
+        this.alertService.successAlert(this.translate.instant("alerts.success.task-responsibles")
+      )});
     } else {
       this.alertService.errorAlert("Você não pode remover o criador da tarefa")
     }
@@ -142,7 +144,7 @@ export class PropertiesComponent {
 
   setTaskDependencies(task: any) {
     this.taskService.taskDependency(this.task.id, task.value.id, this.task).subscribe((task1: Task) => {
-      this.alertService.successAlert("Essa tarefa agora necessita da conclusão da tarefa " + task.value.name)
+      this.alertService.successAlert(this.translate.instant("alerts.success.dependency") + task.value.name)
       this.selectedDependency = task.value.name
     },
       (error) => {
