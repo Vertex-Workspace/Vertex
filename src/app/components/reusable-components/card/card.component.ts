@@ -41,6 +41,7 @@ export class CardComponent implements OnInit {
   @Input() borderColor!: string;
   @Input() project!: Project;
   @Input() permissions!: Permission[];
+  @Input() hasTrash: boolean=true;
 
   @Output() deleteTask = new EventEmitter();
 
@@ -61,13 +62,15 @@ export class CardComponent implements OnInit {
         this.borderColor = color.strong;
       }
     });
-    for (const permission of this.permissions) {
-      if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
-        this.canDelete = true;
-        this.settings[0].disabled = false;
-      }
-      if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
-        this.canEdit = true;
+    if (this.permissions) {
+      for (const permission of this.permissions) {
+        if ((permission.name === PermissionsType.DELETE) && permission.enabled) {
+          this.canDelete = true;
+          this.settings[0].disabled = false;
+        }
+        if ((permission.name === PermissionsType.EDIT) && permission.enabled) {
+          this.canEdit = true;
+        }
       }
     }
   }
@@ -97,11 +100,14 @@ export class CardComponent implements OnInit {
   openInputName: boolean = false;
   saveLastName: string = "";
   openModalEdit() {
-    this.openInputName = !this.openInputName;
-    this.saveLastName = this.task.name;
+      this.openInputName = !this.openInputName;
+      this.saveLastName = this.task.name;
   }
 
   editName(): void{
+    if(!this.hasTrash){
+      return;
+    }
     if(this.task.name.length < 4){
       this.alertService.errorAlert(this.translate.instant('alerts.error.minTaskLengthName'));
       this.task.name = this.saveLastName;

@@ -4,7 +4,7 @@
             <ng-container *ngIf="isCreator">
                 <td>
                     <div>
-                        <fa-icon [icon]="faListCheck" class="size"></fa-icon>
+                        <fa-icon [icon]="faListCheck" class="size cursor-default"></fa-icon>
                         <p>{{ 'components.modals.task.properties.dependency' | translate }}</p>
                     </div>
                     <div>
@@ -22,7 +22,7 @@
                 </td>
                 <td>
                     <div>
-                        <fa-icon [icon]="faUsers" class="size"></fa-icon>
+                        <fa-icon [icon]="faUsers" class="size cursor-default"></fa-icon>
                         <p>{{ 'components.modals.task.properties.responsible' | translate }}</p>
                     </div>
                     <div>
@@ -41,7 +41,7 @@
                 <td *ngIf="value.property.propertyStatus != 'INVISIBLE'">
 
                     <div>
-                        <fa-icon [icon]="getIcon(value)"></fa-icon>
+                        <fa-icon [icon]="getIcon(value)" class="cursor-default"></fa-icon>
                         <p>{{value.property.name}}</p>
                     </div>
                     <div>

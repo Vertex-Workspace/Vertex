@@ -82,17 +82,7 @@ export class AppComponent {
     private notificationWebSocket: NotificationWebSocketService,
     private translate: TranslateService,
     private personalizationService: PersonalizationService
-  ) {
-    this.userState.getAuthenticationStatus()
-    .subscribe((userLogged) => {   
-      this.userLogged = userLogged;
-      if(userLogged){
-        this.logged = this.userService.getLogged()!;
-        this.settingsRequest();
-      }
-    }
-    );
-  }
+  ) {}
 
 
   ngOnInit(): void {
@@ -100,8 +90,10 @@ export class AppComponent {
   }
 
   private userBasicData() {
-    this.userState.getAuthenticatedUser().then(
+    this.userState.getAuthenticationStatus().subscribe(
       (user : boolean) => {
+        console.log(user);
+        
       if(user){
         this.userLogged = true;
         this.logged = this.userService.getLogged()!;
