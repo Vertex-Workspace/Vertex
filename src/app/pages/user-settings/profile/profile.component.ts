@@ -121,6 +121,8 @@ export class ProfileComponent {
         this.alert.successAlert(this.translate.instant('alerts.success.update_success'))
       },
         e => {
+          console.log(e);
+          
           this.alert.errorAlert(this.translate.instant('alerts.success.update_error'))
         }
       )

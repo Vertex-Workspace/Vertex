@@ -15,6 +15,7 @@ import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
 import { error } from 'jquery';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-list',
@@ -75,13 +76,15 @@ export class ListComponent implements OnInit {
     private taskService: TaskService,
     private route: ActivatedRoute,
     private router: Router,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private loadingService: LoadingService,
 
   ) {
     this.logged = userService.getLogged();
   }
 
   ngOnChanges(){
+    this.loadingService.hide();
     this.updateGlobalValues();
   }
   ngOnInit(): void {      

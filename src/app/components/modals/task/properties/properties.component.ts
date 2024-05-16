@@ -19,6 +19,7 @@ import { LogComponent } from '../log/log.component';
 import { ReturnStatement } from '@angular/compiler';
 import { TreeNode } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-properties',
@@ -39,6 +40,7 @@ export class PropertiesComponent {
     private projectService: ProjectService,
     private alertService: AlertService,
     private teamService: TeamService,
+    private loadingService: LoadingService,
     private userService: UserService, 
     private translate: TranslateService) {
     }
@@ -65,6 +67,7 @@ export class PropertiesComponent {
 
 
   ngOnInit(): void {
+    this.loadingService.hide();
     if(this.task){
       if(this.task.creator?.user.id == this.userService.getLogged().id) {
         this.isCreator = true;

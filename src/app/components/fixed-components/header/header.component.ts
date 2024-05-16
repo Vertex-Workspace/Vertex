@@ -67,6 +67,8 @@ export class HeaderComponent {
           if (params) {
             this.id = params['id'];           
             this.incrementUrlById(activeRoute, this.id);
+          } else {
+            
           }
         });
       }
@@ -107,7 +109,7 @@ export class HeaderComponent {
   }
 
   updateLocation(activeRoute: string): void {
-    this.isHome = activeRoute.includes('home');
+    this.isHome = activeRoute.includes("home");
     this.locations
       .find((loc: LocationItem) => {
         if (activeRoute.includes(loc.url)) {
@@ -117,10 +119,14 @@ export class HeaderComponent {
   }
 
   back(): void {
+    console.log("Back");
+    this.isHome = this.router.url.includes("home");
+    
     this.backLocationHandler(this.router.url);
   }
 
   backLocationHandler(currentLocation: string): void {
+    
     const previousLocation: Record<string, () => void> = {
       '/projeto/' : () => this.backToTeam(true),
       '/projetos' : () => this.backToHome(),
@@ -140,7 +146,7 @@ export class HeaderComponent {
   }
 
   backToHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   backToTeam(hasProjectId: boolean): void {

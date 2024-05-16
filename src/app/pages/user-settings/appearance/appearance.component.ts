@@ -38,20 +38,19 @@ export class AppearanceComponent implements OnInit {
 
   newPers!: Personalization;
 
-  colors: any = [
-    { colorDark: '', colorLight: '#092C4C', status: 'unselected' }, // Azul
+  colors = [
+    { colorDark: '#176DBF', colorLight: '#092C4C', status: 'unselected' }, // Azul
     { colorDark: '#28a745', colorLight: '#104e29', status: 'unselected' }, // Verde
     { colorDark: '#dc3545', colorLight: '#6e181e', status: 'unselected' }, // Vermelho
     { colorDark: '#17a2b8', colorLight: '#0b4450', status: 'unselected' }, // Azul claro
     { colorDark: '#6f42c1', colorLight: '#341f38', status: 'unselected' }, // Roxo escuro
     { colorDark: '#20c997', colorLight: '#0d5b47', status: 'unselected' }, // Verde claro
-    { colorDark: '#e83e8c', colorLight: '#8e1746', status: 'unselected' }, // Rosa
+    { colorDark: '#C82063', colorLight: '#8e1746', status: 'unselected' }, // Rosa
     { colorDark: '#ff8fff', colorLight: '#ab2d77', status: 'unselected' }, // Rosa claro
     { colorDark: '#007b5e', colorLight: '#003f33', status: 'unselected' }, // Verde azulado
     { colorDark: '#FF6347', colorLight: '#802e1f', status: 'unselected' }, // Tomato
-    { colorDark: '', colorLight: '#23426a', status: 'unselected' }, // Steel Blue
-    { colorDark: '', colorLight: '#0e6553', status: 'unselected' }, // Light Sea Green
-    { colorDark: '', colorLight: '#460046', status: 'unselected' },
+    { colorDark: '#4079C3', colorLight: '#23426a', status: 'unselected' }, // Steel Blue
+    { colorDark: '#12846D', colorLight: '#0e6553', status: 'unselected' }, // Light Sea Green
   ];
 
   constructor(
@@ -93,6 +92,11 @@ export class AppearanceComponent implements OnInit {
 
   changeTheme(mode : string) {
     this.newPers.theme = mode == "dark" ? 1 : 0;
+    if(mode == 'dark'){
+      this.newPers.primaryColor = this.colors.find((element : any) => element.status == 'selected')!.colorDark;
+    } else {
+      this.newPers.primaryColor = this.colors.find((element : any) => element.status == 'selected')!.colorLight;
+    }
     this.savePersonalization();
   }
 

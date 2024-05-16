@@ -1,11 +1,29 @@
-<div class="modal-overlay" (click)="closeModal()">
-    <div class="base" *ngIf="render" (click)="$event.stopPropagation()">
+<div class="modal-overlay" (click)="closeModal()" *ngIf="render">
+    <div class="base"  (click)="$event.stopPropagation()">
         <div class="location">
             <div class="routes regular-text">
                 <p>{{ taskInfoDTO.teamName }}</p>
                 <p>{{ taskInfoDTO.projectName }}</p>
             </div>
             <div class="div-timer-closeModal">
+                <ng-container *ngIf="isCreator()">
+                    <a [href]="data" [download]="task.name" [type]="'https://cdn-icons-png.flaticon.com/512/337/337946.png'">
+                        <i class="pi pi-download"></i>
+                     </a>
+                </ng-container>
+                <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable && project.projectReviewENUM != 'EMPTY'">
+                    <button (click)="sendTask()" id="red-btn" 
+                    [ngClass]="hasDependency ? 'opacity-20' : 'opacity-100'"
+                    [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
+                        [disabled]="timeInTask.working || hasDependency">
+                        {{ 'components.modals.task.deliverTask' | translate }}
+                    </button>
+                </div>
+                <div class="flex flex-row gap-2" *ngIf="isCreator() && isRevisable()">
+                    <p-checkbox [(ngModel)]="checkedReview" [binary]="true" inputId="binary"
+                        (click)="updateTaskRevisable()"></p-checkbox>
+                    <p class="regular-text ">{{ 'components.modals.task.forceReview' | translate }}</p>
+                </div>
                 <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">
                     <i class="pi pi-plus rotate-45 text-2xl pt-2"></i>
                 </button>
@@ -23,29 +41,9 @@
                         [canEdit]="canEdit"/>
                 </div>
                 <div class="down relative">
-                    <div class="flex flex-row items-center justify-between">
-                        <div class="back-icon">
-                            <i class="pi pi-comment"></i>
-                        </div>
-                        
-                        <ng-container *ngIf="isCreator()">
-                            <a [href]="data" [download]="task.name" [type]="'https://cdn-icons-png.flaticon.com/512/337/337946.png'">
-                                <i class="pi pi-download"></i>
-                             </a>
-                        </ng-container>
-                        <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable && project.projectReviewENUM != 'EMPTY'">
-                            <button (click)="sendTask()" id="red-btn" 
-                            [ngClass]="hasDependency ? 'opacity-20' : 'opacity-100'"
-                            [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
-                                [disabled]="timeInTask.working || hasDependency">
-                                {{ 'components.modals.task.deliverTask' | translate }}
-                            </button>
-                        </div>
-                        <div class="flex flex-row gap-2" *ngIf="isCreator() && isRevisable()">
-                            <p-checkbox [(ngModel)]="checkedReview" [binary]="true" inputId="binary"
-                                (click)="updateTaskRevisable()"></p-checkbox>
-                            <p class="regular-text ">{{ 'components.modals.task.forceReview' | translate }}</p>
-                        </div>
+                    <div class="buttons">
+                        <button *ngIf="!task.chatCreated" (click)="createChat()">{{ 'components.modals.task.createChat' | translate }}</button>
+                        <button *ngIf="task.chatCreated" (click)="openMiniChat()">{{ 'components.modals.task.openChat' | translate }}</button>
                     </div>
 
                     <div *ngIf="miniChatOpen" class="absolute">

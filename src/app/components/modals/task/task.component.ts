@@ -71,11 +71,13 @@ export class TaskComponent {
     private taskHourService: taskHourService,
     private teamService: TeamService,
     private userService: UserService,
+    private loadingService: LoadingService,
     private router: Router,
     private activatedRoute : ActivatedRoute,
     private reviewService: ReviewService,
     private translate : TranslateService
   ) {
+
     this.user = userService.getLogged();
     if(!this.task){
       this.requests();

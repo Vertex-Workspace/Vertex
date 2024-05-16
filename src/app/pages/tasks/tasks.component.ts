@@ -120,8 +120,6 @@ export class TasksComponent implements OnInit {
     this.projectService.getOneById(id).subscribe((p: Project) => {
       this.project = p;
       
-  
-      this.loadingService.hide();
 
       this.teamService.getPermission(p.idTeam, this.logged.id!).subscribe((permissions: Permission[]) => {
         this.permissions = permissions;
@@ -405,7 +403,6 @@ export class TasksComponent implements OnInit {
     });
 
     this.project = {...this.project};
-    console.log("Change");
     
   }
 

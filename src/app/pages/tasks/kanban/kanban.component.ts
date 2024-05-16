@@ -128,7 +128,6 @@ export class KanbanComponent {
     
       this.projectService.updateIndex(this.project.id!, this.taskList).subscribe(
         (task: Task[]) => {
-          this.taskList = task;
         }, error => {
           console.log(error);
           moveItemInArray(this.taskList, event.currentIndex, event.previousIndex);
@@ -238,7 +237,7 @@ export class KanbanComponent {
     
     this.taskService.create(taskCreate).subscribe(
       (task: Task) => {
-
+        
         const valueUpdate: ValueUpdate = {
           id: task.id,
           value: {
