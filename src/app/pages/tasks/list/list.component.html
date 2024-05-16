@@ -1,7 +1,7 @@
 <section *ngIf="!isNull">
     <!-- [ngStyle]="{'overflow-x' : project ? 'auto' : 'hidden'}" -->
-    <div class="table-vertex overflow-y-auto overflow-x-auto" >
-        <div class="thead">
+    <div class="table-vertex overflow-y-auto overflow-x-auto"  [ngClass]="isTaskPage() ? '' : 'max-h-[500px]'">
+        <div [ngStyle]="getStyles()">
             <label class="min-w-[300px]">
                 <h6>{{ 'pages.tasks.list.table.name' | translate }}</h6>
             </label>
@@ -18,11 +18,11 @@
         <div class="tbody" cdkDropList (cdkDropListDropped)="dropCard($event)">
             <ng-container
                 *ngFor="let task of (taskList | namePipe : queryFilter | statusPipe : filter : project === undefined | statusBasicPipe : filter : project === undefined | datePipe : filter | simplePropertyPipe : simplePropertyFilter | nameSortPipe : orderParams | dateSortPipe : orderParams | statusSortPipe : orderParams)">
-                <div class="trow regular-text relative" [cdkDragData]="task" cdkDrag cdkDragLockAxis="y"
-                    cdkDragBoundary=".table">
+                <div class="trow regular-text relative" [cdkDragData]="task" cdkDrag cdkDragLockAxis="y" [cdkDragDisabled]="!isTaskPage()"
+                    cdkDragBoundary=".tbody">
                     <app-row-card *ngIf="!project" (modalTask)="openTaskModal($event)" [task]="task"
                         [properties]="properties" [permissions]="permissions"
-                        (deleteTask)="updateTaskList($event)"></app-row-card>
+                        (deleteTask)="updateTaskList($event)" ></app-row-card>
                     <app-row-card *ngIf="project" (modalTask)="openTaskModal($event)" [task]="task"
                         [properties]="project.properties" [project]="project" [permissions]="permissions"
                         (deleteTask)="updateTaskList($event)"></app-row-card>

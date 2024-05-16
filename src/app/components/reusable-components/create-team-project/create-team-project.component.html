@@ -49,7 +49,7 @@
           <p class="large-text self-start"> {{ 'components.reusable-components.create-team-project.responsibles' | translate }}</p>
           <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
             placeholder="{{ 'components.reusable-components.create-team-project.responsiblesOfProject' | translate }}" appendTo="body" class="flex items-start justify-start pt-2"
-            [(ngModel)]="selectedUsers" [style]="{ width: '255px'}"></p-multiSelect>
+            [(ngModel)]="selectedUsers" [style]="{ width: '255px', backgroundColor: 'var(--card)'}"></p-multiSelect>
         </div>
         <div class="flex w-1/2 flex-col">
           <p class="large-text self-start">{{ 'components.reusable-components.create-team-project.task-review' | translate }}</p>

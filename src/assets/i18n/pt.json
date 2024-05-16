@@ -264,14 +264,19 @@
                 "cancel_button": "Cancelar",
                 "confirm_button": "Confirmar"
             },
-            "change-password" : {
-                "title": "Troca periódica de senha",
-                "subtitle": "Para sua segurança, insira uma nova senha",
-                "placeholder": "Digite sua nova senha",
-                "button": "Enviar"
+            "create-groups": {
+                "title": "Crie um novo grupo",
+                "name": "Nome do grupo",
+                "participants": "Selecionar Participantes",
+                "name_placeholder": "Adicione um nome para o grupo",
+                "multi_select":"Membros do grupo",
+                "members":"Membros",
+                "confirm_button":"Criar Grupo",
+                "cancel_button": "Cancelar"
             },
             "groups": {
-                "title": "Grupos"
+                "multi_select": "Membros do grupo",
+                "members": "membros"
             },
             "minichat": {
                 "header": {
@@ -522,8 +527,7 @@
             "editedGroup": "Nome do grupo editado com sucesso!",
             "groupCreated":"Grupo criado com sucesso!",
             "descriptionUpdated":"Descrição atualizada com sucesso!",
-            "nameUpdated":"Nome atualizado com sucesso!",
-            "new-password" : "Sua senha foi modificada com sucesso!"
+            "nameUpdated":"Nome atualizado com sucesso!"
         },
         "error": {
             "participantsNotAddedToGroup": "Erro ao adicionar usuário ao grupo!",
@@ -557,8 +561,7 @@
             "notPermissionEditTask": "Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!",
             "minTaskLengthName": "O nome da tarefa deve ter no mínimo 4 caracteres!",
             "errorEditingTask": "Erro ao editar a tarefa!",
-            "update_error":"O e-mail não atende aos requisitos necessários",
-            "new-password" : "A senha não atende aos requisitos necessários"
+            "update_error":"O e-mail não atende aos requisitos necessários"
         },
         "notification": {
             "nameLength": "O nome do status deve ter entre 3 e 20 caracteres",

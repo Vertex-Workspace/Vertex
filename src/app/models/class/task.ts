@@ -17,6 +17,7 @@ export class Task {
     creator?: {
         user: {
             id: number;
+            image?: string;
         }
     }
     comments!: Comment[];
@@ -32,7 +33,7 @@ export class Task {
     image ?: string; //only validation
     log !: any[];
 
-    
+    indexTask: number = 0;
 
     //Chat
     chat?:Chat;

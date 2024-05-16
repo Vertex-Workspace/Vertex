@@ -7,7 +7,7 @@
 
 @media screen and (min-width: 800px) {
     .modal {
-        @apply absolute rounded-sm flex flex-col w-[650px] h-[700px]
+        @apply absolute rounded-sm flex flex-col w-[800px] h-[700px]
         items-end justify-start text-center p-5 border-t-8;
         background-color: $secondColor;
         border-color: $primaryColor;
@@ -23,7 +23,7 @@
 }
 
 .exitModal {
-    @apply flex font-bold h-[12%] w-full justify-between flex-row px-4;
+    @apply flex font-bold h-[5%] w-full justify-between flex-row px-4;
     color: $primaryColor;
 }
 

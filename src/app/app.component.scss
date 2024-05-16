@@ -23,6 +23,10 @@
         position: fixed;
         z-index: 10;
     }
+
+    .page-content {
+        @apply h-full w-[96%];
+    }
     
 }
 
@@ -147,6 +151,10 @@
         @apply w-full;
     }
 
+    .page-content {
+        @apply h-full w-[100%];
+    }
+
 }
 
 .textSpeech {
@@ -167,4 +175,120 @@
 .tutorial-div{
     background-color: $card;
     color: $text;
+}
+
+::ng-deep .p-dropdown-panel {
+    background: $card !important;
+    color: white !important;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+    border: 0 none;
+    color: $text;
+    background: transparent;
+    transition: box-shadow 0.2s;
+    border-radius: 0;
+}
+
+::ng-deep .p-multiselect-panel {
+    background: $card !important;
+    color: #495057;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+    border: 0 none;
+    color: $text;
+    background: transparent;
+    transition: box-shadow 0.2s;
+    border-radius: 0;
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-header {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid #dee2e6;
+    color: $text;
+    background: $card;
+    margin: 0;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+::ng-deep .p-dropdown {
+    background: $card;
+    border: 1px solid #ced4da;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+}
+
+::ng-deep .p-cascadeselect-panel {
+    background: $card;
+    color: #495057;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item {
+    margin: 0;
+    border: 0 none;
+    color: $text;
+    background: transparent;
+    transition: box-shadow 0.2s;
+    border-radius: 0;
+}
+
+::ng-deep .p-datepicker:not(.p-datepicker-inline) {
+    background: $card;
+    border: 0 none;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-datepicker {
+    padding: 0.5rem;
+    background: #ffffff;
+    color: $text;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+}
+
+::ng-deep .p-datepicker table td.p-datepicker-today > span.p-highlight {
+    color: white;
+    background: $primaryColor;
+}
+
+::ng-deep .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+    background: $card;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev, .p-datepicker .p-datepicker-header .p-datepicker-next {
+    width: 2rem;
+    height: 2rem;
+    color: $text;
+    border: 0 none;
+    background: transparent;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  color: $text !important;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  font-weight: 600;
+  padding: 0.5rem;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+    margin-right: 0.5rem;
+    color: $text !important;
 }

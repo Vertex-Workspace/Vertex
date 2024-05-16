@@ -14,6 +14,7 @@ import { Permission, User } from 'src/app/models/class/user';
 import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
 import { PipeParams } from 'src/app/models/interface/params';
 import { FilterParams } from 'src/app/models/interface/filter-params';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-list',
@@ -73,14 +74,22 @@ export class ListComponent implements OnInit {
     private userService: UserService, 
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private projectService: ProjectService
 
   ) {
     this.logged = userService.getLogged();
   }
 
+  ngOnChanges(){
+    this.updateGlobalValues();
+  }
   ngOnInit(): void {      
     this.updateGlobalValues();
+  }
+
+  isTaskPage(): boolean {
+    return this.router.url.includes("tarefas");
   }
 
   translatePropertyListKey(value: string): string {
@@ -100,10 +109,14 @@ export class ListComponent implements OnInit {
   }
 
   dropCard(event: CdkDragDrop<Task[]>): void {
-    moveItemInArray(
-      this.taskList, 
-      event.previousIndex, 
-      event.currentIndex
+    moveItemInArray(this.taskList, event.previousIndex, event.currentIndex);
+    this.projectService.updateIndex(this.project.id, this.taskList).subscribe(
+      (task: Task[]) => {
+        this.taskList = task;
+      }, error => {
+        console.log(error);
+        moveItemInArray(this.taskList, event.currentIndex, event.previousIndex);
+      }
     );
   }
 
@@ -118,8 +131,8 @@ export class ListComponent implements OnInit {
       .subscribe((tl: Task[]) => {
         if (tl.length > 0) {
           this.isNull = false;
-          this.taskList = tl;  
           
+          this.taskList = tl;  
         }
         else this.isNull = true;
       }); //busca a equipe com base no id da url
@@ -139,6 +152,19 @@ export class ListComponent implements OnInit {
 
   updateTaskList(task: Task){
     this.taskList.splice(this.taskList.indexOf(task), 1);
+  }
+
+  @Input() shouldApplyZIndex : boolean = false
+  getStyles() {
+    return {
+      'width': 'full',
+      'min-height': '50px',
+      'display': 'flex',
+      'position': 'sticky',
+      'top': '0',
+      'background-color': '$secondColor',
+      'z-index': this.shouldApplyZIndex ? '98' : 'auto'
+    };
   }
 
 

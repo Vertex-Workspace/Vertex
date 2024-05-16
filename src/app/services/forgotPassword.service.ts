@@ -14,7 +14,7 @@ export class ForgotPasswordService {
   } 
 
   public sendMessageToEmail(emailTo:String): Observable<any> {
-    return this.http.get(`${URL}forgotPassword/"${emailTo}`, {withCredentials: true});
+    return this.http.get(`${URL}forgotPassword/${emailTo}`, {withCredentials: true});
   }
 
 }

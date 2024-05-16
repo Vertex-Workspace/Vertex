@@ -99,7 +99,7 @@
 
                     <!-- NG IF uses to wait the permissions request before render the component -->
                     <div class="default-size">
-                        <app-list style="padding-top: 3%;" [team]="team"
+                        <app-list style="padding-top: 3%;" [team]="team" [shouldApplyZIndex]="false"
                             (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissionsOnTeam"
                             [queryFilter]="queryFilter" [filter]="selectedFilter"
                             [orderParams]="orderParams"></app-list>

@@ -2,40 +2,21 @@
 
 section {
     color: $primaryColor;
-    @apply flex h-full justify-center overflow-hidden;
+    @apply flex h-full justify-start overflow-hidden;
     
     .table-vertex {
-        @apply  flex max-h-[500px] flex-col rounded-sm mb-12;
+        @apply  flex flex-col rounded-sm mb-12;
         
         .tbody {
             @apply flex w-full h-full flex-col;
-
-            .newTaskButton {
-              @apply w-full h-[60px] flex items-center pl-4;
-              background-color: $emphasis;
-              color: $primaryColor;
-              border: 1px solid $card;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              position: static;
-              
-              &:hover {
-                  background-color: $primaryColor;
-                  color: $emphasis;
-              }
+        }
+         
+          label {
+              @apply flex items-center justify-center;
+              background-color: $secondColor;
+              border: 1px solid $emphasis;
           }
-        }
-        
-        .thead {
-            @apply w-[full] min-h-[50px] flex sticky top-0;
-            background-color: $secondColor;
-            
-            label {
-                @apply flex items-center justify-center;
-                background-color: $secondColor;
-                border: 1px solid $emphasis;
-            }
-        }
+          
         .trow {
             @apply w-full h-[55px] flex flex-col;
         }

@@ -143,20 +143,25 @@ export class HomeComponent implements OnInit {
   subscribeToTeams() {
     this.teamService.getTeamsByUser(this.logged).subscribe(teams => {
       this.teams = teams
-      this.joyrideService.startTour({
-        steps: [
-          'step1@home',
-          `sidebar@home`,
-          `header@home`,
-          'step2@home',
-          `step3@home`,
-          `goToTeamPage@home`,
-          `step4@equipe/${this.teams[0].id}/projetos`,
-          `step5@equipe/${this.teams[0].id}/projetos`,
-          `goToTasks@equipe/${this.teams[0].id}/projetos`,
-          `step6@projeto/${this.teams[0].projects[0].id}/tarefas`,
-        ],
-      });
+      if(this.logged.firstAccess){
+
+        this.joyrideService.startTour({
+          steps: [
+            'step1@home',
+            `sidebar@home`,
+            `header@home`,
+            'step2@home',
+            `step3@home`,
+            `goToTeamPage@home`,
+            `step4@equipe/${this.teams[0].id}/projetos`,
+            `step5@equipe/${this.teams[0].id}/projetos`,
+            `goToTasks@equipe/${this.teams[0].id}/projetos`,
+            `step6@projeto/${this.teams[0].projects[0].id}/tarefas`,
+            `step7@projeto/${this.teams[0].projects[0].id}/tarefas`
+            
+          ],
+        });
+      }
     });
   }
 

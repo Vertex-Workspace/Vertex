@@ -164,7 +164,7 @@
 @media screen and (max-width: 750px) {
 
     .div-dashboards{
-        @apply flex flex-col justify-evenly pt-5 items-center w-full h-[90%];
+        @apply flex flex-col justify-evenly pt-3 items-center w-full h-[90%] pb-10;
     }
 
     .top-side {
@@ -172,7 +172,7 @@
     }
 
     .top-side-left {
-        @apply flex flex-col items-center min-h-[450px] w-full pb-12 text-center;
+        @apply flex flex-col items-center min-h-[450px] w-full  text-center;
     }
 
     .description {
@@ -211,7 +211,7 @@
     }
 
     h6 {
-        @apply w-[90%];
+        @apply w-[90%] pt-4;
     }
 
     br {
@@ -334,7 +334,7 @@ mat-progress-spinner {
 }
 
 .dashboard-bar{
-    @apply flex justify-center items-center w-full h-[100%];
+    @apply flex justify-center items-center w-full h-[100%] ;
 }
 
 .circular {

@@ -78,9 +78,23 @@ export class TaskComponent {
     private translate : TranslateService
   ) {
     this.user = userService.getLogged();
-    this.test();
+    if(!this.task){
+      this.requests();
+    } else {
+      this.aditionalInformations();
+    }
   }
 
+  changed: boolean = false;
+  ngOnChanges() {
+    let idTask = 0;
+    this.activatedRoute.queryParamMap.subscribe((p: any) => {idTask = p['params'].taskID});
+    if(!idTask){
+      this.changed = true;
+      this.requests();
+    }
+    
+  }
   selectedComponent: string = 'attachments';
 
   soloResponsable: boolean = false;
@@ -89,9 +103,14 @@ export class TaskComponent {
   permissionsRender!: Observable<Permission[]>;
 
   render : boolean = false;
-  test() {
+  requests() {
     let idTask = 0;
+    
     this.activatedRoute.queryParamMap.subscribe((p: any) => {idTask = p['params'].taskID});
+    
+    if(!idTask && !this.changed){
+      return;
+    }
     if(!idTask || idTask == 0){
       idTask = this.task.id;
     }
@@ -100,58 +119,8 @@ export class TaskComponent {
       (task: Task) => {
         
         this.task = task;
-        
-        if (this.task.revisable) {
-          this.checkedReview = true;
-        }
-        this.taskService.getTaskInfo(idTask).subscribe(
-          (taskInfo: any) => {
-      
-            this.taskInfoDTO = taskInfo;
-          }
-        );
-        this.task.taskResponsables!.forEach((taskResponsable) => {
-          if (taskResponsable.userTeam.user.id == this.user.id) {
-            this.idResponsable = taskResponsable.id;
-    
-            //Validates if the user is the creator of the task
-            if (this.task.creator?.user.id == taskResponsable.userTeam.user.id) {
-              //The creator doesn't send the task
-              this.soloResponsable = true;
-            }
-          }
-        });
-        if (this.task.taskResponsables!.length == 1) {
-          this.soloResponsable = true;
-        }
-    
-        this.getTimeInTask();
-    
-          
-        this.taskService.getTaskPermissions(idTask, this.user.id!).subscribe(
-          (permissions: Permission[]) => {
-            this.permissions = permissions;
-            this.setEditPermission(permissions);
-          }
-        );
-    
-        //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
-        window.onbeforeunload = () => this.ngOnDestroy();
-    
-        if (this.task.taskDependency != null) {
-          this.hasDependency = true
-          this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
-        }
-        this.taskService.getPDF(this.task.id).subscribe(
-          (pdf: any) => {
-            this.data = "data:application/pdf;base64,"+pdf; 
-          },
-          error => {
-            console.error('Error downloading PDF:', error);
-            this.data = "data:application/pdf;base64,"+error.error.text; 
-          }
-        );
-        this.render = true;
+        this.aditionalInformations();
+ 
       }
     , (error) => {
       this.router.navigate(['projeto/' + this.project.id + '/tarefas']);
@@ -161,9 +130,61 @@ export class TaskComponent {
 
   }
 
-  data : string = "";
-  public downloadPDF() {
+  public aditionalInformations(){
+    if (this.task.revisable) {
+      this.checkedReview = true;
+    }
+    this.taskService.getTaskInfo(this.task.id).subscribe(
+      (taskInfo: any) => {
+  
+        this.taskInfoDTO = taskInfo;
+      }
+    );
+    this.task.taskResponsables!.forEach((taskResponsable) => {
+      if (taskResponsable.userTeam.user.id == this.user.id) {
+        this.idResponsable = taskResponsable.id;
+
+        //Validates if the user is the creator of the task
+        if (this.task.creator?.user.id == taskResponsable.userTeam.user.id) {
+          //The creator doesn't send the task
+          this.soloResponsable = true;
+        }
+      }
+    });
+    if (this.task.taskResponsables!.length == 1) {
+      this.soloResponsable = true;
+    }
+
+    this.getTimeInTask();
+
+      
+    this.taskService.getTaskPermissions(this.task.id, this.user.id!).subscribe(
+      (permissions: Permission[]) => {
+        this.permissions = permissions;
+        this.setEditPermission(permissions);
+      }
+    );
+
+    //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
+    window.onbeforeunload = () => this.ngOnDestroy();
+
+    if (this.task.taskDependency != null) {
+      this.hasDependency = true
+      this.alertService.successAlert("Lembre-se de terminar a tarefa " + this.task.taskDependency.name + " antes")
+    }
+    this.taskService.getPDF(this.task.id).subscribe(
+      (pdf: any) => {
+        this.data = "data:application/pdf;base64,"+pdf; 
+      },
+      error => {
+        console.error('Error downloading PDF:', error);
+        this.data = "data:application/pdf;base64,"+error.error.text; 
+      }
+    );
+    this.render = true;
   }
+
+  data : string = "";
 
   private setEditPermission(permissions: Permission[]) {
     for (const permission of permissions) {
@@ -197,7 +218,7 @@ export class TaskComponent {
     }
   }
 
-  changeTask(event: any): void {
+  changeTask(event: Task): void {
     this.changes.emit(event);
   }
 
@@ -205,11 +226,16 @@ export class TaskComponent {
     if (this.task.name === "") {
       this.task.name = this.translate.instant('pages.tasks.new_task');
     }
+  
     if (this.task.description === "") {
       this.task.description = this.translate.instant('pages.tasks.new_task_description');
     }
     if (this.task.description.length > 1000) {
       this.alertService.notificationAlert(this.translate.instant('alerts.notification.descriptionLimit'));
+      return;
+    }
+    if(this.task.name.length < 4){
+      this.alertService.errorAlert(this.translate.instant('alerts.error.minTaskLengthName'));
       return;
     }
     let taskEdit: TaskEdit = {
@@ -220,6 +246,14 @@ export class TaskComponent {
     this.taskService.edit(taskEdit).subscribe(
       (task: Task) => {
         this.task = task;
+        const modeView : any = {
+          id: task.id,
+          name: task.name,
+          image: task.creator?.user.image,
+          values: task.values,
+          indexTask: task.indexTask
+        }
+        this.changeTask(modeView);
         this.alertService.successAlert(this.translate.instant("alerts.success.taskUpdated"));
       }
     );

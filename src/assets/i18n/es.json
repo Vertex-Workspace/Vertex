@@ -264,8 +264,15 @@
         "cancel_button": "Cancelar",
         "confirm_button": "Confirmar"
       },
-      "groups": {
-        "title": "Grupos"
+      "create-groups": {
+        "title": "Crear un nuevo grupo",
+        "name": "Nombre del grupo",
+        "participants": "Seleccionar Participantes",
+        "name_placeholder": "Agregar un nombre al grupo",
+        "multi_select": "Miembros del grupo",
+        "members": "Miembros",
+        "confirm_button": "Crear Grupo",
+        "cancel_button": "Cancelar"
       },
       "change-password" : {
         "title": "Cambio Periódico de Contraseña",
@@ -273,6 +280,10 @@
         "placeholder": "Ingrese su nueva contraseña",
         "button": "Enviar"
     },
+      "groups": {
+        "multi_select": "Miembros del grupo",
+        "members": "miembros"
+    },    
       "minichat": {
         "header": {
           "conversations": "Conversaciones"
@@ -289,9 +300,8 @@
         "confirm": "Confirmar"
       },
       "notification": {
-        "notificações" : "Notificaciones",
+        "notificações": "Notificaciones",
         "selectAll": "Seleccionar todo",
-        
         "markAsRead": "Marcar como leído",
         "exclude": "Excluir",
         "searchByANotification": "Buscar una notificación...",

@@ -80,6 +80,9 @@ export class RowCardComponent {
       }
     }
   }
+  isTaskPage(): boolean {
+    return this.router.url.includes("tarefas");
+  }
 
   getPropertyValue(property: Property | PropertyCreation): Value {
     let value: Value;

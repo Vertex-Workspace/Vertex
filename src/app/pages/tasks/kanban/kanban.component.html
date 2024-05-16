@@ -33,6 +33,7 @@
                         <app-card 
                             *ngIf="getTaskByProperty(task, propertyList)"
                             cdkDrag 
+                            cdkDragBoundary=".col-container"
                             [task]="task"
                             [borderColor]="propertyList.color" 
                             [minHeight]="'140px'" 

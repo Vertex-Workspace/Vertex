@@ -221,7 +221,7 @@
             @apply flex w-[90%] h-full flex-col;
             
             section {
-                @apply w-[85%] min-h-[80px] flex items-center justify-around border-b-2 border-solid;
+                @apply w-full min-h-[80px] flex items-center justify-around border-b-2 border-solid;
                 
                 ul {
                     @apply 
