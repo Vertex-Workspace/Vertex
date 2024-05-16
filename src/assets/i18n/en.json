@@ -534,7 +534,9 @@
             "groupCreated": "Group created successfully!",
             "descriptionUpdated": "Description updated successfully!",
             "nameUpdated": "Name updated successfully!",
-            "new-password": "Password modified successfully"
+            "new-password": "Password modified successfully",
+            "task-responsibles":"Task responsibles updated successfully",
+            "dependency": "This task requires the conclusion of "
         },
         "error": {
             "participantsNotAddedToGroup": "Error adding user to group!",

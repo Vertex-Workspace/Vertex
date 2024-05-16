@@ -534,7 +534,9 @@
       "groupCreated": "¡Grupo creado con éxito!",
       "descriptionUpdated": "¡Descripción actualizada con éxito!",
       "nameUpdated": "¡Nombre actualizado con éxito!",
-      "new-password": "Contraseña modificada con éxito"
+      "new-password": "Contraseña modificada con éxito",
+      "task-responsibles": "Responsables de tareas actualizados exitosamente",
+      "dependency": "Esta tarea requiere la realización de "
     },
     "error": {
       "participantsNotAddedToGroup": "¡Error al agregar usuario al grupo!",

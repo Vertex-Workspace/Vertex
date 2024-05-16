@@ -534,7 +534,9 @@
             "groupCreated":"群组已成功创建！",
             "descriptionUpdated":"描述已成功更新！",
             "nameUpdated":"名称已成功更新！",
-            "new-password": "密码修改成功"
+            "new-password": "密码修改成功",
+            "task-responsibles": "任务负责人更新成功",
+            "dependency": "此任务需要完成"
         },
         "error": {
             "participantsNotAddedToGroup": "无法将用户添加到群组！",
