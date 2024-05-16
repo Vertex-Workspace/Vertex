@@ -37,6 +37,7 @@ ul {
     textarea{
         @apply flex w-full h-[70px] px-3 py-1 items-start;
         border: 0.50px solid $emphasis;
+        background-color: $card;
         resize: none !important;    
         outline: none;
     }
