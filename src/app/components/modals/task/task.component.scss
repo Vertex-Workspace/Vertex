@@ -327,6 +327,14 @@
     
     .down {
         @apply h-[20%] flex flex-row w-full items-end;
+
+        .back-icon{
+            @apply flex w-10 h-10 justify-center items-center;
+            background-color: $primaryColor;
+            i{
+                color: $secondColor;
+            }
+        }
     }
     
     .buttons {
