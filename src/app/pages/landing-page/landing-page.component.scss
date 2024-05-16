@@ -72,7 +72,7 @@ main {
         @apply w-[100%] mt-4 mb-4 bg-[#092c4c] flex flex-col items-center justify-start py-5 text-white;
 
         .title-aboutUs {
-            @apply text-center gap-10 flex flex-col;
+            @apply items-center gap-10 flex flex-col;
         }
 
         .section-title-vertex {
@@ -86,7 +86,7 @@ main {
     }
 
     .section-tutorial {
-        @apply w-[100%] flex items-start justify-center gap-10;
+        @apply w-[100%] h-[100vh] flex items-center justify-center gap-10;
 
         .section-title {
             @apply text-4xl text-[#092c4c] text-center font-semibold font-['Inter'];
@@ -100,54 +100,62 @@ main {
             @apply w-[900px] h-[500px] bg-white shadow-md rounded-md flex justify-center items-center p-4;
 
         }
+
     }
-
+    
     .section-features {
-        @apply w-[100%] h-[90vh] flex items-start justify-center gap-10;
-
+        @apply w-[100%] h-[85vh] flex items-start justify-center gap-10;
+        
         .section-title {
             @apply text-4xl text-[#092c4c] text-start font-semibold font-['Inter'];
         }
-
+        
         .section-subtitle {
             @apply text-lg font-light font-['Inter'] text-justify;
         }
-
+        
         .card-features {
-            @apply w-[1720px] h-[800px] bg-white shadow-md rounded-md flex justify-center pt-16;
+            @apply w-[85%] h-min bg-white shadow-md rounded-md flex justify-center pt-16 pb-16;
             border-top: #092c4c 20px solid;
         }
     }
-
+    
     .section-principles {
-        @apply w-[100%] h-[150vh] flex flex-col items-center justify-center gap-10;
-
+        @apply w-[100%] h-[130vh] flex flex-col items-center justify-start gap-10;
+        
         .section-title {
             @apply text-4xl text-[#092c4c] text-start pt-8 font-semibold font-['Inter'];
         }
-
+        
         .section-subtitle {
             @apply text-lg font-light font-['Inter'] text-justify;
         }
-
+        
         .blue-square {
             @apply w-[420px] h-[300px] bg-[#092c4c] relative flex flex-col items-center justify-center gap-5;
-
+            
             .p-white {
                 @apply text-white font-semibold text-2xl;
             }
         }
-
+        
         .white-square {
             @apply w-[800px] h-[250px] top-5 bg-white shadow-md rounded-md flex justify-center items-center z-10 p-10 text-justify;
         }
     }
 }
 
+::ng-deep .p-galleriacontent{
+    display: flex !important;
+    justify-content: center !important;
+    align-self: center !important;
+}
+
+
 footer {
-    @apply w-[100vw] h-[50vh] border-t-2 flex flex-col items-center justify-start;
-
-
+    @apply w-[100vw] h-[50vh] border-t-2 flex flex-col items-center justify-between;
+    
+    
     .above-div {
         @apply w-[85%] border-b-2 h-[80%] flex-col;
 
@@ -225,7 +233,7 @@ footer {
     @apply min-h-[50px] flex pt-4 justify-center;
 
     .col-container {
-        @apply gap-6 max-w-full min-h-[50px] overflow-auto flex overflow-y-auto;
+        @apply gap-6 max-w-full w-[100%] justify-center min-h-[50px] overflow-auto flex overflow-y-auto;
 
         .col {
             @apply min-w-[250px] w-[250px] flex flex-col gap-[12px] p-4 shadow-md mb-16;
@@ -409,6 +417,14 @@ section {
     @apply w-full h-1/2 flex gap-5;
 }
 
+.principles-squaresRight{
+    @apply w-[60%] flex justify-end items-center;
+}
+
+.principles-squaresLeft{
+    @apply w-[60%] flex justify-end items-center translate-x-0;
+}
+
 @media screen and (max-width:1700px) {
 
     .main-header {
@@ -455,12 +471,87 @@ section {
         @apply w-[80%] h-auto flex flex-col-reverse items-center gap-20;
     }
 
+    
+
+    .white-square {
+        @apply w-[800px] top-5 bg-white shadow-md rounded-md flex flex-col gap-5 justify-center items-center z-10 p-10 text-justify;
+        height: auto !important;
+        min-height: 250px !important;
+
+        .p-white{
+            @apply text-2xl text-[#092c4c] font-semibold;
+        }
+    }
+
+    .principles-squaresRight{
+        @apply w-[100%] h-auto flex items-center;
+        justify-content: center !important;
+    }
+
+    .principles-squaresLeft{
+        @apply w-[100%] h-auto flex items-center translate-x-0;
+        align-self: center !important;
+        justify-content: center !important;
+    }
+}
+
+
+.section-subtitleabout{
+    @apply w-[50%] text-lg font-light font-['Inter'] text-justify;
+}
+
+.image-features{
+    @apply w-[47%] flex items-center justify-center;
+}
+
+.divText-features{
+    @apply w-[45%] flex flex-col p-10 gap-10;
+}
+
+.divDevelopedBy{
+    @apply w-full h-1/2 flex justify-end gap-2 items-center;
+}
+
+
+@media screen and (max-width: 1320px) {
+
+    .col-container {
+        @apply max-w-full w-full min-h-[50px] overflow-auto flex items-center flex-col overflow-y-auto;
+    }
+
+    .section-subtitleabout {
+        @apply p-10 text-center text-lg font-light font-['Inter'];
+    }
+
+    .image-features{
+        @apply hidden;
+    }
+
+    .divText-features{
+        @apply w-[100%] flex flex-col p-10 gap-10;
+    }
+
     footer {
-        @apply w-[100vw] h-[60vh] border-t-2 flex flex-col items-center;
+        @apply w-[100vw] h-[65vh] border-t-2 flex flex-col items-center;
     }
 
     .footer-logo {
         height: 40% !important;
+    }
+
+    .footer-div{
+        @apply w-[85%] h-[30%] flex flex-col-reverse gap-5 ;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .divDevelopedBy{
+        @apply w-full h-1/2 flex justify-center gap-2 items-center;
+    }
+
+    .footer-text {
+        @apply w-full text-[#092c4c] font-semibold text-sm font-['Inter'];
+        text-align: center !important;
     }
 
     .links-div {
@@ -505,27 +596,23 @@ section {
         order: 3;
         /* Terceiro item */
     }
-}
-
-.section-subtitleabout{
-    @apply text-lg font-light font-['Inter'] text-justify;
-}
-
-@media screen and (max-width: 1320px) {
-
-    .col-container {
-        @apply max-w-full w-full min-h-[50px] overflow-auto flex items-center flex-col overflow-y-auto;
-    }
-
-    .section-subtitleabout {
-        @apply p-10 text-center text-lg font-light font-['Inter'];
-    }
 
 }
 
 @media screen and (max-width: 1024px) {}
 
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+
+
+    .footer-logo{
+        width: 100% !important;
+        align-items: center !important;
+        justify-content: center !important;
+        .footer-img{
+            width: 50px !important;
+        }
+    }
+}
 
 @media screen and (max-width: 456px) {
     // Ajustes para celulares
@@ -553,3 +640,12 @@ section {
 .nav-itens{
     @apply p-8 flex gap-5;
 }
+
+.menu-container2 {
+    @apply relative w-10 h-10;
+
+    .nav-item {
+        @apply p-2 transition-colors cursor-pointer w-10 h-10;
+    }
+}
+

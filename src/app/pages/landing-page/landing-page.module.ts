@@ -12,6 +12,7 @@ import { RowCardModule } from "../../components/reusable-components/row-task/row
 import { GalleriaModule } from 'primeng/galleria';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AvatarModule } from 'primeng/avatar';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -26,6 +27,7 @@ import { AvatarModule } from 'primeng/avatar';
         BrowserAnimationsModule,    
         CommonModule,
         MatMenuModule,
+        RouterModule,
         TranslateModule,
         CarouselModule,
         TagModule,
