@@ -14,10 +14,10 @@ form {
 }
 
 .input-name {
-    @apply flex flex-col w-full h-[80%] justify-start items-start pt-4;
+    @apply flex flex-col w-full h-[80%] justify-start items-start pt-2;
 
     input {
-        @apply flex h-20 rounded-md pl-4 w-full;
+        @apply flex h-14 rounded-md pl-4 w-full;
         background-color: $card;
         color: $text;
     }
@@ -37,13 +37,10 @@ form {
     }
 }
 
-.div-buttons {
-    @apply flex w-full justify-end items-end pt-10;
 
     .buttons {
-        @apply flex w-[65%] h-full justify-between items-end;
+        @apply flex w-full h-full justify-center items-center pt-8 gap-4;
     }
-}
 
 p {
     font-size: $largeText;
@@ -55,7 +52,7 @@ p {
 }
 
 .modal {
-    @apply absolute rounded-md flex flex-col w-[25%] h-[45%] items-start justify-start text-center p-8 border-t-8;
+    @apply absolute rounded-md flex flex-col w-auto h-auto items-start justify-start text-center p-8 border-t-8;
     border-color: $primaryColor;
     background-color: $secondColor;
 }
