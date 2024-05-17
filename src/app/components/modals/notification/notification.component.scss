@@ -15,8 +15,8 @@
 
 
 section {
-@apply absolute z-10 flex h-full justify-end w-[100%] max-w-[96%];
-overflow: hidden;
+    @apply absolute z-10 flex h-full justify-end w-[100%] max-w-[96%];
+    overflow: hidden;
 }
 
 .clickOut {
@@ -31,14 +31,15 @@ overflow: hidden;
 
     .header {
         @apply flex flex-col w-full h-[15%] p-4;
-        background-color: $primaryColor;
-        color: $secondColor;
+        background-color: $secondColor;
+        color: $primaryColor;
+        border-bottom: 1px solid $emphasis;
 
         .header-title {
             @apply flex w-full h-1/2 flex-row justify-between items-center;
 
             h5 {
-                color: $secondColor;
+                color: $primaryColor;
             }
 
             p {
@@ -53,7 +54,7 @@ overflow: hidden;
                 @apply flex flex-row w-1/4 items-center justify-between;
 
                 .colorAllCheckbox {
-                    color: $secondColor;
+                    color: $primaryColor;
                 }
             }
 
@@ -147,7 +148,7 @@ fa-icon,
 i {
     min-width: 35px;
     font-size: 20px; // Defina o tamanho fixo para os ícones
-    color: $secondColor;
+    color: $primaryColor;
 }
 
 input[type=checkbox] {

@@ -2,10 +2,12 @@
     <div class="container-custom" *ngIf="render">
         <section class="grid w-full">
             <div>
-                <div class="flex flex-row gap-2">
+                <div class="flex flex-row gap-2 items-center">
+                    <img *ngIf="project.creationOrigin === 'GOOGLE'" src="../../../assets/calendar-logo.png" class="h-[35px] pr-2" (click)="update()">
                     <h4>
                         {{pageTitle}}
                     </h4>
+                    
                     <i class="pi pi-pencil pt-2 cursor-pointer" *ngIf="isCreator" (click)="openProjectInfos()"></i>
                 </div>
                 <div class="pt-2">

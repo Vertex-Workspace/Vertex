@@ -275,7 +275,9 @@
                 "visibilityProfile": "Visibilidade do Perfil",
                 "update": "Atualizar",
                 "1": "Mostrar gráficos de desempenho para equipe",
-                "2": "Deixar meu perfil visível a membros da equipe"
+                "2": "Deixar meu perfil visível a membros da equipe",
+                "3": "Sincronizar com Google Agenda",
+                "4": "Sincronizar com Google Drive"
             },
             "security": {
                 "title": "Segurança",

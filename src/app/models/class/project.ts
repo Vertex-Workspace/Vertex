@@ -24,6 +24,7 @@ export class Project {
     groups?: Group[]
     users?: User[]
     projectReviewENUM!: ProjectReview; 
+    creationOrigin ?: string;
 
     isCreator!: boolean;
 
@@ -45,6 +46,7 @@ export class Project {
         this.projectDependency = project.projectDependency
         this.groups = project.groups
         this.users = project.users
+        this.creationOrigin = project.creationOrigin;
     }
 
 }
@@ -84,4 +86,9 @@ export enum ProjectReview {
     MANDATORY="MANDATORY",
     OPTIONAL="OPTIONAL",
     EMPTY="EMPTY",
+}
+
+export enum CreationOrigin {
+    GOOGLE,
+    DEFAULT
 }

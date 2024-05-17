@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core'; // Import TranslateService
 import { Group } from 'src/app/models/class/groups';
-import { Project } from 'src/app/models/class/project';
+import { CreationOrigin, Project, ProjectReview } from 'src/app/models/class/project';
 import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
 import { Team } from 'src/app/models/class/team';
@@ -24,6 +24,7 @@ import { tutorialText } from 'src/app/tutorialText';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
+
   isCreatingProject: boolean = false;
   filterOpen: boolean = false;
   orderOpen: boolean = false;
@@ -38,6 +39,7 @@ export class ProjectsComponent implements OnInit {
 
   orderParams !: PipeParams;
   orderOptions: any = [];
+  isCreator !: boolean;
 
 
   queryFilter !: string;
@@ -63,7 +65,7 @@ export class ProjectsComponent implements OnInit {
 
   permissionsOnTeam!: Permission[];
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.getTeam();
     this.updateTranslate();
   }
@@ -73,8 +75,9 @@ export class ProjectsComponent implements OnInit {
     const teamId: number = Number(this.route.snapshot.paramMap.get('id'));
     this.teamService
     .getScreenInformationsById(teamId)
-    .subscribe((team: Team) => {
+    .subscribe((team: Team) => {      
       this.team = team;
+      this.isCreator = this.logged.id! === team.creator.id!;
       this.teamName = team.name!;
       this.projects = this.team.projects;
       this.permissionsOnTeam = team.permissions;   
@@ -194,4 +197,33 @@ export class ProjectsComponent implements OnInit {
     const route: string = 'equipe/' + this.team.id;
     this.router.navigate([route]);
   }
+
+  createCalendarProject() {
+    const project: any = {
+      name: `Agenda de ${this.logged.firstName}`,
+      description: 'Aqui você pode interagir com todos os seus eventos do Google Agenda em formato de tarefas',
+      projectReviewENUM: ProjectReview.EMPTY,
+      creator: {
+        user: {
+          id: this.logged.id!
+        },
+        team: {
+          id: this.team.id!
+        }
+      }
+    }
+
+    this.projectService
+      .createFromCalendar(project, this.team.id!, this.logged.id!)
+      .subscribe(project => this.projects.push(project));
+
+  }
+
+  calendarAlreadyImported(): boolean {
+    return this.team.projects.some(p => {      
+      return p.creationOrigin == 'GOOGLE';
+    });
+  }
+
+
 }

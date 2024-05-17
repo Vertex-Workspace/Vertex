@@ -30,6 +30,8 @@ export class User {
     icon ?: string;
     selectedProject ?: boolean;
     firstAccess ?: boolean;
+    userKind ?: UserKind;
+    syncWithCalendar ?: boolean;
 
     taskReview ?: boolean;
     newMembersAndGroups ?: boolean;
@@ -74,7 +76,9 @@ export class User {
         this.openPermission = user.openPermission;
         this.permissions = user.permissions
         this.label = user.firstName
-        this.selectedProject = user.selectedProject        
+        this.selectedProject = user.selectedProject   
+        this.userKind = user.userKind;  
+        this.syncWithCalendar = user.syncWithCalendar;   
 
     }
 }
@@ -102,6 +106,11 @@ export enum PermissionsType {
     EDIT = "Editar", 
     VIEW = "Visualizar",
     DELETE = "Deletar"
+}
+
+export enum UserKind {
+    DEFAULT,
+    GOOGLE
 }
 
 export class HasPermission {

@@ -40,6 +40,7 @@ export class Task {
     chatCreated?:boolean;
     label !: string
     taskDependency !: Task
+    taskKind ?: string
 
     constructor(
         task: Task
@@ -58,6 +59,7 @@ export class Task {
         this.log = task.log;
         this.label = task.name;
         this.taskDependency = task.taskDependency
+        this.taskKind = task.taskKind;
     }
 
 }
@@ -81,6 +83,10 @@ export class TaskEdit {
     name!: string;
     description!: string;
     revisable?: boolean;
+}
+
+export enum TaskKind { 
+    DEFAULT,
 }
 
 

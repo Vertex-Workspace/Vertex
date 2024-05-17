@@ -1,5 +1,20 @@
 @import '../../../variables';
 
+.import {
+    background-color: $secondColor;
+    border-color: $primaryColor;
+    color: $secondColor;
+    border: solid 1px $primaryColor;
+    cursor: pointer;
+    @apply h-full w-[80px] flex items-center justify-center gap-4
+    text-lg p-3 rounded font-light transition-colors;
+
+    &:hover {
+        background-color: $primaryColor;
+        @apply transition-colors;
+    }
+}
+
 @media screen and (min-width: 1430px) {
     section{
         @apply flex w-screen h-full justify-center items-center ;
@@ -376,6 +391,7 @@
             }
 
         }
+
         .search {
             @apply w-[300px] h-14 flex items-center justify-between bg-white p-3
             rounded shadow-md border-none;

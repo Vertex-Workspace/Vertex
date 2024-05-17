@@ -23,14 +23,15 @@
                             </div>
                         </div>
                     </form>
-                    <div class="charts pt-10">
-                        <p class="medium-text">{{ 'pages.user-settings.profile.visibilityProfile' | translate }}
-                        </p>
-                        <div class="flex flex-row">
-                            <fa-icon (click)="toogleCharts()" [icon]="publicProfile.icon" class="iconProfile">
-                            </fa-icon>
-                            <p class="small-text px-3">{{ 'pages.user-settings.profile.1' | translate }}</p>
-                        </div>
+                    <div class="charts">
+                        <p class="medium-text">{{ 'pages.user-settings.profile.visibilityProfile' | translate }}</p>  
+                        <ng-container *ngFor="let toogle of tooglesList; index as item">
+                            <div>
+                                <fa-icon (click)="toogle.event()" [icon]="toogle.icon" class="iconProfile">
+                                </fa-icon>
+                                <p class="small-text px-3">{{ 'pages.user-settings.profile.' + toogle.id | translate }}</p>
+                            </div>
+                        </ng-container>
                     </div>
                 </section>
             </div>
@@ -38,10 +39,8 @@
             <div class="rightSide">
                 <section>
                     <div class="circular rounded-sm">
-                        <img src="data:image/jpg;base64, {{logged.image}}" *ngIf="logged.image"
-                            class="object-cover h-full w-full rounded-sm">
-                        <img src="{{logged.imgUrl}}" *ngIf="logged.imgUrl"
-                            class="object-cover h-full w-full rounded-sm">
+                        <img src="data:image/jpg;base64, {{logged.image}}" *ngIf="logged.image" class="object-cover h-full w-full rounded-sm">
+                        <img src="{{logged.imgUrl}}" *ngIf="logged.imgUrl && !logged.image" class="object-cover h-full w-full rounded-sm">
                         <form class="input-div">
                             <input type="file" class="input-file" (change)="onFileSelected($event)">
                         </form>

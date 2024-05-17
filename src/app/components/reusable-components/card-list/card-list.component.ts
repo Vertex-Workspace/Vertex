@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Team } from 'src/app/models/class/team';
 import { Project } from 'src/app/models/class/project';
@@ -75,9 +75,8 @@ export class CardListComponent implements OnInit {
   renderList: any[] = [];
 
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     this.setRenderList();
-
   }
 
   ngOnInit(): void {

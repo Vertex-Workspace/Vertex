@@ -6,7 +6,7 @@ import {
   faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { User } from 'src/app/models/class/user';
+import { User, UserKind } from 'src/app/models/class/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Message } from 'src/app/models/class/message';
@@ -55,10 +55,9 @@ export class ProfileComponent {
     { id: 'description', icon: faEarthAmericas, option: 'Descrição', formControlName: 'description' }
   ];
 
-  publicProfile = 
-    { text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff }
-  ;
-
+  tooglesList !: any[];
+  // visible: this.logged.userKind === UserKind.GOOGLE
+  // visible: this.logged.userKind === UserKind.GOOGLE
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -70,9 +69,15 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
+    this.tooglesList = [
+      { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff, event: () => this.toogleCharts(), visible: true },
+      { id: 3, text: "Sincronizar com Google Agenda", icon: faToggleOff, event: () => this.syncCalendar(), visible: this.logged.userKind === UserKind.GOOGLE },
+      { id: 4, text: "Sincronizar com Google Drive", icon: faToggleOff, event: () => this.syncDrive(), visible: this.logged.userKind === UserKind.GOOGLE }
+    ]
     if(this.logged.showCharts){
-      this.publicProfile.icon = faToggleOn;
+      this.tooglesList[0].icon = faToggleOn;
     }
+    
 
     this.form = this.formBuilder.group({
 
@@ -87,12 +92,26 @@ export class ProfileComponent {
   }
 
 
+  syncCalendar(): void {
+    console.log('aoisjd9iasjdfi');
+    
+    this.userService.a(this.logged.id!).subscribe();    
+  }
+
+  syncDrive(): void {
+    
+  }
+
+  getLoggedUser(): void {
+    this.logged = this.userService.getLogged();
+  }
+
   // Alter the status of toggle
   toogleCharts(): void {
     this.userService.patchShowCharts(this.logged.id!).subscribe((user : User) => {
       this.alert.successAlert(this.translate.instant('alerts.success.update_success'))
       this.logged = user;
-      this.publicProfile.icon = this.publicProfile.icon === faToggleOff ? faToggleOn : faToggleOff;
+      this.tooglesList[0].icon = this.tooglesList[0].icon === faToggleOff ? faToggleOn : faToggleOff;
     });
   }
 

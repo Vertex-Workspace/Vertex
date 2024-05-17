@@ -215,6 +215,7 @@ export class InputValuePropertyComponent {
     this.taskService.patchValue(valueUpdate).subscribe(
       (task) => {
         this.task = task;
+        
         this.alertService.successAlert(value.property.name + this.translate.instant("alerts.success.alterated"));
         this.changes.emit(task);
       },

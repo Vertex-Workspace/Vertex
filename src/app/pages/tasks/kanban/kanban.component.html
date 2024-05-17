@@ -11,7 +11,7 @@
                         [style.color]="getStrongerColor(propertyList.color)">
                             {{ propertyList.value }}
                     </p>
-                    <button (click)="createTask(propertyList)"
+                    <button (click)="project.creationOrigin === 'GOOGLE' ? createCalendarTask(propertyList) : createTask(propertyList)"
                         [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'" 
                         [style.color]="getStrongerColor(propertyList.color)" 
                         [disabled]="!canCreate"

@@ -12,6 +12,8 @@ import { UserStateService } from './user-state.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Notification } from '../models/class/notification';
+import { Project } from '../models/class/project';
+import { Task } from '../models/class/task';
 
 @Injectable({
   providedIn: 'root'
@@ -120,6 +122,14 @@ export class UserService {
   public patchPersonalization(personalization: Personalization): Observable<User> {
     return this.http
     .patch<any>(`${URL}user/${this.getLogged().id}/personalization`, personalization, {withCredentials: true});
+  }
+
+  public a(userId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:7777/authorize/google/${userId}`, { withCredentials: true })
+  }
+
+  public b(userId: number, projectId: number): Observable<Project> {
+    return this.http.get<Project>(`${URL}google/calendar/${userId}/${projectId}`, { withCredentials: true })
   }
 
   public patchPassword(emailTo: String, password: String): Observable<User> {

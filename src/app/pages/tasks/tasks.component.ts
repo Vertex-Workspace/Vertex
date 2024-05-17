@@ -2,7 +2,7 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project, ProjectReview } from 'src/app/models/class/project';
+import { CreationOrigin, Project, ProjectReview } from 'src/app/models/class/project';
 import { TaskService } from 'src/app/services/task.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Task, TaskCreate, TaskWaitingToReview } from 'src/app/models/class/task';
@@ -32,6 +32,7 @@ import { CalendarComponent } from './calendar/calendar.component';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
+
 
 
   filterSettings: any[] = [];
@@ -118,6 +119,7 @@ export class TasksComponent implements OnInit {
     
     //Método que atribui o valor de project vindo do observable
     this.projectService.getOneById(id).subscribe((p: Project) => {
+
       this.project = p;
       
 
@@ -164,6 +166,9 @@ export class TasksComponent implements OnInit {
           }
         }
       })
+      if(this.project.creationOrigin == "GOOGLE") {
+        this.update();
+      }
     }, (error) => {
       this.router.navigate(['/acesso-negado']);
     });
@@ -178,6 +183,14 @@ export class TasksComponent implements OnInit {
         project.projectDependency.name)
       } 
     })
+  }
+
+  update() {
+    this.userService.b(this.logged.id!, this.project.id!).subscribe(p => {
+      if (p.tasks != this.project.tasks) {
+        this.project.tasks = p.tasks;
+      }
+    });
   }
 
   muralPageListener(): void {
@@ -425,6 +438,12 @@ export class TasksComponent implements OnInit {
 
   attUserFirstAccess() {
     this.userService.patchFirstAccess(this.logged);
+  }
+
+  createCalendarTask(): void {
+    this.taskService
+      .createCalendarTask(this.logged.id!, this.project.id!)
+      .subscribe();
   }
 
   updateProject(project : Project) {
