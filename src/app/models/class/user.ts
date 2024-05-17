@@ -31,6 +31,7 @@ export class User {
     selectedProject ?: boolean;
     firstAccess ?: boolean;
     userKind ?: UserKind;
+    syncWithCalendar ?: boolean;
 
     taskReview ?: boolean;
     newMembersAndGroups ?: boolean;
@@ -75,7 +76,8 @@ export class User {
         this.permissions = user.permissions
         this.label = user.firstName
         this.selectedProject = user.selectedProject   
-        this.userKind = user.userKind;     
+        this.userKind = user.userKind;  
+        this.syncWithCalendar = user.syncWithCalendar;   
 
     }
 }

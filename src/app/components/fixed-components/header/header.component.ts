@@ -149,7 +149,9 @@ export class HeaderComponent {
       .subscribe(project => {
         this.router.navigate([`equipe/${project.idTeam}/projetos`])
       });
-    } 
+    } else {
+      this.router.navigate(['home']);
+    }
   }
 
   incrementUrlById(activeRoute: string, id: number): void {

@@ -32,11 +32,6 @@ export class TasksComponent implements OnInit {
 
 
 
-  update() {
-    this.userService.b(this.logged.id!, this.project.id!).subscribe(p => console.log(p));
-  }
-
-
   filterSettings: any[] = [];
   orderSettings: any[] = [];
   clicked: string = 'List';
@@ -169,6 +164,8 @@ export class TasksComponent implements OnInit {
           }
         }
       })
+
+      this.update();
     }, (error) => {
       this.router.navigate(['/acesso-negado']);
     });
@@ -183,6 +180,14 @@ export class TasksComponent implements OnInit {
         project.projectDependency.name)
       } 
     })
+  }
+
+  update() {
+    this.userService.b(this.logged.id!, this.project.id!).subscribe(p => {
+      if (p.tasks != this.project.tasks) {
+        this.project.tasks = p.tasks;
+      }
+    });
   }
 
   muralPageListener(): void {

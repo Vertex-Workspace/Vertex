@@ -3,7 +3,7 @@
         <!-- RIGHT SIDE TASKS/TEAMS -->
         <div class="container-grid">
             <div class="flex flex-row items-end gap-3">
-                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName }}</h4>
+                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>
             </div>
             <div class="pt-2 mb-3">
                 <p class="small-text text-gray-600 text-justify w-2/3">{{'pages.projects.description1' | translate}}</p>
@@ -21,7 +21,7 @@
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <div class="flex gap-2">
-                        <div *ngIf="isCreator && !calendarAlreadyImported()" class="import" (click)="createCalendarProject()">
+                        <div *ngIf="isCreator && !calendarAlreadyImported() && logged.syncWithCalendar" class="import" (click)="createCalendarProject()">
                             <img src="../../../assets/calendar-logo.png" class="w-[60%]">
                         </div>
                         <button class="create" (click)="switchCreateView()">
