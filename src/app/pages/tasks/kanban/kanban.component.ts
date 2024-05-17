@@ -128,7 +128,6 @@ export class KanbanComponent {
     
       this.projectService.updateIndex(this.project.id!, this.taskList).subscribe(
         (task: Task[]) => {
-          this.taskList = task;
         }, error => {
           console.log(error);
           moveItemInArray(this.taskList, event.currentIndex, event.previousIndex);

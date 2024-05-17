@@ -78,7 +78,7 @@ export class CardUserComponent implements OnInit {
 
       });
     }
-    if (this.user.id! === this.team.creator!.id) {
+    if (this.user.id! === this.userService.getLogged().id) {
       this.isNonCreatorCard = false
     }
     if (this.team.creator!.id === this.userService.getLogged().id) {

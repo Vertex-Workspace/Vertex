@@ -268,7 +268,6 @@ export class CalendarComponent {
       this.patchValue(task, day);
       this.projectService.updateIndex(this.project.id!, this.project.tasks).subscribe(
         (task: Task[]) => {
-          this.project.tasks = task;
         }, error => {
         }
       );
