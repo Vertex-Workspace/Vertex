@@ -105,7 +105,9 @@ export class TasksComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.logged = this.userService.getLogged();
-
+    if(this.logged.firstAccess){
+      this.render = true;
+    }
   }
 
   teamId?: number

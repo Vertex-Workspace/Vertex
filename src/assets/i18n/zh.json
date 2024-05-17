@@ -252,7 +252,8 @@
                 "enableSignLanguage": "启用手语",
                 "enableTextReading": "启用文本阅读",
                 "Tema Claro": "亮色主题",
-                "Tema Escuro": "暗色主题"
+                "Tema Escuro": "暗色主题",
+                "tutorial":"启用教程"
             },
             "notifications": {
                 "Notification": "通知",

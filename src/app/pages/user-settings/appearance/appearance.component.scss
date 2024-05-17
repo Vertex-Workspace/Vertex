@@ -279,6 +279,19 @@
     color: $text;
 }
 
+.btn {
+    @apply flex w-[200px] items-center justify-center 
+    transition-colors rounded p-3;
+    background-color: $primaryColor;
+    color: $text;
+}
+
+.btn:hover {
+    background-color: $secondColor;
+    color: $text;
+    border: 2px solid $primaryColor;
+}
+
 .icon {
     color: $primaryColor;
 }

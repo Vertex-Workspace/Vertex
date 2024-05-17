@@ -144,6 +144,8 @@ export class HomeComponent implements OnInit {
     this.teamService.getTeamsByUser(this.logged).subscribe(teams => {
       this.teams = teams
       if(this.logged.firstAccess){
+        console.log(teams);
+        
 
         this.joyrideService.startTour({
           steps: [
@@ -160,6 +162,7 @@ export class HomeComponent implements OnInit {
             `step7@projeto/${this.teams[0].projects[0].id}/tarefas`
             
           ],
+          logsEnabled: true,
         });
       }
     });

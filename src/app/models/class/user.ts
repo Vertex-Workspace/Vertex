@@ -29,7 +29,7 @@ export class User {
     label ?: string;
     icon ?: string;
     selectedProject ?: boolean;
-    firstAccess ?: boolean;
+    firstAccess?: boolean;
 
     taskReview ?: boolean;
     newMembersAndGroups ?: boolean;

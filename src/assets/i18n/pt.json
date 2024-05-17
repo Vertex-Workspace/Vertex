@@ -252,7 +252,8 @@
                 "enableSignLanguage": "Habilitar libras",
                 "enableTextReading": "Habilitar leitura de texto",
                 "Tema Claro": "Tema Claro",
-                "Tema Escuro": "Tema Escuro"
+                "Tema Escuro": "Tema Escuro",
+                "tutorial":"Habilitar tutorial"
             },
             "notifications": {
                 "Notification": "Notificações",

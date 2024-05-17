@@ -183,7 +183,7 @@ export class UserService {
 
   public setFirstAccessNull(user: User){
     return this.http
-    .patch<User>(`${URL}user/first-access/${user.id}`, user);
+    .patch<User>(`${URL}user/first-access/${user.id}`, user, {withCredentials: true});
   }
 
   public changePassword(changePassword : ChangePassword){
