@@ -19,6 +19,9 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
+  public createCalendarTask(id: number, projectId: number): Observable<Task> {
+    return this.http.post<Task>(`${URL}google/calendar/${id}`, projectId, { withCredentials: true });
+  }
 
   public getOneById(id: number): Observable<Task> {
     return this.http

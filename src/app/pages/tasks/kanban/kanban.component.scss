@@ -10,7 +10,7 @@
       
       .col {
         @apply min-w-[300px] w-[300px] flex flex-col
-        gap-[12px] p-4 shadow-md mb-16;
+        gap-[12px] p-4 shadow-md mb-16 h-fit;
         
         h6 {
           @apply pl-3;

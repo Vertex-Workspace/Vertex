@@ -3,9 +3,6 @@
         <section class="grid w-full">
             <div>
                 <div class="flex flex-row gap-2 items-center">
-                    <button (click)="teste()">
-                        BOTAO DO CALENDARIO
-                    </button>
                     <img *ngIf="project.creationOrigin === 'GOOGLE'" src="../../../assets/calendar-logo.png" class="h-[35px] pr-2" (click)="update()">
                     <h4>
                         {{pageTitle}}

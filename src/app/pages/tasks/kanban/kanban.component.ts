@@ -12,7 +12,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { TeamService } from 'src/app/services/team.service';
-import { Permission, PermissionsType } from 'src/app/models/class/user';
+import { Permission, PermissionsType, User } from 'src/app/models/class/user';
 import { taskHourService } from 'src/app/services/taskHour.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PipeParams } from 'src/app/models/interface/params';
@@ -26,7 +26,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class KanbanComponent {
 
-
   constructor(
     private taskService: TaskService,
     private alertService: AlertService,
@@ -34,7 +33,10 @@ export class KanbanComponent {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private teamService: TeamService, private translate: TranslateService) {
+      this.logged = this.userService.getLogged();
   }
+
+  logged !: User;
 
   @Input()
   project!: Project;
@@ -68,6 +70,7 @@ export class KanbanComponent {
 
   lastIndexSize: number = 0;
   ngOnInit() {
+    console.log(this.project)
     this.lastIndexSize = this.project.tasks.length;
     this.taskList = this.project.tasks;
     this.status = this.project.properties[0].propertyLists;
@@ -248,6 +251,56 @@ export class KanbanComponent {
       }
     );
   }
+
+  createCalendarTask(propertyList: PropertyList): void {
+
+    let propertyUsed!: Property;
+      //For each to find the property of the clicked Property List
+      this.project.properties.forEach((property) => {
+  
+        if (property.kind == PropertyKind.STATUS) {
+  
+          property.propertyLists.forEach((propertyListForEach) => {
+  
+            if (propertyListForEach.id == propertyList.id) {
+              propertyUsed = property;
+            }
+          });
+        }
+      });
+
+    this.taskService.createCalendarTask(this.logged.id!, this.project.id!).subscribe(t => {
+      const valueUpdate: ValueUpdate = {
+        id: t.id,
+        value: {
+          property: {
+            id: propertyUsed.id
+          },
+          value: {
+            //It always gonna be the status
+            id: t.values[0].id,
+            value: propertyList.id as number
+          }
+        },
+        userID: this.userService.getLogged().id!
+      };
+
+      this.taskService.patchValue(valueUpdate).subscribe(
+        (taskDate) => {
+          t.values = taskDate.values;
+          this.taskList.push(t);
+          this.alertService.successAlert(this.translate.instant("alerts.success.task_created"));
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
+    });
+
+  }
+
+
   getStrongerColor(colorReceived: string): string | undefined {
     const matchingColor = colors.find(color => color.weak === colorReceived);
     return matchingColor ? matchingColor.strong : undefined;

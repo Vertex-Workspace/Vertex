@@ -29,9 +29,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
-  teste() {
-    this.userService.testeDoDrive(this.logged.id!, this.project.id!).subscribe();
-  }
+
+
 
   update() {
     this.userService.b(this.logged.id!, this.project.id!).subscribe(p => console.log(p));
@@ -123,7 +122,7 @@ export class TasksComponent implements OnInit {
     
     //Método que atribui o valor de project vindo do observable
     this.projectService.getOneById(id).subscribe((p: Project) => {
-      console.log(p)
+
       this.project = p;
       this.loadingService.hide();
 
@@ -429,6 +428,12 @@ export class TasksComponent implements OnInit {
         console.log(e);
       }
     )
+  }
+
+  createCalendarTask(): void {
+    this.taskService
+      .createCalendarTask(this.logged.id!, this.project.id!)
+      .subscribe();
   }
 
   updateProject(project : Project) {

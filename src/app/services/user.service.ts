@@ -19,9 +19,6 @@ import { Task } from '../models/class/task';
   providedIn: 'root'
 })
 export class UserService {
-  public testeDoDrive(id: number, projectId: number): Observable<Task> {
-    return this.http.post<Task>(`${URL}google/calendar/${id}`, projectId, { withCredentials: true });
-  }
 
   private defaultImg: string = defaultImage;
 

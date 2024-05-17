@@ -4,14 +4,14 @@
 
         <div class="col-container">
             <div class="col" *ngFor="let propertyList of status"
-                [style.backgroundColor]="propertyList.color" [style.height]="getHeight(propertyList)"
+                [style.backgroundColor]="propertyList.color"
                 cdkDropList [cdkDropListData]="project.tasks" (cdkDropListDropped)="dropCard($event, propertyList)">
                 <div class="flex flex-row justify-between w-full items-center">
                     <p class="large-text" 
                         [style.color]="getStrongerColor(propertyList.color)">
                             {{ propertyList.value }}
                     </p>
-                    <button (click)="createTask(propertyList)"
+                    <button (click)="project.creationOrigin === 'GOOGLE' ? createCalendarTask(propertyList) : createTask(propertyList)"
                         [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'" 
                         [style.color]="getStrongerColor(propertyList.color)" 
                         [disabled]="!canCreate"
