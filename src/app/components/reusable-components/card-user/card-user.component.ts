@@ -65,6 +65,8 @@ export class CardUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.user);
+    
     if (this.typeString === 'inTheGroup') {
       this.getUsersByGroup()
     } else if (this.typeString === 'creating' || this.typeString === 'permissions' || this.typeString === 'view-infos') {
