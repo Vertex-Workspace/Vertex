@@ -68,15 +68,21 @@ export class ProjectService {
   }
 
   public updateIndex(projectId :number, tasks: Task[]): Observable<Task[]> {
+    console.log(tasks);
+
     const tasksBody: Task[] = tasks.map(task => ({ ...task })).reverse();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
 
     });
+    console.log(tasksBody);
+    
     tasksBody.forEach((task) => {
       task.image = "";
       task.values = [];
     });
+    console.log(tasksBody);
+    
     return this.http.patch<Task[]>(`${URL}project/${projectId}/task/index`, tasksBody, { headers , withCredentials: true});
   }
 

@@ -20,6 +20,11 @@
     }
 }
 
+h6, p {
+    color: black !important;
+  }
+  
+
 @media screen and (min-width: 800px) {
 
     .title {
@@ -76,7 +81,7 @@
                         }
                         
                         a {
-                            @apply w-[22%] py-1 text-start rounded-sm;
+                            @apply w-[22%]  text-end rounded-sm;
                             color: grey;
                             
                             &:hover {

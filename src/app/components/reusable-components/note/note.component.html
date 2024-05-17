@@ -24,8 +24,11 @@
       </div>
       <div class="image-container">
         <ng-container *ngFor="let file of note.files">
-          <div class="single-image">
-            <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]">
+          <div class="single-image flex-col">
+            <a [href]="changeUrlOfArchive(file)" download="{{file.name}}">
+              <img [src]="getIconSrc(file)" class="z-[1]">
+            </a>
+            <p class="small-text text-center">{{file.name}}</p>
           </div>
         </ng-container>
       </div>

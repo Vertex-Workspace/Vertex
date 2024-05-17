@@ -82,24 +82,23 @@ export class AppComponent {
     private notificationWebSocket: NotificationWebSocketService,
     private translate: TranslateService,
     private personalizationService: PersonalizationService
-  ) {}
+  ) {
+    this.userBasicData();
+  }
 
 
   ngOnInit(): void {
-    this.userBasicData();
   }
 
   private userBasicData() {
     this.userState.getAuthenticationStatus().subscribe(
       (user : boolean) => {
-        console.log(user);
-        
       if(user){
         this.userLogged = true;
         this.logged = this.userService.getLogged()!;
         this.settingsRequest();
       }
-  }, (error) => this.router.navigate(['/login']));
+  }, (error) => this.router.navigate(['/landing-page']));
   }
   renderPersonalization: boolean = false;
 

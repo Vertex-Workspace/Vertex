@@ -40,6 +40,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
   modalOpen: boolean = false;
 
   ngOnInit(): void { 
+    
   }
 
   getBgColor(): string {
@@ -85,7 +86,7 @@ export class NoteComponent implements OnInit, AfterViewInit {
     this.noteService
       .uploadImage(this.note.id!, fd)
       .subscribe((note: Note) => {
-        this.note = note;
+        this.note.files = note.files;
         this.alert.successAlert(this.translate.instant("alerts.success.uploadImage"))
       });
   }
@@ -176,6 +177,41 @@ export class NoteComponent implements OnInit, AfterViewInit {
       .subscribe((note: Note) => {        
         this.note = note;
       });
+  }
+
+  getIconSrc(message: any): string {
+    if(message.type == "image/png"){
+      return `data:image/jpg;base64, ${message.file}`;
+    }
+    const fileTypeIcons: Record<string, string> = {
+      'application/pdf': 'https://cdn-icons-png.flaticon.com/512/337/337946.png',
+      'text/plain': 'https://cdn-icons-png.freepik.com/512/8243/8243060.png',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'https://cdn-icons-png.freepik.com/256/8361/8361174.png?uid=R112263958&ga=GA1.1.310772085.1710953572&',
+      'video/mp4': 'https://cdn-icons-png.freepik.com/512/8243/8243015.png',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
+      'application/vnd.ms-excel': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
+      'text/csv': 'https://cdn-icons-png.freepik.com/512/8242/8242984.png'
+    };
+    return fileTypeIcons[message.type];;
+  }
+  changeUrlOfArchive(response: any) {
+    if (response.file instanceof Blob) {
+      response.file = this.convertBlobToFile(response.file, response.name);
+      return window.URL.createObjectURL(response.file);
+    } else {
+      const byteCharacters = atob(response.file);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'application/pdf' });
+      return window.URL.createObjectURL(blob);
+    }
+  }
+  convertBlobToFile(blob: Blob, fileName: string): File {
+    const file = new File([blob], fileName, { type: blob.type });
+    return file;
   }
 
 }

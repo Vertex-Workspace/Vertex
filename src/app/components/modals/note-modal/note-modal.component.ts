@@ -50,33 +50,25 @@ export class NoteModalComponent implements OnInit {
   
   colorList: Color[] = [
     {
-      color: '#D3E5EF',
-      imgBackgroundColor: '#c5dfed'
+      color: '#77dd77', 
+      imgBackgroundColor: ''
     },
     {
-      color: '#FF9D9D',
-      imgBackgroundColor: '#ff8787'
+      color: '#779ecb', 
+      imgBackgroundColor: ''
     },
     {
-      color: '#F5E0E9',
-      imgBackgroundColor: '#f5d5e3'
+      color: '#ff7eb9', 
+      imgBackgroundColor: ''
     },
     {
-      color: '#FFD601',
-      imgBackgroundColor: 'deba00'
+      color: '#fff740', 
+      imgBackgroundColor: '#fff740'
     },
     {
-      color: '#E3E2E0',
-      imgBackgroundColor: '#c2c2c0'
+      color: '#ffffff', 
+      imgBackgroundColor: '#fff740'
     },
-    {
-      color: '#65D73C',
-      imgBackgroundColor: '#58cf2d'
-    },
-    {
-      color: '#FFFFFF',
-      imgBackgroundColor: '#F3F3F3'
-    }
   ];
   
   constructor(
@@ -89,27 +81,8 @@ export class NoteModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.note);
     
-    this.route.params.subscribe(params => {
-      if (params) {
-        console.log(params);
-        this.getProject(params['id']);        
-      }
-    });
-    
-    this.descriptionTextarea.nativeElement.focus();
-  }
-
-  getProject(id: number): void {
-    this.projectService
-      .getOneById(id)
-      .subscribe((project: Project) => {
-        console.log(project);
-        
-        
-        
-        this.project = project;
-      })
   }
 
   changeColor(color: Color) {    
@@ -127,6 +100,42 @@ export class NoteModalComponent implements OnInit {
 
   clickOutHandler(): void {
     this.closeModal.emit();
+  }
+
+  getIconSrc(message: any): string {
+    if(message.type == "image/png"){
+      return `data:image/jpg;base64, ${message.file}`;
+    }
+    const fileTypeIcons: Record<string, string> = {
+      'application/pdf': 'https://cdn-icons-png.flaticon.com/512/337/337946.png',
+      'text/plain': 'https://cdn-icons-png.freepik.com/512/8243/8243060.png',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'https://cdn-icons-png.freepik.com/256/8361/8361174.png?uid=R112263958&ga=GA1.1.310772085.1710953572&',
+      'video/mp4': 'https://cdn-icons-png.freepik.com/512/8243/8243015.png',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
+      'application/vnd.ms-excel': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
+      'text/csv': 'https://cdn-icons-png.freepik.com/512/8242/8242984.png'
+    };
+    return fileTypeIcons[message.type];;
+  }
+
+  changeUrlOfArchive(response: any) {
+    if (response.file instanceof Blob) {
+      response.file = this.convertBlobToFile(response.file, response.name);
+      return window.URL.createObjectURL(response.file);
+    } else {
+      const byteCharacters = atob(response.file);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'application/pdf' });
+      return window.URL.createObjectURL(blob);
+    }
+  }
+  convertBlobToFile(blob: Blob, fileName: string): File {
+    const file = new File([blob], fileName, { type: blob.type });
+    return file;
   }
 
   onFileSelected(e: any): void {

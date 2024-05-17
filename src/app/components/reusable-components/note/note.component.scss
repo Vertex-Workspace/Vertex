@@ -1,8 +1,14 @@
 @import '../../../../variables';
 
+h6, p {
+  color: black !important;
+}
+
 .card {
     @apply overflow-hidden shadow-md absolute
     rounded-sm flex cursor-move transition-colors min-w-[120px] min-h-[120px];
+
+    color: $text !important;
   }
   
   .card span:last-child {

@@ -2,11 +2,6 @@
     <div class="modal" [style.backgroundColor]="note.color">
         <div class="left">
 
-            <div class="location pl-2">
-                <p>
-                    {{project.name}}
-                </p>
-            </div>
             <div>
                 <input type="text" class="title" [(ngModel)]="note.title" [style.backgroundColor]="note.color">
             </div>
@@ -27,26 +22,29 @@
                     >
                     </textarea>
 
-                    <a *ngIf="!descriptionEditable" (click)="toggleEditDescription()">
+                    <a class="self-end" *ngIf="!descriptionEditable" (click)="toggleEditDescription()">
                         {{ 'components.modals.note-modal.editDescription' | translate }}
                     </a>
                     
-                    <a *ngIf="descriptionEditable" (click)="toggleEditDescription()">
+                    <a class="self-end" *ngIf="descriptionEditable" (click)="toggleEditDescription()">
                         {{ 'components.modals.note-modal.confirm' | translate }}
                     </a>
                     
                 </div>
-                <div class="image-container">
+                <div class="image-container" *ngIf="note.files.length > 0">
                     <ng-container *ngFor="let file of note.files">
                         <div 
-                            class="single-image"
+                            class="single-image flex-col"
                             (mouseenter)="hoverFile(file)"
                         >
-                            <i class="pi pi-plus rotate-45" (click)="removeImage(file)" *ngIf="hoveringFile === file"></i>
-                            <img src="data:image/jpg;base64, {{file.file}}" class="z-[1]" draggable="false">
+                            <i class="pi pi-plus rotate-45" (click)="removeImage(file)"></i>
+                            <a [href]="changeUrlOfArchive(file)" download="{{ file.name }}">
+                                <img [src]="getIconSrc(file)" class="z-[1]" draggable="false">
+                            </a>
+                            <p class="small-text text-center">{{file.name}}</p>
                         </div>
                     </ng-container>
-                  </div>
+                </div>
 
             </div>
 
