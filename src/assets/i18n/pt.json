@@ -1,4 +1,32 @@
 {
+    "tutorial": {
+        "texts": {
+            "0": "Esta é a barra de navegação lateral. Você terá como voltar para a página inicial, pesquisar QUALQUER coisa do site, acessar o chat, acessar o perfil, o menu de configurações e sair do sistema.",
+            "1": "Este é o cabeçalho do site, onde poderá visualizar sua rota atual, notificações e central de ajuda.",
+            "2": "Aqui você poderá pesquisar e criar novas equipes. Além de visualizar as equipes que você faz parte.",
+            "3": "Acesso rápido para visualizar TODAS as suas tarefas, podendo pesquisar e filtrar por status e data.",
+            "4": "Ao clicar no cartão da equipe, você será redirecionado para página da equipe e terá acesso aos projetos.",
+            "5": "Na tela da equipe você poderá pesquisar e criar novos projetos, além de visualizar os projetos que você faz parte.",
+            "6": "Acesso rápido para visualizar APENAS as tarefas daquela equipe, podendo pesquisar e filtrar por status e data.",
+            "7": "Ao clicar no cartão do projeto, você será redirecionado para página do projeto e terá acesso as tarefas do projeto.",
+            "8": "Aqui você terá acesso à 4 opções de visualização de tarefas, podendo escolher por mural, lista, calendário ou kanban.",
+            "9": "Aqui você poderá criar propriedades que serão utilizadas em tarefas e projetos, bem como editá-las e gerenciar status.",
+            "visualize": "Modos de visualização",
+            "property": "Propriedades",
+            "header": "Cabeçalho",
+            "sidebar": "Barra de Navegação Lateral",
+            "welcome": "Bem-vindo ao Vertex ",
+            "title":"Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!",
+            "visualize/create":"Visualizar / Criar Equipes",
+            "goToTeamPage":"Ir para tela da equipe",
+            "visualize/createProjects":"Visualizar / Criar Projetos",
+            "goToTasks":"Ir para tela de tarefas",
+            "visualizeTeamTasks":"Visualizar Tarefas da Equipe",
+            "back":"Voltar",
+            "next":"Próximo",
+            "end":"Fim"
+        }
+    },
     "pages": {
         "landing-page": {
             "VERTEX": "VERTEX",
@@ -27,11 +55,11 @@
             "VISION_DESCRIPTION": "Ser reconhecido como o principal software de gerenciamento de projetos e tarefas, oferecendo uma solução abrangente e personalizável que atenda às necessidades diversificadas dos usuários. Buscamos constantemente inovação e aprimoramento, visando ser a referência em ferramentas de gestão para a comunidade empresarial e individual.",
             "JOIN_VERTEX_COMMUNITY": "Faça parte da comunidade Vertex",
             "NAVIGATE_VERTEX": "Navegue pelo Vertex",
-            "NOT_STARTED":"Não Iniciado",
-            "IN_PROGRESS":"Em Andamento",
-            "COMPLETED":"Concluído",
-            "PAUSED":"Pausado",
-            "NEW_TASK":"Nova Tarefa",
+            "NOT_STARTED": "Não Iniciado",
+            "IN_PROGRESS": "Em Andamento",
+            "COMPLETED": "Concluído",
+            "PAUSED": "Pausado",
+            "NEW_TASK": "Nova Tarefa",
             "COPYRIGHT": "© 2024 Vertex. Todos os direitos reservados.",
             "DEVELOPED_BY": "Desenvolvido por",
             "MANAGE_TIME": "Gerencie seu Tempo de Ponta a Ponta",
@@ -253,7 +281,7 @@
                 "enableTextReading": "Habilitar leitura de texto",
                 "Tema Claro": "Tema Claro",
                 "Tema Escuro": "Tema Escuro",
-                "tutorial":"Habilitar tutorial"
+                "tutorial": "Habilitar tutorial"
             },
             "notifications": {
                 "Notification": "Notificações",
@@ -324,9 +352,9 @@
                 "name": "Nome do grupo",
                 "participants": "Selecionar Participantes",
                 "name_placeholder": "Adicione um nome para o grupo",
-                "multi_select":"Membros do grupo",
-                "members":"Membros",
-                "confirm_button":"Criar Grupo",
+                "multi_select": "Membros do grupo",
+                "members": "Membros",
+                "confirm_button": "Criar Grupo",
                 "cancel_button": "Cancelar"
             },
             "groups": {
@@ -580,12 +608,11 @@
             "alterated": " alterado com sucesso!",
             "uploadImage": "Imagem adicionada!",
             "editedGroup": "Nome do grupo editado com sucesso!",
-            "groupCreated":"Grupo criado com sucesso!",
-            "descriptionUpdated":"Descrição atualizada com sucesso!",
-            "nameUpdated":"Nome atualizado com sucesso!",
-            "task-responsibles":"Responsáveis da tarefa atualizados com sucesso",
+            "groupCreated": "Grupo criado com sucesso!",
+            "descriptionUpdated": "Descrição atualizada com sucesso!",
+            "nameUpdated": "Nome atualizado com sucesso!",
+            "task-responsibles": "Responsáveis da tarefa atualizados com sucesso",
             "dependency": "Esta tarefa necessita da realização de "
-            
         },
         "error": {
             "participantsNotAddedToGroup": "Erro ao adicionar usuário ao grupo!",

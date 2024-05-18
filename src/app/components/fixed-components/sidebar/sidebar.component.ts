@@ -1,8 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { faMessage, faMagnifyingGlass, faClipboardList, 
   faUser, faGear, faSignOut, faBellSlash, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
+import { JoyrideService } from 'ngx-joyride';
 import { UserService } from 'src/app/services/user.service';
+import { tutorialText } from 'src/app/tutorialText';
 
 
 @Component({
@@ -17,11 +20,23 @@ export class SidebarComponent {
   faUser = faUser;
   faGear = faGear;
   faSignOut = faSignOut;
+  string : string = "";
+  tutorialText: any[] = tutorialText;
 
   constructor(
     private userService: UserService,
-    private router:Router
-  ) {}
+    private router:Router,
+    private translateService : TranslateService,
+    private cd : ChangeDetectorRef
+  ) {
+     
+    this.string = this.translateService.instant(tutorialText[0]);
+  }
+
+  getString(){
+    return this.translateService.instant("tutorial.texts.0");
+
+  }
 
   items: any = [
     { label: "Pesquisar", icon: "pi pi-search", command: () => { this.switchSearch(); } },

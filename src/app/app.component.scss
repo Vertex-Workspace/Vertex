@@ -348,6 +348,20 @@
     color: white !important;
 }
 
+::ng-deep .joyride-step__container {
+    box-sizing: border-box;
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0 0 30px 1px #000;
+    border-radius: 5px;
+    border-top: 10px solid $primaryColor;
+}
+
 ::ng-deep .joyride-arrow__left {
     border-right: 11px solid $card !important;
     border-top: 11px solid transparent;
@@ -357,7 +371,7 @@
 ::ng-deep .joyride-arrow__top {
     border-right: 11px solid transparent;
     border-left: 11px solid transparent;
-    border-bottom: 11px solid $card !important;
+    border-bottom: 11px solid $primaryColor !important;
 }
 
 ::ng-deep .joyride-arrow__bottom {

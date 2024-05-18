@@ -1,4 +1,32 @@
 {
+  "tutorial": {
+    "texts": {
+      "0": "Esta es la barra de navegación lateral. Podrás volver a la página de inicio, buscar CUALQUIER cosa en el sitio, acceder al chat, al perfil, al menú de configuración y salir del sistema.",
+      "1": "Este es el encabezado del sitio, donde podrá ver su ruta actual, notificaciones y centro de ayuda.",
+      "2": "Aquí podrás buscar y crear nuevos equipos. Además de visualizar los equipos de los que formas parte.",
+      "3": "Acceso rápido para ver TODAS tus tareas, pudiendo buscar y filtrar por estado y fecha.",
+      "4": "Al hacer clic en la tarjeta del equipo, serás redirigido a la página del equipo y tendrás acceso a los proyectos.",
+      "5": "En la pantalla del equipo, podrás buscar y crear nuevos proyectos, además de visualizar los proyectos de los que formas parte.",
+      "6": "Acceso rápido para ver SOLO las tareas de ese equipo, pudiendo buscar y filtrar por estado y fecha.",
+      "7": "Al hacer clic en la tarjeta del proyecto, serás redirigido a la página del proyecto y tendrás acceso a las tareas del proyecto.",
+      "8": "Aquí tendrás acceso a 4 opciones de visualización de tareas, pudiendo elegir entre mural, lista, calendario o kanban.",
+      "9": "Aquí podrás crear propiedades que se utilizarán en tareas y proyectos, así como editarlas y gestionar estados.",
+      "visualize": "Modos de visualización",
+      "property": "Propiedades",
+      "header": "Encabezado",
+      "sidebar": "Barra de Navegación Lateral",
+      "welcome": "Bienvenido a Vertex",
+      "title": "¡Explore Vertex y descubra cómo gestionar su tiempo de principio a fin!",
+      "visualize/create": "Visualizar / Crear Equipos",
+      "goToTeamPage": "Ir a la página del equipo",
+      "visualize/createProjects": "Visualizar / Crear Proyectos",
+      "goToTasks": "Ir a la página de tareas",
+      "visualizeTeamTasks": "Visualizar Tareas del Equipo",
+      "back": "Volver",
+      "next": "Siguiente",
+      "end": "Fin"
+    }
+  },
   "pages": {
     "landing-page": {
       "VERTEX": "VERTEX",
@@ -253,7 +281,7 @@
         "enableTextReading": "Habilitar lectura de texto",
         "Tema Claro": "Tema Claro",
         "Tema Escuro": "Tema Oscuro",
-        "tutorial":"Habilitar tutorial"
+        "tutorial": "Habilitar tutorial"
       },
       "notifications": {
         "Notification": "Notificaciones",
@@ -329,16 +357,16 @@
         "confirm_button": "Crear Grupo",
         "cancel_button": "Cancelar"
       },
-      "change-password" : {
+      "change-password": {
         "title": "Cambio Periódico de Contraseña",
         "subtitle": "Para su seguridad, ingrese una nueva contraseña",
         "placeholder": "Ingrese su nueva contraseña",
         "button": "Enviar"
-    },
+      },
       "groups": {
         "multi_select": "Miembros del grupo",
         "members": "miembros"
-    },    
+      },
       "minichat": {
         "header": {
           "conversations": "Conversaciones"

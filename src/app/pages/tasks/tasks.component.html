@@ -16,7 +16,7 @@
 
         <section class="menu">
             <div joyrideStep="step6" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'pages.tasks.viewModesTitle' | translate" [stepContent]="customContent"
+                [title]="'tutorial.texts.visualize' | translate" [stepContent]="customContent"
                 [stepContentParams]="{ texto: tutorialText[8] | translate }">
                 <ng-container *ngFor="let item of menuItems">
                     <label [ngClass]="clicked === item.id ? 'clicked' : 'default'" class="medium-text">
@@ -54,8 +54,8 @@
                 </button>
 
                 <div joyrideStep="step7" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                    [doneTemplate]="doneButton" [title]="'Modos de visualização das tarefas'"
-                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[9] }">
+                    [doneTemplate]="doneButton" [title]="'tutorial.texts.property' | translate"
+                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[9] | translate }">
                     <button class="properties-button" (click)="openPropertiesModal()" *ngIf="clicked !== 'Mural'">
                         <i class="pi pi-tags"></i>
                         <p>
@@ -159,19 +159,19 @@
 
 <ng-template #prevButton>
     <button class="btn">
-        Voltar
+        {{'tutorial.texts.back' | translate}}
     </button>
 </ng-template>
 <ng-template #nextButton>
     <button class="btn">
-        Próximo
+        {{'tutorial.texts.next' | translate}}
     </button>
 </ng-template>
 <ng-template #doneButton>
     <button (click)="attUserFirstAccess()" class="btn">
-        Fim
+        {{'tutorial.texts.end' | translate}}
     </button>
 </ng-template>
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">
-    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px" class="teste"></div>
+    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px" class="teste text-justify"></div>
 </ng-template>
