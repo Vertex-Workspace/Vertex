@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { JoyrideModule } from 'ngx-joyride';
 import { TranslateModule } from '@ngx-translate/core';
+import { PipesModule } from 'src/app/pipes/module/pipes.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TranslateModule } from '@ngx-translate/core';
     TaskModule,
     TranslateModule,
     FormsModule,
-    CascadeSelectModule
+    CascadeSelectModule,
+    PipesModule
   ],
 })
 export class ProjectsModule { }

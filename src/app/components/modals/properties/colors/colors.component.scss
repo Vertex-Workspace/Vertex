@@ -16,14 +16,6 @@ li {
 
     }
 
-    p{
-        color: $secondColor;
-    }
-}
-
-fa-icon {
-    @apply text-xl;
-    color: $secondColor;
 }
 
 
@@ -39,8 +31,4 @@ fa-icon {
     .real-time-view{
         @apply h-10 flex justify-center items-center rounded-2xl px-3 py-1;
     }
-}
-
-.color{
-    color: $text !important
 }

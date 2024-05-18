@@ -83,9 +83,10 @@ export class ListComponent implements OnInit {
     this.logged = userService.getLogged();
   }
 
-  ngOnChanges(){
-    this.loadingService.hide();
-    this.updateGlobalValues();
+  ngOnChanges(){ 
+    if(this.router.url.includes("tarefas")){
+      this.updateGlobalValues();
+    }
   }
   ngOnInit(): void {      
     this.updateGlobalValues();

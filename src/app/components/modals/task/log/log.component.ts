@@ -18,8 +18,7 @@ export class LogComponent {
   }
 
   convertDateToString(item: LogRecord): string {
-    const date = new Date(item.date);
-    return date.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+    return new Date(item.date).toLocaleDateString();
   }
   
 }

@@ -67,16 +67,13 @@ export class HomeComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
+    this.loadTranslatedOptions();
 
-    this.translate.onLangChange.subscribe(() => {
-      this.loadTranslatedOptions();
-    });
   }
 
   ngOnInit(): void {
     this.checkChangePassword();
     this.subscribeToTeams();
-    this.loadTranslatedOptions();
   }
 
 
@@ -122,7 +119,7 @@ export class HomeComponent implements OnInit {
     ];
 
     // Detect changes after loading translations
-    this.detectChanges();
+    // this.detectChanges();
   }
 
   detectChanges() {

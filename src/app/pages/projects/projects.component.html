@@ -41,7 +41,7 @@
                         <h6 class="pt-16 flex justify-center items-center">{{"pages.projects.noProjects" | translate }}</h6>
                     </div>
                     <app-card-list style="width: 100%; height: 90%; padding-top: 3%" [type]="'project'" [team]="team"
-                        [teamScreen]="'project'" [projects]="projects">
+                        [teamScreen]="'project'" [projects]="(projects | namePipe : projectSearch)">
                     </app-card-list>
                     <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
                         *ngIf="isCreatingProject" (senderEmitter)="updateProjects($event)" (close)="switchCreateView()"

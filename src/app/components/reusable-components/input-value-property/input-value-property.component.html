@@ -39,7 +39,7 @@
     [options]="getSelectOptions(value)"
     optionLabel="value" optionGroupLabel="name" 
     [optionGroupChildren]="[]"
-    [style]="{ minWidth: '200px', maxWidth: '200px',  'background-color': 'var(--card)' }" 
+    [style]="{ minWidth: '200px', maxWidth: '200px',  'background-color': backgroundColor }" 
     placeholder="{{getValue()}}"
     (onChange)="changeList($event, value)" 
     appendTo="body" 

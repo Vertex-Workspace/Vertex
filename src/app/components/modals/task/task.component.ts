@@ -96,7 +96,7 @@ export class TaskComponent {
     }
     
   }
-  selectedComponent: string = 'attachments';
+  selectedComponent: string = 'description';
 
   soloResponsable: boolean = false;
   checkedReview: boolean = false;

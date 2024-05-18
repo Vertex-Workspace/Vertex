@@ -10,8 +10,8 @@
                         <h1 *ngIf="!hasImage(item)">{{getFirstLetter(item)}}</h1>
                     </div>
                     <div class="informations">
-                        <div class="infos-team" (click)="openTeam(item.id)">
-                            <p class="large-text">{{item.name}}</p>
+                        <div class="infos-team" >
+                            <p class="large-text" (click)="openTeam(item.id)">{{item.name}}</p>
                             <p class="regular-text underline" *ngIf="teamScreen != 'project'" (click)="openTeamInformations(item.id)">
                                 {{'components.reusable-components.card-list.viewInformation' | translate }}</p>
                         </div>
