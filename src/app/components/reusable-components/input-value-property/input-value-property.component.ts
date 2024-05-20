@@ -64,10 +64,6 @@ export class InputValuePropertyComponent {
   ngOnInit(): void {
     this.oldValue = new Value(this.value);
 
-    if (this.value.property.kind === PropertyKind.STATUS ||
-      this.value.property.kind === PropertyKind.LIST) {
-      this.setBackground();
-    }
     if (this.value.property.kind === PropertyKind.NUMBER && this.value.value != null) {
       this.valueNumber = this.value.value as number;
     }
@@ -226,17 +222,16 @@ export class InputValuePropertyComponent {
           this.value = this.oldValue;
 
           this.task.values[0] = this.value;
-          this.setBackground();
         }
         this.alertService.errorAlert(error.error);
       }
     );
   }
 
-  setBackground(): void {
+  getBackgroundColor() {
     let valuePropertyList: PropertyList = this.value.value as PropertyList;
     if (valuePropertyList != null) {
-      this.backgroundColor = valuePropertyList.color;
+      return valuePropertyList.color;
     }
   }
 }

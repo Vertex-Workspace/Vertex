@@ -84,6 +84,10 @@ export class AppComponent {
     private personalizationService: PersonalizationService
   ) {
     this.userBasicData();
+
+    if(!document.cookie.includes("JWT") && localStorage.getItem("logged") != null){
+      localStorage.removeItem("logged");
+    }
   }
 
 

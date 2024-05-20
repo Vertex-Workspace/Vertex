@@ -420,7 +420,7 @@ export class TasksComponent implements OnInit {
   }
 
   changeProject(project: Project) {
-    this.project = project;
+    this.project = {...project};
   }
 
   getProject(): Project {
