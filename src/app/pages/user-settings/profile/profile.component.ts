@@ -3,7 +3,8 @@ import {
   faUser, faEnvelope,
   faEarthAmericas, faKey, faAngleDown, faToggleOff,
   faPencil, faToggleOn, faCircleUser,
-  faPenToSquare
+  faPenToSquare,
+  faTShirt
 } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { User, UserKind } from 'src/app/models/class/user';
@@ -77,6 +78,10 @@ export class ProfileComponent {
     if(this.logged.showCharts){
       this.tooglesList[0].icon = faToggleOn;
     }
+
+    if (this.logged.syncWithCalendar) {
+      this.tooglesList[1].icon = faToggleOn;
+    }
     
 
     this.form = this.formBuilder.group({
@@ -93,9 +98,14 @@ export class ProfileComponent {
 
 
   syncCalendar(): void {
-    console.log('aoisjd9iasjdfi');
-    window.location.href = `http://localhost:7777/calendar/authorize`;
-    // this.userService.a().subscribe();    
+    if (!this.logged.syncWithCalendar) {
+      this.logged.syncWithCalendar = true;
+      window.location.href = `http://localhost:7777/calendar/authorize`;
+      this.tooglesList[1].icon = faToggleOn; 
+    } else {
+        this.userService.a().subscribe(); 
+        this.tooglesList[1].icon = faToggleOff; 
+    }
   }
 
   syncDrive(): void {
@@ -112,6 +122,7 @@ export class ProfileComponent {
       this.alert.successAlert(this.translate.instant('alerts.success.update_success'))
       this.logged = user;
       this.tooglesList[0].icon = this.tooglesList[0].icon === faToggleOff ? faToggleOn : faToggleOff;
+    
     });
   }
 
