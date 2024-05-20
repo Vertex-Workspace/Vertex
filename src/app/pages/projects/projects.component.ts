@@ -57,11 +57,6 @@ export class ProjectsComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
-    // this.translate.onLangChange.subscribe(() => {
-    //   if(document.cookie.includes('JWT')) {
-    //     this.updateTranslate();
-    //   }
-    // });
   }
 
 
