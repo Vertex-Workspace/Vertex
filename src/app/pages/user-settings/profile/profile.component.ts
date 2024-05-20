@@ -94,8 +94,8 @@ export class ProfileComponent {
 
   syncCalendar(): void {
     console.log('aoisjd9iasjdfi');
-    
-    this.userService.a(this.logged.id!).subscribe();    
+    window.location.href = `http://localhost:7777/calendar/authorize`;
+    // this.userService.a().subscribe();    
   }
 
   syncDrive(): void {
