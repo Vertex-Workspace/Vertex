@@ -26,16 +26,8 @@ export class SidebarComponent {
   constructor(
     private userService: UserService,
     private router:Router,
-    private translateService : TranslateService,
-    private cd : ChangeDetectorRef
   ) {
-     
-    this.string = this.translateService.instant(tutorialText[0]);
-  }
-
-  getString(){
-    return this.translateService.instant("tutorial.texts.0");
-
+    
   }
 
   items: any = [

@@ -56,7 +56,9 @@ export class ProjectsComponent implements OnInit {
   ) {
     this.logged = this.userService.getLogged();
     this.translate.onLangChange.subscribe(() => {
-      this.updateTranslate();
+      if(document.cookie.includes('JWT')) {
+        this.updateTranslate();
+      }
     });
   }
 

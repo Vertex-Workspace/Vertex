@@ -669,5 +669,10 @@
   "addedToTeam": "Has sido agregado al equipo ",
   "success_alert": "Éxito",
   "error_alert": "Erro",
-  "notification_alert": "Atención"
+  "notification_alert": "Atención",
+  "permission": {
+    "Criar": "Crear",
+    "Editar": "Editar",
+    "Deletar": "Borrar"
+  }
 }

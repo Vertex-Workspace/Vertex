@@ -140,7 +140,7 @@ export class HeaderComponent {
   }
 
   backToHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   backToTeam(hasProjectId: boolean): void {

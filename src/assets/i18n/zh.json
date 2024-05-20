@@ -663,11 +663,17 @@
         }
     },
     "equipe": "团队",
+
     "deleteProject": "删除项目？",
     "deleteTeam": "删除团队？",
     "exitTeam": "退出团队？",
     "addedToTeam": "您已被添加到团队 ",
     "success_alert": "成功",
     "error_alert": "错误",
-    "notification_alert": "注意力"
+    "notification_alert": "注意力",
+    "permission" :{
+        "Criar": "创造",
+        "Editar": "编辑",
+        "Deletar": "删除"
+    }
 }

@@ -17,7 +17,7 @@
         </p-multiSelect>
     </div>
     <div class="h-[12%] members">
-        <p>{{group.userTeams?.length}} {{'pages.team-informations.members' | translate}}</p>
+        <p>{{'pages.team-informations.members' | translate: {number: group.userTeams?.length} }}</p>
     </div>
 </div>
 

@@ -36,7 +36,7 @@
                         <div (click)="openConversation(chatFor)"
                             [ngClass]="chatFor.conversationOpen! ? 'card-chatOpen' : 'card-chat'">
                             <div class="user-card-message">
-                                <div class="overflow-hidden h-20 w-20 icon" *ngIf="chatFor.image">
+                                <div class="overflow-hidden h-20 w-20 img-chat" *ngIf="chatFor.image">
                                     <img src="data:image/jpg;base64, {{chatFor.image}}" alt="" class="rounded-full object-cover h-full w-full">
                                 </div>
                                 <fa-icon class="chat-icons" [icon]="faCircleUser" *ngIf="!chatFor.image"></fa-icon>

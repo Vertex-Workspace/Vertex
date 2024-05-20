@@ -16,15 +16,15 @@
             "header": "Cabeçalho",
             "sidebar": "Barra de Navegação Lateral",
             "welcome": "Bem-vindo ao Vertex ",
-            "title":"Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!",
-            "visualize/create":"Visualizar / Criar Equipes",
-            "goToTeamPage":"Ir para tela da equipe",
-            "visualize/createProjects":"Visualizar / Criar Projetos",
-            "goToTasks":"Ir para tela de tarefas",
-            "visualizeTeamTasks":"Visualizar Tarefas da Equipe",
-            "back":"Voltar",
-            "next":"Próximo",
-            "end":"Fim"
+            "title": "Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!",
+            "visualize/create": "Visualizar / Criar Equipes",
+            "goToTeamPage": "Ir para tela da equipe",
+            "visualize/createProjects": "Visualizar / Criar Projetos",
+            "goToTasks": "Ir para tela de tarefas",
+            "visualizeTeamTasks": "Visualizar Tarefas da Equipe",
+            "back": "Voltar",
+            "next": "Próximo",
+            "end": "Fim"
         }
     },
     "pages": {
@@ -662,5 +662,11 @@
     "addedToTeam": "Você foi adicionado ao time ",
     "success_alert": "Successo",
     "error_alert": "Erro",
-    "notification_alert": "Atenção"
+    "notification_alert": "Atenção",
+    
+    "permission" :{
+        "Criar": "Criar",
+        "Editar": "Editar",
+        "Deletar": "Deletar"
+    }
 }

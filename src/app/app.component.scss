@@ -357,9 +357,10 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    box-shadow: 0 0 30px 1px #000;
+    box-shadow: 0 0 50px 1px #000;
     border-radius: 5px;
     border-top: 10px solid $primaryColor;
+    font-family: $fontFamily !important;
 }
 
 ::ng-deep .joyride-arrow__left {

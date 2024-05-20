@@ -44,6 +44,7 @@ export class AppComponent {
 
   title = 'Vertex';
   tutorialText = tutorialText;
+  persObservable!: Observable<Personalization>;
 
   inputColor: string = '#FFFFFF';
   fontColor: string = '#000000';
@@ -82,11 +83,23 @@ export class AppComponent {
     private notificationWebSocket: NotificationWebSocketService,
     private translate: TranslateService,
     private personalizationService: PersonalizationService
-  ) {}
+  ) {
+    console.log(this.tutorialText[0]);
+    if(document.cookie.includes('JWT')){
+      translate.setDefaultLang(this.userService.getLogged().personalization!.language!);
+    }
 
 
+  }
+  
+  
   ngOnInit(): void {
     this.userBasicData();
+    
+  }
+
+  getText(a:number):string{
+    return this.tutorialText[a];
   }
 
   private userBasicData() {
@@ -104,13 +117,10 @@ export class AppComponent {
   renderPersonalization: boolean = false;
 
   private settingsRequest(){
-    this.personalizationService.findByUserId(this.userService.getLogged().id!).subscribe(
+    this.persObservable = this.personalizationService.findByUserId(this.userService.getLogged().id!);
+    this.persObservable.forEach(
       (res: Personalization) => {
-        this.translate.setDefaultLang(res.language!);
-      },
-      (error) => {
-        this.translate.setDefaultLang('pt');
-        console.error("Erro ao buscar personalização do usuário", error);
+        this.translate.setDefaultLang(res.language!); 
       }
     );
     this.personalizationService.setPersonalization(this.logged.personalization!);

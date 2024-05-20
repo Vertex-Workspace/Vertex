@@ -146,8 +146,9 @@
     <app-modal-properties *ngIf="propertiesOpen" [project]="project" [height]="'600px'" [width]="'450px'"
         (close)="openPropertiesModal()" (changeProjectSettings)="changeProject($event)"></app-modal-properties>
 
-    <app-task *ngIf="taskOpen" [task]="taskOpenObject" [project]="project" [permissions]="permissions"
-        (changes)="updateProjectByTaskChanges($event)" (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
+    <app-task *ngIf="taskOpen" [task]="taskOpenObject"
+        [project]="project" [permissions]="permissions" (changes)="updateProjectByTaskChanges($event)"
+        (close)="changeModalTaskState(false, taskOpenObject)"></app-task>
 
     <app-review-task *ngIf="taskReview" [tasksToReview]="tasksToReview" (toggleReview)="toggleReview()"
         (closeModal)="updateTasksToReview($event)"></app-review-task>
