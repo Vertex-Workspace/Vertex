@@ -158,7 +158,8 @@ export class ListComponent implements OnInit {
     this.taskList.splice(this.taskList.indexOf(task), 1);
   }
 
-  @Input() shouldApplyZIndex : boolean = false
+  @Input() shouldApplyZIndex : boolean = false;
+
   getStyles() {
     return {
       'width': 'full',

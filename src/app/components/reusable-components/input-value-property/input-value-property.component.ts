@@ -75,6 +75,8 @@ export class InputValuePropertyComponent {
       this.valueText = this.value.value as string;
     }
 
+
+
     this.portugueseDate = {
       firstDayOfWeek: 0,
       dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
@@ -123,7 +125,7 @@ export class InputValuePropertyComponent {
 
 
   getSelectOptions(value: Value): PropertyList[] {
-    return value.property.propertyLists;
+    return value.property.propertyLists.filter((propertyList) => propertyList.propertyListKind != PropertyListKind.INVISIBLE);
   }
 
   getKind(property: Property, kind: string): boolean {
