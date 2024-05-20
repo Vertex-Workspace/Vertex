@@ -31,6 +31,7 @@ export class Task {
     files: any[];
     
     image ?: string; //only validation
+    imgUrl ?: string; //only validation
     log !: any[];
 
     indexTask: number = 0;
