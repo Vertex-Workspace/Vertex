@@ -298,7 +298,7 @@
     border-color: $primaryColor;
 }
 
-::ng-deep .p-cascadeselect:not(.p-disabled).p-focus{
+::ng-deep .p-cascadeselect:not(.p-disabled).p-focus {
     outline-offset: 0;
     outline: 0 none;
     box-shadow: 0 0 0 0.025rem $primaryColor !important;
@@ -320,14 +320,14 @@
     border-color: $primaryColor;
 }
 
-::ng-deep .p-multiselect:not(.p-disabled).p-focus{
+::ng-deep .p-multiselect:not(.p-disabled).p-focus {
     outline-offset: 0;
     outline: 0 none;
     box-shadow: 0 0 0 0.025rem $primaryColor !important;
     border-color: $primaryColor !important;
 }
 
-::ng-deep .p-dropdown:not(.p-disabled).p-focus{
+::ng-deep .p-dropdown:not(.p-disabled).p-focus {
     outline-offset: 0;
     outline: 0 none;
     box-shadow: 0 0 0 0.025rem $primaryColor !important;
@@ -338,4 +338,57 @@
     border-color: $primaryColor;
 }
 
+::ng-deep .joyride-step__close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    color: white !important;
+}
 
+::ng-deep .joyride-step__container {
+    box-sizing: border-box;
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0 0 50px 1px #000;
+    border-radius: 5px;
+    border-top: 10px solid $primaryColor;
+    font-family: $fontFamily !important;
+}
+
+::ng-deep .joyride-arrow__left {
+    border-right: 11px solid $card !important;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+}
+
+::ng-deep .joyride-arrow__top {
+    border-right: 11px solid transparent;
+    border-left: 11px solid transparent;
+    border-bottom: 11px solid $primaryColor !important;
+}
+
+::ng-deep .joyride-arrow__bottom {
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 11px solid $card !important;
+}
+
+::ng-deep .joyride-backdrop .backdrop-right{
+    background-color: none !important;
+}
+
+::ng-deep line {
+    stroke: $text !important;
+    stroke-width: 3;
+}
+::ng-deep .joyride-step__title {
+    color: $text !important;
+}

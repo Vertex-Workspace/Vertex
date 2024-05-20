@@ -5,10 +5,8 @@
 
     <aside (mouseenter)="openSideBar()" (mouseleave)="openSideBar()"
         [ngClass]="isSideBarExpanded ? 'side-barOpen': 'side-bar'">
-        <app-sidebar [isSideBarExpanded]="isSideBarExpanded" style="width: 100%; height: 100%;"
-            (openChat)="expandChat($event)" joyrideStep="sidebar" [prevTemplate]="prevButton"
-            [nextTemplate]="nextButton" [title]="'Barra de navegação lateral'" [stepContent]="customContent"
-            [stepContentParams]="{ texto: tutorialText[0] }" />
+        <app-sidebar [isSideBarExpanded]="isSideBarExpanded"
+            style="width: 100%; height: 100%;" (openChat)="expandChat($event)" />
     </aside>
 
     <div [ngClass]="isSideBarExpanded ? 'main-divOpen': 'main-div'"
@@ -27,9 +25,7 @@
 
 
                 <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()"
-                    [currentRoute]="'/home'" [notificationBadge]="notificationBadge" joyrideStep="header"
-                    [prevTemplate]="prevButton" [nextTemplate]="nextButton" [title]="'Cabeçalho do site'"
-                    [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[1] }"/>
+                    [currentRoute]="'/home'" [notificationBadge]="notificationBadge" />
 
             </header>
 
@@ -78,17 +74,3 @@
     <p-toast></p-toast>
 
 </div>
-
-<ng-template #prevButton>
-    <button class="btn">
-        Voltar
-    </button>
-</ng-template>
-<ng-template #nextButton>
-    <button class="btn">
-        Próximo
-    </button>
-</ng-template>
-<ng-template #customContent let-texto="texto" style="border-radius: 5px">
-    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px" class="tutorial-div"></div>
-</ng-template>

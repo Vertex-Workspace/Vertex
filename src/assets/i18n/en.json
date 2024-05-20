@@ -1,4 +1,32 @@
-{   
+{
+    "tutorial": {
+        "texts": {
+            "0": "This is the sidebar navigation. You will be able to go back to the homepage, search for ANYTHING on the site, access the chat, profile, settings menu, and log out.",
+            "1": "This is the site header, where you can view your current route, notifications, and help center.",
+            "2": "Here you can search for and create new teams. You can also view the teams you are part of.",
+            "3": "Quick access to view ALL your tasks, with the ability to search and filter by status and date.",
+            "4": "By clicking on the team card, you will be redirected to the team page and have access to the projects.",
+            "5": "On the team screen, you can search for and create new projects, as well as view the projects you are part of.",
+            "6": "Quick access to view ONLY the tasks of that team, with the ability to search and filter by status and date.",
+            "7": "By clicking on the project card, you will be redirected to the project page and have access to the project tasks.",
+            "8": "Here you will have access to 4 task view options, you can choose from wall, list, calendar, or kanban.",
+            "9": "Here you can create properties that will be used in tasks and projects, as well as edit them and manage status.",
+            "visualize": "View Modes",
+            "property": "Properties",
+            "header": "Header",
+            "sidebar": "Sidebar Navigation",
+            "welcome": "Welcome to Vertex, ",
+            "title": "Explore Vertex and discover how to manage your time from end to end!",
+            "visualize/create": "View / Create Teams",
+            "goToTeamPage": "Go to team page",
+            "visualize/createProjects": "View / Create Projects",
+            "goToTasks": "Go to tasks page",
+            "visualizeTeamTasks": "View Team Tasks",
+            "back": "Back",
+            "next": "Next",
+            "end": "End"
+        }
+    },
     "pages": {
         "landing-page": {
             "VERTEX": "VERTEX",
@@ -252,7 +280,8 @@
                 "enableSignLanguage": "Enable sign language",
                 "enableTextReading": "Enable text reading",
                 "Tema Claro": "Light Theme",
-                "Tema Escuro": "Dark Theme"
+                "Tema Escuro": "Dark Theme",
+                "tutorial": "Enable tutorial"
             },
             "notifications": {
                 "Notification": "Notifications",
@@ -325,12 +354,12 @@
                 "name": "Group Name",
                 "participants": "Select Participants",
                 "name_placeholder": "Add a name for the group",
-                "multi_select":"Group Members",
-                "members":"Members",
-                "confirm_button":"Create Group",
+                "multi_select": "Group Members",
+                "members": "Members",
+                "confirm_button": "Create Group",
                 "cancel_button": "Cancel"
             },
-            "change-password" : {
+            "change-password": {
                 "title": "Periodic Password Change",
                 "subtitle": "For your security, please enter a new password",
                 "placeholder": "Enter your new password",
@@ -339,7 +368,7 @@
             "groups": {
                 "multi_select": "Group Members",
                 "members": "members"
-            },            
+            },
             "minichat": {
                 "header": {
                     "conversations": "Conversations"
@@ -591,7 +620,7 @@
             "descriptionUpdated": "Description updated successfully!",
             "nameUpdated": "Name updated successfully!",
             "new-password": "Password modified successfully",
-            "task-responsibles":"Task responsibles updated successfully",
+            "task-responsibles": "Task responsibles updated successfully",
             "dependency": "This task requires the conclusion of "
         },
         "error": {
@@ -636,11 +665,17 @@
         }
     },
     "equipe": "Team ",
+
     "deleteProject": "delete the project?",
     "deleteTeam": "delete team?",
     "exitTeam": "leave the team?",
     "addedToTeam": "You have been added to the team ",
     "success_alert": "Success",
     "error_alert": "Error",
-    "notification_alert": "Be Careful"
+    "notification_alert": "Be Careful",
+    "permission" :{
+        "Criar": "Create",
+        "Editar": "Edit",
+        "Deletar": "Delete"
+    }
 }

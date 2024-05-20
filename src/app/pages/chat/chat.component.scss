@@ -141,8 +141,13 @@ main {
     @apply flex flex-col gap-2 items-center;
 }
 
+.img-chat{
+    background-color: $secondColor;
+    @apply rounded-full flex items-center justify-center;
+}
+
 .card-chat {
-    @apply flex justify-start  items-center w-full pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-start w-[90%] items-center  pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     border: 1px solid $emphasis;
     color: $text;
     background-color: $secondColor;
@@ -150,7 +155,7 @@ main {
 }
 
 .card-chatOpen {
-    @apply flex justify-start items-center w-[105%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-start items-center w-[100%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     background-color: $primaryColor;
     color: $secondColor !important;
     animation: rightPulse 0.3s;
@@ -163,7 +168,7 @@ main {
 
 @keyframes leftPulse {
     0% {
-        width: 95%;
+        width: 100%;
     }
 
     100% {
@@ -177,7 +182,7 @@ main {
     }
 
     100% {
-        width: 95%;
+        width: 100%;
     }
 }
 

@@ -1,4 +1,32 @@
 {
+    "tutorial": {
+        "texts": {
+            "0": "这是侧边栏导航。您可以返回主页、搜索网站上的任何内容、访问聊天、个人资料、设置菜单和退出系统。",
+            "1": "这是网站的页眉，您可以在其中查看当前路线、通知和帮助中心。",
+            "2": "在这里，您可以搜索和创建新团队。还可以查看您所属的团队。",
+            "3": "快速访问查看所有任务，并可按状态和日期搜索和筛选。",
+            "4": "点击团队卡片后，您将被重定向到团队页面并可访问项目。",
+            "5": "在团队页面，您可以搜索和创建新项目，并查看您参与的项目。",
+            "6": "快速访问仅查看该团队的任务，并可按状态和日期搜索和筛选。",
+            "7": "点击项目卡片后，您将被重定向到项目页面并可访问项目任务。",
+            "8": "在这里，您可以访问4种任务视图选项，可以选择墙、列表、日历或看板。",
+            "9": "在这里，您可以创建将在任务和项目中使用的属性，并可以编辑和管理状态。",
+            "visualize": "视图模式",
+            "property": "属性",
+            "header": "页眉",
+            "sidebar": "侧边栏导航",
+            "welcome": "欢迎来到 Vertex, ",
+            "title": "探索 Vertex，发现如何从头到尾管理您的时间！",
+            "visualize/create": "查看 / 创建团队",
+            "goToTeamPage": "转到团队页面",
+            "visualize/createProjects": "查看 / 创建项目",
+            "goToTasks": "转到任务页面",
+            "visualizeTeamTasks": "查看团队任务",
+            "back": "返回",
+            "next": "下一步",
+            "end": "结束"
+        }
+    },
     "pages": {
         "landing-page": {
             "VERTEX": "VERTEX",
@@ -252,7 +280,8 @@
                 "enableSignLanguage": "启用手语",
                 "enableTextReading": "启用文本阅读",
                 "Tema Claro": "亮色主题",
-                "Tema Escuro": "暗色主题"
+                "Tema Escuro": "暗色主题",
+                "tutorial": "启用教程"
             },
             "notifications": {
                 "Notification": "通知",
@@ -325,12 +354,12 @@
                 "name": "群组名称",
                 "participants": "选择参与者",
                 "name_placeholder": "为群组添加名称",
-                "multi_select":"群组成员",
-                "members":"成员",
-                "confirm_button":"创建群组",
+                "multi_select": "群组成员",
+                "members": "成员",
+                "confirm_button": "创建群组",
                 "cancel_button": "取消"
             },
-            "change-password" : {
+            "change-password": {
                 "title": "定期更改密码",
                 "subtitle": "为了您的安全，请输入新密码",
                 "placeholder": "输入新密码",
@@ -339,7 +368,7 @@
             "groups": {
                 "multi_select": "群组成员",
                 "members": "成员"
-            },            
+            },
             "minichat": {
                 "header": {
                     "conversations": "对话"
@@ -587,9 +616,9 @@
             "alterated": "已成功修改！",
             "uploadImage": "图片已成功添加！",
             "editedGroup": "群组名称已成功编辑！",
-            "groupCreated":"群组已成功创建！",
-            "descriptionUpdated":"描述已成功更新！",
-            "nameUpdated":"名称已成功更新！",
+            "groupCreated": "群组已成功创建！",
+            "descriptionUpdated": "描述已成功更新！",
+            "nameUpdated": "名称已成功更新！",
             "new-password": "密码修改成功",
             "task-responsibles": "任务负责人更新成功",
             "dependency": "此任务需要完成"
@@ -625,7 +654,7 @@
             "notPermissionEditTask": "为了安全起见，您无法通过首页更改任务，请单击任务或访问团队！",
             "minTaskLengthName": "任务名称必须至少有4个字符！",
             "errorEditingTask": "编辑任务时出错！",
-            "update_error":"电子邮件不符合要求",
+            "update_error": "电子邮件不符合要求",
             "new-password": "您的密码不符合要求"
         },
         "notification": {
@@ -636,11 +665,17 @@
         }
     },
     "equipe": "团队",
+
     "deleteProject": "删除项目？",
     "deleteTeam": "删除团队？",
     "exitTeam": "退出团队？",
     "addedToTeam": "您已被添加到团队 ",
     "success_alert": "成功",
     "error_alert": "错误",
-    "notification_alert": "注意力"
+    "notification_alert": "注意力",
+    "permission" :{
+        "Criar": "创造",
+        "Editar": "编辑",
+        "Deletar": "删除"
+    }
 }

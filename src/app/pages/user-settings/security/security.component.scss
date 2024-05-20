@@ -25,8 +25,9 @@
     }
     
     input {
-        @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-[450px] h-[50px];
+        @apply rounded-r-sm px-3 w-[450px] h-[50px];
         background-color: $card;
+        color: $text;
     }
     
     .iconInputBlock {
@@ -81,7 +82,7 @@
     }
     
     span {
-        @apply h-full w-[92%];
+        @apply h-full w-[80%];
     }
     
     h2 {
@@ -117,7 +118,9 @@
     }
     
     input {
-        @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-[400px] h-[50px];
+        @apply  rounded-r-sm px-3 w-[400px] h-[50px];
+        background-color: $card;
+        color: $text;
     }
     
     .iconInputBlock {
@@ -213,7 +216,9 @@
     }
     
     input {
-        @apply bg-white rounded-r-sm placeholder-slate-400 px-3 w-[250px] h-[50px];
+        @apply  rounded-r-sm px-3 w-[250px] h-[50px];
+        background-color: $card;
+        color: $text;
     }
     
     .iconInputBlock {
