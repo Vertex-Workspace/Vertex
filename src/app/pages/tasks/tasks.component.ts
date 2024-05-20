@@ -166,6 +166,8 @@ export class TasksComponent implements OnInit {
           }
         }
       })
+      console.log(this.project);
+      
       if(this.project.creationOrigin == "GOOGLE") {
         this.update();
       }
