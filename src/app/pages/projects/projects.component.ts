@@ -120,7 +120,7 @@ export class ProjectsComponent implements OnInit {
         ]
       }
     ];
-    this.detectChanges();
+    // this.detectChanges();
   }
 
   detectChanges() {

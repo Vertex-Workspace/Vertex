@@ -84,16 +84,14 @@ export class AppComponent {
     private translate: TranslateService,
     private personalizationService: PersonalizationService
   ) {
-    this.userBasicData();
-
+    this.userBasicData()
     if(!document.cookie.includes("JWT") && localStorage.getItem("logged") != null){
       localStorage.removeItem("logged");
     }
-    // if(document.cookie.includes('JWT')){
-    //   translate.setDefaultLang(this.userService.getLogged().personalization!.language!);
-    // }
+    if(document.cookie.includes('JWT') && this.logged){
+      this.translate.setDefaultLang(this.logged.personalization?.language!);
+    }
   }
-  
   
   ngOnInit(): void {
   }

@@ -67,13 +67,12 @@ export class HomeComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
-    this.loadTranslatedOptions();
   }
 
   ngOnInit(): void {
     this.checkChangePassword();
     this.subscribeToTeams();
-
+    this.loadTranslatedOptions();
   }
 
 
