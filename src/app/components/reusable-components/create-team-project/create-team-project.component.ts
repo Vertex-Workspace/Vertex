@@ -70,6 +70,8 @@ export class CreateTeamProjectComponent implements OnInit {
   selectedUsers: TreeNode[] = [];
 
   ngOnInit(): void {
+    console.log(this.typeString);
+    
 
     this.form = this.formBuilder.group({
       name: [null, [Validators.required]],

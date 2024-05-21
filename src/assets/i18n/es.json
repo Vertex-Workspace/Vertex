@@ -102,7 +102,8 @@
         "title": "Equipos",
         "description": "Los equipos son espacios de trabajo donde puedes administrar proyectos, invitar miembros, iniciar conversaciones de chat y tener tu tiempo y el tiempo de tu equipo al alcance de tu mano.",
         "newTeamBtn": "Nuevo equipo",
-        "noTeam": "No hay equipos disponibles..."
+        "noTeam": "No hay equipos disponibles...",
+        "placeholderSearchTeam": "Buscar un equipo..."
       },
       "allTasks": {
         "title": "Todas las Tareas",
@@ -366,6 +367,7 @@
         "button": "Enviar"
       },
       "groups": {
+        "no-groups":"No hay grupos disponibles...",
         "multi_select": "Miembros del grupo",
         "members": "miembros"
       },

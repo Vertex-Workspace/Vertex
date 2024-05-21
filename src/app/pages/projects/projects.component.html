@@ -68,7 +68,7 @@
                     <div class="functionally-items regular-text">
                         <div class="search" [style.backgroundColor]="'var(--card)'">
                             <input class="inputSearch" type="text"
-                                placeholder="{{'pages.projects.searchPlaceholder' | translate}}"
+                                [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
                                 [(ngModel)]="queryFilter" [style.backgroundColor]="'var(--card)'">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
