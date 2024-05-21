@@ -102,7 +102,8 @@
                 "title": "Teams",
                 "description": "Teams are workspaces where you can manage projects, invite members, start chat conversations, and have your time and your team's time at your fingertips.",
                 "newTeamBtn": "New team",
-                "noTeam": "No teams available..."
+                "noTeam": "No teams available...",
+                "placeholderSearchTeam": "Search for a team..."
             },
             "allTasks": {
                 "title": "All Tasks",
@@ -366,6 +367,7 @@
                 "button": "Submit"
             },
             "groups": {
+                "no-groups":"No groups available...",
                 "multi_select": "Group Members",
                 "members": "members"
             },

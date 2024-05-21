@@ -18,7 +18,7 @@
 
                         <div *ngIf="(teamScreen === 'settings' || teamScreen === 'project')" class="icon">
                             <ng-container *ngIf="item.isCreator else isMember">
-                                <fa-icon [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
+                                <fa-icon *ngIf="teamScreen === 'project'" [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
                                 <fa-icon [ngClass]="teamScreen === 'settings' ? 'pr-3' : ''" [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
                             </ng-container>
                             <ng-template #isMember>
@@ -38,7 +38,7 @@
 [typeString]="'projectInfo'"
 [team]="team"
 (senderEmitter)="updateProject($event)" (close)="close()">
-</app-create-team-project>            
+</app-create-team-project>  
 
 <app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
                 [title]="itemToDelete.name" (close)="emitItem($event)"></app-confirm-modal>

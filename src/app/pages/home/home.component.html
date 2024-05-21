@@ -20,7 +20,7 @@
                         [style.backgroundColor]="'var(--card)'"
                     >
                         <input type="text" 
-                            [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
+                            [placeholder]="'pages.home.teams.placeholderSearchTeam' | translate"
                             [(ngModel)]="teamSearch" 
                             [style.backgroundColor]="'var(--card)'"
                         >
@@ -40,7 +40,7 @@
                     <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" [teams]="teams" [type]="'team'"
                         [filterSearch]="teamSearch" joyrideStep="goToTeamPage" [prevTemplate]="prevButton"
                         [nextTemplate]="nextButton" [title]="'tutorial.texts.goToTeamPage' | translate" [stepContent]="customContent"
-                        [stepContentParams]="{ texto: tutorialText[4] | translate}"></app-card-list>
+                        [stepContentParams]="{ texto: tutorialText[4] | translate}" [teamScreen]="'team'"></app-card-list>
 
                 </div>
             </div>

@@ -102,7 +102,8 @@
                 "title": "Equipes",
                 "description": "As equipes são locais de trabalho onde é possível gerenciar projetos, convidar membros, iniciar chats de conversa e ter o seu tempo e o tempo da sua equipe na palma da sua mão.",
                 "newTeamBtn": "Nova equipe",
-                "noTeam": "Nenhuma equipe disponível..."
+                "noTeam": "Nenhuma equipe disponível...",
+                "placeholderSearchTeam": "Pesquise por uma equipe..."
             },
             "allTasks": {
                 "title": "Todas as Tarefas",
@@ -360,6 +361,7 @@
                 "cancel_button": "Cancelar"
             },
             "groups": {
+                "no-groups":"Nenhum grupo disponível...",
                 "multi_select": "Membros do grupo",
                 "members": "membros"
             },

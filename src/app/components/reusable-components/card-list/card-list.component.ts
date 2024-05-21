@@ -124,6 +124,7 @@ export class CardListComponent implements OnInit {
     this.project = null!
   }
 
+
   hasImage(item: any) {
     if (this.type === 'team') {
       if (item.image != null) {
