@@ -51,16 +51,20 @@ export class SecurityComponent {
     const formValue = this.form.value;
 
     if (this.passwordValidation()) {
-      this.logged = {
-        ...this.logged,
-        password: formValue.newPassword
-      };
+      const userPasswordUpdate = {
+        userId: this.logged.id!,
+        newPassword: formValue.newPassword,
+        oldPassword: formValue.oldPassword
+      }      
 
       this.userService
-        .update(this.logged)
-        .subscribe((user: User) => {
+        .updatePassword(userPasswordUpdate)
+        .subscribe((success: boolean) => {
           this.alert.successAlert(this.translate.instant("alerts.success.passwordUpdated"));
-        })
+        },
+      e => {
+        this.alert.errorAlert(this.translate.instant("alerts.error.errorPasswordUpdated"));
+      })
       
     } else {
       this.alert
@@ -81,8 +85,7 @@ export class SecurityComponent {
   passwordValidation(): boolean {
     const formValue = this.form.value;
 
-    return formValue.newPassword === formValue.newPasswordConf
-      && formValue.oldPassword === this.logged.password;
+    return formValue.newPassword === formValue.newPasswordConf;
   }
 
 }

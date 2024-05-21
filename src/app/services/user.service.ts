@@ -89,6 +89,11 @@ export class UserService {
     window.location.reload();
   }
 
+  public updatePassword(dto: any) {
+    return this.http
+      .patch<boolean>(`${URL}user/password-update`, dto, { withCredentials: true })
+  }
+
   getLogged(): any {
     const loggedIntoLocalStorage = JSON.parse(localStorage.getItem('logged')!);
     if(loggedIntoLocalStorage == null || loggedIntoLocalStorage == ''){
