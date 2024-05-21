@@ -61,6 +61,7 @@ export class TaskComponent {
     email: "",
     projectReviewENUM: ""
   }
+  persObservable!: Observable<Permission[]>;
 
   isSending: boolean = false;
 
@@ -118,10 +119,9 @@ export class TaskComponent {
 
     this.taskService.getOneById(idTask).subscribe(
       (task: Task) => {
-        
         this.task = task;
         this.aditionalInformations();
- 
+
       }
     , (error) => {
       this.router.navigate(['projeto/' + this.project.id + '/tarefas']);
@@ -139,32 +139,47 @@ export class TaskComponent {
       (taskInfo: any) => {
   
         this.taskInfoDTO = taskInfo;
-      }
-    );
-    this.task.taskResponsables!.forEach((taskResponsable) => {
-      if (taskResponsable.userTeam.user.id == this.user.id) {
-        this.idResponsable = taskResponsable.id;
-
-        //Validates if the user is the creator of the task
-        if (this.task.creator?.user.id == taskResponsable.userTeam.user.id) {
-          //The creator doesn't send the task
+        
+        if(!this.project){
+          console.log("REQUEST");
+          
+          this.projectService.getOneById(taskInfo.projectId).subscribe(
+            (project: Project) => {
+              this.project = project;
+              console.log(this.project);
+              
+            }
+          );
+        }
+        this.task.taskResponsables!.forEach((taskResponsable) => {
+          if (taskResponsable.userTeam.user.id == this.user.id) {
+            this.idResponsable = taskResponsable.id;
+    
+            //Validates if the user is the creator of the task
+            if (this.task.creator?.user.id == taskResponsable.userTeam.user.id) {
+              //The creator doesn't send the task
+              this.soloResponsable = true;
+            }
+          }
+        });
+        if (this.task.taskResponsables!.length == 1) {
           this.soloResponsable = true;
         }
-      }
-    });
-    if (this.task.taskResponsables!.length == 1) {
-      this.soloResponsable = true;
-    }
-
-    this.getTimeInTask();
-
-      
-    this.taskService.getTaskPermissions(this.task.id, this.user.id!).subscribe(
-      (permissions: Permission[]) => {
-        this.permissions = permissions;
-        this.setEditPermission(permissions);
+    
+        this.getTimeInTask();
+    
+          
+        this.persObservable = this.taskService.getTaskPermissions(this.task.id, this.user.id!)
+    
+        this.persObservable.forEach(
+          (permissions: Permission[]) => {
+            this.permissions = permissions;
+            this.setEditPermission(permissions);
+          }
+        );
       }
     );
+    
 
     //Caso o usuário der F5 na página, o request de encerrar ciclo é feito
     window.onbeforeunload = () => this.ngOnDestroy();
@@ -411,6 +426,7 @@ export class TaskComponent {
         (task: Boolean) => {
           this.project.tasks = this.project.tasks.filter((task) => task.id != this.task.id);
           this.alertService.successAlert(this.translate.instant("alerts.success.taskSentToReview"));
+          window.location.reload();
           this.closeModal();
         },
         (error: any) => {

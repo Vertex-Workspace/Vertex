@@ -453,7 +453,8 @@ export class TasksComponent implements OnInit {
   }
 
   updateProject(project : Project) {
-    this.project = project;
+    this.project.name = project.name;
+    this.project.description = project.description;
     this.pageTitle = project.name;
     this.pageDescription = project.description!;
     this.openProjectInfos();

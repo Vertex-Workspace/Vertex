@@ -74,13 +74,13 @@ export class TeamInformationsComponent implements OnInit {
             this.basicData = {
                 labels: [this.translate.instant("pages.team-informations.NaoIniciadas"), this.translate.instant("pages.team-informations.EmAndamento"), this.translate.instant("pages.team-informations.Concluidas")],
                 datasets: [
-                    {
-                        label: '',
-                        data: this.team.tasksPerformances,
-                        backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
-                        borderColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
-                        borderWidth: 1
-                    }
+                  {
+                    // label: this.translate.instant('pages.user-informations.tasksPerformance'),
+                    data: this.team.tasksPerformances,
+                    backgroundColor: this.userService.getLogged().personalization?.theme == 1 ? ["#FA7070", "#F3CA52", "#A1C398"] : ["#ffe2dd", "#fdecc8", "#dbeddb"],
+                    borderColor: ["#d93b3b", "#d9bf3b", "#70d93b"],
+                    borderWidth: 1,
+                  }
                 ]
             };
             this.basicOptions = {
