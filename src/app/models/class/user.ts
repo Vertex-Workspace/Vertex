@@ -30,7 +30,7 @@ export class User {
     icon ?: string;
     selectedProject ?: boolean;
     firstAccess ?: boolean;
-    userKind ?: UserKind;
+    userKind ?: string;
     syncWithCalendar ?: boolean;
 
     taskReview ?: boolean;

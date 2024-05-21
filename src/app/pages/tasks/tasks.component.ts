@@ -173,7 +173,13 @@ export class TasksComponent implements OnInit {
       console.log(this.project);
       
       if(this.project.creationOrigin == "GOOGLE") {
-        this.update();
+        if (!this.logged.syncWithCalendar) {
+          this.router.navigate(['home']);
+          this.alertService
+            .errorAlert('Para acessar esse projeto, você deve sincronizar sua conta com o Google Agenda');
+        } else {
+          this.update();
+        }
       }
     }, (error) => {
       this.router.navigate(['/acesso-negado']);

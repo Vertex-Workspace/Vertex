@@ -5,7 +5,7 @@
         <div class="left">
             <!-- <fa-icon class="icon" [icon]="faCircleUser" *ngIf="!task.image"></fa-icon> -->
             <div class="overflow-hidden h-10 w-10 icon">
-                <img src="data:image/jpg;base64, {{task.image}}" *ngIf="!task.imgUrl && task.image" alt="" class="rounded-full object-cover h-full w-full">
+                <img src="data:image/jpg;base64, {{task.image}}" *ngIf="!task.imgUrl" alt="" class="rounded-full object-cover h-full w-full">
                 <img src="{{task.imgUrl}}" *ngIf="task.imgUrl" alt="" class="rounded-full object-cover h-full w-full">
                 <fa-icon [icon]="faCircleUser" *ngIf="!task.imgUrl && !task.image"></fa-icon>
             </div>
