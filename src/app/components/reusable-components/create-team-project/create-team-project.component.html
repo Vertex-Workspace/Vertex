@@ -3,8 +3,8 @@
   <h4 class="title" *ngIf="typeString === 'team'">{{ 'components.reusable-components.create-team-project.new-team' | translate }}</h4>
   <h4 class="title" *ngIf="typeString === 'project'">{{
     'components.reusable-components.create-team-project.new-project' | translate }}</h4>
-    <span class="flex w-full justify-between" *ngIf="typeString === 'projectInfo'">
-      <h4 class="title">{{
+    <span class="flex w-full justify-between" *ngIf="typeString === 'projectInfo' || typeString === 'settings'">
+      <h4 class="title" *ngIf="typeString === 'projectInfo'">{{
         'components.reusable-components.create-team-project.project-info' | translate }}</h4>
       <fa-icon [icon]="faX" (click)="closeScreen()"></fa-icon>
     </span>
@@ -16,11 +16,11 @@
           'components.reusable-components.create-team-project.project-name' | translate }}</p>
         <input formControlName="name" type="text"
         [placeholder]="'components.reusable-components.create-team-project.add-team-name' | translate"
-          *ngIf="typeString != 'projectInfo'">
+          *ngIf="typeString != 'projectInfo' && typeString != 'settings'">
         <input formControlName="name" [placeholder]="'components.reusable-components.create-team-project.add-project-name' | translate" type="text"
-         *ngIf="typeString === 'projectInfo'" [(ngModel)]="project.name">
+         *ngIf="typeString === 'projectInfo' " [(ngModel)]="project.name">
       </div>
-      <div class="circular">
+      <div class="circular" >
         <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover">
         <form class="input-div">
           <input type="file" class="input-file" (change)="onFileSelected($event)">
@@ -28,8 +28,7 @@
       </div>
     </div>
 
-    <div class="input-description"
-      *ngIf="typeString === 'team' || typeString === 'project' || typeString === 'projectInfo'">
+    <div class="input-description" [ngClass]="typeString === 'settings' ? 'pt-10' : ''">
 
       <p class="medium-text" *ngIf="typeString === 'team'">{{
         'components.reusable-components.create-team-project.team-description' | translate }}</p>

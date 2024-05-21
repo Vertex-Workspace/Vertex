@@ -12,7 +12,7 @@
 
     <p class="pt-4">{{'components.modals.create-groups.participants' | translate}}</p>
     <div class="pt-2">
-      <p-multiSelect [options]="usersToSelect!" optionLabel="name" (onChange)="pushParticipants($event)"
+      <p-multiSelect [options]="usersToSelect!" optionLabel="name" (onChange)="pushParticipants($event)" [displaySelectedLabel]="false"
             [style]="{ width: '300px', height: '55px', backgroundColor: 'var(--secondColor)'}" [placeholder]="'components.modals.create-groups.multi_select' | translate">
             <ng-template let-user pTemplate="user">
                 <span>{{user.firstName}}</span>

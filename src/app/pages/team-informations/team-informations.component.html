@@ -86,8 +86,8 @@
                 </ng-container>
             </div>
 
-            <div class="w-full flex justify-center" *ngIf="team.groups.length === 0 && clicked == 'groups'">
-                <h6 class="pt-10 flex justify-center items-center">Nenhum grupo disponível...</h6>
+            <div class="w-[40%] flex justify-center" *ngIf="team.groups.length === 0 && clicked == 'groups'">
+                <h6 class="pt-10 flex justify-center items-center">{{'components.modals.groups.no-groups' | translate}}</h6>
             </div>
             <div *ngIf="clicked == 'groups' && isCreator()" class="grid-group">
                 <ng-container *ngFor="let group of (team.groups | namePipe: query)">
