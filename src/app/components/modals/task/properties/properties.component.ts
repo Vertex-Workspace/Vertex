@@ -20,6 +20,7 @@ import { ReturnStatement } from '@angular/compiler';
 import { TreeNode } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/services/loading.service';
+import { Chat } from 'src/app/models/class/chat';
 
 @Component({
   selector: 'app-properties',
@@ -41,9 +42,9 @@ export class PropertiesComponent {
     private alertService: AlertService,
     private teamService: TeamService,
     private loadingService: LoadingService,
-    private userService: UserService, 
+    private userService: UserService,
     private translate: TranslateService) {
-    }
+  }
 
   icons: any = [
     { name: 'TEXT', icon: faFont },
@@ -68,16 +69,16 @@ export class PropertiesComponent {
 
   ngOnInit(): void {
     this.loadingService.hide();
-    if(this.task){
-      if(this.task.creator?.user.id == this.userService.getLogged().id) {
+    if (this.task) {
+      if (this.task.creator?.user.id == this.userService.getLogged().id) {
         this.isCreator = true;
       }
     }
-    if(this.isCreator){
+    if (this.isCreator) {
       this.tasks = this.project.tasks
       this.getGroups()
       this.getUsers()
-      
+
       for (const task of this.project.tasks) {
         if (this.task.id != task.id) {
           this.taskDependency.push(task)
@@ -115,6 +116,7 @@ export class PropertiesComponent {
     return "";
   }
 
+  @Input() chatP!: Chat;
   updateResponsible(event: any, node: any): void {
     let isGroup: boolean = false
 
@@ -124,6 +126,9 @@ export class PropertiesComponent {
       isGroup = false;
     }
 
+    console.log(node);
+    
+
     let taskResponsibles: UpdateResponsibles = {
       taskId: this.task.id,
       teamId: this.project.idTeam,
@@ -131,15 +136,33 @@ export class PropertiesComponent {
       group: isGroup ? node : null
     };
 
+    // this.teamService.patchChat(this.chatP.id!, this.project.idTeam, node.id).subscribe(
+    //   (res:any) => {
+    //     this.alertService.successAlert(this.translate.instant("alerts.success.chat-responsibles"))
+    //     this.chatP = res;
+        
+    //     console.log(res.userTeams, "USER TEAMS");
+        
+    //   },
+    //   (error) => {
+    //     this.alertService.errorAlert("Erro ao adicionar usuário ao chat")
+    //     console.log(error);
+    //   }
+    // );
+
     if (taskResponsibles.group) {
       taskResponsibles.group.tasks = []
       taskResponsibles.group.projects = []
     }
 
+    let idUser: number = taskResponsibles.user?.id ?? 0;
+    let idTeam = taskResponsibles.teamId;
+
     if ((taskResponsibles.user != null) && (this.task.creator?.user.id != taskResponsibles.user.id)) {
       this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
         this.alertService.successAlert(this.translate.instant("alerts.success.task-responsibles")
-      )});
+        )
+      });
     } else {
       this.alertService.errorAlert("Você não pode remover o criador da tarefa")
     }

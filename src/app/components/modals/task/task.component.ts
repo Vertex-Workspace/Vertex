@@ -27,7 +27,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
   faClock = faClock;
 
   @Input() project!: Project;
@@ -85,6 +85,16 @@ export class TaskComponent {
     } else {
       this.aditionalInformations();
     }
+  }
+  ngOnInit(): void {
+    this.taskService.getChatByTaskId(this.task.id).subscribe(
+      (chat: Chat) => {
+        this.taskChat = chat;
+      },
+      (error: any) => {
+        this.alertService.errorAlert(error.error)
+      }
+    );
   }
 
   changed: boolean = false;
@@ -357,18 +367,7 @@ export class TaskComponent {
   }
 
   openMiniChat() {
-    this.taskService.getChatByTaskId(this.task.id).subscribe(
-      (chat: Chat) => {
-        this.taskChat = chat;
-        this.miniChatOpen = !this.miniChatOpen;
-        console.log(this.taskChat, "TASK CHAT");
-
-
-      },
-      (error: any) => {
-        this.alertService.errorAlert(error.error)
-      }
-    );
+    this.miniChatOpen = !this.miniChatOpen;
   }
   minimizeChat() {
     this.chatExpanded = !this.chatExpanded;
