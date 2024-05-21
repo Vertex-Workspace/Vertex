@@ -19,7 +19,7 @@
             <div class="permissions">
                 <div class="single-permissions" *ngFor="let permission of user.permissions">
                     <fa-icon [icon]="faSquare" [ngClass]="permission.enabled === true ? 'icon' : 'icon-not-selected'" (click)="selectPermission(user, permission)"></fa-icon>
-                    <p>{{ permission.name }}</p>
+                    <p>{{ "permission."+permission.name | translate }}</p>
                 </div>
             </div>
         </div>

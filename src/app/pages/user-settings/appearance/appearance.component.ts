@@ -6,6 +6,9 @@ import { User } from 'src/app/models/class/user';
 import { UserService } from '../../../services/user.service';
 import TypedRegistry from 'chart.js/dist/core/core.typedRegistry';
 import { take } from 'rxjs';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-appearance',
@@ -55,42 +58,54 @@ export class AppearanceComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private personalizationService : PersonalizationService
+    private personalizationService: PersonalizationService,
+    private router: Router
   ) {
+    this.logged = this.userService.getLogged();
+    this.newPers = this.userService.getLogged().personalization!;
   }
   // Sets the theme by default and make the persistence of the theme in this component
   ngOnInit(): void {
-    this.newPers = this.userService.getLogged().personalization!;
-    this.colors.forEach((element : any) => {
-      if(element.colorLight == this.newPers.primaryColor){
+
+    this.colors.forEach((element: any) => {
+      if (element.colorLight == this.newPers.primaryColor) {
         element.status = 'selected';
       }
-      if(element.colorDark == this.newPers.primaryColor){
+      if (element.colorDark == this.newPers.primaryColor) {
         element.status = 'selected';
       }
     });
   }
 
-  toggleChange(item: any){
-    if(item == 'libras'){
+  toggleChange(item: any) {
+    if (item == 'libras') {
       this.newPers.signLanguage = !this.newPers.signLanguage;
-    } else if(item == 'listening'){
+      this.savePersonalization();
+      window.location.reload();
+    } else if (item == 'listening') {
       this.newPers.listeningText = !this.newPers.listeningText;
+      this.savePersonalization();
+      window.location.reload();
+    } else if (item == 'firstAccess') {
+
+      this.logged.firstAccess = !this.logged.firstAccess;
+      this.userService.setFirstAccessNull(this.logged).subscribe((user) => {
+        this.router.navigate(['/home']);
+      });
+
     }
-    this.savePersonalization();
-    window.location.reload();      
   }
 
   selectColor(color: any) {
-    this.colors.forEach((element : any) => {
+    this.colors.forEach((element: any) => {
       element.status = 'unselected';
-    }); 
+    });
     color.status = 'selected';
     this.newPers.primaryColor = this.newPers.theme == 0 ? color.colorLight : color.colorDark;
     this.savePersonalization();
   }
 
-  changeTheme(mode : string) {
+  changeTheme(mode: string) {
     this.newPers.theme = mode == "dark" ? 1 : 0;
     if(mode == 'dark'){
       this.newPers.primaryColor = this.colors.find((element : any) => element.status == 'selected')!.colorDark;
@@ -103,7 +118,7 @@ export class AppearanceComponent implements OnInit {
   changeFontFamily() {
     this.savePersonalization();
   }
-  
+
   savePersonalization() {
     this.userService.patchPersonalization(this.newPers).subscribe((userRes) => {
       this.userService.saveLoggedUser(userRes);

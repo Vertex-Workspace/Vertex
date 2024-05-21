@@ -6,6 +6,7 @@ import { SearchAllModule } from '../../modals/search-all/search-all.module';
 import { RouterModule } from '@angular/router';
 import { ModalWarnModule } from '../../modals/modal-warn/modal-warn.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -16,7 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     SearchAllModule,
     RouterModule,
     ModalWarnModule,
-    TranslateModule
+    TranslateModule,
+    JoyrideModule
   ]
 })
 export class SidebarModule { }

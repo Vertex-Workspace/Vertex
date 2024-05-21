@@ -1,23 +1,21 @@
 <section>
     <div class="container-custom">
         <!-- RIGHT SIDE TASKS/TEAMS -->
-        <div class="container-grid">
+        <div class="container-grid" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
+        [title]="'tutorial.texts.visualize/createProjects' | translate" [stepContent]="customContent"
+        [stepContentParams]="{ texto: tutorialText[5] | translate}">
             <div class="flex flex-row items-end gap-3">
                 <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>
             </div>
             <div class="pt-2 mb-3">
                 <p class="small-text text-gray-600 text-justify w-2/3">{{'pages.projects.description1' | translate}}</p>
             </div>
-            <div class="flex flex-col" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'Visualizar / Criar projetos'" [stepContent]="customContent"
-                [stepContentParams]="{ texto: tutorialText[5] }">
+            <div class="flex flex-col">
                 <div class="functionally-items regular-text">
                     <div class="search" [style.backgroundColor]="'var(--card)'">
                         <input class="inputSearch" type="text"
-                            placeholder="{{'pages.projects.searchPlaceholder' | translate}}"
-                            [(ngModel)]="projectSearch"
-                            [style.backgroundColor]="'var(--card)'"
-                        >
+                            placeholder="{{'pages.projects.searchPlaceholder' | translate}}" [(ngModel)]="projectSearch"
+                            [style.backgroundColor]="'var(--card)'">
                         <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                     </div>
                     <div class="flex gap-2">
@@ -33,15 +31,16 @@
                     </div>
                 </div>
 
-                <div class="default-size" joyrideStep="goToTasks" [prevTemplate]="prevButton"
-                    [nextTemplate]="nextButton" [title]="'Ir para tarefas'" [stepContent]="customContent"
-                    [stepContentParams]="{ texto: tutorialText[7] }">
+                <div class="default-size">
 
                     <div class="w-[40%] absolute" *ngIf="projects.length === 0">
-                        <h6 class="pt-16 flex justify-center items-center">{{"pages.projects.noProjects" | translate }}</h6>
+                        <h6 class="pt-16 flex justify-center items-center">{{"pages.projects.noProjects" | translate }}
+                        </h6>
                     </div>
                     <app-card-list style="width: 100%; height: 90%; padding-top: 3%" [type]="'project'" [team]="team"
-                        [teamScreen]="'project'" [projects]="(projects | namePipe : projectSearch)">
+                        [teamScreen]="'project'" [projects]="(projects | namePipe : projectSearch)" joyrideStep="goToTasks"
+                        [prevTemplate]="prevButton" [nextTemplate]="nextButton" [title]="'tutorial.texts.goToTasks' | translate"
+                        [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[7] | translate }">
                     </app-card-list>
                     <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
                         *ngIf="isCreatingProject" (senderEmitter)="updateProjects($event)" (close)="switchCreateView()"
@@ -58,28 +57,26 @@
                 </div>
 
                 <div class="pt-2">
-                    <p class="small-text text-gray-600 text-justify w-2/3 mb-3">{{'pages.projects.description4' | translate:{team:teamName} }}</p>
+                    <p class="small-text text-gray-600 text-justify w-2/3 mb-3">{{'pages.projects.description4' |
+                        translate:{team:teamName} }}</p>
                 </div>
 
                 <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                    [title]="'Visualizar tarefas da equipe'" [stepContent]="customContent"
-                    [stepContentParams]="{ texto: tutorialText[6] }">
+                    [title]="'tutorial.texts.visualizeTeamTasks' | translate" [stepContent]="customContent"
+                    [stepContentParams]="{ texto: tutorialText[6] | translate}">
 
                     <div class="functionally-items regular-text">
                         <div class="search" [style.backgroundColor]="'var(--card)'">
                             <input class="inputSearch" type="text"
                                 placeholder="{{'pages.projects.searchPlaceholder' | translate}}"
-                                [(ngModel)]="queryFilter"
-                                [style.backgroundColor]="'var(--card)'"
-                            >
+                                [(ngModel)]="queryFilter" [style.backgroundColor]="'var(--card)'">
                             <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
                         </div>
                         <div class="filter-items">
                             <div *ngFor="let item of configItems" class="icons">
                                 <button (click)="item.click()">
                                     <i class="{{ item.iconClass }}"
-                                        [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"
-                                    ></i>
+                                        [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"></i>
                                 </button>
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faArrowLeft, faCheck, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { Project } from 'src/app/models/class/project';
 import {  PropertyList } from 'src/app/models/class/property';
 import { colors } from 'src/app/models/colors';
 import { AlertService } from 'src/app/services/alert.service';
@@ -18,6 +19,7 @@ export class ColorsComponent {
 
     @Input()
     propertyList!: PropertyList;
+
 
     @Output()
     changeColor = new EventEmitter<PropertyList>();

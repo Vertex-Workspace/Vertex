@@ -106,7 +106,9 @@ export class TasksComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.logged = this.userService.getLogged();
-
+    if(this.logged.firstAccess){
+      this.render = true;
+    }
   }
 
   teamId?: number
@@ -123,7 +125,9 @@ export class TasksComponent implements OnInit {
       this.project = p;
       
 
-      this.teamService.getPermission(p.idTeam, this.logged.id!).subscribe((permissions: Permission[]) => {
+      this.renderPermissions = this.teamService.getPermission(p.idTeam, this.logged.id!)
+      
+      this.renderPermissions.forEach((permissions: Permission[]) => {
         this.permissions = permissions;
         this.render = true;
         for (const permission of permissions) {
@@ -422,7 +426,7 @@ export class TasksComponent implements OnInit {
   }
 
   changeProject(project: Project) {
-    this.project = project;
+    this.project = {...project};
   }
 
   getProject(): Project {

@@ -23,7 +23,7 @@
 <!-- status -->
 <p-cascadeSelect *ngIf="getKind(value.property, 'STATUS')" [options]="getSelectOptions(value)" [(ngModel)]="value.value"
     optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="[]"
-    [style]="{ minWidth: '200px', maxWidth: '200px', 'background-color': backgroundColor  }" placeholder="{{getValue()}}"
+    [style]="{ minWidth: '200px', maxWidth: '200px', 'background-color': getBackgroundColor()  }" placeholder="{{getValue()}}"
     (onChange)="changeList($event, value)" appendTo="body" [disabled]="!canEdit">
     <ng-template pTemplate="option" let-option>
         <div class="flex items-center justify-center gap-2">
@@ -39,7 +39,7 @@
     [options]="getSelectOptions(value)"
     optionLabel="value" optionGroupLabel="name" 
     [optionGroupChildren]="[]"
-    [style]="{ minWidth: '200px', maxWidth: '200px',  'background-color': backgroundColor }" 
+    [style]="{ minWidth: '200px', maxWidth: '200px',  'background-color': getBackgroundColor() }" 
     placeholder="{{getValue()}}"
     (onChange)="changeList($event, value)" 
     appendTo="body" 

@@ -57,9 +57,6 @@ export class ProjectsComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
-    this.translate.onLangChange.subscribe(() => {
-      this.updateTranslate();
-    });
   }
 
 
@@ -123,7 +120,7 @@ export class ProjectsComponent implements OnInit {
         ]
       }
     ];
-    this.detectChanges();
+    // this.detectChanges();
   }
 
   detectChanges() {

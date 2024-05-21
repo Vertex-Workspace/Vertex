@@ -6,15 +6,15 @@
             <div class="flex flex-row items-end gap-3">
                 <h4>{{ 'pages.home.teams.title' | translate }}</h4>
             </div>
-            <div stepPosition="center" joyrideStep="step1" [title]="'Seja bem vindo, ' + logged.firstName + '!'"
-                [text]="'Explore o Vertex e descubra como gerenciar seu tempo de ponta a ponta!'" [stepContentParams]="{ 'nome': logged.firstName }">
+            <div stepPosition="center" joyrideStep="step1" [title]="('tutorial.texts.welcome' | translate) + logged.firstName + '!'"
+                [text]="'tutorial.texts.title' | translate" [stepContentParams]="{ 'nome': logged.firstName }">
             </div>
             <div class="pt-2 pb-4">
                 <p class="small-text text-gray-600 text-justify w-2/3">{{ 'pages.home.teams.description' | translate }}</p>
             </div>
-            <div class="flex flex-col" joyrideStep="step2" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
-                [title]="'Visualizar / Criar Equipes'" [stepContent]="customContent"
-                [stepContentParams]="{ texto: tutorialText[2] }">
+            <div class="flex flex-col" joyrideStep="step2" [prevTemplate]="prevButton"  [nextTemplate]="nextButton"
+                [title]="'tutorial.texts.visualize/create' | translate" [stepContent]="customContent"
+                [stepContentParams]="{ texto: tutorialText[2] | translate }">
                 <div class="functionally-items-task">
                     <div class="search" 
                         [style.backgroundColor]="'var(--card)'"
@@ -39,8 +39,8 @@
 
                     <app-card-list style="width: 100%; height: 90%; padding-top: 3%;" [teams]="teams" [type]="'team'"
                         [filterSearch]="teamSearch" joyrideStep="goToTeamPage" [prevTemplate]="prevButton"
-                        [nextTemplate]="nextButton" [title]="'Ir para tela da equipe'" [stepContent]="customContent"
-                        [stepContentParams]="{ texto: tutorialText[4] }"></app-card-list>
+                        [nextTemplate]="nextButton" [title]="'tutorial.texts.goToTeamPage' | translate" [stepContent]="customContent"
+                        [stepContentParams]="{ texto: tutorialText[4] | translate}"></app-card-list>
 
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="flex flex-col" joyrideStep="step3" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
                     [title]="'pages.home.allTasks.title' | translate" [stepContent]="customContent"
-                    [stepContentParams]="{ texto: tutorialText[3] }">
+                    [stepContentParams]="{ texto: tutorialText[3] | translate}">
                     <!-- UTILITY NAV BAR TASK -->
                     <div class="functionally-items-task">
                         <div class="search" [style.backgroundColor]="'var(--card)'">
@@ -120,13 +120,13 @@
 *ngIf="isCreating" [typeString]="'team'" (sendTeam)="updateTeams($event)"></app-create-team-project>
 
 <ng-template #prevButton>
-    <button class="btn">Voltar</button>
+    <button class="btn">{{'tutorial.texts.back' | translate}}</button>
 </ng-template>
 
 <ng-template #nextButton>
-    <button class="btn">Próximo</button>
+    <button class="btn">{{'tutorial.texts.next' | translate}}</button>
 </ng-template>
 
 <ng-template #customContent let-texto="texto" style="border-radius: 5px">
-    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px" class="tutorial-div"></div>
+    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px" class="tutorial-div text-justify"></div>
 </ng-template>

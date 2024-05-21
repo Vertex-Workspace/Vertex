@@ -38,6 +38,7 @@
 
         input {
             background-color: $card;
+            width: 90%;
         }
     }
 }
@@ -52,7 +53,7 @@
         @apply hidden;
         border-color: $emphasis;
         div {
-            @apply flex w-[15%] items-center justify-start gap-7;
+            @apply flex w-[15%] items-start justify-start gap-7;
         }
         
         p{

@@ -67,18 +67,18 @@ export class HomeComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
-    this.loadTranslatedOptions();
-
   }
 
   ngOnInit(): void {
     this.checkChangePassword();
     this.subscribeToTeams();
+    this.loadTranslatedOptions();
   }
 
 
   loadTranslatedOptions() {
     // Translate filter and order options
+
     this.filterOptions = [
       {
         name: this.translate.instant('pages.home.filterandorder.Status'), values: [
@@ -141,12 +141,10 @@ export class HomeComponent implements OnInit {
     this.teamService.getTeamsByUser(this.logged).subscribe(teams => {
       this.teams = teams
       if(this.logged.firstAccess){
-
+        console.log(teams);
         this.joyrideService.startTour({
           steps: [
             'step1@home',
-            `sidebar@home`,
-            `header@home`,
             'step2@home',
             `step3@home`,
             `goToTeamPage@home`,
@@ -154,9 +152,9 @@ export class HomeComponent implements OnInit {
             `step5@equipe/${this.teams[0].id}/projetos`,
             `goToTasks@equipe/${this.teams[0].id}/projetos`,
             `step6@projeto/${this.teams[0].projects[0].id}/tarefas`,
-            `step7@projeto/${this.teams[0].projects[0].id}/tarefas`
-            
+            `step7@projeto/${this.teams[0].projects[0].id}/tarefas`,
           ],
+          logsEnabled: true,
         });
       }
     });

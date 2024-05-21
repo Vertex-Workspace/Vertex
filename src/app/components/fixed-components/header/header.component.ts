@@ -83,6 +83,7 @@ export class HeaderComponent {
       (res: User) => {
         this.userService.saveLoggedUser(res);
         this.updateLocation(this.router.url);
+        window.location.reload();
     });
   }
 

@@ -17,7 +17,7 @@
         @apply flex w-screen h-full justify-center items-center;
         
         .container-custom{
-            @apply flex w-[90%] h-full pt-4;
+            @apply flex w-[90%] h-full justify-between pt-4;
             
             section {
                 @apply h-[90%] w-[250px] border-r-2 border-solid border-[#96A4B0] flex flex-col;
@@ -59,7 +59,7 @@
                 }
             }
             .router-outlet {
-                @apply w-[75%] h-full flex justify-end;
+                @apply w-[85%] h-full flex justify-end;
             }
         }
     }
