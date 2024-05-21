@@ -34,6 +34,7 @@ export class Task {
     imgUrl ?: string; //only validation
     log !: any[];
 
+    project!: Task;
     indexTask: number = 0;
 
     //Chat

@@ -21,7 +21,7 @@ export class UserInformationsComponent {
   optionsPie: any;
   dataBar: any;
   optionsBar: any;
-
+basicOptions: any;
   user!: User;
   userObservable!: Observable<User>
   loggedUser!: User;
@@ -69,15 +69,14 @@ export class UserInformationsComponent {
        
       
     this.dataPie = {
-      labels:  labels
-      ,
+      labels: [this.translate.instant("pages.team-informations.NaoIniciadas"), this.translate.instant("pages.team-informations.EmAndamento"), this.translate.instant("pages.team-informations.Concluidas")],
       datasets: [
         {
-          label: this.translate.instant('pages.user-informations.tasksPerformance'),
+          // label: this.translate.instant('pages.user-informations.tasksPerformance'),
           data: this.user.tasksPerformances,
-          backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+          backgroundColor: this.userService.getLogged().personalization?.theme == 1 ? ["#FA7070", "#F3CA52", "#A1C398"] : ["#ffe2dd", "#fdecc8", "#dbeddb"],
           borderColor: ["#d93b3b", "#d9bf3b", "#70d93b"],
-          borderWidth: 1
+          borderWidth: 1,
         }
       ]
     };
@@ -87,12 +86,13 @@ export class UserInformationsComponent {
     const surfaceBorder = documentStyle1.getPropertyValue('--surface-border');
 
     this.dataBar = {
-      labels: labels,
+      labels: [this.translate.instant("pages.team-informations.NaoIniciadas"), this.translate.instant("pages.team-informations.EmAndamento"), this.translate.instant("pages.team-informations.Concluidas")],
       datasets: [
         {
-          label: this.translate.instant('pages.user-informations.tasksPerformance'),
+          label: "Mostrar Tarefas",
+          labelColor: "blue",
           data: this.user.tasksPerformances,
-          backgroundColor: ["#ffe2dd", "#fdecc8", "#dbeddb"],
+          backgroundColor: this.userService.getLogged().personalization?.theme == 1 ? ["#FA7070", "#F3CA52", "#A1C398"] : ["#ffe2dd", "#fdecc8", "#dbeddb"],
           borderColor: ["#d93b3b", "#d9bf3b", "#70d93b"],
           borderWidth: 1
         }

@@ -54,6 +54,7 @@ export class ReviewTaskComponent {
     if (this.tasksToReview.length == 0) {
       this.alertService.successAlert(this.translate.instant("alerts.success.reviewAllTasks"));
     }
+    window.location.reload();
     this.closeModal.emit(this.tasksToReview);
   }
 
@@ -88,7 +89,7 @@ export class ReviewTaskComponent {
         } else {
           setTimeout(() => {
             this.closeReview();
-          }, 500);
+          }, 300);
         }
       },
       (error) => {

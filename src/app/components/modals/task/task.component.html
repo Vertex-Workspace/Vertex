@@ -1,4 +1,4 @@
-<div class="modal-overlay" (click)="closeModal()" *ngIf="render">
+<div class="modal-overlay" (click)="closeModal()" *ngIf="persObservable | async">
     <div class="base"  (click)="$event.stopPropagation()">
         <div class="location">
             <div class="routes regular-text">

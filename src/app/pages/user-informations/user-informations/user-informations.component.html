@@ -62,14 +62,13 @@
                 <div class="dashboards">
                     <div class="div-dashboard-pie-doughnut">
                         <p class="large-text">{{ 'pages.user-informations.tasksPie' | translate }}</p>
-                        <p-chart class="dashboard-pie-doughnut" type="doughnut" [data]="dataPie" [options]="optionsPie">
+                        <p-chart class="dashboard-pie-doughnut" type="doughnut" [responsive]="true" [data]="dataPie" [options]="optionsPie">
                         </p-chart>
                     </div>
 
                     <div class="div-dashboard-bar">
                         <p class="large-text">{{ 'pages.user-informations.tasksBar' | translate }}</p>
-                        <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [options]="optionsBar">
-                        </p-chart>
+                        <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [responsive]="true" [options]="basicOptions"></p-chart>
                     </div>
 
                     <div class="div-dashboard-bar flex-col">
