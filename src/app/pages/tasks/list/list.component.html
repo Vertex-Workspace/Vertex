@@ -1,6 +1,6 @@
-<section *ngIf="!isNull">
+<section *ngIf="taskList.length">
     <!-- [ngStyle]="{'overflow-x' : project ? 'auto' : 'hidden'}" -->
-    <div class="table-vertex overflow-y-auto overflow-x-auto"  [ngClass]="isTaskPage() ? '' : 'max-h-[500px]'">
+    <div class="table-vertex overflow-y-auto overflow-x-auto"  [ngClass]="isTaskPage() ? '' : 'max-h-[500px] overflow-x-hidden'">
         <div [ngStyle]="getStyles()">
             <label class="min-w-[300px]">
                 <h6>{{ 'pages.tasks.list.table.name' | translate }}</h6>
@@ -32,7 +32,7 @@
     </div>
 
 </section>
-<div class="null-list" *ngIf="isNull">
+<div class="null-list" *ngIf="!taskList.length">
     <h6>
         {{"pages.tasks.list.noTasks" | translate}}
     </h6>

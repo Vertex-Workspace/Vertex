@@ -1,4 +1,4 @@
-<section *ngIf="conversations">
+<section *ngIf="conversations.length > 0">
 
     <header>
         <div class="conversations-div">
@@ -126,7 +126,7 @@
     </main>
 </section>
 
-<section class="gap-8" *ngIf="!conversations">
+<section class="gap-8" *ngIf="conversations.length == 0">
     <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>
-    <p class="pHasNoOneChat">{{"pages.chat.noChats"}}</p>
+    <p class="pHasNoOneChat">{{"pages.chat.noChats" | translate}}</p>
 </section>

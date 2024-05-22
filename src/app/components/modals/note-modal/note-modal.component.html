@@ -22,11 +22,11 @@
                     >
                     </textarea>
 
-                    <a class="self-end" *ngIf="!descriptionEditable" (click)="toggleEditDescription()">
+                    <a class="self-end text-black" *ngIf="!descriptionEditable" (click)="toggleEditDescription()">
                         {{ 'components.modals.note-modal.editDescription' | translate }}
                     </a>
                     
-                    <a class="self-end" *ngIf="descriptionEditable" (click)="toggleEditDescription()">
+                    <a class="self-end text-black" *ngIf="descriptionEditable" (click)="toggleEditDescription()">
                         {{ 'components.modals.note-modal.confirm' | translate }}
                     </a>
                     

@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { faSmile, faSearch, faCircleUser, faStar, faMinimize, faGlobe, faUser, faUsers, faCheckDouble, faPaperclip, faMicrophoneLines, faChevronRight, faPaperPlane, faTimes, faArrowLeft, faExpand } from "@fortawesome/free-solid-svg-icons";
+import { faSmile, faSearch, faCircleUser, faStar, faMinimize, faGlobe, faUser, faUsers, faCheckDouble, faPaperclip, faMicrophoneLines, faChevronRight, faPaperPlane, faTimes, faArrowLeft, faExpand, faCommentSlash } from "@fortawesome/free-solid-svg-icons";
 import { Message } from "src/app/models/class/message";
 import { Chat } from "src/app/models/class/chat";
 import { User } from "src/app/models/class/user";
@@ -31,7 +31,7 @@ export class MinichatComponent {
   faTimes = faTimes;
   faArrowLeft = faArrowLeft;
   faExpand = faExpand;
-
+  faCommentSlash = faCommentSlash;
   messageUser: any = "";
   conversationOpen: boolean = false;
   conversations: Chat[] = []
