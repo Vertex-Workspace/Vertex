@@ -34,7 +34,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 export class TasksComponent implements OnInit {
 
 
-
+  isGoogle!: boolean;
   filterSettings: any[] = [];
   orderSettings: any[] = [];
   clicked: string = 'List';
@@ -109,6 +109,8 @@ export class TasksComponent implements OnInit {
     if(this.logged.firstAccess){
       this.render = true;
     }
+
+    
   }
 
   teamId?: number
@@ -173,6 +175,7 @@ export class TasksComponent implements OnInit {
       console.log(this.project);
       
       if(this.project.creationOrigin == "GOOGLE") {
+        this.isGoogle = true;
         if (!this.logged.syncWithCalendar) {
           this.router.navigate(['home']);
           this.alertService
