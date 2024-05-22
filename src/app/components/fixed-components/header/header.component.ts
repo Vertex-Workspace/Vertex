@@ -41,7 +41,7 @@ export class HeaderComponent {
 
   @Input()
   currentRoute !: string;
-
+  logged!: User;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -53,6 +53,7 @@ export class HeaderComponent {
     private personalizationService : PersonalizationService,
     private translate: TranslateService
   ) {
+    this.logged = userService.getLogged();
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         const activeRoute: string = val.url as string;
