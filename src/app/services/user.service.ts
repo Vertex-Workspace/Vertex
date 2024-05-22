@@ -137,11 +137,11 @@ export class UserService {
     return this.http.get<Project>(`${URL}google/calendar/${userId}/${projectId}`, { withCredentials: true })
   }
 
-  public patchPassword(emailTo: String, password: String): Observable<User> {
+  public patchPassword(emailUser: String, newPassword: String): Observable<User> {
 
     let passwordObj = {
-      email: emailTo,
-      password: password
+      emailUser: emailUser,
+      newPassword: newPassword
     }
     
     return this.http
