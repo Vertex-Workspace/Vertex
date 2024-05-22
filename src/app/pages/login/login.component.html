@@ -2,11 +2,11 @@
     <!-- Div da esquerda da tela - Responsável pelo h1 do Vertex e da logo -->
     <div id="left-div-login">
         <!-- H1 que contém o nome do aplicativo - Fica localizado no canto superior esquerdo. -->
-        <h1 id="h1NameVertex">VERTEX</h1>
+        <h1 id="h1NameVertex" [routerLink]="'landing-page'" class="cursor-pointer">VERTEX</h1>
 
         <!-- Div responsável pela imagem da logo - Fica localizada no meio da div da esquerda -->
         <div id="div-img-login">
-            <img id="img-login" src="../../../assets/white-logo.svg" alt="">
+            <img id="img-login" [routerLink]="'landing-page'" class="cursor-pointer" src="../../../assets/white-logo.svg" alt="">
         </div>
     </div>
 

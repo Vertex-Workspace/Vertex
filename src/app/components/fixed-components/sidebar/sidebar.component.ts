@@ -58,5 +58,6 @@ export class SidebarComponent {
   logout(): void {
     this.isSideBarExpanded = false;
     this.userService.logout();
+
   }
 }

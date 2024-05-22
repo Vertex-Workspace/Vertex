@@ -13,7 +13,10 @@ import { UserService } from 'src/app/services/user.service';
 export class ForgotPasswordComponent {
 
   faEnvelope = faEnvelope;
-  constructor(private forgotService: ForgotPasswordService, private userService: UserService, private alertService: AlertService,private translate : TranslateService) { }
+  constructor(private forgotService: ForgotPasswordService, private userService: UserService, private alertService: AlertService, private translate: TranslateService) { 
+
+    this.translate.setDefaultLang('pt');
+  }
 
   emailTo: String = "";
 
@@ -37,7 +40,6 @@ export class ForgotPasswordComponent {
   forgot = new EventEmitter<boolean>();
 
   toForgotPassword(): void {
-    // localStorage.setItem("toForgotPassword",JSON.stringify(!this.forgotPassword));
     this.forgotPassword = !this.forgotPassword;
     this.emailTo = "";
     this.password = "";
@@ -83,15 +85,17 @@ export class ForgotPasswordComponent {
     if (this.password == this.passwordConf) {
       this.userService.patchPassword(this.emailTo, this.password).subscribe(
         (data) => {
-          console.log(data);
           this.alertService.successAlert(this.translate.instant("alerts.success.passwordUpdated"));
           this.toForgotPassword();
         },
         (error) => {
-          this.alertService.errorAlert(this.translate.instant("alerts.success.errorPasswordUpdated"));
           console.log(error);
+          
+          this.alertService.errorAlert(error.error);
         }
       );
+    } else {
+      this.alertService.errorAlert('Senhas incompatíveis');
     }
   }
 
