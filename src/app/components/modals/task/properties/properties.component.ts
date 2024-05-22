@@ -76,7 +76,7 @@ export class PropertiesComponent {
     }
     if (this.isCreator) {
       this.tasks = this.project.tasks
-      this.getGroups()
+      // this.getGroups()
       this.getUsers()
 
       for (const task of this.project.tasks) {
@@ -201,26 +201,26 @@ export class PropertiesComponent {
     })
   }
 
-  getGroups() {
-    this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
-      for (const group1 of pc.groups) {
-        let group: Group = group1 as Group
-        group.label = "Grupo " + group.name
-        this.taskResponsables.push(group)
-        this.returnAllGroups(group)
+  // getGroups() {
+  //   this.projectService.returnAllCollaborators(this.project.id).subscribe((pc: ProjectCollaborators) => {
+  //     for (const group1 of pc.groups) {
+  //       let group: Group = group1 as Group
+  //       group.label = "Grupo " + group.name
+  //       this.taskResponsables.push(group)
+  //       this.returnAllGroups(group)
 
 
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
 
-  returnAllGroups(group1: Group) {
-    this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
-      for (const group of tr.groups) {
-        if (group.id == group1.id) {
-          this.selectedUsers.push(group1)
-        }
-      }
-    })
-  }
+  // returnAllGroups(group1: Group) {
+  //   this.taskService.returnAllResponsables(this.task.id).subscribe((tr: ReturnTaskResponsables) => {
+  //     for (const group of tr.groups) {
+  //       if (group.id == group1.id) {
+  //         this.selectedUsers.push(group1)
+  //       }
+  //     }
+  //   })
+  // }
 }

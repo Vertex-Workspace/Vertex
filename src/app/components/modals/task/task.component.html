@@ -94,8 +94,8 @@
                         <p>{{ timer }}</p>
                     </span>
                     <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()"
-                    [disabled]="hasDependency"
-                    [ngStyle]="{'opacity' : hasDependency ? '0.2' : '1'}"
+                    [disabled]="hasDependency2()"
+                    [ngStyle]="{'opacity' : hasDependency2() ? '0.2' : '1'}"
                     >{{ 'components.modals.task.workTask' | translate }}</button>
                     <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
                         (click)="stopTimer()">{{ 'components.modals.task.endWork' | translate }}</button>

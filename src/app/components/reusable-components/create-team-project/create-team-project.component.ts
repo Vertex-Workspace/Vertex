@@ -303,6 +303,9 @@ export class CreateTeamProjectComponent implements OnInit {
   updateProject(): void {
     let project = this.form.getRawValue() as Project;
 
+    console.log(project);
+    
+
     let projectEdit: ProjectEdit = {
       id: this.project?.id,
       name: project.name,
@@ -324,13 +327,10 @@ export class CreateTeamProjectComponent implements OnInit {
     }
 
     let reviewConfig = this.form.get('projectReviewENUM');
-    console.log(this.convertTypeString(reviewConfig?.value)!);
     
     projectEdit.projectReviewENUM = this.convertTypeString(reviewConfig?.value)!;
-    console.log(projectEdit.projectReviewENUM);
     
 
-    
     this.projectService.patchValue(projectEdit).subscribe((projectRes: Project) => {
       if (this.fd) {
         this.projectService
@@ -354,18 +354,16 @@ export class CreateTeamProjectComponent implements OnInit {
       project.projectDependency.properties = [];
       project.projectDependency.tasks = []
     }
-
-    console.log(project.listOfResponsibles);
     
     project.listOfResponsibles.forEach(type => {
-      if (type instanceof Group) {
+      if (type && typeof type.label === 'string' && type.label.startsWith('Grupo')) {
         let group: Group = type as Group;
         group.children = [];
         groups.push({ ...group });
       } else {
+        console.log(1);
         let user: User = type as User;
         if (!users.some(existingUser => existingUser.id === user.id)) {
-    
           users.push({ ...user });
         }
       }
@@ -379,6 +377,7 @@ export class CreateTeamProjectComponent implements OnInit {
       project.users = users
       project.groups = groups;
     }
+    
   }
 
 
