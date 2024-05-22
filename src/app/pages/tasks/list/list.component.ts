@@ -133,12 +133,7 @@ export class ListComponent implements OnInit {
     this.taskService
       .getAllByTeam(id)
       .subscribe((tl: Task[]) => {
-        if (tl.length > 0) {
-          this.isNull = false;
-          
           this.taskList = tl;  
-        }
-        else this.isNull = true;
       }); //busca a equipe com base no id da url
       //busca todas as tarefas criadas dentro da equipe
   }

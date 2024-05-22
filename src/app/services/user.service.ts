@@ -39,7 +39,7 @@ export class UserService {
       (userRes: User) => {
         this.login(form);
     }, (e) => {
-      this.alert.errorAlert(e.error);
+      this.alert.errorAlert(e.error.error);
   
     });
   }

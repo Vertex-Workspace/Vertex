@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="miniChat-main-input">
+    <div class="miniChat-main-input" >
         <div class="div-searchStep1">
             <input class="input-searchStep1 regular-text" type="text" [(ngModel)]="query"  placeholder="{{ 'components.modals.minichat.placeholderSearchConversation' | translate }}" />
         </div>
@@ -67,6 +67,10 @@
                     </div>
                 </div>
             </div>
+        </ng-container>
+        <ng-container *ngIf="conversations.length == 0">
+            <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>
+            <p class="pHasNoOneChat">{{"pages.chat.noChats" | translate}}</p>
         </ng-container>
     </div>
 </div>
