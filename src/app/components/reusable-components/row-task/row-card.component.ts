@@ -86,10 +86,18 @@ export class RowCardComponent {
 
   getPropertyValue(property: Property | PropertyCreation): Value {
     let value: Value;
+  
     this.task.values?.forEach((values: any) => {
-      if (property.kind === values.property.kind) {
-        value = values;
-      }
+      if (this.isTaskPage()) {
+        const property2 : Property = property as Property;
+        if (property2.id === values.property.id) {
+            value = values;
+        }
+    } else {
+        if (property.kind === values.property.kind) {
+            value = values;
+        }
+    }
     });
     return value!;
   }
@@ -141,4 +149,4 @@ export class RowCardComponent {
   openModalTask(): void {
     this.modalTask.emit(this.task);
   }
-}
+} 

@@ -209,6 +209,8 @@ export class InputValuePropertyComponent {
       },
       userID: this.userService.getLogged().id!
     };
+    console.log(valueUpdate);
+    
 
     this.taskService.patchValue(valueUpdate).subscribe(
       (task) => {

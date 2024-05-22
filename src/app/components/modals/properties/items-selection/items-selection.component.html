@@ -13,10 +13,10 @@
                 <div>
                     <div>
                         <p *ngIf="propertyList.id != propertyListNameEditId" (click)="editName(propertyList)"
-                            class="regular-text cursor-pointer" [ngStyle]="{'background-color': propertyList.color}">
+                            class="regular-text cursor-pointer" [ngStyle]="{'background-color': propertyList.color}" [style.color]="getStrongerColor(propertyList.color)">
                             {{ propertyList.value }}</p>
                         <input *ngIf="propertyList.id == propertyListNameEditId" type="text" class="regular-text"
-                            [(ngModel)]="nameEdit" [ngStyle]="{'background-color': propertyList.color}">
+                            [(ngModel)]="nameEdit" [ngStyle]="{'background-color': propertyList.color}" [style.color]="getStrongerColor(propertyList.color)">
                         <p *ngIf="propertyList.id == propertyListNameEditId" (click)="saveName(propertyList)"
                             class="cursor-pointer">✔</p>
                     </div>
