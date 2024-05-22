@@ -48,6 +48,8 @@ export class CardComponent implements OnInit {
   canDelete?: boolean = false;
   canEdit?: boolean = false;
   ngOnChanges(): void {
+    console.log(this.task);
+    
     colors.forEach(color => {
       if (color.weak === this.borderColor) {
         this.borderColor = color.strong;
