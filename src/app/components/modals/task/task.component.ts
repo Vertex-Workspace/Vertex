@@ -443,4 +443,8 @@ export class TaskComponent implements OnInit {
   isRevisable(): boolean {
     return this.taskInfoDTO.projectReviewENUM == "OPTIONAL";
   }
+
+  hasDependency2():boolean{
+    return this.task.taskDependency != null;
+  }
 }
