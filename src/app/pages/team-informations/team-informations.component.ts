@@ -222,8 +222,6 @@ export class TeamInformationsComponent implements OnInit {
     }
 
     deleteGroup(event : Group){
-        console.log(event);
-        
         this.groupService.delete(event).subscribe((group: Group) => {
             this.alertService.successAlert(this.translate.instant("alerts.success.group_deleted"));
             this.team.groups.splice(this.team.groups.indexOf(event),1)
@@ -235,36 +233,40 @@ export class TeamInformationsComponent implements OnInit {
 
     editDescription: boolean = false;
     changeEditDescription(): void {
-        this.editDescription = !this.editDescription
-
-        if (!this.editDescription) {
-            this.teamService.updateTeam(this.team).subscribe(
-                (team: Team) => {
-                    this.alertService.successAlert(this.translate.instant("alerts.success.descriptionUpdated"));
-                });
+        if(this.isCreator()){
+            this.editDescription = !this.editDescription
+        
+            if (!this.editDescription) {
+                this.teamService.updateTeam(this.team).subscribe(
+                    (team: Team) => {
+                        this.alertService.successAlert(this.translate.instant("alerts.success.descriptionUpdated"));
+                    });
+                }
         }
     }
 
     inputEditName: boolean = false;
     newName: string = "";
     editName(): void {
-        this.inputEditName = !this.inputEditName;
-        if (this.inputEditName) {
-            this.newName = this.team.name;
-        } else {
-            //Validação
-            if (this.newName.length < 3 || this.newName.length > 30) {
-                this.alertService.notificationAlert(this.translate.instant("alerts.notification.invalidName"));
-                this.newName = "";
-                return;
+        if(this.isCreator()){
+            this.inputEditName = !this.inputEditName;
+            if (this.inputEditName) {
+                this.newName = this.team.name;
+            } else {
+                    //Validação
+                    if (this.newName.length < 3 || this.newName.length > 30) {
+                        this.alertService.notificationAlert(this.translate.instant("alerts.notification.invalidName"));
+                        this.newName = "";
+                        return;
+                    }
+                this.team.name = this.newName;
+                //Caso a validação seja feita é feito o update
+                this.teamService.updateTeam(this.team).subscribe(
+                    (team: Team) => {
+                        this.alertService.successAlert(this.translate.instant("alerts.success.nameUpdated"));
+                    }
+                );
             }
-            this.team.name = this.newName;
-            //Caso a validação seja feita é feito o update
-            this.teamService.updateTeam(this.team).subscribe(
-                (team: Team) => {
-                    this.alertService.successAlert(this.translate.instant("alerts.success.nameUpdated"));
-                }
-            );
         }
     }
 
