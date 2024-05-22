@@ -21,6 +21,7 @@ import { TreeNode } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/services/loading.service';
 import { Chat } from 'src/app/models/class/chat';
+import { TaskResponsable } from 'src/app/models/class/taskResponsable';
 
 @Component({
   selector: 'app-properties',
@@ -116,6 +117,8 @@ export class PropertiesComponent {
     return "";
   }
 
+  @Output()
+  updateTaskResponsibles : EventEmitter<TaskResponsable[]> = new EventEmitter<TaskResponsable[]>();
   @Input() chatP!: Chat;
   updateResponsible(event: any, node: any): void {
     let isGroup: boolean = false
@@ -160,6 +163,7 @@ export class PropertiesComponent {
 
     if ((taskResponsibles.user != null) && (this.task.creator?.user.id != taskResponsibles.user.id)) {
       this.taskService.updateTaskResponsables(taskResponsibles).subscribe((task: Task) => {
+        this.updateTaskResponsibles.emit(task.taskResponsables);
         this.alertService.successAlert(this.translate.instant("alerts.success.task-responsibles")
         )
       });
