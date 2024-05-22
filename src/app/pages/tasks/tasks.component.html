@@ -8,7 +8,7 @@
                         {{pageTitle}}
                     </h4>
                     
-                    <i class="pi pi-pencil pt-2 cursor-pointer" *ngIf="isCreator" (click)="openProjectInfos()"></i>
+                    <i class="pi pi-pencil pt-2 cursor-pointer" *ngIf="isCreator && isNotGoogleProject()" (click)="openProjectInfos()" ></i>
                 </div>
                 <div class="pt-2">
                     <p class="small-text text-gray-600 texttt text-justify">{{pageDescription}}</p>

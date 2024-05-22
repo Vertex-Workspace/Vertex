@@ -138,6 +138,10 @@ export class CardListComponent implements OnInit {
     return false;
   }
 
+  isNotGoogleProject(item : any): boolean {
+    return item.creationOrigin != 'GOOGLE';
+  }
+
   getImage(item: any) {
     if (!this.hasImage(item)) {
       return "";

@@ -18,7 +18,7 @@
 
                         <div *ngIf="(teamScreen === 'settings' || teamScreen === 'project')" class="icon">
                             <ng-container *ngIf="item.isCreator else isMember">
-                                <fa-icon *ngIf="teamScreen === 'project'" [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
+                                <fa-icon *ngIf="teamScreen === 'project' && isNotGoogleProject(item)" [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
                                 <fa-icon [ngClass]="teamScreen === 'settings' ? 'pr-3' : ''" [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
                             </ng-container>
                             <ng-template #isMember>

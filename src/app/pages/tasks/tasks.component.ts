@@ -469,4 +469,9 @@ export class TasksComponent implements OnInit {
     this.openProjectInfos();
   }
 
+  
+  isNotGoogleProject(): boolean {
+    return this.project.creationOrigin != 'GOOGLE';
+  }
+
 }
