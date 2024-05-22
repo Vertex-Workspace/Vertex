@@ -102,8 +102,10 @@ export class CardComponent implements OnInit {
   openInputName: boolean = false;
   saveLastName: string = "";
   openModalEdit() {
+    if(this.canEdit){
       this.openInputName = !this.openInputName;
       this.saveLastName = this.task.name;
+    }
   }
 
   editName(): void{

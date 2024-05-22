@@ -105,7 +105,7 @@ export class CreateGroupComponent implements OnInit {
   }
 
   pushParticipants(user: any): void {
-    this.users.push(user.itemValue);
+    this.users = user.value;
   }
 
   @Output()
