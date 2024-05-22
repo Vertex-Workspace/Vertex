@@ -225,7 +225,7 @@ export class InputValuePropertyComponent {
 
           this.task.values[0] = this.value;
         }
-        this.alertService.errorAlert(error.error);
+        // this.alertService.errorAlert(error.error);
       }
     );
   }

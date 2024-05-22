@@ -452,7 +452,4 @@ export class TaskComponent implements OnInit {
     return this.task.taskDependency != null;
   }
 
-  updateTaskResponsibles(taskResponsable: TaskResponsable[]) {
-    this.task.taskResponsables = taskResponsable;
-  }
 }
