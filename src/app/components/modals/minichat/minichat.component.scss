@@ -170,11 +170,11 @@ textarea {
 
 .div-searchStep1 {
     @apply flex border-2 w-[93%] h-full rounded-sm;
-    border: 1px solid $emphasis;
+    
 }
 
 .miniChatStep1 {
-    @apply absolute right-0 bottom-0 w-[450px] h-[500px] rounded-sm flex flex-col justify-between items-start shadow-lg;
+    @apply absolute right-0 bottom-0 w-[450px] h-[500px] rounded-sm flex flex-col justify-between items-start shadow-md;
     background-color: $card;
     animation: bottomToTop 0.5s;
 }
@@ -184,14 +184,13 @@ textarea {
 }
 
 .input-searchStep1 {
-    @apply pl-[10px] w-[100%] h-[100%];
+    @apply pl-[10px] w-[100%] h-[100%] shadow-md;
     background-color: $card !important;
-    border: 1px solid #777777;
+    
 }
 
 .card-chat {
-    @apply flex justify-between items-center w-[100%] pl-[10px] h-[100px] rounded-sm cursor-pointer min-h-[100px];
-    border: 1px solid #777777;
+    @apply flex justify-between items-center w-[100%] pl-[10px] h-[100px] rounded-sm cursor-pointer min-h-[100px] shadow-md;
     animation: leftPulse 0.3s;
 }
 

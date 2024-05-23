@@ -41,7 +41,7 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     TaskModule,
-    JoyrideModule.forChild(),
+    JoyrideModule,
     CommonModule,
     RouterModule,
     BrowserModule,
