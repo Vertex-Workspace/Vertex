@@ -618,3 +618,8 @@
     padding: 20px;
     box-shadow: none;
 }
+
+.selected{
+    background-color: $primaryColor;
+    color: $secondColor;
+}

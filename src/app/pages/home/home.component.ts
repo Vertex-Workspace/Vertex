@@ -44,8 +44,8 @@ export class HomeComponent implements OnInit {
 
   orderSettings: any[] = [];
   configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
+    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter(), selected: false },
+    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder(), selected: false },
   ];
 
   filterOpen !: boolean;
@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
       ];
 
 
-      if(this.logged.firstAccess){
+      if (this.logged.firstAccess) {
         console.log(teams);
         this.joyrideService.startTour({
           steps: stepsT,
@@ -173,14 +173,15 @@ export class HomeComponent implements OnInit {
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
     this.selectedFilter = '';
-    this.filterDate = '';
+    this.filterDate = ''; 
+    this.configItems[0].selected = !this.configItems[0].selected
   }
 
   clickOrder(): void {
     this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
+    this.configItems[1].selected = !this.configItems[1].selected
   }
-
 
   taskOpen: boolean = false;
   taskOpenObject!: Task;
