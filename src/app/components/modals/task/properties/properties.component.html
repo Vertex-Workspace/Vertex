@@ -29,7 +29,7 @@
                         <p-multiSelect [options]="taskResponsables" [style]="{ minWidth: '200px', 'background-color': 'var(--card)'}"
                             [(ngModel)]="selectedUsers" appendTo="body"
                             placeholder="{{ 'components.modals.task.properties.responsible' | translate }}"
-                            emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherResponsiblesInTask' | translate }}">
+                            emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherResponsiblesInTask' | translate }}" [showToggleAll]="false">
                             <ng-template let-node pTemplate="default" display="chip">
                                 <span (click)="updateResponsible($event, node)">{{node.label}}</span>
                             </ng-template>

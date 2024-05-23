@@ -303,8 +303,8 @@ export class TasksComponent implements OnInit {
   ];
 
   configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter() },
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder() },
+    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.toggleFilter(), selected: false },
+    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.toggleOrder(), selected: false },
   ];
 
 
@@ -314,6 +314,7 @@ export class TasksComponent implements OnInit {
   }
 
   toggleFilter(): void {
+    this.configItems[0].selected = !this.configItems[0].selected;
     this.filterOpen = !this.filterOpen;
     this.selectedFilter = '';
     this.simplePropertyFilter = {
@@ -324,6 +325,7 @@ export class TasksComponent implements OnInit {
   }
 
   toggleOrder(): void {
+    this.configItems[1].selected = !this.configItems[1].selected;
     this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
   }

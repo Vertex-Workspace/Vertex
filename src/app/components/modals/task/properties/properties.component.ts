@@ -59,6 +59,7 @@ export class PropertiesComponent {
 
 
   @Input() canEdit: boolean = false;
+  @Output() dependencyEmitter = new EventEmitter();
   taskResponsables: TreeNode[] = []
   selectedUsers: TreeNode[] = []
   selectedUsers2: TreeNode[] = []
@@ -139,19 +140,6 @@ export class PropertiesComponent {
       group: isGroup ? node : null
     };
 
-    // this.teamService.patchChat(this.chatP.id!, this.project.idTeam, node.id).subscribe(
-    //   (res:any) => {
-    //     this.alertService.successAlert(this.translate.instant("alerts.success.chat-responsibles"))
-    //     this.chatP = res;
-        
-    //     console.log(res.userTeams, "USER TEAMS");
-        
-    //   },
-    //   (error) => {
-    //     this.alertService.errorAlert("Erro ao adicionar usuário ao chat")
-    //     console.log(error);
-    //   }
-    // );
 
     if (taskResponsibles.group) {
       taskResponsibles.group.tasks = []
@@ -176,6 +164,7 @@ export class PropertiesComponent {
     this.taskService.taskDependency(this.task.id, task.value.id, this.task).subscribe((task1: Task) => {
       this.alertService.successAlert(this.translate.instant("alerts.success.dependency") + task.value.name)
       this.selectedDependency = task.value.name
+      this.dependencyEmitter.emit(true);
     },
       (error) => {
         this.alertService.errorAlert("Já existe uma tarefa que depende dessa")

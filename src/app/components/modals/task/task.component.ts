@@ -451,8 +451,8 @@ export class TaskComponent implements OnInit {
     return this.taskInfoDTO.projectReviewENUM == "OPTIONAL";
   }
 
-  hasDependency2():boolean{
-    return this.task.taskDependency != null;
+  hasDependency2(): void{
+    this.hasDependency = true;
   }
 
 }
