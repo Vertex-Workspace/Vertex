@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Output } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Observable, Subscription } from 'rxjs';
 import { Team } from 'src/app/models/class/team';
@@ -62,11 +62,13 @@ export class HomeComponent implements OnInit {
     private teamService: TeamService,
     private alert: AlertService,
     private projectService: ProjectService,
-    private readonly joyrideService: JoyrideService,
+    private joyrideService: JoyrideService,
     private translate: TranslateService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.logged = this.userService.getLogged();
+
+  
   }
 
   ngOnInit(): void {
@@ -156,7 +158,7 @@ export class HomeComponent implements OnInit {
       ];
 
 
-      if(this.logged.firstAccess){
+      if (this.logged.firstAccess) {
         console.log(teams);
         this.joyrideService.startTour({
           steps: stepsT,
@@ -165,6 +167,8 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+  
+
 
   switchCreateView(): void {
     this.isCreating = !this.isCreating;

@@ -147,7 +147,7 @@ main {
 }
 
 .card-chat {
-    @apply flex justify-start w-[90%] items-center  pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    @apply flex justify-start w-[100%] items-center  pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
     border: 1px solid $emphasis;
     color: $text;
     background-color: $secondColor;
@@ -166,25 +166,25 @@ main {
     }
 }
 
-@keyframes leftPulse {
-    0% {
-        width: 100%;
-    }
+// @keyframes leftPulse {
+//     0% {
+//         width: 100%;
+//     }
 
-    100% {
-        width: 90%;
-    }
-}
+//     100% {
+//         width: 90%;
+//     }
+// }
 
-@keyframes rightPulse {
-    0% {
-        width: 90%;
-    }
+// @keyframes rightPulse {
+//     0% {
+//         width: 90%;
+//     }
 
-    100% {
-        width: 100%;
-    }
-}
+//     100% {
+//         width: 100%;
+//     }
+// }
 
 .text-group-individual {
     @apply flex justify-between items-center gap-2 cursor-pointer;
