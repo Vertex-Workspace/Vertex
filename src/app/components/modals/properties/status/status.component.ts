@@ -213,7 +213,11 @@ export class StatusComponent {
   }
 
   openModalDelete(property: PropertyList): void {
-    this.deleteBoolean = !this.deleteBoolean
-    this.propertyListToDelete = property
+    if(this.canDelete){
+      this.deleteBoolean = !this.deleteBoolean
+      this.propertyListToDelete = property
+    } else {
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantDeleteStatus"));
+    }
   }
 }

@@ -79,20 +79,28 @@ export class ItemsSelectionComponent {
   }
 
   eyeVisibility(propertyList: PropertyList) {
-    if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
-      this.sections[0].propertyLists.splice(this.sections[0].propertyLists.indexOf(propertyList), 1);
-      this.sections[1].propertyLists.push(propertyList);
-      propertyList.propertyListKind = PropertyListKind.INVISIBLE;
+    if(this.canEdit){
+      if (propertyList.propertyListKind == PropertyListKind.VISIBLE) {
+        this.sections[0].propertyLists.splice(this.sections[0].propertyLists.indexOf(propertyList), 1);
+        this.sections[1].propertyLists.push(propertyList);
+        propertyList.propertyListKind = PropertyListKind.INVISIBLE;
+      } else {
+        this.sections[1].propertyLists.splice(this.sections[1].propertyLists.indexOf(propertyList), 1);
+        this.sections[0].propertyLists.push(propertyList);
+        propertyList.propertyListKind = PropertyListKind.VISIBLE;
+      }
+      this.saveProperty();
     } else {
-      this.sections[1].propertyLists.splice(this.sections[1].propertyLists.indexOf(propertyList), 1);
-      this.sections[0].propertyLists.push(propertyList);
-      propertyList.propertyListKind = PropertyListKind.VISIBLE;
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEdit"));
     }
-    this.saveProperty();
   }
 
   pencilClick(propertyList: PropertyList) {
-    this.pencil.emit(propertyList);
+    if(this.canEdit){
+      this.pencil.emit(propertyList);
+    } else {
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantEdit"));
+    }
   }
 
   delete(event: any) {
@@ -172,7 +180,11 @@ export class ItemsSelectionComponent {
   }
 
   openModalDelete(property: PropertyList): void {
-    this.deleteBoolean = !this.deleteBoolean
-    this.propertyListToDelete = property
+    if(this.canDelete){
+      this.deleteBoolean = !this.deleteBoolean
+      this.propertyListToDelete = property
+    } else {
+      this.alertService.errorAlert(this.translate.instant("alerts.error.cantDeleteStatus"));
+    }
   }
 }
