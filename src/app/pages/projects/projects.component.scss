@@ -604,5 +604,10 @@
         @apply transition-colors;
     }
 }
+
+.selected{
+    background-color: $primaryColor;
+    color: $secondColor;
+}
     
     

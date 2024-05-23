@@ -158,18 +158,20 @@ export class ProjectsComponent implements OnInit {
   }
 
   configItems = [
-    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter() },
-    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder() },
+    { id: 'filter', iconClass: 'pi pi-filter', click: () => this.clickFilter(), selected: false },
+    { id: 'order', iconClass: 'pi pi-arrow-right-arrow-left', click: () => this.clickOrder(), selected: false },
   ];
 
   clickFilter(): void {
     this.filterOpen = !this.filterOpen;
     this.selectedFilter = '';
+    this.configItems[0].selected = !this.configItems[0].selected;
   }
 
   clickOrder(): void {
     this.orderParams = { name: '', type: '' };
     this.orderOpen = !this.orderOpen;
+    this.configItems[1].selected = !this.configItems[1].selected;
   }
 
   taskOpen: boolean = false;
