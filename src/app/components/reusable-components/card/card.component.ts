@@ -12,7 +12,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { TaskService } from 'src/app/services/task.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UserService } from 'src/app/services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { colors } from 'src/app/models/colors';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -33,6 +33,7 @@ export class CardComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private userService: UserService,
+    private router : Router,
     private translate: TranslateService) {
   }
   @Input() task!: Task;
@@ -102,7 +103,7 @@ export class CardComponent implements OnInit {
   openInputName: boolean = false;
   saveLastName: string = "";
   openModalEdit() {
-    if(this.canEdit){
+    if(this.canEdit || this.router.url.includes('landing-page')){
       this.openInputName = !this.openInputName;
       this.saveLastName = this.task.name;
     }
