@@ -678,5 +678,7 @@
     "Criar": "Crear",
     "Editar": "Editar",
     "Deletar": "Borrar"
-  }
+  },
+
+  "noOneNote" : "¡Aún no tienes ninguna nota creada!"
 }
