@@ -396,7 +396,6 @@ export class TaskComponent implements OnInit {
         this.task.chatCreated = true;
         this.miniChatOpen = true;
         this.taskChat = task.chat!;
-        console.log(this.taskChat, "taskchat");
         this.alertService.successAlert(this.translate.instant("alerts.success.chatCreated"));
       },
       (error: any) => {
@@ -410,6 +409,10 @@ export class TaskComponent implements OnInit {
   }
   isAloneTask() {
     return this.task.taskResponsables!.length <= 1;
+  }
+
+  updateTaskChat(chat : Chat){
+    this.task.chat = chat;
   }
 
   sentToReviewDescription: string = "";

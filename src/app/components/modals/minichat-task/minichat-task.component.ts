@@ -14,6 +14,7 @@ import { Chat } from 'src/app/models/class/chat';
 import { User } from 'src/app/models/class/user';
 import { TeamService } from 'src/app/services/team.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-minichat-task',
@@ -48,8 +49,9 @@ export class MinichatTASKComponent {
   side: boolean = true;
   logged!: User;
 
-  constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
-    this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
+  constructor(public webSocketService: WebSocketService, private userService : UserService, private teamService: TeamService) {
+
+    this.logged = userService.getLogged();
   }
 
   showEmojiPicker: boolean = false;
@@ -67,12 +69,12 @@ export class MinichatTASKComponent {
   ngOnInit() {
     this.webSocketService.openWebSocket();
     this.webSocketService.listenToServer().subscribe((change) => {
-      this.chat.messages!.push(change);
+      if(change.user != this.logged.firstName){
+        this.chat.messages!.push(change);
+      }
       this.scrollToBottom();
     });
     this.scrollToBottom();
-
-    console.log(this.chat, "CHAT");
   }
 
   ngOnDestroy(): void {
@@ -91,20 +93,16 @@ export class MinichatTASKComponent {
       time: new Date(),
       viewed: false,
     };
-    console.log(messageDto);
 
     this.showEmojiPicker = false;
 
     if (messageDto.contentMessage != null && messageDto.contentMessage.trim() != "") {
       this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
-        (response: any) => {
+        (response: Chat) => {
           this.chat = response;
-          console.log(response, "Message sentALLL");
           sendForm.controls['message'].reset();
+          this.webSocketService.sendMessage(messageDto);
         });
-
-      this.webSocketService.sendMessage(messageDto);
-
       sendForm.reset();
     }
   }
@@ -214,22 +212,6 @@ export class MinichatTASKComponent {
     } else return new Date(message.time!).getHours() + ":" + new Date(message.time!).getMinutes();
   }
 
-  // openConversation(chat: Chat) {
-  //   this.step=2;
-  //   this.chat = chat;
-  //   this.conversations.forEach((conversation: Chat) => {
-  //     conversation.conversationOpen = false;
-  //   });
-
-  //   this.chat.conversationOpen = true;
-
-  //   this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
-  //     this.chat.messages = messages;
-
-  //     let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
-  //     a.scrollTo(a.scrollTop, a.scrollHeight);
-  //   });
-  // }
 
   @Output() miniChatOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
   openMiniChat(value: boolean) {
