@@ -3,8 +3,8 @@
         <li *ngFor="let comment of task.comments">
             <div class="comment-informations">
                 <div>
-                    <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon>
-                    <p>{{ getName(comment.taskResponsable!) }}</p>
+                    <!-- <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon> -->
+                    <p class="medium-text">{{ getName(comment.taskResponsable!) }}</p>
                 </div>
                 <div>
                     <p class="small-text">{{ getDate(comment.date!) }}</p>

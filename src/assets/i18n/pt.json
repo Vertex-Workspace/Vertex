@@ -420,7 +420,7 @@
                     }
                 },
                 "general-properties": {
-                    "Visíveis": "Visível",
+                    "Visíveis": "Visíveis",
                     "Não visíveis": "Não visíveis",
                     "Fixas": "Fixas",
                     "manage-status": "Gerenciar Status",
@@ -674,5 +674,5 @@
         "Deletar": "Deletar"
     },
 
-    "noOneNote" : "Você ainda não possui nenhuma nota criada ainda!"
+    "noOneNote" : "Você ainda não possui nenhuma nota criada!"
 }
