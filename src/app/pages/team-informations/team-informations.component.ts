@@ -127,10 +127,7 @@ export class TeamInformationsComponent implements OnInit {
                 console.log(error);
             }
         )
-
         this.alertService.successAlert(this.translate.instant("alerts.success.invitationCodeCopied"));
-
-
     }
 
 

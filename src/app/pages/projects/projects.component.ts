@@ -8,7 +8,7 @@ import { CreationOrigin, Project, ProjectReview } from 'src/app/models/class/pro
 import { PropertyKind, PropertyListKind } from 'src/app/models/class/property';
 import { Task } from 'src/app/models/class/task';
 import { Team } from 'src/app/models/class/team';
-import { Permission, User } from 'src/app/models/class/user';
+import { Permission, PermissionsType, User } from 'src/app/models/class/user';
 import { PipeParams } from 'src/app/models/interface/params';
 import { AlertService } from 'src/app/services/alert.service';
 import { GroupService } from 'src/app/services/group.service';
@@ -61,7 +61,7 @@ export class ProjectsComponent implements OnInit {
 
 
   permissionsOnTeam!: Permission[];
-
+  canCreate : boolean = false;
   ngOnInit(): void {    
     this.getTeam();
     this.updateTranslate();
@@ -77,7 +77,16 @@ export class ProjectsComponent implements OnInit {
       this.isCreator = this.logged.id! === team.creator.id!;
       this.teamName = team.name!;
       this.projects = this.team.projects;
-      this.permissionsOnTeam = team.permissions;   
+      this.permissionsOnTeam = team.permissions; 
+      console.log(this.permissionsOnTeam);
+      
+      this.permissionsOnTeam.forEach((perm) => {
+        if(perm.name == PermissionsType.CREATE && perm.enabled){
+          console.log("Can Create");
+          
+          this.canCreate = true;
+        }
+      });  
     });
   }
 

@@ -22,7 +22,7 @@
                         <div *ngIf="isCreator && !calendarAlreadyImported() && logged.syncWithCalendar" class="import" (click)="createCalendarProject()">
                             <img src="../../../assets/calendar-logo.png" class="w-[60%]">
                         </div>
-                        <button class="create" (click)="switchCreateView()">
+                        <button class="create" (click)="switchCreateView()" [disabled]="!canCreate" [ngClass]="canCreate ? '' : 'opacity-20'">
                             <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
                             <p>
                                 {{'pages.projects.newProjectBtn' | translate}}

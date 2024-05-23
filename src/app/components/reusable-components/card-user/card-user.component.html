@@ -7,7 +7,7 @@
             </div>
             <div class="pl-3">
                 <p (click)="goToProfile()">{{ user.firstName }} <span *ngIf="!isNonCreatorCard">{{ 'components.reusable-components.card-user.you' | translate }}</span></p>
-                <p>{{ user.email }}</p>
+                <p class="truncate">{{ user.email }}</p>
             </div>
             <div class="more-infos" *ngIf="isTeamCreator && isNonCreatorCard">
                 <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean(user)"
