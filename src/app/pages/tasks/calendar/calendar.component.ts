@@ -249,10 +249,7 @@ export class CalendarComponent {
 
   }
 
-  deleteTask(task: Task): void {
-    this.project.tasks = this.project.tasks.filter(taskToDelete => taskToDelete.id !== task.id);
-    this.alert.successAlert(this.translate.instant('alerts.success.task_deleted'));
-  }
+
   
   drop(e: CdkDragDrop<any>, day: Date): void {
     const task: Task = e.item.data;
@@ -337,4 +334,25 @@ export class CalendarComponent {
     this.hoveringDay = day;
   }
 
+  modalDelete: boolean = false;
+  taskToDelete !: Task;
+  deleteTask(task: Task): void {
+    this.modalDelete = !this.modalDelete;
+    this.taskToDelete = task;
+  }
+
+  confirmDeleteTask(bool: boolean){
+    if(bool){
+      this.taskService.delete(this.taskToDelete.id).subscribe(
+        (task) => {
+          this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id !== this.taskToDelete.id);
+          this.alert.successAlert(this.translate.instant('alerts.success.task_deleted'));
+          this.modalDelete = false;  
+          this.taskToDelete = {} as Task;
+      });
+    } else {
+      this.modalDelete = false;  
+      this.taskToDelete = {} as Task;
+    }
+  }
 }

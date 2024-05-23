@@ -21,7 +21,6 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     DragDropModule,
     ConfirmModalModule,
-    CdkDrag,
     TranslateModule
   
   ]

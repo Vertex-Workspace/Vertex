@@ -134,3 +134,7 @@
         </div>
     </div>
 </app-modal-warn>
+
+
+<app-confirm-modal *ngIf="modalDelete" [width]="'400px'" [height]="'250px'"
+[title]="'components.reusable-components.card.excludeTask' | translate" (close)="confirmDeleteTask($event)"></app-confirm-modal>

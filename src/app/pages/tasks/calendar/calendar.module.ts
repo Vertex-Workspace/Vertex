@@ -11,6 +11,7 @@ import { PipesModule } from 'src/app/pipes/module/pipes.module';
 import { FormsModule } from '@angular/forms';
 import { CalendarRowCardComponent } from 'src/app/components/reusable-components/calendar-row-card/calendar-row-card.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ConfirmModalModule } from 'src/app/components/modals/confirm-modal/confirm-modal.module';
 
 
 
@@ -33,7 +34,8 @@ import { TranslateModule } from '@ngx-translate/core';
     PipesModule,
     CalendarModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    ConfirmModalModule
   ]
 })
 export class CalendarScreenModule { }

@@ -72,8 +72,12 @@ export class ProfileComponent {
   ngOnInit(): void {
     this.tooglesList = [
       { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff, event: () => this.toogleCharts(), visible: true },
-      { id: 3, text: "Sincronizar com Google Agenda", icon: faToggleOff, event: () => this.syncCalendar(), visible: this.logged.userKind === 'GOOGLE' },
     ]
+    if(this.logged.userKind === "GOOGLE"){
+      this.tooglesList.push(
+      { id: 3, text: "Sincronizar com Google Agenda", icon: faToggleOff, event: () => this.syncCalendar(), visible: this.logged.userKind === 'GOOGLE' },
+      );
+    }
     if(this.logged.showCharts){
       this.tooglesList[0].icon = faToggleOn;
     }

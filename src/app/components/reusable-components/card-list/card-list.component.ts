@@ -191,6 +191,7 @@ export class CardListComponent implements OnInit {
       .subscribe((project) => {
         this.alert.successAlert(this.translate.instant('alerts.success.project_deleted'));
         this.projects.splice(this.projects.indexOf(projectId), 1);
+        window.location.reload();
       });
   }
 

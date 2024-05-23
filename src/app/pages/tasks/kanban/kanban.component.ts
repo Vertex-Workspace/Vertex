@@ -62,13 +62,14 @@ export class KanbanComponent {
   status : PropertyList[] = [];
 
   ngOnChanges(){
+    console.log("Change");
+    
     this.status = this.project.properties[0].propertyLists;
     this.taskList = this.project.tasks; 
   }
 
   lastIndexSize: number = 0;
   ngOnInit() {
-    console.log(this.project)
     this.lastIndexSize = this.project.tasks.length;
     this.taskList = this.project.tasks;
     this.status = this.project.properties[0].propertyLists;
@@ -195,9 +196,29 @@ export class KanbanComponent {
   }
 
 
+  modalDelete: boolean = false;
+  taskToDelete !: Task;
   deleteTask(task: Task): void {
-    this.taskList = this.taskList.filter(t => task.id !== t.id)
-    this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id !== task.id);
+    this.modalDelete = !this.modalDelete;
+    this.taskToDelete = task;
+  }
+
+  confirmDeleteTask(bool: boolean){
+    console.log(this.taskToDelete);
+    
+    if(bool){
+      this.taskService.delete(this.taskToDelete.id).subscribe(
+        (task) => {
+          this.taskList = this.taskList.filter(t => this.taskToDelete.id !== t.id)
+          this.project.tasks = this.project.tasks.filter(taskdaje => taskdaje.id !== this.taskToDelete.id);
+          this.alertService.successAlert(this.translate.instant('alerts.success.task_deleted'));
+          this.modalDelete = false;  
+          this.taskToDelete = {} as Task;
+      });
+    } else {
+      this.modalDelete = false;  
+      this.taskToDelete = {} as Task;
+    }
   }
 
   @Output() openTaskDetails = new EventEmitter();

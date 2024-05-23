@@ -48,9 +48,7 @@ export class CardComponent implements OnInit {
 
   canDelete?: boolean = false;
   canEdit?: boolean = false;
-  ngOnChanges(): void {
-    console.log(this.task);
-    
+  ngOnChanges(): void {   
     colors.forEach(color => {
       if (color.weak === this.borderColor) {
         this.borderColor = color.strong;
@@ -90,7 +88,9 @@ export class CardComponent implements OnInit {
 
   openModalDelete(): void {
     if (this.canDelete) {
-      this.modalDelete = true;
+      console.log(this.task);
+      
+      this.deleteTask.emit(this.task);
     } else {
       this.modalDelete2 = true;
       this.alertService.errorAlert(this.translate.instant('alerts.error.cantDeleteTask'));
@@ -133,26 +133,6 @@ export class CardComponent implements OnInit {
     );
   }
 
-  delete(event: any): void {
-    if (event) {
-      console.log("Delete");
-      
-        this.taskService.delete(this.task.id).subscribe(
-          (task) => {
-            console.log(task);
-            
-            // Alert
-            this.alertService.successAlert(this.translate.instant('alerts.success.task_deleted'));
-            this.deleteTask.emit();
-          },
-          (error) => {
-            console.log(error);
-            
-          }
-        );
-  }
-  this.modalDelete = false;
-  }
 
   @Output() openTaskDetails = new EventEmitter();
   openTask(): void {
