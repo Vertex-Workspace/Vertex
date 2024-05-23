@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { faUser, faUsers, faPaintBrush, faBell, faUserCircle, faLock } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
@@ -16,12 +17,18 @@ export class UserSettingsComponent {
 
   click: string = 'perfil';
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
+    this.handleLocation();
   }
 
   clickOption(id: string): void{
     this.click = id;
-    localStorage.setItem('settings-option', id);
+  }
+
+  handleLocation(): void {
+    this.click = String(this.router.url.split("/").pop());
   }
 
   itemsList = [
