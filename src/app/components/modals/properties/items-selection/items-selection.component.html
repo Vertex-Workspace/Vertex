@@ -22,7 +22,8 @@
                     </div>
                 </div>
                 <div>
-                    <fa-icon [icon]="section.icon" class="little-icon" (click)="eyeVisibility(propertyList)"></fa-icon>
+                    <fa-icon [icon]="section.icon" class="little-icon" (click)="eyeVisibility(propertyList)"
+                    [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'"></fa-icon>
                     <fa-icon [icon]="faPaintBrush" class="little-icon" (click)="pencilClick(propertyList)"
                     [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'"></fa-icon>
                     <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(propertyList)"

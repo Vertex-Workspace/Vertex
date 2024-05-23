@@ -204,8 +204,12 @@ export class GeneralPropertiesComponent {
   }
 
   openModalDelete(property: Property) {
-    this.deleteBoolean = !this.deleteBoolean
-    this.propertyToDelete = property
+    if(this.canDelete){
+      this.deleteBoolean = !this.deleteBoolean
+      this.propertyToDelete = property
+    } else {
+      this.alertService.errorAlert(this.translate.instant("alerts.error.permission_to_remove_properties"));
+    }
   }
 }
 
