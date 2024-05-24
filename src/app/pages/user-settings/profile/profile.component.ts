@@ -78,6 +78,11 @@ export class ProfileComponent {
       { id: 3, text: "Sincronizar com Google Agenda", icon: faToggleOff, event: () => this.syncCalendar(), visible: this.logged.userKind === 'GOOGLE' },
       );
     }
+    if(this.logged.userKind === "GOOGLE"){
+      this.tooglesList.push(
+      { id: 4, text: "Sincronizar com Google Drive", icon: faToggleOff, event: () => this.syncDrive(), visible: this.logged.userKind === 'GOOGLE' },
+      );
+    }
     if(this.logged.showCharts){
       this.tooglesList[0].icon = faToggleOn;
     }
@@ -108,6 +113,17 @@ export class ProfileComponent {
     } else {
         this.userService.a().subscribe(); 
         this.tooglesList[1].icon = faToggleOff; 
+    }
+  }
+
+  syncDrive(){
+    if (!this.logged.syncWithCalendar) {
+      this.logged.syncWithCalendar = true;
+      window.location.href = `http://localhost:7777/drive/authorize`;
+      this.tooglesList[2].icon = faToggleOn; 
+    } else {
+        this.userService.drive().subscribe(); 
+        this.tooglesList[2].icon = faToggleOff; 
     }
   }
 

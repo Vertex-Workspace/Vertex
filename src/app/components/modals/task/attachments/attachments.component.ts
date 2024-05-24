@@ -30,6 +30,12 @@ export class AttachmentsComponent {
     
   }
 
+  callServiceDrive(){
+    this.userService.getItens().subscribe((res) => {
+      console.log(res);
+    });
+  }
+
   onFileSelected(e: any): void {
     const selectedFile = e.target.files[0];
     const fd: FormData = new FormData();

@@ -1,12 +1,17 @@
 <section>
    <span>
-      <form class="input-div">
-         <input type="file" class="input-file" (change)="onFileSelected($event)">
-     </form>
-      <i class="pi pi-plus"></i>
-      <p>
-         {{'components.modals.task.attachments.add_attachment' | translate}}
-      </p> 
+      <div>
+         <img class="w-14" src="../../../../../assets/Google-Drive-Logo.png" (click)="callServiceDrive()" alt="">
+      </div>
+      <span>
+         <form class="input-div">
+            <input type="file" class="input-file" (change)="onFileSelected($event)">
+        </form>
+         <i class="pi pi-plus"></i>
+         <p>
+            {{'components.modals.task.attachments.add_attachment' | translate}}
+         </p>
+      </span> 
    </span>
    <div class="container">
       <div>

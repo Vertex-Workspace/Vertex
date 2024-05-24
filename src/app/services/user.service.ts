@@ -133,6 +133,14 @@ export class UserService {
     return this.http.get<any>(`http://localhost:7777/calendar/authorize`, { withCredentials: true })
   }
 
+  public drive(): Observable<any> {
+    return this.http.get<any>(`http://localhost:7777/drive/authorize`, { withCredentials: true })
+  }
+
+  public getItens(): Observable<any> {
+    return this.http.get<any>(`http://localhost:7777/drive/getItens`, { withCredentials: true })
+  }
+
   public b(userId: number, projectId: number): Observable<Project> {
     return this.http.get<Project>(`${URL}google/calendar/${userId}/${projectId}`, { withCredentials: true })
   }
@@ -205,4 +213,7 @@ export class UserService {
     return this.http
     .patch(`${URL}user/password`, changePassword, {withCredentials: true});
   }
+
+  
+
 }
