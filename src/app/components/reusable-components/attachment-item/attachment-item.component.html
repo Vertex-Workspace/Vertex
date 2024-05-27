@@ -1,7 +1,7 @@
 <div class="item">
     <img draggable="false" [src]="getIconSrc()">
     <div>
-       <p class="truncate">{{getName()}}</p>
+       <p class=" w-60 truncate">{{getName()}}</p>
     </div>
 
 
@@ -13,7 +13,6 @@
          class="pi pi-plus rotate-45 cursor-pointer"
          (click)="remove()"
       ></i>
-
    </span>
 </div>
-<a>Exportar para o drive</a>
+<a (click)="callServiceDrive()" >Exportar para o drive</a>

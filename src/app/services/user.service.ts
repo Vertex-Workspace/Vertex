@@ -141,6 +141,14 @@ export class UserService {
     return this.http.get<any>(`http://localhost:7777/drive/getItens`, { withCredentials: true })
   }
 
+  public sendItensToDrive(fd : FormData): Observable<any> {
+    return this.http.post<any>(`http://localhost:7777/drive/createFile`,fd, { withCredentials: true })
+  }
+
+  public deleteFileByNameDRIVE(name:string): Observable<any> {
+    return this.http.delete<any>(`http://localhost:7777/drive/deleteFile/${name}`, { withCredentials: true })
+  }
+
   public b(userId: number, projectId: number): Observable<Project> {
     return this.http.get<Project>(`${URL}google/calendar/${userId}/${projectId}`, { withCredentials: true })
   }
