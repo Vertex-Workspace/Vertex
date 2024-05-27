@@ -23,7 +23,7 @@ export class AttachmentItemComponent {
   realFile!:File;
   url !: string;
 
-  constructor(private userService: UserService, private alert: AlertService) {
+  constructor(public userService: UserService, private alert: AlertService) {
   }
 
   ngOnInit(): void {
@@ -61,9 +61,6 @@ export class AttachmentItemComponent {
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
       'application/vnd.ms-excel': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
       'text/csv': 'https://cdn-icons-png.freepik.com/512/8242/8242984.png',
-      'image/jpeg': 'https://cdn-icons-png.flaticon.com/512/337/337946.png',
-      'image/png': 'https://cdn-icons-png.flaticon.com/512/337/337946.png',
-      'image/jpg': 'https://cdn-icons-png.flaticon.com/512/337/337946.png',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'https://cdn-icons-png.freepik.com/256/8361/8361174.png?uid=R112263958&ga=GA1.1.310772085.1710953572&',
     };
     const iconSrc = fileTypeIcons[this.file.type];
@@ -86,7 +83,9 @@ export class AttachmentItemComponent {
 
   getName(): string {
     const name: string = this.file.name;
-    return name.substr(0, name.lastIndexOf('.'));
+    
+    
+    return name;
   }
 
   remove(): void {

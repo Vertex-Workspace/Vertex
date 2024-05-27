@@ -32,6 +32,7 @@ export class User {
     firstAccess ?: boolean;
     userKind ?: string;
     syncWithCalendar ?: boolean;
+    syncWithDrive ?: boolean;
 
     taskReview ?: boolean;
     newMembersAndGroups ?: boolean;
@@ -79,7 +80,7 @@ export class User {
         this.selectedProject = user.selectedProject   
         this.userKind = user.userKind;  
         this.syncWithCalendar = user.syncWithCalendar;   
-
+        this.syncWithDrive = user.syncWithDrive;
     }
 }
 
