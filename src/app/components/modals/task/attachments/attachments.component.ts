@@ -16,10 +16,11 @@ declare var gapi: any;
 export class AttachmentsComponent implements OnInit {
   @Input() task!: Task;
 
-  private CLIENT_ID = '526993530074-1f56cdf8k5lpht66el9gv7dvm27q4h1e.apps.googleusercontent.com';
-  private API_KEY = 'AIzaSyBBaeGOB8Bij0Py3MkYSNqwvq-k9J0VOjw';
-  private SCOPES = 'https://www.googleapis.com/auth/drive.file';
-  private DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'];
+  private clientId = '526993530074-1f56cdf8k5lpht66el9gv7dvm27q4h1e.apps.googleusercontent.com';
+  private developerKey = 'AIzaSyBBaeGOB8Bij0Py3MkYSNqwvq-k9J0VOjw';
+  private scope = ['https://www.googleapis.com/auth/drive.file'];
+  private pickerApiLoaded = false;
+  private oauthToken?: string;
 
   constructor(
     private alert: AlertService,
@@ -30,68 +31,100 @@ export class AttachmentsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.task);
-    this.loadGoogleAPI();
+    this.loadPicker();
   }
 
-  loadGoogleAPI() {
-    gapi.load('client', () => {
-      gapi.client.init({
-        apiKey: this.API_KEY,
-        discoveryDocs: this.DISCOVERY_DOCS,
-      }).then(() => {
-        this.initializeGsi();
-      }).catch((error: any) => {
-        console.error('Erro ao inicializar a API do Google:', error);
-      });
+  loadPicker(): void {
+    gapi.load('client:picker', () => {
+      this.onPickerApiLoad();
     });
   }
 
-  initializeGsi() {
+  onPickerApiLoad(): void {
+    this.pickerApiLoaded = true;
+  }
+
+  openPicker(): void {
     google.accounts.id.initialize({
-      client_id: this.CLIENT_ID,
+      client_id: this.clientId,
       callback: (response: any) => this.handleCredentialResponse(response)
     });
 
     google.accounts.id.prompt();
   }
 
-  handleCredentialResponse(response: any) {
-    const credential = response.credential;
-    gapi.auth2.init({
-      client_id: this.CLIENT_ID
-    }).then((authInstance: any) => {
-      authInstance.signIn().then(() => {
-        this.openPicker();
-      });
-    }).catch((error: any) => {
-      console.error('Erro ao autenticar o usuário:', error);
+  handleCredentialResponse(response: any): void {
+    const tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: this.clientId,
+      scope: this.scope.join(' '),
+      callback: (tokenResponse: any) => {
+        this.oauthToken = tokenResponse.access_token;
+        this.createPicker();
+      }
     });
+
+    tokenClient.requestAccessToken();
   }
 
-  openPicker() {
-    if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-      const oauthToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+  createPicker(): void {
+    if (this.pickerApiLoaded && this.oauthToken) {
       const picker = new google.picker.PickerBuilder()
         .addView(google.picker.ViewId.DOCS)
-        .setOAuthToken(oauthToken)
-        .setDeveloperKey(this.API_KEY)
-        .setCallback(this.pickerCallback)
+        .setOAuthToken(this.oauthToken)
+        .setDeveloperKey(this.developerKey)
+        .setCallback(this.pickerCallback.bind(this))
         .build();
       picker.setVisible(true);
     }
   }
 
-  pickerCallback(data: any) {
-    if (data[google.picker.Response.ACTION] === google.picker.Action.PICKED) {
-      const fileId = data[google.picker.Response.DOCUMENTS][0][google.picker.Document.ID];
-      console.log('Arquivo selecionado:', fileId);
+  pickerCallback(data: any): void {
+    if (data.action === google.picker.Action.PICKED && data.docs && data.docs.length > 0) {
+      const fileId = data.docs[0].id;
+      console.log(data);
+      
+      this.downloadFile(fileId);
+    } else {
+      console.error('Nenhum arquivo selecionado.');
     }
   }
   
+
+  downloadFile(fileId: string): void {
+    const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
+    
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.oauthToken}`
+      }
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro ao baixar o arquivo: ${response.status}`);
+      }
+      return response.blob();
+    }).then(blob => {
+      const file = new File([blob], `file_${fileId}`);
+      const fd: FormData = new FormData();
+      fd.append('file', file);
+  
+      this.taskService.uploadFile(fd, this.task.id!, this.userService.getLogged().id!).subscribe((task: Task) => {
+        this.task = task;
+        this.alert.successAlert(this.translate.instant("alerts.success.uploadFile") + task.name + "!");
+      });
+    }).catch(error => {
+      console.error('Erro ao baixar o arquivo:', error);
+    });
+  }
+  
+  
+  
+  
+
   onFileSelected(e: any): void {
     const selectedFile = e.target.files[0];
     console.log(selectedFile, 'file');
-    
+
     const fd: FormData = new FormData();
     fd.append('file', selectedFile, selectedFile.name);
 
@@ -100,7 +133,6 @@ export class AttachmentsComponent implements OnInit {
       this.alert.successAlert(this.translate.instant("alerts.success.uploadFile") + task.name + "!");
     });
   }
-
 
   fileRemoveHandler(file: any): void {
     this.taskService.removeFile(this.task.id, file.id).subscribe((task: Task) => {
