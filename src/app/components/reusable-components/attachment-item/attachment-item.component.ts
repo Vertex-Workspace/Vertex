@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
 
@@ -22,7 +23,7 @@ export class AttachmentItemComponent {
   realFile!:File;
   url !: string;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private alert: AlertService) {
   }
 
   ngOnInit(): void {
@@ -91,13 +92,13 @@ export class AttachmentItemComponent {
   remove(): void {
     this.userService.deleteFileByNameDRIVE(this.file.name).subscribe(
       () => {
-        console.log('Arquivos excluídos com sucesso.');
-        this.removeFile.emit(this.file);
+        this.alert.successAlert('Arquivo excluído com sucesso!');
       },
       (error) => {
-        console.error('Erro ao excluir arquivos:', error);
+        this.alert.errorAlert('Erro ao excluir arquivo!');
       }
     );
+    this.removeFile.emit(this.file);
   }
 
 }
