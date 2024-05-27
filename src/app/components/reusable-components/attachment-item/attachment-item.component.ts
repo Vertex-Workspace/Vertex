@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
 
 
@@ -16,14 +18,40 @@ export class AttachmentItemComponent {
   removeFile: EventEmitter<any> = new EventEmitter;
 
   defaultImg = defaultImage;
+
+  @Input()
+  realFile!:File;
   url !: string;
 
-  constructor() {
+  constructor(public userService: UserService, private alert: AlertService) {
   }
 
   ngOnInit(): void {
     this.setUrl();
   }
+
+  callServiceDrive() {
+    const byteCharacters = atob(this.file.file);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: this.file.type });
+  
+    const fd: FormData = new FormData();
+    fd.append('file', blob, this.file.name);
+  
+    this.userService.sendItensToDrive(fd).subscribe(
+      (res) => {
+        console.log('File ID:', res);
+      },
+      (error) => {
+        console.error('Upload error:', error);
+      }
+    );
+  }
+  
 
   getIconSrc(): string {
     const fileTypeIcons: Record<string, string> = {
@@ -32,8 +60,8 @@ export class AttachmentItemComponent {
       'video/mp4': 'https://cdn-icons-png.freepik.com/512/8243/8243015.png',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
       'application/vnd.ms-excel': 'https://cdn-icons-png.freepik.com/512/8361/8361467.png',
-      'text/csv': 'https://cdn-icons-png.freepik.com/512/8242/8242984.png'
-      // adicionar
+      'text/csv': 'https://cdn-icons-png.freepik.com/512/8242/8242984.png',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'https://cdn-icons-png.freepik.com/256/8361/8361174.png?uid=R112263958&ga=GA1.1.310772085.1710953572&',
     };
     const iconSrc = fileTypeIcons[this.file.type];
     if (iconSrc) return iconSrc;
@@ -47,17 +75,28 @@ export class AttachmentItemComponent {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
     const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], { type: 'application/pdf' });
-
+    const blob = new Blob([byteArray], { type: this.file.type });
+  
     this.url = window.URL.createObjectURL(blob);
   }
+  
 
   getName(): string {
     const name: string = this.file.name;
-    return name.substr(0, name.lastIndexOf('.'));
+    
+    
+    return name;
   }
 
   remove(): void {
+    this.userService.deleteFileByNameDRIVE(this.file.name).subscribe(
+      () => {
+        this.alert.successAlert('Arquivo excluído com sucesso!');
+      },
+      (error) => {
+        this.alert.errorAlert('Erro ao excluir arquivo!');
+      }
+    );
     this.removeFile.emit(this.file);
   }
 

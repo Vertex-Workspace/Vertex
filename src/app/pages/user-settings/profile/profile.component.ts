@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Message } from 'src/app/models/class/message';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -63,7 +64,8 @@ export class ProfileComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alert: AlertService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.logged = this.userService.getLogged();
 
@@ -73,19 +75,27 @@ export class ProfileComponent {
     this.tooglesList = [
       { id: 1, text: "Mostrar gráficos de desempenho para equipe", icon: faToggleOff, event: () => this.toogleCharts(), visible: true },
     ]
-    if(this.logged.userKind === "GOOGLE"){
+    if (this.logged.userKind === "GOOGLE") {
       this.tooglesList.push(
-      { id: 3, text: "Sincronizar com Google Agenda", icon: faToggleOff, event: () => this.syncCalendar(), visible: this.logged.userKind === 'GOOGLE' },
+        { id: 3, text: "Sincronizar com Google Agenda", icon: faToggleOff, event: () => this.syncCalendar(), visible: this.logged.userKind === 'GOOGLE' },
       );
     }
-    if(this.logged.showCharts){
+    if (this.logged.userKind === "GOOGLE") {
+      this.tooglesList.push(
+        { id: 4, text: "Sincronizar com Google Drive", icon: faToggleOff, event: () => this.syncDrive(), visible: this.logged.userKind === 'GOOGLE' },
+      );
+    }
+    if (this.logged.showCharts) {
       this.tooglesList[0].icon = faToggleOn;
     }
 
     if (this.logged.syncWithCalendar) {
       this.tooglesList[1].icon = faToggleOn;
     }
-    
+    if (this.logged.syncWithDrive) {
+      this.tooglesList[2].icon = faToggleOn;
+    }
+
 
     this.form = this.formBuilder.group({
 
@@ -104,10 +114,21 @@ export class ProfileComponent {
     if (!this.logged.syncWithCalendar) {
       this.logged.syncWithCalendar = true;
       window.location.href = `http://localhost:7777/calendar/authorize`;
-      this.tooglesList[1].icon = faToggleOn; 
+      this.tooglesList[1].icon = faToggleOn;
     } else {
-        this.userService.a().subscribe(); 
-        this.tooglesList[1].icon = faToggleOff; 
+      this.userService.a().subscribe();
+      this.tooglesList[1].icon = faToggleOff;
+    }
+  }
+
+  syncDrive() {
+    if (!this.logged.syncWithCalendar) {
+      this.logged.syncWithDrive = true;
+      window.location.href = `http://localhost:7777/drive/authorize`;
+      this.tooglesList[2].icon = faToggleOn;
+    } else {
+      this.userService.drive().subscribe();
+      this.tooglesList[2].icon = faToggleOff;
     }
   }
 
@@ -117,11 +138,11 @@ export class ProfileComponent {
 
   // Alter the status of toggle
   toogleCharts(): void {
-    this.userService.patchShowCharts(this.logged.id!).subscribe((user : User) => {
+    this.userService.patchShowCharts(this.logged.id!).subscribe((user: User) => {
       this.alert.successAlert(this.translate.instant('alerts.success.update_success'))
       this.logged = user;
       this.tooglesList[0].icon = this.tooglesList[0].icon === faToggleOff ? faToggleOn : faToggleOff;
-    
+
     });
   }
 
@@ -151,7 +172,7 @@ export class ProfileComponent {
       },
         e => {
           console.log(e);
-          
+
           this.alert.errorAlert(this.translate.instant('alerts.success.update_error'))
         }
       )
