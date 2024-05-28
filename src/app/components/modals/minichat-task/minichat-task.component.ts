@@ -15,6 +15,8 @@ import { User } from 'src/app/models/class/user';
 import { TeamService } from 'src/app/services/team.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
 import { UserService } from 'src/app/services/user.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-minichat-task',
@@ -49,7 +51,9 @@ export class MinichatTASKComponent {
   side: boolean = true;
   logged!: User;
 
-  constructor(public webSocketService: WebSocketService, private userService : UserService, private teamService: TeamService) {
+  constructor(public webSocketService: WebSocketService, private userService: UserService, private teamService: TeamService, private alertService: AlertService,
+    private translate: TranslateService
+  ) {
 
     this.logged = userService.getLogged();
   }
@@ -69,7 +73,7 @@ export class MinichatTASKComponent {
   ngOnInit() {
     this.webSocketService.openWebSocket();
     this.webSocketService.listenToServer().subscribe((change) => {
-      if(change.user != this.logged.firstName){
+      if (change.user != this.logged.firstName) {
         this.chat.messages!.push(change);
       }
       this.scrollToBottom();
@@ -121,8 +125,6 @@ export class MinichatTASKComponent {
 
     this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
       (response: any) => {
-        // this.chat.messages?.push(response);
-
         let reader = new FileReader();
         reader.readAsDataURL(this.selectedFile);
         reader.onload = () => {
@@ -133,11 +135,17 @@ export class MinichatTASKComponent {
             file: reader.result,
             viewed: false,
           };
+          this.chat.messages?.push(message);
+          this.scrollToBottom();
           this.webSocketService.sendMessage(message);
         };
+      },
+      (error) => {
+        console.error('Upload error:', error);
       }
     );
   }
+
 
   messageFileIncludesImage(message: any): boolean {
     if (message.file && message.file.type && typeof message.file.type === 'string') {
@@ -216,5 +224,42 @@ export class MinichatTASKComponent {
   @Output() miniChatOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
   openMiniChat(value: boolean) {
     this.miniChatOpen.emit(value);
+  }
+
+  callServiceDrive(file: any) {
+    if (this.logged.syncWithDrive) {
+      let blob: Blob;
+
+      if (typeof file.file === 'string') {
+        // Arquivo recebido via WebSocket (codificado em base64)
+        const byteCharacters = atob(file.file);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        blob = new Blob([byteArray], { type: file.type });
+      } else if (file instanceof File) {
+        // Arquivo recebido diretamente via upload (objeto File)
+        blob = file;
+      } else {
+        console.error('Tipo de arquivo desconhecido');
+        return;
+      }
+
+      const fd: FormData = new FormData();
+      fd.append('file', blob, file.name);
+
+      this.userService.sendItensToDrive(fd).subscribe(
+        (res) => {
+          console.log('File ID:', res);
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        }
+      );
+    }else{
+      this.alertService.notificationAlert(this.translate.instant("areNotSyncDrive"));
+    }
   }
 }

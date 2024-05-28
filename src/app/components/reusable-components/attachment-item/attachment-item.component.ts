@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { defaultImage } from 'src/assets/data/defaultImg';
@@ -23,7 +25,7 @@ export class AttachmentItemComponent {
   realFile!:File;
   url !: string;
 
-  constructor(public userService: UserService, private alert: AlertService) {
+  constructor(public userService: UserService, private alert: AlertService,private router: Router,private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class AttachmentItemComponent {
   }
 
   callServiceDrive() {
+   if(this.userService.getLogged().syncWithDrive){
     const byteCharacters = atob(this.file.file);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
@@ -45,11 +48,16 @@ export class AttachmentItemComponent {
     this.userService.sendItensToDrive(fd).subscribe(
       (res) => {
         console.log('File ID:', res);
+        this.alert.successAlert(this.translate.instant('fileUploadedToDrive'));
       },
       (error) => {
+        this.alert.errorAlert(this.translate.instant('fileErorUploadedToDrive'));
         console.error('Upload error:', error);
       }
     );
+   }else{
+      this.alert.notificationAlert(this.translate.instant('areNotSyncDrive'));
+   }
   }
   
 
@@ -89,14 +97,6 @@ export class AttachmentItemComponent {
   }
 
   remove(): void {
-    this.userService.deleteFileByNameDRIVE(this.file.name).subscribe(
-      () => {
-        this.alert.successAlert('Arquivo excluído com sucesso!');
-      },
-      (error) => {
-        this.alert.errorAlert('Erro ao excluir arquivo!');
-      }
-    );
     this.removeFile.emit(this.file);
   }
 

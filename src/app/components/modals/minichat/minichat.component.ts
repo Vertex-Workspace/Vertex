@@ -6,6 +6,9 @@ import { Chat } from "src/app/models/class/chat";
 import { User } from "src/app/models/class/user";
 import { TeamService } from "src/app/services/team.service";
 import { WebSocketService } from "src/app/services/websocket.service";
+import { TranslateService } from "@ngx-translate/core";
+import { AlertService } from "src/app/services/alert.service";
+import { UserService } from "src/app/services/user.service";
 
 
 @Component({
@@ -40,7 +43,8 @@ export class MinichatComponent {
   side: boolean = true;
   logged!: User;
 
-  constructor(public webSocketService: WebSocketService, private teamService: TeamService) {
+  constructor(public webSocketService: WebSocketService, private teamService: TeamService,
+    private userService: UserService, private alertService: AlertService, private translate: TranslateService) {
     this.logged = JSON.parse(localStorage.getItem('logged') || '{}');
     this.teamService.findAllChatsByUser(this.logged.id!).subscribe((chats: Chat[]) => {
       console.log(chats);
@@ -207,8 +211,10 @@ export class MinichatComponent {
     this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) => {
       this.chat.messages = messages;
 
-      let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
-      a.scrollTo(a.scrollTop, a.scrollHeight);
+      setTimeout(() => {
+        let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
+        a.scrollTop = a.scrollHeight;
+      }, 0);
     });
   }
 
@@ -229,6 +235,44 @@ export class MinichatComponent {
 
   openMiniChat(value: boolean) {
     this.miniChatOpen.emit(value);
+  }
+
+
+  callServiceDrive(file: any) {
+    if (this.logged.syncWithDrive) {
+      let blob: Blob;
+
+      if (typeof file.file === 'string') {
+        // Arquivo recebido via WebSocket (codificado em base64)
+        const byteCharacters = atob(file.file);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        blob = new Blob([byteArray], { type: file.type });
+      } else if (file instanceof File) {
+        // Arquivo recebido diretamente via upload (objeto File)
+        blob = file;
+      } else {
+        console.error('Tipo de arquivo desconhecido');
+        return;
+      }
+
+      const fd: FormData = new FormData();
+      fd.append('file', blob, file.name);
+
+      this.userService.sendItensToDrive(fd).subscribe(
+        (res) => {
+          console.log('File ID:', res);
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        }
+      );
+    }else{
+      this.alertService.notificationAlert(this.translate.instant("areNotSyncDrive"));
+    }
   }
 
 }

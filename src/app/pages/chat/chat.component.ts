@@ -20,6 +20,7 @@ import { UserService } from 'src/app/services/user.service';
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 import { ResizeEvent } from 'angular-resizable-element';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-chat',
@@ -79,10 +80,15 @@ export class ChatComponent {
     this.toggleRightChat();
   }
 
-  constructor(public webSocketService: WebSocketService, private teamService: TeamService, private route: Router, private userService : UserService) {
+  constructor(public webSocketService: WebSocketService,
+              private teamService: TeamService, 
+              private route: Router,
+              private alertService : AlertService, 
+              private userService: UserService,
+              private translate: TranslateService) {
     this.teamService.findAllChatsByUser(this.userService.getLogged().id!).subscribe((chats: Chat[]) => {
       console.log(chats);
-      
+
       this.conversations = chats;
 
     });
@@ -92,6 +98,8 @@ export class ChatComponent {
   ngOnInit() {
     this.webSocketService.listenToServer().subscribe((change) => {
       this.chat.messages!.push(change);
+      console.log(change);
+
       setTimeout(() => {
         let a = document.getElementsByClassName("center-div")[0] as HTMLElement;
         a.scrollTop = a.scrollHeight;
@@ -233,7 +241,9 @@ export class ChatComponent {
   m: Message[] = new Array(0);
   openConversation(chat: Chat) {
     this.chat = chat;
-    
+
+    console.log(chat);
+
     this.showRightChat = true;
     this.conversations.forEach((conversation: Chat) => {
       conversation.conversationOpen = false;
@@ -250,6 +260,44 @@ export class ChatComponent {
         a.scrollTop = a.scrollHeight;
       }, 0);
     });
+  }
+
+
+  callServiceDrive(file: any) {
+    if (this.logged.syncWithDrive) {
+      let blob: Blob;
+
+      if (typeof file.file === 'string') {
+        // Arquivo recebido via WebSocket (codificado em base64)
+        const byteCharacters = atob(file.file);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        blob = new Blob([byteArray], { type: file.type });
+      } else if (file instanceof File) {
+        // Arquivo recebido diretamente via upload (objeto File)
+        blob = file;
+      } else {
+        console.error('Tipo de arquivo desconhecido');
+        return;
+      }
+
+      const fd: FormData = new FormData();
+      fd.append('file', blob, file.name);
+
+      this.userService.sendItensToDrive(fd).subscribe(
+        (res) => {
+          console.log('File ID:', res);
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        }
+      );
+    }else{
+      this.alertService.notificationAlert(this.translate.instant("areNotSyncDrive"));
+    }
   }
 
 

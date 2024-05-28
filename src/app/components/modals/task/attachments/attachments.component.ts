@@ -17,7 +17,7 @@ export class AttachmentsComponent implements OnInit {
   @Input() task!: Task;
 
   private clientId = '526993530074-1f56cdf8k5lpht66el9gv7dvm27q4h1e.apps.googleusercontent.com';
-  private developerKey = 'AIzaSyBBaeGOB8Bij0Py3MkYSNqwvq-k9J0VOjw';
+  private developerKey = 'AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg';
   private scope = ['https://www.googleapis.com/auth/drive.install', 'https://www.googleapis.com/auth/drive.appfolder', 'https://www.googleapis.com/auth/drive.appdata'];
   private pickerApiLoaded = false;
   private oauthToken?: string;
@@ -97,7 +97,7 @@ export class AttachmentsComponent implements OnInit {
   downloadFile(fileId: string): void {
     console.log(fileId);
   
-    const metadataUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?fields=name,mimeType&key=AIzaSyBBaeGOB8Bij0Py3MkYSNqwvq-k9J0VOjw`;
+    const metadataUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?fields=name,mimeType&key=AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg`;
   
     fetch(metadataUrl, {
       method: 'GET',
@@ -127,11 +127,11 @@ export class AttachmentsComponent implements OnInit {
         } else if (mimeType === 'application/vnd.google-apps.presentation') {
           exportMimeType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
         } else {
-          this.alert.errorAlert('Tipo de arquivo não suportado.');
+          this.alert.errorAlert(this.translate.instant("unsupportedFileType"));
         }
-        fileUrl = `https://www.googleapis.com/drive/v3/files/${fileId}/export?mimeType=${encodeURIComponent(exportMimeType)}&key=AIzaSyBBaeGOB8Bij0Py3MkYSNqwvq-k9J0VOjw`;
+        fileUrl = `https://www.googleapis.com/drive/v3/files/${fileId}/export?mimeType=${encodeURIComponent(exportMimeType)}&key=AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg`;
       } else {
-        fileUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=AIzaSyBBaeGOB8Bij0Py3MkYSNqwvq-k9J0VOjw`;
+        fileUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg`;
       }
   
       return fetch(fileUrl, {
@@ -156,7 +156,7 @@ export class AttachmentsComponent implements OnInit {
   
       this.taskService.uploadFile(fd, this.task.id!, this.userService.getLogged().id!).subscribe((task: Task) => {
         this.task = task;
-        this.alert.successAlert(this.translate.instant("alerts.success.uploadFile") + task.name + "!");
+        this.alert.successAlert(this.translate.instant("fileImportedFromDrive") + task.name + "!");
       });
     })
     .catch(error => {
