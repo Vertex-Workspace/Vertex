@@ -680,5 +680,11 @@
     "Deletar": "Borrar"
   },
 
-  "noOneNote" : "¡Aún no tienes ninguna nota creada!"
+  "noOneNote" : "¡Aún no tienes ninguna nota creada!",
+  "toAccesProjectCalendar": "Para acceder a este proyecto, debes sincronizar tu cuenta con Google Calendar",
+    "areNotSyncDrive": "No estás sincronizado con Google Drive, por favor sincroniza para enviar archivos.",
+    "fileUploadedToDrive": "¡Archivo subido con éxito a Google Drive!",
+    "fileErorUploadedToDrive": "¡Error al subir el archivo a Google Drive!",
+    "unsupportedFileType": "¡Tipo de archivo no soportado!",
+    "fileImportedFromDrive": "¡Archivo importado con éxito desde Google Drive!"
 }

@@ -681,5 +681,14 @@
         "Deletar": "删除"
     },
 
-    "noOneNote" : "您还没有创建任何笔记!"
+    "noOneNote" : "您还没有创建任何笔记!",
+    
+    "toAccesProjectCalendar": "要访问该项目，您需要将您的帐户与Google日历同步",
+    "areNotSyncDrive": "您尚未与Google云端硬盘同步，请同步以发送文件。",
+    "fileUploadedToDrive": "文件成功上传到Google云端硬盘！",
+    "fileErorUploadedToDrive": "文件上传到Google云端硬盘时出错！",
+    "unsupportedFileType": "不支持的文件类型！",
+    "fileImportedFromDrive": "文件已成功从Google云端硬盘导入！"
+
+
 }

@@ -179,7 +179,7 @@ export class TasksComponent implements OnInit {
         if (!this.logged.syncWithCalendar) {
           this.router.navigate(['home']);
           this.alertService
-            .errorAlert('Para acessar esse projeto, você deve sincronizar sua conta com o Google Agenda');
+            .notificationAlert(this.translate.instant('toAccesProjectCalendar'));
         } else {
           this.update();
         }

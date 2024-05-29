@@ -1,7 +1,7 @@
 <div class="item">
     <img draggable="false" [src]="getIconSrc()">
     <div>
-       <p class="truncate">{{getName()}}</p>
+       <p class=" w-60 truncate">{{getName()}}</p>
     </div>
 
 
@@ -14,4 +14,5 @@
          (click)="remove()"
       ></i>
    </span>
- </div>
+</div>
+<button><a *ngIf="userService.getLogged().userKind==='GOOGLE'" (click)="callServiceDrive()" >Exportar para o drive</a></button>
