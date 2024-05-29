@@ -1,54 +1,186 @@
-import { Component, Input } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Task } from 'src/app/models/class/task';
 import { AlertService } from 'src/app/services/alert.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 
+declare var google: any;
+declare var gapi: any;
+
 @Component({
   selector: 'app-attachments',
   templateUrl: './attachments.component.html',
   styleUrls: ['./attachments.component.scss'],
-
 })
-export class AttachmentsComponent {
+export class AttachmentsComponent implements OnInit {
+  @Input() task!: Task;
 
-  @Input()
-  task !: Task;
-
-  fd !: FormData;
+  private clientId = '526993530074-1f56cdf8k5lpht66el9gv7dvm27q4h1e.apps.googleusercontent.com';
+  private developerKey = 'AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg';
+  private scope = ['https://www.googleapis.com/auth/drive.file'];
+  private pickerApiLoaded = false;
+  private oauthToken?: string;
 
   constructor(
     private alert: AlertService,
     private taskService: TaskService,
-    private userService : UserService,
-    private translate : TranslateService
-  ) {}
+    public userService: UserService,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
     console.log(this.task);
-    
+    this.loadPicker();
   }
+
+  loadPicker(): void {
+    gapi.load('client:picker', () => {
+      this.onPickerApiLoad();
+    });
+  }
+
+  onPickerApiLoad(): void {
+    this.pickerApiLoaded = true;
+  }
+
+  openPicker(): void {
+    const tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: this.clientId,
+      scope: this.scope.join(' '),
+      callback: (tokenResponse: any) => {
+        this.oauthToken = tokenResponse.access_token;
+        this.createPicker();
+      }
+    });
+
+    tokenClient.requestAccessToken();
+  }
+
+  // handleCredentialResponse(response: any): void {
+  //   const tokenClient = google.accounts.oauth2.initTokenClient({
+  //     client_id: this.clientId,
+  //     scope: this.scope.join(' '),
+  //     callback: (tokenResponse: any) => {
+  //       this.oauthToken = tokenResponse.access_token;
+  //       this.createPicker();
+  //     }
+  //   });
+
+  //   tokenClient.requestAccessToken();
+  // }
+
+  createPicker(): void {
+    if (this.pickerApiLoaded && this.oauthToken) {
+      const picker = new google.picker.PickerBuilder()
+        .addView(google.picker.ViewId.DOCS)
+        .setOAuthToken(this.oauthToken)
+        .setDeveloperKey(this.developerKey)
+        .setCallback(this.pickerCallback.bind(this))
+        .build();
+      picker.setVisible(true);
+    }
+  }
+
+  pickerCallback(data: any): void {
+    if (data.action === google.picker.Action.PICKED && data.docs && data.docs.length > 0) {
+      const fileId = data.docs[0].id;
+      console.log(data);
+
+      this.downloadFile(fileId);
+    } else {
+      console.error('Nenhum arquivo selecionado.');
+    }
+  }
+
+
+  downloadFile(fileId: string): void {
+    console.log(fileId);
+  
+    const metadataUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?fields=name,mimeType&key=AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg`;
+  
+    fetch(metadataUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.oauthToken}`
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro ao obter metadados do arquivo: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(metadata => {
+      const fileName = metadata.name;
+      const mimeType = metadata.mimeType;
+  
+      let fileUrl: string;
+      let exportMimeType: string = '';
+  
+      
+      if (mimeType.includes('application/vnd.google-apps')) {
+        if (mimeType === 'application/vnd.google-apps.document') {
+          exportMimeType = 'application/pdf'; 
+        } else if (mimeType === 'application/vnd.google-apps.spreadsheet') {
+          exportMimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'; 
+        } else if (mimeType === 'application/vnd.google-apps.presentation') {
+          exportMimeType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+        } else {
+          this.alert.errorAlert(this.translate.instant("unsupportedFileType"));
+        }
+        fileUrl = `https://www.googleapis.com/drive/v3/files/${fileId}/export?mimeType=${encodeURIComponent(exportMimeType)}&key=AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg`;
+      } else {
+        fileUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg`;
+      }
+  
+      return fetch(fileUrl, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${this.oauthToken}`
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro ao baixar o arquivo: ${response.status}`);
+        }
+        return response.blob().then(blob => ({ blob, exportMimeType, fileName }));
+      });
+    })
+    .then(({ blob, exportMimeType, fileName }) => {
+      const file = new File([blob], fileName, { type: exportMimeType || blob.type });
+      const fd: FormData = new FormData();
+      fd.append('file', file);
+  
+      console.log(file, 'file');
+  
+      this.taskService.uploadFile(fd, this.task.id!, this.userService.getLogged().id!).subscribe((task: Task) => {
+        this.task = task;
+        this.alert.successAlert(this.translate.instant("fileImportedFromDrive") + task.name + "!");
+      });
+    })
+    .catch(error => {
+      console.error('Erro ao baixar o arquivo:', error);
+    });
+  }
+  
 
   onFileSelected(e: any): void {
     const selectedFile = e.target.files[0];
-    const fd: FormData = new FormData();
-    fd.append('file', selectedFile, selectedFile.name);    
+    console.log(selectedFile, 'file');
 
-    this.taskService
-      .uploadFile(fd, this.task.id!, this.userService.getLogged().id!)
-      .subscribe((task: Task) => {
-        this.task = task;
-        this.alert.successAlert(this.translate.instant("alerts.success.uploadFile") + task.name + "!");
-      });
+    const fd: FormData = new FormData();
+    fd.append('file', selectedFile, selectedFile.name);
+
+    this.taskService.uploadFile(fd, this.task.id!, this.userService.getLogged().id!).subscribe((task: Task) => {
+      this.task = task;
+      this.alert.successAlert(this.translate.instant("alerts.success.uploadFile") + task.name + "!");
+    });
   }
 
   fileRemoveHandler(file: any): void {
-    this.taskService
-      .removeFile(this.task.id, file.id)
-      .subscribe((task: Task) => {
-        this.task = task;
-      })
+    this.taskService.removeFile(this.task.id, file.id).subscribe((task: Task) => {
+      this.task = task;
+    });
   }
-
 }

@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 import { Note } from 'src/app/models/class/note';
 import { Project } from 'src/app/models/class/project';
 import { AlertService } from 'src/app/services/alert.service';
@@ -75,7 +76,8 @@ export class NoteModalComponent implements OnInit {
     private projectService: ProjectService,
     private route: ActivatedRoute,
     private alert: AlertService,
-    private userService: UserService
+    private translate : TranslateService,
+    public userService: UserService
   ) {
 
   }
@@ -158,6 +160,43 @@ export class NoteModalComponent implements OnInit {
   removeImage(file: any): void {
     this.note.files.splice(this.note.files.indexOf(file), 1);
     this.removeImageOutput.emit(file.id);
+  }
+
+  callServiceDrive(file: any) {
+    if (this.userService.getLogged().syncWithDrive) {
+      let blob: Blob;
+
+      if (typeof file.file === 'string') {
+        // Arquivo recebido via WebSocket (codificado em base64)
+        const byteCharacters = atob(file.file);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        blob = new Blob([byteArray], { type: file.type });
+      } else if (file instanceof File) {
+        // Arquivo recebido diretamente via upload (objeto File)
+        blob = file;
+      } else {
+        console.error('Tipo de arquivo desconhecido');
+        return;
+      }
+
+      const fd: FormData = new FormData();
+      fd.append('file', blob, file.name);
+
+      this.userService.sendItensToDrive(fd).subscribe(
+        (res) => {
+          console.log('File ID:', res);
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        }
+      );
+    }else{
+      this.alert.notificationAlert(this.translate.instant("areNotSyncDrive"));
+    }
   }
 
 }

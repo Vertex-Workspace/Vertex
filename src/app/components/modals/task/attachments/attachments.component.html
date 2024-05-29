@@ -1,20 +1,24 @@
 <section>
-   <span>
+  <div class="w-full flex items-center gap-3">
+    <div *ngIf="userService.getLogged().userKind==='GOOGLE'" class="h-[40px] flex items-center  aspect-square hover:bg-[#D9D9D9] cursor-pointer">
+      <img class="w-14" src="../../../../../assets/Google-Drive-Logo.png" (click)="openPicker()" alt="">
+    </div>
+
+    <span>
       <form class="input-div">
-         <input type="file" class="input-file" (change)="onFileSelected($event)">
-     </form>
+        <input type="file" class="input-file" (change)="onFileSelected($event)">
+      </form>
       <i class="pi pi-plus"></i>
       <p>
-         {{'components.modals.task.attachments.add_attachment' | translate}}
-      </p> 
-   </span>
-   <div class="container">
-      <div>
-         <app-attachment-item
-            *ngFor="let attc of task.files"
-            [file]="attc"
-            (removeFile)="fileRemoveHandler($event)"
-         ></app-attachment-item>
-      </div>
-   </div>
+        {{ 'components.modals.task.attachments.add_attachment' | translate }}
+      </p>
+    </span>
+
+  </div>
+  <div class="container">
+    <div>
+      <app-attachment-item *ngFor="let attc of task.files" [file]="attc" (removeFile)="fileRemoveHandler($event)">
+      </app-attachment-item>
+    </div>
+  </div>
 </section>

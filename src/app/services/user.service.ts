@@ -133,6 +133,22 @@ export class UserService {
     return this.http.get<any>(`${URL}calendar/authorize`, { withCredentials: true })
   }
 
+  public drive(): Observable<any> {
+    return this.http.get<any>(`http://localhost:7777/drive/authorize`, { withCredentials: true })
+  }
+
+  public getItens(): Observable<any> {
+    return this.http.get<any>(`http://localhost:7777/drive/getItens`, { withCredentials: true })
+  }
+
+  public sendItensToDrive(fd : FormData): Observable<any> {
+    return this.http.post<any>(`http://localhost:7777/drive/createFile`,fd, { withCredentials: true })
+  }
+
+  public deleteFileByNameDRIVE(name:string): Observable<any> {
+    return this.http.delete<any>(`http://localhost:7777/drive/deleteFile/${name}`, { withCredentials: true })
+  }
+
   public b(userId: number, projectId: number): Observable<Project> {
     return this.http.get<Project>(`${URL}google/calendar/${userId}/${projectId}`, { withCredentials: true })
   }
@@ -206,3 +222,4 @@ export class UserService {
     .patch(`${URL}user/password`, changePassword, {withCredentials: true});
   }
 }
+
