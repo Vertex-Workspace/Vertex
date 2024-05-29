@@ -130,7 +130,7 @@ export class UserService {
   }
 
   public a(): Observable<any> {
-    return this.http.get<any>(`http://localhost:7777/calendar/authorize`, { withCredentials: true })
+    return this.http.get<any>(`${URL}calendar/authorize`, { withCredentials: true })
   }
 
   public drive(): Observable<any> {
@@ -221,7 +221,5 @@ export class UserService {
     return this.http
     .patch(`${URL}user/password`, changePassword, {withCredentials: true});
   }
-
-  
-
 }
+
