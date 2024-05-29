@@ -78,8 +78,16 @@ export class MinichatTASKComponent {
       }
       this.scrollToBottom();
     });
-    this.scrollToBottom();
+    this.loadChatMessages();
   }
+  
+  loadChatMessages() {
+    this.teamService.findAllMessagesByChatId(this.chat.id!).subscribe((messages: Message[]) => {
+      this.chat.messages = messages;
+      this.scrollToBottom();
+    });
+  }
+  
 
   ngOnDestroy(): void {
     this.webSocketService.closeWebSocket();
