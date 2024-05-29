@@ -15,4 +15,4 @@
       ></i>
    </span>
 </div>
-<a *ngIf="userService.getLogged().userKind==='GOOGLE'" (click)="callServiceDrive()" >Exportar para o drive</a>
+<button><a *ngIf="userService.getLogged().userKind==='GOOGLE'" (click)="callServiceDrive()" >Exportar para o drive</a></button>

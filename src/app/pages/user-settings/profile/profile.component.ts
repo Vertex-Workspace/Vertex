@@ -116,17 +116,19 @@ export class ProfileComponent {
       window.location.href = `http://localhost:7777/calendar/authorize`;
       this.tooglesList[1].icon = faToggleOn;
     } else {
+      this.logged.syncWithCalendar = false;
       this.userService.a().subscribe();
       this.tooglesList[1].icon = faToggleOff;
     }
   }
 
   syncDrive() {
-    if (!this.logged.syncWithCalendar) {
+    if (!this.logged.syncWithDrive) {
       this.logged.syncWithDrive = true;
       window.location.href = `http://localhost:7777/drive/authorize`;
       this.tooglesList[2].icon = faToggleOn;
     } else {
+      this.logged.syncWithDrive = false;
       this.userService.drive().subscribe();
       this.tooglesList[2].icon = faToggleOff;
     }
