@@ -41,7 +41,12 @@
                             <a [href]="changeUrlOfArchive(file)" download="{{ file.name }}">
                                 <img [src]="getIconSrc(file)" class="z-[1]" draggable="false">
                             </a>
-                            <p class="small-text text-center">{{file.name}}</p>
+                            <div class="small-text flex flex-row h-[30px] items-center">
+              
+                                <img *ngIf="userService.getLogged().userKind==='GOOGLE'" class="w-8 h-8 max-h-[30px] flex object-contain self-start cursor-pointer"
+                                src="../../../../../assets/Google-Drive-Logo.png" (click)="callServiceDrive(file)" alt="">
+                                {{file.name}}
+                              </div>
                         </div>
                     </ng-container>
                 </div>
