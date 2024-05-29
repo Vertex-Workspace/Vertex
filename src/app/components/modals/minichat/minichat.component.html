@@ -110,8 +110,8 @@
                     <div class="w-full h-full flex justify-center items-center gap-3">
                         <img [ngClass]="messageFileIncludesImage(message) ? 'object-contain pl-2 pt-1':'archive'"
                             draggable="false" [src]="getIconSrc(message)">
-                        <div class="flex h-full justify-center items-center gap-5">
-                            <p class="text-center w-[80%]" *ngIf="!messageFileIncludesImage(message)">{{
+                        <div class="flex h-full justify-center items-center gap-5 ">
+                            <p class="text-center w-[120px] truncated"  *ngIf="!messageFileIncludesImage(message)">{{
                                 message.file.name }}</p>
                         </div>
                     </div>
@@ -120,8 +120,8 @@
                             [ngClass]="message.user !== logged.firstName ? 'timestamp  text-[#777777]' : 'timestamp text-[#fff]'">
                             {{ generateTime(message) }}
                         </p>
-                        <div *ngIf="logged.userKind==='GOOGLE'" class="h-[40px] flex gap-2 items-center cursor-pointer">
-                            <img class="w-9" src="../../../../../assets/Google-Drive-Logo.png"
+                        <div  class="h-[40px] flex gap-2 items-center cursor-pointer">
+                            <img *ngIf="logged.userKind==='GOOGLE'" class="w-9" src="../../../../../assets/Google-Drive-Logo.png"
                                 (click)="callServiceDrive(message.file)" alt="">
                             <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">
                                 <i class="pi pi-download"></i>

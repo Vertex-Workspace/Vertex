@@ -18,7 +18,7 @@ export class AttachmentsComponent implements OnInit {
 
   private clientId = '526993530074-1f56cdf8k5lpht66el9gv7dvm27q4h1e.apps.googleusercontent.com';
   private developerKey = 'AIzaSyAxn9BHXagz3JvLAyXxJ6DjAj59qTXeuVg';
-  private scope = ['https://www.googleapis.com/auth/drive.install', 'https://www.googleapis.com/auth/drive.appfolder', 'https://www.googleapis.com/auth/drive.appdata'];
+  private scope = ['https://www.googleapis.com/auth/drive.file'];
   private pickerApiLoaded = false;
   private oauthToken?: string;
 

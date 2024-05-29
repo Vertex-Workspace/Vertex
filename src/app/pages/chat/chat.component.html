@@ -100,13 +100,12 @@
                                     [ngClass]="message.user !== logged.firstName ? 'timestampBlack' : 'timestamp text-[#fff]'">
                                     {{ generateTime(message) }}
                                 </p>
-                                <div *ngIf="logged.userKind==='GOOGLE'"
-                                    class="h-[40px] flex gap-2 items-center cursor-pointer">
-                                    <img class="w-9" src="../../../../../assets/Google-Drive-Logo.png"
+                                <div class="h-[40px] flex gap-2 items-center cursor-pointer">
+                                    <img *ngIf="logged.userKind==='GOOGLE'" class="w-9" src="../../../../../assets/Google-Drive-Logo.png"
                                         (click)="callServiceDrive(message.file)" alt="">
-                                        <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">
-                                            <i class="pi pi-download"></i>
-                                        </a>
+                                    <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">
+                                        <i class="pi pi-download"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
