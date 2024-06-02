@@ -1,7 +1,7 @@
 @import "../../../../variables";
 
 .search {
-    @apply flex w-full h-[10%] items-center justify-between p-3 rounded shadow-md border-none;
+    @apply flex w-[98%] h-[10%] items-center justify-between p-3 rounded shadow-md border-none mt-10;
     background-color: $card;
     i {
         @apply w-[10%];
@@ -26,9 +26,8 @@
 }
 
 .div-searched{
-    @apply w-full flex flex-col gap-4;
+    @apply w-full flex items-center flex-col gap-4;
     overflow-x: hidden;
-    overflow-y: auto;
     .card-searched{
         @apply flex w-[98%] h-fit rounded-sm flex-row items-center justify-between px-4 py-2;
         text-align: start;

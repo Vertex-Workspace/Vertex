@@ -4,15 +4,15 @@
             [(ngModel)]="query" (keyup.enter)="onSearch()" #searchInput>
         <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
     </div>
-    <div class="order regular-text">
+    <!-- <div class="order regular-text">
 
 
         <p class="text-lg h-full flex items-center">{{ 'components.modals.search-all.filter_by' | translate }}</p>
         <p-dropdown [options]="orderSettings" [(ngModel)]="orderParam" [showClear]="true" optionLabel="name"
             placeholder="{{ 'components.modals.search-all.select_placeholder' | translate }}" [style.width]="'10rem'"
             (ngModelChange)="updateOrderParam($event)"></p-dropdown>
-    </div>
-    <div class="div-searched pt-6">
+    </div> -->
+    <div class="div-searched mt-4" [ngClass]="itemsSearched.length ? 'overflow-y-auto' : 'overflow-y-hidden'">
         <ng-container *ngIf="!itemsSearched.length">
             <h6 *ngIf="!firstSearch; else firstSearchTemplate">
                 {{ 'components.modals.search-all.no_results' | translate }}
