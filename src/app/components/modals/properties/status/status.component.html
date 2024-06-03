@@ -28,6 +28,7 @@
                         <fa-icon [icon]="faPaintBrush" (click)="clickPencil(propertyList)" class="little-icon"
                             [ngClass]="canEdit ? 'opacity-100' : 'opacity-20'"></fa-icon>
                         <fa-icon [icon]="faTrashCan" class="little-icon" (click)="openModalDelete(propertyList)"
+                            
                             [ngClass]="propertyList.isFixed ? 'disabled-trash' : canDelete ? 'opacity-100' : 'disabled-trash'"></fa-icon>
                     </div>
                 </div>

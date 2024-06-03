@@ -213,7 +213,7 @@ export class StatusComponent {
   }
 
   openModalDelete(property: PropertyList): void {
-    if(this.canDelete){
+    if(this.canDelete && !property.isFixed){
       this.deleteBoolean = !this.deleteBoolean
       this.propertyListToDelete = property
     } else {
