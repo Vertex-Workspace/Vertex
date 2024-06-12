@@ -1,0 +1,24 @@
+<div class="bg">
+    <!-- TITLE PAGE -->
+    <div class="title">
+        <div>
+            <h5>Administrador</h5>
+            <fa-icon [icon]="faUserTie" class="icon size"></fa-icon>
+        </div>
+    </div>
+
+    <h6 class="w-[85%] pt-10 text-start">Visualização de erros do sistema</h6>
+    <div class="underDiv">
+        <div class="errorLogs">
+            <ng-container *ngFor="let log of logs">
+                <p class="pt-6">{{log.exceptionMessage}}</p>
+            </ng-container>
+        </div>
+
+        <div class="graphs">
+            <div class="div-dashboard">
+                <p-chart type="doughnut" [data]="basicData" [options]="basicOptions" />
+            </div>
+        </div>
+    </div>
+</div>

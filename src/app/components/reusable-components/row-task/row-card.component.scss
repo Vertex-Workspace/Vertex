@@ -1,0 +1,65 @@
+@import '../../../../variables';
+
+.card {
+    @apply w-full flex shadow-sm cursor-pointer;
+    background-color: $secondColor;
+
+    &:hover{
+        background-color: $card !important;
+
+        .name, .properties {
+            border: 1px solid $secondColor;
+        }
+    }
+
+    .name {
+        @apply h-[55px] flex items-center justify-between px-4 overflow-hidden;
+        border: 1px solid $emphasis;
+        background-color: inherit;
+
+        p {
+            @apply pl-8;
+        }
+    }
+
+    .properties {
+        @apply h-[55px] flex items-center justify-center px-4;
+        border: 1px solid $emphasis;
+        background-color: inherit;
+
+        p {
+            @apply p-[0.15rem] rounded-sm overflow-hidden;
+        }
+        
+    }
+
+    .icons {
+        @apply flex gap-3 pr-3;
+        color: $text;
+        
+        .icon {
+            color: $primaryColor !important;
+            font-size: 1.1rem;
+
+            &:hover {
+                @apply scale-105;
+            }
+        }
+    }
+}
+
+// .test-name{
+//     @apply sticky left-0;
+//     background-color: $secondColor;
+// }
+
+.drag-handle {
+    @apply h-full flex items-center pl-[0.8rem] absolute left-0 my-auto cursor-move gap-[0.2rem];
+  
+    fa-icon {
+      font-size: 1.7rem;
+      color: $primaryColor;
+      @apply cursor-move;
+    }
+  
+  }

@@ -1,0 +1,49 @@
+<div class="list">
+    <div class="container-custom">
+
+        <ng-container *ngFor="let item of (renderList | namePipe : filterSearch)">
+            <div class="card">
+                <div class="flex flex-col w-full">
+                    <div class="image flex justify-center items-center relative" (click)="openTeam(item.id)">
+                        <img src="../../../../assets/calendar-logo.png" class="absolute top-0 left-0 m-4 h-[30px]" *ngIf="item.creationOrigin && item.creationOrigin == 'GOOGLE'">
+                        <img src="data:image/jpg;base64, {{getImage(item)}}" alt="" class="h-full">
+                        <h1 *ngIf="!hasImage(item)">{{getFirstLetter(item)}}</h1>
+                    </div>
+                    <div class="informations">
+                        <div class="infos-team" >
+                            <p class="large-text" (click)="openTeam(item.id)">{{item.name}}</p>
+                            <p class="regular-text underline" *ngIf="teamScreen != 'project'" (click)="openTeamInformations(item.id)">
+                                {{'components.reusable-components.card-list.viewInformation' | translate }}</p>
+                        </div>
+
+                        <div *ngIf="(teamScreen === 'settings' || teamScreen === 'project')" class="icon">
+                            <ng-container *ngIf="item.isCreator else isMember">
+                                <fa-icon *ngIf="teamScreen === 'project' && isNotGoogleProject(item)" [icon]="faGear" class="trash-icon pr-4" (click)="openInformations(item)"></fa-icon>
+                                <fa-icon [ngClass]="teamScreen === 'settings' ? 'pr-3' : ''" [icon]="faTrashCan" class="trash-icon" (click)="openModalDelete(item)"></fa-icon>
+                            </ng-container>
+                            <ng-template #isMember>
+                                <fa-icon *ngIf="teamScreen === 'settings'" [icon]="faDoorOpen" class="trash-icon" (click)="openModalLeave(item)"></fa-icon>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<app-create-team-project 
+[project]="project" 
+*ngIf="openModal" 
+[typeString]="'projectInfo'"
+[team]="team"
+(senderEmitter)="updateProject($event)" (close)="close()">
+</app-create-team-project>  
+
+<app-confirm-modal *ngIf="delete && type==='project'" [width]="'450px'" [height]="'250px'"
+                [title]="itemToDelete.name" (close)="emitItem($event)"></app-confirm-modal>
+<app-confirm-modal *ngIf="delete && type==='team'" [width]="'450px'" [height]="'250px'" [title]="itemToDelete.name"
+                (close)="emitItem($event)"></app-confirm-modal>
+
+<app-confirm-modal *ngIf="leaveBool && type==='team'" [width]="'450px'" [height]="'250px'" [title]="itemToDelete.name"
+                (close)="leaveTeam($event)"></app-confirm-modal>

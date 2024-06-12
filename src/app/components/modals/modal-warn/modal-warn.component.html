@@ -1,0 +1,12 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="exitModal">
+            <h4>{{title}}</h4>
+            <i class="pi pi-plus rotate-45 text-2xl font-bold mb-10 cursor-pointer" (click)="closeModal()"></i>
+        </div>
+        
+        <div class="ng-contentDiv">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

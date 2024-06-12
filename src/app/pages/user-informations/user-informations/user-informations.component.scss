@@ -1,0 +1,357 @@
+@import '../../../../variables';
+
+@media screen and (min-width: 1300px) {
+
+    .div-dashboards{
+        @apply flex flex-col justify-evenly pt-5 items-start w-full h-[90%];
+    }
+
+    .top-side {
+        @apply flex h-[38%] w-full;
+    }
+    
+
+    .top-side-left {
+        @apply flex items-center h-full w-1/2;
+    }
+    
+    .top-side-user-img {
+        @apply flex justify-center items-center h-full w-[30%];
+    }
+
+    .dashboards{
+        @apply flex gap-5 justify-start items-start w-[100%] h-[70%];
+    }
+
+    .div-dashboard-bar{
+        @apply flex items-center flex-col w-1/3 h-[85%] border-t-8 shadow-md rounded-md justify-evenly;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+        
+        p{
+            @apply pt-3;
+        
+        }
+    }
+    
+    .top-side-right {
+        @apply pb-6 flex flex-col justify-between items-center h-full w-1/2;
+        border-left: $borderBottom;
+    }
+
+    .div-dashboard-pie-doughnut{
+        @apply flex flex-col items-center w-1/3 h-[85%] border-t-8 shadow-md rounded-md;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+    }
+
+    .top-side-user-img {
+        @apply flex justify-center items-center h-full w-[30%];
+    }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1300px) {
+
+    .div-dashboards{
+        @apply flex flex-col justify-evenly pt-5 items-start w-full h-[90%];
+    }
+
+    .top-side {
+        @apply flex h-[38%] w-full;
+    }
+
+    .top-side-left {
+        @apply flex items-center h-full w-1/2;
+    }
+
+    .top-side-right {
+        @apply pb-6 flex flex-col justify-between items-center h-full w-1/2;
+        border-left: $borderBottom;
+    }
+    
+    .top-side-user-img {
+        @apply flex justify-center items-center h-full w-[30%];
+    }
+
+    .dashboards{
+        @apply flex flex-wrap gap-5 justify-start items-start w-[100%] h-[70%];
+    }
+
+    .div-dashboard-bar{
+        @apply flex items-center flex-col w-[47%] h-[85%] border-t-8 shadow-md rounded-md justify-evenly;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+        
+        p{
+            @apply pt-3;
+        
+        }
+    }
+        
+    .div-dashboard-pie-doughnut{
+        @apply flex flex-col items-center w-[47%] h-[85%] border-t-8 shadow-md rounded-md;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+    }
+
+    .top-side-user-img {
+        @apply flex justify-center items-center h-full w-[30%];
+    }
+
+    h6 {
+        @apply w-[80%];
+    }
+
+    br {
+        @apply hidden;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 900px) {
+
+    .div-dashboards{
+        @apply flex flex-col justify-evenly pt-5 items-center w-full h-[90%];
+    }
+
+    .top-side {
+        @apply flex flex-col h-[68%] w-full;
+    }
+
+    .top-side-left {
+        @apply flex items-center h-[350px] w-full pb-12;
+    }
+
+    .top-side-right {
+        @apply pb-6 flex flex-col justify-between items-center h-1/2 w-full;
+        border-top: $borderBottom;
+    }
+    
+
+    .dashboards{
+        @apply flex flex-col gap-5 justify-start items-center w-[100%] h-[70%];
+    }
+
+    .div-dashboard-bar{
+        @apply flex items-center flex-col min-w-[80%] min-h-[95%] border-t-8 shadow-md rounded-md justify-evenly;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+        
+        p{
+            @apply pt-3;
+        
+        }
+    }
+    
+    .div-dashboard-pie-doughnut{
+        @apply flex flex-col items-center min-w-[80%] min-h-[95%] border-t-8 shadow-md rounded-md;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+    }
+
+    h6 {
+        @apply w-[70%];
+    }
+
+    br {
+        @apply hidden;
+    }
+
+    .top-side-user-img {
+        @apply flex justify-center items-center h-full w-[200px] pr-4;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+    .div-dashboards{
+        @apply flex flex-col justify-evenly pt-3 items-center w-full h-[90%] pb-10;
+    }
+
+    .top-side {
+        @apply flex flex-col h-[68%] w-full;
+    }
+
+    .top-side-left {
+        @apply flex flex-col items-center min-h-[450px] w-full  text-center;
+    }
+
+    .description {
+        @apply flex justify-center pl-12;
+    }
+
+    .userName-creationData {
+        @apply pr-6 ml-4;
+    }
+
+    .top-side-right {
+        @apply pb-6 flex flex-col justify-between items-center h-1/2 w-full;
+        border-top: $borderBottom;
+    }
+    
+
+    .dashboards{
+        @apply flex flex-col gap-5 justify-start items-center w-[100%] h-[70%];
+    }
+
+    .div-dashboard-bar{
+        @apply flex items-center flex-col min-w-[80%] min-h-[95%] border-t-8 shadow-md rounded-md justify-evenly;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+        
+        p{
+            @apply pt-3 w-[80%] text-center;
+        
+        }
+    }
+    
+    .div-dashboard-pie-doughnut{
+        @apply flex flex-col items-center min-w-[80%] min-h-[95%] border-t-8 shadow-md rounded-md;
+        background-color: $card;
+        border-top:8px solid $primaryColor; 
+    }
+
+    h6 {
+        @apply w-[90%] pt-4;
+    }
+
+    br {
+        @apply hidden;
+    }
+
+    h5 {
+        p {
+            @apply hidden;
+        }
+    }
+
+    .top-side-user-img {
+        @apply flex justify-center items-center h-[550px] w-[250px] pr-4 pb-3;
+    }
+}
+
+
+
+section {
+    @apply flex w-screen h-full justify-center items-center;
+}
+
+.main-div {
+    @apply flex flex-col w-[90%] h-full;
+}
+
+
+.user-img {
+    @apply text-[180px];
+    color: $primaryColor;
+}
+
+.top-side-user-informations {
+    @apply flex flex-col justify-start items-center h-[80%] w-[70%];
+}
+
+.userName-creationData {
+    @apply flex flex-col gap-4 justify-center w-[88%] h-full;
+}
+
+.realName-location {
+    @apply flex gap-[35px] justify-center items-center h-full w-full;
+}
+
+.user-description {
+    @apply flex justify-center items-center h-full w-full;
+}
+
+.description {
+    @apply text-justify w-[88%];
+}
+
+.top-side-right-text {
+    @apply flex flex-col justify-end items-start h-[26.5%] w-[90%];
+}
+
+.top-side-right-projects {
+    @apply grid grid-cols-2 justify-start gap-2 items-start h-[69%] overflow-auto w-[90%];
+}
+
+.card-project {
+    @apply flex gap-4 w-full h-[100px]  rounded-sm;
+    background-color: $card;
+    cursor: pointer;
+}
+
+.indicator-color {
+    @apply w-[2%] h-full rounded-sm;
+    background-color: $primaryColor;
+}
+
+.project-informations {
+    @apply flex flex-col justify-between items-start w-[70%] h-full;
+}
+
+.name-project {
+    @apply flex flex-col pt-2;
+}
+
+.div-trashIcon{
+    @apply flex items-center justify-center w-[10%] h-full;
+    color: $primaryColor;
+}
+
+.trashIcon{
+    color: $primaryColor;
+}
+
+mat-progress-spinner {
+    ::ng-deep circle {
+        stroke: $primaryColor;
+    }
+}
+
+.div-dashboard{
+    @apply flex relative items-center justify-start w-[20%] h-full;
+}
+
+.spinner-background {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    line-height: 80px;
+    text-align: center;
+    overflow: hidden;
+    border-color: $emphasis;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 10px;
+}
+
+.under-side {
+    @apply flex justify-center items-center h-[62%] w-full;
+}
+
+
+.dashboard-pie-doughnut{
+    @apply flex justify-center items-center w-[40%];
+}
+
+.dashboard-bar{
+    @apply flex justify-center items-center w-full h-[100%] ;
+}
+
+.circular {
+    width: 170px;
+    height: 230px;
+    position: relative;
+    overflow: hidden;
+    @apply rounded-sm;
+}
+.circular img {
+    @apply rounded-sm;
+    height: 80%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,287 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+@media screen and (min-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply w-[85%] h-[40px] flex flex-col items-start justify-start border-b;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[300px] items-center justify-start gap-5;
+        }
+        
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    input {
+        @apply rounded-r-sm px-3 w-[450px] h-[50px];
+        background-color: $card;
+        color: $text;
+    }
+    
+    .iconInputBlock {
+        @apply flex py-3 min-w-[450px] h-full;
+        
+        .iconBox {
+            @apply flex min-w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    section {
+        @apply h-full w-[45%] pt-6 flex flex-col;
+        
+        .forgot-password{
+            @apply flex justify-end;
+        };
+        
+    }
+    
+    .requires{
+        @apply w-full h-[27%] flex flex-row pt-6;
+        
+        p:first-child{
+            @apply font-bold
+        }
+        
+        p {
+            @apply pt-[4px];
+        }
+        
+        div:first-child {
+            @apply w-[65%]
+        }
+        
+        div:last-child {
+            @apply w-[35%] flex items-end justify-end 
+        }
+        
+        button {
+            color: $secondColor;
+            @apply h-[50px] w-[170px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
+        }
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    span {
+        @apply h-full w-[80%];
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[20%] items-center justify-start gap-5;
+        }
+        
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    input {
+        @apply  rounded-r-sm px-3 w-[400px] h-[50px];
+        background-color: $card;
+        color: $text;
+    }
+    
+    .iconInputBlock {
+        @apply flex py-3 min-w-[450px] h-full;
+        
+        .iconBox {
+            @apply flex min-w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    section {
+        @apply h-full w-[45%] pt-6 flex flex-col;
+        
+        .forgot-password{
+            @apply flex justify-end;
+        };
+        
+    }
+    
+    .requires{
+        @apply w-full h-[27%] flex flex-row pt-6;
+        
+        p:first-child{
+            @apply font-bold
+        }
+        
+        p {
+            @apply pt-[4px];
+        }
+        
+        div:first-child {
+            @apply w-[65%]
+        }
+        
+        div:last-child {
+            @apply w-[35%] flex items-end justify-end 
+        }
+        
+        button {
+            color: $secondColor;
+            @apply h-[50px] w-[170px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
+        }
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    span {
+        @apply h-full w-[92%];
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+}
+
+@media screen and (max-width: 760px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start pt-6;
+    }
+    
+    .title {
+        @apply w-full min-h-[30px] flex flex-col items-start justify-start pt-4 px-10;
+        border-color: $emphasis;
+        div {
+            @apply flex w-full items-center justify-center gap-5;
+
+            .icon {
+                @apply hidden;
+            }
+
+        }
+        
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    input {
+        @apply  rounded-r-sm px-3 w-[250px] h-[50px];
+        background-color: $card;
+        color: $text;
+    }
+    
+    .iconInputBlock {
+        @apply flex py-3 w-[300px] h-full;
+        
+        .iconBox {
+            @apply flex min-w-[50px] h-[50px] justify-center items-center rounded-l-sm;
+            background-color: $emphasis;
+        }
+    }
+    
+    section {
+        @apply h-full w-[75%] pt-6 flex flex-col;
+        
+        .forgot-password{
+            @apply flex justify-end;
+        };
+        
+    }
+    
+    .requires{
+        @apply w-full h-[27%] flex flex-row pt-2;
+        
+        p:first-child{
+            @apply font-bold
+        }
+        
+        p {
+            @apply pt-[4px];
+        }
+        
+        div:first-child {
+            @apply w-[65%]
+        }
+        
+        div:last-child {
+            @apply w-[35%] flex items-end justify-end 
+        }
+        
+        button {
+            color: $secondColor;
+            @apply h-[50px] w-[170px] flex flex-col items-center justify-center gap-4 text-sm p-3 rounded font-bold border-2 transition-colors; 
+        }
+    }
+    
+    .noEdit {
+        background-color: $disabled;
+    }
+    
+    .edit {
+        background-color: $primaryColor;
+    }
+    
+    span {
+        @apply h-full w-[92%];
+    }
+    
+    h2 {
+        @apply text-xl font-bold;
+    }
+    
+    .modal {
+        @apply flex items-center justify-center w-full h-full pb-16;
+    }
+}
+    

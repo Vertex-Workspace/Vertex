@@ -1,0 +1,50 @@
+<div #resizeBox class="card" [style.width.px]="note.width" [style.height.px]="note.height"
+  [style.backgroundColor]="note.color" cdkDrag cdkDragBoundary=".mural-section"
+  [cdkDragFreeDragPosition]="getNotePosition()" (cdkDragEnded)="dragEnd($event)">
+  <span #dragHandleCorner class="dragHandle corner" cdkDrag (cdkDragMoved)="dragMove(dragHandleCorner, $event)"></span>
+  <span #dragHandleRight cdkDragLockAxis="x" class="dragHandle right" cdkDrag
+    (cdkDragMoved)="dragMove(dragHandleRight, $event)"></span>
+  <span #dragHandleBottom cdkDragLockAxis="y" class="dragHandle bottom" cdkDrag
+    (cdkDragMoved)="dragMove(dragHandleBottom, $event)"></span>
+  <span class="full" style="width: 100%;">
+
+    <div class="left">
+      <h6>{{ note.title }}</h6>
+
+      <div class="text relative">
+        <p #description>
+          {{ note.description }}
+        </p>
+      </div>
+      <div class="image-container">
+        <ng-container *ngFor="let file of note.files">
+          <div class="single-image flex-col">
+            <a [href]="changeUrlOfArchive(file)" download="{{file.name}}">
+              <img [src]="getIconSrc(file)" class="z-[1]">
+            </a>
+            <div class="small-text flex flex-row h-[30px] items-center">
+              
+              <img *ngIf="userService.getLogged().userKind==='GOOGLE'" class="w-8 h-8 max-h-[30px] flex object-contain self-start cursor-pointer"
+              src="../../../../../assets/Google-Drive-Logo.png" (click)="callServiceDrive(file)" alt="">
+              {{file.name}}
+            </div>
+
+          </div>
+        </ng-container>
+      </div>
+
+
+      <div class="right">
+
+        <div class="icons">
+          <ng-container *ngFor="let item of configItems">
+            <i (click)="item.onClick()" class="{{item.iconClass}}" style="font-size: 1rem"></i>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </span>
+</div>
+
+<app-note-modal *ngIf="modalOpen" [note]="note" (closeModal)="toggleModalOpen()" (patchOutput)="edit()"
+  (uploadImageOutput)="uploadImage($event)" (removeImageOutput)="removeImage($event)"></app-note-modal>

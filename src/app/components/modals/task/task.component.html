@@ -1,0 +1,123 @@
+<div class="modal-overlay" (click)="closeModal()" *ngIf="persObservable | async">
+    <div class="base"  (click)="$event.stopPropagation()">
+        <div class="location">
+            <div class="routes regular-text">
+                <p>{{ taskInfoDTO.teamName }}</p>
+                <p>{{ taskInfoDTO.projectName }}</p>
+            </div>
+            <div class="div-timer-closeModal">
+                <ng-container *ngIf="isCreator()">
+                    <a [href]="data" [download]="task.name" [type]="'https://cdn-icons-png.flaticon.com/512/337/337946.png'">
+                        <i class="pi pi-download"></i>
+                     </a>
+                </ng-container>
+                <div class="flex h-[40px]" *ngIf="!isCreator() && task.revisable && project.projectReviewENUM != 'EMPTY'">
+                    <button (click)="sendTask()" id="red-btn" 
+                    [ngClass]="hasDependency ? 'opacity-20' : 'opacity-100'"
+                    [ngStyle]="{'opacity' : timeInTask.working ? '0.5' : '1'}"
+                        [disabled]="timeInTask.working || hasDependency">
+                        {{ 'components.modals.task.deliverTask' | translate }}
+                    </button>
+                </div>
+                <div class="flex flex-row gap-2" *ngIf="isCreator() && isRevisable()">
+                    <p-checkbox [(ngModel)]="checkedReview" [binary]="true" inputId="binary"
+                        (click)="updateTaskRevisable()"></p-checkbox>
+                    <p class="regular-text ">{{ 'components.modals.task.forceReview' | translate }}</p>
+                </div>
+                <button *ngIf="!timeInTask.working" (click)="closeModal()" class="large-text">
+                    <i class="pi pi-plus rotate-45 text-2xl pt-2"></i>
+                </button>
+            </div>
+        </div>
+        <div class="informations">
+            <div class="side">
+                <div>
+                    <h4 (click)="cantEdit()"><input (blur)="updateTaskNameAndDescription()" [disabled]="!canEdit"
+                            [(ngModel)]="task.name" type="text" class="title" name="name" id="name"
+                            value="{{ task.name }}"></h4>
+                </div>
+                <div class="properties">
+                    <app-properties [task]="task" [chatP]="taskChat" [project]="project" style="width: 100%; height: 100%;" (changes)="changeTask($event)"
+                        [canEdit]="canEdit" (dependencyEmitter)="hasDependency2()"/>
+                </div>
+                <div class="down relative">
+                    <div class="buttons">
+                        <button *ngIf="!task.chatCreated" [disabled]="task.taskResponsables?.length == 1" [ngClass]="isAloneTask() ? 'opacity-20' : ''" (click)="createChat()">{{ 'components.modals.task.createChat' | translate }}</button>
+                        <button *ngIf="task.chatCreated" (click)="openMiniChat()">{{ 'components.modals.task.openChat' | translate }}</button>
+                    </div>
+
+                    <div *ngIf="miniChatOpen" class="absolute">
+                        <app-minichat-task [chat]="taskChat" (miniChatOpen)="openMiniChat()"></app-minichat-task>
+                    </div>
+                </div>
+            </div>
+            <div class="side right">
+                <nav>
+                    <ul>
+                        <a (click)="navigate('description')"
+                            [style.background]="'description' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.description' | translate }}</a>
+                        <span>|</span>
+                        <a (click)="navigate('comments')"
+                            [style.background]="'comments' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.commentsS' | translate }}</a>
+                        <span>|</span>
+                        <a (click)="navigate('log')"
+                            [style.background]="'log' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.log' | translate }}</a>
+                        <span>|</span>
+                        <a (click)="navigate('attachments')"
+                            [style.background]="'attachments' === selectedComponent ? '#D6D6D687' : 'inherit'">{{ 'components.modals.task.attachmentsS' | translate }}</a>
+                    </ul>
+                </nav>
+                <div class="components">
+                    <div *ngIf="selectedComponent === 'description'" class="flex flex-col">
+                        <textarea [disabled]="!descriptionEditable" class="task-description"
+                            [(ngModel)]="task.description">{{ task.description }}</textarea>
+                        <div class="button">
+                            <button *ngIf="!descriptionEditable" (click)="changeEditDescription()">{{ 'components.modals.task.editDescription' | translate }}</button>
+                            <button *ngIf="descriptionEditable" (click)="changeEditDescription()">{{ 'components.modals.task.saveDescription' | translate }}</button>
+                        </div>
+                    </div>
+
+                    <app-comments [task]="task" *ngIf="selectedComponent === 'comments'"
+                        style="width: 100%; height: 100%;" />
+
+                    <app-log [task]="task" *ngIf="selectedComponent === 'log'" 
+                        style="width: 100%; height: 100%;"
+                    />
+
+                    <app-attachments [task]="task" *ngIf="selectedComponent === 'attachments'" 
+                        style="width: 100%; height: 100%;"
+                    />
+                </div>
+                <div class="submit gap-3 rounded-sm">
+                    <span class="div-timer">
+                        <fa-icon [icon]="faClock"></fa-icon>
+                        <p>{{ timer }}</p>
+                    </span>
+                    <button class="work-task-button" *ngIf="!timeInTask.working" (click)="startTimer()"
+                    [disabled]="hasDependency"
+                    [ngStyle]="{'opacity' : hasDependency ? '0.2' : '1'}"
+                    >{{ 'components.modals.task.workTask' | translate }}</button>
+                    <button class="work-task-button" id="red-btn" *ngIf="timeInTask.working"
+                        (click)="stopTimer()">{{ 'components.modals.task.endWork' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-confirm-modal *ngIf="isSending" [title]="'components.modals.task.analysis' | translate" [height]="'450px'" [width]="'400px'"
+(close)="taskAction($event)" [buttonText]="'components.modals.task.sendTask' | translate">
+    <ng-container #content>
+        <div class="flex flex-col w-full justify-start items-start pt-5">
+            <p class="regular-text">{{ 'components.modals.task.reviewer' | translate }}</p>
+            <div class="regular-text">
+                <p class="text-start">{{ taskInfoDTO.creatorFullName }}</p>
+                <p class="text-start">{{ taskInfoDTO.email }}</p>
+            </div>
+            <div class="flex w-full h-24 pt-5">
+                <textarea name="description" placeholder="{{ 'components.modals.task.taskDescriptionPlaceholder' | translate }}" id="description"
+                    class="flex w-full h-full text-area-send-task" [(ngModel)]="sentToReviewDescription"></textarea>
+            </div>
+        </div>
+    </ng-container>
+</app-confirm-modal>

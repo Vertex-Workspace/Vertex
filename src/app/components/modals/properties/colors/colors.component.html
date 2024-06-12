@@ -1,0 +1,22 @@
+<ul>
+    <ng-container *ngFor="let color of colorsList;">
+        <li (click)="selectColor(color)" [ngClass]="color.status === 'selected' ? 'emphasis' : ''">
+            <div [ngStyle]="{'background-color': color.color , 'border' : color.color}" [style.color]="getStrongerColor(color.color)">
+                <p class="regular-text">{{'components.modals.properties.modal-properties.' + color.name | translate}}</p>
+                <fa-icon *ngIf="color.status == 'selected'" class="regular-text" [icon]="faCheck"></fa-icon>
+            </div>
+        </li>
+    </ng-container>
+</ul>
+<div class="info">
+    <div class="flex flex-row w-full h-[50%] justify-center items-center">
+        <fa-icon [icon]="circleInfo"></fa-icon>
+        <p class="small-text pl-2">
+            {{'components.modals.properties.chooseColor' | translate}}
+        </p>
+    </div>
+
+    <div class="real-time-view" [ngStyle]="{'background-color': currentColor}" [style.color]="getStrongerColor(currentColor)">
+        {{propertyList.value}}
+    </div>
+</div>

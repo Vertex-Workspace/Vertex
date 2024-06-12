@@ -1,0 +1,19 @@
+<div class="bg">
+    <div class="title">
+        <div>
+            <h5>{{'pages.user-settings.notifications.Notification' | translate}}</h5>
+            <fa-icon [icon]="faBell" class="icon size"></fa-icon>
+        </div>
+    </div>
+
+    <div class="my-notifications">
+        <p class="regular-text">{{'pages.user-settings.notifications.workspace' | translate}}</p>
+        <div *ngFor="let toogle of tooglesList; index as item">
+            <div class="item">
+                <fa-icon class="icon" (click)="toogleCharts(item)" [icon]="toogle.icon">
+                </fa-icon>
+                <p class="small-text">{{'pages.user-settings.notifications.options.'+ toogle.id | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

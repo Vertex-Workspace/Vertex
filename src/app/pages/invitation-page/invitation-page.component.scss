@@ -1,0 +1,49 @@
+@import '../../../variables';
+
+.main-div{
+    @apply w-screen h-[92vh] flex flex-col items-center ;
+}
+
+.center-div{
+    @apply flex flex-col items-center justify-center gap-10 h-[80%];
+}
+
+.submit button {
+    border: 1px solid $primaryColor;
+    background-color: $primaryColor;
+    color: $secondColor;
+    @apply p-3;
+}
+
+.submit{
+    @apply flex flex-col justify-center w-1/2;
+}
+
+.text-invitation{
+    text-align: center ;
+}
+
+.deny-invite{
+    text-align: center;
+}
+
+.square {
+    width: 200px;
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+  }
+.square img {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    object-fit: cover;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

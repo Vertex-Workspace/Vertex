@@ -1,0 +1,39 @@
+<div class="card min-h-[40px]">
+    <div class="name test-name min-w-[300px]" (click)="openModalTask()">
+        <span class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()" *ngIf="isTaskPage()">
+            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+        </span>
+        <div class="flex max-w-[190px] truncate">
+            <p>
+                {{task.name}}
+            </p>
+        </div>
+        <div class="icons" (click)="$event.stopPropagation()">
+            <ng-container *ngFor="let item of icons">
+                <fa-icon [icon]="item.icon" class="icon" [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'"
+                    (click)="openModalDelete()"></fa-icon>
+            </ng-container>
+        </div>
+    </div>
+
+        <ng-container *ngFor="let col of properties">
+            <div 
+                class="properties" 
+                [ngStyle]="{'min-width' : project ? '300px' : '245px'}"
+                (click)="alertNotPermission()"
+                *ngIf="col.propertyStatus != 'INVISIBLE'"
+            >
+                <app-input-value-property 
+                    style="width: 100%; height: 100%;" 
+                    [task]="task" 
+                    [value]="getPropertyValue(col)"
+                    [backgroundColor]="getColor(getPropertyValue(col))"
+                    [canEdit]="canEdit"
+                ></app-input-value-property>
+            </div>
+    </ng-container>
+</div>
+
+<app-confirm-modal *ngIf="modalDelete" [height]="'250px'" [width]="'400px'" [title]="'components.reusable-components.row-task.delete-task' | translate"
+    (close)="delete($event)"></app-confirm-modal>

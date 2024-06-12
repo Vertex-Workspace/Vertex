@@ -1,0 +1,531 @@
+@import '../../../_variables.scss';
+
+@media screen and (min-width: 1560px) {
+    
+    .divHead {
+        @apply flex w-[80%] h-[25%] gap-10;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4;
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex justify-between;
+
+        .search {
+            @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply flex w-full justify-end; 
+            
+        }
+    }
+    .grid-permissions{
+        @apply grid grid-cols-2 gap-4 w-[96%] pr-3 overflow-x-hidden overflow-y-auto;
+    }
+    
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1560px) {
+    .divHead {
+        @apply flex w-[80%] h-[25%] gap-10;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4;
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex flex-col items-start gap-3;
+
+        .search {
+            @apply w-full h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply flex w-full justify-end; 
+            
+        }
+    }
+
+    .grid-permissions{
+        @apply flex flex-wrap gap-3 w-[85%] pr-3 overflow-auto;
+    }
+
+}
+
+
+@media screen and (min-width: 524px) and (max-width: 1024px) {
+    section {
+        @apply flex w-full h-full justify-center items-center;
+    }
+    .divHead {
+        @apply flex w-[80%] h-[25%] gap-10;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4;
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    .container-custom {
+        @apply flex flex-col w-[90%] h-full pt-5;
+    }
+
+    .right-side {
+        @apply flex flex-col w-full h-full;
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply hidden; 
+            
+        }
+    }
+
+    .left-side {
+        @apply flex flex-col w-full h-full gap-8;
+    }
+
+    .table {
+        @apply flex flex-col w-full h-[100px] overflow-x-hidden overflow-y-auto mt-4;
+    }
+
+    .grid-permissions{
+        @apply flex flex-wrap gap-3 w-[85%] pr-3 overflow-auto;
+    }
+}
+
+@media screen and (max-width: 524px) {
+
+    .divHead {
+        @apply flex flex-col w-full h-[50%] gap-2 justify-center items-center;
+    }
+
+    .divTextHead {
+        @apply flex flex-col w-full gap-4 items-center max-h-[140px];
+    
+        .edit-pencil{
+            @apply text-[20px] cursor-pointer;
+            color: $primaryColor;
+        
+        }
+    }
+
+    section {
+        @apply pl-6 flex w-screen h-full justify-center items-center;
+    }
+
+    .container-custom {
+        @apply flex flex-col w-full h-full pt-5 gap-4;
+    }
+
+    .right-side {
+        @apply flex flex-col w-[90%] h-full;
+    }
+
+    .div-description-top-right{
+        display: none;
+    
+        .p-description{
+            @apply hidden; 
+        }
+    }
+
+    .left-side {
+        @apply flex flex-col w-full h-full gap-8;
+    }
+
+    .table {
+        @apply flex flex-col w-full h-[100px] overflow-x-hidden overflow-y-auto mt-4;
+    }
+
+    .grid-permissions{
+        @apply flex flex-wrap gap-3 w-[85%] pr-3 overflow-auto;
+    }
+}
+
+
+.input-div {
+    @apply cursor-pointer absolute flex w-full h-full;
+    opacity: 0;
+
+    .input-file {
+        @apply cursor-pointer flex w-full h-full justify-center;
+    }
+
+}
+.circular {
+    width: 200px;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+.circular img {
+    height: 80%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+.image-icon{
+    font-size: 250px;
+    color: $primaryColor;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.image-icon:hover{
+    opacity: 0.5;
+}
+
+
+
+.divMembers {
+    @apply flex gap-2 justify-center items-center   ;
+}
+.iconLink {
+    @apply flex items-center text-[15px];
+    color: $text;
+}
+
+.extense-card{
+    @apply  rounded-sm w-full h-full flex flex-col justify-evenly;
+    background-color: $card;
+}
+
+.extense-cardExpanded{
+    @apply  rounded-sm w-full h-full flex flex-col justify-center;
+    animation: animate 0.3s ease-in-out;
+    background-color: $card;
+}
+
+.image {
+    @apply w-full h-full flex overflow-hidden;
+
+    img {
+        @apply flex;
+        width: auto;
+        min-height: 250px;
+        object-fit: contain;
+        zoom: 0.55;
+    }
+
+    .profile-photo {
+        color: $primaryColor;
+        font-size: 10rem;
+    }
+}
+
+@keyframes animate{
+    0%{
+        height: 25%;
+    }
+    100%{
+        height: 100%;
+    }
+}
+
+.clicked {
+    color: $secondColor;
+    background-color: $primaryColor;
+}
+
+.default {
+    color: $primaryColor;
+    background-color: $secondColor;
+}
+
+
+.div-permission{
+    @apply w-full h-full flex justify-evenly;
+}
+
+.div-permission-icon{
+    @apply w-[15%] h-full flex items-start p-4;
+}
+
+.permission-icon{
+    @apply text-[60px];
+    color: $primaryColor;
+}
+
+.div-permission-nameFunction{
+    @apply w-[70%] h-full flex flex-col justify-start items-start text-right p-3;
+}
+
+.div-swap-permission{
+    @apply h-full flex items-center;
+}
+
+.icon-swap-permission{
+    @apply text-[20px] cursor-pointer;
+    color: $primaryColor;
+}
+
+.div-checkbox1{
+    @apply w-[33.7%] flex justify-end gap-2;
+}
+
+.div-checkbox2{
+    @apply w-[40%] flex justify-end gap-2;
+}
+
+.div-checkbox3{
+    @apply w-[34.7%] flex justify-end gap-2;
+}
+
+// ============================================================================================================================================================================
+
+
+.divProjectDashboardsBar {
+    @apply flex w-full h-full rounded-sm flex-col justify-start gap-10 items-center;
+    border-top:8px solid $primaryColor; 
+    background-color: $card;
+
+
+}
+.card-reviews{
+    @apply flex w-full flex-col h-full gap-3 items-center;
+
+    div{
+        @apply flex w-full flex-col rounded-sm px-3;
+        border-top:8px solid $primaryColor; 
+        background-color: $card;
+    }
+}
+
+.chart-bar{
+    @apply h-[150px] w-[250px] flex flex-col justify-center items-center;
+}
+
+
+.high-div-members{
+    @apply flex flex-col gap-3 w-[93%];
+}
+
+.div-members{
+    @apply flex flex-col gap-5 border-b;
+    border-color: $emphasis
+}
+
+.members{
+    @apply flex w-full gap-7 pb-2;
+    border-bottom: 5px;
+    border-color: $emphasis
+}
+
+.searchInput{
+    width: 80%;
+    background-color: $card;
+    color: $text;
+}
+
+.card-user-grid{
+    @apply  rounded-sm w-full h-full flex pl-4;
+    background-color: $card;
+}
+
+.div-text-card{
+    @apply w-[30%] flex items-start h-full 
+}
+
+.bg-description{
+    @apply px-4;
+    background-color: $card;
+}
+
+.iconuser{
+    @apply text-[150px] ;
+    color: $primaryColor;
+}
+
+.highDiv-card-informations{
+    @apply w-[70%] h-full flex flex-col text-right p-3;
+}
+
+.divSocial-media{
+    @apply flex gap-3 items-end h-full w-full justify-end;
+}
+
+.social-media{
+    @apply text-[20px];
+    color: $primaryColor;
+}
+
+.grid-group{
+    @apply grid grid-cols-2 gap-4 w-[85%] h-[42%];
+    overflow-y: scroll
+}
+
+.div-project-dashboards{
+    @apply flex flex-col justify-center w-full h-[54.5%];
+}
+
+.high-div-dashboards-bar{
+    @apply flex flex-col justify-center w-full h-[42%];
+}
+
+.divOf-project-dashboards-bar{
+    @apply flex gap-4 w-full h-full;
+}
+
+textarea {
+    @apply flex py-2 rounded-sm w-full;
+    background-color: $secondColor;
+    resize: none;
+    opacity: 0.7;
+    min-height: 100px;
+    border: none;
+    color: $text;
+}
+textarea:focus{
+    @apply shadow-md rounded-sm;
+    border: 0 none;
+    outline: 0;
+}
+
+.high-div-dashboards-pie{
+    @apply flex flex-col items-center w-full h-[40%];
+}
+
+.divOf-project-dashboards-pie{
+    @apply flex gap-4 w-[82%] h-full;
+}
+
+.dashboard-pie{
+    @apply w-[60%] h-[30%] flex flex-col justify-center items-center;
+}
+
+button{
+    @apply w-[150px] h-[50px] flex gap-2 p-4 px-4 transition-colors
+    items-center justify-center rounded cursor-pointer;
+}
+table, th, td {
+    border:1px solid black;
+}
+td{
+    color: $text;
+}
+table > tr {
+    height: 40px ;
+}
+td {
+    @apply text-center;
+}
+
+@media screen and (min-width: 732px) and (max-width: 1024px) {
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex justify-between items-center gap-3;
+
+        .search {
+            @apply w-1/2 h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+}
+
+@media screen and (min-width: 512px) and (max-width: 732px) {
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex flex-col justify-between items-start gap-3;
+
+        .search {
+            @apply w-2/3 h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+}
+
+@media screen and (max-width: 512px) {
+    .high-listDiv-members{
+        @apply w-[100%] h-full flex flex-col justify-between items-start gap-3;
+
+        .search {
+            @apply w-full h-[50px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            background-color: $card;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    section {
+        @apply flex w-screen h-full justify-center items-center;
+    }
+
+    .container-custom {
+        @apply flex w-[90%] h-full pt-5;
+    }
+
+    .right-side {
+        @apply flex flex-col w-[50%] h-full;
+    }
+
+    .div-description-top-right{
+        @apply flex flex-col;
+    
+        .p-description{
+            @apply flex w-full justify-end; 
+            
+        }
+    }
+
+    .table {
+        @apply flex flex-col w-full h-[170px] overflow-x-hidden overflow-y-auto mt-4;
+    }
+
+    .left-side {
+        @apply flex flex-col w-[50%] h-full gap-8;
+    }
+}
+
+::ng-deep .p-progressbar .p-progressbar-value {
+    border: 0 none;
+    margin: 0;
+    background: $primaryColor !important;
+}

@@ -1,0 +1,108 @@
+@import '../../../../variables';
+
+
+.card{
+    @apply flex flex-col w-full shadow-lg;
+    background-color: $card;
+    height: 150px;
+    color: $text;
+
+    .emailUser{
+        color: $text;
+    }
+  
+    .sections-in-card {
+        @apply flex w-full items-center ;
+        min-height: 70px;
+
+        div:first-child {
+            @apply w-[20%] flex items-center justify-center h-full;
+            font-size: $regularText
+        };
+
+        div:nth-child(2) {
+            @apply w-[65%] flex items-start justify-center h-full flex-col;
+
+            p:first-child {
+                font-size: $regularText
+            };
+
+            p:nth-child(2){
+                font-size: $smallText;
+                @apply pt-1
+            }
+        };
+
+        div:nth-child(3) {
+            p {
+                @apply font-bold pt-12;
+                font-size: $smallText;
+            };
+        };
+
+        .icons-div {
+            @apply w-[15%] flex items-center pl-6 h-full;
+        };
+
+        .more-infos-div {
+            @apply w-[35%] flex items-end pl-6 h-full;
+        }
+    }
+
+}
+
+.icon {
+    color: $primaryColor;
+    font-size: 1rem;
+}
+
+.icon-not-selected {
+    color: $text;
+    opacity: 0.3;
+    font-size: 1rem;
+}
+
+.size {
+    font-size: 1.5rem
+}
+
+.permissions {
+    @apply flex flex-row items-center justify-between px-4;
+    background-color: $card;
+
+    .single-permissions {
+        @apply flex flex-row justify-center items-center;
+        color: $text;
+    }
+
+    p {
+        color: $text;
+        @apply pl-2;
+    }
+}
+
+p {
+    font-size: $smallText;
+}
+
+.default-color {
+    background-color: $secondColor
+}
+
+.default-grid {
+    @apply w-full h-full gap-2;
+}
+
+
+
+.creating {
+    @apply flex flex-col gap-2
+}
+
+.more-infos {
+    @apply flex flex-row justify-end;
+
+    p{
+        cursor: pointer;
+    }
+}

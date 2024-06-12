@@ -1,0 +1,76 @@
+@import '../../../../../variables';
+
+.ng-contentDiv{
+    @apply flex flex-col w-full h-[450px] items-center gap-4 overflow-y-auto; 
+}
+
+.whole-content {
+    @apply w-[90%] flex flex-col items-start justify-start;
+    
+}
+.whole-content-w-full{
+    @apply w-full flex justify-center; 
+    border-top: 1px solid $emphasis;
+}
+
+.icon {
+    color: $primaryColor;
+}
+.visible {
+    @apply w-full min-h-[40px] flex flex-row justify-between ;
+
+    div:first-child {
+        @apply flex w-[70%] pr-3 items-center;
+
+        div:first-child{
+            @apply flex w-[85%] h-full justify-start pl-2 items-center;
+        
+            input {
+                @apply flex rounded-lg px-2;
+                outline: none;
+            }
+
+            p{
+                @apply px-2 rounded-xl; 
+                color: $text;
+                width: auto;
+            }
+        }
+
+    }
+
+    div:last-child {
+        @apply flex w-[20%] justify-between items-center;
+    }
+}
+
+p{
+    @apply flex justify-start items-start;
+    color:$text;
+}
+
+.opacity{
+    @apply opacity-25;
+}
+
+.little-icon {
+    color:$primaryColor;
+    font-size: 1rem;
+}
+
+.opacity-icon{
+    @apply opacity-75;
+    color: $text;
+}
+
+.info-status{
+    @apply flex flex-row h-[10%] items-end justify-center pt-4 opacity-60 gap-2;
+
+    p{
+        color: $text;
+    }
+
+    fa-icon{
+        color: $text;
+    }
+}

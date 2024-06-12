@@ -1,0 +1,1888 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  InputValuePropertyComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/reusable-components/input-value-property/input-value-property.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-input-value-property</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./input-value-property.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./input-value-property.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#calendarClicked" >calendarClicked</a>
+                            </li>
+                            <li>
+                                <a href="#date" >date</a>
+                            </li>
+                            <li>
+                                <a href="#oldValue" >oldValue</a>
+                            </li>
+                            <li>
+                                <a href="#portugueseDate" >portugueseDate</a>
+                            </li>
+                            <li>
+                                <a href="#project" >project</a>
+                            </li>
+                            <li>
+                                <a href="#valueNumber" >valueNumber</a>
+                            </li>
+                            <li>
+                                <a href="#valueText" >valueText</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#alertNotPermission" >alertNotPermission</a>
+                            </li>
+                            <li>
+                                <a href="#change" >change</a>
+                            </li>
+                            <li>
+                                <a href="#changeDate" >changeDate</a>
+                            </li>
+                            <li>
+                                <a href="#changeList" >changeList</a>
+                            </li>
+                            <li>
+                                <a href="#getKind" >getKind</a>
+                            </li>
+                            <li>
+                                <a href="#getSelectOptions" >getSelectOptions</a>
+                            </li>
+                            <li>
+                                <a href="#getValue" >getValue</a>
+                            </li>
+                            <li>
+                                <a href="#isSelected" >isSelected</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#setBackground" >setBackground</a>
+                            </li>
+                            <li>
+                                <a href="#updateTask" >updateTask</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#backgroundColor" >backgroundColor</a>
+                            </li>
+                            <li>
+                                <a href="#canEdit" >canEdit</a>
+                            </li>
+                            <li>
+                                <a href="#task" >task</a>
+                            </li>
+                            <li>
+                                <a href="#value" >value</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changes" >changes</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, projectService: <a href="../injectables/ProjectService.html" target="_self">ProjectService</a>, route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, alertService: <a href="../injectables/AlertService.html" target="_self">AlertService</a>, taskService: <a href="../injectables/TaskService.html" target="_self">TaskService</a>, router: Router, primeNGCOnfig: PrimeNGConfig)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>projectService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alertService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>taskService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TaskService.html" target="_self" >TaskService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>primeNGCOnfig</td>
+                                                  
+                                                        <td>
+                                                                    <code>PrimeNGConfig</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="backgroundColor"></a>
+                        <b>backgroundColor</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:26</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canEdit"></a>
+                        <b>canEdit</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:36</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="task"></a>
+                        <b>task</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <b>value</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Value.html" target="_self" >Value</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:29</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changes"></a>
+                        <b>changes</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:24</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alertNotPermission"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>alertNotPermission</b></span>
+                        <a href="#alertNotPermission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>alertNotPermission()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="change"></a>
+                    <span class="name">
+                        <span ><b>change</b></span>
+                        <a href="#change"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>change(value: <a href="../classes/Value.html" target="_self">Value</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../classes/Value.html" target="_self" >Value</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeDate"></a>
+                    <span class="name">
+                        <span ><b>changeDate</b></span>
+                        <a href="#changeDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeDate(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeList"></a>
+                    <span class="name">
+                        <span ><b>changeList</b></span>
+                        <a href="#changeList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeList(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, value: <a href="../classes/Value.html" target="_self">Value</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../classes/Value.html" target="_self" >Value</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getKind"></a>
+                    <span class="name">
+                        <span ><b>getKind</b></span>
+                        <a href="#getKind"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getKind(property: <a href="../classes/Property.html" target="_self">Property</a>, kind: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>property</td>
+                                            <td>
+                                                            <code><a href="../classes/Property.html" target="_self" >Property</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>kind</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSelectOptions"></a>
+                    <span class="name">
+                        <span ><b>getSelectOptions</b></span>
+                        <a href="#getSelectOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSelectOptions(value: <a href="../classes/Value.html" target="_self">Value</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../classes/Value.html" target="_self" >Value</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>PropertyList[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getValue"></a>
+                    <span class="name">
+                        <span ><b>getValue</b></span>
+                        <a href="#getValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getValue()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | number</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSelected"></a>
+                    <span class="name">
+                        <span ><b>isSelected</b></span>
+                        <a href="#isSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isSelected(propertyList: <a href="../classes/PropertyList.html" target="_self">PropertyList</a>, value: <a href="../classes/Value.html" target="_self">Value</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:131</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>propertyList</td>
+                                            <td>
+                                                            <code><a href="../classes/PropertyList.html" target="_self" >PropertyList</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../classes/Value.html" target="_self" >Value</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setBackground"></a>
+                    <span class="name">
+                        <span ><b>setBackground</b></span>
+                        <a href="#setBackground"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setBackground()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateTask"></a>
+                    <span class="name">
+                        <span ><b>updateTask</b></span>
+                        <a href="#updateTask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateTask(value: <a href="../classes/Value.html" target="_self">Value</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="../classes/Value.html" target="_self" >Value</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calendarClicked"></a>
+                    <span class="name">
+                        <span ><b>calendarClicked</b></span>
+                        <a href="#calendarClicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="date"></a>
+                    <span class="name">
+                        <span ><b>date</b></span>
+                        <a href="#date"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="oldValue"></a>
+                    <span class="name">
+                        <span ><b>oldValue</b></span>
+                        <a href="#oldValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Value.html" target="_self" >Value</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="portugueseDate"></a>
+                    <span class="name">
+                        <span ><b>portugueseDate</b></span>
+                        <a href="#portugueseDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="project"></a>
+                    <span class="name">
+                        <span ><b>project</b></span>
+                        <a href="#project"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valueNumber"></a>
+                    <span class="name">
+                        <span ><b>valueNumber</b></span>
+                        <a href="#valueNumber"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valueText"></a>
+                    <span class="name">
+                        <span ><b>valueText</b></span>
+                        <a href="#valueText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;Vazio&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/components/reusable-components/input-value-property/input-value-property.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import { Property, PropertyKind, PropertyList, PropertyListKind } from &#x27;src/app/models/class/property&#x27;;
+import { Task } from &#x27;src/app/models/class/task&#x27;;
+import { Value, ValueUpdate } from &#x27;src/app/models/class/value&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { Permission, PermissionsType } from &#x27;src/app/models/class/user&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { ProjectService } from &#x27;src/app/services/project.service&#x27;;
+import { TaskService } from &#x27;src/app/services/task.service&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+import { PrimeNGConfig } from &#x27;primeng/api&#x27;;
+
+//teste pra ver se foi
+@Component({
+  selector: &#x27;app-input-value-property&#x27;,
+  templateUrl: &#x27;./input-value-property.component.html&#x27;,
+  styleUrls: [&#x27;./input-value-property.component.scss&#x27;]
+})
+export class InputValuePropertyComponent {
+
+  @Output()
+  changes &#x3D; new EventEmitter();
+
+  @Input() backgroundColor?: string &#x3D; &#x27;&#x27;;
+
+  @Input()
+  value!: Value;
+
+  @Input()
+  task!: Task;
+
+  project !: Project;
+
+  @Input() canEdit !: boolean;
+
+
+  constructor(private teamService: TeamService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private alertService: AlertService,
+    private taskService: TaskService,
+    private router: Router,
+    private primeNGCOnfig : PrimeNGConfig) { }
+
+
+  oldValue!: Value;
+
+  ngOnChanges(){
+    if(this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.STATUS){
+      const value : PropertyList &#x3D; this.value.value as PropertyList;
+      if(value.propertyListKind !&#x3D;&#x3D; PropertyListKind.DONE){
+        this.oldValue &#x3D; new Value(this.value);
+      }
+    }
+  }
+  calendarClicked: boolean &#x3D; false;
+  portugueseDate: any;
+
+  ngOnInit(): void {
+    this.oldValue &#x3D; new Value(this.value);
+
+    if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.STATUS ||
+      this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.LIST) {
+      this.setBackground();
+    }
+    if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.NUMBER &amp;&amp; this.value.value !&#x3D; null) {
+      this.valueNumber &#x3D; this.value.value as number;
+    }
+    if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.TEXT &amp;&amp; this.value.value !&#x3D; null) {
+      this.valueText &#x3D; this.value.value as string;
+    }
+
+    this.portugueseDate &#x3D; {
+      firstDayOfWeek: 0,
+      dayNames: [&quot;Domingo&quot;, &quot;Segunda-feira&quot;, &quot;Terça-feira&quot;, &quot;Quarta-feira&quot;, &quot;Quinta-feira&quot;, &quot;Sexta-feira&quot;, &quot;Sábado&quot;],
+      dayNamesShort: [&quot;Dom&quot;, &quot;Seg&quot;, &quot;Ter&quot;, &quot;Qua&quot;, &quot;Qui&quot;, &quot;Sex&quot;, &quot;Sáb&quot;],
+      dayNamesMin: [&quot;Do&quot;,&quot;Se&quot;,&quot;Te&quot;,&quot;Qu&quot;,&quot;Qu&quot;,&quot;Se&quot;,&quot;Sa&quot;],
+      monthNames: [ &quot;Janeiro&quot;,&quot;Fevereiro&quot;,&quot;Março&quot;,&quot;Abril&quot;,&quot;Maio&quot;,&quot;Junho&quot;,&quot;Julho&quot;,&quot;Agosto&quot;,&quot;Setembro&quot;,&quot;Outubro&quot;,&quot;Novembro&quot;,&quot;Dezembro&quot; ],
+      monthNamesShort: [ &quot;Jan&quot;, &quot;Fev&quot;, &quot;Mar&quot;, &quot;Abr&quot;, &quot;Mai&quot;, &quot;Jun&quot;,&quot;Jul&quot;, &quot;Ago&quot;, &quot;Set&quot;, &quot;Out&quot;, &quot;Nov&quot;, &quot;Dez&quot; ],
+      today: &#x27;Hoje&#x27;,
+      clear: &#x27;Limpar&#x27;,
+      dateFormat: &#x27;dd/mm/yy&#x27;,
+      weekHeader: &#x27;Sem&#x27;
+    };
+    this.primeNGCOnfig.setTranslation(this.portugueseDate);
+
+    if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.DATE) {
+      this.date &#x3D; new Date(this.value.value as string);
+    }
+  }
+  date!: Date;
+  valueNumber: number &#x3D; 0;
+  valueText: string &#x3D; &quot;Vazio&quot;;
+
+ 
+  getValue(): string | number {
+    if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.STATUS || this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.LIST) {
+      let valueProperty &#x3D; this.value.value as PropertyList;
+      if (valueProperty &#x3D;&#x3D; null) {
+        return &quot;&quot;;
+      }
+
+      return valueProperty.value;
+    }
+    if (this.value.value &#x3D;&#x3D; null) {
+      if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.NUMBER) {
+        return 0;
+      }
+      return &quot;Vazio&quot;;
+    }
+    if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.DATE) {
+      let date &#x3D; new Date(this.value.value as string);
+      //to format the date to yyyy-mm-dd
+      return &#x60;${date.getDate().toString().padStart(2, &#x27;0&#x27;)}/${(date.getMonth() + 1).toString().padStart(2, &#x27;0&#x27;)}/${date.getFullYear()}&#x60;;
+    }
+    return this.value.value as string;
+  }
+
+
+  getSelectOptions(value: Value): PropertyList[] {
+    return value.property.propertyLists;
+  }
+
+  getKind(property: Property, kind: string): boolean {
+    return property.kind &#x3D;&#x3D;&#x3D; kind;
+  }
+
+  isSelected(propertyList: PropertyList, value: Value): boolean {
+    let valueProperty &#x3D; value.value as PropertyList;
+    return propertyList.id &#x3D;&#x3D;&#x3D; valueProperty.id;
+
+  }
+
+  changeDate(event: any): void {
+    if (this.canEdit) {
+      this.value.value &#x3D; new Date(event).toISOString().slice(0, -1);
+      this.updateTask(this.value);
+    } else {
+      this.alertNotPermission();
+    }
+  }
+
+  changeList(event: any, value: Value): void {
+    if (this.canEdit) {
+      this.updateTask(value);
+    } else {
+      this.alertNotPermission();
+    }
+  }
+
+  private alertNotPermission(): void {
+    console.log(&quot;NOT PERMISSION&quot;);
+    if (this.router.url.includes(&quot;home&quot;)) {
+      console.log(&quot;home&quot;);
+      this.alertService.errorAlert(&quot;Por segurança, você não pode alterar tarefas pela home, clique na tarefa ou acesse à equipe!&quot;)
+    } else {
+      this.alertService.errorAlert(&quot;Você não tem permissão para editar!&quot;);
+    }
+
+  }
+
+  change(value: Value): void {
+    if (this.canEdit) {
+      if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.NUMBER) {
+        value.value &#x3D; this.valueNumber;
+      }
+      if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.TEXT) {
+        value.value &#x3D; this.valueText;
+      }
+      this.updateTask(value);
+    }
+    else {
+      this.alertNotPermission();
+    }
+  }
+
+  updateTask(value: Value): void {
+    let valueTest: string | number | Date | PropertyList;
+    if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.DATE) {
+      valueTest &#x3D; value.value as Date;
+    } else if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.NUMBER) {
+      valueTest &#x3D; Number(value.value);
+    } else if (value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.STATUS || value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.LIST) {
+      let propertyList: PropertyList &#x3D; value.value as PropertyList;
+      valueTest &#x3D; propertyList.id;
+      if(propertyList.propertyListKind &#x3D;&#x3D;&#x3D; PropertyListKind.DONE){
+        this.taskService.setTaskDependencyNull(this.task.id, this.task).subscribe((task: Task)&#x3D;&gt; {
+          this.task &#x3D; task;
+        })
+      }
+    } else {
+      valueTest &#x3D; value.value;
+    }
+
+    
+    const valueUpdate: ValueUpdate &#x3D; {
+      id: this.task.id,
+      value: {
+        property: {
+          id: value.property.id
+        },
+        value: {
+          id: value.id,
+          value: valueTest
+        }
+      },
+      userID: this.userService.getLogged().id!
+    };
+
+    this.taskService.patchValue(valueUpdate).subscribe(
+      (task) &#x3D;&gt; {
+        this.task &#x3D; task;
+        this.alertService.successAlert(value.property.name + &quot; alterado com sucesso!&quot;);
+        this.changes.emit(task);
+      },
+      (error) &#x3D;&gt; {
+        if (this.value.property.kind &#x3D;&#x3D;&#x3D; PropertyKind.STATUS) {
+          this.value &#x3D; this.oldValue;
+
+          this.task.values[0] &#x3D; this.value;
+          this.setBackground();
+        }
+        this.alertService.errorAlert(error.error);
+      }
+    );
+  }
+
+  setBackground(): void {
+    let valuePropertyList: PropertyList &#x3D; this.value.value as PropertyList;
+    if (valuePropertyList !&#x3D; null) {
+      this.backgroundColor &#x3D; valuePropertyList.color;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;flex w-full h-full justify-center items-center&quot;&gt;
+&lt;!-- text --&gt;
+&lt;input *ngIf&#x3D;&quot;getKind(value.property, &#x27;TEXT&#x27;)&quot; type&#x3D;&quot;text&quot; pInputText (blur)&#x3D;&quot;change(value)&quot; [(ngModel)]&#x3D;&quot;valueText&quot;
+    [disabled]&#x3D;&quot;!canEdit&quot;  [style]&#x3D;&quot;{ minWidth: &#x27;200px&#x27;, maxWidth: &#x27;200px&#x27;, &#x27;background-color&#x27;: backgroundColor  }&quot;/&gt;
+
+
+&lt;!-- number --&gt;
+&lt;p-inputNumber  *ngIf&#x3D;&quot;getKind(value.property, &#x27;NUMBER&#x27;)&quot; [style]&#x3D;&quot;{ minWidth: &#x27;200px&#x27;, maxWidth: &#x27;200px&#x27;}&quot; (onBlur)&#x3D;&quot;change(value)&quot; [(ngModel)]&#x3D;&quot;valueNumber&quot;
+
+    [disabled]&#x3D;&quot;!canEdit&quot;&gt; &lt;/p-inputNumber&gt;
+
+
+
+&lt;!-- date --&gt;
+&lt;span *ngIf&#x3D;&quot;getKind(value.property, &#x27;DATE&#x27;)&quot;&gt;
+    &lt;p-calendar #calendarLabel appendTo&#x3D;&quot;body&quot; [style]&#x3D;&quot;{ minWidth: &#x27;200px&#x27;, maxWidth: &#x27;200px&#x27; }&quot; (onSelect)&#x3D;&quot;changeDate($event)&quot;
+        [disabled]&#x3D;&quot;!canEdit&quot; [(ngModel)]&#x3D;&quot;calendarClicked&quot; inputId&#x3D;&quot;label-calendar&quot; [(ngModel)]&#x3D;&quot;date&quot;&gt;&lt;/p-calendar&gt;
+&lt;/span&gt;
+
+&lt;!-- status --&gt;
+&lt;p-cascadeSelect *ngIf&#x3D;&quot;getKind(value.property, &#x27;STATUS&#x27;)&quot; [options]&#x3D;&quot;getSelectOptions(value)&quot; [(ngModel)]&#x3D;&quot;value.value&quot;
+    optionLabel&#x3D;&quot;value&quot; optionGroupLabel&#x3D;&quot;name&quot; [optionGroupChildren]&#x3D;&quot;[]&quot;
+    [style]&#x3D;&quot;{ minWidth: &#x27;200px&#x27;, maxWidth: &#x27;200px&#x27;, &#x27;background-color&#x27;: backgroundColor  }&quot; placeholder&#x3D;&quot;{{getValue()}}&quot;
+    (onChange)&#x3D;&quot;changeList($event, value)&quot; appendTo&#x3D;&quot;body&quot; [disabled]&#x3D;&quot;!canEdit&quot;&gt;
+    &lt;ng-template pTemplate&#x3D;&quot;option&quot; let-option&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-center gap-2&quot;&gt;
+            &lt;span class&#x3D;&quot;mr-2 w-[17px] h-[17px] rounded-full&quot; [style.backgroundColor]&#x3D;&quot;option.color&quot;&gt;&lt;/span&gt;
+            &lt;span&gt;{{ option.value }}&lt;/span&gt;
+        &lt;/div&gt; 
+    &lt;/ng-template&gt;
+&lt;/p-cascadeSelect&gt;
+
+&lt;p-cascadeSelect *ngIf&#x3D;&quot;getKind(value.property, &#x27;LIST&#x27;)&quot; [(ngModel)]&#x3D;&quot;value.value&quot; [options]&#x3D;&quot;getSelectOptions(value)&quot;
+    optionLabel&#x3D;&quot;value&quot; optionGroupLabel&#x3D;&quot;name&quot; [optionGroupChildren]&#x3D;&quot;[]&quot;
+    [style]&#x3D;&quot;{ minWidth: &#x27;200px&#x27;, maxWidth: &#x27;200px&#x27;,  &#x27;background-color&#x27;: backgroundColor }&quot; placeholder&#x3D;&quot;{{getValue()}}&quot;
+    (onChange)&#x3D;&quot;changeList($event, value)&quot; appendTo&#x3D;&quot;body&quot; [disabled]&#x3D;&quot;!canEdit&quot;&gt;
+    &lt;ng-template pTemplate&#x3D;&quot;option&quot; let-option&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-center gap-2&quot;&gt;
+            &lt;span class&#x3D;&quot;mr-2 w-[17px] h-[17px] rounded-full shadow-md&quot; [style.backgroundColor]&#x3D;&quot;option.color&quot;&gt;&lt;/span&gt;
+            &lt;span&gt;{{ option.value }}&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/ng-template&gt;
+&lt;/p-cascadeSelect&gt;
+&lt;/section&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./input-value-property.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../../_variables.scss&#x27;;
+
+input, p, select{
+    @apply w-full flex h-full justify-center items-center px-3;
+    background-color: $card;
+}
+
+::ng-deep .p-inputtext{
+    @apply w-full flex h-full justify-center items-center px-3;
+    background-color: $card ;
+    
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section class="flex w-full h-full justify-center items-center"><!-- text --><input *ngIf="getKind(value.property, \'TEXT\')" type="text" pInputText (blur)="change(value)" [(ngModel)]="valueText"    [disabled]="!canEdit"  [style]="{ minWidth: \'200px\', maxWidth: \'200px\', \'background-color\': backgroundColor  }"/><!-- number --><p-inputNumber  *ngIf="getKind(value.property, \'NUMBER\')" [style]="{ minWidth: \'200px\', maxWidth: \'200px\'}" (onBlur)="change(value)" [(ngModel)]="valueNumber"    [disabled]="!canEdit"> </p-inputNumber><!-- date --><span *ngIf="getKind(value.property, \'DATE\')">    <p-calendar #calendarLabel appendTo="body" [style]="{ minWidth: \'200px\', maxWidth: \'200px\' }" (onSelect)="changeDate($event)"        [disabled]="!canEdit" [(ngModel)]="calendarClicked" inputId="label-calendar" [(ngModel)]="date"></p-calendar></span><!-- status --><p-cascadeSelect *ngIf="getKind(value.property, \'STATUS\')" [options]="getSelectOptions(value)" [(ngModel)]="value.value"    optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="[]"    [style]="{ minWidth: \'200px\', maxWidth: \'200px\', \'background-color\': backgroundColor  }" placeholder="{{getValue()}}"    (onChange)="changeList($event, value)" appendTo="body" [disabled]="!canEdit">    <ng-template pTemplate="option" let-option>        <div class="flex items-center justify-center gap-2">            <span class="mr-2 w-[17px] h-[17px] rounded-full" [style.backgroundColor]="option.color"></span>            <span>{{ option.value }}</span>        </div>     </ng-template></p-cascadeSelect><p-cascadeSelect *ngIf="getKind(value.property, \'LIST\')" [(ngModel)]="value.value" [options]="getSelectOptions(value)"    optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="[]"    [style]="{ minWidth: \'200px\', maxWidth: \'200px\',  \'background-color\': backgroundColor }" placeholder="{{getValue()}}"    (onChange)="changeList($event, value)" appendTo="body" [disabled]="!canEdit">    <ng-template pTemplate="option" let-option>        <div class="flex items-center justify-center gap-2">            <span class="mr-2 w-[17px] h-[17px] rounded-full shadow-md" [style.backgroundColor]="option.color"></span>            <span>{{ option.value }}</span>        </div>    </ng-template></p-cascadeSelect></section></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'InputValuePropertyComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'InputValuePropertyComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

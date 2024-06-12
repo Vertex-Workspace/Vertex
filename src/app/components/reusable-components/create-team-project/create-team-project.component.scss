@@ -1,0 +1,159 @@
+@import "../../../../variables";
+
+@media screen and (min-width: 660px) {
+    .modal {
+        @apply absolute rounded-md flex flex-col w-[600px] h-[650px]
+        items-start justify-start text-center p-8 border-t-8;
+        border-color: $primaryColor;
+        background-color: $secondColor;
+    }
+
+    .div-grid-name-image{
+        @apply grid w-full h-[30%];
+        grid-template-columns: 65% 35%;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .modal {
+        @apply absolute flex flex-col w-full h-full
+        items-start justify-start text-center p-8;
+        background-color: $secondColor;
+    }
+
+    .div-grid-name-image{
+        @apply grid w-full h-[20%];
+        grid-template-columns: 65% 35%;
+    }
+}
+
+form{
+    @apply w-full h-full flex flex-col justify-between;
+    color: $primaryColor;
+}
+
+fa-icon{
+    @apply text-2xl;
+    color: $primaryColor;
+
+}
+
+.title{
+    @apply flex h-[15%];
+}
+
+.input-name{
+    @apply flex flex-col w-[90%] h-[50%] justify-start items-start;
+    color: $text;
+    p{
+        @apply pt-6 pb-6;
+        font-size: $mediumText
+    }
+    input{
+        @apply flex h-52 rounded-md pl-4 w-96;
+        background-color: $card;
+    }
+}
+
+.circular {
+    width: 200px;
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+  }
+.circular img {
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.input-div {
+    @apply w-full h-full flex justify-center items-center absolute;
+    opacity: 0;
+    color: $text;
+
+    .input-file {
+        @apply cursor-pointer w-full h-full;
+    }
+
+}
+// .image-icon{
+//     font-size: 8rem;
+//     color: $primaryColor;
+// }
+// .image-icon:hover{
+//     opacity: 0.5;
+// }
+
+
+
+.input-description{
+    @apply flex flex-col h-[60%] w-full items-start;
+
+    p{
+        @apply pb-6;
+        font-size: $mediumText
+    }
+    textarea{
+        @apply pl-4 pt-4 rounded-md h-[70%] w-full;
+        resize: none;
+    }
+}
+
+.div-buttons{
+    @apply flex h-[20%] w-[99%] justify-end items-end;
+
+    .buttons{
+        @apply flex w-full h-full justify-end items-end;
+    }
+
+    .cancel-button{
+        @apply flex items-center justify-center w-24 h-8 rounded-sm mr-4;
+        background-color: $error;
+        color: white;
+    }
+    .confirm-button{
+        @apply flex items-center justify-center w-24 h-8 rounded-sm;
+        background-color: $primaryColor;
+        color: white;
+    }
+}
+
+app-modal-warn{
+    color: $primaryColor;
+    
+    h5{
+        @apply pt-2;
+    }
+
+    .informations-modal{
+        @apply flex pt-12 flex-col;
+    }
+
+    app-button{
+        @apply pt-12;
+    }
+}
+
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    z-index: 999;
+}
+
+
+.size {
+    font-size: $largeText;
+}
+
+textarea{
+    outline: none;
+    background-color: $card;
+    color: $text;
+}
+

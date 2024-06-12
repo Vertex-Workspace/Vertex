@@ -1,0 +1,33 @@
+<header class="header">
+  <section class="header-section">
+    <div class="current-location medium-text">
+      <i (click)="back()" class="pi pi-angle-double-left back"
+        *ngIf="!isHome || location.includes('aceitar-convite')"></i>
+      <p>{{ location | translate }}</p>
+    </div>
+    <div class="items-header">
+      <div class="menu-container">
+        <button mat-button [matMenuTriggerFor]="idiomaMenu" class="nav-item">
+          <img style="width: 35px; margin-right: 10px" [src]="linkImage" />
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <mat-menu #idiomaMenu="matMenu" class="custom-menu">
+          <ng-container *ngFor="let tr of translates">
+            <button mat-menu-item (click)="
+                        changeLanguage(
+                          tr.sigla,
+                          tr.image
+                        )
+                      ">
+              <img style="width: 34px;" src="{{tr.image}}" />
+            </button>
+          </ng-container>
+        </mat-menu>
+      </div>
+      <i class="pi pi-bell cursor-pointer text-xl" (click)="openNotifications()" pBadge value={{notificationBadge}}
+        *ngIf="notificationBadge > 0"></i>
+      <i class="pi pi-bell cursor-pointer text-xl" (click)="openNotifications()" *ngIf="notificationBadge == 0"></i>
+      <!-- <i class="pi pi-question"></i> -->
+    </div>
+  </section>
+</header>

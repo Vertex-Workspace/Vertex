@@ -1,0 +1,114 @@
+@import '../../../../../variables';
+
+.ng-contentDiv{
+    @apply flex h-full flex-col w-full items-center justify-between;
+}
+
+.icon {
+    color: $primaryColor !important;
+    font-size: 1.5rem;
+    cursor: grab;
+}
+.properties{
+    @apply flex flex-col w-full h-full items-center gap-5;
+    
+    .visible-unvisible {
+        @apply flex flex-col w-full overflow-y-auto items-center;
+
+        border-top: 1px solid $emphasis;
+    };
+
+    button{
+        font-size:1.5rem;
+        @apply pr-2
+    };
+}
+
+.fixed-properties{
+    @apply flex w-full h-[65px] flex-row justify-center;
+    border-top: 2px solid $emphasis;
+
+    &:hover{
+        @apply rounded-md;
+        cursor: pointer;
+        background-color: $primaryColor;
+        p{
+            color: $secondColor;
+        }
+        fa-icon{
+            color: $secondColor;
+        }
+    }
+    fa-icon{
+        @apply text-2xl;
+        color: $primaryColor;
+    }
+    div{
+        @apply flex w-[35%] h-full items-center justify-between;
+    }
+}
+
+.visible {
+    @apply w-full min-h-[40px] flex flex-row justify-between pr-3;
+    background-color: $primaryColor + "FF";
+
+    &:hover{
+        @apply rounded-sm;
+        background-color: $emphasis;
+        cursor: pointer;
+    }
+
+    div:first-child {
+        @apply flex w-[80%] pr-3 items-center ;
+
+        div:first-child{
+            @apply pl-3 w-[15%] flex justify-between;
+        }
+
+        div:last-child{
+            @apply w-full h-full flex justify-between items-center gap-4;
+
+            fa-icon{
+                color: $primaryColor;
+                @apply text-2xl;
+            }
+        }
+
+    }
+
+    div:last-child {
+        @apply flex w-[20%] justify-between items-center;
+    }
+}
+
+p{
+    @apply flex justify-start items-start;
+    color:$primaryColor;
+}
+
+.new-property {
+   @apply flex w-full items-center pt-3;
+
+   p{
+    @apply pl-3 items-center;
+   }
+}
+
+.opacity{
+    @apply opacity-25;
+}
+
+.opacity-icon{
+    @apply opacity-75;
+}
+
+.little-icon {
+    color:$primaryColor;
+    font-size: 1rem;
+}
+
+.number-type-icon{
+    padding-left: 4px;
+    margin-right: 3px;
+
+}

@@ -1,0 +1,105 @@
+@import '../../../../variables';
+
+h6, p {
+  color: black !important;
+}
+
+.card {
+    @apply overflow-hidden shadow-md absolute
+    rounded-sm flex cursor-move transition-colors min-w-[120px] min-h-[120px];
+
+    color: $text !important;
+  }
+  
+  .card span:last-child {
+    @apply p-2 ;
+  
+    .left {
+      @apply flex flex-col h-[50%] w-[90%] p-4 gap-4;
+  
+  
+      .text {
+        @apply text-justify w-full pr-2 break-words pt-2;
+  
+        p {
+          @apply h-[65%] w-full relative;
+
+        }
+      }
+    }
+  
+    .right {
+      @apply h-full flex flex-col items-end right-0 w-[4%]
+      justify-end transition-colors p-8;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-right: 10px;
+  
+      .icons {
+        @apply w-1/2 h-1/4 flex gap-3 pl-3 pb-1 items-end 
+        justify-end flex-col transition-colors;
+        position: absolute; 
+        bottom: 0;
+        right: 0;
+        padding-bottom: 10px;
+        padding-right: 10px;
+  
+        i {
+          font-size: 1rem;
+          cursor: pointer;
+          color: $primaryColor;
+          z-index: 11;
+        }
+      }
+    }
+  }
+
+  .image-container {
+    @apply w-full h-full flex flex-wrap gap-1 relative;
+
+    .single-image {
+      @apply h-[180px] w-[180px] flex items-center justify-center;
+
+      img {
+        @apply h-[140px];
+      }
+    }
+  }
+
+  .overflow-button {
+    @apply absolute bottom-0 w-full h-[1%] p-4 z-[10] flex items-center;
+    color: #797979;
+  
+  }
+  
+  .full {
+    width: 100%;
+  }
+  
+  .dragHandle {
+    position: absolute;
+    // background-color: black;
+  }
+  
+  .dragHandle.corner {
+    width: 15px;
+    height: 15px;
+    z-index: 90;
+    cursor: nwse-resize;
+  }
+  
+  .dragHandle.right {
+    width: 6px;
+    height: 100%;
+    z-index: 90;
+    cursor: ew-resize;
+  }
+  
+  .dragHandle.bottom {
+    height: 6px;
+    width: 100%;
+    z-index: 90;
+    cursor: ns-resize;
+  }
+  

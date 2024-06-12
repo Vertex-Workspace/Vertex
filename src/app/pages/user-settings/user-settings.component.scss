@@ -1,0 +1,288 @@
+@import '../../../variables.scss';
+
+@keyframes slide {
+    from {
+      width: 0;
+      opacity: 1;
+    }
+    to {
+      width: 200px;
+      opacity: 1;
+    }
+}
+
+@media screen and (min-width: 1324px) {
+
+    .screen{
+        @apply flex w-screen h-full justify-center items-center;
+        
+        .container-custom{
+            @apply flex w-[90%] h-full justify-between pt-4;
+            
+            section {
+                @apply h-[90%] w-[250px] border-r-2 border-solid border-[#96A4B0] flex flex-col;
+                
+                ul {
+                    @apply 
+                    flex flex-col w-[220px] max-w-[220px] h-[8%] pt-3;
+                    
+                    li {
+                        @apply
+                        flex justify-start w-[220px] h-full items-center p-3 rounded-sm;
+                        background-image: linear-gradient(to left,
+                                      transparent,
+                                      transparent 50%,
+                                      $emphasis 50%);
+                        background-position: 100% 0; 
+                        background-size: 200% 100%;
+                        transition: all .2s ease-in;
+
+                        button {
+                            @apply w-[220px] flex gap-4 items-center;
+                            
+                            .icon {
+                                @apply text-[20px];
+                                color: $primaryColor
+                            }
+
+                            p{
+                                @apply w-full flex items-start;
+                            }
+                        }
+
+                        &:hover {
+                            background-position: 0 0;
+                            background-color: $emphasis;
+                            
+                        }
+                    }
+                }
+            }
+            .router-outlet {
+                @apply w-[85%] h-full flex justify-end;
+            }
+        }
+    }
+
+    .clicked {
+        @apply max-w-[220px];
+        background-color: $emphasis;
+    }
+    
+    .click {
+        background-color: $emphasis;
+        @apply rounded-r-sm;
+    }
+    
+    .default {
+        background-color: $secondColor;
+    }
+}
+
+@media screen and (min-width: 980px) and (max-width: 1324px) {
+    .screen{
+        @apply flex w-screen h-full justify-center items-center;
+        
+        .container-custom{
+            @apply flex w-[90%] h-full flex-col;
+            
+            section {
+                @apply w-[85%] h-[80px] flex items-center px-6 ml-10 border-b-2 border-solid;
+                
+                ul {
+                    @apply 
+                    flex h-[60px] pt-3;
+                    
+                    li {
+                        @apply
+                        flex justify-start w-[160px] h-full items-center p-3 rounded-sm;
+                        background-image: linear-gradient(to left,
+                                      transparent,
+                                      transparent 50%,
+                                      $emphasis 50%);
+                        background-position: 100% 0; 
+                        background-size: 200% 100%;
+                        transition: all .2s ease-in;
+
+                        button {
+                            @apply w-[160px] flex gap-4 items-center;
+                            
+                            .icon {
+                                @apply text-[20px];
+                                color: $primaryColor
+                            }
+
+                            p{
+                                @apply w-full flex items-start;
+                            }
+                        }
+
+                        &:hover {
+                            background-position: 0 0;
+                            background-color: $emphasis;
+                            
+                        }
+                    }
+                }
+            }
+            .router-outlet {
+                @apply w-full h-full flex justify-end;
+            }
+        }
+    }
+
+    .clicked {
+        @apply max-w-[220px];
+        background-color: $emphasis;
+    }
+    
+    .click {
+        background-color: $emphasis;
+        @apply rounded-r-sm;
+    }
+    
+    .default {
+        background-color: $secondColor;
+    }
+}
+
+
+@media screen and (min-width: 770px) and (max-width: 980px) {
+    .screen{
+        @apply flex w-screen h-full justify-center items-center;
+        
+        .container-custom{
+            @apply flex w-[90%] h-full flex-col;
+            
+            section {
+                @apply w-[85%] min-h-[80px] flex items-center ml-6 border-b-2 border-solid;
+                
+                ul {
+                    @apply 
+                    flex h-[60px] pt-3;
+                    
+                    li {
+                        @apply
+                        flex justify-start w-[130px] h-full items-center p-3 rounded-sm;
+                        background-image: linear-gradient(to left,
+                                      transparent,
+                                      transparent 50%,
+                                      $emphasis 50%);
+                        background-position: 100% 0; 
+                        background-size: 200% 100%;
+                        transition: all .2s ease-in;
+
+                        button {
+                            @apply w-[130px] flex items-center justify-center;
+                            
+                            .icon {
+                                @apply hidden;
+                            }
+
+                            p{
+                                @apply w-full flex items-start;
+                            }
+                        }
+
+                        &:hover {
+                            background-position: 0 0;
+                            background-color: $emphasis;
+                            
+                        }
+                    }
+                }
+            }
+            .router-outlet {
+                @apply w-full h-full flex justify-end;
+            }
+        }
+    }
+
+    .clicked {
+        @apply max-w-[220px];
+        background-color: $emphasis;
+    }
+    
+    .click {
+        background-color: $emphasis;
+        @apply rounded-r-sm;
+    }
+    
+    .default {
+        background-color: $secondColor;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .screen{
+        @apply flex w-screen h-full justify-center items-center;
+        
+        .container-custom{
+            @apply flex w-[90%] h-full flex-col;
+            
+            section {
+                @apply w-full min-h-[80px] flex items-center justify-around border-b-2 border-solid;
+                
+                ul {
+                    @apply 
+                    flex h-[60px] pt-3;
+                    
+                    li {
+                        @apply
+                        flex min-w-[40px] max-w-[100px] h-full items-center p-3 rounded-sm justify-center;
+                        background-image: linear-gradient(to left,
+                                      transparent,
+                                      transparent 50%,
+                                      $emphasis 50%);
+                        background-position: 100% 0; 
+                        background-size: 200% 100%;
+                        transition: all .2s ease-in;
+
+                        button {
+                            @apply min-w-[40px] max-w-[100px] flex gap-2 items-center justify-center;
+                            
+                            .icon {
+                                @apply text-[20px];
+                                color: $primaryColor
+                            }
+
+                            p{
+                                @apply hidden;
+                            }
+                        }
+
+                        &:hover {
+                            background-position: 0 0;
+                            background-color: $emphasis;
+                            
+                        }
+                    }
+                }
+            }
+            .router-outlet {
+                @apply w-full h-full flex justify-end;
+            }
+        }
+    }
+
+    .clicked {
+        @apply max-w-[220px];
+        background-color: $emphasis;
+    }
+    
+    .click {
+        background-color: $emphasis;
+        @apply rounded-r-sm;
+    }
+    
+    .default {
+        background-color: $secondColor;
+    }
+}
+    
+    
+    
+    
+    
+    
+    

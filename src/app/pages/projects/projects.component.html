@@ -1,0 +1,131 @@
+<section>
+    <div class="container-custom">
+        <!-- RIGHT SIDE TASKS/TEAMS -->
+        <div class="container-grid" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
+        [title]="'tutorial.texts.visualize/createProjects' | translate" [stepContent]="customContent"
+        [stepContentParams]="{ texto: tutorialText[5] | translate}">
+            <div class="flex flex-row items-end gap-3">
+                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>
+            </div>
+            <div class="pt-2 mb-3">
+                <p class="small-text text-gray-600 text-justify w-2/3">{{'pages.projects.description1' | translate}}</p>
+            </div>
+            <div class="flex flex-col">
+                <div class="functionally-items regular-text">
+                    <div class="search" [style.backgroundColor]="'var(--card)'">
+                        <input class="inputSearch" type="text"
+                            placeholder="{{'pages.projects.searchPlaceholder' | translate}}" [(ngModel)]="projectSearch"
+                            [style.backgroundColor]="'var(--card)'">
+                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <div *ngIf="isCreator && !calendarAlreadyImported() && logged.syncWithCalendar" class="import" (click)="createCalendarProject()">
+                            <img src="../../../assets/calendar-logo.png" class="w-[60%]">
+                        </div>
+                        <button class="create" (click)="switchCreateView()" [disabled]="!canCreate" [ngClass]="canCreate ? '' : 'opacity-20'">
+                            <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>
+                            <p>
+                                {{'pages.projects.newProjectBtn' | translate}}
+                            </p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="default-size">
+
+                    <div class="w-[40%] absolute" *ngIf="projects.length === 0">
+                        <h6 class="pt-16 flex justify-center items-center">{{"pages.projects.noProjects" | translate }}
+                        </h6>
+                    </div>
+                    <app-card-list style="width: 100%; height: 90%; padding-top: 3%" [type]="'project'" [team]="team"
+                        [teamScreen]="'project'" [projects]="(projects | namePipe : projectSearch)" joyrideStep="goToTasks"
+                        [prevTemplate]="prevButton" [nextTemplate]="nextButton" [title]="'tutorial.texts.goToTasks' | translate"
+                        [stepContent]="customContent" [stepContentParams]="{ texto: tutorialText[7] | translate }">
+                    </app-card-list>
+                    <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"
+                        *ngIf="isCreatingProject" (senderEmitter)="updateProjects($event)" (close)="switchCreateView()"
+                        [typeString]="'project'" [team]="team"></app-create-team-project>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE - QUICK ACCESS -->
+        <div class="container-grid pb-10">
+            <div class="default-size">
+                <div class="flex flex-row items-end gap-3">
+                    <h4>{{'pages.projects.titleTask' | translate: {team : teamName} }}</h4>
+                </div>
+
+                <div class="pt-2">
+                    <p class="small-text text-gray-600 text-justify w-2/3 mb-3">{{'pages.projects.description4' |
+                        translate:{team:teamName} }}</p>
+                </div>
+
+                <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"
+                    [title]="'tutorial.texts.visualizeTeamTasks' | translate" [stepContent]="customContent"
+                    [stepContentParams]="{ texto: tutorialText[6] | translate}">
+
+                    <div class="functionally-items regular-text">
+                        <div class="search" [style.backgroundColor]="'var(--card)'">
+                            <input class="inputSearch" type="text"
+                                [placeholder]="'pages.home.allTasks.placeholderSearchTask' | translate"
+                                [(ngModel)]="queryFilter" [style.backgroundColor]="'var(--card)'">
+                            <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>
+                        </div>
+                        <div class="filter-items">
+                            <div *ngFor="let item of configItems" class="icons">
+                                <button (click)="item.click()" [ngClass]="item.selected ? 'selected' : ''">
+                                    <i class="{{ item.iconClass }}"
+                                        [style.transform]="item.id === 'order' ? 'rotate(90deg)' : 'rotate(0deg)'"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="filter-settings" *ngIf="filterOpen || orderOpen">
+                        <ng-container *ngIf="filterOpen">
+                            <p>{{'pages.projects.filterBy' | translate}}</p>
+                            <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"
+                                optionGroupLabel="name" [optionGroupChildren]="['values']"
+                                [style]="{ minWidth: '14rem', backgroundColor: 'var(--card)' }"
+                                placeholder="{{'pages.projects.select' | translate}}"></p-cascadeSelect>
+
+                        </ng-container>
+                        <ng-container *ngIf="orderOpen">
+                            <p>{{'pages.projects.orderBy' | translate}}</p>
+                            <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"
+                                optionGroupLabel="name" [optionGroupChildren]="['values']"
+                                [style]="{ minWidth: '13rem', backgroundColor: 'var(--card)' }"
+                                placeholder="{{'pages.projects.select' | translate}}"></p-cascadeSelect>
+                        </ng-container>
+                    </section>
+
+                    <!-- NG IF uses to wait the permissions request before render the component -->
+                    <div class="default-size">
+                        <app-list style="padding-top: 3%;" [team]="team" [shouldApplyZIndex]="false"
+                            (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissionsOnTeam"
+                            [queryFilter]="queryFilter" [filter]="selectedFilter"
+                            [orderParams]="orderParams"></app-list>
+                    </div>
+                </div>
+                <!-- <app-quick-access style="width: 100%; height:100%;" [typeString]="'project'"></app-quick-access> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-container *ngIf="taskOpen">
+    <app-task [task]="taskOpenObject" (close)="changeModalTaskState(false, taskOpenObject)"
+        [permissions]="permissionsOnTeam"></app-task>
+</ng-container>
+
+<ng-template #prevButton>
+    <button class="btn">{{ 'pages.projects.backBtn' | translate }}</button>
+</ng-template>
+
+<ng-template #nextButton>
+    <button class="btn">{{ 'pages.projects.nextBtn' | translate }}</button>
+</ng-template>
+
+<ng-template #customContent let-texto="texto" style="border-radius: 5px">
+    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+</ng-template>

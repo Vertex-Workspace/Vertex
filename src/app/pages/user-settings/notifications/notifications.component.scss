@@ -1,0 +1,215 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+@media screen and (min-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start ;
+    }
+    
+    .title {
+        @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b;
+        border-color: $emphasis;
+        
+        div {
+            @apply flex w-[300px] items-center justify-start gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium
+        }
+    }
+    
+    .icon {
+        color: $primaryColor;
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    .my-notifications {
+        @apply flex flex-col h-[50%] w-[85%] items-start justify-start py-5;
+        
+        p:first-child{
+            @apply text-base py-3;
+        }
+        
+        p:last-child{
+            @apply text-sm px-3;
+        }
+        
+        div:first-child {
+            @apply flex py-1 
+        }
+        
+        div:last-child {
+            @apply flex justify-center items-center
+        }
+    }
+    
+    section {
+        @apply flex flex-col h-[55%] w-[85%] items-start justify-start
+    }
+    
+    .list {
+        @apply flex py-1 w-full
+    }
+    
+    .emails {
+        @apply flex justify-center items-center 
+    }
+    
+    .toggles-text {
+        @apply flex justify-center items-center;
+        color: $primaryColor;
+        
+        p{
+            @apply px-3 text-sm;
+        }
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1324px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start ;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+        
+        div {
+            @apply flex w-[20%] items-center justify-start gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium
+        }
+    }
+    
+    .icon {
+        color: $primaryColor;
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    .my-notifications {
+        @apply flex flex-col h-[50%] w-[85%] items-start justify-start py-2;
+        
+        p:first-child{
+            @apply text-base py-3;
+        }
+        
+        p:last-child{
+            @apply text-sm px-3;
+        }
+        
+        div:first-child {
+            @apply flex py-1 
+        }
+        
+        div:last-child {
+            @apply flex justify-center items-center
+        }
+    }
+    
+    section {
+        @apply flex flex-col h-[55%] w-[85%] items-start justify-start
+    }
+    
+    .list {
+        @apply flex py-1 w-full
+    }
+    
+    .emails {
+        @apply flex justify-center items-center 
+    }
+    
+    .toggles-text {
+        @apply flex justify-center items-center;
+        color: $primaryColor;
+        
+        p{
+            @apply px-3 text-sm;
+        }
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start pt-6;
+    }
+    
+    .title {
+        @apply w-full min-h-[30px] flex flex-col items-start justify-start pt-4;
+        border-color: $emphasis;
+        
+        div {
+            @apply flex w-full items-center justify-center gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium
+        }
+
+        .icon {
+            @apply hidden;
+        }
+    }
+    
+    .icon {
+        color: $primaryColor;
+        @apply min-w-[30px];
+    }
+    
+    .size {
+        @apply text-[18px];
+    }
+    
+    .my-notifications {
+        @apply flex flex-col h-[50%] w-[85%] items-start justify-start py-2;
+        
+        p:first-child{
+            @apply text-base py-3;
+        }
+        
+        p:last-child{
+            @apply text-sm px-3;
+        }
+        
+        div:first-child {
+            @apply flex py-1 
+        }
+        
+        div:last-child {
+            @apply flex justify-center items-center
+        }
+    }
+    
+    section {
+        @apply flex flex-col h-[55%] w-[85%] items-start justify-start
+    }
+    
+    .list {
+        @apply flex py-1 w-full
+    }
+    
+    .emails {
+        @apply flex justify-center items-center 
+    }
+    
+    .toggles-text {
+        @apply flex justify-center items-center;
+        color: $primaryColor;
+        
+        p{
+            @apply px-3 text-sm;
+        }
+    }
+}
+    
+    
+    

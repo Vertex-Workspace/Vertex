@@ -1,0 +1,84 @@
+<div class="bg">
+    <!-- TITLE PAGE -->
+    <div class="title">
+        <div>
+            <h5>{{ 'pages.user-settings.appearance.title' | translate }}</h5>
+            <fa-icon [icon]="faPencil" class="icon size"></fa-icon>
+        </div>
+    </div>
+    <!-- CONTENT -->
+    <div class="themes">
+        <p class="medium-text">{{ 'pages.user-settings.appearance.themePreference' | translate }}</p>
+        <div class="flex w-full flex-row justify-between">
+            <ng-container *ngFor="let theme of themes">
+                <div 
+                class="theme-color" 
+                (click)="changeTheme(theme.name)"
+                [style.opacity]="theme.value == newPers.theme ? '1' : '0.5'"
+                >
+                    <fa-icon [icon]="theme.icon"></fa-icon>
+                </div>
+            </ng-container>
+        </div>
+        <div class="colors">
+            <div>
+                <p class="medium-text">{{ 'pages.user-settings.appearance.corDestaque' | translate }}</p>
+                <div class="colors-row">
+                    <ng-container *ngFor="let color of colors;">
+                        <button 
+                        *ngIf="(newPers.theme == 1 && color.colorDark != '') || newPers.theme == 0"
+                        [ngStyle]="{'background-color': this.newPers.theme == 0 ? color.colorLight : color.colorDark}" 
+                        class="colors-circle"
+                            (click)="selectColor(color)">
+                            <fa-icon [icon]="faCheck" *ngIf="color.status === 'selected'" class="icon"
+                                [ngStyle]="{'color': this.newPers.theme == 0 ? '#F3F3F3' : '#1E1E1E'}">
+                            </fa-icon>
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-preferences ">
+        <div class="writing">
+            <div class="h-full flex flex-col gap-2">
+                <p class="medium-text">{{ 'pages.user-settings.appearance.fontSize' | translate }}</p>
+                <p-cascadeSelect [(ngModel)]="newPers.fontSize" [options]="fontSizes" optionGroupLabel="name"
+                    [optionGroupChildren]="[]"
+                    [style]="{ width: '120px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)'}"
+                    placeholder="{{ newPers.fontSize }}" (onChange)="changeFontSize()"></p-cascadeSelect>
+            </div>
+            <div class="h-full flex flex-col gap-2">
+                <p class="medium-text">{{ 'pages.user-settings.appearance.fontStyle' | translate }}</p>
+                <p-cascadeSelect [(ngModel)]="newPers.fontFamily" [options]="fontFamily" optionGroupLabel="name"
+                    [optionGroupChildren]="[]"
+                    [style]="{ width: '180px', backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--primaryColor)' }"
+                    placeholder="{{ newPers.fontFamily }}" (onChange)="changeFontFamily()"></p-cascadeSelect>
+            </div>
+        </div>
+
+        <div>
+            <p class="medium-text">{{ 'pages.user-settings.appearance.accessibility' | translate }}</p>
+            <div [(ngModel)]="newPers.signLanguage" (click)="toggleChange('libras')" class="accessibility">
+                <fa-icon *ngIf="!newPers.signLanguage" class="icon" [icon]="faToggleOff">
+                </fa-icon>
+                <fa-icon *ngIf="newPers.signLanguage" class="icon" [icon]="faToggleOn">
+                </fa-icon>
+                <p class="small-text">{{ 'pages.user-settings.appearance.enableSignLanguage' | translate }}</p>
+            </div>
+    
+            <div [(ngModel)]="newPers.listeningText" (click)="toggleChange('listening')" class="accessibility">
+                <fa-icon *ngIf="!newPers.listeningText" class="icon" [icon]="faToggleOff">
+                </fa-icon>
+                <fa-icon *ngIf="newPers.listeningText" class="icon" [icon]="faToggleOn">
+                </fa-icon>
+                <p class="small-text">{{ 'pages.user-settings.appearance.enableTextReading' | translate }}</p>
+            </div>
+
+        </div>
+        <button *ngIf="!logged.firstAccess" (click)="toggleChange('firstAccess')" class="btn">
+            <p class="small-textT">{{ 'pages.user-settings.appearance.tutorial' | translate }}</p>
+        </button>
+    </div>
+</div>

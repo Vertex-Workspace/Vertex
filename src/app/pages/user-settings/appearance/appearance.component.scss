@@ -1,0 +1,363 @@
+@import '../../../../variables.scss';
+
+@media screen and (min-width: 1324px) {
+    .title {
+        @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b ;
+        border-color: #96A4B0;
+        
+
+        div {
+            @apply flex items-center justify-start gap-7;
+        }
+
+        p {
+            @apply text-xl font-medium;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .writing {
+        @apply w-full h-[40%] flex py-3;
+
+        p:nth-child(2) {
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[30%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-sm h-[30%];
+
+            option {
+                @apply rounded-full;
+                color: $secondColor;
+
+            }
+        }
+    }
+
+    .colors-circle {
+        @apply rounded-full w-[60px] h-[60px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+        
+    }
+
+    .colors {
+        @apply flex flex-col w-full h-full pb-2;
+
+
+        div:first-child {
+            @apply flex h-full flex-col place-content-evenly;
+        }
+
+        ;
+
+        .colors-row {
+            @apply pt-4 w-full flex flex-row flex-wrap justify-start gap-5;
+        }
+
+    }
+
+    .box-modes {
+        @apply flex w-full min-h-[180px] items-center pl-3 border rounded-sm;
+        border-color: $primaryColor;
+
+        .mode {
+            @apply flex min-h-[150px] w-[20%];
+
+            p {
+                @apply text-sm py-3
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1324px) {
+    .writing {
+        @apply w-full h-[40%] flex py-3;
+
+        p:nth-child(2) {
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[30%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-sm h-[30%];
+
+            option {
+                @apply rounded-full;
+                color: $secondColor;
+
+            }
+        }
+    }
+
+    .colors-circle {
+        @apply rounded-full w-[60px] h-[60px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+    }
+
+    .title {
+        @apply hidden;
+        border-color: $primaryColor;
+
+        div {
+            @apply flex items-center justify-start gap-7;
+        }
+
+        p {
+            @apply text-xl font-medium;
+        }
+    }
+
+    .desc {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .t-mode {
+        @apply hidden;
+    }
+
+    .box-modes {
+        @apply flex w-full h-[45%] items-center pl-3 border rounded-sm pr-3;
+        border-color: $primaryColor;
+
+        .mode {
+            @apply hidden;
+
+            p {
+                @apply text-sm py-3
+            }
+        }
+    }
+
+    .colors {
+        @apply flex flex-col w-full h-full pb-2;
+
+
+        div:first-child {
+            @apply flex h-full flex-col place-content-evenly;
+        }
+
+        ;
+
+        .colors-row {
+            @apply pt-4 w-full flex flex-row flex-wrap justify-start gap-5;
+        }
+
+    }
+}
+
+@media screen and (min-width: 450px) and (max-width: 760px) {
+
+    .writing {
+        @apply w-full h-[40%] flex py-3;
+
+        p:nth-child(2) {
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[70%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-sm h-[30%];
+
+            option {
+                @apply rounded-full;
+                color: $secondColor;
+
+            }
+        }
+    }
+
+    .colors-circle {
+        @apply rounded-full w-[40px] h-[40px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+    }
+
+    .title {
+        @apply w-full min-h-[30px] flex flex-col items-start justify-start pt-12 px-10;
+        border-color: $primaryColor;
+
+        div {
+            @apply flex w-full items-center justify-center gap-7;
+        }
+
+        p {
+            @apply text-xl font-medium;
+        }
+
+        .icon {
+            @apply hidden;
+        }
+    }
+
+    .desc {
+        @apply hidden;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .writing {
+        @apply w-full h-[70%] flex flex-col py-3 gap-2;
+
+        p:nth-child(2) {
+            @apply text-sm
+        }
+
+        div {
+            @apply w-[70%];
+        }
+
+        select {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply text-sm rounded-sm h-[30%];
+
+            option {
+                @apply rounded-full;
+                color: $secondColor;
+
+            }
+        }
+    }
+
+    .colors-circle {
+        @apply rounded-full w-[40px] h-[40px] flex shadow-[0_35px_60px_-15px_rgba(1,1,1,2)] items-center justify-center;
+    }
+
+    .title {
+        @apply w-full min-h-[30px] flex flex-col items-start justify-start pt-12 px-10;
+        border-color: $primaryColor;
+
+        div {
+            @apply flex w-full items-center justify-center gap-7;
+
+            h5 {
+                @apply min-w-[300px] text-center;
+            }
+        }
+
+        p {
+            @apply text-xl font-medium;
+        }
+
+        .icon {
+            @apply hidden;
+        }
+    }
+
+    .box-modes {
+        @apply flex w-full min-h-[55%] items-center p-3 border rounded-sm;
+        border-color: $primaryColor;
+
+        .mode {
+            @apply hidden;
+
+            p {
+                @apply text-sm py-3
+            }
+        }
+    }
+
+    .desc {
+        @apply hidden;
+    }
+}
+
+.bg {
+    @apply flex min-h-full w-screen flex-col items-center justify-start pb-16;
+    color: $text;
+}
+
+.btn {
+    @apply flex w-[200px] items-center justify-center transition-colors rounded p-3;
+    background-color: $card;
+    color: $text;
+    border: 2px solid $primaryColor;
+
+    .small-textT {
+        @apply text-sm;
+        color: $text;
+    }
+}
+
+
+.icon {
+    color: $primaryColor;
+}
+
+.size {
+    @apply text-[18px];
+}
+
+.icon-dark {
+    color: $secondColor;
+}
+
+.themes {
+    @apply w-[85%] min-h-[60%] flex flex-col justify-between items-start gap-2;
+
+    p:first-child {
+        @apply pt-2;
+    }
+}
+
+
+.icon-themes {
+    @apply px-3 py-3;
+}
+
+.text-preferences {
+    @apply w-[85%] h-[30%] flex flex-col gap-7;
+
+
+}
+
+.accessibility {
+    @apply flex;
+
+    p {
+        @apply px-3 text-sm flex items-center justify-center;
+    }
+}
+
+.bg-light {
+    background: linear-gradient(to right bottom, $secondColor 50%, $primaryColor 50%);
+}
+
+.bg-dark {
+    background: linear-gradient(to bottom right, $primaryColor 50%, $secondColor 50%);
+}
+
+.unselected {
+    @apply opacity-25;
+}
+
+.theme-color {
+    @apply flex w-[45%] justify-center items-center rounded-sm h-36;
+    background-color: $primaryColor;
+
+    fa-icon {
+        @apply text-3xl;
+    }
+
+    &:hover {
+        @apply cursor-pointer;
+    }
+}

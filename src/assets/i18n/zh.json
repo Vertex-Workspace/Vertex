@@ -1,0 +1,694 @@
+{
+    "tutorial": {
+        "texts": {
+            "0": "这是侧边栏导航。您可以返回主页、搜索网站上的任何内容、访问聊天、个人资料、设置菜单和退出系统。",
+            "1": "这是网站的页眉，您可以在其中查看当前路线、通知和帮助中心。",
+            "2": "在这里，您可以搜索和创建新团队。还可以查看您所属的团队。",
+            "3": "快速访问查看所有任务，并可按状态和日期搜索和筛选。",
+            "4": "点击团队卡片后，您将被重定向到团队页面并可访问项目。",
+            "5": "在团队页面，您可以搜索和创建新项目，并查看您参与的项目。",
+            "6": "快速访问仅查看该团队的任务，并可按状态和日期搜索和筛选。",
+            "7": "点击项目卡片后，您将被重定向到项目页面并可访问项目任务。",
+            "8": "在这里，您可以访问4种任务视图选项，可以选择墙、列表、日历或看板。",
+            "9": "在这里，您可以创建将在任务和项目中使用的属性，并可以编辑和管理状态。",
+            "visualize": "视图模式",
+            "property": "属性",
+            "header": "页眉",
+            "sidebar": "侧边栏导航",
+            "welcome": "欢迎来到 Vertex, ",
+            "title": "探索 Vertex，发现如何从头到尾管理您的时间！",
+            "visualize/create": "查看 / 创建团队",
+            "goToTeamPage": "转到团队页面",
+            "visualize/createProjects": "查看 / 创建项目",
+            "goToTasks": "转到任务页面",
+            "visualizeTeamTasks": "查看团队任务",
+            "back": "返回",
+            "next": "下一步",
+            "end": "结束"
+        }
+    },
+    "pages": {
+        "landing-page": {
+            "VERTEX": "VERTEX",
+            "HOME": "主页",
+            "ABOUT_US": "关于我们",
+            "TUTORIAL": "教程",
+            "FEATURES": "特点",
+            "PRINCIPLES": "原则",
+            "MANAGE_EACH": "管理每一个",
+            "STORY": "你的故事。",
+            "START": "开始",
+            "FEEL_THE_FLOW": "感受流程...",
+            "ABOUT_US_DESCRIPTION": "顶点是一款创新的任务和项目管理平台，旨在优化各种规模团队的生产力和协作。顶点具有直观的界面和全面的功能，使您能够高效有效地组织、跟踪和完成您的项目。",
+            "TUTORIAL_DESCRIPTION": "揭示任务和项目管理的秘密对于推动团队成功至关重要，而顶点正是在这一激动人心的旅程中引领您。在我们的视频教程中，深入了解这款先进平台的强大功能，旨在提高您的生产力和效率到前所未有的水平。准备好进行一次沉浸式体验，这将改变您的工作方式，让您自信地掌握工作流程的每个方面。",
+            "VERTEX_PRINCIPLES": "顶点原则",
+            "MISSION": "使命",
+            "MISSION_DESCRIPTION": "通过为用户提供直观和安全的平台来组织其个人和专业日程，促进项目和任务的管理，从而提高效率、协作和透明度，使管理流程对个人和团队更加可访问和有效。",
+            "VALUES": "价值观",
+            "EXCELLENCE": "卓越",
+            "EXCELLENCE_DESCRIPTION": "我们致力于在我们所做的一切中追求质量和卓越，始终努力超越用户的期望。",
+            "INTEGRITY": "诚信",
+            "INTEGRITY_DESCRIPTION": "在我们的所有互动中都要以透明、诚实和道德行动，保持客户和合作伙伴的信任。",
+            "INNOVATION": "创新",
+            "INNOVATION_DESCRIPTION": "不断寻求新的解决方案和技术来改进我们的平台，为用户提供卓越的体验。",
+            "VISION": "愿景",
+            "VISION_DESCRIPTION": "被公认为是领先的项目和任务管理软件，提供全面且可定制的解决方案，满足用户多样化的需求。我们不断追求创新和改进，旨在成为企业和个人管理工具的业界标杆。",
+            "JOIN_VERTEX_COMMUNITY": "加入顶点社区",
+            "NAVIGATE_VERTEX": "浏览顶点",
+            "NOT_STARTED": "未开始",
+            "IN_PROGRESS": "进行中",
+            "COMPLETED": "已完成",
+            "PAUSED": "已暂停",
+            "NEW_TASK": "新任务",
+            "COPYRIGHT": "© 2024 顶点。保留所有权利。",
+            "DEVELOPED_BY": "开发者",
+            "MANAGE_TIME": "从头到尾管理您的时间",
+            "TIME_TRACKING": "时间跟踪",
+            "TIME_TRACKING_DESC": "允许团队成员记录在项目的特定任务上花费的时间。\n 用户可以开始、暂停和停止计时器，以精确记录每个活动所需的时间。",
+            "ASSIGN_TIME_TO_TASKS": "为任务分配时间",
+            "ASSIGN_TIME_TO_TASKS_DESC": "自动将记录的时间与项目中的特定任务或子任务关联。\n 有助于识别消耗更多时间的活动，并优化资源分配。",
+            "DATA_VISUALIZATION": "数据可视化",
+            "DATA_VISUALIZATION_DESC": "提供有关在不同任务、项目或团队成员之间花费的时间的详细报告。\n 图表和表格清晰地展示了总共花费的时间、每项任务的平均时间以及随时间的变化。",
+            "PLAN_TRACK_REVIEW": "计划、跟踪和审查",
+            "TASK_REVIEW": "任务审查",
+            "TASK_REVIEW_DESC": "允许团队成员审查和评估分配给他们或其他团队成员的任务。\n 审查人员可以针对任务的进度、质量和与项目要求的符合性提供具体反馈。",
+            "EFFICIENT_COLLABORATION": "高效协作",
+            "EFFICIENT_COLLABORATION_DESC": "促进团队成员之间的沟通，使其能够直接在审查的任务上分享意见、建议和更正。\n 通过提供一个集中讨论和解决与任务相关问题的平台，促进透明度和协作。",
+            "QUALITY_VALIDATION": "质量验证",
+            "QUALITY_VALIDATION_DESC": "通过提供机会来识别和纠正团队执行的工作质量，有助于确保团队的工作质量。\n 有助于符合项目或组织设立的质量标准和最佳实践。",
+            "COMMUNICATION_IS_KEY": "沟通是成功的关键",
+            "REAL_TIME_COMMUNICATION": "实时通信",
+            "REAL_TIME_COMMUNICATION_DESC": "允许团队成员彼此之间即时通信，无论他们的地理位置如何。\n 促进信息、更新和重要讨论的实时交流。",
+            "INTEGRATED_CHAT": "集成聊天",
+            "INTEGRATED_CHAT_DESC": "通过在项目的每个任务中集成聊天功能，促进团队成员之间的沟通。\n 允许用户在平台上直接讨论细节、共享文件和解决问题。"
+        },
+        "home": {
+            "filterandorder": {
+                "Name": "名称",
+                "AtoZ": "A-Z",
+                "ZtoA": "Z-A",
+                "Date": "日期",
+                "HigherToLower": "从高到低",
+                "LowerToHigher": "从低到高",
+                "Status": "状态",
+                "NotStarted": "未开始",
+                "InProgress": "进行中",
+                "Completed": "已完成",
+                "Today": "今天",
+                "NextWeek": "下周",
+                "NextMonth": "下个月"
+            },
+            "teams": {
+                "title": "团队",
+                "description": "团队是您可以管理项目、邀请成员、开始聊天对话并在手掌上查看您和您的团队的时间的工作区。",
+                "newTeamBtn": "新团队",
+                "noTeam": "没有可用的团队...",
+                "placeholderSearchTeam": "寻找团队..."
+            },
+            "allTasks": {
+                "title": "所有任务",
+                "description": "在此部分，您可以查看您在整个系统中负责的所有任务，以及所有团队和项目的任务。",
+                "placeholderSearchTask": "搜索任务...",
+                "placeholderFilterBy": "选择",
+                "placeholderOrderBy": "选择",
+                "filterBy": "按条件筛选",
+                "orderBy": "按顺序排序"
+            },
+            "backBtn": "返回",
+            "nextBtn": "下一个",
+            "textWelcome": ""
+        },
+        "chat": {
+            "header": {
+                "conversas": "聊天"
+            },
+            "placeholderPesquisarConversa": "搜索对话...",
+            "mensagemNenhumaConversa": "目前没有打开的对话。",
+            "mensagemNenhumaMensagem": "还没有发送任何消息！成为第一个发送消息的人！",
+            "inputPlaceholder": "在这里输入...",
+            "noChats": "您还没有在系统中注册任何聊天。要创建聊天，请向您的团队添加成员！"
+        },
+        "invitation-page": {
+            "text": "团队 {{teamName}} 邀请您加入团队！",
+            "enterTeam": "加入团队",
+            "declineInvite": "拒绝邀请"
+        },
+        "projects": {
+            "titleTask": "{{team}} 的任务",
+            "description1": "项目是团队的不同工作空间，在这些空间中，您可以细分主题并组织您和/或团队的任务。",
+            "description4": "在此部分，您可以查看您是 {{team}} 团队内责任人的所有任务。",
+            "searchPlaceholder": "搜索项目...",
+            "newProjectBtn": "新项目",
+            "title": "查看/创建项目",
+            "filterBy": "按条件筛选",
+            "orderBy": "按顺序排序",
+            "select": "选择",
+            "backBtn": "返回",
+            "nextBtn": "下一个",
+            "noProjects": "没有可用的项目...",
+            "filterAndOrder": {
+                "Status": "状态",
+                "NotStarted": "未开始",
+                "InProgress": "进行中",
+                "Completed": "已完成",
+                "Date": "日期",
+                "Today": "今天",
+                "NextWeek": "下周",
+                "NextMonth": "下个月",
+                "Name": "名称",
+                "AtoZ": "A到Z",
+                "ZtoA": "Z到A",
+                "HigherToLower": "从高到低",
+                "LowerToHigher": "从低到高"
+            }
+        },
+        "tasks": {
+            "description": "在这里，您可以集中管理项目的所有任务，您可以筛选、排序和创建新任务。管理您的时间并记录每个阶段。",
+            "viewModesTitle": "任务视图模式",
+            "searchTask": "搜索任务...",
+            "properties": "属性",
+            "newTask": "新任务",
+            "newNote": "新笔记",
+            "filterBy": "按条件筛选",
+            "filterByText": "按文本筛选",
+            "filterByNumber": "按数字筛选",
+            "orderBy": "按顺序排序",
+            "select": "选择",
+            "backBtn": "返回",
+            "nextBtn": "下一个",
+            "endBtn": "结束",
+            "new_task": "新任务",
+            "new_task_description": "在这里简要描述您的任务",
+            "new_note": "新笔记",
+            "viewModeLabels": {
+                "Kanban": "看板",
+                "List": "列表",
+                "Calendar": "日历",
+                "Mural": "墙"
+            },
+            "list": {
+                "noTasks": "没有可用的任务...",
+                "table": {
+                    "name": "名称",
+                    "Status": "状态",
+                    "Data": "日期",
+                    "Dificuldade": "难度",
+                    "Número": "号码",
+                    "Palavra-Chave": "关键词"
+                }
+            },
+            "calendar": {
+                "months": {
+                    "0": "一月",
+                    "1": "二月",
+                    "2": "三月",
+                    "3": "四月",
+                    "4": "五月",
+                    "5": "六月",
+                    "6": "七月",
+                    "7": "八月",
+                    "8": "九月",
+                    "9": "十月",
+                    "10": "十一月",
+                    "11": "十二月"
+                },
+                "days": {
+                    "0": "周日",
+                    "1": "周一",
+                    "2": "周二",
+                    "3": "周三",
+                    "4": "周四",
+                    "5": "周五",
+                    "6": "周六"
+                },
+                "showTasks": "显示任务",
+                "attTasks": "任务 分配",
+                "tasksAttFor": "任务分配给"
+            }
+        },
+        "team-informations": {
+            "editDesc": "编辑描述",
+            "saveDesc": "保存描述",
+            "Participantes": "参与者",
+            "Grupos": "组",
+            "participants": "搜索参与者...",
+            "groups": "搜索组...",
+            "createNewGroup": "新建组",
+            "copyInviteLink": "复制邀请链接",
+            "memberSingle": "成员",
+            "member": "{{number}} 成员",
+            "members": "{{number}} 成员",
+            "individualPerformance": "个人绩效",
+            "individualPerformanceDescription": "列出了您在 {{teamName}} 的所有项目中所花费的时间。",
+            "teamPerformance": "团队绩效",
+            "teamPerformanceDescription": "跟踪团队整体进度和绩效的关键信息，重点关注任务。",
+            "reviews": "审核",
+            "reviewsReproved": "未通过",
+            "reviewsApproved": "已通过",
+            "generalAverage": "平均值",
+            "progress": "进度",
+            "taskProgress": "任务进度",
+            "timeDedicated": "专用时间",
+            "NaoIniciadas": "未开始",
+            "EmAndamento": "进行中",
+            "Concluidas": "已完成"
+        },
+        "user-informations": {
+            "locationNotProvided": "未提供位置",
+            "noDescription": "没有描述",
+            "commonTasks": "与您共享的任务",
+            "commonTasksPlaceholder": "这里将显示您与访问您个人资料的人共享的任务。",
+            "personalPerformance": "系统中的个人绩效",
+            "tasksPie": "任务 - 饼图",
+            "tasksBar": "任务 - 条形图",
+            "timeWorked": "在 Vertex 上工作的时间",
+            "tasksPerformance": "任务进展"
+        },
+        "user-settings": {
+            "Meu Perfil": "我的个人资料",
+            "Segurança": "安全",
+            "Aparência": "外观",
+            "Equipes": "团队",
+            "Notificações": "通知",
+            "appearance": {
+                "title": "系统外观",
+                "themePreference": "主题偏好",
+                "corDestaque": "突出颜色",
+                "lightTheme": "亮色主题",
+                "fontSize": "字体大小",
+                "fontStyle": "字体样式",
+                "accessibility": "辅助功能",
+                "enableSignLanguage": "启用手语",
+                "enableTextReading": "启用文本阅读",
+                "Tema Claro": "亮色主题",
+                "Tema Escuro": "暗色主题",
+                "tutorial": "启用教程"
+            },
+            "notifications": {
+                "Notification": "通知",
+                "workspace": "工作区通知",
+                "options": {
+                    "1": "接收任务的提交和反馈",
+                    "2": "新成员加入",
+                    "3": "权限更改",
+                    "4": "项目和任务责任分配",
+                    "5": "任务的任何更新",
+                    "6": "通过电子邮件发送通知"
+                }
+            },
+            "profile": {
+                "title": "个人资料",
+                "email": "电子邮件",
+                "name": "名称",
+                "location": "位置",
+                "description": "描述",
+                "visibilityProfile": "个人资料可见性",
+                "update": "更新",
+                "1": "为团队显示绩效图表",
+                "2": "允许团队成员查看我的个人资料",
+                "3": "与 Google 云端硬盘同步",
+                "4": "允许团队成员查看我的个人资料"
+            },
+            "security": {
+                "title": "安全",
+                "oldPassword": "确认旧密码",
+                "newPassword": "输入新密码",
+                "newPasswordConf": "确认新密码",
+                "requirements": "良好密码的要求：",
+                "lengthRequirement": "*8个字符或更多",
+                "uppercaseRequirement": "*至少一个大写字母",
+                "lowercaseRequirement": "*至少一个小写字母",
+                "specialCharRequirement": "*至少一个特殊字符（#@!%$）",
+                "passwordMatchRequirement": "*密码匹配",
+                "reset": "重置"
+            },
+            "teams-settings": {
+                "title": "团队",
+                "searchPlaceholder": "搜索团队"
+            }
+        }
+    },
+    "components": {
+        "fixed-components": {
+            "header": {
+                "home": "首页",
+                "perfil de": "个人资料：",
+                "seu perfil": "您的个人资料",
+                "configurações e preferências": "设置和偏好"
+            },
+            "sidebar": {
+                "Pesquisar": "搜索",
+                "Conversas": "聊天",
+                "Perfil": "个人资料",
+                "Configurações": "设置",
+                "Sair": "退出"
+            }
+        },
+        "modals": {
+            "confirm-modal": {
+                "confirm_message": "您确定要吗",
+                "cancel_button": "取消",
+                "confirm_button": "确认"
+            },
+            "create-groups": {
+                "title": "创建新群组",
+                "name": "群组名称",
+                "participants": "选择参与者",
+                "name_placeholder": "为群组添加名称",
+                "multi_select": "群组成员",
+                "members": "成员",
+                "confirm_button": "创建群组",
+                "cancel_button": "取消"
+            },
+            "change-password": {
+                "title": "定期更改密码",
+                "subtitle": "为了您的安全，请输入新密码",
+                "placeholder": "输入新密码",
+                "button": "提交"
+            },
+            "groups": {
+                "no-groups": "没有可用的组",
+                "multi_select": "群组成员",
+                "members": "成员"
+            },
+            "minichat": {
+                "header": {
+                    "conversations": "对话"
+                },
+                "placeholderSearchConversation": "搜索对话...",
+                "noConversationMessage": "目前没有打开的对话。",
+                "noMessageMessage": "还没有发送任何消息！成为第一个发送消息的人！",
+                "inputPlaceholder": "在这里输入...",
+                "digitHere": "在这里输入...",
+                "me": "我"
+            },
+            "note-modal": {
+                "editDescription": "编辑描述",
+                "confirm": "确认"
+            },
+            "notification": {
+                "notificações": "通知",
+                "selectAll": "全选",
+                "markAsRead": "标记为已读",
+                "exclude": "排除",
+                "searchByANotification": "按通知搜索...",
+                "search": "搜索",
+                "config": "设置",
+                "noOneNotificationAtMoment": "目前没有通知。",
+                "enjoyWhilePossible": "尽情享受！"
+            },
+            "properties": {
+                "chooseColor": "选择颜色并实时查看结果",
+                "edit-properties": {
+                    "name": "名称",
+                    "name-placeholder": "输入您想要的属性名称...",
+                    "data-type": "数据类型",
+                    "data-type-info": "属性将存储的信息类型",
+                    "default-value-placeholder": "默认值",
+                    "confirm-changes": "确认更改",
+                    "propertytypes": {
+                        "text": "文本",
+                        "number": "数字",
+                        "list": "列表"
+                    },
+                    "checkboxlist": {
+                        "defaultvalue": "设置默认值"
+                    },
+                    "errorcannotchangepropertytype": "无法更改已创建属性的类型！",
+                    "notification": {
+                        "invalidpropertyname": "属性名称必须为3到25个字符之间！"
+                    },
+                    "propertylists": {
+                        "high": "高",
+                        "medium": "中",
+                        "low": "低",
+                        "nonessential": "非必要"
+                    }
+                },
+                "general-properties": {
+                    "Visíveis": "可见",
+                    "Não visíveis": "不可见",
+                    "Fixas": "固定",
+                    "manage-status": "管理状态",
+                    "delete-property": "删除属性"
+                },
+                "items-selection": {
+                    "Visíveis": "可见",
+                    "Não Visíveis": "不可见",
+                    "info-message": "点击文本，您可以编辑项目名称",
+                    "delete-property": "删除属性"
+                },
+                "status": {
+                    "Não iniciado": "未开始",
+                    "Em andamento": "进行中",
+                    "Concluída": "已完成",
+                    "info-message": "点击文本，您可以编辑状态名称",
+                    "delete-status": "删除状态"
+                },
+                "modal-properties": {
+                    "Propriedades": "属性",
+                    "Edite a Propriedade": "编辑属性",
+                    "Itens de Seleção": "选择项",
+                    "Status": "状态",
+                    "Cores": "颜色",
+                    "Azul": "蓝色",
+                    "Vermelho": "红色",
+                    "Verde": "绿色",
+                    "Amarelo": "黄色",
+                    "Roxo": "紫色",
+                    "Laranja": "橙色",
+                    "Cinza": "灰色",
+                    "Rosa": "粉色"
+                }
+            },
+            "review-task": {
+                "tasks_to_review": "待审核任务",
+                "sender": "发送者",
+                "final_description": "最终描述",
+                "responsible": "负责人",
+                "time": "时间",
+                "feedback": "反馈",
+                "insert_feedback": "输入反馈描述...",
+                "grade_note": "将为任务的所有负责人授予分数。",
+                "reject": "拒绝",
+                "approve": "批准"
+            },
+            "search-all": {
+                "search_placeholder": "搜索您想要的...",
+                "order_by": "排序方式",
+                "filter_by": "筛选方式",
+                "select_placeholder": "选择",
+                "no_results": "未找到结果...",
+                "no_search": "未进行搜索...",
+                "Equipes": "团队",
+                "Projetos": "项目",
+                "Tarefas": "任务",
+                "Responsaveis": "负责人"
+            },
+            "task": {
+                "attachments": {
+                    "add_attachment": "添加附件"
+                },
+                "comments": {
+                    "no_comments": "任务中没有评论！",
+                    "be_first": "成为第一个！",
+                    "placeholder": "添加评论...",
+                    "send_button": "发送"
+                },
+                "properties": {
+                    "responsible": "负责人",
+                    "dependency": "依赖关系",
+                    "doesntHaveOtherTasks": "没有其他任务",
+                    "doesntHaveOtherResponsiblesInTask": "任务中没有其他负责人"
+                },
+                "deliverTask": "提交任务",
+                "forceReview": "强制审核",
+                "createChat": "创建聊天",
+                "openChat": "打开聊天",
+                "description": "描述",
+                "commentsS": "评论",
+                "log": "日志",
+                "analysis": "提交任务以进行分析",
+                "sendTask": "发送任务",
+                "attachmentsS": "附件",
+                "editDescription": "编辑描述",
+                "saveDescription": "保存描述",
+                "workTask": "处理任务",
+                "endWork": "结束工作",
+                "reviewer": "审核人",
+                "taskDescriptionPlaceholder": "完成任务的描述..."
+            }
+        },
+        "reusable-components": {
+            "card": {
+                "excludeTask": "排除任务"
+            },
+            "card-group": {
+                "participants": "参与者",
+                "deleteGroup": "删除群组",
+                "confirmDeleteGroup": "删除群组",
+                "confirmDeleteUser": "从群组中删除用户"
+            },
+            "card-list": {
+                "viewInformation": "查看信息",
+                "confirmDeleteProject": "删除项目",
+                "confirmDeleteTeam": "删除团队"
+            },
+            "card-user": {
+                "you": "(您)",
+                "confirmDeleteUser": "从团队中删除用户？"
+            },
+            "create-group": {
+                "new-group": "创建新群组",
+                "group-name": "群组名称",
+                "add-name": "为群组添加名称",
+                "select-participants": "选择参与者",
+                "cancel": "取消",
+                "create-group": "创建群组",
+                "add-participants": "添加更多参与者",
+                "add": "添加",
+                "team-created": "成功创建团队！",
+                "invite-people": "邀请人员加入",
+                "invite-link": "通过以下链接邀请。",
+                "copy-link": "复制邀请链接"
+            },
+            "create-team-project": {
+                "new-team": "创建新团队...",
+                "new-project": "创建新项目...",
+                "project-info": "项目信息",
+                "team-name": "团队名称",
+                "project-name": "项目名称",
+                "add-team-name": "为团队添加名称",
+                "add-project-name": "为项目添加名称",
+                "team-description": "团队描述",
+                "project-description": "项目描述",
+                "add-team-description": "为团队添加描述...",
+                "add-project-description": "为项目添加描述...",
+                "responsibles": "负责人",
+                "assign-responsibles": "为项目分配负责人",
+                "task-review": "任务审核",
+                "cancel": "取消",
+                "confirm": "确认",
+                "edit": "编辑",
+                "responsiblesOfProject": "项目的负责人"
+            },
+            "input-value-property": {
+                "date-label": "日期",
+                "text-placeholder": "添加文本",
+                "status-placeholder": "选择状态",
+                "list-placeholder": "从列表中选择"
+            },
+            "note": {
+                "title": "标题",
+                "view-all-button": "查看全部"
+            },
+            "row-task": {
+                "task-name": "任务名称",
+                "delete-task": "删除任务"
+            }
+        }
+    },
+    "alerts": {
+        "success": {
+            "addToTeam": "您已成功添加到团队",
+            "project_deleted": "项目已成功删除！",
+            "group_deleted": "群组已成功删除！",
+            "task_deleted": "任务已成功删除！",
+            "date_updated": "日期已成功更新！",
+            "task_created": "任务已成功创建！",
+            "invitationCodeCopied": "链接已成功复制！",
+            "userRemovedOfTeam": "用户已成功从团队中移除",
+            "update_success": "信息已成功更新！",
+            "image_update_success": "图片已成功更新！",
+            "passwordUpdated": "密码已成功更新！",
+            "teamDeleted": "团队已成功删除！",
+            "codeSent": "代码已成功发送！",
+            "reviewAllTasks": "所有任务已成功审核！",
+            "reviewDone": "审核已成功完成！",
+            "uploadFile": "文件已成功上传至",
+            "taskUpdated": "任务已成功更新！",
+            "chatCreated": "聊天已成功创建！",
+            "taskSentToReview": "任务已成功发送至审核！",
+            "removeUserFromGroup": "用户已成功从群组中移除！",
+            "permissionChanged": "权限已更改！",
+            "participantsAddedToGroup": "已成功添加参与者至群组！",
+            "createdWithSuccess": "已成功创建！",
+            "projectCreatedWithSuccess": "项目已成功创建！",
+            "projectModifyWithSuccess": "项目已成功修改！",
+            "alterated": "已成功修改！",
+            "uploadImage": "图片已成功添加！",
+            "editedGroup": "群组名称已成功编辑！",
+            "groupCreated": "群组已成功创建！",
+            "descriptionUpdated": "描述已成功更新！",
+            "nameUpdated": "名称已成功更新！",
+            "new-password": "密码修改成功",
+            "task-responsibles": "任务负责人更新成功",
+            "dependency": "此任务需要完成"
+        },
+        "error": {
+            "participantsNotAddedToGroup": "无法将用户添加到群组！",
+            "invalidImage_update": "无效的图片更新！",
+            "needGroupName": "您需要添加一个名称！",
+            "creategroup": "创建群组时出错！",
+            "cantRemoveUserFromGroup": "无法将用户从群组中移除！",
+            "task_not_created": "无法创建任务！",
+            "codeNotSent": "无法发送代码！",
+            "teamErrorDeleted": "删除团队时出错！",
+            "passwordIncompatible": "密码不兼容！",
+            "delete_project": "删除项目时出错！",
+            "creatorNotRemovedOfTeam": "您无法移除团队创建者",
+            "delete_group": "无法删除群组！",
+            "inexistent_team": "团队不存在！",
+            "nopermission_to_create_task": "您没有创建任务的权限",
+            "permission_to_edit_properties": "您没有编辑属性的权限",
+            "update_date": "更新日期时出错！",
+            "permission_to_edit_propertiesK": "您没有更改任务状态的权限！",
+            "errorPasswordUpdated": "更新密码时出错！",
+            "permissionDeniedPropertyCreation": "您没有创建属性的权限",
+            "permission_to_remove_properties": "您没有移除该属性的权限",
+            "cantCreate": "您没有创建的权限！",
+            "cantEdit": "您没有编辑的权限！",
+            "cantEditTask": "您没有编辑该任务的权限！",
+            "cantEditStatus": "您没有编辑状态的权限！",
+            "cantCreateMoreStatus": "您没有创建更多状态的权限！",
+            "cantDeleteStatus": "您没有删除状态的权限！",
+            "cantDeleteTask": "您没有删除任务的权限！",
+            "notPermissionEditTask": "为了安全起见，您无法通过首页更改任务，请单击任务或访问团队！",
+            "minTaskLengthName": "任务名称必须至少有4个字符！",
+            "errorEditingTask": "编辑任务时出错！",
+            "update_error": "电子邮件不符合要求",
+            "new-password": "您的密码不符合要求"
+        },
+        "notification": {
+            "nameLength": "状态名称必须在3到20个字符之间",
+            "descriptionLimit": "描述的最大字符数为1000，请缩短描述！",
+            "needsConclusion": "该项目需要项目的完成 ",
+            "invalidName": "名称必须为4到29个字符之间"
+        }
+    },
+    "equipe": "团队",
+
+    "deleteProject": "删除项目？",
+    "deleteTeam": "删除团队？",
+    "exitTeam": "退出团队？",
+    "addedToTeam": "您已被添加到团队 ",
+    "success_alert": "成功",
+    "error_alert": "错误",
+    "notification_alert": "注意力",
+    "permission" :{
+        "Criar": "创造",
+        "Editar": "编辑",
+        "Deletar": "删除"
+    },
+
+    "noOneNote" : "您还没有创建任何笔记!",
+    
+    "toAccesProjectCalendar": "要访问该项目，您需要将您的帐户与Google日历同步",
+    "areNotSyncDrive": "您尚未与Google云端硬盘同步，请同步以发送文件。",
+    "fileUploadedToDrive": "文件成功上传到Google云端硬盘！",
+    "fileErorUploadedToDrive": "文件上传到Google云端硬盘时出错！",
+    "unsupportedFileType": "不支持的文件类型！",
+    "fileImportedFromDrive": "文件已成功从Google云端硬盘导入！"
+
+
+}

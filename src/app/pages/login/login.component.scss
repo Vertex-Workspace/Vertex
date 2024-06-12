@@ -1,0 +1,157 @@
+@import '../../../variables';
+
+.bg-login {
+    @apply bg-cover bg-center w-screen h-screen flex;
+
+    background-image: url(../../../assets/Vertex-bg-login-new.jpg);
+}
+
+.center {
+    @apply flex justify-center;
+}
+
+.bg-loginOpacity {
+
+    @apply bg-cover bg-center w-screen h-screen flex opacity-60;
+
+    background-image: url(../../../assets/Vertex-bg-login-new.jpg);
+}
+
+#left-div-login {
+    @apply w-1/2 h-screen flex items-center;
+}
+
+.google {
+    @apply flex w-[200px] h-[50px] bg-white p-3 rounded-sm 
+    items-center justify-center gap-3;
+    border: solid $emphasis 1px;
+    color: black;
+    &:hover {
+        background-color: #f3f3f3;
+        @apply transition-colors;
+    }
+}
+
+
+#h1NameVertex {
+    @apply text-3xl h-[95%] ml-5 text-[#f3f3f3];
+    font-family: 'Manrope', sans-serif;
+}
+
+#div-img-login {
+    @apply w-2/3 h-screen flex items-center justify-center;
+}
+
+#img-login {
+    @apply w-80 h-80;
+}
+
+
+// ==========================================================================================================================================================================
+
+
+#right-div-login {
+    @apply w-1/2 h-screen flex flex-col gap-10 items-center justify-center;
+}
+
+#h1-access-account {
+    @apply text-3xl text-[#092c4c];
+    font-family: 'Manrope', sans-serif;
+}
+
+.labels {
+    @apply text-[#092c4c] text-sm;
+    font-family: 'Inter', sans-serif;
+}
+
+.inputs {
+    @apply block h-14 w-full py-1.5 border-none px-3 text-black shadow-sm ring-inset ring-gray-300 placeholder:text-[#092c4c] sm:text-sm sm:leading-6;
+    font-family: "Inter", sans-serif;
+}
+
+.divRegisterIcons {
+    @apply w-14 h-14 bg-slate-300 flex justify-center items-center
+}
+
+.divRegisterIconsModal {
+    @apply w-14 h-10 flex justify-center items-center;
+    background-color: rgba(46, 93, 166, 24%);
+}
+
+.registerIcons {
+    @apply w-14 text-[#092c4c] flex justify-center items-center
+}
+
+.eyesDiv {
+    @apply w-14 bg-white flex items-center justify-center
+}
+
+.eyeIcon {
+    @apply w-6 text-[#092c4c] flex items-center
+}
+
+#a-forget-password {
+    @apply text-[#092c4c] text-sm;
+    font-family: 'Inter', sans-serif;
+}
+
+#enter-btn {
+    @apply flex w-[190px] h-[47px] items-center justify-center rounded-md bg-[#092C4C] text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#20478b] transition-all;
+}
+
+#p-haveNot-account {
+    @apply text-center text-sm text-[#092c4c]
+}
+
+#a-goTo-register {
+    @apply font-semibold leading-6 cursor-pointer text-[#092c4c];
+}
+
+.divH1Modal {
+    @apply w-full flex flex-col items-center;
+}
+
+#divGeralModal {
+    @apply w-full h-full flex flex-col items-center justify-stretch;
+}
+
+.square-code {
+    @apply w-10 h-10 bg-[#D9D9D9] rounded-md text-center;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .bg-login {
+        background-image: none;
+        background-color: #f3f3f3;
+        border-top: #092c4c 15px solid;
+        
+    }
+
+    #left-div-login {
+        @apply hidden;
+    }
+
+    #right-div-login {
+        @apply w-full;
+    }
+
+    .inputs {
+        @apply text-xs w-full;
+    }
+
+    form {
+        @apply w-[60%];
+    }
+
+
+}
+@media screen and (max-width: 400px) {
+    .inputs {
+        @apply text-xs w-full;
+    }
+
+    form {
+        @apply w-[300px];
+    }
+}

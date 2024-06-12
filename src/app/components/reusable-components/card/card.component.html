@@ -1,0 +1,28 @@
+<div class="card" [style.width]="width" [style.min-height]="minHeight" [style.borderColor]="borderColor"
+    (click)="openTask()">
+
+    <div class="top">
+        <div class="left">
+            <!-- <fa-icon class="icon" [icon]="faCircleUser" *ngIf="!task.image"></fa-icon> -->
+            <div class="overflow-hidden h-10 w-10 icon">
+                <img src="data:image/jpg;base64, {{task.image}}" *ngIf="!task.imgUrl && task.image" alt="" class="rounded-full object-cover h-full w-full">
+                <img src="{{task.imgUrl}}" *ngIf="task.imgUrl && !task.image" alt="" class="rounded-full object-cover h-full w-full">
+                <fa-icon [icon]="faCircleUser" class="flex text-4xl" style="color: var(--primaryColor)" *ngIf="!task.imgUrl && !task.image"></fa-icon>
+            </div>
+        </div>
+
+        <div class="right" (click)="$event.stopPropagation()">
+            <ng-container *ngFor="let item of settings">
+                <fa-icon *ngIf="hasTrash" [icon]="item.icon" (click)="item.onclick()" class="icon" [style.color]="borderColor"
+                    [ngClass]="item.disabled ? 'opacity-20' : 'opacity-100'">
+                </fa-icon>
+            </ng-container>
+        </div>
+    </div>
+    <span (click)="$event.stopPropagation()">
+        <input class="medium-text name-task" *ngIf="openInputName" [(ngModel)]="task.name" (blur)="editName()"/>
+        <p class="medium-text name-task truncate" *ngIf="!openInputName" (click)="openModalEdit()">{{task.name}}</p>
+    </span>
+</div>
+
+

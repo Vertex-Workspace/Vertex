@@ -1,0 +1,76 @@
+<form [formGroup]="form" class="modal-overlay">
+  <div class="modal">
+  <h4 class="title" *ngIf="typeString === 'team'">{{ 'components.reusable-components.create-team-project.new-team' | translate }}</h4>
+  <h4 class="title" *ngIf="typeString === 'project'">{{
+    'components.reusable-components.create-team-project.new-project' | translate }}</h4>
+    <span class="flex w-full justify-between" *ngIf="typeString === 'projectInfo' || typeString === 'settings'">
+      <h4 class="title" *ngIf="typeString === 'projectInfo'">{{
+        'components.reusable-components.create-team-project.project-info' | translate }}</h4>
+      <fa-icon [icon]="faX" (click)="closeScreen()"></fa-icon>
+    </span>
+    <div class="div-grid-name-image">
+      <div class="input-name">
+        <p class="medium-text" *ngIf="typeString === 'team'">{{
+          'components.reusable-components.create-team-project.team-name' | translate }}</p>
+        <p class="medium-text" *ngIf="typeString === 'project' || typeString === 'projectInfo'">{{
+          'components.reusable-components.create-team-project.project-name' | translate }}</p>
+        <input formControlName="name" type="text"
+        [placeholder]="'components.reusable-components.create-team-project.add-team-name' | translate"
+          *ngIf="typeString != 'projectInfo' && typeString != 'settings'">
+        <input formControlName="name" [placeholder]="'components.reusable-components.create-team-project.add-project-name' | translate" type="text"
+         *ngIf="typeString === 'projectInfo' " [(ngModel)]="project.name">
+      </div>
+      <div class="circular" >
+        <img src="data:image/jpg;base64, {{base64}}" alt="" class=" object-cover">
+        <form class="input-div">
+          <input type="file" class="input-file" (change)="onFileSelected($event)">
+        </form>
+      </div>
+    </div>
+
+    <div class="input-description" [ngClass]="typeString === 'settings' ? 'pt-10' : ''">
+
+      <p class="medium-text" *ngIf="typeString === 'team'">{{
+        'components.reusable-components.create-team-project.team-description' | translate }}</p>
+      <p class="medium-text" *ngIf="typeString === 'project' || typeString === 'projectInfo'">{{
+        'components.reusable-components.create-team-project.project-description' | translate }}</p>
+        <textarea formControlName="description" *ngIf="projectNull && typeString === 'team'"
+        [placeholder]="'components.reusable-components.create-team-project.add-team-description' | translate"></textarea>
+      <textarea formControlName="description" *ngIf="projectNull && typeString === 'project'"
+        [placeholder]="'components.reusable-components.create-team-project.add-project-description' | translate"></textarea>
+      <textarea formControlName="description" *ngIf="typeString === 'projectInfo'" [(ngModel)]="project.description"></textarea>
+    </div>
+
+    <ng-container *ngIf="typeString === 'projectInfo' || typeString === 'project'">
+
+      <div class="flex flex-row w-full pt-3 gap-5">
+        <div class="flex w-1/2 flex-col" *ngIf="showResponsibles">
+          <p class="large-text self-start"> {{ 'components.reusable-components.create-team-project.responsibles' | translate }}</p>
+          <p-multiSelect [options]="listOfResponsibles" formControlName="listOfResponsibles"
+            placeholder="{{ 'components.reusable-components.create-team-project.responsiblesOfProject' | translate }}" appendTo="body" class="flex items-start justify-start pt-2"
+            [(ngModel)]="selectedUsers" [style]="{ width: '255px', backgroundColor: 'var(--card)'}"></p-multiSelect>
+        </div>
+        <div class="flex w-1/2 flex-col">
+          <p class="large-text self-start">{{ 'components.reusable-components.create-team-project.task-review' | translate }}</p>
+          <p-dropdown class="flex items-start justify-start pt-2" [options]="optionsReview" 
+          [style]="{ width: '255px', backgroundColor: 'var(--card)' }" formControlName="projectReviewENUM" placeholder="{{review}} "></p-dropdown>
+        </div>
+      </div>
+
+      <div class="flex flex-col w-full pt-3">
+        <p class="large-text self-start">{{ 'components.modals.task.properties.dependency' | translate }}</p>
+        <p-dropdown class="flex items-start justify-start pr-1 pt-2" [options]="dependencies" optionLabel="name"
+          formControlName="projectDependency" placeholder="{{dependency}} "[style]="{ width: '250px', backgroundColor: 'var(--card)' }"
+          emptyMessage="Não há outros projetos"></p-dropdown>
+      </div>
+    </ng-container>
+
+    <div class="div-buttons">
+      <div class="buttons" *ngIf="projectNull">
+        <button class="cancel-button" (click)="closeScreen()" *ngIf="projectNull">{{'components.reusable-components.create-team-project.cancel' | translate }}</button>
+        <button class="confirm-button" (click)="onSubmit()" *ngIf="typeString != 'projectInfo'">{{'components.reusable-components.create-team-project.confirm' | translate }}</button>
+      </div>
+      <button class="confirm-button" (click)="onSubmit()" *ngIf="typeString === 'projectInfo'">{{'components.reusable-components.create-team-project.edit' | translate }}</button>
+    </div>
+  </div>
+</form>

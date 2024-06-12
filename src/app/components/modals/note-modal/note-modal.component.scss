@@ -1,0 +1,483 @@
+@import '../../../../variables';
+
+@keyframes slideInRight {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100%;
+        opacity: 100;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
+h6, p {
+    color: black !important;
+  }
+  
+
+@media screen and (min-width: 800px) {
+
+    .title {
+        @apply text-4xl p-2;
+        border-bottom: $primaryColor 1px solid;
+    }
+    
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+        z-index: 999;
+        
+        .image-container {
+            @apply w-full h-full flex flex-wrap gap-1 rounded-sm;
+            
+            .single-image {
+                @apply w-[250px] h-[250px] flex items-center justify-center relative;
+                
+                .pi-plus {
+                    @apply absolute top-0 right-0 m-2;
+                }
+                
+                img {
+                    @apply h-[180px] w-auto;
+                }
+            }
+        }
+        
+        .modal {
+            @apply w-[700px] h-[600px] flex p-8 rounded-sm relative;
+            background-color: $whiteDefault;
+            
+            .left {
+                @apply w-[100%] h-[90%];
+                
+                .location {
+                    @apply w-full h-[10%];
+                }
+                
+                .main-content {
+                    @apply w-full h-auto max-h-[80%] flex flex-col gap-8 overflow-y-auto pr-10 pt-2;
+                    color: $primaryColor;
+                    
+                    .content {
+                        @apply flex flex-col px-2 h-full;
+                        
+                        textarea {
+                            @apply text-lg overflow-y-hidden text-justify cursor-text mt-4 mb-2 pr-32;
+                            resize: none;
+                            
+                            &:focus {
+                                border: none;
+                                outline: none;
+                            }
+                        }
+                        
+                        a {
+                            @apply w-[22%]  text-end rounded-sm;
+                            
+                            &:hover {
+                                color: $primaryColor;
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                .config {
+                    @apply h-[10%] flex justify-between items-center absolute bottom-0 w-[90%] mb-4;
+                    
+                    .config-right {
+                        @apply flex gap-2 items-center;
+                        
+                        .pi-images {
+                            font-size: 1.8rem;
+                        }
+                        
+                        .image {
+                            @apply w-[45px] h-full flex items-center justify-center relative cursor-pointer;
+                            
+                            .pi-images {
+                                @apply cursor-pointer;
+                            }
+                            
+                            form {
+                                @apply w-full h-full flex justify-center items-center absolute cursor-pointer;
+                                opacity: 0;
+                                
+                                .input-file {
+                                    @apply cursor-pointer w-full h-full;
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                        
+                        button {
+                            @apply w-[45px] h-[45px] rounded-sm flex items-center justify-center transition-colors;
+                            background-color: $primaryColor;
+                            border: solid 1px $primaryColor;
+                            
+                            i {
+                                font-size: 1.3rem;
+                                font-weight: bold;
+                                color: $secondColor;
+                                cursor: pointer;
+                            }
+                            
+                            &:hover {
+                                @apply transition-colors;
+                                background-color: $secondColor;
+                                i {
+                                    color: $primaryColor;
+                                }
+                            }
+                        }
+                    }
+                    
+                    .color-list {
+                        @apply flex gap-2 items-center; 
+                        animation: slideInRight 0.3s ease-out;
+                    }
+                    
+                    .color {
+                        @apply cursor-pointer w-[50px] h-[50px] rounded-full flex items-center justify-center shadow-md;
+                        border: 1px solid;
+                        .icon {
+                            color: $primaryColor;
+                        }
+                    }
+                    
+                }
+            }
+            
+            .pi-plus {
+                @apply absolute top-0 right-0 m-8;
+                font-size: 1.3rem;
+            }
+            
+            
+        }
+        
+        i {
+            cursor: pointer;
+        }
+        
+    }
+}
+
+@media screen and (min-width: 540px) and (max-width: 800px) {
+
+    .title {
+        @apply text-4xl p-2;
+        border-bottom: $primaryColor 1px solid;
+    }
+    
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+        z-index: 999;
+        
+        .image-container {
+            @apply w-full h-full flex flex-wrap gap-1 rounded-sm;
+            
+            .single-image {
+                @apply w-[250px] h-[250px] flex items-center justify-center relative;
+                
+                .pi-plus {
+                    @apply absolute top-0 right-0 m-2;
+                }
+                
+                img {
+                    @apply h-[180px] w-auto;
+                }
+            }
+        }
+        
+        .modal {
+            @apply w-full h-full flex p-8 relative;
+            background-color: $whiteDefault;
+            
+            .left {
+                @apply w-[100%] h-[90%];
+                
+                .location {
+                    @apply w-full h-[10%];
+                }
+                
+                .main-content {
+                    @apply w-full h-auto max-h-[80%] flex flex-col gap-8 overflow-y-auto pr-10 pt-2;
+                    color: $primaryColor;
+                    
+                    .content {
+                        @apply flex flex-col px-2 h-full;
+                        
+                        textarea {
+                            @apply text-lg overflow-y-hidden text-justify cursor-text mt-4 mb-2 pr-32;
+                            resize: none;
+                            border: none;
+                            
+                            &:focus {
+                                border: none;
+                                outline: none;
+                            }
+                        }
+                        
+                        a {
+                            @apply w-[22%] py-1 text-start rounded-sm;
+                            color: grey;
+                            
+                            &:hover {
+                                color: $primaryColor;
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                .config {
+                    @apply h-[10%] flex justify-between items-center absolute bottom-0 w-[90%] mb-4;
+                    
+                    .config-right {
+                        @apply flex gap-2 items-center;
+                        
+                        .pi-images {
+                            font-size: 1.8rem;
+                        }
+                        
+                        .image {
+                            @apply w-[45px] h-full flex items-center justify-center relative cursor-pointer;
+                            
+                            .pi-images {
+                                @apply cursor-pointer;
+                            }
+                            
+                            form {
+                                @apply w-full h-full flex justify-center items-center absolute cursor-pointer;
+                                opacity: 0;
+                                
+                                .input-file {
+                                    @apply cursor-pointer w-full h-full;
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                        
+                        button {
+                            @apply w-[45px] h-[45px] rounded-sm flex items-center justify-center transition-colors;
+                            background-color: $primaryColor;
+                            border: solid 1px $primaryColor;
+                            
+                            i {
+                                font-size: 1.3rem;
+                                font-weight: bold;
+                                color: $secondColor;
+                                cursor: pointer;
+                            }
+                            
+                            &:hover {
+                                @apply transition-colors;
+                                background-color: $secondColor;
+                                i {
+                                    color: $primaryColor;
+                                }
+                            }
+                        }
+                    }
+                    
+                    .color-list {
+                        @apply flex gap-2 items-center; 
+                        animation: slideInRight 0.3s ease-out;
+                    }
+                    
+                    .color {
+                        @apply cursor-pointer w-[50px] h-[50px] rounded-full flex items-center justify-center;
+                        .icon {
+                            color: $primaryColor;
+                        }
+                    }
+                    
+                }
+            }
+            
+            .pi-plus {
+                @apply absolute top-0 right-0 m-8;
+                font-size: 1.3rem;
+            }
+            
+            
+        }
+        
+        i {
+            cursor: pointer;
+        }
+        
+    }
+}
+
+@media screen and (max-width: 540px) {
+
+    .title {
+        @apply text-4xl p-2;
+        border-bottom: $primaryColor 1px solid;
+    }
+    
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+        z-index: 999;
+        
+        .image-container {
+            @apply w-full h-full flex flex-wrap gap-1 rounded-sm;
+            
+            .single-image {
+                @apply w-[250px] h-[250px] flex items-center justify-center relative;
+                
+                .pi-plus {
+                    @apply absolute top-0 right-0 m-2;
+                }
+                
+                img {
+                    @apply h-[180px] w-auto;
+                }
+            }
+        }
+        
+        .modal {
+            @apply w-full h-full flex p-8 relative;
+            background-color: $whiteDefault;
+            
+            .left {
+                @apply w-[100%] h-[90%];
+                
+                .location {
+                    @apply w-full h-[10%];
+                }
+                
+                .main-content {
+                    @apply w-full h-auto max-h-[80%] flex flex-col gap-8 overflow-y-auto pr-10 pt-2;
+                    color: $primaryColor;
+                    
+                    .content {
+                        @apply flex flex-col px-2 h-full;
+                        
+                        textarea {
+                            @apply text-lg overflow-y-hidden text-justify cursor-text mt-4 mb-2 pr-32;
+                            resize: none;
+                            
+                            &:focus {
+                                border: none;
+                                outline: none;
+                            }
+                        }
+                        
+                        a {
+                            @apply w-[22%] py-1 text-start rounded-sm;
+                            color: grey;
+                            
+                            &:hover {
+                                color: $primaryColor;
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                .config {
+                    @apply h-[10%] flex flex-col items-start gap-3 m-8 pb-4 absolute bottom-0 left-0 w-[90%] mb-4;
+                    
+                    .config-right {
+                        @apply flex gap-2 items-center;
+                        
+                        .pi-images {
+                            font-size: 1.8rem;
+                        }
+                        
+                        .image {
+                            @apply w-[45px] h-full flex items-center justify-center relative cursor-pointer;
+                            
+                            .pi-images {
+                                @apply cursor-pointer;
+                            }
+                            
+                            form {
+                                @apply w-full h-full flex justify-center items-center absolute cursor-pointer;
+                                opacity: 0;
+                                
+                                .input-file {
+                                    @apply cursor-pointer w-full h-full;
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                        
+                        button {
+                            @apply w-[45px] h-[45px] rounded-sm flex items-center justify-center transition-colors;
+                            background-color: $primaryColor;
+                            border: solid 1px $primaryColor;
+                            
+                            i {
+                                font-size: 1.3rem;
+                                font-weight: bold;
+                                color: $secondColor;
+                                cursor: pointer;
+                            }
+                            
+                            &:hover {
+                                @apply transition-colors;
+                                background-color: $secondColor;
+                                i {
+                                    color: $primaryColor;
+                                }
+                            }
+                        }
+                    }
+                    
+                    .color-list {
+                        @apply flex gap-2 items-center; 
+                        animation: slideInRight 0.3s ease-out;
+                    }
+                    
+                    .color {
+                        @apply cursor-pointer w-[50px] h-[50px] rounded-full flex items-center justify-center;
+                        .icon {
+                            color: $primaryColor;
+                        }
+                    }
+                    
+                }
+            }
+            
+            .pi-plus {
+                @apply absolute top-0 right-0 m-8;
+                font-size: 1.3rem;
+            }
+            
+            
+        }
+        
+        i {
+            cursor: pointer;
+        }
+        
+    }
+}

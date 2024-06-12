@@ -1,0 +1,3151 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ChatComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/chat/chat.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-chat</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./chat.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./chat.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cardChat" >cardChat</a>
+                            </li>
+                            <li>
+                                <a href="#chat" >chat</a>
+                            </li>
+                            <li>
+                                <a href="#conversationOpen" >conversationOpen</a>
+                            </li>
+                            <li>
+                                <a href="#conversations" >conversations</a>
+                            </li>
+                            <li>
+                                <a href="#faCheckDouble" >faCheckDouble</a>
+                            </li>
+                            <li>
+                                <a href="#faChevronRight" >faChevronRight</a>
+                            </li>
+                            <li>
+                                <a href="#faCircleUser" >faCircleUser</a>
+                            </li>
+                            <li>
+                                <a href="#faCommentSlash" >faCommentSlash</a>
+                            </li>
+                            <li>
+                                <a href="#faGlobe" >faGlobe</a>
+                            </li>
+                            <li>
+                                <a href="#faMicrophoneLines" >faMicrophoneLines</a>
+                            </li>
+                            <li>
+                                <a href="#faMinimize" >faMinimize</a>
+                            </li>
+                            <li>
+                                <a href="#faPaperclip" >faPaperclip</a>
+                            </li>
+                            <li>
+                                <a href="#faPaperPlane" >faPaperPlane</a>
+                            </li>
+                            <li>
+                                <a href="#faSearch" >faSearch</a>
+                            </li>
+                            <li>
+                                <a href="#faSmile" >faSmile</a>
+                            </li>
+                            <li>
+                                <a href="#faStar" >faStar</a>
+                            </li>
+                            <li>
+                                <a href="#faTimes" >faTimes</a>
+                            </li>
+                            <li>
+                                <a href="#faUser" >faUser</a>
+                            </li>
+                            <li>
+                                <a href="#faUsers" >faUsers</a>
+                            </li>
+                            <li>
+                                <a href="#hasAnyChat" >hasAnyChat</a>
+                            </li>
+                            <li>
+                                <a href="#logged" >logged</a>
+                            </li>
+                            <li>
+                                <a href="#m" >m</a>
+                            </li>
+                            <li>
+                                <a href="#messages" >messages</a>
+                            </li>
+                            <li>
+                                <a href="#messageUser" >messageUser</a>
+                            </li>
+                            <li>
+                                <a href="#selectedFile" >selectedFile</a>
+                            </li>
+                            <li>
+                                <a href="#showRightChat" >showRightChat</a>
+                            </li>
+                            <li>
+                                <a href="#side" >side</a>
+                            </li>
+                            <li>
+                                <a href="#url" >url</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#webSocketService" >webSocketService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addEmoji" >addEmoji</a>
+                            </li>
+                            <li>
+                                <a href="#changeUrlOfArchive" >changeUrlOfArchive</a>
+                            </li>
+                            <li>
+                                <a href="#convertBlobToFile" >convertBlobToFile</a>
+                            </li>
+                            <li>
+                                <a href="#convertDataUrlToBlob" >convertDataUrlToBlob</a>
+                            </li>
+                            <li>
+                                <a href="#generateTime" >generateTime</a>
+                            </li>
+                            <li>
+                                <a href="#getIconSrc" >getIconSrc</a>
+                            </li>
+                            <li>
+                                <a href="#messageFileIncludesImage" >messageFileIncludesImage</a>
+                            </li>
+                            <li>
+                                <a href="#minimizeChat" >minimizeChat</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onFileChange" >onFileChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#onResize" >onResize</a>
+                            </li>
+                            <li>
+                                <a href="#openConversation" >openConversation</a>
+                            </li>
+                            <li>
+                                <a href="#openFile" >openFile</a>
+                            </li>
+                            <li>
+                                <a href="#sendMessage" >sendMessage</a>
+                            </li>
+                            <li>
+                                <a href="#toggleRightChat" >toggleRightChat</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#chatExpanded" >chatExpanded</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#window:resize" >window:resize</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(webSocketService: <a href="../injectables/WebSocketService.html" target="_self">WebSocketService</a>, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, route: Router, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/pages/chat/chat.component.ts:79</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>webSocketService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WebSocketService.html" target="_self" >WebSocketService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chatExpanded"></a>
+                        <b>chatExpanded</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/chat/chat.component.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="window:resize"></a>
+                    <span class="name">
+                        <span ><b>window:resize</b></span>
+                        <a href="#window:resize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>window:resize(event: ResizeEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addEmoji"></a>
+                    <span class="name">
+                        <span ><b>addEmoji</b></span>
+                        <a href="#addEmoji"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addEmoji(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeUrlOfArchive"></a>
+                    <span class="name">
+                        <span ><b>changeUrlOfArchive</b></span>
+                        <a href="#changeUrlOfArchive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeUrlOfArchive(response: <a href="../classes/Message.html" target="_self">Message</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertBlobToFile"></a>
+                    <span class="name">
+                        <span ><b>convertBlobToFile</b></span>
+                        <a href="#convertBlobToFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>convertBlobToFile(blob: Blob, fileName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:205</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>blob</td>
+                                            <td>
+                                                        <code>Blob</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>fileName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/File.html" target="_self" >File</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertDataUrlToBlob"></a>
+                    <span class="name">
+                        <span ><b>convertDataUrlToBlob</b></span>
+                        <a href="#convertDataUrlToBlob"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>convertDataUrlToBlob(dataUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>dataUrl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateTime"></a>
+                    <span class="name">
+                        <span ><b>generateTime</b></span>
+                        <a href="#generateTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>generateTime(message: <a href="../classes/Message.html" target="_self">Message</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="226"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getIconSrc"></a>
+                    <span class="name">
+                        <span ><b>getIconSrc</b></span>
+                        <a href="#getIconSrc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getIconSrc(message: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageFileIncludesImage"></a>
+                    <span class="name">
+                        <span ><b>messageFileIncludesImage</b></span>
+                        <a href="#messageFileIncludesImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>messageFileIncludesImage(message: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="161"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:161</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="minimizeChat"></a>
+                    <span class="name">
+                        <span ><b>minimizeChat</b></span>
+                        <a href="#minimizeChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>minimizeChat(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:252</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileChange"></a>
+                    <span class="name">
+                        <span ><b>onFileChange</b></span>
+                        <a href="#onFileChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFileChange(e: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onResize"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>onResize</b></span>
+                        <a href="#onResize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onResize(event: ResizeEvent)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>ResizeEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openConversation"></a>
+                    <span class="name">
+                        <span ><b>openConversation</b></span>
+                        <a href="#openConversation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openConversation(chat: <a href="../classes/Chat.html" target="_self">Chat</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>chat</td>
+                                            <td>
+                                                            <code><a href="../classes/Chat.html" target="_self" >Chat</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openFile"></a>
+                    <span class="name">
+                        <span ><b>openFile</b></span>
+                        <a href="#openFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openFile()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendMessage"></a>
+                    <span class="name">
+                        <span ><b>sendMessage</b></span>
+                        <a href="#sendMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sendMessage(sendForm: NgForm)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sendForm</td>
+                                            <td>
+                                                        <code>NgForm</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleRightChat"></a>
+                    <span class="name">
+                        <span ><b>toggleRightChat</b></span>
+                        <a href="#toggleRightChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleRightChat()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/pages/chat/chat.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cardChat"></a>
+                    <span class="name">
+                        <span ><b>cardChat</b></span>
+                        <a href="#cardChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/chat/chat.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chat"></a>
+                    <span class="name">
+                        <span ><b>chat</b></span>
+                        <a href="#chat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Chat.html" target="_self" >Chat</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/chat/chat.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="conversationOpen"></a>
+                    <span class="name">
+                        <span ><b>conversationOpen</b></span>
+                        <a href="#conversationOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/chat/chat.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="conversations"></a>
+                    <span class="name">
+                        <span ><b>conversations</b></span>
+                        <a href="#conversations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Chat.html" target="_self" >Chat[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/chat/chat.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCheckDouble"></a>
+                    <span class="name">
+                        <span ><b>faCheckDouble</b></span>
+                        <a href="#faCheckDouble"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCheckDouble</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/chat/chat.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faChevronRight"></a>
+                    <span class="name">
+                        <span ><b>faChevronRight</b></span>
+                        <a href="#faChevronRight"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faChevronRight</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/chat/chat.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCircleUser"></a>
+                    <span class="name">
+                        <span ><b>faCircleUser</b></span>
+                        <a href="#faCircleUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCircleUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/chat/chat.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCommentSlash"></a>
+                    <span class="name">
+                        <span ><b>faCommentSlash</b></span>
+                        <a href="#faCommentSlash"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faCommentSlash</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/chat/chat.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faGlobe"></a>
+                    <span class="name">
+                        <span ><b>faGlobe</b></span>
+                        <a href="#faGlobe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faGlobe</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/chat/chat.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faMicrophoneLines"></a>
+                    <span class="name">
+                        <span ><b>faMicrophoneLines</b></span>
+                        <a href="#faMicrophoneLines"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faMicrophoneLines</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/chat/chat.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faMinimize"></a>
+                    <span class="name">
+                        <span ><b>faMinimize</b></span>
+                        <a href="#faMinimize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faMinimize</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/chat/chat.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPaperclip"></a>
+                    <span class="name">
+                        <span ><b>faPaperclip</b></span>
+                        <a href="#faPaperclip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPaperclip</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/chat/chat.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPaperPlane"></a>
+                    <span class="name">
+                        <span ><b>faPaperPlane</b></span>
+                        <a href="#faPaperPlane"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPaperPlane</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/chat/chat.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faSearch"></a>
+                    <span class="name">
+                        <span ><b>faSearch</b></span>
+                        <a href="#faSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faSearch</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/chat/chat.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faSmile"></a>
+                    <span class="name">
+                        <span ><b>faSmile</b></span>
+                        <a href="#faSmile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faSmile</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/chat/chat.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faStar"></a>
+                    <span class="name">
+                        <span ><b>faStar</b></span>
+                        <a href="#faStar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faStar</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/chat/chat.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTimes"></a>
+                    <span class="name">
+                        <span ><b>faTimes</b></span>
+                        <a href="#faTimes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faTimes</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/chat/chat.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faUser"></a>
+                    <span class="name">
+                        <span ><b>faUser</b></span>
+                        <a href="#faUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/chat/chat.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faUsers"></a>
+                    <span class="name">
+                        <span ><b>faUsers</b></span>
+                        <a href="#faUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faUsers</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/chat/chat.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasAnyChat"></a>
+                    <span class="name">
+                        <span ><b>hasAnyChat</b></span>
+                        <a href="#hasAnyChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/pages/chat/chat.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logged"></a>
+                    <span class="name">
+                        <span ><b>logged</b></span>
+                        <a href="#logged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/pages/chat/chat.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="m"></a>
+                    <span class="name">
+                        <span ><b>m</b></span>
+                        <a href="#m"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Message.html" target="_self" >Message[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Array(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/pages/chat/chat.component.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messages"></a>
+                    <span class="name">
+                        <span ><b>messages</b></span>
+                        <a href="#messages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Message.html" target="_self" >Message[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/chat/chat.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageUser"></a>
+                    <span class="name">
+                        <span ><b>messageUser</b></span>
+                        <a href="#messageUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/chat/chat.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFile"></a>
+                    <span class="name">
+                        <span ><b>selectedFile</b></span>
+                        <a href="#selectedFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/pages/chat/chat.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showRightChat"></a>
+                    <span class="name">
+                        <span ><b>showRightChat</b></span>
+                        <a href="#showRightChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/pages/chat/chat.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="side"></a>
+                    <span class="name">
+                        <span ><b>side</b></span>
+                        <a href="#side"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/chat/chat.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="url"></a>
+                    <span class="name">
+                        <span ><b>url</b></span>
+                        <a href="#url"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/pages/chat/chat.component.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="webSocketService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>webSocketService</b></span>
+                        <a href="#webSocketService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/WebSocketService.html" target="_self" >WebSocketService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/pages/chat/chat.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter, HostListener } from &#x27;@angular/core&#x27;;
+import {
+  faChevronRight, faPaperPlane,
+  faMicrophoneLines, faPaperclip,
+  faCheckDouble, faUsers, faUser, faGlobe,
+  faMinimize, faStar, faCircleUser, faSearch,
+  faTimes, faSmile
+} from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { getLocaleDateFormat } from &#x27;@angular/common&#x27;;
+import { WebSocketService } from &#x27;src/app/services/websocket.service&#x27;;
+import { Chat } from &#x27;../../models/class/chat&#x27;;
+import { NgForm } from &#x27;@angular/forms&#x27;;
+import { User } from &#x27;src/app/models/class/user&#x27;;
+import { Message } from &#x27;src/app/models/class/message&#x27;;
+import { TeamService } from &#x27;../../services/team.service&#x27;;
+import { PersonalizationService } from &#x27;src/app/services/personalization.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+
+import { faCommentSlash } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { ResizeEvent } from &#x27;angular-resizable-element&#x27;;
+
+@Component({
+  selector: &#x27;app-chat&#x27;,
+  templateUrl: &#x27;./chat.component.html&#x27;,
+  styleUrls: [&#x27;./chat.component.scss&#x27;],
+
+})
+export class ChatComponent {
+
+  faCommentSlash &#x3D; faCommentSlash;
+  faSmile &#x3D; faSmile;
+  faSearch &#x3D; faSearch;
+  faCircleUser &#x3D; faCircleUser;
+  faStar &#x3D; faStar;
+  faMinimize &#x3D; faMinimize;
+  faGlobe &#x3D; faGlobe;
+  faUser &#x3D; faUser;
+  faUsers &#x3D; faUsers;
+  faCheckDouble &#x3D; faCheckDouble;
+  faPaperclip &#x3D; faPaperclip;
+  faMicrophoneLines &#x3D; faMicrophoneLines;
+  faChevronRight &#x3D; faChevronRight;
+  faPaperPlane &#x3D; faPaperPlane;
+  faTimes &#x3D; faTimes;
+
+  messageUser: any &#x3D; &quot;&quot;;
+  @Output()
+  chatExpanded: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  conversationOpen: boolean &#x3D; false;
+
+  conversations: Chat[] &#x3D; []
+
+  messages: Message[] &#x3D; [];
+
+  chat!: Chat;
+
+  cardChat: number &#x3D; 0;
+
+  side: boolean &#x3D; true;
+
+  hasAnyChat: boolean &#x3D; false;
+
+  logged!: User;
+
+  showRightChat &#x3D; false;
+
+  toggleRightChat() {
+    if (window.innerWidth &lt; 1024) {
+      this.route.navigate([&#x27;/home&#x27;]);
+    }
+  }
+
+  @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
+  onResize(event: ResizeEvent) {
+    // Chama toggleRightChat() sempre que o tamanho da tela for alterado
+    this.toggleRightChat();
+  }
+
+  constructor(public webSocketService: WebSocketService, private teamService: TeamService, private route: Router, private userService : UserService) {
+    this.teamService.findAllChatsByUser(this.userService.getLogged().id!).subscribe((chats: Chat[]) &#x3D;&gt; {
+      this.conversations &#x3D; chats;
+      
+    });
+    this.logged &#x3D; this.userService.getLogged();
+  }
+
+  ngOnInit() {
+    this.webSocketService.listenToServer().subscribe((change) &#x3D;&gt; {
+      this.chat.messages!.push(change);
+      setTimeout(() &#x3D;&gt; {
+        let a &#x3D; document.getElementsByClassName(&quot;center-div&quot;)[0] as HTMLElement;
+        a.scrollTop &#x3D; a.scrollHeight;
+      }, 0);
+    });
+    this.toggleRightChat();
+  }
+
+  ngOnDestroy(): void {
+    this.webSocketService.closeWebSocket();
+  }
+
+  addEmoji(event: any) {
+    this.messageUser +&#x3D; event.emoji.native;
+  }
+
+  sendMessage(sendForm: NgForm) {
+    this.logged &#x3D; JSON.parse(localStorage.getItem(&#x27;logged&#x27;) || &#x27;{}&#x27;);
+
+    const messageDto: Message &#x3D; {
+      user: this.logged.firstName,
+      contentMessage: this.messageUser,
+      time: new Date(),
+      viewed: false,
+    };
+
+    if (messageDto.contentMessage !&#x3D; null &amp;&amp; messageDto.contentMessage.trim() !&#x3D; &quot;&quot;) {
+      this.teamService.patchMessagesOnChat(this.chat.id!, this.logged.id!, messageDto).subscribe(
+        (response: any) &#x3D;&gt; {
+          sendForm.controls[&#x27;message&#x27;].reset();
+        });
+
+      this.webSocketService.sendMessage(messageDto);
+
+      sendForm.reset();
+    }
+  }
+
+  openFile() {
+    let a &#x3D; document.getElementById(&#x27;fileInput&#x27;) as HTMLElement;
+    a.click();
+  }
+  selectedFile!: any;
+  url !: any;
+  onFileChange(e: any) {
+    this.selectedFile &#x3D; e.target.files[0];
+    const fd: FormData &#x3D; new FormData();
+    fd.append(&#x27;file&#x27;, this.selectedFile, this.selectedFile.name);
+    fd.append(&#x27;user&#x27;, this.logged.firstName!);
+
+    this.teamService.patchArchiveOnChat(this.chat.id!, fd).subscribe(
+      (response: any) &#x3D;&gt; {
+        // this.chat.messages?.push(response);
+        let reader &#x3D; new FileReader();
+        reader.readAsDataURL(this.selectedFile);
+        reader.onload &#x3D; () &#x3D;&gt; {
+          let message: Message &#x3D; {
+            user: this.logged.firstName,
+            contentMessage: this.selectedFile.name,
+            time: new Date(),
+            file: reader.result,
+            viewed: false,
+          };
+          this.webSocketService.sendMessage(message);
+        };
+      }
+    );
+  }
+
+  messageFileIncludesImage(message: any): boolean {
+    if (message.file &amp;&amp; message.file.type &amp;&amp; typeof message.file.type &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+      return message.file.type.includes(&#x27;image&#x27;);
+    }
+    return false;
+  }
+
+  convertDataUrlToBlob(dataUrl: string) {
+    const byteString &#x3D; atob(dataUrl.split(&#x27;,&#x27;)[1]);
+    const mimeString &#x3D; dataUrl.split(&#x27;,&#x27;)[0].split(&#x27;:&#x27;)[1].split(&#x27;;&#x27;)[0];
+    const ab &#x3D; new ArrayBuffer(byteString.length);
+    const ia &#x3D; new Uint8Array(ab);
+    for (let i &#x3D; 0; i &lt; byteString.length; i++) {
+      ia[i] &#x3D; byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
+
+  getIconSrc(message: any): string {
+    const fileTypeIcons: Record&lt;string, string&gt; &#x3D; {
+      &#x27;application/pdf&#x27;: &#x27;https://cdn-icons-png.flaticon.com/512/337/337946.png&#x27;,
+      &#x27;text/plain&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8243/8243060.png&#x27;,
+      &#x27;application/vnd.openxmlformats-officedocument.wordprocessingml.document&#x27;: &#x27;https://cdn-icons-png.freepik.com/256/8361/8361174.png?uid&#x3D;R112263958&amp;ga&#x3D;GA1.1.310772085.1710953572&amp;&#x27;,
+      &#x27;video/mp4&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8243/8243015.png&#x27;,
+      &#x27;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8361/8361467.png&#x27;,
+      &#x27;application/vnd.ms-excel&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8361/8361467.png&#x27;,
+      &#x27;text/csv&#x27;: &#x27;https://cdn-icons-png.freepik.com/512/8242/8242984.png&#x27;
+    };
+    if (typeof message.file &#x3D;&#x3D; &quot;string&quot;) {
+      message.file &#x3D; this.convertDataUrlToBlob(message.file);
+    }
+
+    const iconSrc &#x3D; fileTypeIcons[message.file.type];
+    if (iconSrc) {
+      return iconSrc;
+    }
+    else {
+      if (message.file instanceof Blob) {
+        return URL.createObjectURL(message.file);
+      }
+      return &#x60;data:image/jpg;base64,${message.file.file}&#x60;
+    };
+  }
+
+  convertBlobToFile(blob: Blob, fileName: string): File {
+    const file &#x3D; new File([blob], fileName, { type: blob.type });
+    return file;
+  }
+
+  changeUrlOfArchive(response: Message) {
+    if (response.file instanceof Blob) {
+      response.file &#x3D; this.convertBlobToFile(response.file, response.contentMessage! as string);
+      return window.URL.createObjectURL(response.file);
+    } else {
+      const byteCharacters &#x3D; atob(response.file.file);
+      const byteNumbers &#x3D; new Array(byteCharacters.length);
+      for (let i &#x3D; 0; i &lt; byteCharacters.length; i++) {
+        byteNumbers[i] &#x3D; byteCharacters.charCodeAt(i);
+      }
+      const byteArray &#x3D; new Uint8Array(byteNumbers);
+      const blob &#x3D; new Blob([byteArray], { type: &#x27;application/pdf&#x27; });
+      return window.URL.createObjectURL(blob);
+    }
+  }
+
+  generateTime(message: Message) {
+    return new Date(message.time!).toLocaleString();
+  }
+
+  m: Message[] &#x3D; new Array(0);
+  openConversation(chat: Chat) {
+    this.chat &#x3D; chat;
+    
+    this.showRightChat &#x3D; true;
+    this.conversations.forEach((conversation: Chat) &#x3D;&gt; {
+      conversation.conversationOpen &#x3D; false;
+    });
+
+    this.chat.conversationOpen &#x3D; true;
+
+    this.teamService.findAllMessagesByChatId(chat.id!).subscribe((messages: Message[]) &#x3D;&gt; {
+      this.chat.messages &#x3D; messages;
+
+      setTimeout(() &#x3D;&gt; {
+        let a &#x3D; document.getElementsByClassName(&quot;center-div&quot;)[0] as HTMLElement;
+        a.scrollTop &#x3D; a.scrollHeight;
+      }, 0);
+    });
+  }
+
+
+  minimizeChat(value: boolean) {
+    this.chatExpanded.emit(value);
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section *ngIf&#x3D;&quot;conversations&quot;&gt;
+
+    &lt;header&gt;
+
+        &lt;div class&#x3D;&quot;conversations-div&quot;&gt;
+            &lt;h3 class&#x3D;&quot;conversations&quot;&gt;Conversas&lt;/h3&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;header-right&quot;&gt;
+
+            &lt;div class&#x3D;&quot;header-right-informations&quot;&gt;
+                &lt;div class&#x3D;&quot;leftChatPerson&quot;&gt;
+                    &lt;fa-icon *ngIf&#x3D;&quot;chat&quot; class&#x3D;&quot;section-icons-7xl&quot; [icon]&#x3D;&quot;faCircleUser&quot;&gt;&lt;/fa-icon&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;gap-3 flex flex-col&quot;&gt;
+                    &lt;div class&#x3D;&quot;divNamesPerson&quot;&gt;
+                        &lt;p *ngIf&#x3D;&quot;chat&quot; class&#x3D;&quot;userName large-text&quot;&gt;{{chat.name}}&lt;/p&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- &lt;div class&#x3D;&quot;divNamesPerson regular-text&quot;&gt;
+                        &lt;p&gt;Nome equipe&lt;/p&gt;
+                    &lt;/div&gt; --&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/header&gt;
+
+
+    &lt;main&gt;
+        &lt;div class&#x3D;&quot;section-left-chat&quot;&gt;
+            &lt;div class&#x3D;&quot;header-section-left&quot;&gt;
+                &lt;div class&#x3D;&quot;search-div&quot;&gt;
+                    &lt;input id&#x3D;&quot;search&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Pesquise por uma conversa...&quot;&gt;
+                    &lt;fa-icon class&#x3D;&quot;searchIcon&quot; [icon]&#x3D;&quot;faSearch&quot;&gt;&lt;/fa-icon&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;main-section-left gap-2&quot;&gt;
+
+                &lt;div class&#x3D;&quot;w-[90%] flex justify-center flex-col&quot;&gt;
+                    &lt;ng-container *ngFor&#x3D;&quot;let chatFor of conversations&quot;&gt;
+                        &lt;div (click)&#x3D;&quot;openConversation(chatFor)&quot;
+                            [ngClass]&#x3D;&quot;chatFor.conversationOpen! ? &#x27;card-chatOpen&#x27; : &#x27;card-chat&#x27;&quot;&gt;
+                            &lt;div class&#x3D;&quot;user-card-message&quot;&gt;
+                                &lt;fa-icon class&#x3D;&quot;chat-icons&quot; [icon]&#x3D;&quot;faCircleUser&quot;&gt;&lt;/fa-icon&gt;
+                                &lt;div class&#x3D;&quot;flex flex-col&quot;&gt;
+                                    &lt;p class&#x3D;&quot;chatName&quot;&gt;{{chatFor.name}}&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+
+                            &lt;!-- &lt;fa-icon class&#x3D;&quot;section-icons&quot; [icon]&#x3D;&quot;faStar&quot;&gt;&lt;/fa-icon&gt;
+                            &lt;div class&#x3D;&quot;div-time-message&quot;&gt;
+    
+                                &lt;div class&#x3D;&quot;div-time&quot;&gt;
+                                    &lt;fa-icon class&#x3D;&quot;section-icons&quot; [icon]&#x3D;&quot;faCheckDouble&quot;&gt;&lt;/fa-icon&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt; --&gt;
+                        &lt;/div&gt;
+
+                    &lt;/ng-container&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;section-right-chat&quot;&gt;
+
+            &lt;div *ngIf&#x3D;&quot;!chat&quot; class&#x3D;&quot;center-div justify-center&quot;&gt;
+                &lt;div class&#x3D;&quot;flex flex-col items-center gap-5 pb-20&quot;&gt;
+                    &lt;fa-icon class&#x3D;&quot;section-icons text-9xl&quot; [icon]&#x3D;&quot;faCommentSlash&quot;&gt;&lt;/fa-icon&gt;
+                    &lt;h6&gt;Não há nenhuma conversa aberta no momento.&lt;/h6&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- &lt;div *ngIf&#x3D;&quot;chat &amp;&amp; !chat.messages&quot;&gt;
+                &lt;div class&#x3D;&quot;flex flex-col items-center gap-5 pb-20&quot;&gt;
+                    &lt;img class&#x3D;&quot;w-40 h-40&quot; src&#x3D;&quot;../../../assets/messageImage.png&quot; alt&#x3D;&quot;&quot;&gt;
+                    &lt;h6&gt;Nenhuma mensagem enviada ainda! Seja o primeiro a enviar uma mensagem!&lt;/h6&gt;
+                &lt;/div&gt;
+            &lt;/div&gt; --&gt;
+
+            &lt;div *ngIf&#x3D;&quot;chat&quot; class&#x3D;&quot;center-div&quot;&gt;
+                &lt;div class&#x3D;&quot;min-h-[60px]&quot;&gt;
+                    &lt;div *ngFor&#x3D;&quot;let message of chat.messages&quot; class&#x3D;&quot;message-container&quot;
+                        [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;left&#x27; : &#x27;right&#x27;&quot;&gt;
+                        &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+                            &lt;p *ngIf&#x3D;&quot;(logged.firstName !&#x3D; message.user)&quot; class&#x3D;&quot;username&quot;&gt;{{ message.user }}&lt;/p&gt;
+                            &lt;p *ngIf&#x3D;&quot;(logged.firstName &#x3D;&#x3D; message.user)&quot; class&#x3D;&quot;username&quot;&gt;Eu&lt;/p&gt;
+                        &lt;/div&gt;
+
+                        &lt;div *ngIf&#x3D;&quot;!message.file&quot;
+                            [ngClass]&#x3D;&quot;logged.firstName!&#x3D;&#x3D;message.user ? &#x27;message-bubble-left&#x27; : &#x27;message-bubble-right&#x27;&quot;&gt;
+                            &lt;p class&#x3D;&quot;contentMessage whitespace-pre-wrap&quot;&gt;{{ message.contentMessage }}&lt;/p&gt;
+                            &lt;p [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;timestampBlack&#x27; : &#x27;timestamp text-right&#x27;&quot;&gt;{{
+                                generateTime(message) }}&lt;/p&gt;
+                        &lt;/div&gt;
+
+                        &lt;div *ngIf&#x3D;&quot;message.file&quot;
+                            [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;message-bubble-left with-photo&#x27; : &#x27;message-bubble-right with-photo items-end&#x27;&quot;&gt;
+                            &lt;div class&#x3D;&quot;w-full h-full flex justify-center items-center gap-3 relative&quot;&gt;
+                                &lt;div class&#x3D;&quot;relative left-[5px] top-1 flex justify-center items-center&quot;
+                                    style&#x3D;&quot;max-width: 300px;&quot;&gt;
+                                    &lt;img [ngClass]&#x3D;&quot;messageFileIncludesImage(message) ? &#x27;image&#x27;:&#x27;archive&#x27;&quot;
+                                        draggable&#x3D;&quot;false&quot; [src]&#x3D;&quot;getIconSrc(message)&quot;
+                                        style&#x3D;&quot;max-width: 100%; height: auto;&quot;&gt;
+                                    &lt;p-image *ngIf&#x3D;&quot;messageFileIncludesImage(message)&quot; [src]&#x3D;&quot;getIconSrc(message)&quot;
+                                        alt&#x3D;&quot;Image&quot; height&#x3D;&quot;auto&quot; width&#x3D;&quot;300&quot; [preview]&#x3D;&quot;true&quot; class&#x3D;&quot;absolute inset-0&quot;&gt;
+                                    &lt;/p-image&gt;
+                                &lt;/div&gt;
+                                &lt;div class&#x3D;&quot;flex flex-col items-center&quot;&gt;
+                                    &lt;p *ngIf&#x3D;&quot;!messageFileIncludesImage(message)&quot; class&#x3D;&quot;text-center&quot;&gt;{{
+                                        message.file.name }}&lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+                                &lt;p
+                                    [ngClass]&#x3D;&quot;message.user !&#x3D;&#x3D; logged.firstName ? &#x27;timestampBlack&#x27; : &#x27;timestamp text-[#fff]&#x27;&quot;&gt;
+                                    {{ generateTime(message) }}
+                                &lt;/p&gt;
+                                &lt;a [href]&#x3D;&quot;changeUrlOfArchive(message)&quot; download&#x3D;&quot;{{ message.file.name }}&quot;&gt;
+                                    &lt;i class&#x3D;&quot;pi pi-download&quot;&gt;&lt;/i&gt;
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+
+
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;form *ngIf&#x3D;&quot;chat &amp;&amp; chat.messages!&#x3D;null&quot; (ngSubmit)&#x3D;&quot;sendMessage(sendForm)&quot;
+                (keydown.enter)&#x3D;&quot;sendMessage(sendForm)&quot; #sendForm&#x3D;&quot;ngForm&quot; class&#x3D;&quot;high-input-div justify-center&quot;&gt;
+                &lt;div class&#x3D;&quot;divWhiteInput&quot;&gt;
+
+                    &lt;textarea type&#x3D;&quot;text&quot; name&#x3D;&quot;message&quot; id&#x3D;&quot;input-message&quot;
+                        class&#x3D;&quot;form-control text-black focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]&quot;
+                        [(ngModel)]&#x3D;&quot;messageUser&quot; placeholder&#x3D;&quot;Digite aqui...&quot;&gt;&lt;/textarea&gt;
+                    
+                    &lt;div class&#x3D;&quot;flex relative&quot;&gt;
+                        &lt;input type&#x3D;&quot;file&quot; id&#x3D;&quot;fileInput&quot; class&#x3D;&quot;hidden absolute left-1/2 top-1/2&quot;
+                            (change)&#x3D;&quot;onFileChange($event)&quot;&gt;
+                        &lt;fa-icon (click)&#x3D;&quot;openFile()&quot; class&#x3D;&quot;section-icons&quot; [icon]&#x3D;&quot;faPaperclip&quot;&gt;&lt;/fa-icon&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;square-chat rounded-sm&quot;&gt;
+                    &lt;fa-icon class&#x3D;&quot;text-lg pr-1&quot; [icon]&#x3D;&quot;faPaperPlane&quot;&gt;&lt;/fa-icon&gt;
+                &lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+
+
+&lt;/section&gt;
+
+&lt;section class&#x3D;&quot;gap-8&quot; *ngIf&#x3D;&quot;!conversations&quot;&gt;
+    &lt;fa-icon class&#x3D;&quot;section-icons text-9xl&quot; [icon]&#x3D;&quot;faCommentSlash&quot;&gt;&lt;/fa-icon&gt;
+    &lt;p class&#x3D;&quot;pHasNoOneChat&quot;&gt;Você ainda não possui nenhum chat cadastrado no sistema. Para criar um chat adicione
+        membros a sua equipe!&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./chat.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../_variables.scss&#x27;;
+
+section{
+    @apply w-screen h-screen flex flex-col justify-center items-center;
+    background-color: $secondColor;
+}
+
+input {
+    padding: 10px;
+}
+
+.chat {
+    margin-top: 10rem;
+}
+
+div.chat-content {
+    border-radius: .25rem;
+    height: 40rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    height: 100%;
+}
+
+.container-custom {
+    @apply flex w-[90%] h-full;
+}
+
+.main-div {
+    @apply flex flex-col w-full h-full;
+}
+
+header {
+    @apply flex w-[100%] h-[15%] justify-between items-end;
+    background-color: $secondColor;
+}
+
+.conversations-div {
+    @apply w-[10%] h-[60%] flex flex-col justify-center items-center;
+}
+
+.conversations {
+    @apply pl-[12.5%];
+    color: $primaryColor
+}
+
+.header-right {
+    @apply w-[69.8%] flex justify-between items-center;
+    color: $primaryColor;
+}
+
+.header-right-informations {
+    @apply flex gap-5 items-center pb-5;
+}
+
+.leftChatPerson {
+    @apply flex items-center gap-2;
+
+}
+
+.divNamesPerson {
+    @apply flex gap-5 items-center;
+}
+
+.userName {
+    @apply text-[1.5rem];
+    color: $primaryColor;
+}
+
+.pHasNoOneChat{
+    @apply text-[1.2rem];
+    color: $primaryColor;
+
+}
+
+main {
+    @apply w-full h-[85%] flex justify-between;
+}
+
+.section-left-chat {
+    @apply flex flex-col items-center justify-between w-[30%] h-[100%] rounded-sm;
+    background-color: $secondColor;
+}
+
+.header-section-left {
+    @apply w-[90%] h-[6%] flex items-center justify-center
+}
+
+.search-div {
+    @apply flex w-[100%] h-[100%] items-center gap-2 border-2 rounded-sm;
+    border: 1px solid $emphasis;
+    background-color: $card;
+}
+
+#search {
+    @apply flex w-[90%] h-[100%] items-center justify-center;
+    color: $text;
+    background-color: $card;
+}
+
+.searchIcon {
+    @apply w-[7%] text-[1.5rem] text-white flex items-center;
+    color: $primaryColor;
+}
+
+.main-section-left {
+    @apply flex flex-col w-full h-[90%] items-center justify-start overflow-auto;
+}
+
+.footer-section-left {
+    @apply flex w-full h-[10%] items-center justify-evenly;
+}
+
+.section-icons {
+    @apply flex justify-center items-center;
+    color: $primaryColor !important;
+}
+
+.section-icons-7xl {
+    @apply flex justify-between items-center;
+    color: $primaryColor !important;
+    font-size: 80px;
+}
+
+.chat-icons {
+    @apply flex justify-between items-center;
+    color: $primaryColor !important;
+    font-size: 70px
+}
+
+.user-card-message {
+    @apply flex gap-6 items-center w-[70%];
+}
+
+.div-time-message {
+    @apply flex items-center justify-center w-[20%];
+}
+
+.div-time {
+    @apply flex flex-col gap-2 items-center;
+}
+
+.card-chat {
+    @apply flex justify-start  items-center w-full pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    border: 1px solid $emphasis;
+    color: $text;
+    background-color: $secondColor;
+    animation: leftPulse 0.3s;
+}
+
+.card-chatOpen {
+    @apply flex justify-start items-center w-[105%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    background-color: $primaryColor;
+    color: $secondColor !important;
+    animation: rightPulse 0.3s;
+    .chat-icons {
+        @apply flex justify-between items-center;
+        color: $secondColor !important;
+        font-size: 70px;
+    }
+}
+
+@keyframes leftPulse {
+    0% {
+        width: 95%;
+    }
+
+    100% {
+        width: 90%;
+    }
+}
+
+@keyframes rightPulse {
+    0% {
+        width: 90%;
+    }
+
+    100% {
+        width: 95%;
+    }
+}
+
+.text-group-individual {
+    @apply flex justify-between items-center gap-2 cursor-pointer;
+}
+
+.section-right-chat {
+    @apply flex flex-col items-center justify-center w-[70%] h-[100%] gap-2 rounded-sm;
+    border: 1px solid $emphasis;
+    background-color: $secondColor;
+}
+
+.center-div {
+    @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
+}
+
+.left {
+    @apply w-[100%] min-h-[60px] flex flex-col items-start gap-2;
+    word-break: break-all;
+    flex-wrap: wrap;
+}
+
+.right {
+    @apply w-[100%] min-h-[60px] flex flex-col items-end gap-2;
+}
+
+/* CSS para as bolhas de mensagem */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 20px;
+}
+
+.message-container.right {
+    align-items: flex-end;
+}
+
+.contentMessage{
+    font-size: $largeText !important;
+}
+
+.message-bubble-left {
+    max-width: 70%;
+    min-width: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $card;
+    color: black !important;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+.message-bubble-right  {
+    max-width: 70%;
+    min-width: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $primaryColor;
+    color: white;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+.message-bubble-right:last-child &gt; :last-child {
+    @apply w-full   
+}
+
+.image{
+    @apply w-80 h-52;
+}
+.archive{
+    @apply w-16 h-16;   
+
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.timestamp {
+    font-size: $smallText;
+    color: rgb(241, 241, 241);
+}
+
+.timestampBlack {
+    font-size: $smallText;
+    color: black;
+}
+
+.divWhiteInput{
+    @apply flex pr-5 gap-4  w-[80%] h-[45%] rounded-sm;
+    background-color: $card;
+}
+
+#input-message{
+    @apply w-[90%] h-[100%] rounded-sm text-lg;
+    background-color: $card;
+    color: $text;
+}
+
+.high-input-div {
+    @apply w-[65%] h-[20%] flex items-center gap-3;
+
+}
+
+.div-input-chat {
+    @apply w-[100%] h-[45%] flex;
+    background-color: $card;
+    border: $borderBottom;
+}
+
+.square-chat {
+    @apply w-[8%] h-[44%] flex items-center justify-center;
+    background-color: $primaryColor;
+    border: $borderBottom;
+
+    .section-icons {
+        @apply flex justify-between items-center;
+        color: $card !important;
+    }
+}
+
+.imgUser {
+    @apply rounded-full;
+    width: 50px;
+    height: 50px;
+}
+
+.emoji-wrapper {
+    position: absolute;
+    right: 40px;
+    bottom: 85px;
+    z-index: 5;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section *ngIf="conversations">    <header>        <div class="conversations-div">            <h3 class="conversations">Conversas</h3>        </div>        <div class="header-right">            <div class="header-right-informations">                <div class="leftChatPerson">                    <fa-icon *ngIf="chat" class="section-icons-7xl" [icon]="faCircleUser"></fa-icon>                </div>                <div class="gap-3 flex flex-col">                    <div class="divNamesPerson">                        <p *ngIf="chat" class="userName large-text">{{chat.name}}</p>                    </div>                    <!-- <div class="divNamesPerson regular-text">                        <p>Nome equipe</p>                    </div> -->                </div>            </div>        </div>    </header>    <main>        <div class="section-left-chat">            <div class="header-section-left">                <div class="search-div">                    <input id="search" type="text" placeholder="Pesquise por uma conversa...">                    <fa-icon class="searchIcon" [icon]="faSearch"></fa-icon>                </div>            </div>            <div class="main-section-left gap-2">                <div class="w-[90%] flex justify-center flex-col">                    <ng-container *ngFor="let chatFor of conversations">                        <div (click)="openConversation(chatFor)"                            [ngClass]="chatFor.conversationOpen! ? \'card-chatOpen\' : \'card-chat\'">                            <div class="user-card-message">                                <fa-icon class="chat-icons" [icon]="faCircleUser"></fa-icon>                                <div class="flex flex-col">                                    <p class="chatName">{{chatFor.name}}</p>                                </div>                            </div>                            <!-- <fa-icon class="section-icons" [icon]="faStar"></fa-icon>                            <div class="div-time-message">                                    <div class="div-time">                                    <fa-icon class="section-icons" [icon]="faCheckDouble"></fa-icon>                                </div>                            </div> -->                        </div>                    </ng-container>                </div>            </div>        </div>        <div class="section-right-chat">            <div *ngIf="!chat" class="center-div justify-center">                <div class="flex flex-col items-center gap-5 pb-20">                    <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>                    <h6>Não há nenhuma conversa aberta no momento.</h6>                </div>            </div>            <!-- <div *ngIf="chat && !chat.messages">                <div class="flex flex-col items-center gap-5 pb-20">                    <img class="w-40 h-40" src="../../../assets/messageImage.png" alt="">                    <h6>Nenhuma mensagem enviada ainda! Seja o primeiro a enviar uma mensagem!</h6>                </div>            </div> -->            <div *ngIf="chat" class="center-div">                <div class="min-h-[60px]">                    <div *ngFor="let message of chat.messages" class="message-container"                        [ngClass]="message.user !== logged.firstName ? \'left\' : \'right\'">                        <div class="flex items-center gap-2">                            <p *ngIf="(logged.firstName != message.user)" class="username">{{ message.user }}</p>                            <p *ngIf="(logged.firstName == message.user)" class="username">Eu</p>                        </div>                        <div *ngIf="!message.file"                            [ngClass]="logged.firstName!==message.user ? \'message-bubble-left\' : \'message-bubble-right\'">                            <p class="contentMessage whitespace-pre-wrap">{{ message.contentMessage }}</p>                            <p [ngClass]="message.user !== logged.firstName ? \'timestampBlack\' : \'timestamp text-right\'">{{                                generateTime(message) }}</p>                        </div>                        <div *ngIf="message.file"                            [ngClass]="message.user !== logged.firstName ? \'message-bubble-left with-photo\' : \'message-bubble-right with-photo items-end\'">                            <div class="w-full h-full flex justify-center items-center gap-3 relative">                                <div class="relative left-[5px] top-1 flex justify-center items-center"                                    style="max-width: 300px;">                                    <img [ngClass]="messageFileIncludesImage(message) ? \'image\':\'archive\'"                                        draggable="false" [src]="getIconSrc(message)"                                        style="max-width: 100%; height: auto;">                                    <p-image *ngIf="messageFileIncludesImage(message)" [src]="getIconSrc(message)"                                        alt="Image" height="auto" width="300" [preview]="true" class="absolute inset-0">                                    </p-image>                                </div>                                <div class="flex flex-col items-center">                                    <p *ngIf="!messageFileIncludesImage(message)" class="text-center">{{                                        message.file.name }}</p>                                </div>                            </div>                            <div class="flex justify-between">                                <p                                    [ngClass]="message.user !== logged.firstName ? \'timestampBlack\' : \'timestamp text-[#fff]\'">                                    {{ generateTime(message) }}                                </p>                                <a [href]="changeUrlOfArchive(message)" download="{{ message.file.name }}">                                    <i class="pi pi-download"></i>                                </a>                            </div>                        </div>                    </div>                </div>            </div>            <form *ngIf="chat && chat.messages!=null" (ngSubmit)="sendMessage(sendForm)"                (keydown.enter)="sendMessage(sendForm)" #sendForm="ngForm" class="high-input-div justify-center">                <div class="divWhiteInput">                    <textarea type="text" name="message" id="input-message"                        class="form-control text-black focus:outline-none resize-none rounded-sm border-l-4 pt-[15px] pl-[15px] w-[90%] h-[100%]"                        [(ngModel)]="messageUser" placeholder="Digite aqui..."></textarea>                                        <div class="flex relative">                        <input type="file" id="fileInput" class="hidden absolute left-1/2 top-1/2"                            (change)="onFileChange($event)">                        <fa-icon (click)="openFile()" class="section-icons" [icon]="faPaperclip"></fa-icon>                    </div>                </div>                <button type="submit" class="square-chat rounded-sm">                    <fa-icon class="text-lg pr-1" [icon]="faPaperPlane"></fa-icon>                </button>            </form>        </div>    </main></section><section class="gap-8" *ngIf="!conversations">    <fa-icon class="section-icons text-9xl" [icon]="faCommentSlash"></fa-icon>    <p class="pHasNoOneChat">Você ainda não possui nenhum chat cadastrado no sistema. Para criar um chat adicione        membros a sua equipe!</p></section></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ChatComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChatComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

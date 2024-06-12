@@ -1,0 +1,49 @@
+@import '../../../../variables';
+
+.main-div {
+    @apply w-full h-[150px] shadow-lg;
+    background-color: $card;
+}
+
+.user-card {
+    @apply pt-5 flex flex-col gap-4 w-full;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $primaryColor;
+    margin-left: 3px;
+}
+
+.title{
+    font-size: $largeText;
+    @apply cursor-pointer;
+}
+
+.icon {
+    color: $primaryColor;
+    font-size: 1rem;
+}
+
+.members{
+    font-size: $smallText;
+    @apply flex justify-end w-[92%] pb-10
+}
+
+.clicked {
+    border-bottom: 1px solid $primaryColor;
+}
+
+input{
+    @apply  h-[30px];
+    background-color: $card;
+    color: $primaryColor;
+    padding-left: 10px;
+    font-size: $smallText;
+}
+
+input {
+    background-color: $card;
+}
+
+
+

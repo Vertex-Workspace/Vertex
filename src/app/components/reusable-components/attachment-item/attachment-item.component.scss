@@ -1,0 +1,40 @@
+@import '../../../../variables';
+
+.item {
+    @apply relative w-full h-[90px] rounded-sm flex items-center p-2 shadow-md;
+    background-color: $secondColor;
+
+    img {
+        @apply h-[80%] mr-3;
+    }
+
+    div:last-child {
+        @apply p-2 w-full flex justify-between items-center cursor-pointer;
+        background-color: #474747af;
+        color: $secondColor;
+
+        p {
+            @apply w-2/3 overflow-hidden ;
+        }
+        
+        a {
+            @apply p-1 rounded-full flex items-center justify-center w-[35px] h-[35px];
+
+            &:hover {
+                background-color: #b1b1b1;
+            }
+
+            i {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .remove {
+        @apply absolute top-0 right-0 h-full flex items-center gap-4 pr-4;
+
+        i {
+            font-size: 1.2rem;
+        }
+    }
+}

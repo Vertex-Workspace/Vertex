@@ -1,0 +1,14 @@
+<div class="modal-overlay" *ngIf="!secondModal" draggable="false">
+    <div class="modal" [style.height]="height" [style.width]="width">
+        <div class="text-align">
+            <h6 *ngIf="!secondModal">{{ 'components.modals.confirm-modal.confirm_message' | translate }} {{title}}</h6>
+        </div>
+        <div class="ng-contentDiv">
+            <ng-content #content></ng-content>
+        </div>
+        <div class="button-div">
+            <button (click)="deleteConfirm(false)" class="no-button regular-text">{{ 'components.modals.confirm-modal.cancel_button' | translate }}</button>
+            <button (click)="deleteConfirm(true)" class="yes-button regular-text">{{ 'components.modals.confirm-modal.confirm_button' | translate }}</button>
+        </div>
+    </div>
+</div>

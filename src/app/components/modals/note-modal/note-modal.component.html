@@ -1,0 +1,83 @@
+<section class="modal-overlay">
+    <div class="modal" [style.backgroundColor]="note.color">
+        <div class="left">
+
+            <div>
+                <input type="text" class="title" [(ngModel)]="note.title" [style.backgroundColor]="note.color">
+            </div>
+            <div class="main-content">
+
+                <div class="content">
+                    <textarea 
+                        [disabled]="!descriptionEditable"
+                        [(ngModel)]="note.description"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        [cdkAutosizeMinRows]="1"
+                        [cdkAutosizeMaxRows]="7"
+                        maxlength="500"
+                        [style.backgroundColor]="note.color"
+                        [style.border]="descriptionEditable ? 'solid black 1px' : 'none'"
+                        #description
+                    >
+                    </textarea>
+
+                    <a class="self-end text-black" *ngIf="!descriptionEditable" (click)="toggleEditDescription()">
+                        {{ 'components.modals.note-modal.editDescription' | translate }}
+                    </a>
+                    
+                    <a class="self-end text-black" *ngIf="descriptionEditable" (click)="toggleEditDescription()">
+                        {{ 'components.modals.note-modal.confirm' | translate }}
+                    </a>
+                    
+                </div>
+                <div class="image-container" *ngIf="note.files.length > 0">
+                    <ng-container *ngFor="let file of note.files">
+                        <div 
+                            class="single-image flex-col"
+                            (mouseenter)="hoverFile(file)"
+                        >
+                            <i class="pi pi-plus rotate-45" (click)="removeImage(file)"></i>
+                            <a [href]="changeUrlOfArchive(file)" download="{{ file.name }}">
+                                <img [src]="getIconSrc(file)" class="z-[1]" draggable="false">
+                            </a>
+                            <div class="small-text flex flex-row h-[30px] items-center">
+              
+                                <img *ngIf="userService.getLogged().userKind==='GOOGLE'" class="w-8 h-8 max-h-[30px] flex object-contain self-start cursor-pointer"
+                                src="../../../../../assets/Google-Drive-Logo.png" (click)="callServiceDrive(file)" alt="">
+                                {{file.name}}
+                              </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+
+            <div class="config">
+                <div class="color-list">
+
+                    <ng-container *ngFor="let color of colorList">
+                        <div class="color" 
+                            [style.backgroundColor]="color.color" 
+                            (click)="changeColor(color)"
+                        >
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="config-right">
+                    <div class="image">
+                        <i class="pi pi-images"></i>
+                        <form>
+                            <input type="file" class="input-file" (change)="onFileSelected($event)">
+                        </form>
+                    </div>
+                    
+                    <button (click)="submit()">
+                        <i class="pi pi-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <i class="pi pi-plus rotate-45" (click)="clickOutHandler()"></i>
+    </div>
+</section>

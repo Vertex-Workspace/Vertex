@@ -1,0 +1,2557 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProjectsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/projects/projects.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-projects</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./projects.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./projects.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#clicked" >clicked</a>
+                            </li>
+                            <li>
+                                <a href="#configItems" >configItems</a>
+                            </li>
+                            <li>
+                                <a href="#filterOpen" >filterOpen</a>
+                            </li>
+                            <li>
+                                <a href="#filterOptions" >filterOptions</a>
+                            </li>
+                            <li>
+                                <a href="#isCreatingProject" >isCreatingProject</a>
+                            </li>
+                            <li>
+                                <a href="#logged" >logged</a>
+                            </li>
+                            <li>
+                                <a href="#orderOpen" >orderOpen</a>
+                            </li>
+                            <li>
+                                <a href="#orderOptions" >orderOptions</a>
+                            </li>
+                            <li>
+                                <a href="#orderParams" >orderParams</a>
+                            </li>
+                            <li>
+                                <a href="#permissionsOnTeam" >permissionsOnTeam</a>
+                            </li>
+                            <li>
+                                <a href="#permissionsOnTeamObservable" >permissionsOnTeamObservable</a>
+                            </li>
+                            <li>
+                                <a href="#projects" >projects</a>
+                            </li>
+                            <li>
+                                <a href="#projectSearch" >projectSearch</a>
+                            </li>
+                            <li>
+                                <a href="#queryFilter" >queryFilter</a>
+                            </li>
+                            <li>
+                                <a href="#selectedFilter" >selectedFilter</a>
+                            </li>
+                            <li>
+                                <a href="#taskOpen" >taskOpen</a>
+                            </li>
+                            <li>
+                                <a href="#taskOpenObject" >taskOpenObject</a>
+                            </li>
+                            <li>
+                                <a href="#team" >team</a>
+                            </li>
+                            <li>
+                                <a href="#teamName" >teamName</a>
+                            </li>
+                            <li>
+                                <a href="#tutorialText" >tutorialText</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeModalTaskState" >changeModalTaskState</a>
+                            </li>
+                            <li>
+                                <a href="#changePreviewMode" >changePreviewMode</a>
+                            </li>
+                            <li>
+                                <a href="#clickFilter" >clickFilter</a>
+                            </li>
+                            <li>
+                                <a href="#clickOrder" >clickOrder</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                <a href="#getTeam" >getTeam</a>
+                            </li>
+                            <li>
+                                <a href="#goTeamSettings" >goTeamSettings</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#switchCreateView" >switchCreateView</a>
+                            </li>
+                            <li>
+                                <a href="#updateProjects" >updateProjects</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(projectService: <a href="../injectables/ProjectService.html" target="_self">ProjectService</a>, route: ActivatedRoute, alert: <a href="../injectables/AlertService.html" target="_self">AlertService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, teamService: <a href="../injectables/TeamService.html" target="_self">TeamService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/pages/projects/projects.component.ts:68</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>projectService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alert</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AlertService.html" target="_self" >AlertService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>teamService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TeamService.html" target="_self" >TeamService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeModalTaskState"></a>
+                    <span class="name">
+                        <span ><b>changeModalTaskState</b></span>
+                        <a href="#changeModalTaskState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeModalTaskState(bool: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, task: <a href="../classes/Task.html" target="_self">Task</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:158</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bool</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>task</td>
+                                            <td>
+                                                            <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changePreviewMode"></a>
+                    <span class="name">
+                        <span ><b>changePreviewMode</b></span>
+                        <a href="#changePreviewMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changePreviewMode(preview: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>preview</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clickFilter"></a>
+                    <span class="name">
+                        <span ><b>clickFilter</b></span>
+                        <a href="#clickFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clickFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clickOrder"></a>
+                    <span class="name">
+                        <span ><b>clickOrder</b></span>
+                        <a href="#clickOrder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clickOrder()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete(project: <a href="../classes/Project.html" target="_self">Project</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>project</td>
+                                            <td>
+                                                            <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTeam"></a>
+                    <span class="name">
+                        <span ><b>getTeam</b></span>
+                        <a href="#getTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTeam()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goTeamSettings"></a>
+                    <span class="name">
+                        <span ><b>goTeamSettings</b></span>
+                        <a href="#goTeamSettings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goTeamSettings()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="switchCreateView"></a>
+                    <span class="name">
+                        <span ><b>switchCreateView</b></span>
+                        <a href="#switchCreateView"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>switchCreateView()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProjects"></a>
+                    <span class="name">
+                        <span ><b>updateProjects</b></span>
+                        <a href="#updateProjects"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateProjects(project: <a href="../classes/Project.html" target="_self">Project</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/pages/projects/projects.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>project</td>
+                                            <td>
+                                                            <code><a href="../classes/Project.html" target="_self" >Project</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clicked"></a>
+                    <span class="name">
+                        <span ><b>clicked</b></span>
+                        <a href="#clicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;project&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/projects/projects.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configItems"></a>
+                    <span class="name">
+                        <span ><b>configItems</b></span>
+                        <a href="#configItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { id: &#x27;filter&#x27;, iconClass: &#x27;pi pi-filter&#x27;, click: () &#x3D;&gt; this.clickFilter() },
+    { id: &#x27;order&#x27;, iconClass: &#x27;pi pi-arrow-right-arrow-left&#x27;, click: () &#x3D;&gt; this.clickOrder() },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/pages/projects/projects.component.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterOpen"></a>
+                    <span class="name">
+                        <span ><b>filterOpen</b></span>
+                        <a href="#filterOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/projects/projects.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterOptions"></a>
+                    <span class="name">
+                        <span ><b>filterOptions</b></span>
+                        <a href="#filterOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {name: &#x27;Status&#x27;, values: [
+      {name: &#x27;Não Iniciado&#x27;, kind: PropertyListKind.TODO, status: true},
+      {name: &#x27;Em Andamento&#x27;, kind: PropertyListKind.DOING, status: true},
+      {name: &#x27;Concluído&#x27;, kind: PropertyListKind.DONE, status: true}
+    ]},
+    {name: &#x27;Data&#x27;, values: [
+      {name: &quot;Hoje&quot;, kind: PropertyKind.DATE as string, value: &#x27;td&#x27; },
+      { name: &quot;Próxima semana&quot;, kind: PropertyKind.DATE as string, value: &#x27;nw&#x27; },
+      { name: &quot;Próximo mês&quot;, kind: PropertyKind.DATE as string, value: &#x27;nm&#x27;}
+    ]},
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/projects/projects.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCreatingProject"></a>
+                    <span class="name">
+                        <span ><b>isCreatingProject</b></span>
+                        <a href="#isCreatingProject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/projects/projects.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logged"></a>
+                    <span class="name">
+                        <span ><b>logged</b></span>
+                        <a href="#logged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/projects/projects.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="orderOpen"></a>
+                    <span class="name">
+                        <span ><b>orderOpen</b></span>
+                        <a href="#orderOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/projects/projects.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="orderOptions"></a>
+                    <span class="name">
+                        <span ><b>orderOptions</b></span>
+                        <a href="#orderOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { name: &#x27;Nome&#x27;, values: [
+      { name: &#x27;A-Z&#x27;, type: &#x27;name&#x27;  },
+      { name: &#x27;Z-A&#x27;, type: &#x27;name&#x27; }
+    ]},
+    { name: &#x27;Data&#x27;, values: [
+      { name: &#x27;Maior - Menor&#x27;, type: &#x27;date&#x27; },
+      { name: &#x27;Menor - Maior&#x27;, type: &#x27;date&#x27; }
+    ] },
+    { name: &#x27;Status&#x27;, values: [
+      { name: &#x27;Não Iniciado&#x27;, type: &#x27;status&#x27;, kind: PropertyListKind.TODO },
+      { name: &#x27;Em Andamento&#x27;, type: &#x27;status&#x27;, kind: PropertyListKind.DOING },
+      { name: &#x27;Concluído&#x27;, type: &#x27;status&#x27;, kind: PropertyListKind.DONE },
+    ] }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/projects/projects.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="orderParams"></a>
+                    <span class="name">
+                        <span ><b>orderParams</b></span>
+                        <a href="#orderParams"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PipeParams.html" target="_self" >PipeParams</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/projects/projects.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="permissionsOnTeam"></a>
+                    <span class="name">
+                        <span ><b>permissionsOnTeam</b></span>
+                        <a href="#permissionsOnTeam"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Permission.html" target="_self" >Permission[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/pages/projects/projects.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="permissionsOnTeamObservable"></a>
+                    <span class="name">
+                        <span ><b>permissionsOnTeamObservable</b></span>
+                        <a href="#permissionsOnTeamObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Permission.html" target="_self" >Observable&lt;Permission[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/pages/projects/projects.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="projects"></a>
+                    <span class="name">
+                        <span ><b>projects</b></span>
+                        <a href="#projects"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Project.html" target="_self" >Project[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/pages/projects/projects.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="projectSearch"></a>
+                    <span class="name">
+                        <span ><b>projectSearch</b></span>
+                        <a href="#projectSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/pages/projects/projects.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="queryFilter"></a>
+                    <span class="name">
+                        <span ><b>queryFilter</b></span>
+                        <a href="#queryFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/pages/projects/projects.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFilter"></a>
+                    <span class="name">
+                        <span ><b>selectedFilter</b></span>
+                        <a href="#selectedFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/projects/projects.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskOpen"></a>
+                    <span class="name">
+                        <span ><b>taskOpen</b></span>
+                        <a href="#taskOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">src/app/pages/projects/projects.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="taskOpenObject"></a>
+                    <span class="name">
+                        <span ><b>taskOpenObject</b></span>
+                        <a href="#taskOpenObject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Task.html" target="_self" >Task</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/pages/projects/projects.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="team"></a>
+                    <span class="name">
+                        <span ><b>team</b></span>
+                        <a href="#team"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Team.html" target="_self" >Team</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/projects/projects.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="teamName"></a>
+                    <span class="name">
+                        <span ><b>teamName</b></span>
+                        <a href="#teamName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/pages/projects/projects.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tutorialText"></a>
+                    <span class="name">
+                        <span ><b>tutorialText</b></span>
+                        <a href="#tutorialText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>tutorialText</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/projects/projects.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { CardListComponent } from &#x27;src/app/components/reusable-components/card-list/card-list.component&#x27;;
+import { Group } from &#x27;src/app/models/class/groups&#x27;;
+import { Project } from &#x27;src/app/models/class/project&#x27;;
+import { PropertyKind, PropertyListKind } from &#x27;src/app/models/class/property&#x27;;
+import { Task } from &#x27;src/app/models/class/task&#x27;;
+import { Team } from &#x27;src/app/models/class/team&#x27;;
+import { Permission, User } from &#x27;src/app/models/class/user&#x27;;
+import { PipeParams } from &#x27;src/app/models/interface/params&#x27;;
+import { AlertService } from &#x27;src/app/services/alert.service&#x27;;
+import { GroupService } from &#x27;src/app/services/group.service&#x27;;
+import { ProjectService } from &#x27;src/app/services/project.service&#x27;;
+import { TeamService } from &#x27;src/app/services/team.service&#x27;;
+import { UserService } from &#x27;src/app/services/user.service&#x27;;
+import { tutorialText } from &#x27;src/app/tutorialText&#x27;;
+
+@Component({
+  selector: &#x27;app-projects&#x27;,
+  templateUrl: &#x27;./projects.component.html&#x27;,
+  styleUrls: [&#x27;./projects.component.scss&#x27;]
+})
+export class ProjectsComponent implements OnInit {
+  isCreatingProject: boolean &#x3D; false;
+  filterOpen: boolean &#x3D; false;
+  orderOpen: boolean &#x3D; false;
+  clicked: string &#x3D; &#x27;project&#x27;;
+  logged !: User;
+  team !: Team;
+  tutorialText &#x3D; tutorialText;
+
+  //TASKS - FILTER AND ORDER
+  selectedFilter !: string;
+  filterOptions: any[] &#x3D; [
+    {name: &#x27;Status&#x27;, values: [
+      {name: &#x27;Não Iniciado&#x27;, kind: PropertyListKind.TODO, status: true},
+      {name: &#x27;Em Andamento&#x27;, kind: PropertyListKind.DOING, status: true},
+      {name: &#x27;Concluído&#x27;, kind: PropertyListKind.DONE, status: true}
+    ]},
+    {name: &#x27;Data&#x27;, values: [
+      {name: &quot;Hoje&quot;, kind: PropertyKind.DATE as string, value: &#x27;td&#x27; },
+      { name: &quot;Próxima semana&quot;, kind: PropertyKind.DATE as string, value: &#x27;nw&#x27; },
+      { name: &quot;Próximo mês&quot;, kind: PropertyKind.DATE as string, value: &#x27;nm&#x27;}
+    ]},
+  ];
+
+  orderParams !: PipeParams;
+  orderOptions : any &#x3D; [
+    { name: &#x27;Nome&#x27;, values: [
+      { name: &#x27;A-Z&#x27;, type: &#x27;name&#x27;  },
+      { name: &#x27;Z-A&#x27;, type: &#x27;name&#x27; }
+    ]},
+    { name: &#x27;Data&#x27;, values: [
+      { name: &#x27;Maior - Menor&#x27;, type: &#x27;date&#x27; },
+      { name: &#x27;Menor - Maior&#x27;, type: &#x27;date&#x27; }
+    ] },
+    { name: &#x27;Status&#x27;, values: [
+      { name: &#x27;Não Iniciado&#x27;, type: &#x27;status&#x27;, kind: PropertyListKind.TODO },
+      { name: &#x27;Em Andamento&#x27;, type: &#x27;status&#x27;, kind: PropertyListKind.DOING },
+      { name: &#x27;Concluído&#x27;, type: &#x27;status&#x27;, kind: PropertyListKind.DONE },
+    ] }
+  ];
+
+
+  queryFilter !: string;
+
+  projectSearch !: string;
+
+  constructor(
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private alert: AlertService,
+    private userService: UserService,
+    private teamService: TeamService,
+    private router: Router,
+  ) {
+    this.logged &#x3D; this.userService.getLogged();
+  }
+
+
+  permissionsOnTeam!: Permission[];
+  permissionsOnTeamObservable!: Observable&lt;Permission[]&gt;;
+
+  ngOnInit(): void {
+    this.getTeam();
+  }
+
+
+  teamName: string &#x3D; &#x27;&#x27;;
+  getTeam() {
+    const teamId: number &#x3D; Number(this.route.snapshot.paramMap.get(&#x27;id&#x27;));
+    this.teamService
+    .getOneById(teamId)
+    .subscribe((team: Team) &#x3D;&gt; {
+      console.log(team);
+      
+      this.team &#x3D; team;
+      this.teamName &#x3D; team.name!;
+      this.projects &#x3D; this.team.projects;
+      this.permissionsOnTeamObservable &#x3D; this.teamService.getPermission(this.team.id, this.logged.id!);
+      this.permissionsOnTeamObservable.subscribe((permissions: Permission[]) &#x3D;&gt; {
+        this.permissionsOnTeam &#x3D; permissions;
+        
+      });
+    }, (error) &#x3D;&gt; {
+      this.router.navigate([&#x27;/home&#x27;]);
+      this.alert.errorAlert(&#x27;Equipe inexistente!&#x27;)
+    });
+  }
+
+
+
+  delete(project: Project): void {
+    this.projectService
+      .delete(project.id)
+      .subscribe(() &#x3D;&gt; {
+        this.alert.successAlert(&#x60;Projeto deletado com sucesso!&#x60;);
+        this.team.projects?.splice(this.team.projects.indexOf(project),1)
+      },
+       e &#x3D;&gt; {
+         this.alert.errorAlert(&#x27;Erro ao deletar projeto!&#x27;);
+       });
+  }
+
+  changePreviewMode(preview: string): void {
+    this.clicked &#x3D; preview;
+  }
+
+  projects: Project[] &#x3D; []
+
+  switchCreateView(): void {
+    this.isCreatingProject &#x3D; !this.isCreatingProject;
+  }
+
+  updateProjects(project: Project) {
+    this.projects.push(project);
+    this.switchCreateView();
+  }
+
+  configItems &#x3D; [
+    { id: &#x27;filter&#x27;, iconClass: &#x27;pi pi-filter&#x27;, click: () &#x3D;&gt; this.clickFilter() },
+    { id: &#x27;order&#x27;, iconClass: &#x27;pi pi-arrow-right-arrow-left&#x27;, click: () &#x3D;&gt; this.clickOrder() },
+  ];
+
+  clickFilter(): void {
+    this.filterOpen &#x3D; !this.filterOpen;
+    this.selectedFilter &#x3D; &#x27;&#x27;;
+  }
+
+  clickOrder(): void {
+    this.orderParams &#x3D; {name: &#x27;&#x27;, type: &#x27;&#x27;};
+    this.orderOpen &#x3D; !this.orderOpen;
+  }
+
+  taskOpen: boolean &#x3D; false;
+  taskOpenObject!: Task;
+  changeModalTaskState(bool: boolean, task: Task): void {
+    if (bool &#x3D;&#x3D; false) {
+      this.taskOpenObject &#x3D; {} as Task;
+      this.taskOpen &#x3D; false;
+      return;
+    } else {
+      this.taskOpen &#x3D; true;
+      this.taskOpenObject &#x3D; task;
+    }
+  }
+
+
+  goTeamSettings():void{
+    const route : string &#x3D; &#x27;equipe/&#x27; + this.team.id;
+    this.router.navigate([route]);
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section&gt;
+    &lt;div class&#x3D;&quot;container-custom&quot;&gt;
+        &lt;!-- RIGHT SIDE TASKS/TEAMS --&gt;
+        &lt;div class&#x3D;&quot;container-grid&quot;&gt;
+            &lt;div class&#x3D;&quot;flex flex-row items-end gap-3&quot;&gt;
+                &lt;h4 class&#x3D;&quot;underline cursor-pointer&quot; (click)&#x3D;&quot;goTeamSettings()&quot;&gt;{{teamName}}&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;pt-2 mb-3&quot;&gt;
+                &lt;p class&#x3D;&quot;small-text text-gray-600 text-justify w-2/3&quot;&gt;Projetos são os diferentes espaços de trabalho de uma equipe, neles
+                é possível segmentar assuntos e organizar as tarefas sua e/ou do
+                    time.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex flex-col&quot; joyrideStep&#x3D;&quot;step4&quot; [prevTemplate]&#x3D;&quot;prevButton&quot; [nextTemplate]&#x3D;&quot;nextButton&quot;
+                [title]&#x3D;&quot;&#x27;Visualizar / Criar projetos&#x27;&quot; [stepContent]&#x3D;&quot;customContent&quot;
+                [stepContentParams]&#x3D;&quot;{ texto: tutorialText[5] }&quot;&gt;
+                &lt;div class&#x3D;&quot;functionally-items regular-text&quot;&gt;
+                    &lt;div class&#x3D;&quot;search&quot;&gt;
+                        &lt;input class&#x3D;&quot;inputSearch&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Pesquisar por um projeto...&quot;
+                            [(ngModel)]&#x3D;&quot;projectSearch&quot;&gt;
+                        &lt;i class&#x3D;&quot;pi pi-search cursor-pointer&quot; style&#x3D;&quot;font-size: 1.4rem;&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;button class&#x3D;&quot;create&quot; (click)&#x3D;&quot;switchCreateView()&quot;&gt;
+                        &lt;i class&#x3D;&quot;pi pi-plus-circle&quot; style&#x3D;&quot;font-size: 1.7rem;&quot;&gt;&lt;/i&gt;
+                        &lt;p&gt;
+                            Novo projeto
+                        &lt;/p&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;default-size&quot; joyrideStep&#x3D;&quot;goToTasks&quot; [prevTemplate]&#x3D;&quot;prevButton&quot;
+                    [nextTemplate]&#x3D;&quot;nextButton&quot; [title]&#x3D;&quot;&#x27;Ir para tarefas&#x27;&quot; [stepContent]&#x3D;&quot;customContent&quot;
+                    [stepContentParams]&#x3D;&quot;{ texto: tutorialText[7] }&quot;&gt;
+
+                    &lt;div class&#x3D;&quot;w-[40%] absolute&quot; *ngIf&#x3D;&quot;projects.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+                        &lt;h6 class&#x3D;&quot;pt-16 flex justify-center items-center&quot;&gt;Nenhum projeto disponível...&lt;/h6&gt;
+                    &lt;/div&gt;
+                    &lt;app-card-list style&#x3D;&quot;width: 100%; height: 90%; padding-top: 3%&quot; [type]&#x3D;&quot;&#x27;project&#x27;&quot; [team]&#x3D;&quot;team&quot;
+                        [teamScreen]&#x3D;&quot;&#x27;project&#x27;&quot; [projects]&#x3D;&quot;projects&quot;&gt;
+                    &lt;/app-card-list&gt;
+                    &lt;app-create-team-project style&#x3D;&quot;width: 100%; height: 90%; padding-top: 3%;&quot;
+                        *ngIf&#x3D;&quot;isCreatingProject&quot; (senderEmitter)&#x3D;&quot;updateProjects($event)&quot; (close)&#x3D;&quot;switchCreateView()&quot;
+                        [typeString]&#x3D;&quot;&#x27;project&#x27;&quot; [team]&#x3D;&quot;team&quot;&gt;&lt;/app-create-team-project&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- RIGHT SIDE - QUICK ACCESS --&gt;
+        &lt;div class&#x3D;&quot;container-grid pb-10&quot;&gt;
+            &lt;div class&#x3D;&quot;default-size&quot;&gt;
+                &lt;div class&#x3D;&quot;flex flex-row items-end gap-3&quot;&gt;
+                    &lt;h4&gt;Tarefas de {{teamName}}&lt;/h4&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;pt-2&quot;&gt;
+                    &lt;p class&#x3D;&quot;small-text text-gray-600 text-justify w-2/3 mb-3&quot;&gt;Nessa seção é possível visualizar todas as tarefas na qual você
+                    é um dos responsáveis dentro da equipe {{teamName}}&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;flex flex-col&quot; joyrideStep&#x3D;&quot;step5&quot; [prevTemplate]&#x3D;&quot;prevButton&quot; [nextTemplate]&#x3D;&quot;nextButton&quot;
+                    [title]&#x3D;&quot;&#x27;Visualizar tarefas da equipe&#x27;&quot; [stepContent]&#x3D;&quot;customContent&quot;
+                    [stepContentParams]&#x3D;&quot;{ texto: tutorialText[6] }&quot;&gt;
+
+                    &lt;div class&#x3D;&quot;functionally-items regular-text&quot;&gt;
+                        &lt;div class&#x3D;&quot;search&quot;&gt;
+                            &lt;input class&#x3D;&quot;inputSearch&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Pesquise por uma tarefa...&quot;
+                                [(ngModel)]&#x3D;&quot;queryFilter&quot;&gt;
+                            &lt;i class&#x3D;&quot;pi pi-search cursor-pointer&quot; style&#x3D;&quot;font-size: 1.4rem;&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;filter-items&quot;&gt;
+                            &lt;div *ngFor&#x3D;&quot;let item of configItems&quot; class&#x3D;&quot;icons&quot;&gt;
+                                &lt;button (click)&#x3D;&quot;item.click()&quot;&gt;
+                                    &lt;i class&#x3D;&quot;{{ item.iconClass }}&quot;
+                                        [style.transform]&#x3D;&quot;item.id &#x3D;&#x3D;&#x3D; &#x27;order&#x27; ? &#x27;rotate(90deg)&#x27; : &#x27;rotate(0deg)&#x27;&quot;&gt;&lt;/i&gt;
+                                &lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;section class&#x3D;&quot;filter-settings&quot; *ngIf&#x3D;&quot;filterOpen || orderOpen&quot;&gt;
+                        &lt;ng-container *ngIf&#x3D;&quot;filterOpen&quot;&gt;
+                            &lt;p&gt;Filtrar por &lt;/p&gt;
+                            &lt;p-cascadeSelect [(ngModel)]&#x3D;&quot;selectedFilter&quot; [options]&#x3D;&quot;filterOptions&quot; optionLabel&#x3D;&quot;name&quot;
+                                optionGroupLabel&#x3D;&quot;name&quot; [optionGroupChildren]&#x3D;&quot;[&#x27;values&#x27;]&quot;
+                                [style]&#x3D;&quot;{ minWidth: &#x27;14rem&#x27; }&quot; placeholder&#x3D;&quot;Selecione&quot;&gt;&lt;/p-cascadeSelect&gt;
+
+                        &lt;/ng-container&gt;
+                        &lt;ng-container *ngIf&#x3D;&quot;orderOpen&quot;&gt;
+                            &lt;p&gt;Ordenar por &lt;/p&gt;
+                            &lt;p-cascadeSelect [(ngModel)]&#x3D;&quot;orderParams&quot; [options]&#x3D;&quot;orderOptions&quot; optionLabel&#x3D;&quot;name&quot;
+                                optionGroupLabel&#x3D;&quot;name&quot; [optionGroupChildren]&#x3D;&quot;[&#x27;values&#x27;]&quot;
+                                [style]&#x3D;&quot;{ minWidth: &#x27;13rem&#x27; }&quot; placeholder&#x3D;&quot;Selecione&quot;&gt;&lt;/p-cascadeSelect&gt;
+                        &lt;/ng-container&gt;
+                    &lt;/section&gt;
+
+                    &lt;!-- NG IF uses to wait the permissions request before render the component --&gt;
+                    &lt;div class&#x3D;&quot;default-size&quot; *ngIf&#x3D;&quot;permissionsOnTeamObservable | async&quot;&gt;
+                        &lt;app-list style&#x3D;&quot;padding-top: 3%;&quot; [team]&#x3D;&quot;team&quot;
+                            (openTaskDetails)&#x3D;&quot;changeModalTaskState(true, $event)&quot; [permissions]&#x3D;&quot;permissionsOnTeam&quot;
+                            [queryFilter]&#x3D;&quot;queryFilter&quot; [filter]&#x3D;&quot;selectedFilter&quot;
+                            [orderParams]&#x3D;&quot;orderParams&quot;&gt;&lt;/app-list&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;!-- &lt;app-quick-access style&#x3D;&quot;width: 100%; height:100%;&quot; [typeString]&#x3D;&quot;&#x27;project&#x27;&quot;&gt;&lt;/app-quick-access&gt; --&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;ng-container *ngIf&#x3D;&quot;permissionsOnTeamObservable | async&quot;&gt;
+    &lt;app-task [task]&#x3D;&quot;taskOpenObject&quot; *ngIf&#x3D;&quot;taskOpen&quot; (close)&#x3D;&quot;changeModalTaskState(false, taskOpenObject)&quot;
+        [permissions]&#x3D;&quot;permissionsOnTeam&quot;&gt;&lt;/app-task&gt;
+
+&lt;/ng-container&gt;
+
+&lt;ng-template #prevButton&gt;
+    &lt;button class&#x3D;&quot;btn btn-outline-primary&quot;&gt;
+        Voltar
+    &lt;/button&gt;
+&lt;/ng-template&gt;
+&lt;ng-template #nextButton&gt;
+    &lt;button class&#x3D;&quot;btn btn-primary&quot;&gt;
+        Próximo
+    &lt;/button&gt;
+&lt;/ng-template&gt;
+&lt;ng-template #customContent let-texto&#x3D;&quot;texto&quot; style&#x3D;&quot;border-radius: 5px&quot;&gt;
+    &lt;div [innerHTML]&#x3D;&quot;texto&quot; style&#x3D;&quot;max-width: 300px; padding: 20px&quot;&gt;&lt;/div&gt;
+&lt;/ng-template&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./projects.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;../../../variables&#x27;;
+
+@media screen and (min-width: 1430px) {
+    section{
+        @apply flex w-screen h-full justify-center items-center ;
+    }
+    
+    .container-custom{
+        @apply grid w-[90%] h-full grid-cols-2 gap-20;
+    }
+    
+    //TEAMS
+    .nav-tasks-teams{
+        border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: 0.25px solid $emphasis;
+        
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+            
+        }
+        
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+    
+    .functionally-items {
+        @apply flex flex-row w-full pt-4 justify-between;
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-col w-full justify-between;
+        
+        .filter-items {
+            @apply flex;
+        }
+        
+    }
+    
+    .functionally-items, .functionally-items-task {
+        
+        .container {
+            @apply flex w-full justify-between;
+        }
+        
+        .filter-items {
+            @apply flex gap-2;
+            
+            button {
+                border: none;
+                &amp;:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
+        button {
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-full w-[180px] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
+        }
+        .search {
+            @apply w-96 h-[56px] flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+            
+            i {
+                @apply w-[10%];
+            }
+            
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+    }
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .container-grid{
+        @apply flex flex-col h-[90%] w-full pt-4;
+    }
+    .default-size{
+        @apply flex w-full h-[70%] flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] mt-6 justify-start;
+        
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+        
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+        
+    }
+    
+    //BUTTONS
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1430px) {
+    section{
+        @apply flex w-screen h-full justify-center items-center;
+    }
+    
+    .container-custom{
+        @apply grid w-[90%] h-full grid-cols-2 gap-20;
+    }
+    
+    //TEAMS
+    .nav-tasks-teams{
+        border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: 0.25px solid $emphasis;
+        
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+            
+        }
+        
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+    
+    .functionally-items {
+        @apply flex flex-row w-full pt-4 justify-between;
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-col w-full justify-between;
+        
+        .filter-items {
+            @apply flex;
+        }
+        
+    }
+    
+    .functionally-items, .functionally-items-task {
+        
+        .container {
+            @apply flex w-full justify-between;
+        }
+        
+        .filter-items {
+            @apply flex gap-2;
+            
+            button {
+                border: none;
+                &amp;:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
+        button {
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-full w-[80px] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
+
+            p {
+                @apply hidden;
+            }
+
+        }
+        .search {
+            @apply w-[300px] h-14 flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+    
+            i {
+                @apply w-[10%];
+            }
+    
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+    }
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .container-grid{
+        @apply flex flex-col h-[90%] w-full pt-4;
+    }
+    .default-size{
+        @apply flex w-full h-[70%] flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] mt-6 justify-start;
+        
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+        
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+        
+    }
+    
+    //BUTTONS
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+}
+
+@media screen and (min-width: 460px) and (max-width: 1024px) {
+    section{
+        @apply flex flex-col w-screen h-full justify-center items-center;
+    }
+    
+    .container-custom{
+        @apply w-[90%] h-full flex flex-col gap-10;
+    }
+    
+    //TEAMS
+    .nav-tasks-teams{
+        border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: 0.25px solid $emphasis;
+        
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+            
+        }
+        
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+    
+    .functionally-items {
+        @apply flex flex-row w-full pt-4 justify-between;
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-col w-full justify-between;
+        
+        .filter-items {
+            @apply flex;
+        }
+        
+    }
+    
+    .functionally-items, .functionally-items-task {
+        
+        .container {
+            @apply flex w-full justify-between;
+        }
+        
+        .filter-items {
+            @apply flex gap-2;
+            
+            button {
+                border: none;
+                &amp;:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
+        button {
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-full w-[80px] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
+
+            p {
+                @apply hidden;
+            }
+
+        }
+        .search {
+            @apply w-[300px] h-14 flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+    
+            i {
+                @apply w-[10%];
+            }
+    
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+    }
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .container-grid{
+        @apply flex flex-col h-auto w-full pt-4;
+    }
+    .default-size{
+        @apply flex w-full  flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] mt-6 justify-start;
+        
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+        
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+        
+    }
+    
+    //BUTTONS
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    section{
+        @apply flex flex-col w-screen h-full justify-center items-center;
+    }
+    
+    .container-custom{
+        @apply w-[90%] h-full flex flex-col gap-10;
+    }
+    
+    //TEAMS
+    .nav-tasks-teams{
+        border-color: $primaryColor;
+        @apply w-[368px] h-[53px] flex gap-1 border-b-[1px] flex-row pb-4;
+        border-bottom: 0.25px solid $emphasis;
+        
+        label {
+            @apply w-[135px] h-[48px] flex gap-2 p-4 px-4 transition-colors
+            items-center justify-center rounded cursor-pointer;
+            
+        }
+        
+        label:hover {
+            background-color: $primaryColor;
+            color: $secondColor;
+            @apply transition-colors;
+        }
+    }
+    
+    .functionally-items {
+        @apply flex flex-col w-full h-full gap-2 items-center;
+    }
+    
+    .functionally-items-task {
+        @apply flex flex-col gap-2 items-center;
+
+        .filter-items {
+            @apply flex;
+        }
+    
+    }
+    
+    .functionally-items, .functionally-items-task {
+        
+        .container {
+            @apply flex w-full justify-between;
+        }
+        
+        .filter-items {
+            @apply flex gap-2 hidden;
+            
+            button {
+                border: none;
+                &amp;:hover {
+                    background-color: $primaryColor;
+                    color: $secondColor;
+                }
+            }
+        }
+        //BUTTONS
+        button {
+            @apply flex w-full  items-center justify-center 
+            border-2 transition-colors rounded p-3;
+        }
+        
+        button:hover {
+            background-color: $secondColor;
+            color: $primaryColor;
+            @apply transition-colors;
+        }
+        
+        .create {
+            background-color: $primaryColor;
+            border-color: $primaryColor;
+            color: $secondColor;
+            @apply h-[53px] w-[99%] flex items-center justify-center gap-4
+            text-lg p-3 rounded font-light border-2 transition-colors;
+
+
+        }
+        .search {
+            @apply w-full h-14 flex items-center justify-between bg-white p-3
+            rounded shadow-md border-none;
+    
+            i {
+                @apply w-[10%];
+            }
+    
+            input {
+                @apply w-[90%] h-full outline-none flex items-center pl-2;
+            }
+        }
+    }
+    
+    .icons {
+        button {
+            i {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
+    .clicked {
+        color: $secondColor;
+        background-color: $primaryColor;
+    }
+    .default {
+        color: $primaryColor;
+        background-color: $secondColor;
+    }
+    
+    .container-grid{
+        @apply flex flex-col h-auto w-full pt-4;
+    }
+    .default-size{
+        @apply flex w-full flex-col;
+    }
+    
+    
+    // TASK - FILTER ORDER
+    .filter-settings {
+        @apply flex gap-3 h-[5%] mt-6 justify-start;
+        
+        p {
+            color: $primaryColor;
+            @apply text-lg;
+        }
+        
+        select {
+            @apply w-[170px] h-[35px] text-center outline-none;
+        }
+        
+    }
+    
+    //BUTTONS
+    .btn {
+        @apply flex w-full  items-center justify-center 
+        border-2 transition-colors rounded p-3;
+    }
+    
+    .btn:hover {
+        background-color: $secondColor;
+        color: $primaryColor;
+        @apply transition-colors;
+    }
+}
+    
+    </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section>    <div class="container-custom">        <!-- RIGHT SIDE TASKS/TEAMS -->        <div class="container-grid">            <div class="flex flex-row items-end gap-3">                <h4 class="underline cursor-pointer" (click)="goTeamSettings()">{{teamName}}</h4>            </div>            <div class="pt-2 mb-3">                <p class="small-text text-gray-600 text-justify w-2/3">Projetos são os diferentes espaços de trabalho de uma equipe, neles                é possível segmentar assuntos e organizar as tarefas sua e/ou do                    time.</p>            </div>            <div class="flex flex-col" joyrideStep="step4" [prevTemplate]="prevButton" [nextTemplate]="nextButton"                [title]="\'Visualizar / Criar projetos\'" [stepContent]="customContent"                [stepContentParams]="{ texto: tutorialText[5] }">                <div class="functionally-items regular-text">                    <div class="search">                        <input class="inputSearch" type="text" placeholder="Pesquisar por um projeto..."                            [(ngModel)]="projectSearch">                        <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>                    </div>                    <button class="create" (click)="switchCreateView()">                        <i class="pi pi-plus-circle" style="font-size: 1.7rem;"></i>                        <p>                            Novo projeto                        </p>                    </button>                </div>                <div class="default-size" joyrideStep="goToTasks" [prevTemplate]="prevButton"                    [nextTemplate]="nextButton" [title]="\'Ir para tarefas\'" [stepContent]="customContent"                    [stepContentParams]="{ texto: tutorialText[7] }">                    <div class="w-[40%] absolute" *ngIf="projects.length === 0">                        <h6 class="pt-16 flex justify-center items-center">Nenhum projeto disponível...</h6>                    </div>                    <app-card-list style="width: 100%; height: 90%; padding-top: 3%" [type]="\'project\'" [team]="team"                        [teamScreen]="\'project\'" [projects]="projects">                    </app-card-list>                    <app-create-team-project style="width: 100%; height: 90%; padding-top: 3%;"                        *ngIf="isCreatingProject" (senderEmitter)="updateProjects($event)" (close)="switchCreateView()"                        [typeString]="\'project\'" [team]="team"></app-create-team-project>                </div>            </div>        </div>        <!-- RIGHT SIDE - QUICK ACCESS -->        <div class="container-grid pb-10">            <div class="default-size">                <div class="flex flex-row items-end gap-3">                    <h4>Tarefas de {{teamName}}</h4>                </div>                <div class="pt-2">                    <p class="small-text text-gray-600 text-justify w-2/3 mb-3">Nessa seção é possível visualizar todas as tarefas na qual você                    é um dos responsáveis dentro da equipe {{teamName}}</p>                </div>                <div class="flex flex-col" joyrideStep="step5" [prevTemplate]="prevButton" [nextTemplate]="nextButton"                    [title]="\'Visualizar tarefas da equipe\'" [stepContent]="customContent"                    [stepContentParams]="{ texto: tutorialText[6] }">                    <div class="functionally-items regular-text">                        <div class="search">                            <input class="inputSearch" type="text" placeholder="Pesquise por uma tarefa..."                                [(ngModel)]="queryFilter">                            <i class="pi pi-search cursor-pointer" style="font-size: 1.4rem;"></i>                        </div>                        <div class="filter-items">                            <div *ngFor="let item of configItems" class="icons">                                <button (click)="item.click()">                                    <i class="{{ item.iconClass }}"                                        [style.transform]="item.id === \'order\' ? \'rotate(90deg)\' : \'rotate(0deg)\'"></i>                                </button>                            </div>                        </div>                    </div>                    <section class="filter-settings" *ngIf="filterOpen || orderOpen">                        <ng-container *ngIf="filterOpen">                            <p>Filtrar por </p>                            <p-cascadeSelect [(ngModel)]="selectedFilter" [options]="filterOptions" optionLabel="name"                                optionGroupLabel="name" [optionGroupChildren]="[\'values\']"                                [style]="{ minWidth: \'14rem\' }" placeholder="Selecione"></p-cascadeSelect>                        </ng-container>                        <ng-container *ngIf="orderOpen">                            <p>Ordenar por </p>                            <p-cascadeSelect [(ngModel)]="orderParams" [options]="orderOptions" optionLabel="name"                                optionGroupLabel="name" [optionGroupChildren]="[\'values\']"                                [style]="{ minWidth: \'13rem\' }" placeholder="Selecione"></p-cascadeSelect>                        </ng-container>                    </section>                    <!-- NG IF uses to wait the permissions request before render the component -->                    <div class="default-size" *ngIf="permissionsOnTeamObservable | async">                        <app-list style="padding-top: 3%;" [team]="team"                            (openTaskDetails)="changeModalTaskState(true, $event)" [permissions]="permissionsOnTeam"                            [queryFilter]="queryFilter" [filter]="selectedFilter"                            [orderParams]="orderParams"></app-list>                    </div>                </div>                <!-- <app-quick-access style="width: 100%; height:100%;" [typeString]="\'project\'"></app-quick-access> -->            </div>        </div>    </div></section><ng-container *ngIf="permissionsOnTeamObservable | async">    <app-task [task]="taskOpenObject" *ngIf="taskOpen" (close)="changeModalTaskState(false, taskOpenObject)"        [permissions]="permissionsOnTeam"></app-task></ng-container><ng-template #prevButton>    <button class="btn btn-outline-primary">        Voltar    </button></ng-template><ng-template #nextButton>    <button class="btn btn-primary">        Próximo    </button></ng-template><ng-template #customContent let-texto="texto" style="border-radius: 5px">    <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div></ng-template></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppearanceComponent', 'selector': 'app-appearance'},{'name': 'AttachmentItemComponent', 'selector': 'app-attachment-item'},{'name': 'AttachmentsComponent', 'selector': 'app-attachments'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CalendarRowCardComponent', 'selector': 'app-calendar-row-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardGroupComponent', 'selector': 'app-card-group'},{'name': 'CardListComponent', 'selector': 'app-card-list'},{'name': 'CardUserComponent', 'selector': 'app-card-user'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ColorsComponent', 'selector': 'app-colors'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'ConfirmModalComponent', 'selector': 'app-confirm-modal'},{'name': 'CreateGroupComponent', 'selector': 'app-create-group'},{'name': 'CreateTeamProjectComponent', 'selector': 'app-create-team-project'},{'name': 'DeletedComponent', 'selector': 'app-deleted'},{'name': 'DeniedAccessComponent', 'selector': 'app-denied-access'},{'name': 'EditPropertiesComponent', 'selector': 'app-edit-properties'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GeneralPropertiesComponent', 'selector': 'app-general-properties'},{'name': 'GroupsSelectComponent', 'selector': 'app-groups-select'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputValuePropertyComponent', 'selector': 'app-input-value-property'},{'name': 'InvitationPageComponent', 'selector': 'app-invitation-page'},{'name': 'ItemsSelectionComponent', 'selector': 'app-items-selection'},{'name': 'KanbanComponent', 'selector': 'app-kanban'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LogComponent', 'selector': 'app-log'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MinichatComponent', 'selector': 'app-minichat'},{'name': 'MinichatTASKComponent', 'selector': 'app-minichat-task'},{'name': 'MobileSidebarComponent', 'selector': 'app-mobile-sidebar'},{'name': 'ModalPropertiesComponent', 'selector': 'app-modal-properties'},{'name': 'ModalWarnComponent', 'selector': 'app-modal-warn'},{'name': 'MuralComponent', 'selector': 'app-mural'},{'name': 'NoteComponent', 'selector': 'app-note'},{'name': 'NoteModalComponent', 'selector': 'app-note-modal'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProjectsComponent', 'selector': 'app-projects'},{'name': 'PropertiesComponent', 'selector': 'app-properties'},{'name': 'QuickAccessComponent', 'selector': 'app-quick-access'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReviewTaskComponent', 'selector': 'app-review-task'},{'name': 'RowCardComponent', 'selector': 'app-row-card'},{'name': 'SearchAllComponent', 'selector': 'app-search-all'},{'name': 'SecurityComponent', 'selector': 'app-security'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'StatusComponent', 'selector': 'app-status'},{'name': 'TaskComponent', 'selector': 'app-task'},{'name': 'TasksComponent', 'selector': 'app-tasks'},{'name': 'TeamInformationsComponent', 'selector': 'app-team-informations'},{'name': 'TeamsSettingsComponent', 'selector': 'app-teams-settings'},{'name': 'UserInformationsComponent', 'selector': 'app-user-informations'},{'name': 'UserSettingsComponent', 'selector': 'app-user-settings'},{'name': 'VlibrasComponent', 'selector': 'app-vlibras'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProjectsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProjectsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

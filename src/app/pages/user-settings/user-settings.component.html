@@ -1,0 +1,23 @@
+<section class="screen">
+    <div class="container-custom">
+        <!-- Left side -->
+        <section>   
+            <!-- Take each item of the itemsList -->
+            <ng-container *ngFor="let item of itemsList">
+                <ul>
+                    <!-- Check if the option is clicked, if it is the bg will be changed-->
+                    <li [ngClass]="click === item.id ? 'clicked' : 'default'">
+                        <button (click)="clickOption(item.id)" [routerLink]="[item.id]">
+                            <fa-icon [icon]="item.icon" class="icon"></fa-icon>
+                            <p class="medium-text">{{'pages.user-settings.'+item.option | translate}}</p>
+                        </button>
+                        <!-- Take each option inside the itemsList -->
+                    </li>
+                </ul>
+            </ng-container>
+        </section>
+        <div class="router-outlet">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</section>

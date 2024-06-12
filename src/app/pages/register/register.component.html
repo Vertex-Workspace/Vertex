@@ -1,0 +1,148 @@
+<div class="register-bg">
+
+    <div class="main-div ">
+
+        <div class="div-accessAccount">
+            <img *ngIf="isMobileTablet()" class="w-20 h-20" src="../../../assets/vertex-logo.png" alt="">
+
+            <h1 id="h1-access-account">Crie uma Conta</h1>
+        </div>
+
+
+        <div class="div-highForm">
+            <form action="#" method="POST" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="div-highInputName">
+                    <!-- Div Input Nome -->
+                    <div class="w-full">
+
+                        <div class="center-all">
+                            <div class="divRegisterIcons">
+                                <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
+                            </div>
+                            <input id="nome" pInputText pAutoFocus [autofocus]="true" formControlName="firstName"
+                                type="text" required placeholder="Nome" class="inputs">
+                        </div>
+                    </div>
+
+                    <!-- Div input Sobrenome -->
+                    <div class="w-full">
+
+                        <div class=" center-all">
+                            <div class="divRegisterIcons">
+                                <fa-icon class="registerIcons" [icon]="faUser"></fa-icon>
+                            </div>
+                            <input id="sobrenome" formControlName="lastName" type="text" required
+                                placeholder="Sobrenome" class="inputs">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex">
+                    <!-- Div Input Email -->
+                    <div class="w-full">
+                        <div class="center-all">
+                            <div class="divRegisterIcons">
+                                <fa-icon class="registerIcons" [icon]="faEnvelope"></fa-icon>
+                            </div>
+                            <input id="email" formControlName="email" type="email" required placeholder="E-mail"
+                                class="inputs">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="div-highInputPassword">
+                    
+                        <!-- Div input Senha -->
+                        <div class="w-full">
+                            <div class="center-all">
+                                <div class="divRegisterIcons">
+                                    <fa-icon class="registerIcons" [icon]="faLock"></fa-icon>
+                                </div>
+                                <input id="password" tooltipEvent="focus" pInputText p pTooltip="Requisitos para uma boa senha: 
+                                • Mínimo de 8 caracteres
+                                • Mínimo de 1 letra minúscula
+                                • Mínimo de 1 letra maiúscula
+                                • Mínimo de 1 número
+                                • Mínimo de 1 caractere especial (@#!$%)" [type]="invisibleEye1 ? 'password' : 'text'"
+                                    required placeholder="Senha" formControlName="password" class="inputs">
+                                <div class="eyesDiv">
+                                    <fa-icon *ngIf="!invisibleEye1" (click)="passwordToggle()" class="eyeIcon"
+                                        [icon]="faEye">
+                                    </fa-icon>
+                                    <fa-icon *ngIf="invisibleEye1" (click)="passwordToggle()" class="eyeIcon"
+                                        [icon]="faEyeSlash"></fa-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Div input Confirmar Senha -->
+                        <div class="w-full">
+                            <div class="center-all">
+                                <div class="divRegisterIcons">
+                                    <fa-icon class="registerIcons" [icon]="faKey"></fa-icon>
+                                </div>
+                                <input id="passwordConfirm" tooltipEvent="focus" pInputText p pTooltip="Requisitos para uma boa senha: 
+                                • Mínimo de 8 caracteres
+                                • Mínimo de 1 letra minúscula
+                                • Mínimo de 1 letra maiúscula
+                                • Mínimo de 1 número
+                                • Mínimo de 1 caractere especial (@#!$%)" [type]="invisibleEye2 ? 'password' : 'text'"
+                                    required placeholder="Confirme sua Senha" formControlName="passwordConf"
+                                    class="inputs">
+                                <div class="eyesDiv">
+                                    <fa-icon *ngIf="!invisibleEye2" (click)="passwordToggle()" class="eyeIcon"
+                                        [icon]="faEye">
+                                    </fa-icon>
+                                    <fa-icon *ngIf="invisibleEye2" (click)="passwordToggle()" class="eyeIcon"
+                                        [icon]="faEyeSlash"></fa-icon>
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                    <!-- <div class="div-toStrong-password">
+                        <div class="w-[360px]">
+                            <p></p>
+                            <p></p>
+                            <p> </p>
+                            <p> </p>
+                            <p></p>
+                            <p> </p>
+                        </div>
+                    </div> -->
+                </div>
+
+
+
+
+                <!-- Div do botão de Enviar -->
+                <div class="flex justify-center">
+                    <button type="submit" id="enter-btn">
+                        Cadastrar</button>
+                </div>
+
+            </form>
+            <br>
+
+            <!-- Texto Não possui conta -->
+            <p class="text-center text-sm text-[#092C4C]">
+                Já possui uma conta?
+                <br>
+                <a [routerLink]="['/login']" class="font-semibold leading-6 text-[#092c4c]">Clique
+                    aqui</a>
+                para entrar
+            </p>
+        </div>
+    </div>
+
+
+    <div class="div-white-logo">
+        <img class="logo cursor-pointer" [routerLink]="'landing-page'" src="../../../assets/white-logo.svg" alt="">
+
+
+    </div>
+    <h1 style="font-family: 'Manrope'; font-weight: lighter;" class=" nameVertex cursor-pointer" [routerLink]="'landing-page'">VERTEX
+    </h1>
+</div>

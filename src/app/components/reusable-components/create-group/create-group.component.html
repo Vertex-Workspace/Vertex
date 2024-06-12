@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-overlay" *ngIf="typeString != 'addingParticipants'">
+
+  <div class="modal">
+    <h4 class="title">{{'components.modals.create-groups.title' | translate}}</h4>
+
+    <div class="div-name">
+      <div class="input-name">
+        <p>{{'components.modals.create-groups.name' | translate}}</p>
+        <input formControlName="name" [placeholder]="'components.modals.create-groups.name_placeholder' | translate" type="text">
+      </div>
+    </div>
+
+    <p class="pt-4">{{'components.modals.create-groups.participants' | translate}}</p>
+    <div class="pt-2">
+      <p-multiSelect [options]="usersToSelect!" optionLabel="name" (onChange)="pushParticipants($event)" [displaySelectedLabel]="false"
+            [style]="{ width: '300px', height: '55px', backgroundColor: 'var(--secondColor)'}" [placeholder]="'components.modals.create-groups.multi_select' | translate">
+            <ng-template let-user pTemplate="user">
+                <span>{{user.firstName}}</span>
+            </ng-template>
+        </p-multiSelect>
+    </div>
+
+      <div class="buttons">
+        <button class="button cancel" (click)="closeGroup()">{{'components.modals.create-groups.cancel_button' | translate}}</button>
+        <button class="button confirm" type="submit">{{'components.modals.create-groups.confirm_button' | translate}}</button>
+      </div>
+  </div>
+</form>
+
+<app-modal-warn (close)="closeScreen()" *ngIf="modalCopyLink">
+  <h5>Equipe {{form.value.name}} criada com sucesso!</h5>
+  <div class="informations-modal medium-text">
+    <p>Convide pessoas para {{form.value.name}}</p>
+    <p>através do link abaixo.</p>
+  </div>
+  <app-button [title]="'Copiar Link de Convite'" [icon]="'pi-link'" [width]="'250px'" [height]="'50px'"
+    (clickEvent)="copyLink()" />
+</app-modal-warn>

@@ -1,0 +1,33 @@
+:root {
+    --fontFamily: 'Manrope', sans-serif;
+    --primaryColor: #092C4C;
+    --secondColor: #F3F3F3;
+    --emphasis: #D9D9D9;
+    --card: #FFFFFF;
+    --error: #872323;
+    --text: #000000;
+    --disabled: grey;
+    --largeText: 20px;
+    --mediumText: 18px;
+    --regularText: 16px;
+    --smallText: 14px;
+    --borderBottom: 1px solid var(--primaryColor);
+}
+
+$fontFamily: var(--fontFamily);
+$text-white: var(--textWhite);
+$largeText: var(--largeText);
+$mediumText: var(--mediumText);
+$regularText: var(--regularText);
+$smallText: var(--smallText);
+
+$primaryColor: var(--primaryColor);
+$secondColor: var(--secondColor);
+$emphasis: var(--emphasis);
+$card: var(--card);
+$error: var(--error);
+$text: var(--text);
+$disabled: var(--disabled);
+$borderBottom: var(--borderBottom);
+$secondColorHover: #dadada;
+$whiteDefault: #FFFFFF;

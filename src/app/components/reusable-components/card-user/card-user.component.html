@@ -1,0 +1,30 @@
+<div class="creating">
+    <div class="card" [style.width]="width" [style.height]="isTeamCreator ? '120px' : '80px'">
+        <div class="sections-in-card gap-3 cursor-pointer">
+            <div class="overflow-hidden h-20 w-20 pt-2 pl-2" (click)="goToProfile()">
+                <img src="data:image/jpg;base64, {{user.image}}" *ngIf="!user.imgUrl" alt="" class="rounded-full object-cover h-full w-full">
+                <img src="{{user.imgUrl}}" *ngIf="user.imgUrl" alt="" class="rounded-full object-cover h-full w-full">
+            </div>
+            <div class="pl-3">
+                <p (click)="goToProfile()">{{ user.firstName }} <span *ngIf="!isNonCreatorCard">{{ 'components.reusable-components.card-user.you' | translate }}</span></p>
+                <p class="truncate">{{ user.email }}</p>
+            </div>
+            <div class="more-infos" *ngIf="isTeamCreator && isNonCreatorCard">
+                <fa-icon [icon]="faUserMinus" class="icon pr-3" style="font-size: 0.75rem;" (click)="deleteBoolean(user)"
+                    *ngIf="typeString === 'inTheGroup'  || typeString === 'permissions'">
+                </fa-icon>
+            </div>
+        </div>
+        <div class="w-full h-full flex flex-col pt-2" *ngIf="isTeamCreator && isNonCreatorCard">
+            <div class="permissions">
+                <div class="single-permissions" *ngFor="let permission of user.permissions">
+                    <fa-icon [icon]="faSquare" [ngClass]="permission.enabled === true ? 'icon' : 'icon-not-selected'" (click)="selectPermission(user, permission)"></fa-icon>
+                    <p>{{ "permission."+permission.name | translate }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'components.reusable-components.card-user.confirmDeleteUser' | translate"
+                (close)="deleteUserTeam($event)"></app-confirm-modal>

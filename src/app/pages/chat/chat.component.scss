@@ -1,0 +1,321 @@
+@import '../../../_variables.scss';
+
+section{
+    @apply w-screen h-screen flex flex-col justify-center items-center;
+    background-color: $secondColor;
+}
+
+input {
+    padding: 10px;
+}
+
+.chat {
+    margin-top: 10rem;
+}
+
+div.chat-content {
+    border-radius: .25rem;
+    height: 40rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    height: 100%;
+}
+
+.container-custom {
+    @apply flex w-[90%] h-full;
+}
+
+.main-div {
+    @apply flex flex-col w-full h-full;
+}
+
+header {
+    @apply flex w-[100%] h-[15%] justify-between items-end;
+    background-color: $secondColor;
+}
+
+.conversations-div {
+    @apply w-[10%] h-[60%] flex flex-col justify-center items-center;
+}
+
+.conversations {
+    @apply pl-[12.5%];
+    color: $primaryColor
+}
+
+.header-right {
+    @apply w-[69.8%] flex justify-between items-center;
+    color: $primaryColor;
+}
+
+.header-right-informations {
+    @apply flex gap-5 items-center pb-5;
+}
+
+.leftChatPerson {
+    @apply flex items-center gap-2;
+
+}
+
+.divNamesPerson {
+    @apply flex gap-5 items-center;
+}
+
+.userName {
+    @apply text-[1.5rem];
+    color: $primaryColor;
+}
+
+.pHasNoOneChat{
+    @apply text-[1.2rem];
+    color: $primaryColor;
+
+}
+
+main {
+    @apply w-full h-[85%] flex justify-between;
+}
+
+.section-left-chat {
+    @apply flex flex-col items-center justify-between w-[30%] h-[100%] rounded-sm;
+    background-color: $secondColor;
+}
+
+.header-section-left {
+    @apply w-[90%] h-[6%] flex items-center justify-center
+}
+
+.search-div {
+    @apply flex w-[100%] h-[100%] items-center gap-2 border-2 rounded-sm;
+    border: 1px solid $emphasis;
+    background-color: $card;
+}
+
+#search {
+    @apply flex w-[90%] h-[100%] items-center justify-center;
+    color: $text;
+    background-color: $card;
+}
+
+.searchIcon {
+    @apply w-[7%] text-[1.5rem] text-white flex items-center;
+    color: $primaryColor;
+}
+
+.main-section-left {
+    @apply flex flex-col w-full h-[90%] items-center justify-start overflow-auto;
+}
+
+.footer-section-left {
+    @apply flex w-full h-[10%] items-center justify-evenly;
+}
+
+.section-icons {
+    @apply flex justify-center items-center;
+    color: $primaryColor !important;
+}
+
+.section-icons-7xl {
+    @apply flex justify-between items-center;
+    color: $primaryColor !important;
+    font-size: 80px;
+}
+
+.chat-icons {
+    @apply flex justify-between items-center;
+    color: $primaryColor !important;
+    font-size: 70px
+}
+
+.user-card-message {
+    @apply flex gap-6 items-center w-[70%];
+}
+
+.div-time-message {
+    @apply flex items-center justify-center w-[20%];
+}
+
+.div-time {
+    @apply flex flex-col gap-2 items-center;
+}
+
+.img-chat{
+    background-color: $secondColor;
+    @apply rounded-full flex items-center justify-center;
+}
+
+.card-chat {
+    @apply flex justify-start w-[100%] items-center  pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    border: 1px solid $emphasis;
+    color: $text;
+    background-color: $secondColor;
+    animation: leftPulse 0.3s;
+}
+
+.card-chatOpen {
+    @apply flex justify-start items-center w-[100%] pl-4 h-[100px] rounded-sm cursor-pointer min-h-[100px];
+    background-color: $primaryColor;
+    color: $secondColor !important;
+    animation: rightPulse 0.3s;
+    .chat-icons {
+        @apply flex justify-between items-center;
+        color: $secondColor !important;
+        font-size: 70px;
+    }
+}
+
+// @keyframes leftPulse {
+//     0% {
+//         width: 100%;
+//     }
+
+//     100% {
+//         width: 90%;
+//     }
+// }
+
+// @keyframes rightPulse {
+//     0% {
+//         width: 90%;
+//     }
+
+//     100% {
+//         width: 100%;
+//     }
+// }
+
+.text-group-individual {
+    @apply flex justify-between items-center gap-2 cursor-pointer;
+}
+
+.section-right-chat {
+    @apply flex flex-col items-center justify-center w-[70%] h-[100%] gap-2 rounded-sm;
+    border: 1px solid $emphasis;
+    background-color: $secondColor;
+}
+
+.center-div {
+    @apply pr-[6%] pl-[6%] pt-[3%] w-[100%] h-[80%] flex flex-col gap-2 overflow-auto;
+}
+
+.left {
+    @apply w-[100%] min-h-[60px] flex flex-col items-start gap-2;
+    word-break: break-all;
+    flex-wrap: wrap;
+}
+
+.right {
+    @apply w-[100%] min-h-[60px] flex flex-col items-end gap-2;
+}
+
+/* CSS para as bolhas de mensagem */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 20px;
+}
+
+.message-container.right {
+    align-items: flex-end;
+}
+
+.contentMessage{
+    font-size: $largeText !important;
+}
+
+.message-bubble-left {
+    max-width: 70%;
+    min-width: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $card;
+    color: $text !important;
+    background-color: $card;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+.message-bubble-right  {
+    max-width: 70%;
+    min-width: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $primaryColor;
+    color: white;
+    word-wrap: break-word;
+    @apply flex flex-col gap-3 shadow-md;
+}
+.message-bubble-right:last-child > :last-child {
+    @apply w-full   
+}
+
+.image{
+    @apply w-80 h-52;
+}
+.archive{
+    @apply w-16 h-16;   
+
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.timestamp {
+    font-size: $smallText;
+    color: rgb(241, 241, 241);
+}
+
+.timestampBlack {
+    font-size: $smallText;
+    color: $text;
+}
+
+.divWhiteInput{
+    @apply flex pr-5 gap-4  w-[80%] h-[45%] rounded-sm;
+    background-color: $card;
+}
+
+#input-message{
+    @apply w-[90%] h-[100%] rounded-sm text-lg;
+    background-color: $card;
+    color: $text;
+}
+
+.high-input-div {
+    @apply w-[65%] h-[20%] flex items-center gap-3;
+
+}
+
+.div-input-chat {
+    @apply w-[100%] h-[45%] flex;
+    background-color: $card;
+    border: $borderBottom;
+}
+
+.square-chat {
+    @apply w-[8%] h-[44%] flex items-center justify-center;
+    background-color: $primaryColor;
+    border: $borderBottom;
+
+    .section-icons {
+        @apply flex justify-between items-center;
+        color: $card !important;
+    }
+}
+
+.imgUser {
+    @apply rounded-full;
+    width: 50px;
+    height: 50px;
+}
+
+.emoji-wrapper {
+    position: absolute;
+    right: 40px;
+    bottom: 85px;
+    z-index: 5;
+}

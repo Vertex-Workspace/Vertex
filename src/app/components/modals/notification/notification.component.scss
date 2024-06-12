@@ -1,0 +1,234 @@
+@import "../../../../variables";
+
+@keyframes slideInLeft {
+    from {
+      width: 0;
+      opacity: 1;
+      overflow: hidden;
+    }
+    to {
+      width: 25%;
+      opacity: 1;
+      overflow: hidden;
+    }
+}
+
+
+section {
+    @apply absolute z-10 flex h-full justify-end w-[100%] max-w-[96%];
+    overflow: hidden;
+}
+
+.clickOut {
+    @apply flex w-[75%] h-full;
+}
+
+.modal {
+    @apply w-[470px] flex h-full rounded-sm flex-col shadow-xl;
+    z-index: 999;
+    background-color: $secondColor;
+    animation: slideInLeft 0.2s ease-in-out;
+
+    .header {
+        @apply flex flex-col w-full h-[15%] p-4;
+        background-color: $secondColor;
+        color: $primaryColor;
+        border-bottom: 1px solid $emphasis;
+
+        .header-title {
+            @apply flex w-full h-1/2 flex-row justify-between items-center;
+
+            h5 {
+                color: $primaryColor;
+            }
+
+            p {
+                @apply text-sm;
+            }
+        }
+
+        ul {
+            @apply flex flex-row items-end justify-between w-full h-1/2;
+
+            .tool-icons {
+                @apply flex flex-row w-1/4 items-center justify-between;
+
+                .colorAllCheckbox {
+                    color: $primaryColor;
+                }
+            }
+
+            .search {
+                @apply flex w-full h-3/4 items-center justify-between p-3 rounded shadow-md border-none;
+                background-color: $card;
+
+                i {
+                    @apply w-[10%];
+                    color: $primaryColor;
+                }
+
+                input {
+                    @apply w-[90%] h-full outline-none flex items-center pl-2;
+                    color: $text;
+                    background-color: $card;
+                }
+            }
+
+            .search-settings {
+                @apply flex flex-row items-end justify-between w-[80px];
+                font-size: 20px;
+            }
+        }
+
+
+    }
+
+    .notifications {
+        @apply flex flex-col w-full h-[85%] overflow-y-auto overflow-x-hidden;
+
+        .notification {
+            @apply flex w-full max-h-fit border-b-2 items-center py-2 px-4 justify-between;
+
+            :first-child {
+                @apply flex flex-row items-center justify-between;
+
+                .iconUser>fa-icon {
+                    @apply flex rounded-full pl-5;
+                    font-size: 35px;
+                    
+                    color: $primaryColor;
+                }
+
+                .description {
+                    @apply flex flex-col pl-4;
+                    color: $text;
+                    p{
+                        word-wrap: break-word;
+                        @apply w-[300px];
+                    }
+                    div{
+                        word-wrap: break-word;
+                        @apply w-[300px];
+                    }
+                }
+
+                .color {
+                    font-size: 20px;
+                    color: $primaryColor;
+                }
+            }
+
+            .barOpenClose>fa-icon {
+                @apply flex text-2xl;
+                color: $primaryColor;
+            }
+
+            .rotate {
+                transform: rotate(90deg);
+            }
+        }
+
+        .notification:hover {
+            @apply cursor-pointer;
+            scale: 1.03;
+            transition: 0.3s;
+        }
+
+        .openedNotification {
+            @apply flex w-full;
+            min-height: 90px;
+            background-color: $primaryColor;
+        }
+    }
+}
+
+
+
+fa-icon,
+i {
+    min-width: 35px;
+    font-size: 20px; // Defina o tamanho fixo para os ícones
+    color: $primaryColor;
+}
+
+input[type=checkbox] {
+    width: 18px;
+    height: 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    section{
+        @apply w-full min-w-full;
+    }
+
+    .modal {
+        @apply w-full min-w-full;
+        animation: slideInLeft 0.5s ease-out;
+    }
+
+    .description{
+        @apply w-[250px];
+    }
+
+    @keyframes slideInLeft {
+        from {
+          width: 0;
+          opacity: 1;
+          overflow: hidden;
+        }
+        to {
+          width: 100%;
+          min-width: 100%;
+          opacity: 1;
+          overflow: hidden;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px){
+    section{
+        @apply w-[100%] fixed right-0 bottom-0;
+    }
+
+    .modal {
+        @apply w-[470px];
+
+        .header {
+            ul {
+                .tool-icons {
+                    .colorAllCheckbox {
+                        font-size: 20px;
+                    }
+                }
+
+                .search {
+                    i {
+                        font-size: 20px;
+                    }
+
+                    input {
+                        font-size: 20px;
+                    }
+                }
+
+                .search-settings {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+          width: 0;
+          opacity: 1;
+          overflow: hidden;
+        }
+        to {
+          width: 50%;
+          opacity: 1;
+          overflow: hidden;
+        }
+    }
+}

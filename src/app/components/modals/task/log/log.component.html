@@ -1,0 +1,13 @@
+<section>
+    <div class="container">
+        <ng-container *ngFor="let item of task.log ? task.log.slice().reverse() : task.log">
+            <div>
+                <label>
+                    <i class="pi pi-info-circle"></i>
+                    <p>{{item.description}}</p>
+                </label>
+                <p class="date">{{convertDateToString(item)}}</p>
+            </div>
+        </ng-container>
+    </div>
+ </section>

@@ -1,0 +1,14 @@
+<div class="modal-overlay">
+    <div class="modal" 
+    [style.height]="height"
+    [style.width]="width"
+    [title]="title">
+        <div class="exitModal" (click)="closeModal()">
+            X
+        </div>
+        
+        <div class="ng-contentDiv">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+@import "../../../../variables";
+
+form {
+    @apply w-full h-full flex flex-col justify-between;
+    color: $primaryColor;
+}
+
+.title {
+    @apply flex h-[15%];
+}
+
+.div-name {
+    @apply w-full
+}
+
+.input-name {
+    @apply flex flex-col w-full h-[80%] justify-start items-start pt-2;
+
+    input {
+        @apply flex h-14 rounded-md pl-4 w-full;
+        background-color: $card;
+        color: $text;
+    }
+
+    p {
+        @apply pb-4
+    }
+}
+
+.input-description {
+    @apply flex flex-col w-full items-start;
+    overflow-y: auto;
+
+    p {
+        @apply pl-4 pt-3;
+        font-size: $regularText
+    }
+}
+
+
+    .buttons {
+        @apply flex w-full h-full justify-center items-center pt-8 gap-4;
+    }
+
+p {
+    font-size: $largeText;
+}
+
+.modal-overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-[#b4b4b4] bg-opacity-50 flex justify-center items-center transition-transform;
+    z-index: 999;
+}
+
+.modal {
+    @apply absolute rounded-md flex flex-col w-auto h-auto items-start justify-start text-center p-8 border-t-8;
+    border-color: $primaryColor;
+    background-color: $secondColor;
+}
+
+.button {
+    @apply w-[130px] h-[40px] flex gap-2 p-4 px-4 transition-colors items-center justify-center rounded cursor-pointer;
+}
+
+.confirm {
+    background-color: $primaryColor;
+    color: $secondColor
+}
+
+.cancel {
+    background-color: $error;
+    color: white
+}

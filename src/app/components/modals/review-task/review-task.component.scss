@@ -1,0 +1,193 @@
+
+@import "../../../../variables.scss";
+
+
+@media screen and (min-width: 650px) {
+
+    section {
+        @apply grid w-full h-[500px] pt-6;
+        grid-template-columns: 35% 65%;
+
+        .s1 {
+            @apply flex flex-col h-full w-full;
+
+            .s2 {
+                @apply flex flex-col w-full h-[470px] overflow-y-auto overflow-x-hidden justify-start items-start;
+            }
+        }
+
+        .ns1 {
+            @apply pl-4 border-l-4;
+
+            .ns2 {
+                @apply flex flex-col w-full h-[25%];
+            }
+        }
+
+        .fs1 {
+            @apply flex w-full max-h-[161px] overflow-x-hidden overflow-y-auto;
+        }
+
+        .ts1 {
+            @apply flex flex-col pt-3;
+
+            .ts2 {
+                @apply flex flex-col gap-4;
+
+                textarea {
+                    @apply flex w-full h-[120px] outline-none px-3 py-1;
+                }
+            }
+        }
+    }
+
+    .card-task-review{
+        @apply flex min-h-[80px] w-[97%] items-start justify-center flex-col rounded-sm px-3 mt-4;
+        background-color: $card;
+        &:hover{
+            @apply w-full cursor-pointer;
+            background-color: $primaryColor;
+            
+            p{
+                color: $secondColor !important;
+            }
+        }
+    }
+    
+    .task-reviewed-focus{  
+        border-left: 6px solid $primaryColor;   
+    }
+    
+    .review-grade{
+        
+        button{
+            @apply w-[100px] h-[40px] flex items-center justify-center rounded-sm;
+        }
+        
+        #primary-btn{
+            @apply w-[45%] transition-colors;
+            background-color: $primaryColor;
+            color: $secondColor;
+            &:hover{
+                background-color: $secondColor;
+                color: $primaryColor;
+                border: 1px solid $primaryColor;
+                
+            }
+        }
+        
+        #red-btn{
+            @apply w-[45%] transition-colors;
+            background-color: $error;
+            color: $secondColor;
+            &:hover{
+                background-color: $secondColor;
+                color: $error;
+                border: 1px solid $error;
+            }
+        }
+    }
+    
+    table, th, td {
+        border:1px solid black;
+    }
+    table > tr {
+        @apply h-[40px];
+    }
+   
+}
+
+@media screen and (max-width: 650px) {
+
+    section {
+        @apply flex flex-col w-full h-full pt-6;
+        grid-template-columns: 35% 65%;
+
+        .s1 {
+            @apply flex flex-col h-[150px] w-full;
+
+            .s2 {
+                @apply flex w-full h-[110px] overflow-y-hidden overflow-x-auto gap-4;
+            }
+        }
+
+        .ns1 {
+            @apply pl-4 border-l-4;
+
+            .ns2 {
+                @apply flex flex-col w-full h-[15%] pt-3;
+            }
+        }
+
+        .fs1 {
+            @apply flex w-full max-h-[161px] overflow-x-hidden overflow-y-auto mt-8 pt-6;
+        }
+
+        .ts1 {
+            @apply flex flex-col pt-3;
+
+            .ts2 {
+                @apply flex flex-col gap-4;
+
+                textarea {
+                    @apply flex w-full h-[120px] outline-none px-3 py-1;
+                }
+            }
+        }
+    }
+
+    .card-task-review{
+        @apply flex h-[80px] min-w-[235px] items-start justify-center flex-col rounded-sm px-3 mt-4;
+        background-color: $card;
+        &:hover{
+            @apply w-full cursor-pointer;
+            background-color: $primaryColor;
+            
+            p{
+                color: $secondColor !important;
+            }
+        }
+    }
+    
+    .task-reviewed-focus{  
+        border-left: 6px solid $primaryColor;   
+    }
+    
+    .review-grade{
+        
+        button{
+            @apply w-[100px] h-[40px] flex items-center justify-center rounded-sm;
+        }
+        
+        #primary-btn{
+            @apply w-[45%] transition-colors;
+            background-color: $primaryColor;
+            color: $secondColor;
+            &:hover{
+                background-color: $secondColor;
+                color: $primaryColor;
+                border: 1px solid $primaryColor;
+                
+            }
+        }
+        
+        #red-btn{
+            @apply w-[45%] transition-colors;
+            background-color: $error;
+            color: $secondColor;
+            &:hover{
+                background-color: $secondColor;
+                color: $error;
+                border: 1px solid $error;
+            }
+        }
+    }
+    
+    table, th, td {
+        border:1px solid black;
+    }
+    table > tr {
+        @apply h-[40px];
+    }
+   
+}

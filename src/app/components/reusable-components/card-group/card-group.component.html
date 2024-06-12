@@ -1,0 +1,26 @@
+<div class="main-div" *ngIf="render">
+    <div class="h-[40%] w-[90%] flex justify-between pt-3">
+        <div class="flex pl-5 pt-1">
+            <input class="pl-1 h-3/4 w-[70%] title" type="text" value="{{group.name}}"
+                [ngClass]="input ? 'clicked' : ''" (click)="editGroupName()" [(ngModel)]="group.name">
+            <i class="pi pi-check icon pt-1 pl-2 cursor-pointer" *ngIf="input" (click)="edit(group)"></i>
+        </div>
+        <fa-icon [icon]="faTrashCan" class="icon" (click)="openModalDelete(group)"></fa-icon>
+    </div>
+    <div class="h-[48%] flex items-start pl-5">
+        <p-multiSelect [options]="usersTeam" optionLabel="name" [displaySelectedLabel]="false" [group]="false"
+            [style]="{ width: '300px', height: '50px'}" [placeholder]="placeholder" placeholder="{{placeholder}}" [(ngModel)]="selectedUsers"
+            (onChange)="addOrDelete($event, group)" [showToggleAll]="false">
+            <ng-template let-user pTemplate="user">
+                <span>{{user.firstName}}</span>
+            </ng-template>
+        </p-multiSelect>
+    </div>
+    <div class="h-[12%] members">
+        <p>{{'pages.team-informations.members' | translate: {number: group.userTeams?.length} }}</p>
+    </div>
+</div>
+
+<app-confirm-modal *ngIf="delete" [width]="'450px'" [height]="'250px'" [title]="'components.reusable-components.card-group.confirmDeleteGroup' | translate"
+        (close)="emitItem($event)">
+        </app-confirm-modal>

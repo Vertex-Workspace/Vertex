@@ -1,0 +1,27 @@
+<div class="base">
+    <ul class="teste-scroll">
+        <li *ngFor="let comment of task.comments">
+            <div class="comment-informations">
+                <div>
+                    <!-- <fa-icon class="iconUser" [icon]="faCircleUser"></fa-icon> -->
+                    <p class="medium-text">{{ getName(comment.taskResponsable!) }}</p>
+                </div>
+                <div>
+                    <p class="small-text">{{ getDate(comment.date!) }}</p>
+                    <fa-icon (click)="deleteComment(comment)" [icon]="faTrash" *ngIf="isLoggedUser(comment.taskResponsable!)"></fa-icon>
+                </div>
+            </div>
+            <div class="comment-text">
+                <p class="regular-text">{{ comment.comment }}</p>
+            </div>
+        </li>
+        <div *ngIf="!hasComments" class="flex w-full items-center flex-col h-[90%] null-comment">
+            <p class="pt-3">{{ 'components.modals.task.comments.no_comments' | translate }}</p>
+            <p>{{ 'components.modals.task.comments.be_first' | translate }}</p>
+        </div>
+    </ul>
+    <div class="send-message">
+        <textarea type="text" [(ngModel)]="message" placeholder="{{ 'components.modals.task.comments.placeholder' | translate }}" class="medium-text"></textarea>
+        <button (click)="sendComment()">{{ 'components.modals.task.comments.send_button' | translate }}</button>
+    </div>
+</div>

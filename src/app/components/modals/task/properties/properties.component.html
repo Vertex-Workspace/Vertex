@@ -1,0 +1,55 @@
+<div class="base">
+    <table>
+        <tr>
+            <ng-container *ngIf="isCreator">
+                <td>
+                    <div>
+                        <fa-icon [icon]="faListCheck" class="size cursor-default"></fa-icon>
+                        <p>{{ 'components.modals.task.properties.dependency' | translate }}</p>
+                    </div>
+                    <div>
+                        <p-dropdown [style]="{ minWidth: '200px', backgroundColor: 'var(--card)'}" class="w-full" containerStyleClass="w-full"
+                            [(ngModel)]="selectedDependency"
+                            placeholder="{{ 'components.modals.task.properties.dependency' | translate }}"
+                            [options]="taskDependency" optionLabel="task" (onChange)="setTaskDependencies($event)"
+                            placeholder="{{selectedDependency}}"
+                            emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherTasks' | translate }}">
+                            <ng-template let-task pTemplate="task">
+                                <span>{{task.name}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <fa-icon [icon]="faUsers" class="size cursor-default"></fa-icon>
+                        <p>{{ 'components.modals.task.properties.responsible' | translate }}</p>
+                    </div>
+                    <div>
+                        <p-multiSelect [options]="taskResponsables" [style]="{ minWidth: '200px', 'background-color': 'var(--card)'}"
+                            [(ngModel)]="selectedUsers" appendTo="body"
+                            placeholder="{{ 'components.modals.task.properties.responsible' | translate }}"
+                            emptyMessage="{{ 'components.modals.task.properties.doesntHaveOtherResponsiblesInTask' | translate }}" [showToggleAll]="false">
+                            <ng-template let-node pTemplate="default" display="chip">
+                                <span (click)="updateResponsible($event, node)">{{node.label}}</span>
+                            </ng-template>
+                        </p-multiSelect>
+                    </div>
+                </td>
+            </ng-container>
+            <ng-container *ngFor="let value of task.values">
+                <td *ngIf="value.property.propertyStatus != 'INVISIBLE'">
+
+                    <div>
+                        <fa-icon [icon]="getIcon(value)" class="cursor-default"></fa-icon>
+                        <p>{{value.property.name}}</p>
+                    </div>
+                    <div>
+                        <app-input-value-property (changes)="changeTask($event)" [task]="task" [value]="value"
+                            [backgroundColor]="getColor(value)" [canEdit]="canEdit"></app-input-value-property>
+                    </div>
+                </td>
+            </ng-container>
+        </tr>
+    </table>
+</div>

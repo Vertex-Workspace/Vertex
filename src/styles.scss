@@ -1,0 +1,150 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+// @import '@ctrl/ngx-emoji-mart/picker';
+
+@import './variables';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: $secondColor;
+    color: $primaryColor;
+    font-family: $fontFamily;
+    font-size: $regularText;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    scroll-behavior: smooth
+}
+
+fa-icon {
+    @apply text-2xl;
+    color: $secondColor;
+    cursor: pointer;
+}
+
+button,
+a {
+    cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+}
+
+.p-badge{
+    background-color: $primaryColor !important;
+    color: $secondColor !important;
+    padding: 0 !important;
+}
+/* width */
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: $secondColor;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $primaryColor;
+    border-radius: 3px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $fontFamily;
+    color: $primaryColor;
+}
+
+//TEXTS SIZES - STYLE GUIDE
+h1 {
+    font-size: 56px;
+    line-height: 61.1px;
+
+}
+
+h2 {
+    font-size: 48px;
+    line-height: 52.8px;
+}
+
+h3 {
+    font-size: 40px;
+    line-height: 44px;
+}
+
+h4 {
+    font-size: 32px;
+    line-height: 35.2px;
+}
+
+h5 {
+    font-size: 24px;
+    line-height: 26.4px;
+}
+
+h6 {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.large-text,
+.medium-text,
+.regular-text,
+.small-text {
+    font-family: $fontFamily;
+    color: $text;
+}
+
+.large-text {
+    font-size: $largeText;
+    line-height: 28px;
+}
+
+.medium-text {
+    font-size: $mediumText;
+    line-height: 25.2px;
+}
+
+.regular-text {
+    font-size: $regularText;
+    line-height: 22.4px;
+    font-family: $fontFamily;
+}
+
+.small-text {
+    font-size: $smallText;
+    line-height: 19.6px;
+}
+
+input {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    outline: none;
+}
+
+::ng-deep .joyride-step__container {
+    background-color: $card !important;
+    color: $text !important;
+    padding: 20px;
+    box-shadow: none;
+}
+

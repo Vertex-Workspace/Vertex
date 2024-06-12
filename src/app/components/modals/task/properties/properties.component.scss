@@ -1,0 +1,170 @@
+@import '../../../../../variables.scss';
+
+@media screen and (min-width: 1032px) {
+
+    .base {
+        @apply w-full h-full flex;
+    }
+    table {
+        @apply w-[90%] h-[100%] flex flex-col gap-8 items-start overflow-x-hidden pr-5;
+    }
+    
+    tr {
+        @apply w-full flex flex-col items-center justify-center;
+    }
+    
+    td {
+        @apply flex justify-center w-[100%] px-2 items-center border-b-2;
+        min-height: 75px;
+    }
+    
+    td div {
+        @apply w-1/2 flex h-full justify-start items-center pl-5;
+    }
+    
+    fa-icon {
+        @apply w-12 h-12 flex justify-center items-center;
+        color: $primaryColor; 
+    }
+    select{
+        @apply w-full h-2/3 flex rounded-sm px-2;
+    }
+    select:hover{
+        background-color: #f3f0f0;
+        cursor: pointer;
+    }
+    
+    input{
+        @apply w-full h-2/3 flex rounded-sm px-2;
+    }
+    input:hover{
+        background-color: #f3f0f0;
+        cursor: pointer;
+    }
+    input:focus{
+        cursor: text;
+        border-bottom: 1px solid $primaryColor;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    
+    .size{
+        font-size: 1.25rem;;
+    }
+}
+
+@media screen and (min-width: 560px) and (max-width: 1032px) {
+
+    .base {
+        @apply w-full h-full flex justify-center;
+    }
+    table {
+        @apply w-full h-[100%] flex flex-col gap-8 items-start overflow-x-hidden pr-5;
+    }
+    
+    tr {
+        @apply w-full flex flex-col items-center justify-center;
+    }
+    
+    td {
+        @apply flex justify-start w-[100%] px-2 items-center border-b-2;
+        min-height: 75px;
+    }
+    
+    td div {
+        @apply w-1/2 flex h-full justify-start items-center pl-5;
+    }
+    
+    fa-icon {
+        @apply w-12 h-12 flex justify-center items-center;
+        color: $primaryColor; 
+    }
+    select{
+        @apply w-full h-2/3 flex rounded-sm px-2;
+    }
+    select:hover{
+        background-color: #f3f0f0;
+        cursor: pointer;
+    }
+    
+    input{
+        @apply w-full h-2/3 flex rounded-sm px-2;
+    }
+    input:hover{
+        background-color: #f3f0f0;
+        cursor: pointer;
+    }
+    input:focus{
+        cursor: text;
+        border-bottom: 1px solid $primaryColor;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    
+    .size{
+        font-size: 1.25rem;;
+    }
+}
+
+@media screen and (max-width: 560px) {
+
+    .base {
+        @apply w-full h-full flex justify-center;
+    }
+    table {
+        @apply w-full h-[100%] flex flex-col gap-8 items-start overflow-x-hidden pr-5;
+    }
+    
+    tr {
+        @apply w-full flex flex-col items-center justify-center;
+    }
+    
+    td {
+        @apply flex justify-start w-[100%] px-2 items-center border-b-2;
+        min-height: 75px;
+    }
+    
+    td div {
+        @apply w-1/5 flex h-full justify-start items-center pl-5;
+    }
+    
+    fa-icon {
+        @apply w-12 h-12 flex justify-center items-center;
+        color: $primaryColor; 
+    }
+    select{
+        @apply w-full h-2/3 flex rounded-sm px-2;
+    }
+    select:hover{
+        background-color: #f3f0f0;
+        cursor: pointer;
+    }
+
+    td > div > p {
+        @apply hidden;
+    }
+    
+    input{
+        @apply w-full h-2/3 flex rounded-sm px-2;
+    }
+    input:hover{
+        background-color: #f3f0f0;
+        cursor: pointer;
+    }
+    input:focus{
+        cursor: text;
+        border-bottom: 1px solid $primaryColor;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    
+    .size{
+        font-size: 1.25rem;;
+    }
+}

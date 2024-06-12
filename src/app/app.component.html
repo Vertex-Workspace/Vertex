@@ -1,0 +1,75 @@
+<div *ngIf="userLogged && !this.router.url.includes('landing-page')" class="mobileSideBar">
+    <app-mobile-sidebar (isMiniChatOpen)="openMiniChat()" style="width: 100%; height: 100%;"></app-mobile-sidebar>
+</div>
+<section class="main-screen" *ngIf="userLogged && renderPersonalization && !this.router.url.includes('landing-page')">
+
+    <aside (mouseenter)="openSideBar()" (mouseleave)="openSideBar()"
+        [ngClass]="isSideBarExpanded ? 'side-barOpen': 'side-bar'">
+        <app-sidebar [isSideBarExpanded]="isSideBarExpanded"
+            style="width: 100%; height: 100%;" (openChat)="expandChat($event)" />
+    </aside>
+
+    <div [ngClass]="isSideBarExpanded ? 'main-divOpen': 'main-div'"
+        [ngStyle]="{'overflow-y' : notification ? 'hidden' : 'auto'}">
+        <div class="page-content">
+
+            <app-notification *ngIf="notification" style="width: 100%; height:100%" (close)="switchNotifications()"
+                [notifications]="notifications">
+            </app-notification>
+
+
+            <header *ngIf="!this.router.url.includes('chat')" class="main-header">
+
+                <app-loading *ngIf="userLogged" [userLogged]="userLogged"></app-loading>
+
+
+                <app-header style="width: 100%; height: 100%;" (openNotification)="switchNotifications()"
+                    [currentRoute]="'/home'" [notificationBadge]="notificationBadge" />
+
+            </header>
+
+            <main class="main-content" [@routeAnimations]="getRouteAnimationData()">
+                <router-outlet></router-outlet>
+            </main>
+        </div>
+
+        <div *ngIf="url !== 'chat' && !this.router.url.includes('chat')" (click)="openMiniChat()" class="chat-circle">
+            <fa-icon [icon]="faMessage"></fa-icon>
+        </div>
+
+        <app-vlibras *ngIf="logged.personalization?.signLanguage"></app-vlibras>
+
+        <div *ngIf="logged.personalization?.listeningText" class="position-fixed div-principal"
+            style="position: absolute; top: 37% ;right: 0; margin: 0!important;">
+            <div role="button" *ngIf="!textSpeechService.canSpeak" class="textSpeech mt-2"
+                style="position: relative !important;" (click)="startSpeech()">
+                <fa-icon class="text-white" [icon]="faVolumeOff"></fa-icon>
+            </div>
+            <div role="button" *ngIf="textSpeechService.canSpeak" class="textSpeech mt-2"
+                style="position: relative !important; background-color: #3b82f6 !important;" (click)="stopSpeech()">
+                <fa-icon class="text-white" [icon]="faVolumeUp"></fa-icon>
+            </div>
+        </div>
+        <div style="z-index: 2147483648 !important;" *ngIf="miniChatOpen">
+            <app-minichat (miniChatOpen)="openMiniChat()" (chatExpanded)="minimizeChat()"></app-minichat>
+        </div>
+    </div>
+
+    <app-loading *ngIf="userLogged" [userLogged]="userLogged"></app-loading>
+
+</section>
+
+<section *ngIf="userLogged && renderPersonalization && this.router.url.includes('landing-page')">
+    <router-outlet></router-outlet>
+
+</section>
+
+<div class="main-content" *ngIf="!userLogged" [@routeAnimations]="getRouteAnimationData()">
+    <app-loading *ngIf="!userLogged" [userLogged]="userLogged"></app-loading>
+    <router-outlet></router-outlet>
+</div>
+
+<div class="card">
+    <p-toast></p-toast>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="main-div">
+    <div class="center-div" *ngIf="render">
+        <div class="square" *ngIf="team.image">
+            <img src="data:image/jpg;base64, {{team.image}}" alt="" class="h-full w-full">
+        </div>
+        <div class="flex w-64 h-64 shadow-md justify-center items-center" *ngIf="!team.image">
+            <h1 >{{getFirstLetter(team.name)}}</h1>
+        </div>
+        <div class="flex flex-col justify-center items-center gap-5">
+            <div class="text-invitation">{{ 'pages.invitation-page.text' | translate:{teamName:team.name} }}</div>
+            <div class="submit gap-3">
+                <button (click)="addUserOnTeam()">{{ 'pages.invitation-page.enterTeam' | translate }}</button>
+                <div class="deny-invite">
+                    <p (click)="deny()">{{ 'pages.invitation-page.declineInvite' | translate }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

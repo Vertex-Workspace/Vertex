@@ -1,0 +1,1 @@
+export const URL: string = "http://localhost:7777/";

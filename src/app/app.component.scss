@@ -1,0 +1,427 @@
+@import '../variables';
+
+@media screen and (min-width: 1024px) {
+    .main-screen {
+        @apply w-screen h-screen flex justify-start;
+    }
+
+    @media screen and (min-width: 1024px) {
+
+
+        .side-bar {
+            @apply flex w-[60px] h-full flex-col items-center z-[998];
+            background-color: $primaryColor;
+            transition: width 0.32s ease-out;
+            z-index: 10;
+            position: fixed;
+        }
+
+        .side-barOpen {
+            @apply flex w-[300px] h-full flex-col items-center z-[998];
+            transition: width 0.32s ease-in-out;
+            background-color: $primaryColor;
+            position: fixed;
+            z-index: 10;
+        }
+
+        .page-content {
+            @apply h-full w-[96%];
+        }
+
+    }
+
+    @media screen and (max-width: 1023px) {
+
+        .side-bar {
+            @apply flex w-full h-[60px] items-center z-[998];
+            background-color: $primaryColor;
+            transition: width 0.32s ease-out;
+            z-index: 10;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .side-barOpen {
+            @apply flex w-full h-[60px] items-center z-[998];
+            background-color: $primaryColor;
+            transition: width 0.32s ease-out;
+            z-index: 10;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+    }
+
+    .main-div {
+        @apply flex w-[100%] h-full flex-col items-end;
+        background-color: $secondColor;
+        transition: width 0.32s ease-in-out;
+    }
+
+    .main-divOpen {
+        @apply flex w-[100%] h-full flex-col items-end;
+        background-color: $secondColor;
+    }
+
+
+    .main-header {
+        @apply flex w-full h-[8%] items-center justify-between;
+    }
+
+    .main-content {
+        @apply flex w-full h-[92%] justify-end;
+    }
+
+    .main-contentChat {
+        @apply flex w-full h-[100%] justify-end;
+    }
+
+    .chat-circle {
+        @apply cursor-pointer absolute right-10 bottom-10 w-[70px] h-[70px] rounded-full flex justify-center items-center;
+        background-color: $primaryColor;
+    }
+
+    .section-icons {
+        @apply flex justify-between items-center text-lg;
+        color: $primaryColor !important;
+    }
+
+    .square-chat {
+        @apply w-[10%] h-[100%] rounded-lg flex items-center justify-center;
+        background-color: $primaryColor;
+    }
+
+    @keyframes pulse {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .animate-pulse {
+        animation: pulse 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .textSpeech {
+        border-radius: 10px;
+        right: 10px;
+        z-index: 2;
+        width: 40px;
+        float: right;
+        top: 2.5vw;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #3b82f6;
+        background-position: center;
+    }
+
+    .mobileSideBar {
+        @apply hidden;
+
+    }
+
+    .centerDiv {
+        @apply h-full w-[96%];
+    }
+}
+
+
+@media screen and (max-width: 1024px) {
+
+    .chat-circle {
+        @apply hidden;
+    }
+
+    .side-bar {
+        @apply hidden;
+    }
+
+    .mobileSideBar {
+        @apply fixed bottom-0 left-0 w-full h-[60px] z-[999];
+    }
+
+    .main-header {
+        @apply h-[90px]
+    }
+
+    .centerDiv {
+        @apply w-full;
+    }
+
+    .page-content {
+        @apply h-full w-[100%];
+    }
+
+}
+
+.textSpeech {
+    border-radius: 10px;
+    right: 10px;
+    z-index: 2;
+    width: 40px;
+    float: right;
+    top: 2.5vw;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b82f6;
+    background-position: center;
+}
+
+.tutorial-div {
+    background-color: $card;
+    color: $text;
+}
+
+::ng-deep .p-dropdown-panel {
+    background: $card !important;
+    color: white !important;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+    border: 0 none;
+    color: $text;
+    background: transparent;
+    transition: box-shadow 0.2s;
+    border-radius: 0;
+}
+
+::ng-deep .p-multiselect-panel {
+    background: $card !important;
+    color: #495057;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+    border: 0 none;
+    color: $text !important;
+    background: transparent;
+    transition: box-shadow 0.2s;
+    border-radius: 0;
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-header {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid #dee2e6;
+    color: $text !important;
+    background: $card !important;
+    margin: 0;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+::ng-deep .p-dropdown {
+    background: $card !important;
+    border: 1px solid #ced4da;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+}
+
+::ng-deep .p-cascadeselect-panel {
+    background: $card !important;
+    color: #495057;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item {
+    margin: 0;
+    border: 0 none;
+    color: $text !important;
+    background: transparent;
+    transition: box-shadow 0.2s;
+    border-radius: 0;
+}
+
+::ng-deep .p-datepicker:not(.p-datepicker-inline) {
+    background: $card !important;
+    border: 0 none;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .p-datepicker {
+    padding: 0.5rem;
+    background: #ffffff;
+    color: $text !important;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+}
+
+::ng-deep .p-datepicker table td.p-datepicker-today>span.p-highlight {
+    color: white;
+    background: $primaryColor !important;
+}
+
+::ng-deep .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+    background: $card !important;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev,
+.p-datepicker .p-datepicker-header .p-datepicker-next {
+    width: 2rem;
+    height: 2rem;
+    color: $text !important;
+    border: 0 none;
+    background: transparent;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+    color: $text !important;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    font-weight: 600;
+    padding: 0.5rem;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+    margin-right: 0.5rem;
+    color: $text !important;
+}
+
+::ng-deep .p-cascadeselect:not(.p-disabled):hover {
+    border-color: $primaryColor;
+}
+
+::ng-deep .p-cascadeselect:not(.p-disabled).p-focus {
+    outline-offset: 0;
+    outline: 0 none;
+    box-shadow: 0 0 0 0.025rem $primaryColor !important;
+    border-color: $primaryColor !important;
+}
+
+::ng-deep .p-inputtext:enabled:focus {
+    outline-offset: 0;
+    outline: 0 none;
+    box-shadow: 0 0 0 0.025rem $primaryColor !important;
+    border-color: $primaryColor !important;
+}
+
+::ng-deep .p-inputtext:enabled:hover {
+    border-color: $primaryColor;
+}
+
+::ng-deep .p-multiselect:not(.p-disabled):hover {
+    border-color: $primaryColor;
+}
+
+::ng-deep .p-multiselect:not(.p-disabled).p-focus {
+    outline-offset: 0;
+    outline: 0 none;
+    box-shadow: 0 0 0 0.025rem $primaryColor !important;
+    border-color: $primaryColor !important;
+}
+
+::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+    outline-offset: 0;
+    outline: 0 none;
+    box-shadow: 0 0 0 0.025rem $primaryColor !important;
+    border-color: $primaryColor !important;
+}
+
+::ng-deep .p-dropdown:not(.p-disabled):hover {
+    border-color: $primaryColor;
+}
+
+::ng-deep .joyride-step__close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    color: white !important;
+}
+
+::ng-deep .joyride-step__container {
+    box-sizing: border-box;
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 0 0 50px 1px #000;
+    border-radius: 5px;
+    border-top: 10px solid $primaryColor;
+    font-family: $fontFamily !important;
+}
+
+::ng-deep .joyride-arrow__left {
+    border-right: 11px solid $card !important;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+}
+
+::ng-deep .joyride-arrow__top {
+    border-right: 11px solid transparent;
+    border-left: 11px solid transparent;
+    border-bottom: 11px solid $primaryColor !important;
+}
+
+::ng-deep .joyride-arrow__bottom {
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 11px solid $card !important;
+}
+
+::ng-deep .joyride-backdrop .backdrop-right{
+    background-color: none !important;
+}
+
+::ng-deep line {
+    stroke: $text !important;
+    stroke-width: 3;
+}
+::ng-deep .joyride-step__title {
+    color: $text !important;
+}
+
+::ng-deep .p-cascadeselect {
+    background: $card ;
+    border: 1px solid #ced4da;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+}
+
+::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    border-color: $primaryColor !important;
+    background: $primaryColor !important;
+    color: $text !important;
+}
+
+::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+    border-color: $primaryColor !important;
+    background: $primaryColor !important;
+}
+
+::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+    box-shadow: $card !important;
+    border-color: $card !important;
+}
+
+::ng-deep .p-checkbox .p-checkbox-box {
+    border: 2px solid $primaryColor !important;
+    background: $card !important;
+    width: 22px;
+    height: 22px;
+    color: #495057;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}

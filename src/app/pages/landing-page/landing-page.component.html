@@ -1,0 +1,315 @@
+<header #inicio>
+    <div class="head-navigation">
+        <div class="container-logo">
+            <img class="head-logo" src="../../../assets/vertex-logo.png" alt="Vertex Logo">
+            <h4 class="name-vertex">{{ 'pages.landing-page.VERTEX' | translate }}</h4>
+        </div>
+
+        <div *ngIf="!resposive" class="header-container-options">
+            <a class="header-option" (click)="scroll(inicio)">{{ 'pages.landing-page.HOME' | translate }}</a>
+            <a class="header-option" (click)="scroll(aboutUs)">{{ 'pages.landing-page.ABOUT_US' | translate }}</a>
+            <a class="header-option" (click)="scroll(tutorial)">{{ 'pages.landing-page.TUTORIAL' | translate }}</a>
+            <a class="header-option" (click)="scroll(features)">{{ 'pages.landing-page.FEATURES' | translate }}</a>
+            <a class="header-option" (click)="scroll(principles)">{{ 'pages.landing-page.PRINCIPLES' | translate }}</a>
+            <div class="flex items-center">
+                <button mat-button [matMenuTriggerFor]="idiomaMenu" class="nav-item">
+                    <img style="width: 40px;" [src]="linkImage" />
+                    <i class="bi bi-chevron-down"></i>
+                </button>
+                <mat-menu #idiomaMenu="matMenu" class="custom-menu">
+                    <ng-container *ngFor="let tr of translates">
+                        <button mat-menu-item (click)="changeLanguage(tr.sigla,tr.image)">
+                            <img style="width: 40px;" src="{{tr.image}}" />
+                        </button>
+                    </ng-container>
+                </mat-menu>
+            </div>
+        </div>
+
+        <div *ngIf="resposive" (click)="openNavigation()">
+            <i class="pi pi-bars" style="font-size: 35px;"></i>
+        </div>
+    </div>
+
+    <div class="main-header">
+        <div class="header-content">
+            <p class="header-titleG">
+                {{ 'pages.landing-page.MANAGE_EACH' | translate }}<br><span class="header-title">{{ 'pages.landing-page.VERTEX' | translate }}</span> {{ 'pages.landing-page.STORY' | translate }}
+            </p>
+            <button (click)="goToLogin()" class="header-button">{{ 'pages.landing-page.START' | translate }}</button>
+        </div>
+        <div class="header-image">
+            <img class="header-img" src="../../../assets/vertex-logo.png" alt="Vertex Logo">
+        </div>
+    </div>
+</header>
+<main>
+
+
+    <section #aboutUs class="section-aboutUs scroll-smooth gap-16">
+        <div class="w-full bg-[#f3f3f3] h-[20px]"></div>
+        <div class="title-aboutUs">
+            <p class="section-title-vertex">{{ 'pages.landing-page.VERTEX' | translate }}</p>
+            <p class="section-subtitleabout">{{ 'pages.landing-page.ABOUT_US_DESCRIPTION' | translate }}</p>
+        </div>
+        <div class="w-[85%] h-[700px] bg-[#f3f3f3] flex flex-col gap-16" style="margin: auto;">
+            <p class="section-title">{{ 'pages.landing-page.FEEL_THE_FLOW' | translate }}</p>
+            <div class="screen">
+                <ng-container cdkDropListGroup>
+                    <div class="col-container">
+                        <div class="col h-fit" *ngFor="let col of columns" cdkDropList (cdkDropListDropped)="drop($event,col)"
+                            [style.backgroundColor]="col.color">
+                            <div class="flex flex-row justify-between w-full items-center">
+                                <p class="large-text" [style.color]="getStrongerColor(col.color)">{{col.status }}
+                                </p>
+                                <button (click)="createTask(col)" [style.color]="getStrongerColor(col.color)">+</button>
+                            </div>
+                            <ng-container *ngFor="let task of tasks">
+                                <app-card *ngIf="task.status === col" [task]="task"   [borderColor]="col.color" cdkDrag
+                                    [cdkDragData]="task" [hasTrash]="false"></app-card>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="w-full bg-[#f3f3f3] h-[20px]"></div>
+    </section>
+
+    <div class="flex flex-col justify-start scroll-smoothAboutUs">
+        <section #tutorial class="section-tutorial">
+            <div class="highDivVideo">
+                <div class="div-tutorial-text ">
+                    <p class="section-title">{{ 'pages.landing-page.TUTORIAL' | translate }}</p>
+
+                    <p class="section-subtitle">
+                        {{ 'pages.landing-page.TUTORIAL_DESCRIPTION' | translate }}
+                    </p>
+                </div>
+
+                <div class="card-tutorial">
+                    <iframe width="800" height="400" src="https://www.youtube.com/embed/6dtAMXlvvQU?si=Vs1DhZirXiM4XhHM"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section #features class="section-features scroll-smooth">
+            <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [style]="{'height': '700px'}"
+                [containerStyle]="{ 'width': '100%', 'height': 'auto'}">
+                <ng-template pTemplate="item" let-item>
+
+                    <div class="card-features">
+                        <div class="w-[95%] justify-between flex gap-5">
+                            <div class="divText-features">
+                                <p class="section-title">{{item.title}}</p>
+
+                                <div class="text-justify">
+                                    <ul>
+                                        <li *ngFor="let itemD of item.description">
+                                            <strong>{{itemD.title}}</strong>
+                                            <br>
+                                            {{itemD.description}}
+                                            <br>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="image-features">
+                                <img class="w-[550px] h-[500px] object-contain" [src]="item.image" alt="Feature Image">
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-template>
+            </p-galleria>
+        </section>
+
+        <section #principles class="section-principles">
+            <p class="section-title">{{ 'pages.landing-page.VERTEX_PRINCIPLES' | translate }}</p>
+            <div class="w-[90%] flex flex-col items-center gap-10 relative">
+                <div id="principles1" class="principles-squaresRight">
+                    <div class="white-square 3xl:-mr-5">
+                        <p class="p-white" *ngIf="resposive">{{ 'pages.landing-page.MISSION' | translate }}</p>
+                        {{ 'pages.landing-page.MISSION_DESCRIPTION' | translate }}
+                    </div>
+                    <div class="blue-square" *ngIf="!resposive">
+                        <img class="w-32 h-32" src="../../../assets/alvo.png" alt="">
+                        <p class="p-white">{{ 'pages.landing-page.MISSION' | translate }}</p>
+                    </div>
+                </div>
+
+                <div id="principles2"
+                    class="principles-squaresLeft">
+                    <div class="blue-square" *ngIf="!resposive">
+                        <img class="w-32 h-32" src="../../../assets/diamond.svg" alt="">
+                        <p class="p-white">{{ 'pages.landing-page.VALUES' | translate }}</p>
+                    </div>
+                    <div class="white-square 3xl:-ml-5">
+                        <p class="p-white" *ngIf="resposive">{{ 'pages.landing-page.VALUES' | translate }}</p>
+                        <ol>
+                            <li><strong>{{ 'pages.landing-page.EXCELLENCE' | translate }}:</strong> {{ 'pages.landing-page.EXCELLENCE_DESCRIPTION' | translate }}</li>
+                            <li><strong>{{ 'pages.landing-page.INTEGRITY' | translate }}:</strong> {{ 'pages.landing-page.INTEGRITY_DESCRIPTION' | translate }}</li>
+                            <li><strong>{{ 'pages.landing-page.INNOVATION' | translate }}:</strong> {{ 'pages.landing-page.INNOVATION_DESCRIPTION' | translate }}</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div id="principles3" class="principles-squaresRight">
+                    <div class="white-square 3xl:-mr-5">
+                        <p class="p-white" *ngIf="resposive">{{ 'pages.landing-page.VISION' | translate }}</p>
+                        {{ 'pages.landing-page.VISION_DESCRIPTION' | translate }}
+                    </div>
+                    <div class="blue-square" *ngIf="!resposive">
+                        <img class="w-32 h-24" src="../../../assets/eye.png" alt="">
+                        <p class="p-white">{{ 'pages.landing-page.VISION' | translate }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+    </div>
+</main>
+
+<footer>
+    <div class="above-div">
+        <div class="footer-logo">
+            <img class="footer-img" src="../../../assets/vertex-logo.png" alt="Vertex Logo">
+            <h4 class="footer-name">{{ 'pages.landing-page.VERTEX' | translate }}</h4>
+        </div>
+
+        <div class="links-div">
+
+            <div class="community">
+                <p class="footer-title">{{ 'pages.landing-page.JOIN_VERTEX_COMMUNITY' | translate }}</p>
+
+                <div class="div-balls">
+                    <div class="ball">
+                        <i class="pi pi-youtube" style="color: white;"></i>
+                    </div>
+
+                    <div class="ball">
+                        <i class="pi pi-facebook" style="color: white;"></i>
+                    </div>
+
+                    <div class="ball">
+                        <i class="pi pi-instagram" style="color: white;"></i>
+                    </div>
+                    <div class="ball">
+                        <i class="pi pi-envelope" style="color: white;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <p class="footer-title">{{ 'pages.landing-page.NAVIGATE_VERTEX' | translate }}</p>
+
+                <div class="footer-options">
+                    <a class="footer-option" (click)="scroll(inicio)">{{ 'pages.landing-page.HOME' | translate }}</a>
+                    <a class="footer-option" (click)="scroll(aboutUs)">{{ 'pages.landing-page.ABOUT_US' | translate }}</a>
+                    <a class="footer-option" (click)="scroll(tutorial)">{{ 'pages.landing-page.TUTORIAL' | translate }}</a>
+                    <a class="footer-option" (click)="scroll(features)">{{ 'pages.landing-page.FEATURES' | translate }}</a>
+                    <a class="footer-option" (click)="scroll(principles)">{{ 'pages.landing-page.PRINCIPLES' | translate }}</a>
+                </div>
+
+            </div>
+
+            <div class="lang-div">
+                <img class="language" src="https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
+                    alt="">
+                <img class="language"
+                    src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg"
+                    alt="">
+                <img class="language"
+                    src="https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg" alt="">
+                <img class="language"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png"
+                    alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-div">
+        <p class="footer-text">{{ 'pages.landing-page.COPYRIGHT' | translate }}</p>
+
+        <div class="divDevelopedBy">
+            {{ 'pages.landing-page.DEVELOPED_BY' | translate }} -     
+            <a target="_blank" href="https://www.linkedin.com/in/ana-clara-tomaselli-borchardt-29a76228b/">
+                <p-avatar  image="../../assets/ana.png" styleClass="mr-2"
+                size="large" shape="circle" />
+            </a>
+
+            <a target="_blank" href="https://www.linkedin.com/in/kaique-fernandes-73402727b/">
+                <p-avatar  image="../../assets/kaique.jpg" styleClass="mr-2"
+                size="large" shape="circle" />
+            </a>
+
+            <a target="_blank" href="https://www.linkedin.com/in/miguel-bertoldi-88a439224/">
+                <p-avatar  image="../../assets/miguel.jpg" styleClass="mr-2"
+                size="large" shape="circle" class="h-auto"/>
+            </a>
+
+            <a target="_blank" href="https://www.linkedin.com/in/ot%C3%A1vio-miguel-rocha-931907252/">
+                <p-avatar  image="../../assets/otavio.jpg" styleClass="mr-2"
+                size="large" shape="circle" />
+            </a>
+        </div>
+    </div>
+</footer>
+
+
+<div *ngIf="navigation" class="fixed left-0 top-0 w-full h-full flex flex-col gap-10 bg-[#092c4c]">
+    <div class="w-full h-[15%] flex justify-between pl-5 pr-10 items-center">
+        <div class="flex items-center gap-5">
+            <img class=" h-24" src="../../../assets/white-logo.svg">
+            <h4 class="text-white">{{ 'pages.landing-page.VERTEX' | translate }}</h4>
+        </div>
+        <i class="pi pi-times" (click)="openNavigation()" style="color: white; font-size: 30px  ;"></i>
+    </div>
+
+    <div class="w-full h-[50%] flex pl-5 flex-col">
+        <div class="nav-itens" (click)="scroll2(inicio)">
+            <i class="pi pi-home" style="color: white; font-size: 25px;"></i>
+            <a class="text-white text-lg font-['Inter']">{{ 'pages.landing-page.HOME' | translate }}</a>
+        </div>
+
+        <div class="nav-itens" (click)="scroll2(aboutUs)">
+            <i class="pi pi-users" style="color: white; font-size: 25px;"></i>
+            <a class="text-white text-lg font-['Inter']" >{{ 'pages.landing-page.ABOUT_US' | translate }}</a>
+        </div>
+
+        <div class="nav-itens" (click)="scroll2(tutorial)">
+            <i class="pi pi-info-circle" style="color: white; font-size: 25px;"></i>
+            <a class="text-white text-lg font-['Inter']">{{ 'pages.landing-page.TUTORIAL' | translate }}</a>
+        </div>
+
+        <div class="nav-itens" (click)="scroll2(features)">
+            <i class="pi pi-thumbs-up" style="color: white; font-size: 25px;"></i>
+            <a class="text-white text-lg font-['Inter']">{{ 'pages.landing-page.FEATURES' | translate }}</a>
+        </div>
+
+        <div class="nav-itens" (click)="scroll2(principles)">
+            <i class="pi pi-check-circle" style="color: white; font-size: 25px;"></i>
+            <a class="text-white text-lg font-['Inter']">{{ 'pages.landing-page.PRINCIPLES' | translate }}</a>
+        </div>
+
+    </div>
+    <div class=" flex justify-end items-end h-full pb-10 pr-10">
+        <button mat-button [matMenuTriggerFor]="idiomaMenu" class="nav-item">
+            <img style="width: 40px;" [src]="linkImage" />
+            <i class="bi bi-chevron-down"></i>
+        </button>
+        <mat-menu #idiomaMenu="matMenu" class="custom-menu">
+            <ng-container *ngFor="let tr of translates">
+                <button mat-menu-item (click)="changeLanguage(tr.sigla,tr.image)">
+                    <img style="width: 40px;" src="{{tr.image}}" />
+                </button>
+            </ng-container>
+        </mat-menu>
+    </div>
+</div>

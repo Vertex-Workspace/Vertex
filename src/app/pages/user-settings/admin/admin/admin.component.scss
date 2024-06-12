@@ -1,0 +1,46 @@
+@import "../../../../../variables";
+
+.bg {
+  @apply flex min-h-full w-screen flex-col items-center justify-start pb-16;
+  color: $text;
+}
+
+.icon {
+  color: $primaryColor;
+}
+
+.title {
+  @apply w-[85%] h-[5%] flex flex-col items-start justify-start border-b border-[#96A4B0];
+  border-color: $primaryColor;
+
+  div {
+    @apply flex items-center justify-start gap-7;
+  }
+
+  p {
+    @apply text-xl font-medium;
+  }
+}
+
+.underDiv {
+  @apply w-[85%] h-[700px] flex items-center justify-start;
+
+  .errorLogs {
+    @apply w-[60%] h-[90%] overflow-y-auto flex flex-col items-start justify-start;
+    color: $text;
+  }
+
+  .graphs {
+    @apply w-[100%] h-[90%] flex flex-col items-end justify-start;
+    color: $text;
+  }
+}
+.div-dashboard {
+  @apply flex items-center flex-col w-[80%] h-[85%] border-t-8 shadow-md rounded-md justify-evenly;
+  background-color: $card;
+  border-top: 8px solid $primaryColor;
+
+  p {
+    @apply pt-3;
+  }
+}

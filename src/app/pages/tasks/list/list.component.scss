@@ -1,0 +1,60 @@
+@import '../../../../variables.scss';
+
+section {
+    color: $primaryColor;
+    @apply flex h-full justify-start overflow-hidden;
+    
+    .table-vertex {
+        @apply  flex flex-col rounded-sm mb-12;
+        
+        .tbody {
+            @apply flex w-full h-full flex-col;
+        }
+         
+          label {
+              @apply flex items-center justify-center;
+              background-color: $secondColor;
+              border: 1px solid $emphasis;
+          }
+          
+        .trow {
+            @apply w-full h-[55px] flex flex-col;
+        }
+    }
+}
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    overflow-x: hidden;
+    color: $primaryColor;
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .cdk-drop-list-dragging .cdk-drag {
+    transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+
+  .nameHeader{
+    @apply sticky left-0;
+  }
+
+  .null-list {
+    @apply w-full h-full pt-10 flex justify-center;
+  }

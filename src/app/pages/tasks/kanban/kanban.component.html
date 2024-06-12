@@ -1,0 +1,56 @@
+<section class="screen">
+    
+    <ng-container >
+        <div class="col-container" cdkDropListGroup>
+            <ng-container *ngFor="let propertyList of status">
+            <div class="col" 
+                [style.backgroundColor]="propertyList.color"
+                cdkDropList [cdkDropListData]="taskList" (cdkDropListDropped)="dropCard($event, propertyList)">
+                <div class="flex flex-row justify-between w-full items-center">
+                    <p class="large-text" 
+                        [style.color]="getStrongerColor(propertyList.color)">
+                            {{ propertyList.value }}
+                    </p>
+                    <button (click)="project.creationOrigin === 'GOOGLE' ? createCalendarTask(propertyList) : createTask(propertyList)"
+                        [ngClass]="canCreate ? 'opacity-100' : 'opacity-20'" 
+                        [style.color]="getStrongerColor(propertyList.color)" 
+                        [disabled]="!canCreate"
+                    >
+                        +
+                    </button>
+                </div>
+
+                <div class="col-items">
+
+                    <ng-container 
+                        *ngFor="let task of (taskList 
+                            | namePipe : nameFilter 
+                            | statusPipe : filter : false
+                            | datePipe : filter
+                            | nameSortPipe : orderParams
+                            | dateSortPipe : orderParams)">
+
+                        <app-card 
+                            *ngIf="getTaskByProperty(task, propertyList)"
+                            cdkDrag 
+                            cdkDragBoundary=".col-container"
+                            [task]="task"
+                            [borderColor]="propertyList.color" 
+                            [minHeight]="'140px'" 
+                            [width]="'300px'" 
+                            [cdkDragData]="task" 
+                            [permissions]="permissions" 
+                            (deleteTask)="deleteTask($event)" 
+                            (openTaskDetails)="openTaskModal(task)" 
+                        />
+
+                    </ng-container>
+
+                </div>
+            </div>
+        </ng-container>
+        </div>
+    </ng-container>
+</section>
+<app-confirm-modal *ngIf="modalDelete" [width]="'400px'" [height]="'250px'"
+[title]="'components.reusable-components.card.excludeTask' | translate" (close)="confirmDeleteTask($event)"></app-confirm-modal>

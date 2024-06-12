@@ -1,0 +1,46 @@
+<app-modal-warn [width]="'650px'" [height]="'700px'" (close)="closeModal()">
+    <div class="search">
+        <input type="text" placeholder="{{ 'components.modals.search-all.search_placeholder' | translate }}"
+            [(ngModel)]="query" (keyup.enter)="onSearch()" #searchInput>
+        <i class="pi pi-search cursor-pointer" style="font-size: 20px;" (click)="onSearch()"></i>
+    </div>
+    <!-- <div class="order regular-text">
+
+
+        <p class="text-lg h-full flex items-center">{{ 'components.modals.search-all.filter_by' | translate }}</p>
+        <p-dropdown [options]="orderSettings" [(ngModel)]="orderParam" [showClear]="true" optionLabel="name"
+            placeholder="{{ 'components.modals.search-all.select_placeholder' | translate }}" [style.width]="'10rem'"
+            (ngModelChange)="updateOrderParam($event)"></p-dropdown>
+    </div> -->
+    <div class="div-searched pt-8" [ngClass]="itemsSearched.length ? 'overflow-y-auto' : 'overflow-y-hidden'">
+        <ng-container *ngIf="!itemsSearched.length">
+            <h6 *ngIf="!firstSearch; else firstSearchTemplate">
+                {{ 'components.modals.search-all.no_results' | translate }}
+            </h6>
+            <ng-template #firstSearchTemplate>
+                <h6>
+                    {{ 'components.modals.search-all.no_search' | translate }}
+                </h6>
+            </ng-template>
+        </ng-container>
+        <ng-container *ngFor="let item of (itemsSearched | searchAllFilterPipe : orderKind)">
+            <div class="card-searched" (click)="handleClick(item)">
+                <div class="flex flex-row gap-4">
+                    <div class="circular rleative">
+                        <img *ngIf="item.image; else firstLetter" src="data:image/jpg;base64, {{item.image}}" alt="">
+                        <ng-template #firstLetter>
+                            <div class="flex w-full h-full justify-center items-center">
+                                <h2 *ngIf="!item.image">{{ getFirstLetter(item) }}</h2>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="flex max-w-[50%] flex-col  justify-center">
+                        <p class="medium-text">{{ item.name }}</p>
+                        <p class="regular-text">{{ item.description }}</p>
+                    </div>
+                </div>
+                <p class="regular-text">{{ item.kind }}</p>
+            </div>
+        </ng-container>
+    </div>
+</app-modal-warn>

@@ -1,0 +1,617 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vertex documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">vertex documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#backEnd" title="src/app/services/notification-websocket.service.ts" ><b>backEnd</b>&nbsp;&nbsp;&nbsp;(src/.../notification-websocket.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#backEnd" title="src/app/services/websocket.service.ts" ><b>backEnd</b>&nbsp;&nbsp;&nbsp;(src/.../websocket.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#colors" title="src/app/models/colors.ts" ><b>colors</b>&nbsp;&nbsp;&nbsp;(src/.../colors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#defaultImage" title="src/assets/data/defaultImg.ts" ><b>defaultImage</b>&nbsp;&nbsp;&nbsp;(src/.../defaultImg.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#defaultTeamImage" title="src/assets/data/defaultImg.ts" ><b>defaultTeamImage</b>&nbsp;&nbsp;&nbsp;(src/.../defaultImg.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#locations" title="src/assets/data/locations.ts" ><b>locations</b>&nbsp;&nbsp;&nbsp;(src/.../locations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#slideInAnimation" title="src/app/animations.ts" ><b>slideInAnimation</b>&nbsp;&nbsp;&nbsp;(src/.../animations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tutorialText" title="src/app/tutorialText.ts" ><b>tutorialText</b>&nbsp;&nbsp;&nbsp;(src/.../tutorialText.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#URL" title="src/app/services/path/api_url.ts" ><b>URL</b>&nbsp;&nbsp;&nbsp;(src/.../api_url.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/services/notification-websocket.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="backEnd"></a>
+                    <span class="name">
+                        <span ><b>backEnd</b></span>
+                        <a href="#backEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;ws://localhost:7777/notifications&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/services/websocket.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="backEnd"></a>
+                    <span class="name">
+                        <span ><b>backEnd</b></span>
+                        <a href="#backEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;ws://localhost:7777/chat&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/models/colors.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="colors"></a>
+                    <span class="name">
+                        <span ><b>colors</b></span>
+                        <a href="#colors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        weak: &quot;#d3e5ef&quot;,
+        strong: &quot;#2965CC&quot;
+    },
+    {
+        weak: &quot;#ffe2dd&quot;,
+        strong: &quot;#D39384&quot;
+    },
+    {
+        weak: &quot;#e8deee&quot;,
+        strong: &quot;#6554C0&quot;
+    },
+    {
+        weak: &quot;#f5e0e9&quot;,
+        strong: &quot;#FF6E8B&quot;
+    },
+    {
+        weak: &quot;#fadec9&quot;,
+        strong: &quot;#FF991F&quot;
+    },
+    {
+        weak: &quot;#e3e2e0&quot;,
+        strong: &quot;#6B778C&quot;
+    },
+    {
+        weak: &quot;#fdecc8&quot;,
+        strong: &quot;#c0b217&quot;
+    },
+    {
+        weak: &quot;#dbeddb&quot;,
+        strong: &quot;#36B37E&quot;
+    },
+    {
+        weak: &quot;#f3f3f3&quot;,
+        strong: &quot;#FFFFFF&quot;
+    }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/data/defaultImg.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultImage"></a>
+                    <span class="name">
+                        <span ><b>defaultImage</b></span>
+                        <a href="#defaultImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;/9j/4AAQSkZJRgABAQEBLAEsAAD/4QBWRXhpZgAATU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAAITAAMAAAABAAEAAAAAAAAAAAEsAAAAAQAAASwAAAAB/+0ALFBob3Rvc2hvcCAzLjAAOEJJTQQEAAAAAAAPHAFaAAMbJUccAQAAAgAEAP/hDIFodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0n77u/JyBpZD0nVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkJz8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0nYWRvYmU6bnM6bWV0YS8nIHg6eG1wdGs9J0ltYWdlOjpFeGlmVG9vbCAxMC4xMCc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczp0aWZmPSdodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyc+CiAgPHRpZmY6UmVzb2x1dGlvblVuaXQ+MjwvdGlmZjpSZXNvbHV0aW9uVW5pdD4KICA8dGlmZjpYUmVzb2x1dGlvbj4zMDAvMTwvdGlmZjpYUmVzb2x1dGlvbj4KICA8dGlmZjpZUmVzb2x1dGlvbj4zMDAvMTwvdGlmZjpZUmVzb2x1dGlvbj4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6eG1wTU09J2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8nPgogIDx4bXBNTTpEb2N1bWVudElEPmFkb2JlOmRvY2lkOnN0b2NrOjQ5ZDRhN2FlLTI1NjYtNDY5Yi05NmI5LWUxYzAxM2JiNmEwYzwveG1wTU06RG9jdW1lbnRJRD4KICA8eG1wTU06SW5zdGFuY2VJRD54bXAuaWlkOjUxYWY0OTY0LWE4MjQtNDk1Yy04MzgzLTQ3OTYxMzNjMzY2YjwveG1wTU06SW5zdGFuY2VJRD4KIDwvcmRmOkRlc2NyaXB0aW9uPgo8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo8P3hwYWNrZXQgZW5kPSd3Jz8+/9sAQwAFAwQEBAMFBAQEBQUFBgcMCAcHBwcPCwsJDBEPEhIRDxERExYcFxMUGhURERghGBodHR8fHxMXIiQiHiQcHh8e/8AACwgBaAFoAQERAP/EABsAAQADAQEBAQAAAAAAAAAAAAAFBgcEAgMB/8QAPhABAAEDAgIECA0EAgMAAAAAAAECAwQFBhEhEjFBUQcTNmFzgbHRFSIkMkJSU2JxcpGhwRQjk+GC8RY0Vf/aAAgBAQAAPwDXQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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&#x3D;&quot;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultTeamImage"></a>
+                    <span class="name">
+                        <span ><b>defaultTeamImage</b></span>
+                        <a href="#defaultTeamImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;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&#x3D;&#x3D;&quot;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/assets/data/locations.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="locations"></a>
+                    <span class="name">
+                        <span ><b>locations</b></span>
+                        <a href="#locations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LocationItem.html" target="_self" >LocationItem[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        url: &#x27;/home&#x27;,
+        name: &#x27;Home&#x27;,
+    },
+    {
+        url: &#x27;/perfil/usuario&#x27;,
+        name: &#x27;Perfil de &#x27;,
+        previous: &#x27;/home&#x27;
+    }, 
+    {
+        url: &#x27;/perfil&#x27;,
+        name: &#x27;Seu perfil&#x27;,
+        previous: &#x27;/home&#x27;
+    },
+    {
+        url: &#x27;/configuracoes&#x27;,
+        name: &#x27;Configurações e Preferências&#x27;,
+        previous: &#x27;/home&#x27;
+    },
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/animations.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="slideInAnimation"></a>
+                    <span class="name">
+                        <span ><b>slideInAnimation</b></span>
+                        <a href="#slideInAnimation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>trigger(&#x27;routeAnimations&#x27;, [
+    
+    //Animação do Cadastro pro Login
+    transition(&#x27;registerPage &#x3D;&gt; loginPage&#x27;, [
+      style({ position: &#x27;relative&#x27; }),
+      query(&#x27;:enter, :leave&#x27;, [
+        style({
+          position: &#x27;fixed&#x27;,
+          top: 0,
+          left: 0,
+          width: &#x27;100%&#x27;
+        })
+      ]),
+      query(&#x27;:enter&#x27;, [
+        style({ left: &#x27;-100%&#x27; })
+      ], { optional: true }),
+      query(&#x27;:leave&#x27;, animateChild(), { optional: false }),
+      group([
+        query(&#x27;:leave&#x27;, [
+          animate(&#x27;300ms ease-out&#x27;, style({ left: &#x27;100%&#x27;}))
+        ], { optional: true }),
+        query(&#x27;:enter&#x27;, [
+          animate(&#x27;300ms ease-out&#x27;, style({ left: &#x27;0%&#x27; }))
+        ], { optional: true }),
+      ]),
+    ]),
+
+    //Animação do Login pro Cadastro
+    transition(&#x27;loginPage &#x3D;&gt; registerPage&#x27;, [
+      style({ position: &#x27;relative&#x27; }),
+      query(&#x27;:enter, :leave&#x27;, [
+        style({
+          position: &#x27;fixed&#x27;,
+          top: 0,
+          right: 0,
+          width: &#x27;100%&#x27;
+        })
+      ], { optional: true }),
+      query(&#x27;:enter&#x27;, [
+        style({ right: &#x27;-100%&#x27; })
+      ], { optional: true }),
+      query(&#x27;:leave&#x27;, animateChild(), { optional: true }),
+      group([
+        query(&#x27;:leave&#x27;, [
+          animate(&#x27;300ms ease-out&#x27;, style({ right: &#x27;100%&#x27; }))
+        ], { optional: true }),
+        query(&#x27;:enter&#x27;, [
+          animate(&#x27;300ms ease-out&#x27;, style({ right: &#x27;0%&#x27; }))
+        ], { optional: true }),
+        query(&#x27;@*&#x27;, animateChild(), { optional: true })
+      ]),
+    ]),
+
+    //Animação dos components, muda opacidade
+    transition(&#x27;* &#x3D;&gt; *&#x27;, [
+      style({ position: &#x27;relative&#x27; }),
+      query(&#x27;:enter, :leave&#x27;, [
+        style({
+          width: &#x27;100%&#x27;
+        })
+      ], { optional: true }),
+      query(&#x27;:enter&#x27;, [
+        style({ opacity: &#x27;0%&#x27; })
+      ], { optional: true }),
+      query(&#x27;:leave&#x27;, animateChild(), { optional: true }),
+      group([
+        query(&#x27;:leave&#x27;, [
+          animate(&#x27;300ms ease-out&#x27;, style({ opacity: &#x27;0%&#x27; }))
+        ], { optional: true }),
+        query(&#x27;:enter&#x27;, [
+          animate(&#x27;300ms ease-out&#x27;, style({ opacity: &#x27;100%&#x27; }))
+        ], { optional: true }),
+        query(&#x27;@*&#x27;, animateChild(), { optional: true })
+      ]),
+    ])
+  ])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/tutorialText.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tutorialText"></a>
+                    <span class="name">
+                        <span ><b>tutorialText</b></span>
+                        <a href="#tutorialText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    &#x60;Esta é a barra de navegação lateral. Você terá como voltar para a página inicial, pesquisar QUALQUER coisa do site, acessar o chat, acessar o perfil, o menu de configurações e sair do sistema.&#x60;,
+    &#x60;Este é o cabeçalho do site, onde poderá visualizar sua rota atual, notificações e central de ajuda.&#x60;,
+    &#x60;Aqui você poderá pesquisar e criar novas equipes. Além de visualizar as equipes que você faz parte.&#x60;,
+    &#x60;Acesso rápido para visualizar TODAS as suas tarefas, podendo pesquisar e filtrar por status e data.&#x60;,
+    &#x60;Ao clicar no cartão da equipe, você será redirecionado para página da equipe e terá acesso aos projetos.&#x60;,
+    &#x60;Na tela da  equipe você poderá pesquisar e criar novos projetos, além de visualizar os projetos que você faz parte.&#x60;,
+    &#x60;Acesso rápido para visualizar APENAS as tarefas daquela equipe, podendo pesquisar e filtrar por status e data.&#x60;,
+    &#x60;Ao clicar no cartão do projeto, você será redirecionado para página do projeto e terá acesso as tarefas do projeto.&#x60;,
+    &#x60;Aqui você terá opções de visualização de tarefas, podendo escolher por mural, lista, calendário ou kanban.&#x60;,
+    &#x60;Aqui você poderá criar propriedades que serão utilizadas em tarefas e projetos, bem como editá-las e gerenciar status&#x60;,
+
+
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/services/path/api_url.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="URL"></a>
+                    <span class="name">
+                        <span ><b>URL</b></span>
+                        <a href="#URL"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;http://localhost:7777/&quot;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

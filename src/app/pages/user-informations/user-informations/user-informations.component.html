@@ -1,0 +1,88 @@
+<section>
+
+    <div class="main-div" *ngIf="userObservable | async">
+
+        <div class="top-side">
+            <div class="top-side-left">
+                <div class="circular">
+                    <img src="data:image/jpg;base64, {{user.image}}" alt="" class="object-cover h-full w-full" *ngIf="user.image">
+                    <img src="{{user.imgUrl}}" alt="" class="object-cover h-full w-full" *ngIf="user.imgUrl">
+                </div>
+
+                <div class="top-side-user-informations">
+                    <div class="userName-creationData">
+                        <h4>{{user.fullname}}</h4>
+                        <p class="large-text opacity-90">{{user.email}}</p>
+                        <p class="regular-text">{{user.location ? user.location : 'pages.user-informations.locationNotProvided' | translate}}</p>
+                        <p class="regular-text description">
+                            {{user.description ? user.description : 'pages.user-informations.noDescription' | translate}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-side-right">
+                <ng-container *ngIf="showCommonTasks">
+                    <div class="top-side-right-text">
+                        <h6>
+                            {{ 'pages.user-informations.commonTasks' | translate }}
+                        </h6>
+                    </div>
+
+                    <div class="top-side-right-projects">
+                        <ng-container *ngFor="let task of user.tasksInCommon">
+                            <div class="card-project" (click)="goToTask(task)">
+                                <div class="indicator-color">
+                                </div>
+
+                                <div class="project-informations">
+                                    <div class="name-project">
+                                        <p class="medium-text">{{task.name}}</p>
+                                        <p class="small-text text-justify overflow-auto">{{task.description}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!showCommonTasks">
+                    <div class="flex w-full h-full justify-center items-center">
+                        <h6 class="text-center">
+                            {{ 'pages.user-informations.commonTasksPlaceholder' | translate }}
+                        </h6>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="under-side" >
+            <div class="div-dashboards" *ngIf="getPermission() ; else message"> 
+                <h5>{{ 'pages.user-informations.personalPerformance' | translate }}</h5>
+                <div class="dashboards">
+                    <div class="div-dashboard-pie-doughnut">
+                        <p class="large-text">{{ 'pages.user-informations.tasksPie' | translate }}</p>
+                        <p-chart class="dashboard-pie-doughnut" type="doughnut" [responsive]="true" [data]="dataPie" [options]="optionsPie">
+                        </p-chart>
+                    </div>
+
+                    <div class="div-dashboard-bar">
+                        <p class="large-text">{{ 'pages.user-informations.tasksBar' | translate }}</p>
+                        <p-chart class="dashboard-bar" type="bar" [data]="dataBar" [responsive]="true" [options]="basicOptions"></p-chart>
+                    </div>
+
+                    <div class="div-dashboard-bar flex-col">
+                        <p class="large-text">{{ 'pages.user-informations.timeWorked' | translate }}</p>
+                        <h4>{{user.time}}</h4>
+                    </div>
+                </div>
+            </div>
+            <ng-template #message>
+                <h5 class="truncate">{{user.fullname}} privou seu desempenho no sistema.</h5>
+            </ng-template>
+        </div>
+
+
+    </div>
+
+</section>

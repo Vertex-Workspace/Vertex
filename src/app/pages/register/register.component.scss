@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Manrope:wght@200;300;400;500&display=swap');
+@import "../../../variables";
+
+.register-bg {
+    @apply bg-cover bg-center w-screen h-screen flex;
+    background-image: url("../../../assets/Vertex-bg-register-new.jpg");
+}
+
+.main-div {
+    @apply flex flex-col justify-center items-center w-3/5 gap-10;
+}
+
+.div-accessAccount{
+    @apply flex flex-col items-center gap-5 mt-10;
+}
+
+form {
+    @apply space-y-7;
+}
+
+.divRegisterIcons {
+    @apply w-14 h-14 bg-slate-300 flex justify-center items-center;
+}
+
+.nameVertex {
+    @apply text-4xl p-7 text-right text-[#f3f3f3];
+}
+
+#h1-access-account {
+    @apply text-3xl text-[#092c4c];
+    font-family: 'Manrope', sans-serif;
+}
+
+.center-all {
+    @apply flex items-center justify-center w-full;
+}
+
+.div-password-input {
+    @apply flex items-center justify-center w-full;
+}
+
+.div-toStrong-password {
+    @apply flex flex-col justify-center text-[16px];
+    color: #092c4c;
+}
+
+.inputs {
+    @apply block h-14 w-full border-0 py-1.5 px-3 text-black shadow-sm placeholder:text-[#092C4C] sm:text-sm sm:leading-6;
+    font-family: "Inter";
+}
+
+.registerIcons {
+    @apply w-14 text-[#092c4c] flex justify-center items-center;
+}
+
+.eyesDiv {
+    @apply w-14 bg-white flex items-center justify-center;
+}
+
+.eyeIcon {
+    @apply w-6 h-14 text-[#092c4c] flex items-center;
+}
+
+#enter-btn {
+    @apply flex w-44 h-10 items-center justify-center rounded-md bg-[#092C4C] text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#20478b] transition-all;
+}
+
+.div-white-logo {
+    @apply flex pb-5 items-center justify-end h-screen w-2/5;
+}
+
+.div-highForm{
+    @apply w-2/3 mt-10;
+}
+
+.div-highInputName{
+    @apply flex gap-2;
+}
+
+.div-highInputPassword{
+    @apply flex gap-2;
+}
+
+.logo{
+    @apply w-80 h-80;
+}
+
+::ng-deep {
+    .p-tooltip {
+        max-width: fit-content;
+     }
+} 
+
+
+// @media screen and (max-width: 1460px) {
+//     .div-white-logo {
+//         @apply flex pb-5 items-center justify-end h-screen w-2/5;
+//     }
+
+//     .div-highInput{
+//         @apply flex flex-col gap-7;
+//     }
+
+//     .nameVertex{
+        
+//     }
+// }
+
+
+@media screen and (min-width:1024px) and (max-width:1300px){
+    .main-div{
+        @apply w-[55%];
+    }
+    
+    .inputs {
+        @apply text-xs w-full;
+    }
+
+    .nameVertex{
+        @apply p-0 absolute right-5 top-5;
+    }
+}
+
+@media screen and (min-width:1024px) and (max-width:1460px){
+    .main-div{
+        @apply w-[50%];
+    }
+    
+    .div-highInputName{
+        @apply flex flex-col gap-7;
+    }
+
+    .div-highInputPassword{
+        @apply flex flex-col gap-7;
+    }
+
+    .inputs {
+        @apply text-xs w-full;
+    }
+
+    .nameVertex{
+        @apply p-0 absolute right-5 top-5;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .register-bg {
+        background-image: none;
+        background-color: #f3f3f3;
+        border-top: #092c4c 15px solid;
+    }
+    .inputs {
+        @apply text-xs w-full;
+    }
+
+    .nameVertex {
+        display: none;
+    }
+
+    .main-div {
+        width: 100%;
+    }
+
+    .div-white-logo {
+        display: none;
+    }
+
+    .center-all {
+        justify-content: flex-start;
+    }
+    .div-highInputPassword{
+        @apply flex flex-col gap-7;
+    }
+
+    .inputs {
+        width: calc(100% - 45px);
+    }
+
+    .eyesDiv {
+        margin-left: -45px;   
+    }
+
+    .div-accessAccount{
+        @apply flex flex-col items-center gap-5 mr-0 mt-0;
+    }
+
+    .div-highForm{
+        @apply w-2/3 mr-0 mt-0;
+    }
+}

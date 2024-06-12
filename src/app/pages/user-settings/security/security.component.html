@@ -1,0 +1,51 @@
+<div class="bg">
+    <div class="title">
+        <div>
+            <h5>{{ 'pages.user-settings.security.title' | translate }}</h5>
+            <fa-icon [icon]="faLock" class="icon size"></fa-icon>
+        </div>
+    </div>
+
+    <div class="w-[85%]">
+        <form action="POST" [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full max-h-full">
+
+            <div *ngFor="let item of passwords; index as i">
+                <section>
+                    <p class="regular-text text-bold">{{ 'pages.user-settings.security.' + item.formControlName | translate }}</p>
+                    <div class="iconInputBlock">
+                        <div class="iconBox">
+                            <fa-icon [icon]="item.icon" class="icon"></fa-icon>
+                        </div>
+                        <span (ngSubmit)="passwordValidation()">
+                            <div class="h-full w-full p-input-icon-right">
+                                <input [type]="item.statusEye ? 'text' : 'password'"
+                                    formControlName="{{item.formControlName}}" class="px-4"/>
+                                <i (click)="passwordEye(item)" class="pi pi-eye icon" *ngIf="!item.statusEye"></i>
+                                <i (click)="passwordEye(item)" class="pi pi-eye-slash icon" *ngIf="item.statusEye"></i>
+                            </div>
+                        </span>
+                    </div>
+                </section>
+            </div>
+
+            <div class="requires">
+                <div class="small-text">
+                    <p class="medium-text">{{ 'pages.user-settings.security.requirements' | translate }}</p>
+                    <p>{{ 'pages.user-settings.security.lengthRequirement' | translate }}</p>
+                    <p>{{ 'pages.user-settings.security.uppercaseRequirement' | translate }}</p>
+                    <p>{{ 'pages.user-settings.security.lowercaseRequirement' | translate }}</p>
+                    <p>{{ 'pages.user-settings.security.specialCharRequirement' | translate }}</p>
+                    <p>{{ 'pages.user-settings.security.passwordMatchRequirement' | translate }}</p>
+                </div>
+
+                <div>
+                    <button type="submit" (click)="clickOption('edit')" [disabled]="!form.valid"
+                        [ngClass]="form.valid ? 'edit' : 'noEdit'">
+                        {{ 'pages.user-settings.security.reset' | translate }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

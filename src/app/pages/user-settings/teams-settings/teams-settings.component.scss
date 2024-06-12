@@ -1,0 +1,131 @@
+@import '../../../../variables.scss';
+@import '../../../../styles.scss';
+
+@media screen and (min-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start ;
+    }
+    
+    .title {
+        @apply w-[85%] h-[40px] flex flex-col items-start justify-start border-b;
+        border-color: $emphasis;
+
+        div {
+            @apply flex w-[300px] items-center justify-start gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium
+        }
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+        @apply text-[18px];
+    }
+    
+    
+    section {
+        @apply h-full w-full flex flex-col pt-8 items-center;
+    }
+    
+    
+    .search {
+        @apply w-[400px] h-[50px] flex items-start justify-between bg-white p-3
+        rounded shadow-md border-none;
+        background-color: $card;
+
+        input {
+            background-color: $card;
+            width: 90%;
+        }
+    }
+}
+
+@media screen and (min-width: 770px) and (max-width: 1324px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start ;
+    }
+    
+    .title {
+        @apply hidden;
+        border-color: $emphasis;
+        div {
+            @apply flex w-[15%] items-start justify-start gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium
+        }
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+        @apply text-[18px];
+    }
+    
+    
+    section {
+        @apply h-full w-full flex flex-col pt-8 items-center;
+    }
+    
+    
+    .search {
+        @apply w-[400px] h-[50px] flex items-start justify-between bg-white p-3
+        rounded shadow-md border-none;
+        background-color: $card;
+
+        input {
+            background-color: $card;
+        }
+    }
+}
+
+@media screen and (max-width: 770px) {
+
+    .bg {
+        @apply flex h-full w-screen flex-col items-center justify-start pt-6;
+    }
+    
+    .title {
+        @apply w-full min-h-[50px] flex flex-col items-start justify-start pt-4 px-10;
+        border-color: $emphasis;
+        div {
+            @apply flex w-full items-center justify-center gap-7;
+        }
+        
+        p{
+            @apply text-xl font-medium
+        }
+
+        .icon {
+            @apply hidden;
+        }
+    }
+    
+    .icon {
+        color:$primaryColor !important;
+        @apply text-[18px];
+    }
+    
+    
+    section {
+        @apply h-full w-[100%] flex flex-col pt-4 items-center;
+    }
+    
+    
+    .search {
+        @apply w-[400px] h-[50px] flex items-start justify-between bg-white p-3
+        rounded shadow-md border-none;
+        background-color: $card;
+
+        input {
+            background-color: $card;
+        }
+    }
+    
+}
+    
+    

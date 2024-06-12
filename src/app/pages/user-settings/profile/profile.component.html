@@ -1,0 +1,62 @@
+<div class="bg">
+    <div class="title">
+        <div>
+            <h5>{{ 'pages.user-settings.profile.title' | translate }}</h5>
+            <fa-icon [icon]="faUser" class="iconProfile size"></fa-icon>
+        </div>
+    </div>
+    <div class="generalDiv">
+        <div class="divInputs">
+            <div class="divLeftSide">
+                <!-- E-mail -->
+                <section>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="divEachInput" *ngFor="let item of itemsList">
+                            <p class="medium-text">{{ 'pages.user-settings.profile.' + item.id | translate }}</p>
+                            <div class="iconInputBlock">
+                                <div class="iconBox" *ngIf="item.id != 'description'">
+                                    <fa-icon [icon]="item.icon" class="iconInput"></fa-icon>
+                                </div>
+                                <textarea (input)="onChange()" type="text" [ngClass]="item.id" #textBox
+                                    class="regular-text" formControlName="{{item.formControlName}}">
+                            </textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="charts">
+                        <p class="medium-text">{{ 'pages.user-settings.profile.visibilityProfile' | translate }}</p>  
+                        <ng-container *ngFor="let toogle of tooglesList; index as item">
+                            <div>
+                                <fa-icon (click)="toogle.event()" [icon]="toogle.icon" class="iconProfile">
+                                </fa-icon>
+                                <p class="small-text px-3">{{ 'pages.user-settings.profile.' + toogle.id | translate }}</p>
+                            </div>
+                        </ng-container>
+                    </div>
+                </section>
+            </div>
+
+            <div class="rightSide">
+                <section>
+                    <div class="circular rounded-sm">
+                        <img src="data:image/jpg;base64, {{logged.image}}" *ngIf="logged.image && !logged.imgUrl" class="object-cover h-full w-full rounded-sm">
+                        <img src="{{logged.imgUrl}}" *ngIf="logged.imgUrl && !logged.image" class="object-cover h-full w-full rounded-sm">
+                        <form class="input-div">
+                            <input type="file" class="input-file" (change)="onFileSelected($event)">
+                        </form>
+                    </div>
+
+                    <div>
+                        <div *ngIf="!buttonConfirm">
+                            <button class="confirm justify-end medium-text" (click)="clickOption('edit')"
+                                [disabled]="contentEditable ? false : true"
+                                [ngClass]="contentEditable ? 'edit' : 'noEdit'" type="submit" (click)="onSubmit()">
+                                {{ 'pages.user-settings.profile.update' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

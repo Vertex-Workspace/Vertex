@@ -1,0 +1,116 @@
+@import '../../../../../variables';
+
+.icon {
+    color: $primaryColor;
+    font-size: 3rem;
+}
+
+.checkBox-selected {
+    color: $primaryColor;
+    font-size: 1.5rem;
+    @apply opacity-25;
+}
+
+.checkBox-unselected {
+    color: $primaryColor;
+    font-size: 1.5rem;
+}
+
+
+.task-name{
+    @apply w-full h-[25%]  pt-4 flex justify-evenly flex-col;
+
+    input{
+        @apply flex flex-row justify-start w-full h-[40px] border-b;
+        background-color: $secondColor;
+        border-color: $primaryColor;
+    }
+    p{
+        @apply flex w-full text-start;
+        color: $text;
+    }
+}
+
+.properties-types {
+    @apply pt-2 w-[85%] h-[30%] grid grid-cols-3 justify-center gap-4;
+
+
+
+    .square-icon{
+        @apply w-full h-[60%] flex justify-center shadow-md items-center;
+        cursor: pointer;
+        background-color: $emphasis;
+
+        &:hover{
+            @apply scale-105;
+        }
+    }
+}
+
+.opacity{
+    @apply opacity-25;
+}
+
+.list-button{
+    @apply w-full h-[50px] rounded-sm shadow-md;
+    background-color: $emphasis;
+    color: $primaryColor;
+}
+.properties-answers {
+    @apply flex w-full h-[20%] justify-end flex-col;
+
+
+    div:last-child{
+        @apply flex flex-row;
+    }
+    input {
+        @apply w-2/3 h-[32px] rounded-sm shadow-2xl pl-3;
+        outline: none;
+    }
+
+
+}
+
+.checkboxes{
+    @apply flex flex-row items-center gap-2;
+}
+
+.value-input{
+    @apply h-[30%] w-full flex py-3;
+
+    input {
+        @apply w-2/3 h-[32px] rounded-sm shadow-2xl pl-3;
+        outline: none;
+    };
+}
+
+.delete {
+    @apply w-full h-[10%] border-t border-[#092C4C] flex items-center gap-2;
+}
+
+.trash-icon{
+    font-size:1rem;
+    color:$primaryColor;
+}
+
+section{
+    @apply w-full h-[80%] flex flex-col items-center justify-evenly pb-5;
+
+
+    .info{
+        @apply flex w-full justify-center items-center;
+        opacity: 0.5;
+
+        fa-icon{
+            @apply w-4 h-4 flex justify-center items-center;
+            color: $primaryColor;
+            cursor: default;
+        }
+    }
+
+    .save-button{
+        @apply w-[40%] h-[50px] rounded-sm shadow-2xl self-end;
+        background-color: $primaryColor;
+        color: $secondColor;
+    }
+}
